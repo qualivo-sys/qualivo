@@ -118,9 +118,43 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .sgrid article{background:var(--papel);border:2px solid var(--tinta);border-radius:22px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;box-shadow:6px 6px 0 var(--tinta)}
 .sgrid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-bottom:2px solid var(--tinta)}
 .sgrid .in{padding:20px 22px 24px;display:grid;gap:8px;align-content:start}
-.no{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font:700 15px/1.3 var(--mono)}
-.no s{text-decoration:none;display:inline-flex;align-items:center;gap:8px;color:var(--mut)}
-.no s::before{content:"✕";color:var(--naranja)}
+.yesno{display:grid;gap:22px;margin-top:34px}
+@media (min-width:860px){.yesno{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.yesno h3{font-family:var(--serif);font-weight:400;font-size:30px}
+.yesno ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.yesno li{display:flex;gap:12px;align-items:flex-start}
+.yesno li::before{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:700 13px/1 var(--mono);margin-top:2px;border:1.5px solid currentColor}
+.yes{background:var(--tinta);color:#F1EDE0;box-shadow:8px 8px 0 var(--naranja)}
+.yes li::before{content:"✓";background:var(--amarillo);color:var(--tinta);border-color:var(--amarillo)}
+.nope li::before{content:"✕";color:var(--naranja2)}
+.nope li{color:var(--tinta2)}
+
+/* Lo que reviso antes de presupuestar */
+.revisa{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.revisa article{border-top:3px solid var(--tinta);padding-top:16px;display:grid;gap:6px;align-content:start}
+.revisa .k{color:var(--naranja2)}
+.revisa h3{font-family:var(--serif);font-weight:400;font-size:26px}
+.revisa p{font-size:15.5px;color:var(--tinta2)}
+
+/* Cómo comparar presupuestos */
+.comp{background:var(--tinta);color:#F1EDE0;overflow:hidden}
+.comp .eb{color:var(--amarillo)}
+.comp .lead{color:#CFC9BA}
+.comp-grid{display:grid;gap:36px;position:relative;z-index:1}
+@media (min-width:960px){.comp-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:56px;align-items:start}}
+.three{display:grid;gap:14px;counter-reset:c;list-style:none;margin:0;padding:0}
+.three li{counter-increment:c;display:grid;grid-template-columns:auto 1fr;gap:4px 18px;padding:20px;border:1.5px solid #4A4640;border-radius:18px}
+.three li::before{content:counter(c);grid-row:span 2;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--amarillo);color:var(--tinta);font:700 20px/1 var(--mono)}
+.three b{font:700 17px/1.3 var(--mono);color:#fff}
+.three span{color:#CFC9BA;font-size:15.5px}
+.guide{background:var(--papel);color:var(--tinta);border:2px solid var(--tinta);border-radius:22px;box-shadow:8px 8px 0 var(--amarillo);padding:26px;display:grid;gap:14px}
+.guide h3{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.1}
+.guide .ok{color:var(--ok);font-weight:600}
+
+/* Medición: registro visible solo en revisión */
+.tlog{position:fixed;z-index:40;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100vw - 28px));background:var(--tinta);color:#EFEBDD;border-radius:14px;padding:12px 14px;font:400 12.5px/1.45 var(--mono);box-shadow:0 12px 30px rgba(0,0,0,.25);display:grid;gap:6px}
+.tlog b{color:var(--amarillo);font-weight:700}
+.tlog ol{margin:0;padding-left:18px;max-height:126px;overflow:auto}
 
 /* Chalets: bloque naranja como las secciones de color de su web */
 .chalet{background:var(--ambar);color:var(--tinta);overflow:hidden}
@@ -283,8 +317,8 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
 <header class="top">
   <div class="wrap">
     <img class="logo" src="img/logo.png" alt="Al Milímetro">
-    <nav class="nav" aria-label="Secciones"><a href="#como">Cómo trabajo</a><a href="#proceso">Proceso</a><a href="#zonas">Zonas</a><a href="#preguntas">Preguntas</a></nav>
-    <a class="btn btn-am btn-sm" href="#calcula">Calcula tu reforma</a>
+    <nav class="nav" aria-label="Secciones"><a href="#proceso">Proceso</a><a href="#comparar">Comparar presupuestos</a><a href="#zonas">Zonas</a><a href="#preguntas">Preguntas</a></nav>
+    <a class="btn btn-am btn-sm" href="#calcula" data-track="clic_calcula" data-pos="cabecera">Calcula tu reforma</a>
   </div>
 </header>
 
@@ -293,14 +327,14 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <span class="eb">Reformas integrales · Madrid y noroeste</span>
-      <h1 id="h-hero">Reformar tu casa no debería ser una <em>caja de sorpresas.</em></h1>
-      <p class="lead">Reformo pisos y chalets completos en Madrid. Visito tu casa, te doy un presupuesto por partidas y coordino toda la obra. Tú hablas solo conmigo.</p>
+      <h1 id="h-hero">La arquitecta que te da el presupuesto es <em>la que hace tu obra.</em></h1>
+      <p class="lead">Reformo pisos y chalets completos en Madrid capital y el noroeste. Visito tu casa y en 7 días tienes el presupuesto por partidas. Sin comerciales ni portales: hablas solo conmigo, de la primera visita a la entrega.</p>
       <div class="ctas">
-        <a class="btn btn-am" href="#calcula">Calcula tu reforma <span aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="#como">Cómo trabajo</a>
+        <a class="btn btn-am" href="#calcula" data-track="clic_calcula" data-pos="hero">Calcula tu reforma <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#proceso">Cómo trabajo</a>
       </div>
-      <div class="chips"><span>Presupuesto por partidas</span><span>Una sola persona</span><span>Visita técnica</span></div>
-      <span class="rev">titular = anuncio A · botón = anuncio C · habla Sonia en primera persona, como en su web</span>
+      <div class="chips"><span>Partidas en 7 días</span><span>Sin portales</span><span>Una sola persona</span></div>
+      <span class="rev">promesa que no firma la competencia (todos dicen «precio cerrado», nadie dice quién ni cuándo) · botón = anuncio C</span>
     </div>
     <div class="hero-fig">
       <svg class="cinta" viewBox="0 0 400 460" preserveAspectRatio="none" aria-hidden="true"><path d="M30 110 C 90 10, 250 20, 300 90 S 250 230, 190 200 S 170 90, 300 120 S 420 320, 330 380 S 120 460, 60 400" stroke="url(#gcinta)" stroke-width="40"/></svg>
@@ -312,10 +346,10 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
 
 <div class="strip" aria-label="Lo esencial">
   <div class="wrap">
-    <div><b>Pisos y chalets</b><span>Reformas completas, de principio a fin</span></div>
-    <div><b>Arquitecta</b><span>Proyecto y dirección de toda la obra</span></div>
-    <div><b>Por partidas</b><span>Sabes qué pagas y por qué</span></div>
-    <div><b>Desde 15.000 €</b><span>Obra mínima <span class="rev"><b>[C]</b></span></span></div>
+    <div><b>Sin portales</b><span>Tus datos no van a cuatro empresas: los leo yo</span></div>
+    <div><b>7 días</b><span>De la visita al presupuesto por partidas <span class="rev"><b>[C]</b></span></span></div>
+    <div><b>Una sola persona</b><span>Proyecto y coordino todos los gremios</span></div>
+    <div><b>Desde 15.000 €</b><span>Si no es lo mío, te lo digo <span class="rev"><b>[C]</b></span></span></div>
   </div>
 </div>
 
@@ -325,7 +359,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
       <span class="eb">Cómo trabajo</span>
       <h2 id="h-fears">¿Te preocupa empezar una reforma por miedo a imprevistos y <em>sobrecostes?</em></h2>
       <p class="lead">Es normal. Estos son los tres miedos que más me cuentan, y lo que hago para que no te pasen.</p>
-      <span class="rev">titular de su propia web</span>
+      <span class="rev">titular de su propia web · desarrolla el anuncio A · son los miedos que recogen las guías de consumo: presupuesto que entra bajo y sube, cambios a mitad de obra, retrasos</span>
     </div>
     <div class="fgrid">
       <article class="card fear"><span class="n">Miedo 1</span><h3>«Que acabe costando el doble.»</h3><span class="how">Cómo lo evito</span><p>Antes de empezar voy a tu casa, mido y te doy un presupuesto por partidas. Si algo cambia en obra, te lo valoro y lo decides tú antes de hacerlo.</p></article>
@@ -338,15 +372,26 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
 <section class="serv" aria-labelledby="h-serv">
   <div class="wrap">
     <div class="head">
-      <span class="eb">Qué hago</span>
-      <h2 id="h-serv">Reformas completas, bien pensadas de principio a fin.</h2>
+      <span class="eb">Para quién sí y para quién no</span>
+      <h2 id="h-serv">Hago pocas obras, <em>para hacerlas bien.</em></h2>
+      <p class="lead">Me dedico a reformas completas. Si lo tuyo no encaja, te lo digo el primer día y no te hago perder el tiempo.</p>
     </div>
     <div class="sgrid">
       <article><img src="img/ia3.jpg" alt="Chalet unifamiliar con jardín" loading="lazy"><div class="in"><h3>Chalets y viviendas</h3><p class="mut">Instalaciones, cocina, baños, distribución y, si hace falta, ventanas.</p></div></article>
       <article><img src="img/ia5.jpg" alt="Cocina reformada con muebles verdes y luz natural" loading="lazy"><div class="in"><h3>Pisos completos</h3><p class="mut">Lo que se ve y lo que no se ve: luz, agua, bajantes y suelo.</p></div></article>
       <article><img src="img/ia6.jpg" alt="Baño reformado con ducha y lavabo de madera" loading="lazy"><div class="in"><h3>Cocina y baño, o dos baños</h3><p class="mut">De la misma vivienda, a partir de 15.000 €. <span class="rev"><b>[C]</b></span></p></div></article>
     </div>
-    <p class="no">No hago: <s>Locales u oficinas</s><s>Arreglos sueltos</s></p>
+    <div class="yesno">
+      <div class="card yes"><h3>Sí, si…</h3><ul>
+        <li>Quieres reformar tu chalet o tu piso entero, o la cocina y el baño a la vez.</li>
+        <li>Tu casa está en Madrid capital o en el noroeste.</li>
+        <li>La obra parte de unos 15.000 €. <span class="rev"><b>[C]</b></span></li>
+        <li>Quieres saber qué pagas por cada partida antes de empezar.</li></ul></div>
+      <div class="card nope"><h3>No, si…</h3><ul>
+        <li>Buscas un arreglo suelto: una puerta, unos azulejos, un falso techo.</li>
+        <li>Es un local o una oficina.</li>
+        <li>Solo te importa el precio más bajo.</li></ul></div>
+    </div>
     <p class="revblock" style="margin-top:16px">A confirmar: ¿baño o cocina sueltos dentro de la M-30? Un baño solo va de 4.000 a 7.000 € [C], por debajo del mínimo. No se anuncia; si entra, pasa por las segundas preguntas.</p>
   </div>
 </section>
@@ -383,14 +428,57 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
 
 <section class="proc" id="proceso" aria-labelledby="h-steps">
   <div class="wrap">
-    <div class="head"><span class="eb">El proceso</span><h2 id="h-steps">Del primer mensaje a tu casa terminada.</h2></div>
+    <div class="head"><span class="eb">El proceso</span><h2 id="h-steps">Del formulario a tu obra, <em>con fechas.</em></h2><p class="lead">Así sabes en todo momento qué viene después y cuándo.</p></div>
     <ol class="steps">
-      <li class="step"><span class="p"><small>Paso</small>01</span><h3>Visita técnica</h3><p>Voy a tu casa, mido y escucho lo que quieres.</p></li>
-      <li class="step"><span class="p"><small>Paso</small>02</span><h3>Presupuesto</h3><p>Por partidas, con materiales y plazo, en 7 días desde la visita. <span class="rev"><b>[C]</b></span></p></li>
-      <li class="step"><span class="p"><small>Paso</small>03</span><h3>Proyecto</h3><p>Plano, distribución y acabados, decididos contigo.</p></li>
-      <li class="step"><span class="p"><small>Paso</small>04</span><h3>Obra</h3><p>Todos los gremios, coordinados por mí.</p></li>
-      <li class="step"><span class="p"><small>Paso</small>05</span><h3>Entrega</h3><p>Tu casa lista, limpia y preparada para vivirla.</p></li>
+      <li class="step"><span class="p"><small>2 minutos</small>01</span><h3>Formulario</h3><p>Me cuentas tu casa y ves desde cuánto sale una reforma así.</p></li>
+      <li class="step"><span class="p"><small>El mismo día</small>02</span><h3>WhatsApp</h3><p>Te escribo yo el mismo día laborable para hablar 10 minutos.</p></li>
+      <li class="step"><span class="p"><small>Cuando te venga bien</small>03</span><h3>Visita técnica</h3><p>Voy a tu casa, mido y reviso lo que no se ve. Siempre hago hueco. <span class="rev"><b>[C]</b></span></p></li>
+      <li class="step"><span class="p"><small>En 7 días</small>04</span><h3>Presupuesto</h3><p>Por partidas, con materiales y plazo, a los 7 días de la visita. <span class="rev"><b>[C]</b></span></p></li>
+      <li class="step"><span class="p"><small>Hasta la entrega</small>05</span><h3>Obra</h3><p>La coordino yo, con todos los gremios. Cualquier cambio, por escrito antes de hacerlo. <span class="rev"><b>[C]</b> quiere los cambios por escrito</span></p></li>
     </ol>
+  </div>
+</section>
+
+<section aria-labelledby="h-revisa">
+  <div class="wrap">
+    <div class="head">
+      <span class="eb">Antes de presupuestar</span>
+      <h2 id="h-revisa">Lo que reviso para que el precio <em>no suba a mitad de obra.</em></h2>
+      <p class="lead">El presupuesto que entra bajo y luego sube suele fallar en lo que no se ve. Por eso lo miro antes de darte una cifra.</p>
+    </div>
+    <div class="revisa">
+      <article><span class="k">01 · Instalaciones</span><h3>Luz y agua</h3><p>Cuadro eléctrico, cableado y tuberías: si hay que cambiarlos, va en el presupuesto desde el principio.</p></article>
+      <article><span class="k">02 · Bajantes</span><h3>Desagües</h3><p>En pisos antiguos son la sorpresa más cara. Los compruebo antes de tocar un baño o una cocina.</p></article>
+      <article><span class="k">03 · Suelo</span><h3>Lo que hay debajo</h3><p>Nivel, humedad y forjado. Decide si se puede poner encima o hay que levantar.</p></article>
+      <article><span class="k">04 · Ventanas</span><h3>Aislamiento</h3><p>Si conviene cambiarlas, te lo digo ahora y no cuando ya está pintado.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="comp" id="comparar" aria-labelledby="h-comp">
+  <svg class="cinta" style="right:-200px;top:-160px;width:620px;height:620px;opacity:.85" viewBox="0 0 400 400" aria-hidden="true"><path d="M40 300 C 10 160, 180 100, 220 190 S 120 330, 190 250 S 360 70, 300 40" stroke="url(#gcinta)" stroke-width="30"/></svg>
+  <div class="wrap comp-grid">
+    <div style="display:grid;gap:22px;min-width:0">
+      <span class="eb">Cómo comparar presupuestos</span>
+      <h2 id="h-comp">Si estás pidiendo varios presupuestos, <em>mira estas 3 cosas.</em></h2>
+      <p class="lead">Dos presupuestos con el mismo total pueden ser obras muy distintas. Aunque al final no lo hagas conmigo.</p>
+      <ol class="three">
+        <li><b>Que venga por partidas</b><span>Cada trabajo con su precio y su material. Un total sin desglose no se puede comparar.</span></li>
+        <li><b>Que tenga fechas</b><span>Cuándo empieza, cuánto dura y qué pasa si se retrasa.</span></li>
+        <li><b>Qué pasa si algo cambia</b><span>Cómo se valora un cambio en obra y si se aprueba por escrito antes de hacerlo.</span></li>
+      </ol>
+      <span class="rev">lo que recomienda la guía de consumo del Ayuntamiento de Madrid · la coloca como la honesta del mercado</span>
+    </div>
+    <form class="guide" id="guia" novalidate>
+      <span class="k">Guía en PDF · 1 página</span>
+      <h3>Te mando la guía para comparar presupuestos por WhatsApp</h3>
+      <div class="field"><label for="g-tel">Tu WhatsApp</label><input id="g-tel" type="tel" autocomplete="tel" placeholder="600 000 000"></div>
+      <label class="consent" for="g-ok"><input type="checkbox" id="g-ok"> Acepto que Al Milímetro me escriba por WhatsApp. Política de privacidad.</label>
+      <p class="err" id="g-err" hidden>Escribe un teléfono de 9 cifras y acepta la privacidad.</p>
+      <button type="submit" class="btn btn-am">Mándamela →</button>
+      <p class="ok" id="g-ok-msg" hidden>Hecho. En un momento te llega por WhatsApp.</p>
+      <span class="rev">entra como contacto C (nutrición), sin llamada · la guía en PDF está por hacer</span>
+    </form>
   </div>
 </section>
 
@@ -425,6 +513,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
       <figure><img src="img/ia2.jpg" alt="Plano y presupuesto sobre la mesa de trabajo" loading="lazy"><figcaption>Proyecto</figcaption></figure>
       <figure><img src="img/ia4.jpg" alt="Cocina abierta al jardín" loading="lazy"><figcaption>Chalet</figcaption></figure>
     </div>
+    <div class="revblock" style="margin-top:28px;border:2px dashed var(--rev);text-align:center;padding:28px">Hueco para «Obras de Sonia»: 3 a 5 obras suyas con el antes y el después, el municipio y cuánto tardó. Solo se publica con fotos suyas.</div>
     <div class="opis revonly">
       <div class="opi"><span class="stars">★★★★★</span><b>Opinión de un cliente</b>Solo opiniones que Sonia confirme como suyas.</div>
       <div class="opi"><span class="stars">★★★★★</span><b>Opinión de un cliente</b>Las de su web pueden no ser reales: no se usan.</div>
@@ -441,8 +530,8 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
       <h2 id="h-calc">Seis preguntas y te digo <em>desde cuánto sale.</em></h2>
       <p class="lead">Tardas 2 minutos. La cifra buena te la doy después de ver tu casa.</p>
       <ul class="ticks">
-        <li>Sin compromiso y sin llamadas a deshoras</li>
-        <li>Te escribo por WhatsApp en horario de oficina</li>
+        <li>Tus datos no van a ningún portal ni a otras empresas: los leo yo</li>
+        <li>Te escribo por WhatsApp en horario de oficina, sin llamadas a deshoras</li>
         <li>Si no es lo mío, te lo digo y no te molesto más</li>
       </ul>
       <p class="note">Lunes a jueves, de 9:00 a 19:00 · viernes, de 9:00 a 15:00 <span class="rev"><b>[C]</b></span></p>
@@ -461,6 +550,8 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
     <div class="faq">
       <details><summary>¿Cuánto cuesta reformar un piso en Madrid?</summary><p>Depende de los metros, del estado y de los acabados. Una reforma completa de un piso suele empezar en unos 35.000 € a partir de 50 m². La cifra cerrada, por partidas, te la doy después de la visita. <span class="rev"><b>[C]</b> pendiente de su Excel de horquillas</span></p></details>
       <details><summary>¿Cuánto tarda una reforma integral?</summary><p>Depende del tamaño y de lo que haya que cambiar. Te doy el plazo antes de empezar, junto con el presupuesto.</p></details>
+      <details><summary>¿Cómo se paga?</summary><p>Los hitos de pago van en el presupuesto, para que sepas qué pagas en cada momento. <span class="rev"><b>a confirmar</b> con Sonia cómo cobra hoy</span></p></details>
+      <details><summary>¿Pasáis mis datos a otras empresas?</summary><p>No. Esto no es un portal: lo que me cuentas en el formulario lo leo yo, la arquitecta que hará tu obra.</p></details>
       <details><summary>¿Qué pasa si algo cambia durante la obra?</summary><p>Te lo explico, te doy el precio y no se hace hasta que lo apruebas por escrito.</p></details>
       <details><summary>¿Hacéis reformas pequeñas o arreglos?</summary><p>No. Me dedico a reformas completas de viviendas, y a cocina y baño de la misma vivienda. Para un arreglo suelto te irá mejor un albañil u oficial de confianza de tu zona.</p></details>
       <details><summary>¿Trabajáis fuera de estas zonas?</summary><p>Depende de la obra. Dime en el formulario dónde está tu casa y te digo si llego.</p></details>
@@ -471,7 +562,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
 <section class="cta-end" style="padding-block:60px" aria-label="Llamada final">
   <div class="wrap">
     <h2>¿Empezamos por saber cuánto cuesta tu reforma?</h2>
-    <a class="btn" href="#calcula">Calcula tu reforma <span aria-hidden="true">→</span></a>
+    <a class="btn" href="#calcula" data-track="clic_calcula" data-pos="cierre">Calcula tu reforma <span aria-hidden="true">→</span></a>
   </div>
 </section>
 </main>
@@ -534,6 +625,16 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
 (function(){
   var t=document.getElementById('revtoggle');
   try{ if(localStorage.getItem('am-rev')==='0'){t.checked=false;document.body.classList.add('clean');} }catch(e){}
+
+  // Medición: scroll, clic en «Calcula tu reforma», inicio y fin del formulario, descartes y guía.
+  // En producción va a dataLayer (GTM → Meta y GA4); en revisión se ve en el registro de abajo a la derecha.
+  window.dataLayer=window.dataLayer||[];
+  var logBox=document.createElement('div');logBox.className='tlog revonly';logBox.innerHTML='<b>Medición · lo que se registraría</b><ol id="tlog"><li>pagina_vista</li></ol>';document.body.appendChild(logBox);
+  function track(ev,data){var o={event:ev};for(var k in (data||{}))o[k]=data[k];window.dataLayer.push(o);var li=document.createElement('li');li.textContent=ev+(data?' · '+Object.keys(data).map(function(k){return data[k]}).join(' · '):'');var ol=document.getElementById('tlog');ol.appendChild(li);ol.scrollTop=ol.scrollHeight}
+  window.amTrack=track;
+  document.querySelectorAll('[data-track]').forEach(function(a){a.addEventListener('click',function(){track(a.dataset.track,{posicion:a.dataset.pos})})});
+  var hit={};window.addEventListener('scroll',function(){var h=document.documentElement,pc=(h.scrollTop+innerHeight)/h.scrollHeight*100;[25,50,75,100].forEach(function(m){if(pc>=m-1&&!hit[m]){hit[m]=1;track('scroll_'+m)}})},{passive:true});
+  var g=document.getElementById('guia');g.addEventListener('submit',function(e){e.preventDefault();var tel=document.getElementById('g-tel').value.replace(/\D/g,''),ok=document.getElementById('g-ok').checked;document.getElementById('g-err').hidden=(tel.length>=9&&ok);if(tel.length<9||!ok)return;document.getElementById('g-ok-msg').hidden=false;track('guia_whatsapp')});
   t.addEventListener('change',function(){document.body.classList.toggle('clean',!t.checked);try{localStorage.setItem('am-rev',t.checked?'1':'0')}catch(e){}});
 
   // «Calcula tu reforma»: 6 preguntas + contacto, con los descartes y las segundas preguntas del 23-oct
@@ -551,7 +652,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
   var SUR=/^(2803[18]|28041|28051|28053|28021|2890\d|2891\d|2893\d|2897\d)$/;
   var M30=/^(2800[1-9]|2801[0-5]|28020|28028|28045|28036|28039)$/;
   var DESDE={chalet:['160.000 €','chalet completo, unos 200 m²'],piso:['35.000 €','piso completo, desde 50 m²'],cb:['15.000 €','cocina y baño de la misma vivienda'],'2b':['15.000 €','dos baños'],suelto:['15.000 €','obra mínima']};
-  var A={},i=0,form=document.getElementById('calc'),stage=document.getElementById('stage'),prog=document.getElementById('prog');
+  var started=0,A={},i=0,form=document.getElementById('calc'),stage=document.getElementById('stage'),prog=document.getElementById('prog');
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
   function bar(n){prog.innerHTML='';for(var k=0;k<7;k++){var e=document.createElement('i');if(k<n)e.className='on';prog.appendChild(e)}}
   function render(){
@@ -561,7 +662,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
     else{h+='<div class="opts'+(q.two?' two':'')+'">';q.o.forEach(function(o){h+='<button type="button" class="opt" data-v="'+o[0]+'" aria-pressed="'+(A[q.id]===o[0])+'">'+o[1]+(o[2]?'<small>'+o[2]+'</small>':'')+'</button>'});h+='</div>';}
     h+='<div class="navq">'+(i>0?'<button type="button" class="btn btn-ghost btn-sm" id="back">← Atrás</button>':'<span></span>')+(q.input?'<button type="button" class="btn btn-am btn-sm" id="next">Siguiente →</button>':'')+'</div>';
     stage.innerHTML=h;
-    stage.querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){A[q.id]=b.dataset.v;afterAnswer(q.id)})});
+    stage.querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){if(!started){started=1;window.amTrack('form_inicio')}A[q.id]=b.dataset.v;afterAnswer(q.id)})});
     var nx=document.getElementById('next');if(nx)nx.addEventListener('click',function(){var cp=document.getElementById('f-cp').value.trim();A.cp=cp;A.mun=document.getElementById('f-mun').value.trim();if(!/^\d{5}$/.test(cp)){document.getElementById('err').hidden=false;return}afterAnswer('zona')});
   }
   function afterAnswer(id){
@@ -591,7 +692,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
   form.addEventListener('submit',function(e){e.preventDefault();
     var n=document.getElementById('f-nom'),tel=document.getElementById('f-tel'),ok=document.getElementById('f-ok');
     if(!n||!n.value.trim()||tel.value.replace(/\D/g,'').length<9||!ok.checked){document.getElementById('err').hidden=false;return}
-    result(n.value.trim());
+    window.amTrack('form_fin',{tipo:A.tipo,revision:A.review?'segundas':'desde'});result(n.value.trim());
   });
   function inHours(d){var day=d.getDay(),h=d.getHours()+d.getMinutes()/60;if(day>=1&&day<=4)return h>=9&&h<19;if(day===5)return h>=9&&h<15;return false}
   function madridNow(){try{return new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Madrid'}))}catch(e){return new Date()}}
@@ -604,12 +705,12 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
       '<div class="navq"><button type="button" class="btn btn-ghost btn-sm" id="again">Volver a empezar</button></div></div>';
     stage.innerHTML=h;document.getElementById('again').addEventListener('click',reset);
   }
-  function nofit(why){bar(0);
+  function nofit(why){bar(0);window.amTrack('form_descarte',{motivo:why});
     var msg={tipo:'Me dedico a reformas completas de viviendas, y para lo que necesitas no te voy a poder dar el mejor precio.',zona:'Ahora mismo no trabajo en tu zona, y prefiero decírtelo antes que hacerte esperar.',suelto:'Un baño o una cocina sueltos solo los hago en el centro de Madrid, y tu casa queda fuera.',acab:'Para cambiar acabados sin tocar instalaciones no te voy a poder dar el mejor precio.'}[why];
     stage.innerHTML='<div class="result"><span class="k" style="color:var(--naranja2)">Gracias por contarme tu proyecto</span><h3>Te soy sincera: esto no es lo mío.</h3><p>'+msg+'</p><p class="mut">Te recomiendo hablar con un albañil o un oficial de confianza de tu zona: te va a salir mejor. ¡Mucha suerte con tu casa!</p><span class="rev">página de «no es lo nuestro» · no entra en la base de datos · <b>a confirmar</b> el texto de la recomendación</span><div class="navq"><button type="button" class="btn btn-ghost btn-sm" id="again">Me he equivocado, volver a empezar</button></div></div>';
     document.getElementById('again').addEventListener('click',reset);
   }
-  function reset(){A={};i=0;render()}
+  function reset(){A={};i=0;started=0;render()}
   render();
 })();
 </script>
