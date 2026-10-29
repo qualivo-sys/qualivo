@@ -10,6 +10,7 @@ global.fetch = async (url, o) => {
   llamadas.push(m + ' ' + u.pathname);
   const res = (j) => ({ ok: true, status: 200, text: async () => JSON.stringify(j) });
   if (u.pathname === '/locations/search') return res({ locations: estado.locations });
+  if (m === 'GET' && /^\/locations\/[^/]+$/.test(u.pathname)) { assert.equal(o.headers.Authorization, 'Bearer pit'); const id = u.pathname.split('/')[2]; return res({ location: { id, name: cli.nombre } }); }
   if (m === 'POST' && u.pathname === '/locations/') { const l = { id: 'loc1', name: b.name }; estado.locations.push(l); return res({ id: 'loc1', name: b.name }); }
   if (u.pathname === '/oauth/locationToken') { assert.equal(b.locationId, estado.locations[0].id); return res({ access_token: 'lt' }); }
   if (/customValues$/.test(u.pathname)) { if (m === 'POST') estado.cv.push({ id: 'v' + estado.cv.length, name: b.name, value: b.value }); return res({ customValues: estado.cv }); }
@@ -32,6 +33,16 @@ global.fetch = async (url, o) => {
   assert.equal(despues - antes, 1, 'repetir solo pide el token de nuevo');
   estado.locations = [{ id: 'bHGMuZEGUESZmVoNv9HT', name: cli.nombre }];
   await assert.rejects(cargar(true).main(cli), /Qualivo/);
+  // Modo «subcuenta creada a mano» (plan de 297 $): Private Integration de la subcuenta, sin clave de agencia
+  delete process.env.GHL_AGENCY_API_KEY; delete process.env.GHL_COMPANY_ID;
+  Object.assign(process.env, { GHL_LOCATION_API_KEY: 'pit', GHL_LOCATION_ID: 'locManual' });
+  Object.assign(estado, { cv: [], cf: [], tags: [], cals: [] }); llamadas.length = 0;
+  await cargar(true).main(cli);
+  assert.ok(!llamadas.some((l) => /locations\/search|locationToken|POST \/locations\/$/.test(l)), 'sin llamadas de agencia: ' + llamadas);
+  assert.equal(estado.cf.length, 16); assert.equal(estado.tags.length, 16);
+  process.env.GHL_LOCATION_ID = 'bHGMuZEGUESZmVoNv9HT';
+  await assert.rejects(cargar(true).main(cli), /Qualivo/);
   console.log = log;
+  console.log('✓ modo subcuenta creada a mano: configura con la Private Integration, sin clave de agencia, y se niega con Qualivo');
   console.log('✓ vista previa sin escrituras · ✓ alta completa (14 valores, 16 campos, 16 etiquetas, calendario) · ✓ idempotente · ✓ se niega con la subcuenta de Qualivo');
 })().catch((e) => { console.error('✗', e); process.exit(1); });

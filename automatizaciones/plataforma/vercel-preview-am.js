@@ -1,7 +1,11 @@
 // Pone en la PREVIEW de Vercel (solo la rama de Al Milímetro) las variables para probar el receptor contra la
 // subcuenta nueva de GHL. Guía: 2026-10-29-montaje-agencia.md, parte G.
 //
-//   GHL_AGENCY_API_KEY=… GHL_COMPANY_ID=… VERCEL_TOKEN=… node automatizaciones/plataforma/vercel-preview-am.js <locationId> [--pipeline=<id>] [--aplicar]
+//   Habitual (subcuenta creada a mano, plan de 297 $): con AM_GHL_API_KEY (Private Integration de la subcuenta)
+//   y AM_GHL_LOCATION_ID en el entorno, más VERCEL_TOKEN:
+//     node automatizaciones/plataforma/vercel-preview-am.js [--pipeline=<id>] [--aplicar]
+//   Se pone ESE token, que no caduca. Sin él, con GHL_AGENCY_API_KEY + GHL_COMPANY_ID y el <locationId> como argumento,
+//   se saca un token de ubicación de unas 24 h (solo para pruebas).
 //
 // Qué pone (target «preview», gitBranch claude/al-milimetro-landing-v2-site; no toca producción):
 //   AM_GHL_LOCATION_ID · AM_GHL_API_KEY (token de ubicación de unas 24 h: SOLO para la prueba; el duradero es la
@@ -26,24 +30,39 @@ async function pedir(url, o) {
 
 async function main() {
   const { GHL_AGENCY_API_KEY: AG, GHL_COMPANY_ID: CO, VERCEL_TOKEN: VT } = process.env;
-  if (!AG || !CO || !VT) throw new Error('Faltan GHL_AGENCY_API_KEY, GHL_COMPANY_ID o VERCEL_TOKEN');
-  if (!locId) throw new Error('Falta el locationId de la subcuenta (lo imprime ghl-alta-subcuenta.js)');
-  if (locId === QUALIVO) throw new Error('Esa es la subcuenta de Qualivo: no');
+  const PIT = process.env.AM_GHL_API_KEY;
+  const loc = locId || process.env.AM_GHL_LOCATION_ID;
+  if (!VT) throw new Error('Falta VERCEL_TOKEN');
+  if (!loc) throw new Error('Falta el ID de la subcuenta (AM_GHL_LOCATION_ID o argumento)');
+  if (loc === QUALIVO) throw new Error('Esa es la subcuenta de Qualivo: no');
+  if (!PIT && (!AG || !CO)) throw new Error('Falta AM_GHL_API_KEY (Private Integration de la subcuenta) o, en su defecto, GHL_AGENCY_API_KEY + GHL_COMPANY_ID');
   const proyecto = process.env.VERCEL_PROJECT || 'qualivo';
   const team = process.env.VERCEL_TEAM_ID ? '&teamId=' + process.env.VERCEL_TEAM_ID : '';
   const V = 'https://api.vercel.com';
   const cabV = { Authorization: 'Bearer ' + VT, 'Content-Type': 'application/json' };
 
-  const tk = await pedir('https://services.leadconnectorhq.com/oauth/locationToken', {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + AG, Version: '2021-07-28', 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
-    body: new URLSearchParams({ companyId: CO, locationId: locId }).toString()
-  });
-  if (!tk.access_token) throw new Error('GHL no ha dado token de ubicación');
+  let token = PIT;
+  if (token) {
+    // Comprobar que el token es de esa subcuenta antes de ponerlo en Vercel
+    const d = await pedir('https://services.leadconnectorhq.com/locations/' + encodeURIComponent(loc), {
+      headers: { Authorization: 'Bearer ' + token, Version: '2021-07-28', Accept: 'application/json' }
+    });
+    if (((d.location || d).id) !== loc) throw new Error('AM_GHL_API_KEY no es de la subcuenta ' + loc);
+    console.log('✓ Private Integration de la subcuenta ' + loc + ' (no caduca)');
+  } else {
+    const tk = await pedir('https://services.leadconnectorhq.com/oauth/locationToken', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + AG, Version: '2021-07-28', 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' },
+      body: new URLSearchParams({ companyId: CO, locationId: loc }).toString()
+    });
+    if (!tk.access_token) throw new Error('GHL no ha dado token de ubicación');
+    token = tk.access_token;
+    console.log('· token de ubicación de unas 24 h (solo pruebas)');
+  }
 
   const hay = await pedir(V + '/v9/projects/' + encodeURIComponent(proyecto) + '/env?gitBranch=' + encodeURIComponent(RAMA) + team, { headers: cabV });
   const yaClave = (hay.envs || []).some((e) => e.key === 'INTELLIGENCE_CLAVE_AM' && (e.target || []).includes('preview'));
-  const vars = { AM_GHL_LOCATION_ID: locId, AM_GHL_API_KEY: tk.access_token, AM_SOLO_PRUEBA: '1' };
+  const vars = { AM_GHL_LOCATION_ID: loc, AM_GHL_API_KEY: token, AM_SOLO_PRUEBA: '1' };
   if (pipeline) vars.AM_GHL_PIPELINE_ID = pipeline;
   let clave = null;
   if (!yaClave) { clave = crypto.randomBytes(18).toString('base64url'); vars.INTELLIGENCE_CLAVE_AM = clave; }

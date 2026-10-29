@@ -6,8 +6,8 @@ WhatsApp va con Wazzap y el cliente trabaja en Qualivo Intelligence, en su domin
 **Al Milímetro es el primer cliente** y su subcuenta sirve para guardar la plantilla
 **«Qualivo · Reformas v1»**.
 
-**Orden:** primero la parte A, que es tuya y lleva unos 40 minutos. Con la clave de agencia ya puesta,
-Automatización hace la parte B por API. Después tú montas la parte C (los 7 workflows, unos 90 minutos)
+**Orden:** primero la parte A, que es tuya y lleva unos 40 minutos; crea la subcuenta y su clave (A3). Con esa clave
+en el entorno, Automatización hace la parte B por API. Después tú montas la parte C (los 7 workflows, unos 90 minutos)
 y la guardas como plantilla. La parte D es la prueba.
 
 > **Reglas que no cambian:** nada sale a leads reales hasta el OK de Sonia (viernes 30). Todos los
@@ -38,29 +38,30 @@ en el buscador de *Settings*.
 5. Vuelve a GHL, pulsa **Verify** y espera a que salga en verde. Es posible que tenga que pasar un rato.
 6. A partir de aquí, Sonia y los clientes entran por `https://app.qualivo.io`.
 
-### A3 · Claves de API con los permisos mínimos (10 min)
+### A3 · Subcuenta y su clave de API (5 min)
 
-Hacen falta **dos** claves. Así, la que va en la web nunca puede tocar la agencia.
+> **Cambio (29-oct, 14:20):** con el plan de agencia de 297 $, la API **no crea subcuentas**. Al
+> intentarlo, `POST /locations/` devolvió 403 «The company does not have access to this feature»; eso es
+> del plan Agency Pro (497 $). Por eso la subcuenta se crea a mano y toda la configuración se hace con la
+> clave **de la subcuenta**. La clave de agencia no hace falta.
 
-**A3.1 · Clave de agencia** (solo para crear subcuentas; la usa Automatización)
+**A3.1 · Crear la subcuenta** (2 min). Vista de agencia → **Sub-Accounts → Create Sub-Account** →
+*Blank* (para Al Milímetro, que es la primera) → nombre **«Al Milímetro Reformas»**, país España, zona
+horaria **Europe/Madrid**. Copia su **ID** (*Settings → Business Profile*, o de la URL `/location/<ID>/`).
+Para los clientes siguientes, ver «Clientes siguientes» en la parte B.
 
-1. Vista de agencia → **Settings → Private Integrations → Create new integration**.
-2. Nombre: `Qualivo · montaje (Automatización)`.
-3. Permisos (*scopes*), solo estos:
-   - `locations.write` y `locations.readonly`, para crear y ver subcuentas.
-   - `oauth.write` y `oauth.readonly`, para sacar el token de cada subcuenta y configurarla.
-   - `snapshots.readonly`, para crear las subcuentas nuevas a partir de la plantilla.
-   - `users.readonly`.
-4. Copia el token **una sola vez**.
-5. Ponlo como **`GHL_AGENCY_API_KEY`** en las variables de entorno del entorno de Claude (claude.ai/code → el entorno → *Environment variables*). Pon también **`GHL_COMPANY_ID`**: el ID de la agencia, que sale en *Settings → Company* o en la URL de la vista de agencia.
-6. **No** lo pongas en Vercel.
-
-**A3.2 · Clave de la subcuenta de Al Milímetro** (la usa la web: formulario e Intelligence)
-
-Se crea cuando exista la subcuenta, después de B1. Entra en la subcuenta → **Settings → Private Integrations → Create**.
+**A3.2 · Clave de la subcuenta (Private Integration)** (3 min). Entra en la subcuenta → **Settings →
+Private Integrations → Create new integration**.
 - Nombre: `Qualivo · web e Intelligence`.
-- Permisos: `contacts.write`, `contacts.readonly`, `opportunities.write`, `opportunities.readonly`, `locations/customFields.readonly`, `locations/customValues.readonly`, `locations/tags.readonly`, `calendars.readonly`, `calendars/events.readonly`, `conversations.readonly` y `conversations/message.readonly`.
-- Va **en Vercel** como `AM_GHL_API_KEY`, y el ID de la subcuenta como `AM_GHL_LOCATION_ID`. Son los nombres que ya usa el agente de Al Milímetro.
+- Permisos:
+  - para la web y para Intelligence: `contacts.write`, `contacts.readonly`, `opportunities.write`, `opportunities.readonly`, `calendars.readonly`, `calendars/events.readonly`, `conversations.readonly` y `conversations/message.readonly`;
+  - para que Automatización monte la plantilla: `locations.readonly`, `locations/customValues.write`, `locations/customValues.readonly`, `locations/customFields.write`, `locations/customFields.readonly`, `locations/tags.write`, `locations/tags.readonly` y `calendars.write`.
+
+  Cuando la plantilla esté montada, puedes quitar los `.write` del segundo grupo.
+- Copia el token **una sola vez** y ponlo, junto con el ID, en **dos sitios**:
+  - en el entorno de Claude (claude.ai/code → el entorno → *Environment variables*), como **`AM_GHL_API_KEY`** y **`AM_GHL_LOCATION_ID`**;
+  - en Vercel no hace falta que lo pongas tú: lo hace el script de la parte G, en la preview. Para producción, cuando Sonia dé el OK.
+- **Ese token no caduca.** Si se filtra, se revoca en la misma pantalla.
 
 ### A4 · Wazzap en la subcuenta de Al Milímetro (15 min, con el móvil de Sonia delante)
 
@@ -77,15 +78,16 @@ Se crea cuando exista la subcuenta, después de B1. Entra en la subcuenta → **
 
 ---
 
-## B · Lo que hace Automatización por API (en cuanto esté `GHL_AGENCY_API_KEY`)
+## B · Lo que hace Automatización por API (en cuanto estén `AM_GHL_API_KEY` y `AM_GHL_LOCATION_ID`)
 
 Script: `automatizaciones/plataforma/ghl-alta-subcuenta.js`. Por defecto solo enseña lo que haría y no toca
-nada; con `--aplicar`, lo hace. Se niega a tocar la subcuenta de Qualivo.
+nada; con `--aplicar`, lo hace. Se niega a tocar la subcuenta de Qualivo y comprueba que el token es de la
+subcuenta indicada.
 
-| # | Qué | Por API |
+| # | Qué | ¿Por API, con el plan de 297 $? |
 |---|---|---|
-| B1 | Crear la subcuenta **Al Milímetro** (Europe/Madrid, España, web y teléfono del negocio) | ✅ `POST /locations/` |
-| B2 | Sacar el token de la subcuenta | ✅ `POST /oauth/locationToken` |
+| — | Crear la subcuenta | ❌ **a mano** (A3.1). Por API solo con Agency Pro (497 $). |
+| — | La clave de la subcuenta (Private Integration) | ❌ a mano (A3.2) |
 | B3 | **Valores personalizados** de la plantilla (lista en C1) con los datos de Sonia | ✅ |
 | B4 | **Campos del contacto** (lista en C2), con las opciones exactas del formulario | ✅ |
 | B5 | **Etiquetas** (lista en C3) | ✅ |
@@ -93,9 +95,18 @@ nada; con `--aplicar`, lo hace. Se niega a tocar la subcuenta de Qualivo.
 | — | Pipeline «Reformas» y sus etapas | ❌ solo interfaz → C4 |
 | — | Workflows | ❌ solo interfaz → C5 |
 | — | Guardar la plantilla (snapshot) | ❌ solo interfaz → C6 |
-| — | **Clientes siguientes:** crear la subcuenta **desde la plantilla** | ✅ `POST /locations/` con `snapshotId`; después solo se cambian los valores de C1 |
+| — | Variables de la preview de Vercel y su redeploy | ✅ `vercel-preview-am.js` (parte G) |
 
-Cuando termine, te paso el ID de la subcuenta y la URL para entrar.
+### Clientes siguientes («fábrica»): un paso manual de 2 minutos por cliente
+
+Con este plan, el alta de cada cliente nuevo de reformas es:
+
+1. **A mano, 2 minutos:** *Sub-Accounts → Create Sub-Account* → **desde la plantilla «Qualivo · Reformas v1»**. Así nacen el pipeline, los workflows, el calendario, los campos, los valores y las etiquetas. Después, su Private Integration (A3.2), y el token y el ID al entorno.
+2. **Por API, 1 minuto:** `ghl-alta-subcuenta.js <cliente>.json --aplicar` con sus datos (copia de `al-milimetro.json`). Cambia los valores personalizados y añade lo que falte. Lo que vino de la plantilla lo da por bueno.
+3. **A mano:** el horario de los bloques ⏰ si no es el mismo, Wazzap con su número (A4) y los huecos del calendario.
+
+Si algún día compensa pasar a Agency Pro (497 $), el paso 1 también se hace por API (`POST /locations/` con
+`snapshotId`). El script ya sabe hacerlo con `GHL_AGENCY_API_KEY` + `GHL_COMPANY_ID`.
 
 ---
 
@@ -257,8 +268,8 @@ Con el filtro `prueba`, publicar no escribe a nadie más.
 
 Vista de agencia → **Account Snapshots → Create new snapshot** → subcuenta **Al Milímetro** → nombre
 **«Qualivo · Reformas v1»**. La plantilla incluye pipeline, workflows, calendario, campos, valores y
-etiquetas, pero **no los contactos**. Pásame el ID de la plantilla: con él, el próximo cliente de reformas
-se crea por API en un minuto.
+etiquetas, pero **no los contactos**. Con ella, el próximo cliente de reformas se crea en 2 minutos (parte B,
+«Clientes siguientes»).
 
 > Guarda la plantilla **después** de la prueba D, para que no se guarde con errores. Si cambias algo
 > después, *Update snapshot*.
@@ -298,38 +309,38 @@ visitas (calendario) · si quita W6 y W11 (regla de 2 WhatsApp) · el OK para qu
 
 ## G · Para la sesión que ejecuta la parte B (la lanza el Chief of Staff con las variables ya puestas)
 
-Necesita en su entorno `GHL_AGENCY_API_KEY`, `GHL_COMPANY_ID` y `VERCEL_TOKEN`. Opcionales: `VERCEL_PROJECT`
-(por defecto `qualivo`) y `VERCEL_TEAM_ID`, si el proyecto está en un equipo.
+Necesita en su entorno **`AM_GHL_API_KEY`** y **`AM_GHL_LOCATION_ID`** (A3.2) y **`VERCEL_TOKEN`**.
+Opcionales: `VERCEL_PROJECT` (por defecto `qualivo`) y `VERCEL_TEAM_ID`, si el proyecto está en un equipo.
+**No** necesita la clave de agencia.
 
 ```bash
 git fetch origin claude/qualivo-automatizaciones-b7k2m9 && git checkout claude/qualivo-automatizaciones-b7k2m9
 
-# 0 · Pruebas sin red (tienen que salir las dos líneas con ✓)
+# 0 · Pruebas sin red (todas las líneas con ✓)
 node automatizaciones/plataforma/pruebas/probar-alta.js
 node automatizaciones/plataforma/pruebas/probar-vercel.js
 
-# 1 · Vista previa (no escribe nada) y, si cuadra, alta de la subcuenta
+# 1 · Plantilla en la subcuenta: vista previa (no escribe) y después de verdad
 node automatizaciones/plataforma/ghl-alta-subcuenta.js automatizaciones/plataforma/al-milimetro.json
 node automatizaciones/plataforma/ghl-alta-subcuenta.js automatizaciones/plataforma/al-milimetro.json --aplicar
 
-# 2 · Repetir el alta: ahora todo tiene que salir con ✓ y ninguna línea «+» (es idempotente)
+# 2 · Repetir: todo con ✓ y ninguna línea «+» (es idempotente)
 node automatizaciones/plataforma/ghl-alta-subcuenta.js automatizaciones/plataforma/al-milimetro.json
 
-# 3 · Variables de la preview de Vercel (solo la rama de Al Milímetro; nunca producción)
-node automatizaciones/plataforma/vercel-preview-am.js <ID de la subcuenta del paso 1>            # vista previa
-node automatizaciones/plataforma/vercel-preview-am.js <ID de la subcuenta del paso 1> --aplicar
+# 3 · Variables de la preview de Vercel (solo la rama de Al Milímetro; nunca producción) + redeploy
+node automatizaciones/plataforma/vercel-preview-am.js             # vista previa
+node automatizaciones/plataforma/vercel-preview-am.js --aplicar
 ```
 
 **Comprobar después:**
 
-1. El paso 1 imprime `Subcuenta: <id>`, y ese id **no** es `bHGMuZEGUESZmVoNv9HT`. El script se niega solo, pero mira igualmente.
-2. Ninguna línea con `⚠`. Si sale «GHL ha puesto otra clave a…», ese campo se renombra en *Settings → Custom Fields* para que su clave sea exactamente la de la lista. Si no, el receptor no lo encuentra.
+1. El paso 1 imprime `✓ subcuenta existente · <id>`, y ese id **no** es `bHGMuZEGUESZmVoNv9HT`. Si sale «⚠ la subcuenta se llama…», para y confirma con el Chief of Staff que es la de Al Milímetro.
+2. Ninguna línea con `⚠` de campos. Si sale «GHL ha puesto otra clave a…», ese campo se renombra en *Settings → Custom Fields* para que su clave sea exactamente la de la lista. Si no, el receptor no lo encuentra.
 3. El paso 2 sale entero con `✓`.
-4. El paso 3 lista `AM_GHL_LOCATION_ID`, `AM_GHL_API_KEY`, `AM_SOLO_PRUEBA` e `INTELLIGENCE_CLAVE_AM` con «+», todas en *preview* y en la rama `claude/al-milimetro-landing-v2-site`.
+4. El paso 3 dice `✓ Private Integration de la subcuenta … (no caduca)` y lista `AM_GHL_LOCATION_ID`, `AM_GHL_API_KEY`, `AM_SOLO_PRUEBA` e `INTELLIGENCE_CLAVE_AM` con «+», en *preview* y en la rama `claude/al-milimetro-landing-v2-site`. Al final imprime `Redeploy lanzado: https://…`.
 
 **Después:**
 
 - **`INTELLIGENCE_CLAVE_AM`** sale impresa una sola vez. Se le pasa **solo al Chief of Staff** (o a Maikel), nunca al agente de Al Milímetro ni al repositorio.
-- **Al agente de Al Milímetro** (`session_01MkLw1AucMdomaoD3uZM2Zs`) solo el **ID de la subcuenta** y la **URL de la preview** que imprime el paso 3. El paso 3 ya hace él solo el redeploy, porque ese agente no tiene `VERCEL_TOKEN`. Hay que esperar un par de minutos a que termine; después él hace la prueba de punta a punta con «PRUEBA QUALIVO».
-- **El `AM_GHL_API_KEY` de la preview caduca en unas 24 h** (es un token de ubicación). Hasta que Maikel cree la Private Integration (A3.2), se refresca repitiendo el paso 3. La clave de Intelligence no cambia al repetirlo.
+- **Al agente de Al Milímetro** (`session_01MkLw1AucMdomaoD3uZM2Zs`) solo el **ID de la subcuenta** y la **URL de la preview** del paso 3. Que espere un par de minutos a que termine el deploy y haga la prueba de punta a punta con «PRUEBA QUALIVO».
 - **Cuando Maikel cree el pipeline «Reformas»** (C4), se repite el paso 3 con `--pipeline=<id del pipeline>`. Hasta entonces, el receptor guarda el contacto, los campos y las etiquetas, pero no la oportunidad.

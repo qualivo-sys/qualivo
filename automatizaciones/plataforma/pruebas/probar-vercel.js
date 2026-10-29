@@ -1,12 +1,14 @@
 // Prueba sin red de vercel-preview-am.js: node automatizaciones/plataforma/pruebas/probar-vercel.js
 const assert = require('assert'); const path = require('path').join(__dirname, '..', 'vercel-preview-am.js');
 Object.assign(process.env, { GHL_AGENCY_API_KEY: 'ag', GHL_COMPANY_ID: 'co', VERCEL_TOKEN: 'vt' });
-const puestas = []; let envs = []; let redeploys = 0;
+const puestas = []; let envs = []; let redeploys = 0; const valores = {};
 global.fetch = async (url, o) => {
   const res = (j) => ({ ok: true, status: 200, text: async () => JSON.stringify(j) });
   if (url.includes('locationToken')) return res({ access_token: 'tok24h' });
+  if (/leadconnectorhq\.com\/locations\/locManual$/.test(url)) { assert.equal(o.headers.Authorization, 'Bearer pit'); return res({ location: { id: 'locManual' } }); }
+  if (/leadconnectorhq\.com\/locations\/otra$/.test(url)) return res({ location: { id: 'otra-distinta' } });
   if (url.includes('/v9/projects/qualivo/env')) { assert.ok(url.includes('gitBranch=claude%2Fal-milimetro-landing-v2-site')); return res({ envs }); }
-  if (url.includes('/v10/projects/qualivo/env?upsert=true')) { const b = JSON.parse(o.body); assert.deepEqual(b.target, ['preview']); assert.equal(b.gitBranch, 'claude/al-milimetro-landing-v2-site'); puestas.push(b.key); envs.push({ key: b.key, target: ['preview'] }); return res({}); }
+  if (url.includes('/v10/projects/qualivo/env?upsert=true')) { const b = JSON.parse(o.body); valores[b.key] = b.value; assert.deepEqual(b.target, ['preview']); assert.equal(b.gitBranch, 'claude/al-milimetro-landing-v2-site'); puestas.push(b.key); envs.push({ key: b.key, target: ['preview'] }); return res({}); }
   if (url.includes('/v9/projects/qualivo?')) return res({ id: 'prj1' });
   if (url.includes('/v6/deployments?projectId=prj1')) return res({ deployments: [
     { uid: 'd-otra', created: 3, meta: { githubCommitRef: 'otra-rama' } },
@@ -25,5 +27,12 @@ global.fetch = async (url, o) => {
   puestas.length = 0; await run(['loc1', '--aplicar']);
   assert.ok(!puestas.includes('INTELLIGENCE_CLAVE_AM'), 'no cambia una clave que ya existe');
   await assert.rejects(run(['bHGMuZEGUESZmVoNv9HT', '--aplicar']), /Qualivo/);
+  // Modo habitual: Private Integration de la subcuenta en el entorno, sin clave de agencia
+  delete process.env.GHL_AGENCY_API_KEY; delete process.env.GHL_COMPANY_ID;
+  Object.assign(process.env, { AM_GHL_API_KEY: 'pit', AM_GHL_LOCATION_ID: 'locManual' });
+  await run(['--aplicar']);
+  assert.equal(valores.AM_GHL_API_KEY, 'pit'); assert.equal(valores.AM_GHL_LOCATION_ID, 'locManual');
+  await assert.rejects(run(['otra', '--aplicar']), /no es de la subcuenta/);
+  console.log('✓ modo Private Integration: pone el token duradero tras comprobar que es de esa subcuenta, sin clave de agencia');
   console.log('✓ vista previa sin escrituras · ✓ preview de la rama, nunca producción · ✓ clave de Intelligence una vez · ✓ refrescar el token no la cambia · ✓ se niega con Qualivo · ✓ redeploy del último deploy de la rama con su URL');
 })().catch((e) => { console.error('✗', e); process.exit(1); });

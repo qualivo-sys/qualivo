@@ -1,7 +1,12 @@
 // Alta de una subcuenta de cliente en la agencia de GHL (plantilla «Qualivo · Reformas v1»).
 // Guía: automatizaciones/plataforma/2026-10-29-montaje-agencia.md (parte B).
 //
-//   GHL_AGENCY_API_KEY=… GHL_COMPANY_ID=… node automatizaciones/plataforma/ghl-alta-subcuenta.js cliente.json [--aplicar]
+// Dos modos:
+//   · Subcuenta ya creada a mano (plan de agencia de 297 $: la API NO crea subcuentas, da 403) — el habitual:
+//       GHL_LOCATION_API_KEY=<token de la Private Integration de la subcuenta> GHL_LOCATION_ID=<id> \
+//       node automatizaciones/plataforma/ghl-alta-subcuenta.js cliente.json [--aplicar]
+//     (si no están, usa AM_GHL_API_KEY y AM_GHL_LOCATION_ID). La clave de agencia no hace falta.
+//   · Con clave de agencia (solo plan Agency Pro): GHL_AGENCY_API_KEY + GHL_COMPANY_ID; crea la subcuenta.
 //
 // Sin --aplicar solo enseña lo que haría (lee, no escribe). Es idempotente: lo que ya existe no se toca,
 // así que se puede repetir. Nunca borra. Nunca toca la subcuenta de Qualivo.
@@ -57,9 +62,31 @@ async function ghl(token, metodo, ruta, cuerpo, version, form) {
 }
 
 async function main(cli) {
-  if (!AGENCIA || !COMPANY) throw new Error('Faltan GHL_AGENCY_API_KEY y GHL_COMPANY_ID (guía, A3.1)');
   if (!cli || !cli.nombre || !cli.valores) throw new Error('cliente.json sin «nombre» o sin «valores»');
   console.log((aplicar ? 'APLICANDO' : 'VISTA PREVIA (añade --aplicar)') + ' · subcuenta «' + cli.nombre + '»');
+  const TOKEN_SUB = process.env.GHL_LOCATION_API_KEY || process.env.AM_GHL_API_KEY;
+  const ID_SUB = process.env.GHL_LOCATION_ID || process.env.AM_GHL_LOCATION_ID;
+  let loc, T;
+  if (TOKEN_SUB && ID_SUB) {
+    // Subcuenta creada a mano: se trabaja con su Private Integration, sin la clave de agencia
+    if (ID_SUB === QUALIVO) throw new Error('Esa es la subcuenta de Qualivo: no se toca');
+    const d = await ghl(TOKEN_SUB, 'GET', '/locations/' + ID_SUB);
+    loc = d.location || d;
+    if (!loc || loc.id !== ID_SUB) throw new Error('El token no corresponde a la subcuenta ' + ID_SUB);
+    if (String(loc.name || '').trim().toLowerCase() !== cli.nombre.trim().toLowerCase()) {
+      console.log('⚠ la subcuenta se llama «' + loc.name + '» y cliente.json dice «' + cli.nombre + '»: comprueba que es la correcta');
+    }
+    console.log('✓ subcuenta existente · ' + loc.id + ' (Private Integration de la subcuenta)');
+    T = TOKEN_SUB;
+  } else {
+    if (!AGENCIA || !COMPANY) throw new Error('Faltan GHL_LOCATION_API_KEY + GHL_LOCATION_ID (subcuenta creada a mano) o GHL_AGENCY_API_KEY + GHL_COMPANY_ID');
+    ({ loc, T } = await conAgencia(cli));
+    if (!loc) return;
+  }
+  return configurar(cli, loc, T);
+}
+
+async function conAgencia(cli) {
 
   // B1 · subcuenta (si ya hay una con ese nombre, se reutiliza)
   const lista = await ghl(AGENCIA, 'GET', '/locations/search?companyId=' + COMPANY + '&limit=100&skip=0');
@@ -68,7 +95,7 @@ async function main(cli) {
   if (loc) console.log('✓ la subcuenta ya existe · ' + loc.id);
   else {
     hacer('crear subcuenta «' + cli.nombre + '»' + (cli.snapshotId ? ' desde la plantilla ' + cli.snapshotId : ''));
-    if (!aplicar) { console.log('(sin subcuenta no se puede seguir mirando; con --aplicar continúa)'); return; }
+    if (!aplicar) { console.log('(sin subcuenta no se puede seguir mirando; con --aplicar continúa)'); return {}; }
     const c = await ghl(AGENCIA, 'POST', '/locations/', Object.assign({
       companyId: COMPANY, name: cli.nombre, timezone: 'Europe/Madrid', country: 'ES'
     }, cli.ficha || {}, cli.snapshotId ? { snapshotId: cli.snapshotId } : {}));
@@ -81,6 +108,10 @@ async function main(cli) {
   const tk = await ghl(AGENCIA, 'POST', '/oauth/locationToken', { companyId: COMPANY, locationId: loc.id }, '2021-07-28', true);
   const T = tk.access_token;
   if (!T) throw new Error('Sin token de la subcuenta (¿falta el permiso oauth.write en la clave de agencia?)');
+  return { loc, T };
+}
+
+async function configurar(cli, loc, T) {
 
   // B3 · valores personalizados
   const cv = await ghl(T, 'GET', '/locations/' + loc.id + '/customValues');
