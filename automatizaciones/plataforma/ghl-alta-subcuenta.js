@@ -34,7 +34,7 @@ const CAMPOS = [
   ['que_cambiar', 'Que cambiar', 'LARGE_TEXT'], ['visita_direccion', 'Visita direccion', 'TEXT']
 ];
 const ETIQUETAS = ['prueba', 'nuevo', 'clase-a', 'clase-b', 'clase-c', 'revision', 'respondio', 'visita', 'presupuesto',
-  'mas-adelante', 'stop', 'origen-pared', 'origen-chalet', 'origen-precio', 'origen-portal'];
+  'mas-adelante', 'stop', 'origen-pared', 'origen-chalet', 'origen-precio', 'origen-portal', 'origen-web'];
 
 const aplicar = process.argv.includes('--aplicar');
 const archivo = process.argv.slice(2).find((a) => !a.startsWith('--'));

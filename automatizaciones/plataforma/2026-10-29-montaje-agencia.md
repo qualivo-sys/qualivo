@@ -138,7 +138,7 @@ Claves **genéricas**, sin el prefijo `am_`, para que valgan para cualquier clie
 
 `prueba` (**la llave del modo prueba**) · `nuevo` · `clase-a` · `clase-b` · `clase-c` · `revision` ·
 `respondio` · `visita` · `presupuesto` · `mas-adelante` · `stop` · `origen-pared` · `origen-chalet` ·
-`origen-precio` · `origen-portal`.
+`origen-precio` · `origen-portal` · `origen-web`.
 
 ### C4 · Pipeline (solo interfaz, 3 min)
 
