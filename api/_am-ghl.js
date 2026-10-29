@@ -1,6 +1,7 @@
 // Al Milímetro: la subcuenta de GoHighLevel de Sonia (agencia de Qualivo, decisión del 29-oct a las 13:58).
 // La usan api/al-milimetro-lead.js (escribe el lead) e api/intelligence-almilimetro.js (lee el pipeline).
-// Los WhatsApp y emails los lanzan los workflows de GHL con las etiquetas que se ponen aquí;
+// Los WhatsApp y emails los lanzan los workflows de GHL con las etiquetas que se ponen aquí. Campos y etiquetas son
+// los genéricos de la plantilla «Reformas v1» (los crea Automatización con ghl-alta-subcuenta.js);
 // el WhatsApp sale por Wazzap desde el número de Sonia.
 //
 // Variables: AM_GHL_API_KEY (token privado de la subcuenta) · AM_GHL_LOCATION_ID
@@ -34,7 +35,7 @@ async function ghl(metodo, ruta, cuerpo) {
 }
 const loc = function () { return encodeURIComponent(process.env.AM_GHL_LOCATION_ID); };
 
-// Campos personalizados por su clave («contact.am_…» → id), leídos una vez por instancia
+// Campos personalizados por su clave («contact.obra_tipo» → id), leídos una vez por instancia
 async function campos() {
   if (cacheCampos) return cacheCampos;
   const d = await ghl('GET', '/locations/' + loc() + '/customFields?model=contact');
@@ -60,14 +61,14 @@ async function pipeline() {
 async function escribirLead(L, sc, extra) {
   const ids = (await campos()).porClave;
   const valores = {
-    am_tipo_obra: M.OPCIONES.tipo[L.tipo], am_tipo_texto: M.TIPO_TEXTO[L.tipo] || 'tu casa', am_codigo_postal: L.cp, am_zona: L.mun || L.cp,
-    am_metros: M.OPCIONES.m2[L.m2] || '', am_cuando: M.OPCIONES.cuando[L.cuando] || '', am_presupuesto: M.OPCIONES.ppto[L.ppto] || '',
-    am_vivienda_propia: M.OPCIONES.propia[L.propia] || '', am_clase: sc.clase, am_puntos: sc.puntos,
-    am_origen: M.OPCIONES.origen[L.origen], am_revision: L.revision ? 'Sí' : 'No', am_desde: M.DESDE[L.tipo] || '',
-    am_instalaciones: M.OPCIONES.inst[L.inst] || '', am_que_cambiar: L.frase || ''
+    obra_tipo: M.OPCIONES.tipo[L.tipo], obra_texto: M.TIPO_TEXTO[L.tipo] || 'tu casa', codigo_postal: L.cp, zona: L.mun || L.cp,
+    metros: M.OPCIONES.m2[L.m2] || '', cuando: M.OPCIONES.cuando[L.cuando] || '', presupuesto: M.OPCIONES.ppto[L.ppto] || '',
+    vivienda_propia: M.OPCIONES.propia[L.propia] || '', clase: sc.clase, puntos: sc.puntos,
+    origen: M.OPCIONES.origen[L.origen], revision: L.revision ? 'Sí' : 'No', precio_desde: M.DESDE[L.tipo] || '',
+    instalaciones: M.OPCIONES.inst[L.inst] || '', que_cambiar: L.frase || ''
   };
   const faltan = Object.keys(valores).filter(function (k) { return !ids[k]; });
-  if (faltan.length) console.error('[am-ghl] Faltan campos (scripts/al-milimetro/ghl-preparar.js):', faltan.join(', '));
+  if (faltan.length) console.error('[am-ghl] Faltan campos (los crea ghl-alta-subcuenta.js de Automatización):', faltan.join(', '));
   const customFields = Object.keys(valores).filter(function (k) { return ids[k] && valores[k] !== ''; }).map(function (k) { return { id: ids[k], field_value: valores[k] }; });
 
   // Sin «tags» en el upsert: si el contacto ya existía, GHL sustituiría sus etiquetas. Se suman después.
@@ -78,10 +79,12 @@ async function escribirLead(L, sc, extra) {
   const contactId = up && up.contact && up.contact.id;
   if (!contactId) throw new Error('upsert sin id');
 
-  // El orden importa: los workflows se disparan con «am-lead» y miran ya las demás etiquetas
-  const tags = ['am-' + sc.clase.toLowerCase(), 'am-origen-' + L.origen].concat(L.revision ? ['am-revision'] : []).concat(L.prueba ? ['am-prueba'] : []);
+  // El orden importa: los workflows se disparan con «nuevo» y miran ya las demás etiquetas
+  // Etiquetas genéricas de la plantilla «Reformas v1» de la agencia (29-oct). «nuevo» dispara el workflow del
+  // primer contacto y va la última, en otra llamada, para que las demás ya estén puestas.
+  const tags = ['clase-' + sc.clase.toLowerCase(), 'origen-' + L.origen].concat(L.revision ? ['revision'] : []).concat(L.prueba ? ['prueba'] : []);
   await ghl('POST', '/contacts/' + contactId + '/tags', { tags: tags });
-  await ghl('POST', '/contacts/' + contactId + '/tags', { tags: ['am-lead'] });
+  await ghl('POST', '/contacts/' + contactId + '/tags', { tags: ['nuevo'] });
 
   try {
     const p = await pipeline();
@@ -139,10 +142,10 @@ async function leerTablero() {
     return {
       id: o.id, n: corto(c.firstName || (o.contact && o.contact.name) || o.name), etapaNombre: et, etapa: ETAPA_IDX[et.toLowerCase()] || 1,
       fin: o.status === 'won' || /^firmado$/i.test(et) ? 'ganado' : o.status === 'lost' || /^perdido$/i.test(et) ? 'perdido' : null,
-      clase: v.am_clase || '', puntos: Number(v.am_puntos || 0), origen: ORIGEN_ID[v.am_origen] || 'web',
-      tipo: v.am_tipo_obra || '', zona: v.am_zona || '', cp: v.am_codigo_postal || '', metros: v.am_metros || '', cuando: v.am_cuando || '',
-      presupuesto: v.am_presupuesto || '', revision: v.am_revision === 'Sí', prueba: (c.tags || []).indexOf('am-prueba') > -1,
-      valor: Number(o.monetaryValue) || VALOR[v.am_presupuesto] || 27500,
+      clase: v.clase || '', puntos: Number(v.puntos || 0), origen: ORIGEN_ID[v.origen] || 'web',
+      tipo: v.obra_tipo || '', zona: v.zona || '', cp: v.codigo_postal || '', metros: v.metros || '', cuando: v.cuando || '',
+      presupuesto: v.presupuesto || '', revision: v.revision === 'Sí', prueba: (c.tags || []).indexOf('prueba') > -1,
+      valor: Number(o.monetaryValue) || VALOR[v.presupuesto] || 27500,
       creado: Date.parse(o.createdAt || c.dateAdded) || Date.now(), cambio: Date.parse(o.lastStageChangeAt || o.updatedAt) || null
     };
   });

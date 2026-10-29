@@ -1,4 +1,5 @@
-// Prepara la subcuenta de GHL de Al Milímetro: crea los campos personalizados que faltan
+// (Verificación) Comprueba la subcuenta de GHL de Al Milímetro. Los campos los crea Automatización con ghl-alta-subcuenta.js;
+// este script sirve para comprobar que las opciones coinciden con api/_am-modelo.js. Con --aplicar crea los que falten.
 // (con las opciones EXACTAS de api/_am-modelo.js) y comprueba el pipeline y sus etapas.
 // Uso: AM_GHL_API_KEY=… AM_GHL_LOCATION_ID=… node scripts/al-milimetro/ghl-preparar.js [--aplicar]
 // Sin --aplicar solo enseña lo que haría. No borra ni cambia nada que ya exista.
@@ -13,21 +14,21 @@ async function ghl(m, ruta, cuerpo) {
 }
 const ops = function (o) { return Object.values(o); };
 const CAMPOS = [
-  ['am_tipo_obra', 'AM · Tipo de obra', 'SINGLE_OPTIONS', ops(M.OPCIONES.tipo)],
-  ['am_tipo_texto', 'AM · Obra (texto para mensajes)', 'TEXT'],
-  ['am_codigo_postal', 'AM · Código postal', 'TEXT'],
-  ['am_zona', 'AM · Municipio o barrio', 'TEXT'],
-  ['am_metros', 'AM · Metros', 'SINGLE_OPTIONS', ops(M.OPCIONES.m2)],
-  ['am_cuando', 'AM · Cuándo quiere empezar', 'SINGLE_OPTIONS', ops(M.OPCIONES.cuando)],
-  ['am_presupuesto', 'AM · Presupuesto orientativo', 'SINGLE_OPTIONS', ops(M.OPCIONES.ppto)],
-  ['am_vivienda_propia', 'AM · Vivienda propia', 'SINGLE_OPTIONS', ops(M.OPCIONES.propia)],
-  ['am_clase', 'AM · Clase', 'SINGLE_OPTIONS', ops(M.OPCIONES.clase)],
-  ['am_puntos', 'AM · Puntos', 'NUMERICAL'],
-  ['am_origen', 'AM · Origen (anuncio)', 'SINGLE_OPTIONS', ops(M.OPCIONES.origen)],
-  ['am_revision', 'AM · Segundas preguntas', 'SINGLE_OPTIONS', ['Sí', 'No']],
-  ['am_desde', 'AM · Precio «desde» mostrado', 'TEXT'],
-  ['am_instalaciones', 'AM · Instalaciones', 'SINGLE_OPTIONS', ops(M.OPCIONES.inst)],
-  ['am_que_cambiar', 'AM · Qué quiere cambiar', 'LARGE_TEXT']
+  ['obra_tipo', 'AM · Tipo de obra', 'SINGLE_OPTIONS', ops(M.OPCIONES.tipo)],
+  ['obra_texto', 'AM · Obra (texto para mensajes)', 'TEXT'],
+  ['codigo_postal', 'AM · Código postal', 'TEXT'],
+  ['zona', 'AM · Municipio o barrio', 'TEXT'],
+  ['metros', 'AM · Metros', 'SINGLE_OPTIONS', ops(M.OPCIONES.m2)],
+  ['cuando', 'AM · Cuándo quiere empezar', 'SINGLE_OPTIONS', ops(M.OPCIONES.cuando)],
+  ['presupuesto', 'AM · Presupuesto orientativo', 'SINGLE_OPTIONS', ops(M.OPCIONES.ppto)],
+  ['vivienda_propia', 'AM · Vivienda propia', 'SINGLE_OPTIONS', ops(M.OPCIONES.propia)],
+  ['clase', 'AM · Clase', 'SINGLE_OPTIONS', ops(M.OPCIONES.clase)],
+  ['puntos', 'AM · Puntos', 'NUMERICAL'],
+  ['origen', 'AM · Origen (anuncio)', 'SINGLE_OPTIONS', ops(M.OPCIONES.origen)],
+  ['revision', 'AM · Segundas preguntas', 'SINGLE_OPTIONS', ['Sí', 'No']],
+  ['precio_desde', 'AM · Precio «desde» mostrado', 'TEXT'],
+  ['instalaciones', 'AM · Instalaciones', 'SINGLE_OPTIONS', ops(M.OPCIONES.inst)],
+  ['que_cambiar', 'AM · Qué quiere cambiar', 'LARGE_TEXT']
 ];
 const ETAPAS = ['Nuevo', 'Contactado', 'Visita técnica', 'Presupuesto enviado', 'Seguimiento', 'Firmado', 'Perdido'];
 (async function () {
