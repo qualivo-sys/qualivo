@@ -1,6 +1,6 @@
 # Al Milímetro · montaje de los flujos en GoHighLevel
 
-> ⚠️ **SUSTITUIDO (29-oct, 12:00):** Al Milímetro no va en GHL, sino en un sistema propio (qualivo.io, base de datos, Resend y wa.me). La lógica vigente está en `api/_am-flujos.js` (rama `claude/am-flujos`). Esta hoja se queda solo como referencia de los workflows.
+> ↩️ **VUELVE A VALER (29-oct, 14:00):** GHL con plan de agencia es el motor estándar. La versión al día, adaptada a Wazzap y con los pasos clic a clic, está en `automatizaciones/plataforma/2026-10-29-montaje-agencia.md`. Esta hoja queda como borrador previo.
 
 Hoja de montaje del 29-oct-2026, preparada por Automatización para el agente de Al Milímetro.
 Base: `propuestas-wip/sistema/mensajes.md` (rama `claude/al-milimetro-landing`), con

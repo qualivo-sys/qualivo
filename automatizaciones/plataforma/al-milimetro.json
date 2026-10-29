@@ -1,0 +1,27 @@
+{
+  "nombre": "Al Milímetro",
+  "ficha": { "city": "Madrid", "state": "Madrid", "website": "https://www.almilimetroreformas.com" },
+  "valores": {
+    "negocio_nombre": "Al Milímetro",
+    "persona_nombre": "Sonia",
+    "persona_presentacion": "arquitecta de Al Milímetro",
+    "negocio_lema": "Tu reforma, sin agobios",
+    "horario_texto": "de lunes a jueves de 9:00 a 19:00 y los viernes de 9:00 a 15:00",
+    "servicios_texto": "reformas completas de viviendas, y cocina y baño de la misma vivienda",
+    "obra_minima": "15.000 €",
+    "enlace_web": "https://qualivo.io/propuestas/al-milimetro/landing-v2/",
+    "enlace_reserva": "PENDIENTE",
+    "whatsapp_negocio": "PENDIENTE",
+    "aviso_movil": "+34663375205",
+    "aviso_email": "maikel@qualivo.io",
+    "email_remite": "PENDIENTE",
+    "direccion_postal": "PENDIENTE"
+  },
+  "calendario": {
+    "nombre": "Visita técnica",
+    "openHours": [
+      { "daysOfTheWeek": [1, 2, 3, 4], "hours": [{ "openHour": 9, "openMinute": 0, "closeHour": 19, "closeMinute": 0 }] },
+      { "daysOfTheWeek": [5], "hours": [{ "openHour": 9, "openMinute": 0, "closeHour": 15, "closeMinute": 0 }] }
+    ]
+  }
+}

@@ -5,7 +5,7 @@ Cada aviso llega por dos vías independientes, como pidió Maikel el 29-oct
 («enviadme un WhatsApp y un email»):
 
 - **Email** a `maikel@qualivo.io` (Gmail).
-- **WhatsApp** a su número personal (+34 647 11 84 91), desde la cuenta de WhatsApp de Qualivo en GHL.
+- **WhatsApp** a su móvil personal (+34 663 375 205), desde el número de Qualivo (647) por la pasarela Wazzap de GHL.
 
 Si un canal falla, el otro sale igualmente.
 
@@ -80,7 +80,7 @@ importable en `qualivo.app.n8n.cloud`.
 ```
 Webhook (token en cabecera) → Config → Validar y redactar → ¿válido?
    ├─ no → 400
-   └─ sí → Email (Gmail) → Contacto Maikel (GHL, upsert) → WhatsApp (GHL) → Resumen → 200
+   └─ sí → Email (Gmail) → WhatsApp (Wazzap, vía GHL) → Resumen → 200
 ```
 
 - Los nodos de envío llevan «continuar si falla»: el resumen dice qué canal salió y cuál no.
@@ -94,15 +94,13 @@ Hasta que se hagan estos pasos, el webhook no existe. Avisa solo a Maikel, así 
 2. **Credenciales** (en el almacén de n8n, nunca en los nodos):
    - `Qualivo · Avisos agentes (X-Qualivo-Token)`: *Header Auth*, con nombre `X-Qualivo-Token` y como valor el token que reparte el Chief of Staff.
    - `Qualivo · Gmail maikel@qualivo.io`: *Gmail OAuth2*, con «Sign in with Google».
-   - `Qualivo · GHL (Bearer)`: *Header Auth*, con nombre `Authorization` y valor `Bearer <token de la subcuenta Qualivo>`. Permisos: `contacts.write`, `conversations/message.write`.
-3. En el nodo **Config avisos**, cambiar `PON-AQUI-LOCATION-ID-DE-QUALIVO` por el *Location ID* de la subcuenta de Qualivo en GHL.
-4. **Activar** y lanzar el curl de prueba de arriba con `"urgencia": "normal"` y `"titulo": "Prueba del canal de avisos"`.
+   - `Qualivo · GHL (Bearer)`: *Header Auth*, con nombre `Authorization` y valor `Bearer <token de la subcuenta Qualivo>` (el mismo `GHL_API_KEY` de Vercel vale). Permiso: `conversations/message.write`.
+3. **Activar** y lanzar el curl de prueba de arriba con `"urgencia": "normal"` y `"titulo": "Prueba del canal de avisos"`.
 
-### ⚠️ La ventana de 24 h de WhatsApp
+### WhatsApp sin ventana de 24 h
 
-WhatsApp solo deja escribir texto libre si **Maikel ha escrito al número de Qualivo
-en las últimas 24 h**. Fuera de esa ventana, Meta rechaza el mensaje y el resumen
-devuelve `whatsapp: fallo…`, aunque el email sí llega. Hay dos soluciones:
-
-- **Ya:** que Maikel mande un «hola» al WhatsApp de Qualivo cada mañana. Basta para probarlo hoy.
-- **Definitiva:** una plantilla *utility* aprobada en GHL (`aviso_agente`: «{{1}} · {{2}} — {{3}}»), enviada desde un workflow de GHL con disparador *Inbound Webhook* en lugar del envío de texto libre. Queda propuesta; cuando esté aprobada, se cambia el nodo «WhatsApp a Maikel (GHL)».
+El mensaje sale como `type: 'SMS'` hacia el contacto de Maikel en la subcuenta de Qualivo
+(`DgkPLaw6fzy4z1bs8HsB`, su 663), el mismo que usa `api/_aviso.js`. En GHL, el proveedor de SMS de
+Qualivo es **Wazzap**, así que sale **como WhatsApp** desde el 647, sin plantillas ni ventana de 24 h.
+Corrección del 29-oct: la primera versión apuntaba al 647 (el de la firma), que es el propio número de
+Qualivo.
