@@ -7,7 +7,7 @@ Una sola página que reúne cada parte del plan. [C] es un dato confirmado; [E],
 | Etapa | Meta | Fuente |
 |---|---|---|
 | Leads aptos | 10-13 [E] | Paid |
-| Reuniones con encaje | 5-7 [E] según Paid; Outbound se pone 4-5 solo para su canal | Paid y Outbound (**hay que cuadrarlo**, ver abajo) |
+| Reuniones celebradas con encaje (contadas en GHL) | **7-9** [E]: 4-5 de Paid y 3-4 de Outbound | Acordado entre Paid y Outbound el 29-oct; se revisa el 13-nov |
 | Propuestas | 2-3 [E] | Paid |
 | Clientes nuevos | 1-2 (1 es lo realista) | Instrucción maestra |
 
@@ -32,5 +32,5 @@ Una sola página que reúne cada parte del plan. [C] es un dato confirmado; [E],
 
 ## Lo que cuadran los agentes, sin ti
 
-- **Objetivo de reuniones:** Paid cuenta 1-2 reuniones de Outbound y Outbound se pone 4-5. Paid y Outbound lo unifican en un solo número antes del viernes.
+- **Objetivo de reuniones:** ✅ cuadrado. Son 7-9 reuniones celebradas; el 4-5 que daba Outbound eran reuniones agendadas.
 - **Pendientes de Outbound que no son del plan:** los borradores de Tunergia y Strat (llevan 6 días esperando) y la regla de responder solos a los «ahora no». Van al bloque de las 13:00.
