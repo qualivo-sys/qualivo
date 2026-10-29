@@ -1,6 +1,6 @@
 /* Cuenta privada de Al Milímetro: /intelligence/?cuenta=almilimetro
  * Pide la contraseña, lee /api/intelligence-almilimetro/?accion=tablero (solo con sesión) y monta
- * el sector «almilimetro» con las oportunidades reales del pipeline de Sonia en GHL.
+ * el sector «almilimetro» con los contactos reales de su base de datos (api/_am-db.js).
  * Solo lectura: no envía mensajes ni mueve oportunidades. En el código no hay ni un dato real. */
 (function () {
   'use strict';
@@ -26,7 +26,7 @@
         '<label for="clave">Contraseña</label><input id="clave" name="password" type="password" autocomplete="current-password" required>' +
         '<p id="claveError" style="color:var(--coral);font-size:13px;min-height:20px;margin-top:8px">' + esc(mensaje || '') + '</p>' +
         '<button class="btn btn-primario btn-grande" type="submit" style="width:100%">Entrar</button></form>' +
-      '<p class="inicio-nota">Solo lectura: desde aquí no se envía nada a nadie ni se cambia nada en el CRM.</p>');
+      '<p class="inicio-nota">Solo lectura: desde aquí no se envía nada a nadie ni se cambia nada.</p>');
     $('#clave').focus();
     $('#formClave').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -56,7 +56,7 @@
     return {
       id: r.id, n: r.n + (r.prueba ? ' (prueba)' : ''), rol: 'Clase ' + (r.clase || '—') + ' · ' + r.puntos + ' puntos', emp: '', seg: 'particular',
       ciudad: r.zona || r.cp || '—', prod: [r.tipo, r.metros].filter(Boolean).join(' · ') || 'Reforma', orig: r.origen, canal: 'wa',
-      etapa: r.etapa, etapaTxt: r.etapaNombre, valor: r.valor, ghl: r.ghl, tel: '', email: '', web: '',
+      etapa: r.etapa, etapaTxt: r.etapaNombre, valor: r.valor, tel: '', email: '', web: '',
       creado: hace(r.creado, ahora), act: hace(r.cambio || r.creado, ahora), toque: null, fin: r.fin || undefined,
       f: { fitFijo: r.puntos || 0, tipo: TIPO[r.tipo], cuando: CUANDO[r.cuando] },
       s: { revision: r.revision },
@@ -83,7 +83,7 @@
       historias: null, historiaDefecto: null, campanas: campanas, contactos: contactos,
       columnasCrm: d.etapas || [],
       mesDatos: { respuestaAntes: 0, respuestaAhora: 0, agendadas: contactos.filter(function (c) { return c.etapa >= 3; }).length },
-      // La clase la calcula el formulario (api/_am-modelo.js) y se guarda en GHL: el encaje que pinta
+      // La clase la calcula el formulario (api/_am-modelo.js) y se guarda en la base de datos: el encaje que pinta
       // Intelligence es esa misma puntuación, en escalones de 5 (el motor solo suma puntos fijos)
       reglas: Object.assign({}, base.reglas, { fitBase: 0, fit: [[function () { return true; }, 0, function (c) { return 'puntuación del formulario: ' + c.f.fitFijo; }]]
         .concat(Array.from({ length: 20 }, function (_, i) { return [function (c) { return (c.f.fitFijo || 0) >= (i + 1) * 5; }, 5, '']; })) }),

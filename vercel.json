@@ -200,6 +200,10 @@
   "trailingSlash": true,
   "crons": [
     {
+      "path": "/api/al-milimetro-cron/",
+      "schedule": "*/10 * * * *"
+    },
+    {
       "path": "/api/secuencia/",
       "schedule": "0 8 * * *"
     },

@@ -66,4 +66,13 @@ function puntuar(r) {
 const MAXIMO = 20 + 25 + 15 + 20 + 10;
 if (MAXIMO < UMBRAL_A) throw new Error('La puntuación máxima (' + MAXIMO + ') no llega a la clase A (' + UMBRAL_A + ')');
 
-module.exports = { OPCIONES, DESDE, TIPO_TEXTO, UMBRAL_A, UMBRAL_B, MAXIMO, descarte, necesitaRevision, zonaPrioritaria, puntuar };
+// Ficha legible de un lead guardado (para correos, avisos e Intelligence)
+function vista(r) {
+  return Object.assign({}, r, {
+    tipoTexto: TIPO_TEXTO[r.tipo] || 'tu casa', tipoLargo: OPCIONES.tipo[r.tipo] || 'Reforma',
+    m2Txt: OPCIONES.m2[r.m2] || '', cuandoTxt: OPCIONES.cuando[r.cuando] || '', pptoTxt: OPCIONES.ppto[r.ppto] || '',
+    propiaTxt: OPCIONES.propia[r.propia] || '', origenTxt: OPCIONES.origen[r.origen] || OPCIONES.origen.web
+  });
+}
+
+module.exports = { vista, OPCIONES, DESDE, TIPO_TEXTO, UMBRAL_A, UMBRAL_B, MAXIMO, descarte, necesitaRevision, zonaPrioritaria, puntuar };
