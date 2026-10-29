@@ -10,3 +10,8 @@ datos/
 # solo devuelve la del ultimo. Si se pierde, se pierde para siempre: el 19-oct
 # se reciclo el contenedor y se llevo todo el scratchpad por delante.
 !clics-estado.json
+
+# Excepcion: la lista preseleccionada SI va versionada. Solo lleva datos de
+# empresa (nombre, web, telefono general, zona), ni nombres ni correos de
+# personas. Lo que se enriquezca con contactos va a datos/, que no se versiona.
+!lista/*.csv

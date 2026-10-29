@@ -38,7 +38,8 @@ DATOS = os.path.join(KUBY, "datos")
 ESTADO = os.path.join(KUBY, "clics-estado.json")
 
 B = "https://server.smartlead.ai/api/v1"
-CAMPANA = 4071068
+# La del piloto de octubre. La de noviembre se pasa con --campana cuando exista.
+CAMPANAS = [4071068]
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36"}
 
@@ -67,16 +68,27 @@ def get(url, intentos=3):
             time.sleep(2)
 
 
-def paginado(ruta, k):
+def paginado(campana, ruta, k):
     """Todas las paginas de un endpoint que devuelve {'data': [...]}."""
     fuera, off = [], 0
     while True:
-        d = get(f"{B}/campaigns/{CAMPANA}/{ruta}?api_key={k}&offset={off}&limit=100")
+        d = get(f"{B}/campaigns/{campana}/{ruta}?api_key={k}&offset={off}&limit=100")
         lote = (d or {}).get("data") or []
         fuera += lote
         if len(lote) < 100:
             return fuera
         off += 100
+
+
+def cuerpos(campana, k):
+    """Texto de cada paso de la secuencia, para poner en el aviso el mensaje
+    que se envio. Es la plantilla, con las variables sin sustituir."""
+    d = get(f"{B}/campaigns/{campana}/sequences?api_key={k}") or []
+    fuera = {}
+    for s in d if isinstance(d, list) else []:
+        v = (s.get("sequence_variants") or [{}])[0] or {}
+        fuera[s.get("seq_number")] = texto_plano(v.get("email_body") or s.get("email_body"))
+    return fuera
 
 
 def texto_plano(html):
@@ -107,7 +119,10 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--umbral", type=int, default=3)
     ap.add_argument("--marcar-avisado", action="store_true")
+    ap.add_argument("--campana", type=int, action="append",
+                    help="id de campana de Smartlead; se puede repetir")
     a = ap.parse_args()
+    campanas = a.campana or CAMPANAS
 
     k = clave()
     ahora = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -116,17 +131,18 @@ if __name__ == "__main__":
 
     # Los leads, para el nombre de la empresa y el telefono. Se indexa por
     # correo porque /statistics devuelve lead_id a null.
-    leads = {}
-    for it in paginado("leads", k):
-        l = it.get("lead") or it
-        e = (l.get("email") or "").lower()
-        if e:
-            leads[e] = {"empresa": l.get("company_name") or "",
-                        "tel": l.get("phone_number") or "",
-                        "web": l.get("website") or "",
-                        **(l.get("custom_fields") or {})}
-
-    filas = paginado("statistics", k)
+    leads, textos, filas = {}, {}, []
+    for cp in campanas:
+        for it in paginado(cp, "leads", k):
+            l = it.get("lead") or it
+            e = (l.get("email") or "").lower()
+            if e:
+                leads[e] = {"empresa": l.get("company_name") or "",
+                            "tel": l.get("phone_number") or "",
+                            "web": l.get("website") or "",
+                            **(l.get("custom_fields") or {})}
+        textos[cp] = cuerpos(cp, k)
+        filas += [dict(r, campana=cp) for r in paginado(cp, "statistics", k)]
 
     nuevos_por_lead = {}          # correo -> cuantos clics nuevos hemos visto
     for r in filas:
@@ -143,6 +159,7 @@ if __name__ == "__main__":
             # apunta como tal y se marca de donde viene.
             est["correos"][sid] = {
                 "lead": correo, "paso": r.get("sequence_number"),
+                "campana": r["campana"],
                 "asunto": r.get("email_subject") or "",
                 "enviado": r.get("sent_time"),
                 "clics": n,
@@ -169,24 +186,36 @@ if __name__ == "__main__":
             detalle.setdefault(e, []).append(c)
 
     # Avisa al llegar al umbral, y otra vez con cada clic nuevo por encima.
-    avisos = []
+    # Con 1 o 2 clics no hay aviso: van a la lista de revision manual.
+    avisos, revisar = [], []
     for e, n in total.items():
-        if n < a.umbral:
+        if n == 0:
             continue
-        ya = est["avisados"].get(e, 0)
-        if n <= ya:
-            continue                      # ya avisado con este numero de clics
         i = leads.get(e, {})
         fechas = sorted(f["cuando"] for f in fechas_lead.get(e, []) if f["cuando"])
-        avisos.append({
+        envios = sorted(c["enviado"] for c in est["correos"].values()
+                        if c["lead"] == e and c.get("enviado"))
+        fila = {
             "empresa": i.get("empresa", ""), "email": e,
             "telefono": i.get("tel", ""), "ciudad": i.get("ciudad", ""),
-            "clics": n, "clics_nuevos": n - ya,
+            "clics": n,
+            "fecha_envio": envios[0] if envios else "",
+            "clic_1": fechas[0] if len(fechas) > 0 else "",
+            "clic_2": fechas[1] if len(fechas) > 1 else "",
+            "clic_3": fechas[2] if len(fechas) > 2 else "",
             "primer_clic": fechas[0] if fechas else "",
             "ultimo_clic": fechas[-1] if fechas else "",
             "fechas_clics": " · ".join(fechas),
             "correos": detalle.get(e, []),
-        })
+        }
+        if n < a.umbral:
+            revisar.append(fila)
+            continue
+        ya = est["avisados"].get(e, 0)
+        if n <= ya:
+            continue                      # ya avisado con este numero de clics
+        fila["clics_nuevos"] = n - ya
+        avisos.append(fila)
         if a.marcar_avisado:
             est["avisados"][e] = n
 
@@ -200,30 +229,55 @@ if __name__ == "__main__":
               "nuevo queda con la hora en que se detecta.\n")
 
     cols = ["clics", "clics_nuevos", "empresa", "ciudad", "telefono", "email",
-            "primer_clic", "ultimo_clic", "fechas_clics"]
+            "fecha_envio", "clic_1", "clic_2", "clic_3", "ultimo_clic", "fechas_clics"]
     destino = os.path.join(DATOS, "avisos_clics.csv")
     with open(destino, "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         w.writeheader()
         for v in sorted(avisos, key=lambda x: -x["clics"]):
-            w.writerow({c: v[c] for c in cols})
+            w.writerow({c: v.get(c, "") for c in cols})
+    destino_rev = os.path.join(DATOS, "revisar_1_2_clics.csv")
+    with open(destino_rev, "w", newline="", encoding="utf-8-sig") as f:
+        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
+        w.writeheader()
+        for v in sorted(revisar, key=lambda x: -x["clics"]):
+            w.writerow({c: v.get(c, "") for c in cols})
 
+    # Un fichero de texto por aviso, con el correo a Marc ya escrito. Es lo que
+    # se manda tal cual cuando el envio este encendido (diseno-alerta-clics.md).
+    dir_avisos = os.path.join(DATOS, "avisos")
+    os.makedirs(dir_avisos, exist_ok=True)
     print(f"empresas con {a.umbral}+ clics y aviso pendiente: {len(avisos)}")
+    print(f"empresas con 1 o 2 clics para revisar a mano: {len(revisar)}")
     for v in sorted(avisos, key=lambda x: -x["clics"]):
-        print("\n" + "=" * 68)
-        print(f"ASUNTO: {v['empresa']} ha hecho {v['clics']} clics")
-        print("=" * 68)
-        print(f"Empresa:   {v['empresa']}")
-        print(f"Ciudad:    {v['ciudad']}")
-        print(f"Teléfono:  {v['telefono']}")
-        print(f"Email:     {v['email']}")
-        print(f"Clics:     {v['clics']}  (nuevos desde el último aviso: {v['clics_nuevos']})")
-        print(f"Fechas de los clics: {v['fechas_clics'] or 'sin fecha'}")
+        lineas = [
+            f"ASUNTO: Lead caliente: {v['empresa'] or v['email']} ha hecho {v['clics']} clics",
+            "",
+            f"Empresa:          {v['empresa']}",
+            f"Ciudad:           {v['ciudad']}",
+            f"Teléfono:         {v['telefono']}",
+            f"Email:            {v['email']}",
+            f"Número de clics:  {v['clics']}  (nuevos desde el último aviso: {v['clics_nuevos']})",
+            f"Fecha de envío:   {v['fecha_envio']}",
+            f"Primer clic:      {v['clic_1'] or 'sin fecha'}",
+            f"Segundo clic:     {v['clic_2'] or 'sin fecha'}",
+            f"Tercer clic:      {v['clic_3'] or 'sin fecha'}",
+            f"Todos los clics:  {v['fechas_clics'] or 'sin fecha'}",
+            "",
+            "Las fechas marcadas como histórico son la del último clic de ese correo;",
+            "las detectadas tienen una precisión de una hora.",
+        ]
         for c in v["correos"]:
-            print(f"\n  --- correo {c['paso']} · enviado {c['enviado']} · "
-                  f"{c['clics']} clics ---")
-            print(f"  Asunto: {c['asunto']}")
+            lineas += ["", f"--- Mensaje enviado: correo {c['paso']} · enviado {c['enviado']} · "
+                           f"{c['clics']} clics ---", f"Asunto: {c['asunto']}",
+                       textos.get(c.get("campana", campanas[0]), {}).get(c["paso"], "")]
+        texto = "\n".join(lineas)
+        print("\n" + "=" * 68 + "\n" + texto)
+        nombre = re.sub(r"[^a-z0-9]+", "-", v["email"].lower()) + ".txt"
+        with open(os.path.join(dir_avisos, nombre), "w", encoding="utf-8") as f:
+            f.write(texto + "\n")
     print(f"\n-> {destino}")
+    print(f"-> {destino_rev}")
     print(f"-> estado en {ESTADO}")
     if avisos and not a.marcar_avisado:
         print("\nEn seco: no se ha marcado como avisado y no se ha enviado nada.")
