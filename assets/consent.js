@@ -1,6 +1,9 @@
-/* Consentimiento de cookies + Google Analytics 4 (Consent Mode v2).
-   GA4 solo se carga si el visitante acepta. La elección se guarda en
-   localStorage ('qv-consent': granted | denied). */
+/* Consentimiento de cookies + Google Analytics 4 (Consent Mode v2) + píxel de Meta.
+   T5.1 (29-oct): GA4 y el píxel se cargan siempre, sin esperar al banner, pero
+   arrancan sin cookies: GA4 en Consent Mode 'denied' (pings anónimos que GA4
+   modela) y el píxel con fbq('consent', 'revoke') (no envía ni guarda nada).
+   Al aceptar se conceden los dos. La elección se guarda en localStorage
+   ('qv-consent': granted | denied). */
 (function () {
   'use strict';
 
@@ -8,8 +11,8 @@
   var META_PIXEL = '879197745226987';
   var KEY = 'qv-consent';
 
-  // Stub de gtag siempre presente: los eventos se encolan en dataLayer y
-  // solo se procesan si el script llega a cargarse (tras consentimiento).
+  // Stub de gtag siempre presente. Con el consentimiento en 'denied', GA4
+  // recibe pings sin cookies; con 'granted', medición completa.
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   gtag('consent', 'default', {
@@ -21,7 +24,8 @@
   });
 
   function cargarGA() {
-    gtag('consent', 'update', { analytics_storage: 'granted' });
+    if (window.__qvGA) return;
+    window.__qvGA = true;
     gtag('js', new Date());
     gtag('config', GA_ID, { anonymize_ip: true });
     var s = document.createElement('script');
@@ -30,8 +34,9 @@
     document.head.appendChild(s);
   }
 
-  // Píxel de Meta: solo tras consentimiento. Los eventos del diagnóstico se
-  // traducen a eventos del píxel para optimizar y hacer retargeting.
+  // Píxel de Meta: se carga siempre, pero en 'revoke' hasta que el visitante
+  // acepta. Los eventos del diagnóstico se traducen a eventos del píxel; sin
+  // consentimiento, la señal de Meta llega por la Conversions API del servidor.
   function cargarMeta() {
     if (window.fbq) return;
     var n = window.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
@@ -40,8 +45,19 @@
     var s = document.createElement('script');
     s.async = true; s.src = 'https://connect.facebook.net/en_US/fbevents.js';
     document.head.appendChild(s);
+    fbq('consent', 'revoke');
     fbq('init', META_PIXEL);
     fbq('track', 'PageView');
+  }
+
+  function conceder() {
+    gtag('consent', 'update', {
+      analytics_storage: 'granted',
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
+    });
+    try { fbq('consent', 'grant'); } catch (e) {}
   }
 
   var META_EVENTOS = {
@@ -75,8 +91,8 @@
     home_reserva: ['trackCustom', 'HomeReserva']
   };
 
-  // Helper de eventos: siempre llamable; solo llega a GA y a Meta si hubo
-  // consentimiento y los scripts cargaron. Vercel Analytics (sin cookies) recibe siempre.
+  // Helper de eventos: siempre llamable. GA4 lo recibe siempre (sin cookies
+  // si no hay consentimiento); Meta solo con consentimiento. Vercel Analytics (sin cookies) recibe siempre.
   window.qvTrack = function (nombre, datos) {
     try { gtag('event', nombre, datos || {}); } catch (e) {}
     try {
@@ -99,7 +115,7 @@
     try { localStorage.setItem(KEY, valor); } catch (e) {}
     var b = document.getElementById('qv-cookies');
     if (b) b.remove();
-    if (valor === 'granted') { cargarGA(); cargarMeta(); }
+    if (valor === 'granted') conceder();
   }
 
   function pintarBanner() {
@@ -122,10 +138,14 @@
   function init() {
     var previo = null;
     try { previo = localStorage.getItem(KEY); } catch (e) {}
-    if (previo === 'granted') { cargarGA(); cargarMeta(); return; }
+    if (previo === 'granted') { conceder(); return; }
     if (previo === 'denied') { return; }
     pintarBanner();
   }
+
+  // Sin esperar al banner ni al DOM: los dos scripts arrancan sin cookies.
+  cargarGA();
+  cargarMeta();
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
