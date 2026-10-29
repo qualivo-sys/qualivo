@@ -1,0 +1,369 @@
+{
+  "name": "Qualivo · Avisar a Maikel (agentes → email + WhatsApp)",
+  "settings": {
+    "timezone": "Europe/Madrid",
+    "executionOrder": "v1"
+  },
+  "nodes": [
+    {
+      "id": "c4000000-0000-4000-8000-000000000001",
+      "name": "Aviso de agente",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "agentes-avisar-maikel",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "agentes/avisar-maikel",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Qualivo · Avisos agentes (X-Qualivo-Token)"
+        }
+      }
+    },
+    {
+      "id": "c4000000-0000-4000-8000-000000000002",
+      "name": "Config avisos",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        420,
+        300
+      ],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": true,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "ghl_base",
+              "type": "string",
+              "value": "https://services.leadconnectorhq.com"
+            },
+            {
+              "id": "a2",
+              "name": "ghl_location_id",
+              "type": "string",
+              "value": "PON-AQUI-LOCATION-ID-DE-QUALIVO"
+            },
+            {
+              "id": "a3",
+              "name": "maikel_email",
+              "type": "string",
+              "value": "maikel@qualivo.io"
+            },
+            {
+              "id": "a4",
+              "name": "maikel_whatsapp",
+              "type": "string",
+              "value": "+34647118491"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "c4000000-0000-4000-8000-000000000003",
+      "name": "Validar y redactar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        300
+      ],
+      "parameters": {
+        "jsCode": "// Payload: { urgencia: 'rojo'|'normal', titulo, texto, enlace?, agente }\n// Lo llama cualquier agente de Qualivo que necesite a Maikel. Devuelve error legible si falta algo.\nconst entrada = $input.first().json;\nconst b = entrada.body || entrada;\nconst limpiar = (s, max) => String(s ?? '').replace(/\\s+\\n/g, '\\n').trim().slice(0, max);\n\nconst urgencia = String(b.urgencia || 'normal').toLowerCase() === 'rojo' ? 'rojo' : 'normal';\nconst titulo = limpiar(b.titulo, 120);\nconst texto = limpiar(b.texto, 1500);\nconst agente = limpiar(b.agente, 80);\nconst enlace = /^https?:\\/\\/\\S+$/.test(String(b.enlace || '').trim()) ? String(b.enlace).trim() : '';\n\nconst faltan = [!titulo && 'titulo', !texto && 'texto', !agente && 'agente'].filter(Boolean);\nif (faltan.length) {\n  return [{ json: { valido: false, error: `Faltan campos: ${faltan.join(', ')}` } }];\n}\n\nconst marca = urgencia === 'rojo' ? '🔴 URGENTE' : '🟡 Aviso';\nconst whatsapp =\n  `${marca} · ${titulo}\\n\\n${texto}\\n\\n` +\n  (enlace ? `👉 ${enlace}\\n\\n` : '') +\n  `— ${agente}`;\n\nconst esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst asunto = `[${urgencia === 'rojo' ? 'URGENTE' : 'Aviso'}] ${titulo} · ${agente}`;\nconst html =\n  `<p style=\"font-size:15px\"><b>${marca}</b> · ${esc(titulo)}</p>` +\n  `<p style=\"white-space:pre-line\">${esc(texto)}</p>` +\n  (enlace ? `<p><a href=\"${esc(enlace)}\">${esc(enlace)}</a></p>` : '') +\n  `<p style=\"color:#888\">— ${esc(agente)} · enviado por el webhook «Avisar a Maikel»</p>`;\n\nreturn [{ json: { valido: true, urgencia, titulo, agente, enlace, whatsapp, asunto, html } }];\n"
+      }
+    },
+    {
+      "id": "c4000000-0000-4000-8000-000000000004",
+      "name": "IF válido",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        860,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "v1",
+              "leftValue": "={{ $json.valido }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "c4000000-0000-4000-8000-000000000005",
+      "name": "Email a Maikel (Gmail)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1080,
+        200
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $('Config avisos').first().json.maikel_email }}",
+        "subject": "={{ $('Validar y redactar').first().json.asunto }}",
+        "emailType": "html",
+        "message": "={{ $('Validar y redactar').first().json.html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "",
+          "name": "Qualivo · Gmail maikel@qualivo.io"
+        }
+      }
+    },
+    {
+      "id": "c4000000-0000-4000-8000-000000000006",
+      "name": "Contacto Maikel (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1300,
+        200
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config avisos').first().json.ghl_base }}/contacts/upsert",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ locationId: $('Config avisos').first().json.ghl_location_id, firstName: 'Maikel', lastName: 'Echevarria', email: $('Config avisos').first().json.maikel_email, phone: $('Config avisos').first().json.maikel_whatsapp, tags: ['interno-avisos-agentes'] }) }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Qualivo · GHL (Bearer)"
+        }
+      }
+    },
+    {
+      "id": "c4000000-0000-4000-8000-000000000007",
+      "name": "WhatsApp a Maikel (GHL)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1520,
+        200
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config avisos').first().json.ghl_base }}/conversations/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-04-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ type: 'WhatsApp', contactId: $('Contacto Maikel (GHL)').first().json.contact?.id, message: $('Validar y redactar').first().json.whatsapp }) }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Qualivo · GHL (Bearer)"
+        }
+      }
+    },
+    {
+      "id": "c4000000-0000-4000-8000-000000000008",
+      "name": "Resumen de envío",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1740,
+        200
+      ],
+      "parameters": {
+        "jsCode": "// Junta el resultado de los dos canales. Un canal caído no tumba el otro.\nconst email = $('Email a Maikel (Gmail)').first().json;\nconst wa = $('WhatsApp a Maikel (GHL)').first().json;\nconst emailOk = Boolean(email.id) && !email.error;\nconst whatsappOk = Boolean(wa.messageId || wa.conversationId) && !wa.error;\nreturn [{ json: {\n  ok: emailOk || whatsappOk,\n  email: emailOk ? 'enviado' : `fallo: ${JSON.stringify(email.error || email).slice(0, 300)}`,\n  whatsapp: whatsappOk ? 'enviado' : `fallo: ${JSON.stringify(wa.error || wa).slice(0, 300)}`,\n} }];"
+      }
+    },
+    {
+      "id": "c4000000-0000-4000-8000-000000000009",
+      "name": "Responder 200",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1960,
+        200
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    },
+    {
+      "id": "c4000000-0000-4000-8000-000000000010",
+      "name": "Responder 400",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1080,
+        420
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: false, error: $json.error }) }}",
+        "options": {
+          "responseCode": 400
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Aviso de agente": {
+      "main": [
+        [
+          {
+            "node": "Config avisos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config avisos": {
+      "main": [
+        [
+          {
+            "node": "Validar y redactar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar y redactar": {
+      "main": [
+        [
+          {
+            "node": "IF válido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email a Maikel (Gmail)": {
+      "main": [
+        [
+          {
+            "node": "Contacto Maikel (GHL)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contacto Maikel (GHL)": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp a Maikel (GHL)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp a Maikel (GHL)": {
+      "main": [
+        [
+          {
+            "node": "Resumen de envío",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resumen de envío": {
+      "main": [
+        [
+          {
+            "node": "Responder 200",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF válido": {
+      "main": [
+        [
+          {
+            "node": "Email a Maikel (Gmail)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder 400",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false
+}
