@@ -293,3 +293,43 @@ rellena la landing con un nombre que lleve «PRUEBA QUALIVO», y el receptor pon
 
 Su móvil delante para el QR de Wazzap (A4) · su dirección de email y la postal (C1) · sus huecos para
 visitas (calendario) · si quita W6 y W11 (regla de 2 WhatsApp) · el OK para quitar el filtro `prueba`.
+
+---
+
+## G · Para la sesión que ejecuta la parte B (la lanza el Chief of Staff con las variables ya puestas)
+
+Necesita en su entorno `GHL_AGENCY_API_KEY`, `GHL_COMPANY_ID` y `VERCEL_TOKEN`. Opcionales: `VERCEL_PROJECT`
+(por defecto `qualivo`) y `VERCEL_TEAM_ID`, si el proyecto está en un equipo.
+
+```bash
+git fetch origin claude/qualivo-automatizaciones-b7k2m9 && git checkout claude/qualivo-automatizaciones-b7k2m9
+
+# 0 · Pruebas sin red (tienen que salir las dos líneas con ✓)
+node automatizaciones/plataforma/pruebas/probar-alta.js
+node automatizaciones/plataforma/pruebas/probar-vercel.js
+
+# 1 · Vista previa (no escribe nada) y, si cuadra, alta de la subcuenta
+node automatizaciones/plataforma/ghl-alta-subcuenta.js automatizaciones/plataforma/al-milimetro.json
+node automatizaciones/plataforma/ghl-alta-subcuenta.js automatizaciones/plataforma/al-milimetro.json --aplicar
+
+# 2 · Repetir el alta: ahora todo tiene que salir con ✓ y ninguna línea «+» (es idempotente)
+node automatizaciones/plataforma/ghl-alta-subcuenta.js automatizaciones/plataforma/al-milimetro.json
+
+# 3 · Variables de la preview de Vercel (solo la rama de Al Milímetro; nunca producción)
+node automatizaciones/plataforma/vercel-preview-am.js <ID de la subcuenta del paso 1>            # vista previa
+node automatizaciones/plataforma/vercel-preview-am.js <ID de la subcuenta del paso 1> --aplicar
+```
+
+**Comprobar después:**
+
+1. El paso 1 imprime `Subcuenta: <id>`, y ese id **no** es `bHGMuZEGUESZmVoNv9HT`. El script se niega solo, pero mira igualmente.
+2. Ninguna línea con `⚠`. Si sale «GHL ha puesto otra clave a…», ese campo se renombra en *Settings → Custom Fields* para que su clave sea exactamente la de la lista. Si no, el receptor no lo encuentra.
+3. El paso 2 sale entero con `✓`.
+4. El paso 3 lista `AM_GHL_LOCATION_ID`, `AM_GHL_API_KEY`, `AM_SOLO_PRUEBA` e `INTELLIGENCE_CLAVE_AM` con «+», todas en *preview* y en la rama `claude/al-milimetro-landing-v2-site`.
+
+**Después:**
+
+- **`INTELLIGENCE_CLAVE_AM`** sale impresa una sola vez. Se le pasa **solo al Chief of Staff** (o a Maikel), nunca al agente de Al Milímetro ni al repositorio.
+- **Al agente de Al Milímetro** (`session_01MkLw1AucMdomaoD3uZM2Zs`) solo el ID de la subcuenta y el aviso de que la preview ya tiene las variables. Necesita un deploy nuevo de su rama (un push o *Redeploy*) para que la preview las coja. Con eso hace la prueba de punta a punta con «PRUEBA QUALIVO».
+- **El `AM_GHL_API_KEY` de la preview caduca en unas 24 h** (es un token de ubicación). Hasta que Maikel cree la Private Integration (A3.2), se refresca repitiendo el paso 3. La clave de Intelligence no cambia al repetirlo.
+- **Cuando Maikel cree el pipeline «Reformas»** (C4), se repite el paso 3 con `--pipeline=<id del pipeline>`. Hasta entonces, el receptor guarda el contacto, los campos y las etiquetas, pero no la oportunidad.
