@@ -319,3 +319,14 @@ Una fila por anuncio y semana:
 ## Al Milímetro · 3 borradores (29-oct, para el 30-oct)
 
 Cliente de reformas (Sonia). Sin vídeo y sin su cara. A «sin extras ocultos» (carrusel de 3 miedos), B «tu chalet, de principio a fin» (con variante por municipio), C «¿cuánto cuesta?» (diseño con las 6 preguntas del formulario y cifras «desde»). Fotos de referencia hechas con IA porque las de su web son de banco. Piezas en `content/clientes/al-milimetro/anuncios-2026-10-30/`. Sin datos todavía: lanzamiento previsto en noviembre.
+
+## Regla de Maikel (29-oct): sin casos de clientes
+
+De momento no se usan casos de clientes, ni siquiera anónimos, en anuncios, vídeos ni piezas, y no se pide ningún permiso. La prueba social va solo con datos propios de Qualivo (nuestra cuenta, nuestro embudo) o con ejemplos marcados como tales.
+
+## Al Milímetro · segunda ronda (29-oct)
+
+- Maikel prefiere los anuncios con la foto a sangre en toda la pieza, sin recuadros con borde y sombra: «quedaba raro y se solapaba».
+- Piezas nuevas tras revisar la competencia: «¿Tu piso tiene más de 30 años? Esto es lo que hay detrás de sus paredes», «El presupuesto que te dan y el que acabas pagando» y «Sin portales».
+- Primer vídeo sin Sonia: «detrás de la pared», de 17,5 s (Kling 3.0, 2 planos, unos 28 créditos).
+- Landing de conversión en `content/clientes/al-milimetro/landing-alta-conversion/`.
