@@ -71,3 +71,10 @@ Si no salta ninguna condición, no se toca nada y no se escribe.
 - **Cómo se crea:** siempre en modo auto, con un encargo que cabe en una pantalla, un parte diario y como mucho una rutina.
 - **Qué se quita a cambio:** se dice qué se quita o qué tarea deja de hacer otro agente.
 - **Cuándo se archiva:** cuando termina su encargo o pasan 14 días sin uso.
+
+## 5. Dónde están las claves
+
+- **Dónde:** en la base de Notion «Credenciales qualivo» (collection://3eb56e1a-d6ed-800a-98bf-000b7214e5ef), que mantiene Maikel.
+- **Cómo se usan:** cada agente lee solo la fila que necesita y la guarda en su entorno o en el scratchpad cuando se reinicia el contenedor.
+- **Dónde no van nunca:** ni el repo, ni páginas de Notion, ni partes, ni mensajes entre sesiones, ni el texto de las rutinas.
+- **Si falta una clave:** el agente lo pone en su parte y el Chief of Staff se la pide a Maikel.
