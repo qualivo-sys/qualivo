@@ -10,7 +10,7 @@ Encaja con el plan de captación de Paid (`paid/plan/2026-10-27-plan-captacion-n
 |---|---|---|---|
 | qualivoedge | 5 | 30 | 100% |
 | novaqualivo | 5 | 30 | 89-93% |
-| goqualivo y gotqualivo | 5 | 1 | En lista negra SURBL; se retiran de la rotación cuando Maikel lo confirme |
+| goqualivo y gotqualivo | 5 | 1 | En lista negra SURBL; fuera de todas las campañas activas (confirmado por Maikel el 29-oct) |
 
 - **Capacidad:** ~300 correos/día, que es el tope de 30 por buzón.
 - **Regla para novaqualivo:** si la reputación baja del 85%, sus buzones pasan a 20/día.
@@ -45,7 +45,7 @@ El 27-oct este filtro descartó 15 de 116 leads [C], después de que una empresa
 | Vertical | Cuentas | Estado | Campaña |
 |---|---|---|---|
 | Formación | 2 | Activa desde el 27-oct | 4213037 |
-| Reformas | 6 | Pendiente del ok a la secuencia (`bus/out/outbound-abm-reformas-secuencia-28oct.md`) | 4213038 |
+| Reformas | 6 | Activa desde el 29-oct, desde un buzón de qualivoedge | 4213038 |
 
 De las 30 cuentas del piloto en Notion, las 22 restantes se cargan a medida que haya un decisor verificado.
 
@@ -125,8 +125,9 @@ Coste por reunión: unos 450-550 créditos de Apollo [E].
   - en el ABM sí (va en HTML y lleva enlace): con 3 o más clics se avisa a Maikel con las fechas de los clics y el mensaje enviado.
   - Se monta con el triaje horario.
 
-## 6. Decisiones para Maikel (máximo 3)
+## 6. Decisiones para Maikel
 
-1. **Ok a la secuencia del ABM de reformas** (2 minutos). Con él se activan las 6 cuentas.
-2. **Permiso de Apollo para la carga automática.** Hay que añadir `mcp__Apollo_io__apollo_people_bulk_match` a `.claude/settings.json`. Sin ese permiso, la carga diaria se para cada vez que el contenedor se reinicia: le pasó el 27 y el 28-oct.
-3. **Retirar goqualivo y gotqualivo** de las campañas. Lo decidió el Chief of Staff; el sistema exige que Maikel lo confirme en el chat de Outbound.
+Las 3 quedaron resueltas el 29-oct:
+1. **Secuencia del ABM de reformas:** aprobada; la campaña está activa.
+2. **Permiso de Apollo** (`mcp__Apollo_io__apollo_people_bulk_match`): añadido a `.claude/settings.json`. La carga diaria ya no se para al reiniciarse el contenedor.
+3. **goqualivo y gotqualivo:** fuera de todas las campañas activas. Los buzones se conservan.
