@@ -11,11 +11,11 @@
 | Etapa | Meta de noviembre | De dónde sale [E] | Referencia real [C] |
 |---|---|---|---|
 | Leads cualificados (aptos) | **10-13** | Paid: 9-11 (unos 65 € por apto con el filtro de E-01, con los 150 € extra de E-02). Outbound: 1-2 | E-01: 128 € → 2 aptos (1 cliente y 1 dudoso) y 1 contacto repetido |
-| Reuniones celebradas con encaje | **5-7** | Paid: 4-5 (cerca del 50 % de los aptos). Outbound: 1-2 (criterio: ≥1 reunión por cada 500 envíos) | Meta en 3 meses: 58 leads → 10 reuniones celebradas (17 %); con filtro, el apto llegó a reunión en 24 h |
+| Reuniones celebradas con encaje | **7-9** (acordado con Outbound el 29-oct) | Paid: 4-5 (cerca del 50 % de los aptos). Outbound: 3-4 (unos 6.000 correos a 1 agendada por cada ~1.350 dan 4-5 agendadas; quedan 3-4 celebradas con encaje). Definición común: reunión CELEBRADA con encaje, contada en GHL; no vale solo agendada | Meta en 3 meses: 58 leads → 10 reuniones celebradas (17 %); con filtro, el apto llegó a reunión en 24 h |
 | Propuestas | **2-3** | — | Meta en 3 meses: 7 propuestas de 10 reuniones |
 | **Clientes nuevos** | **1-2** (meta de la instrucción maestra) | Paid 1 + reserva | Meta: 2 de 11 reuniones acaban en piloto o cliente. E-01: 1 cliente de 3.600 € con unos 48 € de anuncios |
 
-**Lectura honesta:** un cliente es lo realista y dos es la parte alta. Outbound sigue activo (decisión de Maikel del 27-oct), pero su dato hasta ahora es de 0 reuniones en 1.373 correos (semana del 19-oct: 41 respuestas, 2 con interés) [C]. Las 1-2 reuniones de Outbound son una meta, no algo ya visto: se revisa el 13-nov con el criterio de su plan.
+**Lectura honesta:** un cliente es lo realista y dos es la parte alta. Outbound sigue activo (decisión de Maikel del 27-oct). Su dato de octubre es de 2 reuniones agendadas en 2.697 correos, de las que 1 ya se ha celebrado [C, plan final de Outbound, sección 5, commit d93c1cee]. Las 3-4 reuniones de Outbound son una meta, no algo ya visto. El riesgo es el volumen de leads cargados. Se revisa el 13-nov con el criterio de su plan.
 
 ---
 
@@ -61,7 +61,7 @@
 
 | Canal | Noviembre | Reuniones [E] |
 |---|---|---|
-| Email frío (Smartlead, 15 buzones) | Sigue con unos 300 correos/día. Se cargan leads nuevos de Apollo (quedan unos 2.650 créditos hasta el 14-nov), en formación y reformas con señal de anuncios o CRM | 1-2 si llega a ≥1 reunión por cada 500 envíos. **Hoy está en 0 de 1.373** [C] |
+| Email frío (Smartlead, 15 buzones) | Sigue con unos 300 correos/día. Se cargan leads nuevos de Apollo (quedan unos 2.650 créditos hasta el 14-nov), en formación y reformas con señal de anuncios o CRM | 3-4 celebradas con encaje (4-5 agendadas). Octubre: 2 agendadas en 2.697 correos [C] |
 | ABM formación por email | 10 cuentas revisadas a mano: 4 correos en 12 días | 0-1 |
 | LinkedIn | Manual, cuando se reconecte la cuenta, como apoyo al ABM | Solo apoyo |
 | Teléfono / WhatsApp | Solo para contestar a quien escribe | — |
