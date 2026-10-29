@@ -37,25 +37,27 @@ create table am_eventos (
   datos    jsonb
 );
 create index on am_eventos (lead_id);
+-- Candado contra envíos dobles: un paso solo se reserva una vez por lead.
+create unique index am_eventos_paso on am_eventos (lead_id, clave) where tipo = 'enviado';
 ```
 
 El lead para el módulo es `{ ...am_leads, creado: ms, cita: ms, eventos: [{ tipo, clave, en: ms }] }`.
 
-## El reloj (`/api/am-reloj`, Vercel Cron cada 10 min: `*/10 * * * *`)
+## El reloj, ya escrito
 
-```
-para cada lead sin stop/ganado/perdido (y, mientras AM_SOLO_PRUEBA=1, solo prueba = true):
-  para cada paso de debidos(lead):
-    si paso.caducado → insertar evento enviado {clave, datos:{caducado:true}} y seguir
-    E*      → Resend (remite de Sonia, con enlace de baja) → evento enviado
-    W*      → tarea para Sonia: email (o su panel) con el texto ya relleno y el botón
-              waEnlace(lead.telefono, texto); evento enviado al crear la tarea
-    AVISO_A / LLAMAR_A → email a Sonia con la ficha → evento enviado
-    PERDIDO → tarea para Sonia «márcalo como perdido con su motivo» → evento enviado
-```
+- **`api/al-milimetro-cron.js`:** Vercel Cron cada 10 minutos, ya añadido a `vercel.json`. Protegido con `CRON_SECRET`. Por cada paso que toca: E1-E4 van al lead por Resend, con enlace de baja firmado. W1-W12 van a Sonia como email con el texto ya escrito, el botón wa.me y los botones para marcar. AVISO_A, LLAMAR_A y PERDIDO van a Sonia como avisos. Cada paso se **reserva antes de enviarse** (índice único) y se suelta si Resend falla; lo atrasado más de 36 h se marca como caducado sin enviarse.
+- **`api/al-milimetro-marca.js`:** los botones de Sonia (ha contestado, visita con fecha y hora, presupuesto enviado, más adelante, parar, ganado y perdido) y la baja de los leads. Los enlaces van firmados con HMAC sobre `CRON_SECRET`.
+- **`api/_am-db.js`:** Postgres de Neon por HTTP, sin dependencias, porque el repo no tiene `package.json`. **Verificar el endpoint con la primera consulta real** (`AM_DB_HTTP` para cambiarlo).
+- **`api/_am-textos.js`:** los textos de `mensajes.md`. W8 dice «el {día} a las {hora}», y no «mañana», porque con cita en lunes se envía el viernes.
+- **Pruebas:** `node scripts/al-milimetro/probar-cron.js` (8 casos) y `node scripts/al-milimetro/probar-flujos.js` (17 casos).
 
-El evento se inserta **antes** de enviar (o en la misma transacción) para que dos
-ejecuciones del cron no manden lo mismo dos veces.
+**Seguro por defecto:** mientras `AM_SOLO_PRUEBA` no valga `0`, solo se tocan los leads con `prueba = true`, y `AM_SONIA_EMAIL` debe apuntar a un email interno. Nada de deploy hasta después de la reunión con Sonia (Chief of Staff, 29-oct).
+
+**Variables:** `CRON_SECRET`, `AM_DATABASE_URL`, `RESEND_API_KEY`, `AM_FROM` (dominio de Sonia verificado en Resend), `AM_SONIA_EMAIL`, y opcionales `AM_REPLY_TO`, `AM_AVISOS_FROM`, `AM_WHATSAPP_NEGOCIO`, `AM_PAUSA` y `AM_DB_HTTP`.
+
+**Lo que falta de tu lado:** que `api/al-milimetro-lead.js` inserte en `am_leads` (con `prueba = true` para «PRUEBA QUALIVO»). Desde ese momento, el reloj lo recoge solo.
+
+**Límite conocido:** si la visita cambia de fecha, Sonia vuelve a pulsar «Ha reservado visita» y se actualiza la cita, pero W7 y W8 ya se habían enviado y no se repiten. Para la v2.
 
 ## Lo que marca Sonia (enlaces firmados en sus emails o en su panel)
 

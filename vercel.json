@@ -247,7 +247,8 @@
       "path": "/api/recordatorios-hora/",
       "schedule": "*/10 * * * *"
     },
-    { "path": "/api/wa-nuria/", "schedule": "*/2 * * * *" }
+    { "path": "/api/wa-nuria/", "schedule": "*/2 * * * *" },
+    { "path": "/api/al-milimetro-cron/", "schedule": "*/10 * * * *" }
   ],
   "functions": {
     "api/intelligence-datos.js": {
