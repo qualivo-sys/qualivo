@@ -17,7 +17,14 @@ global.fetch = async (url, o) => {
   if (/customValues$/.test(u.pathname)) { if (m === 'POST') estado.cv.push({ id: 'v' + estado.cv.length, name: b.name, value: b.value }); return res({ customValues: estado.cv }); }
   if (/customFields$/.test(u.pathname)) { if (m === 'POST') estado.cf.push({ fieldKey: 'contact.' + b.name.toLowerCase().replace(/ /g, '_') }); return res({ customFields: estado.cf }); }
   if (/tags$/.test(u.pathname)) { if (m === 'POST') estado.tags.push({ name: b.name }); return res({ tags: estado.tags }); }
-  if (u.pathname === '/calendars/') { if (m === 'POST') estado.cals.push({ name: b.name }); return res({ calendars: estado.cals }); }
+  if (u.pathname === '/calendars/') {
+    if (m === 'POST') {
+      // Como la API real (29-oct): 422 si una entrada de openHours trae más de un día
+      if ((b.openHours || []).some((h) => h.daysOfTheWeek.length !== 1) || estado.rechazarHorario && b.openHours) return { ok: false, status: 422, text: async () => '{"message":["openHours.0.must be a valid day of week"]}' };
+      estado.cals.push({ name: b.name, openHours: b.openHours });
+    }
+    return res({ calendars: estado.cals });
+  }
   throw new Error('ruta no simulada ' + m + ' ' + u.pathname);
 };
 (async () => {
@@ -28,6 +35,8 @@ global.fetch = async (url, o) => {
   await cargar(true).main(cli);
   assert.equal(estado.locations.length, 1); assert.equal(estado.cv.length, 14); assert.equal(estado.cf.length, 16); assert.equal(estado.tags.length, 16); assert.equal(estado.cals.length, 1);
   assert.ok(!out.some((s) => String(s).startsWith('⚠')), 'todas las claves de campo coinciden: ' + out.filter((s) => String(s).startsWith('⚠')));
+  assert.deepEqual(estado.cals[0].openHours.map((h) => h.daysOfTheWeek[0]), [1, 2, 3, 4, 5], 'un día por entrada, lunes a viernes');
+  assert.equal(estado.cals[0].openHours[4].hours[0].closeHour, 15, 'el viernes cierra a las 15:00');
   const antes = llamadas.filter((l) => l.startsWith('POST') || l.startsWith('PUT')).length;
   await cargar(true).main(cli);
   const despues = llamadas.filter((l) => l.startsWith('POST') || l.startsWith('PUT')).length;
@@ -45,7 +54,14 @@ global.fetch = async (url, o) => {
   process.env.AM_GHL_LOCATION_ID = 'bHGMuZEGUESZmVoNv9HT';
   await assert.rejects(cargar(true).main(cli), /Qualivo/);
   await assert.rejects(cargar(true).main(Object.assign({}, cli, { env: { token: 'GHL_API_KEY', location: 'GHL_LOCATION_ID' } })), /Qualivo/);
+  // Si GHL sigue rechazando el horario: calendario sin horario y aviso, sin romper el resto
+  process.env.AM_GHL_LOCATION_ID = 'locManual'; Object.assign(estado, { cals: [], rechazarHorario: true }); out = [];
+  await cargar(true).main(cli);
+  assert.equal(estado.cals.length, 1); assert.equal(estado.cals[0].openHours, undefined);
+  assert.ok(out.some((s) => /GHL rechaza el horario/.test(s)));
+  assert.throws(() => cargar(false).horario([{ daysOfTheWeek: [7], hours: [] }]), /no válido/);
   console.log = log;
+  console.log('✓ calendario: un día por entrada; si GHL rechaza el horario, se crea sin él y avisa');
   console.log('✓ modo subcuenta creada a mano: usa las variables AM_* aunque estén las de Qualivo en el entorno, sin clave de agencia, y se niega con Qualivo');
   console.log('✓ vista previa sin escrituras · ✓ alta completa (14 valores, 16 campos, 16 etiquetas, calendario) · ✓ idempotente · ✓ se niega con la subcuenta de Qualivo');
 })().catch((e) => { console.error('✗', e); process.exit(1); });

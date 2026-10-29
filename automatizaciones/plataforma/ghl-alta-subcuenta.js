@@ -62,6 +62,18 @@ async function ghl(token, metodo, ruta, cuerpo, version, form) {
   }
 }
 
+// Horario del calendario: GHL lo guarda con UN día por entrada (así lo devuelve la interfaz). Con varios días
+// en la misma entrada respondió 422 «openHours.0.must be a valid day of week». Días 0 (domingo) a 6 (sábado).
+function horario(openHours) {
+  if (!Array.isArray(openHours) || !openHours.length) return null;
+  const out = [];
+  openHours.forEach((o) => (o.daysOfTheWeek || []).forEach((d) => {
+    if (!Number.isInteger(d) || d < 0 || d > 6) throw new Error('Día de la semana no válido en cliente.json: ' + d + ' (0 domingo … 6 sábado)');
+    out.push({ daysOfTheWeek: [d], hours: o.hours });
+  }));
+  return out.sort((x, y) => x.daysOfTheWeek[0] - y.daysOfTheWeek[0]);
+}
+
 async function main(cli) {
   if (!cli || !cli.nombre || !cli.valores) throw new Error('cliente.json sin «nombre» o sin «valores»');
   console.log((aplicar ? 'APLICANDO' : 'VISTA PREVIA (añade --aplicar)') + ' · subcuenta «' + cli.nombre + '»');
@@ -160,10 +172,19 @@ async function configurar(cli, loc, T) {
   if ((cal.calendars || []).some((c) => c.name === nombreCal)) console.log('✓ calendario ' + nombreCal);
   else {
     hacer('crear calendario «' + nombreCal + '»');
-    if (aplicar) await ghl(T, 'POST', '/calendars/', Object.assign({
-      locationId: loc.id, name: nombreCal, calendarType: 'event', slotDuration: 60, slotInterval: 60,
-      description: 'Visita técnica a la vivienda'
-    }, cli.calendario && cli.calendario.openHours ? { openHours: cli.calendario.openHours } : {}), '2021-04-15');
+    if (aplicar) {
+      const base = { locationId: loc.id, name: nombreCal, calendarType: 'event', slotDuration: 60, slotInterval: 60, description: 'Visita técnica a la vivienda' };
+      const horas = horario(cli.calendario && cli.calendario.openHours);
+      try {
+        await ghl(T, 'POST', '/calendars/', Object.assign({}, base, horas ? { openHours: horas } : {}), '2021-04-15');
+      } catch (e) {
+        // 29-oct: 422 «openHours.0.must be a valid day of week» con días agrupados. Si GHL sigue rechazando el
+        // horario, el calendario se crea sin él y el horario se pone a mano (Calendars → Availability).
+        if (!horas || !/422/.test(e.message)) throw e;
+        console.log('⚠ GHL rechaza el horario (' + e.message.slice(0, 160) + '). Creo el calendario sin horario: ponlo a mano en Calendars → «' + nombreCal + '» → Availability.');
+        await ghl(T, 'POST', '/calendars/', base, '2021-04-15');
+      }
+    }
   }
 
   console.log('\nHecho. Solo por interfaz: pipeline «Reformas», workflows y guardar la plantilla (guía, C4-C6).');
@@ -175,4 +196,4 @@ if (require.main === module) {
   try { cli = JSON.parse(fs.readFileSync(archivo, 'utf8')); } catch (e) { console.error('Uso: … ghl-alta-subcuenta.js cliente.json [--aplicar]'); process.exit(1); }
   main(cli).catch((e) => { console.error('✗ ' + e.message); process.exit(1); });
 }
-module.exports = { main, CAMPOS, ETIQUETAS, QUALIVO };
+module.exports = { main, horario, CAMPOS, ETIQUETAS, QUALIVO };
