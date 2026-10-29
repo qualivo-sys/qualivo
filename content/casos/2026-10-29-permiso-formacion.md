@@ -1,5 +1,7 @@
 # Permiso del caso · cliente de formación (nivel anónimo)
 
+> **ARCHIVADO SIN USAR (29-oct).** Maikel decide que, de momento, no se cuentan casos de clientes ni se pide ningún permiso. No enviar.
+
 > Para Maikel, 29-oct. Lo pide él por WhatsApp (regla R6, `content/casos-permisos.md`).
 > Este repositorio es público: aquí no va el nombre del cliente. Se registra como **C-01** cuando conteste.
 

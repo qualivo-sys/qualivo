@@ -64,12 +64,14 @@
 
 | Semana | Lunes · carrusel | Martes · vídeo | Jueves · carrusel | Jueves · newsletter (la escribe Contenido y la envía Growth) | Blog (2/semana) |
 |---|---|---|---|---|---|
-| 47 · 16-20 | «Una cita no es una oportunidad hasta que aparece» (clínicas, el recordatorio que pide un «sí») | V2 «El teléfono nos tiene enganchadas» (sale de la reserva; se graba el 29-oct) | Agentizando: «Tres horas sin nada» (el vigía) | 19-nov · sale de la pieza de la semana | Citas y medición |
-| 48 · 23-27 | Caso con permiso escrito, si llega. Si no, «Qué aprendí analizando un embudo…» sin nombres | V4 «Lo que no dejamos en manos del sistema» (sale de la reserva; se graba el 5-nov) | Opinión: «Tus datos son tuyos», la objeción de los cierres [C, bus 26-oct] | 26-nov · sale de la pieza de la semana | Fugas y propiedad de los datos |
+| 47 · 16-20 | «Una cita no es una oportunidad hasta que aparece» (clínicas, el recordatorio que pide un «sí») | «Cómo le contamos a Meta quién llegó a la reunión» (dato propio de Qualivo; idea 2 de la investigación de competencia; se graba el 5-nov) | Agentizando: «Tres horas sin nada» (el vigía) | 19-nov · sale de la pieza de la semana | Citas y medición |
+| 48 · 23-27 | «Qué aprendí analizando un embudo…» (aprendizaje propio, sin clientes) | Diagnóstico de un embudo en pantalla, con «datos de ejemplo» (idea 1 de la investigación de competencia; se graba el 12-nov) | Opinión: «Tus datos son tuyos», la objeción de los cierres [C, bus 26-oct] | 26-nov · sale de la pieza de la semana | Fugas y propiedad de los datos |
 
 Quedan en reserva: «Las métricas antes de subir presupuesto» (inmobiliaria) y «Las cinco fugas entre el anuncio y la venta».
 
-**Grabaciones (jueves de 17:00 a 18:00):** el 29-oct, V1 (sale el 3-nov) y V2 (semana 47); el 5-nov, V3 (sale el 10-nov) y V4 (semana 48).
+**Grabaciones (jueves de 17:00 a 18:00):** el 29-oct, V1 (sale el 3-nov) y V3 (sale el 10-nov), como dice `videos/2026-11-guiones-semanas-45-46.md`; el 5-nov, el vídeo de la semana 47; el 12-nov, el de la semana 48. V2 sigue en reserva (podía parecer un caso real) y V4 queda para diciembre.
+
+**Sin clientes (29-oct, Maikel):** ninguna pieza, anuncio ni newsletter menciona clientes, ni en anónimo. Solo datos propios de Qualivo o ejemplos marcados como tales. No se pide ningún permiso de caso por ahora.
 
 **Quién hace qué:**
 - Contenido: piezas, imágenes, textos y blog.
@@ -92,7 +94,7 @@ Quedan en reserva: «Las métricas antes de subir presupuesto» (inmobiliaria) y
 - **Las IA y herramientas como tema:** 102 de 290 publicaciones del sector, saturado [C].
 - **«Comenta PALABRA».** Desde el 29-oct, cada pieza cierra con una línea a la llamada (qualivo.io/llamada/) o a la calculadora de fugas, y la pregunta de conversación va al primer comentario (objetivo de Maikel: 2 clientes nuevos en noviembre).
 - **Las series por días** (Sin humo, bandera roja…) y las infografías planas del S44.
-- **Casos y cifras de clientes sin permiso escrito** (R6) y cualquier promesa o precio (R10).
+- **Casos de clientes, también en anónimo** (decisión del 29-oct; no se piden permisos por ahora) y cualquier promesa o precio (R10).
 - **Newsletters propias:** son de Growth. Contenido le pasa la mejor pieza de cada quincena como idea, sin duplicar.
 - **TikTok y stories.**
 
