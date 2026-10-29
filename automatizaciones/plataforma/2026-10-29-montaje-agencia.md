@@ -148,7 +148,7 @@ Claves **genéricas**, sin el prefijo `am_`, para que valgan para cualquier clie
 ### C3 · Etiquetas, que crea B5
 
 `prueba` (**la llave del modo prueba**) · `nuevo` · `clase-a` · `clase-b` · `clase-c` · `revision` ·
-`respondio` · `visita` · `presupuesto` · `mas-adelante` · `stop` · `origen-pared` · `origen-chalet` ·
+`respondio` · `visita` · `presupuesto` · `mas-adelante` · `stop` (estas dos ya no las usa ningún workflow: quedan por si Sonia quiere marcar a mano) · `origen-pared` · `origen-chalet` ·
 `origen-precio` · `origen-portal` · `origen-web`.
 
 ### C4 · Pipeline (solo interfaz, 3 min)
@@ -169,8 +169,15 @@ pulsa **Add New Trigger** y, en cada «+», **Add Action**.
 - Los textos se copian de `propuestas-wip/sistema/mensajes.md` (rama `claude/al-milimetro-landing`), cambiando «Sonia» por `{{custom_values.persona_nombre}}`, «Al Milímetro» por `{{custom_values.negocio_nombre}}`, etc.
 - En los textos, el nombre es `{{contact.first_name}}`, la obra `{{contact.obra_texto}}` y la zona `{{contact.zona}}`.
 
-**Filtro de prueba, en el disparador de TODOS:** dentro del trigger, *Add filters* →
-**Contact Tag · Includes · `prueba`**. Mañana, con el OK de Sonia, se quita este filtro de cada workflow.
+> **Decisiones del 29-oct (Chief of Staff), que prevalecen sobre versiones anteriores de esta sección.**
+> Si la guía y el anexo de mensajes (`mensajes.md`) no coinciden, **manda el anexo**. En particular:
+> - **Nunca más de 2 WhatsApp seguidos sin respuesta.** Seguimiento: W1 y W5, **sin W6**. Presupuesto: W9 y W10, y el **día 14 una tarea para Sonia** en lugar de W11 y W12.
+> - **Fuera de horario solo salen W2 y E1.** Todo lo demás espera a la siguiente franja (⏰).
+> - **Todo queda en borrador (*Draft*)** hasta la auditoría. Nada se publica sin el OK.
+
+**Filtro de prueba:** en los workflows que tienen disparador, dentro del trigger → *Add filters* →
+**Contact Tag · Includes · `prueba`**. El WF2 no tiene disparador propio: lleva el filtro como **If/Else
+al empezar**. Con el OK de Sonia se quitan los filtros.
 
 **⏰ Bloque «¿En horario?»** (se usa donde pone ⏰). Hay dos formas de montarlo; usa la primera que te deje
 la interfaz:
@@ -197,38 +204,41 @@ Submitted* → acciones *Add Tag* `nuevo` (y la clase, cuando se decida cómo se
 - **Nombre:** `Reformas · 1 · Primer contacto`
 - **Trigger:** *Contact Tag* → *Tag added* = `nuevo` · filtro `prueba`.
 - **Acciones:**
-  1. **Send Email**: E1 «Lo que pasa ahora con tu reforma». Remitente: `{{custom_values.email_remite}}`. Sale al momento, a cualquier hora.
+  1. **Send Email**: E1 «Lo que pasa ahora con tu reforma». Remitente: `{{custom_values.email_remite}}`. **Sale al momento, a cualquier hora.**
   2. **If/Else** «¿Revisión?»: *Contact Tag includes* `revision`.
-     - **Sí** → **Send SMS** (sale como WhatsApp por Wazzap) con W3 → fin.
+     - **Sí** → ⏰ → **Send SMS** (sale como WhatsApp por Wazzap) con W3 → fin.
      - **No** → paso 3.
   3. ⏰ «¿En horario?» **sin la espera**:
      - **Sí** → **Send SMS** con W1.
-     - **No** → **Send SMS** con W2 («ahora estoy fuera de horario: te escribo {mañana por la mañana | el lunes por la mañana}»). Para esa frase, pon dos ramas de If/Else por día de la semana o, si usas la opción 2, el texto genérico «en cuanto abra».
-  4. **If/Else** «¿Clase A?»: *Contact Tag includes* `clase-a` → **Send Internal Notification** → *SMS* al número `{{custom_values.aviso_movil}}`: «Nuevo contacto A: {{contact.first_name}}, {{contact.obra_texto}} en {{contact.zona}}, {{contact.metros}} m². Llámale hoy.» Más una copia por email a `{{custom_values.aviso_email}}`.
-  - **Comprobar en D-1** que la notificación interna por SMS sale por Wazzap. En Qualivo, los avisos al móvil van a un **contacto** («Maikel · avisos») y no como notificación interna. Si aquí no sale, se hace igual: un contacto «Avisos · {{custom_values.persona_nombre}}» con su móvil y **Send SMS** desde un workflow aparte, disparado con *Add to Workflow*.
+     - **No** → **Send SMS** con W2 («ahora estoy fuera de horario: te escribo {mañana por la mañana | el lunes por la mañana}»). Para esa frase, pon dos ramas de If/Else por día de la semana o, si usas la opción 2, el texto genérico «en cuanto abra». **W2 y E1 son lo único que sale fuera de horario.**
+  4. **If/Else** «¿Clase A?»: *Contact Tag includes* `clase-a` → ⏰ → **Send Internal Notification** → *SMS* al número `{{custom_values.aviso_movil}}`: «Nuevo contacto A: {{contact.first_name}}, {{contact.obra_texto}} en {{contact.zona}}, {{contact.metros}} m². Llámale hoy.» Más una copia por email a `{{custom_values.aviso_email}}`.
+     - **Comprobar en D-1** que la notificación interna por SMS sale por Wazzap. En Qualivo, los avisos al móvil van a un **contacto** («Maikel · avisos») y no como notificación interna. Si aquí no sale, se hace igual: un contacto «Avisos · {{custom_values.persona_nombre}}» con su móvil y **Send SMS** desde un workflow aparte, disparado con *Add to Workflow*.
   5. **Update Opportunity** → etapa **Contactado**.
   6. **Add to Workflow** → `Reformas · 2 · Seguimiento`.
 
 #### WF2 · Seguimiento sin respuesta
 
-- **Nombre:** `Reformas · 2 · Seguimiento` · sin trigger propio (lo añade WF1) · *Stop on response* ON.
+- **Nombre:** `Reformas · 2 · Seguimiento` · **sin disparador** (lo añade WF1) · *Stop on response* ON.
 - **Acciones:**
+  0. **If/Else** «¿Prueba?»: *Contact Tag includes* `prueba` → **No**: fin (**Remove from Workflow** → este mismo) · **Sí**: sigue. Es el filtro de prueba de este workflow.
   1. **Wait** 2 horas → ⏰ → **If/Else** `clase-a` → **Send Internal Notification** (SMS a `aviso_movil`): «{{contact.first_name}} (A) lleva 2 h sin contestar. Llámale hoy.»
-  2. **Wait** 1 día → ⏰ → **Send SMS**: W5 (versión sin fotos).
-  3. **Wait** 2 días → ⏰ → **Send SMS**: W6 + **Send Email**: E2.
+  2. **Wait** 1 día → ⏰ → **Send SMS**: W5 (versión sin fotos). **Es el segundo y último WhatsApp sin respuesta** (después de W1): **no hay W6**.
+  3. **Wait** 2 días → ⏰ → **Send Email**: E2.
   4. **Wait** 4 días → ⏰ → **Send Email**: E3.
-  5. **Wait** 7 días → **If/Else** «¿clase B o C?» → **Send Email**: E4.
-- **Ritmo humano:** con W1, W5 y W6 son 3 WhatsApp sin respuesta. Es lo que se le plantea mañana a Sonia (propuesta: quitar W6). Si dice que sí, se borra la acción del paso 3.
+  5. **Wait** 7 días → **If/Else** «¿clase B o C?» → ⏰ → **Send Email**: E4.
 
 #### WF3 · Visita: confirmación y recordatorio
 
 - **Nombre:** `Reformas · 3 · Visita` · **Trigger:** *Customer Booked Appointment* → calendario «Visita técnica» · filtro `prueba`.
 - **Acciones:**
-  1. **Remove from Workflow** → `Reformas · 2 · Seguimiento`.
+  1. **Remove from Workflow** → `Reformas · 1 · Primer contacto` y `Reformas · 2 · Seguimiento`.
   2. **Add Tag** `visita`.
   3. **Update Opportunity** → **Visita técnica**.
-  4. **Send SMS**: W7 «¡Perfecto, {{contact.first_name}}! Nos vemos el {{appointment.start_date}} a las {{appointment.start_time}}…».
-  5. **Wait** → *Event/appointment time*: **1 día antes** de la cita → ⏰ → **Send SMS**: W8 «…te recuerdo que el {{appointment.start_date}} a las {{appointment.start_time}} paso a ver tu casa. ¿Sigue en pie?». W8 dice el día y no «mañana», porque con cita en lunes el ⏰ lo deja para el viernes.
+  4. ⏰ → **Send SMS**: W7 «¡Perfecto, {{contact.first_name}}! Nos vemos el {{appointment.start_date}} a las {{appointment.start_time}}…».
+  5. **If/Else** «¿Cita en lunes?» (*Appointment start day of week* = Monday):
+     - **Sí** → **Wait** hasta el **viernes anterior a las 10:00** (*Wait → Event/appointment time*: 3 días antes, a las 10:00) → **Send SMS**: W8.
+     - **No** → **Wait** → *Event/appointment time*: **1 día antes, a las 10:00** → ⏰ → **Send SMS**: W8.
+  - W8 dice el día y no «mañana»: «…te recuerdo que el {{appointment.start_date}} a las {{appointment.start_time}} paso a ver tu casa. ¿Sigue en pie?».
 - En el calendario, **desactiva los recordatorios propios** (*Calendar → Notifications*), para que no salgan dos.
 
 #### WF4 · Recuperación del presupuesto
@@ -237,10 +247,8 @@ Submitted* → acciones *Add Tag* `nuevo` (y la clase, cuando se decida cómo se
 - **Acciones:**
   1. **Add Tag** `presupuesto`.
   2. **Wait** 2 días → ⏰ → **Send SMS**: W9.
-  3. **Wait** 5 días → ⏰ → **Send SMS**: W10.
-  4. **Wait** 7 días → ⏰ → **Send SMS**: W11 (propuesta para Sonia: quitarlo).
-  5. **Wait** 7 días → ⏰ → **Send SMS**: W12.
-  6. **Wait** 1 día → **Add Task** a la usuaria Sonia: «Marca {{contact.first_name}} como firmado o perdido, con el motivo».
+  3. **Wait** 5 días (día 7) → ⏰ → **Send SMS**: W10. **Es el segundo y último WhatsApp sin respuesta: no hay W11 ni W12.**
+  4. **Wait** 7 días (día 14) → **Add Task** a la usuaria Sonia: «{{contact.first_name}}: 14 días desde el presupuesto sin respuesta. Llámale o márcalo como firmado o perdido, con el motivo».
 - No se pasa a «Perdido» solo: el motivo lo pone ella.
 
 #### WF5 · Ha contestado → aviso a Sonia
@@ -253,16 +261,25 @@ Submitted* → acciones *Add Tag* `nuevo` (y la clase, cuando se decida cómo se
   4. **If/Else** etapa = Nuevo → **Update Opportunity** → **Contactado**.
 - **Ojo:** las respuestas por WhatsApp entran por Wazzap como mensajes entrantes de tipo SMS. Comprueba en la prueba D-4 que disparan este trigger.
 
-#### WF6 · Paradas
+#### WF6 · Paradas por etapa
 
-- **Nombre:** `Reformas · 6 · Paradas`. **Tres disparadores** en el mismo workflow, cada uno con el filtro `prueba`:
-  - *Contact Tag added* = `stop` → **Remove from Workflow**: los workflows 1, 2, 3 y 4.
-  - *Contact Tag added* = `mas-adelante` → **Remove from Workflow** → 2 → **Add Tag** `clase-c` → (los emails de nutrición de C, cuando estén escritos).
-  - *Pipeline Stage Changed* → **Firmado** o **Perdido** → **Remove from Workflow**: los workflows 1, 2, 3 y 4.
-- Para Sonia, «parar» es poner la etiqueta `stop` en la ficha del contacto, y «más adelante» es la etiqueta `mas-adelante`.
+- **Nombre:** `Reformas · 6 · Paradas` · **Trigger:** *Pipeline Stage Changed* → pipeline «Reformas» (cualquier etapa) · filtro `prueba`.
+- **Acciones:** un **If/Else** por etapa nueva:
 
-**Al terminar:** **Publish** en cada workflow. Arriba a la derecha, el interruptor *Draft → Publish*.
-Con el filtro `prueba`, publicar no escribe a nadie más.
+| Etapa a la que pasa | Saca de |
+|---|---|
+| Contactado | — (WF2 sigue; la respuesta ya lo para WF5) |
+| Visita técnica | WF1 y WF2 |
+| Presupuesto enviado | WF1 y WF2 (WF4 empieza por su cuenta) |
+| Seguimiento | WF1, WF2 y WF4 |
+| Firmado | WF1, WF2 y WF4 |
+| Perdido | WF1, WF2 y WF4 |
+
+- Para Sonia, «parar todo» con un contacto es pasarlo a **Perdido** (o a **Seguimiento** si lo lleva ella a mano).
+
+**Al terminar: todo en *Draft*.** No pulses *Publish* en ningún workflow hasta la auditoría y el OK. Para
+las pruebas de la parte D se publican, uno a uno, solo con el filtro `prueba` puesto, y se vuelven a dejar
+en *Draft* al acabar.
 
 ### C6 · Guardar la plantilla (5 min)
 
@@ -288,9 +305,9 @@ rellena la landing con un nombre que lleve «PRUEBA QUALIVO», y el receptor pon
 | D-3 | Revisión | E1 + W3 |
 | D-4 | Contestas al W1 desde el móvil | Aviso «te ha contestado» y salida de WF2 (no llega W5) |
 | D-5 | Reservas visita en el calendario | Salida de WF2 + W7; W8 la víspera (para la prueba, acorta la espera) |
-| D-6 | Mueves la oportunidad a «Presupuesto enviado» | W9 (para la prueba, acorta las esperas a minutos y después vuélvelas a poner) |
+| D-6 | Mueves la oportunidad a «Presupuesto enviado» | W9 y W10, y la tarea del día 14 (para la prueba, acorta las esperas a minutos y después vuélvelas a poner) |
 | D-7 | Contacto **sin** la etiqueta `prueba` | **No le llega nada** |
-| D-8 | Etiqueta `stop` a mitad de secuencia | No sale nada más |
+| D-8 | Pasas la oportunidad a «Perdido» a mitad de secuencia | No sale nada más |
 
 ---
 
@@ -303,7 +320,7 @@ rellena la landing con un nombre que lleve «PRUEBA QUALIVO», y el receptor pon
 ## F · Pendiente de Sonia (reunión del viernes 30)
 
 Su móvil delante para el QR de Wazzap (A4) · su dirección de email y la postal (C1) · sus huecos para
-visitas (calendario) · si quita W6 y W11 (regla de 2 WhatsApp) · el OK para quitar el filtro `prueba`.
+visitas (calendario) · contarle la regla de 2 WhatsApp sin respuesta (sin W6, W11 ni W12) · el OK para quitar el filtro `prueba`.
 
 ---
 
