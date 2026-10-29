@@ -2,6 +2,9 @@
 // Necesita un Postgres local y el paquete «pg» (solo para el emulador del endpoint /sql de Neon):
 //   PG_URL=postgres://am@localhost:5544/postgres NODE_PATH=/ruta/node_modules node scripts/al-milimetro/probar.js
 // Los correos no salen: se captura la llamada a Resend.
+// Nunca contra los servicios reales, aunque el entorno tenga las claves: GHL y Resend van simulados
+['AM_GHL_API_KEY', 'AM_GHL_LOCATION_ID', 'AM_GHL_PIPELINE_ID', 'GHL_API_KEY', 'GHL_LOCATION_ID', 'GHL_AGENCY_API_KEY', 'RESEND_API_KEY', 'DATABASE_URL']
+  .forEach(function (k) { delete process.env[k]; });
 const assert = require('assert');
 const http = require('http');
 const path = require('path');
@@ -262,6 +265,8 @@ const correos = [];
   // ---------- Destino GHL (subcuenta de Sonia), con GHL simulado ----------
   const G = require(API + '_am-ghl.js');
   const ghlLlamadas = [];
+  // GHL simulado con estado: un contacto C1 (sus etiquetas) y las oportunidades del pipeline
+  const ghl = { existe: false, tags: [], ops: [] };
   const fetchAntes = global.fetch;
   global.fetch = async function (url, o) {
     if (!/leadconnectorhq/.test(url)) return fetchAntes(url, o);
@@ -270,8 +275,18 @@ const correos = [];
     let d = {};
     if (/customFields/.test(ruta)) d = { customFields: ['obra_tipo', 'obra_texto', 'codigo_postal', 'zona', 'metros', 'cuando', 'presupuesto', 'vivienda_propia', 'clase', 'puntos', 'origen', 'revision', 'precio_desde', 'instalaciones', 'que_cambiar'].map(function (k, i) { return { id: 'f' + i, fieldKey: 'contact.' + k }; }) };
     else if (/pipelines/.test(ruta)) d = { pipelines: [{ id: 'P1', name: 'Reformas', stages: ['Nuevo', 'Contactado', 'Visita técnica', 'Presupuesto enviado', 'Seguimiento', 'Firmado', 'Perdido'].map(function (n, i) { return { id: 'S' + i, name: n }; }) }] };
-    else if (/upsert/.test(ruta)) d = { contact: { id: 'C1' } };
-    else if (/opportunities\/search/.test(ruta)) d = { opportunities: [{ id: 'O1', contactId: 'C1', pipelineStageId: 'S2', status: 'open', createdAt: new Date().toISOString() }] };
+    else if (/upsert/.test(ruta)) { d = { new: !ghl.existe, contact: { id: 'C1' } }; ghl.existe = true; }
+    else if (/\/contacts\/C1\/tags$/.test(ruta)) {
+      if (o.method === 'DELETE') ghl.tags = ghl.tags.filter(function (x) { return cuerpo.tags.indexOf(x) < 0; });
+      else cuerpo.tags.forEach(function (x) { if (ghl.tags.indexOf(x) < 0) ghl.tags.push(x); });
+      d = { tags: ghl.tags };
+    }
+    else if (ruta === '/opportunities/' && o.method === 'POST') {
+      if (ghl.ops.some(function (x) { return x.contactId === cuerpo.contactId; })) return { ok: false, status: 400, text: async function () { return '{"message":"duplicate opportunity"}'; } };
+      d = Object.assign({ id: 'O' + (ghl.ops.length + 1), createdAt: new Date().toISOString() }, cuerpo); ghl.ops.push(d);
+    }
+    else if (/^\/opportunities\/O\d+$/.test(ruta) && o.method === 'PUT') { const x = ghl.ops.find(function (y) { return '/opportunities/' + y.id === ruta; }); Object.assign(x, cuerpo); d = x; }
+    else if (/opportunities\/search/.test(ruta)) { const c = (ruta.match(/contact_id=([^&]+)/) || [])[1]; d = { opportunities: ghl.ops.filter(function (x) { return !c || x.contactId === c; }) }; }
     else if (/^\/contacts\/C1$/.test(ruta)) d = { contact: { firstName: 'PRUEBA QUALIVO Marta', tags: ['prueba'], customFields: [{ id: 'f8', value: 'A' }, { id: 'f9', value: 85 }, { id: 'f10', value: 'C · Cuánto cuesta' }, { id: 'f0', value: 'Piso entero' }] } };
     return { ok: true, status: 200, text: async function () { return JSON.stringify(d); }, json: async function () { return d; } };
   };
@@ -285,10 +300,33 @@ const correos = [];
     assert.equal(up.cuerpo.customFields.find(function (c) { return c.id === 'f10'; }).field_value, 'C · Cuánto cuesta');
     const tags = ghlLlamadas.filter(function (l) { return /\/tags$/.test(l.ruta); }).map(function (l) { return l.cuerpo.tags; });
     assert.deepEqual(tags, [['clase-a', 'origen-precio', 'prueba'], ['nuevo']]);
+    assert.ok(!ghlLlamadas.some(function (l) { return l.m === 'DELETE'; }), 'a un contacto nuevo no se le quita nada');
     const op = ghlLlamadas.find(function (l) { return l.ruta === '/opportunities/'; });
     assert.equal(op.cuerpo.pipelineStageId, 'S0'); assert.ok(/^\[PRUEBA\]/.test(op.cuerpo.name));
     assert.ok(ghlLlamadas.some(function (l) { return /\/notes$/.test(l.ruta); }));
     assert.equal((await q('SELECT count(*)::int n FROM am_leads'))[0].n, antes);
+  });
+  await t('GHL: repite el formulario con la oportunidad abierta → cambia clase y origen, no se repite la bienvenida, sigue en su etapa', async function () {
+    ghlLlamadas.length = 0; ghl.ops[0].pipelineStageId = 'S2';
+    const r = await llamar(lead, { method: 'POST', body: Object.assign({}, base, { nombre: 'PRUEBA QUALIVO Marta', a: 'chalet', ppto: '15-30', cuando: '6' }) });
+    assert.equal(r.json.ok, true); assert.equal(r.json.clase, 'B');
+    assert.deepEqual(ghl.tags.filter(function (x) { return /^(clase|origen)-/.test(x); }).sort(), ['clase-b', 'origen-chalet']);
+    assert.ok(ghl.tags.indexOf('repite') > -1);
+    assert.ok(!ghlLlamadas.some(function (l) { return l.m === 'POST' && /\/tags$/.test(l.ruta) && l.cuerpo.tags.indexOf('nuevo') > -1; }), 'sin «nuevo» otra vez');
+    assert.equal(ghl.ops.length, 1); assert.equal(ghl.ops[0].pipelineStageId, 'S2');
+    assert.ok(/Repite el formulario: ya estaba/.test(ghlLlamadas.find(function (l) { return /\/notes$/.test(l.ruta); }).cuerpo.body));
+  });
+  await t('GHL: repite con la oportunidad perdida → vuelve a «Nuevo» y salta otra vez la bienvenida', async function () {
+    ghlLlamadas.length = 0; ghl.ops[0].status = 'lost'; ghl.ops[0].pipelineStageId = 'S6';
+    const r = await llamar(lead, { method: 'POST', body: Object.assign({}, base, { nombre: 'PRUEBA QUALIVO Marta', a: 'precio' }) });
+    assert.equal(r.json.clase, 'A');
+    assert.equal(ghl.ops.length, 1); assert.equal(ghl.ops[0].status, 'open'); assert.equal(ghl.ops[0].pipelineStageId, 'S0');
+    const del = ghlLlamadas.find(function (l) { return l.m === 'DELETE'; });
+    assert.ok(del.cuerpo.tags.indexOf('nuevo') > -1);
+    const pos = ghlLlamadas.filter(function (l) { return l.m === 'POST' && /\/tags$/.test(l.ruta); });
+    assert.deepEqual(pos[pos.length - 1].cuerpo.tags, ['nuevo']);
+    assert.deepEqual(ghl.tags.filter(function (x) { return /^(clase|origen)-/.test(x); }).sort(), ['clase-a', 'origen-precio']);
+    ghl.ops[0].pipelineStageId = 'S2';
   });
   await t('GHL: descartado no toca GHL', async function () {
     ghlLlamadas.length = 0;
