@@ -46,7 +46,7 @@ en el buscador de *Settings*.
 > clave **de la subcuenta**. La clave de agencia no hace falta.
 
 **A3.1 · Crear la subcuenta** (2 min). Vista de agencia → **Sub-Accounts → Create Sub-Account** →
-*Blank* (para Al Milímetro, que es la primera) → nombre **«Al Milímetro Reformas»**, país España, zona
+*Blank* (para Al Milímetro, que es la primera) → nombre **«Almilimetro»** (así está creada), país España, zona
 horaria **Europe/Madrid**. Copia su **ID** (*Settings → Business Profile*, o de la URL `/location/<ID>/`).
 Para los clientes siguientes, ver «Clientes siguientes» en la parte B.
 

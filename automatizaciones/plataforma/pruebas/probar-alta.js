@@ -1,5 +1,6 @@
 // Prueba sin red de ghl-alta-subcuenta.js: node automatizaciones/plataforma/pruebas/probar-alta.js
 // Simula la API de GHL y comprueba el script de alta (vista previa, aplicar, idempotencia y la subcuenta de Qualivo).
+for (const k of Object.keys(process.env)) if (/^(GHL_|AM_GHL_|VERCEL_)/.test(k)) delete process.env[k]; // nunca el entorno real
 const assert = require('assert');
 const path = require('path').join(__dirname, '..', 'ghl-alta-subcuenta.js'), dir = require('path').dirname(path);
 const cli = JSON.parse(require('fs').readFileSync(dir + '/al-milimetro.json', 'utf8'));
@@ -35,14 +36,16 @@ global.fetch = async (url, o) => {
   await assert.rejects(cargar(true).main(cli), /Qualivo/);
   // Modo «subcuenta creada a mano» (plan de 297 $): Private Integration de la subcuenta, sin clave de agencia
   delete process.env.GHL_AGENCY_API_KEY; delete process.env.GHL_COMPANY_ID;
-  Object.assign(process.env, { GHL_LOCATION_API_KEY: 'pit', GHL_LOCATION_ID: 'locManual' });
+  Object.assign(process.env, { GHL_LOCATION_ID: 'bHGMuZEGUESZmVoNv9HT', GHL_API_KEY: 'qualivo' }); // las de Qualivo, presentes como en el entorno real
+  Object.assign(process.env, { AM_GHL_API_KEY: 'pit', AM_GHL_LOCATION_ID: 'locManual' });
   Object.assign(estado, { cv: [], cf: [], tags: [], cals: [] }); llamadas.length = 0;
   await cargar(true).main(cli);
   assert.ok(!llamadas.some((l) => /locations\/search|locationToken|POST \/locations\/$/.test(l)), 'sin llamadas de agencia: ' + llamadas);
   assert.equal(estado.cf.length, 16); assert.equal(estado.tags.length, 16);
-  process.env.GHL_LOCATION_ID = 'bHGMuZEGUESZmVoNv9HT';
+  process.env.AM_GHL_LOCATION_ID = 'bHGMuZEGUESZmVoNv9HT';
   await assert.rejects(cargar(true).main(cli), /Qualivo/);
+  await assert.rejects(cargar(true).main(Object.assign({}, cli, { env: { token: 'GHL_API_KEY', location: 'GHL_LOCATION_ID' } })), /Qualivo/);
   console.log = log;
-  console.log('✓ modo subcuenta creada a mano: configura con la Private Integration, sin clave de agencia, y se niega con Qualivo');
+  console.log('✓ modo subcuenta creada a mano: usa las variables AM_* aunque estén las de Qualivo en el entorno, sin clave de agencia, y se niega con Qualivo');
   console.log('✓ vista previa sin escrituras · ✓ alta completa (14 valores, 16 campos, 16 etiquetas, calendario) · ✓ idempotente · ✓ se niega con la subcuenta de Qualivo');
 })().catch((e) => { console.error('✗', e); process.exit(1); });

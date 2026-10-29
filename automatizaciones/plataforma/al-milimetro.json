@@ -1,6 +1,14 @@
 {
-  "nombre": "Al Milímetro Reformas",
-  "ficha": { "city": "Madrid", "state": "Madrid", "website": "https://www.almilimetroreformas.com" },
+  "nombre": "Almilimetro",
+  "env": {
+    "token": "AM_GHL_API_KEY",
+    "location": "AM_GHL_LOCATION_ID"
+  },
+  "ficha": {
+    "city": "Madrid",
+    "state": "Madrid",
+    "website": "https://www.almilimetroreformas.com"
+  },
   "valores": {
     "negocio_nombre": "Al Milímetro",
     "persona_nombre": "Sonia",
@@ -20,8 +28,35 @@
   "calendario": {
     "nombre": "Visita técnica",
     "openHours": [
-      { "daysOfTheWeek": [1, 2, 3, 4], "hours": [{ "openHour": 9, "openMinute": 0, "closeHour": 19, "closeMinute": 0 }] },
-      { "daysOfTheWeek": [5], "hours": [{ "openHour": 9, "openMinute": 0, "closeHour": 15, "closeMinute": 0 }] }
+      {
+        "daysOfTheWeek": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "hours": [
+          {
+            "openHour": 9,
+            "openMinute": 0,
+            "closeHour": 19,
+            "closeMinute": 0
+          }
+        ]
+      },
+      {
+        "daysOfTheWeek": [
+          5
+        ],
+        "hours": [
+          {
+            "openHour": 9,
+            "openMinute": 0,
+            "closeHour": 15,
+            "closeMinute": 0
+          }
+        ]
+      }
     ]
   }
 }

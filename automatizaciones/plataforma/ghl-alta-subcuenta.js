@@ -3,9 +3,10 @@
 //
 // Dos modos:
 //   · Subcuenta ya creada a mano (plan de agencia de 297 $: la API NO crea subcuentas, da 403) — el habitual:
-//       GHL_LOCATION_API_KEY=<token de la Private Integration de la subcuenta> GHL_LOCATION_ID=<id> \
 //       node automatizaciones/plataforma/ghl-alta-subcuenta.js cliente.json [--aplicar]
-//     (si no están, usa AM_GHL_API_KEY y AM_GHL_LOCATION_ID). La clave de agencia no hace falta.
+//     El token y el ID se leen de las variables que nombra cliente.json en "env" (Al Milímetro:
+//     AM_GHL_API_KEY y AM_GHL_LOCATION_ID). Nunca de GHL_LOCATION_ID ni GHL_API_KEY, que son los de la
+//     subcuenta de Qualivo. La clave de agencia no hace falta.
 //   · Con clave de agencia (solo plan Agency Pro): GHL_AGENCY_API_KEY + GHL_COMPANY_ID; crea la subcuenta.
 //
 // Sin --aplicar solo enseña lo que haría (lee, no escribe). Es idempotente: lo que ya existe no se toca,
@@ -64,8 +65,11 @@ async function ghl(token, metodo, ruta, cuerpo, version, form) {
 async function main(cli) {
   if (!cli || !cli.nombre || !cli.valores) throw new Error('cliente.json sin «nombre» o sin «valores»');
   console.log((aplicar ? 'APLICANDO' : 'VISTA PREVIA (añade --aplicar)') + ' · subcuenta «' + cli.nombre + '»');
-  const TOKEN_SUB = process.env.GHL_LOCATION_API_KEY || process.env.AM_GHL_API_KEY;
-  const ID_SUB = process.env.GHL_LOCATION_ID || process.env.AM_GHL_LOCATION_ID;
+  // Solo las variables del cliente (cliente.json → env). Las genéricas GHL_* son las de Qualivo.
+  const env = cli.env || { token: 'AM_GHL_API_KEY', location: 'AM_GHL_LOCATION_ID' };
+  if (/^GHL_(API_KEY|LOCATION_ID)$/.test(env.token) || /^GHL_(API_KEY|LOCATION_ID)$/.test(env.location)) throw new Error('cliente.json → env no puede apuntar a las variables de Qualivo');
+  const TOKEN_SUB = process.env[env.token];
+  const ID_SUB = process.env[env.location];
   let loc, T;
   if (TOKEN_SUB && ID_SUB) {
     // Subcuenta creada a mano: se trabaja con su Private Integration, sin la clave de agencia
@@ -79,7 +83,7 @@ async function main(cli) {
     console.log('✓ subcuenta existente · ' + loc.id + ' (Private Integration de la subcuenta)');
     T = TOKEN_SUB;
   } else {
-    if (!AGENCIA || !COMPANY) throw new Error('Faltan GHL_LOCATION_API_KEY + GHL_LOCATION_ID (subcuenta creada a mano) o GHL_AGENCY_API_KEY + GHL_COMPANY_ID');
+    if (!AGENCIA || !COMPANY) throw new Error('Faltan ' + env.token + ' + ' + env.location + ' (subcuenta creada a mano) o GHL_AGENCY_API_KEY + GHL_COMPANY_ID');
     ({ loc, T } = await conAgencia(cli));
     if (!loc) return;
   }

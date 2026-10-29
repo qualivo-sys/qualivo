@@ -1,5 +1,6 @@
 // Prueba sin red de vercel-preview-am.js: node automatizaciones/plataforma/pruebas/probar-vercel.js
 const assert = require('assert'); const path = require('path').join(__dirname, '..', 'vercel-preview-am.js');
+for (const k of Object.keys(process.env)) if (/^(GHL_|AM_GHL_|VERCEL_)/.test(k)) delete process.env[k]; // nunca el entorno real
 Object.assign(process.env, { GHL_AGENCY_API_KEY: 'ag', GHL_COMPANY_ID: 'co', VERCEL_TOKEN: 'vt' });
 const puestas = []; let envs = []; let redeploys = 0; const valores = {};
 global.fetch = async (url, o) => {
