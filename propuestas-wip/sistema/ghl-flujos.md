@@ -1,5 +1,7 @@
 # Al Milímetro · ficha de montaje en GoHighLevel
 
+> **OBSOLETO (29-oct, 11:28):** no se usa GHL. El sistema va en qualivo.io con base de datos propia y Resend; ver `propuestas/al-milimetro/estado-2026-10-29.md`.
+
 Para montar la subcuenta de Sonia en la interfaz de GHL. Los textos de cada mensaje están en `mensajes.md` (W1-W12, E1-E4). El formulario los dispara con **etiquetas** que pone `api/al-milimetro-lead.js` (rama `claude/al-milimetro-landing-v2-site`).
 
 **Hasta el OK de Sonia (viernes 30, 10:15):** todos los flujos llevan como primera condición «tiene la etiqueta `am-prueba`». Al dar el OK se quita esa condición y se pone `AM_SOLO_PRUEBA=0` en Vercel.
