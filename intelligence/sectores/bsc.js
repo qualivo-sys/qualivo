@@ -13,7 +13,8 @@
     sinAgentes: true,
     persona: 'Anna',
     vozAuto: false,
-    vistasOcultas: ['agentes'],
+    vistasOcultas: ['agentes', 'inteligencia'],
+    avisoEnVivo: { id: 'b01', tras: 7000, mensaje: 'Hola Anna, ¿me puedes llamar hoy? Quiero cerrar lo de enero.', titulo: 'Júlia Ferrer acaba de escribir: quiere cerrar lo de enero', texto: 'Copywriting · enero · cambio de profesión · ha visto el plan de financiación 4 veces. Te pide que la llames hoy. Puedes contestarle desde aquí mismo, por WhatsApp o por correo.' },
     remedioFuga: { contactado: 'Llamar el mismo día a quien entra, empezando por los de más encaje. La lista de la mañana ya viene ordenada.', cualificado: 'En la primera llamada, cuatro preguntas: programa, convocatoria, horario y cómo lo pagaría.', entrevista: 'Proponer la entrevista en la misma llamada y recordarla la víspera.', matricula: 'Llamar a quien dijo «me lo pienso» en la fecha que dio, con su ficha delante.' },
     t: {
       contacto: 'interesado', contactos: 'interesados', Contactos: 'Interesados', Contacto: 'Interesado',

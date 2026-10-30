@@ -136,6 +136,9 @@
       pintarTodo();
       if (QV.copilot) QV.copilot.reiniciar();
       irA(opts.vista || 'resumen');
+      document.body.classList.toggle('sin-ia', !!cfg.sinAgentes);
+      clearTimeout(estado.avisoVivo);
+      if (cfg.sinAgentes && cfg.avisoEnVivo) estado.avisoVivo = setTimeout(function () { avisoEnVivo(cfg.avisoEnVivo); }, cfg.avisoEnVivo.tras || 6000);
       return cfg;
     });
   }
@@ -194,6 +197,25 @@
   function contacto(id) { return estado.contactos.filter(function (c) { return c.id === id; })[0]; }
   function atencion() { return estado.contactos.filter(function (c) { return c.x.atencion; }); }
   function tituloSistema() { return 'Intelligence System' + (estado.empresa ? ' · <b>' + esc(estado.empresa) + '</b>' : ''); }
+
+  // Modo sin agentes: un aviso «en vivo» como los que recibiría la persona del equipo (lo pidió BSC)
+  function avisoEnVivo(a) {
+    const c = contacto(a.id); const el = $('#humano');
+    if (!c || !el || (QV.demo && QV.demo.activo && QV.demo.activo())) return;
+    if (a.mensaje) { c.conv.push({ t: estado.ahora, de: 'c', canal: 'wa', texto: a.mensaje }); c.s.conv = true; recalcular(); pintarTodo(); }
+    el.innerHTML = '<span class="humano-tag">' + ico('persona') + 'Aviso para ' + esc(estado.cfg.persona || 'ti') + ' · ahora mismo</span><h3>' + esc(a.titulo) + '</h3><p>' + esc(a.texto) + '</p>' +
+      '<div class="botones"><button class="btn btn-primario" type="button" data-contestar="' + c.id + '">Contestar desde aquí</button><button class="btn" type="button" data-abrir="' + c.id + '">Ver ficha</button><button class="btn btn-fantasma" type="button" data-demo="cerrar-humano">Cerrar</button></div>';
+    el.hidden = false;
+  }
+  document.addEventListener('click', function (e) {
+    const b = e.target.closest && e.target.closest('[data-contestar]');
+    if (!b) return;
+    e.preventDefault();
+    $('#humano').hidden = true;
+    estado.convSel = b.getAttribute('data-contestar');
+    irA('conversaciones');
+    setTimeout(function () { const t = document.querySelector('.hilo-conv .ar-texto'); if (t) t.focus(); }, 60);
+  });
 
   function aviso(txt, icono) {
     const el = document.createElement('div');
@@ -337,7 +359,7 @@
       let cuenta = '';
       if (v.id === 'oportunidades' && nAt) cuenta = '<span class="cuenta">' + nAt + '</span>';
       if (v.id === 'senales' && nSen) cuenta = '<span class="cuenta">' + nSen + '</span>';
-      return '<button type="button" data-vista="' + v.id + '"' + (estado.vista === v.id ? ' aria-current="page"' : '') + '>' + ico(v.ico) + '<span>' + v.txt + '</span>' + cuenta + '</button>';
+      return '<button type="button" data-vista="' + v.id + '"' + (estado.vista === v.id ? ' aria-current="page"' : '') + '>' + ico(v.ico) + '<span>' + (estado.cfg.sinAgentes && v.id === 'senales' ? 'Avisos' : v.txt) + '</span>' + cuenta + '</button>';
     }).join('');
   }
   function pintarBarra() {
@@ -406,7 +428,7 @@
   // Modo real: generar mensaje, agente de WhatsApp y llamada de Raquel (real.js hace el resto)
   function accionesRealHtml(c) {
     if (estado.cfg.cuenta) return ''; // cuentas de clientes: solo lectura
-    if (estado.cfg.sinAgentes) return '<div data-bloque-real><div class="pie acciones-real"><button class="btn btn-mini btn-primario" type="button" data-real="redactar" data-id="' + c.id + '">' + ico('rayo') + 'Prepárame la llamada</button></div><div class="accion-real-caja"></div></div>';
+    if (estado.cfg.sinAgentes) return '<div data-bloque-real><div class="accion-real-caja"><div class="responder"><textarea class="ar-texto" rows="3" placeholder="Escribe tu respuesta a ' + esc(c.n.split(' ')[0]) + '…"></textarea><div class="pie acciones-real"><button class="btn btn-mini btn-primario" type="button" data-real="enviar" data-id="' + c.id + '">' + ico('whatsapp') + 'Enviar por WhatsApp</button><button class="btn btn-mini" type="button" data-real="enviar-correo" data-id="' + c.id + '">' + ico('correo') + 'Enviar por correo</button></div></div></div></div>';
     return '<div data-bloque-real><div class="pie acciones-real"><button class="btn btn-mini" type="button" data-real="redactar" data-id="' + c.id + '">' + ico('rayo') + 'Generar mensaje</button>' +
       '<button class="btn btn-mini" type="button" data-real="agente" data-id="' + c.id + '">' + ico('whatsapp') + 'Activar agente de WhatsApp</button>' +
       '<button class="btn btn-mini btn-primario" type="button" data-real="llamar" data-id="' + c.id + '">' + ico('voz') + 'Llamada de Raquel</button></div><div class="accion-real-caja"></div></div>';
@@ -606,14 +628,14 @@
       const sel = contacto(estado.convSel);
       const lado = con.map(function (c) {
         const u = c.conv[c.conv.length - 1];
-        const qui = u.de === 'c' ? '' : u.de === 'h' ? 'Equipo: ' : 'Agente: ';
+        const qui = u.de === 'c' ? '' : u.de === 'h' ? (cfg.persona || 'Equipo') + ': ' : 'Agente: ';
         return '<div class="conv-el" data-conv="' + c.id + '" aria-current="' + (c.id === estado.convSel) + '"><div class="l1"><b>' + esc(c.n) + '</b><time>' + M.fechaCorta(u.t, estado.ahora) + '</time></div><p>' + esc(qui + u.texto) + '</p><div class="l3">' + pillPrio(c.x.prio) + '<span class="pill t-gris">' + esc(M.ESTADOS[c.x.nba.estado]) + '</span></div></div>';
       }).join('');
       let hilo = '<p class="vacio">Sin conversaciones.</p>';
       if (sel) {
         hilo = '<div class="hilo-conv"><div class="hilo-cab"><div class="quien-fila">' + avatar(sel) + '<div><div class="nombre">' + esc(sel.n) + '</div><div class="meta">' + esc(metaContacto(sel)) + '</div></div></div><button class="btn btn-mini" data-abrir="' + sel.id + '">Ver ficha</button></div>' + '<div class="hilo-contacto">' + contactoRealHtml(sel) + '</div>' +
           '<div class="burbujas">' + sel.conv.filter(function (m) { return m.t <= estado.ahora; }).map(function (m) {
-            const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? (estado.cfg.cuenta ? 'Envío automático' : 'Agente de WhatsApp') : m.de === 'v' ? 'Agente de voz' : 'Equipo';
+            const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? (estado.cfg.cuenta ? 'Envío automático' : 'Agente de WhatsApp') : m.de === 'v' ? 'Agente de voz' : (estado.cfg.persona || 'Equipo');
             const ic = m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp';
             return '<div class="burbuja ' + m.de + '"><small>' + ico(ic) + esc(quien) + ' · ' + M.fechaCorta(m.t, estado.ahora) + '</small>' + esc(m.texto) + '</div>';
           }).join('') + '</div>' +
@@ -666,7 +688,7 @@
       const f = estado.filtroSenal;
       const lista = todas.filter(function (x) { return f === 'todas' ? true : f === 'humano' ? x.s.humano : x.s.tipo === f; });
       const nh = todas.filter(function (x) { return x.s.humano; }).length;
-      return cabecera('Señales', '¿Dónde existe un riesgo o una oportunidad?', 'Lo que el sistema ha detectado solo. Cada señal dice quién, qué ha pasado, por qué importa, qué se ha hecho ya y si hace falta una persona.') +
+      return (estado.cfg.sinAgentes ? cabecera('Avisos', '¿Qué me ha avisado el sistema?', 'Lo que el sistema ha detectado solo: quién ha vuelto a la web, quién ha contestado, quién no vino o lleva días sin que nadie le llame. Cada aviso dice por qué importa y qué hacer.') : cabecera('Señales', '¿Dónde existe un riesgo o una oportunidad?', 'Lo que el sistema ha detectado solo. Cada señal dice quién, qué ha pasado, por qué importa, qué se ha hecho ya y si hace falta una persona.')) +
         '<div class="filtros"><button class="filtro" data-fsenal="todas" aria-pressed="' + (f === 'todas') + '">Todas <small>' + todas.length + '</small></button><button class="filtro" data-fsenal="humano" aria-pressed="' + (f === 'humano') + '">Requieren persona <small>' + nh + '</small></button>' +
         Object.keys(tipos).map(function (k) { return '<button class="filtro" data-fsenal="' + k + '" aria-pressed="' + (f === k) + '">' + M.TIPOS_SENAL[k].txt + ' <small>' + tipos[k] + '</small></button>'; }).join('') + '</div>' +
         '<div class="tarjeta" style="padding:0">' + (lista.map(function (x) {

@@ -149,13 +149,13 @@
       setTimeout(function () { borrador(box, c, accion); }, 650);
       return;
     }
-    if (accion === 'enviar' || accion === 'agente-enviar') {
+    if (accion === 'enviar' || accion === 'agente-enviar' || accion === 'enviar-correo') {
       const t = box && box.querySelector('.ar-texto');
       const texto = t ? t.value.trim() : '';
       if (!texto) return;
-      c.conv.push({ t: E().ahora, de: 'a', canal: 'wa', texto: texto });
+      c.conv.push({ t: E().ahora, de: E().cfg.sinAgentes ? 'h' : 'a', canal: accion === 'enviar-correo' ? 'email' : 'wa', texto: texto });
       if (accion === 'agente-enviar') c.ev = (c.ev || []).concat([{ t: E().ahora, tipo: 'sistema', texto: 'Agente de WhatsApp activado: contesta solo a ' + nombre(c) }]);
-      pintar(box, '<p class="ok-ar">' + (accion === 'enviar' ? 'Enviado por WhatsApp.' : 'Enviado y agente activado: a partir de ahora contesta solo.') + ' (Demo: no ha salido nada.)</p>' +
+      pintar(box, '<p class="ok-ar">' + (accion === 'enviar-correo' ? 'Enviado por correo.' : accion === 'enviar' ? 'Enviado por WhatsApp.' : 'Enviado y agente activado: a partir de ahora contesta solo.') + ' (Demo: no ha salido nada.)</p>' +
         '<div class="fila"><button class="btn btn-mini" type="button" data-demo-refrescar="' + c.id + '">Verlo en la conversación</button></div>');
       return;
     }
