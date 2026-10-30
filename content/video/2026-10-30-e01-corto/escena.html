@@ -135,7 +135,7 @@ window.setT=function(t){
  // L1
  $('L1').style.opacity=1-cl(t,T.diag-.25,T.diag);
  ['a1','a2','a3','b1','b2','b3'].forEach(x=>$(x).style.opacity=1);  // escrito desde el fotograma 0
- $('band').style.opacity=cl(t,3,3.3)*(1-cl(t,T.cta-.3,T.cta));
+ $('band').style.opacity=0;  // franja quitada (Maikel, 30-oct)
  const f0=.3; D.forEach((d,i)=>{const p=cl(t,f0+d.dl,f0+d.dl+1.2);let x=525+d.dx*p, y=130+p*240;
    if(!d.ok&&p>.55){const q=(p-.55)/.45; x=525+d.dx*.55+(d.dx>0?1:-1)*q*420; y=130+.55*240+q*180;}
    d.el.style.left=x+'px';d.el.style.top=y+'px';d.el.style.opacity=p>0&&p<1?1:(d.ok&&p>=1?1:0);d.el.style.background=(!d.ok&&p>.55)?'#E5484D':(d.ok&&p>.9?'#1FA396':'#F4F1EB');

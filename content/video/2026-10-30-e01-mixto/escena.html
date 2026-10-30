@@ -300,7 +300,7 @@ window.setT=function(t){
   if(d.ok&&p>=1){d.el.style.left=(470+(i/10)*60)+'px';d.el.style.top='380px';}});
  win($('L2'),t,T.diag,T.sis,.25);
  [['c1',1.8],['c2',3.4],['c3',4.6]].forEach(([c,o])=>{$(c).classList.toggle('on',t>T.diag+o);});
- $('band').style.opacity=cl(t,3,3.3)*(1-cl(t,T.cta-.3,T.cta));
+ $('band').style.opacity=0;  // franja quitada (Maikel, 30-oct)
  // MAPA: visible en «sis» y al inicio de cada bloque; en cada bloque se resalta el suyo y se hace zoom hacia él
  const Wd=T.W, w=(x,d)=>(Wd[x]!==undefined?Wd[x]:d)-.05;
  const segs=[['sis',T.sis,T.b1,0],['b1',T.b1,T.icp,1],['b2',T.b2,T.fm,2],['b3',T.b3,T.seg,3]];
