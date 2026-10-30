@@ -82,3 +82,60 @@ Lo que sí usa todo el mundo, y se evita: «leads cualificados» como promesa ge
 **Formatos:** el vídeo es mayoría en los que aguantan más tiempo (15 de 21) [C, contado en la tabla de Paid]. La imagen con texto largo es la que más días aguanta: 317 días, Ted Gravlin [C].
 
 **Estado a las 13:00:** las objeciones literales de Growth (11:00) todavía no están en ningún archivo del repositorio. Las pido por Paid. Sin ellas, a las 15:00 los ganchos se atan a objeciones **probables**, marcadas [E].
+
+---
+
+## Paso 4 · los 3 ángulos (propuesta de Creative para cerrar con Paid a las 15:00)
+
+**Fuente de las objeciones:** respuestas de los formularios nativos de Meta del 15-sep al 30-oct, leídas por API por Paid el 30-oct [C]. Son **opciones de respuesta del formulario, no frases literales de conversación**. Growth no ha enviado las suyas.
+
+| Pregunta del formulario | Respuestas [C] |
+|---|---|
+| ¿Dónde se te escapan los clientes? | «no lo sé» 13 · seguimiento 12 · anuncios 7 · tardo en contestar 4 |
+| Dolor principal | llegan pero no compran 3 · no entran 1 · no son mi perfil 1 · no lo sé 1 |
+| Inversión en anuncios | menos de 500 € 16 · nada 8 · 500 € o más 15 |
+
+La oferta (diagnóstico gratis), el formulario y el rótulo «sus clientes pagan 500 € o más» no cambian.
+
+### A · «No sabes dónde se te escapan» (la fuga que no se ve)
+- **Objeción:** «no lo sé», 13 respuestas, la primera [C].
+- **Hueco:** la duda dicha en voz alta; nadie de los 21 pregunta.
+- **Valor:** el diagnóstico te enseña en qué punto, entre el anuncio y la venta, se pierde el alumno.
+- **Gancho, segundo 0:** «Tienes una formación. Te entran contactos. Y no sabes en qué punto se te escapan.»
+- **9:16:**
+  1. Texto grande sobre un plano de un móvil con notificaciones de leads.
+  2. Tres pasos que se iluminan: anuncio → formulario → llamada → matrícula, con un hueco rojo que va cambiando de sitio.
+  3. «En el diagnóstico te digo dónde está el tuyo.»
+  4. Cierre con el rótulo de 500 € y «Diagnóstico gratis».
+- **4:5:** titular «¿Dónde se te escapan los alumnos? Si la respuesta es "no lo sé", empieza por ahí.» Debajo, un embudo dibujado con 4 tramos y un interrogante en uno.
+
+### B · «El problema no son los leads. Es lo que pasa después.» (seguimiento)
+- **Objeción:** seguimiento, 12 respuestas, más «tardo en contestar», 4 [C].
+- **Hueco:** la pérdida contada desde la venta. Solo MediSimple toca el seguimiento, y lo hace en clínicas.
+- **Valor:** Qualivo conecta la captación con las ventas.
+- **Gancho, segundo 0:** «El problema no son los leads. Es lo que pasa después.»
+- **9:16:**
+  1. Un lead entra a las 10:14 y el reloj corre: nadie llama, el WhatsApp sale «visto», y el mismo contacto aparece después en otra academia (plano simbólico, sin marcas).
+  2. «Conectamos tus anuncios con tu equipo de ventas para que ningún contacto se quede esperando.»
+  3. Cierre con el rótulo y el diagnóstico.
+- **4:5:** dos columnas, «Lo que te venden: leads» frente a «Lo que necesitas: que alguien los llame a tiempo y los cierre». Va en la línea de los anuncios que aguantan con «leads no, citas o clientes».
+- Sin cifra de minutos o de porcentaje de pérdida: no hay fuente.
+
+### C · «Llegan, pero no compran», enseñando el filtro (conversión)
+- **Objeción:** «llegan pero no compran», 3 respuestas, el dolor principal más repetido [C].
+- **Hueco:** enseñar el filtro; nadie de los 21 lo hace.
+- **Valor:** llegan leads cualificados y se cierran más.
+- **Gancho, segundo 0:** «Si te llegan contactos pero no compran, el problema empieza antes del primer mensaje.»
+- **9:16:**
+  1. Un formulario en pantalla: se marca «menos de 500 €» y sale «Gracias, de momento no encajamos».
+  2. Se marca «500 € o más» y sale «Te llamo».
+  3. «Solo hablamos con quien puede invertir. Por eso hablamos con menos gente, y mejor.» No se dice que «compran más»: sería una promesa sin cifra.
+  4. Cierre con el rótulo.
+- **4:5:** el formulario a sangre, con el filtro marcado y el titular «Este formulario descarta a más de la mitad. A propósito.»
+  - «Más de la mitad» sale de los datos: 24 de 39 respuestas, menos de 500 € o nada, el 62 % [C].
+
+### Riesgos e hipótesis, para la fila de la base de hipótesis
+- **A:** hipótesis: nombrar el «no sé» sube el CTR de enlace frente al vídeo actual. Riesgo: si atrae a curiosos, el filtro los corta igualmente.
+- **B:** hipótesis: el seguimiento es el dolor más concreto y atrae a quien ya invierte. Mide el coste por apto.
+- **C:** hipótesis: enseñar el filtro baja el volumen y sube el porcentaje de aptos. Mide el porcentaje de aptos sobre envíos (hoy, 2 de 5 [C]).
+- **Para los tres:** el mismo formulario, el mismo presupuesto y sin casos de clientes. Lanzamiento el lunes, solo con el OK de Maikel.
