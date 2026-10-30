@@ -1,0 +1,313 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- E-01 · versión mixta: problema (versión corta) + cómo lo hacemos (recorrido) · identidad del anuncio de formación de septiembre (content/video/2026-09-17-sistema/escena-formacion.html). Tiempos en tiempos.js (de la voz). -->
+<script src="tiempos.js"></script>
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../anuncios/2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+:root{--tl:#1FA396;--tld:#0E7C74;--bk:#0A0A0B;--cr:#F4F1EB;--y:#F4CC38;--red:#E5484D;--mut:#7A7C82}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:SG;background:var(--tl);color:var(--bk)}
+.lay{position:absolute;inset:0;opacity:0}
+.A{font-family:Anton;text-transform:uppercase;line-height:.95}
+.A i{font-style:normal;color:var(--y)}
+/* dolor */
+#P{background:var(--bk);color:var(--cr);z-index:15}
+#P .hk{position:absolute;left:90px;right:90px;top:560px;font-size:142px}
+#P .hk .s{display:block;opacity:0}
+.pain{position:absolute;inset:0;opacity:0}
+.pain .vis{position:absolute;left:140px;right:140px;top:330px;height:760px}
+.pain .tx{position:absolute;left:90px;right:90px;top:1170px;font-size:98px}
+.pain .tx .x{display:inline-flex;width:96px;height:96px;border-radius:50%;background:var(--red);align-items:center;justify-content:center;font-family:SG;font-size:60px;font-weight:700;color:#fff;vertical-align:middle;margin-right:26px;transform:translateY(-10px)}
+/* d1 multitud */
+.dot{position:absolute;width:46px;height:46px;border-radius:50%;background:#3A3D44}
+.dot.r{background:var(--red)}
+.adc{position:absolute;left:220px;top:0;width:360px;height:250px;border-radius:24px;background:#1C1E24;border:3px solid #2E3139;display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:44px;color:#9AA2AE;text-transform:uppercase}
+/* d2 form */
+.mfm{position:absolute;left:60px;right:60px;top:60px;background:#16181D;border-radius:30px;padding:46px;border:3px solid #2E3139}
+.mfm .f{border:3px solid #3A3D44;border-radius:16px;padding:22px 26px;font-size:36px;color:#C9CDD3;margin-bottom:22px;font-weight:600}
+.mfm .q{border:3px dashed #5A2E30;border-radius:16px;padding:22px 26px;font-size:34px;color:#E5484D;margin-bottom:22px;font-weight:700;opacity:0}
+/* d3 chat */
+.mch{position:absolute;left:60px;right:60px;top:40px;height:700px;background:#16181D;border-radius:30px;border:3px solid #2E3139;padding:40px}
+.mch .b{background:#2A2D33;color:#fff;border-radius:24px;border-top-left-radius:6px;padding:24px 28px;font-size:36px;width:520px;font-weight:500}
+.mch .clk{position:absolute;right:40px;bottom:40px;font-family:Anton;font-size:120px;color:var(--red)}
+.mch .ag{position:absolute;left:40px;bottom:60px;font-size:30px;color:#9AA2AE;font-weight:600}
+/* d4 cita */
+.mcal{position:absolute;left:60px;right:60px;top:60px;background:#16181D;border-radius:30px;border:3px solid #2E3139;padding:46px}
+.mcal .s{border-radius:18px;padding:28px;font-size:38px;font-weight:700;background:#1F2228;color:#5A5E66;margin-bottom:18px}
+.mcal .s.c{background:rgba(229,72,77,.15);border:3px solid var(--red);color:#fff}
+.mcal .s.c span{display:block;font-size:28px;color:var(--red);margin-top:6px}
+/* giro */
+#G{display:flex;align-items:center;padding:0 90px;z-index:14}
+#G h1{font-size:160px}
+#G h1 i{color:var(--cr)}
+/* recorrido */
+#top{position:absolute;left:80px;right:80px;top:270px;display:flex;justify-content:space-between;align-items:center;z-index:20;opacity:0}
+#top .n{font-family:Anton;font-size:40px;letter-spacing:.04em;color:var(--bk)}
+#top .n b{display:inline-block;background:var(--bk);color:var(--y);border-radius:12px;padding:4px 16px;margin-right:14px;font-weight:400}
+#dots{display:flex;gap:10px}
+#dots i{width:44px;height:10px;border-radius:5px;background:rgba(10,10,11,.2);display:block}
+#dots i.on{background:var(--bk)}
+#stage{position:absolute;left:90px;top:400px;width:900px;height:1020px}
+.sc{position:absolute;inset:0;opacity:0}
+#cap{position:absolute;left:70px;right:70px;top:1480px;font-size:84px;text-align:center;z-index:30;opacity:0}
+#cap i{color:var(--cr)}
+.box{position:absolute;background:var(--cr);border-radius:36px;border:4px solid var(--bk);overflow:hidden}
+.k{font-size:22px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--tld)}
+.chip{position:absolute;background:var(--bk);color:var(--cr);border-radius:14px;padding:14px 22px;font-family:Anton;font-size:32px;letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;gap:14px;white-space:nowrap;z-index:5}
+.chip::before{content:'';width:18px;height:18px;background:var(--y);border-radius:4px}
+.chip small{font-family:SG;font-weight:600;font-size:22px;color:rgba(244,241,235,.65);text-transform:none;letter-spacing:0}
+/* icp */
+.icp{left:150px;top:40px;width:600px;padding:44px;text-align:center}
+.icp .av{width:200px;height:200px;border-radius:50%;background:var(--tl);margin:10px auto 24px;position:relative;overflow:hidden}
+.icp .av::before{content:'';position:absolute;left:60px;top:34px;width:80px;height:80px;border-radius:50%;background:var(--cr)}
+.icp .av::after{content:'';position:absolute;left:30px;top:124px;width:140px;height:120px;border-radius:70px 70px 0 0;background:var(--cr)}
+.icp h3{font-family:Anton;font-size:58px;text-transform:uppercase;line-height:1}
+.icp p{font-size:28px;color:var(--mut);margin-top:10px;font-weight:600}
+.pn{position:absolute;background:var(--bk);color:var(--cr);border-radius:20px;padding:20px 26px;font-size:32px;font-weight:700;opacity:0;white-space:nowrap}
+.pn::before{content:'“';color:var(--y);font-family:Anton;margin-right:8px}
+/* ads */
+.adt{width:300px;height:470px;padding:0;top:200px}
+.adt .im{height:250px;background:var(--bk);position:relative;overflow:hidden}
+.adt .im i{position:absolute;left:30px;right:30px;height:22px;border-radius:11px;background:rgba(244,241,235,.85)}
+.adt .im i.y{background:var(--y)}
+.adt .ln{margin:24px 26px 0;height:16px;border-radius:8px;background:rgba(10,10,11,.15)}
+.adt .an{position:absolute;left:20px;right:20px;bottom:22px;background:var(--y);border-radius:12px;padding:14px;text-align:center;font-family:Anton;font-size:30px;text-transform:uppercase;letter-spacing:.03em}
+.aim{position:absolute;left:330px;top:-40px;width:240px;height:240px;border-radius:50%;border:6px solid var(--bk);display:flex;align-items:center;justify-content:center;opacity:0}
+.aim::after{content:'';width:120px;height:120px;border-radius:50%;background:var(--bk)}
+/* landing */
+.ph{left:200px;top:0;width:500px;height:1000px;border-radius:60px;background:var(--bk);padding:18px;border:none}
+.scr{width:100%;height:100%;background:var(--cr);border-radius:44px;overflow:hidden;position:relative}
+.scroll{position:absolute;left:0;right:0;top:0}
+.sec{margin:20px 22px;border-radius:24px;padding:26px;background:#fff;border:3px solid rgba(10,10,11,.1)}
+.sec .t{font-family:Anton;font-size:40px;text-transform:uppercase;line-height:1}
+.sec .l{height:14px;border-radius:7px;background:rgba(10,10,11,.12);margin-top:14px}
+.sec.hero{background:var(--bk);color:var(--cr);height:330px}
+.sec.on{border-color:var(--tld);box-shadow:0 0 0 5px rgba(14,124,116,.25)}
+.lbl{position:absolute;left:730px;width:250px;font-family:Anton;font-size:36px;text-transform:uppercase;line-height:1;opacity:0}
+.lbl::before{content:'← ';color:var(--cr)}
+/* formulario */
+.fmb{left:60px;top:20px;width:780px;padding:44px}
+.fmb h3{font-family:Anton;font-size:50px;text-transform:uppercase;margin-bottom:26px}
+.f{border:3px solid var(--bk);border-radius:18px;padding:16px 22px;margin-bottom:18px;font-size:34px;font-weight:700;background:#fff;min-height:100px}
+.f small{display:block;font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:6px}
+.f.on{border-color:var(--tld);box-shadow:0 0 0 4px rgba(14,124,116,.2)}
+.score{margin-top:10px;display:flex;align-items:center;gap:20px;font-size:30px;font-weight:700;opacity:0}
+.score .bar{flex:1;height:24px;background:rgba(10,10,11,.12);border-radius:999px;overflow:hidden}
+.score .bar i{display:block;height:100%;width:0;background:var(--tld)}
+.score em{font-style:normal;background:var(--bk);color:var(--y);font-family:Anton;padding:8px 18px;border-radius:12px;font-size:32px;letter-spacing:.04em}
+/* whatsapp */
+.wab{left:110px;top:20px;width:680px;height:980px;border-radius:56px;background:var(--bk);padding:18px;border:none}
+.wa{position:absolute;inset:18px;background:#EFE7DD;border-radius:40px;overflow:hidden}
+.wah{background:var(--bk);color:var(--cr);padding:44px 34px 22px;display:flex;align-items:center;gap:18px}
+.wah .av{width:66px;height:66px;border-radius:50%;background:var(--y);color:var(--bk);font-family:Anton;font-size:36px;display:flex;align-items:center;justify-content:center}
+.wah b{font-size:30px;display:block}.wah span{font-size:21px;color:rgba(244,241,235,.6)}
+.bub{position:absolute;width:520px;border-radius:24px;padding:22px 24px;font-size:28px;line-height:1.36;box-shadow:0 4px 0 rgba(10,10,11,.08);opacity:0}
+.bub.in{left:24px;background:#fff;border-top-left-radius:6px}
+.bub.out{right:24px;background:#D9FDD3;border-top-right-radius:6px;width:auto}
+.bub .t{text-align:right;font-size:18px;color:var(--mut);margin-top:6px}
+.typing{position:absolute;left:24px;background:#fff;border-radius:24px;padding:20px 26px;display:flex;gap:10px;opacity:0}
+.typing i{width:14px;height:14px;border-radius:50%;background:#9AA2AE;display:block}
+/* voz */
+.call{position:absolute;inset:18px;background:var(--bk);color:var(--cr);border-radius:40px;display:flex;flex-direction:column;align-items:center;padding-top:110px}
+.call .av{width:220px;height:220px;border-radius:50%;background:var(--y);color:var(--bk);font-family:Anton;font-size:120px;display:flex;align-items:center;justify-content:center;position:relative}
+.ring{position:absolute;inset:0;border-radius:50%;border:5px solid var(--y)}
+.call h2{font-family:Anton;font-size:52px;text-transform:uppercase;margin-top:40px}
+.call p{font-size:26px;color:rgba(244,241,235,.6);margin-top:8px}
+.wave{display:flex;gap:10px;align-items:center;height:120px;margin-top:40px}
+.wave i{width:12px;border-radius:6px;background:var(--y);display:block;height:20px}
+.sub{position:absolute;left:40px;right:40px;top:700px;font-size:30px;line-height:1.35;text-align:center;font-weight:600}
+.sub i{font-style:normal;color:var(--y)}
+.calok{position:absolute;left:18px;right:18px;bottom:18px;background:var(--cr);color:var(--bk);border-radius:36px 36px 40px 40px;padding:36px 40px;opacity:0}
+.calok h3{font-family:Anton;font-size:52px;text-transform:uppercase;line-height:1;margin-top:6px}
+.calok p{font-size:26px;margin-top:8px;color:#3D4148}
+.chk{position:absolute;right:36px;top:36px;width:70px;height:70px;border-radius:50%;background:var(--tld);color:var(--cr);display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:800}
+/* seguimiento */
+.pp{left:0;top:40px;width:900px;padding:40px 30px;height:820px}
+.cols{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;height:520px}
+.col{background:rgba(10,10,11,.06);border-radius:20px;padding:16px 10px}
+.col h4{font-size:19px;letter-spacing:.06em;text-transform:uppercase;color:#3D4148;text-align:center}
+.col.win{background:rgba(14,124,116,.18)}
+.lead{position:absolute;top:70px;width:180px;background:#fff;border:3px solid var(--bk);border-radius:16px;padding:14px 12px;font-size:24px;font-weight:700;line-height:1.2}
+.lead small{display:block;font-size:17px;color:var(--mut);font-weight:600;margin-top:4px}
+.ev{margin-top:22px;font-size:27px;font-weight:600}
+.ev div{padding:12px 0;border-top:2px solid rgba(10,10,11,.1);opacity:0}
+.ev b{color:var(--tld)}
+/* panel */
+.pa{left:0;top:20px;width:900px;padding:40px 44px;background:var(--bk);color:var(--cr)}
+.pa .k{color:var(--y)}
+.fr{display:grid;grid-template-columns:210px 1fr 70px;gap:18px;align-items:center;margin-top:20px;font-size:28px;font-weight:700}
+.fb{height:50px;background:#1C1E24;border-radius:12px;overflow:hidden}
+.fb i{display:block;height:100%;background:linear-gradient(90deg,var(--tld),var(--tl));width:0}
+.fr em{font-style:normal;text-align:right;color:var(--y)}
+.ads{margin-top:30px;border-top:2px solid #24262C;padding-top:18px}
+.ad{display:grid;grid-template-columns:1fr 150px 170px;font-size:26px;font-weight:600;padding:12px 0;color:rgba(244,241,235,.85);opacity:0}
+.ad span{text-align:right}
+.ad .g{color:var(--tl);font-weight:800}.ad .r{color:#F87171;font-weight:800}
+.demo{font-size:20px;color:var(--mut);margin-top:14px;text-align:right}
+/* cierre */
+#F{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:46px;padding:0 80px;z-index:16}
+#F img{width:560px}
+#F .cl{font-size:92px}
+#F .cl i{color:var(--cr)}
+#F .btn{background:var(--bk);color:var(--y);font-family:Anton;font-size:66px;text-transform:uppercase;padding:26px 58px;border-radius:999px;letter-spacing:.03em}
+#F .ro{font-size:40px;font-weight:700;line-height:1.3}
+#F .web{font-family:Anton;font-size:48px;letter-spacing:.06em;color:var(--cr)}
+#F>*{opacity:0}
+
+/* gancho y diagnóstico (de la versión corta) */
+.blk0{background:var(--bk);color:var(--cr);z-index:15}
+.tag{position:absolute;left:90px;top:300px;background:var(--y);color:var(--bk);font-family:Anton;font-size:56px;text-transform:uppercase;padding:10px 28px;border-radius:14px}
+.hk{position:absolute;left:90px;right:90px;top:420px;font-size:150px}
+.hk span{display:block}
+#flow{position:absolute;left:0;right:0;top:960px;height:520px}
+.fd{position:absolute;width:40px;height:40px;border-radius:50%;background:var(--cr)}
+.bin{position:absolute;left:340px;top:220px;width:400px;height:210px;border:5px solid #3A3D44;border-top:none;border-radius:0 0 40px 40px}
+.bin b{position:absolute;left:0;right:0;bottom:-70px;text-align:center;font-size:30px;font-weight:700;color:#7A7C82;letter-spacing:.1em}
+.ad0{position:absolute;left:390px;top:0;width:300px;height:120px;border-radius:22px;background:#1C1E24;border:3px solid #2E3139;display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:40px;color:#9AA2AE;text-transform:uppercase}
+.dt{position:absolute;left:90px;right:90px;top:300px;font-size:104px}
+.path{position:absolute;left:120px;right:120px;top:930px;height:8px;background:#2E3139;border-radius:4px}
+.node{position:absolute;top:840px;width:280px;text-align:center}
+.node .c{width:190px;height:190px;margin:0 auto;border-radius:50%;border:6px solid #3A3D44;background:var(--bk);display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:80px;color:#5A5E66}
+.node .c.on{border-color:var(--red);color:var(--red);box-shadow:0 0 0 18px rgba(229,72,77,.12)}
+.node p{margin-top:30px;font-size:40px;font-weight:700;line-height:1.15;color:rgba(244,241,235,.85)}
+#band{position:absolute;left:0;right:0;top:1500px;height:84px;background:var(--y);color:var(--bk);display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:44px;text-transform:uppercase;z-index:40;opacity:0}
+.bk3{z-index:14;display:flex;flex-direction:column;justify-content:center;padding:0 90px;gap:30px}
+.bk3 .num{width:170px;height:170px;border-radius:50%;background:var(--y);border:6px solid var(--bk);display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:110px}
+.bk3 h1{font-size:150px}
+.bk3 h1 i{color:var(--cr)}
+#cap{top:1290px;font-size:72px}
+#stage{transform:scale(.85);transform-origin:50% 0;top:390px}
+</style>
+<div id="e">
+ <div class="lay blk0" id="L1" style="opacity:1"><div class="tag">¿Vendes formación?</div>
+  <div class="hk A"><span>Te llegan contactos…</span><span><i>y no compran.</i></span></div>
+  <div id="flow"><div class="ad0">Tu anuncio</div><div class="bin"><b>VENTAS</b></div></div></div>
+ <div class="lay blk0" id="L2"><div class="dt A">El problema puede estar en <i>tres sitios.</i></div><div class="path"></div>
+  <div class="node" style="left:40px"><div class="c" id="c1">1</div><p>A quién<br>atraes</p></div>
+  <div class="node" style="left:400px"><div class="c" id="c2">2</div><p>Cómo<br>filtras</p></div>
+  <div class="node" style="left:760px"><div class="c" id="c3">3</div><p>Qué pasa<br>después</p></div></div>
+ <div class="lay" id="G"><h1 class="A" id="gt">Así lo hacemos <i>en Qualivo.</i></h1></div>
+ <div class="lay bk3" id="K1"><div class="num">1</div><h1 class="A">Atraer a <i>quien encaja.</i></h1></div>
+ <div class="lay bk3" id="K2"><div class="num">2</div><h1 class="A">Atender y cualificar <i>a tiempo.</i></h1></div>
+ <div class="lay bk3" id="K3"><div class="num">3</div><h1 class="A">Seguir <i>hasta la venta.</i></h1></div>
+
+ <!-- RECORRIDO -->
+ <div id="top"><div class="n" id="tn"><b>01</b>Alumno ideal</div><div id="dots"></div></div>
+ <div id="ejm" style="position:absolute;left:80px;top:226px;font-size:22px;letter-spacing:.18em;font-weight:800;color:rgba(10,10,11,.6);z-index:20;opacity:0">EJEMPLO FICTICIO · NO ES UN CLIENTE REAL</div>
+ <div id="stage">
+  <div class="sc" id="s_icp"><div class="box icp"><div class="k">Análisis</div><div class="av"></div><h3>Tu alumno ideal</h3><p>Quién es, qué busca y qué le frena</p></div>
+   <div class="pn" id="pn1" style="left:0;top:560px">No tengo tiempo</div>
+   <div class="pn" id="pn2" style="left:420px;top:640px">¿Me servirá para trabajar?</div>
+   <div class="pn" id="pn3" style="left:40px;top:740px">¿Puedo pagarlo a plazos?</div>
+   <div class="pn" id="pn4" style="left:470px;top:820px">Ya probé y lo dejé</div></div>
+  <div class="sc" id="s_ads"><div class="aim" id="aim"></div>
+   <div class="box adt" id="ad1" style="left:0"><div class="im"><i style="top:60px;width:200px"></i><i class="y" style="top:100px;width:160px"></i><i style="top:140px;width:220px"></i></div><div class="ln" style="width:220px"></div><div class="ln" style="width:160px"></div><div class="an">Ángulo · tiempo</div></div>
+   <div class="box adt" id="ad2" style="left:300px"><div class="im"><i class="y" style="top:60px;width:180px"></i><i style="top:100px;width:220px"></i><i style="top:140px;width:140px"></i></div><div class="ln" style="width:200px"></div><div class="ln" style="width:230px"></div><div class="an">Ángulo · trabajo</div></div>
+   <div class="box adt" id="ad3" style="left:600px"><div class="im"><i style="top:60px;width:210px"></i><i style="top:100px;width:150px"></i><i class="y" style="top:140px;width:200px"></i></div><div class="ln" style="width:180px"></div><div class="ln" style="width:210px"></div><div class="an">Ángulo · precio</div></div>
+   <div class="chip" style="left:230px;top:760px">Un anuncio<small>para cada dolor</small></div></div>
+  <div class="sc" id="s_lp"><div class="box ph"><div class="scr"><div class="scroll" id="scroll">
+    <div class="sec hero" id="lp1"><div class="t" style="font-size:52px">Fórmate a tu ritmo</div><div class="l" style="background:rgba(244,241,235,.3);width:80%"></div><div class="l" style="background:rgba(244,241,235,.3);width:60%"></div><div style="margin-top:40px;background:var(--y);border-radius:14px;height:70px"></div></div>
+    <div class="sec" id="lp2"><div class="t">Para quién es</div><div class="l"></div><div class="l" style="width:70%"></div></div>
+    <div class="sec" id="lp3"><div class="t">Qué consigues</div><div class="l"></div><div class="l" style="width:80%"></div><div class="l" style="width:60%"></div></div>
+    <div class="sec" id="lp4"><div class="t">Opiniones</div><div class="l"></div><div class="l" style="width:75%"></div></div>
+    <div class="sec" id="lp5"><div class="t">Precio y dudas</div><div class="l"></div><div class="l" style="width:65%"></div></div>
+    <div class="sec" id="lp6" style="background:var(--bk);color:var(--y)"><div class="t">Ver si encajo →</div></div>
+   </div></div></div>
+   <div class="lbl" id="lb1" style="top:120px">Promesa</div><div class="lbl" id="lb2" style="top:330px">Prueba</div><div class="lbl" id="lb3" style="top:540px">Dudas resueltas</div><div class="lbl" id="lb4" style="top:750px">Siguiente paso</div></div>
+  <div class="sc" id="s_fm"><div class="box fmb"><h3>Cuéntanos un poco</h3>
+   <div class="f" id="f1"><small>¿Qué quieres conseguir?</small><span></span></div>
+   <div class="f" id="f2"><small>¿Cuándo quieres empezar?</small><span></span></div>
+   <div class="f" id="f3"><small>¿Cuánto puedes invertir?</small><span></span></div>
+   <div class="score" id="sc"><span>Encaje</span><div class="bar"><i id="scb"></i></div><em id="sce">…</em></div></div></div>
+  <div class="sc" id="s_wa"><div class="chip" style="left:110px;top:-55px">Agente de WhatsApp<small>responde en minutos</small></div><div class="box wab"><div class="wa"><div class="wah"><div class="av">A</div><div><b>Tu academia</b><span>en línea</span></div></div>
+   <div class="bub in" id="w1" style="top:150px">Hola Laura 👋 Vi que quieres cambiar de trabajo y empezar en enero. ¿Te cuento cómo encaja el curso con tus horarios?<div class="t">10:16</div></div>
+   <div class="typing" id="wty" style="top:440px"><i></i><i></i><i></i></div>
+   <div class="bub in" id="w2" style="top:440px">Si te va bien, te llamamos y lo vemos en 10 minutos.<div class="t">10:16</div></div></div></div></div>
+  <div class="sc" id="s_voz"><div class="chip" style="left:110px;top:-55px">Agente de voz<small>llama si no contesta</small></div><div class="box wab"><div class="call"><div class="av">A<div class="ring" id="ring"></div></div><h2>Tu academia</h2><p id="cdur">llamando…</p><div class="wave" id="wave"></div>
+   <div class="sub" id="csub">Hola Laura, te llamo de la academia. ¿Te viene bien <i>mañana a las 10?</i></div></div>
+   <div class="calok" id="cok"><div class="chk">✓</div><div class="k">Cita confirmada</div><h3>Mañana · 10:00</h3><p>Recordatorio el mismo día</p></div></div></div>
+  <div class="sc" id="s_seg"><div class="box pp"><div class="k">Oportunidades</div>
+   <div class="cols"><div class="col"><h4>Cita</h4></div><div class="col"><h4>Propuesta</h4></div><div class="col"><h4>Decidiendo</h4></div><div class="col win"><h4>Venta</h4></div>
+    <div class="lead" id="ld" style="left:10px">Laura<small id="lds">Cita hecha</small></div></div>
+   <div class="ev"><div id="e1"><b>Día 1</b> · propuesta por escrito</div><div id="e2"><b>Día 3</b> · resuelve la duda del pago</div><div id="e3"><b>Día 5</b> · matrícula ✓</div></div></div></div>
+  <div class="sc" id="s_pa"><div class="box pa"><div class="k">Tu panel · este mes</div>
+   <div class="fr"><span>Contactos</span><div class="fb"><i id="b1"></i></div><em id="n1">0</em></div>
+   <div class="fr"><span>Cualificados</span><div class="fb"><i id="b2"></i></div><em id="n2">0</em></div>
+   <div class="fr"><span>Citas</span><div class="fb"><i id="b3"></i></div><em id="n3">0</em></div>
+   <div class="fr"><span>Ventas</span><div class="fb"><i id="b4"></i></div><em id="n4">0</em></div>
+   <div class="ads"><div class="ad" style="opacity:1;color:var(--mut);font-size:20px;letter-spacing:.12em">ANUNCIO<span>CITAS</span><span>VENTAS</span></div>
+    <div class="ad" id="a1">Ángulo · tiempo<span>9</span><span class="g">4</span></div>
+    <div class="ad" id="a2">Ángulo · trabajo<span>6</span><span class="g">3</span></div>
+    <div class="ad" id="a3">Ángulo · precio<span>2</span><span class="r">0 · pausar</span></div></div>
+   <div class="demo">Datos de ejemplo</div></div></div>
+ </div>
+ <div id="cap" class="A"></div>
+ <div id="band">Para negocios cuyos clientes pagan 500 € o más</div>
+ <div class="lay" id="F"><img id="z0" src="../2026-09-17-sistema/rec/logo-blanco.png"><div class="cl A" id="z1">Descubre dónde pierdes <i>oportunidades de venta.</i></div><div class="btn" id="z2">Solicita tu diagnóstico</div><div class="ro" id="z3">Para negocios que ya reciben contactos<br>y cuyos clientes pagan 500 € o más.</div><div class="web" id="z4">QUALIVO.IO</div></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a,b)=>Math.max(0,Math.min(1,(x-a)/(b-a)));
+const ease=x=>1-Math.pow(1-x,3), back=x=>{const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+function win(el,t,a,b,d=.22){const o=cl(t,a,a+d)*(b===undefined?1:1-cl(t,b-d,b));el.style.opacity=o;return o}
+function pop(el,t,a,dy=36,d=.3){const k=ease(cl(t,a,a+d));el.style.opacity=k;el.style.transform=`translateY(${(1-k)*dy}px)`;return k}
+function zoom(el,t,a,d=.35){const k=cl(t,a,a+d);el.style.opacity=Math.min(1,k*2);el.style.transform=`scale(${.6+.4*back(k)})`;return k}
+function type(el,t,a,s,d=.5){const n=Math.floor(cl(t,a,a+d)*s.length);el.textContent=s.slice(0,n);}
+const T=window.TI;
+// multitud
+const flow=$('flow'), D=[]; for(let i=0;i<30;i++){const d=document.createElement('div');d.className='fd';flow.appendChild(d);D.push({el:d,dl:i*.11,ok:i%10===0,dx:(Math.random()-.5)*260});}
+const wave=$('wave'); for(let i=0;i<22;i++){const w=document.createElement('i');wave.appendChild(w);}
+const BLQ={icp:1,ads:1,lp:1,fm:2,wa:2,voz:2,seg:3,panel:3};
+const STEPS=[['s_icp','icp','Alumno ideal','Analizamos <i>quién es y qué le duele.</i>'],['s_ads','ads','Anuncios','Ángulos distintos, <i>un dolor cada uno.</i>'],['s_lp','lp','Landing','Una landing que <i>prepara para comprar.</i>'],['s_fm','fm','Formulario','Pregunta lo que importa <i>y filtra.</i>'],['s_wa','wa','WhatsApp','Responde en minutos, <i>con sus palabras.</i>'],['s_voz','voz','Voz','Si no contesta, <i>le llama y le da hora.</i>'],['s_seg','seg','Seguimiento','Seguimiento <i>hasta la venta.</i>'],['s_pa','panel','Tu panel','Y todo lo ves <i>en tu panel.</i>']];
+const dots=$('dots'); STEPS.forEach(()=>dots.appendChild(document.createElement('i')));
+window.setT=function(t){
+ const end=k=>{const ks=['gancho','diag','giro','b1','icp','ads','lp','b2','fm','wa','voz','b3','seg','panel','cta'];const i=ks.indexOf(k);return i<ks.length-1?T[ks[i+1]]:T.FIN;};
+ // GANCHO (escrito desde el fotograma 0) y DIAGNÓSTICO
+ $('L1').style.opacity=1-cl(t,T.diag-.25,T.diag);
+ D.forEach((d,i)=>{const p=cl(t,.3+d.dl,.3+d.dl+1.2);let x=525+d.dx*p,y=130+p*240;
+  if(!d.ok&&p>.55){const q=(p-.55)/.45;x=525+d.dx*.55+(d.dx>0?1:-1)*q*420;y=130+.55*240+q*180;}
+  d.el.style.left=x+'px';d.el.style.top=y+'px';d.el.style.opacity=p>0&&p<1?1:(d.ok&&p>=1?1:0);d.el.style.background=(!d.ok&&p>.55)?'#E5484D':(d.ok&&p>.9?'#1FA396':'#F4F1EB');
+  if(d.ok&&p>=1){d.el.style.left=(470+(i/10)*60)+'px';d.el.style.top='380px';}});
+ win($('L2'),t,T.diag,T.giro,.25);
+ [['c1',1.8],['c2',3.4],['c3',4.6]].forEach(([c,o])=>{$(c).classList.toggle('on',t>T.diag+o);});
+ $('band').style.opacity=cl(t,3,3.3)*(1-cl(t,T.cta-.3,T.cta));
+ win($('G'),t,T.giro-.05,T.b1,.25); zoom($('gt'),t,T.giro);
+ ['b1','b2','b3'].forEach((k,i)=>{const el=$('K'+(i+1));win(el,t,T[k],end(k),.2);el.style.background='#1FA396';zoom(el.querySelector('.num'),t,T[k]);});
+ // RECORRIDO
+ const J0=T.icp, J1=T.cta; const inStep=STEPS.some(x=>t>=T[x[1]]-.2&&t<end(x[1])); $('top').style.opacity=inStep?1:0; $('ejm').style.opacity=$('top').style.opacity;
+ let cur=-1;
+ STEPS.forEach((s,i)=>{const a=T[s[1]],b=end(s[1]);const el=$(s[0]);const o=win(el,t,a,b,.2);el.style.transform=`translateX(${(1-ease(cl(t,a,a+.35)))*120 - ease(cl(t,b-.25,b))*120}px)`; if(t>=a&&t<b) cur=i;});
+ [...dots.children].forEach((d,i)=>d.classList.toggle('on',i<=cur));
+ if(cur>=0){const s=STEPS[cur];$('tn').innerHTML='<b>'+BLQ[s[1]]+'</b>'+s[2];const a=T[s[1]],b=end(s[1]);$('cap').innerHTML=s[3];$('cap').style.opacity=cl(t,a+.35,a+.65)*(1-cl(t,b-.2,b));$('cap').style.transform=`translateY(${(1-ease(cl(t,a+.35,a+.65)))*30}px)`;}else $('cap').style.opacity=0;
+ // icp
+ ['pn1','pn2','pn3','pn4'].forEach((p,i)=>{const k=zoom($(p),t,T.icp+.6+i*.45);});
+ // ads
+ ['ad1','ad2','ad3'].forEach((a,i)=>{const k=ease(cl(t,T.ads+.15+i*.25,T.ads+.55+i*.25));$(a).style.opacity=k;$(a).style.transform=`translateY(${(1-k)*200}px) rotate(${(i-1)*(4-4*k)}deg)`;});
+ zoom($('aim'),t,T.ads+1.3);
+ // landing
+ const sp=ease(cl(t,T.lp+.4,end('lp')-.4)); $('scroll').style.transform=`translateY(${-sp*640}px)`;
+ ['lp1','lp3','lp5','lp6'].forEach((l,i)=>{$(l).classList.toggle('on',t>T.lp+.4+i*.75&&l!=='lp1');});
+ ['lb1','lb2','lb3','lb4'].forEach((l,i)=>pop($(l),t,T.lp+.4+i*.75,20));
+ // formulario
+ [['f1','Cambiar de trabajo'],['f2','En enero'],['f3','Entre 500 y 1.500 €']].forEach((f,i)=>{const a=T.fm+.4+i*.7;type($(f[0]).querySelector('span'),t,a,f[1]);$(f[0]).classList.toggle('on',t>=a&&t<a+.7);});
+ const sk=pop($('sc'),t,T.fm+2.5,20); const bk=ease(cl(t,T.fm+2.6,T.fm+3.2)); $('scb').style.width=(86*bk)+'%'; $('sce').textContent=bk>.95?'ENCAJA':'…';
+ // whatsapp
+ pop($('w1'),t,T.wa+.5); $('wty').style.opacity=(t>T.wa+1.6&&t<T.wa+2.3)?1:0; pop($('w2'),t,T.wa+2.3);
+ // voz
+ const rk=((t-T.voz)%1.2)/1.2; $('ring').style.transform=`scale(${1+rk*.5})`; $('ring').style.opacity=t<T.voz+1.2?1-rk:0;
+ $('cdur').textContent=t<T.voz+1.2?'llamando…':'00:'+String(Math.floor(Math.max(0,t-T.voz-1.2))+4).padStart(2,'0');
+ [...wave.children].forEach((w,i)=>{const on=t>T.voz+1.2;w.style.height=on?(20+Math.abs(Math.sin(t*9+i*.7))*90*(0.5+0.5*Math.sin(i)))+'px':'20px';});
+ pop($('csub'),t,T.voz+1.3,20); $('csub').style.opacity*=1-cl(t,end('voz')-1.4,end('voz')-1.1); const ck=ease(cl(t,end('voz')-1.3,end('voz')-.9)); $('cok').style.opacity=ck; $('cok').style.transform=`translateY(${(1-ck)*300}px)`;
+ // seguimiento
+ const colw=(840-42)/4+14; const m=[T.seg+.6,T.seg+1.2,T.seg+1.8].reduce((s,a)=>s+ease(cl(t,a,a+.35)),0);
+ $('ld').style.left=(10+colw*m)+'px'; $('lds').textContent=['Cita hecha','Propuesta','Decidiendo','Matriculada ✓'][Math.round(m)];
+ ['e1','e2','e3'].forEach((e,i)=>pop($(e),t,T.seg+.6+i*.6,14));
+ // panel
+ [[100,46],[62,28],[38,17],[20,9]].forEach((v,i)=>{const k=ease(cl(t,T.panel+.3+i*.25,T.panel+1.1+i*.25));$('b'+(i+1)).style.width=(v[0]*k)+'%';$('n'+(i+1)).textContent=Math.round(v[1]*k);});
+ ['a1','a2','a3'].forEach((a,i)=>pop($(a),t,T.panel+1.6+i*.4,14));
+ // cierre
+ win($('F'),t,T.cta-.1); ['z0','z1','z2','z3','z4'].forEach((z,i)=>pop($(z),t,T.cta+.15+[0,.4,2.6,3.3,4.0][i]));
+};
+setT(0);
+</script>

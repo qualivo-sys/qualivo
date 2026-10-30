@@ -14,9 +14,11 @@ html,body{background:#000}
 .A i{font-style:normal;color:var(--y)}
 .o{opacity:0}
 /* gancho */
-.hk{position:absolute;left:90px;right:90px;top:300px;font-size:128px}
+.hk{position:absolute;left:90px;right:90px;top:400px;font-size:112px}
+.tag{position:absolute;left:90px;top:290px;background:var(--y);color:var(--bk);font-family:Anton;font-size:52px;text-transform:uppercase;padding:10px 28px;border-radius:14px;letter-spacing:.02em}
+#band{position:absolute;left:0;right:0;top:1500px;height:84px;background:var(--y);color:var(--bk);display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:44px;text-transform:uppercase;letter-spacing:.02em;z-index:40;opacity:0}
 .hk span{display:block}
-#flow{position:absolute;left:0;right:0;top:1080px;height:520px}
+#flow{position:absolute;left:0;right:0;top:960px;height:520px}
 .dot{position:absolute;width:40px;height:40px;border-radius:50%;background:var(--cr)}
 .bin{position:absolute;left:340px;top:220px;width:400px;height:210px;border:5px solid #3A3D44;border-top:none;border-radius:0 0 40px 40px}
 .bin b{position:absolute;left:0;right:0;bottom:-70px;text-align:center;font-size:30px;font-weight:700;color:#7A7C82;letter-spacing:.1em}
@@ -33,13 +35,13 @@ html,body{background:#000}
 /* sistema */
 .st{position:absolute;left:90px;right:90px;top:290px;font-size:96px;color:var(--bk)}
 .st i{color:var(--cr)}
-.blk{position:absolute;left:90px;right:90px;height:300px;border-radius:40px;background:rgba(10,10,11,.12);border:4px solid rgba(10,10,11,.2);display:flex;align-items:center;gap:40px;padding:0 44px;color:rgba(10,10,11,.45)}
+.blk{position:absolute;left:90px;right:90px;height:280px;border-radius:40px;background:rgba(10,10,11,.12);border:4px solid rgba(10,10,11,.2);display:flex;align-items:center;gap:40px;padding:0 44px;color:rgba(10,10,11,.45)}
 .blk.on{background:var(--cr);border-color:var(--bk);color:var(--bk)}
 .blk .n{width:96px;height:96px;flex:none;border-radius:50%;border:5px solid currentColor;display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:52px}
 .blk.on .n{background:var(--y);border-color:var(--bk)}
 .blk h3{font-family:Anton;font-size:62px;text-transform:uppercase;line-height:.98}
 .blk .ill{margin-left:auto;width:220px;height:200px;position:relative;flex:none}
-.conn{position:absolute;left:186px;width:8px;background:rgba(10,10,11,.2);height:60px}
+.conn{position:absolute;left:186px;width:8px;background:rgba(10,10,11,.2);height:40px}
 .conn i{display:block;width:100%;background:var(--bk);height:0}
 /* ilustraciones */
 .tg{position:absolute;inset:10px 20px;border-radius:50%;border:8px solid currentColor}
@@ -81,7 +83,8 @@ html,body{background:#000}
 </style>
 <div id="e"><div id="tl"></div>
  <div class="lay" id="L1">
-  <div class="hk A" id="hkA"><span class="o" id="a1">¿Inviertes en anuncios,</span><span class="o" id="a2">te llegan contactos…</span><span class="o" id="a3"><i>y no sabes por qué no compran?</i></span></div>
+  <div class="tag">¿Vendes formación?</div>
+  <div class="hk A" id="hkA"><span class="o" id="a1">¿Inviertes en anuncios,</span><span class="o" id="a2">te llegan contactos…</span><span class="o" id="a3"><i>y no compran?</i></span></div>
   <div class="hk A" id="hkB"><span class="o" id="b1">¿Sabes cuántas</span><span class="o" id="b2"><i>oportunidades de venta</i></span><span class="o" id="b3">pierdes después del anuncio?</span></div>
   <div id="flow"><div class="ad0">Tu anuncio</div><div class="bin"><b>VENTAS</b></div></div>
  </div>
@@ -94,11 +97,11 @@ html,body{background:#000}
  </div>
  <div class="lay" id="L3">
   <div class="st A">Conectamos <i>las tres partes.</i></div>
-  <div class="blk" id="k1" style="top:620px"><div class="n">1</div><h3>Atraer a<br>quien encaja</h3><div class="ill"><div class="tg"></div></div></div>
-  <div class="conn" style="top:920px"><i id="cn1"></i></div>
-  <div class="blk" id="k2" style="top:980px"><div class="n">2</div><h3>Atender y<br>cualificar<br>a tiempo</h3><div class="ill"><div class="bb" style="top:6px"></div><div class="bb r" style="top:76px"></div><div class="wv" id="wv"></div></div></div>
-  <div class="conn" style="top:1280px"><i id="cn2"></i></div>
-  <div class="blk" id="k3" style="top:1340px"><div class="n">3</div><h3>Seguir<br>hasta la venta</h3><div class="ill"><div class="col3"><div></div><div></div><div class="w"></div></div><div class="mv" id="mv">✓</div></div></div>
+  <div class="blk" id="k1" style="top:560px"><div class="n">1</div><h3>Atraer a<br>quien encaja</h3><div class="ill"><div class="tg"></div></div></div>
+  <div class="conn" style="top:840px"><i id="cn1"></i></div>
+  <div class="blk" id="k2" style="top:880px"><div class="n">2</div><h3>Atender y<br>cualificar<br>a tiempo</h3><div class="ill"><div class="bb" style="top:6px"></div><div class="bb r" style="top:76px"></div><div class="wv" id="wv"></div></div></div>
+  <div class="conn" style="top:1160px"><i id="cn2"></i></div>
+  <div class="blk" id="k3" style="top:1200px"><div class="n">3</div><h3>Seguir<br>hasta la venta</h3><div class="ill"><div class="col3"><div></div><div></div><div class="w"></div></div><div class="mv" id="mv">✓</div></div></div>
  </div>
  <div class="lay" id="L4">
   <div class="pt A">Te enseñamos <i>qué mejorar primero.</i></div>
@@ -111,6 +114,7 @@ html,body{background:#000}
    <div class="hlt" id="hlt">● Aquí se pierden: entre el contacto y la cita.</div>
    <div class="fix"><div id="x1"><b>1</b>Responder antes</div><div id="x2"><b>2</b>Filtrar en el formulario</div></div></div>
  </div>
+ <div id="band">Para negocios cuyos clientes pagan 500 € o más</div>
  <div class="lay" id="F"><img id="z0" src="../2026-09-17-sistema/rec/logo-blanco.png"><div class="cl A" id="z1">Descubre dónde pierdes <i>oportunidades de venta.</i></div><div class="btn" id="z2">Solicita tu diagnóstico</div><div class="ro" id="z3">Para negocios que ya reciben contactos<br>y cuyos clientes pagan 500 € o más.</div><div class="web" id="z4">QUALIVO.IO</div></div>
 </div>
 <script>
@@ -129,9 +133,9 @@ window.setT=function(t){
  // fondo turquesa desde el sistema
  $('tl').style.opacity=cl(t,T.sis-.3,T.sis+.1);
  // L1
- win($('L1'),t,0,T.diag,.01); if(t>T.diag-.25) $('L1').style.opacity=1-cl(t,T.diag-.25,T.diag);
- if(A){pop($('a1'),t,0);pop($('a2'),t,w('te',1.4));pop($('a3'),t,w('y',2.7));}
- else{pop($('b1'),t,0);pop($('b2'),t,w('oportunidades',.7));pop($('b3'),t,w('pierdes',1.9));}
+ $('L1').style.opacity=1-cl(t,T.diag-.25,T.diag);
+ ['a1','a2','a3','b1','b2','b3'].forEach(x=>$(x).style.opacity=1);  // escrito desde el fotograma 0
+ $('band').style.opacity=cl(t,3,3.3)*(1-cl(t,T.cta-.3,T.cta));
  const f0=.3; D.forEach((d,i)=>{const p=cl(t,f0+d.dl,f0+d.dl+1.2);let x=525+d.dx*p, y=130+p*240;
    if(!d.ok&&p>.55){const q=(p-.55)/.45; x=525+d.dx*.55+(d.dx>0?1:-1)*q*420; y=130+.55*240+q*180;}
    d.el.style.left=x+'px';d.el.style.top=y+'px';d.el.style.opacity=p>0&&p<1?1:(d.ok&&p>=1?1:0);d.el.style.background=(!d.ok&&p>.55)?'#E5484D':(d.ok&&p>.9?'#1FA396':'#F4F1EB');
@@ -143,8 +147,8 @@ window.setT=function(t){
  // L3
  win($('L3'),t,T.sis,T.prop,.25);
  [['k1','atraer'],['k2','atenderle'],['k3','seguirle']].forEach(([k,x],i)=>{const a=w(x,T.sis+2+i*1.5);$(k).classList.toggle('on',t>a);const z=ease(cl(t,a,a+.3));$(k).style.transform=`translateX(${(1-ease(cl(t,T.sis+.2+i*.15,T.sis+.6+i*.15)))*-1100}px) scale(${1+.04*Math.sin(z*Math.PI)})`;});
- $('cn1').style.height=(60*ease(cl(t,w('atenderle',15)-.4,w('atenderle',15))))+'px';
- $('cn2').style.height=(60*ease(cl(t,w('seguirle',18)-.4,w('seguirle',18))))+'px';
+ $('cn1').style.height=(40*ease(cl(t,w('atenderle',15)-.4,w('atenderle',15))))+'px';
+ $('cn2').style.height=(40*ease(cl(t,w('seguirle',18)-.4,w('seguirle',18))))+'px';
  [...wv.children].forEach((b,i)=>{b.style.height=(t>w('cualificarle',16)?10+Math.abs(Math.sin(t*8+i))*50:10)+'px';});
  const mvp=ease(cl(t,w('seguirle',18)+.1,w('seguirle',18)+1.1)); $('mv').style.left=(4+mvp*150)+'px';
  // L4
