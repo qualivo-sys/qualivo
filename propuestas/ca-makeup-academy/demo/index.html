@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>C.A Makeup Academy · demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Demo guiada en pestañas para C.A Makeup Academy: anuncios, formulario, WhatsApp, voz, ficha de Carolina, seguimientos y panel. */
+:root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--body:var(--sans)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}}
+:root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}
+/* cabecera */
+.dhero{position:relative;background:var(--f900);color:#fff;overflow:hidden;isolation:isolate}
+.dhero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(17,15,12,.96) 0%,rgba(17,15,12,.86) 55%,rgba(17,15,12,.5) 100%),url(../assets/hero.jpg) center 40%/cover}
+.dhero .wrap{padding-block:56px 40px;display:grid;gap:12px}
+.dhero .eyebrow{color:#F2C26B}
+.dhero h1{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 144;font-size:clamp(32px,4.8vw,56px);line-height:1.05;letter-spacing:-.02em;max-width:20ch}
+.dhero .lead{font-size:18px;color:rgba(255,255,255,.82);max-width:68ch;margin-top:6px}
+.dhero .note{color:rgba(255,255,255,.72);border-color:rgba(255,255,255,.2);margin-top:10px;max-width:90ch}
+.wrap.main{display:grid;gap:26px;padding-top:0;padding-bottom:72px}
+.wrap.main > *{min-width:0}
+h2{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 96;font-size:clamp(25px,3vw,34px);line-height:1.12;letter-spacing:-.015em}
+.eyebrow{font-family:var(--mono)}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;line-height:1.5}
+.note a{color:var(--accent)}
+.ej{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;background:#C9860A;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;margin-right:4px}
+h2 .ej{vertical-align:6px;margin-left:6px}
+/* pestañas tipo producto */
+nav.tabs{position:sticky;top:57px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:5px;margin-top:-28px;box-shadow:var(--shadow-lg)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 9px;cursor:pointer;transition:background .25s,color .25s}
+nav.tabs button:hover{color:var(--ink);background:var(--line-2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-family:var(--mono);font-size:11px;background:var(--line-2);color:var(--muted);transition:background .25s,color .25s}
+nav.tabs button[aria-selected="true"]{background:var(--f700);color:#fff;box-shadow:0 6px 16px -8px rgba(12,33,9,.6)}
+nav.tabs button[aria-selected="true"] span{background:var(--moss);color:var(--f900)}
+@media (max-width:560px){nav.tabs{top:96px;border-radius:14px}nav.tabs button{padding:9px 12px;font-size:13.5px}}
+.pane{display:none;gap:22px}
+.pane.on{display:grid;animation:paneIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px}
+.pane > header p{color:var(--muted);margin-top:8px;max-width:76ch;font-size:16.5px}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.two{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:22px;align-items:start}
+.cap{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
+.adimg{width:100%;border-radius:14px;display:block;box-shadow:var(--shadow-lg)}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--muted);margin-top:12px;line-height:1.55}
+.why b{color:var(--ink)}
+/* captura y test */
+.capt{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;box-shadow:var(--shadow)}
+.capt .row{display:flex;gap:8px;flex-wrap:wrap}
+.capt .fake{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--paper)}
+.capt .btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:650;border-radius:99px;padding:9px 16px;font-size:14.5px;width:fit-content}
+.quiz{width:min(400px,100%);margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:24px;display:grid;gap:14px;min-height:500px;align-content:start;box-shadow:var(--shadow-lg)}
+.quiz h3{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:-.01em;line-height:1.2}
+.quiz .bar{height:6px;border-radius:3px;background:var(--line-2);overflow:hidden}
+.quiz .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--moss));transition:width .35s}
+.quiz .qopts{display:grid;gap:8px}
+.quiz .qopts button{font:inherit;font-weight:550;text-align:left;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .15s,transform .15s,background .15s}
+.quiz .qopts button:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateX(2px)}
+.quiz .done{display:grid;gap:10px;padding-top:10px}
+.quiz .done b.t{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.2}
+.quiz .done p{color:var(--muted);font-size:15px}
+.grp{display:inline-block;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px}
+.grp.a{background:var(--good-soft);color:var(--good)}
+.grp.b{background:var(--warn-soft);color:var(--warn)}
+.grp.c{background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+.list{display:grid;gap:12px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.list p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.btnl{display:inline-flex;align-items:center;gap:6px;font-weight:650;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:99px;padding:10px 18px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit;transition:transform .15s}
+.btnl:hover{transform:translateY(-1px)}
+/* móvil: WhatsApp */
+.phone{width:min(380px,100%);margin-inline:auto;background:#0E120D;border-radius:46px;padding:12px;box-shadow:0 0 0 1px #2b3328,0 30px 60px -20px rgba(17,15,12,.55),inset 0 0 0 2px #262c24;position:relative}
+.phone .sbar{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:12.5px;padding:6px 22px 8px;font-weight:600}
+.phone .isl{width:96px;height:26px;border-radius:20px;background:#000}
+.phone .home{width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.55);margin:10px auto 2px}
+.wa{border-radius:30px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:620px;background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1px);background-size:14px 14px}
+.wa .top{background:var(--wa-head);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.wa .top i{width:36px;height:36px;border-radius:50%;background:#111;color:#F2C26B;display:inline-grid;place-items:center;flex:none;font-style:normal;font-weight:700;font-size:11px;letter-spacing:.04em}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.b{max-width:84%;padding:8px 10px 6px;border-radius:12px;font-size:14.5px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08);animation:pop .3s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+.b.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:4px}
+.b.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:4px}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:color-mix(in srgb,var(--surface) 92%,transparent);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center;border-radius:8px}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:12px;padding:8px 12px;font-size:13px;color:var(--muted);font-style:italic}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:62px;align-items:center}
+.wa .opts button{font:inherit;font-size:13.5px;font-weight:600;border:1.5px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer;transition:background .15s,color .15s;animation:pop .3s ease-out}
+.wa .opts button:hover{background:var(--accent);color:var(--accent-ink)}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;align-content:start;max-height:690px;overflow-y:auto;box-shadow:var(--shadow)}
+.log h3{display:flex;align-items:center;gap:8px}
+.log h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--moss);box-shadow:0 0 0 4px var(--accent-soft)}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border:1px solid var(--line-2);border-left:3px solid var(--accent);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--surface-2);animation:pop .3s ease-out}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-left-color:#C9860A}
+.log li.g{border-left-color:var(--good)}
+/* voz */
+.call{border-radius:28px;background:var(--surface);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.call .top{background:linear-gradient(160deg,#2b241b,#111);color:#fff;padding:22px 20px 18px;display:grid;justify-items:center;gap:6px;text-align:center;font-size:14px}
+.call .av{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25)}
+.call .av svg{width:28px;height:28px}
+.call .top small{opacity:.75;font-family:var(--mono);font-size:11.5px}
+.wave{display:flex;gap:3px;align-items:center;height:26px;margin-top:4px}
+.wave i{width:3px;border-radius:2px;background:var(--moss);animation:wv 1.2s ease-in-out infinite}
+.wave i:nth-child(odd){animation-delay:-.4s}.wave i:nth-child(3n){animation-delay:-.8s}
+@keyframes wv{0%,100%{height:5px}50%{height:24px}}
+.call .body{padding:16px;display:flex;flex-direction:column;gap:9px}
+.v{max-width:86%;padding:9px 13px;border-radius:14px;font-size:14.5px;line-height:1.5}
+.v small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-bottom:2px;letter-spacing:.06em}
+.v.r{background:var(--accent-soft);align-self:flex-start;border-top-left-radius:4px}
+.v.c{background:var(--paper);border:1px solid var(--line);align-self:flex-end;border-top-right-radius:4px}
+.rules{display:grid;gap:10px}
+.rules > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:14.5px;line-height:1.55}
+.rules b{display:block;font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+/* ventanas de aplicación (ficha y panel) */
+.win{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);min-width:0}
+.wbar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.wbar i{width:11px;height:11px;border-radius:50%;background:#E5DFD2}
+.wbar i:nth-child(1){background:#F0A39B}.wbar i:nth-child(2){background:#F2D18A}.wbar i:nth-child(3){background:#A9D7A2}
+.wbar span{margin-left:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbar em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#fff;background:#C9860A;border-radius:6px;padding:2px 7px;white-space:nowrap}
+.winbody{padding:18px;display:grid;gap:16px;background:var(--paper)}
+.ficha{background:var(--surface);overflow:hidden}
+.ficha .hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 20px;border-bottom:1px solid var(--line);align-items:center}
+.ficha .hd b{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+.ficha .sc{font-family:var(--serif);font-size:44px;font-weight:600;line-height:1;color:var(--good)}
+.ficha .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.ficha .grid > div{padding:14px 20px;border-bottom:1px solid var(--line-2);border-right:1px solid var(--line-2);font-size:14.5px}
+.ficha .grid > div:nth-child(3n){border-right:0}
+.ficha dl{margin:0}
+.ficha dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ficha dd{margin:3px 0 0;font-weight:550}
+.ficha .why2{padding:16px 20px;font-size:14.5px;border-bottom:1px solid var(--line-2);line-height:1.6}
+.ficha .next{padding:16px 20px;background:var(--accent-soft);font-weight:600;line-height:1.55;border-left:4px solid var(--accent)}
+.pts{width:100%;border-collapse:collapse;font-size:14px}
+.pts td{padding:8px 0;border-bottom:1px dashed var(--line);white-space:normal;text-align:left;background:none!important}
+.pts td:last-child{text-align:right;white-space:nowrap;padding-left:10px;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
+.pts tr:last-child td{border-bottom:0;font-size:16px;padding-top:12px}
+/* seguimiento */
+.seq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0;box-shadow:var(--shadow)}
+.seq h3{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:14px}
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{position:relative;padding:0 0 16px 24px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-8px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--surface)}
+.tl li.stop::before{background:var(--good)}
+.tl li.alert::before{background:#C9860A}
+.tl li.mail::before{background:#5B7FB8}
+.tl .w{font-family:var(--mono);font-size:11.5px;color:var(--accent);letter-spacing:.02em}
+.tl b{display:block;font-size:14.5px;margin-top:1px}
+.tl blockquote{margin:8px 0 0;background:var(--accent-soft);border-radius:4px 12px 12px 12px;padding:10px 12px;font-size:14px;white-space:pre-line;line-height:1.5}
+.tl li.mail blockquote{background:var(--paper);border:1px solid var(--line);border-radius:10px}
+.tl .subj{display:block;font-weight:700;font-size:13px;margin-bottom:4px}
+/* panel */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;min-width:0}
+.tbl{overflow-x:auto}
+.tbl table,.box > table{width:100%;border-collapse:collapse;font-size:14px}
+.tbl table{min-width:640px}
+.tbl th,.tbl td{padding:10px 10px;border-bottom:1px solid var(--line-2);text-align:right;white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child,.tbl td.l,.tbl th.l{text-align:left}
+.tbl td:first-child{position:sticky;left:0;background:var(--surface);font-weight:600}
+.tbl td.w{white-space:normal;min-width:220px}
+.tbl th{white-space:normal;vertical-align:bottom;line-height:1.35}
+.tbl td.k{font-weight:700;color:var(--accent)}
+.ficha .hd > div:first-child{flex:1 1 300px}
+.tbl th{position:sticky;top:0;background:var(--surface-2);font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.tbl tbody tr:last-child td{border-bottom:0}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:4px;align-content:start}
+.kpi b{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1;letter-spacing:-.02em}
+.kpi span{font-size:13px;color:var(--muted);line-height:1.4}
+.kpi.alert{border-color:#C9860A;background:var(--warn-soft)}
+.kpi.alert b{color:var(--warn)}
+footer{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:22px;font-size:13.5px;color:var(--muted)}
+footer p b{color:var(--ink)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links .btnl{background:var(--surface);color:var(--ink);border:1px solid var(--line);margin:0}
+.links .btnl:hover{border-color:var(--accent);color:var(--accent)}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button,.navnext .btnl{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:650;background:var(--f700);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s}
+.navnext button:hover,.navnext .btnl:hover{transform:translateX(3px);box-shadow:var(--shadow)}
+@media (max-width:900px){.cols,.seq,.two{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.ficha .grid{grid-template-columns:1fr 1fr}.ficha .grid > div:nth-child(3n){border-right:1px solid var(--line-2)}.ficha .grid > div:nth-child(2n){border-right:0}.cols > div{max-width:440px}}
+@media (max-width:520px){.ficha .grid{grid-template-columns:1fr}.ficha .grid > div{border-right:0!important}.wa{height:560px}.phone{border-radius:40px;padding:9px}.winbody{padding:10px}.kpi b{font-size:32px}.dhero .wrap{padding-block:40px 44px}}
+@media print{.pane{display:grid!important;break-before:page}nav.tabs,.navnext{display:none}.dhero::before{background:var(--f900)}.wave i{animation:none;height:10px}}
+:root{--f900:#141210;--f800:#1E1A15;--f700:#2B241B;--f600:#A8590F;--moss:#E3B04B;--accent:#9A6A12;--accent-ink:#fff;--accent-soft:#F7EADB}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent:#F2C26B;--accent-ink:#1A1206;--accent-soft:#2E2414}}
+:root[data-theme="dark"]{--accent:#F2C26B;--accent-ink:#1A1206;--accent-soft:#2E2414}
+.topnav{background:rgba(17,15,12,.95)!important}
+.topnav .bsc{font-weight:700;font-size:13.5px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav.tabs button[aria-selected="true"] span{color:#1A1206}
+.why code{font-family:var(--mono);font-size:12px;background:var(--line-2);border-radius:5px;padding:1px 5px;word-break:break-all}
+.pane > .kpis{margin-top:4px}
+.anna{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:22px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.anna h2{font-size:clamp(22px,2.6vw,30px)}
+.anna .said{display:grid;gap:10px;margin-top:14px}
+.anna .said div{border-left:4px solid var(--accent);background:var(--surface-2);border-radius:0 12px 12px 0;padding:10px 14px;font-size:15px}
+.anna .said b{display:block;font-family:var(--serif);font-size:24px;line-height:1.1}
+.map{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.map li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:1px solid var(--line-2);border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.45;cursor:pointer;transition:border-color .15s,background .15s}
+.map li:hover{border-color:var(--accent);background:var(--accent-soft)}
+.map li span{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--f700);color:#fff;font-family:var(--mono);font-size:12px}
+.map li b{display:block;font-size:15px}
+.fun{display:grid;gap:8px}
+.fun .r{display:grid;grid-template-columns:170px minmax(0,1fr) 230px;gap:12px;align-items:center;font-size:14px}
+.fun .r > span:first-child{font-weight:600}
+.fun .bar2{height:30px;border-radius:8px;background:var(--line-2);overflow:hidden}
+.fun .bar2 i{display:flex;align-items:center;height:100%;padding-left:10px;background:var(--f700);color:#fff;font-style:normal;font-weight:700;font-size:13px;white-space:nowrap}
+.fun .lk{font-size:13px;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:5px 9px;line-height:1.35}
+.fun .lk a{color:inherit;font-weight:700}
+.fun .r.ok .lk{color:var(--muted);background:transparent}
+@media (max-width:900px){.anna{grid-template-columns:1fr}.fun .r{grid-template-columns:1fr;gap:4px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10.5 3 12 8 12 8s1.5-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol><symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol><symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M19 5.5a9 9 0 0 1 0 13"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7 15h10"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7l10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M12 19h4.5a3.5 3.5 0 0 0 0-7h-8a3.5 3.5 0 0 1 0-7H12"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 2h12M6 22h12M7 2v4a5 5 0 0 0 10 0V2M7 22v-4a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M17 6l3 3"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol></svg>
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="bsc">C·A Carolina Alvarado</span><span class="x">×</span><span class="qv">Qualivo</span><span class="by">30-oct-2026</span></div>
+    <div class="links"><a href="./" aria-current="page">Recorrido</a><a href="../landing/">Landing</a><a href="https://qualivo.io/intelligence/?sector=camakeup&amp;empresa=C.A%20Makeup%20Academy&amp;objetivo=conversion" target="_blank" rel="noopener">Panel en vivo</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<div class="wrap">
+  <p class="eyebrow">Demo · C.A Makeup Academy · paso a paso</p>
+  <h1>Del anuncio a la matrícula, sin perder a nadie por el camino</h1>
+  <p class="lead">Así lo vivirían Lucía (24 años, de Murcia, quiere dedicarse al maquillaje) y tú, Carolina. Los anuncios y la masterclass siguen siendo los tuyos. La diferencia está en lo que pasa desde que Lucía deja sus datos hasta que se matricula.</p>
+  <p class="note"><span class="ej">Ejemplo</span> Demo preparada por Qualivo. Los anuncios son los tuyos (Biblioteca de anuncios de Meta). Cursos tomados de tu respuesta automática de WhatsApp y de cursosmaquillajepresencial.es (30-oct). Lucía, los mensajes y las cifras del panel son inventados. Los textos finales los apruebas tú. El asistente no da precios fuera de lo que tú le digas ni matricula a nadie: eso lo haces tú.</p>
+</div>
+</header>
+
+<div class="wrap main">
+
+<div class="anna" style="margin-top:-28px;position:relative;z-index:21">
+  <div>
+    <p class="eyebrow">Para Carolina · lo que nos contaste en el formulario</p>
+    <h2>Quieres convertir más de las que ya te llegan, y en 30 días.</h2>
+    <div class="said">
+      <div><b>20-49 solicitudes al mes</b>que llegan por anuncios y redes</div>
+      <div><b>1.000-4.999 € por alumna</b>el valor de cada matrícula</div>
+      <div><b>Menos de 500 € al mes</b>en anuncios: cada solicitud cuenta</div>
+    </div>
+  </div>
+  <div>
+    <p class="cap" style="margin-top:4px">Cada pestaña responde a un sitio donde se pierde gente</p>
+    <ol class="map">
+      <li data-go="anuncios"><span>1</span><div><b>Antes de que pidan nada</b>Tus anuncios piden el formulario de Meta y nadie sabe cuál acaba en matrícula.</div></li>
+      <li data-go="test"><span>2</span><div><b>En el primer mensaje</b>Hoy tu WhatsApp contesta con un menú de 10 números y pide nombre, país y horario. Muchas no contestan.</div></li>
+      <li data-go="whatsapp"><span>3-4</span><div><b>Entre la masterclass y hablar contigo</b>Quien la pide por la noche se enfría. Aquí le contesta alguien al minuto y agenda contigo.</div></li>
+      <li data-go="seguimiento"><span>6</span><div><b>Después de hablar contigo</b>«Me lo pienso», «lo hablo con mi pareja», «en enero cuando cobre la extra».</div></li>
+      <li data-go="panel"><span>7</span><div><b>En una pantalla</b>Coste por matrícula por anuncio, y a quién llamar hoy.</div></li>
+    </ol>
+  </div>
+</div>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo" style="margin-top:0">
+  <button role="tab" id="t-anuncios" aria-controls="p-anuncios" data-p="anuncios"><span>1</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mega"/></svg>Anuncios</button>
+  <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>2</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-bell"/></svg>Formulario</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chat"/></svg>WhatsApp</button>
+  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>4</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mic"/></svg>Llamada (voz)</button>
+  <button role="tab" id="t-ficha" aria-controls="p-ficha" data-p="ficha"><span>5</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-user"/></svg>Ficha de Carolina</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>6</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-route"/></svg>Seguimientos</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>7</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chart"/></svg>Panel</button>
+</nav>
+
+<section class="pane" id="p-anuncios" role="tabpanel" aria-labelledby="t-anuncios">
+  <header><h2>1 · Tus anuncios, tal cual, pero medidos hasta la matrícula</h2><p>Son tus creatividades de este año. No las tocamos. Lo que cambia es lo que pasa después y que cada anuncio quede unido a la matrícula que trae.</p></header>
+  <div class="cols">
+    <div><p class="cap">«Carrera de Maquillaje Profesional» · formulario de Meta</p><img class="adimg" src="../assets/ad1.jpg" alt="Anuncio de la Carrera de Maquillaje Profesional, matrículas abiertas" loading="lazy"><div class="why"><b>Hoy:</b> formulario de Meta y después, tu WhatsApp con el menú de números. <b>Con el sistema:</b> el formulario entra solo en el CRM y le escribe alguien por su nombre en el minuto uno.</div></div>
+    <div><p class="cap">«Haz de tu pasión tu profesión» · anuncio de imagen</p><img class="adimg" src="../assets/ad10.jpg" alt="Anuncio con maquillaje de delineado blanco" loading="lazy"><div class="why"><b>Hoy:</b> no se sabe cuál de tus variantes trae alumnas. <b>Con el sistema:</b> cada anuncio lleva su marca y sabrás cuál matricula, no cuál tiene más clics.</div></div>
+    <div><p class="cap">Masterclass «Profesional en 90 días» · web</p><img class="adimg" src="../assets/aula01.jpg" alt="Maquillaje profesional de la escuela" loading="lazy"><div class="why"><b>Hoy:</b> para ver la masterclass hay que dejar nombre, país, email y teléfono, y luego esperar. <b>Con el sistema:</b> la ve al momento y quien la ve entera sube en tu lista.</div></div>
+  </div>
+  <div class="why" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between;margin-top:0"><span><b>Y adónde llevarían:</b> una página pensada para que pidan hablar contigo, hecha con tus fotos y tus anuncios.</span><a class="btnl" href="../landing/" target="_blank" rel="noopener" style="margin:0">Ver la landing ›</a></div>
+  <p class="note">[C] Biblioteca de anuncios de Meta, consulta del 30-oct-2026: página «C.A Academy International Makeup». Hoy no hay anuncios activos; los últimos son de julio. La Biblioteca no muestra gasto ni resultados.</p>
+  <div class="navnext"><button data-go="test">Siguiente: el formulario <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-test" role="tabpanel" aria-labelledby="t-test">
+  <header><h2>2 · De un menú de 10 números a tres toques <span class="ej">Ejemplo</span></h2><p>Hoy, a quien te escribe le llega un menú con 10 cursos numerados y le pides que escriba su nombre, su país, su horario y el número del curso. Aquí responde tres preguntas con un toque. Pruébalo como si fueras Lucía.</p></header>
+  <div class="two">
+    <div class="quiz" id="quiz" aria-live="polite"></div>
+    <div class="list">
+      <div class="capt"><p class="cap" style="margin:0">Hoy, tu respuesta automática</p><p style="font-size:14px;white-space:pre-line">«Por favor, indícanos el numerito de la formación que estás interesada: 1. Carrera Maquillaje Profesional Allface · 2. Beauty Fundamentals · 3. Depilación con hilo · 4. Arq. de cejas · … · 10. Carrera Premium.
+Nombre: · País: · Horario para contactar: · Número de formación:»</p></div>
+      <div><h3>Qué cambia</h3><p>Ella toca, no escribe. Y tú recibes lo que necesitas para la llamada: si quiere dedicarse, presencial u online y cuándo quiere empezar.</p></div>
+      <div><h3>Qué pasa al terminar</h3><p>Se crea su ficha con la puntuación. Si quiere dedicarse y empezar ya, le escribe el asistente al minuto y agenda la llamada contigo. Si es «para mí», recibe la info de automaquillaje sin ocupar tu agenda.</p></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>3 · Al minuto, por WhatsApp <span class="ej">Ejemplo</span></h2><p>Lucía pide la masterclass a las 22:30. Le contesta Lola, la asistente, como una persona: por su nombre, sin menús. Elige un camino; a la derecha, lo que pasa por detrás.</p></header>
+  <div class="two">
+    <div class="phone"><div class="sbar" aria-hidden="true"><b>22:30</b><span class="isl"></span><span>5G</span></div>
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><i aria-hidden="true">C·A</i><div><b>Carolina Alvarado · Escuela</b><small>Lola, asistente · Ejemplo</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="home" aria-hidden="true"></div></div>
+    <div class="log"><h3>Por detrás</h3><ol id="log"></ol></div>
+  </div>
+  <p class="note">Lola no da precios que no hayas aprobado ni matricula a nadie. Tú ves cada conversación y puedes entrar cuando quieras: en cuanto escribes, Lola se calla con esa persona. Mensajes automáticos solo de 9:00 a 22:30.</p>
+  <div class="navnext"><button data-go="voz">Siguiente: la llamada <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-voz" role="tabpanel" aria-labelledby="t-voz">
+  <header><h2>4 · Si no contesta, llama la asistente de voz <span class="ej">Ejemplo</span></h2><p>Marta deja el formulario de Meta y no contesta al WhatsApp. A los 15 minutos la llama la asistente. No vende: confirma lo básico y deja la llamada contigo en tu agenda.</p></header>
+  <div class="two">
+    <div class="call">
+      <div class="top"><span class="av" aria-hidden="true"><svg class="i"><use href="#i-mic"/></svg></span><span><b>Llamada saliente · Lola (Escuela Carolina Alvarado)</b> → Marta R.</span><small>Martes 12:40 · 1 min 50 s · Ejemplo</small><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+      <div class="body">
+        <div class="v r"><small>LOLA</small>Hola, ¿Marta? Soy Lola, de la escuela de maquillaje de Carolina Alvarado. Te llamo porque hace un rato pediste información de la carrera. ¿Te pillo bien un minuto?</div>
+        <div class="v c"><small>MARTA</small>Sí, dime.</div>
+        <div class="v r"><small>LOLA</small>¿Te gustaría dedicarte al maquillaje o es para ti?</div>
+        <div class="v c"><small>MARTA</small>Dedicarme. Hago maquillajes a amigas, pero quiero hacerlo bien y cobrar.</div>
+        <div class="v r"><small>LOLA</small>Genial. ¿Presencial u online? En presencial hay sesiones individuales, incluso los fines de semana.</div>
+        <div class="v c"><small>MARTA</small>Presencial, si es en fin de semana. ¿Y cuánto cuesta?</div>
+        <div class="v r"><small>LOLA</small>Depende de la modalidad y del plan de pago, y eso te lo cuenta Carolina en 15 minutos. ¿Te va mejor mañana a las 11:00 o a las 17:00?</div>
+        <div class="v c"><small>MARTA</small>A las 17:00.</div>
+        <div class="v r"><small>LOLA</small>Hecho: mañana a las 17:00 te llama Carolina. Te lo dejo por WhatsApp y te aviso un rato antes. ¡Gracias, Marta!</div>
+      </div>
+    </div>
+    <div class="rules">
+      <div><b>Cuándo llama</b>Entre 10 y 20 minutos después del formulario, solo si quiere dedicarse y no ha contestado al WhatsApp. Si entra de noche, a partir de las 10:00.</div>
+      <div><b>A quién</b>Solo a quien ha pedido información y dejado su teléfono. Se presenta como asistente de la escuela.</div>
+      <div><b>Qué deja hecho</b>Si quiere dedicarse, modalidad, cuándo empezar y su duda principal, y la llamada contigo en tu agenda.</div>
+      <div><b>Latinoamérica</b>Con quien es de fuera, respeta su horario (el país lo dejó en el formulario).</div>
+      <div><b>Cuándo se calla</b>Si pide no recibir llamadas, si es «para mí» o si tú ya has hablado con ella.</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="ficha">Siguiente: la ficha <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-ficha" role="tabpanel" aria-labelledby="t-ficha">
+  <header><h2>5 · Lo que ves antes de llamar a Lucía <span class="ej">Ejemplo</span></h2><p>Una ficha, no un nombre y un número. Solo te avisamos de las que tienen más opciones; el resto lo mueve el sistema hasta que suben o se apartan.</p></header>
+  <div class="two">
+    <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Alumnas › Lucía M. · ficha</span><em>Ejemplo</em></div>
+    <div class="ficha">
+      <div class="hd"><div><b style="font-size:19px">Lucía M. · Murcia · 24 años</b><p class="muted" style="font-size:14px;color:var(--muted)">Entró por: anuncio «Carrera de Maquillaje Profesional» → masterclass → WhatsApp con Lola</p></div><div style="text-align:right"><span class="sc">79</span><br><span class="grp a">A · ya</span></div></div>
+      <div class="grid">
+        <div><dl><dt>Qué quiere</dt><dd>Dedicarse al maquillaje</dd></dl></div>
+        <div><dl><dt>Modalidad</dt><dd>Presencial</dd></dl></div>
+        <div><dl><dt>Cuándo</dt><dd>La próxima edición</dd></dl></div>
+        <div><dl><dt>Hoy</dt><dd>Maquilla a amigas; trabaja en una tienda</dd></dl></div>
+        <div><dl><dt>Masterclass</dt><dd>Vista entera, dos veces</dd></dl></div>
+        <div><dl><dt>Duda</dt><dd>Pago a plazos</dd></dl></div>
+        <div><dl><dt>Disponibilidad</dt><dd>Fines de semana</dd></dl></div>
+        <div><dl><dt>País</dt><dd>España</dd></dl></div>
+        <div><dl><dt>Llamada</dt><dd>Mañana 11:00 · confirmada</dd></dl></div>
+      </div>
+      <div class="why2"><b>Resumen:</b> Quiere vivir del maquillaje y empezar ya. Le frena el pago. Le encaja la carrera presencial con sesiones de fin de semana.</div>
+      <div class="next">Siguiente paso: en la llamada, fechas de la próxima edición, plan de pago y certificado de la Asociación. Si encaja, enlace de matrícula en la misma llamada.</div>
+    </div></div>
+    <div class="box" style="box-shadow:var(--shadow)">
+      <h3>Por qué tiene 79</h3>
+      <table class="pts" style="min-width:0">
+        <tr><td>Quiere dedicarse, no es «para mí»</td><td>20</td></tr>
+        <tr><td>Quiere empezar en la próxima edición</td><td>20</td></tr>
+        <tr><td>Presencial y vive cerca</td><td>12</td></tr>
+        <tr><td>Vio la masterclass entera</td><td>12</td></tr>
+        <tr><td>Contesta rápido y agenda sola</td><td>10</td></tr>
+        <tr><td>Pregunta por el pago</td><td>5</td></tr>
+        <tr><td><b>Total</b></td><td>79</td></tr>
+      </table>
+      <p class="note">Pesos de ejemplo. Los ajustas tú y se recalibran cada mes con las matrículas reales.</p>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: los seguimientos <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header><h2>6 · Seguimientos: nadie se queda en «me lo pienso» <span class="ej">Ejemplo</span></h2><p>Salen solos, de 9:00 a 22:30. Cualquier respuesta los para y te pasa la conversación. Cada texto lo apruebas tú.</p></header>
+  <div class="seq">
+    <div><h3>A · Pidió la masterclass y no contesta</h3><p>Dejó sus datos y no responde.</p><ol class="tl">
+      <li><span class="w">Minuto 1 · WhatsApp</span><b>La masterclass y una pregunta</b><blockquote>Hola Lucía, soy Lola, de la escuela de Carolina Alvarado. Aquí tienes la masterclass. ¿Te gustaría dedicarte al maquillaje o es para ti?</blockquote></li>
+      <li><span class="w">Minuto 10-20 · voz</span><b>Llama la asistente</b></li>
+      <li><span class="w">Día 1 · WhatsApp</span><b>¿La viste?</b><blockquote>Lucía, ¿pudiste ver la masterclass? Si quieres, Carolina te cuenta en 15 minutos cómo sería tu caso.</blockquote></li>
+      <li class="mail"><span class="w">Día 3 · email</span><b>Trabajos de alumnas</b><blockquote><span class="subj">Asunto: Ellas empezaron de cero</span>Trabajos de alumnas y dónde maquillan ahora.</blockquote></li>
+      <li><span class="w">Día 5 · WhatsApp</span><b>¿Ahora o más adelante?</b><blockquote>¿Sigues pensando en empezar ya o lo dejamos para más adelante? [Ya] [Más adelante] [Es para mí]</blockquote></li>
+      <li class="stop"><span class="w">Día 8</span><b>Pasa a «más adelante», con su fecha</b></li></ol></div>
+    <div><h3>B · Que la llamada contigo ocurra</h3><p>Para que no te quedes esperando.</p><ol class="tl">
+      <li><span class="w">Al agendar · WhatsApp</span><b>Confirmación</b><blockquote>Listo, Lucía: mañana a las 11:00 te llama Carolina. Si te viene mal, contesta aquí y lo movemos.</blockquote></li>
+      <li><span class="w">Víspera · WhatsApp</span><b>Recordatorio</b><blockquote>Lucía, mañana a las 11:00 hablas con Carolina. ¡Hasta mañana!</blockquote></li>
+      <li class="alert"><span class="w">Si no lo coge · 10 min después</span><b>Recuperación</b><blockquote>Lucía, Carolina te ha llamado y no hemos dado contigo. ¿Te va mejor mañana? [11:00] [17:00] [Fin de semana]</blockquote></li></ol></div>
+    <div><h3>C · Después de la llamada: «me lo pienso»</h3><p>«Lo hablo con mi pareja», «a ver si me cuadra».</p><ol class="tl">
+      <li><span class="w">24 h · WhatsApp</span><b>Dudas</b><blockquote>Lucía, ¿te quedó alguna duda después de hablar con Carolina?</blockquote></li>
+      <li class="mail"><span class="w">48 h · email</span><b>Plan de pago por escrito</b><blockquote><span class="subj">Asunto: Tu plan para empezar</span>Fechas, modalidad y plan de pago, con lo que hablasteis.</blockquote></li>
+      <li class="alert"><span class="w">Día 4 · aviso a Carolina</span><b>Sin respuesta</b><blockquote>Lucía M. · abrió el email del plan de pago 2 veces · 4 días sin contestar. Mejor una llamada.</blockquote></li>
+      <li><span class="w">Antes de la edición · WhatsApp</span><b>Cierre de plazas</b><blockquote>Lucía, la próxima edición empieza pronto. ¿Te reservo la plaza? [Sí] [Más adelante] [Hablar con Carolina]</blockquote></li></ol></div>
+    <div><h3>D · «Más adelante»</h3><p>Ejemplo: Noelia, «en enero, cuando cobre la extra».</p><ol class="tl">
+      <li><span class="w">Hoy · WhatsApp</span><b>Guardado</b><blockquote>Perfecto, Noelia. Te escribo a principios de enero con las fechas. Si cambias de idea, aquí estoy.</blockquote></li>
+      <li><span class="w">Principios de enero · WhatsApp</span><b>Vuelve</b><blockquote>Noelia, como te dije: ya tenemos las fechas de la próxima edición. ¿Hablamos 15 minutos con Carolina? [Sí] [Mándamelas por aquí]</blockquote></li>
+      <li class="stop"><span class="w">Si dice sí</span><b>Vuelve a tu lista, con su ficha</b></li></ol></div>
+    <div><h3>E · Alumnas: la siguiente formación</h3><p>Quien ya está dentro.</p><ol class="tl">
+      <li><span class="w">Al acabar la carrera · WhatsApp</span><b>Especialízate</b><blockquote>¡Enhorabuena, Laura! Si quieres seguir, tienes extensiones de pestañas y arquitectura de cejas. ¿Te cuento fechas?</blockquote></li>
+      <li><span class="w">Día +7 · WhatsApp</span><b>Reseña</b><blockquote>¿Nos dejas tu opinión? Ayuda mucho a las que empiezan.</blockquote></li></ol></div>
+    <div><h3>F · «Es para mí»</h3><p>Automaquillaje: sin ocupar tu agenda.</p><ol class="tl">
+      <li><span class="w">Al momento · WhatsApp</span><b>La info del curso</b><blockquote>Rocío, el de automaquillaje es así: [fechas y precio que tú apruebes]. ¿Te reservo plaza?</blockquote></li>
+      <li class="stop"><span class="w">Si pregunta por la carrera</span><b>Sube a tu lista</b></li></ol></div>
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>7 · Lo que verías cada día <span class="ej">Datos de ejemplo</span></h2><p>Por anuncio y por alumna, hasta la matrícula. Cifras inventadas, no son previsiones. La versión interactiva, con avisos y conversaciones, está en <a href="https://qualivo.io/intelligence/?sector=camakeup&amp;empresa=C.A%20Makeup%20Academy&amp;objetivo=conversion" target="_blank" rel="noopener">el panel en vivo</a>.</p></header>
+  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Panel · hoy · Carolina</span><em>Datos de ejemplo</em></div><div class="winbody">
+  <div class="kpis">
+    <div class="kpi"><b>2 min</b><span>hasta el primer mensaje a cada solicitud · ejemplo</span></div>
+    <div class="kpi"><b>83 %</b><span>llamadas contigo que se celebran · ejemplo</span></div>
+    <div class="kpi alert"><b>5</b><span>vieron la masterclass y nadie ha hablado con ellas · ejemplo</span></div>
+    <div class="kpi"><b>225 €</b><span>coste por matrícula · ejemplo</span></div>
+  </div>
+  <div class="box">
+    <p class="cap">Por anuncio · 30 días · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Anuncio</th><th>Inversión</th><th>Solicitudes</th><th>Hablaron contigo</th><th>Llamadas</th><th>Matrículas</th><th>Coste por matrícula</th></tr></thead>
+      <tbody>
+        <tr><td>Masterclass «Profesional en 90 días»</td><td>220 €</td><td>14</td><td>9</td><td>3</td><td>1</td><td class="k">220 €</td></tr>
+        <tr><td>Formulario · Carrera presencial</td><td>160 €</td><td>9</td><td>7</td><td>3</td><td>1</td><td class="k">160 €</td></tr>
+        <tr><td>Carrera online · España y Latam</td><td>70 €</td><td>6</td><td>3</td><td>1</td><td>0</td><td class="k">—</td></tr>
+        <tr><td>Instagram y WhatsApp (orgánico)</td><td>0 €</td><td>7</td><td>6</td><td>3</td><td>1</td><td class="k">—</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="box">
+    <p class="cap">A quién llamar hoy · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Alumna</th><th>Nota</th><th class="l">Por qué hoy</th><th class="l">Siguiente paso</th></tr></thead>
+      <tbody>
+        <tr><td>Andrea L.</td><td>81 A</td><td class="l w">Pregunta cuándo empieza la próxima y si hay plazos · vio la masterclass otra vez hace 23 min</td><td class="l w">Llamar ahora: fechas y plan de pago</td></tr>
+        <tr><td>Daniela R.</td><td>77 A</td><td class="l w">Ya maquilla novias · quiere el certificado de la Asociación</td><td class="l w">Perfeccionamiento + certificado</td></tr>
+        <tr><td>Paula S.</td><td>70 A</td><td class="l w">No se presentó a la llamada</td><td class="l w">Proponer otra hora</td></tr>
+        <tr><td>Claudia F.</td><td>64 B</td><td class="l w">«Lo hablo con mi pareja» hace 6 días</td><td class="l w">WhatsApp tuyo, no llamada</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  </div></div>
+  <div class="box" style="box-shadow:var(--shadow)">
+    <h3>Para arrancar en 30 días</h3>
+    <ol style="margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px">
+      <li>Conectar tus formularios de Meta y tu WhatsApp al sistema.</li>
+      <li>Aprobar los textos del asistente: cursos, fechas, qué puede decir del precio.</li>
+      <li>Definir con nosotras qué alumna es «A» para ti.</li>
+      <li>A los 30 días, mirar juntas: cuántas más hablaron contigo y cuántas se matricularon.</li>
+    </ol>
+  </div>
+  <div class="navnext"><a class="btnl" href="https://qualivo.io/intelligence/?sector=camakeup&amp;empresa=C.A%20Makeup%20Academy&amp;objetivo=conversion" target="_blank" rel="noopener">Abrir el panel en vivo <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></a></div>
+</section>
+
+<footer>
+  <div class="links"><a class="btnl" href="../landing/">Landing</a><a class="btnl" href="https://qualivo.io/intelligence/?sector=camakeup&amp;empresa=C.A%20Makeup%20Academy&amp;objetivo=conversion" target="_blank" rel="noopener">Panel en vivo</a></div>
+  <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+  <p>Demo preparada el 30 de octubre de 2026 para C.A Makeup Academy. No es una página de la escuela. Anuncios de la Biblioteca de anuncios de Meta y cursos de tu web y tu WhatsApp ese día; personas, mensajes y cifras de ejemplo.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['anuncios', 'test', 'whatsapp', 'voz', 'ficha', 'seguimiento', 'panel'];
+  var started = false;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'anuncios';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  // Solicitud de seis toques
+  var quiz = document.getElementById('quiz');
+  var Q = [
+    ['¿Qué te gustaría?', ['Dedicarme al maquillaje', 'Mejorar lo que ya hago', 'Es para mí (automaquillaje)', 'Solo estoy mirando']],
+    ['¿Cómo lo prefieres?', ['Presencial', 'Online', 'Aún no lo sé']],
+    ['¿Cuándo te gustaría empezar?', ['La próxima edición', 'En unos meses', 'Más adelante']]
+  ];
+  var resp = [];
+  function el(tag, cls, txt) { var d = document.createElement(tag); if (cls) d.className = cls; if (txt != null) d.textContent = txt; return d; }
+  function grupo() {
+    if (resp[0] === 'Solo estoy mirando') return ['c', 'Solo mirando', 'Recibe la masterclass y un email al mes con trabajos de alumnas. Sin llamadas.'];
+    if (resp[0] === 'Es para mí (automaquillaje)') return ['b', 'Para ella', 'Recibe la info de automaquillaje al momento. No ocupa tu agenda.'];
+    if (resp[2] === 'Más adelante') return ['b', 'Más adelante', 'Se guarda la fecha. Le escribimos cuando haya nueva edición.'];
+    var pts = (resp[0] === 'Dedicarme al maquillaje' ? 30 : 24) + (resp[1] === 'Aún no lo sé' ? 4 : 12) + (resp[2] === 'La próxima edición' ? 25 : 15);
+    return pts >= 60 ? ['a', 'Ya · ' + pts + ' puntos antes de conversar', 'WhatsApp al minuto y llamada contigo agendada en el mismo chat. Si no contesta, llamada de la asistente a los 10-20 min. Aviso a ti con la ficha.'] : ['b', 'Con dudas · ' + pts + ' puntos', 'WhatsApp al minuto para resolver lo que le frena. Tú entras si contesta.'];
+  }
+  function paso(n) {
+    quiz.innerHTML = '';
+    var cap = el('p', 'cap', 'Ejemplo · ' + Math.min(n + 1, Q.length) + ' de ' + Q.length);
+    var bar = el('div', 'bar'); var s = el('span'); s.style.width = Math.round(n / Q.length * 100) + '%'; bar.appendChild(s);
+    quiz.appendChild(cap); quiz.appendChild(bar);
+    if (n >= Q.length) {
+      s.style.width = '100%'; cap.textContent = 'Ejemplo · listo';
+      var g = grupo(), d = el('div', 'done');
+      d.appendChild(el('b', 't', 'Te escribimos por WhatsApp en un minuto'));
+      d.appendChild(el('p', null, 'En la versión real aquí van nombre, WhatsApp y país, con consentimiento. Tus respuestas: ' + resp.join(' · ') + '.'));
+      var gp = el('p'); gp.appendChild(el('span', 'grp ' + g[0], g[1])); d.appendChild(gp);
+      d.appendChild(el('p', null, g[2]));
+      var row = el('div'); row.style.display = 'flex'; row.style.gap = '8px'; row.style.flexWrap = 'wrap';
+      var w = el('button', 'btnl', 'Ver el WhatsApp ›'); w.type = 'button'; w.addEventListener('click', function () { show('whatsapp', true); });
+      var r = el('button', 'btnl', '↺ Repetir'); r.type = 'button'; r.style.background = 'var(--muted)'; r.addEventListener('click', function () { resp = []; paso(0); });
+      row.appendChild(w); row.appendChild(r); d.appendChild(row);
+      quiz.appendChild(d); return;
+    }
+    quiz.appendChild(el('h3', null, Q[n][0]));
+    var o = el('div', 'qopts');
+    Q[n][1].forEach(function (t) {
+      var b = el('button', null, t); b.type = 'button';
+      b.addEventListener('click', function () { resp.push(t); paso(n + 1); });
+      o.appendChild(b);
+    });
+    quiz.appendChild(o);
+  }
+  paso(0);
+
+  // WhatsApp
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var minuto = 30;
+  function hora() { minuto++; return '22:' + String(minuto % 60).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = document.createElement('div'); d.className = 'b ' + cls; d.textContent = txt;
+    if (cls !== 'sys') { var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = document.createElement('li'); if (tipo) li.className = tipo;
+    li.innerHTML = '<b></b><span></span>'; li.firstChild.textContent = txt; li.lastChild.textContent = sub || '';
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = document.createElement('div'); ty.className = 'typing'; ty.textContent = 'escribiendo…';
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      setTimeout(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, reduce ? 0 : 750);
+    })();
+  }
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = c[0];
+      b.addEventListener('click', function () { opts.innerHTML = ''; bubble('out', c[0]); setTimeout(function () { N[c[1]](); }, reduce ? 0 : 300); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'restart'; b.textContent = '↺ Probar otro camino';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  var N = {
+    inicio: function () {
+      bot(['¡Hola, Lucía! Soy Lola, de la escuela de maquillaje de Carolina Alvarado. Aquí tienes la masterclass «Profesional en 90 días».', 'Para orientarte bien: ¿te gustaría dedicarte al maquillaje o es para ti?'],
+        function () { choices([['Quiero dedicarme', 'p1'], ['Es para mí', 'mia'], ['¿Cuánto cuesta?', 'precio']]); });
+    },
+    p1: function () {
+      apunta('Quiere dedicarse', '+20 · carrera completa', 'g');
+      bot(['¡Genial! ¿Presencial u online? En presencial hay sesiones individuales, incluso los fines de semana.'],
+        function () { choices([['Presencial', 'p2'], ['Online, vivo fuera', 'online']]); });
+    },
+    online: function () { apunta('Online · fuera de España', 'se respeta su horario para la llamada', 'h'); N.p2(); },
+    p2: function () {
+      apunta('Modalidad guardada', '+12');
+      bot(['¿Y cuándo te gustaría empezar?'],
+        function () { choices([['La próxima edición', 'p3'], ['En enero', 'luego']]); });
+    },
+    p3: function () {
+      apunta('Quiere empezar ya', '+20 · puntuación provisional 79 → A', 'g');
+      bot(['Perfecto. Lo mejor es que te lo cuente Carolina en 15 minutos: fechas, plan de pago y el certificado de la Asociación.', '¿Te va bien mañana?'],
+        function () { choices([['Mañana a las 11:00', 'cita'], ['¿Se puede a plazos?', 'plazos'], ['Me lo pienso', 'piensa']]); });
+    },
+    plazos: function () {
+      apunta('Pregunta por el pago', 'se anota para la llamada', 'h');
+      bot(['Sí, hay forma de pago a plazos. Carolina te lo explica según la modalidad. ¿Mañana a las 11:00 o a las 17:00?'],
+        function () { choices([['Mañana a las 11:00', 'cita'], ['A las 17:00', 'cita']]); });
+    },
+    cita: function () {
+      apunta('Llamada con Carolina agendada', 'en su agenda · recordatorio la víspera', 'g');
+      apunta('Aviso a Carolina', 'Lucía M. · A 79 · quiere dedicarse · presencial · próxima edición\nVino del anuncio «Carrera de Maquillaje Profesional»', 'g');
+      bot(['¡Hecho! Mañana te llama Carolina. Te aviso un rato antes por aquí.', 'Mientras, mira la masterclass entera: ahí cuenta cómo viven del maquillaje sus alumnas.'], fin);
+    },
+    piensa: function () {
+      apunta('«Me lo pienso»', 'sigue el seguimiento A: día 1, 3 y 5', 'h');
+      bot(['Sin problema, Lucía. Te dejo la masterclass aquí. Cuando quieras hablar con Carolina, escríbeme.'], fin);
+    },
+    luego: function () {
+      apunta('Más adelante: enero', 'se le escribe a principios de enero con las fechas', 'g');
+      bot(['Apuntado: te escribo a principios de enero con las fechas, antes de que se llenen las plazas.'], fin);
+    },
+    mia: function () {
+      apunta('Es para ella (automaquillaje)', 'no ocupa la agenda de Carolina', 'h');
+      bot(['¡Qué bien! Para ti tenemos el curso de automaquillaje. Te paso la información y las próximas fechas.'], fin);
+    },
+    precio: function () {
+      apunta('Pregunta por el precio', 'interés real · se anota', 'h');
+      bot(['Depende de si es presencial u online y del plan de pago, y eso te lo cuenta Carolina en 15 minutos.', 'Antes: ¿te gustaría dedicarte o es para ti?'],
+        function () { choices([['Quiero dedicarme', 'p1'], ['Es para mí', 'mia']]); });
+    }
+  };
+  function start() {
+    started = true; minuto = 30; chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    bubble('sys', 'Ejemplo · Lucía pide la masterclass a las 22:30');
+    apunta('Ficha creada', 'origen: anuncio «Carrera de Maquillaje Profesional» → masterclass');
+    apunta('Respuesta en menos de 1 minuto', 'sin menú de números');
+    N.inicio();
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
