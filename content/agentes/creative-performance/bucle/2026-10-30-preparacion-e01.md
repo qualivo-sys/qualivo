@@ -14,9 +14,9 @@ Este archivo es un borrador previo. Los ganchos se cierran a las 15:00 (Madrid),
 - Sin casos de clientes y sin cifras sin fuente.
 
 ## Pista de E-02
-Por impresión, QV_11-nolose abre el formulario el doble que QV_11 [C]. El gancho que nombra la duda del cliente («no sé») funciona mejor que el que afirma.
+**No hay ganador en E-02.** QV_11-nolose lleva 8 € gastados, 3 aperturas del formulario y 0 leads. QV_11 lleva 38 €, 5 aperturas y 0 leads [C, Meta, 30-oct]. Lo único que hay es una señal con una muestra muy pequeña: un 0,96 % de aperturas por impresión frente a un 0,47 %.
 
-**Hipótesis:** para E-01 conviene un gancho que diga la objeción en voz alta, no uno que prometa resultados.
+**Hipótesis, no resultado:** el gancho que dice en voz alta la duda del cliente («no sé») atrae a más gente que abre el formulario.
 
 ## Ganchos candidatos
 Cada uno queda pendiente de casarlo con una objeción literal de Growth.
@@ -25,7 +25,7 @@ Cada uno queda pendiente de casarlo con una objeción literal de Growth.
 |---|---|---|---|
 | 1 | «Ya probé anuncios y solo llegan curiosos» | «¿Tus anuncios te traen alumnos… o preguntas?» | Nombra el dolor; enlaza con el filtro del formulario |
 | 2 | «Las agencias solo me hablan de clics» | «Tu agencia te enseña clics. ¿Cuántas matrículas?» | Ataca la métrica equivocada; la propuesta es conectar captación y ventas |
-| 3 | «No sé cuánto invertir» | «¿No sabes cuánto invertir en anuncios? Empieza por saber cuánto te deja un alumno.» | Replica el «no sé» que ganó en E-02 |
+| 3 | «No sé cuánto invertir» | «¿No sabes cuánto invertir en anuncios? Empieza por saber cuánto te deja un alumno.» | Prueba la hipótesis del «no sé» de E-02 (señal, no resultado) |
 | 4 | «Me llegan leads, pero no cierro» | «El problema no son los leads. Es lo que pasa después.» | Va directo a la mitad de ventas de la propuesta |
 | 5 | «Es caro» o «no es para mí» | «Este formulario descarta a quien no invierte 500 € al mes. A propósito.» | Da la vuelta al filtro: exclusividad y auto-selección |
 | 6 | «No tengo tiempo para atender leads» | «Si respondes a los leads cuando puedes, ya los has perdido.» | Velocidad de respuesta, sin cifra inventada |
@@ -59,7 +59,7 @@ Fuente: `content/research/2026-11-competidores/biblioteca-anuncios-paid.md`, ram
 1. **«No te traemos leads. Te traemos alumnos que pueden pagar.»**: patrón 2, junto con el filtro de 500 €. Sustituye al candidato 5.
 2. **«Tu agencia te enseña clics. ¿Cuántas matrículas?»** (candidato 2): anti-agencia, como Yoann y Luna (122 días).
 3. **«El problema no son los leads. Es lo que pasa después.»** (candidato 4): patrón 3, seguimiento.
-4. **«¿No sabes cuánto invertir en anuncios?»** (candidato 3): el «no sé», que ya ganó en E-02.
+4. **«¿No sabes cuánto invertir en anuncios?»** (candidato 3): prueba la hipótesis del «no sé». En E-02 solo hay una señal, no un ganador.
 
 Se descartan el 1 («¿alumnos o preguntas?»), que queda absorbido por el nuevo 1, y el 6, que solapa con el 3.
 
