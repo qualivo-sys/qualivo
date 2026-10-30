@@ -23,6 +23,7 @@
     { id: 'agencias', txt: 'Vista para agencias', desc: 'La cartera de una agencia: qué cuenta vende y cuál se puede ir', ico: 'anuncio' },
     { id: 'consultoria', txt: 'Consultoría de alto valor', desc: 'Proyectos grandes, ciclos largos y clientes que repiten', ico: 'b2b' },
     { id: 'fp', txt: 'Centro de FP', desc: 'Ciclos de grado medio y superior: alumnos, familias y visita al centro', ico: 'formacion' },
+    { id: 'camakeup', txt: 'Academia de maquillaje', desc: 'Carrera presencial y online, masterclass gratis y llamada de asesoramiento', ico: 'formacion' },
     { id: 'bsc', txt: 'Barcelona School of Creativity', desc: 'Versión sin agentes: el sistema puntúa y ordena, y llama siempre una persona', ico: 'formacion' },
     { id: 'creativa', txt: 'Escuela creativa', desc: 'Programas anuales de dirección de arte, copy, contenido y eventos: solicitud, reunión informativa, entrevista y matrícula', ico: 'formacion' },
     { id: 'aviacion', txt: 'Escuela de aviación', desc: 'TCP, azafata de tierra y despachador de vuelo', ico: 'formacion' },
