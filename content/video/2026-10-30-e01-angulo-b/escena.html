@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../anuncios/2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;background:#0A0A0B;font-family:SG;color:#fff}
+.lay{position:absolute;inset:0;opacity:0}
+.big{position:absolute;left:70px;right:70px;font-family:Anton;text-transform:uppercase;line-height:.93;color:#fff}
+.big .y{color:#F4CC38}
+.w{display:inline-block;opacity:0}
+.tag{position:absolute;left:70px;top:300px;font-size:40px;font-weight:700;color:#0A0A0B;background:#F4CC38;padding:12px 26px;border-radius:999px;opacity:0}
+.sub{position:absolute;left:70px;right:70px;font-size:56px;font-weight:600;line-height:1.25;color:rgba(255,255,255,.92)}
+/* móvil */
+.ph{position:absolute;left:140px;top:300px;width:800px;height:1200px;border-radius:70px;background:#15171C;border:10px solid #2A2D33;overflow:hidden}
+.ph .clk{position:absolute;top:120px;left:0;right:0;text-align:center;font-size:190px;font-weight:300;letter-spacing:-.04em}
+.ph .dt{position:absolute;top:84px;left:0;right:0;text-align:center;font-size:34px;font-weight:600;color:rgba(255,255,255,.7)}
+.noti{position:absolute;left:36px;right:36px;top:430px;background:rgba(244,241,235,.95);color:#0A0A0B;border-radius:38px;padding:30px 34px}
+.noti .h{display:flex;align-items:center;gap:16px;font-size:28px;font-weight:700;color:#5A5E66;margin-bottom:10px}
+.noti .h i{width:46px;height:46px;border-radius:12px;background:#F4CC38;display:block}
+.noti .h span{margin-left:auto;font-weight:500}
+.noti b{font-size:38px;display:block;margin-bottom:4px}
+.noti p{font-size:32px;line-height:1.3;color:#2A2D33}
+.wait{position:absolute;left:36px;right:36px;top:760px;display:flex;flex-direction:column;gap:22px}
+.wait div{opacity:0;font-size:34px;font-weight:600;color:rgba(255,255,255,.75);display:flex;gap:18px;align-items:center}
+.wait div i{width:18px;height:18px;border-radius:50%;background:#E5484D;display:block}
+.cap2{position:absolute;left:70px;right:70px;top:1560px;font-family:Anton;font-size:96px;text-transform:uppercase;line-height:.95;text-align:center}
+/* cadena */
+.chain{position:absolute;left:90px;right:90px;top:820px;display:flex;flex-direction:column;gap:34px}
+.node{display:flex;align-items:center;gap:30px;font-size:52px;font-weight:700;color:rgba(255,255,255,.35)}
+.node i{width:78px;height:78px;border-radius:50%;border:6px solid #3A3D44;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:40px;color:#0A0A0B}
+.node.on{color:#fff}.node.on i{background:#F4CC38;border-color:#F4CC38}
+/* cierre */
+.pill{display:inline-block;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:96px;padding:22px 54px;border-radius:999px;letter-spacing:.01em}
+.logo{position:absolute;left:0;right:0;top:300px;text-align:center;font-family:Anton;font-size:64px;letter-spacing:.06em;color:#fff;opacity:0}
+.logo b{color:#F4CC38}
+</style>
+<div id="e">
+ <!-- 1 · gancho -->
+ <div class="lay" id="L1">
+  <div class="tag" id="tag">¿Tienes una formación?</div>
+  <div class="big" style="top:470px;font-size:190px"><span class="w">El</span> <span class="w">problema</span><br><span class="w">no</span> <span class="w">son</span> <span class="w">los</span><br><span class="w">leads.</span></div>
+  <div class="big y" style="top:1330px;font-size:118px"><span class="w y">Es lo que</span><br><span class="w y">pasa después.</span></div>
+ </div>
+ <!-- 2 · el lead espera -->
+ <div class="lay" id="L2">
+  <div class="ph"><div class="dt">martes</div><div class="clk" id="clk">10:14</div>
+   <div class="noti" id="noti"><div class="h"><i></i>FORMULARIO<span id="ago">ahora</span></div><b>Nuevo contacto</b><p>Quiere información del curso y pregunta precios.</p></div>
+   <div class="wait"><div id="w1"><i></i>11:30 · nadie le ha llamado</div><div id="w2"><i></i>16:05 · sin WhatsApp</div><div id="w3"><i></i>Miércoles · ya pidió información en otra</div></div>
+  </div>
+  <div class="cap2" id="c2">Nadie <span style="color:#F4CC38">le llama.</span></div>
+ </div>
+ <!-- 3 · solución -->
+ <div class="lay" id="L3">
+  <div class="sub" style="top:380px;font-size:66px;font-weight:700;line-height:1.15">Conectamos tus anuncios<br>con tu equipo de ventas.</div>
+  <div class="chain">
+   <div class="node" id="n1"><i>1</i>Anuncio</div>
+   <div class="node" id="n2"><i>2</i>Formulario con filtro</div>
+   <div class="node" id="n3"><i>3</i>Respuesta y llamada</div>
+   <div class="node" id="n4"><i>4</i>Seguimiento hasta la venta</div>
+  </div>
+  <div class="sub" id="s3" style="top:1440px;opacity:0;font-size:50px;color:#F4CC38;font-weight:700">Ningún contacto se queda esperando.</div>
+ </div>
+ <!-- 4 · cierre -->
+ <div class="lay" id="L4">
+  <div class="logo" id="logo">QUALIVO<b>.</b></div>
+  <div style="position:absolute;left:0;right:0;top:640px;text-align:center"><div class="big" style="position:static;font-size:150px" id="t4">¿Qué pasa<br><span class="y">después?</span></div></div>
+  <div style="position:absolute;left:0;right:0;top:1060px;text-align:center;opacity:0" id="p4"><span class="pill">Diagnóstico gratis</span></div>
+  <div class="sub" id="s4" style="top:1290px;text-align:center;font-size:44px;opacity:0;color:rgba(255,255,255,.85)">Para negocios cuyos clientes<br>pagan 500 € o más.</div>
+ </div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a,b)=>Math.max(0,Math.min(1,(x-a)/(b-a)));
+const ease=x=>1-Math.pow(1-x,3);
+function fade(el,t,a,b,c,d){ // in a→b, out c→d
+  let o=cl(t,a,b); if(c!==undefined) o*=1-cl(t,c,d); el.style.opacity=o; return o;}
+function pop(el,t,a){const k=ease(cl(t,a,a+.28));el.style.opacity=k;el.style.transform=`translateY(${(1-k)*40}px) scale(${.9+.1*k})`;}
+window.setT=function(t){
+ // L1 0-4.3
+ fade($('L1'),t,0,.01,4.0,4.3);
+ pop($('tag'),t,.1);
+ const ws=[...document.querySelectorAll('#L1 .w')];
+ const st=[.25,.45,.75,.9,1.05,1.3,2.15,2.55];
+ ws.forEach((w,i)=>pop(w,t,st[i]));
+ $('L1').style.transform=`scale(${1+t*.008})`;
+ // L2 4.3-9.6
+ fade($('L2'),t,4.2,4.5,9.3,9.6);
+ const nk=ease(cl(t,4.5,4.9)); $('noti').style.opacity=nk; $('noti').style.transform=`translateY(${(1-nk)*-60}px)`;
+ const times=[[4.3,'10:14','ahora'],[6.0,'11:30','1 h'],[7.0,'16:05','6 h'],[8.0,'9:40','ayer']];
+ let cur=times[0]; for(const x of times) if(t>=x[0]) cur=x; $('clk').textContent=cur[1]; document.querySelector('.ph .dt').textContent=t>=8?'miércoles':'martes'; $('ago').textContent=cur[2];
+ pop($('w1'),t,6.0); pop($('w2'),t,7.0); pop($('w3'),t,8.0);
+ $('noti').style.filter=t>8.0?'grayscale(1) opacity(.6)':'none';
+ pop($('c2'),t,5.1);
+ $('L2').style.transform=`scale(${1+(t-4.3)*.01})`;
+ // L3 9.6-13.6
+ fade($('L3'),t,9.5,9.8,13.3,13.6);
+ ['n1','n2','n3','n4'].forEach((n,i)=>{ $(n).classList.toggle('on',t>10.2+i*.55); const k=ease(cl(t,10.0+i*.55,10.3+i*.55)); $(n).style.transform=`translateX(${(1-k)*-40}px)`;});
+ pop($('s3'),t,12.5);
+ // L4 13.6-17
+ fade($('L4'),t,13.5,13.8);
+ pop($('logo'),t,13.7); pop($('t4'),t,13.9); pop($('p4'),t,14.5); pop($('s4'),t,15.0);
+};
+setT(0);
+</script>
