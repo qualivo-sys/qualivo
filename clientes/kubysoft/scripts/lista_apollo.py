@@ -107,7 +107,7 @@ def main(cand, revi, *tsv):
         if "TICKETBAI" in nota:
             rev[dom] = {"decision": "fuera", "motivo": "web: sede en Navarra o Euskadi"}
             continue
-        if "GRANDE" in nota:
+        if "GRANDE" in nota or re.search(r"\b(5\d|[6-9]\d|\d{3,})\s*-\s*\d+ EMPLEADOS", nota):
             rev[dom] = {"decision": "fuera", "motivo": "web: grupo o más de 20 empleados"}
             continue
         if ver == "no encaja":
@@ -118,7 +118,9 @@ def main(cand, revi, *tsv):
         if ver == "encaja":
             confianza = "alta: web revisada"
         elif ver.startswith("ca"):
-            confianza = "web caída: buscar la sociedad operativa"
+            # Muchas cargan desde un navegador normal: lo que falla a veces es
+            # el acceso desde nuestro entorno. Se revisan a mano antes de enviar.
+            confianza = "web sin verificar: no cargó desde aquí"
         elif ver == "dudosa":
             confianza = "media: web revisada sin confirmar mantenimiento"
         else:
