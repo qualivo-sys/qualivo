@@ -237,13 +237,13 @@ window.setT=function(t){
  // DOLOR
  const Pe=T.giro; $('P').style.opacity=t<Pe?1:1-cl(t,Pe,Pe+.25);
  const hk=$('hk'); hk.style.opacity=1-cl(t,T.d1-.2,T.d1);
- pop($('h1'),t,T.gancho,50); pop($('h2'),t,T.gancho+1.4,50); pop($('h3'),t,T.gancho+2.5,50);
+ pop($('h1'),t,T.gancho,50); pop($('h2'),t,T.gancho+2.55,50); pop($('h3'),t,T.gancho+4.05,50);
  hk.style.transform=`scale(${1+cl(t,0,T.d1)*.05})`;
  ['d1','d2','d3','d4'].forEach((k,i)=>{const el=$('p'+(i+1));win(el,t,T[k],end(k),.18);const kk=ease(cl(t,T[k],T[k]+.3));el.querySelector('.tx').style.transform=`translateX(${(1-kk)*90}px)`;});
  const c0=T.d1; D.forEach(d=>{const p=cl(t,c0+d.dl*.6,c0+d.dl*.6+d.sp*1.6);d.el.style.left=(d.x)+'px';d.el.style.top=(260+p*520)+'px';d.el.style.opacity=p>0&&p<1?1:0;});
  ['q1','q2','q3'].forEach((q,i)=>pop($(q),t,T.d2+.8+i*.35,20));
  const h=Math.floor(cl(t,T.d3,end('d3'))*48); $('pclk').textContent=h<24?h+' h':'2 días'; 
- const no=t>T.d4+1.0; $('cs').classList.toggle('c',true); $('cst').textContent=no?'No se ha presentado':'Agendada'; $('cs').style.background=no?'rgba(229,72,77,.15)':'#1F2228'; $('cs').style.borderColor=no?'#E5484D':'#2E3139';
+ const no=t>T.d4+1.4; $('cs').classList.toggle('c',true); $('cst').textContent=no?'No se ha presentado':'Agendada'; $('cs').style.background=no?'rgba(229,72,77,.15)':'#1F2228'; $('cs').style.borderColor=no?'#E5484D':'#2E3139';
  // GIRO
  win($('G'),t,T.giro-.05,T.icp,.25); const gk=zoom($('gt'),t,T.giro);
  $('e').style.background='#1FA396';
