@@ -171,6 +171,7 @@
     return d.getTime() - dia * 1440 * MIN;
   }
   function porDe(c) {
+    if (QV.estado && QV.estado.cfg && QV.estado.cfg.sinAgentes) return 'persona';
     if (c.s.citaPor) return c.s.citaPor;
     if ((c.llamadas || []).some(function (l) { return l.res === 'agendo'; })) return 'voz';
     if (c.conv.some(function (m) { return m.de === 'a'; })) return 'wa';
@@ -249,7 +250,7 @@
           const r2 = hash(k + cfg.id + 'e' + off), r3 = hash(k + 'p' + cfg.id + off);
           const est = hoyFuturo ? (r2 < 76 ? 'confirmada' : 'sinconfirmar') : (r2 < show * 100 ? 'asistio' : r2 < show * 100 + (100 - show * 100) * 0.55 ? 'recuperando' : 'planton');
           ocupado[k] = true;
-          items.push({ relleno: true, tipo: tipos[r3 % tipos.length], por: r3 < 36 ? 'voz' : r3 < 78 ? 'wa' : 'persona', estado: est, dia: d.i, h: h, t: d.t + h * 60 * MIN, riesgo: est === 'sinconfirmar' && d.t + h * 60 * MIN - ahora < 2880 * MIN });
+          items.push({ relleno: true, tipo: tipos[r3 % tipos.length], por: cfg.sinAgentes ? 'persona' : r3 < 36 ? 'voz' : r3 < 78 ? 'wa' : 'persona', estado: est, dia: d.i, h: h, t: d.t + h * 60 * MIN, riesgo: est === 'sinconfirmar' && d.t + h * 60 * MIN - ahora < 2880 * MIN });
         });
       });
     }

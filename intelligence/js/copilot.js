@@ -32,7 +32,7 @@
   function todas() {
     const cfg = E().cfg;
     const sec = (cfg.preguntas || []).map(function (p) { return Object.assign({ sector: true }, p); });
-    const uni = universales(cfg.t).filter(function (u) { return !sec.some(function (s) { return s.h === u.h && !s.filtro; }); });
+    const uni = universales(cfg.t).filter(function (u) { return !sec.some(function (s) { return s.h === u.h && !s.filtro; }) && !(cfg.sinAgentes && u.h === 'voz'); });
     return uni.concat(sec);
   }
   // Orden de las sugeridas: primero las del objetivo elegido, alternando sector y universales.
@@ -40,7 +40,7 @@
     const obj = E().objetivo || 'todo';
     const cfg = E().cfg;
     const sec = cfg.preguntas || [];
-    const uni = universales(cfg.t).filter(function (u) { return !sec.some(function (s) { return s.h === u.h && !s.filtro; }); });
+    const uni = universales(cfg.t).filter(function (u) { return !sec.some(function (s) { return s.h === u.h && !s.filtro; }) && !(cfg.sinAgentes && u.h === 'voz'); });
     const peso = function (p) { return (p.obj || []).indexOf(obj) >= 0 ? 0 : 1; };
     const a = uni.slice().sort(function (x, y) { return peso(x) - peso(y); });
     const b = sec.slice().sort(function (x, y) { return peso(x) - peso(y); });
@@ -120,8 +120,8 @@
           (ag.riesgo.length ? '**' + M.pl(ag.riesgo.length, T.cita + ' sigue', T.citas + ' siguen') + ' sin confirmar** en las próximas 48 horas: son las que más fallan.' : 'Todo lo de las próximas 48 horas está confirmado.'))
       ];
       if (riesgo.length) out.push(tarjetas(riesgo, 3));
-      if (plant.length) out.push(texto('Plantones a recuperar: ' + M.unir(plant.map(function (c) { return c.n.split(' ')[0]; })) + '. El agente les propone dos huecos nuevos; no hace falta llamar en frío.'));
-      out.push(accion(ag.libres.length ? (ag.libres.length === 1 ? 'Queda 1 hueco libre' : 'Quedan ' + ag.libres.length + ' huecos libres') + ' esta semana: el agente los ofrece primero a quien está más caliente.' : 'La semana está llena: las nuevas ' + T.citas + ' se ofrecen para la siguiente.'));
+      if (plant.length) out.push(texto('Plantones a recuperar: ' + M.unir(plant.map(function (c) { return c.n.split(' ')[0]; })) + '. ' + ((E().cfg && E().cfg.sinAgentes) ? 'Tienes su ficha para llamarles con contexto y proponerles otra hora.' : 'El agente les propone dos huecos nuevos; no hace falta llamar en frío.')));
+      out.push(accion(ag.libres.length ? (ag.libres.length === 1 ? 'Queda 1 hueco libre' : 'Quedan ' + ag.libres.length + ' huecos libres') + ' esta semana: ' + ((E().cfg && E().cfg.sinAgentes) ? 'ofrécelos primero a quien está más caliente.' : 'el agente los ofrece primero a quien está más caliente.') : 'La semana está llena: las nuevas ' + T.citas + ' se ofrecen para la siguiente.'));
       return out;
     },
 
@@ -173,7 +173,7 @@
       return [
         texto('**' + plural(l.length, T.contacto, T.contactos) + '** contestaron y llevan más de 2 días sin que nadie les escriba. Suman ' + M.euros(suma(l)) + '. Es la fuga más barata de arreglar: ya mostraron interés.'),
         tablaContactos(l, [col.nombre, col.sinSeg, col.valor, col.accion]),
-        accion('El agente de seguimiento puede retomar hoy las ' + l.filter(function (c) { return c.x.nba.tipo === 'agente'; }).length + ' que no necesitan a una persona, cada una con su contexto.')
+        accion((E().cfg && E().cfg.sinAgentes) ? 'Están ordenadas por quién tiene más probabilidad de matricularse: empieza por arriba y cada ficha te dice qué decir.' : 'El agente de seguimiento puede retomar hoy las ' + l.filter(function (c) { return c.x.nba.tipo === 'agente'; }).length + ' que no necesitan a una persona, cada una con su contexto.')
       ];
     },
 
@@ -199,7 +199,7 @@
       if (props.length) hoyTxt.push(props.length + ' ' + (T.propuestas || 'propuestas') + ' sin respuesta (' + M.euros(suma(props)) + ')');
       if (nos.length) hoyTxt.push(nos.length + ' que no se presentaron');
       if (hoyTxt.length) out.push(texto('Hoy mismo, en el sistema: ' + M.unir(hoyTxt) + '.'));
-      out.push(accion('Lo primero que taparía: ' + ((nombres[f.a.id] || {}).exp || 'este salto') + '. Es donde un agente rinde antes.'));
+      out.push(accion('Lo primero que taparía: ' + ((nombres[f.a.id] || {}).exp || 'este salto') + '. ' + ((E().cfg && E().cfg.sinAgentes) ? 'Es donde una llamada a tiempo rinde más.' : 'Es donde un agente rinde antes.')));
       return out;
     },
 
@@ -550,7 +550,7 @@
     const ultimo = c.conv.filter(function (m) { return m.de === 'c'; }).slice(-1)[0];
     const id = x.nba.id;
     if (x.nba.tipo === 'humano') {
-      return { canal: 'Nota para ' + T.comercial, texto: 'Llamar a ' + c.n + (c.emp ? ' (' + c.emp + ')' : '') + '.\n\nQué quiere: ' + c.prod + '.\nPor qué ahora: ' + x.porque.replace(/^Prioridad \w+ porque /, '') + '\n' + (ultimo ? 'Lo último que dijo: «' + ultimo.texto + '»\n' : '') + 'Valor: ' + M.euros(c.valor) + '.\n\nQué NO repetir: ya sabe ' + (c.conv.filter(function (m) { return m.de !== 'c'; }).length ? 'lo que le ha contado el agente' : 'quiénes somos') + '. Ir directo a ' + (T.pasoHumano || 'resolver sus dudas y proponer el siguiente paso') + '.' };
+      return { canal: 'Nota para ' + T.comercial, texto: 'Llamar a ' + c.n + (c.emp ? ' (' + c.emp + ')' : '') + '.\n\nQué quiere: ' + c.prod + '.\nPor qué ahora: ' + x.porque.replace(/^Prioridad \w+ porque /, '') + '\n' + (ultimo ? 'Lo último que dijo: «' + ultimo.texto + '»\n' : '') + 'Valor: ' + M.euros(c.valor) + '.\n\nQué NO repetir: ya sabe ' + (c.conv.filter(function (m) { return m.de !== 'c'; }).length ? ((E().cfg && E().cfg.sinAgentes) ? 'lo que ya habéis hablado' : 'lo que le ha contado el agente') : 'quiénes somos') + '. Ir directo a ' + (T.pasoHumano || 'resolver sus dudas y proponer el siguiente paso') + '.' };
     }
     if (id === 'reenganche') return { canal: 'WhatsApp · agente', texto: 'Hola ' + nom + ', retomo lo que hablamos' + (ultimo ? ' («' + ultimo.texto.slice(0, 60) + (ultimo.texto.length > 60 ? '…' : '') + '»)' : '') + '. ¿Te va bien que lo veamos 15 minutos esta semana? Tengo jueves a las 10:00 o viernes a las 16:30.' };
     if (id === 'reprogramar') return { canal: 'WhatsApp · agente', texto: 'Hola ' + nom + ', ayer no pudimos vernos. Pasa, no te preocupes. ¿Te dejo otro hueco? Tengo mañana a las 12:00 o el jueves a las 17:30.' };
