@@ -20,5 +20,7 @@ else:
         while i < len(ws) - 1 and ws[i:i+2] != cab: i += 1
         if ws[i:i+2] != cab: sys.exit(f'no encuentro «{" ".join(cab)}»')
         T[k] = 0 if k == 'gancho' else round(max(0, pal[i]['s'] - ADELANTO), 2); i += 1
+    T['W'] = {}
+    for p in pal: T['W'].setdefault(norm(p['w']), p['s'])
     T['FIN'] = round(pal[-1]['e'] + COLA, 2)
-    open(f'{AQUI}/tiempos.js', 'w').write('window.TI=' + json.dumps(T) + ';'); print(T)
+    open(f'{AQUI}/tiempos.js', 'w').write('window.TI=' + json.dumps(T, ensure_ascii=False) + ';'); print({k: T[k] for k in T if k != 'W'})

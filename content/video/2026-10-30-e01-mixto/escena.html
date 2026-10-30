@@ -178,6 +178,32 @@ html,body{background:#000}
 .bk3 h1 i{color:var(--cr)}
 #cap{top:1290px;font-size:72px}
 #stage{transform:scale(.85);transform-origin:50% 0;top:390px}
+
+/* mapa de las tres partes (de la versión corta) */
+#OV{z-index:13}
+.st{position:absolute;left:90px;right:90px;top:290px;font-size:96px;color:var(--bk)}
+.st i{color:var(--cr)}
+#ovw{position:absolute;inset:0;transform-origin:50% 50%}
+.blk{position:absolute;left:90px;right:90px;height:280px;border-radius:40px;background:rgba(10,10,11,.12);border:4px solid rgba(10,10,11,.2);display:flex;align-items:center;gap:40px;padding:0 44px;color:rgba(10,10,11,.45)}
+.blk.on{background:var(--cr);border-color:var(--bk);color:var(--bk)}
+.blk.dim{opacity:.35}
+.blk .n{width:96px;height:96px;flex:none;border-radius:50%;border:5px solid currentColor;display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:52px}
+.blk.on .n{background:var(--y);border-color:var(--bk)}
+.blk h3{font-family:Anton;font-size:62px;text-transform:uppercase;line-height:.98}
+.blk .ill{margin-left:auto;width:220px;height:200px;position:relative;flex:none}
+.conn{position:absolute;left:186px;width:8px;background:rgba(10,10,11,.2);height:40px}
+.conn i{display:block;width:100%;background:var(--bk);height:0}
+.tg{position:absolute;inset:10px 20px;border-radius:50%;border:8px solid currentColor}
+.tg::before{content:'';position:absolute;inset:34px;border-radius:50%;border:8px solid currentColor}
+.tg::after{content:'';position:absolute;inset:72px;border-radius:50%;background:currentColor}
+.bb{position:absolute;left:0;width:200px;height:56px;border-radius:18px;background:currentColor;opacity:.9}
+.bb.r{left:auto;right:0;width:150px;background:#25D366}
+.wv{position:absolute;left:10px;right:10px;bottom:10px;height:60px;display:flex;gap:8px;align-items:center}
+.wv i{flex:1;border-radius:4px;background:currentColor;display:block}
+.col3{position:absolute;inset:20px 0;display:flex;gap:14px}
+.col3 div{flex:1;border-radius:14px;background:rgba(10,10,11,.1)}
+.col3 div.w{background:rgba(14,124,116,.25)}
+.mv{position:absolute;top:70px;width:52px;height:52px;border-radius:12px;background:var(--bk);color:var(--y);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:30px}
 </style>
 <div id="e">
  <div class="lay blk0" id="L1" style="opacity:1"><div class="tag">¿Vendes formación?</div>
@@ -187,10 +213,12 @@ html,body{background:#000}
   <div class="node" style="left:40px"><div class="c" id="c1">1</div><p>A quién<br>atraes</p></div>
   <div class="node" style="left:400px"><div class="c" id="c2">2</div><p>Cómo<br>filtras</p></div>
   <div class="node" style="left:760px"><div class="c" id="c3">3</div><p>Qué pasa<br>después</p></div></div>
- <div class="lay" id="G"><h1 class="A" id="gt">Así lo hacemos <i>en Qualivo.</i></h1></div>
- <div class="lay bk3" id="K1"><div class="num">1</div><h1 class="A">Atraer a <i>quien encaja.</i></h1></div>
- <div class="lay bk3" id="K2"><div class="num">2</div><h1 class="A">Atender y cualificar <i>a tiempo.</i></h1></div>
- <div class="lay bk3" id="K3"><div class="num">3</div><h1 class="A">Seguir <i>hasta la venta.</i></h1></div>
+ <div class="lay" id="OV"><div class="st A" id="ovt">Conectamos <i>las tres partes.</i></div><div id="ovw">
+  <div class="blk" id="k1" style="top:560px"><div class="n">1</div><h3>Atraer a<br>quien encaja</h3><div class="ill"><div class="tg"></div></div></div>
+  <div class="conn" style="top:840px"><i id="cn1"></i></div>
+  <div class="blk" id="k2" style="top:880px"><div class="n">2</div><h3>Atender y<br>cualificar<br>a tiempo</h3><div class="ill"><div class="bb" style="top:6px"></div><div class="bb r" style="top:76px"></div><div class="wv" id="wv"></div></div></div>
+  <div class="conn" style="top:1160px"><i id="cn2"></i></div>
+  <div class="blk" id="k3" style="top:1200px"><div class="n">3</div><h3>Seguir<br>hasta la venta</h3><div class="ill"><div class="col3"><div></div><div></div><div class="w"></div></div><div class="mv" id="mv">✓</div></div></div></div></div>
 
  <!-- RECORRIDO -->
  <div id="top"><div class="n" id="tn"><b>01</b>Alumno ideal</div><div id="dots"></div></div>
@@ -257,25 +285,36 @@ function type(el,t,a,s,d=.5){const n=Math.floor(cl(t,a,a+d)*s.length);el.textCon
 const T=window.TI;
 // multitud
 const flow=$('flow'), D=[]; for(let i=0;i<30;i++){const d=document.createElement('div');d.className='fd';flow.appendChild(d);D.push({el:d,dl:i*.11,ok:i%10===0,dx:(Math.random()-.5)*260});}
+const wvv=document.getElementById('wv'); for(let i=0;i<12;i++) wvv.appendChild(document.createElement('i'));
 const wave=$('wave'); for(let i=0;i<22;i++){const w=document.createElement('i');wave.appendChild(w);}
 const BLQ={icp:1,ads:1,lp:1,fm:2,wa:2,voz:2,seg:3,panel:3};
 const STEPS=[['s_icp','icp','Alumno ideal','Analizamos <i>quién es y qué le duele.</i>'],['s_ads','ads','Anuncios','Ángulos distintos, <i>un dolor cada uno.</i>'],['s_lp','lp','Landing','Una landing que <i>prepara para comprar.</i>'],['s_fm','fm','Formulario','Pregunta lo que importa <i>y filtra.</i>'],['s_wa','wa','WhatsApp','Responde en minutos, <i>con sus palabras.</i>'],['s_voz','voz','Voz','Si no contesta, <i>le llama y le da hora.</i>'],['s_seg','seg','Seguimiento','Seguimiento <i>hasta la venta.</i>'],['s_pa','panel','Tu panel','Y todo lo ves <i>en tu panel.</i>']];
 const dots=$('dots'); STEPS.forEach(()=>dots.appendChild(document.createElement('i')));
 window.setT=function(t){
- const end=k=>{const ks=['gancho','diag','giro','b1','icp','ads','lp','b2','fm','wa','voz','b3','seg','panel','cta'];const i=ks.indexOf(k);return i<ks.length-1?T[ks[i+1]]:T.FIN;};
+ const end=k=>{const ks=['gancho','diag','sis','b1','icp','ads','lp','b2','fm','wa','voz','b3','seg','panel','cta'];const i=ks.indexOf(k);return i<ks.length-1?T[ks[i+1]]:T.FIN;};
  // GANCHO (escrito desde el fotograma 0) y DIAGNÓSTICO
  $('L1').style.opacity=1-cl(t,T.diag-.25,T.diag);
  D.forEach((d,i)=>{const p=cl(t,.3+d.dl,.3+d.dl+1.2);let x=525+d.dx*p,y=130+p*240;
   if(!d.ok&&p>.55){const q=(p-.55)/.45;x=525+d.dx*.55+(d.dx>0?1:-1)*q*420;y=130+.55*240+q*180;}
   d.el.style.left=x+'px';d.el.style.top=y+'px';d.el.style.opacity=p>0&&p<1?1:(d.ok&&p>=1?1:0);d.el.style.background=(!d.ok&&p>.55)?'#E5484D':(d.ok&&p>.9?'#1FA396':'#F4F1EB');
   if(d.ok&&p>=1){d.el.style.left=(470+(i/10)*60)+'px';d.el.style.top='380px';}});
- win($('L2'),t,T.diag,T.giro,.25);
+ win($('L2'),t,T.diag,T.sis,.25);
  [['c1',1.8],['c2',3.4],['c3',4.6]].forEach(([c,o])=>{$(c).classList.toggle('on',t>T.diag+o);});
  $('band').style.opacity=cl(t,3,3.3)*(1-cl(t,T.cta-.3,T.cta));
- win($('G'),t,T.giro-.05,T.b1,.25); zoom($('gt'),t,T.giro);
- ['b1','b2','b3'].forEach((k,i)=>{const el=$('K'+(i+1));win(el,t,T[k],end(k),.2);el.style.background='#1FA396';zoom(el.querySelector('.num'),t,T[k]);});
+ // MAPA: visible en «sis» y al inicio de cada bloque; en cada bloque se resalta el suyo y se hace zoom hacia él
+ const Wd=T.W, w=(x,d)=>(Wd[x]!==undefined?Wd[x]:d)-.05;
+ const segs=[['sis',T.sis,T.b1,0],['b1',T.b1,T.icp,1],['b2',T.b2,T.fm,2],['b3',T.b3,T.seg,3]];
+ let ov=0, act=0, zk=0, zb=0;
+ segs.forEach(([k,a,b,n])=>{if(t>=a-.2&&t<b){ov=cl(t,a-.2,a+.1)*(n?1-cl(t,b-.3,b):1-cl(t,b-.3,b));act=n;zk=n?ease(cl(t,b-.6,b)):0;}});
+ $('OV').style.opacity=ov; $('OV').style.background=ov?'#1FA396':'';
+ const lit=[w('atraer',T.sis+2),w('atenderle',T.sis+3.5),w('seguirle',T.sis+5)];
+ ['k1','k2','k3'].forEach((k,i)=>{const on=act?act===i+1:t>lit[i];$(k).classList.toggle('on',on);$(k).classList.toggle('dim',act&&act!==i+1);const z=act?0:ease(cl(t,lit[i],lit[i]+.3));$(k).style.transform=`translateX(${act?0:(1-ease(cl(t,T.sis+.2+i*.15,T.sis+.6+i*.15)))*-1100}px) scale(${1+.04*Math.sin(z*Math.PI)})`;});
+ const cy=[700,1020,1340][Math.max(0,act-1)]; $('ovw').style.transformOrigin=`50% ${cy}px`; $('ovw').style.transform=`scale(${1+zk*.45})`; $('ovt').style.opacity=1-zk;
+ $('cn1').style.height=(40*ease(cl(t,lit[1]-.4,lit[1])))+'px'; $('cn2').style.height=(40*ease(cl(t,lit[2]-.4,lit[2])))+'px';
+ [...$('wv').children].forEach((b,i)=>{b.style.height=(t>lit[1]?10+Math.abs(Math.sin(t*8+i))*50:10)+'px';});
+ $('mv').style.left=(4+ease(cl(t,lit[2]+.1,lit[2]+1.1))*150)+'px';
  // RECORRIDO
- const J0=T.icp, J1=T.cta; const inStep=STEPS.some(x=>t>=T[x[1]]-.2&&t<end(x[1])); $('top').style.opacity=inStep?1:0; $('ejm').style.opacity=$('top').style.opacity;
+ const J0=T.icp, J1=T.cta; const inStep=STEPS.some(x=>t>=T[x[1]]&&t<end(x[1])); $('top').style.opacity=inStep?1:0; $('ejm').style.opacity=$('top').style.opacity;
  let cur=-1;
  STEPS.forEach((s,i)=>{const a=T[s[1]],b=end(s[1]);const el=$(s[0]);const o=win(el,t,a,b,.2);el.style.transform=`translateX(${(1-ease(cl(t,a,a+.35)))*120 - ease(cl(t,b-.25,b))*120}px)`; if(t>=a&&t<b) cur=i;});
  [...dots.children].forEach((d,i)=>d.classList.toggle('on',i<=cur));
