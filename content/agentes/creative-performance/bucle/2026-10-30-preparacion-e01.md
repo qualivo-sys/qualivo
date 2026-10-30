@@ -27,7 +27,7 @@ Cada uno queda pendiente de casarlo con una objeción literal de Growth.
 | 2 | «Las agencias solo me hablan de clics» | «Tu agencia te enseña clics. ¿Cuántas matrículas?» | Ataca la métrica equivocada; la propuesta es conectar captación y ventas |
 | 3 | «No sé cuánto invertir» | «¿No sabes cuánto invertir en anuncios? Empieza por saber cuánto te deja un alumno.» | Prueba la hipótesis del «no sé» de E-02 (señal, no resultado) |
 | 4 | «Me llegan leads, pero no cierro» | «El problema no son los leads. Es lo que pasa después.» | Va directo a la mitad de ventas de la propuesta |
-| 5 | «Es caro» o «no es para mí» | «Este formulario descarta a quien no invierte 500 € al mes. A propósito.» | Da la vuelta al filtro: exclusividad y auto-selección |
+| 5 | «Es caro» o «no es para mí» | «Preguntamos cuánto inviertes antes de llamarte.» (antes ponía «el formulario descarta», que es falso: el filtro se aplica en la cualificación) | Da la vuelta al filtro: exclusividad y auto-selección |
 | 6 | «No tengo tiempo para atender leads» | «Si respondes a los leads cuando puedes, ya los has perdido.» | Velocidad de respuesta, sin cifra inventada |
 
 ## Formato propuesto para los 3 finales
@@ -72,7 +72,7 @@ A las 15:00 cada uno de los 4 tiene que casar con una objeción **literal** de G
 ### Paso 3 · ángulos que NO usa nadie de los 21 (13:00)
 | Hueco | Por qué es nuestro | Riesgo |
 |---|---|---|
-| **El filtro a la vista** («este formulario descarta a quien no invierte 500 €») | Ninguno enseña su filtro; todos prometen volumen o calidad en abstracto. Nosotros sí filtramos, y está en el formulario de E-01. | Puede bajar el volumen. Es lo que buscamos: se mide en coste por apto, no por lead. |
+| **El filtro a la vista** («preguntamos cuánto inviertes antes de llamarte») | Ninguno enseña su filtro; todos prometen volumen o calidad en abstracto. Nosotros sí filtramos, y está en el formulario de E-01. | Puede bajar el volumen. Es lo que buscamos: se mide en coste por apto, no por lead. |
 | **La fuga entre el lead y la venta, contada desde la venta** | MediSimple habla de seguimiento, pero solo en clínicas y desde la captación. Ninguno habla de conectar la captación con el comercial ni de «lo que pasa después». | Abstracto: tiene que llevar una imagen concreta (un lead sin llamar, un CRM vacío). |
 | **Formación como nicho** | Venus Consulting hace nichos, pero ninguno de los 21 se dirige a academias ni a formación. | Ninguno. |
 | **La duda dicha en voz alta** («no sé cuánto invertir») | Todos afirman; nadie pregunta con la objeción del cliente. | Solo es una señal en E-02 (hipótesis, no resultado). |
@@ -127,12 +127,13 @@ La oferta (diagnóstico gratis), el formulario y el rótulo «sus clientes pagan
 - **Valor:** llegan leads cualificados y se cierran más.
 - **Gancho, segundo 0:** «Si te llegan contactos pero no compran, el problema empieza antes del primer mensaje.»
 - **9:16:**
-  1. Un formulario en pantalla: se marca «menos de 500 €» y sale «Gracias, de momento no encajamos».
-  2. Se marca «500 € o más» y sale «Te llamo».
+  1. Un formulario en pantalla con la pregunta «¿Cuánto inviertes en anuncios?» resaltada.
+  2. «Preguntamos cuánto inviertes antes de llamarte.»
   3. «Solo hablamos con quien puede invertir. Por eso hablamos con menos gente, y mejor.» No se dice que «compran más»: sería una promesa sin cifra.
   4. Cierre con el rótulo.
-- **4:5:** el formulario a sangre, con el filtro marcado y el titular «Este formulario descarta a más de la mitad. A propósito.»
-  - «Más de la mitad» sale de los datos: 24 de 39 respuestas, menos de 500 € o nada, el 62 % [C].
+- **4:5:** el formulario a sangre, con el filtro marcado y el titular «Más de la mitad no pasa nuestro filtro. A propósito.»
+  - El formulario NO descarta a nadie: todos entran en GHL y el filtro se aplica después, en la cualificación.
+  - Fuente de «más de la mitad»: 24 de 40 respuestas válidas (60 %) invierten menos de 500 € o nada. Son todos los formularios del 15-sep al 30-oct, no solo E-01, y sin contar los 2 leads de prueba [C, Paid].
 
 ### Riesgos e hipótesis, para la fila de la base de hipótesis
 - **A:** hipótesis: nombrar el «no sé» sube el CTR de enlace frente al vídeo actual. Riesgo: si atrae a curiosos, el filtro los corta igualmente.
