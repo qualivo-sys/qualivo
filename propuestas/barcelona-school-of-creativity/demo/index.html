@@ -203,6 +203,25 @@ footer p b{color:var(--ink)}
 nav.tabs button[aria-selected="true"] span{color:#1A1206}
 .why code{font-family:var(--mono);font-size:12px;background:var(--line-2);border-radius:5px;padding:1px 5px;word-break:break-all}
 .pane > .kpis{margin-top:4px}
+.anna{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:22px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.anna h2{font-size:clamp(22px,2.6vw,30px)}
+.anna .said{display:grid;gap:10px;margin-top:14px}
+.anna .said div{border-left:4px solid var(--accent);background:var(--surface-2);border-radius:0 12px 12px 0;padding:10px 14px;font-size:15px}
+.anna .said b{display:block;font-family:var(--serif);font-size:24px;line-height:1.1}
+.map{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.map li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:1px solid var(--line-2);border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.45;cursor:pointer;transition:border-color .15s,background .15s}
+.map li:hover{border-color:var(--accent);background:var(--accent-soft)}
+.map li span{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--f700);color:#fff;font-family:var(--mono);font-size:12px}
+.map li b{display:block;font-size:15px}
+.fun{display:grid;gap:8px}
+.fun .r{display:grid;grid-template-columns:170px minmax(0,1fr) 230px;gap:12px;align-items:center;font-size:14px}
+.fun .r > span:first-child{font-weight:600}
+.fun .bar2{height:30px;border-radius:8px;background:var(--line-2);overflow:hidden}
+.fun .bar2 i{display:flex;align-items:center;height:100%;padding-left:10px;background:var(--f700);color:#fff;font-style:normal;font-weight:700;font-size:13px;white-space:nowrap}
+.fun .lk{font-size:13px;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:5px 9px;line-height:1.35}
+.fun .lk a{color:inherit;font-weight:700}
+.fun .r.ok .lk{color:var(--muted);background:transparent}
+@media (max-width:900px){.anna{grid-template-columns:1fr}.fun .r{grid-template-columns:1fr;gap:4px}}
 </style>
 </head>
 <body>
@@ -225,7 +244,29 @@ nav.tabs button[aria-selected="true"] span{color:#1A1206}
 
 <div class="wrap main">
 
-<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+<div class="anna" style="margin-top:-28px;position:relative;z-index:21">
+  <div>
+    <p class="eyebrow">Para Anna · lo que nos contasteis en el formulario</p>
+    <h2>Si no sabéis dónde se escapan, empezamos por verlo.</h2>
+    <div class="said">
+      <div><b>Más de 5.000 € al mes</b>en captación</div>
+      <div><b>50-100 solicitudes al mes</b>que llegan a admisiones</div>
+      <div><b>«No lo sé, eso es lo que quiero»</b>a la pregunta de dónde se os escapan</div>
+    </div>
+  </div>
+  <div>
+    <p class="cap" style="margin-top:4px">Cada pestaña responde a un sitio donde se pierde gente</p>
+    <ol class="map">
+      <li data-go="anuncios"><span>1</span><div><b>Antes de que pidan nada</b>Hoy 15 anuncios van a la home y ninguno lleva UTM: no se sabe qué anuncio matricula.</div></li>
+      <li data-go="test"><span>2</span><div><b>En la solicitud</b>Termina en «te llamaremos». Nadie sabe aún si es para enero o para «algún día».</div></li>
+      <li data-go="whatsapp"><span>3-4</span><div><b>Entre la solicitud y la primera llamada</b>Quien pide información por la noche, se enfría hasta el día siguiente.</div></li>
+      <li data-go="seguimiento"><span>6</span><div><b>Reunión informativa, entrevista y matrícula</b>Quien no se presenta, quien «se lo piensa» y quien no paga la transferencia.</div></li>
+      <li data-go="panel"><span>7</span><div><b>El lunes, en una pantalla</b>Coste por matrícula por programa y anuncio, y en qué paso se pierde cada uno.</div></li>
+    </ol>
+  </div>
+</div>
+
+<nav class="tabs" role="tablist" style="margin-top:0" aria-label="Pasos de la demo">
   <button role="tab" id="t-anuncios" aria-controls="p-anuncios" data-p="anuncios"><span>1</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mega"/></svg>Anuncios</button>
   <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>2</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-bell"/></svg>Solicitud</button>
   <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chat"/></svg>WhatsApp</button>
@@ -250,6 +291,7 @@ nav.tabs button[aria-selected="true"] span{color:#1A1206}
     <div class="kpi"><b>57</b><span>de 58 salen también en Audience Network y Threads; lo separaríamos para medirlo aparte [C]</span></div>
   </div>
   <p class="note">[C] Biblioteca de anuncios de Meta, consulta del 30-oct-2026. La Biblioteca no muestra gasto ni resultados: eso lo veríamos con acceso a vuestra cuenta.</p>
+  <div class="why" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between;margin-top:0"><span><b>Y adónde llevarían:</b> una página por programa, pensada para que pidan la reunión informativa, hecha con vuestras fotos y vuestros profesores.</span><a class="btnl" href="../landing/" target="_blank" rel="noopener" style="margin:0">Ver la landing de Art Direction ›</a></div>
   <div class="navnext"><button data-go="test">Siguiente: la solicitud <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
 </section>
 
@@ -446,19 +488,31 @@ nav.tabs button[aria-selected="true"] span{color:#1A1206}
     <div class="kpi"><b>41</b><span>contactos guardados para la convocatoria de marzo · ejemplo</span></div>
   </div>
   <div class="box">
-    <p class="cap">Por programa · 30 días · datos de ejemplo</p>
+    <p class="cap">Dónde se escapan hoy · así se vería el primer diagnóstico · ejemplo con vuestro volumen (unas 80 solicitudes al mes)</p>
+    <div class="fun">
+      <div class="r ok"><span>Solicitudes</span><div class="bar2"><i style="width:100%">80</i></div><span class="lk">Punto de partida</span></div>
+      <div class="r"><span>Contestadas en 5 min</span><div class="bar2"><i style="width:30%">24</i></div><span class="lk">Las de la noche esperan al día siguiente → <a href="#whatsapp" data-go="whatsapp">WhatsApp al minuto</a></span></div>
+      <div class="r"><span>Reunión informativa reservada</span><div class="bar2"><i style="width:45%">36</i></div><span class="lk">«Te llamaremos» y no coge → <a href="#voz" data-go="voz">llamada de voz y reserva en el chat</a></span></div>
+      <div class="r"><span>Reunión celebrada</span><div class="bar2"><i style="width:31%">25</i></div><span class="lk">11 no se presentan → <a href="#seguimiento" data-go="seguimiento">recordatorios y recuperación</a></span></div>
+      <div class="r"><span>Entrevista</span><div class="bar2"><i style="width:20%">16</i></div><span class="lk">«Me lo pienso» sin fecha → seguimiento C</span></div>
+      <div class="r"><span>Matrícula pagada</span><div class="bar2"><i style="width:9%;min-width:34px">7</i></div><span class="lk">Admitidos que no hacen la transferencia → seguimiento D</span></div>
+    </div>
+    <p class="note">Ejemplo: no son vuestros datos. Lo primero que haríamos es rellenar estas seis barras con vuestro ActiveCampaign y vuestro Calendly de los últimos 90 días, para saber con números dónde se os escapan antes de tocar nada.</p>
+  </div>
+  <div class="box">
+    <p class="cap">Por programa · 30 días · con el sistema en marcha · datos de ejemplo</p>
     <div class="tbl"><table>
       <thead><tr><th>Programa</th><th>Inversión</th><th>Solicitudes</th><th>Cualificadas (A+B)</th><th>Reuniones informativas</th><th>Entrevistas</th><th>Matrículas</th><th>Coste por matrícula</th></tr></thead>
       <tbody>
-        <tr><td>Events &amp; Experiences</td><td>1.800 €</td><td>34</td><td>15</td><td>10</td><td>6</td><td>2</td><td class="k">900 €</td></tr>
-        <tr><td>Art Direction</td><td>1.000 €</td><td>20</td><td>11</td><td>8</td><td>5</td><td>2</td><td class="k">500 €</td></tr>
-        <tr><td>Copywriting</td><td>900 €</td><td>16</td><td>8</td><td>6</td><td>4</td><td>1</td><td class="k">900 €</td></tr>
-        <tr><td>Creative Content</td><td>500 €</td><td>9</td><td>4</td><td>3</td><td>2</td><td>1</td><td class="k">500 €</td></tr>
-        <tr><td>IA generativa</td><td>700 €</td><td>22</td><td>5</td><td>3</td><td>1</td><td>0</td><td class="k">—</td></tr>
-        <tr><td>Audience Network (todos)</td><td>500 €</td><td>14</td><td>1</td><td>0</td><td>0</td><td>0</td><td class="k">—</td></tr>
+        <tr><td>Events &amp; Experiences</td><td>1.800 €</td><td>22</td><td>10</td><td>7</td><td>4</td><td>2</td><td class="k">900 €</td></tr>
+        <tr><td>Art Direction</td><td>1.000 €</td><td>14</td><td>8</td><td>6</td><td>4</td><td>2</td><td class="k">500 €</td></tr>
+        <tr><td>Copywriting</td><td>900 €</td><td>11</td><td>6</td><td>5</td><td>3</td><td>1</td><td class="k">900 €</td></tr>
+        <tr><td>Creative Content</td><td>500 €</td><td>7</td><td>4</td><td>3</td><td>2</td><td>1</td><td class="k">500 €</td></tr>
+        <tr><td>Cursos de IA (generativa y arquitectura)</td><td>700 €</td><td>16</td><td>5</td><td>3</td><td>2</td><td>1</td><td class="k">700 €</td></tr>
+        <tr><td>Audience Network (todos)</td><td>500 €</td><td>10</td><td>1</td><td>1</td><td>1</td><td>0</td><td class="k">—</td></tr>
       </tbody>
     </table></div>
-    <p class="note">Así se ve lo que hoy no se puede ver: IA generativa trae muchas solicitudes y casi ninguna matrícula; Audience Network trae solicitudes que no avanzan. Todos los datos son de ejemplo.</p>
+    <p class="note">Así se ve lo que hoy no se puede ver: Audience Network trae solicitudes que no avanzan; los cursos de IA traen muchas solicitudes que no pasan de la reunión; Art Direction matricula a mitad de coste que Events. Todos los datos son de ejemplo.</p>
   </div>
   <div class="box">
     <p class="cap">A quién llamar hoy · Carla · datos de ejemplo</p>
@@ -473,6 +527,16 @@ nav.tabs button[aria-selected="true"] span{color:#1A1206}
     </table></div>
   </div>
   </div></div>
+  <div class="box" style="box-shadow:var(--shadow)">
+    <h3>Para arrancar, de vuestra parte</h3>
+    <ol style="margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px">
+      <li>Acceso de lectura a Meta Ads, ActiveCampaign y Calendly, para rellenar el embudo con vuestros datos reales.</li>
+      <li>Un programa para empezar (proponemos Art Direction o Events &amp; Experiences, el que más invierte).</li>
+      <li>Los textos que puede decir el asistente: precios publicables, becas, financiación y dudas frecuentes.</li>
+      <li>Una persona de admisiones que reciba los avisos y valide la puntuación.</li>
+    </ol>
+    <p style="font-size:14.5px;color:var(--muted);margin:0">Primero el diagnóstico con vuestros datos; después, un programa en marcha; y si funciona, el resto.</p>
+  </div>
   <div class="navnext"><a class="btnl" href="../">Volver al plan <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></a></div>
 </section>
 
