@@ -1,5 +1,39 @@
 # Plan de contenidos de noviembre · Qualivo (en una página)
 
+> **MANDA EL BRIEF DEL 29-OCT · «El cliente como protagonista»** (Notion, página del plan: https://app.notion.com/p/40656e1ad6ed815abdb2d2c6c41b85a4). Todo lo que hay debajo de esta caja es material anterior y cede ante el brief cuando choca.
+> - **Enfoque:** abrir con la situación que vive el empresario (formación, reformas, clínicas, servicios B2B), no con «en Qualivo» ni con herramientas. Orden: situación → tensión → criterio útil → evidencia si existe → cierre según la función.
+> - **Reparto orientativo:** 70 % situaciones, 20 % mecanismos, 10 % experiencia propia documentada. Nada de clientes, ni en anónimo (decisión del 29-oct).
+> - **Cadencia:** 2 piezas sociales base por semana; una tercera solo si aporta una prueba, objeción o aprendizaje distinto. El vídeo ocupa uno de esos huecos, no suma.
+> - **Newsletter:** una sola al mes, la prepara Growth con aportaciones de Contenido. Las newsletters semanales de Contenido (5 y 12-nov) se fusionan en esa.
+> - **Cierres:** cada pieza cierra según su función. No todas venden ni piden llamada; el enlace al blog solo cuando amplía de verdad.
+> - **Blog:** artículos A («Piden información, pero no avanzan») y B («Antes de invertir más»), no dos por semana.
+
+## 0. Narrativas y piezas (revisión del 30-oct)
+
+| Semana | Narrativa | Pieza base A | Pieza base B | Tercera (opcional) |
+|---|---|---|---|---|
+| S45 · 2-8 | Pagas por contactos. ¿Pero son oportunidades? | **Nueva:** escena de formación: preguntan por un curso, no encajan requisitos u horario y nadie distingue interés de matrícula posible | **C4 «Déjanos tus datos y te llamamos»**, ajustar apertura: qué pregunta del formulario da contexto antes de llamar | **C5 «No lo sé»** con el copy del brief (§6), puente con Paid |
+| S46 · 9-15 | Te piden información y después desaparecen | **V3 «Día 2, día 5, día 10»** (reformas, presupuesto sin siguiente paso), grabado el 29-oct | **C7 «Llámame en enero»** (B2B): responsable, motivo y próximo paso | **C3 «Pidió cita a las 21:14»** (clínica), contraste, si cabe |
+| S47 · 16-22 | Tus campañas funcionan, pero el negocio no crece | **C8 «Un anuncio también se cansa»**, reorientar: «el coste por contacto baja y las ventas no suben» (sin causalidad del CTR) | **V1 «Reservada, celebrada y con encaje»** (separa reserva, asistencia y oportunidad), grabado el 29-oct | Lectura de una cohorte con «datos de ejemplo» |
+| S48 · 23-29 | Antes de gastar más, descubre qué arreglar | **Nueva:** «Cada uno tiene su explicación» (marketing, ventas y dirección; ninguna contrastada) | **Nueva:** mapa de prioridad: motivo, impacto, esfuerzo y confianza en los datos | «Qué aprendí analizando un embudo», experiencia propia sin clientes |
+
+**Clasificación del resto:**
+
+| Pieza | Decisión | Motivo |
+|---|---|---|
+| C1 «Los leads de Meta son malos» | Conservar (aprobado) | Abre el mes; encaja con S45 |
+| C2 «Presupuesto gratis» | Reserva | Encaja con S45, pero la semana ya tiene A, B y tercera; habla del anuncio, no del empresario |
+| C6 «Todo en la misma página» | Reserva | Mecanismo de anuncio y landing; no tiene hueco en las narrativas |
+| V2 y V4 | Reserva / diciembre | V2 podía parecer un caso real; V4 carga noviembre de automatización |
+| Newsletters 1 (5-nov) y 2 (12-nov) | Fusionar en la mensual de Growth | Brief: una sola newsletter al mes |
+| Vídeo «Cómo le contamos a Meta quién llegó» y diagnóstico en pantalla | Reserva | Con 2 piezas por semana no hay hueco; V1 ya cubre S47 |
+
+Cada ficha recibe la sección **«Revisión · cliente protagonista»** con: público, escena, tesis, gancho, láminas, acción útil, cierre, fuente o «ejemplo ilustrativo», conexión con blog o newsletter, canal, fecha, responsable y métrica. Los originales no se borran.
+
+---
+
+## Material anterior
+
 > Encargo del Chief of Staff (27-oct), para la revisión conjunta del jueves 29 a las 11:00. Lo desarrolla el plan de 30 días por dolores (`content/redes/2026-10-27-plan-30-dias-dolores.md`), y aquí va solo lo que se decide.
 > [C] = confirmado · [E] = estimado. **No se publica nada sin el ok de Maikel.**
 
