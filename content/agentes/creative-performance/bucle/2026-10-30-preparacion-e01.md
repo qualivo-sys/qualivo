@@ -68,3 +68,17 @@ A las 15:00 cada uno de los 4 tiene que casar con una objeción **literal** de G
 ### Formato, a partir de lo que aguanta
 - **Vídeo 9:16:** el nicho y el gancho en texto, en el segundo 0.
 - **Imagen 4:5:** texto largo en el cuerpo del anuncio, como Ted Gravlin (317 días). Retrato del dueño de academia que vende y da clase a la vez.
+
+### Paso 3 · ángulos que NO usa nadie de los 21 (13:00)
+| Hueco | Por qué es nuestro | Riesgo |
+|---|---|---|
+| **El filtro a la vista** («este formulario descarta a quien no invierte 500 €») | Ninguno enseña su filtro; todos prometen volumen o calidad en abstracto. Nosotros sí filtramos, y está en el formulario de E-01. | Puede bajar el volumen. Es lo que buscamos: se mide en coste por apto, no por lead. |
+| **La fuga entre el lead y la venta, contada desde la venta** | MediSimple habla de seguimiento, pero solo en clínicas y desde la captación. Ninguno habla de conectar la captación con el comercial ni de «lo que pasa después». | Abstracto: tiene que llevar una imagen concreta (un lead sin llamar, un CRM vacío). |
+| **Formación como nicho** | Venus Consulting hace nichos, pero ninguno de los 21 se dirige a academias ni a formación. | Ninguno. |
+| **La duda dicha en voz alta** («no sé cuánto invertir») | Todos afirman; nadie pregunta con la objeción del cliente. | Solo es una señal en E-02 (hipótesis, no resultado). |
+
+Lo que sí usa todo el mundo, y se evita: «leads cualificados» como promesa genérica, «más de X clientes» como autoridad (no tenemos cifra con fuente) y resultados con plazo.
+
+**Formatos:** el vídeo es mayoría en los que aguantan más tiempo (13 de 21) [C, contado en la tabla de Paid]. La imagen con texto largo es la que más días aguanta: 317 días, Ted Gravlin [C].
+
+**Estado a las 13:00:** las objeciones literales de Growth (11:00) todavía no están en ningún archivo del repositorio. Las pido por Paid. Sin ellas, a las 15:00 los ganchos se atan a objeciones **probables**, marcadas [E].
