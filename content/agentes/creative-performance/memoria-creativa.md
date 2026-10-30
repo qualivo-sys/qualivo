@@ -330,3 +330,22 @@ De momento no se usan casos de clientes, ni siquiera anónimos, en anuncios, ví
 - Piezas nuevas tras revisar la competencia: «¿Tu piso tiene más de 30 años? Esto es lo que hay detrás de sus paredes», «El presupuesto que te dan y el que acabas pagando» y «Sin portales».
 - Primer vídeo sin Sonia: «detrás de la pared», de 17,5 s (Kling 3.0, 2 planos, unos 28 créditos).
 - Landing de conversión en `content/clientes/al-milimetro/landing-alta-conversion/`.
+
+### E-03 · «Conciso Javier» (formación, 30-oct-2026)
+- **Estado:** en test desde el 30-oct. Conjunto E-03 «formacion · CONCISO Javier» (120246325688440358) a 20 €/día, con anuncio 120246325691150358 (9:16 y 4:5 juntos por ubicación). Formulario de E-01 (2063720777591278). El formación viejo (120245699224780358) sigue a 20 €/día. E-02 está pausado. OK de Maikel en el chat de Paid.
+- **Vertical · Etapa · Dolor · Ángulo · Formato:** formación · captación hasta venta · contactos que no compran · tres fugas → «conectamos las tres partes» · motion con demos simuladas, 54 s.
+- **Hook:** «¿Vendes formación? Te llegan contactos… pero muchos no terminan comprando.» Escrito desde el fotograma 0.
+- **Mecanismo:**
+  - tres fugas: atraes a quien no encaja, no sabes quién quiere comprar, falta seguimiento;
+  - captación → cualificación → seguimiento comercial;
+  - demos: anuncios con ángulos, WhatsApp que cualifica, agente de voz que registra en el CRM (simulada) y panel con la fuga marcada.
+- **CTA:** «¿Dónde está fallando tu proceso? Solicita tu diagnóstico de captación y ventas.» Rótulo «para negocios cuyos clientes pagan 500 € o más» (pendiente de que Maikel confirme si encaja con formación).
+- **Duración · voz · música:** 54 s · Javier (ElevenLabs v3, stability 1.0; «Cuálivo» escrito así para que lo pronuncie bien) · música H.
+- **Archivo o fuente:** `content/video/2026-10-30-e01-conciso/` (e01-conciso-javier-916.mp4 y e01-conciso-javier-45.mp4, recorte del 9:16).
+- **Resultados:** pendientes. Paid mide retención a 3 s, % visto, clics, solicitudes, aptos, reuniones y oportunidades. Se corta a los 75 € sin un apto o el 16-nov.
+- **Qué aprendimos del proceso:**
+  - Maikel quiere la identidad del anuncio de formación de septiembre (turquesa, Anton, fichas crema) y no la negro y amarillo de Al Milímetro.
+  - Música y voz de nuestro catálogo, no sintetizadas.
+  - Vender el resultado y las tres partes conectadas, no la lista de herramientas.
+  - Las demos van marcadas como simuladas.
+  - Otras versiones del mismo día: cortas A y B (`2026-10-30-e01-corto/`), mixta (`2026-10-30-e01-mixto/`) y recorrido de 62 s (`2026-10-30-e01-recorrido/`, para remarketing).
