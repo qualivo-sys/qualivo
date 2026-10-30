@@ -10,7 +10,7 @@
 >   - 1 vídeo (martes);
 >   - la newsletter del jueves.
 >
->   Cada pieza sale de un caso, un dato o un aprendizaje real, con la fuente en la ficha, y cierra con una línea a la llamada o a la calculadora de fugas (29-oct).
+>   Cada pieza sale de un caso, un dato o un aprendizaje real, con la fuente en la ficha.
 > - **Tiempo de Maikel:** unas 2 horas a la semana como máximo. Revisión los jueves de 13:00 a 14:00. Grabación los jueves de 17:00 a 18:00.
 > - **El 30-nov:** una línea con lo que ha funcionado (alcance, respuestas y reuniones) para ajustar el ritmo.
 > - **Las fichas:** en Notion, base «📝 Piezas de noviembre · para revisar» (https://app.notion.com/p/e7227459f29a4f9c98053c86142c937c), con una ficha por pieza para comentar.
@@ -92,7 +92,7 @@ Quedan en reserva: «Las métricas antes de subir presupuesto» (inmobiliaria) y
 
 - **La página de empresa de Qualivo en LinkedIn:** mediana de 0 comentarios en el sector [C].
 - **Las IA y herramientas como tema:** 102 de 290 publicaciones del sector, saturado [C].
-- **«Comenta PALABRA».** Desde el 29-oct, cada pieza cierra con una línea a la llamada (qualivo.io/llamada/) o a la calculadora de fugas, y la pregunta de conversación va al primer comentario (objetivo de Maikel: 2 clientes nuevos en noviembre).
+- **«Comenta PALABRA»** y cualquier diagnóstico en el cierre de un post. Solo una pieza de las 13 lleva diagnóstico.
 - **Las series por días** (Sin humo, bandera roja…) y las infografías planas del S44.
 - **Casos de clientes, también en anónimo** (decisión del 29-oct; no se piden permisos por ahora) y cualquier promesa o precio (R10).
 - **Newsletters propias:** son de Growth. Contenido le pasa la mejor pieza de cada quincena como idea, sin duplicar.

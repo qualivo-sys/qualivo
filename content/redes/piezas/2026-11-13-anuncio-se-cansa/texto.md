@@ -32,10 +32,6 @@
 >
 > Y lo leeremos por la calidad comercial de lo que traiga, no solo por los clics. Un gancho que trae curiosos no arregla nada.
 >
-> Si quieres que revisemos tus anuncios contigo: https://qualivo.io/llamada/
-
-## Primer comentario (lo pone Maikel nada más publicar)
-
 > ¿Qué miráis primero cuando un anuncio baja?
 
 ## Instagram

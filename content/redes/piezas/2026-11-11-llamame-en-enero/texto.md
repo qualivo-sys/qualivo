@@ -33,10 +33,6 @@
 >
 > Cada semana, revisa las tareas vencidas. Las que tienen fecha en enero, déjalas en enero: no hace falta perseguir en noviembre a quien pidió hablar en enero.
 >
-> Para calcular lo que se queda parado en tu CRM: https://qualivo.io/calculadora-de-fugas/
-
-## Primer comentario (lo pone Maikel nada más publicar)
-
 > Abre una oportunidad aplazada. ¿Alguien sabría retomarla sin preguntarte?
 
 ## Instagram
