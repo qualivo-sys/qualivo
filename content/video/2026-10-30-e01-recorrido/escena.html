@@ -168,6 +168,7 @@ html,body{background:#000}
 
  <!-- RECORRIDO -->
  <div id="top"><div class="n" id="tn"><b>01</b>Alumno ideal</div><div id="dots"></div></div>
+ <div id="ejm" style="position:absolute;left:80px;top:226px;font-size:22px;letter-spacing:.18em;font-weight:800;color:rgba(10,10,11,.6);z-index:20;opacity:0">EJEMPLO FICTICIO · NO ES UN CLIENTE REAL</div>
  <div id="stage">
   <div class="sc" id="s_icp"><div class="box icp"><div class="k">Análisis</div><div class="av"></div><h3>Tu alumno ideal</h3><p>Quién es, qué busca y qué le frena</p></div>
    <div class="pn" id="pn1" style="left:0;top:560px">No tengo tiempo</div>
@@ -248,7 +249,7 @@ window.setT=function(t){
  win($('G'),t,T.giro-.05,T.icp,.25); const gk=zoom($('gt'),t,T.giro);
  $('e').style.background='#1FA396';
  // RECORRIDO
- const J0=T.icp, J1=T.cta; $('top').style.opacity=cl(t,J0-.2,J0+.1)*(1-cl(t,J1-.2,J1));
+ const J0=T.icp, J1=T.cta; $('top').style.opacity=cl(t,J0-.2,J0+.1)*(1-cl(t,J1-.2,J1)); $('ejm').style.opacity=$('top').style.opacity;
  let cur=-1;
  STEPS.forEach((s,i)=>{const a=T[s[1]],b=end(s[1]);const el=$(s[0]);const o=win(el,t,a,b,.2);el.style.transform=`translateX(${(1-ease(cl(t,a,a+.35)))*120 - ease(cl(t,b-.25,b))*120}px)`; if(t>=a&&t<b) cur=i;});
  [...dots.children].forEach((d,i)=>d.classList.toggle('on',i<=cur));
