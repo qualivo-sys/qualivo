@@ -79,6 +79,6 @@ A las 15:00 cada uno de los 4 tiene que casar con una objeción **literal** de G
 
 Lo que sí usa todo el mundo, y se evita: «leads cualificados» como promesa genérica, «más de X clientes» como autoridad (no tenemos cifra con fuente) y resultados con plazo.
 
-**Formatos:** el vídeo es mayoría en los que aguantan más tiempo (13 de 21) [C, contado en la tabla de Paid]. La imagen con texto largo es la que más días aguanta: 317 días, Ted Gravlin [C].
+**Formatos:** el vídeo es mayoría en los que aguantan más tiempo (15 de 21) [C, contado en la tabla de Paid]. La imagen con texto largo es la que más días aguanta: 317 días, Ted Gravlin [C].
 
 **Estado a las 13:00:** las objeciones literales de Growth (11:00) todavía no están en ningún archivo del repositorio. Las pido por Paid. Sin ellas, a las 15:00 los ganchos se atan a objeciones **probables**, marcadas [E].
