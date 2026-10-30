@@ -12,21 +12,24 @@
 
 | Semana | Narrativa | Pieza base A | Pieza base B | Tercera (opcional) |
 |---|---|---|---|---|
-| S45 · 2-8 | Pagas por contactos. ¿Pero son oportunidades? | **Nueva:** escena de formación: preguntan por un curso, no encajan requisitos u horario y nadie distingue interés de matrícula posible | **C4 «Déjanos tus datos y te llamamos»**, ajustar apertura: qué pregunta del formulario da contexto antes de llamar | **C5 «No lo sé»** con el copy del brief (§6), puente con Paid |
-| S46 · 9-15 | Te piden información y después desaparecen | **V3 «Día 2, día 5, día 10»** (reformas, presupuesto sin siguiente paso), grabado el 29-oct | **C7 «Llámame en enero»** (B2B): responsable, motivo y próximo paso | **C3 «Pidió cita a las 21:14»** (clínica), contraste, si cabe |
-| S47 · 16-22 | Tus campañas funcionan, pero el negocio no crece | **C8 «Un anuncio también se cansa»**, reorientar: «el coste por contacto baja y las ventas no suben» (sin causalidad del CTR) | **V1 «Reservada, celebrada y con encaje»** (separa reserva, asistencia y oportunidad), grabado el 29-oct | Lectura de una cohorte con «datos de ejemplo» |
-| S48 · 23-29 | Antes de gastar más, descubre qué arreglar | **Nueva:** «Cada uno tiene su explicación» (marketing, ventas y dirección; ninguna contrastada) | **Nueva:** mapa de prioridad: motivo, impacto, esfuerzo y confianza en los datos | «Qué aprendí analizando un embudo», experiencia propia sin clientes |
+| S45 · 2-8 | Pagas por contactos. ¿Pero son oportunidades? | **C4**, lun 2-nov: escena de formación (preguntan por un curso y no encajan); apertura ajustada | **C5 «No lo sé»**, mié 4-nov: copy del brief (§6), puente con Paid | — |
+| S46 · 9-15 | Te piden información y después desaparecen | **V3 «Día 2, día 5, día 10»**, mar 10-nov (reformas), grabado el 29-oct | **C7 «Llámame en enero»**, mié 11-nov (B2B) | C3 (clínica), solo si aporta algo distinto |
+| S47 · 16-22 | Tus campañas funcionan, pero el negocio no crece | **C8 reorientado**, lun 16-nov: «El coste por contacto ha bajado. Las ventas, no.» (sin cifra de CTR) | **V1**, mar 17-nov: reservada, celebrada y con encaje; apertura en el montaje | — |
+| S48 · 23-29 | Antes de gastar más, descubre qué arreglar | **C9 nuevo**, lun 23-nov: «Cada uno tiene su explicación» | **C10 nuevo**, mié 25-nov: «Qué arreglar primero» (la única con invitación comercial) | «Qué aprendí analizando un embudo», experiencia propia sin clientes |
 
 **Clasificación del resto:**
 
 | Pieza | Decisión | Motivo |
 |---|---|---|
-| C1 «Los leads de Meta son malos» | Conservar (aprobado) | Abre el mes; encaja con S45 |
+| C1 «Los leads de Meta son malos» | Conservar (aprobado, 28-oct) | Abre el mes; encaja con S45 |
 | C2 «Presupuesto gratis» | Reserva | Encaja con S45, pero la semana ya tiene A, B y tercera; habla del anuncio, no del empresario |
 | C6 «Todo en la misma página» | Reserva | Mecanismo de anuncio y landing; no tiene hueco en las narrativas |
 | V2 y V4 | Reserva / diciembre | V2 podía parecer un caso real; V4 carga noviembre de automatización |
 | Newsletters 1 (5-nov) y 2 (12-nov) | Fusionar en la mensual de Growth | Brief: una sola newsletter al mes |
 | Vídeo «Cómo le contamos a Meta quién llegó» y diagnóstico en pantalla | Reserva | Con 2 piezas por semana no hay hueco; V1 ya cubre S47 |
+| Grabación del 5-nov | Solo si hace falta | V1 y V3 ya están grabados |
+
+**En Notion (30-oct):** cada ficha lleva la sección «Revisión · cliente protagonista» con la decisión, y C4, C5, C8, C9 y C10 llevan el texto propuesto. Láminas que rehacer (Creative): C4 1-2, C5 1, 2 y 5, C8 todas, C9 y C10 nuevas.
 
 Cada ficha recibe la sección **«Revisión · cliente protagonista»** con: público, escena, tesis, gancho, láminas, acción útil, cierre, fuente o «ejemplo ilustrativo», conexión con blog o newsletter, canal, fecha, responsable y métrica. Los originales no se borran.
 
