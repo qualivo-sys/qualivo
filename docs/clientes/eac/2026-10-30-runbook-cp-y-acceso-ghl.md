@@ -80,3 +80,11 @@ New 2026 no hace las preguntas de cualificación del v3 (en qué punto estás y 
   - Comprobar si los contactos del v3 (`lead-tcp`) entran en el workflow de reserva.
   - Medir las citas del experimento de la Parte 1.
 - **Rotación:** revocar el token cuando termine la auditoría o rotarlo cada 90 días.
+
+## Registro de ejecución
+
+| Fecha (UTC) | Quién | Qué | Comprobado |
+|---|---|---|---|
+| 30-oct 12:05 | CoS (`session_01NNCtoKFYwvEDk4WP8zWyNJ`), con el OK de Maikel en su chat | Los 3 pasos de la Parte 1: anuncio nuevo `52663804883713` «ad02 regis_video · New2026 · 30oct» con la creatividad `1985400128724595` en el conjunto `6875325518909`; CP `6506611992909` a 40 $/día; CAT_PROSPECCIO `52663064493113` pausada | Sesión de auditoría, 30-oct 12:06 UTC: anuncio en PENDING_REVIEW con la creatividad correcta; CP con `daily_budget` 4000 y ACTIVE; CAT en PAUSED [C] |
+| 31-oct ~12:45 | Sesión de auditoría | Medición a las 24 h | pendiente |
+| 1-nov ~12:45 | Sesión de auditoría | Medición a las 48 h y veredicto | pendiente |
