@@ -7,7 +7,7 @@ import json, os, sys, unicodedata
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(AQUI, '../../../produccion/video-anuncios'))
 GUION = json.load(open(f'{AQUI}/guion.json'))
-ADELANTO, COLA = 0.15, 2.6
+ADELANTO, COLA = 0.15, 4.0
 def norm(w):
     w = unicodedata.normalize('NFD', w.lower()); return ''.join(c for c in w if c.isalnum() and unicodedata.category(c) != 'Mn')
 VZ = sys.argv[2] if len(sys.argv) > 2 else ''

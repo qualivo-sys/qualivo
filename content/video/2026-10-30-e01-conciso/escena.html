@@ -220,6 +220,12 @@ html,body{background:#000}
 .ad{font-size:34px!important;grid-template-columns:1fr 130px 200px!important}
 .demo{font-size:24px!important}
 #top .n{font-size:46px!important}
+
+.vb{position:absolute;left:40px;right:40px;font-size:38px;line-height:1.3;font-weight:700;text-align:center;opacity:0}
+.vb.ag{top:640px;color:var(--cr)}.vb.ag i{font-style:normal;color:var(--y)}
+.vb.le{top:780px;color:#25D366}
+.lk{margin-top:22px;border-radius:18px;background:rgba(229,72,77,.14);border:3px solid rgba(229,72,77,.6);padding:18px 22px;font-size:30px;font-weight:800;color:#F87171;opacity:0}
+.calok h3{font-size:58px!important}.calok p{font-size:30px!important}.calok .k{font-size:24px!important}
 </style>
 <style>
 .qa{position:absolute;right:24px;top:0;background:var(--bk);color:var(--y);font-family:Anton;font-size:30px;text-transform:uppercase;padding:12px 20px;border-radius:14px;opacity:0;letter-spacing:.03em}
@@ -266,16 +272,21 @@ html,body{background:#000}
    <div class="bub in q" id="w3" style="top:420px">¿Lo harías de una vez o a plazos?<div class="t">10:17</div></div>
    <div class="bub out" id="w4" style="top:570px">A plazos, mejor<div class="t">10:18 ✓✓</div></div>
    <div class="bub in" id="w5" style="top:700px;background:var(--bk);color:var(--y);font-weight:700">✓ Cualificada · intención alta → llamada mañana 10:00</div></div></div></div>
+  <div class="sc" id="s_vz"><div class="chip" style="left:110px;top:-55px">Agente de voz<small>demostración simulada</small></div><div class="box wab"><div class="call"><div class="av">A<div class="ring" id="ring"></div></div><h2>Tu academia</h2><p id="cdur">00:08</p><div class="wave" id="wave"></div>
+   <div class="vb ag" id="vq1">«¿Te interesa el curso <i>online o presencial?</i>»</div>
+   <div class="vb le" id="vq2">«Online, porque estoy trabajando.»</div></div>
+   <div class="calok" id="crm"><div class="chk">✓</div><div class="k">Ficha en el CRM · Laura</div><h3>Modalidad: online</h3><p>Preferencia registrada</p></div></div></div>
   <div class="sc" id="s_pa"><div class="box pa"><div class="k">Tu panel · este mes</div><div class="k2">DE CADA ANUNCIO A CADA VENTA</div>
    <div class="fr"><span>Contactos</span><div class="fb"><i id="b1"></i></div><em id="n1">0</em></div>
-   <i id="b2" style="display:none"></i><em id="n2" style="display:none"></em>
-   <div class="fr"><span>Citas</span><div class="fb"><i id="b3"></i></div><em id="n3">0</em></div>
+   <div class="fr"><span>Cualificados</span><div class="fb"><i id="b2"></i></div><em id="n2">0</em></div>
+   <div class="fr"><span>Reuniones</span><div class="fb"><i id="b3"></i></div><em id="n3">0</em></div>
    <div class="fr"><span>Ventas</span><div class="fb"><i id="b4"></i></div><em id="n4">0</em></div>
-   <div class="ads"><div class="ad" style="opacity:1;color:var(--mut);font-size:20px;letter-spacing:.12em">ANUNCIO<span>CITAS</span><span>VENTAS</span></div>
+   <div class="lk" id="lk">● Aquí se pierden: entre cualificado y reunión</div>
+   <div class="ads"><div class="ad" style="opacity:1;color:var(--mut);font-size:22px!important;letter-spacing:.12em">ANUNCIO<span>REUNIONES</span><span>VENTAS</span></div>
     <div class="ad" id="a1">Ángulo · tiempo<span>9</span><span class="g">4</span></div>
     <div class="ad" id="a2">Ángulo · trabajo<span>6</span><span class="g">3</span></div>
     <div class="ad" id="a3">Ángulo · precio<span>2</span><span class="r">0 · pausar</span></div></div>
-   <div class="demo">Datos de ejemplo</div></div></div>
+   <div class="demo">Datos de demostración · no son resultados de clientes</div></div></div>
  </div>
  <div id="cap" class="A"></div>
  <div class="lay" id="BEN"><h1 class="A">Así puedes <i>decidir con datos.</i></h1>
@@ -294,7 +305,8 @@ function zoom(el,t,a,d=.35){const k=cl(t,a,a+d);el.style.opacity=Math.min(1,k*2)
 const T=window.TI, Wd=T.W, w=(x,d)=>(Wd[x]!==undefined?Wd[x]:d)-.05;
 const flow=$('flow'), D=[]; for(let i=0;i<30;i++){const d=document.createElement('div');d.className='fd';flow.appendChild(d);D.push({el:d,dl:i*.11,ok:i%10===0,dx:(Math.random()-.5)*260});}
 for(let i=0;i<12;i++) $('wv').appendChild(document.createElement('i'));
-const STEPS=[['s_ads','d1','d2',1,'Captación','Atraemos oportunidades <i>con más potencial.</i>'],['s_wa','d2','d3',2,'Cualificación','Las atiende y <i>cualifica en minutos.</i>'],['s_pa','d3','ben',3,'Seguimiento comercial','Sabes <i>qué está funcionando.</i>']];
+for(let i=0;i<22;i++) $('wave').appendChild(document.createElement('i'));
+const STEPS=[['s_ads','d1','d2',1,'Captación','Atraemos oportunidades <i>con más potencial.</i>'],['s_wa','d2','vz',2,'Cualificación','Responde y <i>cualifica en minutos.</i>'],['s_vz','vz','d3',2,'Cualificación','Pregunta, escucha <i>y lo registra.</i>'],['s_pa','d3','ben',3,'Seguimiento comercial','Ves qué funciona <i>y dónde se pierden.</i>']];
 const dots=$('dots'); STEPS.forEach(()=>dots.appendChild(document.createElement('i')));
 window.setT=function(t){
  // gancho
@@ -327,9 +339,17 @@ window.setT=function(t){
  if(cur>=0){const s=STEPS[cur];$('tn').innerHTML='<b>'+s[3]+'</b>'+s[4];const a=T[s[1]],b=T[s[2]];$('cap').innerHTML=s[5];$('cap').style.opacity=cl(t,a+.35,a+.65)*(1-cl(t,b-.2,b));$('cap').style.transform=`translateY(${(1-ease(cl(t,a+.35,a+.65)))*30}px)`;}else $('cap').style.opacity=0;
  ['ad1','ad2','ad3'].forEach((a,i)=>{const k=ease(cl(t,T.d1+.15+i*.25,T.d1+.55+i*.25));$(a).style.opacity=k;$(a).style.transform=`translateY(${(1-k)*200}px) rotate(${(i-1)*(4-4*k)}deg)`;});
  zoom($('aim'),t,T.d1+1.2);
- ['w1','w2','w3','w4'].forEach((x,i)=>pop($(x),t,T.d2+.3+i*.6,20)); zoom($('w5'),t,T.d2+2.8);
+ ['w1','w2','w3','w4'].forEach((x,i)=>pop($(x),t,T.d2+.15+i*.42,20)); zoom($('w5'),t,T.d2+1.85);
  [[100,46],[62,28],[38,17],[20,9]].forEach((v,i)=>{const k=ease(cl(t,T.d3+.3+i*.25,T.d3+1.1+i*.25));$('b'+(i+1)).style.width=(v[0]*k)+'%';$('n'+(i+1)).textContent=Math.round(v[1]*k);});
- ['a1','a2','a3'].forEach((a,i)=>pop($(a),t,w('comerciales',T.d3+2)+i*.35,14));
+ ['a1','a2','a3'].forEach((a,i)=>pop($(a),t,w('comerciales',T.d3+2)+.5+i*.35,14));
+ pop($('lk'),t,T.d3+1.4,14);
+ // agente de voz
+ const V0=T.vz; const rk=((t-V0)%1.1)/1.1; $('ring').style.transform=`scale(${1+rk*.5})`; $('ring').style.opacity=1-rk;
+ $('cdur').textContent='00:'+String(8+Math.floor(Math.max(0,t-V0))).padStart(2,'0');
+ [...$('wave').children].forEach((b,i)=>{const talk=(t>V0+.3&&t<V0+2.0)||(t>V0+2.2&&t<V0+3.4);b.style.height=talk?(20+Math.abs(Math.sin(t*9+i*.7))*90*(.5+.5*Math.sin(i)))+'px':'20px';b.style.background=(t>V0+2.2&&t<V0+3.4)?'#25D366':'';});
+ pop($('vq1'),t,V0+.3,20); pop($('vq2'),t,V0+2.2,20);
+ const ck=ease(cl(t,V0+3.3,V0+3.8)); $('crm').style.opacity=ck; $('crm').style.transform=`translateY(${(1-ck)*300}px)`;
+ $('vq1').style.opacity*=1-ck; $('vq2').style.opacity*=1-ck;
  // beneficio
  win($('BEN'),t,T.ben-.1,T.cta,.25); $('BEN').style.background='#1FA396';
  pop($('bn1'),t,w('detectar',T.ben+1)); pop($('bn2'),t,w('mejorar',T.ben+3)); pop($('bn3'),t,w('decidir',T.ben+5));
