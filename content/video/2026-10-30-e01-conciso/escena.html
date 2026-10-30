@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="es"><meta charset="utf-8">
 <!-- E-01 versión concisa (guion de Maikel, 30-oct): gancho → 3 fugas → tres partes (protagonista) → demostración (anuncios, WhatsApp que cualifica, panel) → beneficio → CTA. -->
-<script src="tiempos.js"></script>
+<script>window.VZ=(location.hash||'').slice(1);document.write('<script src="tiempos'+(window.VZ?'_'+window.VZ:'')+'.js"><\/script>');</script>
 <style>
 @font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
 @font-face{font-family:SG;src:url(../../anuncios/2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2')}
@@ -204,6 +204,22 @@ html,body{background:#000}
 .col3 div{flex:1;border-radius:14px;background:rgba(10,10,11,.1)}
 .col3 div.w{background:rgba(14,124,116,.25)}
 .mv{position:absolute;top:70px;width:52px;height:52px;border-radius:12px;background:var(--bk);color:var(--y);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:30px}
+
+/* legibilidad en móvil (Maikel, 30-oct) */
+#stage{transform:scale(.93)!important}
+#cap{top:1350px!important}
+.bub{font-size:36px!important;width:600px!important}
+.bub.out{width:auto!important}
+.bub .t{font-size:22px!important}
+.wah b{font-size:38px!important}
+.chip{font-size:38px!important}.chip small{font-size:26px!important}
+.adt .an{font-size:36px!important}
+.pa .k{font-size:28px!important}.pa .k2{font-size:26px!important}
+.fr{font-size:38px!important;grid-template-columns:240px 1fr 80px!important}
+.fb{height:60px!important}
+.ad{font-size:34px!important;grid-template-columns:1fr 130px 200px!important}
+.demo{font-size:24px!important}
+#top .n{font-size:46px!important}
 </style>
 <style>
 .qa{position:absolute;right:24px;top:0;background:var(--bk);color:var(--y);font-family:Anton;font-size:30px;text-transform:uppercase;padding:12px 20px;border-radius:14px;opacity:0;letter-spacing:.03em}
@@ -252,7 +268,7 @@ html,body{background:#000}
    <div class="bub in" id="w5" style="top:700px;background:var(--bk);color:var(--y);font-weight:700">✓ Cualificada · intención alta → llamada mañana 10:00</div></div></div></div>
   <div class="sc" id="s_pa"><div class="box pa"><div class="k">Tu panel · este mes</div><div class="k2">DE CADA ANUNCIO A CADA VENTA</div>
    <div class="fr"><span>Contactos</span><div class="fb"><i id="b1"></i></div><em id="n1">0</em></div>
-   <div class="fr"><span>Cualificados</span><div class="fb"><i id="b2"></i></div><em id="n2">0</em></div>
+   <i id="b2" style="display:none"></i><em id="n2" style="display:none"></em>
    <div class="fr"><span>Citas</span><div class="fb"><i id="b3"></i></div><em id="n3">0</em></div>
    <div class="fr"><span>Ventas</span><div class="fb"><i id="b4"></i></div><em id="n4">0</em></div>
    <div class="ads"><div class="ad" style="opacity:1;color:var(--mut);font-size:20px;letter-spacing:.12em">ANUNCIO<span>CITAS</span><span>VENTAS</span></div>
@@ -288,16 +304,21 @@ window.setT=function(t){
   d.el.style.left=x+'px';d.el.style.top=y+'px';d.el.style.opacity=p>0&&p<1?1:(d.ok&&p>=1?1:0);d.el.style.background=(!d.ok&&p>.55)?'#E5484D':(d.ok&&p>.9?'#1FA396':'#F4F1EB');
   if(d.ok&&p>=1){d.el.style.left=(470+(i/10)*60)+'px';d.el.style.top='380px';}});
  // fugas
- win($('L2'),t,T.p1,T.sis,.25);
+ win($('L2'),t,T.p1,T.sis+.2,.5); document.querySelectorAll('#L2 .node .c').forEach(c=>c.style.opacity=1-cl(t,T.sis-.45,T.sis-.2));
  ['p1','p2','p3'].forEach((k,i)=>{const c=$('c'+(i+1));c.classList.toggle('on',t>T[k]+.2);const z=ease(cl(t,T[k]+.2,T[k]+.5));c.style.transform=`scale(${1+.15*Math.sin(z*Math.PI)})`;});
  // tres partes (protagonista)
- const ov=cl(t,T.sis-.2,T.sis+.1)*(1-cl(t,T.d1-.3,T.d1)); $('OV').style.opacity=ov; $('OV').style.background=ov?'#1FA396':'';
+ const ov=cl(t,T.sis-.45,T.sis-.25)*(1-cl(t,T.d1-.3,T.d1)); $('OV').style.opacity=ov; $('OV').style.background=`rgba(31,163,150,${cl(t,T.sis+.1,T.sis+.9)})`;
  const lit=[w('captacion',T.sis+3),w('cualificacion',T.sis+4),w("comercial",T.sis+5.6)-.6];
- ['k1','k2','k3'].forEach((k,i)=>{$(k).classList.toggle('on',t>lit[i]);const z=ease(cl(t,lit[i],lit[i]+.3));$(k).style.transform=`translateX(${(1-ease(cl(t,T.sis+.2+i*.15,T.sis+.6+i*.15)))*-1100}px) scale(${1+.05*Math.sin(z*Math.PI)})`;});
+ const mk=ease(cl(t,T.sis-.1,T.sis+1.1)); const NX=[180,540,900], CY=[700,1020,1340];
+ ['k1','k2','k3'].forEach((k,i)=>{$(k).classList.toggle('on',t>lit[i]);const z=ease(cl(t,lit[i],lit[i]+.3));
+  $(k).style.transform=`translate(${(NX[i]-540)*(1-mk)}px,${(935-CY[i])*(1-mk)}px) scale(${(.22+.78*mk)*(1+.05*Math.sin(z*Math.PI))})`;
+  $(k).style.borderRadius=(40+(1-mk)*100)+'px'; $(k).style.background=mk<1?`rgba(229,72,77,${.85*(1-mk)})`:''; });
+ document.querySelectorAll('#OV .conn').forEach(c=>c.style.opacity=mk);
+ $('ovt').style.opacity=cl(t,T.sis+.6,T.sis+1.0);
  $('cn1').style.height=(40*ease(cl(t,lit[1]-.4,lit[1])))+'px'; $('cn2').style.height=(40*ease(cl(t,lit[2]-.4,lit[2])))+'px';
  [...$('wv').children].forEach((b,i)=>{b.style.height=(t>lit[1]?10+Math.abs(Math.sin(t*8+i))*50:10)+'px';});
  $('mv').style.left=(4+ease(cl(t,lit[2]+.1,lit[2]+1.1))*150)+'px';
- const hb=ease(cl(t,T.d1-1.1,T.d1-.4)); $('ovw').style.transform=`scale(${1-hb*.04})`; // respiración antes de la demo
+ const hb=ease(cl(t,T.d1-.8,T.d1)); $('ovw').style.transformOrigin='50% 1020px'; $('ovw').style.transform=`scale(${1+hb*.25})`; // respiración antes de la demo
  // demostración
  let cur=-1;
  STEPS.forEach((s,i)=>{const a=T[s[1]],b=T[s[2]];const el=$(s[0]);win(el,t,a,b,.2);el.style.transform=`translateX(${(1-ease(cl(t,a,a+.35)))*120-ease(cl(t,b-.25,b))*120}px)`;if(t>=a&&t<b)cur=i;});
