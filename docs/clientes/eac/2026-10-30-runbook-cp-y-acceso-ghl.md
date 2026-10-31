@@ -86,5 +86,5 @@ New 2026 no hace las preguntas de cualificación del v3 (en qué punto estás y 
 | Fecha (UTC) | Quién | Qué | Comprobado |
 |---|---|---|---|
 | 30-oct 12:05 | CoS (`session_01NNCtoKFYwvEDk4WP8zWyNJ`), con el OK de Maikel en su chat | Los 3 pasos de la Parte 1: anuncio nuevo `52663804883713` «ad02 regis_video · New2026 · 30oct» con la creatividad `1985400128724595` en el conjunto `6875325518909`; CP `6506611992909` a 40 $/día; CAT_PROSPECCIO `52663064493113` pausada | Sesión de auditoría, 30-oct 12:06 UTC: anuncio en PENDING_REVIEW con la creatividad correcta; CP con `daily_budget` 4000 y ACTIVE; CAT en PAUSED [C] |
-| 31-oct ~12:45 | Sesión de auditoría | Medición a las 24 h | pendiente |
+| 31-oct 12:46 | Sesión de auditoría | Medición a las 24 h | Desde el 30-oct a las 12:05 UTC, el anuncio nuevo trae **14 envíos de New 2026**; `ad02 regis` (v3) no trae ninguno [C]. Gasto de CP en los dos anuncios: unos 59 $ (52,13 $ el nuevo, con CTR 1,33 % y CPM 2,67 $; 7,04 $ `ad02 regis`), lo que da **unos 4,2 $ por lead** [C/E: el gasto de `ad02 regis` incluye el tramo del 30-oct anterior al cambio]. Aprendizaje del conjunto: SUCCESS [C]. El umbral de 48 h (12 o más) ya se cumple a las 24 h → **causa confirmada** [C] |
 | 1-nov ~12:45 | Sesión de auditoría | Medición a las 48 h y veredicto | pendiente |
