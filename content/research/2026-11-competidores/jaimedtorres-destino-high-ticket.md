@@ -45,3 +45,24 @@
 ## Cómo encaja con nosotros
 - No compite de frente: él vende contenido y oferta (antes del anuncio y el propio anuncio); nosotros, lo que pasa después del anuncio hasta la venta.
 - Sí compite por el mismo cliente si lanzamos la línea de infoproductores: le habla al mismo avatar y con el mismo argumento de Claude.
+
+## Qué anuncios le funcionan mejor (1-nov, historial completo de su página)
+> 240 anuncios desde oct-2025, 102 activos. La Biblioteca no da gasto ni impresiones útiles (todas salen como «<100»), así que uso dos señales indirectas: **cuántos días lo ha dejado activo** y **cuántas copias del mismo anuncio ha lanzado**. Duplicar mucho y mantenerlo activo suele querer decir que rinde. [E]
+
+| Señal | Anuncio | Copias | Días activo | Destino |
+|---|---|---|---|---|
+| El que está escalando ahora | «Monto con Claude un sistema para que tu contenido se produzca casi solo, sin pasarte horas editando. Pulsa el botón, mira el vídeo y agenda una llamada…» | 27, todas activas | lanzado el 30-oct | web + VSL |
+| Su caballo de batalla de siempre | «Sigue a @jaimedtorres para…» (anuncios para ganar seguidores) | 2-3 por versión | 184, 159, 117 y 63 días | perfil de Instagram |
+| Escalado en mayo y apagado | «Vender high ticket por redes no va de publicar más…» / «Antes bastaba con lanzar un anuncio rápido…» | 33 y 34 | 29 y 20 días | formulario de Meta |
+| Escalado en feb-mar | «Si vendes mentorías… y dependes de lanzamientos o de tráfico frío a una VSL, tienes un problema» | 20 | 16 días | web |
+| Test del 21-oct, todavía vivo | Cinco conceptos: 2.500 € = 4 ventas · «Tú cierras, tú entregas…» · «Buscamos 3 marcas» · «Skool low ticket» · «14 agentes» | 9-11 cada uno (solo ha apagado 1 copia de cada) | 11 días | web |
+| Variantes sueltas del 26-28 oct | «18 agentes…», «este anuncio lo ha editado Claude», «150 trial reels…», «¿Te cuesta superar los 10k?»… | 1-2 cada una | 4-6 días | web |
+
+**Cómo trabaja [E]:**
+1. Lanza tandas de 5 conceptos con unas 10 copias cada uno.
+2. A los pocos días prueba variantes sueltas.
+3. Cuando una gana, la relanza con unas 25-30 copias.
+4. Mantiene siempre encendidos los anuncios para ganar seguidores, que alimentan el orgánico y el retargeting.
+5. Ha pasado de formulario de Meta (mayo) a web + vídeo + agenda (octubre).
+
+**El mensaje que gana ahora [E]:** el más simple y concreto, el ahorro de tiempo («tu contenido se produce casi solo, sin pasarte horas editando»), más una sola instrucción. Ya no usa las cifras grandes de mayo («+26.000 € en el primer mes»).
