@@ -140,3 +140,24 @@ La oferta (diagnóstico gratis), el formulario y el rótulo «sus clientes pagan
 - **B:** hipótesis: el seguimiento es el dolor más concreto y atrae a quien ya invierte. Mide el coste por apto.
 - **C:** hipótesis: enseñar el filtro baja el volumen y sube el porcentaje de aptos. Mide el porcentaje de aptos sobre envíos (hoy, 2 de 5 [C]).
 - **Para los tres:** el mismo formulario, el mismo presupuesto y sin casos de clientes. Lanzamiento el lunes, solo con el OK de Maikel.
+
+---
+
+## Revisión de Growth (1-nov) sobre el anuncio «recorrido» y lo que aplica a E-03
+Fuente: llamadas del 30-oct con Anna (BSC) y Carolina (C.A Makeup) y respuestas del formulario. Es opinión de Growth; decide Maikel. Objeciones literales: `content/research/2026-11-competidores/objeciones.md` (rama `claude/qualivo-landing-vercel-nubk1i`, commit 47b5aaba).
+
+- **Dolores reales:** «nadie contesta a tiempo» y «el que agenda no se presenta».
+- **Dolores débiles:**
+  - «tu anuncio habla para todos»: las dueñas dicen que la creatividad ya la llevan ellas;
+  - «el formulario solo pide nombre y teléfono»: preguntar mucho «huele a gurú».
+- **Dolor que más repiten:** «no sé qué anuncio me trae alumnos, solo contactos». Anna: «no tengo un buen panel de control».
+- **Lenguaje del sector:** «matrículas» o «se apunten», mejor que «compran» o «ventas». Una lead: «que los que entran se apunten todos».
+- **Panel:** es lo que más gusta («Me encantaría tener un panel así»). Merece más tiempo.
+- **Agente de voz:** hay rechazo («prefiero contratar a dos personas más para llamar»). Conviene decir que es opcional: «o, si lo prefieres, te avisa a ti para que llames tú».
+- **Grabación de llamadas:** la piden por motivos legales. Se puede contar como «cada llamada, grabada y resumida».
+- **Rótulo de 500 €:** para Growth está bien.
+
+**Impacto en E-03 (para decidir con Maikel antes de la siguiente versión, sin tocar lo que está en circulación):**
+- La fuga 1 («Atraes a quien no encaja») y la 2 («No sabes quién quiere comprar») se pueden cambiar por «No sabes qué anuncio te trae alumnos» y «Nadie contesta a tiempo».
+- En el gancho, «y no se apuntan» en lugar de «y no compran».
+- En el agente de voz, añadir «o te avisa a ti».
