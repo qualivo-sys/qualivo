@@ -167,7 +167,9 @@ const FORMULARIOS_SECTOR = {
   // 19-oct-2026: test de cualificación de formación (21-31 oct). La copia es la que lleva el anuncio.
   // Sin estas entradas el rescate no los miraba y el primer lead apto (22-oct) no llegó al CRM.
   '2063720777591278': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' },
-  '1419526843110847': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' }
+  '1419526843110847': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' },
+  // 1-nov-2026: formulario corto de formación (2 preguntas: ticket del alumno e inversión), para el anuncio de Javier (E-03).
+  '1426444132403939': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-corto' }
 };
 
 async function nombreFormulario(formId) {
@@ -225,7 +227,7 @@ async function guardar(lead, opts) {
   const web = valor(campos, ['website', 'web', 'sitio_web']);
   // Meta devuelve la CLAVE de la opción elegida, no el texto que ve el usuario.
   const CLAVES_INV = {
-    nada: 'Nada todavía', menos500: 'Menos de 500 €', '500_2000': 'Entre 500 y 2.000 €',
+    nada: 'Nada todavía', menos500: 'Menos de 500 €', '500_2000': 'Entre 500 y 2.000 €', '500_1500': 'Entre 500 y 1.500 €', mas1500: 'Más de 1.500 €',
     '2000_5000': 'Entre 2.000 y 5.000 €', mas5000: 'Más de 5.000 €'
   };
   const CLAVES_FUGA = {
