@@ -140,3 +140,54 @@ Variante E: «seguir» = ≥ 5 con el problema confirmado y **≥ 1 propuesta ac
 5. **¿De dónde salen tus 2 h semanales?** Propuesta: de la revisión de las adaptaciones a Instagram y de los artículos nuevos del blog, hasta el 30-nov. Era el 8.1 de `03`, todavía pendiente de decisión.
 
 Las demás preguntas de `06` (casos y permisos, «más de 100 funnels», Equipzilla, marca, cuenta de Meta) **no hacen falta para el experimento**. Se quedan para después del 30-nov si se sigue. La de permisos y casos publicados ya la lleva el Chief of Staff con Growth.
+
+---
+
+## 7 · Referente: GTM School (Pau Llambí y WaLead). Qué copiar y qué no
+
+**Encargo:** Maikel, vía Growth, 2-nov. **Fuente:** análisis de Growth en `content/research/2026-11-competidores/pau-llambi-gtm-school.md` (rama `claude/qualivo-landing-vercel-nubk1i`). Sin datos de ventas ni de gasto: **no se sabe si su modelo es rentable**, solo cómo está montado [C].
+
+### 7.1 Su escalera frente a la nuestra
+
+| Escalón | GTM School [C] | Qualivo (`2 ter`) [H] |
+|---|---|---|
+| Captación | Reel casi diario con «Comenta PALABRA» → mensaje directo con un recurso. Anuncios con ~40 textos | Entrevistas 1 a 1 con la red de Maikel. Sin contenido nuevo ni anuncios |
+| Entrada | **Clase gratuita con fecha**, con regalos solo para quien asiste en directo | Imán (lista de comprobación), sin construir |
+| Producto principal | **Máster de 16 semanas** en directo, 32 sesiones, licencia de WaLead 12 meses, titulación con insignia de LinkedIn. **Precio en llamada** | Programa de 6 semanas, máx. 12, con precio público de 1.200-1.800 € + IVA. Se prueba con un depósito de 100 € |
+| Siguiente | «Agency Scaling: escala tu agencia a +20K al mes» (lista de espera) | Licencia anual de plantillas |
+| Salida | Agencia (Marketers Group, 23 personas) y SaaS (WaLead) | Derivación al servicio de Qualivo |
+| Autoridad | Evento presencial con José Elías, casos en vídeo, logos de grandes marcas | Sistema propio en producción. Sin casos con permiso todavía |
+
+**Lo que dice de nuestro avatar:**
+- **Va a por el mismo público:** agencias a las que enseña a vender un servicio nuevo a 5.000-8.000 € por cliente [C].
+- **Es una señal a favor:** alguien con recursos invierte para vender formación a agencias en España. No es una prueba de que paguen.
+- **También es competencia por la atención.** Lo nuestro se diferencia en el contenido: ellos enseñan **prospección saliente** (outbound) y nosotros **lo que pasa con el lead que ya entra** [C, Growth].
+
+### 7.2 Qué copiar
+
+| Qué | Por qué | Cuándo |
+|---|---|---|
+| **El presupuesto real desglosado** como argumento («diagnóstico X €, implantación Y €, mensualidad Z €») | Es concreto y creíble, y no promete ingresos: enseña lo que se cobra, no lo que se gana | **Ya, dentro del experimento:** en la oferta de una página, con los precios de las propuestas de Qualivo como ejemplo y sin nombre de cliente. Coste: 0 h extra |
+| **Clase gratuita con fecha y regalos solo en directo** | Concentra la decisión en un día y premia asistir. Además, contra los plantones, que son nuestro problema medido | **Solo si el 30-nov sale «seguir».** No cabe en 2 h por semana y exige preparar material |
+| **Muchas variantes de texto** hacia una sola página y una sola fecha | Prueba ángulos con poco esfuerzo de diseño | Si se sigue y hay presupuesto aprobado. Hoy, 0 € de anuncios |
+| **«Comenta PALABRA»** con un recurso útil y entrada en el CRM con la etiqueta de la palabra | Convierte alcance en contactos medibles | **No lo decide el infoproducto.** Es del plan de Contenido y Growth para la marca de Qualivo. Si lo adoptan, el infoproducto se suma después |
+| **Un socio con producto** (como WaLead dentro del máster) | Aporta valor tangible (licencia) y reparte la captación | Pregunta para después del 30-nov. Riesgo: ata el producto a una herramienta (principio 11) |
+
+### 7.3 Qué no copiar
+
+| Qué | Por qué no |
+|---|---|
+| **Promesas de ingresos** («+20K al mes», «5.000-8.000 € por cliente») | Sin datos propios es publicidad engañosa (LGP) y choca con la política de Meta [C, `01`]. Es lo contrario del «sin promesas» que nos diferencia |
+| **Precio en llamada** | Cada venta pide una llamada de Maikel, y no caben en 2 h por semana. Para 1.200-1.800 €, el precio público basta y mide mejor la disposición a pagar |
+| **16 semanas y 32 sesiones** | Unas 2 sesiones semanales de Maikel durante 4 meses. Es un segundo trabajo |
+| **Titulación con insignia de LinkedIn** | No consta que aporte valor de compra, y añade gestión. Alternativa propia y barata, si se sigue: **«implantación verificada»** en un cliente real, que es lo que ya promete la lista de comprobación |
+| **Evento presencial y autoridad prestada** (José Elías) | Coste y horas fuera del límite, y sin audiencia propia todavía. Growth tampoco lo recomienda |
+| **Logos y casos en vídeo** | Sin permiso escrito no se puede (registro vacío) [C] |
+
+### 7.4 Un cambio al experimento (opcional, sin horas extra)
+
+Añadir **dos preguntas** al guion de entrevista:
+1. «¿Conoces programas como GTM School? ¿Te has planteado alguno? ¿Por qué sí o no?»
+2. «¿Qué te frena más: el precio, el tiempo o no saber si funcionará con tus clientes?»
+
+Así se mide si nuestro avatar ya compara con ellos y qué objeción manda. **Lo decide Maikel**; no cambia el coste ni el criterio.
