@@ -86,16 +86,20 @@ Webhook (token en cabecera) → Config → Validar y redactar → ¿válido?
 - Los nodos de envío llevan «continuar si falla»: el resumen dice qué canal salió y cuál no.
 - El código del nodo de validación también está en [`validar-y-redactar.js`](../../automatizaciones/avisar-a-maikel/validar-y-redactar.js), y se probó en local con tres casos: aviso rojo completo; aviso normal con HTML en el texto y un enlace `javascript:`, donde el HTML se escapa y el enlace se descarta; y un aviso sin título ni agente, que da 400.
 
-### Para ponerlo en marcha (Maikel, unos 10 minutos)
+### Para ponerlo en marcha (estado del 2-nov)
 
-Hasta que se hagan estos pasos, el webhook no existe. Avisa solo a Maikel, así que encenderlo no escribe a clientes ni a leads.
+**Ya está importado en n8n, apagado:** «Qualivo · Avisar a Maikel (agentes → email + WhatsApp)», id
+`6W9m6XkzH9hPoPD5`. El email sale por la credencial SMTP que ya existía («SMTP Gmail ·
+info@maikelechevarria.com»), así que no hace falta conectar Gmail.
 
-1. **Importar** `workflow.json` en n8n (*Workflows → Import from file*).
-2. **Credenciales** (en el almacén de n8n, nunca en los nodos):
-   - `Qualivo · Avisos agentes (X-Qualivo-Token)`: *Header Auth*, con nombre `X-Qualivo-Token` y como valor el token que reparte el Chief of Staff.
-   - `Qualivo · Gmail maikel@qualivo.io`: *Gmail OAuth2*, con «Sign in with Google».
-   - `Qualivo · GHL (Bearer)`: *Header Auth*, con nombre `Authorization` y valor `Bearer <token de la subcuenta Qualivo>` (el mismo `GHL_API_KEY` de Vercel vale). Permiso: `conversations/message.write`.
-3. **Activar** y lanzar el curl de prueba de arriba con `"urgencia": "normal"` y `"titulo": "Prueba del canal de avisos"`.
+**Falta, unos 3 minutos en la interfaz de n8n.** Crear credenciales por API no está permitido desde la
+sesión del agente.
+
+1. *Credentials → Add credential → Header Auth*:
+   - `Qualivo · Avisos agentes (X-Qualivo-Token)`: Name `X-Qualivo-Token`, Value: el token que reparte el Chief of Staff.
+   - `Qualivo · GHL (Bearer)`: Name `Authorization`, Value `Bearer ` + el token de la subcuenta de Qualivo (el mismo `GHL_API_KEY` de Vercel). Permiso necesario: `conversations/message.write`.
+2. Abrir el workflow y asignar la primera al nodo **«Aviso de agente»** (webhook) y la segunda al nodo **«WhatsApp a Maikel (Wazzap)»**.
+3. **Activar** y lanzar el curl de prueba de arriba con `"urgencia": "normal"` y `"titulo": "Prueba del canal de avisos"`. Tienen que llegar el email a maikel@qualivo.io y el WhatsApp al 663.
 
 ### WhatsApp sin ventana de 24 h
 

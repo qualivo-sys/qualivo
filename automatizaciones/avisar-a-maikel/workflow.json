@@ -127,8 +127,8 @@
     },
     {
       "id": "c4000000-0000-4000-8000-000000000005",
-      "name": "Email a Maikel (Gmail)",
-      "type": "n8n-nodes-base.gmail",
+      "name": "Email a Maikel (SMTP)",
+      "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
         1080,
@@ -136,22 +136,22 @@
       ],
       "onError": "continueRegularOutput",
       "parameters": {
-        "resource": "message",
-        "operation": "send",
-        "sendTo": "={{ $('Config avisos').first().json.maikel_email }}",
+        "fromEmail": "Avisos Qualivo <info@maikelechevarria.com>",
+        "toEmail": "={{ $('Config avisos').first().json.maikel_email }}",
         "subject": "={{ $('Validar y redactar').first().json.asunto }}",
-        "emailType": "html",
-        "message": "={{ $('Validar y redactar').first().json.html }}",
+        "emailFormat": "html",
+        "html": "={{ $('Validar y redactar').first().json.html }}",
         "options": {
           "appendAttribution": false
         }
       },
       "credentials": {
-        "gmailOAuth2": {
-          "id": "",
-          "name": "Qualivo · Gmail maikel@qualivo.io"
+        "smtp": {
+          "id": "2lt9aBFiTuuZWMV7",
+          "name": "SMTP Gmail · info@maikelechevarria.com"
         }
-      }
+      },
+      "notes": "Sale por la credencial SMTP que ya existe en n8n (Gmail de info@maikelechevarria.com), sin OAuth."
     },
     {
       "id": "c4000000-0000-4000-8000-000000000007",
@@ -200,7 +200,7 @@
         200
       ],
       "parameters": {
-        "jsCode": "// Junta el resultado de los dos canales. Un canal caído no tumba el otro.\nconst email = $('Email a Maikel (Gmail)').first().json;\nconst wa = $('WhatsApp a Maikel (Wazzap)').first().json;\nconst emailOk = Boolean(email.id) && !email.error;\nconst whatsappOk = Boolean(wa.messageId || wa.conversationId) && !wa.error;\nreturn [{ json: {\n  ok: emailOk || whatsappOk,\n  email: emailOk ? 'enviado' : `fallo: ${JSON.stringify(email.error || email).slice(0, 300)}`,\n  whatsapp: whatsappOk ? 'enviado' : `fallo: ${JSON.stringify(wa.error || wa).slice(0, 300)}`,\n} }];"
+        "jsCode": "// Junta el resultado de los dos canales. Un canal caído no tumba el otro.\nconst email = $('Email a Maikel (SMTP)').first().json;\nconst wa = $('WhatsApp a Maikel (Wazzap)').first().json;\nconst emailOk = !email.error && Boolean(email.accepted || email.messageId || email.response);\nconst whatsappOk = Boolean(wa.messageId || wa.conversationId) && !wa.error;\nreturn [{ json: {\n  ok: emailOk || whatsappOk,\n  email: emailOk ? 'enviado' : `fallo: ${JSON.stringify(email.error || email).slice(0, 300)}`,\n  whatsapp: whatsappOk ? 'enviado' : `fallo: ${JSON.stringify(wa.error || wa).slice(0, 300)}`,\n} }];"
       }
     },
     {
@@ -272,17 +272,6 @@
         ]
       ]
     },
-    "Email a Maikel (Gmail)": {
-      "main": [
-        [
-          {
-            "node": "WhatsApp a Maikel (Wazzap)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Resumen de envío": {
       "main": [
         [
@@ -298,7 +287,7 @@
       "main": [
         [
           {
-            "node": "Email a Maikel (Gmail)",
+            "node": "Email a Maikel (SMTP)",
             "type": "main",
             "index": 0
           }
@@ -317,6 +306,17 @@
         [
           {
             "node": "Resumen de envío",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email a Maikel (SMTP)": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp a Maikel (Wazzap)",
             "type": "main",
             "index": 0
           }
