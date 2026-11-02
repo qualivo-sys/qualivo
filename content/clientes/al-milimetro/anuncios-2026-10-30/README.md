@@ -13,7 +13,7 @@ Tres mensajes, sin vídeo y sin la cara de Sonia (decidido el 23-oct):
 | C · ¿Cuánto cuesta? | C1 (imagen y portada), C2-C4, C-story |
 
 - `piezas.html` + `render.js` regeneran los PNG: `node render.js $PWD`.
-- `fotos/ia*.jpg`: imágenes de referencia hechas con IA (Higgsfield, gpt_image_2_5, 8 imágenes, 2 créditos). **No son obras de Sonia**: cambiarlas por las suyas en cuanto lleguen. Las fotos de su web son de banco y no se usan.
+- `fotos/ia*.jpg`: imágenes de referencia hechas con IA (Higgsfield, gpt_image_2_5, 8 imágenes, 2 créditos). **No son obras de Sonia**: cambiarlas por las suyas en cuanto lleguen. Las fotos de su web de la serie «MG-» parecen de banco y no se usan. Desde el 2-nov, A1, la story A y A4 llevan fotos de su web con nombre de obra o de WhatsApp (López de Hoyos, WA0040 y Villamil), pendientes de que Sonia confirme que son suyas.
 - Encaje con el formulario de la semana 1 (Notion «Al Milímetro · materiales de la semana 1»): 6 preguntas + contacto, «desde», mínimo 15.000 €, sin locales ni arreglos sueltos.
 
 C3 (cifras «desde») queda fuera hasta que Sonia valide el Excel: C sale con 3 láminas. El formulario se abre con «Calcula tu reforma» para casar con el botón de C.
