@@ -13,17 +13,25 @@ Ficheros:
 
 ## Buzones, en una línea
 
-**3 buzones en 3 dominios `.es` nuevos en IONOS: unos 3 € el primer mes y unos 40 € el
-primer año sin IVA [E]. Se compran y configuran en 1 día, y necesitan 14 días de
-calentamiento [E]: comprados el 30-oct, envían a pleno hacia el 13-nov.**
+**3 buzones de Google Workspace en un dominio secundario nuevo, parecido a
+`kubysoft.es`: unos 20-25 € al mes más unos 12 € al año el dominio [E]. Con buzones
+precalentados envían a 10 al día en una semana [E]; con buzones nuevos, hacen falta
+unos 14 días de calentamiento [E].**
 
-Por qué 3 y no 2: `hola@kubysoft.es` no sirve para esta tanda. Está pausado, con la
-reputación al 66 % y un 5,8 % de rebotes [C, guardia del 29-oct]. 169 empresas por 3
-correos son 507 envíos. Con 3 buzones a 30 al día entran 90 empresas nuevas al día y la
-tanda arranca entera en 2 días hábiles [E]. Con 2 buzones serían 3 días. Precios de
-IONOS sacados de agregadores (dominio a unos 1 € el primer año y buzón a unos 1 € al
-mes), no de su tarifa oficial: confirmarlos al comprar. Lo compra Kubysoft, como
-`kubysoft.es`.
+*Corregido el 2-nov. La versión del 29-oct proponía buzones de IONOS, y el diagnóstico
+de Outbound del 30-oct (`bus/out/outbound-diagnostico-30oct.md`) lo descarta: el 35 %
+del calentamiento de `hola@kubysoft.es` cae en spam por el SMTP compartido de IONOS, y
+no mejora con el tiempo [C].*
+
+Por qué 3 buzones: `hola@kubysoft.es` no sirve para esta tanda. Está pausado, con la
+reputación al 62 % el 2-nov y un 5,8 % de rebotes [C, guardia]. 169 empresas por 3
+correos son 507 envíos. Con 3 buzones a 10 al día entran 30 empresas nuevas al día y la
+tanda arranca entera en 6 días hábiles [E]. Lo compra Kubysoft, como compró
+`kubysoft.es`, y lo aprueba Maikel.
+
+**Antes de enviar hay que verificar los correos**: el 5,8 % de rebote de octubre viene
+de una lista sin verificar [C, diagnóstico de Outbound]. Sin catch-all ni direcciones
+que no existan.
 
 ## La lista en cifras
 
@@ -111,7 +119,8 @@ clics posteriores al dato que se dio a Marc [E].
 ## Pendiente de OK de Maikel
 
 1. Mandar lista y mensajes a Marc.
-2. Que Kubysoft compre los 3 dominios con sus buzones.
-3. Enriquecer contactos con Apollo (unos 169 créditos) o ir al correo general.
-4. Cambiar el enlace de la campaña a la página de SAT (pendiente desde el 27-oct).
-5. Encender la alerta de 3 clics (`diseno-alerta-clics.md`).
+2. Que Kubysoft compre un dominio secundario con 3 buzones de Google Workspace.
+3. Verificar los correos de la lista antes de cargarla.
+4. Enriquecer contactos con Apollo (unos 169 créditos) o ir al correo general.
+5. Cambiar el enlace de la campaña a la página de SAT (pendiente desde el 27-oct).
+6. Encender la alerta de 3 clics (`diseno-alerta-clics.md`).
