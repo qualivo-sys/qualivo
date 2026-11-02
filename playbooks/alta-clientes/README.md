@@ -157,6 +157,20 @@ Los pasos están en el README de la carpeta.
 
 ---
 
+> **Ojo, 2-nov: ya existe un onboarding en n8n.** «Qualivo — Onboarding Cliente» (`tvy0qvnJcOYOh6UT`),
+> **activo** desde marzo. Con el webhook `qualivo-onboarding` hace esto:
+> - crea la carpeta del cliente en Drive (Contrato, Creatividades, Reportes y Accesos) y el contrato;
+> - crea en Notion la ficha del cliente y sus tareas de onboarding;
+> - **manda al cliente un email y un SMS de bienvenida por GHL**;
+> - avisa por Slack y lo apunta en Sheets.
+>
+> A1 se solaparía con la parte de Notion. Por eso **A1 no se importa** hasta decidir una de dos:
+> 1. ampliar el existente con lo de este playbook (proyecto en Todoist con las 26 tareas, página «Client OS» y lista de accesos);
+> 2. sustituirlo.
+>
+> Además, conviene revisar si su bienvenida al cliente sigue valiendo con el canal único (el email de
+> Maikel) y la regla de «nada sale sin el OK de Maikel». Lo decide el Chief of Staff o Maikel.
+
 ## 5. Lo que este playbook todavía no sabe
 
 - **Plazo real de cada acceso.** En los dos casos los accesos son lo que más retrasa. Hay que medir cuántos días pasan entre pedir y recibir en los 3 próximos arranques.
