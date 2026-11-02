@@ -166,6 +166,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (min-width:900px){.who{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px}}
 .portrait{aspect-ratio:4/5;max-width:400px;width:100%;justify-self:center;border-radius:24px;border:2px dashed var(--tinta);background:var(--arena);display:grid;place-items:center;text-align:center;padding:24px;color:var(--mut)}
 .portrait b{display:block;font-family:var(--serif);font-weight:400;font-size:26px;color:var(--tinta)}
+.portrait-img{max-width:400px;width:100%;height:auto;justify-self:center;border-radius:24px}
 blockquote{margin:0;font-family:var(--serif);font-size:clamp(26px,3vw,34px);line-height:1.2;text-wrap:balance}
 .sig{font:700 16px/1.3 var(--mono)}.sig span{display:block;font:400 15px/1.4 var(--sans);color:var(--mut)}
 
@@ -240,7 +241,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
 <body>
 
 
-<div class="draft"><div class="wrap"><b>Borrador para Sonia</b> · con tus cambios del 2 de noviembre · las fotos de «Mis obras» son de tu Instagram; el resto son de referencia hasta que tengamos las tuyas</div></div>
+<div class="draft"><div class="wrap"><b>Borrador para Sonia</b> · con tus cambios del 2 de noviembre · las fotos de «Mis obras» son de tu web y el vídeo, de tu Instagram; el resto son de referencia hasta que tengamos más tuyas</div></div>
 
 <header class="top">
   <div class="wrap">
@@ -349,10 +350,10 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
       <h2 id="h-obras">Tu reforma, <em>sin agobios.</em></h2>
       <p class="lead">¿Quieres reformar pero te da vértigo meterte en el fregado? Te acompaño en todo el proceso, de la primera visita a los últimos remates.</p>
       <div class="ogal">
-        <img src="img/obra-bano-marmol.jpg" alt="Baño reformado con porcelánico tipo mármol y grifería dorada" loading="lazy">
-        <img src="img/obra-aseo-azul.jpg" alt="Aseo con papel pintado azul de flor de almendro" loading="lazy">
-        <img src="img/obra-bano-gris.jpg" alt="Baño gris con mampara" loading="lazy">
-        <img src="img/obra-bano-espejo.jpg" alt="Baño con espejo iluminado y grifería dorada" loading="lazy">
+        <img src="img/obra-salon-lopez-de-hoyos.jpg" alt="Salón reformado, luminoso, con suelo de madera clara" loading="lazy">
+        <img src="img/obra-cocina-villamil.jpg" alt="Cocina reformada con muebles blancos y mesa de comedor" loading="lazy">
+        <img src="img/obra-bano-azul.jpg" alt="Baño reformado con mampara y azulejo azul" loading="lazy">
+        <img src="img/obra-escalera.jpg" alt="Escalera de madera reformada" loading="lazy">
       </div>
     </div>
   </div>
@@ -382,7 +383,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
 
 <section aria-labelledby="h-who">
   <div class="wrap who">
-    <div class="portrait"><div><b>Foto de Sonia</b>La que va a mandar, en blanco y negro como en su web.</div></div>
+    <img class="portrait-img" src="img/sonia.jpg" alt="Sonia, arquitecta de Al Milímetro" width="640" height="799" loading="lazy">
     <div style="display:grid;gap:22px;min-width:0">
       <span class="eb">Quién está detrás</span>
       <h2 id="h-who">Soy Sonia, arquitecta. <em style="color:var(--naranja)">Te hablo claro desde el primer día.</em></h2>
@@ -486,8 +487,7 @@ footer b{color:#fff;font:700 15px/1.3 var(--mono);display:block;margin-bottom:6p
   // «Calcula tu reforma»: 6 preguntas + contacto, con los descartes y las segundas preguntas del 23-oct
   var Q=[
     {id:'tipo',t:'¿Qué quieres reformar?',o:[
-      ['chalet','Una casa o chalet entero'],['piso','Un piso entero'],['cb','Cocina y baño de la misma vivienda'],['2b','Dos baños'],
-      ['suelto','Solo un baño o solo la cocina'],['local','Un local u oficina'],['arreglo','Arreglos sueltos','Una puerta, unos azulejos, un falso techo…']]},
+      ['chalet','Una casa o chalet entero'],['piso','Un piso entero'],['cb','Cocina y baño de la misma vivienda'],['local','Un local u oficina']]},
     {id:'zona',t:'¿Dónde está la vivienda?',input:true},
     {id:'m2',t:'¿Cuántos metros tiene, más o menos?',two:true,o:[['<50','Menos de 50 m²'],['50-80','50-80 m²'],['80-120','80-120 m²'],['120-200','120-200 m²'],['>200','Más de 200 m²']]},
     {id:'cuando',t:'¿Cuándo te gustaría empezar?',two:true,o:[['3','En menos de 3 meses'],['6','Entre 3 y 6 meses'],['mas','Más adelante'],['mirando','Solo estoy mirando precios']]},
