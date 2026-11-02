@@ -47,7 +47,7 @@ function tipologia(c) {
   let pInv = -1, mInv = '';
   if (/mas-de-2|2-000-y|mas-2000|entre-2-000|mas-de-5/.test(inv)) { pInv = 5; mInv = 'invierte más de 2.000 €'; }
   // Tramos del formulario horizontal (15-oct): 1.000-3.000 € y más de 3.000 €.
-  else if (/entre-1-000-y-3|mas-de-3-000/.test(inv)) { pInv = 5; mInv = 'invierte más de 1.000 €'; }
+  else if (/entre-1-000-y-3|entre-1-000-y-2-999|mas-de-3-000/.test(inv)) { pInv = 5; mInv = 'invierte más de 1.000 €'; }
   // Formulario corto de formación (1-nov): tramo «más de 1.500 €».
   else if (/mas-de-1-500/.test(inv)) { pInv = 5; mInv = 'invierte más de 1.500 €'; }
   else if (/entre-500|500-y-2/.test(inv)) { pInv = 4; mInv = 'invierte 500-2.000 €'; }

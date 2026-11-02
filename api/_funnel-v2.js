@@ -112,6 +112,18 @@ function reglaDinero(vol, tic) {
   return 'c';
 }
 
+// Formularios sin «quién decide» (formación, oct-nov 2026): solo las etiquetas de ticket, cuándo y problema.
+function etiquetasSueltas(campos) {
+  const out = [];
+  const tic = tramoTicket(campo(campos, CLAVES.ticket));
+  const mom = momento(campo(campos, CLAVES.momento));
+  const dol = dolor(campo(campos, CLAVES.dolor));
+  if (tic) out.push('ticket-' + tic);
+  if (mom) out.push('momento-' + mom, 'cuando-' + (mom === 'mes' ? 'este-mes' : mom === '1-3' ? '1-3-meses' : 'mirando'));
+  if (dol) out.push('dolor-' + dol);
+  return out;
+}
+
 // ¿Es un lead de los formularios nuevos?
 function esV2(campos) {
   if (process.env.FUNNEL_V2 === '0') return false;
@@ -177,4 +189,4 @@ function desdeCampos(campos, opciones) {
   return { etiquetas: etiquetas, nota: nota, tramos: { vol: vol, tic: tic } };
 }
 
-module.exports = { desdeCampos: desdeCampos, esV2: esV2, tramoVolumen: tramoVolumen, tramoTicket: tramoTicket, reglaPaid: reglaPaid, reglaDinero: reglaDinero };
+module.exports = { desdeCampos: desdeCampos, esV2: esV2, tramoVolumen: tramoVolumen, tramoTicket: tramoTicket, reglaPaid: reglaPaid, reglaDinero: reglaDinero, etiquetasSueltas };
