@@ -27,7 +27,7 @@ Tono: el de la landing y los anuncios. Habla Sonia en primera persona, de tú, c
 | A las 2 h sin respuesta (en horario) | Llamada | Asistente de voz (B) o aviso para que llame Sonia (A) | A y B |
 | Día 1 sin respuesta | WhatsApp | W5 · Día 1 | A y B |
 | Día 3 sin respuesta | WhatsApp | W6 · Día 3 | A y B |
-| Día 3 | Email | E2 · Lo que reviso antes de presupuestar | A, B y C |
+| Día 3 | Email | E2 · Lo que miramos antes de cerrar tu presupuesto | A, B y C |
 | Día 7 | Email | E3 · Cómo comparar presupuestos | A, B y C |
 | Día 14 | Email | E4 · ¿Seguimos? | B y C |
 | Al reservar la visita | WhatsApp | W7 · Confirmación de la visita | Con visita |
@@ -164,27 +164,27 @@ Remite: Sonia · Al Milímetro. Pie: dirección del negocio [A CONFIRMAR], enlac
 >
 > Gracias por contarme tu proyecto. Te explico cómo trabajo para que sepas qué esperar.
 >
-> Primero voy a ver tu casa, mido y escucho lo que quieres. Reviso también lo que no se ve (instalaciones, bajantes, suelo), que es lo que suele disparar una reforma a mitad de obra.
+> Primero voy yo a ver tu casa, mido y escucho lo que quieres.
 >
-> A los 7 días de la visita tienes el presupuesto por partidas, con materiales y plazo. Si decides seguir, coordino toda la obra: hablas solo conmigo, de la primera visita a la entrega.
+> A los 7 días de la visita tienes una primera versión del presupuesto por partidas, que vamos ajustando juntos. Cuando decides seguir, voy con un albañil a hacer una cata para ver cómo están las instalaciones y cerramos el presupuesto. Después coordino toda la obra: hablas solo conmigo, de la primera visita a la entrega.
 >
 > Si quieres reservar ya la visita, contesta a este correo o escríbeme por WhatsApp al {{número del negocio}}.
 >
 > Sonia · Al Milímetro
 > Tu reforma, sin agobios
 
-### E2 · Día 3 · «Lo que reviso antes de darte un precio»
+### E2 · Día 3 · «Lo que miramos antes de cerrar tu presupuesto»
 
 > Hola {{nombre}}:
 >
-> El presupuesto que entra bajo y luego sube casi siempre falla en lo que no se ve. Antes de darte una cifra, miro cuatro cosas:
+> El presupuesto que entra bajo y luego sube casi siempre falla en lo que no se ve. Por eso, antes de cerrar el tuyo, voy con un albañil a hacer una cata y miramos cuatro cosas:
 >
 > - **La luz y el agua:** el cuadro, el cableado y las tuberías.
 > - **Las bajantes:** en pisos antiguos son la sorpresa más cara.
 > - **El suelo:** si se puede poner encima o hay que levantar.
-> - **Las ventanas:** si conviene cambiarlas, te lo digo ahora y no cuando ya está pintado.
+> - **Las ventanas:** si conviene cambiarlas, te lo digo antes de empezar y no cuando ya está pintado.
 >
-> Si algo de esto hay que hacerlo, va en el presupuesto desde el principio. Así el precio no cambia a mitad de obra.
+> Si algo de esto hay que hacerlo, va en el presupuesto antes de firmar. Así no hay sorpresas a mitad de obra.
 >
 > Sonia
 
