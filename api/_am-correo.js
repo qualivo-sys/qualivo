@@ -96,16 +96,16 @@ const CORREOS = {
     return { asunto: 'Lo que pasa ahora con tu reforma', html: marco(
       p('Hola ' + esc(L.nombre) + ':') +
       p('Gracias por contarme tu proyecto. Te explico cómo trabajo para que sepas qué esperar.') +
-      p('Primero voy a ver tu casa, mido y escucho lo que quieres. Reviso también lo que no se ve (instalaciones, bajantes, suelo), que es lo que suele disparar una reforma a mitad de obra.') +
-      p('A los 7 días de la visita tienes el presupuesto por partidas, con materiales y plazo. Si decides seguir, coordino toda la obra: hablas solo conmigo, de la primera visita a la entrega.') +
+      p('Primero voy yo a ver tu casa, mido y escucho lo que quieres.') +
+      p('A los 7 días de la visita tienes una primera versión del presupuesto por partidas, que vamos ajustando juntos. Cuando decides seguir, voy con un albañil a hacer una cata para ver cómo están las instalaciones y cerramos el presupuesto. Después coordino toda la obra: hablas solo conmigo, de la primera visita a la entrega.') +
       p('Si quieres reservar ya la visita, contesta a este correo.') + firmaSonia, pieLead(L.id)) };
   },
   E2: function (L) {
-    return { asunto: 'Lo que reviso antes de darte un precio', html: marco(
+    return { asunto: 'Lo que miramos antes de cerrar tu presupuesto', html: marco(
       p('Hola ' + esc(L.nombre) + ':') +
-      p('El presupuesto que entra bajo y luego sube casi siempre falla en lo que no se ve. Antes de darte una cifra, miro cuatro cosas:') +
-      '<ul><li><b>La luz y el agua:</b> el cuadro, el cableado y las tuberías.</li><li><b>Las bajantes:</b> en pisos antiguos son la sorpresa más cara.</li><li><b>El suelo:</b> si se puede poner encima o hay que levantar.</li><li><b>Las ventanas:</b> si conviene cambiarlas, te lo digo ahora y no cuando ya está pintado.</li></ul>' +
-      p('Si algo de esto hay que hacerlo, va en el presupuesto desde el principio. Así el precio no cambia a mitad de obra.') + '<p>Sonia</p>', pieLead(L.id)) };
+      p('El presupuesto que entra bajo y luego sube casi siempre falla en lo que no se ve. Por eso, antes de cerrar el tuyo, voy con un albañil a hacer una cata y miramos cuatro cosas:') +
+      '<ul><li><b>La luz y el agua:</b> el cuadro, el cableado y las tuberías.</li><li><b>Las bajantes:</b> en pisos antiguos son la sorpresa más cara.</li><li><b>El suelo:</b> si se puede poner encima o hay que levantar.</li><li><b>Las ventanas:</b> si conviene cambiarlas, te lo digo antes de empezar y no cuando ya está pintado.</li></ul>' +
+      p('Si algo de esto hay que hacerlo, va en el presupuesto antes de firmar. Así no hay sorpresas a mitad de obra.') + '<p>Sonia</p>', pieLead(L.id)) };
   },
   E3: function (L) {
     return { asunto: 'Cómo comparar presupuestos sin equivocarte', html: marco(

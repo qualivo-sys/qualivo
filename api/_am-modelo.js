@@ -1,6 +1,6 @@
 // Al Milímetro: descartes y puntuación A/B/C del formulario «Calcula tu reforma».
 // Lo usan api/al-milimetro-lead.js (autoridad) y las pruebas (scripts/al-milimetro/probar-modelo.js).
-// Reglas acordadas el 23-oct y el 29-oct. [C] = dicho por Sonia · [E] = estimación nuestra, a confirmar.
+// Reglas acordadas el 23-oct y el 29-oct, y respuestas de Sonia del 2-nov. [C] = dicho por Sonia · [E] = estimación nuestra, a confirmar.
 
 // Las etiquetas de cada respuesta son EXACTAMENTE las opciones de los campos de GHL.
 // Si se cambia un texto aquí, hay que cambiar la opción en GHL (ver scripts/al-milimetro/ghl-preparar.js).
@@ -15,30 +15,44 @@ const OPCIONES = {
   clase: { A: 'A', B: 'B', C: 'C' }
 };
 
-// Sur excluido (M-30 a M-40 y municipios del sur) [E]
-const SUR = /^(2803[18]|28041|28051|28053|28021|2890\d|2891\d|2893\d|2897\d)$/;
-// Sus 14 zonas prioritarias por código postal [E, a confirmar con Sonia]
-const PRIO = /^(28660|28670|2822[0-2]|28250|28023|28008|28040|28042|28050|2803[45]|2804[3]|28033|2800[1-3]|2800[6-7]|28009|28010|28014|28015|28028)$/;
-const PRIO_TXT = /boadilla|villaviciosa|majadahonda|torrelodones|aravaca|moncloa|alameda de osuna|las tablas|mirasierra|hortaleza|pe[ñn]a grande|chamber[ií]|prosperidad|salamanca|retiro/i;
+// Zonas en las que NO trabaja. [C, 2-nov]: Latina, Carabanchel, Usera y Puente de Vallecas enteros
+// (28011 va aparte: también es la Colonia del Manzanares, que sí). [E]: el resto del sur (Villaverde,
+// Villa de Vallecas, Vallecas y los municipios del sur), que ya estaba fuera.
+const SUR = /^(28024|28044|28047|28019|28025|28054|28026|28041|28018|28038|28053|28031|28051|28021|2890\d|2891\d|2893\d|2897\d)$/;
+// Códigos postales que mezclan barrios en los que trabaja y en los que no: no se descartan, van a revisión.
+// 28011: Puerta del Ángel (no) y Colonia del Manzanares (sí). 28043 y 28037: en Ciudad Lineal no quiere
+// San Pascual, San Juan Bautista, Colina, Atalaya ni Costillares, pero 28043 también es Hortaleza. [C, 2-nov]
+const ZONA_DUDOSA = /^(28011|28043|28037)$/;
+// Zonas prioritarias. [C, 2-nov]: los 7 distritos dentro de la M-30 (Centro, Arganzuela, Retiro, Salamanca,
+// Chamartín, Tetuán y Chamberí) y las zonas de chalets (Pozuelo, Majadahonda, La Moraleja, Las Rozas, Boadilla,
+// Villaviciosa; en Madrid: Puerta de Hierro, Peñagrande, Fuentelarreina, Mirasierra, El Viso, Aravaca,
+// Valdemarín, Conde Orgaz y La Florida-El Plantío). [E]: sus zonas de pisos del 23-oct (Prosperidad,
+// Alameda de Osuna, Las Tablas). Los códigos postales los ponemos nosotros [E].
+const PRIO = /^(2800[1-9]|2801[0-6]|28020|28028|28029|28036|28039|28045|28046|28023|28034|28035|28040|28042|28050|2822[0-4]|2823[0-2]|28109|2866[0-9]|28670)$/;
+const PRIO_TXT = /boadilla|villaviciosa|majadahonda|pozuelo|las rozas|moraleja|aravaca|valdemar[ií]n|plant[ií]o|puerta de hierro|pe[ñn]a ?grande|fuentelarreina|mirasierra|el viso|conde (de )?orgaz|alameda de osuna|las tablas|chamber[ií]|prosperidad|salamanca|retiro|chamart[ií]n|tetu[aá]n|arganzuela|centro/i;
 
-// Precio «desde» que ve la persona [C, cifras de Sonia; pendiente de que valide el Excel]
-const DESDE = { chalet: '160.000 €', piso: '35.000 €', cb: '15.000 €', '2b': '15.000 €' };
+// Precio «desde» que ve la persona [C, Sonia el 2-nov]
+const DESDE = { chalet: '80.000 €', piso: '25.000 €', cb: '10.000 €' };
 // Cómo se nombra la obra en el WhatsApp: «He recibido tu petición para reformar {{2}}»
-const TIPO_TEXTO = { chalet: 'tu chalet', piso: 'tu piso', cb: 'la cocina y el baño', '2b': 'los baños' };
+const TIPO_TEXTO = { chalet: 'tu chalet', piso: 'tu piso', cb: 'la cocina y el baño' };
 
 const UMBRAL_A = 70, UMBRAL_B = 45;
 
 // Devuelve el motivo si no encaja (no se guarda), o null.
 function descarte(r) {
   if (r.tipo === 'local' || r.tipo === 'arreglo') return 'tipo';
-  if (r.tipo === 'suelto') return 'suelto';            // decidido 29-oct: ni dentro de la M-30
+  if (r.tipo === 'suelto' || r.tipo === '2b') return 'suelto';  // ni dentro de la M-30 (29-oct); ni dos baños (2-nov)
   if (SUR.test(String(r.cp || ''))) return 'zona';
   if (r.inst === 'acab') return 'acab';                // segundas preguntas: solo acabados
   return null;
 }
 
 function necesitaRevision(r) {
-  return r.ppto === '<15' || (r.ppto === 'nose' && r.m2 === '<50');
+  return r.ppto === '<15' || (r.ppto === 'nose' && r.m2 === '<50') || zonaDudosa(r);
+}
+
+function zonaDudosa(r) {
+  return ZONA_DUDOSA.test(String(r.cp || ''));
 }
 
 function zonaPrioritaria(r) {
@@ -52,7 +66,7 @@ function puntuar(r) {
   if (zonaPrioritaria(r)) suma(20, 'zona prioritaria');
   if (r.tipo === 'chalet') suma(25, 'chalet o casa entera');
   else if (r.tipo === 'piso') suma(20, 'piso entero');
-  else if (r.tipo === 'cb' || r.tipo === '2b') suma(10, 'cocina y baño o dos baños');
+  else if (r.tipo === 'cb') suma(10, 'cocina y baño');
   if (r.ppto === '30-60' || r.ppto === '60-160' || r.ppto === '>160') suma(15, 'presupuesto de 30.000 € o más');
   else if (r.ppto === '15-30') suma(5, 'presupuesto de 15.000 a 30.000 €');
   if (r.cuando === '3') suma(20, 'empieza en menos de 3 meses');
@@ -75,4 +89,4 @@ function vista(r) {
   });
 }
 
-module.exports = { vista, OPCIONES, DESDE, TIPO_TEXTO, UMBRAL_A, UMBRAL_B, MAXIMO, descarte, necesitaRevision, zonaPrioritaria, puntuar };
+module.exports = { vista, OPCIONES, DESDE, TIPO_TEXTO, UMBRAL_A, UMBRAL_B, MAXIMO, descarte, necesitaRevision, zonaDudosa, zonaPrioritaria, puntuar };

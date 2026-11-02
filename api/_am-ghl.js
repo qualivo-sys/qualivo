@@ -147,7 +147,7 @@ async function escribirLead(L, sc, extra) {
   const nota = [
     repetido ? 'Nuevo envío del formulario · ' + ahora + (otros.length ? ' · en este envío puso ' + otros.join(' y ') : '') : '',
     'Formulario «Calcula tu reforma» · ' + ahora,
-    'Clase ' + sc.clase + ' · ' + sc.puntos + ' puntos (' + sc.motivos.join(', ') + ')' + (L.revision ? ' · pasa por segundas preguntas' : ''),
+    'Clase ' + sc.clase + ' · ' + sc.puntos + ' puntos (' + sc.motivos.join(', ') + ')' + (L.revision ? (M.zonaDudosa(L) ? ' · REVISAR LA ZONA: su código postal mezcla barrios en los que trabaja y en los que no' : ' · pasa por segundas preguntas') : ''),
     'Obra: ' + M.OPCIONES.tipo[L.tipo] + ' · ' + (M.OPCIONES.m2[L.m2] || '—') + ' · ' + (L.mun || '') + ' (' + L.cp + ')',
     'Cuándo: ' + (M.OPCIONES.cuando[L.cuando] || '—') + ' · Presupuesto: ' + (M.OPCIONES.ppto[L.ppto] || '—') + ' · Vivienda propia: ' + (M.OPCIONES.propia[L.propia] || '—'),
     L.inst ? 'Instalaciones: ' + M.OPCIONES.inst[L.inst] : '',

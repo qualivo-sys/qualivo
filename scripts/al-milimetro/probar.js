@@ -25,6 +25,21 @@ const correos = [];
     assert.equal(M.descarte({ tipo: 'piso', cp: '28010', inst: 'acab' }), 'acab');
     assert.equal(M.descarte({ tipo: 'piso', cp: '28010' }), null);
   });
+  await t('respuestas de Sonia del 2-nov: dos baños fuera, sus zonas y sus precios', async function () {
+    const r = { tipo: 'piso', cp: '28010', m2: '80-120', cuando: '3', ppto: '30-60', propia: 'si' };
+    assert.equal(M.descarte(Object.assign({}, r, { tipo: '2b' })), 'suelto');
+    ['28024', '28047', '28019', '28025', '28026', '28041', '28018', '28053'].forEach(function (cp) {   // Latina, Carabanchel, Usera, P. de Vallecas
+      assert.equal(M.descarte(Object.assign({}, r, { cp: cp })), 'zona', cp);
+    });
+    ['28011', '28043'].forEach(function (cp) {   // mezclan barrios que sí y que no: a revisión, sin descartar
+      assert.equal(M.descarte(Object.assign({}, r, { cp: cp })), null, cp);
+      assert.equal(M.necesitaRevision(Object.assign({}, r, { cp: cp })), true, cp);
+    });
+    assert.equal(M.descarte(Object.assign({}, r, { cp: '28030' })), null);                          // Moratalaz sí
+    assert.ok(M.zonaPrioritaria({ cp: '28039' }) && M.zonaPrioritaria({ cp: '28224' }) && M.zonaPrioritaria({ mun: 'Las Rozas' }));
+    assert.ok(!M.zonaPrioritaria({ cp: '28250', mun: 'Torrelodones' }));
+    assert.deepEqual(M.DESDE, { chalet: '80.000 €', piso: '25.000 €', cb: '10.000 €' });
+  });
   await t('puntuación A/B/C y techo', function () {
     assert.ok(M.MAXIMO >= M.UMBRAL_A);
     assert.equal(M.puntuar({ tipo: 'piso', cp: '28010', ppto: '30-60', cuando: '3', propia: 'si' }).clase, 'A');
@@ -138,8 +153,16 @@ const correos = [];
   });
 
   // ---------- Cron ----------
-  const martes11 = new Date('2026-11-03T10:00:00Z');   // martes 3-nov, 11:00 en Madrid: en horario (día 5)
-  const domingo = new Date('2026-11-01T10:00:00Z');    // domingo 1-nov: fuera de horario
+  // Fechas a partir de hoy (con fechas fijas, la prueba caducaba). El cron simula el día 3 desde el alta (un domingo),
+  // el día 5 (martes) y el día 18 (lunes); para que caigan en esos días de la semana se retrasan el alta y los envíos.
+  const domingo = new Date(Date.now() + 3 * 864e5);
+  while (domingo.getUTCDay() !== 0) domingo.setUTCDate(domingo.getUTCDate() + 1);
+  domingo.setUTCHours(10, 0, 0, 0);                                        // fuera de horario
+  const martes11 = new Date(domingo.getTime() + 2 * 864e5);                // 11:00-12:00 en Madrid: en horario
+  const lunes905 = new Date(domingo.getTime() + 15 * 864e5 - 115 * 6e4);   // 8:05 UTC: 9:05 en Madrid (10:05 en verano)
+  const retraso = Math.max(0, Math.round((domingo.getTime() - 3 * 864e5 - Date.now()) / 1000));
+  await pg.query("UPDATE am_envios SET programado = programado + make_interval(secs => $1)", [retraso]);
+  await pg.query("UPDATE am_leads SET creado = creado + make_interval(secs => $1)", [retraso]);
   await t('cron: reintenta E1 y el aviso pendientes, y respeta el horario', async function () {
     correos.length = 0;
     const r1 = await cron.vuelta(domingo);
@@ -158,16 +181,16 @@ const correos = [];
     await llamar(accion, { method: 'POST', query: { l: idA, a: 'presupuesto', f: f }, body: '' });
     assert.equal((await q("SELECT count(*)::int n FROM am_envios WHERE lead_id=$1 AND paso IN ('W9','W10','W11','W12') AND estado='pendiente'", [idA]))[0].n, 4);
     await pg.query("UPDATE am_envios SET programado = now() - interval '1 hour' WHERE paso = 'W9'");
-    // El cron simula el 16-nov: W10-W12 se llevan lejos para que solo venza W9 (si vencieran varios, saldría solo el último)
+    // El cron simula un lunes por la mañana: W10-W12 se llevan lejos para que solo venza W9 (si vencieran varios, saldría solo el último)
     await pg.query("UPDATE am_envios SET programado = now() + interval '60 days' WHERE paso IN ('W10','W11','W12')");
     correos.length = 0;
-    const r = await cron.vuelta(new Date('2026-11-16T08:05:00Z'));   // lunes 16-nov, 9:05 en Madrid
+    const r = await cron.vuelta(lunes905);                       // lunes, 9:05 en Madrid (10:05 en horario de verano)
     assert.equal(r.resumen, true);
     const res = correos.find(function (c) { return /Tu día en Al Milímetro/.test(c.subject); });
     assert.ok(res, 'falta el resumen');
     assert.ok(decodeURIComponent(res.html).indexOf('¿has podido ver el presupuesto?') > -1);
     assert.equal((await q("SELECT estado FROM am_envios WHERE lead_id=$1 AND paso='W9'", [idA]))[0].estado, 'avisado');
-    const r2 = await cron.vuelta(new Date('2026-11-16T08:15:00Z'));
+    const r2 = await cron.vuelta(new Date(lunes905.getTime() + 10 * 6e4));
     assert.equal(r2.resumen, false);                       // un resumen al día
   });
   await t('baja del lead: no vuelve a recibir correos', async function () {
