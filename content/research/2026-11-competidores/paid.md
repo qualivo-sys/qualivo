@@ -10,7 +10,7 @@
 **Leyenda:** [C] es dato confirmado en su página o en nuestra cuenta; [E] es estimado o deducido.
 **Reglas:** los textos están parafraseados (nunca copiados), no se usan marcas en piezas, ninguna cifra va sin fuente, no se abren verticales nuevas y no se usan casos de clientes.
 
-**Límite de método:** en 9 de las 19 webs el formulario se carga con JavaScript (Typeform o GHL) y sus preguntas no se ven sin rellenarlo. En la búsqueda por marca en la Biblioteca solo aparece Reforleads en España. Las demás marcas de España no salen con su nombre (o no tienen anuncios activos o anuncian con otra página). La búsqueda de las marcas de EE. UU. no terminó a tiempo.
+**Límite de método:** en 9 de las 19 webs el formulario se carga con JavaScript (Typeform o GHL) y sus preguntas no se ven sin rellenarlo. En la búsqueda por marca en la Biblioteca solo aparece Reforleads en España. Las demás marcas de España no salen con su nombre (o no tienen anuncios activos o anuncian con otra página). En EE. UU., buscando por nombre (Outcome Creation, Think Bullish, MediaBloom, Booked Then Built, Atomic Enrollment, Thrivvest, Lasso MD y Prevello), ninguna marca devolvió anuncios activos [C, 2-nov]. Puede que anuncien con otro nombre de página o que la web pública falle sin sesión, como ya pasó otras veces; no se puede afirmar que no anuncien.
 
 ## 1. Ofertas de entrada
 
