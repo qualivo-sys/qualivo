@@ -14,7 +14,7 @@ Entorno: sandbox **«Nexus And IA»** (8.780 oportunidades del ZIP anonimizado d
 | Reglas de validación | ✅ [C] | Añadidas a la regla de «Fase» que ya existía, sin quitar las de Sonia. Briefing (Zonas, Presupuesto, Decisor, Empresa a facturar) para Planificación en adelante · versión y cambios en Ajustes · documento de cierre en Ganada · motivo y fecha en Pospuesta |
 | Tareas por etapa | ✅ [C] | Flujo «Qualivo · tareas por etapa» (al cambiar la fase) y «Qualivo · tareas al crear oportunidad». 13 tareas, asignadas al propietario |
 | Aviso al CEO ≥ 30.000 € | ⏸ | No montado: falta decidir quién lo recibe. En pruebas mandaría correos reales |
-| «Emitir factura» al marcar «Lista para facturar» | ⏸ | Pendiente: va en otra regla |
+| «Emitir factura» al marcar «Lista para facturar» | ✅ [C] | Regla «Qualivo · emitir factura» (2-nov), tarea a +1 día. Probada |
 
 **Lo que Zoho no deja con reglas de validación [C]:** campos multilínea (Necesidad) y campos de archivo o imagen (archivo del contrato, foto de la campaña colocada). Para hacerlos obligatorios hace falta **Blueprint**. Se propone a Sergi el lunes.
 
