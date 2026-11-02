@@ -40,7 +40,7 @@
   // de recepcionista del negocio, y al colgar llega el correo del dueño). La web
   // del negocio puede venir en el enlace (?web=nuriaroure.com) para no pedirla, o
   // una ficha ya hecha (?preset=nuria, api/_fichas/nuria.json).
-  const SECTOR_PRUEBA = { clinica: 'clinicas', cirugia: 'clinicas', nutricion: 'clinicas', osteopatia: 'clinicas', reformas: 'reformas', inmobiliaria: 'asesorias', b2b: 'asesorias', consultoria: 'asesorias', agencias: 'asesorias', marketing: 'asesorias', formacion: 'formacion', fp: 'formacion', aviacion: 'formacion', academia: 'formacion', musica: 'formacion', masters: 'formacion', maritima: 'formacion', lanzamientos: 'formacion', sueno: 'formacion' };
+  const SECTOR_PRUEBA = { clinica: 'clinicas', cirugia: 'clinicas', nutricion: 'clinicas', osteopatia: 'clinicas', reformas: 'reformas', inmobiliaria: 'asesorias', b2b: 'asesorias', consultoria: 'asesorias', agencias: 'asesorias', marketing: 'asesorias', formacion: 'formacion', fp: 'formacion', aviacion: 'formacion', creativa: 'formacion', bsc: 'formacion', camakeup: 'formacion', academia: 'formacion', musica: 'formacion', masters: 'formacion', maritima: 'formacion', lanzamientos: 'formacion', sueno: 'formacion' };
   const ERR_PRUEBA = { nombre: 'Falta tu nombre.', telefono: 'Ese móvil no es válido: tiene que ser un móvil español.', email: 'Ese correo no es válido.', web: 'Falta la web del negocio.', ya_hoy: 'Ese móvil ya ha hecho hoy todas las llamadas de prueba permitidas. Mañana puedes repetir.', tope: 'Hoy ya se han hecho todas las llamadas de prueba. Mañana vuelve a estar disponible.', llamada: 'La llamada no ha podido salir. Avisamos al equipo; prueba en unos minutos.' };
   const param = function (k) { try { return new URLSearchParams(location.search).get(k) || ''; } catch (e) { return ''; } };
 
@@ -149,13 +149,13 @@
       setTimeout(function () { borrador(box, c, accion); }, 650);
       return;
     }
-    if (accion === 'enviar' || accion === 'agente-enviar') {
+    if (accion === 'enviar' || accion === 'agente-enviar' || accion === 'enviar-correo') {
       const t = box && box.querySelector('.ar-texto');
       const texto = t ? t.value.trim() : '';
       if (!texto) return;
-      c.conv.push({ t: E().ahora, de: 'a', canal: 'wa', texto: texto });
+      c.conv.push({ t: E().ahora, de: E().cfg.sinAgentes ? 'h' : 'a', canal: accion === 'enviar-correo' ? 'email' : 'wa', texto: texto });
       if (accion === 'agente-enviar') c.ev = (c.ev || []).concat([{ t: E().ahora, tipo: 'sistema', texto: 'Agente de WhatsApp activado: contesta solo a ' + nombre(c) }]);
-      pintar(box, '<p class="ok-ar">' + (accion === 'enviar' ? 'Enviado por WhatsApp.' : 'Enviado y agente activado: a partir de ahora contesta solo.') + ' (Demo: no ha salido nada.)</p>' +
+      pintar(box, '<p class="ok-ar">' + (accion === 'enviar-correo' ? 'Enviado por correo.' : accion === 'enviar' ? 'Enviado por WhatsApp.' : 'Enviado y agente activado: a partir de ahora contesta solo.') + ' (Demo: no ha salido nada.)</p>' +
         '<div class="fila"><button class="btn btn-mini" type="button" data-demo-refrescar="' + c.id + '">Verlo en la conversación</button></div>');
       return;
     }

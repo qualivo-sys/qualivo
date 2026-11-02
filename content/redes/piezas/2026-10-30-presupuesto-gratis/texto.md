@@ -38,19 +38,11 @@
 >
 > Después, mediría por obras cerradas y no por llamadas. Y con paciencia: una reforma puede tardar meses en decidirse.
 >
-> Si quieres que revisemos tu anuncio y tu formulario contigo: https://qualivo.io/llamada/
-
-## Primer comentario (lo pone Maikel nada más publicar)
-
 > ¿Qué promete vuestro anuncio? ¿Y a quién atrae eso?
 
 ## Para Instagram
 
 > «Presupuesto gratis y sin compromiso.» Comparar es normal. ¿Tu anuncio dice por qué elegirte a ti?
-
-## Cierre (29-oct)
-
-- Decisión del 29-oct (objetivo: reuniones): el texto cierra con una línea a la llamada o a la calculadora, y la pregunta de conversación va al primer comentario. En Instagram, «enlace en la bio».
 
 ## Pendiente de Maikel
 

@@ -658,3 +658,13 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .inf-nota { font-size: 12px; margin: 8px 2px 0; }
 .inf-tabla th[scope="row"] { text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--tinta); background: var(--superficie); }
 .inf-tabla td small { font-size: 11px; }
+
+/* Modo sin agentes (BSC): sin copiloto de IA; el panel ocupa todo el ancho */
+body.sin-ia .copilot, body.sin-ia #btnCopilotMovil, body.sin-ia [data-demo="preguntar"] { display: none !important; }
+body.sin-ia .app { grid-template-columns: 212px minmax(0, 1fr); }
+@media (min-width: 1181px) and (max-width: 1439px) { body.sin-ia .app { grid-template-columns: 64px minmax(0, 1fr); } }
+@media (max-width: 1180px) { body.sin-ia .app { grid-template-columns: 200px minmax(0, 1fr); } }
+@media (max-width: 760px) { body.sin-ia .app { grid-template-columns: minmax(0, 1fr); } }
+.responder { display: grid; gap: 8px; margin-top: 10px; }
+.responder textarea { width: 100%; border: 1px solid var(--borde); border-radius: 10px; padding: 10px 12px; font: inherit; font-size: 14px; background: var(--fondo); color: inherit; resize: vertical; }
+.responder textarea:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(14,124,116,.14); }

@@ -23,6 +23,9 @@
     { id: 'agencias', txt: 'Vista para agencias', desc: 'La cartera de una agencia: qué cuenta vende y cuál se puede ir', ico: 'anuncio' },
     { id: 'consultoria', txt: 'Consultoría de alto valor', desc: 'Proyectos grandes, ciclos largos y clientes que repiten', ico: 'b2b' },
     { id: 'fp', txt: 'Centro de FP', desc: 'Ciclos de grado medio y superior: alumnos, familias y visita al centro', ico: 'formacion' },
+    { id: 'camakeup', txt: 'Academia de maquillaje', desc: 'Carrera presencial y online, masterclass gratis y llamada de asesoramiento', ico: 'formacion' },
+    { id: 'bsc', txt: 'Barcelona School of Creativity', desc: 'Versión sin agentes: el sistema puntúa y ordena, y llama siempre una persona', ico: 'formacion' },
+    { id: 'creativa', txt: 'Escuela creativa', desc: 'Programas anuales de dirección de arte, copy, contenido y eventos: solicitud, reunión informativa, entrevista y matrícula', ico: 'formacion' },
     { id: 'aviacion', txt: 'Escuela de aviación', desc: 'TCP, azafata de tierra y despachador de vuelo', ico: 'formacion' },
     { id: 'academia', txt: 'Academia de idiomas y apoyo', desc: 'Inglés para niños y adultos, apoyo escolar y prueba de nivel', ico: 'formacion' },
     { id: 'musica', txt: 'Escuela de música', desc: 'Clases para niños y adultos: clase de prueba e inscripción', ico: 'formacion' },
@@ -91,7 +94,7 @@
       cfg.t.citas = plu(cfg.t.cita);
       cfg.t.Citas = cfg.t.citas.charAt(0).toUpperCase() + cfg.t.citas.slice(1);
     }
-    if (!cfg.real && cfg.historias && !cfg.historias.voz && cfg.historiaGenerica !== false) { const hv = QV.voz.historiaGenerica(cfg); if (hv) cfg.historias.voz = hv; }
+    if (!cfg.real && !cfg.sinAgentes && cfg.historias && !cfg.historias.voz && cfg.historiaGenerica !== false) { const hv = QV.voz.historiaGenerica(cfg); if (hv) cfg.historias.voz = hv; }
     cfg._ok = true;
     return cfg;
   }
@@ -134,6 +137,9 @@
       pintarTodo();
       if (QV.copilot) QV.copilot.reiniciar();
       irA(opts.vista || 'resumen');
+      document.body.classList.toggle('sin-ia', !!cfg.sinAgentes);
+      clearTimeout(estado.avisoVivo);
+      if (cfg.sinAgentes && cfg.avisoEnVivo) estado.avisoVivo = setTimeout(function () { avisoEnVivo(cfg.avisoEnVivo); }, cfg.avisoEnVivo.tras || 6000);
       return cfg;
     });
   }
@@ -193,6 +199,25 @@
   function atencion() { return estado.contactos.filter(function (c) { return c.x.atencion; }); }
   function tituloSistema() { return 'Intelligence System' + (estado.empresa ? ' · <b>' + esc(estado.empresa) + '</b>' : ''); }
 
+  // Modo sin agentes: un aviso «en vivo» como los que recibiría la persona del equipo (lo pidió BSC)
+  function avisoEnVivo(a) {
+    const c = contacto(a.id); const el = $('#humano');
+    if (!c || !el || (QV.demo && QV.demo.activo && QV.demo.activo())) return;
+    if (a.mensaje) { c.conv.push({ t: estado.ahora, de: 'c', canal: 'wa', texto: a.mensaje }); c.s.conv = true; recalcular(); pintarTodo(); }
+    el.innerHTML = '<span class="humano-tag">' + ico('persona') + 'Aviso para ' + esc(estado.cfg.persona || 'ti') + ' · ahora mismo</span><h3>' + esc(a.titulo) + '</h3><p>' + esc(a.texto) + '</p>' +
+      '<div class="botones"><button class="btn btn-primario" type="button" data-contestar="' + c.id + '">Contestar desde aquí</button><button class="btn" type="button" data-abrir="' + c.id + '">Ver ficha</button><button class="btn btn-fantasma" type="button" data-demo="cerrar-humano">Cerrar</button></div>';
+    el.hidden = false;
+  }
+  document.addEventListener('click', function (e) {
+    const b = e.target.closest && e.target.closest('[data-contestar]');
+    if (!b) return;
+    e.preventDefault();
+    $('#humano').hidden = true;
+    estado.convSel = b.getAttribute('data-contestar');
+    irA('conversaciones');
+    setTimeout(function () { const t = document.querySelector('.hilo-conv .ar-texto'); if (t) t.focus(); }, 60);
+  });
+
   function aviso(txt, icono) {
     const el = document.createElement('div');
     el.className = 'aviso';
@@ -217,7 +242,7 @@
     const base = {
       interesados: { l: N.interesados || T.Contactos, v: M.num(m.tot[primera]), em: M.euros(m.inversion) + ' invertidos' },
       cpl: { l: 'Coste por ' + T.contacto, v: M.euros(m.inversion / Math.max(1, sum(pago, primera))), em: 'Solo campañas de pago' },
-      respuesta: { l: 'Tiempo de respuesta', v: md.respuestaAntes ? M.duracionLarga(md.respuestaAntes) : '—', em: 'Con el agente: ' + (md.respuestaAhora || 1) + ' min', clase: 'mal' },
+      respuesta: { l: 'Tiempo de respuesta', v: md.respuestaAntes ? M.duracionLarga(md.respuestaAntes) : '—', em: cfg.sinAgentes ? (md.respuestaTxt || 'Objetivo: llamar el mismo día') : 'Con el agente: ' + (md.respuestaAhora || 1) + ' min', clase: 'mal' },
       cualificados: { l: N.cualificados || 'Cualificados', v: M.num(m.tot[et.cualificados]), em: M.pct(m.tot[et.cualificados] / Math.max(1, m.tot[primera])) + ' de los que entran' },
       entrevistas: { l: N.entrevistas || T.Citas, v: M.num(m.tot[et.entrevistas]), em: md.agendadas ? md.agendadas + ' agendadas' : '' },
       show: { l: 'Asistencia (show rate)', v: md.agendadas ? M.pct(m.tot[et.entrevistas] / md.agendadas) : '—', em: md.agendadas ? (md.agendadas - m.tot[et.entrevistas]) + ' no se presentaron' : '', clase: 'mal' },
@@ -335,7 +360,7 @@
       let cuenta = '';
       if (v.id === 'oportunidades' && nAt) cuenta = '<span class="cuenta">' + nAt + '</span>';
       if (v.id === 'senales' && nSen) cuenta = '<span class="cuenta">' + nSen + '</span>';
-      return '<button type="button" data-vista="' + v.id + '"' + (estado.vista === v.id ? ' aria-current="page"' : '') + '>' + ico(v.ico) + '<span>' + v.txt + '</span>' + cuenta + '</button>';
+      return '<button type="button" data-vista="' + v.id + '"' + (estado.vista === v.id ? ' aria-current="page"' : '') + '>' + ico(v.ico) + '<span>' + (estado.cfg.sinAgentes && v.id === 'senales' ? 'Avisos' : v.txt) + '</span>' + cuenta + '</button>';
     }).join('');
   }
   function pintarBarra() {
@@ -404,6 +429,7 @@
   // Modo real: generar mensaje, agente de WhatsApp y llamada de Raquel (real.js hace el resto)
   function accionesRealHtml(c) {
     if (estado.cfg.cuenta) return ''; // cuentas de clientes: solo lectura
+    if (estado.cfg.sinAgentes) return '<div data-bloque-real><div class="accion-real-caja"><div class="responder"><textarea class="ar-texto" rows="3" placeholder="Escribe tu respuesta a ' + esc(c.n.split(' ')[0]) + '…"></textarea><div class="pie acciones-real"><button class="btn btn-mini btn-primario" type="button" data-real="enviar" data-id="' + c.id + '">' + ico('whatsapp') + 'Enviar por WhatsApp</button><button class="btn btn-mini" type="button" data-real="enviar-correo" data-id="' + c.id + '">' + ico('correo') + 'Enviar por correo</button></div></div></div></div>';
     return '<div data-bloque-real><div class="pie acciones-real"><button class="btn btn-mini" type="button" data-real="redactar" data-id="' + c.id + '">' + ico('rayo') + 'Generar mensaje</button>' +
       '<button class="btn btn-mini" type="button" data-real="agente" data-id="' + c.id + '">' + ico('whatsapp') + 'Activar agente de WhatsApp</button>' +
       '<button class="btn btn-mini btn-primario" type="button" data-real="llamar" data-id="' + c.id + '">' + ico('voz') + 'Llamada de Raquel</button></div><div class="accion-real-caja"></div></div>';
@@ -455,11 +481,11 @@
       const humanos = estado.contactos.filter(function (c) { return c.x.nba.tipo === 'humano' && c.x.nba.id !== 'asignado'; }).length;
       const dest = DESTACADO[estado.objetivo] || [];
       const fg = M.fugas(cfg)[0];
-      const hoyTxt = at.length ? '<b>' + at.length + ' ' + T.oportunidades + '</b> requieren atención hoy. Solo <b>' + humanos + '</b> necesitan a una persona.' : 'Hoy no hay nada urgente. El sistema sigue trabajando.';
+      const hoyTxt = cfg.sinAgentes ? (at.length ? (cfg.persona ? cfg.persona + ', hoy' : 'Hoy') + ' tienes <b>' + at.length + ' ' + (at.length === 1 ? 'llamada' : 'llamadas') + '</b> que importan. Están en orden: empieza por arriba.' : 'Hoy no hay llamadas urgentes.') : at.length ? '<b>' + at.length + ' ' + T.oportunidades + '</b> requieren atención hoy. Solo <b>' + humanos + '</b> necesitan a una persona.' : 'Hoy no hay nada urgente. El sistema sigue trabajando.';
       return '<div class="hoy"><div class="hoy-frase"><h2>' + hoyTxt + '</h2><p>' + estado.contactos.length + ' ' + T.contactos + ' en el sistema · actualizado a las ' + M.hora(estado.ahora) + '</p></div>' +
         '<button class="hoy-dato" type="button" data-vista="oportunidades"><span>Requieren atención</span><strong>' + at.length + '</strong><em>' + (enJuego ? M.euros(enJuego) + ' en juego' : 'ordenadas por prioridad') + '</em></button>' +
-        '<button class="hoy-dato" type="button" data-vista="agentes"><span>El sistema está moviendo</span><strong>' + trabajando + '</strong><em>sin que nadie tenga que acordarse</em></button>' +
-        '<button class="hoy-dato" type="button" data-vista="senales"><span>Necesitan a una persona</span><strong style="color:var(--coral)">' + humanos + '</strong><em>con todo el contexto</em></button></div>' +
+        (cfg.sinAgentes ? '<button class="hoy-dato" type="button" data-vista="agenda"><span>Con fecha para volver a llamar</span><strong>' + estado.contactos.filter(function (c) { return c.s.luego && !c.fin; }).length + '</strong><em>dijeron «más adelante» y cuándo</em></button>' : '<button class="hoy-dato" type="button" data-vista="agentes"><span>El sistema está moviendo</span><strong>' + trabajando + '</strong><em>sin que nadie tenga que acordarse</em></button>') +
+        (cfg.sinAgentes ? '<button class="hoy-dato" type="button" data-vista="oportunidades"><span>A un paso de matricularse</span><strong style="color:var(--coral)">' + estado.contactos.filter(function (c) { return !c.fin && c.etapa >= 4; }).length + '</strong><em>entrevista hecha o matrícula pendiente</em></button></div>' : '<button class="hoy-dato" type="button" data-vista="senales"><span>Necesitan a una persona</span><strong style="color:var(--coral)">' + humanos + '</strong><em>con todo el contexto</em></button></div>') +
         '<p class="pregunta-guia" style="margin:18px 0 8px">Últimos 30 días</p>' +
         '<div class="kpis">' + kpis().map(function (k) {
           return '<div class="kpi' + (dest.indexOf(k.id) >= 0 ? ' destacado' : '') + '"><span title="' + esc(k.l) + '">' + esc(k.l) + '</span><strong>' + k.v + '</strong><em class="' + (k.clase || '') + '">' + esc(k.em || '') + '</em></div>';
@@ -469,7 +495,7 @@
           (at.length > 6 ? '<button class="btn btn-fantasma btn-mini" data-vista="oportunidades" style="margin-top:6px">Ver las ' + at.length + '</button>' : '') + '</div>' +
           '<div class="rejilla">' +
             (fg ? '<div class="tarjeta fuga-grande" data-vista="recorrido" style="cursor:pointer"><h3>Dónde se pierde más <span class="sub">Últimos 30 días</span></h3><div class="cifra">' + M.num(fg.recuperables) + ' ' + TA().contactos + '</div><p class="gris">Se quedan entre <b>' + esc(fg.de.txt) + '</b> y <b>' + esc(fg.a.txt) + '</b>: solo pasa el ' + M.pct(fg.conv) + ', cuando con un buen seguimiento pasa el ' + M.pct(fg.ref) + '.</p></div>' : '') +
-            '<div class="tarjeta"><h3>Qué está haciendo el sistema <span class="sub">Piloto automático</span></h3><div style="margin-top:6px">' + pintaFeed(feed(6)) + '</div></div>' +
+            '<div class="tarjeta"><h3>' + (cfg.sinAgentes ? 'Qué ha pasado <span class="sub">Últimas 48 horas</span>' : 'Qué está haciendo el sistema <span class="sub">Piloto automático</span>') + '</h3><div style="margin-top:6px">' + pintaFeed(feed(6)) + '</div></div>' +
           '</div>' +
         '</div>';
     },
@@ -505,16 +531,16 @@
       const cuenta = function (r) { return ll.filter(function (x) { return x.l.res === r; }).length; };
       const cogieron = ll.filter(function (x) { return x.l.res !== 'nocontesta'; }).length;
       const kp = function (l, v, em, cls) { return '<div class="kpi"><span>' + esc(l) + '</span><strong>' + v + '</strong><em class="' + (cls || '') + '">' + esc(em || '') + '</em></div>'; };
-      return cabecera('Agenda', '¿Cómo está la agenda esta semana?', 'Cada ' + T.cita + ' con quién la agendó y si está confirmada. El sistema confirma, recuerda y recupera los plantones sin que nadie tenga que acordarse.') +
+      return cabecera('Agenda', '¿Cómo está la agenda esta semana?', cfg.sinAgentes ? 'Cada ' + T.cita + ' de la semana, si está confirmada y quién no vino. Las llamadas las haces tú; el sistema te dice cuándo y a quién.' : 'Cada ' + T.cita + ' con quién la agendó y si está confirmada. El sistema confirma, recuerda y recupera los plantones sin que nadie tenga que acordarse.') +
         '<div class="kpis ag-kpis">' +
           kp(T.Citas, M.num(ag.total), ag.porDelante + ' por delante') +
           kp('Asistencia', ag.asistencia == null ? '—' : M.pct(ag.asistencia), ag.plantones ? M.pl(ag.plantones, 'plantón', 'plantones') : 'sin plantones', ag.plantones ? 'mal' : '') +
-          kp(vozT, M.num(ag.voz), ag.total ? M.pct(ag.voz / ag.total) + ' del total' : '') +
+          (cfg.sinAgentes ? kp('Llamadas para hoy', M.num(atencion().length), 'en orden de prioridad') : kp(vozT, M.num(ag.voz), ag.total ? M.pct(ag.voz / ag.total) + ' del total' : '')) +
           kp('Sin confirmar', M.num(ag.riesgo.length), ag.riesgo.length ? 'en las próximas 48 h' : 'todo confirmado', ag.riesgo.length ? 'mal' : '') +
           kp('Huecos libres', M.num(ag.libres.length), ag.off > 0 ? 'en toda la semana' : 'de aquí al ' + DIAS[ag.dias.length - 1].toLowerCase()) +
         '</div>' +
         '<div class="ag-semana"><button class="btn btn-mini btn-icono" type="button" data-semana="-1" aria-label="Semana anterior">‹</button><b>' + esc(semTxt) + '</b><button class="btn btn-mini btn-icono" type="button" data-semana="1" aria-label="Semana siguiente">›</button>' + (ag.off !== QV.voz.semanaDefecto(estado.ahora) ? '<button class="btn btn-mini btn-fantasma" type="button" data-semana="0">Volver a hoy</button>' : '') + '</div>' +
-        '<div class="ag-leyenda"><span>' + ico('voz') + esc(vozT) + '</span><span>' + ico('whatsapp') + 'Agente de WhatsApp</span><span>' + ico('persona') + 'Una persona</span><span class="lg e-confirmada">Confirmada</span><span class="lg e-sinconfirmar">Sin confirmar</span><span class="lg e-asistio">Asistió</span><span class="lg e-planton">Plantón</span>' + (cfg.real ? '' : '<span class="gris">En gris, el resto de ' + T.citas + ' de la semana</span>') + '</div>' +
+        '<div class="ag-leyenda">' + (cfg.sinAgentes ? '' : '<span>' + ico('voz') + esc(vozT) + '</span><span>' + ico('whatsapp') + 'Agente de WhatsApp</span><span>' + ico('persona') + 'Una persona</span>') + '<span class="lg e-confirmada">Confirmada</span><span class="lg e-sinconfirmar">Sin confirmar</span><span class="lg e-asistio">Asistió</span><span class="lg e-planton">Plantón</span>' + (cfg.real ? '' : '<span class="gris">En gris, el resto de ' + T.citas + ' de la semana</span>') + '</div>' +
         '<div class="tarjeta ag-cal"><div class="ag-scroll"><div class="ag-grid" style="grid-template-columns:52px repeat(' + ag.dias.length + ',minmax(118px,1fr))">' + cab + filas + '</div></div></div>' +
         '<div class="rejilla r-3" style="margin-top:14px">' +
           '<div class="tarjeta"><h3>Riesgo de plantón <span class="sub">Sin confirmar en las próximas 48 h</span></h3><div class="lista" style="margin-top:8px">' +
@@ -522,12 +548,13 @@
             (riesgoR ? '<p class="gris" style="margin-top:8px">' + (riesgoC.length ? 'Y ' : '') + M.pl(riesgoR, T.cita + ' más', T.citas + ' más') + ' sin confirmar: el recordatorio del mismo día sale solo.</p>' : '') + '</div></div>' +
           '<div class="tarjeta"><h3>Plantones y recuperación <span class="sub">No vinieron, pero el interés era real</span></h3><div class="lista" style="margin-top:8px">' +
             (plantC.map(function (c) { return filaMini(c, c.x.nba.accion); }).join('') || '<p class="vacio">Ningún plantón pendiente.</p>') + '</div></div>' +
-          '<div class="tarjeta"><h3>' + esc(vozT) + ' esta semana <span class="sub">' + M.pl(ll.length, 'llamada', 'llamadas') + '</span></h3>' +
+          (cfg.sinAgentes ? '<div class="tarjeta"><h3>Volver a llamar <span class="sub">Dijeron «más adelante», con su fecha</span></h3><div class="lista" style="margin-top:8px">' + (estado.contactos.filter(function (c) { return c.s.luego && !c.fin; }).map(function (c) { return filaMini(c, 'En ' + c.s.luego + ' · ' + (c.s.luegoTxt || '')); }).join('') || '<p class="vacio">Nadie pendiente.</p>') + '</div></div>' : '') +
+          (cfg.sinAgentes ? '' : '<div class="tarjeta"><h3>' + esc(vozT) + ' esta semana <span class="sub">' + M.pl(ll.length, 'llamada', 'llamadas') + '</span></h3>' +
             '<div class="ag-voz"><div><b>' + cogieron + '</b><span>cogieron</span></div><div><b>' + cuenta('agendo') + '</b><span>agendaron</span></div><div><b>' + cuenta('luego') + '</b><span>más tarde</span></div><div><b>' + cuenta('nocontesta') + '</b><span>no cogieron</span></div></div>' +
             '<div class="lista">' + (ll.slice(0, 5).map(function (x) {
               const r = QV.voz.RES[x.l.res];
               return '<div class="fila" data-abrir="' + x.c.id + '"><div class="quien-fila">' + avatar(x.c) + '<div style="min-width:0"><div class="nombre">' + esc(x.c.n) + '</div><div class="meta">' + M.fechaCorta(x.l.t, estado.ahora) + (x.l.dur ? ' · ' + QV.voz.duracionTxt(x.l.dur) : '') + '</div></div></div><span></span><span class="ll-res r-' + r.tono + '">' + esc(r.txt) + '</span></div>';
-            }).join('') || '<p class="vacio">Sin llamadas esta semana.</p>') + '</div></div>' +
+            }).join('') || '<p class="vacio">Sin llamadas esta semana.</p>') + '</div></div>') +
         '</div>';
     },
 
@@ -602,21 +629,21 @@
       const sel = contacto(estado.convSel);
       const lado = con.map(function (c) {
         const u = c.conv[c.conv.length - 1];
-        const qui = u.de === 'c' ? '' : u.de === 'h' ? 'Equipo: ' : 'Agente: ';
+        const qui = u.de === 'c' ? '' : u.de === 'h' ? (cfg.persona || 'Equipo') + ': ' : 'Agente: ';
         return '<div class="conv-el" data-conv="' + c.id + '" aria-current="' + (c.id === estado.convSel) + '"><div class="l1"><b>' + esc(c.n) + '</b><time>' + M.fechaCorta(u.t, estado.ahora) + '</time></div><p>' + esc(qui + u.texto) + '</p><div class="l3">' + pillPrio(c.x.prio) + '<span class="pill t-gris">' + esc(M.ESTADOS[c.x.nba.estado]) + '</span></div></div>';
       }).join('');
       let hilo = '<p class="vacio">Sin conversaciones.</p>';
       if (sel) {
         hilo = '<div class="hilo-conv"><div class="hilo-cab"><div class="quien-fila">' + avatar(sel) + '<div><div class="nombre">' + esc(sel.n) + '</div><div class="meta">' + esc(metaContacto(sel)) + '</div></div></div><button class="btn btn-mini" data-abrir="' + sel.id + '">Ver ficha</button></div>' + '<div class="hilo-contacto">' + contactoRealHtml(sel) + '</div>' +
           '<div class="burbujas">' + sel.conv.filter(function (m) { return m.t <= estado.ahora; }).map(function (m) {
-            const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? (estado.cfg.cuenta ? 'Envío automático' : 'Agente de WhatsApp') : m.de === 'v' ? 'Agente de voz' : 'Equipo';
+            const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? (estado.cfg.cuenta ? 'Envío automático' : 'Agente de WhatsApp') : m.de === 'v' ? 'Agente de voz' : (estado.cfg.persona || 'Equipo');
             const ic = m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp';
             return '<div class="burbuja ' + m.de + '"><small>' + ico(ic) + esc(quien) + ' · ' + M.fechaCorta(m.t, estado.ahora) + '</small>' + esc(m.texto) + '</div>';
           }).join('') + '</div>' +
           '<div class="hilo-pie">' + ico(icoAccion(sel.x.nba.tipo)) + '<span><b>' + esc(sel.x.nba.accion) + '</b> · ' + esc(sel.x.nba.quien) + ' · ' + esc(M.ESTADOS[sel.x.nba.estado]) + '</span></div>' +
           '<div class="hilo-acciones">' + accionesRealHtml(sel) + '</div></div>';
       }
-      return cabecera('Conversaciones', '¿Qué está haciendo el sistema?', 'WhatsApp, correo y llamadas en un solo sitio. El agente escribe con el contexto de cada ' + T.contacto + ' y se aparta cuando hace falta una persona.') +
+      return cabecera('Conversaciones', estado.cfg.sinAgentes ? '¿Qué hemos hablado con cada uno?' : '¿Qué está haciendo el sistema?', estado.cfg.sinAgentes ? 'WhatsApp, correo y llamadas en un solo sitio, con la ficha al lado. Todo lo escribe una persona del equipo.' : 'WhatsApp, correo y llamadas en un solo sitio. El agente escribe con el contexto de cada ' + T.contacto + ' y se aparta cuando hace falta una persona.') +
         '<div class="conv-caja"><div class="conv-lista">' + lado + '</div>' + hilo + '</div>';
     },
 
@@ -662,7 +689,7 @@
       const f = estado.filtroSenal;
       const lista = todas.filter(function (x) { return f === 'todas' ? true : f === 'humano' ? x.s.humano : x.s.tipo === f; });
       const nh = todas.filter(function (x) { return x.s.humano; }).length;
-      return cabecera('Señales', '¿Dónde existe un riesgo o una oportunidad?', 'Lo que el sistema ha detectado solo. Cada señal dice quién, qué ha pasado, por qué importa, qué se ha hecho ya y si hace falta una persona.') +
+      return (estado.cfg.sinAgentes ? cabecera('Avisos', '¿Qué me ha avisado el sistema?', 'Lo que el sistema ha detectado solo: quién ha vuelto a la web, quién ha contestado, quién no vino o lleva días sin que nadie le llame. Cada aviso dice por qué importa y qué hacer.') : cabecera('Señales', '¿Dónde existe un riesgo o una oportunidad?', 'Lo que el sistema ha detectado solo. Cada señal dice quién, qué ha pasado, por qué importa, qué se ha hecho ya y si hace falta una persona.')) +
         '<div class="filtros"><button class="filtro" data-fsenal="todas" aria-pressed="' + (f === 'todas') + '">Todas <small>' + todas.length + '</small></button><button class="filtro" data-fsenal="humano" aria-pressed="' + (f === 'humano') + '">Requieren persona <small>' + nh + '</small></button>' +
         Object.keys(tipos).map(function (k) { return '<button class="filtro" data-fsenal="' + k + '" aria-pressed="' + (f === k) + '">' + M.TIPOS_SENAL[k].txt + ' <small>' + tipos[k] + '</small></button>'; }).join('') + '</div>' +
         '<div class="tarjeta" style="padding:0">' + (lista.map(function (x) {

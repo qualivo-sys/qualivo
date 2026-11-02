@@ -167,7 +167,13 @@ const FORMULARIOS_SECTOR = {
   // 19-oct-2026: test de cualificación de formación (21-31 oct). La copia es la que lleva el anuncio.
   // Sin estas entradas el rescate no los miraba y el primer lead apto (22-oct) no llegó al CRM.
   '2063720777591278': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' },
-  '1419526843110847': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' }
+  '1419526843110847': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' },
+  // 1-nov-2026: formulario corto de formación (2 preguntas: ticket del alumno e inversión), para el anuncio de Javier (E-03).
+  '1426444132403939': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-corto' },
+  // 2-nov-2026: formulario de 4 preguntas (inversión, precio del curso, cuándo y problema), con revisión de «mayor intención».
+  '1656098466017561': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg' },
+  // 2-nov-2026: reformas, mismas 4 preguntas (el precio es el de una obra: ticket-1 < 3.000 €, 2 hasta 10.000, 3 hasta 30.000, 4 más).
+  '1448120514052614': { sector: 'Reformas, construcción o instalaciones', etiqueta: 'sector-reformas', angulo: 'form-4preg' }
 };
 
 async function nombreFormulario(formId) {
@@ -225,8 +231,12 @@ async function guardar(lead, opts) {
   const web = valor(campos, ['website', 'web', 'sitio_web']);
   // Meta devuelve la CLAVE de la opción elegida, no el texto que ve el usuario.
   const CLAVES_INV = {
-    nada: 'Nada todavía', menos500: 'Menos de 500 €', '500_2000': 'Entre 500 y 2.000 €',
-    '2000_5000': 'Entre 2.000 y 5.000 €', mas5000: 'Más de 5.000 €'
+    nada: 'Nada todavía', menos500: 'Menos de 500 €', '500_2000': 'Entre 500 y 2.000 €', '500_1500': 'Entre 500 y 1.500 €', mas1500: 'Más de 1.500 €',
+    '2000_5000': 'Entre 2.000 y 5.000 €', mas5000: 'Más de 5.000 €',
+    // Formulario largo de formación (19-oct) y el de 4 preguntas (2-nov). Sin estas claves la etiqueta
+    // salía «inv-500-999» o «inv-1000-2999» y la puntuación no la reconocía.
+    '500_999': 'Entre 500 y 999 €', '1000_2999': 'Entre 1.000 y 2.999 €', '3000mas': 'Más de 3.000 €',
+    otros_nose: 'Otros canales o no lo sé'
   };
   const CLAVES_FUGA = {
     anuncios: 'En los anuncios y la captación', web: 'En la web y los formularios',
@@ -267,6 +277,13 @@ async function guardar(lead, opts) {
     const dol = (v2.etiquetas.filter(function (t) { return /^dolor-/.test(t); })[0] || '').slice(6);
     fuga = dol === 'seguimiento' ? CLAVES_FUGA.seguimiento : (dol === 'captacion' || dol === 'calidad') ? CLAVES_FUGA.anuncios : dol === 'nose' ? CLAVES_FUGA.nose : '';
   }
+  // Formularios con ticket, cuándo o problema pero sin «quién decide» (los de formación de oct-nov):
+  // se leen igual que en el funnel v2 para que esas respuestas lleguen a GHL como etiquetas.
+  const sueltas = (v2 || hz) ? null : require('./_funnel-v2.js').etiquetasSueltas(campos);
+  if (sueltas && !fuga) {
+    const dol = (sueltas.filter(function (t) { return /^dolor-/.test(t); })[0] || '').slice(6);
+    fuga = dol === 'seguimiento' ? CLAVES_FUGA.seguimiento : (dol === 'captacion' || dol === 'calidad') ? CLAVES_FUGA.anuncios : dol === 'nose' ? CLAVES_FUGA.nose : '';
+  }
   const invierte = v2 ? true : (!!inversion && String(inversionCruda) !== 'nada' &&
     !/^nada/i.test(String(inversion)));
 
@@ -305,6 +322,7 @@ async function guardar(lead, opts) {
   if (lead.ad_id) etiquetas.push('creativo-' + String(lead.ad_id).slice(0, 34));
   if (v2) v2.etiquetas.forEach(function (t) { etiquetas.push(t); });
   if (hz) hz.etiquetas.forEach(function (t) { etiquetas.push(t); });
+  if (sueltas) sueltas.forEach(function (t) { if (etiquetas.indexOf(t) === -1) etiquetas.push(t); });
 
   // Completar un contacto que ya existía (lo creó la landing porque el webhook
   // no procesó el aviso de Meta): se añaden los datos del formulario, pero no

@@ -1,5 +1,42 @@
 # Plan de contenidos de noviembre · Qualivo (en una página)
 
+> **MANDA EL BRIEF DEL 29-OCT · «El cliente como protagonista»** (Notion, página del plan: https://app.notion.com/p/40656e1ad6ed815abdb2d2c6c41b85a4). Todo lo que hay debajo de esta caja es material anterior y cede ante el brief cuando choca.
+> - **Enfoque:** abrir con la situación que vive el empresario (formación, reformas, clínicas, servicios B2B), no con «en Qualivo» ni con herramientas. Orden: situación → tensión → criterio útil → evidencia si existe → cierre según la función.
+> - **Reparto orientativo:** 70 % situaciones, 20 % mecanismos, 10 % experiencia propia documentada. Nada de clientes, ni en anónimo (decisión del 29-oct).
+> - **Cadencia:** 2 piezas sociales base por semana; una tercera solo si aporta una prueba, objeción o aprendizaje distinto. El vídeo ocupa uno de esos huecos, no suma.
+> - **Newsletter:** una sola al mes, la prepara Growth con aportaciones de Contenido. Las newsletters semanales de Contenido (5 y 12-nov) se fusionan en esa.
+> - **Cierres:** cada pieza cierra según su función. No todas venden ni piden llamada; el enlace al blog solo cuando amplía de verdad.
+> - **Blog:** artículos A («Piden información, pero no avanzan») y B («Antes de invertir más»), no dos por semana.
+
+## 0. Narrativas y piezas (revisión del 30-oct)
+
+| Semana | Narrativa | Pieza base A | Pieza base B | Tercera (opcional) |
+|---|---|---|---|---|
+| S45 · 2-8 | Pagas por contactos. ¿Pero son oportunidades? | **C4**, lun 2-nov: escena de formación (preguntan por un curso y no encajan); apertura ajustada | **C5 «No lo sé»**, mié 4-nov: copy del brief (§6), puente con Paid | — |
+| S46 · 9-15 | Te piden información y después desaparecen | **V3 «Día 2, día 5, día 10»**, mar 10-nov (reformas), grabado el 29-oct | **C7 «Llámame en enero»**, mié 11-nov (B2B) | C3 (clínica), solo si aporta algo distinto |
+| S47 · 16-22 | Tus campañas funcionan, pero el negocio no crece | **C8 reorientado**, lun 16-nov: «El coste por contacto ha bajado. Las ventas, no.» (sin cifra de CTR) | **V1**, mar 17-nov: reservada, celebrada y con encaje; apertura en el montaje | — |
+| S48 · 23-29 | Antes de gastar más, descubre qué arreglar | **C9 nuevo**, lun 23-nov: «Cada uno tiene su explicación» | **C10 nuevo**, mié 25-nov: «Qué arreglar primero» (la única con invitación comercial) | «Qué aprendí analizando un embudo», experiencia propia sin clientes |
+
+**Clasificación del resto:**
+
+| Pieza | Decisión | Motivo |
+|---|---|---|
+| C1 «Los leads de Meta son malos» | Conservar (aprobado, 28-oct) | Abre el mes; encaja con S45 |
+| C2 «Presupuesto gratis» | Reserva | Encaja con S45, pero la semana ya tiene A, B y tercera; habla del anuncio, no del empresario |
+| C6 «Todo en la misma página» | Reserva | Mecanismo de anuncio y landing; no tiene hueco en las narrativas |
+| V2 y V4 | Reserva / diciembre | V2 podía parecer un caso real; V4 carga noviembre de automatización |
+| Newsletters 1 (5-nov) y 2 (12-nov) | Fusionar en la mensual de Growth | Brief: una sola newsletter al mes |
+| Vídeo «Cómo le contamos a Meta quién llegó» y diagnóstico en pantalla | Reserva | Con 2 piezas por semana no hay hueco; V1 ya cubre S47 |
+| Grabación del 5-nov | Solo si hace falta | V1 y V3 ya están grabados |
+
+**En Notion (30-oct):** cada ficha lleva la sección «Revisión · cliente protagonista» con la decisión, y C4, C5, C8, C9 y C10 llevan el texto propuesto. Láminas que rehacer (Creative): C4 1-2, C5 1, 2 y 5, C8 todas, C9 y C10 nuevas.
+
+Cada ficha recibe la sección **«Revisión · cliente protagonista»** con: público, escena, tesis, gancho, láminas, acción útil, cierre, fuente o «ejemplo ilustrativo», conexión con blog o newsletter, canal, fecha, responsable y métrica. Los originales no se borran.
+
+---
+
+## Material anterior
+
 > Encargo del Chief of Staff (27-oct), para la revisión conjunta del jueves 29 a las 11:00. Lo desarrolla el plan de 30 días por dolores (`content/redes/2026-10-27-plan-30-dias-dolores.md`), y aquí va solo lo que se decide.
 > [C] = confirmado · [E] = estimado. **No se publica nada sin el ok de Maikel.**
 
@@ -10,7 +47,7 @@
 >   - 1 vídeo (martes);
 >   - la newsletter del jueves.
 >
->   Cada pieza sale de un caso, un dato o un aprendizaje real, con la fuente en la ficha, y cierra con una línea a la llamada o a la calculadora de fugas (29-oct).
+>   Cada pieza sale de un caso, un dato o un aprendizaje real, con la fuente en la ficha.
 > - **Tiempo de Maikel:** unas 2 horas a la semana como máximo. Revisión los jueves de 13:00 a 14:00. Grabación los jueves de 17:00 a 18:00.
 > - **El 30-nov:** una línea con lo que ha funcionado (alcance, respuestas y reuniones) para ajustar el ritmo.
 > - **Las fichas:** en Notion, base «📝 Piezas de noviembre · para revisar» (https://app.notion.com/p/e7227459f29a4f9c98053c86142c937c), con una ficha por pieza para comentar.
@@ -92,7 +129,7 @@ Quedan en reserva: «Las métricas antes de subir presupuesto» (inmobiliaria) y
 
 - **La página de empresa de Qualivo en LinkedIn:** mediana de 0 comentarios en el sector [C].
 - **Las IA y herramientas como tema:** 102 de 290 publicaciones del sector, saturado [C].
-- **«Comenta PALABRA».** Desde el 29-oct, cada pieza cierra con una línea a la llamada (qualivo.io/llamada/) o a la calculadora de fugas, y la pregunta de conversación va al primer comentario (objetivo de Maikel: 2 clientes nuevos en noviembre).
+- **«Comenta PALABRA»** y cualquier diagnóstico en el cierre de un post. Solo una pieza de las 13 lleva diagnóstico.
 - **Las series por días** (Sin humo, bandera roja…) y las infografías planas del S44.
 - **Casos de clientes, también en anónimo** (decisión del 29-oct; no se piden permisos por ahora) y cualquier promesa o precio (R10).
 - **Newsletters propias:** son de Growth. Contenido le pasa la mejor pieza de cada quincena como idea, sin duplicar.
