@@ -292,4 +292,8 @@ async function recorridos(desde, hasta) {
   });
 }
 
-module.exports = { recoger: recoger, recorridos: recorridos, MESES: MESES };
+module.exports = {
+  recoger: recoger, recorridos: recorridos, MESES: MESES,
+  // piezas que reutiliza _nuria-embudo.js
+  ghl: ghl, enParalelo: enParalelo, ventasHoja: ventasHoja, inicioUTC: inicioUTC, sumaDias: sumaDias, diaMadrid: diaMadrid, PUERTAS: PUERTAS
+};
