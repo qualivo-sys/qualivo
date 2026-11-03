@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=block');
+body{padding:0;background:#555}
+.page{margin-bottom:20px}
+.prog{position:absolute;top:0;left:0;right:0;height:14px;background:rgba(128,128,128,.22)}
+.prog i{display:block;height:100%;background:#E8590C}
+.n{position:absolute;top:56px;right:56px;font-family:Anton;font-size:24px;letter-spacing:.1em;opacity:.55}
+.in{position:absolute;inset:0;padding:110px 56px 140px;display:flex;flex-direction:column}
+.h{font-family:Anton;font-size:84px;line-height:1.02;text-transform:uppercase}
+.t{font-size:42px;line-height:1.3;margin-top:28px}
+.tinta .t{color:rgba(242,238,230,.86)} .crema .t{color:rgba(10,10,11,.86)}
+.t b{font-weight:700}
+.next{position:absolute;bottom:46px;right:230px;font-family:Anton;font-size:26px;color:#E8590C;letter-spacing:.06em}
+.mid{margin-top:auto;margin-bottom:auto}
+.ej{font-size:22px;opacity:.55;margin-top:18px}
+/* pegatina escrita a mano */
+.peg{position:absolute;font-family:Caveat,cursive;font-weight:700;color:#0A0A0B;background:#F4CC38;padding:14px 26px;border-radius:10px;transform:rotate(-4deg);box-shadow:0 12px 30px rgba(0,0,0,.35);font-size:46px;line-height:1.05;z-index:5}
+.peg.nar{background:#E8590C;color:#fff}
+/* notificaciones tipo iPhone */
+.noti{background:rgba(245,245,245,.95);color:#111;border-radius:30px;padding:22px 26px;display:flex;gap:20px;align-items:center;font-family:-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.noti .ic{width:62px;height:62px;border-radius:15px;background:#25D366;color:#fff;font-size:34px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.noti .ic.crm{background:#E8590C}
+.noti b{font-size:24px;display:block}
+.noti span{font-size:24px;color:#333}
+.noti small{margin-left:auto;align-self:flex-start;font-size:20px;color:#888}
+/* tarjeta tipo app */
+.crm{background:#fff;color:#0A0A0B;border-radius:26px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.18);font-family:-apple-system,"Segoe UI",Roboto,sans-serif}
+.crm .top{display:flex;align-items:center;padding:22px 28px;border-bottom:1px solid #EEE;font-size:22px;font-weight:600;color:#888}
+.crm .top b{color:#0A0A0B;margin-right:auto;font-size:24px}
+.row{display:flex;align-items:center;gap:24px;padding:36px 28px;border-bottom:1px solid #F1EFEA}
+.row:last-child{border:0}
+.lt{width:66px;height:66px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:36px;flex:none}
+.A{background:#E8590C;color:#fff}.B{background:#FDE3D3;color:#C2410C}.C{background:#EFEAE0;color:#6B655B}.D{background:#F4F2EE;color:#AAA59B}
+.nm{font-size:34px;font-weight:700}.ws{font-size:25px;color:#6E6E6E;margin-top:4px}
+.tag{margin-left:auto;font-size:24px;font-weight:700;padding:10px 16px;border-radius:999px;background:#FDE3D3;color:#C2410C;white-space:nowrap}
+.tag.g{background:#F1EFEA;color:#6E6B63}
+/* CTA final */
+.cta{margin-top:auto;background:#E8590C;color:#fff;border-radius:30px;padding:46px 48px}
+.cta .k{font-family:Anton;font-size:40px;letter-spacing:.04em;opacity:.9}
+.cta .w{font-family:Anton;font-size:120px;line-height:1;margin:8px 0 14px}
+.cta .tx{font-size:36px;line-height:1.3}
+.cta .tx b{font-weight:700}
+/* listas */
+.lista{display:flex;flex-direction:column;gap:30px;margin-top:56px}
+.it{display:flex;gap:28px;align-items:flex-start;font-size:40px;line-height:1.28}
+.it .mk{font-family:Anton;font-size:44px;color:#E8590C;width:56px;flex:none}
+.it b{font-weight:700}
+/* whatsapp */
+.wa{background:#EFEAE2;border-radius:30px;overflow:hidden;font-family:-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.wa .hd{background:#F6F6F6;display:flex;align-items:center;gap:16px;padding:18px 24px;border-bottom:1px solid #DDD;color:#000}
+.wa .av{width:52px;height:52px;border-radius:50%;background:#E8590C;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:24px}
+.wa .hd b{font-size:24px;display:block}.wa .hd small{font-size:18px;color:#777}
+.wa .wall{padding:24px 20px 28px;display:flex;flex-direction:column;gap:14px}
+.bub{max-width:82%;padding:14px 18px 10px;border-radius:16px;font-size:27px;line-height:1.35;color:#000;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.mio{align-self:flex-end;background:#DCF8C6}.suyo{align-self:flex-start;background:#fff}
+.hh{display:block;font-size:16px;color:#8C8C8C;text-align:right;margin-top:4px}
+.ia{display:inline-block;font-size:15px;font-weight:700;color:#E8590C;letter-spacing:.06em;margin-bottom:4px}

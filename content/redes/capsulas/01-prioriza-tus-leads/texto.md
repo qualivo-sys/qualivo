@@ -22,3 +22,5 @@ Con eso, la IA lee cada solicitud, ordena la lista y prepara el siguiente paso d
 No se trata de conseguir más contactos. Se trata de aprovechar mejor los que ya tienes.
 
 Si mañana 40 personas te piden información, ¿tu equipo sabría por dónde empezar?
+
+👉 Comenta ORDEN y te mando por privado la plantilla para ordenar tus contactos con estas dos preguntas.
