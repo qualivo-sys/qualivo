@@ -95,3 +95,59 @@ Maikel, con su usuario de Meta.
 
 Contenido prepara los recursos y sus URLs. Con eso y el punto 1, yo dejo los tres workflows montados y
 apagados, y los pruebo con un reel de prueba.
+
+---
+
+## v2 (3-nov) · ORDEN, AGENTE y VENTAS: decisión y hoja de montaje
+
+Encargo de Contenido, confirmado por el Chief of Staff: todos los CTA acaban en «Comenta PALABRA y te
+mando…». Estas tres palabras sustituyen a las de la v1 (FUGAS, GUION y 5 MIN).
+
+### Decisión: GHL (no ManyChat)
+
+- **El Instagram de Qualivo ya está conectado a GHL** [C, 3-nov]. Hay 45 conversaciones de Instagram en la
+  subcuenta, la última de hoy, y dos perfiles de Instagram enlazados en Social Planner. No hay que
+  conectar nada ni pagar ManyChat.
+- **ManyChat descartado:** no tiene actividad y su puente lleva la clave de GHL en claro. Ese puente se
+  queda como está; lo decide Maikel (rotar la clave y apagarlo).
+- **Hecho por API hoy, en GHL de Qualivo:** etiquetas `ig-orden`, `ig-agente`, `ig-ventas` e
+  `ig-respondio`, y el campo `contact.ig_respuesta` (`origen-instagram` ya existía).
+- **Los workflows no se pueden crear por API** en GHL. Se montan en la interfaz, unos 30 minutos, con esta
+  hoja: Maikel o el agente con navegador.
+
+### Las tres palabras
+
+| Comentario | Recurso (lo escribe Contenido) | Etiqueta | `utm_campaign` | Pregunta de cualificación |
+|---|---|---|---|---|
+| contiene `orden` | Plantilla para ordenar contactos por «¿encaja?» y «¿tiene interés?» | `ig-orden` | `orden` | «¿Cuántos contactos nuevos te entran al mes, más o menos?» |
+| contiene `agente` | Reglas del agente de WhatsApp | `ig-agente` | `agente` | «¿Hoy quién contesta los WhatsApp de los leads, tú o alguien del equipo?» |
+| contiene `ventas` | Checklist para que las campañas aprendan de quién compra | `ig-ventas` | `ventas` | «¿Cuánto inviertes al mes en anuncios, más o menos?» |
+
+Enlace de cada recurso: `https://qualivo.io/<ruta>?utm_source=ig_dm&utm_medium=dm&utm_campaign=<palabra>`.
+
+### Workflow (uno por palabra) · `IG · Comenta ORDEN`, igual para AGENTE y VENTAS
+
+1. **Trigger:** *Instagram Comment* (puede aparecer como *Facebook/Instagram Comment On Post*).
+   - **Elegir el perfil de Qualivo:** hay dos perfiles de Instagram conectados, así que hay que comprobar el usuario.
+   - Publicaciones: **solo el reel de prueba** mientras se prueba; después, todas.
+   - Filtro: el comentario **contiene** `orden`, sin distinguir mayúsculas.
+2. **Respuesta pública al comentario** (opcional), rotando 3 textos: «¡Te lo mando por privado! 📩», «Enviado, mira tus mensajes 👀» y «Hecho, te escribo por privado».
+3. **Respuesta privada (DM):**
+   > ¡Hola {{contact.first_name}}! Aquí tienes {{recurso}} 👉 {{enlace con UTM}}
+   >
+   > Una pregunta rápida para mandarte lo que te sirva: {{pregunta de la tabla}}
+4. **Add Tag:** `ig-orden` + `origen-instagram`.
+5. **Wait for reply**, hasta 24 h:
+   - si contesta → **Update field** `ig_respuesta` = su respuesta → **Add Tag** `ig-respondio` → **Internal notification** a Maikel con el contacto y la respuesta;
+   - si no contesta → fin. **Sin recordatorios:** Meta solo deja una respuesta privada por comentario.
+6. **Settings:** *Allow re-entry* OFF y *Stop on response* ON. **Se queda en Draft.**
+
+### Prueba (antes de encender)
+
+1. Workflow publicado con el trigger limitado al **reel de prueba**. Desde el Instagram personal de Maikel, se comenta «orden».
+2. Tiene que pasar todo esto:
+   - llega el DM con el enlace y la UTM correcta;
+   - el contacto aparece en GHL con `ig-orden` y `origen-instagram`;
+   - al contestar, se rellena `ig_respuesta` y llega el aviso.
+3. Se repite con «agente» y «ventas», y con un comentario sin palabra, que no tiene que provocar nada.
+4. **Encender para todas las publicaciones:** con el OK directo de Maikel (ventana de las 16:30).
