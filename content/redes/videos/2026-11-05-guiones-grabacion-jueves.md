@@ -71,7 +71,7 @@
 **Antes de grabar:**
 - **Pantalla:** grabar la pantalla «Hoy» en modo real con nombres tapados. Si no se puede, usar la demo con «datos de ejemplo» visible.
 - **Pregunta al copiloto:** probarla antes. Si no contesta bien con los datos reales, se graba en la demo.
-- **«Las empresas con las que trabajamos»:** confirmar que es correcto. Hoy hay cuentas privadas de Nuria Roure y Al Milímetro.
+- **«Las empresas con las que trabajamos»:** confirmar con Maikel que se puede decir así (sin nombrar a nadie).
 
 ---
 
