@@ -8,6 +8,10 @@
 //   NURIA_META_CUENTA      id de la cuenta publicitaria (act_…)
 //   NURIA_GOOGLE_SA_JSON   cuenta de servicio con lectura de la hoja de ventas
 //   NURIA_VENTAS_HOJA      id de la hoja «D. MÉTRICAS» (pestaña «🟠 VENTAS»)
+//   NURIA_GADS_DEV_TOKEN   token de desarrollador de Google Ads (MCC de Qualivo)
+//   NURIA_GADS_CLIENTE     id de la cuenta de Google Ads de Nuria (sin guiones)
+//   NURIA_GADS_MCC         id del MCC de Qualivo (login-customer-id)
+//   (la cuenta de servicio de NURIA_GOOGLE_SA_JSON tiene acceso de lectura en Google Ads)
 //
 // Reglas: SOLO LECTURA. Sin datos de salud: no se leen tests, notas ni
 // conversaciones. Nombres como «Nombre I.». Nada de datos en el código.
@@ -119,14 +123,34 @@ async function gastoMeta(desde, hasta, paso) {
   });
 }
 
+// ---------- Google Ads (todo el gasto va al VSL: son las campañas Evergreen) ----------
+// paso: 'week' (semanas que empiezan en lunes) o 'month'. Devuelve [{ dia, gasto }].
+async function gastoGoogle(desde, hasta, paso) {
+  const dev = process.env.NURIA_GADS_DEV_TOKEN, cli = process.env.NURIA_GADS_CLIENTE, mcc = process.env.NURIA_GADS_MCC;
+  if (!dev || !cli) return null;
+  const t = await tokenGoogle('https://www.googleapis.com/auth/adwords');
+  if (!t) return null;
+  const seg = paso === 'month' ? 'segments.month' : 'segments.week';
+  const h = { Authorization: 'Bearer ' + t, 'developer-token': dev, 'Content-Type': 'application/json' };
+  if (mcc) h['login-customer-id'] = mcc;
+  const r = await fetch('https://googleads.googleapis.com/v25/customers/' + cli + '/googleAds:searchStream', {
+    method: 'POST', headers: h,
+    body: JSON.stringify({ query: 'SELECT ' + seg + ', metrics.cost_micros FROM customer WHERE segments.date BETWEEN \'' + desde + '\' AND \'' + hasta + '\'' })
+  });
+  if (!r.ok) throw new Error('Google Ads ' + r.status);
+  const out = [];
+  (await r.json()).forEach(function (lote) { (lote.results || []).forEach(function (x) { out.push({ dia: paso === 'month' ? x.segments.month : x.segments.week, gasto: Number((x.metrics || {}).costMicros || 0) / 1e6 }); }); });
+  return out;
+}
+
 // ---------- Hoja de ventas ----------
-async function tokenGoogle() {
+async function tokenGoogle(alcance) {
   const sa = JSON.parse(process.env.NURIA_GOOGLE_SA_JSON || '{}');
   if (!sa.client_email || !sa.private_key) return null;
   const b64 = function (o) { return Buffer.from(JSON.stringify(o)).toString('base64url'); };
   const now = Math.floor(Date.now() / 1000);
   const cab = b64({ alg: 'RS256', typ: 'JWT' });
-  const carga = b64({ iss: sa.client_email, scope: 'https://www.googleapis.com/auth/spreadsheets.readonly', aud: sa.token_uri, iat: now, exp: now + 3600 });
+  const carga = b64({ iss: sa.client_email, scope: alcance || 'https://www.googleapis.com/auth/spreadsheets.readonly', aud: sa.token_uri, iat: now, exp: now + 3600 });
   const firma = crypto.sign('RSA-SHA256', Buffer.from(cab + '.' + carga), sa.private_key).toString('base64url');
   const r = await fetch(sa.token_uri, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer', assertion: cab + '.' + carga + '.' + firma }) });
   if (!r.ok) throw new Error('Google ' + r.status);
@@ -211,11 +235,16 @@ async function recoger() {
   });
 
   // 3) Gasto en Meta y 4) ventas de la hoja (si están configurados)
-  const [meta, metaMes, ventas] = await Promise.all([
+  const [meta, metaMes, ventas, gads, gadsMes] = await Promise.all([
     gastoMeta(semanas[0], hoy, '7').catch(function () { return null; }),
     gastoMeta(meses[0], hoy, 'monthly').catch(function () { return null; }),
-    ventasHoja(desde).catch(function () { return null; })
+    ventasHoja(desde).catch(function () { return null; }),
+    gastoGoogle(semanas[0], hoy, 'week').catch(function () { return null; }),
+    gastoGoogle(meses[0], hoy, 'month').catch(function () { return null; })
   ]);
+  const google = {}, googleMes = {}; semanas.forEach(function (s) { google[s] = 0; }); meses.forEach(function (m) { googleMes[m] = 0; });
+  (gads || []).forEach(function (g) { if (g.dia in google) google[g.dia] += g.gasto; });
+  (gadsMes || []).forEach(function (g) { if (g.dia in googleMes) googleMes[g.dia] += g.gasto; });
   const gasto = {}, gastoMes = {}; semanas.forEach(function (s) { gasto[s] = {}; }); meses.forEach(function (m) { gastoMes[m] = {}; });
   (meta || []).forEach(function (m) { const o = gasto[lunesDe(m.dia)]; if (o) o[m.puerta] = (o[m.puerta] || 0) + m.gasto; });
   (metaMes || []).forEach(function (m) { const o = gastoMes[mesDe(m.dia)]; if (o) o[m.puerta] = (o[m.puerta] || 0) + m.gasto; });
@@ -257,10 +286,10 @@ async function recoger() {
 
   return {
     generado: Date.now(), hoy: hoy, semanas: semanas, orden: ORDEN,
-    registros: registros, llamadas: llamadas, gasto: meta ? gasto : null, ventas: ventas ? venta : null,
-    meses: meses, mes: { registros: registrosMes, llamadas: llamadasMes, gasto: metaMes ? gastoMes : null, ventas: ventas ? ventaMes : null },
+    registros: registros, llamadas: llamadas, gasto: meta ? gasto : null, google: gads ? google : null, ventas: ventas ? venta : null,
+    meses: meses, mes: { registros: registrosMes, llamadas: llamadasMes, gasto: metaMes ? gastoMes : null, google: gadsMes ? googleMes : null, ventas: ventas ? ventaMes : null },
     ediciones: edicion, sinContactarVsl: sinContactar, closers: closers,
-    fuentes: { meta: !!meta, hoja: !!ventas, googleAds: false }
+    fuentes: { meta: !!meta, hoja: !!ventas, googleAds: !!gads }
   };
 }
 

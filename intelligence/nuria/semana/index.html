@@ -48,7 +48,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
   var datos = null, semanaSel = null, mesSel = null, modo = 'semana';
   var MESL = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
   function nomMes(m) { var d = new Date(m + 'T12:00:00Z'); return MESL[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
-  function src() { return modo === 'mes' ? { per: datos.meses, registros: datos.mes.registros, llamadas: datos.mes.llamadas, gasto: datos.mes.gasto, ventas: datos.mes.ventas } : { per: datos.semanas, registros: datos.registros, llamadas: datos.llamadas, gasto: datos.gasto, ventas: datos.ventas }; }
+  function src() { return modo === 'mes' ? { per: datos.meses, registros: datos.mes.registros, llamadas: datos.mes.llamadas, gasto: datos.mes.gasto, google: datos.mes.google, ventas: datos.mes.ventas } : { per: datos.semanas, registros: datos.registros, llamadas: datos.llamadas, gasto: datos.gasto, google: datos.google, ventas: datos.ventas }; }
   var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -70,6 +70,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
       Object.keys(F.llamadas[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].llam += F.llamadas[s][p].celebradas; });
       if (F.ventas) Object.keys(F.ventas[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].ventas += F.ventas[s][p].n; t[p].eur += F.ventas[s][p].eur; });
       if (F.gasto) Object.keys(F.gasto[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].gasto += F.gasto[s][p]; });
+      if (F.google && F.google[s]) { t['VSL'].gasto += F.google[s]; t['VSL'].google = (t['VSL'].google || 0) + F.google[s]; }
     });
     return t;
   }
@@ -81,7 +82,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     var cur = porPuerta([s]), ant = prev ? porPuerta([prev]) : null;
     var ult4 = esMes ? cur : porPuerta(sem.slice(Math.max(0, i - 3), i + 1));
     var enCurso = i === sem.length - 1;
-    var fact = suma(cur, 'eur'), ventas = suma(cur, 'ventas'), gasto = suma(cur, 'gasto'), llam = suma(cur, 'llam'), reg = (F.registros[s] || {})._total || 0;
+    var gGoogle = (cur['VSL'] && cur['VSL'].google) || 0, fact = suma(cur, 'eur'), ventas = suma(cur, 'ventas'), gasto = suma(cur, 'gasto'), llam = suma(cur, 'llam'), reg = (F.registros[s] || {})._total || 0;
     var etiq = esMes ? 'mes' : 'semana';
     var h = '';
     h += '<div class="barra"><div><h1>Nuria Roure · Intelligence</h1><p class="sub">' + (esMes ? 'Por meses' : 'Por semanas') + ' · datos de GHL, Meta y la hoja de ventas · actualizado hace ' + Math.round((datos.cacheSegundos || 0) / 60) + ' min</p></div>';
@@ -91,19 +92,19 @@ small,.nota{color:var(--mut);font-size:12.5px}
     var k = [
       ['Facturación', F.ventas ? eur(fact) : 'sin hoja', ant && F.ventas ? delta(fact, suma(ant, 'eur')) : ''],
       ['Ventas', F.ventas ? num(ventas) : 'sin hoja', ant && F.ventas ? delta(ventas, suma(ant, 'ventas')) : ''],
-      ['Gasto en Meta', F.gasto ? eur(gasto) : 'sin Meta', ant && F.gasto ? delta(gasto, suma(ant, 'gasto')) : ''],
-      ['Retorno', gasto && F.ventas ? (fact / gasto).toFixed(1).replace('.', ',') + '×' : '—', '<span class="neu">facturación ÷ gasto Meta</span>'],
+      ['Gasto en anuncios', F.gasto || F.google ? eur(gasto) : 'sin datos', (ant && F.gasto ? delta(gasto, suma(ant, 'gasto')) : '') + '<div class="neu">Meta ' + eur(gasto - gGoogle) + ' · Google ' + (F.google ? eur(gGoogle) : 'sin datos') + '</div>'],
+      ['Retorno', gasto && F.ventas ? (fact / gasto).toFixed(1).replace('.', ',') + '×' : '—', '<span class="neu">facturación ÷ gasto en anuncios</span>'],
       ['Llamadas celebradas', num(llam), ant ? delta(llam, suma(ant, 'llam')) : ''],
       ['Registros nuevos', num(reg), ant ? delta(reg, (F.registros[prev] || {})._total || 0) : '']
     ];
     h += '<div class="kpis">' + k.map(function (x) { return '<div class="k"><div class="l">' + x[0] + '</div><div class="v">' + x[1] + '</div>' + x[2] + '</div>'; }).join('') + '</div>';
 
-    h += '<h2>Por puerta de entrada · ' + (esMes ? nomMes(s) : 'últimas 4 semanas hasta la elegida') + '</h2><div class="card"><table><tr><th>Puerta</th><th class="n">Registros</th><th class="n">Llamadas celebradas</th><th class="n">Ventas</th><th class="n">Facturación</th><th class="n">Gasto Meta</th><th class="n">Coste por venta</th></tr>';
+    h += '<h2>Por puerta de entrada · ' + (esMes ? nomMes(s) : 'últimas 4 semanas hasta la elegida') + '</h2><div class="card"><table><tr><th>Puerta</th><th class="n">Registros</th><th class="n">Llamadas celebradas</th><th class="n">Ventas</th><th class="n">Facturación</th><th class="n">Gasto anuncios</th><th class="n">Coste por venta</th></tr>';
     datos.orden.forEach(function (p) {
       var v = ult4[p]; var cpv = v.gasto ? (v.ventas ? eur(v.gasto / v.ventas) : 'sin ventas') : '—';
       h += '<tr><td>' + esc(p) + '</td><td class="n">' + num(v.reg) + '</td><td class="n">' + num(v.llam) + '</td><td class="n">' + num(v.ventas) + '</td><td class="n">' + eur(v.eur) + '</td><td class="n">' + (v.gasto ? eur(v.gasto) : '—') + '</td><td class="n">' + cpv + '</td></tr>';
     });
-    h += '</table><p class="nota">Ventas según la columna «Fuente» de la hoja. El VSL vive de Google Ads, todavía sin conectar: por eso no tiene coste. Las llamadas de las agendas personales de las closers (' + num(ult4['Agenda personal'].llam) + ') no se asignan a ninguna puerta.</p></div>';
+    h += '</table><p class="nota">Ventas según la columna «Fuente» de la hoja. Gasto: Meta por nombre de campaña; todo Google Ads (campañas Evergreen, incluida la de marca) va al VSL. Las llamadas de las agendas personales de las closers (' + num(ult4['Agenda personal'].llam) + ') no se asignan a ninguna puerta.</p></div>';
 
     // embudo completo por puerta (se carga aparte)
     h += '<h2>Embudo por puerta de entrada · personas que se registraron ' + (esMes ? 'en ' + nomMes(s) : 'la semana del ' + rango(s)) + '</h2>';
@@ -119,7 +120,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
       svg += '<rect x="' + (X + 22) + '" y="' + (200 - he).toFixed(0) + '" width="20" height="' + he.toFixed(0) + '" class="be"><title>Facturación ' + eur(x.e) + ' · ' + x.n + ' ventas</title></rect>';
       svg += '<text x="' + (X + 21) + '" y="216" class="ax">' + dia(x.w) + '</text>';
     });
-    h += '<h2>Gasto y facturación por ' + etiq + '</h2><div class="card"><svg viewBox="0 0 ' + (60 + serie.length * bw) + ' 225" class="chart" role="img" aria-label="Gasto en Meta y facturación por semana"><line x1="36" y1="200" x2="' + (50 + serie.length * bw) + '" y2="200" class="axl"/>' + svg + '</svg><div class="leg"><span style="background:var(--b)"></span>Gasto en Meta<span style="background:var(--a)"></span>Facturación</div></div>';
+    h += '<h2>Gasto y facturación por ' + etiq + '</h2><div class="card"><svg viewBox="0 0 ' + (60 + serie.length * bw) + ' 225" class="chart" role="img" aria-label="Gasto en anuncios y facturación"><line x1="36" y1="200" x2="' + (50 + serie.length * bw) + '" y2="200" class="axl"/>' + svg + '</svg><div class="leg"><span style="background:var(--b)"></span>Gasto en anuncios (Meta + Google)<span style="background:var(--a)"></span>Facturación</div></div>';
 
     // ediciones
     h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Entran al grupo</th><th class="n">Aparecen como «sale del grupo»</th><th class="n">Llaman o compran</th><th class="n">Ventas en GHL</th></tr>';
@@ -140,7 +141,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     if (ultEd && datos.ventas) avisos.push('Edición del ' + dia(ultEd.directo) + ': ' + num(ultEd.etapas['Venta']) + ' ventas marcadas en GHL. Compáralo con las ventas «Lanzamiento» de la hoja de esa semana: hoy no siempre coinciden.');
     if (!datos.fuentes.meta) avisos.push('No se ha podido leer Meta: revisa NURIA_META_TOKEN.');
     if (!datos.fuentes.hoja) avisos.push('No se ha podido leer la hoja de ventas: revisa NURIA_GOOGLE_SA_JSON.');
-    avisos.push('Google Ads aún no está conectado: el coste del VSL no aparece.');
+    if (!datos.fuentes.googleAds) avisos.push('No se ha podido leer Google Ads: el coste del VSL no aparece.');
     h += '<div class="grid2"><div><h2>Ventas por closer · desde el ' + dia(datos.meses[0]) + '</h2><div class="card"><table><tr><th>Closer</th><th class="n">Ventas</th><th class="n">Facturación</th></tr>' + cl.map(function (x) { return '<tr><td>' + esc(x[0]) + '</td><td class="n">' + x[1].n + '</td><td class="n">' + eur(x[1].eur) + '</td></tr>'; }).join('') + '</table></div></div>';
     h += '<div><h2>Avisos</h2><div class="card warn"><ul class="rec">' + avisos.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul></div></div></div>';
 
