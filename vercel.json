@@ -264,7 +264,7 @@
     "api/vapi-fin.js": {
       "maxDuration": 60
     },
-    "api/intelligence-nuria.js": { "maxDuration": 60 },
+    "api/intelligence-nuria.js": { "maxDuration": 120 },
     "api/wa-nuria.js": { "maxDuration": 60 },
     "api/intelligence-copilot.js": {
       "maxDuration": 30

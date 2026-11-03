@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>Intelligence · Nuria Roure · Esta semana</title>
+<title>Intelligence · Nuria Roure · Semanas y meses</title>
 <style>
 :root{--bg:#f6f5f2;--card:#fff;--ink:#1d1d1f;--mut:#6b6b70;--line:#e4e2dc;--a:#3b5bdb;--b:#c9a227;--up:#2b8a3e;--down:#c92a2a;--warn:#fff4e6}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141416;--card:#1e1e22;--ink:#f1f1f3;--mut:#a0a0a8;--line:#2e2e34;--a:#748ffc;--b:#e3c158;--up:#69db7c;--down:#ff8787;--warn:#3a2d17}}
@@ -44,7 +44,10 @@ small,.nota{color:var(--mut);font-size:12.5px}
   'use strict';
   var API = '/api/intelligence-nuria/';
   var app = document.getElementById('app');
-  var datos = null, semanaSel = null;
+  var datos = null, semanaSel = null, mesSel = null, modo = 'semana';
+  var MESL = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  function nomMes(m) { var d = new Date(m + 'T12:00:00Z'); return MESL[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+  function src() { return modo === 'mes' ? { per: datos.meses, registros: datos.mes.registros, llamadas: datos.mes.llamadas, gasto: datos.mes.gasto, ventas: datos.mes.ventas } : { per: datos.semanas, registros: datos.registros, llamadas: datos.llamadas, gasto: datos.gasto, ventas: datos.ventas }; }
   var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -55,44 +58,46 @@ small,.nota{color:var(--mut);font-size:12.5px}
   function delta(a, b) {
     if (!b) return '<span class="neu">sin semana anterior</span>';
     var p = (a - b) / b * 100;
-    return '<span class="' + (p >= 0 ? 'up' : 'down') + '">' + (p >= 0 ? '▲' : '▼') + ' ' + Math.abs(p).toFixed(0) + ' % frente a la anterior</span>';
+    return '<span class="' + (p >= 0 ? 'up' : 'down') + '">' + (p >= 0 ? '▲' : '▼') + ' ' + Math.abs(p).toFixed(0) + ' % frente al periodo anterior</span>';
   }
 
   function porPuerta(semanas) {
-    var t = {};
+    var F = src(), t = {};
     datos.orden.concat(['Agenda personal', 'Otras']).forEach(function (p) { t[p] = { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; });
     semanas.forEach(function (s) {
-      Object.keys(datos.registros[s] || {}).forEach(function (p) { if (p !== '_total' && t[p]) t[p].reg += datos.registros[s][p]; });
-      Object.keys(datos.llamadas[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].llam += datos.llamadas[s][p].celebradas; });
-      if (datos.ventas) Object.keys(datos.ventas[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].ventas += datos.ventas[s][p].n; t[p].eur += datos.ventas[s][p].eur; });
-      if (datos.gasto) Object.keys(datos.gasto[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].gasto += datos.gasto[s][p]; });
+      Object.keys(F.registros[s] || {}).forEach(function (p) { if (p !== '_total' && t[p]) t[p].reg += F.registros[s][p]; });
+      Object.keys(F.llamadas[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].llam += F.llamadas[s][p].celebradas; });
+      if (F.ventas) Object.keys(F.ventas[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].ventas += F.ventas[s][p].n; t[p].eur += F.ventas[s][p].eur; });
+      if (F.gasto) Object.keys(F.gasto[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].gasto += F.gasto[s][p]; });
     });
     return t;
   }
   function suma(t, k) { return Object.keys(t).reduce(function (a, p) { return a + (t[p][k] || 0); }, 0); }
 
   function pintar() {
-    var sem = datos.semanas, i = sem.indexOf(semanaSel), s = semanaSel, prev = sem[i - 1];
+    var F = src(), esMes = modo === 'mes';
+    var sem = F.per, s = esMes ? mesSel : semanaSel, i = sem.indexOf(s), prev = sem[i - 1];
     var cur = porPuerta([s]), ant = prev ? porPuerta([prev]) : null;
-    var ult4 = porPuerta(sem.slice(Math.max(0, i - 3), i + 1));
+    var ult4 = esMes ? cur : porPuerta(sem.slice(Math.max(0, i - 3), i + 1));
     var enCurso = i === sem.length - 1;
-    var fact = suma(cur, 'eur'), ventas = suma(cur, 'ventas'), gasto = suma(cur, 'gasto'), llam = suma(cur, 'llam'), reg = (datos.registros[s] || {})._total || 0;
+    var fact = suma(cur, 'eur'), ventas = suma(cur, 'ventas'), gasto = suma(cur, 'gasto'), llam = suma(cur, 'llam'), reg = (F.registros[s] || {})._total || 0;
+    var etiq = esMes ? 'mes' : 'semana';
     var h = '';
-    h += '<div class="barra"><div><h1>Nuria Roure · Intelligence</h1><p class="sub">Esta semana · datos de GHL, Meta y la hoja de ventas · actualizado hace ' + Math.round((datos.cacheSegundos || 0) / 60) + ' min</p></div>';
-    h += '<div><select id="sem" aria-label="Semana">' + sem.map(function (w, k) { return '<option value="' + w + '"' + (w === s ? ' selected' : '') + '>Semana del ' + rango(w) + (k === sem.length - 1 ? ' (en curso)' : '') + '</option>'; }).slice().reverse().join('') + '</select> ';
+    h += '<div class="barra"><div><h1>Nuria Roure · Intelligence</h1><p class="sub">' + (esMes ? 'Por meses' : 'Por semanas') + ' · datos de GHL, Meta y la hoja de ventas · actualizado hace ' + Math.round((datos.cacheSegundos || 0) / 60) + ' min</p></div>';
+    h += '<div><button class="btn" id="modo" type="button">' + (esMes ? 'Ver por semanas' : 'Ver por meses') + '</button> <select id="sem" aria-label="Periodo">' + sem.map(function (w, k) { return '<option value="' + w + '"' + (w === s ? ' selected' : '') + '>' + (esMes ? nomMes(w) : 'Semana del ' + rango(w)) + (k === sem.length - 1 ? ' (en curso)' : '') + '</option>'; }).slice().reverse().join('') + '</select> ';
     h += '<button class="btn" id="refrescar" type="button">Actualizar</button> <a class="btn" href="/intelligence/?cuenta=nuria">Directo y fichas</a></div></div>';
-    if (enCurso) h += '<p class="nota">La semana en curso aún no está completa: compárala con cuidado.</p>';
+    if (enCurso) h += '<p class="nota">' + (esMes ? 'El mes' : 'La semana') + ' en curso aún no está completo: compáralo con cuidado.</p>';
     var k = [
-      ['Facturación', datos.ventas ? eur(fact) : 'sin hoja', ant && datos.ventas ? delta(fact, suma(ant, 'eur')) : ''],
-      ['Ventas', datos.ventas ? num(ventas) : 'sin hoja', ant && datos.ventas ? delta(ventas, suma(ant, 'ventas')) : ''],
-      ['Gasto en Meta', datos.gasto ? eur(gasto) : 'sin Meta', ant && datos.gasto ? delta(gasto, suma(ant, 'gasto')) : ''],
-      ['Retorno', gasto && datos.ventas ? (fact / gasto).toFixed(1).replace('.', ',') + '×' : '—', '<span class="neu">facturación ÷ gasto Meta</span>'],
+      ['Facturación', F.ventas ? eur(fact) : 'sin hoja', ant && F.ventas ? delta(fact, suma(ant, 'eur')) : ''],
+      ['Ventas', F.ventas ? num(ventas) : 'sin hoja', ant && F.ventas ? delta(ventas, suma(ant, 'ventas')) : ''],
+      ['Gasto en Meta', F.gasto ? eur(gasto) : 'sin Meta', ant && F.gasto ? delta(gasto, suma(ant, 'gasto')) : ''],
+      ['Retorno', gasto && F.ventas ? (fact / gasto).toFixed(1).replace('.', ',') + '×' : '—', '<span class="neu">facturación ÷ gasto Meta</span>'],
       ['Llamadas celebradas', num(llam), ant ? delta(llam, suma(ant, 'llam')) : ''],
-      ['Registros nuevos', num(reg), ant ? delta(reg, (datos.registros[prev] || {})._total || 0) : '']
+      ['Registros nuevos', num(reg), ant ? delta(reg, (F.registros[prev] || {})._total || 0) : '']
     ];
     h += '<div class="kpis">' + k.map(function (x) { return '<div class="k"><div class="l">' + x[0] + '</div><div class="v">' + x[1] + '</div>' + x[2] + '</div>'; }).join('') + '</div>';
 
-    h += '<h2>Por puerta de entrada · últimas 4 semanas hasta la elegida</h2><div class="card"><table><tr><th>Puerta</th><th class="n">Registros</th><th class="n">Llamadas celebradas</th><th class="n">Ventas</th><th class="n">Facturación</th><th class="n">Gasto Meta</th><th class="n">Coste por venta</th></tr>';
+    h += '<h2>Por puerta de entrada · ' + (esMes ? nomMes(s) : 'últimas 4 semanas hasta la elegida') + '</h2><div class="card"><table><tr><th>Puerta</th><th class="n">Registros</th><th class="n">Llamadas celebradas</th><th class="n">Ventas</th><th class="n">Facturación</th><th class="n">Gasto Meta</th><th class="n">Coste por venta</th></tr>';
     datos.orden.forEach(function (p) {
       var v = ult4[p]; var cpv = v.gasto ? (v.ventas ? eur(v.gasto / v.ventas) : 'sin ventas') : '—';
       h += '<tr><td>' + esc(p) + '</td><td class="n">' + num(v.reg) + '</td><td class="n">' + num(v.llam) + '</td><td class="n">' + num(v.ventas) + '</td><td class="n">' + eur(v.eur) + '</td><td class="n">' + (v.gasto ? eur(v.gasto) : '—') + '</td><td class="n">' + cpv + '</td></tr>';
@@ -101,6 +106,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
 
     // gráfico
     var serie = sem.map(function (w) { var t = porPuerta([w]); return { w: w, g: suma(t, 'gasto'), e: suma(t, 'eur'), n: suma(t, 'ventas') }; });
+    var etq = function (w) { return esMes ? MES[new Date(w + 'T12:00:00Z').getUTCMonth()] : dia(w); };
     var mx = Math.max.apply(null, serie.map(function (x) { return Math.max(x.g, x.e); })) || 1, bw = 60, svg = '';
     serie.forEach(function (x, k) {
       var X = 40 + k * bw, hg = x.g / mx * 170, he = x.e / mx * 170;
@@ -108,7 +114,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
       svg += '<rect x="' + (X + 22) + '" y="' + (200 - he).toFixed(0) + '" width="20" height="' + he.toFixed(0) + '" class="be"><title>Facturación ' + eur(x.e) + ' · ' + x.n + ' ventas</title></rect>';
       svg += '<text x="' + (X + 21) + '" y="216" class="ax">' + dia(x.w) + '</text>';
     });
-    h += '<h2>Gasto y facturación por semana</h2><div class="card"><svg viewBox="0 0 ' + (60 + serie.length * bw) + ' 225" class="chart" role="img" aria-label="Gasto en Meta y facturación por semana"><line x1="36" y1="200" x2="' + (50 + serie.length * bw) + '" y2="200" class="axl"/>' + svg + '</svg><div class="leg"><span style="background:var(--b)"></span>Gasto en Meta<span style="background:var(--a)"></span>Facturación</div></div>';
+    h += '<h2>Gasto y facturación por ' + etiq + '</h2><div class="card"><svg viewBox="0 0 ' + (60 + serie.length * bw) + ' 225" class="chart" role="img" aria-label="Gasto en Meta y facturación por semana"><line x1="36" y1="200" x2="' + (50 + serie.length * bw) + '" y2="200" class="axl"/>' + svg + '</svg><div class="leg"><span style="background:var(--b)"></span>Gasto en Meta<span style="background:var(--a)"></span>Facturación</div></div>';
 
     // ediciones
     h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Entran al grupo</th><th class="n">Aparecen como «sale del grupo»</th><th class="n">Llaman o compran</th><th class="n">Ventas en GHL</th></tr>';
@@ -130,7 +136,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     if (!datos.fuentes.meta) avisos.push('No se ha podido leer Meta: revisa NURIA_META_TOKEN.');
     if (!datos.fuentes.hoja) avisos.push('No se ha podido leer la hoja de ventas: revisa NURIA_GOOGLE_SA_JSON.');
     avisos.push('Google Ads aún no está conectado: el coste del VSL no aparece.');
-    h += '<div class="grid2"><div><h2>Ventas por closer · desde el ' + dia(sem[0]) + '</h2><div class="card"><table><tr><th>Closer</th><th class="n">Ventas</th><th class="n">Facturación</th></tr>' + cl.map(function (x) { return '<tr><td>' + esc(x[0]) + '</td><td class="n">' + x[1].n + '</td><td class="n">' + eur(x[1].eur) + '</td></tr>'; }).join('') + '</table></div></div>';
+    h += '<div class="grid2"><div><h2>Ventas por closer · desde el ' + dia(datos.meses[0]) + '</h2><div class="card"><table><tr><th>Closer</th><th class="n">Ventas</th><th class="n">Facturación</th></tr>' + cl.map(function (x) { return '<tr><td>' + esc(x[0]) + '</td><td class="n">' + x[1].n + '</td><td class="n">' + eur(x[1].eur) + '</td></tr>'; }).join('') + '</table></div></div>';
     h += '<div><h2>Avisos</h2><div class="card warn"><ul class="rec">' + avisos.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul></div></div></div>';
 
     // recomendaciones (reglas fijas, con su dato)
@@ -138,7 +144,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     var edC = datos.ediciones.filter(function (e) { return e.cerrada; });
     var regEd = edC.reduce(function (a, e) { return a + e.total; }, 0), llEd = edC.reduce(function (a, e) { return a + (e.etapas['Llamada agendada'] || 0) + (e.etapas['Venta'] || 0) + (e.etapas['No venta'] || 0); }, 0);
     if (regEd && llEd / regEd < 0.06) rec.push(['No subir presupuesto en El Círculo hasta mejorar lo que pasa después del registro.', 'En las ediciones cerradas, solo ' + (llEd / regEd * 100).toFixed(1).replace('.', ',') + ' de cada 100 registros llegan a llamada' + (circ.reg && circ.gasto ? ', con un coste de ' + eur(circ.gasto / circ.reg) + ' por registro.' : '.')]);
-    if (datos.sinContactarVsl > 500) rec.push(['Trabajar la bolsa del VSL.', 'El VSL vende ' + num(ult4['VSL'].ventas) + ' veces en 4 semanas y hay ' + num(datos.sinContactarVsl) + ' oportunidades sin mover de «CONTACTAR (HUMANO)».']);
+    if (datos.sinContactarVsl > 500) rec.push(['Trabajar la bolsa del VSL.', 'El VSL vende ' + num(ult4['VSL'].ventas) + ' veces ' + (esMes ? 'en ' + nomMes(s) : 'en 4 semanas') + ' y hay ' + num(datos.sinContactarVsl) + ' oportunidades sin mover de «CONTACTAR (HUMANO)».']);
     rec.push(['Dejar de apuntar las ventas a mano.', 'Las ventas ya entran en GHL desde ThriveCart; con ellas este panel se alimenta solo y cuadra con el CRM.']);
     h += '<h2>Recomendaciones</h2><div class="card"><ol class="rec">' + rec.slice(0, 3).map(function (r) { return '<li><b>' + esc(r[0]) + '</b> ' + esc(r[1]) + '</li>'; }).join('') + '</ol></div>';
 
@@ -152,7 +158,8 @@ small,.nota{color:var(--mut);font-size:12.5px}
     });
     h += '</div><p class="nota">Solo lectura. No se muestran correos, teléfonos ni respuestas de tests.</p>';
     app.innerHTML = h;
-    document.getElementById('sem').onchange = function (e) { semanaSel = e.target.value; pintar(); };
+    document.getElementById('sem').onchange = function (e) { if (modo === 'mes') mesSel = e.target.value; else semanaSel = e.target.value; pintar(); };
+    document.getElementById('modo').onclick = function () { modo = modo === 'mes' ? 'semana' : 'mes'; pintar(); };
     document.getElementById('refrescar').onclick = function () { cargar(true); };
   }
 
@@ -177,6 +184,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
         if (!d) return;
         datos = d;
         if (!semanaSel || d.semanas.indexOf(semanaSel) < 0) semanaSel = d.semanas[d.semanas.length - 2];
+        if (!mesSel || d.meses.indexOf(mesSel) < 0) mesSel = d.meses[d.meses.length - 2];
         pintar();
       })
       .catch(function (e) { app.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
