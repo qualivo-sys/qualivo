@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Intelligence · Nuria Roure · Esta semana</title>
+<style>
+:root{--bg:#f6f5f2;--card:#fff;--ink:#1d1d1f;--mut:#6b6b70;--line:#e4e2dc;--a:#3b5bdb;--b:#c9a227;--up:#2b8a3e;--down:#c92a2a;--warn:#fff4e6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141416;--card:#1e1e22;--ink:#f1f1f3;--mut:#a0a0a8;--line:#2e2e34;--a:#748ffc;--b:#e3c158;--up:#69db7c;--down:#ff8787;--warn:#3a2d17}}
+:root[data-theme="dark"]{--bg:#141416;--card:#1e1e22;--ink:#f1f1f3;--mut:#a0a0a8;--line:#2e2e34;--a:#748ffc;--b:#e3c158;--up:#69db7c;--down:#ff8787;--warn:#3a2d17}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:22px 16px 60px}
+h1{font-size:23px;margin:0}h2{font-size:17px;margin:30px 0 10px}h3{font-size:15px;margin:0 0 8px}
+.sub{color:var(--mut);margin:4px 0 16px}
+.barra{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 12px;font:inherit;cursor:pointer}
+select{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 10px;font:inherit}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.k,.card{background:var(--card);border:1px solid var(--line);border-radius:12px}
+.k{padding:12px 14px}.k .l{color:var(--mut);font-size:13px}.k .v{font-size:23px;font-weight:650;margin-top:2px}
+.up{color:var(--up);font-size:12px}.down{color:var(--down);font-size:12px}.neu{color:var(--mut);font-size:12px}
+.card{padding:14px 16px;margin-bottom:10px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--mut);font-weight:600;font-size:12px}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+small,.nota{color:var(--mut);font-size:12.5px}
+.chart{width:100%;height:auto}.bg{fill:var(--b)}.be{fill:var(--a)}.ax{font-size:10px;fill:var(--mut);text-anchor:middle}.axl{stroke:var(--line)}
+.leg span{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 6px 0 14px;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.tl{list-style:none;padding:0;margin:0}.tl li{padding:5px 0 5px 12px;border-left:2px solid var(--line);margin-left:4px}
+.tl li.venta{border-left-color:var(--a)}.tl .d{display:inline-block;min-width:88px;margin-right:8px;color:var(--mut);font-variant-numeric:tabular-nums}
+.warn{background:var(--warn)}ol.rec li,ul.rec li{margin:6px 0}
+.login{max-width:360px;margin:12vh auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.login input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;margin:10px 0}
+.err{color:var(--down)}.cargando{color:var(--mut);padding:40px 0;text-align:center}
+</style>
+</head>
+<body>
+<main id="app"><p class="cargando">Cargando los datos de GHL, Meta y la hoja de ventas… (puede tardar unos 20 segundos)</p></main>
+<script>
+(function () {
+  'use strict';
+  var API = '/api/intelligence-nuria/';
+  var app = document.getElementById('app');
+  var datos = null, semanaSel = null;
+  var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function eur(x) { return Math.round(x || 0).toLocaleString('es-ES') + ' €'; }
+  function num(x) { return Math.round(x || 0).toLocaleString('es-ES'); }
+  function dia(s) { var d = new Date(s + 'T12:00:00Z'); return d.getUTCDate() + '-' + MES[d.getUTCMonth()]; }
+  function rango(s) { var d = new Date(s + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + 6); return dia(s) + ' a ' + d.getUTCDate() + '-' + MES[d.getUTCMonth()]; }
+  function delta(a, b) {
+    if (!b) return '<span class="neu">sin semana anterior</span>';
+    var p = (a - b) / b * 100;
+    return '<span class="' + (p >= 0 ? 'up' : 'down') + '">' + (p >= 0 ? '▲' : '▼') + ' ' + Math.abs(p).toFixed(0) + ' % frente a la anterior</span>';
+  }
+
+  function porPuerta(semanas) {
+    var t = {};
+    datos.orden.concat(['Agenda personal', 'Otras']).forEach(function (p) { t[p] = { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; });
+    semanas.forEach(function (s) {
+      Object.keys(datos.registros[s] || {}).forEach(function (p) { if (p !== '_total' && t[p]) t[p].reg += datos.registros[s][p]; });
+      Object.keys(datos.llamadas[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].llam += datos.llamadas[s][p].celebradas; });
+      if (datos.ventas) Object.keys(datos.ventas[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].ventas += datos.ventas[s][p].n; t[p].eur += datos.ventas[s][p].eur; });
+      if (datos.gasto) Object.keys(datos.gasto[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].gasto += datos.gasto[s][p]; });
+    });
+    return t;
+  }
+  function suma(t, k) { return Object.keys(t).reduce(function (a, p) { return a + (t[p][k] || 0); }, 0); }
+
+  function pintar() {
+    var sem = datos.semanas, i = sem.indexOf(semanaSel), s = semanaSel, prev = sem[i - 1];
+    var cur = porPuerta([s]), ant = prev ? porPuerta([prev]) : null;
+    var ult4 = porPuerta(sem.slice(Math.max(0, i - 3), i + 1));
+    var enCurso = i === sem.length - 1;
+    var fact = suma(cur, 'eur'), ventas = suma(cur, 'ventas'), gasto = suma(cur, 'gasto'), llam = suma(cur, 'llam'), reg = (datos.registros[s] || {})._total || 0;
+    var h = '';
+    h += '<div class="barra"><div><h1>Nuria Roure · Intelligence</h1><p class="sub">Esta semana · datos de GHL, Meta y la hoja de ventas · actualizado hace ' + Math.round((datos.cacheSegundos || 0) / 60) + ' min</p></div>';
+    h += '<div><select id="sem" aria-label="Semana">' + sem.map(function (w, k) { return '<option value="' + w + '"' + (w === s ? ' selected' : '') + '>Semana del ' + rango(w) + (k === sem.length - 1 ? ' (en curso)' : '') + '</option>'; }).slice().reverse().join('') + '</select> ';
+    h += '<button class="btn" id="refrescar" type="button">Actualizar</button> <a class="btn" href="/intelligence/?cuenta=nuria">Directo y fichas</a></div></div>';
+    if (enCurso) h += '<p class="nota">La semana en curso aún no está completa: compárala con cuidado.</p>';
+    var k = [
+      ['Facturación', datos.ventas ? eur(fact) : 'sin hoja', ant && datos.ventas ? delta(fact, suma(ant, 'eur')) : ''],
+      ['Ventas', datos.ventas ? num(ventas) : 'sin hoja', ant && datos.ventas ? delta(ventas, suma(ant, 'ventas')) : ''],
+      ['Gasto en Meta', datos.gasto ? eur(gasto) : 'sin Meta', ant && datos.gasto ? delta(gasto, suma(ant, 'gasto')) : ''],
+      ['Retorno', gasto && datos.ventas ? (fact / gasto).toFixed(1).replace('.', ',') + '×' : '—', '<span class="neu">facturación ÷ gasto Meta</span>'],
+      ['Llamadas celebradas', num(llam), ant ? delta(llam, suma(ant, 'llam')) : ''],
+      ['Registros nuevos', num(reg), ant ? delta(reg, (datos.registros[prev] || {})._total || 0) : '']
+    ];
+    h += '<div class="kpis">' + k.map(function (x) { return '<div class="k"><div class="l">' + x[0] + '</div><div class="v">' + x[1] + '</div>' + x[2] + '</div>'; }).join('') + '</div>';
+
+    h += '<h2>Por puerta de entrada · últimas 4 semanas hasta la elegida</h2><div class="card"><table><tr><th>Puerta</th><th class="n">Registros</th><th class="n">Llamadas celebradas</th><th class="n">Ventas</th><th class="n">Facturación</th><th class="n">Gasto Meta</th><th class="n">Coste por venta</th></tr>';
+    datos.orden.forEach(function (p) {
+      var v = ult4[p]; var cpv = v.gasto ? (v.ventas ? eur(v.gasto / v.ventas) : 'sin ventas') : '—';
+      h += '<tr><td>' + esc(p) + '</td><td class="n">' + num(v.reg) + '</td><td class="n">' + num(v.llam) + '</td><td class="n">' + num(v.ventas) + '</td><td class="n">' + eur(v.eur) + '</td><td class="n">' + (v.gasto ? eur(v.gasto) : '—') + '</td><td class="n">' + cpv + '</td></tr>';
+    });
+    h += '</table><p class="nota">Ventas según la columna «Fuente» de la hoja. El VSL vive de Google Ads, todavía sin conectar: por eso no tiene coste. Las llamadas de las agendas personales de las closers (' + num(ult4['Agenda personal'].llam) + ') no se asignan a ninguna puerta.</p></div>';
+
+    // gráfico
+    var serie = sem.map(function (w) { var t = porPuerta([w]); return { w: w, g: suma(t, 'gasto'), e: suma(t, 'eur'), n: suma(t, 'ventas') }; });
+    var mx = Math.max.apply(null, serie.map(function (x) { return Math.max(x.g, x.e); })) || 1, bw = 60, svg = '';
+    serie.forEach(function (x, k) {
+      var X = 40 + k * bw, hg = x.g / mx * 170, he = x.e / mx * 170;
+      svg += '<rect x="' + X + '" y="' + (200 - hg).toFixed(0) + '" width="20" height="' + hg.toFixed(0) + '" class="bg"><title>Gasto ' + eur(x.g) + '</title></rect>';
+      svg += '<rect x="' + (X + 22) + '" y="' + (200 - he).toFixed(0) + '" width="20" height="' + he.toFixed(0) + '" class="be"><title>Facturación ' + eur(x.e) + ' · ' + x.n + ' ventas</title></rect>';
+      svg += '<text x="' + (X + 21) + '" y="216" class="ax">' + dia(x.w) + '</text>';
+    });
+    h += '<h2>Gasto y facturación por semana</h2><div class="card"><svg viewBox="0 0 ' + (60 + serie.length * bw) + ' 225" class="chart" role="img" aria-label="Gasto en Meta y facturación por semana"><line x1="36" y1="200" x2="' + (50 + serie.length * bw) + '" y2="200" class="axl"/>' + svg + '</svg><div class="leg"><span style="background:var(--b)"></span>Gasto en Meta<span style="background:var(--a)"></span>Facturación</div></div>';
+
+    // ediciones
+    h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Entran al grupo</th><th class="n">Aparecen como «sale del grupo»</th><th class="n">Llaman o compran</th><th class="n">Ventas en GHL</th></tr>';
+    datos.ediciones.forEach(function (e) {
+      var et = e.etapas, t = e.total || 0;
+      var grupo = (et['En comunidad'] || 0) + (et['Sale comunidad'] || 0) + (et['Llamada agendada'] || 0) + (et['Venta'] || 0) + (et['No venta'] || 0);
+      var llaman = (et['Llamada agendada'] || 0) + (et['Venta'] || 0) + (et['No venta'] || 0);
+      var pct = function (a) { return t ? ' <small>(' + (a / t * 100).toFixed(a / t < 0.1 ? 1 : 0).replace('.', ',') + ' %)</small>' : ''; };
+      h += '<tr><td>Miércoles ' + dia(e.directo) + ' <small>(' + (e.cerrada ? 'cerrada' : 'en curso') + ')</small></td><td class="n">' + num(t) + '</td><td class="n">' + num(grupo) + pct(grupo) + '</td><td class="n">' + num(et['Sale comunidad']) + '</td><td class="n">' + num(llaman) + pct(llaman) + '</td><td class="n">' + num(et['Venta']) + '</td></tr>';
+    });
+    h += '</table><p class="nota">Registros de miércoles a martes, para el directo del miércoles siguiente. Falta confirmar si «sale del grupo» incluye el vaciado del grupo al cerrar cada edición.</p></div>';
+
+    // closers + avisos
+    var cl = Object.keys(datos.closers || {}).map(function (n) { return [n, datos.closers[n]]; }).sort(function (a, b) { return b[1].eur - a[1].eur; });
+    var avisos = [];
+    if (datos.sinContactarVsl) avisos.push(num(datos.sinContactarVsl) + ' oportunidades del VSL siguen en «CONTACTAR (HUMANO)» en SETTEO GENERAL.');
+    var ultEd = datos.ediciones.filter(function (e) { return e.cerrada; }).slice(-1)[0];
+    if (ultEd && datos.ventas) avisos.push('Edición del ' + dia(ultEd.directo) + ': ' + num(ultEd.etapas['Venta']) + ' ventas marcadas en GHL. Compáralo con las ventas «Lanzamiento» de la hoja de esa semana: hoy no siempre coinciden.');
+    if (!datos.fuentes.meta) avisos.push('No se ha podido leer Meta: revisa NURIA_META_TOKEN.');
+    if (!datos.fuentes.hoja) avisos.push('No se ha podido leer la hoja de ventas: revisa NURIA_GOOGLE_SA_JSON.');
+    avisos.push('Google Ads aún no está conectado: el coste del VSL no aparece.');
+    h += '<div class="grid2"><div><h2>Ventas por closer · desde el ' + dia(sem[0]) + '</h2><div class="card"><table><tr><th>Closer</th><th class="n">Ventas</th><th class="n">Facturación</th></tr>' + cl.map(function (x) { return '<tr><td>' + esc(x[0]) + '</td><td class="n">' + x[1].n + '</td><td class="n">' + eur(x[1].eur) + '</td></tr>'; }).join('') + '</table></div></div>';
+    h += '<div><h2>Avisos</h2><div class="card warn"><ul class="rec">' + avisos.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul></div></div></div>';
+
+    // recomendaciones (reglas fijas, con su dato)
+    var circ = ult4['El Círculo'], rec = [];
+    var edC = datos.ediciones.filter(function (e) { return e.cerrada; });
+    var regEd = edC.reduce(function (a, e) { return a + e.total; }, 0), llEd = edC.reduce(function (a, e) { return a + (e.etapas['Llamada agendada'] || 0) + (e.etapas['Venta'] || 0) + (e.etapas['No venta'] || 0); }, 0);
+    if (regEd && llEd / regEd < 0.06) rec.push(['No subir presupuesto en El Círculo hasta mejorar lo que pasa después del registro.', 'En las ediciones cerradas, solo ' + (llEd / regEd * 100).toFixed(1).replace('.', ',') + ' de cada 100 registros llegan a llamada' + (circ.reg && circ.gasto ? ', con un coste de ' + eur(circ.gasto / circ.reg) + ' por registro.' : '.')]);
+    if (datos.sinContactarVsl > 500) rec.push(['Trabajar la bolsa del VSL.', 'El VSL vende ' + num(ult4['VSL'].ventas) + ' veces en 4 semanas y hay ' + num(datos.sinContactarVsl) + ' oportunidades sin mover de «CONTACTAR (HUMANO)».']);
+    rec.push(['Dejar de apuntar las ventas a mano.', 'Las ventas ya entran en GHL desde ThriveCart; con ellas este panel se alimenta solo y cuadra con el CRM.']);
+    h += '<h2>Recomendaciones</h2><div class="card"><ol class="rec">' + rec.slice(0, 3).map(function (r) { return '<li><b>' + esc(r[0]) + '</b> ' + esc(r[1]) + '</li>'; }).join('') + '</ol></div>';
+
+    // la persona
+    h += '<h2>La persona · el recorrido antes de comprar</h2><p class="sub">Las últimas ventas con importe: todo lo que hizo cada clienta en GHL antes de comprar.</p><div class="grid2">';
+    (datos.personas || []).forEach(function (p) {
+      h += '<div class="card"><h3>' + esc(p.nombre) + ' · ' + eur(p.importe) + ' · apuntada como «' + esc(p.puerta) + '»</h3><ol class="tl">' + p.eventos.map(function (e) {
+        var d = new Date(e.dia + 'T12:00:00Z');
+        return '<li class="' + esc(e.tipo) + '"><span class="d">' + d.getUTCDate() + '-' + MES[d.getUTCMonth()] + '-' + String(d.getUTCFullYear()).slice(2) + '</span>' + (e.tipo === 'venta' ? '<b>' + esc(e.texto) + '</b>' : esc(e.texto)) + '</li>';
+      }).join('') + '</ol></div>';
+    });
+    h += '</div><p class="nota">Solo lectura. No se muestran correos, teléfonos ni respuestas de tests.</p>';
+    app.innerHTML = h;
+    document.getElementById('sem').onchange = function (e) { semanaSel = e.target.value; pintar(); };
+    document.getElementById('refrescar').onclick = function () { cargar(true); };
+  }
+
+  function login(msg) {
+    app.innerHTML = '<form class="login" id="f"><h1>Intelligence</h1><p class="sub">Nuria Roure · acceso privado</p><label for="c">Contraseña</label><input id="c" type="password" autocomplete="current-password" required><button class="btn" type="submit">Entrar</button><p class="err" id="e">' + esc(msg || '') + '</p></form>';
+    document.getElementById('f').onsubmit = function (ev) {
+      ev.preventDefault();
+      fetch(API + '?accion=entrar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ clave: document.getElementById('c').value }) })
+        .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); cargar(); }); })
+        .catch(function (e) { document.getElementById('e').textContent = e.message; });
+    };
+  }
+
+  function cargar(fresco) {
+    if (!datos) app.innerHTML = '<p class="cargando">Cargando los datos de GHL, Meta y la hoja de ventas… (puede tardar unos 20 segundos)</p>';
+    fetch(API + '?accion=semana' + (fresco ? '&fresco=1' : ''), { credentials: 'same-origin' })
+      .then(function (r) {
+        if (r.status === 401) { login(); return null; }
+        return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; });
+      })
+      .then(function (d) {
+        if (!d) return;
+        datos = d;
+        if (!semanaSel || d.semanas.indexOf(semanaSel) < 0) semanaSel = d.semanas[d.semanas.length - 2];
+        pintar();
+      })
+      .catch(function (e) { app.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+  }
+  cargar();
+})();
+</script>
+</body>
+</html>
