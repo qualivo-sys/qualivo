@@ -12,7 +12,7 @@ El lunes a las 9:00 la llamas. A veces sigue esperándote. A veces ya ha hablado
 
 No era un mal contacto. Llegó cuando no había nadie.
 
-En Qualivo esa conversación no depende de que alguien esté conectado. Contesta la IA, de 8:00 a 21:30, pero no como un bot suelto: forma parte del proceso comercial.
+¿Y si pudieras atenderle aunque tu equipo ya haya terminado de trabajar? En Qualivo lo hacemos así. Contesta la IA, de 8:00 a 21:30, pero no como un bot suelto: forma parte del proceso comercial.
 
 Conserva el contexto: lee lo que la persona puso en el formulario y toda la conversación.
 Sabe cuándo parar: si hay precio, una queja o piden hablar con alguien, te pasa la conversación.
