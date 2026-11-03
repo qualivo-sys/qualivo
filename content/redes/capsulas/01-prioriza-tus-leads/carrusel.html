@@ -1,89 +1,92 @@
-<!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700&display=block" rel="stylesheet">
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../../infografias/2026-09-10/_base.css">
 <style>
-:root{--crema:#FAF7F0;--tinta:#14181C;--teal:#0E7C74;--teal-s:#E3F1EF;--amarillo:#F4CC38;--gris:#6B6F75;--linea:#E4DFD3;--blanco:#fff}
-html,body{margin:0;background:#888}
-.l{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:'Space Grotesk',sans-serif;color:var(--tinta);background:var(--crema);margin-bottom:20px;box-sizing:border-box;padding:110px 84px 0}
-.osc{background:var(--tinta);color:var(--crema)}
-.h{font-size:78px;line-height:1.04;letter-spacing:-.035em;font-weight:700;margin:0}
-.s{font-size:40px;line-height:1.22;color:#4A4E54;margin:26px 0 0;font-weight:500}
-.osc .s{color:#BDB8AE}
-.acc{color:var(--teal)}.osc .acc{color:var(--amarillo)}
-.pie{position:absolute;left:84px;right:84px;bottom:52px;display:flex;justify-content:space-between;font-size:24px;color:var(--gris);font-weight:500}
-.osc .pie{color:#8D9096}
-.firma{font-weight:700}
-/* pantalla */
-.pant{position:absolute;left:84px;right:84px;bottom:130px;background:var(--blanco);border-radius:28px;box-shadow:0 30px 80px rgba(20,24,28,.14);font-family:Inter,sans-serif;overflow:hidden}
-.bar{display:flex;align-items:center;gap:10px;padding:20px 28px;border-bottom:1px solid #EEE;font-size:22px;color:var(--gris);font-weight:600}
-.bar i{width:14px;height:14px;border-radius:50%;background:#E4E2DC;display:inline-block}
-.bar b{margin-left:14px;color:var(--tinta)}
-.fila{display:flex;align-items:center;gap:24px;padding:24px 28px;border-bottom:1px solid #F1EFEA}
-.letra{width:62px;height:62px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;flex:none}
-.A{background:var(--teal);color:#fff}.B{background:var(--teal-s);color:var(--teal)}.C{background:#FBF3D3;color:#7A5B00}.D{background:#EFEDE8;color:#9A9890}
-.nom{font-size:28px;font-weight:600}
-.why{font-size:22px;color:var(--gris);margin-top:4px}
-.acc2{margin-left:auto;font-size:22px;font-weight:600;padding:10px 16px;border-radius:999px;background:var(--teal-s);color:var(--teal);white-space:nowrap}
-.acc2.n{background:#F2F0EB;color:#77756E}
-.dos{display:flex;gap:28px;margin-top:70px}
-.caja{flex:1;background:#fff;border-radius:28px;padding:40px;box-shadow:0 20px 50px rgba(20,24,28,.08)}
-.caja .k{font-size:26px;color:var(--gris);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-.caja .t{font-size:44px;font-weight:700;margin:12px 0 18px;letter-spacing:-.02em}
-.caja ul{margin:0;padding:0;list-style:none;font-size:32px;line-height:1.5;color:#3B3F45}
-.flecha{text-align:center;font-size:40px;color:var(--teal);font-weight:700;margin-top:40px}
-.reglas{margin-top:64px;display:flex;flex-direction:column;gap:22px}
-.reg{display:flex;align-items:center;gap:30px;background:#fff;border-radius:22px;padding:28px 32px;box-shadow:0 14px 40px rgba(20,24,28,.07)}
-.reg .txt{font-size:36px;font-weight:500;line-height:1.2}
-.reg .txt b{font-weight:700}
+body{padding:0;background:#555}
+.l{margin-bottom:20px}
+.prog{position:absolute;top:0;left:0;right:0;height:14px;background:rgba(128,128,128,.22)}
+.prog i{display:block;height:100%;background:#E8590C}
+.n{position:absolute;top:56px;right:56px;font-family:Anton;font-size:24px;letter-spacing:.1em;opacity:.55}
+.in{position:absolute;inset:0;padding:96px 56px 130px;display:flex;flex-direction:column}
+.h{font-family:Anton;font-size:80px;line-height:1.02;text-transform:uppercase}
+.big{font-family:Anton;font-size:210px;line-height:.9;color:#E8590C;letter-spacing:-.01em}
+.t{font-size:40px;line-height:1.3;margin-top:26px}
+.tinta .t{color:rgba(242,238,230,.85)} .crema .t{color:rgba(10,10,11,.85)}
+.t b{font-weight:700}
+.next{position:absolute;bottom:46px;right:230px;font-family:Anton;font-size:26px;color:#E8590C;letter-spacing:.06em}
+.vis{margin-top:auto}
+/* tarjeta tipo CRM */
+.crm{background:#fff;color:#0A0A0B;border-radius:26px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.35);font-family:-apple-system,"Segoe UI",Roboto,sans-serif}
+.crm .top{display:flex;align-items:center;padding:20px 26px;border-bottom:1px solid #EEE;font-size:22px;font-weight:600;color:#666}
+.crm .top b{color:#0A0A0B;margin-right:auto}
+.row{display:flex;align-items:center;gap:22px;padding:20px 26px;border-bottom:1px solid #F1EFEA}
+.row:last-child{border:0}
+.lt{width:58px;height:58px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:32px;flex:none}
+.A{background:#E8590C;color:#fff}.B{background:#FDE3D3;color:#C2410C}.C{background:#EFEAE0;color:#6B655B}.D{background:#F4F2EE;color:#AAA59B}.Z{background:#F4F2EE;color:#AAA59B}
+.nm{font-size:26px;font-weight:600}.ws{font-size:20px;color:#777;margin-top:3px}
+.tag{margin-left:auto;font-size:20px;font-weight:700;padding:9px 15px;border-radius:999px;background:#FDE3D3;color:#C2410C;white-space:nowrap}
+.tag.g{background:#F1EFEA;color:#77756E}
+.lista{display:flex;flex-direction:column;gap:26px;margin-top:56px}
+.it{display:flex;gap:28px;align-items:flex-start}
+.it .tx{font-size:38px;line-height:1.28}
+.it .tx b{font-weight:700}
+.dos{display:flex;gap:26px;margin-top:56px}
+.cj{flex:1;border:2px solid rgba(10,10,11,.15);border-radius:26px;padding:36px}
+.cj .k{font-family:Anton;font-size:44px;text-transform:uppercase;color:#E8590C}
+.cj .tx{font-size:34px;line-height:1.35;margin-top:14px}
 </style></head><body>
 
-<div class="l" id="s1">
-<p class="h">Entran 40 solicitudes a la semana.<br><span class="acc">¿A cuál llamas primero?</span></p>
-<p class="s">Así decide un sistema de priorización con IA.</p>
-<div class="pant" style="bottom:130px">
-<div class="bar"><i></i><i></i><i></i><b>Solicitudes · esta semana</b><span style="margin-left:auto">40</span></div>
-<div class="fila"><div class="letra D">·</div><div><div class="nom">Solicitud 1</div><div class="why">Llegó el lunes, 9:12</div></div></div>
-<div class="fila"><div class="letra D">·</div><div><div class="nom">Solicitud 2</div><div class="why">Llegó el lunes, 9:40</div></div></div>
-<div class="fila"><div class="letra D">·</div><div><div class="nom">Solicitud 3</div><div class="why">Llegó el lunes, 10:05</div></div></div>
-<div class="fila" style="border:0"><div class="letra D">·</div><div><div class="nom">…</div><div class="why">Por orden de llegada</div></div></div>
-</div>
-<div class="pie"><span class="firma">@maikel.echevarria</span><span>1/5</span></div></div>
+<div class="page tinta l"><div class="prog"><i style="width:17%"></i></div><div class="n">1/6</div><div class="in">
+<div class="big">40 SOLICITUDES</div>
+<div class="h" style="font-size:66px;margin-top:18px">a la semana. ¿A quién llamas <span class="nar">primero?</span></div>
+<div class="t">Te enseño cómo lo decide un sistema con IA.</div>
+</div><div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
 
-<div class="l" id="s2">
-<p class="h">El sistema lee cada solicitud y le pone una letra.</p>
-<div class="pant" style="bottom:130px">
-<div class="bar"><i></i><i></i><i></i><b>Prioridad de hoy</b><span style="margin-left:auto">Academia · ejemplo</span></div>
-<div class="fila"><div class="letra A">A</div><div><div class="nom">Laura M.</div><div class="why">Curso de inglés · empezar en enero · contestó hace 2 h</div></div><div class="acc2">Llamar ya</div></div>
-<div class="fila"><div class="letra A">A</div><div><div class="nom">Jorge P.</div><div class="why">Oposiciones · este trimestre · pidió visita</div></div><div class="acc2">Llamar ya</div></div>
-<div class="fila"><div class="letra B">B</div><div><div class="nom">Marta R.</div><div class="why">Encaja, pero no ha contestado</div></div><div class="acc2 n">Insistir</div></div>
-<div class="fila"><div class="letra C">C</div><div><div class="nom">Sergio L.</div><div class="why">Contesta, pero busca otra cosa</div></div><div class="acc2 n">Atender sin prisa</div></div>
-<div class="fila" style="border:0"><div class="letra D">D</div><div><div class="nom">Ana G.</div><div class="why">«Solo estoy mirando» · sin respuesta</div></div><div class="acc2 n">Guardar</div></div>
-</div>
-<div class="pie"><span>Ejemplo ilustrativo</span><span>2/5</span></div></div>
+<div class="page crema l"><div class="prog"><i style="width:33%"></i></div><div class="n">2/6</div><div class="in">
+<div class="h">Casi todo el mundo llama por orden de <span class="nar">llegada.</span></div>
+<div class="t">O al último que escribió.<br>Y la persona que tenía prisa por apuntarse se queda esperando al final de la lista.</div>
+<div class="vis"><div class="crm">
+<div class="top"><b>Solicitudes</b>por orden de llegada</div>
+<div class="row"><div class="lt Z">1</div><div><div class="nm">Llegó el lunes, 9:12</div><div class="ws">Sin leer</div></div></div>
+<div class="row"><div class="lt Z">2</div><div><div class="nm">Llegó el lunes, 9:40</div><div class="ws">Sin leer</div></div></div>
+<div class="row"><div class="lt Z">3</div><div><div class="nm">Llegó el lunes, 10:05</div><div class="ws">Sin leer</div></div></div>
+</div></div>
+</div><div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
 
-<div class="l" id="s3">
-<p class="h">Mira dos cosas. <span class="acc">Por separado.</span></p>
+<div class="page tinta l"><div class="prog"><i style="width:50%"></i></div><div class="n">3/6</div><div class="in">
+<div class="h">El sistema lee cada solicitud y te las <span class="nar">ordena.</span></div>
+<div class="vis"><div class="crm">
+<div class="top"><b>Hoy, por prioridad</b>academia · ejemplo</div>
+<div class="row"><div class="lt A">A</div><div><div class="nm">Laura</div><div class="ws">Inglés · quiere empezar en enero · contestó hace 2 h</div></div><div class="tag">Llamar ya</div></div>
+<div class="row"><div class="lt A">A</div><div><div class="nm">Jorge</div><div class="ws">Oposiciones · este trimestre · pidió visita</div></div><div class="tag">Llamar ya</div></div>
+<div class="row"><div class="lt B">B</div><div><div class="nm">Marta</div><div class="ws">Le encaja, pero no ha contestado</div></div><div class="tag g">Insistir</div></div>
+<div class="row"><div class="lt C">C</div><div><div class="nm">Sergio</div><div class="ws">Contesta, pero busca otra cosa</div></div><div class="tag g">Sin prisa</div></div>
+<div class="row"><div class="lt D">D</div><div><div class="nm">Ana</div><div class="ws">«Solo estoy mirando» · sin respuesta</div></div><div class="tag g">Más adelante</div></div>
+</div></div>
+</div><div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
+
+<div class="page crema l"><div class="prog"><i style="width:67%"></i></div><div class="n">4/6</div><div class="in">
+<div class="h">¿Cómo lo decide? Se fija en <span class="nar">dos cosas.</span></div>
 <div class="dos">
-<div class="caja"><div class="k">1 · Qué es</div><div class="t">El encaje</div><ul><li>Qué busca</li><li>Para cuándo</li><li>Si cumple lo que pides</li></ul></div>
-<div class="caja"><div class="k">2 · Qué hace</div><div class="t">El interés</div><ul><li>Si contesta</li><li>Cuánto tarda</li><li>Si viene a la cita</li></ul></div>
+<div class="cj"><div class="k">¿Te encaja?</div><div class="tx">Qué busca, para cuándo lo quiere y si cumple lo que pides.</div></div>
+<div class="cj"><div class="k">¿Tiene interés?</div><div class="tx">Si contesta, cuánto tarda y si viene cuando queda contigo.</div></div>
 </div>
-<p class="flecha">Encaje + interés = la letra</p>
-<p class="s" style="margin-top:30px">Alguien puede encajar perfecto y no contestar nunca. Y al revés.</p>
-<div class="pie"><span class="firma">@maikel.echevarria</span><span>3/5</span></div></div>
+<div class="t" style="margin-top:56px">Porque alguien puede encajarte perfecto y no contestar nunca. <b>Y al revés.</b></div>
+</div><div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
 
-<div class="l" id="s4">
-<p class="h">Y cada letra dispara una acción.</p>
-<div class="reglas">
-<div class="reg"><div class="letra A">A</div><div class="txt"><b>Encaja y está activo.</b> Aviso al momento a quien vende.</div></div>
-<div class="reg"><div class="letra B">B</div><div class="txt"><b>Encaja, pero no responde.</b> El sistema insiste, con calma.</div></div>
-<div class="reg"><div class="letra C">C</div><div class="txt"><b>Responde, pero encaja poco.</b> Se atiende, sin dedicarle horas.</div></div>
-<div class="reg"><div class="letra D">D</div><div class="txt"><b>Ni encaja ni responde.</b> Se guarda para más adelante.</div></div>
+<div class="page tinta l"><div class="prog"><i style="width:83%"></i></div><div class="n">5/6</div><div class="in">
+<div class="h">Y te dice qué hacer con cada <span class="nar">uno.</span></div>
+<div class="lista">
+<div class="it"><div class="lt A">A</div><div class="tx"><b>Llámale ya.</b> Te encaja y está activo. Te avisa en el momento.</div></div>
+<div class="it"><div class="lt B">B</div><div class="tx"><b>Le encaja, pero no contesta.</b> El sistema le vuelve a escribir, sin agobiar.</div></div>
+<div class="it"><div class="lt C">C</div><div class="tx"><b>Contesta, pero no encaja tanto.</b> Atiéndele, sin dedicarle horas.</div></div>
+<div class="it"><div class="lt D">D</div><div class="tx"><b>Ni una cosa ni la otra.</b> Se guarda para más adelante.</div></div>
 </div>
-<div class="pie"><span class="firma">@maikel.echevarria</span><span>4/5</span></div></div>
+</div><div class="next">Pasa →</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
 
-<div class="l osc" id="s5">
-<p class="h" style="margin-top:160px">Tu equipo deja de llamar por orden de llegada.</p>
-<p class="h acc" style="margin-top:20px">Y empieza por quien tiene más opciones de comprar.</p>
-<p class="s" style="margin-top:70px">¿Cómo decide hoy tu equipo a quién llama primero?</p>
-<div class="pie"><span class="firma">@maikel.echevarria · Qualivo</span><span>5/5</span></div></div>
+<div class="page crema l"><div class="prog"><i style="width:100%"></i></div><div class="n">6/6</div><div class="in">
+<div class="h" style="margin-top:120px">Tu equipo empieza el día por quien tiene más opciones de <span class="nar">comprar.</span></div>
+<div class="t" style="margin-top:60px">Y deja de perder tiempo buscando a quién llamar.</div>
+<div class="t" style="margin-top:80px"><b>¿Cómo decide hoy tu equipo a quién llama primero?</b></div>
+</div><div class="firma">@maikel.echevarria</div><div class="web">QUALIVO.IO</div></div>
 
 </body></html>
