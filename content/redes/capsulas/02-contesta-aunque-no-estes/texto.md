@@ -8,16 +8,16 @@ Viernes, 21:14. Alguien te escribe: «Hola, ¿os quedan plazas para enero?».
 
 Tu equipo está cenando. Normal.
 
-El lunes a las 9:00 la llamas. Ya se ha apuntado en otro sitio.
+El lunes a las 9:00 la llamas. A veces sigue esperándote. A veces ya ha hablado con otro.
 
 No era un mal contacto. Llegó cuando no había nadie.
 
-Nosotros eso lo resolvemos con IA. Contesta en minutos, de 8:00 a 21:30, también el fin de semana. Entiende qué necesita esa persona y le ofrece huecos reales de tu agenda para hablar.
+En Qualivo esa conversación no depende de que alguien esté conectado. Contesta la IA, de 8:00 a 21:30, pero no como un bot suelto: forma parte del proceso comercial.
 
-Y hay tres cosas que no hace nunca: no da precios, no promete resultados y, si alguien pide hablar con una persona o algo suena raro, se calla y te pasa la conversación.
+Conserva el contexto: lee lo que la persona puso en el formulario y toda la conversación.
+Sabe cuándo parar: si hay precio, una queja o piden hablar con alguien, te pasa la conversación.
+Y deja el siguiente paso apuntado: la cita en tu agenda y la nota en el CRM, para que nadie empiece de cero el lunes.
 
-La IA no vende por ti. Hace que nadie se quede esperando hasta el lunes.
+Las reglas las pones tú.
 
-¿A qué hora llegó tu último contacto? ¿Y cuánto tardó alguien en contestarle?
-
-👉 Comenta AGENTE y te mando por privado las reglas que le damos a la IA: qué contesta, qué no y cuándo te pasa la conversación.
+¿Qué pasa hoy en tu empresa con un mensaje que llega a las 21:14? Cuéntamelo en comentarios.

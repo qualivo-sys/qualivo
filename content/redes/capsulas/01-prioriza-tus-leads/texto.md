@@ -17,7 +17,7 @@ Nosotros lo hacemos con ayuda de la IA. Se fija en dos cosas:
 1. Si encaja: si de verdad puedes ayudar a esa persona con lo que necesita.
 2. Si tiene interés de verdad: si contesta, pregunta y quiere avanzar.
 
-Con eso, la IA lee cada solicitud, ordena la lista y prepara el siguiente paso de cada persona. Tu equipo revisa, llama y se centra en quien tiene más opciones de comprar. Sin olvidarse del resto.
+Con esos criterios, el sistema (con ayuda de la IA) lee cada solicitud, ordena la lista y prepara el siguiente paso de cada persona. Tu equipo revisa, llama y se centra en quien tiene más opciones de comprar. Sin olvidarse del resto.
 
 No se trata de conseguir más contactos. Se trata de aprovechar mejor los que ya tienes.
 

@@ -10,10 +10,10 @@ Pero, ¿cuántos de esos compraron?
 
 Meta te trae lo que le pides. Si le dices que el éxito es un formulario, te trae gente que rellena formularios. Aunque luego no conteste, no venga o no compre.
 
-Nosotros le contamos lo que pasa después. Cada vez que alguien avanza en el CRM (hablamos con él, reserva, viene y le encaja, compra y por cuánto, o no le encaja), el sistema se lo dice a Meta. Solo, sin que nadie tenga que acordarse.
+Nosotros conectamos los anuncios con el CRM y le contamos a Meta lo que pasa después: hablamos con él, reserva, viene y le encaja, compra y por cuánto, o no le encaja. Configurado bien, eso sale cada vez que alguien avanza, sin que nadie tenga que acordarse.
 
-Así Meta aprende a buscar gente que compra, no gente que hace clic. Y tú puedes comparar tus campañas por clientes, no por contactos.
+Así Meta puede aprender a buscar gente que compra, no gente que hace clic. Y tú puedes comparar tus campañas por clientes, no por contactos.
 
-¿Tus campañas aprenden de tus contactos… o de tus ventas?
+¿Tus campañas se optimizan por contactos… o por ventas?
 
 👉 Comenta VENTAS y te mando por privado la checklist para que tus campañas aprendan de quién compra.
