@@ -47,6 +47,8 @@ let cache = null, enCurso = null;
 
 const SEMANA = require('./_nuria-semana.js');
 const COHORTE = require('./_nuria-embudo.js');
+const COMPARA = require('./_nuria-comparativa.js');
+const cacheComp = new Map();   // comparativas: 'desde|hasta' → { t, datos }, 20 min
 const cacheEmb = new Map();   // embudos: 'puerta|desde|hasta' → { t, datos }, 6 h
 const CACHE_SEMANA_MS = 20 * 60000;
 let cacheSem = null, semEnCurso = null;
@@ -400,6 +402,23 @@ module.exports = async function (req, res) {
       return res.status(200).json(Object.assign({ cacheSegundos: Math.round((Date.now() - cacheSem.t) / 1000) }, cacheSem.datos));
     } catch (e) {
       return res.status(502).json({ error: 'No se han podido leer los datos: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'comparativa') {
+    const desde = String((req.query && req.query.desde) || ''), hasta = String((req.query && req.query.hasta) || '');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(desde) || !/^\d{4}-\d{2}-\d{2}$/.test(hasta) || hasta <= desde) return res.status(400).json({ error: 'Periodo no válido.' });
+    try {
+      const k = desde + '|' + hasta, fresco = String((req.query && req.query.fresco) || '') === '1';
+      const c = cacheComp.get(k);
+      if (!c || Date.now() - c.t > CACHE_SEMANA_MS || (fresco && Date.now() - c.t > 120000)) {
+        const datos = await COMPARA.comparativa(desde, hasta);
+        if (cacheComp.size > 30) cacheComp.clear();
+        cacheComp.set(k, { t: Date.now(), datos: datos });
+      }
+      return res.status(200).json(cacheComp.get(k).datos);
+    } catch (e) {
+      return res.status(502).json({ error: 'No se ha podido leer la comparativa: ' + String(e.message || e).slice(0, 80) });
     }
   }
 
