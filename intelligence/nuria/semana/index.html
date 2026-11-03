@@ -34,6 +34,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
 .warn{background:var(--warn)}ol.rec li,ul.rec li{margin:6px 0}
 .login{max-width:360px;margin:12vh auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
 .login input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;margin:10px 0}
+.emb td.bar{width:38%}.emb .b{height:14px;border-radius:3px;background:var(--a);min-width:2px}.emb .b.m{background:var(--b)}.emb tr.ex td{font-weight:600}td.bajo{color:var(--down);font-weight:600}.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.tabs .btn[aria-pressed="true"]{border-color:var(--a);color:var(--a);font-weight:600}
 .err{color:var(--down)}.cargando{color:var(--mut);padding:40px 0;text-align:center}
 </style>
 </head>
@@ -104,6 +105,10 @@ small,.nota{color:var(--mut);font-size:12.5px}
     });
     h += '</table><p class="nota">Ventas según la columna «Fuente» de la hoja. El VSL vive de Google Ads, todavía sin conectar: por eso no tiene coste. Las llamadas de las agendas personales de las closers (' + num(ult4['Agenda personal'].llam) + ') no se asignan a ninguna puerta.</p></div>';
 
+    // embudo completo por puerta (se carga aparte)
+    h += '<h2>Embudo por puerta de entrada · personas que se registraron ' + (esMes ? 'en ' + nomMes(s) : 'la semana del ' + rango(s)) + '</h2>';
+    h += '<div class="tabs" role="group" aria-label="Puerta">' + PUERTAS_EMB.map(function (p) { return '<button class="btn" type="button" data-puerta="' + esc(p) + '" aria-pressed="' + (p === puertaSel) + '">' + esc(p) + '</button>'; }).join('') + '</div><div id="embudo"><p class="cargando">Cargando el embudo…</p></div>';
+
     // gráfico
     var serie = sem.map(function (w) { var t = porPuerta([w]); return { w: w, g: suma(t, 'gasto'), e: suma(t, 'eur'), n: suma(t, 'ventas') }; });
     var etq = function (w) { return esMes ? MES[new Date(w + 'T12:00:00Z').getUTCMonth()] : dia(w); };
@@ -155,8 +160,70 @@ small,.nota{color:var(--mut);font-size:12.5px}
     app.innerHTML = h;
     document.getElementById('sem').onchange = function (e) { if (modo === 'mes') mesSel = e.target.value; else semanaSel = e.target.value; pintar(); };
     document.getElementById('modo').onclick = function () { modo = modo === 'mes' ? 'semana' : 'mes'; pintar(); };
-    document.getElementById('refrescar').onclick = function () { recorridos = {}; cargar(true); };
+    document.getElementById('refrescar').onclick = function () { recorridos = {}; embudos = {}; cargar(true); };
     cargarPersonas(s, fin);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (b) { b.onclick = function () { puertaSel = b.getAttribute('data-puerta'); Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarEmbudo(s, fin); }; });
+    cargarEmbudo(s, fin);
+  }
+
+  var PUERTAS_EMB = ['El Círculo', 'VSL', 'Test y meditación'], puertaSel = 'El Círculo', embudos = {};
+  function pc(x) { return x == null ? '—' : (x * 100).toFixed(x < 0.1 ? 1 : 0).replace('.', ',') + ' %'; }
+  function pintarEmbudo(d) {
+    var caja = document.getElementById('embudo'); if (!caja) return;
+    if (!d.registros) { caja.innerHTML = '<p class="nota">Nadie se registró por esta puerta en este periodo.</p>'; return; }
+    // cada paso: [nombre, personas, exacto, paso con el que se compara]
+    var R = d.registros, M = d.muestra, pasos = [['Se registran', R, true, null]];
+    if (M.conEmail) { pasos.push(['Abren algún email', Math.round(M.abren * R), false, 0]); pasos.push(['Pulsan algún enlace del email', Math.round(M.pulsan * R), false, pasos.length - 1]); }
+    if (M.conWhatsapp >= 5) { pasos.push(['Leen el WhatsApp', Math.round(M.leenWa * R), false, 0]); pasos.push(['Contestan por WhatsApp', Math.round(M.contestanWa * R), false, pasos.length - 1]); }
+    var iAg = pasos.length;
+    pasos.push(['Agendan llamada', d.agendan, true, 0], ['Hacen la llamada', d.celebran, true, iAg], ['Compran', d.compran, true, iAg + 1]);
+    var h = '<div class="card emb"><table><tr><th>Paso</th><th class="n">Personas</th><th class="n">% del registro</th><th class="n">Del paso previo</th><th></th></tr>';
+    pasos.forEach(function (p, k) {
+      var ant = p[3] == null || p[3] === 0 ? null : pasos[p[3]][1];
+      h += '<tr class="' + (p[2] ? 'ex' : '') + '"><td>' + (p[2] ? '' : '≈ ') + esc(p[0]) + '</td><td class="n">' + num(p[1]) + '</td><td class="n">' + pc(p[1] / R) + '</td><td class="n">' + (ant ? pc(p[1] / ant) : '') + '</td><td class="bar"><div class="b' + (p[2] ? '' : ' m') + '" style="width:' + Math.max(0.3, p[1] / R * 100).toFixed(1) + '%"></div></td></tr>';
+    });
+    h += '</table><p class="nota">En negrita, dato exacto de toda la gente registrada. Con «≈», estimado con una muestra de ' + M.personas + ' personas repartidas por el periodo (estado de sus emails y WhatsApp en GHL). ' + num(d.bajas) + ' personas (' + pc(d.bajas / R) + ') se han dado de baja del email. Facturación de estas personas: ' + eur(d.facturacion) + '. Las ventas cuentan desde el inicio del periodo.</p></div>';
+
+    // fricciones (reglas fijas)
+    var fr = [], ex = pasos.filter(function (p) { return p[2]; });
+    var peor = null;
+    for (var i = 1; i < ex.length; i++) { var t = ex[i - 1][1] ? ex[i][1] / ex[i - 1][1] : 1; if (!peor || t < peor.t) peor = { t: t, de: ex[i - 1][0], a: ex[i][0] }; }
+    if (peor) fr.push('El mayor salto está entre «' + peor.de + '» y «' + peor.a + '»: solo pasa ' + pc(peor.t) + '.');
+    if (d.bajas / R > 0.05) fr.push(pc(d.bajas / R) + ' de los registrados se da de baja del email: revisar cuántos emails reciben (' + M.emailsPorPersona.toFixed(1).replace('.', ',') + ' de media en sus primeras 3 semanas) y el tono.');
+    var cs = (d.correos || []).filter(function (c) { return c.enviados >= 4; });
+    if (cs.length > 2) {
+      var tasa = function (c) { return c.abiertos / c.enviados; }, media = cs.reduce(function (a, c) { return a + tasa(c); }, 0) / cs.length;
+      var flojos = cs.filter(function (c) { return tasa(c) < media * 0.6; });
+      if (flojos.length) fr.push(flojos.length + ' emails se abren mucho menos que el resto (marcados en rojo abajo). Media de apertura: ' + pc(media) + '.');
+    }
+    if (M.conEmail && M.abren < 0.5) fr.push('Más de la mitad no abre ningún email: los emails no son el canal que mueve esta puerta.');
+    if (M.conWhatsapp >= 5 && M.leenWa > 0.6 && d.agendan / R < 0.05) fr.push('El WhatsApp se lee (' + pc(M.leenWa) + ') pero poca gente agenda: el mensaje llega; falta el paso a la llamada.');
+    if (fr.length) h += '<div class="card warn"><b>Dónde se pierde la gente</b><ul class="rec">' + fr.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
+
+    // emails
+    if ((d.correos || []).length) {
+      var cs2 = d.correos, med = cs2.reduce(function (a, c) { return a + c.abiertos / c.enviados; }, 0) / cs2.length;
+      h += '<div class="card"><b>Emails que reciben en sus primeras 3 semanas</b> <small>(muestra)</small><table><tr><th class="n">Día</th><th>Asunto</th><th class="n">Lo reciben</th><th class="n">Lo abren</th><th class="n">Pulsan</th></tr>';
+      cs2.forEach(function (c) {
+        var ta = c.abiertos / c.enviados;
+        h += '<tr><td class="n">' + c.dia + '</td><td>' + esc(c.asunto) + (c.campana ? ' <small>(envío masivo)</small>' : '') + '</td><td class="n">' + c.enviados + '</td><td class="n' + (c.enviados >= 4 && ta < med * 0.6 ? ' bajo' : '') + '">' + pc(ta) + '</td><td class="n">' + pc(c.clics / c.enviados) + '</td></tr>';
+      });
+      h += '</table><p class="nota">Día = días después de registrarse. Apple y algunos gestores marcan aperturas que no son reales, y otros las esconden: compara emails entre sí, no te fíes del número exacto.</p></div>';
+    }
+    // pipeline
+    if (d.pipeline && d.pipeline.etapas && d.pipeline.etapas.some(function (e) { return e.n; })) {
+      h += '<div class="card"><b>Dónde están hoy en «' + esc(d.pipeline.nombre) + '»</b> <small>(oportunidades creadas en el periodo)</small><table>' + d.pipeline.etapas.filter(function (e) { return e.n; }).map(function (e) { return '<tr><td>' + esc(e.etapa) + '</td><td class="n">' + num(e.n) + '</td></tr>'; }).join('') + '</table></div>';
+    }
+    caja.innerHTML = h;
+  }
+  function cargarEmbudo(desde, hasta) {
+    var p = puertaSel, k = p + '|' + desde + '|' + hasta, caja = document.getElementById('embudo');
+    if (embudos[k]) return pintarEmbudo(embudos[k]);
+    if (caja) caja.innerHTML = '<p class="cargando">Cargando el embudo de ' + esc(p) + '… (unos 30 segundos)</p>';
+    fetch(API + '?accion=embudo&puerta=' + encodeURIComponent(p) + '&desde=' + desde + '&hasta=' + hasta, { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { embudos[k] = d; if (puertaSel === p && (modo === 'mes' ? mesSel : semanaSel) === desde) pintarEmbudo(d); })
+      .catch(function (e) { var c = document.getElementById('embudo'); if (c && puertaSel === p) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
   }
 
   var recorridos = {};
