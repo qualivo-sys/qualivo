@@ -48,6 +48,7 @@ let cache = null, enCurso = null;
 const SEMANA = require('./_nuria-semana.js');
 const CACHE_SEMANA_MS = 20 * 60000;
 let cacheSem = null, semEnCurso = null;
+const cachePer = new Map();   // recorridos por periodo: 'desde|hasta' → { t, datos }
 
 function cab(version) {
   return {
@@ -397,6 +398,23 @@ module.exports = async function (req, res) {
       return res.status(200).json(Object.assign({ cacheSegundos: Math.round((Date.now() - cacheSem.t) / 1000) }, cacheSem.datos));
     } catch (e) {
       return res.status(502).json({ error: 'No se han podido leer los datos: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'personas') {
+    const desde = String((req.query && req.query.desde) || ''), hasta = String((req.query && req.query.hasta) || '');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(desde) || !/^\d{4}-\d{2}-\d{2}$/.test(hasta) || hasta <= desde) return res.status(400).json({ error: 'Periodo no válido.' });
+    try {
+      const k = desde + '|' + hasta, fresco = String((req.query && req.query.fresco) || '') === '1';
+      const c = cachePer.get(k);
+      if (!c || Date.now() - c.t > CACHE_SEMANA_MS || (fresco && Date.now() - c.t > 120000)) {
+        const datos = await SEMANA.recorridos(desde, hasta);
+        if (cachePer.size > 30) cachePer.clear();
+        cachePer.set(k, { t: Date.now(), datos: datos });
+      }
+      return res.status(200).json({ personas: cachePer.get(k).datos });
+    } catch (e) {
+      return res.status(502).json({ error: 'No se han podido leer los recorridos: ' + String(e.message || e).slice(0, 80) });
     }
   }
 
