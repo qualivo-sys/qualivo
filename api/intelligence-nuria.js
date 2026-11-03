@@ -5,6 +5,8 @@
 //   POST /api/intelligence-nuria/?accion=salir               → borra la cookie
 //   GET  /api/intelligence-nuria/                            → resumen (401 sin sesión)
 //   GET  /api/intelligence-nuria/?accion=tablero             → fichas y conversaciones
+//   GET  /api/intelligence-nuria/?accion=semana              → «Esta semana» y «La persona»
+//                                                              (pantalla /intelligence/nuria/semana/, ver _nuria-semana.js)
 //                                                              (pantallas de Intelligence, ?cuenta=nuria)
 //
 // Variables en Vercel (las pone Maikel):
@@ -42,6 +44,10 @@ const PASOS = [
 ];
 
 let cache = null, enCurso = null;
+
+const SEMANA = require('./_nuria-semana.js');
+const CACHE_SEMANA_MS = 20 * 60000;
+let cacheSem = null, semEnCurso = null;
 
 function cab(version) {
   return {
@@ -379,6 +385,20 @@ module.exports = async function (req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Método no permitido.' });
   if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
   if (!process.env.NURIA_GHL_API_KEY || !process.env.NURIA_GHL_LOCATION_ID) return res.status(503).json({ error: 'Faltan las claves de GHL de Nuria en Vercel.' });
+
+  if (accion === 'semana') {
+    try {
+      const fresco = String((req.query && req.query.fresco) || '') === '1';
+      const edad = cacheSem ? Date.now() - cacheSem.t : Infinity;
+      if (!cacheSem || edad > CACHE_SEMANA_MS || (fresco && edad > 120000)) {
+        if (!semEnCurso) semEnCurso = SEMANA.recoger().then(function (d) { cacheSem = { t: Date.now(), datos: d }; return d; }).finally(function () { semEnCurso = null; });
+        await semEnCurso;
+      }
+      return res.status(200).json(Object.assign({ cacheSegundos: Math.round((Date.now() - cacheSem.t) / 1000) }, cacheSem.datos));
+    } catch (e) {
+      return res.status(502).json({ error: 'No se han podido leer los datos: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
 
   if (accion === 'tablero') {
     try {
