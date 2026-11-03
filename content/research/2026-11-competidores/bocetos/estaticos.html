@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- Bocetos de 3 estáticos 4:5 (identidad Qualivo de E-03). Se renderizan con node render.js -->
+<style>
+@font-face{font-family:Anton;src:url(../../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../../anuncios/2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--tl:#1FA396;--tld:#0E7C74;--bk:#0A0A0B;--cr:#F4F1EB;--y:#F4CC38;--red:#E5484D;--mut:#7A7C82}
+.p{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:SG;background:var(--tl);color:var(--bk);padding:80px 80px;display:flex;flex-direction:column;gap:40px}
+.A{font-family:Anton;text-transform:uppercase;line-height:.95}
+.A i{font-style:normal;color:var(--cr)}
+.tag{align-self:flex-start;background:var(--y);color:var(--bk);font-family:Anton;font-size:44px;text-transform:uppercase;padding:10px 26px;border-radius:14px;border:5px solid var(--bk)}
+.card{background:var(--cr);border:5px solid var(--bk);border-radius:32px;padding:40px}
+.opt{display:flex;align-items:center;gap:26px;font-size:44px;font-weight:700;padding:18px 0;border-top:3px solid rgba(10,10,11,.1)}
+.opt:first-child{border-top:none}
+.opt b{width:72px;height:72px;border-radius:18px;border:5px solid var(--bk);display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:40px;flex:none}
+.opt.ok b{background:var(--y)}
+.opt.no{color:#8A8D93}
+.cta{align-self:flex-start;background:var(--bk);color:var(--y);font-family:Anton;font-size:46px;text-transform:uppercase;padding:22px 40px;border-radius:999px}
+.small{font-size:30px;font-weight:600}
+.chk{display:flex;gap:22px;align-items:center;font-size:42px;font-weight:700}
+.chk b{width:62px;height:62px;border-radius:50%;background:var(--bk);color:var(--y);display:flex;align-items:center;justify-content:center;font-size:36px;flex:none}
+.x b{background:var(--red);color:#fff}
+.doc{background:#fff;border:5px solid var(--bk);border-radius:22px;padding:40px;box-shadow:18px 18px 0 var(--bk);transform:rotate(-1.5deg)}
+.doc .k{font-size:24px;letter-spacing:.16em;font-weight:800;color:var(--tld)}
+.doc h3{font-family:Anton;font-size:60px;text-transform:uppercase;margin:10px 0 24px;line-height:1}
+.row{display:grid;grid-template-columns:60px 1fr;gap:0 18px;padding:16px 0;border-top:3px solid rgba(10,10,11,.1);font-size:34px;font-weight:600}
+.row i{font-style:normal;font-family:Anton;font-size:44px;color:var(--red)}
+.ej{position:absolute;right:30px;top:24px;font-size:22px;font-weight:800;letter-spacing:.14em;color:rgba(10,10,11,.55)}
+</style>
+<div class="p" id="s1"><div class="tag">Test de 10 segundos</div>
+ <h1 class="A" style="font-size:110px">¿Cuánto tardaste en contestar <i>al último lead?</i></h1>
+ <div class="card"><div class="opt ok"><b>A</b>Menos de 5 minutos</div><div class="opt"><b>B</b>Esa misma tarde</div><div class="opt"><b>C</b>Al día siguiente</div><div class="opt no"><b>D</b>No me acuerdo</div></div>
+ <div class="small">Si no es la A, te enseñamos dónde se te escapan los alumnos.</div><div class="cta">Solicita tu diagnóstico →</div></div>
+<div class="p" id="s2" style="background:var(--bk);color:var(--cr)"><div class="tag">Ojo: esto no es para todos</div>
+ <h1 class="A" style="font-size:118px;color:var(--cr)">Solo para academias que <span style="color:var(--y)">ya invierten en anuncios.</span></h1>
+ <div style="display:flex;flex-direction:column;gap:26px">
+  <div class="chk"><b>✓</b>Te llegan contactos cada semana</div>
+  <div class="chk"><b>✓</b>No sabes cuáles acaban matriculándose</div>
+  <div class="chk"><b>✓</b>Quieres verlo en un solo panel</div>
+  <div class="chk x"><b>✕</b>Si aún no inviertes, todavía no es el momento</div></div>
+ <div class="cta" style="background:var(--y);color:var(--bk)">Ver si encajo →</div></div>
+<div class="p" id="s3"><div class="ej">EJEMPLO DE INFORME</div><div class="tag">En 24 horas, por escrito</div>
+ <h1 class="A" style="font-size:100px">Te decimos dónde se te escapan <i>los alumnos.</i></h1>
+ <div class="doc"><div class="k">QUALIVO · INFORME DE FUGAS</div><h3>Tu academia</h3>
+  <div class="row"><i>1</i>Tiempo de primera respuesta</div>
+  <div class="row"><i>2</i>Solicitudes sin llamada a los 2 días</div>
+  <div class="row"><i>3</i>Qué anuncio trae matrículas</div>
+  <div class="row"><i>4</i>Lo primero que cambiaríamos</div></div>
+ <div class="cta">Pide tu informe →</div></div>
