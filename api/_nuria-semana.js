@@ -169,13 +169,13 @@ async function ventasHoja(desde) {
   const hoja = process.env.NURIA_VENTAS_HOJA;
   const t = hoja ? await tokenGoogle() : null;
   if (!t) return null;
-  const r = await fetch('https://sheets.googleapis.com/v4/spreadsheets/' + hoja + '/values/' + encodeURIComponent("'🟠 VENTAS'!A2:N") + '?valueRenderOption=UNFORMATTED_VALUE&dateTimeRenderOption=SERIAL_NUMBER', { headers: { Authorization: 'Bearer ' + t } });
+  const r = await fetch('https://sheets.googleapis.com/v4/spreadsheets/' + hoja + '/values/' + encodeURIComponent("'🟠 VENTAS'!A2:O") + '?valueRenderOption=UNFORMATTED_VALUE&dateTimeRenderOption=SERIAL_NUMBER', { headers: { Authorization: 'Bearer ' + t } });
   if (!r.ok) throw new Error('Hoja ' + r.status);
   const filas = (await r.json()).values || [];
   return filas.map(function (f) {
     const dia = fechaHoja(f[0]);
     const fuente = String(f[2] || '').trim();
-    return { dia: dia, closer: String(f[1] || '').trim().replace(/^Goria\b/, 'Gloria'), puerta: FUENTE_VENTA[fuente.toLowerCase()] || (fuente || 'Sin fuente'), fuente: fuente, email: String(f[4] || '').trim().toLowerCase(), importe: Number(f[13]) || 0 };
+    return { dia: dia, closer: String(f[1] || '').trim().replace(/^Goria\b/, 'Gloria'), puerta: FUENTE_VENTA[fuente.toLowerCase()] || (fuente || 'Sin fuente'), fuente: fuente, email: String(f[4] || '').trim().toLowerCase(), importe: Number(f[13]) || 0, cobrado: Number(f[14]) || 0 };
   }).filter(function (v) { return v.dia && v.dia >= desde; });
 }
 

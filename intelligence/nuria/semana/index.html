@@ -34,7 +34,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
 .warn{background:var(--warn)}ol.rec li,ul.rec li{margin:6px 0}
 .login{max-width:360px;margin:12vh auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
 .login input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;margin:10px 0}
-.emb td.bar{width:38%}.emb .b{height:14px;border-radius:3px;background:var(--a);min-width:2px}.emb .b.m{background:var(--b)}.emb tr.ex td{font-weight:600}td.bajo{color:var(--down);font-weight:600}.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.tabs .btn[aria-pressed="true"]{border-color:var(--a);color:var(--a);font-weight:600}
+.emb td.bar{width:38%}.emb .b{height:14px;border-radius:3px;background:var(--a);min-width:2px}.emb .b.m{background:var(--b)}.emb tr.ex td{font-weight:600}td.bajo{color:var(--down);font-weight:600}td.alto{color:var(--up);font-weight:600}.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.tabs .btn[aria-pressed="true"]{border-color:var(--a);color:var(--a);font-weight:600}
 .err{color:var(--down)}.cargando{color:var(--mut);padding:40px 0;text-align:center}
 </style>
 </head>
@@ -99,6 +99,9 @@ small,.nota{color:var(--mut);font-size:12.5px}
     ];
     h += '<div class="kpis">' + k.map(function (x) { return '<div class="k"><div class="l">' + x[0] + '</div><div class="v">' + x[1] + '</div>' + x[2] + '</div>'; }).join('') + '</div>';
 
+    // comparativa de embudos (se carga aparte)
+    h += '<h2>Comparativa de embudos</h2><div class="tabs" role="group" aria-label="Periodo de la comparativa"><button class="btn" type="button" data-comp="per" aria-pressed="' + (compModo === 'per') + '">' + (esMes ? nomMes(s) : 'Semana del ' + rango(s)) + '</button><button class="btn" type="button" data-comp="ago" aria-pressed="' + (compModo === 'ago') + '">Desde el 1 de agosto</button></div><div id="comparativa"><p class="cargando">Cargando la comparativa…</p></div>';
+
     h += '<h2>Por puerta de entrada · ' + (esMes ? nomMes(s) : 'últimas 4 semanas hasta la elegida') + '</h2><div class="card"><table><tr><th>Puerta</th><th class="n">Registros</th><th class="n">Llamadas celebradas</th><th class="n">Ventas</th><th class="n">Facturación</th><th class="n">Gasto anuncios</th><th class="n">Coste por venta</th></tr>';
     datos.orden.forEach(function (p) {
       var v = ult4[p]; var cpv = v.gasto ? (v.ventas ? eur(v.gasto / v.ventas) : 'sin ventas') : '—';
@@ -161,10 +164,47 @@ small,.nota{color:var(--mut);font-size:12.5px}
     app.innerHTML = h;
     document.getElementById('sem').onchange = function (e) { if (modo === 'mes') mesSel = e.target.value; else semanaSel = e.target.value; pintar(); };
     document.getElementById('modo').onclick = function () { modo = modo === 'mes' ? 'semana' : 'mes'; pintar(); };
-    document.getElementById('refrescar').onclick = function () { recorridos = {}; embudos = {}; cargar(true); };
+    document.getElementById('refrescar').onclick = function () { recorridos = {}; embudos = {}; comparativas = {}; cargar(true); };
     cargarPersonas(s, fin);
     Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (b) { b.onclick = function () { puertaSel = b.getAttribute('data-puerta'); Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarEmbudo(s, fin); }; });
     cargarEmbudo(s, fin);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-comp]'), function (b) { b.onclick = function () { compModo = b.getAttribute('data-comp'); Array.prototype.forEach.call(document.querySelectorAll('[data-comp]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarComparativa(s, fin); }; });
+    cargarComparativa(s, fin);
+  }
+
+  var compModo = 'per', comparativas = {};
+  function hoyISO() { var d = new Date(); d.setDate(d.getDate() + 1); return d.toISOString().slice(0, 10); }
+  function pintarComparativa(d) {
+    var caja = document.getElementById('comparativa'); if (!caja) return;
+    var fs = d.filas, rate = function (a, b) { return b ? a / b : null; };
+    var col = function (vals) { var v = vals.filter(function (x) { return x != null; }); return { max: Math.max.apply(null, v), min: Math.min.apply(null, v) }; };
+    var cPres = col(fs.map(function (f) { return f.agendadas >= 5 ? rate(f.presentadas, f.agendadas) : null; }));
+    var cVen = col(fs.map(function (f) { return f.presentadas >= 5 ? rate(f.ventas, f.presentadas) : null; }));
+    var marca = function (x, c, ok) { if (x == null || !ok || c.max === c.min) return 'n'; return x === c.max ? 'n alto' : (x === c.min ? 'n bajo' : 'n'); };
+    var h = '<div class="card"><table><tr><th>Embudo</th><th class="n">Leads</th><th class="n">Agendadas</th><th class="n">Presentadas</th><th class="n">% presentadas</th><th class="n">Ventas</th><th class="n">% cierre</th><th class="n">Lead → venta</th><th class="n">Facturación</th><th class="n">Cobrado</th><th class="n">€ por presentada</th></tr>';
+    var T = { leads: 0, ag: 0, pr: 0, v: 0, f: 0, c: 0 };
+    fs.forEach(function (f) {
+      var rp = rate(f.presentadas, f.agendadas), rv = rate(f.ventas, f.presentadas), rl = f.leads ? f.ventas / f.leads : null;
+      T.ag += f.agendadas || 0; T.pr += f.presentadas || 0; T.v += f.ventas; T.f += f.facturacion; T.c += f.cobrado;
+      var mp = marca(rp, cPres, f.agendadas >= 5), mv = marca(rv, cVen, f.presentadas >= 5);
+      h += '<tr><td>' + esc(f.embudo) + '</td><td class="n">' + (f.leads == null ? '—' : num(f.leads)) + '</td><td class="n">' + (f.agendadas == null ? '—' : num(f.agendadas)) + '</td><td class="n">' + (f.presentadas == null ? '—' : num(f.presentadas)) + '</td>'
+        + '<td class="' + mp + '">' + pc(rp) + '</td><td class="n">' + num(f.ventas) + '</td>'
+        + '<td class="' + mv + '">' + pc(rv) + '</td><td class="n">' + pc(rl) + '</td><td class="n">' + eur(f.facturacion) + '</td><td class="n">' + eur(f.cobrado) + '</td><td class="n">' + (f.presentadas ? eur(f.facturacion / f.presentadas) : '—') + '</td></tr>';
+    });
+    h += '<tr style="font-weight:600"><td>Total</td><td></td><td class="n">' + num(T.ag) + '</td><td class="n">' + num(T.pr) + '</td><td class="n">' + pc(rate(T.pr, T.ag)) + '</td><td class="n">' + num(T.v) + '</td><td class="n">' + pc(rate(T.v, T.pr)) + '</td><td></td><td class="n">' + eur(T.f) + '</td><td class="n">' + eur(T.c) + '</td><td class="n">' + (T.pr ? eur(T.f / T.pr) : '—') + '</td></tr></table>';
+    var pc1 = fs.reduce(function (a, f) { return a + (f.porCita || 0); }, 0), ph = fs.reduce(function (a, f) { return a + (f.porHoja || 0); }, 0);
+    h += '<p class="nota">Agendadas y presentadas: citas de cada agenda de GHL con fecha en el periodo (sin las inválidas; las canceladas cuentan como agendadas). % presentadas = presentadas ÷ agendadas. % cierre = ventas ÷ presentadas. Ventas: cada venta de la hoja va al embudo de la última llamada de esa persona antes de comprar (' + pc1 + ' ventas); si no tuvo llamada, a la «Fuente» de la hoja (' + ph + '). Leads: solo en los embudos con registro. En verde el mejor y en rojo el peor de cada columna.</p></div>';
+    caja.innerHTML = h;
+  }
+  function cargarComparativa(s, fin) {
+    var desde = compModo === 'ago' ? (datos.meses[0] > '2026-08-01' ? datos.meses[0] : '2026-08-01') : s, hasta = compModo === 'ago' ? hoyISO() : fin;
+    var k = desde + '|' + hasta, caja = document.getElementById('comparativa');
+    if (comparativas[k]) return pintarComparativa(comparativas[k]);
+    if (caja) caja.innerHTML = '<p class="cargando">Cargando la comparativa… (unos 30 segundos)</p>';
+    fetch(API + '?accion=comparativa&desde=' + desde + '&hasta=' + hasta, { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { comparativas[k] = d; var c2 = compModo === 'ago' ? (datos.meses[0] > '2026-08-01' ? datos.meses[0] : '2026-08-01') : (modo === 'mes' ? mesSel : semanaSel); if (c2 === desde) pintarComparativa(d); })
+      .catch(function (e) { var c = document.getElementById('comparativa'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
   }
 
   var PUERTAS_EMB = ['El Círculo', 'VSL', 'Test y meditación'], puertaSel = 'El Círculo', embudos = {};
