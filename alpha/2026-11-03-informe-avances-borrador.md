@@ -1,4 +1,4 @@
-# Informe de avances para Alpha · borrador v2 (3-nov, con lo del WhatsApp)
+# Informe de avances para Alpha · borrador v3 (3-nov, sin el píxel: no es competencia de Qualivo)
 
 Para Sergi y Gemma. Lo envía Maikel.
 
@@ -23,15 +23,9 @@ Os resumo dónde estamos antes de vernos el lunes 9.
 - Para desvincularlo hay que entrar en la app del móvil, y ahí da el error de fecha y hora que nos comentabais. Para no depender del móvil, **hemos abierto una incidencia con Aircall** para que lo registren solo en Aircall. Os tendremos al tanto.
 - Si queréis probar mientras tanto con el móvil: Ajustes › Fecha y hora › activar fecha y hora y zona horaria automáticas (o desactivarlas y volver a activarlas), actualizar WhatsApp Business y reiniciar el móvil. **Por favor, no reseteéis el móvil ni desinstaléis la app**: se perderían las conversaciones.
 
-**3. Píxel de Meta · hemos encontrado el problema**
-- El píxel no registra visitas desde el 13 de agosto. En la web hay dos avisos de cookies: el que se ve no activa el píxel, y el que lo activa está oculto.
-- Además, el aviso visible usa el «si continúa navegando, acepta», que en España no es válido.
-- Es un arreglo de unos 30 minutos para quien gestione vuestra web.
-
 **Lo que necesitamos de vosotros**
 1. **Verificar la empresa en Meta:** una foto o PDF de la tarjeta del CIF de Alpha Publicidad Exterior SL (o una factura de luz o teléfono a su nombre). Meta mandará un código a info@alphamediagroup.es. Sin esto, WhatsApp solo permite un número limitado de conversaciones.
-2. **El contacto de quien gestiona la web,** para pasarle el arreglo de las cookies.
-3. **Para el lunes 9:** la probabilidad de cada etapa, el descuento que aprueba dirección, quién valida las facturas y el OK para archivar (sin borrar) las 1.529 propuestas antiguas.
+2. **Para el lunes 9:** la probabilidad de cada etapa, el descuento que aprueba dirección, quién valida las facturas y el OK para archivar (sin borrar) las 1.529 propuestas antiguas.
 
 Un saludo,
 Maikel
