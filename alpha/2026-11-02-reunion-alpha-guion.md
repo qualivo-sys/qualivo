@@ -1,4 +1,4 @@
-# Reunión con Alpha · lunes 2-nov, 17:00 · guion
+# Reunión con Alpha · lunes 9-nov (aplazada desde el 2-nov) · guion
 
 Interno de Qualivo. 45 min. [C] confirmado · [E] estimación
 
