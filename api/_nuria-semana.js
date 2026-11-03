@@ -17,6 +17,7 @@ const crypto = require('crypto');
 const GHL = 'https://services.leadconnectorhq.com';
 const ZONA = 'Europe/Madrid';
 const SEMANAS = 8;
+const MESES_ATRAS = 4;
 const PERPETUO = 'bIgnFh4rXCSpZ1bwjQHq';       // Lanzamiento Perpetuo (El Círculo semanal)
 const SETTEO_GENERAL = 'IEQ1AEfkYPzgHtlS29gH';
 const CONTACTAR_HUMANO = 'CONTACTAR (HUMANO)';
@@ -94,11 +95,12 @@ function corto(nombre) {
 }
 
 // ---------- Meta ----------
-async function gastoMeta(desde, hasta) {
+// paso: '7' (semanas, si «desde» es lunes) o 'monthly'. Cada fila lleva el día de inicio del periodo.
+async function gastoMeta(desde, hasta, paso) {
   const token = process.env.NURIA_META_TOKEN, cuenta = process.env.NURIA_META_CUENTA;
   if (!token || !cuenta) return null;
   const q = new URLSearchParams({
-    access_token: token, level: 'campaign', fields: 'campaign_name,spend,actions', time_increment: '1',
+    access_token: token, level: 'campaign', fields: 'campaign_name,spend,actions', time_increment: paso,
     time_range: JSON.stringify({ since: desde, until: hasta }), limit: '500'
   });
   let url = 'https://graph.facebook.com/v21.0/' + cuenta + '/insights?' + q;
@@ -160,54 +162,70 @@ async function recoger() {
   const lunesHoy = lunesDe(hoy);
   const semanas = [];
   for (let i = SEMANAS; i >= 0; i--) semanas.push(sumaDias(lunesHoy, -7 * i));   // la última es la semana en curso
-  const desde = semanas[0];
+  const meses = [];
+  for (let i = MESES_ATRAS - 1; i >= 0; i--) { const d = new Date(Date.UTC(Number(hoy.slice(0, 4)), Number(hoy.slice(5, 7)) - 1 - i, 1)); meses.push(d.toISOString().slice(0, 10)); }
+  const desde = meses[0] < semanas[0] ? meses[0] : semanas[0];
+  function mesDe(dia) { return dia.slice(0, 8) + '01'; }
+  function finMes(m) { const d = new Date(m + 'T12:00:00Z'); d.setUTCMonth(d.getUTCMonth() + 1); return d.toISOString().slice(0, 10); }
 
   // 1) Registros por semana y puerta (solo contamos: pageLimit 1 y el total)
   const consultas = [];
-  semanas.forEach(function (s) {
-    const rango = { field: 'dateAdded', operator: 'range', value: { gte: inicioUTC(s), lte: new Date(new Date(inicioUTC(sumaDias(s, 7))).getTime() - 1000).toISOString() } };
-    consultas.push({ s: s, puerta: '_total', filtros: [rango] });
-    PUERTAS.forEach(function (p) { p.fuentes.forEach(function (f) { consultas.push({ s: s, puerta: p.puerta, filtros: [rango, { field: 'source', operator: 'eq', value: f }] }); }); });
+  const periodos = semanas.map(function (s) { return { k: s, de: s, a: sumaDias(s, 7), tipo: 'semana' }; })
+    .concat(meses.map(function (m) { return { k: m, de: m, a: finMes(m), tipo: 'mes' }; }));
+  periodos.forEach(function (pe) {
+    const rango = { field: 'dateAdded', operator: 'range', value: { gte: inicioUTC(pe.de), lte: new Date(new Date(inicioUTC(pe.a)).getTime() - 1000).toISOString() } };
+    consultas.push({ pe: pe, puerta: '_total', filtros: [rango] });
+    PUERTAS.forEach(function (p) { p.fuentes.forEach(function (f) { consultas.push({ pe: pe, puerta: p.puerta, filtros: [rango, { field: 'source', operator: 'eq', value: f }] }); }); });
   });
-  const totales = await enParalelo(consultas, 6, async function (c) { const r = await buscarContactos(c.filtros); return Number(r.total || 0); });
-  const registros = {};
+  const totales = await enParalelo(consultas, 8, async function (c) { const r = await buscarContactos(c.filtros); return Number(r.total || 0); });
+  const registros = {}, registrosMes = {};
   semanas.forEach(function (s) { registros[s] = {}; });
-  consultas.forEach(function (c, k) { registros[c.s][c.puerta] = (registros[c.s][c.puerta] || 0) + totales[k]; });
-  semanas.forEach(function (s) {
-    const r = registros[s]; const conocidas = PUERTAS.reduce(function (t, p) { return t + (r[p.puerta] || 0); }, 0);
-    r['Base de contactos'] = Math.max(0, (r._total || 0) - conocidas);
+  meses.forEach(function (m) { registrosMes[m] = {}; });
+  consultas.forEach(function (c, k) { const dst = c.pe.tipo === 'mes' ? registrosMes : registros; dst[c.pe.k][c.puerta] = (dst[c.pe.k][c.puerta] || 0) + totales[k]; });
+  [registros, registrosMes].forEach(function (obj) {
+    Object.keys(obj).forEach(function (s) {
+      const r = obj[s]; const conocidas = PUERTAS.reduce(function (t, p) { return t + (r[p.puerta] || 0); }, 0);
+      r['Base de contactos'] = Math.max(0, (r._total || 0) - conocidas);
+    });
   });
 
   // 2) Llamadas celebradas por semana y puerta (calendarios)
   const cals = ((await ghl('/calendars/?locationId=' + encodeURIComponent(loc), { version: '2021-04-15' })).calendars || []).filter(function (c) { return CALENDARIO[c.widgetSlug || c.slug]; });
   const ini = new Date(inicioUTC(desde)).getTime(), fin = new Date(inicioUTC(sumaDias(lunesHoy, 7))).getTime();
-  const llamadas = {};
+  const llamadas = {}, llamadasMes = {};
   semanas.forEach(function (s) { llamadas[s] = {}; });
+  meses.forEach(function (m) { llamadasMes[m] = {}; });
   await enParalelo(cals, 4, async function (c) {
     const ev = (await ghl('/calendars/events?locationId=' + encodeURIComponent(loc) + '&calendarId=' + c.id + '&startTime=' + ini + '&endTime=' + fin, { version: '2021-04-15' })).events || [];
     ev.forEach(function (e) {
-      const s = lunesDe(diaMadrid(new Date(e.startTime)));
-      if (!llamadas[s]) return;
+      const dia = diaMadrid(new Date(e.startTime));
       const p = CALENDARIO[c.widgetSlug || c.slug];
       const st = e.appointmentStatus || 'new';
-      llamadas[s][p] = llamadas[s][p] || { celebradas: 0, noPresentadas: 0, canceladas: 0, pendientes: 0 };
-      const o = llamadas[s][p];
-      if (st === 'showed') o.celebradas++; else if (st === 'noshow') o.noPresentadas++; else if (st === 'cancelled' || st === 'invalid') o.canceladas++; else o.pendientes++;
+      [[llamadas, lunesDe(dia)], [llamadasMes, mesDe(dia)]].forEach(function (par) {
+        const obj = par[0], k = par[1];
+        if (!obj[k]) return;
+        const o = obj[k][p] = obj[k][p] || { celebradas: 0, noPresentadas: 0, canceladas: 0, pendientes: 0 };
+        if (st === 'showed') o.celebradas++; else if (st === 'noshow') o.noPresentadas++; else if (st === 'cancelled' || st === 'invalid') o.canceladas++; else o.pendientes++;
+      });
     });
   });
 
   // 3) Gasto en Meta y 4) ventas de la hoja (si están configurados)
-  const [meta, ventas] = await Promise.all([
-    gastoMeta(desde, hoy).catch(function () { return null; }),
+  const [meta, metaMes, ventas] = await Promise.all([
+    gastoMeta(semanas[0], hoy, '7').catch(function () { return null; }),
+    gastoMeta(meses[0], hoy, 'monthly').catch(function () { return null; }),
     ventasHoja(desde).catch(function () { return null; })
   ]);
-  const gasto = {}; semanas.forEach(function (s) { gasto[s] = {}; });
-  (meta || []).forEach(function (m) { const s = lunesDe(m.dia); if (gasto[s]) gasto[s][m.puerta] = (gasto[s][m.puerta] || 0) + m.gasto; });
-  const venta = {}; semanas.forEach(function (s) { venta[s] = {}; });
+  const gasto = {}, gastoMes = {}; semanas.forEach(function (s) { gasto[s] = {}; }); meses.forEach(function (m) { gastoMes[m] = {}; });
+  (meta || []).forEach(function (m) { const o = gasto[lunesDe(m.dia)]; if (o) o[m.puerta] = (o[m.puerta] || 0) + m.gasto; });
+  (metaMes || []).forEach(function (m) { const o = gastoMes[mesDe(m.dia)]; if (o) o[m.puerta] = (o[m.puerta] || 0) + m.gasto; });
+  const venta = {}, ventaMes = {}; semanas.forEach(function (s) { venta[s] = {}; }); meses.forEach(function (m) { ventaMes[m] = {}; });
   (ventas || []).forEach(function (v) {
-    const s = lunesDe(v.dia); if (!venta[s]) return;
-    const o = venta[s][v.puerta] = venta[s][v.puerta] || { n: 0, eur: 0 };
-    o.n++; o.eur += v.importe;
+    [[venta, lunesDe(v.dia)], [ventaMes, mesDe(v.dia)]].forEach(function (par) {
+      const obj = par[0][par[1]]; if (!obj) return;
+      const o = obj[v.puerta] = obj[v.puerta] || { n: 0, eur: 0 };
+      o.n++; o.eur += v.importe;
+    });
   });
 
   // 5) El Círculo por edición: registros de miércoles a martes → directo del miércoles siguiente
@@ -258,6 +276,7 @@ async function recoger() {
   return {
     generado: Date.now(), hoy: hoy, semanas: semanas, orden: ORDEN,
     registros: registros, llamadas: llamadas, gasto: meta ? gasto : null, ventas: ventas ? venta : null,
+    meses: meses, mes: { registros: registrosMes, llamadas: llamadasMes, gasto: metaMes ? gastoMes : null, ventas: ventas ? ventaMes : null },
     ediciones: edicion, sinContactarVsl: sinContactar, personas: personas, closers: closers,
     fuentes: { meta: !!meta, hoja: !!ventas, googleAds: false }
   };
