@@ -251,24 +251,6 @@ async function recoger() {
   const stC = settGen && (settGen.stages || []).find(function (s) { return s.name === CONTACTAR_HUMANO; });
   if (stC) sinContactar = Number(((await ghl('/opportunities/search?' + new URLSearchParams({ location_id: loc, pipeline_id: SETTEO_GENERAL, pipeline_stage_id: stC.id, limit: 1 }))).meta || {}).total || 0);
 
-  // 7) La persona: recorrido de las últimas ventas con importe
-  const nombrePipe = {}, nombreEtapa = {};
-  pipes.forEach(function (p) { nombrePipe[p.id] = p.name; (p.stages || []).forEach(function (s) { nombreEtapa[s.id] = s.name; }); });
-  const ultimas = (ventas || []).filter(function (v) { return v.email && v.importe > 0; }).sort(function (a, b) { return a.dia < b.dia ? 1 : -1; }).slice(0, 6);
-  const personas = (await enParalelo(ultimas, 3, async function (v) {
-    const c = ((await buscarContactos([{ field: 'email', operator: 'eq', value: v.email }])).contacts || [])[0];
-    if (!c) return null;
-    const a = c.attributionSource || {};
-    const ev = [{ t: c.dateAdded, tipo: 'registro', texto: 'Primer registro · ' + (c.source || 'sin puerta') + ' · origen: ' + (a.utmSource || a.sessionSource || 'sin dato') + (a.campaign && !/\{\{/.test(a.campaign) ? ' · ' + a.campaign : '') }];
-    const ops = (await ghl('/opportunities/search?' + new URLSearchParams({ location_id: loc, contact_id: c.id, limit: 50 }))).opportunities || [];
-    ops.forEach(function (o) { ev.push({ t: o.createdAt, tipo: 'embudo', texto: 'Entra en «' + (nombrePipe[o.pipelineId] || 'pipeline') + '» · hoy: ' + (nombreEtapa[o.pipelineStageId] || '—') }); });
-    const citas = (await ghl('/contacts/' + c.id + '/appointments')).events || [];
-    citas.forEach(function (x) { if (x.startTime) ev.push({ t: new Date(String(x.startTime).replace(' ', 'T')).toISOString(), tipo: 'llamada', texto: 'Llamada · ' + ({ showed: 'celebrada', noshow: 'no se presentó', cancelled: 'cancelada', confirmed: 'confirmada' }[x.appointmentStatus] || x.appointmentStatus || 'agendada') }); });
-    ev.push({ t: v.dia + 'T12:00:00Z', tipo: 'venta', texto: 'Venta · apuntada como «' + (v.fuente || '—') + '» · ' + Math.round(v.importe) + ' €' });
-    ev.sort(function (x, y) { return x.t < y.t ? -1 : 1; });
-    return { nombre: corto((c.firstName || '') + ' ' + (c.lastName || '')), dia: v.dia, puerta: v.puerta, importe: v.importe, primero: (c.dateAdded || '').slice(0, 10), eventos: ev.map(function (e) { return { dia: diaMadrid(new Date(e.t)), tipo: e.tipo, texto: e.texto }; }) };
-  })).filter(Boolean).slice(0, 4);
-
   // 8) Ventas por closer (todo el periodo)
   const closers = {};
   (ventas || []).forEach(function (v) { const o = closers[v.closer || '—'] = closers[v.closer || '—'] || { n: 0, eur: 0 }; o.n++; o.eur += v.importe; });
@@ -277,9 +259,37 @@ async function recoger() {
     generado: Date.now(), hoy: hoy, semanas: semanas, orden: ORDEN,
     registros: registros, llamadas: llamadas, gasto: meta ? gasto : null, ventas: ventas ? venta : null,
     meses: meses, mes: { registros: registrosMes, llamadas: llamadasMes, gasto: metaMes ? gastoMes : null, ventas: ventas ? ventaMes : null },
-    ediciones: edicion, sinContactarVsl: sinContactar, personas: personas, closers: closers,
+    ediciones: edicion, sinContactarVsl: sinContactar, closers: closers,
     fuentes: { meta: !!meta, hoja: !!ventas, googleAds: false }
   };
 }
 
-module.exports = { recoger: recoger, MESES: MESES };
+// ---------- La persona: recorrido de TODAS las ventas de un periodo ----------
+// desde incluido, hasta excluido (AAAA-MM-DD). Cada venta de la hoja → su ficha en GHL,
+// oportunidades y citas. Si la venta no tiene email o no está en GHL, sale igual, sin recorrido.
+async function recorridos(desde, hasta) {
+  const loc = process.env.NURIA_GHL_LOCATION_ID;
+  const ventas = (await ventasHoja(desde)) || [];
+  const delPeriodo = ventas.filter(function (v) { return v.dia < hasta; }).sort(function (a, b) { return a.dia < b.dia ? 1 : -1; });
+  const pipes = (await ghl('/opportunities/pipelines?locationId=' + encodeURIComponent(loc))).pipelines || [];
+  const nombrePipe = {}, nombreEtapa = {};
+  pipes.forEach(function (p) { nombrePipe[p.id] = p.name; (p.stages || []).forEach(function (s) { nombreEtapa[s.id] = s.name; }); });
+  return enParalelo(delPeriodo, 4, async function (v) {
+    const textoVenta = 'Venta · apuntada como «' + (v.fuente || '—') + '»' + (v.importe ? ' · ' + Math.round(v.importe) + ' €' : '') + (v.closer ? ' · ' + v.closer : '');
+    const sinFicha = function (motivo) { return { nombre: motivo, dia: v.dia, puerta: v.puerta, importe: v.importe, sinFicha: true, eventos: [{ dia: v.dia, tipo: 'venta', texto: textoVenta }] }; };
+    if (!v.email) return sinFicha('Venta sin email en la hoja');
+    const c = ((await buscarContactos([{ field: 'email', operator: 'eq', value: v.email }])).contacts || [])[0];
+    if (!c) return sinFicha('Venta sin ficha en GHL');
+    const a = c.attributionSource || {};
+    const ev = [{ t: c.dateAdded, tipo: 'registro', texto: 'Primer registro · ' + (c.source || 'sin puerta') + ' · origen: ' + (a.utmSource || a.sessionSource || 'sin dato') + (a.campaign && !/\{\{/.test(a.campaign) ? ' · ' + a.campaign : '') }];
+    const ops = (await ghl('/opportunities/search?' + new URLSearchParams({ location_id: loc, contact_id: c.id, limit: 50 }))).opportunities || [];
+    ops.forEach(function (o) { ev.push({ t: o.createdAt, tipo: 'embudo', texto: 'Entra en «' + (nombrePipe[o.pipelineId] || 'pipeline') + '» · hoy: ' + (nombreEtapa[o.pipelineStageId] || '—') }); });
+    const citas = (await ghl('/contacts/' + c.id + '/appointments')).events || [];
+    citas.forEach(function (x) { if (x.startTime) ev.push({ t: new Date(String(x.startTime).replace(' ', 'T')).toISOString(), tipo: 'llamada', texto: 'Llamada · ' + ({ showed: 'celebrada', noshow: 'no se presentó', cancelled: 'cancelada', confirmed: 'confirmada' }[x.appointmentStatus] || x.appointmentStatus || 'agendada') }); });
+    ev.push({ t: v.dia + 'T12:00:00Z', tipo: 'venta', texto: textoVenta });
+    ev.sort(function (x, y) { return x.t < y.t ? -1 : 1; });
+    return { nombre: corto((c.firstName || '') + ' ' + (c.lastName || '')), dia: v.dia, puerta: v.puerta, importe: v.importe, eventos: ev.map(function (e) { return { dia: diaMadrid(new Date(e.t)), tipo: e.tipo, texto: e.texto }; }) };
+  });
+}
+
+module.exports = { recoger: recoger, recorridos: recorridos, MESES: MESES };

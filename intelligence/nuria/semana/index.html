@@ -148,19 +148,38 @@ small,.nota{color:var(--mut);font-size:12.5px}
     rec.push(['Dejar de apuntar las ventas a mano.', 'Las ventas ya entran en GHL desde ThriveCart; con ellas este panel se alimenta solo y cuadra con el CRM.']);
     h += '<h2>Recomendaciones</h2><div class="card"><ol class="rec">' + rec.slice(0, 3).map(function (r) { return '<li><b>' + esc(r[0]) + '</b> ' + esc(r[1]) + '</li>'; }).join('') + '</ol></div>';
 
-    // la persona
-    h += '<h2>La persona · el recorrido antes de comprar</h2><p class="sub">Las últimas ventas con importe: todo lo que hizo cada clienta en GHL antes de comprar.</p><div class="grid2">';
-    (datos.personas || []).forEach(function (p) {
-      h += '<div class="card"><h3>' + esc(p.nombre) + ' · ' + eur(p.importe) + ' · apuntada como «' + esc(p.puerta) + '»</h3><ol class="tl">' + p.eventos.map(function (e) {
+    // la persona: todas las ventas del periodo elegido (se cargan aparte)
+    var fin = esMes ? (function () { var d = new Date(s + 'T12:00:00Z'); d.setUTCMonth(d.getUTCMonth() + 1); return d.toISOString().slice(0, 10); })() : (function () { var d = new Date(s + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + 7); return d.toISOString().slice(0, 10); })();
+    h += '<h2>La persona · el recorrido antes de comprar</h2><p class="sub">Todas las ventas ' + (esMes ? 'de ' + nomMes(s) : 'de la semana del ' + rango(s)) + ': lo que hizo cada clienta en GHL antes de comprar.</p><div id="personas"><p class="cargando">Cargando los recorridos…</p></div>';
+    h += '<p class="nota">Solo lectura. No se muestran correos, teléfonos ni respuestas de tests.</p>';
+    app.innerHTML = h;
+    document.getElementById('sem').onchange = function (e) { if (modo === 'mes') mesSel = e.target.value; else semanaSel = e.target.value; pintar(); };
+    document.getElementById('modo').onclick = function () { modo = modo === 'mes' ? 'semana' : 'mes'; pintar(); };
+    document.getElementById('refrescar').onclick = function () { recorridos = {}; cargar(true); };
+    cargarPersonas(s, fin);
+  }
+
+  var recorridos = {};
+  function pintarPersonas(lista) {
+    var caja = document.getElementById('personas'); if (!caja) return;
+    if (!lista.length) { caja.innerHTML = '<p class="nota">No hay ventas apuntadas en la hoja para este periodo.</p>'; return; }
+    var sin = lista.filter(function (p) { return p.sinFicha; }).length;
+    var h = '<p class="nota">' + lista.length + ' ventas' + (sin ? ' · ' + sin + ' sin ficha en GHL o sin email en la hoja (salen sin recorrido)' : '') + '.</p><div class="grid2">';
+    lista.forEach(function (p) {
+      h += '<div class="card"><h3>' + esc(p.nombre) + ' · ' + (p.importe ? eur(p.importe) : 'sin importe') + ' · apuntada como «' + esc(p.puerta) + '»</h3><ol class="tl">' + p.eventos.map(function (e) {
         var d = new Date(e.dia + 'T12:00:00Z');
         return '<li class="' + esc(e.tipo) + '"><span class="d">' + d.getUTCDate() + '-' + MES[d.getUTCMonth()] + '-' + String(d.getUTCFullYear()).slice(2) + '</span>' + (e.tipo === 'venta' ? '<b>' + esc(e.texto) + '</b>' : esc(e.texto)) + '</li>';
       }).join('') + '</ol></div>';
     });
-    h += '</div><p class="nota">Solo lectura. No se muestran correos, teléfonos ni respuestas de tests.</p>';
-    app.innerHTML = h;
-    document.getElementById('sem').onchange = function (e) { if (modo === 'mes') mesSel = e.target.value; else semanaSel = e.target.value; pintar(); };
-    document.getElementById('modo').onclick = function () { modo = modo === 'mes' ? 'semana' : 'mes'; pintar(); };
-    document.getElementById('refrescar').onclick = function () { cargar(true); };
+    caja.innerHTML = h + '</div>';
+  }
+  function cargarPersonas(desde, hasta) {
+    var k = desde + '|' + hasta;
+    if (recorridos[k]) return pintarPersonas(recorridos[k]);
+    fetch(API + '?accion=personas&desde=' + desde + '&hasta=' + hasta, { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { recorridos[k] = d.personas || []; if (document.getElementById('personas') && (modo === 'mes' ? mesSel : semanaSel) === desde) pintarPersonas(recorridos[k]); })
+      .catch(function (e) { var c = document.getElementById('personas'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
   }
 
   function login(msg) {
