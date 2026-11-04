@@ -9,6 +9,8 @@
 //   la última cita de esa persona antes de comprar (presentada si la hay). Si no
 //   tiene cita, se usa la columna «Fuente» de la hoja.
 // - Leads: solo en los embudos que tienen registro (Perpetuo, VSL, Test web).
+// - Closers: citas por persona asignada en GHL (agendadas, presentadas, no shows,
+//   canceladas) y ventas por la columna «Closer» de la hoja.
 // Solo lectura y sin datos personales en la respuesta.
 
 const N = require('./_nuria-semana.js');
@@ -50,6 +52,16 @@ async function comparativa(desde, hasta) {
     embudoDeCal[c.id] = e ? e.embudo : 'Otras agendas';
   });
   const ini = new Date(N.inicioUTC(desde)).getTime(), fin = new Date(N.inicioUTC(hasta)).getTime();
+  // Closers: la persona asignada a cada cita (usuarios de GHL), por nombre de pila
+  const usuarios = (await N.ghl('/users/?locationId=' + loc)).users || [];
+  const nombreUsuario = {};
+  usuarios.forEach(function (u) { nombreUsuario[u.id] = ((u.firstName || '') + ' ' + (u.lastName || '')).trim(); });
+  const closers = {};
+  const pila = function (n) { return String(n || '').trim().split(/\s+/)[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); };
+  const closerDe = function (nombre) {
+    const k = pila(nombre) || '—';
+    return closers[k] = closers[k] || { closer: k === '—' ? 'Sin closer' : String(nombre).trim().split(/\s+/)[0], agendadas: 0, presentadas: 0, noShow: 0, canceladas: 0, pendientes: 0, ventas: 0, facturacion: 0, cobrado: 0 };
+  };
   await N.enParalelo(cals, 4, async function (c) {
     const ev = (await N.ghl('/calendars/events?locationId=' + loc + '&calendarId=' + c.id + '&startTime=' + ini + '&endTime=' + (fin - 1000), { version: '2021-04-15' })).events || [];
     const f = fila[embudoDeCal[c.id]];
@@ -57,6 +69,12 @@ async function comparativa(desde, hasta) {
       const st = e.appointmentStatus || 'new';
       if (st === 'invalid') return;
       f.agendadas++;
+      const cl = closerDe(nombreUsuario[e.assignedUserId] || '');
+      cl.agendadas++;
+      if (st === 'showed') cl.presentadas++;
+      else if (st === 'noshow') cl.noShow++;
+      else if (st === 'cancelled') cl.canceladas++;
+      else if (new Date(e.startTime).getTime() > Date.now()) cl.pendientes++;
       if (st === 'showed') f.presentadas++;
       else if (st === 'cancelled') f.canceladas++;
       else if (st !== 'noshow' && new Date(e.startTime).getTime() > Date.now()) f.pendientes++;
@@ -86,12 +104,16 @@ async function comparativa(desde, hasta) {
     }
     const o = fila[destino];
     o.ventas++; o.facturacion += v.importe || 0; o.cobrado += v.cobrado || 0;
+    const cv = closerDe(v.closer || ''); cv.ventas++; cv.facturacion += v.importe || 0; cv.cobrado += v.cobrado || 0;
     if (porCita) o.porCita++; else o.porHoja++;
   });
 
   const filas = EMBUDOS.map(function (e) { return fila[e.embudo]; }).concat([fila[SIN_CITA_BASE]])
     .filter(function (f) { return f.leads || f.agendadas || f.ventas || EMBUDOS.slice(0, 7).some(function (e) { return e.embudo === f.embudo; }); });
-  return { desde: desde, hasta: hasta, generado: Date.now(), filas: filas, ventasTotal: ventas.length };
+  const listaClosers = Object.keys(closers).map(function (k) { return closers[k]; })
+    .filter(function (c) { return c.agendadas || c.ventas; })
+    .sort(function (a, b) { return (a.closer === 'Sin closer') - (b.closer === 'Sin closer') || b.facturacion - a.facturacion || b.agendadas - a.agendadas; });
+  return { desde: desde, hasta: hasta, generado: Date.now(), filas: filas, closers: listaClosers, ventasTotal: ventas.length };
 }
 
 module.exports = { comparativa: comparativa };
