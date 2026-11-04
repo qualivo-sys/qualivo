@@ -1,0 +1,3 @@
+Campaign,Campaign Status,Campaign Type,Networks,Budget,Bid Strategy Type,Max CPC,Languages,Location,Ad Schedule
+QV_SEARCH_AltaIntencion,Paused,Search,Google search,10.00,Maximize clicks,6.00,es,Spain,Mon-Fri 08:00-20:00
+QV_PMAX_Captacion,Paused,Performance Max,All,10.00,Maximize conversions,,es,Spain,Mon-Sun 00:00-24:00

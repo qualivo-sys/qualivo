@@ -1,0 +1,71 @@
+Campaign,Keyword,Criterion Type
+QV_SEARCH_AltaIntencion,gratis,Negative phrase
+QV_SEARCH_AltaIntencion,gratuito,Negative phrase
+QV_SEARCH_AltaIntencion,gratuita,Negative phrase
+QV_SEARCH_AltaIntencion,curso,Negative phrase
+QV_SEARCH_AltaIntencion,cursos,Negative phrase
+QV_SEARCH_AltaIntencion,máster,Negative phrase
+QV_SEARCH_AltaIntencion,master,Negative phrase
+QV_SEARCH_AltaIntencion,grado,Negative phrase
+QV_SEARCH_AltaIntencion,empleo,Negative phrase
+QV_SEARCH_AltaIntencion,trabajo,Negative phrase
+QV_SEARCH_AltaIntencion,sueldo,Negative phrase
+QV_SEARCH_AltaIntencion,prácticas,Negative phrase
+QV_SEARCH_AltaIntencion,qué es,Negative phrase
+QV_SEARCH_AltaIntencion,que es,Negative phrase
+QV_SEARCH_AltaIntencion,definición,Negative phrase
+QV_SEARCH_AltaIntencion,ejemplos,Negative phrase
+QV_SEARCH_AltaIntencion,pdf,Negative phrase
+QV_SEARCH_AltaIntencion,plantilla,Negative phrase
+QV_SEARCH_AltaIntencion,tipos,Negative phrase
+QV_SEARCH_AltaIntencion,etapas,Negative phrase
+QV_SEARCH_AltaIntencion,hubspot,Negative phrase
+QV_SEARCH_AltaIntencion,salesforce,Negative phrase
+QV_SEARCH_AltaIntencion,zoho,Negative phrase
+QV_SEARCH_AltaIntencion,pipedrive,Negative phrase
+QV_SEARCH_AltaIntencion,odoo,Negative phrase
+QV_SEARCH_AltaIntencion,clientify,Negative phrase
+QV_SEARCH_AltaIntencion,descargar,Negative phrase
+QV_SEARCH_AltaIntencion,app,Negative phrase
+QV_SEARCH_AltaIntencion,software,Negative phrase
+QV_SEARCH_AltaIntencion,estudiar,Negative phrase
+QV_SEARCH_AltaIntencion,universidad,Negative phrase
+QV_SEARCH_AltaIntencion,tfg,Negative phrase
+QV_SEARCH_AltaIntencion,odontología,Negative phrase
+QV_SEARCH_AltaIntencion,para pacientes,Negative phrase
+QV_SEARCH_AltaIntencion,agencia marketing dental,Negative phrase
+QV_SEARCH_AltaIntencion,agencia para dentistas,Negative phrase
+QV_PMAX_Captacion,gratis,Negative phrase
+QV_PMAX_Captacion,gratuito,Negative phrase
+QV_PMAX_Captacion,gratuita,Negative phrase
+QV_PMAX_Captacion,curso,Negative phrase
+QV_PMAX_Captacion,cursos,Negative phrase
+QV_PMAX_Captacion,máster,Negative phrase
+QV_PMAX_Captacion,master,Negative phrase
+QV_PMAX_Captacion,grado,Negative phrase
+QV_PMAX_Captacion,empleo,Negative phrase
+QV_PMAX_Captacion,trabajo,Negative phrase
+QV_PMAX_Captacion,sueldo,Negative phrase
+QV_PMAX_Captacion,prácticas,Negative phrase
+QV_PMAX_Captacion,qué es,Negative phrase
+QV_PMAX_Captacion,que es,Negative phrase
+QV_PMAX_Captacion,definición,Negative phrase
+QV_PMAX_Captacion,ejemplos,Negative phrase
+QV_PMAX_Captacion,pdf,Negative phrase
+QV_PMAX_Captacion,plantilla,Negative phrase
+QV_PMAX_Captacion,tipos,Negative phrase
+QV_PMAX_Captacion,etapas,Negative phrase
+QV_PMAX_Captacion,hubspot,Negative phrase
+QV_PMAX_Captacion,salesforce,Negative phrase
+QV_PMAX_Captacion,zoho,Negative phrase
+QV_PMAX_Captacion,pipedrive,Negative phrase
+QV_PMAX_Captacion,odoo,Negative phrase
+QV_PMAX_Captacion,clientify,Negative phrase
+QV_PMAX_Captacion,descargar,Negative phrase
+QV_PMAX_Captacion,app,Negative phrase
+QV_PMAX_Captacion,software,Negative phrase
+QV_PMAX_Captacion,estudiar,Negative phrase
+QV_PMAX_Captacion,universidad,Negative phrase
+QV_PMAX_Captacion,tfg,Negative phrase
+QV_PMAX_Captacion,odontología,Negative phrase
+QV_PMAX_Captacion,para pacientes,Negative phrase
