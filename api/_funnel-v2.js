@@ -58,10 +58,12 @@ const PUNTO_TICKET = { 1: 200, 2: 650, 3: 2000, 4: 4000 };
 function tramoTicket(v) {
   const s = norm(v);
   if (!s) return 0;
-  if (/mas.*3_?000|3_?000_?\+|>3_?000/.test(s)) return 4;
-  if (/1_?000.*3_?000/.test(s)) return 3;
-  if (/300.*1_?000/.test(s)) return 2;
-  if (/menos.*300|<_?300/.test(s)) return 1;
+  // 4-nov-2026: también las claves que devuelve Meta en los formularios de noviembre
+  // («300_999», «1000_2999», «3000mas», «menos300»). Antes «300_999» no casaba con nada.
+  if (/mas.*3_?000|3_?000_?\+|>3_?000|^3_?000_?mas/.test(s)) return 4;
+  if (/1_?000.*(3_?000|2_?999)/.test(s)) return 3;
+  if (/300.*(1_?000|999)/.test(s)) return 2;
+  if (/menos.*300|<_?300|^menos_?300/.test(s)) return 1;
   return 0;
 }
 
@@ -189,4 +191,4 @@ function desdeCampos(campos, opciones) {
   return { etiquetas: etiquetas, nota: nota, tramos: { vol: vol, tic: tic } };
 }
 
-module.exports = { desdeCampos: desdeCampos, esV2: esV2, tramoVolumen: tramoVolumen, tramoTicket: tramoTicket, reglaPaid: reglaPaid, reglaDinero: reglaDinero, etiquetasSueltas };
+module.exports = { desdeCampos: desdeCampos, esV2: esV2, tramoVolumen: tramoVolumen, tramoTicket: tramoTicket, campo: campo, reglaPaid: reglaPaid, reglaDinero: reglaDinero, etiquetasSueltas };

@@ -172,6 +172,9 @@ const FORMULARIOS_SECTOR = {
   '1426444132403939': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-corto' },
   // 2-nov-2026: formulario de 4 preguntas (inversión, precio del curso, cuándo y problema), con revisión de «mayor intención».
   '1656098466017561': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg' },
+  // 4-nov-2026 (Maikel): el mismo de 4 preguntas sin «No invertimos todavía» ni «Menos de 300 €»; la portada dice para quién es.
+  '1756765488760255': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg-filtro' },
+  '1904975540667086': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg-filtro' },
   // 2-nov-2026: reformas, mismas 4 preguntas (el precio es el de una obra: ticket-1 < 3.000 €, 2 hasta 10.000, 3 hasta 30.000, 4 más).
   '1448120514052614': { sector: 'Reformas, construcción o instalaciones', etiqueta: 'sector-reformas', angulo: 'form-4preg' }
 };
@@ -294,7 +297,24 @@ async function guardar(lead, opts) {
   // sin-inversion para medirlo aparte, y deja de salir el correo de «fuera».
   // Benjamín (Talavera) recibió ese correo y lo leyó como «no nos interesa».
   const llamarSinInversion = process.env.LLAMAR_SIN_INVERSION !== '0';
-  if (deEstaCampana && !invierte && !llamarSinInversion) {
+  // 4-nov-2026, Maikel: «quitemos a la gente que no invierte nada y tiene tickets pequeños».
+  // Sin inversión y con ticket bajo (curso o tratamiento de menos de 1.000 €; en reformas,
+  // obra de menos de 3.000 €) el lead se guarda en el CRM pero no se activa: ni WhatsApp, ni
+  // llamada, ni nurturing, ni correo de «fuera» (se leía como «no nos interesa»). A Meta le
+  // llega Disqualified para que deje de traer ese perfil. Sin dato de ticket no se filtra.
+  const F2 = require('./_funnel-v2.js');
+  const tramoTic = F2.tramoTicket(F2.campo(campos, ['ticket', 'paga_de_media', 'vale_de_media', 'cuanto_paga',
+    'cuanto_vale', 'tratamiento', 'alumno', 'precio_del_curso', 'precio_de_la_obra', 'valor_a', 'valor_b', 'valor_c'])) ||
+    Number((((sueltas || []).filter(function (t) { return /^ticket-\d$/.test(t); })[0]) || 'ticket-0').slice(7));
+  // 4-nov-2026, 12:00 (Maikel, en el chat de Paid): «los que ponen no invierten nada todavía O
+  // tienen un ticket de menos de 300 €, descartémoslos». Basta UNA de las dos. «Nada» es solo la
+  // respuesta explícita (nada / no invertimos todavía): un formulario sin pregunta de inversión no
+  // filtra a nadie. Ticket bajo = tramo 1 (menos de 300 €; en reformas, obra de menos de 3.000 €).
+  const declaraNada = String(inversionCruda || '').toLowerCase() === 'nada' || /^(nada|no invertimos|todav[ií]a no)/i.test(String(inversion || ''));
+  const filtrado = deEstaCampana && !v2 && !hz && (declaraNada || tramoTic === 1);
+  if (filtrado) {
+    etiquetas.push('diagnostico-landing', 'paid', 'sin-inversion', 'filtro-sin-inversion-ticket-bajo', 'nut-stop');
+  } else if (deEstaCampana && !invierte && !llamarSinInversion) {
     etiquetas.push('diagnostico-landing', 'paid', 'act-fuera');
   } else if (deEstaCampana) {
     etiquetas.push('diagnostico-landing', 'diagnostico-cualificado', 'paid',
@@ -376,9 +396,25 @@ async function guardar(lead, opts) {
       contactId: contactId, nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
       empresa: empresa, origen: 'Meta', fuente: 'formulario instantáneo',
       sector: sector, adId: lead.ad_id,
-      detalle: !deEstaCampana ? 'otra campaña' : (invierte ? '' : 'nada todavía')
+      detalle: !deEstaCampana ? 'otra campaña' : filtrado ? 'filtrado: no invierte o ticket de menos de 300 €' : (invierte ? '' : 'nada todavía')
     });
     if (t.existia) console.log('[leadform] trato en Prospección ya existía', contactId, t.id);
+    // Filtrado (4-nov): el trato se cierra como perdido y Meta recibe Disqualified.
+    if (filtrado && !completar) {
+      if (t && t.id && !t.existia) {
+        await fetch(GHL_BASE + '/opportunities/' + t.id, {
+          method: 'PUT', headers: headers, body: JSON.stringify({ status: 'lost' })
+        }).catch(function () {});
+      }
+      try {
+        await require('./_meta.js').calidadLead('Disqualified', { leadgenId: String(lead.id || ''), email: EMAIL_RE.test(email) ? email : '',
+          telefono: telefono, contactId: contactId, motivo: declaraNada ? 'no invierte nada' : 'ticket de menos de 300 €' });
+      } catch (e) { console.error('[leadform] Disqualified (filtro):', e && e.message); }
+      await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
+        method: 'POST', headers: headers,
+        body: JSON.stringify({ body: 'FILTRADO AL ENTRAR (regla de Maikel del 4-nov): ' + (declaraNada ? 'no invierte nada en captación' : 'ticket de menos de 300 €') + ' (tramo de ticket ' + tramoTic + '). Se guarda sin activar: sin WhatsApp, llamada ni nurturing. Meta recibe Disqualified.\n\n' + new Date().toISOString() })
+      }).catch(function () {});
+    }
   }
   if (contactId && v2) {
     await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
@@ -409,7 +445,7 @@ async function guardar(lead, opts) {
 
   // Aviso a Maikel. Mismo agujero que en la landing: de estos leads no avisa
   // nadie (ver api/_aviso.js). Los de otra campaña no se avisan, que son ruido.
-  if (deEstaCampana && !completar) {
+  if (deEstaCampana && !completar && !filtrado) {
     try {
       await require('./_aviso.js').leadNuevo({
         nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
@@ -424,7 +460,7 @@ async function guardar(lead, opts) {
   return {
     ok: true, contactId: contactId, nombre: nombre, telefono: telefono,
     email: EMAIL_RE.test(email) ? email : '', invierte: invierte,
-    inversion: inversion, fuga: fuga, sector: sector, campos: campos, activar: deEstaCampana
+    inversion: inversion, fuga: fuga, sector: sector, campos: campos, activar: deEstaCampana && !filtrado, filtrado: filtrado
   };
 }
 
@@ -490,7 +526,7 @@ module.exports = async function handler(req, res) {
       parte.guardados++;
 
       if (!r.activar) {
-        console.log('[leadform] guardado sin activar (formulario fuera de la lista)',
+        console.log(r.filtrado ? '[leadform] guardado sin activar (no invierte y ticket bajo)' : '[leadform] guardado sin activar (formulario fuera de la lista)',
           av.leadgen_id, 'form', lead.form_id || '?');
         parte.sin_activar++;
         continue;

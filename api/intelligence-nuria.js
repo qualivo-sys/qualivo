@@ -5,6 +5,8 @@
 //   POST /api/intelligence-nuria/?accion=salir               → borra la cookie
 //   GET  /api/intelligence-nuria/                            → resumen (401 sin sesión)
 //   GET  /api/intelligence-nuria/?accion=tablero             → fichas y conversaciones
+//   GET  /api/intelligence-nuria/?accion=semana              → «Esta semana» y «La persona»
+//                                                              (pantalla /intelligence/nuria/semana/, ver _nuria-semana.js)
 //                                                              (pantallas de Intelligence, ?cuenta=nuria)
 //
 // Variables en Vercel (las pone Maikel):
@@ -42,6 +44,15 @@ const PASOS = [
 ];
 
 let cache = null, enCurso = null;
+
+const SEMANA = require('./_nuria-semana.js');
+const COHORTE = require('./_nuria-embudo.js');
+const COMPARA = require('./_nuria-comparativa.js');
+const cacheComp = new Map();   // comparativas: 'desde|hasta' → { t, datos }, 20 min
+const cacheEmb = new Map();   // embudos: 'puerta|desde|hasta' → { t, datos }, 6 h
+const CACHE_SEMANA_MS = 20 * 60000;
+let cacheSem = null, semEnCurso = null;
+const cachePer = new Map();   // recorridos por periodo: 'desde|hasta' → { t, datos }
 
 function cab(version) {
   return {
@@ -379,6 +390,72 @@ module.exports = async function (req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Método no permitido.' });
   if (!S.valida(req)) return res.status(401).json({ error: 'Sin sesión.' });
   if (!process.env.NURIA_GHL_API_KEY || !process.env.NURIA_GHL_LOCATION_ID) return res.status(503).json({ error: 'Faltan las claves de GHL de Nuria en Vercel.' });
+
+  if (accion === 'semana') {
+    try {
+      const fresco = String((req.query && req.query.fresco) || '') === '1';
+      const edad = cacheSem ? Date.now() - cacheSem.t : Infinity;
+      if (!cacheSem || edad > CACHE_SEMANA_MS || (fresco && edad > 120000)) {
+        if (!semEnCurso) semEnCurso = SEMANA.recoger().then(function (d) { cacheSem = { t: Date.now(), datos: d }; return d; }).finally(function () { semEnCurso = null; });
+        await semEnCurso;
+      }
+      return res.status(200).json(Object.assign({ cacheSegundos: Math.round((Date.now() - cacheSem.t) / 1000) }, cacheSem.datos));
+    } catch (e) {
+      return res.status(502).json({ error: 'No se han podido leer los datos: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'comparativa') {
+    const desde = String((req.query && req.query.desde) || ''), hasta = String((req.query && req.query.hasta) || '');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(desde) || !/^\d{4}-\d{2}-\d{2}$/.test(hasta) || hasta <= desde) return res.status(400).json({ error: 'Periodo no válido.' });
+    try {
+      const k = desde + '|' + hasta, fresco = String((req.query && req.query.fresco) || '') === '1';
+      const c = cacheComp.get(k);
+      if (!c || Date.now() - c.t > CACHE_SEMANA_MS || (fresco && Date.now() - c.t > 120000)) {
+        const datos = await COMPARA.comparativa(desde, hasta);
+        if (cacheComp.size > 30) cacheComp.clear();
+        cacheComp.set(k, { t: Date.now(), datos: datos });
+      }
+      return res.status(200).json(cacheComp.get(k).datos);
+    } catch (e) {
+      return res.status(502).json({ error: 'No se ha podido leer la comparativa: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'embudo') {
+    const puerta = String((req.query && req.query.puerta) || '');
+    const desde = String((req.query && req.query.desde) || ''), hasta = String((req.query && req.query.hasta) || '');
+    if (COHORTE.PUERTAS_EMBUDO.indexOf(puerta) < 0 || !/^\d{4}-\d{2}-\d{2}$/.test(desde) || !/^\d{4}-\d{2}-\d{2}$/.test(hasta) || hasta <= desde) return res.status(400).json({ error: 'Puerta o periodo no válidos.' });
+    try {
+      const k = puerta + '|' + desde + '|' + hasta, fresco = String((req.query && req.query.fresco) || '') === '1';
+      const c = cacheEmb.get(k);
+      if (!c || Date.now() - c.t > 6 * 3600000 || (fresco && Date.now() - c.t > 600000)) {
+        const datos = await COHORTE.embudo(puerta, desde, hasta);
+        if (cacheEmb.size > 40) cacheEmb.clear();
+        cacheEmb.set(k, { t: Date.now(), datos: datos });
+      }
+      return res.status(200).json(cacheEmb.get(k).datos);
+    } catch (e) {
+      return res.status(502).json({ error: 'No se ha podido leer el embudo: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'personas') {
+    const desde = String((req.query && req.query.desde) || ''), hasta = String((req.query && req.query.hasta) || '');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(desde) || !/^\d{4}-\d{2}-\d{2}$/.test(hasta) || hasta <= desde) return res.status(400).json({ error: 'Periodo no válido.' });
+    try {
+      const k = desde + '|' + hasta, fresco = String((req.query && req.query.fresco) || '') === '1';
+      const c = cachePer.get(k);
+      if (!c || Date.now() - c.t > CACHE_SEMANA_MS || (fresco && Date.now() - c.t > 120000)) {
+        const datos = await SEMANA.recorridos(desde, hasta);
+        if (cachePer.size > 30) cachePer.clear();
+        cachePer.set(k, { t: Date.now(), datos: datos });
+      }
+      return res.status(200).json({ personas: cachePer.get(k).datos });
+    } catch (e) {
+      return res.status(502).json({ error: 'No se han podido leer los recorridos: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
 
   if (accion === 'tablero') {
     try {

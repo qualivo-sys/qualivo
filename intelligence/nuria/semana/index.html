@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Intelligence · Nuria Roure · Semanas y meses</title>
+<style>
+:root{--bg:#f6f5f2;--card:#fff;--ink:#1d1d1f;--mut:#6b6b70;--line:#e4e2dc;--a:#3b5bdb;--b:#c9a227;--up:#2b8a3e;--down:#c92a2a;--warn:#fff4e6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141416;--card:#1e1e22;--ink:#f1f1f3;--mut:#a0a0a8;--line:#2e2e34;--a:#748ffc;--b:#e3c158;--up:#69db7c;--down:#ff8787;--warn:#3a2d17}}
+:root[data-theme="dark"]{--bg:#141416;--card:#1e1e22;--ink:#f1f1f3;--mut:#a0a0a8;--line:#2e2e34;--a:#748ffc;--b:#e3c158;--up:#69db7c;--down:#ff8787;--warn:#3a2d17}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:22px 16px 60px}
+h1{font-size:23px;margin:0}h2{font-size:17px;margin:30px 0 10px}h3{font-size:15px;margin:0 0 8px}
+.sub{color:var(--mut);margin:4px 0 16px}
+.barra{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 12px;font:inherit;cursor:pointer}
+select{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 10px;font:inherit}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.k,.card{background:var(--card);border:1px solid var(--line);border-radius:12px}
+.k{padding:12px 14px}.k .l{color:var(--mut);font-size:13px}.k .v{font-size:23px;font-weight:650;margin-top:2px}
+.up{color:var(--up);font-size:12px}.down{color:var(--down);font-size:12px}.neu{color:var(--mut);font-size:12px}
+.card{padding:14px 16px;margin-bottom:10px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--mut);font-weight:600;font-size:12px}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+small,.nota{color:var(--mut);font-size:12.5px}
+.chart{width:100%;height:auto}.bg{fill:var(--b)}.be{fill:var(--a)}.ax{font-size:10px;fill:var(--mut);text-anchor:middle}.axl{stroke:var(--line)}
+.leg span{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 6px 0 14px;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.tl{list-style:none;padding:0;margin:0}.tl li{padding:5px 0 5px 12px;border-left:2px solid var(--line);margin-left:4px}
+.tl li.venta{border-left-color:var(--a)}.tl .d{display:inline-block;min-width:88px;margin-right:8px;color:var(--mut);font-variant-numeric:tabular-nums}
+.warn{background:var(--warn)}ol.rec li,ul.rec li{margin:6px 0}
+.login{max-width:360px;margin:12vh auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.login input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;margin:10px 0}
+.emb td.bar{width:38%}.emb .b{height:14px;border-radius:3px;background:var(--a);min-width:2px}.emb .b.m{background:var(--b)}.emb tr.ex td{font-weight:600}td.bajo{color:var(--down);font-weight:600}td.alto{color:var(--up);font-weight:600}td.pct,th.pct{background:color-mix(in srgb,var(--a) 6%,transparent)}.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.tabs .btn[aria-pressed="true"]{border-color:var(--a);color:var(--a);font-weight:600}
+.err{color:var(--down)}.cargando{color:var(--mut);padding:40px 0;text-align:center}
+</style>
+</head>
+<body>
+<main id="app"><p class="cargando">Cargando los datos de GHL, Meta y la hoja de ventas… (puede tardar unos 20 segundos)</p></main>
+<script>
+(function () {
+  'use strict';
+  var API = '/api/intelligence-nuria/';
+  var app = document.getElementById('app');
+  var datos = null, semanaSel = null, mesSel = null, modo = 'semana';
+  var MESL = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  function nomMes(m) { var d = new Date(m + 'T12:00:00Z'); return MESL[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+  function src() { return modo === 'mes' ? { per: datos.meses, registros: datos.mes.registros, llamadas: datos.mes.llamadas, gasto: datos.mes.gasto, google: datos.mes.google, ventas: datos.mes.ventas } : { per: datos.semanas, registros: datos.registros, llamadas: datos.llamadas, gasto: datos.gasto, google: datos.google, ventas: datos.ventas }; }
+  var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function eur(x) { return Math.round(x || 0).toLocaleString('es-ES') + ' €'; }
+  function num(x) { return Math.round(x || 0).toLocaleString('es-ES'); }
+  function dia(s) { var d = new Date(s + 'T12:00:00Z'); return d.getUTCDate() + '-' + MES[d.getUTCMonth()]; }
+  function rango(s) { var d = new Date(s + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + 6); return dia(s) + ' a ' + d.getUTCDate() + '-' + MES[d.getUTCMonth()]; }
+  function delta(a, b) {
+    if (!b) return '<span class="neu">sin semana anterior</span>';
+    var p = (a - b) / b * 100;
+    return '<span class="' + (p >= 0 ? 'up' : 'down') + '">' + (p >= 0 ? '▲' : '▼') + ' ' + Math.abs(p).toFixed(0) + ' % frente al periodo anterior</span>';
+  }
+
+  function porPuerta(semanas) {
+    var F = src(), t = {};
+    datos.orden.concat(['Agenda personal', 'Otras']).forEach(function (p) { t[p] = { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; });
+    semanas.forEach(function (s) {
+      Object.keys(F.registros[s] || {}).forEach(function (p) { if (p !== '_total' && t[p]) t[p].reg += F.registros[s][p]; });
+      Object.keys(F.llamadas[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].llam += F.llamadas[s][p].celebradas; });
+      if (F.ventas) Object.keys(F.ventas[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].ventas += F.ventas[s][p].n; t[p].eur += F.ventas[s][p].eur; });
+      if (F.gasto) Object.keys(F.gasto[s] || {}).forEach(function (p) { t[p] = t[p] || { reg: 0, llam: 0, ventas: 0, eur: 0, gasto: 0 }; t[p].gasto += F.gasto[s][p]; });
+      if (F.google && F.google[s]) { t['VSL'].gasto += F.google[s]; t['VSL'].google = (t['VSL'].google || 0) + F.google[s]; }
+    });
+    return t;
+  }
+  function suma(t, k) { return Object.keys(t).reduce(function (a, p) { return a + (t[p][k] || 0); }, 0); }
+
+  function pintar() {
+    var F = src(), esMes = modo === 'mes';
+    var sem = F.per, s = esMes ? mesSel : semanaSel, i = sem.indexOf(s), prev = sem[i - 1];
+    var cur = porPuerta([s]), ant = prev ? porPuerta([prev]) : null;
+    var ult4 = esMes ? cur : porPuerta(sem.slice(Math.max(0, i - 3), i + 1));
+    var enCurso = i === sem.length - 1;
+    var gGoogle = (cur['VSL'] && cur['VSL'].google) || 0, fact = suma(cur, 'eur'), ventas = suma(cur, 'ventas'), gasto = suma(cur, 'gasto'), llam = suma(cur, 'llam'), reg = (F.registros[s] || {})._total || 0;
+    var etiq = esMes ? 'mes' : 'semana';
+    var h = '';
+    h += '<div class="barra"><div><h1>Nuria Roure · Intelligence</h1><p class="sub">' + (esMes ? 'Por meses' : 'Por semanas') + ' · datos de GHL, Meta y la hoja de ventas · actualizado hace ' + Math.round((datos.cacheSegundos || 0) / 60) + ' min</p></div>';
+    h += '<div><button class="btn" id="modo" type="button">' + (esMes ? 'Ver por semanas' : 'Ver por meses') + '</button> <select id="sem" aria-label="Periodo">' + sem.map(function (w, k) { return '<option value="' + w + '"' + (w === s ? ' selected' : '') + '>' + (esMes ? nomMes(w) : 'Semana del ' + rango(w)) + (k === sem.length - 1 ? ' (en curso)' : '') + '</option>'; }).slice().reverse().join('') + '</select> ';
+    h += '<button class="btn" id="refrescar" type="button">Actualizar</button> <a class="btn" href="/intelligence/?cuenta=nuria">Directo y fichas</a></div></div>';
+    if (enCurso) h += '<p class="nota">' + (esMes ? 'El mes' : 'La semana') + ' en curso aún no está completo: compáralo con cuidado.</p>';
+    var k = [
+      ['Facturación', F.ventas ? eur(fact) : 'sin hoja', ant && F.ventas ? delta(fact, suma(ant, 'eur')) : ''],
+      ['Ventas', F.ventas ? num(ventas) : 'sin hoja', ant && F.ventas ? delta(ventas, suma(ant, 'ventas')) : ''],
+      ['Gasto en anuncios', F.gasto || F.google ? eur(gasto) : 'sin datos', (ant && F.gasto ? delta(gasto, suma(ant, 'gasto')) : '') + '<div class="neu">Meta ' + eur(gasto - gGoogle) + ' · Google ' + (F.google ? eur(gGoogle) : 'sin datos') + '</div>'],
+      ['Retorno', gasto && F.ventas ? (fact / gasto).toFixed(1).replace('.', ',') + '×' : '—', '<span class="neu">facturación ÷ gasto en anuncios</span>'],
+      ['Llamadas celebradas', num(llam), ant ? delta(llam, suma(ant, 'llam')) : ''],
+      ['Registros nuevos', num(reg), ant ? delta(reg, (F.registros[prev] || {})._total || 0) : '']
+    ];
+    h += '<div class="kpis">' + k.map(function (x) { return '<div class="k"><div class="l">' + x[0] + '</div><div class="v">' + x[1] + '</div>' + x[2] + '</div>'; }).join('') + '</div>';
+
+    // comparativa de embudos (se carga aparte)
+    h += '<h2>Comparativa de embudos</h2><div class="tabs" role="group" aria-label="Periodo de la comparativa"><button class="btn" type="button" data-comp="per" aria-pressed="' + (compModo === 'per') + '">' + (esMes ? nomMes(s) : 'Semana del ' + rango(s)) + '</button><button class="btn" type="button" data-comp="ago" aria-pressed="' + (compModo === 'ago') + '">Desde el 1 de agosto</button></div><div id="comparativa"><p class="cargando">Cargando la comparativa…</p></div>';
+
+    h += '<h2>Por puerta de entrada · ' + (esMes ? nomMes(s) : 'últimas 4 semanas hasta la elegida') + '</h2><div class="card"><table><tr><th>Puerta</th><th class="n">Registros</th><th class="n">Llamadas celebradas</th><th class="n">Ventas</th><th class="n">Facturación</th><th class="n">Gasto anuncios</th><th class="n">Coste por venta</th></tr>';
+    datos.orden.forEach(function (p) {
+      var v = ult4[p]; var cpv = v.gasto ? (v.ventas ? eur(v.gasto / v.ventas) : 'sin ventas') : '—';
+      h += '<tr><td>' + esc(p) + '</td><td class="n">' + num(v.reg) + '</td><td class="n">' + num(v.llam) + '</td><td class="n">' + num(v.ventas) + '</td><td class="n">' + eur(v.eur) + '</td><td class="n">' + (v.gasto ? eur(v.gasto) : '—') + '</td><td class="n">' + cpv + '</td></tr>';
+    });
+    h += '</table><p class="nota">Ventas según la columna «Fuente» de la hoja. Gasto: Meta por nombre de campaña; todo Google Ads (campañas Evergreen, incluida la de marca) va al VSL. Las llamadas de las agendas personales de las closers (' + num(ult4['Agenda personal'].llam) + ') no se asignan a ninguna puerta.</p></div>';
+
+    // embudo completo por puerta (se carga aparte)
+    h += '<h2>Embudo por puerta de entrada · personas que se registraron ' + (esMes ? 'en ' + nomMes(s) : 'la semana del ' + rango(s)) + '</h2>';
+    h += '<div class="tabs" role="group" aria-label="Puerta">' + PUERTAS_EMB.map(function (p) { return '<button class="btn" type="button" data-puerta="' + esc(p) + '" aria-pressed="' + (p === puertaSel) + '">' + esc(p) + '</button>'; }).join('') + '</div><div id="embudo"><p class="cargando">Cargando el embudo…</p></div>';
+
+    // CAC mensual: (publicidad + comercial + agencia + otros) ÷ ventas del mes
+    var cos = datos.mes.costes || null, filasCac = [];
+    datos.meses.forEach(function (m) {
+      var t = (function () { var M = { per: datos.meses, registros: datos.mes.registros, llamadas: datos.mes.llamadas, gasto: datos.mes.gasto, google: datos.mes.google, ventas: datos.mes.ventas }, r = { meta: 0, google: 0, ventas: 0 };
+        Object.keys((M.gasto || {})[m] || {}).forEach(function (p) { r.meta += M.gasto[m][p]; });
+        r.google = (M.google || {})[m] || 0;
+        Object.keys((M.ventas || {})[m] || {}).forEach(function (p) { r.ventas += M.ventas[m][p].n; });
+        return r; })();
+      var c = (cos && cos[m]) || null, fijos = c ? c.comercial + c.agencia + c.otros : 0, total = t.meta + t.google + fijos;
+      filasCac.push({ m: m, meta: t.meta, google: t.google, c: c, total: total, ventas: t.ventas, cac: t.ventas ? total / t.ventas : null });
+    });
+    h += '<h2>CAC por mes</h2><div class="card"><table><tr><th>Mes</th><th class="n">Meta</th><th class="n">Google</th><th class="n">Comercial</th><th class="n">Agencia</th><th class="n">Otros</th><th class="n">Coste total</th><th class="n">Ventas</th><th class="n pct">CAC</th><th class="n">Frente al mes anterior</th></tr>';
+    filasCac.forEach(function (f, k) {
+      var ant = k ? filasCac[k - 1] : null, en = k === filasCac.length - 1;
+      var falta = function (x) { return f.c ? eur(x) : '<span class="neu">falta</span>'; };
+      h += '<tr><td>' + nomMes(f.m) + (en ? ' <small>(en curso)</small>' : '') + '</td><td class="n">' + eur(f.meta) + '</td><td class="n">' + (datos.mes.google ? eur(f.google) : '—') + '</td><td class="n">' + falta(f.c && f.c.comercial) + '</td><td class="n">' + falta(f.c && f.c.agencia) + '</td><td class="n">' + falta(f.c && f.c.otros) + '</td><td class="n">' + eur(f.total) + '</td><td class="n">' + num(f.ventas) + '</td><td class="n pct"><b>' + (f.cac == null ? '—' : eur(f.cac)) + '</b>' + (f.c ? '' : ' <small>solo publicidad</small>') + '</td><td class="n">' + (ant && ant.cac && f.cac && !en ? (f.cac > ant.cac ? '<span class="down">▲ ' + pc(f.cac / ant.cac - 1) + '</span>' : '<span class="up">▼ ' + pc(1 - f.cac / ant.cac) + '</span>') : '') + '</td></tr>';
+    });
+    h += '</table><p class="nota">CAC = (publicidad en Meta y Google + coste comercial + agencia + otros) ÷ ventas del mes. Si sube, rojo; si baja, verde. ' + (cos ? 'Costes fijos: pestaña «COSTES» de la hoja de métricas.' : 'El coste comercial y el de la agencia se leen de una pestaña «COSTES» en la hoja de métricas (columnas: Mes, Comercial, Agencia, Otros). Mientras no exista, el CAC va solo con la publicidad.') + ' El mes en curso no se compara porque aún no está completo.</p></div>';
+
+    // ediciones
+    h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Entran al grupo</th><th class="n">Aparecen como «sale del grupo»</th><th class="n">Llaman o compran</th><th class="n">Ventas en GHL</th></tr>';
+    datos.ediciones.forEach(function (e) {
+      var et = e.etapas, t = e.total || 0;
+      var grupo = (et['En comunidad'] || 0) + (et['Sale comunidad'] || 0) + (et['Llamada agendada'] || 0) + (et['Venta'] || 0) + (et['No venta'] || 0);
+      var llaman = (et['Llamada agendada'] || 0) + (et['Venta'] || 0) + (et['No venta'] || 0);
+      var pct = function (a) { return t ? ' <small>(' + (a / t * 100).toFixed(a / t < 0.1 ? 1 : 0).replace('.', ',') + ' %)</small>' : ''; };
+      h += '<tr><td>Miércoles ' + dia(e.directo) + ' <small>(' + (e.cerrada ? 'cerrada' : 'en curso') + ')</small></td><td class="n">' + num(t) + '</td><td class="n">' + num(grupo) + pct(grupo) + '</td><td class="n">' + num(et['Sale comunidad']) + '</td><td class="n">' + num(llaman) + pct(llaman) + '</td><td class="n">' + num(et['Venta']) + '</td></tr>';
+    });
+    h += '</table><p class="nota">Registros de miércoles a martes, para el directo del miércoles siguiente. Falta confirmar si «sale del grupo» incluye el vaciado del grupo al cerrar cada edición.</p></div>';
+
+    // closers + avisos
+    var cl = Object.keys(datos.closers || {}).map(function (n) { return [n, datos.closers[n]]; }).sort(function (a, b) { return b[1].eur - a[1].eur; });
+    var avisos = [];
+    if (datos.sinContactarVsl) avisos.push(num(datos.sinContactarVsl) + ' oportunidades del VSL siguen en «CONTACTAR (HUMANO)» en SETTEO GENERAL.');
+    var ultEd = datos.ediciones.filter(function (e) { return e.cerrada; }).slice(-1)[0];
+    if (ultEd && datos.ventas) avisos.push('Edición del ' + dia(ultEd.directo) + ': ' + num(ultEd.etapas['Venta']) + ' ventas marcadas en GHL. Compáralo con las ventas «Lanzamiento» de la hoja de esa semana: hoy no siempre coinciden.');
+    if (!datos.fuentes.meta) avisos.push('No se ha podido leer Meta: revisa NURIA_META_TOKEN.');
+    if (!datos.fuentes.hoja) avisos.push('No se ha podido leer la hoja de ventas: revisa NURIA_GOOGLE_SA_JSON.');
+    if (!datos.fuentes.googleAds) avisos.push('No se ha podido leer Google Ads: el coste del VSL no aparece.');
+    h += '<div class="grid2"><div><h2>Ventas por closer · desde el ' + dia(datos.meses[0]) + '</h2><div class="card"><table><tr><th>Closer</th><th class="n">Ventas</th><th class="n">Facturación</th></tr>' + cl.map(function (x) { return '<tr><td>' + esc(x[0]) + '</td><td class="n">' + x[1].n + '</td><td class="n">' + eur(x[1].eur) + '</td></tr>'; }).join('') + '</table></div></div>';
+    h += '<div><h2>Avisos</h2><div class="card warn"><ul class="rec">' + avisos.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul></div></div></div>';
+
+    // recomendaciones (reglas fijas, con su dato)
+    var circ = ult4['El Círculo'], rec = [];
+    var edC = datos.ediciones.filter(function (e) { return e.cerrada; });
+    var regEd = edC.reduce(function (a, e) { return a + e.total; }, 0), llEd = edC.reduce(function (a, e) { return a + (e.etapas['Llamada agendada'] || 0) + (e.etapas['Venta'] || 0) + (e.etapas['No venta'] || 0); }, 0);
+    if (regEd && llEd / regEd < 0.06) rec.push(['No subir presupuesto en El Círculo hasta mejorar lo que pasa después del registro.', 'En las ediciones cerradas, solo ' + (llEd / regEd * 100).toFixed(1).replace('.', ',') + ' de cada 100 registros llegan a llamada' + (circ.reg && circ.gasto ? ', con un coste de ' + eur(circ.gasto / circ.reg) + ' por registro.' : '.')]);
+    if (datos.sinContactarVsl > 500) rec.push(['Trabajar la bolsa del VSL.', 'El VSL vende ' + num(ult4['VSL'].ventas) + ' veces ' + (esMes ? 'en ' + nomMes(s) : 'en 4 semanas') + ' y hay ' + num(datos.sinContactarVsl) + ' oportunidades sin mover de «CONTACTAR (HUMANO)».']);
+    rec.push(['Dejar de apuntar las ventas a mano.', 'Las ventas ya entran en GHL desde ThriveCart; con ellas este panel se alimenta solo y cuadra con el CRM.']);
+    h += '<h2>Recomendaciones</h2><div class="card"><ol class="rec">' + rec.slice(0, 3).map(function (r) { return '<li><b>' + esc(r[0]) + '</b> ' + esc(r[1]) + '</li>'; }).join('') + '</ol></div>';
+
+    // la persona: todas las ventas del periodo elegido (se cargan aparte)
+    var fin = esMes ? (function () { var d = new Date(s + 'T12:00:00Z'); d.setUTCMonth(d.getUTCMonth() + 1); return d.toISOString().slice(0, 10); })() : (function () { var d = new Date(s + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + 7); return d.toISOString().slice(0, 10); })();
+    h += '<h2>La persona · el recorrido antes de comprar</h2><p class="sub">Todas las ventas ' + (esMes ? 'de ' + nomMes(s) : 'de la semana del ' + rango(s)) + ': lo que hizo cada clienta en GHL antes de comprar.</p><div id="personas"><p class="cargando">Cargando los recorridos…</p></div>';
+    h += '<p class="nota">Solo lectura. No se muestran correos, teléfonos ni respuestas de tests.</p>';
+    app.innerHTML = h;
+    document.getElementById('sem').onchange = function (e) { if (modo === 'mes') mesSel = e.target.value; else semanaSel = e.target.value; pintar(); };
+    document.getElementById('modo').onclick = function () { modo = modo === 'mes' ? 'semana' : 'mes'; pintar(); };
+    document.getElementById('refrescar').onclick = function () { recorridos = {}; embudos = {}; comparativas = {}; cargar(true); };
+    cargarPersonas(s, fin);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (b) { b.onclick = function () { puertaSel = b.getAttribute('data-puerta'); Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarEmbudo(s, fin); }; });
+    cargarEmbudo(s, fin);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-comp]'), function (b) { b.onclick = function () { compModo = b.getAttribute('data-comp'); Array.prototype.forEach.call(document.querySelectorAll('[data-comp]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarComparativa(s, fin); }; });
+    cargarComparativa(s, fin);
+  }
+
+  var compModo = 'per', comparativas = {};
+  function hoyISO() { var d = new Date(); d.setDate(d.getDate() + 1); return d.toISOString().slice(0, 10); }
+  function pintarComparativa(d) {
+    var caja = document.getElementById('comparativa'); if (!caja) return;
+    var fs = d.filas, rate = function (a, b) { return b ? a / b : null; };
+    var col = function (vals) { var v = vals.filter(function (x) { return x != null; }); return { max: Math.max.apply(null, v), min: Math.min.apply(null, v) }; };
+    var cAg = col(fs.map(function (f) { return f.leads >= 20 ? rate(f.agendadas, f.leads) : null; }));
+    var cPres = col(fs.map(function (f) { return f.agendadas >= 5 ? rate(f.presentadas, f.agendadas) : null; }));
+    var cVen = col(fs.map(function (f) { return f.presentadas >= 5 ? rate(f.ventas, f.presentadas) : null; }));
+    var cLv = col(fs.map(function (f) { return f.leads >= 20 ? rate(f.ventas, f.leads) : null; }));
+    var marca = function (x, c, ok) { if (x == null || !ok || c.max === c.min) return 'n pct'; return x === c.max ? 'n pct alto' : (x === c.min ? 'n pct bajo' : 'n pct'); };
+    var h = '<div class="card"><table><tr><th>Embudo</th><th class="n">Leads</th><th class="n">Agendadas</th><th class="n pct">% sobre leads</th><th class="n">Presentadas</th><th class="n pct">% sobre agendadas</th><th class="n">Ventas</th><th class="n pct">% sobre presentadas</th><th class="n pct">% ventas sobre leads</th><th class="n">Facturación</th><th class="n">Cobrado</th><th class="n">€ por presentada</th></tr>';
+    var T = { ag: 0, pr: 0, v: 0, f: 0, c: 0 };
+    fs.forEach(function (f) {
+      var ra = f.leads ? rate(f.agendadas, f.leads) : null, rp = rate(f.presentadas, f.agendadas), rv = rate(f.ventas, f.presentadas), rl = f.leads ? f.ventas / f.leads : null;
+      T.ag += f.agendadas || 0; T.pr += f.presentadas || 0; T.v += f.ventas; T.f += f.facturacion; T.c += f.cobrado;
+      h += '<tr><td>' + esc(f.embudo) + '</td><td class="n">' + (f.leads == null ? '—' : num(f.leads)) + '</td>'
+        + '<td class="n">' + (f.agendadas == null ? '—' : num(f.agendadas)) + '</td><td class="' + marca(ra, cAg, f.leads >= 20) + '">' + pc(ra) + '</td>'
+        + '<td class="n">' + (f.presentadas == null ? '—' : num(f.presentadas)) + '</td><td class="' + marca(rp, cPres, f.agendadas >= 5) + '">' + pc(rp) + '</td>'
+        + '<td class="n">' + num(f.ventas) + '</td><td class="' + marca(rv, cVen, f.presentadas >= 5) + '">' + pc(rv) + '</td>'
+        + '<td class="' + marca(rl, cLv, f.leads >= 20) + '">' + pc(rl) + '</td><td class="n">' + eur(f.facturacion) + '</td><td class="n">' + eur(f.cobrado) + '</td><td class="n">' + (f.presentadas ? eur(f.facturacion / f.presentadas) : '—') + '</td></tr>';
+    });
+    h += '<tr style="font-weight:600"><td>Total</td><td></td><td class="n">' + num(T.ag) + '</td><td></td><td class="n">' + num(T.pr) + '</td><td class="n pct">' + pc(rate(T.pr, T.ag)) + '</td><td class="n">' + num(T.v) + '</td><td class="n pct">' + pc(rate(T.v, T.pr)) + '</td><td></td><td class="n">' + eur(T.f) + '</td><td class="n">' + eur(T.c) + '</td><td class="n">' + (T.pr ? eur(T.f / T.pr) : '—') + '</td></tr></table>';
+    var pc1 = fs.reduce(function (a, f) { return a + (f.porCita || 0); }, 0), ph = fs.reduce(function (a, f) { return a + (f.porHoja || 0); }, 0);
+    h += '<p class="nota">Agendadas y presentadas: citas de cada agenda de GHL con fecha en el periodo (sin las inválidas; las canceladas cuentan como agendadas). Cada porcentaje se calcula sobre el paso anterior (agendadas sobre leads, presentadas sobre agendadas, ventas sobre presentadas); el último, ventas sobre leads, da la conversión de todo el embudo. Ventas: cada venta de la hoja va al embudo de la última llamada de esa persona antes de comprar (' + pc1 + ' ventas); si no tuvo llamada, a la «Fuente» de la hoja (' + ph + '). Leads: solo en los embudos con registro. En verde el mejor y en rojo el peor de cada columna.</p></div>';
+    // closers
+    if ((d.closers || []).length) {
+      var cc = d.closers.filter(function (c) { return c.closer !== 'Sin closer'; });
+      var cP = col(cc.map(function (c) { return c.agendadas >= 5 ? rate(c.presentadas, c.agendadas) : null; }));
+      var cC = col(cc.map(function (c) { return c.presentadas >= 5 ? rate(c.ventas, c.presentadas) : null; }));
+      h += '<h3 style="margin-top:18px">Por closer</h3><div class="card"><table><tr><th>Closer</th><th class="n">Agendadas</th><th class="n">Presentadas</th><th class="n pct">%</th><th class="n">No shows</th><th class="n pct">%</th><th class="n">Canceladas</th><th class="n pct">%</th><th class="n">Pendientes</th><th class="n">Sin marcar</th><th class="n">Ventas</th><th class="n pct">% sobre presentadas</th><th class="n">Facturación</th><th class="n">Cobrado</th></tr>';
+      var TC = { a: 0, p: 0, ns: 0, c: 0, pe: 0, v: 0, f: 0, co: 0 };
+      d.closers.forEach(function (c) {
+        var sin = c.closer === 'Sin closer';
+        TC.a += c.agendadas; TC.p += c.presentadas; TC.ns += c.noShow; TC.c += c.canceladas; TC.pe += c.pendientes; TC.v += c.ventas; TC.f += c.facturacion; TC.co += c.cobrado;
+        h += '<tr><td>' + esc(c.closer) + '</td><td class="n">' + num(c.agendadas) + '</td><td class="n">' + num(c.presentadas) + '</td><td class="' + (sin ? 'n pct' : marca(rate(c.presentadas, c.agendadas), cP, c.agendadas >= 5)) + '">' + pc(rate(c.presentadas, c.agendadas)) + '</td>'
+          + '<td class="n">' + num(c.noShow) + '</td><td class="n pct">' + pc(rate(c.noShow, c.agendadas)) + '</td><td class="n">' + num(c.canceladas) + '</td><td class="n pct">' + pc(rate(c.canceladas, c.agendadas)) + '</td><td class="n">' + num(c.pendientes) + '</td><td class="n' + (c.agendadas - c.presentadas - c.noShow - c.canceladas - c.pendientes > 0 ? ' bajo' : '') + '">' + num(c.agendadas - c.presentadas - c.noShow - c.canceladas - c.pendientes) + '</td>'
+          + '<td class="n">' + num(c.ventas) + '</td><td class="' + (sin ? 'n pct' : marca(rate(c.ventas, c.presentadas), cC, c.presentadas >= 5)) + '">' + pc(rate(c.ventas, c.presentadas)) + '</td><td class="n">' + eur(c.facturacion) + '</td><td class="n">' + eur(c.cobrado) + '</td></tr>';
+      });
+      h += '<tr style="font-weight:600"><td>Total</td><td class="n">' + num(TC.a) + '</td><td class="n">' + num(TC.p) + '</td><td class="n pct">' + pc(rate(TC.p, TC.a)) + '</td><td class="n">' + num(TC.ns) + '</td><td class="n pct">' + pc(rate(TC.ns, TC.a)) + '</td><td class="n">' + num(TC.c) + '</td><td class="n pct">' + pc(rate(TC.c, TC.a)) + '</td><td class="n">' + num(TC.pe) + '</td><td class="n">' + num(TC.a - TC.p - TC.ns - TC.c - TC.pe) + '</td><td class="n">' + num(TC.v) + '</td><td class="n pct">' + pc(rate(TC.v, TC.p)) + '</td><td class="n">' + eur(TC.f) + '</td><td class="n">' + eur(TC.co) + '</td></tr></table>';
+      h += '<p class="nota">Citas de todas las agendas con fecha en el periodo, según la closer asignada en GHL (sin las inválidas). Los % de presentadas, no shows y canceladas son sobre agendadas; el de ventas, sobre presentadas. «Sin marcar»: citas ya pasadas que siguen sin resultado en GHL (ni presentada, ni no show, ni cancelada). Ventas: columna «Closer» de la hoja de ventas.</p></div>';
+    }
+    caja.innerHTML = h;
+  }
+  function cargarComparativa(s, fin) {
+    var desde = compModo === 'ago' ? (datos.meses[0] > '2026-08-01' ? datos.meses[0] : '2026-08-01') : s, hasta = compModo === 'ago' ? hoyISO() : fin;
+    var k = desde + '|' + hasta, caja = document.getElementById('comparativa');
+    if (comparativas[k]) return pintarComparativa(comparativas[k]);
+    if (caja) caja.innerHTML = '<p class="cargando">Cargando la comparativa… (unos 30 segundos)</p>';
+    fetch(API + '?accion=comparativa&desde=' + desde + '&hasta=' + hasta, { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { comparativas[k] = d; var c2 = compModo === 'ago' ? (datos.meses[0] > '2026-08-01' ? datos.meses[0] : '2026-08-01') : (modo === 'mes' ? mesSel : semanaSel); if (c2 === desde) pintarComparativa(d); })
+      .catch(function (e) { var c = document.getElementById('comparativa'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+  }
+
+  var PUERTAS_EMB = ['El Círculo', 'VSL', 'Test y meditación'], puertaSel = 'El Círculo', embudos = {};
+  function pc(x) { return x == null ? '—' : (x * 100).toFixed(x < 0.1 ? 1 : 0).replace('.', ',') + ' %'; }
+  function pintarEmbudo(d) {
+    var caja = document.getElementById('embudo'); if (!caja) return;
+    if (!d.registros) { caja.innerHTML = '<p class="nota">Nadie se registró por esta puerta en este periodo.</p>'; return; }
+    // cada paso: [nombre, personas, exacto, paso con el que se compara]
+    var R = d.registros, M = d.muestra, pasos = [['Se registran', R, true, null]];
+    if (M.conEmail) { pasos.push(['Abren algún email', Math.round(M.abren * R), false, 0]); pasos.push(['Pulsan algún enlace del email', Math.round(M.pulsan * R), false, pasos.length - 1]); }
+    if (M.conWhatsapp >= 5) { pasos.push(['Leen el WhatsApp', Math.round(M.leenWa * R), false, 0]); pasos.push(['Contestan por WhatsApp', Math.round(M.contestanWa * R), false, pasos.length - 1]); }
+    var iAg = pasos.length;
+    pasos.push(['Agendan llamada', d.agendan, true, 0], ['Hacen la llamada', d.celebran, true, iAg], ['Compran', d.compran, true, iAg + 1]);
+    var h = '<div class="card emb"><table><tr><th>Paso</th><th class="n">Personas</th><th class="n">% del registro</th><th class="n">Del paso previo</th><th></th></tr>';
+    pasos.forEach(function (p, k) {
+      var ant = p[3] == null || p[3] === 0 ? null : pasos[p[3]][1];
+      h += '<tr class="' + (p[2] ? 'ex' : '') + '"><td>' + (p[2] ? '' : '≈ ') + esc(p[0]) + '</td><td class="n">' + num(p[1]) + '</td><td class="n">' + pc(p[1] / R) + '</td><td class="n">' + (ant ? pc(p[1] / ant) : '') + '</td><td class="bar"><div class="b' + (p[2] ? '' : ' m') + '" style="width:' + Math.max(0.3, p[1] / R * 100).toFixed(1) + '%"></div></td></tr>';
+    });
+    h += '</table><p class="nota">En negrita, dato exacto de toda la gente registrada. Con «≈», estimado con una muestra de ' + M.personas + ' personas repartidas por el periodo (estado de sus emails y WhatsApp en GHL). ' + num(d.bajas) + ' personas (' + pc(d.bajas / R) + ') se han dado de baja del email. Facturación de estas personas: ' + eur(d.facturacion) + '. Las ventas cuentan desde el inicio del periodo.</p></div>';
+
+    // fricciones (reglas fijas)
+    var fr = [], ex = pasos.filter(function (p) { return p[2]; });
+    var peor = null;
+    for (var i = 1; i < ex.length; i++) { var t = ex[i - 1][1] ? ex[i][1] / ex[i - 1][1] : 1; if (!peor || t < peor.t) peor = { t: t, de: ex[i - 1][0], a: ex[i][0] }; }
+    if (peor) fr.push('El mayor salto está entre «' + peor.de + '» y «' + peor.a + '»: solo pasa ' + pc(peor.t) + '.');
+    if (d.bajas / R > 0.05) fr.push(pc(d.bajas / R) + ' de los registrados se da de baja del email: revisar cuántos emails reciben (' + M.emailsPorPersona.toFixed(1).replace('.', ',') + ' de media en sus primeras 3 semanas) y el tono.');
+    var cs = (d.correos || []).filter(function (c) { return c.enviados >= 4; });
+    if (cs.length > 2) {
+      var tasa = function (c) { return c.abiertos / c.enviados; }, media = cs.reduce(function (a, c) { return a + tasa(c); }, 0) / cs.length;
+      var flojos = cs.filter(function (c) { return tasa(c) < media * 0.6; });
+      if (flojos.length) fr.push(flojos.length + ' emails se abren mucho menos que el resto (marcados en rojo abajo). Media de apertura: ' + pc(media) + '.');
+    }
+    if (M.conEmail && M.abren < 0.5) fr.push('Más de la mitad no abre ningún email: los emails no son el canal que mueve esta puerta.');
+    if (M.conWhatsapp >= 5 && M.leenWa > 0.6 && d.agendan / R < 0.05) fr.push('El WhatsApp se lee (' + pc(M.leenWa) + ') pero poca gente agenda: el mensaje llega; falta el paso a la llamada.');
+    if (fr.length) h += '<div class="card warn"><b>Dónde se pierde la gente</b><ul class="rec">' + fr.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
+
+    // emails
+    if ((d.correos || []).length) {
+      var cs2 = d.correos, med = cs2.reduce(function (a, c) { return a + c.abiertos / c.enviados; }, 0) / cs2.length;
+      h += '<div class="card"><b>Emails que reciben en sus primeras 3 semanas</b> <small>(estimado con una muestra de ' + M.conEmail + ' personas)</small><table><tr><th class="n">Día</th><th>Asunto</th><th class="n">Lo reciben</th><th class="n">≈ personas</th><th class="n">Lo abren</th><th class="n">Pulsan</th></tr>';
+      cs2.forEach(function (c) {
+        var ta = c.abiertos / c.enviados;
+        h += '<tr><td class="n">' + c.dia + '</td><td>' + esc(c.asunto) + (c.campana ? ' <small>(envío masivo)</small>' : '') + '</td><td class="n">' + pc(c.enviados / M.conEmail) + '</td><td class="n">' + num(Math.round(c.enviados / M.conEmail * R)) + '</td><td class="n' + (c.enviados >= 4 && ta < med * 0.6 ? ' bajo' : '') + '">' + pc(ta) + '</td><td class="n">' + pc(c.clics / c.enviados) + '</td></tr>';
+      });
+      h += '</table><p class="nota">Los emails se envían a todas las personas registradas, no solo a la muestra: para saber si se abren se mira, persona a persona, el estado de cada email de ' + M.conEmail + ' personas repartidas por el periodo, y el resultado se aplica al total. «Lo reciben» no llega al 100 % porque quien se registró al final del periodo aún no ha recibido los últimos emails, y porque algunos emails son de otras secuencias (VSL, envíos masivos). Día = días después de registrarse. Apple y algunos gestores marcan aperturas que no son reales, y otros las esconden: compara emails entre sí, no te fíes del número exacto.</p></div>';
+    }
+    // pipeline
+    if (d.pipeline && d.pipeline.etapas && d.pipeline.etapas.some(function (e) { return e.n; })) {
+      h += '<div class="card"><b>Dónde están hoy en «' + esc(d.pipeline.nombre) + '»</b> <small>(oportunidades creadas en el periodo)</small><table>' + d.pipeline.etapas.filter(function (e) { return e.n; }).map(function (e) { return '<tr><td>' + esc(e.etapa) + '</td><td class="n">' + num(e.n) + '</td></tr>'; }).join('') + '</table></div>';
+    }
+    caja.innerHTML = h;
+  }
+  function cargarEmbudo(desde, hasta) {
+    var p = puertaSel, k = p + '|' + desde + '|' + hasta, caja = document.getElementById('embudo');
+    if (embudos[k]) return pintarEmbudo(embudos[k]);
+    if (caja) caja.innerHTML = '<p class="cargando">Cargando el embudo de ' + esc(p) + '… (unos 30 segundos)</p>';
+    fetch(API + '?accion=embudo&puerta=' + encodeURIComponent(p) + '&desde=' + desde + '&hasta=' + hasta, { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { embudos[k] = d; if (puertaSel === p && (modo === 'mes' ? mesSel : semanaSel) === desde) pintarEmbudo(d); })
+      .catch(function (e) { var c = document.getElementById('embudo'); if (c && puertaSel === p) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+  }
+
+  var recorridos = {};
+  function pintarPersonas(lista) {
+    var caja = document.getElementById('personas'); if (!caja) return;
+    if (!lista.length) { caja.innerHTML = '<p class="nota">No hay ventas apuntadas en la hoja para este periodo.</p>'; return; }
+    var sin = lista.filter(function (p) { return p.sinFicha; }).length;
+    var h = '<p class="nota">' + lista.length + ' ventas' + (sin ? ' · ' + sin + ' sin ficha en GHL o sin email en la hoja (salen sin recorrido)' : '') + '.</p><div class="grid2">';
+    lista.forEach(function (p) {
+      h += '<div class="card"><h3>' + esc(p.nombre) + ' · ' + (p.importe ? eur(p.importe) : 'sin importe') + ' · apuntada como «' + esc(p.puerta) + '»</h3><ol class="tl">' + p.eventos.map(function (e) {
+        var d = new Date(e.dia + 'T12:00:00Z');
+        return '<li class="' + esc(e.tipo) + '"><span class="d">' + d.getUTCDate() + '-' + MES[d.getUTCMonth()] + '-' + String(d.getUTCFullYear()).slice(2) + '</span>' + (e.tipo === 'venta' ? '<b>' + esc(e.texto) + '</b>' : esc(e.texto)) + '</li>';
+      }).join('') + '</ol></div>';
+    });
+    caja.innerHTML = h + '</div>';
+  }
+  function cargarPersonas(desde, hasta) {
+    var k = desde + '|' + hasta;
+    if (recorridos[k]) return pintarPersonas(recorridos[k]);
+    fetch(API + '?accion=personas&desde=' + desde + '&hasta=' + hasta, { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { recorridos[k] = d.personas || []; if (document.getElementById('personas') && (modo === 'mes' ? mesSel : semanaSel) === desde) pintarPersonas(recorridos[k]); })
+      .catch(function (e) { var c = document.getElementById('personas'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+  }
+
+  function login(msg) {
+    app.innerHTML = '<form class="login" id="f"><h1>Intelligence</h1><p class="sub">Nuria Roure · acceso privado</p><label for="c">Contraseña</label><input id="c" type="password" autocomplete="current-password" required><button class="btn" type="submit">Entrar</button><p class="err" id="e">' + esc(msg || '') + '</p></form>';
+    document.getElementById('f').onsubmit = function (ev) {
+      ev.preventDefault();
+      fetch(API + '?accion=entrar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ clave: document.getElementById('c').value }) })
+        .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); cargar(); }); })
+        .catch(function (e) { document.getElementById('e').textContent = e.message; });
+    };
+  }
+
+  function cargar(fresco) {
+    if (!datos) app.innerHTML = '<p class="cargando">Cargando los datos de GHL, Meta y la hoja de ventas… (puede tardar unos 20 segundos)</p>';
+    fetch(API + '?accion=semana' + (fresco ? '&fresco=1' : ''), { credentials: 'same-origin' })
+      .then(function (r) {
+        if (r.status === 401) { login(); return null; }
+        return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; });
+      })
+      .then(function (d) {
+        if (!d) return;
+        datos = d;
+        if (!semanaSel || d.semanas.indexOf(semanaSel) < 0) semanaSel = d.semanas[d.semanas.length - 2];
+        if (!mesSel || d.meses.indexOf(mesSel) < 0) mesSel = d.meses[d.meses.length - 2];
+        pintar();
+      })
+      .catch(function (e) { app.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+  }
+  cargar();
+})();
+</script>
+</body>
+</html>
