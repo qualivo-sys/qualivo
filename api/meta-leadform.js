@@ -174,6 +174,7 @@ const FORMULARIOS_SECTOR = {
   '1656098466017561': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg' },
   // 4-nov-2026 (Maikel): el mismo de 4 preguntas sin «No invertimos todavía» ni «Menos de 300 €»; la portada dice para quién es.
   '1756765488760255': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg-filtro' },
+  '1904975540667086': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg-filtro' },
   // 2-nov-2026: reformas, mismas 4 preguntas (el precio es el de una obra: ticket-1 < 3.000 €, 2 hasta 10.000, 3 hasta 30.000, 4 más).
   '1448120514052614': { sector: 'Reformas, construcción o instalaciones', etiqueta: 'sector-reformas', angulo: 'form-4preg' }
 };
