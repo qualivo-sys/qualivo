@@ -301,10 +301,14 @@ async function guardar(lead, opts) {
   // llega Disqualified para que deje de traer ese perfil. Sin dato de ticket no se filtra.
   const F2 = require('./_funnel-v2.js');
   const tramoTic = F2.tramoTicket(F2.campo(campos, ['ticket', 'paga_de_media', 'vale_de_media', 'cuanto_paga',
-    'cuanto_vale', 'tratamiento', 'alumno', 'precio_del_curso', 'precio_de_la_obra'])) ||
+    'cuanto_vale', 'tratamiento', 'alumno', 'precio_del_curso', 'precio_de_la_obra', 'valor_a', 'valor_b', 'valor_c'])) ||
     Number((((sueltas || []).filter(function (t) { return /^ticket-\d$/.test(t); })[0]) || 'ticket-0').slice(7));
-  const limiteTic = /reformas/i.test(sector) ? 1 : 2;
-  const filtrado = deEstaCampana && !v2 && !hz && !invierte && tramoTic > 0 && tramoTic <= limiteTic;
+  // 4-nov-2026, 12:00 (Maikel, en el chat de Paid): «los que ponen no invierten nada todavía O
+  // tienen un ticket de menos de 300 €, descartémoslos». Basta UNA de las dos. «Nada» es solo la
+  // respuesta explícita (nada / no invertimos todavía): un formulario sin pregunta de inversión no
+  // filtra a nadie. Ticket bajo = tramo 1 (menos de 300 €; en reformas, obra de menos de 3.000 €).
+  const declaraNada = String(inversionCruda || '').toLowerCase() === 'nada' || /^(nada|no invertimos|todav[ií]a no)/i.test(String(inversion || ''));
+  const filtrado = deEstaCampana && !v2 && !hz && (declaraNada || tramoTic === 1);
   if (filtrado) {
     etiquetas.push('diagnostico-landing', 'paid', 'sin-inversion', 'filtro-sin-inversion-ticket-bajo', 'nut-stop');
   } else if (deEstaCampana && !invierte && !llamarSinInversion) {
@@ -389,7 +393,7 @@ async function guardar(lead, opts) {
       contactId: contactId, nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
       empresa: empresa, origen: 'Meta', fuente: 'formulario instantáneo',
       sector: sector, adId: lead.ad_id,
-      detalle: !deEstaCampana ? 'otra campaña' : filtrado ? 'filtrado: no invierte y ticket bajo' : (invierte ? '' : 'nada todavía')
+      detalle: !deEstaCampana ? 'otra campaña' : filtrado ? 'filtrado: no invierte o ticket de menos de 300 €' : (invierte ? '' : 'nada todavía')
     });
     if (t.existia) console.log('[leadform] trato en Prospección ya existía', contactId, t.id);
     // Filtrado (4-nov): el trato se cierra como perdido y Meta recibe Disqualified.
@@ -401,11 +405,11 @@ async function guardar(lead, opts) {
       }
       try {
         await require('./_meta.js').calidadLead('Disqualified', { leadgenId: String(lead.id || ''), email: EMAIL_RE.test(email) ? email : '',
-          telefono: telefono, contactId: contactId, motivo: 'no invierte y ticket bajo' });
+          telefono: telefono, contactId: contactId, motivo: declaraNada ? 'no invierte nada' : 'ticket de menos de 300 €' });
       } catch (e) { console.error('[leadform] Disqualified (filtro):', e && e.message); }
       await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
         method: 'POST', headers: headers,
-        body: JSON.stringify({ body: 'FILTRADO AL ENTRAR (regla de Maikel del 4-nov): no invierte nada en captación y el ticket es bajo (tramo ' + tramoTic + '). Se guarda sin activar: sin WhatsApp, llamada ni nurturing. Meta recibe Disqualified.\n\n' + new Date().toISOString() })
+        body: JSON.stringify({ body: 'FILTRADO AL ENTRAR (regla de Maikel del 4-nov): ' + (declaraNada ? 'no invierte nada en captación' : 'ticket de menos de 300 €') + ' (tramo de ticket ' + tramoTic + '). Se guarda sin activar: sin WhatsApp, llamada ni nurturing. Meta recibe Disqualified.\n\n' + new Date().toISOString() })
       }).catch(function () {});
     }
   }
@@ -438,7 +442,7 @@ async function guardar(lead, opts) {
 
   // Aviso a Maikel. Mismo agujero que en la landing: de estos leads no avisa
   // nadie (ver api/_aviso.js). Los de otra campaña no se avisan, que son ruido.
-  if (deEstaCampana && !completar) {
+  if (deEstaCampana && !completar && !filtrado) {
     try {
       await require('./_aviso.js').leadNuevo({
         nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
