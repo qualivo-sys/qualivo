@@ -113,6 +113,25 @@ small,.nota{color:var(--mut);font-size:12.5px}
     h += '<h2>Embudo por puerta de entrada · personas que se registraron ' + (esMes ? 'en ' + nomMes(s) : 'la semana del ' + rango(s)) + '</h2>';
     h += '<div class="tabs" role="group" aria-label="Puerta">' + PUERTAS_EMB.map(function (p) { return '<button class="btn" type="button" data-puerta="' + esc(p) + '" aria-pressed="' + (p === puertaSel) + '">' + esc(p) + '</button>'; }).join('') + '</div><div id="embudo"><p class="cargando">Cargando el embudo…</p></div>';
 
+    // CAC mensual: (publicidad + comercial + agencia + otros) ÷ ventas del mes
+    var cos = datos.mes.costes || null, filasCac = [];
+    datos.meses.forEach(function (m) {
+      var t = (function () { var M = { per: datos.meses, registros: datos.mes.registros, llamadas: datos.mes.llamadas, gasto: datos.mes.gasto, google: datos.mes.google, ventas: datos.mes.ventas }, r = { meta: 0, google: 0, ventas: 0 };
+        Object.keys((M.gasto || {})[m] || {}).forEach(function (p) { r.meta += M.gasto[m][p]; });
+        r.google = (M.google || {})[m] || 0;
+        Object.keys((M.ventas || {})[m] || {}).forEach(function (p) { r.ventas += M.ventas[m][p].n; });
+        return r; })();
+      var c = (cos && cos[m]) || null, fijos = c ? c.comercial + c.agencia + c.otros : 0, total = t.meta + t.google + fijos;
+      filasCac.push({ m: m, meta: t.meta, google: t.google, c: c, total: total, ventas: t.ventas, cac: t.ventas ? total / t.ventas : null });
+    });
+    h += '<h2>CAC por mes</h2><div class="card"><table><tr><th>Mes</th><th class="n">Meta</th><th class="n">Google</th><th class="n">Comercial</th><th class="n">Agencia</th><th class="n">Otros</th><th class="n">Coste total</th><th class="n">Ventas</th><th class="n pct">CAC</th><th class="n">Frente al mes anterior</th></tr>';
+    filasCac.forEach(function (f, k) {
+      var ant = k ? filasCac[k - 1] : null, en = k === filasCac.length - 1;
+      var falta = function (x) { return f.c ? eur(x) : '<span class="neu">falta</span>'; };
+      h += '<tr><td>' + nomMes(f.m) + (en ? ' <small>(en curso)</small>' : '') + '</td><td class="n">' + eur(f.meta) + '</td><td class="n">' + (datos.mes.google ? eur(f.google) : '—') + '</td><td class="n">' + falta(f.c && f.c.comercial) + '</td><td class="n">' + falta(f.c && f.c.agencia) + '</td><td class="n">' + falta(f.c && f.c.otros) + '</td><td class="n">' + eur(f.total) + '</td><td class="n">' + num(f.ventas) + '</td><td class="n pct"><b>' + (f.cac == null ? '—' : eur(f.cac)) + '</b>' + (f.c ? '' : ' <small>solo publicidad</small>') + '</td><td class="n">' + (ant && ant.cac && f.cac && !en ? (f.cac > ant.cac ? '<span class="down">▲ ' + pc(f.cac / ant.cac - 1) + '</span>' : '<span class="up">▼ ' + pc(1 - f.cac / ant.cac) + '</span>') : '') + '</td></tr>';
+    });
+    h += '</table><p class="nota">CAC = (publicidad en Meta y Google + coste comercial + agencia + otros) ÷ ventas del mes. Si sube, rojo; si baja, verde. ' + (cos ? 'Costes fijos: pestaña «COSTES» de la hoja de métricas.' : 'El coste comercial y el de la agencia se leen de una pestaña «COSTES» en la hoja de métricas (columnas: Mes, Comercial, Agencia, Otros). Mientras no exista, el CAC va solo con la publicidad.') + ' El mes en curso no se compara porque aún no está completo.</p></div>';
+
     // ediciones
     h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Entran al grupo</th><th class="n">Aparecen como «sale del grupo»</th><th class="n">Llaman o compran</th><th class="n">Ventas en GHL</th></tr>';
     datos.ediciones.forEach(function (e) {

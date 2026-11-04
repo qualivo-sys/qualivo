@@ -179,6 +179,28 @@ async function ventasHoja(desde) {
   }).filter(function (v) { return v.dia && v.dia >= desde; });
 }
 
+// Costes fijos del mes para el CAC (comercial, agencia, otros), pestaña «COSTES» de la
+// misma hoja: A = mes (fecha de cualquier día del mes o «2026-10»), B = comercial,
+// C = agencia, D = otros. Si la pestaña no existe, devuelve null y el CAC va solo con publicidad.
+async function costesHoja() {
+  const hoja = process.env.NURIA_VENTAS_HOJA;
+  const t = hoja ? await tokenGoogle() : null;
+  if (!t) return null;
+  const r = await fetch('https://sheets.googleapis.com/v4/spreadsheets/' + hoja + '/values/' + encodeURIComponent("'COSTES'!A2:D") + '?valueRenderOption=UNFORMATTED_VALUE&dateTimeRenderOption=SERIAL_NUMBER', { headers: { Authorization: 'Bearer ' + t } });
+  if (!r.ok) return null;
+  const out = {};
+  ((await r.json()).values || []).forEach(function (f) {
+    let mes = null;
+    const m = String(f[0] == null ? '' : f[0]).trim().match(/^(\d{4})-(\d{1,2})$/);
+    if (m) mes = m[1] + '-' + m[2].padStart(2, '0') + '-01';
+    else { const d = fechaHoja(f[0]); if (d) mes = d.slice(0, 8) + '01'; }
+    if (!mes) return;
+    const n = function (x) { return Number(String(x == null ? '' : x).replace(/[€\s.]/g, '').replace(',', '.')) || 0; };
+    out[mes] = { comercial: n(f[1]), agencia: n(f[2]), otros: n(f[3]) };
+  });
+  return out;
+}
+
 // ---------- recoger ----------
 async function recoger() {
   const loc = process.env.NURIA_GHL_LOCATION_ID;
@@ -235,12 +257,13 @@ async function recoger() {
   });
 
   // 3) Gasto en Meta y 4) ventas de la hoja (si están configurados)
-  const [meta, metaMes, ventas, gads, gadsMes] = await Promise.all([
+  const [meta, metaMes, ventas, gads, gadsMes, costes] = await Promise.all([
     gastoMeta(semanas[0], hoy, '7').catch(function () { return null; }),
     gastoMeta(meses[0], hoy, 'monthly').catch(function () { return null; }),
     ventasHoja(desde).catch(function () { return null; }),
     gastoGoogle(semanas[0], hoy, 'week').catch(function () { return null; }),
-    gastoGoogle(meses[0], hoy, 'month').catch(function () { return null; })
+    gastoGoogle(meses[0], hoy, 'month').catch(function () { return null; }),
+    costesHoja().catch(function () { return null; })
   ]);
   const google = {}, googleMes = {}; semanas.forEach(function (s) { google[s] = 0; }); meses.forEach(function (m) { googleMes[m] = 0; });
   (gads || []).forEach(function (g) { if (g.dia in google) google[g.dia] += g.gasto; });
@@ -287,7 +310,7 @@ async function recoger() {
   return {
     generado: Date.now(), hoy: hoy, semanas: semanas, orden: ORDEN,
     registros: registros, llamadas: llamadas, gasto: meta ? gasto : null, google: gads ? google : null, ventas: ventas ? venta : null,
-    meses: meses, mes: { registros: registrosMes, llamadas: llamadasMes, gasto: metaMes ? gastoMes : null, google: gadsMes ? googleMes : null, ventas: ventas ? ventaMes : null },
+    meses: meses, mes: { registros: registrosMes, llamadas: llamadasMes, gasto: metaMes ? gastoMes : null, google: gadsMes ? googleMes : null, ventas: ventas ? ventaMes : null, costes: costes },
     ediciones: edicion, sinContactarVsl: sinContactar, closers: closers,
     fuentes: { meta: !!meta, hoja: !!ventas, googleAds: !!gads }
   };
