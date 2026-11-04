@@ -11,7 +11,7 @@
 
 const N = require('./_nuria-semana.js');
 
-const MUESTRA = 20;
+const MUESTRA = 30;
 const DIAS_SECUENCIA = 21;        // emails que cuentan: los de los 21 días tras registrarse
 const PIPELINE = {
   'El Círculo': { id: 'bIgnFh4rXCSpZ1bwjQHq', nombre: 'Lanzamiento Perpetuo' },
