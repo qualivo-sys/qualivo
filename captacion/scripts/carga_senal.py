@@ -8,6 +8,12 @@
 import json, re, sys, time, urllib.request, urllib.error, os
 sys.path.insert(0, "/home/user/qualivo/captacion/scripts")
 import carga_v3
+# COPY=v4 activa el copy corto del 4-nov (carga_v4.py). Por defecto sigue v3
+# hasta que Maikel confirme el cambio.
+if os.environ.get("COPY") == "v4":
+    import carga_v4 as COPY
+else:
+    COPY = carga_v3
 S = os.environ.get("SP") or os.path.dirname(os.path.abspath(__file__))  # carpeta con los JSON de Apollo
 k = sys.argv[1]; dry = "--dry" in sys.argv
 B = "https://server.smartlead.ai/api/v1"
@@ -58,7 +64,7 @@ total = 0
 for clave, ls in por.items():
     filas = []
     for l in ls:
-        s, b1, b2, b3 = carga_v3.construir(l)
+        s, b1, b2, b3 = COPY.construir(l)
         filas.append({"email": l["email"], "first_name": l.get("first_name") or "", "last_name": l.get("last_name") or "",
                       "company_name": carga_v3.limpia_empresa(l.get("company_name") or ""), "website": l["dom"],
                       "custom_fields": {"subject1": s, "body1": b1, "body2": b2, "body3": b3,
