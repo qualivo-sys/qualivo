@@ -1,0 +1,172 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../../infografias/2026-09-10/_base.css">
+<link rel="stylesheet" href="../../capsulas/_capsula.css">
+<style>
+body{padding:0;margin:0;background:#000}
+#v{width:1080px;height:1920px;position:relative;overflow:hidden;background:#0A0A0B;color:#F2EEE6;font-family:SG}
+#v::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(242,238,230,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(242,238,230,.03) 1px,transparent 1px);background-size:90px 90px}
+.abs{position:absolute}
+#marca{top:150px;left:64px;right:64px;display:flex;justify-content:space-between;font-size:24px;letter-spacing:.06em;color:rgba(242,238,230,.55)}
+#marca b{font-family:Anton;font-weight:400;color:#E8590C;letter-spacing:.04em}
+#tit{top:200px;left:64px;right:64px;font-family:Anton;font-size:86px;line-height:1;text-transform:uppercase}
+#pasos{top:410px;left:64px;right:64px;display:flex;gap:10px}
+#pasos div{flex:1;text-align:center;font-family:Anton;font-size:19px;letter-spacing:.06em;padding:12px 0;border-radius:999px;background:rgba(242,238,230,.07);color:rgba(242,238,230,.45)}
+#pasos div.on{background:#E8590C;color:#fff}
+#pasos div.ok{background:rgba(232,89,12,.22);color:#F2EEE6}
+.esc{position:absolute;left:64px;right:64px;top:500px;height:960px;opacity:0}
+#sub{top:1480px;left:80px;right:80px;text-align:center;font-family:Anton;font-size:58px;line-height:1.12;text-transform:uppercase;color:#fff;text-shadow:0 4px 18px rgba(0,0,0,.6)}
+#sub em{font-style:normal;color:#E8590C}
+#ej{top:1430px;left:64px;font-size:22px;color:rgba(242,238,230,.45)}
+/* s1 */
+.lock{position:relative;background:linear-gradient(160deg,#2B2D33,#111216);border-radius:56px;padding:90px 44px 70px;border:2px solid rgba(255,255,255,.08);margin-top:40px}
+.lock .hora{font-family:-apple-system,"Segoe UI",Roboto,sans-serif;font-size:190px;font-weight:300;color:#fff;text-align:center;line-height:1}
+.lock .dia{font-family:-apple-system,"Segoe UI",Roboto,sans-serif;font-size:36px;color:rgba(255,255,255,.75);text-align:center;margin:10px 0 60px}
+.lock .noti b,.lock .noti span{font-size:28px}
+/* s2 */
+#s2 .wa .bub{font-size:30px}
+.okc{background:#fff;color:#0A0A0B;border-radius:24px;padding:26px 30px;display:flex;align-items:center;gap:20px;font-family:-apple-system,"Segoe UI",Roboto,sans-serif;font-size:30px;font-weight:700;margin-top:26px;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.okc i{font-style:normal;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:32px}
+.okc small{display:block;font-size:24px;font-weight:400;color:#666}
+/* s3 */
+#s3 .crm{position:relative;height:700px;margin-top:30px}
+#s3 .row{position:absolute;left:0;right:0;height:140px;background:#fff}
+/* s4 */
+.ficha{background:#fff;color:#0A0A0B;border-radius:30px;overflow:hidden;font-family:-apple-system,"Segoe UI",Roboto,sans-serif;margin-top:30px}
+.ficha .cab{display:flex;align-items:center;gap:22px;padding:30px;border-bottom:1px solid #EEE}
+.ficha .cab .nm{font-size:38px}
+.etapas{display:flex;gap:10px;padding:26px 30px;border-bottom:1px solid #EEE}
+.etapas span{flex:1;text-align:center;font-size:22px;font-weight:700;padding:14px 6px;border-radius:999px;background:#F1EFEA;color:#8a857b}
+.etapas span.on{background:#E8590C;color:#fff}
+.nota{padding:26px 30px;font-size:30px;line-height:1.35;border-bottom:1px solid #F1EFEA;display:flex;gap:18px}
+.nota b{color:#E8590C}
+/* s5 */
+.sello{display:flex;align-items:center;gap:30px;font-family:Anton;font-size:96px;text-transform:uppercase;margin-top:46px}
+.sello i{font-style:normal;width:110px;height:110px;border-radius:50%;background:#E8590C;color:#fff;font-size:64px;display:flex;align-items:center;justify-content:center;flex:none}
+.sello small{font-family:SG;font-size:34px;color:rgba(242,238,230,.7);text-transform:none;display:block}
+/* s6 */
+.caja{border-radius:30px;padding:34px 40px;font-size:34px;line-height:1.3}
+.caja .k{font-family:Anton;font-size:44px;letter-spacing:.04em;margin-bottom:6px}
+.c1{background:#F2EEE6;color:#0A0A0B}
+.c2{background:#1B1C21;border:3px solid #0866FF}
+.c2 .k{color:#5B9BFF}
+#flecha{position:relative;height:300px;margin-left:120px}
+#flecha .lin{position:absolute;left:0;top:0;width:8px;background:#E8590C;border-radius:4px}
+#flecha .pq{position:absolute;left:-14px;width:36px;height:36px;border-radius:50%;background:#E8590C;box-shadow:0 0 30px #E8590C}
+#flecha .lb{position:absolute;left:70px;top:70px;font-size:36px;line-height:1.3}
+#flecha .lb s{color:rgba(242,238,230,.45)}
+#flecha .lb b{color:#E8590C}
+/* s7 */
+#s7 .h{font-size:132px;line-height:1}
+</style></head><body>
+<div id="v">
+  <div id="marca" class="abs"><span>@maikel.echevarria</span><b>QUALIVO.IO</b></div>
+  <div id="tit" class="abs">Lo que le pasa a un contacto en mi <span class="nar">sistema</span></div>
+  <div id="pasos" class="abs"><div>FORMULARIO</div><div>RESPUESTA</div><div>PRIORIDAD</div><div>CRM</div><div>VENTA</div><div>META</div></div>
+
+  <div id="s1" class="esc">
+    <div class="lock"><div class="hora">21:14</div><div class="dia">viernes</div>
+      <div class="noti" id="n1"><div class="ic crm">Q</div><div><b>Nuevo formulario</b><span>Laura · quiere información del curso</span></div><small>ahora</small></div>
+      <div class="peg" id="p1" style="right:24px;bottom:-40px;transform:rotate(-4deg)">tu equipo, cenando 🍕</div>
+    </div>
+  </div>
+
+  <div id="s2" class="esc">
+    <div class="wa"><div class="hd"><div class="av">A</div><div><b>Academia</b><small>en línea</small></div></div>
+      <div class="wall">
+        <div class="bub mio" id="b1"><span class="ia">IA</span><br>Hola, Laura. Vi que preguntabas por el curso. ¿Es para empezar en enero o más adelante?<span class="hh">21:16</span></div>
+        <div class="bub suyo" id="b2">En enero, si puede ser 🙂<span class="hh">21:18</span></div>
+        <div class="bub mio" id="b3"><span class="ia">IA</span><br>Perfecto. ¿Te va bien el lunes a las 10:00 o a las 12:30?<span class="hh">21:18</span></div>
+        <div class="bub suyo" id="b4">A las 10<span class="hh">21:19</span></div>
+      </div></div>
+    <div class="okc" id="ok2"><i>✓</i><div>Cita reservada en tu agenda<small>Lunes · 10:00</small></div></div>
+  </div>
+
+  <div id="s3" class="esc">
+    <div class="crm"><div class="top"><b>Por quién empezar hoy</b>academia</div>
+      <div class="row" id="rL"><div class="lt A" id="aL">A</div><div><div class="nm">Laura</div><div class="ws">Encaja · quiere empezar ya · contesta</div></div><div class="tag" id="tL">Atender hoy</div></div>
+      <div class="row" id="rM"><div class="lt B">B</div><div><div class="nm">Marta</div><div class="ws">Encaja · aún no ha contestado</div></div><div class="tag g">Volver a escribir</div></div>
+      <div class="row" id="rS"><div class="lt C">C</div><div><div class="nm">Sergio</div><div class="ws">Busca algo distinto</div></div><div class="tag g">Orientarle</div></div>
+      <div class="row" id="rA"><div class="lt D">D</div><div><div class="nm">Ana</div><div class="ws">Faltan datos</div></div><div class="tag g">Conocerla</div></div>
+    </div>
+  </div>
+
+  <div id="s4" class="esc">
+    <div class="ficha">
+      <div class="cab"><div class="lt A">A</div><div><div class="nm">Laura</div><div class="ws">Formulario · viernes 21:14</div></div></div>
+      <div class="etapas"><span id="e1">Nuevo</span><span id="e2">Contactado</span><span id="e3">Reunión agendada</span></div>
+      <div class="nota" id="o1"><b>✎</b><div>Quiere empezar en enero.</div></div>
+      <div class="nota" id="o2"><b>✓</b><div>Cita: lunes a las 10:00.</div></div>
+      <div class="nota" id="o3"><b>→</b><div>Siguiente paso: preparar la reunión.</div></div>
+    </div>
+  </div>
+
+  <div id="s5" class="esc">
+    <div class="h" style="font-size:70px;color:#E8590C;margin-top:30px">Lunes, 10:00</div>
+    <div class="sello" id="k1"><i>✓</i><div>Reunión<small>se celebra</small></div></div>
+    <div class="sello" id="k2"><i>✓</i><div>Le encaja</div></div>
+    <div class="sello" id="k3"><i>€</i><div>Compra<small>y queda el importe en el CRM</small></div></div>
+  </div>
+
+  <div id="s6" class="esc">
+    <div class="caja c1" id="x1"><div class="k">TU CRM</div>Laura ha comprado.</div>
+    <div id="flecha"><div class="lin" id="fl"></div><div class="pq" id="fp"></div>
+      <div class="lb" id="fx"><s>«rellenó un formulario»</s><br><b>«compró»</b></div></div>
+    <div class="caja c2" id="x2"><div class="k">META</div><span id="m1">Recibe la venta.</span><br><span id="m2" style="color:#E8590C;font-weight:700">Y aprende a traerte más gente así ↻</span></div>
+  </div>
+
+  <div id="s7" class="esc">
+    <div class="h" id="z1" style="margin-top:80px">Esto no es un agente.</div>
+    <div class="h nar" id="z2" style="margin-top:30px">Es un sistema.</div>
+    <div class="t" id="z3" style="font-size:52px;margin-top:50px;color:#F2EEE6">Y la IA está dentro.</div>
+  </div>
+
+  <div id="ej" class="abs">Ejemplo ilustrativo.</div>
+  <div id="sub" class="abs"></div>
+</div>
+<script>
+// Escenas: [id, entra, sale, paso activo]
+const ESC=[['s1',0,5.6,0],['s2',5.6,14,1],['s3',14,20.4,2],['s4',20.4,27,3],['s5',27,31.2,4],['s6',31.2,39.4,5],['s7',39.4,47,-1]];
+// Subtítulos (se ajustan a la voz real al montar)
+const SUB=[
+[0,2.6,'Te enseño lo que le pasa a un <em>contacto</em>'],[2.6,5.6,'Viernes, <em>21:14</em>. Laura rellena el formulario'],
+[5.6,8,'En unos minutos ya tiene <em>respuesta</em>'],[8,10.8,'La IA lee lo que ha puesto y pregunta lo justo'],[10.8,14,'Le ofrece dos huecos <em>reales</em> de mi agenda'],
+[14,16.6,'Mientras, el sistema la <em>puntúa</em>'],[16.6,18.6,'Encaja y tiene interés: es una <em>A</em>'],[18.6,20.4,'Mi equipo sabe que va primero'],
+[20.4,23.4,'Todo queda apuntado en el <em>CRM</em>'],[23.4,27,'El lunes nadie empieza <em>de cero</em>'],
+[27,29,'Lunes: reunión. Le <em>encaja</em>'],[29,31.2,'Y <em>compra</em>'],
+[31.2,33.6,'Y entonces <em>Meta</em> se entera'],[33.6,36.6,'No de que rellenó un formulario: de que <em>compró</em>'],[36.6,39.4,'Y aprende a traerte <em>más gente así</em>'],
+[39.4,41.6,'Esto no es un agente. Es un <em>sistema</em>'],[41.6,43.6,'Y la IA está dentro'],[43.6,47,'¿Qué parte te falta a ti? <em>Te leo</em>']];
+const $=id=>document.getElementById(id);
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x));
+const ease=x=>1-Math.pow(1-cl(x,0,1),3);
+function aparece(el,t,t0,d=.45,dy=40){const p=ease((t-t0)/d);el.style.opacity=p;el.style.transform=`translateY(${(1-p)*dy}px)`;}
+function pop(el,t,t0){const x=cl((t-t0)/.35,0,1);const s=x<1?(x<.7?x/.7*1.15:1.15-(x-.7)/.3*.15):1;el.style.opacity=x>0?1:0;el.style.transform=`scale(${s})`;}
+function render(t){
+  ESC.forEach(([id,a,b])=>{const e=$(id);const o=cl((t-a)/.35,0,1)*cl((b-t)/.35,0,1);e.style.opacity=o;e.style.transform=`translateY(${(1-cl((t-a)/.45,0,1))*50}px)`;});
+  const act=ESC.find(e=>t>=e[1]&&t<e[2]);const pi=act?act[3]:-1;
+  [...$('pasos').children].forEach((d,i)=>{d.className=(pi===-1&&t>39)?'ok':(i===pi?'on':(i<pi?'ok':''));});
+  $('ej').style.opacity=(t>5.6&&t<39.4)?1:0;
+  const s=SUB.find(x=>t>=x[0]&&t<x[1]);$('sub').innerHTML=s?s[2]:'';
+  // s1
+  aparece($('n1'),t,1.6,.5,-80);pop($('p1'),t,3.2);
+  // s2
+  [['b1',6.4],['b2',8.4],['b3',10.4],['b4',12.0]].forEach(([i,a])=>aparece($(i),t,a,.35,30));
+  aparece($('ok2'),t,12.8,.4,30);
+  // s3: Laura entra abajo y sube a la primera fila
+  const H=150,top0=86;const up=ease((t-16.4)/.9);
+  const ord={rL:3-3*up,rM:0+up,rS:1+up,rA:2+up};
+  Object.entries(ord).forEach(([i,k])=>{$(i).style.top=(top0+k*H)+'px';});
+  aparece($('rL'),t,14.6,.4,0);$('rL').style.boxShadow=up>.5?'0 20px 50px rgba(232,89,12,.35)':'none';$('rL').style.zIndex=2;
+  pop($('aL'),t,17.3);pop($('tL'),t,18.0);
+  // s4
+  const st=t<21.8?1:(t<23?2:3);['e1','e2','e3'].forEach((i,k)=>$(i).className=(k+1===st)?'on':'');
+  aparece($('o1'),t,22.2,.4,20);aparece($('o2'),t,23.4,.4,20);aparece($('o3'),t,24.6,.4,20);
+  // s5
+  aparece($('k1'),t,27.4,.35,30);aparece($('k2'),t,28.6,.35,30);aparece($('k3'),t,29.6,.35,30);
+  // s6
+  const f=ease((t-32.6)/1.4);$('fl').style.height=(f*300)+'px';$('fp').style.top=(f*300-18)+'px';$('fp').style.opacity=(f>0&&f<1)?1:0;
+  aparece($('fx'),t,34,.4,20);aparece($('m1'),t,34.2,.3,10);aparece($('m2'),t,36.8,.4,20);
+  // s7
+  aparece($('z1'),t,39.6,.4,40);aparece($('z2'),t,40.7,.4,40);aparece($('z3'),t,41.8,.4,30);
+}
+window.render=render;render(0);
+</script></body></html>
