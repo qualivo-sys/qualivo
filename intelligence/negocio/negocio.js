@@ -243,7 +243,7 @@
       kpi('Clientes nuevos del mes', ent(k.clientesNuevos) + '<small> / ' + ent(k.objetivoClientes) + '</small>', vs(k.clientesNuevos, k.objetivoClientes), k.clientesNuevos >= k.objetivoClientes ? 'bien' : '') +
       kpi('Gasto Meta del mes', eur(k.gastoMetaMes), vacio(k.gastoMetaMes) ? '' : pct(k.gastoMetaMes / k.topeMeta, true) + ' del tope de ' + eur(k.topeMeta), k.gastoMetaMes >= 0.85 * k.topeMeta ? 'mal' : '') +
       kpi('CPL de 7 días', eur(k.cpl7, true), 'objetivo ' + eur(k.cplObjetivo) + ' · alerta > ' + eur(k.cplAlerta), vacio(k.cpl7) ? '' : k.cpl7 > k.cplAlerta ? 'mal' : k.cpl7 <= k.cplObjetivo ? 'bien' : '') +
-      kpi('Coste por RC de Meta', vacio(k.costeRC) ? '—' : eur(k.costeRC), vacio(k.costeRC) ? (vacio(k.rcMeta) ? 'sin datos' : ent(k.rcMeta) + ' RC de Meta: hacen falta ' + k.rcMinimo) : ent(k.rcMeta) + ' RC · objetivo ' + eur(k.costeRCObjetivo), vacio(k.costeRC) ? '' : k.costeRC > k.costeRCMax ? 'mal' : k.costeRC <= k.costeRCObjetivo ? 'bien' : '') +
+      kpi('Coste por RC de Meta', vacio(k.costeRC) ? '—' : eur(k.costeRC), vacio(k.costeRC) ? (vacio(k.rcMeta) ? 'sin datos' : ent(k.rcMeta) + ' RC marcadas de Meta (hacen falta ' + k.rcMinimo + ') · ' + ent(k.cualificadasMeta) + ' cualificadas') : ent(k.rcMeta) + ' RC · objetivo ' + eur(k.costeRCObjetivo), vacio(k.costeRC) ? '' : k.costeRC > k.costeRCMax ? 'mal' : k.costeRC <= k.costeRCObjetivo ? 'bien' : '') +
       kpi('MRR confirmado', k.sinHoja ? '—' : eur(k.mrr), k.sinHoja ? 'sin conexión con la hoja' : 'cuotas de clientes', k.sinHoja ? 'aviso-kpi' : '') +
       kpi('Caja disponible', k.sinHoja ? '—' : eur(k.caja), k.sinHoja ? 'sin conexión con la hoja' : 'saldo en banco', k.sinHoja ? 'aviso-kpi' : '') +
       '</div>';
@@ -303,12 +303,12 @@
         { t: 'Gasto', k: 'gasto', num: true, f: function (v) { return eur(v); } },
         { t: 'Leads', k: 'leads', num: true, f: function (v, r) { return esc(ent(v)) + (r.ab ? ' <small class="gris-2">(' + ent(r.ab) + ' A/B)</small>' : ''); } },
         { t: 'Citas', k: 'citas', num: true, f: ent }, { t: 'Celebradas', k: 'celebradas', num: true, f: ent },
-        { t: 'RC', k: 'rc', num: true, f: ent, cls: function (v) { return v ? 'bien' : ''; } }, { t: 'Clientes', k: 'clientes', num: true, f: ent },
+        { t: 'RC (marcadas)', k: 'rc', num: true, f: ent, cls: function (v) { return v ? 'bien' : ''; } }, { t: 'Cualificadas (Meta)', k: 'cualificadas', num: true, f: function (v) { return '<span class="gris-2">' + esc(ent(v)) + '</span>'; } }, { t: 'Clientes', k: 'clientes', num: true, f: ent },
         { t: '€ / lead', k: 'costeLead', num: true, f: function (v) { return eur(v, true); } }, { t: '€ / cita', k: 'costeCita', num: true, f: function (v) { return eur(v, true); } },
         { t: '€ / RC', k: 'costeRC', num: true, f: function (v) { return eur(v, true); }, cls: function (v) { return v == null ? '' : v > 330 ? 'mal' : v <= 170 ? 'bien' : ''; } }];
     };
-    const embudoTxt = ent(t.leads) + ' leads → ' + ent(t.citas) + ' citas → ' + ent(t.celebradas) + ' celebradas → ' + ent(t.rc) + ' RC → ' + ent(t.clientes) + ' clientes';
-    return tarjeta('De la campaña a la RC', 'Leads de formulario del periodo (etiqueta meta-lead-*) cruzados con su cita, su trato y su etiqueta RC en GHL. RC = etiqueta RC completa o «Qualified» de Meta (encaja, o de Oferta en adelante). Coste por RC: verde ≤ 170 €, rojo > 330 €.',
+    const embudoTxt = ent(t.leads) + ' leads → ' + ent(t.citas) + ' citas → ' + ent(t.celebradas) + ' celebradas → ' + ent(t.rc) + ' RC → ' + ent(t.clientes) + ' clientes  ·  ' + ent(t.cualificadas) + ' cualificadas para Meta';
+    return tarjeta('De la campaña a la RC', 'Leads de formulario del periodo (etiqueta meta-lead-*) cruzados con su cita, su trato y su etiqueta RC en GHL. «RC (marcadas)»: solo las que marca Maikel con la etiqueta RC, el canal y la fecha; cuentan para el objetivo y para el coste por RC. «Cualificadas (Meta)»: la señal que va a Meta (encaja, o de Oferta en adelante), como referencia. Coste por RC: verde ≤ 170 €, rojo > 330 €.',
       '<p class="ng-embudo-linea">' + esc(embudoTxt) + '</p><div class="ng-kpis" style="margin-bottom:12px;max-width:280px">' + kpi('Coste por RC', eur(t.costeRC), ent(t.rc) + ' RC con ' + eur(t.gasto), vacio(t.costeRC) ? '' : t.costeRC > 330 ? 'mal' : t.costeRC <= 170 ? 'bien' : '') + '</div>' +
       tabla(cols({ t: 'Campaña', k: 'nombre' }), e.porCampana || [], { vacio: 'Ningún lead de formulario en el periodo.' }) +
       '<details style="margin-top:10px"><summary class="gris" style="cursor:pointer;font-weight:600">Por anuncio</summary>' + tabla(cols({ t: 'Anuncio', k: 'nombre', f: function (v, r) { return esc(v) + (r.campana ? '<div class="gris-2" style="font-size:11px">' + esc(r.campana) + '</div>' : ''); } }), e.porAnuncio || []) + '</details>');

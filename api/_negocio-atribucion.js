@@ -6,8 +6,10 @@
 //   cita       · tiene cita en un calendario de GHL o el trato llegó a reunión (agendada, confirmada,
 //                no presentado o más allá) o la etiqueta act-agendado / reunion-agendada
 //   celebrada  · reunion-celebrada, cita marcada como «showed», o trato en Oferta en adelante
-//   RC         · etiqueta RC con canal y fecha (recuento semanal) o «Qualified» de Meta
-//                (reunion-encaja, o Oferta, Segunda reunión, Negociación, Piloto o Cliente)
+//   RC         · SOLO la etiqueta RC con canal y fecha (la marca Maikel; cuenta para el objetivo y
+//                para el coste por RC). Growth, 5-nov.
+//   cualificada· «Qualified» de Meta (reunion-encaja, o Oferta, Segunda reunión, Negociación, Piloto o
+//                Cliente): la señal que va a Meta, solo como referencia
 // SOLO LECTURA. Nada de datos en el código: se lee con la sesión del panel.
 
 const C = require('./_negocio-comun.js');
@@ -77,16 +79,16 @@ async function embudoPaid(per, fresco) {
       const cita = celebrada || cs.length > 0 || tiene('act-agendado') || tiene('reunion-agendada') || /reuni|confirmad|no presentad|call agendada/.test(n);
       let rcEtiqueta = false;
       if (tiene('rc') && campos.canal && campos.fecha) rcEtiqueta = !!(G.valorCampo(x.c, campos.canal.id) && G.diaDe(G.valorCampo(x.c, campos.fecha.id)));
-      filas.push({ campanaId: o.campanaId, campana: o.campana, anuncioId: o.anuncioId, anuncio: o.anuncio, nivelAB: tiene('nivel-a') || tiene('nivel-b'), cita: cita, celebrada: celebrada, rc: rcEtiqueta || encaja, rcEtiqueta: rcEtiqueta, cliente: venta });
+      filas.push({ campanaId: o.campanaId, campana: o.campana, anuncioId: o.anuncioId, anuncio: o.anuncio, nivelAB: tiene('nivel-a') || tiene('nivel-b'), cita: cita, celebrada: celebrada, rc: rcEtiqueta, cualificada: encaja, cliente: venta });
     });
     const agrupar = function (clave, nombre, gasto) {
       const m = {};
       filas.forEach(function (f) {
         const k = f[clave] || f[nombre];
-        const g = m[k] = m[k] || { id: k, nombre: f[nombre], campana: f.campana, leads: 0, ab: 0, citas: 0, celebradas: 0, rc: 0, clientes: 0 };
-        g.leads++; if (f.nivelAB) g.ab++; if (f.cita) g.citas++; if (f.celebrada) g.celebradas++; if (f.rc) g.rc++; if (f.cliente) g.clientes++;
+        const g = m[k] = m[k] || { id: k, nombre: f[nombre], campana: f.campana, leads: 0, ab: 0, citas: 0, celebradas: 0, rc: 0, cualificadas: 0, clientes: 0 };
+        g.leads++; if (f.nivelAB) g.ab++; if (f.cita) g.citas++; if (f.celebrada) g.celebradas++; if (f.rc) g.rc++; if (f.cualificada) g.cualificadas++; if (f.cliente) g.clientes++;
       });
-      Object.keys(gasto).forEach(function (k) { if (gasto[k] > 0 && !m[k]) m[k] = { id: k, nombre: '(sin leads de formulario en GHL)', campana: '', leads: 0, ab: 0, citas: 0, celebradas: 0, rc: 0, clientes: 0 }; });
+      Object.keys(gasto).forEach(function (k) { if (gasto[k] > 0 && !m[k]) m[k] = { id: k, nombre: '(sin leads de formulario en GHL)', campana: '', leads: 0, ab: 0, citas: 0, celebradas: 0, rc: 0, cualificadas: 0, clientes: 0 }; });
       return Object.keys(m).map(function (k) {
         const g = m[k]; g.gasto = gasto[k] || 0;
         g.costeLead = g.leads ? g.gasto / g.leads : null; g.costeCita = g.citas ? g.gasto / g.citas : null; g.costeRC = g.rc ? g.gasto / g.rc : null;
@@ -95,7 +97,7 @@ async function embudoPaid(per, fresco) {
     };
     const porCampana = agrupar('campanaId', 'campana', gCamp);
     // Nombre de campaña de las que solo tienen gasto
-    const total = filas.reduce(function (s, f) { s.leads++; if (f.cita) s.citas++; if (f.celebradas || f.celebrada) s.celebradas++; if (f.rc) s.rc++; if (f.cliente) s.clientes++; return s; }, { leads: 0, citas: 0, celebradas: 0, rc: 0, clientes: 0 });
+    const total = filas.reduce(function (s, f) { s.leads++; if (f.cita) s.citas++; if (f.celebrada) s.celebradas++; if (f.rc) s.rc++; if (f.cualificada) s.cualificadas++; if (f.cliente) s.clientes++; return s; }, { leads: 0, citas: 0, celebradas: 0, rc: 0, cualificadas: 0, clientes: 0 });
     total.gasto = Object.keys(gCamp).reduce(function (s, k) { return s + gCamp[k]; }, 0);
     total.costeRC = total.rc ? total.gasto / total.rc : null;
     return { periodo: per, total: total, porCampana: porCampana, porAnuncio: agrupar('anuncioId', 'anuncio', gAd), avisos: avisos.slice(0, 5), generado: Date.now() };

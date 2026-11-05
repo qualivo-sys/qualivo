@@ -469,32 +469,32 @@ async function whatsappLeads(filas, dias, fresco) {
   });
 }
 
-// RC de Meta (definición de Paid, la misma que api/senales-meta.js manda como «Qualified»):
-// lead con etiqueta meta-lead-*, cuyo trato tiene reunion-encaja o está en Oferta, Segunda reunión,
-// Negociación, Piloto o Cliente (o ganado). Se cuenta en el mes en que el trato cambió de etapa por
-// última vez: es una aproximación a la fecha en que encajó (GHL no guarda la fecha de cada etapa).
+// RC de Meta del mes (Growth, 5-nov): solo las MARCADAS por Maikel (etiqueta RC + canal + fecha RC en
+// el mes) de contactos que vinieron de un formulario de Meta (meta-lead-*). Es la que cuenta para el
+// coste por RC. Como referencia, «cualificadas»: la regla de «Qualified» de api/senales-meta.js
+// (reunion-encaja, o trato en Oferta, Segunda reunión, Negociación, Piloto o Cliente) con el último
+// cambio de etapa en el mes.
 async function rcMeta(fresco) {
-  const b = await base(fresco);
+  const [b, campos] = await Promise.all([base(fresco), camposRC().catch(function () { return {}; })]);
   const etapa = {};
   b.embudos.forEach(function (e) { e.etapas.forEach(function (s) { etapa[s.id] = s.nombre; }); });
-  const cPorId = {};
-  b.contactos.forEach(function (c) { cPorId[c.id] = c; });
+  const opDe = oportunidadPorContacto(b.oportunidades, etapa);
   const mes = C.diaMadrid(Date.now()).slice(0, 7);
-  const vistos = {};
-  b.oportunidades.forEach(function (o) {
-    const cid = o.contactId || (o.contact && o.contact.id);
-    const c = cPorId[cid];
-    if (!c) return;
+  let marcadas = 0, cualificadas = 0;
+  b.contactos.forEach(function (c) {
     const tags = (c.tags || []).map(function (t) { return String(t).toLowerCase(); });
     if (!tags.some(function (t) { return t.indexOf('meta-lead-') === 0; })) return;
-    const n = String(etapa[o.pipelineStageId] || '').toLowerCase();
-    const venta = /piloto|^cliente/.test(n) || o.status === 'won' || tags.indexOf('cliente') >= 0 || tags.indexOf('piloto') >= 0;
-    const encaja = venta || tags.indexOf('reunion-encaja') >= 0 || /oferta|propuesta|segunda|negociaci/.test(n);
-    if (!encaja || (o.status !== 'open' && o.status !== 'won')) return;
-    const t = fecha(o.lastStageChangeAt) || fecha(o.updatedAt);
-    if (t && C.diaMadrid(t).slice(0, 7) === mes) vistos[cid] = String(c.companyName || o.name || '').trim();
+    if (tags.indexOf('rc') >= 0 && campos.canal && campos.fecha) {
+      const dia = diaDe(valorCampo(c, campos.fecha.id));
+      if (valorCampo(c, campos.canal.id) && dia && dia.slice(0, 7) === mes) marcadas++;
+    }
+    const op = opDe[c.id];
+    if (!op) return;
+    const n = String(op.etapa || '').toLowerCase();
+    const encaja = /piloto|^cliente/.test(n) || op.estado === 'won' || tags.indexOf('reunion-encaja') >= 0 || /oferta|propuesta|segunda|negociaci/.test(n);
+    if (encaja && op.t && C.diaMadrid(op.t).slice(0, 7) === mes) cualificadas++;
   });
-  return { mes: Object.keys(vistos).length, nombres: Object.keys(vistos).map(function (k) { return vistos[k]; }) };
+  return { mes: marcadas, cualificadas: cualificadas };
 }
 
 module.exports = { whatsappLeads, leads, crm, accion, accionesActivas, opcionesRC, base, rc, clientesNuevos, hoy, leadsRango, rcMeta, citas, camposRC, valorCampo, diaDe, oportunidadPorContacto, fecha };

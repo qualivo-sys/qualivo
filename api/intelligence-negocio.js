@@ -90,7 +90,7 @@ async function seccion(nombre, q, usuario) {
       clientesNuevos: nuevos.error ? null : nuevos.n, objetivoClientes: obj.clientes,
       gastoMetaMes: paidMes.error ? null : paidMes.total.gasto, topeMeta: obj.topeMeta,
       cpl7: paid7.error ? null : paid7.total.cpl, cplObjetivo: obj.cpl, cplAlerta: obj.cplAlerta,
-      rcMeta: rcM.error ? null : rcM.mes,
+      rcMeta: rcM.error ? null : rcM.mes, cualificadasMeta: rcM.error ? null : rcM.cualificadas,
       costeRC: !paidMes.error && !rcM.error && rcM.mes >= obj.rcMinimo ? paidMes.total.gasto / rcM.mes : null,
       costeRCObjetivo: obj.costeRC, costeRCMax: obj.costeRCMax, rcMinimo: obj.rcMinimo,
       mrr: fin && fin.kpis ? fin.kpis.mrr : null,
@@ -114,6 +114,7 @@ function objetivos() {
   return {
     // Cifras de Paid (5-nov): CPL objetivo ≤ 50 €, alerta si la media de 7 días pasa de 60 €;
     // coste por RC de Meta: objetivo ≤ 170 €, máximo 330 €, solo con 2 RC o más en el mes.
+    // RC = solo las marcadas por Maikel (etiqueta RC + canal + fecha), no el «Qualified» de Meta (Growth, 5-nov).
     cpl: n('PANEL_CPL_OBJETIVO', 50),
     cplAlerta: n('PANEL_CPL_ALERTA', 60),
     costeRC: n('PANEL_COSTE_RC_OBJETIVO', 170),
