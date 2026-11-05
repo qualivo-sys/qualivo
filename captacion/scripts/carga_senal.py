@@ -3,17 +3,17 @@
 # o campanas activas ... igual no haria falta hacer tanto filtro".
 # Filtro minimo que se mantiene (entregabilidad y RGPD): verificado, no catch-all,
 # mismo dominio, no buzon de rol, no contactado antes, no bloqueado, Espana.
-# El copy va por lead con carga_v3.construir(); la secuencia de la campana no se toca.
+# El copy va por lead con carga_v4.construir() (v3 con COPY=v3); la secuencia de la campana no se toca.
 # Uso: python3 carga_senal.py <clave> <fichero.json> [<fichero.json> ...] [--dry]
 import json, re, sys, time, urllib.request, urllib.error, os
 sys.path.insert(0, "/home/user/qualivo/captacion/scripts")
 import carga_v3
-# COPY=v4 activa el copy corto del 4-nov (carga_v4.py). Por defecto sigue v3
-# hasta que Maikel confirme el cambio.
-if os.environ.get("COPY") == "v4":
-    import carga_v4 as COPY
-else:
+# Copy v4 (corto, sin enlaces, sin «responde BAJA») activado por Maikel el 5-nov.
+# COPY=v3 vuelve al copy anterior si hiciera falta comparar.
+if os.environ.get("COPY") == "v3":
     COPY = carga_v3
+else:
+    import carga_v4 as COPY
 S = os.environ.get("SP") or os.path.dirname(os.path.abspath(__file__))  # carpeta con los JSON de Apollo
 k = sys.argv[1]; dry = "--dry" in sys.argv
 B = "https://server.smartlead.ai/api/v1"
