@@ -136,7 +136,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     // El Círculo por edición (etiquetas de GHL + pipeline + ventas + Meta), con semáforo frente a la edición anterior
     var eT = datos.edicionesEtiquetas || [], porD = {};
     eT.forEach(function (x) { porD[x.directo] = x; });
-    h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Ads / orgánico</th><th class="n">Entran al grupo</th><th class="n">Salen del grupo</th><th class="n">Llaman o compran</th><th class="n">Compras</th><th class="n">Facturación</th><th class="n">Vistas de clases</th><th class="n">Inversión Meta</th><th class="n">CAC</th><th class="n">ROAS</th></tr>';
+    h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Ads / orgánico</th><th class="n">Con etiqueta de grupo en GHL ⚠️</th><th class="n">Salen del grupo</th><th class="n">Llaman o compran</th><th class="n">Compras</th><th class="n">Facturación</th><th class="n">Vistas de clases</th><th class="n">Inversión Meta</th><th class="n">CAC</th><th class="n">ROAS</th></tr>';
     var prevE = null;
     var hace7 = (function () { var d = new Date(datos.hoy + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() - 7); return d.toISOString().slice(0, 10); })();
     datos.ediciones.filter(function (e) { return porD[e.directo] && porD[e.directo].conEtiquetas; }).forEach(function (e) {
@@ -149,7 +149,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
       var sem = function (v, p, menosMejor) { if (v == null || p == null || !madura) return 'n'; var mejor = menosMejor ? v < p * 0.95 : v > p * 1.05, peor = menosMejor ? v > p * 1.05 : v < p * 0.95; return mejor ? 'n alto' : (peor ? 'n bajo' : 'n'); };
       var P = prevE || {};
       h += '<tr><td>Miércoles ' + dia(e.directo) + ' <small>(' + (e.cerrada ? 'directo hecho' : (e.captando ? 'captando' : 'clases')) + ')</small></td><td class="n">' + num(reg) + '</td><td class="n">' + (conE ? num(x.ads) + ' / ' + num(x.org) : '—') + '</td>'
-        + '<td class="' + sem(r.g, P.g) + '">' + num(grupo) + ' <small>(' + pc(r.g) + ')</small></td>'
+        + '<td class="n"><span class="neu">' + num(grupo) + '</span></td>'
         + '<td class="n">' + (conE ? (x.sale ? num(x.sale) : '<span class="neu">sin etiqueta</span>') : num(et['Sale comunidad'])) + '</td>'
         + '<td class="n">' + num(llaman) + ' <small>(' + pc(reg ? llaman / reg : null) + ')</small></td>'
         + '<td class="' + sem(r.c, P.c) + '">' + (conE ? num(x.compras) + ' <small>(' + pc(r.c) + ')</small>' : '—') + '</td>'
@@ -157,7 +157,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
         + '<td class="' + sem(r.cac, P.cac, true) + '">' + (r.cac ? eur(r.cac) : '—') + '</td><td class="' + sem(r.roas, P.roas) + '">' + (r.roas != null ? r.roas.toFixed(1).replace('.', ',') + '×' : '—') + '</td></tr>';
       if (madura) prevE = r;
     });
-    h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>Salen del grupo:</b> hoy no hay etiqueta de salida por edición, así que no se puede medir (pendiente con Alba). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
+    h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>⚠️ Grupo:</b> la etiqueta «ingresa a comunidad» de GHL solo recoge una parte de las entradas; Funnelchat registra muchas más (aprox. 60–75 % de los registros entran al grupo). No usar esta columna para decidir: se sustituirá por los datos del webhook de Funnelchat (entradas y salidas reales por edición). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
 
     // closers + avisos
     var cl = Object.keys(datos.closers || {}).map(function (n) { return [n, datos.closers[n]]; }).sort(function (a, b) { return b[1].eur - a[1].eur; });
