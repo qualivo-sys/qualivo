@@ -284,10 +284,15 @@ async function recoger() {
   const pipes = (await ghl('/opportunities/pipelines?locationId=' + encodeURIComponent(loc))).pipelines || [];
   const perpetuo = pipes.find(function (p) { return p.id === PERPETUO; });
   const settGen = pipes.find(function (p) { return p.id === SETTEO_GENERAL; });
-  let miercoles = hoy; while (diaSemana(miercoles) !== 3) miercoles = sumaDias(miercoles, 1);
-  const ediciones = [sumaDias(miercoles, -14), sumaDias(miercoles, -7), miercoles];
+  // Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente (12 días después
+  // del primer día). La edición que capta hoy es la del primer miércoles a 6 o más días vista.
+  let miercoles = sumaDias(hoy, 6); while (diaSemana(miercoles) !== 3) miercoles = sumaDias(miercoles, 1);
+  const ediciones = [sumaDias(miercoles, -21), sumaDias(miercoles, -14), sumaDias(miercoles, -7), miercoles];
+  // Por etiquetas (desde la edición del 28-oct): registros ads/org, grupo, ventas e inversión de cada edición
+  const metaDia = await gastoMeta(sumaDias(ediciones[0], -12), hoy, '1').catch(function () { return null; });
+  const porEtiqueta = await require('./_nuria-ediciones.js').porEdicion(ediciones, ventas, metaDia).catch(function () { return null; });
   const edicion = await enParalelo(ediciones, 3, async function (w) {
-    const de = sumaDias(w, -7), a = sumaDias(w, -1);
+    const de = sumaDias(w, -12), a = sumaDias(w, -6);   // captación de viernes a jueves
     const base = { location_id: loc, pipeline_id: PERPETUO, limit: 1, date: mdY(de), endDate: mdY(a) };
     const total = Number(((await ghl('/opportunities/search?' + new URLSearchParams(base))).meta || {}).total || 0);
     const etapas = {};
@@ -295,7 +300,7 @@ async function recoger() {
       const r = await ghl('/opportunities/search?' + new URLSearchParams(Object.assign({}, base, { pipeline_stage_id: st.id })));
       etapas[st.name] = Number(((r.meta) || {}).total || 0);
     });
-    return { directo: w, cerrada: w < hoy, total: total, etapas: etapas };
+    return { directo: w, cerrada: w < hoy, captando: hoy <= sumaDias(w, -6), total: total, etapas: etapas };
   });
 
   // 6) Bolsa del VSL sin contactar
@@ -311,7 +316,7 @@ async function recoger() {
     generado: Date.now(), hoy: hoy, semanas: semanas, orden: ORDEN,
     registros: registros, llamadas: llamadas, gasto: meta ? gasto : null, google: gads ? google : null, ventas: ventas ? venta : null,
     meses: meses, mes: { registros: registrosMes, llamadas: llamadasMes, gasto: metaMes ? gastoMes : null, google: gadsMes ? googleMes : null, ventas: ventas ? ventaMes : null, costes: costes },
-    ediciones: edicion, sinContactarVsl: sinContactar, closers: closers,
+    ediciones: edicion, edicionesEtiquetas: porEtiqueta, sinContactarVsl: sinContactar, closers: closers,
     fuentes: { meta: !!meta, hoja: !!ventas, googleAds: !!gads }
   };
 }
