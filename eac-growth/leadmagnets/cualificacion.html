@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solicita información · Escola Aeronàutica de Catalunya</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="https://escolaeronauticadecatalunya.cat/wp-content/uploads/2023/09/cropped-favicon-eac-1-192x192.png">
+<link rel="stylesheet" href="/assets/eac.css">
+<style>
+  /* Incrustado en la landing: sin cabecera ni pie, fondo transparente, todo en una tarjeta */
+  body.embed{background:transparent}
+  body.embed .bar, body.embed .f{display:none}
+  body.embed .shell{padding:0;max-width:none}
+  body.embed .card{box-shadow:none}
+  .card{padding:26px 22px}
+  @media(min-width:560px){.card{padding:32px 34px}}
+  .qt{font-size:1.18rem}
+  .fin h2{font-family:var(--display);font-weight:700;font-size:1.25rem;line-height:1.3;margin-bottom:.5em}
+  .fin p{color:var(--ink-2);margin-bottom:1em}
+  .fin .btn{width:auto;padding:13px 26px}
+  .chkline{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;color:var(--muted);margin:6px 0 16px}
+  .chkline input{margin-top:3px;width:18px;height:18px;flex:0 0 18px;accent-color:var(--red)}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+</head>
+<body>
+<div class="bar"><div class="in">
+  <a class="logo" href="https://escolaeronauticadecatalunya.cat/" target="_blank" rel="noopener"><img src="https://escolaeronauticadecatalunya.cat/wp-content/uploads/2023/07/Logo-EscolaAeronautica-web.png" alt="Escola Aeronàutica de Catalunya" width="800" height="158"></a>
+</div></div>
+
+<main class="shell">
+  <section class="card" id="app" aria-live="polite">
+    <div class="prog"><i></i></div>
+    <div class="pstep" id="pstep"></div>
+    <div id="paso"></div>
+  </section>
+</main>
+
+<footer class="f"><b>Escola Aeronàutica de Catalunya</b><br>Consell de Cent 489, bajos · 08013 Barcelona</footer>
+
+<script>
+(function(){
+  'use strict';
+  var P = new URLSearchParams(location.search);
+  if (P.get('embed') !== '0') document.body.classList.add('embed');
+  var CURSO = ({TCP:1,AT:1,FD:1})[P.get('curso')] ? P.get('curso') : 'TCP';
+  var ORIGEN = P.get('origen') || document.referrer || '';
+  var WEB = {TCP:'https://escolaeronauticadecatalunya.cat/landing-curso-azafata-de-vuelo-barcelona/',
+             AT:'https://escolaeronauticadecatalunya.cat/azafata-de-tierra-y-operaciones/',
+             FD:'https://escolaeronauticadecatalunya.cat/curso-despachador-vuelo/'}[CURSO];
+  var NOMBRE_CURSO = {TCP:'el curso de TCP', AT:'el curso de Azafata de Tierra', FD:'el curso de Despachador de Vuelo'}[CURSO];
+
+  // Las 6 preguntas acordadas con EAC. Las opciones son las etiquetas EXACTAS de los desplegables de GHL.
+  // Primero las que pueden descartar, para que quien no encaja no tenga que rellenar más.
+  var PREGUNTAS = [
+    {k:'edad',    t:'¿Qué edad tienes?', o:['Menor de 18','18-21','22-30','31-40','Mayor de 40']},
+    {k:'espanol', t:'¿Cuál es tu nivel de español?', o:['Nativo','Alto, lo hablo con fluidez','Intermedio','Básico o no lo hablo']},
+    {k:'cuando',  t:'¿Cuándo te gustaría empezar la formación?', o:['Lo antes posible','En 1-3 meses','En 3-6 meses','Solo busco info']},
+    {k:'punto',   t:'¿En qué punto estás?', o:['Quiero matricularme','Comparando escuelas','Consultando requisitos','Solo explorando']},
+    {k:'ingles',  t:'¿Cuál es tu nivel de inglés?', o:['A1-A2','B1','B2','C1 o superior','No estoy seguro']},
+    {k:'nadar',   t:'¿Sabes nadar?', h:'No es eliminatorio: se puede aprender durante el curso.', o:['Sí','No, pero puedo aprender','No'], solo:'TCP'}
+  ].filter(function(q){ return !q.solo || q.solo === CURSO; });
+
+  // Regla de «fuera de perfil» (la misma que en api/cualificacion.js: si se cambia, en los dos)
+  function fuera(r){
+    if (r.edad === 'Menor de 18') return 'menor';
+    if (r.edad === 'Mayor de 40' && CURSO === 'TCP') return 'edad';
+    if (r.espanol === 'Básico o no lo hablo') return 'espanol';
+    if (r.cuando === 'Solo busco info' || r.punto === 'Solo explorando') return 'info';
+    return null;
+  }
+
+  // Mensajes del documento de proceso (apartado 5), validados por EAC
+  var FINAL = {
+    menor: ['Gracias por tu interés',
+            'Para hacer ' + NOMBRE_CURSO + ' hay que ser mayor de edad. Cuando cumplas los 18, vuelve a escribirnos y te atendemos encantados.'],
+    edad:  ['Gracias por tu interés',
+            'Para el curso de TCP las aerolíneas piden un rango de edad que ahora mismo no encaja con tu perfil. Si te interesa el sector aéreo, en la web tienes otras formaciones.'],
+    espanol:['Gracias por tu interés',
+            'El curso se imparte en español y para trabajar en el sector en España hay que hablarlo con fluidez. Cuando tengas un nivel alto, estaremos encantados de atenderte.'],
+    info:  ['Aquí tienes toda la información',
+            'En la web tienes los requisitos, las fechas y las salidas de ' + NOMBRE_CURSO + '. Cuando quieras dar el paso, vuelve a este formulario o llámanos al 936 671 372 y te atendemos.']
+  };
+
+  var R = {}, i = 0, paso = document.getElementById('paso');
+  var prog = document.querySelector('.prog i'), pstep = document.getElementById('pstep');
+
+  function alto(){
+    try { parent.postMessage({source:'eac-form', event:'resize', height: document.documentElement.scrollHeight}, '*'); } catch(e){}
+  }
+  window.addEventListener('resize', alto);
+  function el(tag, cls, txt){ var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function avance(n, txt){ prog.style.width = n + '%'; pstep.textContent = txt; }
+
+  function pregunta(){
+    var q = PREGUNTAS[i];
+    avance(i / (PREGUNTAS.length + 1) * 100, 'Pregunta ' + (i + 1) + ' de ' + PREGUNTAS.length);
+    paso.innerHTML = '';
+    var w = el('div', 'q');
+    w.appendChild(el('div', 'qt', q.t));
+    if (q.h) w.appendChild(el('div', 'qh', q.h));
+    var ops = el('div', 'opts');
+    q.o.forEach(function(op, n){
+      var b = el('button', 'opt' + (R[q.k] === op ? ' sel' : ''));
+      b.type = 'button';
+      b.appendChild(el('span', 'mk', String.fromCharCode(65 + n)));
+      b.appendChild(el('span', null, op));
+      b.addEventListener('click', function(){
+        R[q.k] = op;
+        var f = fuera(R);
+        if (f) return final(f);
+        i++; i < PREGUNTAS.length ? pregunta() : datos();
+      });
+      ops.appendChild(b);
+    });
+    w.appendChild(ops);
+    if (i > 0) w.appendChild(atras(function(){ i--; pregunta(); }));
+    paso.appendChild(w); alto();
+  }
+
+  function atras(fn){ var b = el('button', 'back', '← Volver'); b.type = 'button'; b.addEventListener('click', fn); return b; }
+
+  function final(tipo){
+    avance(100, '');
+    paso.innerHTML = '';
+    var w = el('div', 'q fin');
+    w.appendChild(el('h2', null, FINAL[tipo][0]));
+    w.appendChild(el('p', null, FINAL[tipo][1]));
+    var a = el('a', 'btn', 'Ver la información del curso'); a.href = WEB; a.target = '_top';
+    w.appendChild(a);
+    w.appendChild(atras(function(){ pregunta(); }));
+    paso.appendChild(w); alto();
+  }
+
+  function datos(){
+    avance(PREGUNTAS.length / (PREGUNTAS.length + 1) * 100, 'Último paso');
+    paso.innerHTML =
+      '<div class="q"><div class="qt">¡Encajas en el perfil! ¿Dónde te llamamos?</div>' +
+      '<div class="qh">Te llamamos para agendar tu entrevista de admisión (unos 20 minutos).</div>' +
+      '<form id="f" novalidate>' +
+      '<div class="field"><label for="nombre">Nombre y apellidos</label><input type="text" id="nombre" autocomplete="name" required></div>' +
+      '<div class="field"><label for="telefono">Teléfono <span class="hint">(mejor móvil, con WhatsApp)</span></label><input type="tel" id="telefono" autocomplete="tel" inputmode="tel" required></div>' +
+      '<div class="field"><label for="email">Email</label><input type="email" id="email" autocomplete="email" required></div>' +
+      '<div class="hp" aria-hidden="true"><label for="empresa">Empresa</label><input type="text" id="empresa" tabindex="-1" autocomplete="off"></div>' +
+      '<label class="chkline"><input type="checkbox" id="consent"> <span>Acepto la <a href="https://escolaeronauticadecatalunya.cat/politica-privacidad/" target="_blank" rel="noopener">política de privacidad</a> y que la Escola Aeronàutica de Catalunya me contacte por teléfono, WhatsApp o email sobre ' + NOMBRE_CURSO + '.</span></label>' +
+      '<button class="btn" id="enviar" type="submit">Quiero que me llaméis</button>' +
+      '<div class="err" id="err"></div></form></div>';
+    var f = document.getElementById('f');
+    paso.firstChild.appendChild(atras(function(){ i = PREGUNTAS.length - 1; pregunta(); }));
+    f.addEventListener('submit', enviar);
+    alto();
+  }
+
+  function error(t){ var e = document.getElementById('err'); e.textContent = t; e.classList.add('on'); alto(); }
+
+  async function enviar(ev){
+    ev.preventDefault();
+    var v = function(id){ return document.getElementById(id).value.trim(); };
+    var tel = v('telefono').replace(/[^\d+]/g, '');
+    if (!v('nombre')) return error('Escribe tu nombre.');
+    if (tel.replace(/\D/g, '').length < 9) return error('Revisa el teléfono: faltan dígitos.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email'))) return error('Revisa el email.');
+    if (!document.getElementById('consent').checked) return error('Para llamarte necesitamos que aceptes la política de privacidad.');
+    var btn = document.getElementById('enviar'); btn.disabled = true; btn.textContent = 'Enviando…';
+    var datos = {nombre: v('nombre'), telefono: v('telefono'), email: v('email'), empresa: v('empresa'),
+                 consent: true, curso: CURSO, respuestas: R, origen: ORIGEN};
+    try {
+      var r = await (await fetch('/api/cualificacion', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(datos)})).json();
+      if (r.fuera) return final(fuera(R) || 'info');
+      if (!r.ok) throw new Error(r.error || 'error');
+    } catch(e) {
+      btn.disabled = false; btn.textContent = 'Quiero que me llaméis';
+      return error('No se ha podido enviar. Inténtalo de nuevo o llámanos al 936 671 372.');
+    }
+    // Solo los leads que cumplen el perfil se registran como Lead en Meta y Google (vía Tag Manager de la landing)
+    try { parent.postMessage({source:'eac-leadmagnet', event:'lead', magnet:'form_cualificacion', curso: CURSO,
+                              score: null, tag: 'cualificado', plazo: R.cuando}, '*'); } catch(e){}
+    avance(100, '');
+    paso.innerHTML = '';
+    var w = el('div', 'q fin');
+    w.appendChild(el('h2', null, '¡Gracias, ' + datos.nombre.split(' ')[0] + '!'));
+    w.appendChild(el('p', null, 'Te llamamos en breve para agendar tu entrevista de admisión. Si no puedes cogerlo, te escribimos por WhatsApp.'));
+    paso.appendChild(w); alto();
+  }
+
+  pregunta();
+})();
+</script>
+</body>
+</html>
