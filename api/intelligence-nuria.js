@@ -48,6 +48,8 @@ let cache = null, enCurso = null;
 const SEMANA = require('./_nuria-semana.js');
 const COHORTE = require('./_nuria-embudo.js');
 const COMPARA = require('./_nuria-comparativa.js');
+const CLASES = require('./_nuria-clases.js');
+const cacheCla = new Map();   // visualizaciones de clases: 'desde|hasta' → { t, datos }, 6 h
 const cacheComp = new Map();   // comparativas: 'desde|hasta' → { t, datos }, 20 min
 const cacheEmb = new Map();   // embudos: 'puerta|desde|hasta' → { t, datos }, 6 h
 const CACHE_SEMANA_MS = 20 * 60000;
@@ -402,6 +404,23 @@ module.exports = async function (req, res) {
       return res.status(200).json(Object.assign({ cacheSegundos: Math.round((Date.now() - cacheSem.t) / 1000) }, cacheSem.datos));
     } catch (e) {
       return res.status(502).json({ error: 'No se han podido leer los datos: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'clases') {
+    const desde = String((req.query && req.query.desde) || ''), hasta = String((req.query && req.query.hasta) || '');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(desde) || !/^\d{4}-\d{2}-\d{2}$/.test(hasta) || hasta < desde) return res.status(400).json({ error: 'Periodo no válido.' });
+    try {
+      const k = desde + '|' + hasta, c = cacheCla.get(k);
+      if (!c || Date.now() - c.t > 6 * 3600000) {
+        const datos = await CLASES.clases(desde, hasta);
+        if (!datos) return res.status(503).json({ error: 'Faltan las claves de WordPress en Vercel.' });
+        if (cacheCla.size > 20) cacheCla.clear();
+        cacheCla.set(k, { t: Date.now(), datos: datos });
+      }
+      return res.status(200).json(cacheCla.get(k).datos);
+    } catch (e) {
+      return res.status(502).json({ error: 'No se ha podido leer Presto Player: ' + String(e.message || e).slice(0, 80) });
     }
   }
 
