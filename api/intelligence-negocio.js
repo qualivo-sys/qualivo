@@ -44,7 +44,11 @@ async function seccion(nombre, q, usuario) {
     const [p, lg, emb] = await Promise.all([M.paid(per, fresco), seguro(function () { return G.leadsRango(per.desde, per.hasta, fresco); }), seguro(function () { return A.embudoPaid(per, fresco); })]);
     return Object.assign({}, p, { leadsGHL: lg, embudo: emb });
   }
-  if (nombre === 'leads') return G.leads(q, fresco);
+  if (nombre === 'leads') {
+    const l = await G.leads(q, fresco);
+    const wa = await seguro(function () { return G.whatsappLeads(l.filas, 14, fresco); });
+    return Object.assign({}, l, { whatsapp: wa.error ? {} : wa, errorWhatsapp: wa.error || null });
+  }
   if (nombre === 'crm') {
     const [crm, opciones] = await Promise.all([G.crm(fresco), G.opcionesRC()]);
     return Object.assign({}, crm, { opcionesRC: opciones, acciones: { activas: G.accionesActivas(), puedes: S.puedeActuar(usuario) } });
@@ -73,7 +77,7 @@ async function seccion(nombre, q, usuario) {
       seguro(function () { return M.paid(d7, fresco); }),
       seguro(function () { return G.crm(fresco); }),
       seguro(function () { return SL.outbound(C.periodo({ periodo: '30d' }), fresco); }),
-      seguro(function () { return G.leads({}, fresco); }),
+      seguro(async function () { const l = await G.leads({}, fresco); l.whatsapp = await G.whatsappLeads(l.filas, 7, fresco).catch(function () { return null; }); return l; }),
       seguro(function () { return G.rc(fresco); }),
       seguro(function () { return G.clientesNuevos(fresco); }),
       seguro(function () { return G.hoy(fresco); }),
@@ -97,7 +101,7 @@ async function seccion(nombre, q, usuario) {
       kpis: kpis, paid: paidMes, crm: crm, outbound: ob, leads: leads, hoy: hoy,
       acciones: { activas: G.accionesActivas(), puedes: S.puedeActuar(usuario) }, opcionesRC: opcionesRC, embudos: crm.embudos || [],
       errores: { rc: rc.error, clientes: nuevos.error, hoy: hoy.error, finanzas: fin && fin.error },
-      alertas: alertas({ paid7: paid7, paidMes: paidMes, crm: crm, ob: ob, rc: rc, hoy: hoy, fin: fin, rcMeta: rcM }, obj),
+      alertas: alertas({ paid7: paid7, paidMes: paidMes, crm: crm, ob: ob, rc: rc, hoy: hoy, fin: fin, rcMeta: rcM, leads: leads }, obj),
       generado: Date.now()
     };
   }
@@ -149,6 +153,13 @@ function alertas(d, obj) {
   if (d.paidMes && !d.paidMes.error && d.rcMeta && !d.rcMeta.error && d.rcMeta.mes >= obj.rcMinimo) {
     const coste = d.paidMes.total.gasto / d.rcMeta.mes;
     if (coste > obj.costeRCMax) add({ peso: 82, nivel: 'alta', que: 'Cada RC de Meta cuesta más de lo que cubre el primer pago', evidencia: eur(coste) + ' por RC (' + eur(d.paidMes.total.gasto) + ' / ' + d.rcMeta.mes + ' RC); máximo ' + eur(obj.costeRCMax) + ', objetivo ' + eur(obj.costeRC), causa: 'Leads que no llegan a reunión con encaje', impacto: 'Captar un cliente por Meta deja de ser rentable', accion: 'Revisar con Paid los anuncios y el filtro del formulario', responsable: 'Paid', ir: 'paid' });
+  }
+  // Lead sin contactar (Growth): lead de los últimos 7 días, más de 2 horas después del alta, sin
+  // primer WhatsApp o con el primero fallido (estado real del mensaje, no la etiqueta)
+  if (d.leads && !d.leads.error && d.leads.whatsapp) {
+    const ahora = Date.now();
+    const sin = d.leads.filas.filter(function (f) { const w = d.leads.whatsapp[f.id]; return w && f.alta && ahora - f.alta > 2 * 3600000 && /sin whatsapp|fallido/i.test(w.estado); });
+    if (sin.length) add({ peso: 86, nivel: 'alta', que: sin.length === 1 ? '1 lead sin contactar' : sin.length + ' leads sin contactar', evidencia: sin.slice(0, 5).map(function (f) { return f.empresa + ' (' + f.nivel + ', ' + d.leads.whatsapp[f.id].estado.toLowerCase() + ')'; }).join(' · '), causa: 'El primer WhatsApp no salió o falló', impacto: 'Lead que se enfría en las primeras horas', accion: 'Escribirle o llamarle hoy y revisar la pasarela de WhatsApp', responsable: 'Maikel', ir: 'leads' });
   }
   // 4. Ofertas paradas (Oferta, Negociación o Segunda reunión > 14 días)
   if (d.crm && !d.crm.error) {

@@ -148,7 +148,7 @@ async function leads(q, fresco) {
     const t = fecha(c.dateAdded);
     if (!t || C.diaMadrid(t) < desde) return;
     filas.push({
-      id: c.id, fecha: C.diaMadrid(t), empresa: String(c.companyName || '').trim() || '—',
+      id: c.id, fecha: C.diaMadrid(t), alta: t, empresa: String(c.companyName || '').trim() || '—',
       sector: sectorDe(tags), nivel: nivelDe(tags), canal: canalDe(tags), estado: estadoLead(opDe[c.id])
     });
   });
@@ -435,6 +435,40 @@ async function leadsRango(desde, hasta, fresco) {
   return { total: f.length, ab: f.filter(function (x) { return x.nivel === 'A' || x.nivel === 'B'; }).length, porDia: porDia };
 }
 
+// Primer WhatsApp de un contacto: el primer mensaje SALIENTE por WhatsApp (nativo o por la pasarela,
+// que GHL guarda como TYPE_CUSTOM_SMS) y su estado real (sent, delivered, read, failed…).
+async function primerWhatsApp(contacto) {
+  const cs = await leer('/conversations/search?locationId=' + encodeURIComponent(loc()) + '&contactId=' + encodeURIComponent(contacto));
+  let primero = null;
+  for (const cv of (cs.conversations || []).slice(0, 3)) {
+    const d = await leer('/conversations/' + encodeURIComponent(cv.id) + '/messages?limit=100');
+    const lista = (d.messages && d.messages.messages) || d.messages || [];
+    (Array.isArray(lista) ? lista : []).forEach(function (m) {
+      if (m.direction !== 'outbound' || !/WHATSAPP|CUSTOM_SMS/i.test(String(m.messageType || ''))) return;
+      const t = fecha(m.dateAdded);
+      if (t && (!primero || t < primero.t)) primero = { t: t, estado: String(m.status || '').toLowerCase() };
+    });
+  }
+  return primero;
+}
+const ESTADO_WA = { read: 'Leído', delivered: 'Entregado', sent: 'Enviado', pending: 'Pendiente', queued: 'Pendiente', failed: 'Fallido', undelivered: 'Fallido' };
+// Para los leads de los últimos «dias» días: estado del primer WhatsApp (caché de 10 minutos)
+async function whatsappLeads(filas, dias, fresco) {
+  const desde = C.sumarDias(C.diaMadrid(Date.now()), -dias);
+  const recientes = filas.filter(function (f) { return f.fecha >= desde; }).slice(0, 60);
+  return C.cacheado('ghl|wa|' + recientes.map(function (f) { return f.id; }).join(','), 10 * 60000, fresco, async function () {
+    const res = await C.enParalelo(recientes, 5, function (f) { return primerWhatsApp(f.id); });
+    const out = {};
+    recientes.forEach(function (f, i) {
+      const r = res[i];
+      if (r && r._error) out[f.id] = { estado: 'Sin datos' };
+      else if (!r) out[f.id] = { estado: 'Sin WhatsApp' };
+      else out[f.id] = { estado: ESTADO_WA[r.estado] || r.estado || '—', minutos: f.alta ? Math.max(0, Math.round((r.t - f.alta) / 60000)) : null };
+    });
+    return out;
+  });
+}
+
 // RC de Meta (definición de Paid, la misma que api/senales-meta.js manda como «Qualified»):
 // lead con etiqueta meta-lead-*, cuyo trato tiene reunion-encaja o está en Oferta, Segunda reunión,
 // Negociación, Piloto o Cliente (o ganado). Se cuenta en el mes en que el trato cambió de etapa por
@@ -463,5 +497,5 @@ async function rcMeta(fresco) {
   return { mes: Object.keys(vistos).length, nombres: Object.keys(vistos).map(function (k) { return vistos[k]; }) };
 }
 
-module.exports = { leads, crm, accion, accionesActivas, opcionesRC, base, rc, clientesNuevos, hoy, leadsRango, rcMeta, citas, camposRC, valorCampo, diaDe, oportunidadPorContacto, fecha };
+module.exports = { whatsappLeads, leads, crm, accion, accionesActivas, opcionesRC, base, rc, clientesNuevos, hoy, leadsRango, rcMeta, citas, camposRC, valorCampo, diaDe, oportunidadPorContacto, fecha };
 
