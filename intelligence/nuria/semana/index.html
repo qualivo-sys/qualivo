@@ -136,7 +136,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     // El Círculo por edición (etiquetas de GHL + pipeline + ventas + Meta), con semáforo frente a la edición anterior
     var eT = datos.edicionesEtiquetas || [], porD = {};
     eT.forEach(function (x) { porD[x.directo] = x; });
-    h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Ads / orgánico</th><th class="n">Entran al grupo</th><th class="n">Salen del grupo</th><th class="n">Llaman o compran</th><th class="n">Compras</th><th class="n">Facturación</th><th class="n">Inversión Meta</th><th class="n">CAC</th><th class="n">ROAS</th></tr>';
+    h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Ads / orgánico</th><th class="n">Entran al grupo</th><th class="n">Salen del grupo</th><th class="n">Llaman o compran</th><th class="n">Compras</th><th class="n">Facturación</th><th class="n">Vistas de clases</th><th class="n">Inversión Meta</th><th class="n">CAC</th><th class="n">ROAS</th></tr>';
     var prevE = null;
     var hace7 = (function () { var d = new Date(datos.hoy + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() - 7); return d.toISOString().slice(0, 10); })();
     datos.ediciones.filter(function (e) { return porD[e.directo] && porD[e.directo].conEtiquetas; }).forEach(function (e) {
@@ -153,11 +153,11 @@ small,.nota{color:var(--mut);font-size:12.5px}
         + '<td class="n">' + (conE ? (x.sale ? num(x.sale) : '<span class="neu">sin etiqueta</span>') : num(et['Sale comunidad'])) + '</td>'
         + '<td class="n">' + num(llaman) + ' <small>(' + pc(reg ? llaman / reg : null) + ')</small></td>'
         + '<td class="' + sem(r.c, P.c) + '">' + (conE ? num(x.compras) + ' <small>(' + pc(r.c) + ')</small>' : '—') + '</td>'
-        + '<td class="n">' + (conE ? eur(x.facturacion) : '—') + '</td><td class="n">' + (conE && x.inversion != null ? eur(x.inversion) : '—') + '</td>'
+        + '<td class="n">' + (conE ? eur(x.facturacion) : '—') + '</td><td class="n" data-vistas="' + e.directo + '"><span class="neu">…</span></td><td class="n">' + (conE && x.inversion != null ? eur(x.inversion) : '—') + '</td>'
         + '<td class="' + sem(r.cac, P.cac, true) + '">' + (r.cac ? eur(r.cac) : '—') + '</td><td class="' + sem(r.roas, P.roas) + '">' + (r.roas != null ? r.roas.toFixed(1).replace('.', ',') + '×' : '—') + '</td></tr>';
       if (madura) prevE = r;
     });
-    h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>Salen del grupo:</b> hoy no hay etiqueta de salida por edición, así que no se puede medir (pendiente con Alba). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
+    h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>Salen del grupo:</b> hoy no hay etiqueta de salida por edición, así que no se puede medir (pendiente con Alba). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
 
     // closers + avisos
     var cl = Object.keys(datos.closers || {}).map(function (n) { return [n, datos.closers[n]]; }).sort(function (a, b) { return b[1].eur - a[1].eur; });
@@ -187,12 +187,33 @@ small,.nota{color:var(--mut);font-size:12.5px}
     app.innerHTML = h;
     document.getElementById('sem').onchange = function (e) { if (modo === 'mes') mesSel = e.target.value; else semanaSel = e.target.value; pintar(); };
     document.getElementById('modo').onclick = function () { modo = modo === 'mes' ? 'semana' : 'mes'; pintar(); };
-    document.getElementById('refrescar').onclick = function () { recorridos = {}; embudos = {}; comparativas = {}; cargar(true); };
+    document.getElementById('refrescar').onclick = function () { recorridos = {}; embudos = {}; comparativas = {}; clasesDatos = null; cargar(true); };
     cargarPersonas(s, fin);
     Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (b) { b.onclick = function () { puertaSel = b.getAttribute('data-puerta'); Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarEmbudo(s, fin); }; });
     cargarEmbudo(s, fin);
     Array.prototype.forEach.call(document.querySelectorAll('[data-comp]'), function (b) { b.onclick = function () { compModo = b.getAttribute('data-comp'); Array.prototype.forEach.call(document.querySelectorAll('[data-comp]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarComparativa(s, fin); }; });
     cargarComparativa(s, fin);
+    cargarClases();
+  }
+
+  var clasesDatos = null;
+  function sumaDiasJ(d, n) { var x = new Date(d + 'T12:00:00Z'); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); }
+  function pintarClases() {
+    if (!clasesDatos) return;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-vistas]'), function (td) {
+      var D = td.getAttribute('data-vistas'), de = sumaDiasJ(D, -3), a = sumaDiasJ(D, 3), v = 0, sg = 0;
+      clasesDatos.dias.forEach(function (x) { if (x.dia >= de && x.dia <= a) { v += x.vistas; sg += x.segundos; } });
+      td.innerHTML = v ? num(v) + ' <small>(' + Math.round(sg / v / 60) + ' min de media)</small>' : (de > datos.hoy ? '<span class="neu">aún no</span>' : '0');
+    });
+  }
+  function cargarClases() {
+    if (clasesDatos) return pintarClases();
+    var eds = datos.ediciones.map(function (e) { return e.directo; }).sort();
+    if (!eds.length) return;
+    fetch(API + '?accion=clases&desde=' + sumaDiasJ(eds[0], -3) + '&hasta=' + datos.hoy, { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { clasesDatos = d; pintarClases(); })
+      .catch(function () { Array.prototype.forEach.call(document.querySelectorAll('[data-vistas]'), function (td) { td.innerHTML = '<span class="neu">sin datos</span>'; }); });
   }
 
   var compModo = 'per', comparativas = {};
