@@ -37,7 +37,18 @@ Activo) y **ABM**. Los IDs de las etapas se leen de `GET /opportunities/pipeline
 
 Mover una oportunidad desde el panel es igual que moverla a mano en GHL, así que **ya dispara lo que existe**:
 
-- **Workflows de GHL publicados** en Qualivo: «Cliente ganado:», «ETAPA_NUEVO_LEAD», «Lead_agendado», «Radiografía · contestó» y «ABM — Nuevo Contacto». Hay que revisar con Maikel si alguno escribe al contacto al cambiar de etapa antes de usar el botón con leads reales.
+- **Workflows de GHL publicados** en Qualivo: «Cliente ganado:», «ETAPA_NUEVO_LEAD», «Lead_agendado», «Radiografía · contestó» y «ABM — Nuevo Contacto». La API no deja leer sus pasos ni su disparador. Lo de abajo sale del historial de mensajes (3.083 mensajes, de los que 25 los envió un workflow) [C], cruzado con la etapa de cada oportunidad [E]:
+
+  | Workflow | ¿Escribe al contacto? | Cuándo | Evidencia |
+  |---|---|---|---|
+  | «ETAPA_NUEVO_LEAD» | **Sí, WhatsApp** (Wazzap): bienvenida «Soy Maikel… anuncio de HackTheLead» | Al entrar en **Qualivo Pipeline → Nuevo Lead** | 16 envíos del 30-jun al 12-jul; ninguno después [C]. Atribución [E] |
+  | «Lead_agendado» | **Sí, WhatsApp**: «Confirmada tu llamada para el …» (la fecha sale vacía) | Al entrar en **Qualivo Pipeline → Call Agendada** | 1 envío, el 14-jul [C]. Atribución [E] |
+  | «Radiografía · contestó» | Sin envíos atribuibles | — | Por confirmar en la interfaz |
+  | «Cliente ganado:» | Sin WhatsApp ni SMS registrados; **email, sin poder comprobarlo** (la API no exporta emails) | — | Por confirmar en la interfaz |
+  | «ABM — Nuevo Contacto» | Sin WhatsApp ni SMS registrados; email, sin poder comprobarlo | — | Por confirmar en la interfaz |
+
+  Además, 8 WhatsApp «Acabas de pedir el diagnóstico…» (18 al 24-sep, **todos fallidos**) salieron de un workflow al rellenar el formulario, no al mover etapa. No consta de cuál.
+  **Regla para el panel:** hasta que alguien abra los 5 workflows en la interfaz y lo confirme (unos 5 minutos), el panel **no mueve** oportunidades a «Qualivo Pipeline → Nuevo Lead» ni a «→ Call Agendada», o avisa antes de hacerlo. Los movimientos en **Prospección** y **ABM** no han provocado ningún mensaje [C].
 - **Señales a Meta** (`api/senales-meta.js`, cada 2 horas): lee los cambios de etapa y se los cuenta a Meta. Es deseable: el panel no tiene que mandar nada a Meta por su cuenta.
 - **Seguimientos** (`api/seguimientos.js`, de lunes a viernes): crea tareas de oportunidades atascadas. Si el panel también crea tareas «de seguimiento», que use otro título para no duplicarlas.
 - **n8n:** ningún workflow de n8n actúa sobre los cambios de etapa de Qualivo. Los pollers de etapas son de EAC y ELEVA, en sus subcuentas. Los puentes de Qualivo (ManyChat, Q-Flow y SDR) solo crean contactos o notas al entrar respuestas. **No hay que montar nada en n8n para el panel.**
