@@ -287,10 +287,32 @@
       tarjeta('Por mes', 'Últimos seis meses', tabla([{ t: 'Mes', k: 'mes', f: function (v) { return esc(fMes(v)); } }].concat(colsM), (d.meses || []).slice().reverse())) +
       tarjeta('Por semana', 'Semanas que empiezan en lunes', tabla([{ t: 'Semana', k: 'semana', f: function (v) { return esc(fechaCorta(v)); } }].concat(colsM), (d.semanas || []).slice().reverse())) +
       '</div>' +
+      embudoPaid(d.embudo) +
       tarjeta('Por anuncio', 'Resultados de cada anuncio en el periodo, ordenados por gasto', tabla([{ t: 'Anuncio', k: 'anuncio' }, { t: 'Campaña', k: 'campana' }, { t: 'Estado', k: 'estado', f: function (v) { return pill(v, v === 'Activo' ? 'bien' : /rechaz|problem/i.test(v) ? 'mal' : ''); } }].concat(colsM), ads, { vacio: 'Ningún anuncio con gasto en este periodo.' }),
         '<div class="ng-filtros"><input type="search" placeholder="Buscar anuncio o campaña" data-filtro="paid.q" value="' + esc(f.q) + '"><select data-filtro="paid.estado"><option value="">Todos los estados</option>' + estados.map(function (e) { return '<option' + (e === f.estado ? ' selected' : '') + '>' + esc(e) + '</option>'; }).join('') + '</select></div>') +
       '</div>';
   };
+
+  // De la campaña a la RC (Growth, v1.1): leads de formulario → citas → celebradas → RC → coste por RC
+  function embudoPaid(e) {
+    if (!e) return '';
+    if (e.error) return tarjeta('De la campaña a la RC', '', avisoCaja('No se ha podido cruzar Meta con GHL: ' + e.error, true));
+    const t = e.total || {};
+    const cols = function (primera) {
+      return [primera,
+        { t: 'Gasto', k: 'gasto', num: true, f: function (v) { return eur(v); } },
+        { t: 'Leads', k: 'leads', num: true, f: function (v, r) { return esc(ent(v)) + (r.ab ? ' <small class="gris-2">(' + ent(r.ab) + ' A/B)</small>' : ''); } },
+        { t: 'Citas', k: 'citas', num: true, f: ent }, { t: 'Celebradas', k: 'celebradas', num: true, f: ent },
+        { t: 'RC', k: 'rc', num: true, f: ent, cls: function (v) { return v ? 'bien' : ''; } }, { t: 'Clientes', k: 'clientes', num: true, f: ent },
+        { t: '€ / lead', k: 'costeLead', num: true, f: function (v) { return eur(v, true); } }, { t: '€ / cita', k: 'costeCita', num: true, f: function (v) { return eur(v, true); } },
+        { t: '€ / RC', k: 'costeRC', num: true, f: function (v) { return eur(v, true); }, cls: function (v) { return v == null ? '' : v > 330 ? 'mal' : v <= 170 ? 'bien' : ''; } }];
+    };
+    const embudoTxt = ent(t.leads) + ' leads → ' + ent(t.citas) + ' citas → ' + ent(t.celebradas) + ' celebradas → ' + ent(t.rc) + ' RC → ' + ent(t.clientes) + ' clientes';
+    return tarjeta('De la campaña a la RC', 'Leads de formulario del periodo (etiqueta meta-lead-*) cruzados con su cita, su trato y su etiqueta RC en GHL. RC = etiqueta RC completa o «Qualified» de Meta (encaja, o de Oferta en adelante). Coste por RC: verde ≤ 170 €, rojo > 330 €.',
+      '<p class="ng-embudo-linea">' + esc(embudoTxt) + '</p><div class="ng-kpis" style="margin-bottom:12px;max-width:280px">' + kpi('Coste por RC', eur(t.costeRC), ent(t.rc) + ' RC con ' + eur(t.gasto), vacio(t.costeRC) ? '' : t.costeRC > 330 ? 'mal' : t.costeRC <= 170 ? 'bien' : '') + '</div>' +
+      tabla(cols({ t: 'Campaña', k: 'nombre' }), e.porCampana || [], { vacio: 'Ningún lead de formulario en el periodo.' }) +
+      '<details style="margin-top:10px"><summary class="gris" style="cursor:pointer;font-weight:600">Por anuncio</summary>' + tabla(cols({ t: 'Anuncio', k: 'nombre', f: function (v, r) { return esc(v) + (r.campana ? '<div class="gris-2" style="font-size:11px">' + esc(r.campana) + '</div>' : ''); } }), e.porAnuncio || []) + '</details>');
+  }
 
   // ---------- Leads ----------
   VISTAS.leads = function (d) {

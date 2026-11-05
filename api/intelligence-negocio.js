@@ -25,6 +25,7 @@ const M = require('./_negocio-meta.js');
 const G = require('./_negocio-ghl.js');
 const SL = require('./_negocio-smartlead.js');
 const H = require('./_negocio-hoja.js');
+const A = require('./_negocio-atribucion.js');
 
 async function cuerpo(req) {
   if (req.body && typeof req.body === 'object') return req.body;
@@ -40,8 +41,8 @@ async function seccion(nombre, q, usuario) {
   const fresco = String(q.fresco || '') === '1';
   const per = C.periodo(q);
   if (nombre === 'paid') {
-    const [p, lg] = await Promise.all([M.paid(per, fresco), seguro(function () { return G.leadsRango(per.desde, per.hasta, fresco); })]);
-    return Object.assign({}, p, { leadsGHL: lg });
+    const [p, lg, emb] = await Promise.all([M.paid(per, fresco), seguro(function () { return G.leadsRango(per.desde, per.hasta, fresco); }), seguro(function () { return A.embudoPaid(per, fresco); })]);
+    return Object.assign({}, p, { leadsGHL: lg, embudo: emb });
   }
   if (nombre === 'leads') return G.leads(q, fresco);
   if (nombre === 'crm') {

@@ -169,3 +169,4 @@
 .ng-lista li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; background: var(--fondo); }
 .ng-lista .ng-acciones .btn { height: 24px; }
 @media (max-width: 760px) { .ng-alerta-lado { grid-column: 2; flex-direction: row; align-items: center; } }
+.ng-embudo-linea { font-weight: 700; font-size: 14px; margin: 0 0 10px; color: var(--tinta-2); }

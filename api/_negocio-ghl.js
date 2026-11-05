@@ -463,5 +463,5 @@ async function rcMeta(fresco) {
   return { mes: Object.keys(vistos).length, nombres: Object.keys(vistos).map(function (k) { return vistos[k]; }) };
 }
 
-module.exports = { leads, crm, accion, accionesActivas, opcionesRC, base, rc, clientesNuevos, hoy, leadsRango, rcMeta };
+module.exports = { leads, crm, accion, accionesActivas, opcionesRC, base, rc, clientesNuevos, hoy, leadsRango, rcMeta, citas, camposRC, valorCampo, diaDe, oportunidadPorContacto, fecha };
 
