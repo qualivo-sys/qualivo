@@ -45,8 +45,22 @@ function leerCookie(req) {
   return m ? decodeURIComponent(m.slice(COOKIE.length + 1)) : '';
 }
 
+// Un solo login (plan de Growth): quien ya ha entrado en el modo real de Intelligence de
+// Qualivo (cookie qi_sesion, INTELLIGENCE_CLAVE) entra como NEGOCIO_USUARIO_INTELLIGENCE
+// (por defecto «maikel»), y esa contraseña también vale en el formulario del panel.
+// Se apaga con NEGOCIO_SESION_INTELLIGENCE=0.
+const INTEL = require('./_intel-sesion.js');
+function puenteIntelligence() { return process.env.NEGOCIO_SESION_INTELLIGENCE !== '0' && INTEL.configurada(); }
+function usuarioIntelligence() { return String(process.env.NEGOCIO_USUARIO_INTELLIGENCE || 'maikel').toLowerCase(); }
+
 // Devuelve el usuario de la sesión, o '' si no hay sesión válida.
 function usuario(req) {
+  const propio = usuarioPropio(req);
+  if (propio) return propio;
+  if (puenteIntelligence() && INTEL.valida(req)) return usuarioIntelligence();
+  return '';
+}
+function usuarioPropio(req) {
   if (!claveFirma()) return '';
   const partes = leerCookie(req).split('.');
   if (partes.length !== 3) return '';
@@ -58,11 +72,16 @@ function usuario(req) {
 }
 
 function cookieSesion(u) {
+  if (!claveFirma()) return INTEL.cookieSesion(); // solo hay la contraseña de Intelligence
   const exp = Math.floor(Date.now() / 1000) + DURACION_S;
   const v = exp + '.' + u + '.' + firmar(exp + '.' + u);
   return COOKIE + '=' + encodeURIComponent(v) + '; Path=/api; Max-Age=' + DURACION_S + '; HttpOnly; Secure; SameSite=Strict';
 }
-function cookieBorrar() { return COOKIE + '=; Path=/api; Max-Age=0; HttpOnly; Secure; SameSite=Strict'; }
+// Salir cierra también la sesión de Intelligence, si se entró con ella.
+function cookieBorrar() {
+  const propia = COOKIE + '=; Path=/api; Max-Age=0; HttpOnly; Secure; SameSite=Strict';
+  return puenteIntelligence() ? [propia, INTEL.cookieBorrar()] : propia;
+}
 
 // Comprueba usuario y contraseña en tiempo constante. Devuelve el usuario o ''.
 function comprobar(u, c) {
@@ -71,7 +90,9 @@ function comprobar(u, c) {
   const real = lista[nombre];
   // Se compara siempre (aunque el usuario no exista) para no delatar qué usuarios hay.
   const ok = crypto.timingSafeEqual(hash(c), hash(real || '\u0000no-existe\u0000'));
-  return real && ok ? nombre : '';
+  if (real && ok) return nombre;
+  if (puenteIntelligence() && (!nombre || nombre === usuarioIntelligence()) && INTEL.claveCorrecta(c)) return usuarioIntelligence();
+  return '';
 }
 
 const fallos = {};
@@ -96,4 +117,4 @@ function puedeActuar(u) {
   return !!u && lista.indexOf(u) >= 0;
 }
 
-module.exports = { usuario, cookieSesion, cookieBorrar, comprobar, bloqueada, fallo, ipDe, puedeActuar, configurada: function () { return Object.keys(usuarios()).length > 0; } };
+module.exports = { usuario, cookieSesion, cookieBorrar, comprobar, bloqueada, fallo, ipDe, puedeActuar, configurada: function () { return Object.keys(usuarios()).length > 0 || puenteIntelligence(); } };

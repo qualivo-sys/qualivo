@@ -230,36 +230,45 @@
   const VISTAS = {};
 
   // ---------- Resumen ----------
+  let RES = null;
   VISTAS.resumen = function (d) {
-    const p = d.paid || {}, c = d.crm || {}, o = d.outbound || {}, l = d.leads || {};
-    const t = p.total || {};
-    const ok = o.kpis || {};
-    const hace7 = new Date(Date.now() - 7 * 864e5).toLocaleDateString('en-CA', { timeZone: 'Europe/Madrid' });
-    const leads7 = (l.filas || []).filter(function (f) { return f.fecha >= hace7; });
-    const ab7 = leads7.filter(function (f) { return f.nivel === 'A' || f.nivel === 'B'; }).length;
-    const errores = ['paid', 'crm', 'outbound', 'leads'].filter(function (x) { return d[x] && d[x].error; }).map(function (x) { return avisoCaja('No se ha podido leer ' + x + ': ' + d[x].error, true); }).join('');
-    const kp = '<div class="ng-kpis">' +
-      kpi('Gasto en Meta', eur(t.gasto), p.periodo ? p.periodo.etiqueta : '') +
-      kpi('Leads de Meta', ent(t.leads), 'CPL ' + eur(t.cpl)) +
-      kpi('Leads esta semana', ent(leads7.length), ab7 + ' de nivel A o B', ab7 ? 'bien' : '') +
-      kpi('Emails 7 días', ent(ok.enviados7), ent(ok.enviadosHoy) + ' hoy') +
-      kpi('Con interés', ent(ok.interesados), 'respuestas de outbound') +
-      kpi('Oportunidades', ent(c.abiertas), (c.avanzadas || []).length + ' avanzadas') +
-      kpi('Paradas > ' + (c.diasParada || 14) + ' días', ent(c.paradas), 'sin cambiar de etapa', c.paradas ? 'mal' : '') +
+    RES = d;
+    const k = d.kpis || {}, p = d.paid || {}, c = d.crm || {}, o = d.outbound || {}, l = d.leads || {}, h = d.hoy || {};
+    const puede = d.acciones && d.acciones.puedes;
+    const vs = function (v, obj) { return vacio(v) ? '' : 'objetivo ' + ent(obj) + ' · ' + pct(v / obj, true); };
+    const errores = ['paid', 'crm', 'outbound', 'leads', 'hoy'].filter(function (x) { return d[x] && d[x].error; }).map(function (x) { return avisoCaja('No se ha podido leer ' + x + ': ' + d[x].error, true); }).join('') +
+      Object.keys(d.errores || {}).filter(function (x) { return d.errores[x] && !(d[x] && d[x].error); }).map(function (x) { return avisoCaja('No se ha podido calcular ' + x + ': ' + d.errores[x], true); }).join('');
+    const kp = '<div class="ng-kpis ng-kpis-6">' +
+      kpi('RC del mes', ent(k.rcMes) + '<small> / ' + ent(k.objetivoRC) + '</small>', vacio(k.rcMes) ? 'sin datos' : ent(k.rcSemana) + ' esta semana', k.rcMes >= k.objetivoRC ? 'bien' : '') +
+      kpi('Clientes nuevos del mes', ent(k.clientesNuevos) + '<small> / ' + ent(k.objetivoClientes) + '</small>', vs(k.clientesNuevos, k.objetivoClientes), k.clientesNuevos >= k.objetivoClientes ? 'bien' : '') +
+      kpi('Gasto Meta del mes', eur(k.gastoMetaMes), vacio(k.gastoMetaMes) ? '' : pct(k.gastoMetaMes / k.topeMeta, true) + ' del tope de ' + eur(k.topeMeta), k.gastoMetaMes >= 0.85 * k.topeMeta ? 'mal' : '') +
+      kpi('CPL de 7 días', eur(k.cpl7, true), 'objetivo ' + eur(k.cplObjetivo), vacio(k.cpl7) ? '' : k.cpl7 > k.cplObjetivo ? 'mal' : 'bien') +
+      kpi('MRR confirmado', k.sinHoja ? '—' : eur(k.mrr), k.sinHoja ? 'sin conexión con la hoja' : 'cuotas de clientes', k.sinHoja ? 'aviso-kpi' : '') +
+      kpi('Caja disponible', k.sinHoja ? '—' : eur(k.caja), k.sinHoja ? 'sin conexión con la hoja' : 'saldo en banco', k.sinHoja ? 'aviso-kpi' : '') +
       '</div>';
     const al = (d.alertas || []).length ? '<div class="ng-alertas">' + d.alertas.map(function (a) {
-      return '<article class="ng-alerta ' + esc(a.nivel) + '"><div><h4>' + esc(a.que) + '</h4><dl><dt>Evidencia</dt><dd>' + esc(a.evidencia) + '</dd><dt>Acción</dt><dd>' + esc(a.accion) + '</dd></dl></div><span class="ng-quien-alerta">' + esc(a.responsable) + '</span></article>';
+      return '<article class="ng-alerta ' + esc(a.nivel) + '"><div><h4>' + esc(a.que) + '</h4><dl><dt>Evidencia</dt><dd>' + esc(a.evidencia) + '</dd>' + (a.causa ? '<dt>Causa</dt><dd>' + esc(a.causa) + '</dd>' : '') + (a.impacto ? '<dt>Impacto</dt><dd>' + esc(a.impacto) + '</dd>' : '') + '<dt>Acción</dt><dd>' + esc(a.accion) + (a.ir ? ' <button class="btn btn-mini" type="button" data-ir="' + esc(a.ir) + '">Ir a ' + esc(SECCIONES.filter(function (x) { return x.id === a.ir; })[0].txt) + '</button>' : '') + '</dd></dl></div><div class="ng-alerta-lado"><span class="ng-quien-alerta">' + esc(a.responsable) + '</span><span class="gris-2" style="font-size:11px">' + esc(fechaCorta(a.fecha)) + '</span></div></article>';
     }).join('') + '</div>' : '<p class="ng-vacio">Nada fuera de lo normal ahora mismo.</p>';
-    return cabecera('¿Cómo vamos?', 'Resumen', 'Captación, outbound y CRM en vivo. Las alertas dicen qué ha pasado, en qué se ve, qué hacer y quién.') +
+    const hoyHtml = '<div class="ng-rejilla-3">' +
+      '<div><p class="ng-embudo-t">Reuniones de hoy</p>' + ((h.reunionesHoy || []).length ? '<ul class="ng-lista">' + h.reunionesHoy.map(function (r) { return '<li><b>' + esc(r.hora) + '</b> ' + esc(r.nombre) + ' <span class="gris-2">· ' + esc(r.calendario) + '</span></li>'; }).join('') + '</ul>' : '<p class="ng-vacio">Ninguna en los calendarios de GHL.</p>') + '</div>' +
+      '<div><p class="ng-embudo-t">Reuniones sin resultado</p>' + ((h.sinResultado || []).length ? '<ul class="ng-lista">' + h.sinResultado.map(function (r, i) { return '<li><span>' + esc(fechaCorta(r.dia)) + ' · ' + esc(r.nombre) + '</span><span class="ng-acciones"><button class="btn" type="button" data-acc="reunion" data-reu="' + i + '"' + (puede ? '' : ' disabled') + '>Resultado</button><button class="btn" type="button" data-acc="rc" data-reu="' + i + '"' + (puede ? '' : ' disabled') + '>RC</button></span></li>'; }).join('') + '</ul>' : '<p class="ng-vacio">Todas marcadas.</p>') + '</div>' +
+      '<div><p class="ng-embudo-t">Ofertas abiertas</p>' + ((h.ofertas || []).length ? '<ul class="ng-lista">' + h.ofertas.map(function (r) { return '<li><span>' + esc(r.nombre) + ' <span class="gris-2">· ' + esc(r.etapa) + '</span></span><span class="' + (r.parada ? 'mal' : 'gris-2') + '" style="font-weight:700">' + esc(r.dias) + ' d</span></li>'; }).join('') + '</ul>' : '<p class="ng-vacio">Ninguna.</p>') + '</div>' +
+      '</div>';
+    return cabecera('¿Cómo vamos?', 'Resumen', 'La pantalla de los 10 minutos: objetivos del mes, alertas y lo de hoy. Todo en vivo.') +
       '<div class="ng-sec">' + errores + kp +
-      tarjeta('Alertas', 'Qué ha pasado → evidencia → acción → responsable', al) +
+      tarjeta('Alertas', 'Qué ha pasado → evidencia → causa → impacto → acción → responsable. Máximo 7, por impacto.', al) +
+      tarjeta('Hoy', 'Reuniones de hoy, reuniones pasadas sin resultado y ofertas abiertas', hoyHtml) +
       '<div class="ng-rejilla">' +
       tarjeta('Meta por semana', 'Gasto y leads, semanas que empiezan en lunes', combo(p.semanas || [], { medio: true, x: 'semana', barra: 'gasto', linea: 'leads', fmtX: fSemana, fmtEje: function (v) { return nf0.format(v) + ' €'; }, fmtB: eur, nombreBarra: 'Gasto', nombreLinea: 'Leads', extra: function (f) { return '<br>CPL: ' + esc(eur(f.cpl)); } })) +
       tarjeta('Leads por semana', 'Captación propia (Meta y web); la línea son los de nivel A o B', combo(l.semanas || [], { medio: true, x: 'semana', barra: 'total', linea: 'ab', fmtX: fSemana, nombreBarra: 'Leads', nombreLinea: 'A o B' })) +
-      tarjeta('Outbound por día', 'Enviados y respuestas, últimos 30 días (todas las campañas de Smartlead)', combo(o.dias || [], { medio: true, x: 'dia', barra: 'enviados', linea: 'respuestas', fmtX: function (v, l) { return l ? v : fechaCorta(v); }, nombreBarra: 'Enviados', nombreLinea: 'Respuestas' })) +
+      tarjeta('Outbound por día', 'Enviados y respuestas, últimos 30 días (todas las campañas de Smartlead)', combo(o.dias || [], { medio: true, x: 'dia', barra: 'enviados', linea: 'respuestas', fmtX: function (v, lg) { return lg ? v : fechaCorta(v); }, nombreBarra: 'Enviados', nombreLinea: 'Respuestas' })) +
       tarjeta('Embudo comercial', 'Oportunidades abiertas en Prospección; en coral, las paradas más de ' + (c.diasParada || 14) + ' días', hbarras((c.etapas || []).filter(function (e) { return /prospecci/i.test(e.embudo) && e.abiertas; }).map(function (e) { return { et: e.etapa, v: e.abiertas, rojo: e.paradas }; }))) +
       '</div></div>';
   };
+  $('#vista').addEventListener('click', function (ev) {
+    const b = ev.target.closest('[data-ir]'); if (!b) return;
+    E.seccion = b.getAttribute('data-ir'); history.replaceState(null, '', '#' + E.seccion); pintarNav(); pintar(); window.scrollTo(0, 0); $('#vista').scrollTop = 0;
+  });
 
   // ---------- Paid ----------
   VISTAS.paid = function (d) {
@@ -271,7 +280,7 @@
     });
     const colsM = [{ t: 'Gasto', k: 'gasto', num: true, f: function (v) { return eur(v); } }, { t: 'Impresiones', k: 'impresiones', num: true, f: ent }, { t: 'CTR', k: 'ctr', num: true, f: function (v) { return pct(v); } }, { t: 'CPM', k: 'cpm', num: true, f: function (v) { return eur(v, true); } }, { t: 'Leads', k: 'leads', num: true, f: ent }, { t: 'CPL', k: 'cpl', num: true, f: function (v) { return eur(v, true); } }];
     return cabecera('¿Qué rinde la publicidad?', 'Paid · Meta de Qualivo', 'Cuenta publicitaria de Qualivo en vivo. ' + esc(d.periodo.etiqueta) + ' (' + esc(fechaCorta(d.periodo.desde)) + ' a ' + esc(fechaCorta(d.periodo.hasta)) + '). Cambia el periodo arriba.') +
-      '<div class="ng-sec"><div class="ng-kpis">' + kpi('Gasto', eur(t.gasto)) + kpi('Impresiones', ent(t.impresiones)) + kpi('CTR', pct(t.ctr), ent(t.clics) + ' clics') + kpi('CPM', eur(t.cpm, true)) + kpi('Leads', ent(t.leads)) + kpi('Coste por lead', eur(t.cpl, true)) + '</div>' +
+      '<div class="ng-sec"><div class="ng-kpis">' + kpi('Gasto', eur(t.gasto)) + kpi('Impresiones', ent(t.impresiones)) + kpi('CTR', pct(t.ctr), ent(t.clics) + ' clics') + kpi('CPM', eur(t.cpm, true)) + kpi('Leads de Meta', ent(t.leads), d.leadsGHL && !d.leadsGHL.error ? ent(d.leadsGHL.total) + ' en GHL (' + ent(d.leadsGHL.ab) + ' A o B)' : '') + kpi('Coste por lead', eur(t.cpl, true)) + '</div>' +
       tarjeta('Por día', 'Gasto (barras) y leads (línea) del periodo', combo(d.dias || [], { x: 'dia', barra: 'gasto', linea: 'leads', fmtX: function (v, l) { return l ? v : fechaCorta(v); }, fmtEje: function (v) { return nf0.format(v) + ' €'; }, fmtB: eur, nombreBarra: 'Gasto', nombreLinea: 'Leads', extra: function (r) { return '<br>CTR: ' + esc(pct(r.ctr)) + ' · CPL: ' + esc(eur(r.cpl)); } })) +
       '<div class="ng-rejilla">' +
       tarjeta('Por mes', 'Últimos seis meses', tabla([{ t: 'Mes', k: 'mes', f: function (v) { return esc(fMes(v)); } }].concat(colsM), (d.meses || []).slice().reverse())) +
@@ -502,35 +511,46 @@
 
   // Acciones del CRM
   const WORKFLOWS = ['Cliente ganado:', 'ETAPA_NUEVO_LEAD', 'Lead_agendado', 'Radiografía · contestó', 'ABM — Nuevo Contacto'];
-  $('#vista').addEventListener('click', function (ev) {
-    const b = ev.target.closest('[data-acc]'); if (!b || !CRM) return;
-    const op = (CRM.avanzadas || []).concat(CRM.paradasLista || []).filter(function (o) { return o.id === b.getAttribute('data-op'); })[0];
-    if (!op) return;
-    const tipo = b.getAttribute('data-acc');
-    const activas = CRM.acciones && CRM.acciones.activas;
-    const ficha = '<div class="ng-ficha"><b>' + esc(op.nombre) + '</b><br>' + esc(op.embudo) + ' · ' + esc(op.etapa) + ' · ' + esc(op.dias) + ' días en la etapa</div>' + (activas ? '' : avisoCaja('Acciones apagadas: no se enviará nada a GHL hasta que esté GHL_PANEL_API_KEY y NEGOCIO_ACCIONES=1.'));
+  // ctx: { activas, opcionesRC, embudos } (de la sección CRM o del Resumen)
+  function abrirAccion(tipo, op, ctx) {
+    const activas = ctx.acciones && ctx.acciones.activas;
+    const ficha = '<div class="ng-ficha"><b>' + esc(op.nombre) + '</b><br>' + (op.etapa ? esc(op.embudo) + ' · ' + esc(op.etapa) + ' · ' + esc(op.dias) + ' días en la etapa' : esc(op.detalle || '')) + '</div>' + (activas ? '' : avisoCaja('Acciones apagadas: no se enviará nada a GHL hasta que esté GHL_PANEL_API_KEY y NEGOCIO_ACCIONES=1.'));
     const enviar = function (cuerpo) {
       if (!activas) { aviso('Acciones apagadas: no se ha enviado nada.', true); return false; }
-      return api({ accion: 'ghl' }, Object.assign({ contacto: op.contacto, oportunidad: op.id }, cuerpo)).then(function (r) {
+      return api({ accion: 'ghl' }, Object.assign({ contacto: op.contacto, oportunidad: op.id || '' }, cuerpo)).then(function (r) {
         aviso('Hecho en GHL: ' + r.resumen + (r.avisoRegistro ? ' (' + r.avisoRegistro + ')' : ''));
-        delete E.datos[clave('crm')]; cargar('crm', true); return true;
+        Object.keys(E.datos).forEach(function (k) { if (/^(crm|resumen)/.test(k)) delete E.datos[k]; });
+        cargar(E.seccion, true); pintar(); return true;
       });
     };
-    const emb = (CRM.embudos || []).filter(function (e) { return e.id === op.embudoId; })[0] || { etapas: [] };
+    const emb = (ctx.embudos || []).filter(function (e) { return e.id === op.embudoId; })[0] || { etapas: [] };
     if (tipo === 'mover') {
       abrirModal('Mover de etapa', ficha + campo('etapa', 'Nueva etapa', emb.etapas.filter(function (s) { return s.id !== op.etapaId; }).map(function (s) { return { v: s.id, t: s.nombre }; })) +
-        '<div class="ng-aviso-caja">Mover de etapa es igual que moverla a mano en GHL y dispara los workflows publicados:<ul>' + WORKFLOWS.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>Alguno puede escribir al contacto. También lo verá la señal a Meta de cada 2 horas.</div>' +
+        '<div class="ng-aviso-caja">Mover de etapa es igual que moverla a mano en GHL y dispara los workflows publicados:<ul>' + WORKFLOWS.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>Alguno puede escribir al contacto. Además, la señal a Meta (cada 2 horas) le contará el cambio de etapa.</div>' +
         '<label class="ng-check"><input type="checkbox" name="entendido" required> Entendido: quiero moverla y que se disparen esos workflows.</label>', 'Mover', function (f) { return enviar({ tipo: 'mover', embudo: op.embudoId, etapa: f.etapa }); });
     } else if (tipo === 'nota') {
-      abrirModal('Añadir nota', ficha + campo('texto', 'Nota (se guarda como «[Panel] …»)', 'textarea', '', ' required'), 'Guardar nota', function (f) { return enviar({ tipo: 'nota', texto: f.texto }); });
+      abrirModal('Añadir nota', ficha + campo('texto', 'Nota (queda como «Panel · Nota · fecha · usuario»)', 'textarea', '', ' required'), 'Guardar nota', function (f) { return enviar({ tipo: 'nota', texto: f.texto }); });
     } else if (tipo === 'tarea') {
       const manana = new Date(Date.now() + 864e5).toLocaleDateString('en-CA', { timeZone: 'Europe/Madrid' });
-      abrirModal('Crear tarea', ficha + campo('titulo', 'Título', 'text', '', ' required maxlength="140"') + campo('vence', 'Para el día', 'date', manana, ' required') + campo('detalle', 'Detalle (opcional)', 'textarea', ''), 'Crear tarea', function (f) { return enviar({ tipo: 'tarea', titulo: f.titulo, vence: f.vence, detalle: f.detalle }); });
+      abrirModal('Crear tarea o seguimiento', ficha + campo('titulo', 'Título', 'text', '', ' required maxlength="140"') + campo('vence', 'Para el día', 'date', manana, ' required') + campo('detalle', 'Detalle (opcional)', 'textarea', ''), 'Crear tarea', function (f) { return enviar({ tipo: 'tarea', titulo: f.titulo, vence: f.vence, detalle: f.detalle }); });
     } else if (tipo === 'reunion') {
-      abrirModal('Resultado de la reunión', ficha + campo('resultado', 'Resultado', [{ v: 'celebrada', t: 'Celebrada' }, { v: 'no-presentado', t: 'No se presentó' }, { v: 'reprogramar', t: 'Hay que reprogramar' }, { v: 'cancelada', t: 'Cancelada' }]) + campo('texto', 'Comentario (opcional)', 'textarea', '') + '<p class="gris" style="font-size:12px">Se apunta como nota. Si además hay que cambiar la etapa, usa «Etapa».</p>', 'Guardar', function (f) { return enviar({ tipo: 'reunion', resultado: f.resultado, texto: f.texto }); });
+      abrirModal('Resultado de la reunión', ficha + campo('resultado', 'Resultado', [{ v: 'celebrada', t: 'Celebrada' }, { v: 'no-presentado', t: 'No vino' }, { v: 'movida', t: 'Movida' }, { v: 'cancelada', t: 'Cancelada' }]) +
+        campo('encaje', 'Encaje', [{ v: '', t: '—' }, { v: 'si', t: 'Sí' }, { v: 'dudoso', t: 'Dudoso' }, { v: 'no', t: 'No' }]) + campo('siguiente', 'Siguiente paso', 'text', '', ' maxlength="200"') + campo('texto', 'Comentario (opcional)', 'textarea', '') +
+        '<p class="gris" style="font-size:12px">Queda como nota en el contacto. Si fue cualificada, márcala también como RC; si hay que cambiar la etapa, usa «Etapa».</p>', 'Guardar', function (f) { return enviar({ tipo: 'reunion', resultado: f.resultado, encaje: f.encaje, siguiente: f.siguiente, texto: f.texto }); });
     } else if (tipo === 'rc') {
       abrirModal('Marcar como RC (reunión cualificada)', ficha + '<p class="gris" style="font-size:12.5px">Pone a la vez la etiqueta RC, el canal de origen RC y la fecha RC. El recuento semanal solo cuenta las que tienen las tres.</p>' +
-        campo('canal', 'Canal de origen RC', (CRM.opcionesRC || []).length ? CRM.opcionesRC : ['(no se han podido leer las opciones)']) + campo('fecha', 'Fecha RC (la de la reunión)', 'date', hoyISO(), ' required'), 'Marcar RC', function (f) { return enviar({ tipo: 'rc', canal: f.canal, fecha: f.fecha }); });
+        campo('canal', 'Canal de origen RC', (ctx.opcionesRC || []).length ? ctx.opcionesRC : ['(no se han podido leer las opciones)']) + campo('fecha', 'Fecha RC (la de la reunión)', 'date', op.diaReunion || hoyISO(), ' required'), 'Marcar RC', function (f) { return enviar({ tipo: 'rc', canal: f.canal, fecha: f.fecha }); });
+    }
+  }
+  $('#vista').addEventListener('click', function (ev) {
+    const b = ev.target.closest('[data-acc]'); if (!b) return;
+    const tipo = b.getAttribute('data-acc');
+    if (b.hasAttribute('data-op') && CRM) {
+      const op = (CRM.avanzadas || []).concat(CRM.paradasLista || []).filter(function (o) { return o.id === b.getAttribute('data-op'); })[0];
+      if (op) abrirAccion(tipo, op, CRM);
+    } else if (b.hasAttribute('data-reu') && RES) {
+      const r = ((RES.hoy && RES.hoy.sinResultado) || [])[Number(b.getAttribute('data-reu'))];
+      if (r) abrirAccion(tipo, { contacto: r.contacto, nombre: r.nombre, detalle: 'Reunión del ' + r.dia + ' a las ' + r.hora + ' · ' + r.calendario, diaReunion: r.dia }, RES);
     }
   });
 

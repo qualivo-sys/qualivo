@@ -39,7 +39,10 @@ async function seguro(fn) { try { return await fn(); } catch (e) { return { erro
 async function seccion(nombre, q, usuario) {
   const fresco = String(q.fresco || '') === '1';
   const per = C.periodo(q);
-  if (nombre === 'paid') return M.paid(per, fresco);
+  if (nombre === 'paid') {
+    const [p, lg] = await Promise.all([M.paid(per, fresco), seguro(function () { return G.leadsRango(per.desde, per.hasta, fresco); })]);
+    return Object.assign({}, p, { leadsGHL: lg });
+  }
   if (nombre === 'leads') return G.leads(q, fresco);
   if (nombre === 'crm') {
     const [crm, opciones] = await Promise.all([G.crm(fresco), G.opcionesRC()]);
@@ -62,52 +65,102 @@ async function seccion(nombre, q, usuario) {
     return Object.assign({}, fin, { registro: registro });
   }
   if (nombre === 'resumen') {
-    const mes = C.periodo({ periodo: 'mes' });
-    const [paid, crm, ob, leads] = await Promise.all([
-      seguro(function () { return M.paid(per.clave === 'mes' ? mes : per, fresco); }),
+    const mes = C.periodo({ periodo: 'mes' }), d7 = C.periodo({ periodo: '7d' });
+    const hoyIso = C.diaMadrid(Date.now());
+    const [paidMes, paid7, crm, ob, leads, rc, nuevos, hoy, fin] = await Promise.all([
+      seguro(function () { return M.paid(mes, fresco); }),
+      seguro(function () { return M.paid(d7, fresco); }),
       seguro(function () { return G.crm(fresco); }),
       seguro(function () { return SL.outbound(C.periodo({ periodo: '30d' }), fresco); }),
-      seguro(function () { return G.leads({}, fresco); })
+      seguro(function () { return G.leads({}, fresco); }),
+      seguro(function () { return G.rc(fresco); }),
+      seguro(function () { return G.clientesNuevos(fresco); }),
+      seguro(function () { return G.hoy(fresco); }),
+      H.hayCuenta() ? seguro(function () { return H.finanzas(fresco, function () { return M.gastoMes(hoyIso, fresco); }); }) : { sinCuenta: true }
     ]);
-    return { paid: paid, crm: crm, outbound: ob, leads: leads, alertas: alertas(paid, crm, ob, leads), generado: Date.now() };
+    const obj = objetivos();
+    const kpis = {
+      rcMes: rc.error ? null : rc.mes, rcSemana: rc.error ? null : rc.semana, objetivoRC: obj.rc,
+      clientesNuevos: nuevos.error ? null : nuevos.n, objetivoClientes: obj.clientes,
+      gastoMetaMes: paidMes.error ? null : paidMes.total.gasto, topeMeta: obj.topeMeta,
+      cpl7: paid7.error ? null : paid7.total.cpl, cplObjetivo: obj.cpl,
+      mrr: fin && fin.kpis ? fin.kpis.mrr : null,
+      caja: fin && fin.kpis ? fin.kpis.banco : null, sinHoja: !!(fin && fin.sinCuenta)
+    };
+    const opcionesRC = await G.opcionesRC();
+    return {
+      kpis: kpis, paid: paidMes, crm: crm, outbound: ob, leads: leads, hoy: hoy,
+      acciones: { activas: G.accionesActivas(), puedes: S.puedeActuar(usuario) }, opcionesRC: opcionesRC, embudos: crm.embudos || [],
+      errores: { rc: rc.error, clientes: nuevos.error, hoy: hoy.error, finanzas: fin && fin.error },
+      alertas: alertas({ paid7: paid7, paidMes: paidMes, crm: crm, ob: ob, rc: rc, hoy: hoy, fin: fin }, obj),
+      generado: Date.now()
+    };
   }
   throw Object.assign(new Error('Sección desconocida.'), { status: 404 });
 }
 
-// Alertas del resumen: qué ha pasado → evidencia → acción → responsable.
-// Umbrales en variables de entorno para que Growth los ajuste sin tocar código.
-function alertas(paid, crm, ob, leads) {
+// Objetivos y umbrales: en variables de Vercel (plan de Growth), no en el código.
+function objetivos() {
+  const n = function (k, def) { const v = Number(process.env[k]); return isFinite(v) && v > 0 ? v : def; };
+  return {
+    cpl: n('PANEL_CPL_OBJETIVO', n('NEGOCIO_CPL_MAX', 60)),
+    topeMeta: n('PANEL_TOPE_META', 1000),
+    rc: n('PANEL_OBJETIVO_RC', 20),
+    clientes: n('PANEL_OBJETIVO_CLIENTES', 2),
+    rcSemana: n('PANEL_RC_SEMANA_MIN', 4),
+    rebote: n('NEGOCIO_REBOTE_MAX', 0.03)
+  };
+}
+
+// Alertas v1 (reglas exactas del plan de Growth, 5-nov), máximo 7 y por impacto.
+// Cada una: qué ha pasado → evidencia → causa probable → impacto → acción → responsable → fecha.
+function alertas(d, obj) {
   const out = [];
-  const CPL_MAX = Number(process.env.NEGOCIO_CPL_MAX || 60);
-  const REBOTE_MAX = Number(process.env.NEGOCIO_REBOTE_MAX || 0.03);
-  const fmt = function (n) { return n == null ? '—' : (Math.round(n * 100) / 100).toLocaleString('es-ES'); };
-  if (paid && !paid.error && paid.total) {
-    const t = paid.total;
-    if (t.cpl != null && t.cpl > CPL_MAX) out.push({ nivel: 'alta', que: 'El coste por lead de Meta está por encima del objetivo', evidencia: 'CPL de ' + fmt(t.cpl) + ' € en ' + paid.periodo.etiqueta.toLowerCase() + ' (objetivo: ' + CPL_MAX + ' €) con ' + t.leads + ' leads', accion: 'Revisar los anuncios con más gasto y menos leads en Paid y pausar o cambiar creatividad', responsable: 'Paid' });
-    if (t.gasto > 50 && !t.leads) out.push({ nivel: 'alta', que: 'Meta gasta sin traer leads', evidencia: fmt(t.gasto) + ' € gastados y 0 leads en ' + paid.periodo.etiqueta.toLowerCase(), accion: 'Comprobar el formulario, el píxel y los anuncios activos', responsable: 'Paid' });
-    const hoy = C.diaMadrid(Date.now());
-    const ayer = (paid.dias || []).filter(function (d) { return d.dia === C.sumarDias(hoy, -1); })[0];
-    if (ayer && ayer.gasto === 0 && (paid.anuncios || []).some(function (a) { return a.estado === 'Activo'; })) out.push({ nivel: 'media', que: 'Ayer Meta no gastó nada', evidencia: 'Gasto 0 € el ' + ayer.dia + ' con anuncios activos', accion: 'Mirar si la tarjeta falló o la cuenta está limitada', responsable: 'Paid' });
+  const hoy = C.diaMadrid(Date.now());
+  const n2 = function (n) { return n == null ? '—' : (Math.round(n * 100) / 100).toLocaleString('es-ES'); };
+  const eur = function (n) { return n2(n) + ' €'; };
+  const add = function (a) { out.push(Object.assign({ fecha: hoy }, a)); };
+  // 1. CPL alto (7 días)
+  if (d.paid7 && !d.paid7.error && d.paid7.total.cpl != null && d.paid7.total.cpl > obj.cpl) {
+    add({ peso: 80, nivel: 'alta', que: 'CPL de Meta por encima del objetivo', evidencia: 'CPL de 7 días: ' + eur(d.paid7.total.cpl) + ' (objetivo ' + eur(obj.cpl) + '), ' + d.paid7.total.leads + ' leads con ' + eur(d.paid7.total.gasto), causa: 'Anuncios cansados o público que no convierte', impacto: 'Menos leads por el mismo presupuesto', accion: 'Revisar en Paid los anuncios con más gasto y peor CPL', responsable: 'Paid', ir: 'paid' });
   }
-  if (crm && !crm.error) {
-    const av = (crm.avanzadas || []).filter(function (o) { return o.parada; });
-    if (av.length) out.push({ nivel: 'alta', que: av.length + ' oportunidades avanzadas llevan más de ' + crm.diasParada + ' días sin moverse', evidencia: av.slice(0, 4).map(function (o) { return o.nombre + ' (' + o.etapa + ', ' + o.dias + ' d)'; }).join(' · '), accion: 'Llamar o escribir hoy y mover de etapa o cerrar como perdida', responsable: 'Maikel' });
-    if (crm.paradas > 20) out.push({ nivel: 'media', que: 'El CRM acumula oportunidades paradas', evidencia: crm.paradas + ' de ' + crm.abiertas + ' abiertas llevan más de ' + crm.diasParada + ' días en la misma etapa', accion: 'Limpieza semanal: cerrar las muertas y reactivar las tibias', responsable: 'Growth' });
-  }
-  if (ob && !ob.error && !ob.sinClave) {
-    (ob.campanas || []).filter(function (c) { return c.estado === 'Activa' && c.cliente === 'Qualivo' && c.enviados > 200 && c.tasaRebote > REBOTE_MAX; }).slice(0, 3).forEach(function (c) {
-      out.push({ nivel: 'alta', que: 'Rebote alto en «' + c.campana + '»', evidencia: fmt(c.tasaRebote * 100) + ' % de rebote sobre ' + c.enviados + ' enviados (máximo ' + fmt(REBOTE_MAX * 100) + ' %)', accion: 'Pausar la campaña y verificar la lista antes de seguir enviando', responsable: 'Outbound' });
+  // 2. Anuncio que gasta sin leads (7 días, gasto ≥ 2× CPL objetivo)
+  if (d.paid7 && !d.paid7.error) {
+    (d.paid7.anuncios || []).filter(function (a) { return a.leads === 0 && a.gasto >= 2 * obj.cpl; }).slice(0, 2).forEach(function (a) {
+      add({ peso: 75, nivel: 'alta', que: 'Anuncio que gasta sin traer leads', evidencia: '«' + a.anuncio + '»: ' + eur(a.gasto) + ' en 7 días y 0 leads (' + a.estado + ')', causa: 'Creatividad o formulario que no convierte', impacto: eur(a.gasto) + ' sin retorno', accion: 'Pausarlo o cambiar la creatividad', responsable: 'Paid', ir: 'paid' });
     });
-    const d = (ob.dias || []).filter(function (x) { return x.dia < C.diaMadrid(Date.now()); }).slice(-3);
-    const laborables = d.filter(function (x) { const w = new Date(x.dia + 'T12:00:00Z').getUTCDay(); return w > 0 && w < 6; });
-    if (laborables.length && laborables.every(function (x) { return x.enviados === 0; })) out.push({ nivel: 'alta', que: 'Outbound no está enviando', evidencia: '0 correos en los últimos días laborables', accion: 'Revisar buzones y campañas activas en Smartlead', responsable: 'Outbound' });
   }
-  if (leads && !leads.error && leads.filas) {
-    const hace7 = C.sumarDias(C.diaMadrid(Date.now()), -7);
-    const ab = leads.filas.filter(function (f) { return f.fecha >= hace7 && (f.nivel === 'A' || f.nivel === 'B') && /sin oportunidad|nuevo lead/i.test(f.estado); });
-    if (ab.length) out.push({ nivel: 'media', que: ab.length === 1 ? '1 lead A o B de esta semana sigue sin tratar' : ab.length + ' leads A o B de esta semana siguen sin tratar', evidencia: ab.slice(0, 5).map(function (f) { return f.empresa + ' (' + f.nivel + ')'; }).join(' · '), accion: 'Llamarlos antes de 24 horas', responsable: 'Maikel' });
+  // 3. Tope de Meta (≥ 85 % del tope mensual)
+  if (d.paidMes && !d.paidMes.error && d.paidMes.total.gasto >= 0.85 * obj.topeMeta) {
+    add({ peso: 70, nivel: d.paidMes.total.gasto >= obj.topeMeta ? 'alta' : 'media', que: 'Meta cerca del tope del mes', evidencia: eur(d.paidMes.total.gasto) + ' gastados de ' + eur(obj.topeMeta) + ' (' + Math.round(d.paidMes.total.gasto / obj.topeMeta * 100) + ' %)', causa: 'Ritmo de gasto por encima del plan', impacto: 'Se pasa del presupuesto del mes', accion: 'Bajar presupuestos diarios o decidir subir el tope', responsable: 'Paid / Maikel', ir: 'paid' });
   }
-  return out;
+  // 4. Ofertas paradas (Oferta, Negociación o Segunda reunión > 14 días)
+  if (d.crm && !d.crm.error) {
+    const of = (d.crm.avanzadas || []).filter(function (o) { return o.parada && /oferta|propuesta|negociaci|segunda reuni/i.test(o.etapa); });
+    if (of.length) add({ peso: 90, nivel: 'alta', que: of.length === 1 ? '1 oferta parada más de ' + d.crm.diasParada + ' días' : of.length + ' ofertas paradas más de ' + d.crm.diasParada + ' días', evidencia: of.slice(0, 4).map(function (o) { return o.nombre + ' (' + o.etapa + ', ' + o.dias + ' d)'; }).join(' · '), causa: 'Sin siguiente paso fijado', impacto: 'Ventas que se enfrían', accion: 'Llamar hoy y mover de etapa o cerrar como perdida', responsable: 'Maikel', ir: 'crm' });
+  }
+  // 5. Reunión sin resultado (cita pasada > 24 h)
+  if (d.hoy && !d.hoy.error && (d.hoy.sinResultado || []).length) {
+    const s = d.hoy.sinResultado;
+    add({ peso: 85, nivel: 'alta', que: s.length === 1 ? '1 reunión sin resultado marcado' : s.length + ' reuniones sin resultado marcado', evidencia: s.slice(0, 4).map(function (r) { return r.nombre + ' (' + r.dia.slice(8) + '/' + r.dia.slice(5, 7) + ')'; }).join(' · '), causa: 'No se apuntó cómo fue', impacto: 'El recuento de RC y el embudo quedan cojos', accion: 'Marcar el resultado y, si fue cualificada, marcar RC', responsable: 'Maikel', ir: 'crm' });
+  }
+  // 6. Facturas sin cobrar (pendientes y vencidas)
+  if (d.fin && d.fin.facturas) {
+    const pend = d.fin.facturas.filas.filter(function (f) { return /pendiente|por cobrar|vencid|retras|impag/i.test(f.estado) && !/cobrad|pagad/i.test(f.estado) && (/vencid|retras|impag/i.test(f.estado) || hoy.slice(8) > '15'); });
+    if (pend.length) add({ peso: 78, nivel: 'alta', que: pend.length === 1 ? '1 factura del mes sin cobrar' : pend.length + ' facturas del mes sin cobrar', evidencia: pend.slice(0, 4).map(function (f) { return f.cliente + ' (' + eur(f.total) + ', ' + f.estado + ')'; }).join(' · '), causa: 'Cobro pendiente del cliente', impacto: 'Caja del mes', accion: 'Reclamar el cobro', responsable: 'CFO', ir: 'finanzas' });
+  }
+  // 7. Ritmo de reuniones (RC de la semana < 4 el viernes o después)
+  const dow = new Date(hoy + 'T12:00:00Z').getUTCDay();
+  if (d.rc && !d.rc.error && (dow === 5 || dow === 6 || dow === 0) && d.rc.semana < obj.rcSemana) {
+    add({ peso: 88, nivel: 'alta', que: 'Pocas reuniones cualificadas esta semana', evidencia: d.rc.semana + ' RC esta semana (mínimo ' + obj.rcSemana + '); ' + d.rc.mes + ' en el mes de ' + obj.rc, causa: 'Poca agenda desde captación y outbound', impacto: 'No llegar al objetivo del mes', accion: 'Reactivar la base y empujar outbound la semana que viene', responsable: 'CoS', ir: 'resumen' });
+  }
+  // Fase 2: rebote de Smartlead > 3 % en una campaña activa
+  if (d.ob && !d.ob.error && !d.ob.sinClave) {
+    (d.ob.campanas || []).filter(function (c) { return c.estado === 'Activa' && c.cliente === 'Qualivo' && c.enviados > 200 && c.tasaRebote > obj.rebote; }).slice(0, 2).forEach(function (c) {
+      add({ peso: 60, nivel: 'media', que: 'Rebote alto en «' + c.campana + '»', evidencia: n2(c.tasaRebote * 100) + ' % sobre ' + c.enviados + ' enviados (máximo ' + n2(obj.rebote * 100) + ' %)', causa: 'Lista con correos sin verificar', impacto: 'Reputación de los buzones', accion: 'Pausar la campaña y verificar la lista', responsable: 'Outbound', ir: 'outbound' });
+    });
+  }
+  return out.sort(function (a, b) { return b.peso - a.peso; }).slice(0, 7);
 }
 
 module.exports = async function handler(req, res) {

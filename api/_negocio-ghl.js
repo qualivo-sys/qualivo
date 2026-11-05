@@ -243,7 +243,11 @@ async function camposRC() {
 
 const ID = /^[A-Za-z0-9]{10,40}$/;
 function txt(s, max) { return String(s || '').replace(/[\u0000-\u0008\u000b-\u001f]/g, '').trim().slice(0, max || 2000); }
-function nota(contacto, texto) { return escribir('POST', '/contacts/' + contacto + '/notes', { body: '[Panel] ' + texto }); }
+// Registro en el contacto (formato de Growth): «Panel · {acción} · {fecha} · {usuario}» y el detalle debajo.
+function nota(contacto, accionTxt, usuario, detalle) {
+  const cuando = new Intl.DateTimeFormat('es-ES', { timeZone: C.ZONA, dateStyle: 'short', timeStyle: 'short' }).format(new Date());
+  return escribir('POST', '/contacts/' + contacto + '/notes', { body: 'Panel · ' + accionTxt + ' · ' + cuando + ' · ' + usuario + (detalle ? '\n' + detalle : '') });
+}
 
 // Ejecuta una acción. Devuelve { ok, resumen } para el registro.
 async function accion(a, usuario) {
@@ -251,7 +255,6 @@ async function accion(a, usuario) {
   const tipo = String(a.tipo || '');
   const contacto = String(a.contacto || '');
   if (!ID.test(contacto)) throw Object.assign(new Error('Contacto no válido.'), { status: 400 });
-  const firma = ' (desde el panel, ' + usuario + ')';
   let resumen = '';
 
   if (tipo === 'mover') {
@@ -263,23 +266,25 @@ async function accion(a, usuario) {
     if (!s) throw Object.assign(new Error('Esa etapa no es de ese embudo.'), { status: 400 });
     await escribir('PUT', '/opportunities/' + op, { pipelineId: emb, pipelineStageId: etapa });
     resumen = 'Movida a «' + s.nombre + '» (' + e.nombre + ')';
-    await nota(contacto, resumen + firma);
+    await nota(contacto, 'Mover de etapa', usuario, resumen);
   } else if (tipo === 'nota') {
     const t = txt(a.texto, 3000);
     if (!t) throw Object.assign(new Error('La nota está vacía.'), { status: 400 });
-    await nota(contacto, t + firma);
+    await nota(contacto, 'Nota', usuario, t);
     resumen = 'Nota: ' + t.slice(0, 80);
   } else if (tipo === 'tarea') {
     const titulo = txt(a.titulo, 140), vence = String(a.vence || '');
     if (!titulo || !/^\d{4}-\d{2}-\d{2}$/.test(vence)) throw Object.assign(new Error('Falta el título o la fecha de la tarea.'), { status: 400 });
     // Título con «[Panel]» para no confundirla con las de api/seguimientos.js
-    await escribir('POST', '/contacts/' + contacto + '/tasks', { title: '[Panel] ' + titulo, body: txt(a.detalle, 1000) + firma, dueDate: vence + 'T09:00:00+01:00', completed: false });
+    await escribir('POST', '/contacts/' + contacto + '/tasks', { title: '[Panel] ' + titulo, body: txt(a.detalle, 1000) + ' (desde el panel, ' + usuario + ')', dueDate: vence + 'T09:00:00+01:00', completed: false });
     resumen = 'Tarea «' + titulo + '» para el ' + vence;
+    await nota(contacto, 'Tarea', usuario, resumen);
   } else if (tipo === 'reunion') {
-    const res = { celebrada: 'Reunión celebrada', 'no-presentado': 'No se presentó a la reunión', reprogramar: 'Reunión para reprogramar', cancelada: 'Reunión cancelada' }[String(a.resultado || '')];
+    const res = { celebrada: 'Celebrada', 'no-presentado': 'No vino', movida: 'Movida', cancelada: 'Cancelada' }[String(a.resultado || '')];
     if (!res) throw Object.assign(new Error('Resultado de reunión no válido.'), { status: 400 });
-    await nota(contacto, res + (a.texto ? ': ' + txt(a.texto, 1500) : '') + firma);
-    resumen = res;
+    const encaje = { si: 'Sí', dudoso: 'Dudoso', no: 'No' }[String(a.encaje || '')] || '';
+    resumen = 'Reunión: ' + res + (encaje ? ' · encaje ' + encaje : '') + (a.siguiente ? ' · siguiente paso: ' + txt(a.siguiente, 200) : '');
+    await nota(contacto, 'Resultado de reunión', usuario, resumen + (a.texto ? '\n' + txt(a.texto, 1500) : ''));
   } else if (tipo === 'rc') {
     const campos = await camposRC();
     if (!campos.canal || !campos.fecha) throw new Error('No encuentro los campos RC en GHL (contact.canal_de_origen_rc y contact.fecha_rc).');
@@ -290,7 +295,7 @@ async function accion(a, usuario) {
     await escribir('PUT', '/contacts/' + contacto, { customFields: [{ id: campos.canal.id, field_value: canal }, { id: campos.fecha.id, field_value: dia }] });
     await escribir('POST', '/contacts/' + contacto + '/tags', { tags: ['RC'] });
     resumen = 'Marcada RC · ' + canal + ' · ' + dia;
-    await nota(contacto, resumen + firma);
+    await nota(contacto, 'Marcar RC', usuario, resumen);
   } else {
     throw Object.assign(new Error('Acción desconocida.'), { status: 400 });
   }
@@ -302,4 +307,111 @@ async function opcionesRC() {
   try { const c = await camposRC(); return (c.canal && c.canal.opciones) || []; } catch (e) { return []; }
 }
 
-module.exports = { leads, crm, accion, accionesActivas, opcionesRC, base };
+// ---------------------------------------------------------------------------
+// Citas de los calendarios de GHL (una llamada por calendario)
+// ---------------------------------------------------------------------------
+async function citas(desdeMs, hastaMs, fresco) {
+  return C.cacheado('ghl|citas|' + Math.floor(desdeMs / 3600000) + '|' + Math.floor(hastaMs / 3600000), 3 * 60000, fresco, async function () {
+    const cals = await leer('/calendars/?locationId=' + encodeURIComponent(loc()));
+    const out = [];
+    for (const cal of (cals.calendars || [])) {
+      const d = await leer('/calendars/events?locationId=' + encodeURIComponent(loc()) + '&calendarId=' + encodeURIComponent(cal.id) + '&startTime=' + desdeMs + '&endTime=' + hastaMs);
+      (d.events || []).forEach(function (e) {
+        if (e.deleted) return;
+        out.push({ id: e.id, contacto: e.contactId || '', inicio: fecha(e.startTime), estado: String(e.appointmentStatus || '').toLowerCase(), calendario: cal.name || '' });
+      });
+    }
+    return out.filter(function (e) { return e.inicio; }).sort(function (a, b) { return a.inicio - b.inicio; });
+  });
+}
+
+// ¿Tiene ya el contacto una nota «Panel · Resultado de reunión» posterior a la cita?
+async function resultadoMarcado(contacto, desdeMs) {
+  try {
+    const d = await leer('/contacts/' + encodeURIComponent(contacto) + '/notes');
+    return (d.notes || []).some(function (n) { return /Panel · Resultado de reuni[oó]n/.test(String(n.body || '')) && (fecha(n.dateAdded) || 0) >= desdeMs; });
+  } catch (e) { return false; }
+}
+
+function valorCampo(c, id) {
+  const f = (c.customFields || []).filter(function (x) { return x.id === id; })[0];
+  return f ? (f.value != null ? f.value : f.field_value) : null;
+}
+function diaDe(v) {
+  if (v == null || v === '') return null;
+  if (typeof v === 'number' || /^\d{10,13}$/.test(String(v))) return C.diaMadrid(Number(v) < 1e12 ? Number(v) * 1000 : Number(v));
+  if (/^\d{4}-\d{2}-\d{2}$/.test(String(v))) return String(v);
+  const t = Date.parse(v);
+  return isNaN(t) ? null : C.diaMadrid(t);
+}
+
+// Reuniones cualificadas (RC): etiqueta RC + canal + fecha, las tres (regla del recuento semanal).
+async function rc(fresco) {
+  const [b, campos] = await Promise.all([base(fresco), camposRC().catch(function () { return {}; })]);
+  if (!campos.canal || !campos.fecha) return { error: 'No encuentro los campos RC en GHL.' };
+  const lista = [];
+  let conEtiqueta = 0;
+  b.contactos.forEach(function (c) {
+    const tags = (c.tags || []).map(function (t) { return String(t).toLowerCase(); });
+    if (tags.indexOf('rc') < 0) return;
+    conEtiqueta++;
+    const canal = valorCampo(c, campos.canal.id), dia = diaDe(valorCampo(c, campos.fecha.id));
+    if (!canal || !dia) return;
+    lista.push({ dia: dia, canal: String(canal) });
+  });
+  const hoyIso = C.diaMadrid(Date.now());
+  const mes = lista.filter(function (x) { return x.dia.slice(0, 7) === hoyIso.slice(0, 7); });
+  const lunes = C.lunesDe(hoyIso);
+  const semana = lista.filter(function (x) { return x.dia >= lunes && x.dia <= hoyIso; });
+  const porCanal = {};
+  mes.forEach(function (x) { porCanal[x.canal] = (porCanal[x.canal] || 0) + 1; });
+  return { mes: mes.length, semana: semana.length, porCanal: porCanal, incompletas: conEtiqueta - lista.length };
+}
+
+// Clientes nuevos del mes: oportunidades ganadas (o pasadas a «Cliente») este mes.
+async function clientesNuevos(fresco) {
+  const b = await base(fresco);
+  const etapa = {};
+  b.embudos.forEach(function (e) { e.etapas.forEach(function (s) { etapa[s.id] = s.nombre; }); });
+  const mes = C.diaMadrid(Date.now()).slice(0, 7);
+  const vistos = {};
+  b.oportunidades.forEach(function (o) {
+    const cid = o.contactId || o.id;
+    const ganada = o.status === 'won' && C.diaMadrid(fecha(o.lastStatusChangeAt) || 0).slice(0, 7) === mes;
+    const aCliente = /^cliente/i.test(etapa[o.pipelineStageId] || '') && C.diaMadrid(fecha(o.lastStageChangeAt) || 0).slice(0, 7) === mes;
+    if (ganada || aCliente) vistos[cid] = String((o.contact && o.contact.companyName) || o.name || '').trim();
+  });
+  return { n: Object.keys(vistos).length, nombres: Object.keys(vistos).map(function (k) { return vistos[k]; }) };
+}
+
+// «Hoy»: reuniones de hoy, reuniones pasadas sin resultado y ofertas abiertas.
+async function hoy(fresco) {
+  const ahora = Date.now();
+  const [b, ev, crmD] = await Promise.all([base(fresco), citas(ahora - 14 * 864e5, ahora + 2 * 864e5, fresco), crm(fresco)]);
+  const cPorId = {};
+  b.contactos.forEach(function (c) { cPorId[c.id] = c; });
+  const nombre = function (cid) { const c = cPorId[cid] || {}; return String(c.companyName || '').trim() || '(sin empresa)'; };
+  const hoyIso = C.diaMadrid(ahora);
+  const hora = function (t) { return new Intl.DateTimeFormat('es-ES', { timeZone: C.ZONA, hour: '2-digit', minute: '2-digit' }).format(new Date(t)); };
+  const deHoy = ev.filter(function (e) { return C.diaMadrid(e.inicio) === hoyIso && e.estado !== 'cancelled'; })
+    .map(function (e) { return { hora: hora(e.inicio), nombre: nombre(e.contacto), estado: e.estado, calendario: e.calendario, contacto: e.contacto }; });
+  const pendientes = ev.filter(function (e) { return e.inicio < ahora - 24 * 3600000 && /^(new|confirmed|booked|)$/.test(e.estado) && e.contacto; }).slice(-15);
+  const marcadas = await C.enParalelo(pendientes, 4, function (e) { return resultadoMarcado(e.contacto, e.inicio); });
+  const sinResultado = pendientes.filter(function (e, i) { return marcadas[i] !== true; }).map(function (e) {
+    return { dia: C.diaMadrid(e.inicio), hora: hora(e.inicio), nombre: nombre(e.contacto), contacto: e.contacto, calendario: e.calendario, horas: Math.floor((ahora - e.inicio) / 3600000) };
+  });
+  const ofertas = (crmD.avanzadas || []).filter(function (o) { return /oferta|propuesta|negociaci|segunda reuni/i.test(o.etapa); });
+  return { reunionesHoy: deHoy, sinResultado: sinResultado, ofertas: ofertas };
+}
+
+// Leads de GHL (captación propia) en un rango, para cruzar con los de Meta en Paid
+async function leadsRango(desde, hasta, fresco) {
+  const l = await leads({ desde: desde }, fresco);
+  const f = l.filas.filter(function (x) { return x.fecha >= desde && x.fecha <= hasta; });
+  const porDia = {};
+  f.forEach(function (x) { porDia[x.fecha] = (porDia[x.fecha] || 0) + 1; });
+  return { total: f.length, ab: f.filter(function (x) { return x.nivel === 'A' || x.nivel === 'B'; }).length, porDia: porDia };
+}
+
+module.exports = { leads, crm, accion, accionesActivas, opcionesRC, base, rc, clientesNuevos, hoy, leadsRango };
+
