@@ -368,6 +368,7 @@
       '<div class="ng-sec"><div class="ng-kpis">' + kpi('Abiertas', ent(d.abiertas)) + kpi('Paradas > ' + d.diasParada + ' días', ent(d.paradas), '', d.paradas ? 'mal' : '') + kpi('Avanzadas', ent((d.avanzadas || []).length), 'reunión, oferta, negociación, piloto') + kpi('Avanzadas paradas', ent((d.avanzadas || []).filter(function (o) { return o.parada; }).length), 'las primeras que mover', 'mal') + kpi('Valor en avanzadas', eur((d.avanzadas || []).reduce(function (s, o) { return s + (o.valor || 0); }, 0))) + '</div>' +
       avisoCaja(nota, false) +
       tarjeta('Oportunidades por etapa', 'Barras: abiertas. En coral (y entre paréntesis), las paradas.', embudosHtml) +
+      tarjeta('Totales por embudo', 'Todas las oportunidades de cada embudo, por estado', tabla([{ t: 'Embudo', k: 'embudo' }, { t: 'Abiertas', k: 'abiertas', num: true, f: ent }, { t: 'Ganadas', k: 'ganadas', num: true, f: ent }, { t: 'Perdidas o abandonadas', k: 'perdidas', num: true, f: ent }, { t: 'Total', k: 'total', num: true, f: ent }], d.totales || [])) +
       tarjeta('Avanzadas', 'Reunión, segunda reunión, oferta, negociación y piloto. Las que llevan más tiempo paradas, arriba.', tabla(cols, d.avanzadas || [], { vacio: 'No hay oportunidades avanzadas abiertas.' })) +
       tarjeta('Otras paradas', 'Primeras etapas, más de ' + d.diasParada + ' días sin moverse (hasta 60)', tabla(cols, d.paradasLista || [], { vacio: 'Ninguna.' })) +
       '</div>';

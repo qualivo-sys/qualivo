@@ -201,8 +201,19 @@ async function crm(fresco) {
     });
   });
   lista.sort(function (a, c) { return c.dias - a.dias; });
+  // Totales por embudo y estado (para cuadrar con extracciones de GHL)
+  const totales = b.embudos.map(function (e) {
+    const t = { embudo: e.nombre, abiertas: 0, ganadas: 0, perdidas: 0, total: 0 };
+    b.oportunidades.forEach(function (o) {
+      if (o.pipelineId !== e.id) return;
+      t.total++;
+      if (o.status === 'open') t.abiertas++; else if (o.status === 'won') t.ganadas++; else t.perdidas++;
+    });
+    return t;
+  });
   return {
     embudos: b.embudos,
+    totales: totales,
     etapas: etapas,
     abiertas: lista.length,
     paradas: lista.filter(function (x) { return x.parada; }).length,
