@@ -34,7 +34,7 @@ function fecha(x) { const t = x ? Date.parse(x) : NaN; return isNaN(t) ? null : 
 async function embudos() {
   const d = await leer('/opportunities/pipelines?locationId=' + encodeURIComponent(loc()));
   return (d.pipelines || []).map(function (p) {
-    return { id: p.id, nombre: p.name, etapas: (p.stages || []).slice().sort(function (a, b) { return (a.position || 0) - (b.position || 0); }).map(function (s) { return { id: s.id, nombre: s.name }; }) };
+    return { id: p.id, nombre: p.name, etapas: (p.stages || []).slice().sort(function (a, b) { return (a.position || 0) - (b.position || 0); }).map(function (s) { return { id: s.id, nombre: s.name, escribe: etapaQueEscribe(p.name, s.name) }; }) };
   });
 }
 
@@ -252,6 +252,14 @@ async function camposRC() {
   });
 }
 
+// Etapas cuya entrada dispara un workflow que ESCRIBE al contacto (Automatización, 5-nov, sacado del
+// historial de mensajes): Qualivo Pipeline → Nuevo Lead (ETAPA_NUEVO_LEAD, WhatsApp de bienvenida) y
+// Qualivo Pipeline → Call Agendada (Lead_agendado, WhatsApp de confirmación con la fecha vacía).
+// El panel no mueve a ellas hasta que alguien revise esos workflows (NEGOCIO_PERMITIR_ETAPAS_QUE_ESCRIBEN=1).
+function etapaQueEscribe(embudo, etapa) {
+  return /qualivo pipeline/i.test(embudo) && /^(nuevo lead|call agendada)$/i.test(String(etapa).trim());
+}
+
 const ID = /^[A-Za-z0-9]{10,40}$/;
 function txt(s, max) { return String(s || '').replace(/[\u0000-\u0008\u000b-\u001f]/g, '').trim().slice(0, max || 2000); }
 // Registro en el contacto (formato de Growth): «Panel · {acción} · {fecha} · {usuario}» y el detalle debajo.
@@ -275,6 +283,9 @@ async function accion(a, usuario) {
     const e = b.embudos.filter(function (x) { return x.id === emb; })[0];
     const s = e && e.etapas.filter(function (x) { return x.id === etapa; })[0];
     if (!s) throw Object.assign(new Error('Esa etapa no es de ese embudo.'), { status: 400 });
+    if (etapaQueEscribe(e.nombre, s.nombre) && process.env.NEGOCIO_PERMITIR_ETAPAS_QUE_ESCRIBEN !== '1') {
+      throw Object.assign(new Error('Mover a «' + s.nombre + '» (' + e.nombre + ') dispara un workflow que escribe al contacto. Bloqueado hasta que se revise ese workflow en GHL.'), { status: 409 });
+    }
     await escribir('PUT', '/opportunities/' + op, { pipelineId: emb, pipelineStageId: etapa });
     resumen = 'Movida a «' + s.nombre + '» (' + e.nombre + ')';
     await nota(contacto, 'Mover de etapa', usuario, resumen);

@@ -527,8 +527,10 @@
     };
     const emb = (ctx.embudos || []).filter(function (e) { return e.id === op.embudoId; })[0] || { etapas: [] };
     if (tipo === 'mover') {
-      abrirModal('Mover de etapa', ficha + campo('etapa', 'Nueva etapa', emb.etapas.filter(function (s) { return s.id !== op.etapaId; }).map(function (s) { return { v: s.id, t: s.nombre }; })) +
-        '<div class="ng-aviso-caja">Mover de etapa es igual que moverla a mano en GHL y dispara los workflows publicados:<ul>' + WORKFLOWS.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>Alguno puede escribir al contacto. Además, la señal a Meta (cada 2 horas) le contará el cambio de etapa.</div>' +
+      const opciones = emb.etapas.filter(function (s) { return s.id !== op.etapaId; });
+      abrirModal('Mover de etapa', ficha + '<label>Nueva etapa<select name="etapa">' + opciones.map(function (s) { return '<option value="' + esc(s.id) + '"' + (s.escribe ? ' disabled' : '') + '>' + esc(s.nombre) + (s.escribe ? ' · bloqueada: escribe al contacto' : '') + '</option>'; }).join('') + '</select></label>' +
+        '<div class="ng-aviso-caja">Mover de etapa es igual que moverla a mano en GHL y dispara los workflows publicados:<ul>' + WORKFLOWS.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>' +
+        'Según el historial (Automatización, 5-nov), escriben al contacto ETAPA_NUEVO_LEAD (WhatsApp al entrar en Qualivo Pipeline → Nuevo Lead) y Lead_agendado (WhatsApp al entrar en Qualivo Pipeline → Call Agendada). Por eso esas dos etapas están bloqueadas. En Prospección y ABM no ha salido ningún mensaje. Además, la señal a Meta (cada 2 horas) le contará el cambio de etapa.</div>' +
         '<label class="ng-check"><input type="checkbox" name="entendido" required> Entendido: quiero moverla y que se disparen esos workflows.</label>', 'Mover', function (f) { return enviar({ tipo: 'mover', embudo: op.embudoId, etapa: f.etapa }); });
     } else if (tipo === 'nota') {
       abrirModal('Añadir nota', ficha + campo('texto', 'Nota (queda como «Panel · Nota · fecha · usuario»)', 'textarea', '', ' required'), 'Guardar nota', function (f) { return enviar({ tipo: 'nota', texto: f.texto }); });
