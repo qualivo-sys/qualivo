@@ -67,7 +67,7 @@ async function seccion(nombre, q, usuario) {
   if (nombre === 'resumen') {
     const mes = C.periodo({ periodo: 'mes' }), d7 = C.periodo({ periodo: '7d' });
     const hoyIso = C.diaMadrid(Date.now());
-    const [paidMes, paid7, crm, ob, leads, rc, nuevos, hoy, fin] = await Promise.all([
+    const [paidMes, paid7, crm, ob, leads, rc, nuevos, hoy, fin, rcM] = await Promise.all([
       seguro(function () { return M.paid(mes, fresco); }),
       seguro(function () { return M.paid(d7, fresco); }),
       seguro(function () { return G.crm(fresco); }),
@@ -76,14 +76,18 @@ async function seccion(nombre, q, usuario) {
       seguro(function () { return G.rc(fresco); }),
       seguro(function () { return G.clientesNuevos(fresco); }),
       seguro(function () { return G.hoy(fresco); }),
-      H.hayCuenta() ? seguro(function () { return H.finanzas(fresco, function () { return M.gastoMes(hoyIso, fresco); }); }) : { sinCuenta: true }
+      H.hayCuenta() ? seguro(function () { return H.finanzas(fresco, function () { return M.gastoMes(hoyIso, fresco); }); }) : { sinCuenta: true },
+      seguro(function () { return G.rcMeta(fresco); })
     ]);
     const obj = objetivos();
     const kpis = {
       rcMes: rc.error ? null : rc.mes, rcSemana: rc.error ? null : rc.semana, objetivoRC: obj.rc,
       clientesNuevos: nuevos.error ? null : nuevos.n, objetivoClientes: obj.clientes,
       gastoMetaMes: paidMes.error ? null : paidMes.total.gasto, topeMeta: obj.topeMeta,
-      cpl7: paid7.error ? null : paid7.total.cpl, cplObjetivo: obj.cpl,
+      cpl7: paid7.error ? null : paid7.total.cpl, cplObjetivo: obj.cpl, cplAlerta: obj.cplAlerta,
+      rcMeta: rcM.error ? null : rcM.mes,
+      costeRC: !paidMes.error && !rcM.error && rcM.mes >= obj.rcMinimo ? paidMes.total.gasto / rcM.mes : null,
+      costeRCObjetivo: obj.costeRC, costeRCMax: obj.costeRCMax, rcMinimo: obj.rcMinimo,
       mrr: fin && fin.kpis ? fin.kpis.mrr : null,
       caja: fin && fin.kpis ? fin.kpis.banco : null, sinHoja: !!(fin && fin.sinCuenta)
     };
@@ -92,7 +96,7 @@ async function seccion(nombre, q, usuario) {
       kpis: kpis, paid: paidMes, crm: crm, outbound: ob, leads: leads, hoy: hoy,
       acciones: { activas: G.accionesActivas(), puedes: S.puedeActuar(usuario) }, opcionesRC: opcionesRC, embudos: crm.embudos || [],
       errores: { rc: rc.error, clientes: nuevos.error, hoy: hoy.error, finanzas: fin && fin.error },
-      alertas: alertas({ paid7: paid7, paidMes: paidMes, crm: crm, ob: ob, rc: rc, hoy: hoy, fin: fin }, obj),
+      alertas: alertas({ paid7: paid7, paidMes: paidMes, crm: crm, ob: ob, rc: rc, hoy: hoy, fin: fin, rcMeta: rcM }, obj),
       generado: Date.now()
     };
   }
@@ -103,7 +107,13 @@ async function seccion(nombre, q, usuario) {
 function objetivos() {
   const n = function (k, def) { const v = Number(process.env[k]); return isFinite(v) && v > 0 ? v : def; };
   return {
-    cpl: n('PANEL_CPL_OBJETIVO', n('NEGOCIO_CPL_MAX', 60)),
+    // Cifras de Paid (5-nov): CPL objetivo ≤ 50 €, alerta si la media de 7 días pasa de 60 €;
+    // coste por RC de Meta: objetivo ≤ 170 €, máximo 330 €, solo con 2 RC o más en el mes.
+    cpl: n('PANEL_CPL_OBJETIVO', 50),
+    cplAlerta: n('PANEL_CPL_ALERTA', 60),
+    costeRC: n('PANEL_COSTE_RC_OBJETIVO', 170),
+    costeRCMax: n('PANEL_COSTE_RC_MAX', 330),
+    rcMinimo: n('PANEL_RC_MINIMO_COSTE', 2),
     topeMeta: n('PANEL_TOPE_META', 1000),
     rc: n('PANEL_OBJETIVO_RC', 20),
     clientes: n('PANEL_OBJETIVO_CLIENTES', 2),
@@ -121,8 +131,8 @@ function alertas(d, obj) {
   const eur = function (n) { return n2(n) + ' €'; };
   const add = function (a) { out.push(Object.assign({ fecha: hoy }, a)); };
   // 1. CPL alto (7 días)
-  if (d.paid7 && !d.paid7.error && d.paid7.total.cpl != null && d.paid7.total.cpl > obj.cpl) {
-    add({ peso: 80, nivel: 'alta', que: 'CPL de Meta por encima del objetivo', evidencia: 'CPL de 7 días: ' + eur(d.paid7.total.cpl) + ' (objetivo ' + eur(obj.cpl) + '), ' + d.paid7.total.leads + ' leads con ' + eur(d.paid7.total.gasto), causa: 'Anuncios cansados o público que no convierte', impacto: 'Menos leads por el mismo presupuesto', accion: 'Revisar en Paid los anuncios con más gasto y peor CPL', responsable: 'Paid', ir: 'paid' });
+  if (d.paid7 && !d.paid7.error && d.paid7.total.cpl != null && d.paid7.total.cpl > obj.cplAlerta) {
+    add({ peso: 80, nivel: 'alta', que: 'CPL de Meta por encima del límite', evidencia: 'CPL de 7 días: ' + eur(d.paid7.total.cpl) + ' (alerta a partir de ' + eur(obj.cplAlerta) + ', objetivo ' + eur(obj.cpl) + '), ' + d.paid7.total.leads + ' leads con ' + eur(d.paid7.total.gasto), causa: 'Anuncios cansados o público que no convierte', impacto: 'Menos leads por el mismo presupuesto', accion: 'Revisar en Paid los anuncios con más gasto y peor CPL', responsable: 'Paid', ir: 'paid' });
   }
   // 2. Anuncio que gasta sin leads (7 días, gasto ≥ 2× CPL objetivo)
   if (d.paid7 && !d.paid7.error) {
@@ -133,6 +143,11 @@ function alertas(d, obj) {
   // 3. Tope de Meta (≥ 85 % del tope mensual)
   if (d.paidMes && !d.paidMes.error && d.paidMes.total.gasto >= 0.85 * obj.topeMeta) {
     add({ peso: 70, nivel: d.paidMes.total.gasto >= obj.topeMeta ? 'alta' : 'media', que: 'Meta cerca del tope del mes', evidencia: eur(d.paidMes.total.gasto) + ' gastados de ' + eur(obj.topeMeta) + ' (' + Math.round(d.paidMes.total.gasto / obj.topeMeta * 100) + ' %)', causa: 'Ritmo de gasto por encima del plan', impacto: 'Se pasa del presupuesto del mes', accion: 'Bajar presupuestos diarios o decidir subir el tope', responsable: 'Paid / Maikel', ir: 'paid' });
+  }
+  // Coste por RC de Meta (Paid): mes en curso, con 2 RC o más
+  if (d.paidMes && !d.paidMes.error && d.rcMeta && !d.rcMeta.error && d.rcMeta.mes >= obj.rcMinimo) {
+    const coste = d.paidMes.total.gasto / d.rcMeta.mes;
+    if (coste > obj.costeRCMax) add({ peso: 82, nivel: 'alta', que: 'Cada RC de Meta cuesta más de lo que cubre el primer pago', evidencia: eur(coste) + ' por RC (' + eur(d.paidMes.total.gasto) + ' / ' + d.rcMeta.mes + ' RC); máximo ' + eur(obj.costeRCMax) + ', objetivo ' + eur(obj.costeRC), causa: 'Leads que no llegan a reunión con encaje', impacto: 'Captar un cliente por Meta deja de ser rentable', accion: 'Revisar con Paid los anuncios y el filtro del formulario', responsable: 'Paid', ir: 'paid' });
   }
   // 4. Ofertas paradas (Oferta, Negociación o Segunda reunión > 14 días)
   if (d.crm && !d.crm.error) {

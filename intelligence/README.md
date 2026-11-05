@@ -95,4 +95,4 @@ El motor, el Copilot y el modo demo no se tocan.
 
 **Umbrales de las alertas.** `NEGOCIO_CPL_MAX` (60 € por defecto) y `NEGOCIO_REBOTE_MAX` (0.03 por defecto).
 
-**Objetivos y umbrales del Resumen** (plan de Growth): `PANEL_CPL_OBJETIVO` (60 €), `PANEL_TOPE_META` (1.000 €), `PANEL_OBJETIVO_RC` (20), `PANEL_OBJETIVO_CLIENTES` (2) y `PANEL_RC_SEMANA_MIN` (4). Un solo login: la contraseña y la sesión del modo real de Intelligence (`INTELLIGENCE_CLAVE`) también abren el panel como `maikel`. Se apaga con `NEGOCIO_SESION_INTELLIGENCE=0`.
+**Objetivos y umbrales del Resumen** (plan de Growth): `PANEL_CPL_OBJETIVO` (50 €), `PANEL_CPL_ALERTA` (60 €), `PANEL_COSTE_RC_OBJETIVO` (170 €), `PANEL_COSTE_RC_MAX` (330 €, con 2 RC de Meta o más), `PANEL_TOPE_META` (1.000 €), `PANEL_OBJETIVO_RC` (20), `PANEL_OBJETIVO_CLIENTES` (2) y `PANEL_RC_SEMANA_MIN` (4). Un solo login: la contraseña y la sesión del modo real de Intelligence (`INTELLIGENCE_CLAVE`) también abren el panel como `maikel`. Se apaga con `NEGOCIO_SESION_INTELLIGENCE=0`.

@@ -242,7 +242,8 @@
       kpi('RC del mes', ent(k.rcMes) + '<small> / ' + ent(k.objetivoRC) + '</small>', vacio(k.rcMes) ? 'sin datos' : ent(k.rcSemana) + ' esta semana', k.rcMes >= k.objetivoRC ? 'bien' : '') +
       kpi('Clientes nuevos del mes', ent(k.clientesNuevos) + '<small> / ' + ent(k.objetivoClientes) + '</small>', vs(k.clientesNuevos, k.objetivoClientes), k.clientesNuevos >= k.objetivoClientes ? 'bien' : '') +
       kpi('Gasto Meta del mes', eur(k.gastoMetaMes), vacio(k.gastoMetaMes) ? '' : pct(k.gastoMetaMes / k.topeMeta, true) + ' del tope de ' + eur(k.topeMeta), k.gastoMetaMes >= 0.85 * k.topeMeta ? 'mal' : '') +
-      kpi('CPL de 7 días', eur(k.cpl7, true), 'objetivo ' + eur(k.cplObjetivo), vacio(k.cpl7) ? '' : k.cpl7 > k.cplObjetivo ? 'mal' : 'bien') +
+      kpi('CPL de 7 días', eur(k.cpl7, true), 'objetivo ' + eur(k.cplObjetivo) + ' · alerta > ' + eur(k.cplAlerta), vacio(k.cpl7) ? '' : k.cpl7 > k.cplAlerta ? 'mal' : k.cpl7 <= k.cplObjetivo ? 'bien' : '') +
+      kpi('Coste por RC de Meta', vacio(k.costeRC) ? '—' : eur(k.costeRC), vacio(k.costeRC) ? (vacio(k.rcMeta) ? 'sin datos' : ent(k.rcMeta) + ' RC de Meta: hacen falta ' + k.rcMinimo) : ent(k.rcMeta) + ' RC · objetivo ' + eur(k.costeRCObjetivo), vacio(k.costeRC) ? '' : k.costeRC > k.costeRCMax ? 'mal' : k.costeRC <= k.costeRCObjetivo ? 'bien' : '') +
       kpi('MRR confirmado', k.sinHoja ? '—' : eur(k.mrr), k.sinHoja ? 'sin conexión con la hoja' : 'cuotas de clientes', k.sinHoja ? 'aviso-kpi' : '') +
       kpi('Caja disponible', k.sinHoja ? '—' : eur(k.caja), k.sinHoja ? 'sin conexión con la hoja' : 'saldo en banco', k.sinHoja ? 'aviso-kpi' : '') +
       '</div>';

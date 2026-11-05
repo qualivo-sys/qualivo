@@ -424,5 +424,33 @@ async function leadsRango(desde, hasta, fresco) {
   return { total: f.length, ab: f.filter(function (x) { return x.nivel === 'A' || x.nivel === 'B'; }).length, porDia: porDia };
 }
 
-module.exports = { leads, crm, accion, accionesActivas, opcionesRC, base, rc, clientesNuevos, hoy, leadsRango };
+// RC de Meta (definición de Paid, la misma que api/senales-meta.js manda como «Qualified»):
+// lead con etiqueta meta-lead-*, cuyo trato tiene reunion-encaja o está en Oferta, Segunda reunión,
+// Negociación, Piloto o Cliente (o ganado). Se cuenta en el mes en que el trato cambió de etapa por
+// última vez: es una aproximación a la fecha en que encajó (GHL no guarda la fecha de cada etapa).
+async function rcMeta(fresco) {
+  const b = await base(fresco);
+  const etapa = {};
+  b.embudos.forEach(function (e) { e.etapas.forEach(function (s) { etapa[s.id] = s.nombre; }); });
+  const cPorId = {};
+  b.contactos.forEach(function (c) { cPorId[c.id] = c; });
+  const mes = C.diaMadrid(Date.now()).slice(0, 7);
+  const vistos = {};
+  b.oportunidades.forEach(function (o) {
+    const cid = o.contactId || (o.contact && o.contact.id);
+    const c = cPorId[cid];
+    if (!c) return;
+    const tags = (c.tags || []).map(function (t) { return String(t).toLowerCase(); });
+    if (!tags.some(function (t) { return t.indexOf('meta-lead-') === 0; })) return;
+    const n = String(etapa[o.pipelineStageId] || '').toLowerCase();
+    const venta = /piloto|^cliente/.test(n) || o.status === 'won' || tags.indexOf('cliente') >= 0 || tags.indexOf('piloto') >= 0;
+    const encaja = venta || tags.indexOf('reunion-encaja') >= 0 || /oferta|propuesta|segunda|negociaci/.test(n);
+    if (!encaja || (o.status !== 'open' && o.status !== 'won')) return;
+    const t = fecha(o.lastStageChangeAt) || fecha(o.updatedAt);
+    if (t && C.diaMadrid(t).slice(0, 7) === mes) vistos[cid] = String(c.companyName || o.name || '').trim();
+  });
+  return { mes: Object.keys(vistos).length, nombres: Object.keys(vistos).map(function (k) { return vistos[k]; }) };
+}
+
+module.exports = { leads, crm, accion, accionesActivas, opcionesRC, base, rc, clientesNuevos, hoy, leadsRango, rcMeta };
 
