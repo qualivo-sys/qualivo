@@ -1,0 +1,164 @@
+/* Panel de negocio · Qualivo Intelligence. Usa los tokens y piezas de ../app.css
+   (barra lateral, botones, tarjetas, KPI, tablas) y añade lo propio del panel. */
+
+/* ---------- Entrada ---------- */
+.ng-entrada { min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 40px 18px; background: radial-gradient(1100px 480px at 50% -10%, #E3F3F0 0%, var(--fondo) 60%); }
+.ng-entrada-caja { width: 100%; max-width: 380px; background: var(--superficie); border: 1px solid var(--borde); border-radius: 16px; box-shadow: var(--sombra); padding: 30px 26px; display: flex; flex-direction: column; gap: 8px; }
+.ng-entrada-caja img { height: 28px; width: auto; align-self: flex-start; margin-bottom: 14px; }
+.ng-entrada-caja h1 { font-size: 22px; font-weight: 800; letter-spacing: -.02em; margin: 4px 0 12px; }
+.ng-entrada-caja label { font-weight: 700; font-size: 12.5px; margin-top: 6px; }
+.ng-entrada-caja input { height: 44px; border-radius: 10px; border: 1px solid var(--borde); padding: 0 14px; background: #fff; font-size: 15px; }
+.ng-entrada-caja input:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(14,124,116,.14); }
+.ng-entrada-caja .btn { margin-top: 14px; }
+.ng-error { color: var(--rojo); background: var(--rojo-bg); border-radius: 8px; padding: 8px 10px; font-weight: 600; font-size: 12.5px; }
+.ng-nota { color: var(--gris-2); font-size: 12px; margin-top: 10px; }
+.ng-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Estructura: sin Copilot, dos columnas ---------- */
+.app.ng-app { grid-template-columns: 220px minmax(0, 1fr); }
+.ng-modulo { padding: 0 20px 6px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gris-2); }
+.ng-quien { font-size: 12px; color: var(--gris); font-weight: 600; padding: 0 4px; }
+.ng-barra { gap: 10px; }
+.ng-periodo .select { width: auto; min-width: 150px; }
+.ng-fechas { display: inline-flex; gap: 6px; align-items: center; }
+.ng-fechas input { height: 34px; border: 1px solid var(--borde); border-radius: var(--radio-s); padding: 0 8px; background: var(--superficie); }
+.vista { max-width: 1400px; width: 100%; }
+
+/* ---------- Bloques ---------- */
+.ng-sec { display: flex; flex-direction: column; gap: 16px; }
+.ng-rejilla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.ng-rejilla-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.ng-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--borde); border: 1px solid var(--borde); border-radius: var(--radio); overflow: hidden; }
+.ng-kpis .kpi strong { font-size: 21px; }
+.ng-kpis .kpi em.aviso-kpi { color: var(--ambar); }
+.tarjeta .ng-sub { color: var(--gris); font-size: 12.5px; margin-top: 3px; }
+.tarjeta-cab { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.ng-filtros { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ng-filtros input, .ng-filtros select { height: 32px; border: 1px solid var(--borde); border-radius: var(--radio-s); padding: 0 10px; background: var(--superficie); font-weight: 500; }
+.ng-filtros input[type=search] { min-width: 220px; }
+.ng-tabla-caja { overflow: auto; max-height: 560px; border: 1px solid var(--borde); border-radius: var(--radio-s); }
+.ng-tabla-caja .tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.ng-tabla-caja .tabla td { padding: 8px 12px; }
+.ng-tabla-caja .tabla th { padding: 9px 12px; }
+.ng-vacio { color: var(--gris); padding: 18px 4px; }
+.ng-aviso-caja { background: var(--ambar-bg); color: #6b4a10; border: 1px solid #f0dcae; border-radius: var(--radio-s); padding: 10px 12px; font-size: 12.5px; font-weight: 600; }
+.ng-aviso-caja.error { background: var(--rojo-bg); border-color: #f2c9c5; color: var(--rojo); }
+.ng-cargando { display: flex; align-items: center; gap: 10px; color: var(--gris); padding: 30px 0; }
+.ng-cargando i { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--borde); border-top-color: var(--verde); animation: ng-gira .8s linear infinite; }
+@keyframes ng-gira { to { transform: rotate(360deg); } }
+
+/* Etiquetas de estado */
+.ng-pill { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; background: var(--hover); color: var(--tinta-2); }
+.ng-pill.bien { background: var(--verde-bg); color: var(--verde-txt); }
+.ng-pill.mal { background: var(--rojo-bg); color: var(--rojo); }
+.ng-pill.medio { background: var(--ambar-bg); color: #8a5a10; }
+.ng-pill.info { background: var(--azul-bg); color: var(--azul); }
+.num.mal, td.mal { color: var(--rojo); font-weight: 700; }
+.num.bien, td.bien { color: var(--verde-txt); font-weight: 700; }
+
+/* ---------- Alertas (qué ha pasado → evidencia → acción → responsable) ---------- */
+.ng-alertas { display: flex; flex-direction: column; gap: 10px; }
+.ng-alerta { display: grid; grid-template-columns: 4px minmax(0, 1fr) auto; gap: 14px; align-items: start; background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: 14px 16px 14px 0; overflow: hidden; }
+.ng-alerta::before { content: ''; align-self: stretch; background: var(--ambar); border-radius: 0 3px 3px 0; }
+.ng-alerta.alta::before { background: var(--rojo); }
+.ng-alerta h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.ng-alerta dl { display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 3px 10px; margin: 0; font-size: 12.5px; }
+.ng-alerta dt { color: var(--gris-2); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; padding-top: 1px; }
+.ng-alerta dd { margin: 0; color: var(--tinta-2); }
+.ng-quien-alerta { font-size: 11.5px; font-weight: 700; color: var(--lila-txt); background: var(--lila); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+
+/* ---------- Gráficos (SVG propio) ---------- */
+.ng-graf { position: relative; width: 100%; }
+.ng-graf svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ng-graf .ng-eje { fill: var(--gris-2); font-size: 10.5px; }
+.ng-graf .ng-rej { stroke: var(--borde-2); }
+.ng-graf .ng-bar { fill: var(--verde-2); }
+.ng-graf .ng-bar.neg { fill: var(--coral); }
+.ng-graf .ng-lin { fill: none; stroke: var(--tinta); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.ng-graf .ng-pt { fill: var(--superficie); stroke: var(--tinta); stroke-width: 2; }
+.ng-graf .ng-bar:hover { opacity: .8; }
+.ng-leyenda { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11.5px; color: var(--gris); margin-top: 8px; }
+.ng-leyenda i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; background: var(--verde-2); }
+.ng-leyenda i.l { height: 3px; border-radius: 2px; background: var(--tinta); vertical-align: 2px; }
+.ng-leyenda i.c { background: var(--coral); }
+.ng-tip { position: absolute; pointer-events: none; z-index: 5; background: var(--tinta); color: #fff; font-size: 11.5px; font-weight: 600; padding: 6px 9px; border-radius: 7px; white-space: nowrap; transform: translate(-50%, -110%); box-shadow: var(--sombra-2); }
+.ng-tip b { display: block; color: var(--verde-2); font-weight: 700; }
+
+/* Barras horizontales (niveles, estados, etapas) */
+.ng-hbarras { display: flex; flex-direction: column; gap: 7px; }
+.ng-hb { display: grid; grid-template-columns: minmax(90px, 38%) minmax(0, 1fr) 70px; gap: 10px; align-items: center; font-size: 12.5px; }
+.ng-hb .ng-et { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--tinta-2); font-weight: 600; }
+.ng-hb .pista { height: 14px; background: var(--hover); border-radius: 4px; overflow: hidden; display: flex; }
+.ng-hb .pista span { display: block; height: 100%; background: var(--verde-2); }
+.ng-hb .pista span.c { background: var(--coral); }
+.ng-hb .pista span.g { background: var(--gris-3); }
+.ng-hb .ng-v { text-align: right; font-weight: 700; white-space: nowrap; }
+.ng-hb .ng-v small { color: var(--coral); font-weight: 700; }
+.ng-embudo-t { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gris-2); margin: 12px 0 2px; }
+
+/* Botones de acción en tablas */
+.ng-acciones { display: flex; gap: 4px; flex-wrap: nowrap; }
+.ng-acciones .btn { height: 26px; padding: 0 8px; font-size: 11.5px; }
+.ng-candado { font-size: 11px; color: var(--gris-2); }
+
+/* ---------- Diálogo ---------- */
+.ng-modal-velo { position: fixed; inset: 0; background: rgba(16,19,25,.42); z-index: 60; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.ng-modal { width: 100%; max-width: 520px; max-height: calc(100vh - 32px); overflow: auto; background: var(--superficie); border-radius: 14px; box-shadow: var(--sombra-2); }
+.ng-modal header { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 6px; }
+.ng-modal h2 { font-size: 16px; font-weight: 800; }
+.ng-modal form > div { padding: 6px 18px 4px; display: flex; flex-direction: column; gap: 10px; }
+.ng-modal footer { display: flex; justify-content: flex-end; gap: 8px; padding: 14px 18px 18px; }
+.ng-modal label { font-weight: 700; font-size: 12.5px; display: flex; flex-direction: column; gap: 5px; }
+.ng-modal input, .ng-modal select, .ng-modal textarea { height: 38px; border: 1px solid var(--borde); border-radius: 8px; padding: 0 10px; background: #fff; font-weight: 500; }
+.ng-modal textarea { height: 90px; padding: 8px 10px; resize: vertical; }
+.ng-modal .ng-ficha { background: var(--fondo); border-radius: 10px; padding: 10px 12px; font-size: 12.5px; }
+.ng-modal .ng-ficha b { font-weight: 700; }
+.ng-modal .ng-aviso-caja ul { margin: 6px 0 0; padding-left: 18px; font-weight: 500; }
+.ng-modal .ng-check { flex-direction: row; align-items: flex-start; gap: 8px; font-weight: 600; }
+.ng-modal .ng-check input { height: auto; margin-top: 2px; }
+
+/* ---------- Pantallas medianas y móvil ---------- */
+@media (max-width: 1180px) {
+  .app.ng-app { grid-template-columns: 200px minmax(0, 1fr); }
+  .avisos { right: 18px; }
+}
+@media (max-width: 1000px) {
+  .ng-rejilla, .ng-rejilla-3 { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .app.ng-app { grid-template-columns: minmax(0, 1fr); }
+  .ng-modulo { display: none; }
+  .ng-barra { height: auto; min-height: 56px; flex-wrap: wrap; padding: 8px 14px; }
+  .ng-barra .barra-acciones { flex: 1; justify-content: flex-end; }
+  .ng-periodo .select { min-width: 0; }
+  .ng-fechas { flex-wrap: wrap; }
+  .ng-filtros input[type=search] { min-width: 0; width: 100%; }
+  .ng-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ng-alerta { grid-template-columns: 4px minmax(0, 1fr); }
+  .ng-alerta .ng-quien-alerta { grid-column: 2; justify-self: start; }
+  .ng-alerta dl { grid-template-columns: minmax(0, 1fr); }
+  .ng-hb { grid-template-columns: minmax(80px, 40%) minmax(0, 1fr) 54px; }
+  .ng-tabla-caja { max-height: none; overflow: visible; border: 0; }
+  .ng-tabla-caja .tabla thead { display: none; }
+  .ng-tabla-caja .tabla tr { display: block; background: var(--superficie); border: 1px solid var(--borde); border-radius: 10px; padding: 6px 0; margin-bottom: 8px; }
+  .ng-tabla-caja .tabla td { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 4px 12px; border: 0; text-align: right; }
+  .ng-tabla-caja .tabla td::before { content: attr(data-t); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--gris-2); text-align: left; flex: none; }
+  .ng-tabla-caja .tabla td[data-t=""]::before { display: none; }
+  .ng-tabla-caja .tabla td:not([data-t]) { display: table-cell; text-align: left; }
+  .ng-tabla-caja .tabla td:not([data-t])::before { display: none; }
+  .ng-acciones { flex-wrap: wrap; justify-content: flex-end; }
+  .ng-modal-velo { align-items: flex-end; padding: 0; }
+  .ng-modal { border-radius: 14px 14px 0 0; max-height: 92vh; }
+}
+
+/* app.css encoge la barra lateral a iconos entre 1181 y 1439 px (por el Copilot); aquí no hay Copilot. */
+@media (min-width: 1181px) and (max-width: 1439px) {
+  .ng-app .marca { display: block; padding: 18px 18px 14px; }
+  .ng-app .marca .marca-grande { display: block; }
+  .ng-app .nav { align-items: stretch; padding: 8px 10px; }
+  .ng-app .nav button { width: auto; justify-content: flex-start; padding: 0 10px; }
+  .ng-app .nav button span:not(.cuenta) { display: inline; }
+  .ng-app .lateral-pie { padding: 14px; }
+  .avisos { right: 18px; }
+}
+.avisos { right: 18px; }

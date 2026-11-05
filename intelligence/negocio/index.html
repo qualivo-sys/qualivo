@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="same-origin">
+<title>Panel de negocio · Qualivo Intelligence</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../app.css?v=20261105n">
+<link rel="stylesheet" href="negocio.css?v=20261105n">
+</head>
+<body>
+<noscript>Este panel necesita JavaScript.</noscript>
+
+<!-- Entrada: usuario y contraseña (se comprueban en el servidor) -->
+<section id="entrada" class="ng-entrada" hidden>
+  <form class="ng-entrada-caja" id="formEntrada" autocomplete="on">
+    <img src="/assets/img/qualivo-logo.png" alt="Qualivo" width="132" height="32">
+    <p class="eyebrow">Intelligence · Panel de negocio</p>
+    <h1>Entra con tu usuario</h1>
+    <label for="usuario">Usuario</label>
+    <input id="usuario" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required maxlength="40">
+    <label for="clave">Contraseña</label>
+    <input id="clave" name="password" type="password" autocomplete="current-password" required maxlength="200">
+    <p class="ng-error" id="errorEntrada" role="alert" hidden></p>
+    <button class="btn btn-primario btn-grande btn-bloque" type="submit">Entrar</button>
+    <p class="ng-nota">Privado. Datos en vivo de Meta, GHL, Smartlead, Instagram y la hoja de Facturación.</p>
+  </form>
+</section>
+
+<!-- Panel -->
+<div id="app" class="app ng-app" hidden>
+  <aside class="lateral ng-lateral" id="lateral" aria-label="Secciones">
+    <div class="marca">
+      <img class="marca-grande" src="/assets/img/qualivo-logo.png" alt="Qualivo" width="104" height="25">
+    </div>
+    <p class="ng-modulo">Panel de negocio</p>
+    <nav class="nav" id="nav"></nav>
+    <div class="lateral-pie">
+      <span class="ng-quien" id="quien"></span>
+      <a class="btn btn-fantasma btn-bloque" href="/intelligence/?sector=qualivo&amp;modo=real">Volver a Intelligence</a>
+      <button class="btn btn-fantasma btn-bloque" id="btnSalir" type="button">Salir</button>
+    </div>
+  </aside>
+
+  <main class="principal">
+    <header class="barra ng-barra">
+      <div class="barra-titulo">
+        <span class="sistema">Intelligence <b>· Negocio</b></span>
+      </div>
+      <div class="barra-acciones">
+        <label class="ng-periodo" id="cajaPeriodo">
+          <span class="ng-oculto">Periodo</span>
+          <select id="periodo" class="select">
+            <option value="mes">Este mes</option>
+            <option value="mes_anterior">Mes anterior</option>
+            <option value="7d">Últimos 7 días</option>
+            <option value="30d">Últimos 30 días</option>
+            <option value="hoy">Hoy</option>
+            <option value="personalizado">Elegir fechas…</option>
+          </select>
+        </label>
+        <span class="ng-fechas" id="cajaFechas" hidden>
+          <input type="date" id="desde" aria-label="Desde"><input type="date" id="hasta" aria-label="Hasta">
+          <button class="btn btn-mini" id="btnFechas" type="button">Aplicar</button>
+        </span>
+        <span class="reloj" id="actualizado" title="Hora de la última lectura"></span>
+        <button class="btn btn-icono" id="btnRecargar" type="button" title="Volver a leer las fuentes" aria-label="Volver a leer"></button>
+      </div>
+    </header>
+    <div class="vista" id="vista" tabindex="-1"></div>
+  </main>
+</div>
+
+<!-- Diálogo de confirmación y formularios -->
+<div class="ng-modal-velo" id="modal" hidden>
+  <div class="ng-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <header><h2 id="modalTitulo"></h2><button class="btn btn-icono" type="button" data-cerrar aria-label="Cerrar"></button></header>
+    <form id="modalForm"><div id="modalCuerpo"></div>
+      <footer><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn btn-primario" type="submit" id="modalOk">Confirmar</button></footer>
+    </form>
+  </div>
+</div>
+<div class="avisos" id="avisos" aria-live="polite"></div>
+
+<script src="../js/iconos.js?v=20261105n"></script>
+<script src="negocio.js?v=20261105n"></script>
+</body>
+</html>

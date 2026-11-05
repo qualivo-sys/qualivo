@@ -74,3 +74,23 @@ El motor, el Copilot y el modo demo no se tocan.
 - Lee los leads `paid`/`leadform` de los últimos 30 días (sin `demo`), sus etiquetas de activación, conversaciones, oportunidades de los dos pipelines y citas. No devuelve emails ni teléfonos. Caché de 5 minutos; el botón de reinicio fuerza una lectura nueva.
 - Si `PAUSA_TOTAL` está activa, sale el aviso de automatizaciones en pausa y la siguiente acción pasa a Maikel.
 - En el Copilot, en modo real, a Claude solo le llegan los campos de la lista `CAMPOS_REAL` de `api/intelligence-copilot.js`: nombre de pila con inicial, nivel, etapa y puntuaciones. Nada de empresa, ciudad ni textos de mensajes.
+
+## Panel de negocio (privado)
+
+`/intelligence/negocio/` es el panel de negocio de Qualivo: Resumen, Paid, Leads, Outbound, CRM, Clientes, Redes y Finanzas. Encargo de Maikel del 5-nov; producto, Growth.
+
+**Acceso.** Usuario y contraseña comprobados en el servidor (`api/_negocio-sesion.js`). Los usuarios van en `NEGOCIO_USUARIOS` (`usuario:contraseña;…`). La sesión es la cookie `qi_negocio`: firmada, HttpOnly, de 12 horas y limitada a /api. Si cambia cualquier contraseña, se cierran todas las sesiones.
+
+**Datos.** Solo `api/intelligence-negocio.js` sirve datos, siempre con `no-store`, y sin sesión responde 401.
+- Lee en vivo Meta (`act_3453332464718877` y las cuentas de los clientes), GHL, Smartlead, Instagram y la hoja «Facturación», con caché de 3 a 15 minutos en memoria.
+- En Leads, el navegador solo recibe la empresa: ni correos ni teléfonos.
+- La hoja se lee con `GOOGLE_SA_JSON`, que necesita permiso de editor.
+
+**Datos manuales.** Saldos, huchas, estado de cobro, suscripciones, deuda y estado de cada cliente se guardan en la pestaña «PANEL · datos manuales» de la hoja. Esa pestaña la crea el panel.
+
+**Acciones en GHL.** Son cinco: mover de etapa, nota, tarea, resultado de reunión y marcar RC.
+- Se hacen de una en una, con confirmación, y solo las pueden hacer los usuarios de `NEGOCIO_ACCIONES_USUARIOS` (por defecto `maikel`).
+- Usan la clave `GHL_PANEL_API_KEY` y solo funcionan con `NEGOCIO_ACCIONES=1`.
+- Cada acción deja una nota «[Panel] …» en el contacto y una fila en «PANEL · registro».
+
+**Umbrales de las alertas.** `NEGOCIO_CPL_MAX` (60 € por defecto) y `NEGOCIO_REBOTE_MAX` (0.03 por defecto).
