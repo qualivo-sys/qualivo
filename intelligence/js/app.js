@@ -356,7 +356,13 @@
     const nAt = atencion().length;
     const nSen = estado.contactos.reduce(function (a, c) { return a + c.x.senales.filter(function (s) { return s.humano; }).length; }, 0);
     const ocultas = estado.cfg.vistasOcultas || [];
-    $('#nav').innerHTML = (estado.cfg.vistasExtra || []).concat(VISTAS.filter(function (v) { return ocultas.indexOf(v.id) < 0; })).map(function (v) {
+    const lista = (estado.cfg.vistasExtra || []).concat(VISTAS.filter(function (v) { return ocultas.indexOf(v.id) < 0; }));
+    (QV.navExtra ? QV.navExtra(estado) : []).forEach(function (x) { // pestañas de demo (outbound-demo.js)
+      const k = lista.map(function (v) { return v.id; }).indexOf(x.tras);
+      if (lista.some(function (v) { return v.id === x.id; })) return;
+      lista.splice(k < 0 ? lista.length : k + 1, 0, x);
+    });
+    $('#nav').innerHTML = lista.map(function (v) {
       let cuenta = '';
       if (v.id === 'oportunidades' && nAt) cuenta = '<span class="cuenta">' + nAt + '</span>';
       if (v.id === 'senales' && nSen) cuenta = '<span class="cuenta">' + nSen + '</span>';
