@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Aviso legal y privacidad · Al Milímetro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&display=swap">
+<style>
+/* Aviso legal y política de privacidad de la landing de Al Milímetro.
+   Los huecos entre llaves dobles los rellena scripts/al-milimetro/legal.js con los datos del titular. Borrador [E]: revisarlo con asesoría legal. */
+:root{--crema:#F5F4E7;--tinta:#252525;--tinta2:#3B3936;--naranja:#F46315;--linea:#DED8C2;--serif:"DM Serif Display",Georgia,serif;--sans:"Inter","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--crema);color:var(--tinta);font:400 16px/1.65 var(--sans)}
+.wrap{max-width:760px;margin-inline:auto;padding:40px 16px 64px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.15}
+h1{font-size:clamp(30px,5vw,42px);margin:16px 0 8px}
+h2{font-size:24px;margin:36px 0 8px;padding-top:20px;border-top:2px solid var(--linea)}
+p,li{color:var(--tinta2)}
+ul{padding-left:20px}
+a{color:var(--naranja)}
+.back{font-weight:600;text-decoration:none}
+.small{font-size:14px;color:#6A665E}
+table{border-collapse:collapse;width:100%;font-size:15px}
+td{border-top:1px solid var(--linea);padding:10px 8px;vertical-align:top}
+td:first-child{font-weight:600;width:34%}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a class="back" href="../">← Volver</a>
+  <h1>Aviso legal y privacidad</h1>
+  <p class="small">Última actualización: {{FECHA}}</p>
+
+  <h2>Quién es el responsable</h2>
+  <table>
+    <tr><td>Titular</td><td>{{TITULAR}}</td></tr>
+    <tr><td>Nombre comercial</td><td>Al Milímetro</td></tr>
+    <tr><td>NIF</td><td>{{NIF}}</td></tr>
+    <tr><td>Dirección</td><td>{{DIRECCION}}</td></tr>
+    <tr><td>Email</td><td>{{EMAIL}}</td></tr>
+    <tr><td>Profesión</td><td>Arquitecta, colegiada en {{COLEGIO}} con el número {{COLEGIADO}}</td></tr>
+  </table>
+  <p>Esta página la gestiona Qualivo por encargo del titular.</p>
+
+  <h2>Qué datos recogemos</h2>
+  <p>Los que nos das en el formulario: tu nombre, tu teléfono, tu email si lo pones, y tus respuestas sobre la obra (qué quieres reformar, dónde está la vivienda, cuándo quieres empezar y qué presupuesto tienes en mente).</p>
+
+  <h2>Para qué los usamos</h2>
+  <ul>
+    <li>Darte una cifra orientativa y contestar a tu petición.</li>
+    <li>Escribirte por WhatsApp, por teléfono o por email para quedar para la visita y hacer el seguimiento del presupuesto.</li>
+    <li>Enviarte algunos mensajes de seguimiento. Paran en cuanto nos contestas o nos pides que paremos.</li>
+  </ul>
+  <p>No tomamos decisiones automáticas que te afecten: la clasificación de tu petición solo sirve para ordenar a quién llamar antes.</p>
+
+  <h2>Por qué podemos hacerlo</h2>
+  <p>Porque nos das tu consentimiento al marcar la casilla del formulario y porque nos pides un presupuesto (medidas precontractuales a petición tuya). Puedes retirar el consentimiento cuando quieras.</p>
+
+  <h2>Cuánto tiempo los guardamos</h2>
+  <p>Mientras hablamos de tu obra. Si no llega a hacerse, los borramos en un plazo máximo de 12 meses desde el último contacto. Si la obra se hace, los guardamos lo que exijan las obligaciones legales.</p>
+
+  <h2>Quién más los ve</h2>
+  <p>No cedemos tus datos a ninguna otra empresa. Para funcionar usamos estos proveedores, que solo tratan los datos por encargo nuestro:</p>
+  <ul>
+    <li>Qualivo: gestión de la página, del CRM y de los mensajes.</li>
+    <li>HighLevel (LeadConnector): el CRM donde se guarda tu petición.</li>
+    <li>Vercel: el alojamiento de esta página.</li>
+    <li>{{PROVEEDOR_WHATSAPP}}: el envío de los mensajes de WhatsApp.</li>
+  </ul>
+  <p>Algunos de estos proveedores están en Estados Unidos. La transferencia se hace con las garantías que exige la normativa europea (Marco de Privacidad de Datos UE-EE. UU. o cláusulas contractuales tipo).</p>
+
+  <h2>Tus derechos</h2>
+  <p>Puedes pedir acceder a tus datos, corregirlos, borrarlos, oponerte a su uso, limitarlo o llevártelos a otro sitio. Escribe a {{EMAIL}}. Si crees que no lo hemos hecho bien, puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es).</p>
+
+  <h2>Medición</h2>
+  <p>Esta página mide las visitas y el uso del formulario para saber qué anuncios funcionan. Las herramientas que usan cookies o identificadores solo se activan si las aceptas.</p>
+</main>
+</body>
+</html>
