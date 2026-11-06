@@ -7,7 +7,7 @@
 - **Lanzamiento:** necesita el OK de Maikel porque es un anuncio nuevo de ~10 €/día. No se lanza nada sin él.
 
 **Vídeo base:**
-- Es el anuncio viejo de formación (anuncio 120246158348220358, creativo 4544689645776556): la serie «sistema» de septiembre, versión formación, de 70 s, con la escena en `../2026-09-17-sistema/escena-formacion*.html`. **Pendiente de que Paid confirme que es este vídeo.**
+- Es el anuncio viejo de formación (anuncio 120246158348220358, creativo 4544689645776556): la serie «sistema» de septiembre, versión formación, de 70 s, con la escena en `../2026-09-17-sistema/escena-formacion*.html`. Paid lo confirmó por la API de Meta el 6-nov: «QV_3V_formacion_Sep26» (9:16) y «QV_3V_formacion_45_Sep26» (4:5), los dos de 69,8 s [C].
 - **Voz:** Javier Rojas, ElevenLabs multilingual v2, la misma del original. Comprobado por similitud espectral con la locución original: 0,96 frente a 0,83 de la otra voz de Javier.
 - **Música:** musica-lofi-b, comprobada por correlación con la mezcla (0,98).
 - **Volumen:** el gancho queda a -15,6 / -16 LUFS, como el original.
@@ -45,7 +45,7 @@ Si tu academia ya invierte en anuncios, esto es para ti. Mira lo que pasa con ca
 **Titular (los tres):** Del anuncio a la matrícula, conectado.
 **Descripción (los tres):** Diagnóstico gratuito de 30 minutos.
 
-Paid tiene que confirmar si el diagnóstico del formulario viejo se anuncia de 15 o de 30 minutos. Aquí va 30, como en la web.
+**Duración del diagnóstico:** 30 minutos, confirmado por Paid el 6-nov: es lo que dice la página de reserva.
 
 ## Cómo medimos
 
