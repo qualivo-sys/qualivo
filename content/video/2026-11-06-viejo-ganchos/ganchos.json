@@ -1,5 +1,22 @@
 {
- "g1": {"h1": "¿Sabes qué anuncio te trae <i>alumnos?</i>", "p": "Y cuál solo te trae formularios. Mira lo que montamos dentro de una academia.", "voz": "¿Sabes qué anuncio te trae alumnos… y cuál solo te trae formularios?"},
- "g2": {"h1": "Te piden información. <i>Y no se matriculan.</i>", "p": "Mira dónde se pierde cada solicitud, del anuncio a la matrícula.", "voz": "Te piden información del curso… y no se matriculan. Mira dónde se pierden."},
- "g3": {"h1": "¿Tu academia ya invierte <i>en anuncios?</i>", "p": "Mira lo que pasa con cada solicitud después del clic.", "voz": "Si tu academia ya invierte en anuncios, mira lo que pasa con cada solicitud."}
+ "g1": {
+  "h1": "¿Sabes qué campaña te trae <i>matrículas?</i>",
+  "p": "Y cuál solo te trae formularios. Mira lo que montamos dentro de una academia.",
+  "voz": "¿Sabes qué campaña te trae matrículas… y cuál solo te trae formularios?"
+ },
+ "g2": {
+  "h1": "Te piden información. <i>Y no se matriculan.</i>",
+  "p": "Mira dónde se pierde cada solicitud, del anuncio a la matrícula.",
+  "voz": "Te piden información del curso… y no se matriculan. Mira dónde se pierden."
+ },
+ "g3": {
+  "h1": "¿Tu academia ya invierte <i>en anuncios?</i>",
+  "p": "Mira lo que pasa con cada solicitud después del clic.",
+  "voz": "Si tu academia ya invierte en anuncios, mira lo que pasa con cada solicitud."
+ },
+ "g4": {
+  "h1": "¿Ya tienes a alguien con <i>los anuncios?</i>",
+  "p": "Perfecto. Nosotros conectamos lo que viene después: de la solicitud a la matrícula.",
+  "voz": "¿Ya tienes a alguien con los anuncios? Nosotros conectamos lo que viene después."
+ }
 }

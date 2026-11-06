@@ -15,5 +15,5 @@ for src, dst in (('escena-formacion.html', 'escena-gancho.html'), ('escena-forma
     js = ('<script>const GANCHOS=' + json.dumps(G, ensure_ascii=False) + ';(function(){const g=GANCHOS[(location.hash||"#g1").slice(1)];'
           'document.getElementById("hk1").innerHTML=g.h1;document.getElementById("hkp").innerHTML=g.p;window.setT&&window.setT(0);})();</script>')
     h = h.replace('</html>', js + '</html>') if '</html>' in h else h + js
-    h = h.replace('#hook h1{font-family:Anton;font-size:128px', '#hook h1{font-family:Anton;font-size:150px').replace('#hook h1{font-family:Anton;font-size:112px', '#hook h1{font-family:Anton;font-size:122px')
+    h = h.replace('#hook h1{font-family:Anton;font-size:128px', '#hook h1{font-family:Anton;font-size:150px').replace('font-size:150px;line-height:.95','font-size:150px;line-height:1.04').replace('#hook h1{font-family:Anton;font-size:112px', '#hook h1{font-family:Anton;font-size:122px').replace('font-size:122px;line-height:.95','font-size:122px;line-height:1.04')
     open(f'{A}/{dst}', 'w').write(h); print('ok', dst)
