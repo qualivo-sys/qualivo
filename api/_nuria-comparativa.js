@@ -10,7 +10,8 @@
 //   tiene cita, se usa la columna «Fuente» de la hoja.
 // - Leads: solo en los embudos que tienen registro (Perpetuo, VSL, Test web).
 // - Closers: citas por persona asignada en GHL (agendadas, presentadas, no shows,
-//   canceladas) y ventas por la columna «Closer» de la hoja.
+//   canceladas) y ventas por la columna «Closer» de la hoja; en total y por embudo
+//   (el de la agenda de la cita; el de la venta, el mismo que en la tabla de embudos).
 // Solo lectura y sin datos personales en la respuesta.
 
 const N = require('./_nuria-semana.js');
@@ -58,9 +59,13 @@ async function comparativa(desde, hasta) {
   usuarios.forEach(function (u) { nombreUsuario[u.id] = ((u.firstName || '') + ' ' + (u.lastName || '')).trim(); });
   const closers = {};
   const pila = function (n) { return String(n || '').trim().split(/\s+/)[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); };
-  const closerDe = function (nombre) {
+  const porEmbudo = {};   // embudo → { closerKey → métricas }
+  const nuevo = function (k, nombre) { return { closer: k === '—' ? 'Sin closer' : String(nombre).trim().split(/\s+/)[0], agendadas: 0, presentadas: 0, noShow: 0, canceladas: 0, pendientes: 0, ventas: 0, facturacion: 0, cobrado: 0 }; };
+  // Devuelve los contadores de la closer en total y, si se da, en ese embudo; fn se aplica a los dos.
+  const sumarCloser = function (nombre, embudo, fn) {
     const k = pila(nombre) || '—';
-    return closers[k] = closers[k] || { closer: k === '—' ? 'Sin closer' : String(nombre).trim().split(/\s+/)[0], agendadas: 0, presentadas: 0, noShow: 0, canceladas: 0, pendientes: 0, ventas: 0, facturacion: 0, cobrado: 0 };
+    fn(closers[k] = closers[k] || nuevo(k, nombre));
+    if (embudo) { const e = porEmbudo[embudo] = porEmbudo[embudo] || {}; fn(e[k] = e[k] || nuevo(k, nombre)); }
   };
   await N.enParalelo(cals, 4, async function (c) {
     const ev = (await N.ghl('/calendars/events?locationId=' + loc + '&calendarId=' + c.id + '&startTime=' + ini + '&endTime=' + (fin - 1000), { version: '2021-04-15' })).events || [];
@@ -69,12 +74,13 @@ async function comparativa(desde, hasta) {
       const st = e.appointmentStatus || 'new';
       if (st === 'invalid') return;
       f.agendadas++;
-      const cl = closerDe(nombreUsuario[e.assignedUserId] || '');
-      cl.agendadas++;
-      if (st === 'showed') cl.presentadas++;
-      else if (st === 'noshow') cl.noShow++;
-      else if (st === 'cancelled') cl.canceladas++;
-      else if (new Date(e.startTime).getTime() > Date.now()) cl.pendientes++;
+      sumarCloser(nombreUsuario[e.assignedUserId] || '', embudoDeCal[c.id], function (cl) {
+        cl.agendadas++;
+        if (st === 'showed') cl.presentadas++;
+        else if (st === 'noshow') cl.noShow++;
+        else if (st === 'cancelled') cl.canceladas++;
+        else if (new Date(e.startTime).getTime() > Date.now()) cl.pendientes++;
+      });
       if (st === 'showed') f.presentadas++;
       else if (st === 'cancelled') f.canceladas++;
       else if (st !== 'noshow' && new Date(e.startTime).getTime() > Date.now()) f.pendientes++;
@@ -104,16 +110,20 @@ async function comparativa(desde, hasta) {
     }
     const o = fila[destino];
     o.ventas++; o.facturacion += v.importe || 0; o.cobrado += v.cobrado || 0;
-    const cv = closerDe(v.closer || ''); cv.ventas++; cv.facturacion += v.importe || 0; cv.cobrado += v.cobrado || 0;
+    sumarCloser(v.closer || '', destino, function (cv) { cv.ventas++; cv.facturacion += v.importe || 0; cv.cobrado += v.cobrado || 0; });
     if (porCita) o.porCita++; else o.porHoja++;
   });
 
   const filas = EMBUDOS.map(function (e) { return fila[e.embudo]; }).concat([fila[SIN_CITA_BASE]])
     .filter(function (f) { return f.leads || f.agendadas || f.ventas || EMBUDOS.slice(0, 7).some(function (e) { return e.embudo === f.embudo; }); });
-  const listaClosers = Object.keys(closers).map(function (k) { return closers[k]; })
-    .filter(function (c) { return c.agendadas || c.ventas; })
-    .sort(function (a, b) { return (a.closer === 'Sin closer') - (b.closer === 'Sin closer') || b.facturacion - a.facturacion || b.agendadas - a.agendadas; });
-  return { desde: desde, hasta: hasta, generado: Date.now(), filas: filas, closers: listaClosers, ventasTotal: ventas.length };
+  const lista = function (obj) {
+    return Object.keys(obj).map(function (k) { return obj[k]; })
+      .filter(function (c) { return c.agendadas || c.ventas; })
+      .sort(function (a, b) { return (a.closer === 'Sin closer') - (b.closer === 'Sin closer') || b.facturacion - a.facturacion || b.agendadas - a.agendadas; });
+  };
+  const closersPorEmbudo = {};
+  Object.keys(porEmbudo).forEach(function (e) { const l = lista(porEmbudo[e]); if (l.length) closersPorEmbudo[e] = l; });
+  return { desde: desde, hasta: hasta, generado: Date.now(), filas: filas, closers: lista(closers), closersPorEmbudo: closersPorEmbudo, ventasTotal: ventas.length };
 }
 
 module.exports = { comparativa: comparativa };
