@@ -8,7 +8,7 @@
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Montserrat:wght@400..800&family=JetBrains+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="../assets/deck.css">
 <style>
 /* Demo guiada en pestañas para Institut Gestalt: anuncio y petición del dosier, WhatsApp al minuto, ficha de la entrevista,
@@ -318,6 +318,86 @@ footer p b{color:var(--ink)}
 @media (max-width:560px){nav.tabs{top:96px;border-radius:14px}nav.tabs button{padding:9px 12px}}
 @media (max-width:520px){.ficha .grid{grid-template-columns:1fr}.ficha .grid > div{border-right:0!important}.wa{height:580px}.phone{border-radius:40px;padding:9px}.winbody{padding:10px}.kpi b{font-size:30px}.dhero .wrap{padding-block:40px 44px}.seq > div{padding:16px}.tbl table{min-width:540px;font-size:13.5px}.tbl td:first-child{white-space:normal;min-width:118px;max-width:150px;box-shadow:1px 0 0 var(--line-2)}.tbl th,.tbl td{padding:9px 8px}.fdi{padding:16px}.pipe{grid-auto-columns:minmax(78%,1fr)}}
 @media print{.pane{display:grid!important;break-before:page}nav.tabs,.navnext{display:none}.dhero::after{display:none}}
+/* ===== Identidad del Institut Gestalt: foto, velo violeta, Zilla Slab y animaciones de entrada ===== */
+body{font-size:15.5px}
+.dhero{background:#1C0A45}
+.dhero::before{background:linear-gradient(100deg,rgba(28,10,69,.93) 0%,rgba(58,10,158,.8) 45%,rgba(142,45,226,.38) 100%),var(--hero-img) center 38%/cover no-repeat;animation:gZoom 2.4s cubic-bezier(.2,.7,.2,1) both}
+.dhero::after{background:radial-gradient(circle at 92% 112%,rgba(255,186,0,.26),transparent 38%),radial-gradient(circle at 8% -20%,rgba(142,45,226,.45),transparent 45%);-webkit-mask-image:none;mask-image:none;background-size:auto}
+.dhero .wrap{padding-block:64px 58px;gap:16px}
+.dhero .wrap > *{animation:gUp .8s cubic-bezier(.2,.7,.2,1) both}
+.dhero .wrap > :nth-child(1){animation-delay:.05s}.dhero .wrap > :nth-child(2){animation-delay:.15s}.dhero .wrap > :nth-child(3){animation-delay:.27s}.dhero .wrap > :nth-child(4){animation-delay:.39s}.dhero .wrap > :nth-child(5){animation-delay:.5s}
+.dhero .eyebrow{justify-self:start;color:#fff;font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.14em;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.26);border-radius:99px;padding:6px 14px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);max-width:100%}
+.dhero .eyebrow::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--sun);margin-right:9px;vertical-align:1px;box-shadow:0 0 0 3px rgba(255,186,0,.25)}
+.dhero h1{font-family:var(--serif);font-weight:700;font-variation-settings:normal;font-size:clamp(36px,5.6vw,68px);line-height:1.02;letter-spacing:-.012em;max-width:19ch;text-shadow:0 2px 24px rgba(20,4,60,.35)}
+.dhero .lead{font-size:17px;line-height:1.65;color:rgba(255,255,255,.9)}
+.legend > div{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:16px;color:rgba(255,255,255,.88)}
+h2{font-family:var(--serif);font-weight:700;font-variation-settings:normal;font-size:clamp(28px,3.6vw,42px);line-height:1.08;letter-spacing:-.01em}
+h3{font-weight:700}
+.pane > header p{font-size:16px}
+/* pestañas */
+nav.tabs{border-color:color-mix(in srgb,var(--accent) 18%,var(--line));box-shadow:0 2px 6px rgba(46,12,110,.06),0 24px 48px -22px rgba(46,12,110,.45)}
+nav.tabs button{font-size:13px}
+nav.tabs button[aria-selected="true"]{background:var(--grad);color:#fff;box-shadow:0 10px 22px -10px rgba(74,0,224,.75)}
+nav.tabs button[aria-selected="true"] span{background:#fff;color:#4A00E0}
+/* entrada escalonada de cada pestaña */
+.pane.on > *{animation:gUp .6s cubic-bezier(.2,.7,.2,1) both}
+.pane.on > :nth-child(2){animation-delay:.08s}.pane.on > :nth-child(3){animation-delay:.16s}.pane.on > :nth-child(4){animation-delay:.24s}.pane.on > :nth-child(5){animation-delay:.32s}.pane.on > :nth-child(n+6){animation-delay:.4s}
+/* etiquetas */
+.ej,.real,.nv{font-family:var(--sans);font-weight:700;font-size:10px;letter-spacing:.09em;border-radius:99px;padding:3px 9px}
+.note{border-color:color-mix(in srgb,var(--accent) 28%,var(--line));background:color-mix(in srgb,var(--accent-soft) 35%,transparent)}
+.dhero{--hero-img:url(../assets/brand/gestalt.jpg)}
+.dhero .deco{stroke:#E4D4FF;opacity:.35}
+.dhero .jump button{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.1);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.dhero .jump button.pri{background:#fff;color:#4A00E0;box-shadow:0 12px 28px -12px rgba(0,0,0,.55)}
+.dhero .jump button.pri:hover{background:#F1E8FE}
+.av{background:var(--grad)}
+.ig{border-radius:20px}
+.ig .vis{background:linear-gradient(180deg,rgba(28,10,69,.55) 0%,rgba(52,8,140,.78) 50%,rgba(28,10,69,.95) 100%),url(../assets/brand/gestalt.jpg) center/cover no-repeat}
+.ig .vis .k1{color:#E4D4FF}
+.ig .vis .t1{font-weight:700;font-size:clamp(24px,2.6vw,29px)}
+.ig .vis li::before{color:var(--sun)}
+.ig .vis .price{color:#4A00E0}
+.btnl,.sendbtn{background:var(--grad);color:#fff}
+.navnext button,.navnext .btnl{background:var(--grad);box-shadow:0 12px 26px -12px rgba(74,0,224,.7)}
+.flinks .btnl{background:var(--surface);color:var(--ink)}
+.why,.box,.kpi,.seq > div,.live{border-radius:18px}
+.box{box-shadow:var(--shadow)}
+.kpi{position:relative;overflow:hidden;box-shadow:var(--shadow);padding-top:20px}
+.kpi::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--grad)}
+.kpi.alert::before{background:var(--sun)}
+.kpi b{font-weight:700;color:var(--accent)}
+.kpi.alert b{color:var(--warn)}.kpi.good b{color:var(--good)}
+.live .sc b.n,.ficha .scn{font-weight:700}
+.tl li.call::before{background:#4A00E0}
+.fun .bar i{background:var(--grad)}
+.seg button[aria-pressed="true"]{background:var(--grad);color:#fff;box-shadow:0 6px 14px -8px rgba(74,0,224,.7)}
+.rk.top{background:var(--grad)}
+/* ventanas del CRM con la marca del Institut */
+.win{border-radius:20px;border-color:color-mix(in srgb,var(--accent) 16%,var(--line))}
+.wbar{background:var(--grad-deep);border-bottom:0;padding:11px 16px;gap:10px;color:#fff}
+.wbar i{display:none}
+.wbar .wlogo{height:26px;width:auto;display:block;flex:none}
+.wbar .wcrm{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#1C0A45;background:#fff;border-radius:99px;padding:3px 9px;flex:none}
+.wbar span{margin-left:2px;color:rgba(255,255,255,.82)}
+.wbar em{background:var(--sun);color:#2A1A00;font-weight:700}
+.winbody{background:color-mix(in srgb,var(--accent-soft) 30%,var(--paper))}
+/* etapas del CRM en la escala violeta del Institut */
+.col{border-radius:16px;border-top:4px solid #C9A6FF;background:var(--surface-2)}
+.pipe .col:nth-child(2){border-top-color:#B184FA}.pipe .col:nth-child(3){border-top-color:#9B5CF2}.pipe .col:nth-child(4){border-top-color:#8E2DE2}.pipe .col:nth-child(5){border-top-color:#7A16EA}.pipe .col:nth-child(6){border-top-color:#6508E6}.pipe .col:nth-child(7){border-top-color:#5502E2}.pipe .col:nth-child(8){border-top-color:#4A00E0}
+.col.side{border-top:4px dashed var(--line)}
+.col h4{font-family:var(--serif);font-weight:700;font-size:15px}
+.col h4 small{font-family:var(--sans);font-weight:600}
+.col h4 em{background:var(--grad);color:#fff;font-weight:700;border-radius:99px;padding:1px 8px}
+.pipe .card{border-radius:12px;box-shadow:0 1px 2px rgba(46,12,110,.06)}
+.pipe .card:hover,.pipe .card:focus-visible{transform:translateY(-2px);box-shadow:0 0 0 3px var(--accent-soft),var(--shadow)}
+.today li button{border-left-color:#8E2DE2}
+.acts button.pri{background:var(--grad);border-color:transparent;color:#fff}
+.fdi .nx{border-left-color:#8E2DE2}
+.fdi h3{font-weight:700}
+.steps i.on{background:var(--grad)}
+dialog.fd{border-radius:20px}
+dialog.fd::backdrop{background:rgba(28,10,69,.55);backdrop-filter:blur(3px)}
+.ejband{border-radius:16px}
 </style>
 </head>
 <body>
@@ -325,7 +405,7 @@ footer p b{color:var(--ink)}
 
 <nav class="topnav" aria-label="Presentación">
   <div class="in">
-    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><span class="cl">Institut Gestalt</span><span class="by">9-nov-2026</span></div>
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><img class="lgo" src="../assets/brand/logo-blanco.png" alt="Institut Gestalt" width="150" height="52"><span class="by">9-nov-2026</span></div>
     <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="../landing/">Landing</a><a href="../recorrido/">Recorrido</a><a href="./" aria-current="page">Demo</a></div>
   </div>
 </nav>
@@ -434,7 +514,7 @@ footer p b{color:var(--ink)}
     <p class="rv"><span><span class="real">Real</span> la Formación en Terapia Gestalt, la presentación por Zoom, la entrevista previa y la reserva de plaza de 454 €.</span><span><span class="ej">Inventado</span> Irene, Montse, la puntuación y sus pesos, la conversación y lo que pasó en la presentación.</span></p>
   </header>
   <div class="two">
-    <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>CRM › Irene M. · ficha</span><em>Ejemplo</em></div>
+    <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><img class="wlogo" src="../assets/brand/logo-blanco.png" alt="" width="150" height="52"><b class="wcrm">CRM</b><span>CRM › Irene M. · ficha</span><em>Ejemplo</em></div>
     <div class="ficha">
       <div class="hd"><div><b style="font-size:19px">Irene M. · 36 años · L'Hospitalet</b><p class="muted" style="font-size:14px">Entró por: anuncio de Instagram «formulario que filtra» → petición del dosier (martes 22:15) → WhatsApp con Laia (22:16-22:24) → presentación por Zoom (jueves) → entrevista agendada</p></div><div style="text-align:right"><span class="scn">85</span><br><span class="grp a">A · entrevista</span></div></div>
       <div class="grid">
@@ -585,7 +665,7 @@ Si te surge cualquier duda antes, escríbeme por aquí.</blockquote></li>
   </header>
   <div class="ejband" role="note"><span class="ej">Datos de ejemplo</span><span>Cifras inventadas pero coherentes entre sí, con un presupuesto de ejemplo de <b>3.000 € al mes</b> en Meta. Las personas del CRM no existen. En la versión real, todo se rellena solo con cada petición, mensaje, presentación, entrevista y pago.</span></div>
 
-  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Panel · octubre de 2026 · campañas de Meta</span><em>Datos de ejemplo</em></div><div class="winbody">
+  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><img class="wlogo" src="../assets/brand/logo-blanco.png" alt="" width="150" height="52"><b class="wcrm">CRM</b><span>Panel · octubre de 2026 · campañas de Meta</span><em>Datos de ejemplo</em></div><div class="winbody">
   <div class="kpis" id="kpis"></div>
   <div class="box">
     <p class="cap" style="margin:0">¿Qué anuncio trae matrículas y no solo formularios? · octubre · datos de ejemplo</p>
@@ -616,7 +696,7 @@ Si te surge cualquier duda antes, escríbeme por aquí.</blockquote></li>
   </div>
   </div></div>
 
-  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>CRM · hoy, lunes 9 de noviembre</span><em>Datos de ejemplo</em></div><div class="winbody">
+  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><img class="wlogo" src="../assets/brand/logo-blanco.png" alt="" width="150" height="52"><b class="wcrm">CRM</b><span>CRM · hoy, lunes 9 de noviembre</span><em>Datos de ejemplo</em></div><div class="winbody">
     <div class="tools">
       <input type="search" id="q" placeholder="Buscar por nombre o profesión…" aria-label="Buscar persona">
       <select id="f-prog" aria-label="Filtrar por formación"></select>

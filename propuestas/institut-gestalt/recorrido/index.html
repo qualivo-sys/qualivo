@@ -8,7 +8,7 @@
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Montserrat:wght@400..800&family=JetBrains+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="../assets/deck.css">
 <style>
 /* Recorrido completo del alumno del Institut Gestalt (reunión del 9-nov): del anuncio a la matrícula,
@@ -233,6 +233,66 @@ nav.tabs button[aria-selected="true"] span{background:var(--moss);color:var(--f9
 .links3 a:hover{transform:translateY(-2px);border-color:var(--accent)}
 .links3 a small{color:var(--muted);font-size:13.5px;line-height:1.5}
 .links3 a b{font-size:16px}
+/* ===== Identidad del Institut Gestalt: foto, velo violeta, Zilla Slab y animaciones de entrada ===== */
+body{font-size:15.5px}
+.dhero{background:#1C0A45}
+.dhero::before{background:linear-gradient(100deg,rgba(28,10,69,.93) 0%,rgba(58,10,158,.8) 45%,rgba(142,45,226,.38) 100%),var(--hero-img) center 38%/cover no-repeat;animation:gZoom 2.4s cubic-bezier(.2,.7,.2,1) both}
+.dhero::after{background:radial-gradient(circle at 92% 112%,rgba(255,186,0,.26),transparent 38%),radial-gradient(circle at 8% -20%,rgba(142,45,226,.45),transparent 45%);-webkit-mask-image:none;mask-image:none;background-size:auto}
+.dhero .wrap{padding-block:64px 58px;gap:16px}
+.dhero .wrap > *{animation:gUp .8s cubic-bezier(.2,.7,.2,1) both}
+.dhero .wrap > :nth-child(1){animation-delay:.05s}.dhero .wrap > :nth-child(2){animation-delay:.15s}.dhero .wrap > :nth-child(3){animation-delay:.27s}.dhero .wrap > :nth-child(4){animation-delay:.39s}.dhero .wrap > :nth-child(5){animation-delay:.5s}
+.dhero .eyebrow{justify-self:start;color:#fff;font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.14em;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.26);border-radius:99px;padding:6px 14px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);max-width:100%}
+.dhero .eyebrow::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--sun);margin-right:9px;vertical-align:1px;box-shadow:0 0 0 3px rgba(255,186,0,.25)}
+.dhero h1{font-family:var(--serif);font-weight:700;font-variation-settings:normal;font-size:clamp(36px,5.6vw,68px);line-height:1.02;letter-spacing:-.012em;max-width:19ch;text-shadow:0 2px 24px rgba(20,4,60,.35)}
+.dhero .lead{font-size:17px;line-height:1.65;color:rgba(255,255,255,.9)}
+.legend > div{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:16px;color:rgba(255,255,255,.88)}
+h2{font-family:var(--serif);font-weight:700;font-variation-settings:normal;font-size:clamp(28px,3.6vw,42px);line-height:1.08;letter-spacing:-.01em}
+h3{font-weight:700}
+.pane > header p{font-size:16px}
+/* pestañas */
+nav.tabs{border-color:color-mix(in srgb,var(--accent) 18%,var(--line));box-shadow:0 2px 6px rgba(46,12,110,.06),0 24px 48px -22px rgba(46,12,110,.45)}
+nav.tabs button{font-size:13px}
+nav.tabs button[aria-selected="true"]{background:var(--grad);color:#fff;box-shadow:0 10px 22px -10px rgba(74,0,224,.75)}
+nav.tabs button[aria-selected="true"] span{background:#fff;color:#4A00E0}
+/* entrada escalonada de cada pestaña */
+.pane.on > *{animation:gUp .6s cubic-bezier(.2,.7,.2,1) both}
+.pane.on > :nth-child(2){animation-delay:.08s}.pane.on > :nth-child(3){animation-delay:.16s}.pane.on > :nth-child(4){animation-delay:.24s}.pane.on > :nth-child(5){animation-delay:.32s}.pane.on > :nth-child(n+6){animation-delay:.4s}
+/* etiquetas */
+.ej,.real,.nv{font-family:var(--sans);font-weight:700;font-size:10px;letter-spacing:.09em;border-radius:99px;padding:3px 9px}
+.note{border-color:color-mix(in srgb,var(--accent) 28%,var(--line));background:color-mix(in srgb,var(--accent-soft) 35%,transparent)}
+.dhero{--hero-img:url(../assets/brand/home.jpg)}
+/* tarjetas */
+.flow button{border-radius:16px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.flow button:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.flow i{font-family:var(--sans);font-weight:700;color:var(--accent)}
+.flow b{font-family:var(--serif);font-weight:700;font-size:17px}
+.flow button.mt{background:linear-gradient(160deg,var(--accent-soft),var(--surface))}
+.fact{position:relative;overflow:hidden;border-radius:16px;box-shadow:var(--shadow);padding-top:18px}
+.fact::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--grad)}
+.fact b{font-family:var(--serif);font-weight:700;font-size:34px;color:var(--accent)}
+.stp{border-radius:20px;box-shadow:var(--shadow-lg);border-color:color-mix(in srgb,var(--accent) 14%,var(--line))}
+.stp .hd .n,.steps .card::before{background:var(--grad);box-shadow:0 8px 18px -8px rgba(74,0,224,.7);font-weight:700}
+.stp .hd h3{font-weight:700;font-size:clamp(22px,2.5vw,28px)}
+.hm .mon{background:linear-gradient(160deg,var(--accent-soft),color-mix(in srgb,var(--accent-soft) 40%,var(--surface)))}
+.meta{background:var(--grad)}
+.meta::before{background:var(--sun)}
+.phn .bar .lg,.chat .hd .lg{background:#fff;color:#4A00E0}
+.post .ph .lg{background:var(--grad)}
+.post .vis::before{background:linear-gradient(180deg,rgba(28,10,69,.2) 0%,rgba(40,8,120,.72) 55%,rgba(28,10,69,.94) 100%),url(../assets/brand/gestalt.jpg) center/cover no-repeat}
+.post .vis .big{font-weight:700;font-size:27px}
+.form .fh{background:var(--grad)}
+.loop{border-radius:20px}
+.calc{border-radius:20px;box-shadow:var(--shadow-lg)}
+.fun i{background:var(--grad)}
+.res .fact.hl{background:linear-gradient(160deg,var(--accent-soft),var(--surface))}
+.kb .col{border-radius:16px}
+.kb .col:nth-child(1){border-top:3px solid #C9A6FF}.kb .col:nth-child(2){border-top:3px solid #A56BF5}.kb .col:nth-child(3){border-top:3px solid #8E2DE2}.kb .col:nth-child(4){border-top:3px solid #720EEC}.kb .col:nth-child(5){border-top:3px solid #5A06E4}.kb .col:nth-child(n+6){border-top:3px solid #4A00E0}
+.links3 a{border-radius:18px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.links3 a:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.links3 a b{font-family:var(--serif);font-weight:700;font-size:20px}
+.scen button[aria-pressed="true"]{background:var(--grad);border-color:transparent}
+.agent.lit{box-shadow:0 0 0 3px var(--accent-soft),var(--shadow)}
+.tl > div::before{border-color:#8E2DE2}
 </style>
 </head>
 <body>
@@ -245,7 +305,7 @@ nav.tabs button[aria-selected="true"] span{background:var(--moss);color:var(--f9
 
 <nav class="topnav" aria-label="Presentación">
   <div class="in">
-    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><span class="cl">Institut Gestalt</span><span class="by">9-nov-2026</span></div>
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><img class="lgo" src="../assets/brand/logo-blanco.png" alt="Institut Gestalt" width="150" height="52"><span class="by">9-nov-2026</span></div>
     <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="../landing/">Landing</a><a href="./" aria-current="page">Recorrido</a><a href="../demo/">Demo</a></div>
   </div>
 </nav>
