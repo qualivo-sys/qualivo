@@ -368,8 +368,8 @@ addEventListener('DOMContentLoaded',function(){
     <div class="lockup"><span>Qualivo</span><i aria-hidden="true">×</i><img src="../assets/brand/logo-blanco.png" alt="Institut Gestalt" width="150" height="52"></div>
     <p class="eyebrow">Anuncios · Institut Gestalt</p>
     <h1>Anuncios que hablan al profesional que <em>ya acompaña</em></h1>
-    <p class="lead">Hemos revisado los anuncios que tenéis activos en Meta. Os proponemos siete nuevos para la Formación en Terapia Gestalt y para Constelaciones en Terapia Individual, pensados para psicólogos, coaches, educadores y terapeutas. Cada uno lleva a un formulario de tres preguntas que filtra, y el paso siguiente es siempre una presentación gratuita o una conversación, no un «más información».</p>
-    <nav class="jump" aria-label="Ir a"><a href="#hoy">Lo que vemos hoy</a><a href="#formulario">El formulario</a><a href="#a">A · Vídeo docente</a><a href="#b">B · Carrusel</a><a href="#c">C · Presentación</a><a href="#d">D · Constelaciones</a><a href="#e">E · Fechas</a><a href="#f">F · Testimonio</a><a href="#g">G · Entrevista</a><a href="#arreglos">Arreglos rápidos</a></nav>
+    <p class="lead">Hemos revisado los anuncios que tenéis activos en Meta. Primero definimos con vosotros quién es un lead cualificado. Después, tres anuncios pensados solo para ese perfil, para la Formación en Terapia Gestalt y para Constelaciones en Terapia Individual. Cada uno lleva a un formulario de tres preguntas que filtra, y el paso siguiente es siempre una presentación gratuita o una conversación, no un «más información».</p>
+    <nav class="jump" aria-label="Ir a"><a href="#hoy">Lo que vemos hoy</a><a href="#perfil">Alumno ideal</a><a href="#formulario">El formulario</a><a href="#a">A · Vídeo docente</a><a href="#d">D · Constelaciones</a><a href="#g">G · Entrevista</a><a href="#mas">Más ideas</a><a href="#arreglos">Arreglos rápidos</a></nav>
     <p class="maq">Maqueta de Qualivo para Institut Gestalt · textos y datos de institutgestalt.com y de la Biblioteca de anuncios de Meta (4-nov-2026) · creatividades maquetadas con fotos generadas para la maqueta (en producción, fotos y vídeos reales del Institut) · no son anuncios publicados</p>
   </div>
 </header>
@@ -427,7 +427,46 @@ addEventListener('DOMContentLoaded',function(){
   </div>
 </section>
 
-<section class="sec alt" id="formulario">
+<section class="sec alt" id="perfil">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>PRIMERO</b><span></span></div><h2 class="t">Quién es vuestro alumno ideal <span class="ej">Hipótesis · la validamos hoy contigo</span></h2></div>
+    <p class="lede">Nos dijiste que lo que quieres mejorar es la calidad. Antes de cambiar un solo anuncio hay que acordar qué es para vosotros una petición buena. Esta es nuestra propuesta, a partir de vuestros programas y vuestros anuncios; tú sabes quién acaba matriculándose y la corregimos juntos.</p>
+    <div class="icp-g">
+      <div class="card icp-ok"><p class="k">Lead cualificado</p><ul>
+        <li><b>Acompaña a personas</b> o va a hacerlo: psicología, coaching, educación, salud, terapia.</li>
+        <li><b>Busca una formación profesional</b> certificada (AETG), no un taller suelto.</li>
+        <li><b>Quiere empezar</b> en la próxima convocatoria o en los próximos meses.</li>
+        <li>Puede venir a <b>Barcelona, Madrid u online</b>, y sabe que es una formación de pago.</li></ul></div>
+      <div class="card icp-no"><p class="k">Todavía no es el momento</p><ul>
+        <li>Busca terapia para sí, no formarse.</li>
+        <li>No acompaña a nadie ni tiene previsto hacerlo.</li>
+        <li>«Solo me estoy informando», sin fecha.</li>
+        <li>No recibe un «no»: recibe contenido, talleres y la próxima edición, sin presión.</li></ul></div>
+      <div class="card icp-q"><p class="k">Lo que te preguntamos hoy</p><ol>
+        <li>De los que se matricularon el último año, ¿qué perfil tenían?</li>
+        <li>¿Qué es para vosotros una mala petición?</li>
+        <li>¿Qué programa queréis llenar primero?</li>
+        <li>¿Cuántas de las más de 100 peticiones encajarían en este perfil?</li></ol></div>
+    </div>
+    <p class="small muted" style="margin-top:12px">Con ese perfil acordado se construye todo lo demás: el formulario pregunta exactamente eso, los anuncios le hablan solo a ese perfil y Meta aprende de quién llega a la entrevista y se matricula.</p>
+  </div>
+</section>
+<style>
+#perfil .icp-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+#perfil .card{border-radius:18px;padding:20px 20px 18px;background:#fff;border:1px solid rgba(114,14,236,.14);box-shadow:0 10px 30px -18px rgba(74,0,224,.35)}
+#perfil .card .k{font-family:"Zilla Slab",Georgia,serif;font-weight:700;font-size:21px;margin:0 0 10px;color:#16112A}
+#perfil .icp-ok{border-top:5px solid #720EEC}#perfil .icp-no{border-top:5px solid #FFBA00}#perfil .icp-q{border-top:5px solid #4A00E0;background:linear-gradient(180deg,#F6F0FF,#fff)}
+#perfil ul,#perfil ol{margin:0;padding-left:18px;display:grid;gap:8px;font-size:15px;line-height:1.5;color:#3B3550}
+.mas-ideas{border-top:1px solid rgba(114,14,236,.15)}
+.mas-ideas>summary{list-style:none;cursor:pointer;padding:26px 0;background:linear-gradient(90deg,#F4EEFF,#FCFBFE);color:#2A1F55;font-size:17px}
+.mas-ideas>summary::-webkit-details-marker{display:none}
+.mas-ideas>summary .wrap{display:block}
+.mas-ideas>summary b{color:#5B12D6}
+.mas-ideas>summary::after{content:"Ver ▾";float:right;margin-right:max(16px,calc((100% - 1120px)/2));font-weight:700;color:#720EEC}
+.mas-ideas[open]>summary::after{content:"Ocultar ▴"}
+@media (max-width:860px){#perfil .icp-g{grid-template-columns:1fr}}
+</style>
+<section class="sec" id="formulario">
   <div class="wrap">
     <div class="sh"><div class="no"><b>FILTRO</b><span></span></div><h2 class="t">El formulario: tres preguntas que filtran <span class="ej">Ejemplo</span></h2></div>
     <p class="lede">Es el mismo formulario instantáneo de Meta, con tres preguntas de opción múltiple y el modo «Mayor intención» (un paso para revisar los datos antes de enviar). Se rellena igual de rápido, pero ya no basta un toque por curiosidad, y cada respuesta llega al CRM con su etiqueta.</p>
@@ -459,15 +498,11 @@ addEventListener('DOMContentLoaded',function(){
 
 <section class="sec" style="padding-top:48px">
   <div class="wrap">
-    <div class="sh"><div class="no"><b>PROPUESTA</b><span></span></div><h2 class="t">Siete anuncios, un mismo camino <span class="ej">Ejemplo</span></h2></div>
-    <p class="lede">Cuatro para quien todavía no os conoce (A, B, D, F) y tres para quien ya ha dado un paso (C, E, G). Todos le hablan al profesional y todos acaban en la presentación gratuita o en la entrevista.</p>
+    <div class="sh"><div class="no"><b>PROPUESTA</b><span></span></div><h2 class="t">Tres anuncios para ese perfil <span class="ej">Ejemplo</span></h2></div>
+    <p class="lede">Empezamos solo con tres, cada uno para un momento del recorrido: el profesional que todavía no os conoce (A), quien ya tiene consulta y puede sumar Constelaciones (D) y quien ya vino a la presentación (G). Medimos cuál trae entrevistas y matrículas, no solo formularios, y a partir de ahí añadimos.</p>
     <div class="plan5">
       <a href="#a"><span class="lt">A</span><span class="fm">Vídeo a cámara · docente</span><b>Lo que pasa en la sesión</b><p>Gestalt · público frío. Le habla al profesional que ya tiene oficio.</p></a>
-      <a href="#b"><span class="lt">B</span><span class="fm">Carrusel · 5 tarjetas</span><b>Así se entra, paso a paso</b><p>Gestalt · público frío. Sustituye al carrusel actual.</p></a>
-      <a href="#c"><span class="lt">C</span><span class="fm">Imagen · invitación</span><b>Conócela por dentro</b><p>Gestalt · retargeting. La presentación gratuita como protagonista.</p></a>
       <a href="#d"><span class="lt">D</span><span class="fm">Vídeo a cámara · docente</span><b>La familia entra en consulta</b><p>Constelaciones · público frío. Vuestro mejor texto, en vídeo.</p></a>
-      <a href="#e"><span class="lt">E</span><span class="fm">Imagen · calendario</span><b>27 de enero, 17 de febrero</b><p>Constelaciones · retargeting. Las fechas, claras.</p></a>
-      <a href="#f"><span class="lt">F</span><span class="fm">Testimonio · vídeo selfie</span><b>«Algo se me escapaba»</b><p>Gestalt · frío y retargeting. Un alumno o alumna real.</p></a>
       <a href="#g"><span class="lt">G</span><span class="fm">Imagen · story</span><b>El siguiente paso es hablar</b><p>Gestalt y Constelaciones · quien ya fue a la presentación.</p></a>
     </div>
   </div>
@@ -510,6 +545,70 @@ Pide el dosier: te lo enviamos por WhatsApp junto con la fecha de la próxima pr
   </div>
 </section>
 
+<!-- D -->
+<section class="sec angle" id="d">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">D</span><h2>D · Cuando la familia entra en la consulta</h2><div class="meta"><span><b>Ángulo</b>el profesional que ya trabaja en individual y se encuentra con el sistema familiar del cliente; parte de vuestro texto actual, que ya acierta</span><span><b>Público</b>frío: psicólogos, terapeutas y coaches que trabajan en sesión individual, en toda España (es online)</span><span><b>Lleva a</b>formulario de 3 preguntas (la 2 empieza por Constelaciones) → plaza en la presentación gratuita del 27 de enero por Zoom</span></div></div>
+    <div class="ads">
+      <figure><div class="ig">
+        <div class="h"><span class="av"><img src="../assets/brand/logo-color.png" alt=""></span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art vid b"><svg class="per" aria-hidden="true"><use href="#i-per"/></svg><svg class="plant" viewBox="0 0 60 120" aria-hidden="true"><use href="#i-plant"/></svg><span class="vtag">▶ Vídeo a cámara · 40 s</span><span class="dur">0:02</span><span class="play" aria-hidden="true"></span><p class="subt"><span>¿Qué haces cuando, en una sesión individual, <mark>aparece toda la familia del cliente</mark>?</span></p><p class="name">Docente del Institut<small>Constelaciones en Terapia Individual</small></p></div>
+        <div class="cta"><span>Registrarte</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>¿Qué haces cuando, en una sesión individual, aparece toda la familia del cliente? <span>… más</span></p>
+      </div><figcaption><b>Feed 4:5</b> · docente a cámara, con subtítulos</figcaption></figure>
+      <figure><div class="story"><div class="art vid b"><svg class="per" aria-hidden="true"><use href="#i-per"/></svg><span class="vtag">Reels · 9:16</span><p class="subt"><span>Constelaciones Familiares <mark>en tu consulta individual.</mark></span></p><p class="name">Online · desde el 17 de febrero<small>Presentación gratuita: 27 de enero</small></p></div><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av"><img src="../assets/brand/logo-color.png" alt=""></span><b>Institut Gestalt</b><small>Publicidad</small></div><div class="up"><span>Apuntarme al 27-ene</span></div></div><figcaption><b>Reels / Stories 9:16</b></figcaption></figure>
+      <div class="copy">
+        <div class="hook"><p class="k">Gancho · primera frase</p><pre>¿Qué haces cuando, en una sesión individual, aparece toda la familia del cliente?</pre></div>
+        <div><p class="k">Texto principal</p><pre>¿Qué haces cuando, en una sesión individual, aparece toda la familia del cliente?
+
+La formación en Constelaciones Familiares en Terapia Individual es para quien ya acompaña procesos y quiere trabajar con el sistema familiar dentro de su propia consulta.
+
+🗓️ Empieza el 17 de febrero de 2027
+💻 Online, los miércoles de 17 a 21 h
+🎥 Presentación gratuita por Zoom el 27 de enero
+
+Apúntate a la presentación y te enviamos el enlace por WhatsApp.</pre></div>
+        <div class="meta3"><div><p class="k">Titular</p><pre>Constelaciones en tu consulta individual</pre></div><div><p class="k">Botón</p><pre>Registrarte</pre></div><div><p class="k">Formato</p><pre>Vídeo a cámara de un docente, 30–45 s</pre></div></div>
+        <div><p class="k">Guion del vídeo</p><ul class="gui">
+          <li><b>0–3 s</b><span>La pregunta del gancho, a cámara.</span></li>
+          <li><b>3–25 s</b><span>Un caso tipo (sin datos reales): el cliente habla de su padre, de su madre… y cómo se trabaja eso en individual.</span></li>
+          <li><b>25–40 s</b><span>Fechas, formato online y «ven a la presentación del 27 de enero».</span></li>
+        </ul></div>
+        <div class="why"><p class="k">Por qué</p><pre>Vuestro anuncio de Constelaciones ya le habla a quien acompaña procesos: es el mejor que tenéis. Lo llevamos a vídeo con un docente, que es lo que hace creíble una especialización así, y cambiamos «Más información» por un paso con fecha: la presentación del 27 de enero.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- G -->
+<section class="sec angle alt" id="g">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">G</span><h2>G · Ya la has visto. El siguiente paso es hablar</h2><div class="meta"><span><b>Ángulo</b>continuidad: a quien ya asistió a la presentación se le invita a la entrevista previa, con una persona del Institut</span><span><b>Público</b>retargeting por lista del CRM: asistió a la presentación (Gestalt o Constelaciones) y aún no ha agendado entrevista</span><span><b>Lleva a</b>no a un formulario: directamente al calendario de entrevistas, con huecos reales del equipo</span></div></div>
+    <div class="ads">
+      <figure><div class="ig">
+        <div class="h"><span class="av"><img src="../assets/brand/logo-color.png" alt=""></span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art ent"><span class="kk">Entrevista previa</span><h4>Ya la has visto por dentro. <em style="color:#F6D9B8">¿Hablamos?</em></h4><ul><li>Con una persona del equipo</li><li>Sobre tu momento profesional</li><li>Para ver juntos si encaja</li></ul><span class="door" aria-hidden="true">VERDI 94</span><div class="ft"><span class="logo">Institut Gestalt<small>Gràcia · Barcelona · Madrid · online</small></span></div></div>
+        <div class="cta"><span>Reservar</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>Ya viste la presentación. El siguiente paso es una conversación. <span>… más</span></p>
+      </div><figcaption><b>Imagen 4:5</b> · la puerta de Verdi 94 en versión ilustrada (con foto real si la tenéis)</figcaption></figure>
+      <figure><div class="story"><div class="art ent" style="padding-top:70px"><span class="kk">Entrevista previa</span><h4>¿Te quedaste con ganas de más?</h4><ul><li>Elige tú el día y la hora</li><li>Con una persona del equipo</li></ul><span class="door" aria-hidden="true">VERDI 94</span></div><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av"><img src="../assets/brand/logo-color.png" alt=""></span><b>Institut Gestalt</b><small>Publicidad</small></div><div class="up"><span>Elegir día</span></div></div><figcaption><b>Stories 9:16</b></figcaption></figure>
+      <div class="copy">
+        <div class="hook"><p class="k">Gancho · primera frase</p><pre>Ya viste la presentación. El siguiente paso es una conversación.</pre></div>
+        <div><p class="k">Texto principal</p><pre>Ya viste la presentación. El siguiente paso es una conversación.
+
+Una entrevista previa con una persona del equipo del Institut: hablamos de tu momento profesional, de lo que buscas y de si esta formación encaja contigo. Sin compromiso.
+
+Si los dos lo vemos claro, puedes reservar tu plaza con 454 €. Elige el día y la hora que te vayan bien.</pre></div>
+        <div class="meta3"><div><p class="k">Titular</p><pre>Elige día para tu entrevista</pre></div><div><p class="k">Botón</p><pre>Reservar</pre></div><div><p class="k">Formato</p><pre>Imagen 4:5 + story 9:16</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>Entre la presentación y la entrevista es donde más gente se pierde: se enfría en unos días. Este anuncio solo lo ven quienes asistieron, cuesta poco y les recuerda el paso exacto. La entrevista la hace siempre una persona del Institut; el anuncio solo le abre la agenda.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<details class="mas-ideas" id="mas"><summary><span class="wrap"><b>Más ideas para después</b> · cuatro anuncios más (B, C, E y F), para cuando el perfil esté validado y los tres primeros tengan datos</span></summary>
 <!-- B -->
 <section class="sec angle" id="b">
   <div class="wrap">
@@ -576,42 +675,6 @@ Te apuntas en un minuto y te enviamos el enlace y un recordatorio por WhatsApp.<
   </div>
 </section>
 
-<!-- D -->
-<section class="sec angle" id="d">
-  <div class="wrap">
-    <div class="ah"><span class="lt" aria-hidden="true">D</span><h2>D · Cuando la familia entra en la consulta</h2><div class="meta"><span><b>Ángulo</b>el profesional que ya trabaja en individual y se encuentra con el sistema familiar del cliente; parte de vuestro texto actual, que ya acierta</span><span><b>Público</b>frío: psicólogos, terapeutas y coaches que trabajan en sesión individual, en toda España (es online)</span><span><b>Lleva a</b>formulario de 3 preguntas (la 2 empieza por Constelaciones) → plaza en la presentación gratuita del 27 de enero por Zoom</span></div></div>
-    <div class="ads">
-      <figure><div class="ig">
-        <div class="h"><span class="av"><img src="../assets/brand/logo-color.png" alt=""></span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
-        <div class="art vid b"><svg class="per" aria-hidden="true"><use href="#i-per"/></svg><svg class="plant" viewBox="0 0 60 120" aria-hidden="true"><use href="#i-plant"/></svg><span class="vtag">▶ Vídeo a cámara · 40 s</span><span class="dur">0:02</span><span class="play" aria-hidden="true"></span><p class="subt"><span>¿Qué haces cuando, en una sesión individual, <mark>aparece toda la familia del cliente</mark>?</span></p><p class="name">Docente del Institut<small>Constelaciones en Terapia Individual</small></p></div>
-        <div class="cta"><span>Registrarte</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
-        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
-        <p class="cap"><b>Institut Gestalt</b>¿Qué haces cuando, en una sesión individual, aparece toda la familia del cliente? <span>… más</span></p>
-      </div><figcaption><b>Feed 4:5</b> · docente a cámara, con subtítulos</figcaption></figure>
-      <figure><div class="story"><div class="art vid b"><svg class="per" aria-hidden="true"><use href="#i-per"/></svg><span class="vtag">Reels · 9:16</span><p class="subt"><span>Constelaciones Familiares <mark>en tu consulta individual.</mark></span></p><p class="name">Online · desde el 17 de febrero<small>Presentación gratuita: 27 de enero</small></p></div><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av"><img src="../assets/brand/logo-color.png" alt=""></span><b>Institut Gestalt</b><small>Publicidad</small></div><div class="up"><span>Apuntarme al 27-ene</span></div></div><figcaption><b>Reels / Stories 9:16</b></figcaption></figure>
-      <div class="copy">
-        <div class="hook"><p class="k">Gancho · primera frase</p><pre>¿Qué haces cuando, en una sesión individual, aparece toda la familia del cliente?</pre></div>
-        <div><p class="k">Texto principal</p><pre>¿Qué haces cuando, en una sesión individual, aparece toda la familia del cliente?
-
-La formación en Constelaciones Familiares en Terapia Individual es para quien ya acompaña procesos y quiere trabajar con el sistema familiar dentro de su propia consulta.
-
-🗓️ Empieza el 17 de febrero de 2027
-💻 Online, los miércoles de 17 a 21 h
-🎥 Presentación gratuita por Zoom el 27 de enero
-
-Apúntate a la presentación y te enviamos el enlace por WhatsApp.</pre></div>
-        <div class="meta3"><div><p class="k">Titular</p><pre>Constelaciones en tu consulta individual</pre></div><div><p class="k">Botón</p><pre>Registrarte</pre></div><div><p class="k">Formato</p><pre>Vídeo a cámara de un docente, 30–45 s</pre></div></div>
-        <div><p class="k">Guion del vídeo</p><ul class="gui">
-          <li><b>0–3 s</b><span>La pregunta del gancho, a cámara.</span></li>
-          <li><b>3–25 s</b><span>Un caso tipo (sin datos reales): el cliente habla de su padre, de su madre… y cómo se trabaja eso en individual.</span></li>
-          <li><b>25–40 s</b><span>Fechas, formato online y «ven a la presentación del 27 de enero».</span></li>
-        </ul></div>
-        <div class="why"><p class="k">Por qué</p><pre>Vuestro anuncio de Constelaciones ya le habla a quien acompaña procesos: es el mejor que tenéis. Lo llevamos a vídeo con un docente, que es lo que hace creíble una especialización así, y cambiamos «Más información» por un paso con fecha: la presentación del 27 de enero.</pre></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- E -->
 <section class="sec angle alt" id="e">
   <div class="wrap">
@@ -664,33 +727,7 @@ Si te reconoces en esto, pide el dosier de la Formación en Terapia Gestalt. Te 
   </div>
 </section>
 
-<!-- G -->
-<section class="sec angle alt" id="g">
-  <div class="wrap">
-    <div class="ah"><span class="lt" aria-hidden="true">G</span><h2>G · Ya la has visto. El siguiente paso es hablar</h2><div class="meta"><span><b>Ángulo</b>continuidad: a quien ya asistió a la presentación se le invita a la entrevista previa, con una persona del Institut</span><span><b>Público</b>retargeting por lista del CRM: asistió a la presentación (Gestalt o Constelaciones) y aún no ha agendado entrevista</span><span><b>Lleva a</b>no a un formulario: directamente al calendario de entrevistas, con huecos reales del equipo</span></div></div>
-    <div class="ads">
-      <figure><div class="ig">
-        <div class="h"><span class="av"><img src="../assets/brand/logo-color.png" alt=""></span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
-        <div class="art ent"><span class="kk">Entrevista previa</span><h4>Ya la has visto por dentro. <em style="color:#F6D9B8">¿Hablamos?</em></h4><ul><li>Con una persona del equipo</li><li>Sobre tu momento profesional</li><li>Para ver juntos si encaja</li></ul><span class="door" aria-hidden="true">VERDI 94</span><div class="ft"><span class="logo">Institut Gestalt<small>Gràcia · Barcelona · Madrid · online</small></span></div></div>
-        <div class="cta"><span>Reservar</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
-        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
-        <p class="cap"><b>Institut Gestalt</b>Ya viste la presentación. El siguiente paso es una conversación. <span>… más</span></p>
-      </div><figcaption><b>Imagen 4:5</b> · la puerta de Verdi 94 en versión ilustrada (con foto real si la tenéis)</figcaption></figure>
-      <figure><div class="story"><div class="art ent" style="padding-top:70px"><span class="kk">Entrevista previa</span><h4>¿Te quedaste con ganas de más?</h4><ul><li>Elige tú el día y la hora</li><li>Con una persona del equipo</li></ul><span class="door" aria-hidden="true">VERDI 94</span></div><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av"><img src="../assets/brand/logo-color.png" alt=""></span><b>Institut Gestalt</b><small>Publicidad</small></div><div class="up"><span>Elegir día</span></div></div><figcaption><b>Stories 9:16</b></figcaption></figure>
-      <div class="copy">
-        <div class="hook"><p class="k">Gancho · primera frase</p><pre>Ya viste la presentación. El siguiente paso es una conversación.</pre></div>
-        <div><p class="k">Texto principal</p><pre>Ya viste la presentación. El siguiente paso es una conversación.
-
-Una entrevista previa con una persona del equipo del Institut: hablamos de tu momento profesional, de lo que buscas y de si esta formación encaja contigo. Sin compromiso.
-
-Si los dos lo vemos claro, puedes reservar tu plaza con 454 €. Elige el día y la hora que te vayan bien.</pre></div>
-        <div class="meta3"><div><p class="k">Titular</p><pre>Elige día para tu entrevista</pre></div><div><p class="k">Botón</p><pre>Reservar</pre></div><div><p class="k">Formato</p><pre>Imagen 4:5 + story 9:16</pre></div></div>
-        <div class="why"><p class="k">Por qué</p><pre>Entre la presentación y la entrevista es donde más gente se pierde: se enfría en unos días. Este anuncio solo lo ven quienes asistieron, cuesta poco y les recuerda el paso exacto. La entrevista la hace siempre una persona del Institut; el anuncio solo le abre la agenda.</pre></div>
-      </div>
-    </div>
-  </div>
-</section>
-
+</details>
 <section class="sec" id="arreglos">
   <div class="wrap">
     <div class="sh"><div class="no"><b>REGALO</b><span></span></div><h2 class="t">Arreglos rápidos de lo que tenéis activo</h2></div>
