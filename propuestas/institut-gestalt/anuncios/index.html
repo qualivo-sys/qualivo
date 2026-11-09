@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Institut Gestalt · anuncios</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Poppins:wght@600;800&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Propuesta de anuncios de Meta para Institut Gestalt (reunión 9-nov): lo que tienen hoy (Biblioteca de anuncios, 4-nov),
+   el formulario que filtra y siete anuncios nuevos pintados como maquetas de feed con HTML/CSS, sin imágenes. */
+:root{--gt:#A9512B;--gt-ink:#fff;--gt-2:#7A3A1F;--gt-soft:#F8EBE3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gt:#E89A72;--gt-ink:#1B120D;--gt-2:#F2B796;--gt-soft:#2E1F17}}
+:root[data-theme="dark"]{--gt:#E89A72;--gt-ink:#1B120D;--gt-2:#F2B796;--gt-soft:#2E1F17}
+.topnav .cl{font-weight:700;font-size:14.5px;letter-spacing:.01em;white-space:nowrap}
+.ahero{position:relative;color:#fff;overflow:hidden;isolation:isolate;background:#2A201B}
+.ahero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 90% at 92% 20%,rgba(201,112,70,.45),transparent 70%),radial-gradient(50% 80% at 70% 110%,rgba(110,139,116,.35),transparent 70%),linear-gradient(90deg,#2A201B 0%,#33261F 100%)}
+.ahero .wrap{padding-block:60px 48px;display:grid;gap:14px}
+.ahero .eyebrow{color:#F0A57F}
+.ahero h1{font-family:Poppins,var(--sans);font-weight:800;font-size:clamp(32px,4.8vw,56px);line-height:1.05;letter-spacing:-.02em;max-width:20ch}
+.ahero h1 em{font-style:normal;color:#F0A57F}
+.ahero .lead{color:rgba(255,255,255,.84);font-size:18px;max-width:72ch}
+.ahero .maq{font-family:var(--mono);font-size:11.5px;color:rgba(255,255,255,.6);letter-spacing:.03em}
+nav.jump{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+nav.jump a{color:#fff;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);border-radius:99px;padding:7px 14px;transition:background .2s}
+nav.jump a:hover{background:rgba(201,112,70,.4)}
+.ej,.real{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;line-height:1.5}
+.ej{background:#B87708}.real{background:#17734A}
+.sec.alt{background:var(--surface-2)}
+/* hoy */
+.today{display:grid;grid-template-columns:repeat(2,minmax(0,380px));gap:28px;justify-content:start}
+@media (max-width:860px){.today{grid-template-columns:minmax(0,1fr);justify-items:center}}
+.diag{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:800px){.diag{grid-template-columns:1fr}}
+.diag ul{margin:8px 0 0;padding-left:18px;display:grid;gap:7px;font-size:14.5px}
+.cercle{display:grid;grid-template-columns:auto 1fr;gap:14px 18px;align-items:start;background:var(--gt-soft);border:1px solid color-mix(in srgb,var(--gt) 25%,transparent);border-radius:var(--r);padding:20px 22px}
+.cercle .ic{background:var(--gt);color:var(--gt-ink)}
+.cercle p+p{margin-top:8px}
+.cercle q{font-style:italic}
+@media (max-width:560px){.cercle{grid-template-columns:1fr}}
+/* cambios */
+.chg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.chg{grid-template-columns:1fr}}
+.chg .card{display:grid;gap:8px;align-content:start;border-top:4px solid var(--gt)}
+.chg .n{font-family:Poppins,var(--sans);font-weight:800;font-size:26px;color:var(--gt);line-height:1}
+.chg p{font-size:14.5px;color:var(--muted)}
+.chg .vs{font-size:13.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line-2);border-radius:10px;padding:8px 11px}
+/* formulario */
+.fwrap{display:grid;grid-template-columns:360px minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.fwrap{grid-template-columns:minmax(0,1fr);justify-items:center}.fwrap > .card{justify-self:stretch}}
+.lf{width:min(360px,100%);background:#fff;color:#1C1E21;border-radius:18px;overflow:hidden;border:1px solid #DADDE1;box-shadow:var(--shadow-lg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.lf .top{background:linear-gradient(135deg,#3B2B23,#A9512B);color:#fff;padding:18px 18px 16px;display:grid;gap:4px}
+.lf .top small{font-size:11.5px;opacity:.8}
+.lf .top b{font-size:17px;line-height:1.3}
+.lf .body{padding:14px 18px 18px;display:grid;gap:14px}
+.lf .q{display:grid;gap:7px}
+.lf .q > span{font-size:13.5px;font-weight:700}
+.lf .q > span i{font-style:normal;color:#65676B;font-weight:500;font-size:11.5px;margin-left:4px}
+.lf .opts{display:flex;flex-wrap:wrap;gap:6px}
+.lf .opts em{font-style:normal;font-size:12.5px;border:1px solid #CED0D4;border-radius:99px;padding:4px 10px;color:#1C1E21}
+.lf .opts em.on{background:#E7F3FF;border-color:#1877F2;color:#1464D2;font-weight:600}
+.lf .pre{font-size:12.5px;color:#65676B;border-top:1px solid #E4E6EB;padding-top:10px}
+.lf .send{background:#1877F2;color:#fff;text-align:center;font-weight:700;font-size:14px;border-radius:8px;padding:10px}
+.lf .step{display:flex;gap:6px;justify-content:center}
+.lf .step i{width:22px;height:4px;border-radius:2px;background:#CED0D4}.lf .step i.on{background:#1877F2}
+.route{display:grid;gap:10px;margin-top:6px}
+.route div{display:grid;grid-template-columns:150px 1fr;gap:12px;font-size:14px;border-top:1px solid var(--line-2);padding-top:10px}
+.route div b{font-weight:650}
+@media (max-width:560px){.route div{grid-template-columns:1fr;gap:2px}}
+/* resumen */
+.plan5{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:1000px){.plan5{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.plan5{grid-template-columns:1fr}}
+.plan5 a{display:grid;gap:8px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+.plan5 a:hover{transform:translateY(-2px);border-color:var(--gt)}
+.lt{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#A9512B;color:#fff;font-family:Poppins,var(--sans);font-weight:800;font-size:17px}
+.plan5 b{font-size:15.5px}
+.plan5 p{color:var(--muted);font-size:13.5px;line-height:1.5}
+.plan5 .fm{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gt)}
+/* ángulo */
+.angle{scroll-margin-top:70px}
+.ah{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start}
+.ah .lt{grid-row:span 2;width:56px;height:56px;border-radius:16px;font-size:28px}
+.ah h2{font-family:Poppins,var(--sans);font-weight:800;font-size:clamp(24px,3vw,34px);line-height:1.15;letter-spacing:-.015em}
+.ah .meta{display:grid;gap:6px;font-size:14.5px;color:var(--muted);max-width:92ch}
+.ah .meta b{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gt-2);margin-right:6px}
+@media (max-width:560px){.ah{grid-template-columns:1fr}.ah .lt{grid-row:auto;width:44px;height:44px;font-size:22px}}
+.ads{display:grid;grid-template-columns:380px 300px minmax(0,1fr);gap:28px;align-items:start;margin-top:8px}
+.ads.two{grid-template-columns:380px minmax(0,1fr)}
+@media (max-width:1180px){.ads{grid-template-columns:380px 300px}.ads .copy{grid-column:1/-1}.ads.two{grid-template-columns:380px minmax(0,1fr)}.ads.two .copy{grid-column:auto}}
+@media (max-width:820px){.ads,.ads.two{grid-template-columns:minmax(0,1fr);justify-items:center}.ads .copy,.ads.two .copy{grid-column:auto;justify-self:stretch}}
+figure{margin:0;min-width:0}
+.ads > figure,.today > figure{width:100%;display:grid;justify-items:center}
+figcaption{font-size:13px;color:var(--muted);margin-top:10px;text-align:center;line-height:1.4;max-width:380px}
+figcaption b{color:var(--ink);font-weight:650}
+/* marco instagram */
+.ig{width:min(380px,100%);background:#fff;color:#111;border-radius:14px;overflow:hidden;border:1px solid #DBDBDB;box-shadow:var(--shadow-lg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.ig .h{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.av{width:32px;height:32px;border-radius:50%;background:#3B2B23;color:#fff;display:grid;place-items:center;font:800 11px Poppins,sans-serif;flex:none;box-shadow:0 0 0 2px #fff,0 0 0 3.5px #C97046}
+.ig .h b{font-size:13.5px;display:block;line-height:1.2}
+.ig .h small{font-size:11.5px;color:#737373}
+.ig .h .dots{margin-left:auto;font-weight:700;color:#262626;letter-spacing:1px}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;border-bottom:1px solid #EFEFEF;font-size:13.5px;font-weight:600;color:#0095F6}
+.ig .cta svg{width:16px;height:16px}
+.ig .acts{display:flex;gap:14px;padding:10px 12px 4px;color:#262626}
+.ig .acts svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.ig .acts .sv{margin-left:auto}
+.ig .cdots{display:flex;gap:4px;justify-content:center;margin:-22px 0 0;padding-bottom:4px;position:relative}
+.ig .cdots i{width:6px;height:6px;border-radius:50%;background:#C7C7C7}.ig .cdots i.on{background:#0095F6}
+.ig .cap{padding:4px 12px 14px;font-size:13.5px;line-height:1.45}
+.ig .cap b{margin-right:5px}
+.ig .cap span{color:#737373}
+.story{position:relative;width:min(300px,100%);aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#000;box-shadow:var(--shadow-lg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.story > .art{position:absolute;inset:0;aspect-ratio:auto}
+.story::before{content:"";position:absolute;inset:0 0 auto;height:90px;background:linear-gradient(rgba(0,0,0,.45),transparent);z-index:3}
+.story .pb{position:absolute;top:8px;left:8px;right:8px;display:flex;gap:3px;z-index:4}
+.story .pb i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.4);overflow:hidden}
+.story .pb i:first-child::after{content:"";display:block;height:100%;width:60%;background:#fff}
+.story .sh2{position:absolute;top:18px;left:10px;right:10px;display:flex;align-items:center;gap:8px;color:#fff;z-index:4;font-size:12.5px}
+.story .sh2 .av{width:26px;height:26px;box-shadow:none;font-size:9px}
+.story .sh2 small{opacity:.8;font-size:11px;margin-left:4px}
+.story .up{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:4;display:grid;justify-items:center;gap:2px;color:#fff;font-size:12.5px;font-weight:600;white-space:nowrap}
+.story .up span{background:#fff;color:#111;border-radius:99px;padding:6px 14px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+/* creatividades (todo CSS) */
+.art{position:relative;aspect-ratio:4/5;overflow:hidden;display:flex;flex-direction:column;padding:24px 22px;font-family:Poppins,-apple-system,sans-serif;color:#fff}
+.art .kk{font:600 10.5px/1.3 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.art h4{font:800 27px/1.08 Poppins,sans-serif;letter-spacing:-.02em;margin-top:10px}
+.art h4 em{font-style:normal;color:#F6B28E}
+.art .bt{font:500 13px/1.45 Inter,sans-serif;opacity:.9;margin-top:10px}
+.art .ft{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;font:600 11px/1.3 Inter,sans-serif;opacity:.92}
+.art .logo{font:700 12px/1.1 "Source Serif 4",Georgia,serif;letter-spacing:.01em}
+.art .logo small{display:block;font:500 9.5px Inter,sans-serif;opacity:.75;letter-spacing:.04em;margin-top:2px}
+.seal{display:inline-grid;place-items:center;text-align:center;width:62px;height:62px;border-radius:50%;border:1.5px solid currentColor;font:700 9px/1.15 Inter,sans-serif;letter-spacing:.04em;padding:6px}
+/* vídeo a cámara */
+.art.vid{background:radial-gradient(90% 70% at 50% 35%,#7A6455 0%,#3A2C24 60%,#221915 100%);padding:16px}
+.art.vid.b{background:radial-gradient(90% 70% at 50% 35%,#5E7464 0%,#2E3A31 60%,#1A221C 100%)}
+.art .per{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:78%;height:auto;fill:rgba(255,236,222,.2)}
+.art .plant{position:absolute;right:-8px;bottom:0;width:30%;fill:rgba(160,190,150,.22)}
+.art .vtag{position:relative;z-index:2;align-self:flex-start;background:rgba(0,0,0,.45);border-radius:99px;padding:4px 10px;font:600 10.5px Inter,sans-serif;letter-spacing:.02em}
+.art .dur{position:absolute;top:16px;right:16px;z-index:2;background:rgba(0,0,0,.5);border-radius:6px;padding:2px 7px;font:600 10.5px "JetBrains Mono",monospace}
+.art .play{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);z-index:2;width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.22);backdrop-filter:blur(4px);display:grid;place-items:center}
+.art .play::after{content:"";border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
+.art .subt{position:absolute;left:14px;right:14px;bottom:62px;z-index:2;text-align:center}
+.art .subt span{display:inline;background:rgba(0,0,0,.62);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:3px 7px;border-radius:5px;font:700 16px/1.6 Inter,sans-serif}
+.art .subt span mark{background:none;color:#F6B28E}
+.art .name{position:absolute;left:16px;bottom:18px;z-index:2;font:600 11px/1.3 Inter,sans-serif;border-left:3px solid #F6B28E;padding-left:8px}
+.art .name small{display:block;font-weight:500;opacity:.75}
+.story .art .subt{bottom:120px}.story .art .name{bottom:70px}.story .art .vtag{margin-top:52px}
+/* carrusel */
+.art.car{padding:0;display:block}
+.art.car .trk{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.art.car .trk::-webkit-scrollbar{display:none}
+.art.car .sl{flex:0 0 100%;height:100%;scroll-snap-align:start;display:flex;flex-direction:column;padding:26px 22px}
+.art.car .cnt{position:absolute;top:12px;right:12px;z-index:2;background:rgba(0,0,0,.55);color:#fff;border-radius:99px;padding:2px 9px;font:600 11px Inter,sans-serif}
+.art.car .nx{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:28px;height:28px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#111;font:700 15px/1 Inter,sans-serif;cursor:pointer;display:grid;place-items:center}
+.art.car .nx.p{left:8px}.art.car .nx.n{right:8px}
+.art .big{font:800 64px/1 Poppins,sans-serif;letter-spacing:-.03em;opacity:.95}
+.sl.s1{background:#3B2B23}.sl.s2{background:#A9512B}.sl.s3{background:#EFE4D6;color:#2B211C}.sl.s4{background:#5E7464}.sl.s5{background:#2B211C}
+.sl.s3 h4 em{color:#A9512B}
+.pathx{display:grid;gap:8px;margin-top:16px;font:600 13px/1.3 Inter,sans-serif}
+.pathx span{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.12);border-radius:10px;padding:8px 10px}
+.pathx span b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#fff;color:#2B211C;font-size:11.5px;flex:none}
+.pathx span.on{background:#fff;color:#2B211C}.pathx span.on b{background:#A9512B;color:#fff}
+/* hoy: genérico */
+.art.old{background:#E9E4DD;color:#3A3330;justify-content:center;align-items:center;text-align:center;gap:10px;padding:26px}
+.art.old .lg{font:700 15px "Source Serif 4",Georgia,serif;opacity:.7}
+.art.old h4{font-size:24px;margin:0;color:#3A3330}
+.art.old.v2{background:#D7CFC6}.art.old.v3{background:#CFC4B8}
+.art.dyn{background:linear-gradient(160deg,#6E5A6E,#3F3446);justify-content:center}
+.art.dyn h4{font-size:22px}
+/* invitación */
+.art.inv{background:#EFE4D6;color:#2B211C}
+.art.inv .kk{color:#A9512B}
+.art.inv h4 em{color:#A9512B}
+.art.inv .zoom{margin-top:16px;display:flex;gap:10px;align-items:center;background:#fff;border-radius:14px;padding:11px 12px;font:600 12.5px/1.35 Inter,sans-serif;box-shadow:0 6px 18px -10px rgba(43,33,28,.4)}
+.art.inv .zoom i{flex:none;width:36px;height:36px;border-radius:10px;background:#2D8CFF;display:grid;place-items:center}
+.art.inv .zoom i::after{content:"";width:14px;height:10px;border-radius:2px;background:#fff;box-shadow:6px 0 0 -2px #fff}
+.art.inv .zoom small{display:block;font-weight:500;color:#6B5E57}
+.art.inv .ring{position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;border:28px solid rgba(169,81,43,.12)}
+/* agenda constelaciones */
+.art.agd{background:linear-gradient(170deg,#2E3A31,#1A221C)}
+.cal{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.cal div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:12px;display:grid;gap:2px;font:500 11.5px/1.35 Inter,sans-serif}
+.cal div b{font:800 30px/1 Poppins,sans-serif;letter-spacing:-.02em}
+.cal div b small{font-size:13px;font-weight:600;letter-spacing:0;margin-left:4px}
+.cal div.hl{background:#F6B28E;color:#1A221C;border-color:transparent}
+.cal div.w{grid-column:1/-1;display:flex;align-items:center;gap:10px}
+.cal div.w b{font-size:18px}
+/* testimonio */
+.art.tst{background:#3B2B23;padding:16px}
+.art.tst .qt{position:absolute;left:18px;right:18px;top:62px;z-index:2;font:700 20px/1.3 "Source Serif 4",Georgia,serif;letter-spacing:-.01em}
+.art.tst .qt::before{content:"“";display:block;font:800 54px/0.6 Poppins,sans-serif;color:#F6B28E;margin-bottom:12px}
+.art.tst .per{width:60%;left:auto;right:-6%;transform:none;fill:rgba(255,236,222,.14)}
+/* entrevista */
+.art.ent{background:#5E7464}
+.art.ent .door{position:absolute;right:22px;bottom:70px;width:96px;height:150px;border-radius:48px 48px 6px 6px;border:3px solid rgba(255,255,255,.55);display:grid;place-items:end center;padding-bottom:12px;font:600 10px Inter,sans-serif;letter-spacing:.06em}
+.art.ent .door::after{content:"";position:absolute;right:16px;top:80px;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7)}
+.art.ent ul{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:7px;font:600 12.5px/1.35 Inter,sans-serif;max-width:62%}
+.art.ent ul li{display:flex;gap:8px}.art.ent ul li::before{content:"✓";color:#F6D9B8}
+/* panel de texto */
+.copy{display:grid;gap:12px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-width:0}
+.copy .k{margin:0 0 4px}
+pre{white-space:pre-wrap;font:14.5px/1.55 var(--sans);background:var(--paper);border:1px solid var(--line-2);border-radius:10px;padding:11px 13px;margin:0;color:var(--ink);overflow-wrap:anywhere}
+.hook pre{font-weight:650;border-left:4px solid var(--gt)}
+.meta2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.meta2 > div{min-width:0}
+.meta3{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.meta3 > div:first-child{grid-column:1/-1}
+.meta3 > div{min-width:0}
+@media (max-width:640px){.meta2,.meta3{grid-template-columns:1fr}}
+.why pre{background:var(--gt-soft);border-color:transparent;color:var(--ink)}
+.gui{margin:0;padding-left:0;list-style:none;display:grid;gap:6px;font-size:14px}
+.gui li{display:grid;grid-template-columns:62px 1fr;gap:10px;background:var(--paper);border:1px solid var(--line-2);border-radius:10px;padding:8px 11px}
+.gui li b{font-family:var(--mono);font-weight:500;font-size:11.5px;color:var(--gt-2);padding-top:2px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+  <symbol id="i-per" viewBox="0 0 200 250"><circle cx="100" cy="86" r="40"/><path d="M22 250c4-64 38-100 78-100s74 36 78 100z"/></symbol>
+  <symbol id="i-plant" viewBox="0 0 60 120"><path d="M30 120V50M30 70C10 66 4 48 6 32c16 2 24 16 24 38zM30 58c18-4 26-20 24-38-16 4-24 20-24 38z"/><rect x="16" y="100" width="28" height="20" rx="3"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></symbol>
+  <symbol id="i-com" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M22 3 9.2 10.1M22 3l-7 18-3.8-8.9L2 8.6 22 3z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1z"/></symbol>
+</svg>
+
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><span class="cl">Institut Gestalt</span><span class="by">9-nov-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="./" aria-current="page">Anuncios</a><a href="../landing/">Landing</a><a href="../recorrido/">Recorrido</a><a href="../demo/">Demo</a></div>
+  </div>
+</nav>
+
+<header class="ahero">
+  <div class="wrap">
+    <p class="eyebrow">Anuncios · Institut Gestalt</p>
+    <h1>Anuncios que hablan al profesional que <em>ya acompaña</em></h1>
+    <p class="lead">Hemos revisado los anuncios que tenéis activos en Meta. Os proponemos siete nuevos para la Formación en Terapia Gestalt y para Constelaciones en Terapia Individual, pensados para psicólogos, coaches, educadores y terapeutas. Cada uno lleva a un formulario de tres preguntas que filtra, y el paso siguiente es siempre una presentación gratuita o una conversación, no un «más información».</p>
+    <nav class="jump" aria-label="Ir a"><a href="#hoy">Lo que vemos hoy</a><a href="#formulario">El formulario</a><a href="#a">A · Vídeo docente</a><a href="#b">B · Carrusel</a><a href="#c">C · Presentación</a><a href="#d">D · Constelaciones</a><a href="#e">E · Fechas</a><a href="#f">F · Testimonio</a><a href="#g">G · Entrevista</a><a href="#arreglos">Arreglos rápidos</a></nav>
+    <p class="maq">Maqueta de Qualivo para Institut Gestalt · textos y datos de institutgestalt.com y de la Biblioteca de anuncios de Meta (4-nov-2026) · creatividades dibujadas con HTML, sin fotos · no son anuncios publicados</p>
+  </div>
+</header>
+
+<section class="sec" id="hoy" style="border-top:0">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>HOY</b><span></span></div><h2 class="t">Lo que vemos hoy en vuestros anuncios <span class="real">Real</span></h2></div>
+    <p class="lede">Lo que vimos el 4 de noviembre en la Biblioteca de anuncios de Meta. Los hemos redibujado con vuestros textos tal cual (no son capturas) para poder compararlos con la propuesta.</p>
+    <div class="today">
+      <figure><div class="ig">
+        <div class="h"><span class="av">IG</span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art car" data-car>
+          <span class="cnt">1/3</span>
+          <div class="trk">
+            <div class="sl art old"><span class="lg">Institut Gestalt</span><h4>Formación Terapia Gestalt</h4></div>
+            <div class="sl art old v2"><span class="lg">Institut Gestalt</span><h4>Certificado por Asociación Española de Terapia Gestalt</h4></div>
+            <div class="sl art old v3"><span class="lg">Institut Gestalt</span><h4>Fórmate en Institut Gestalt +40 años de trayectoria</h4></div>
+          </div>
+          <button class="nx p" type="button" aria-label="Anterior">‹</button><button class="nx n" type="button" aria-label="Siguiente">›</button>
+        </div>
+        <div class="cta"><span>Más información</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>🗓️ Inicio: Noviembre en Barcelona. Solicita info aquí</p>
+      </div><figcaption><b>Carrusel de la Formación en Terapia Gestalt</b> · tres tarjetas con la marca, botón «Más información» y formulario instantáneo (enlace fb.me)</figcaption></figure>
+      <figure><div class="ig">
+        <div class="h"><span class="av">IG</span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art dyn"><span class="kk">Anuncio dinámico</span><h4>Constelaciones Familiares en Terapia Individual</h4><p class="bt">Para quien ya acompaña procesos individuales.</p></div>
+        <div class="cta"><span>Ver detalles</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>¿Acompañas procesos individuales y quieres incorporar las Constelaciones Familiares a tu consulta?… <span>… más</span></p>
+      </div><figcaption><b>Constelaciones en Terapia Individual</b> · anuncio dinámico dirigido a quien ya acompaña procesos · los botones que usáis son «Más información» y «Ver detalles»</figcaption></figure>
+    </div>
+    <div class="diag">
+      <div class="card"><p class="k">Lo que comprobamos</p><ul>
+        <li><b>Formularios instantáneos</b> (enlace fb.me): se rellenan en dos toques con los datos que Meta ya tiene. Llegan muchas peticiones, pero Meta aprende a buscar «gente que rellena», no «gente que se matricula».</li>
+        <li><b>Botón «Más información»</b> (o «Ver detalles»): no dice qué pasa después de dejar los datos.</li>
+        <li><b>Carrusel genérico</b>: las tres tarjetas repiten marca, certificación y años. Todo es verdad y suma, pero ninguna dice para quién es ni cuál es el siguiente paso.</li>
+        <li><b>Texto corto</b>: «🗓️ Inicio: Noviembre en Barcelona. Solicita info aquí». Habla del curso, no de quien lo lee, y con el inicio ya encima caduca en días.</li>
+        <li><b>El de Constelaciones sí acierta</b>: «¿Acompañas procesos individuales…?» empieza por el profesional. Es el camino.</li>
+      </ul></div>
+      <div class="card"><p class="k">Qué cambiaríamos</p><ul>
+        <li><b>Formulario con 3 preguntas que filtran</b>: perfil profesional, formación que le interesa y cuándo quiere empezar. Menos peticiones de curiosos, más de gente que encaja, y cada respuesta llega ya clasificada.</li>
+        <li><b>Mensaje centrado en el profesional que ya acompaña</b>: la primera línea le habla a la psicóloga, al coach o al educador y a lo que vive en sus sesiones. El curso viene después.</li>
+        <li><b>La presentación gratuita como paso siguiente</b>: en lugar de «más información», «te reservamos sitio en la próxima presentación por Zoom». Es vuestro propio recorrido (dosier → presentación → entrevista → reserva), contado desde el anuncio.</li>
+      </ul></div>
+    </div>
+    <div class="cercle">
+      <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-eye"/></svg></span>
+      <div>
+        <p class="k" style="color:var(--gt-2)">Cómo se anuncia Cercle Gestalt al mismo público</p>
+        <p>Cercle Gestalt anuncia su Formación Gestalt Integrativa con un vídeo activo desde julio: <q>Tu principal herramienta como profesional eres tú</q>. Le habla a la persona del profesional, no al temario, y sale alguien en cámara. Que un anuncio siga activo tantos meses suele indicar que le funciona.</p>
+        <p>No proponemos copiarles. Proponemos hablar al mismo profesional con lo que es vuestro: más de 40 años acompañando procesos, la certificación de la AETG, Barcelona, Madrid y online, la presentación gratuita como puerta de entrada y una especialización que pocos ofrecen, Constelaciones en Terapia Individual.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="formulario">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>FILTRO</b><span></span></div><h2 class="t">El formulario: tres preguntas que filtran <span class="ej">Ejemplo</span></h2></div>
+    <p class="lede">Es el mismo formulario instantáneo de Meta, con tres preguntas de opción múltiple y el modo «Mayor intención» (un paso para revisar los datos antes de enviar). Se rellena igual de rápido, pero ya no basta un toque por curiosidad, y cada respuesta llega al CRM con su etiqueta.</p>
+    <div class="fwrap">
+      <div class="lf" role="img" aria-label="Maqueta del formulario instantáneo con tres preguntas">
+        <div class="top"><small>Institut Gestalt · formulario</small><b>Te enviamos el dosier por WhatsApp y te guardamos sitio en la próxima presentación gratuita</b></div>
+        <div class="body">
+          <div class="step"><i class="on"></i><i class="on"></i><i></i></div>
+          <div class="q"><span>1. ¿A qué te dedicas?</span><div class="opts"><em class="on">Psicología</em><em>Coaching</em><em>Educación</em><em>Terapia / salud</em><em>Otra profesión de ayuda</em><em>Aún no acompaño a personas</em></div></div>
+          <div class="q"><span>2. ¿Qué formación te interesa?</span><div class="opts"><em class="on">Terapia Gestalt</em><em>Constelaciones en Terapia Individual</em><em>Aún no lo sé</em></div></div>
+          <div class="q"><span>3. ¿Cuándo te gustaría empezar?</span><div class="opts"><em>En la próxima convocatoria</em><em class="on">En los próximos meses</em><em>Solo me estoy informando</em></div></div>
+          <p class="pre">Nombre, email y WhatsApp: prerrellenados por Meta · paso final «Revisa tus datos»</p>
+          <div class="send">Siguiente</div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="k">Qué hace cada respuesta</p>
+        <p class="small muted">Las respuestas deciden qué mensaje recibe cada persona en los primeros minutos. Los mensajes los escribís y aprobáis vosotros, y la entrevista la hace siempre una persona del Institut.</p>
+        <div class="route">
+          <div><b>Perfil profesional</b><span>Quien ya acompaña (psicología, coaching, educación, terapia) recibe el dosier y la fecha de la presentación. Quien «aún no acompaña» recibe una respuesta igual de cuidada, con los talleres u otras formaciones del catálogo que le encajan mejor.</span></div>
+          <div><b>Formación</b><span>Decide qué dosier y qué presentación: la de Terapia Gestalt o la de Constelaciones en Terapia Individual (27 de enero, por Zoom). «Aún no lo sé» recibe ambas.</span></div>
+          <div><b>Cuándo empezar</b><span>«Próxima convocatoria» y «próximos meses» pasan a la lista de la presentación con recordatorios. «Solo me estoy informando» recibe contenido y una invitación más adelante, sin presión.</span></div>
+          <div><b>Señal a Meta</b><span>Cuando alguien llega a la entrevista, reserva su plaza (454 €) o se matricula, se lo contamos a Meta para que busque más personas como esa, no más personas que rellenan.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:48px">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>PROPUESTA</b><span></span></div><h2 class="t">Siete anuncios, un mismo camino <span class="ej">Ejemplo</span></h2></div>
+    <p class="lede">Cuatro para quien todavía no os conoce (A, B, D, F) y tres para quien ya ha dado un paso (C, E, G). Todos le hablan al profesional y todos acaban en la presentación gratuita o en la entrevista.</p>
+    <div class="plan5">
+      <a href="#a"><span class="lt">A</span><span class="fm">Vídeo a cámara · docente</span><b>Lo que pasa en la sesión</b><p>Gestalt · público frío. Le habla al profesional que ya tiene oficio.</p></a>
+      <a href="#b"><span class="lt">B</span><span class="fm">Carrusel · 5 tarjetas</span><b>Así se entra, paso a paso</b><p>Gestalt · público frío. Sustituye al carrusel actual.</p></a>
+      <a href="#c"><span class="lt">C</span><span class="fm">Imagen · invitación</span><b>Conócela por dentro</b><p>Gestalt · retargeting. La presentación gratuita como protagonista.</p></a>
+      <a href="#d"><span class="lt">D</span><span class="fm">Vídeo a cámara · docente</span><b>La familia entra en consulta</b><p>Constelaciones · público frío. Vuestro mejor texto, en vídeo.</p></a>
+      <a href="#e"><span class="lt">E</span><span class="fm">Imagen · calendario</span><b>27 de enero, 17 de febrero</b><p>Constelaciones · retargeting. Las fechas, claras.</p></a>
+      <a href="#f"><span class="lt">F</span><span class="fm">Testimonio · vídeo selfie</span><b>«Algo se me escapaba»</b><p>Gestalt · frío y retargeting. Un alumno o alumna real.</p></a>
+      <a href="#g"><span class="lt">G</span><span class="fm">Imagen · story</span><b>El siguiente paso es hablar</b><p>Gestalt y Constelaciones · quien ya fue a la presentación.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- A -->
+<section class="sec angle alt" id="a">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">A</span><h2>A · Lo que pasa en la sesión, mientras pasa</h2><div class="meta"><span><b>Ángulo</b>el profesional ya tiene oficio; la Gestalt le da un marco para trabajar con el aquí y ahora (y consigo mismo en la sesión)</span><span><b>Público</b>frío: psicólogos, coaches, educadores y terapeutas en Barcelona, Madrid y online</span><span><b>Lleva a</b>formulario de 3 preguntas → dosier por WhatsApp en minutos + fecha de la próxima presentación gratuita</span></div></div>
+    <div class="ads">
+      <figure><div class="ig">
+        <div class="h"><span class="av">IG</span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art vid"><svg class="per" aria-hidden="true"><use href="#i-per"/></svg><svg class="plant" viewBox="0 0 60 120" aria-hidden="true"><use href="#i-plant"/></svg><span class="vtag">▶ Vídeo a cámara · 40 s</span><span class="dur">0:03</span><span class="play" aria-hidden="true"></span><p class="subt"><span>Hay algo que pocas formaciones enseñan: <mark>qué hacer con lo que pasa en la sesión</mark>, mientras pasa.</span></p><p class="name">Docente del Institut<small>Formación en Terapia Gestalt</small></p></div>
+        <div class="cta"><span>Descargar</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>Hay algo que pocas formaciones enseñan: qué hacer con lo que está pasando en la sesión, mientras pasa. <span>… más</span></p>
+      </div><figcaption><b>Feed 4:5</b> · un docente a cámara, con subtítulos (la mayoría lo ve sin sonido)</figcaption></figure>
+      <figure><div class="story"><div class="art vid"><svg class="per" aria-hidden="true"><use href="#i-per"/></svg><span class="vtag">Reels · 9:16</span><p class="subt"><span>Si ya acompañas a personas, <mark>esto va contigo.</mark></span></p><p class="name">Docente del Institut<small>Formación en Terapia Gestalt</small></p></div><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av">IG</span><b>Institut Gestalt</b><small>Publicidad</small></div><div class="up"><span>Descargar el dosier</span></div></div><figcaption><b>Reels / Stories 9:16</b> · mismo vídeo, encuadre vertical</figcaption></figure>
+      <div class="copy">
+        <div class="hook"><p class="k">Gancho · primera frase</p><pre>Hay algo que pocas formaciones enseñan: qué hacer con lo que está pasando en la sesión, mientras pasa.</pre></div>
+        <div><p class="k">Texto principal</p><pre>Hay algo que pocas formaciones enseñan: qué hacer con lo que está pasando en la sesión, mientras pasa.
+
+Si eres psicóloga, coach, educador o terapeuta, ya tienes oficio. La Formación en Terapia Gestalt te da un marco para trabajar con el aquí y ahora: con lo que la persona siente, con lo que evita y con lo que se mueve en ti mientras la acompañas.
+
+✓ Certificada por la Asociación Española de Terapia Gestalt (AETG)
+✓ Más de 40 años acompañando procesos
+✓ Barcelona, Madrid y online
+
+Pide el dosier: te lo enviamos por WhatsApp junto con la fecha de la próxima presentación gratuita.</pre></div>
+        <div class="meta3"><div><p class="k">Titular</p><pre>Formación en Terapia Gestalt para quien ya acompaña</pre></div><div><p class="k">Botón</p><pre>Descargar</pre></div><div><p class="k">Formato</p><pre>Vídeo a cámara de un docente, 30–45 s</pre></div></div>
+        <div><p class="k">Guion del vídeo</p><ul class="gui">
+          <li><b>0–3 s</b><span>El gancho, mirando a cámara. Sin logo ni música de entrada.</span></li>
+          <li><b>3–20 s</b><span>Una situación de sesión que cualquier profesional reconoce, y cómo la mira la Gestalt.</span></li>
+          <li><b>20–35 s</b><span>Para quién es: «si ya acompañas a personas…». Certificación AETG y sedes.</span></li>
+          <li><b>35–45 s</b><span>«Pide el dosier y ven a la presentación gratuita». Rótulo con el botón.</span></li>
+        </ul></div>
+        <div class="why"><p class="k">Por qué</p><pre>En una formación así, el docente es el producto: verle y oírle explicar una sesión convence más que cualquier tarjeta. La primera frase filtra sola: a quien no acompaña a nadie no le dice nada. Y el botón «Descargar» dice exactamente qué recibe.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B -->
+<section class="sec angle" id="b">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">B</span><h2>B · Así se entra en la formación, paso a paso</h2><div class="meta"><span><b>Ángulo</b>transparencia: enseñar el camino (dosier, presentación, entrevista, plaza) quita miedo al que va en serio y aparta al curioso</span><span><b>Público</b>frío, mismo perfil que A; sustituye al carrusel actual</span><span><b>Lleva a</b>formulario de 3 preguntas → sitio en la próxima presentación gratuita por Zoom, con recordatorios</span></div></div>
+    <div class="ads two">
+      <figure><div class="ig">
+        <div class="h"><span class="av">IG</span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art car" data-car>
+          <span class="cnt">1/5</span>
+          <div class="trk">
+            <div class="sl s1"><span class="kk">Formación en Terapia Gestalt</span><h4>¿Ya acompañas a personas? <em>Esto es para ti.</em></h4><p class="bt">Psicólogos, coaches, educadores y terapeutas.</p><div class="ft"><span class="logo">Institut Gestalt<small>Barcelona · Madrid · online</small></span><span>Desliza →</span></div></div>
+            <div class="sl s2"><span class="kk">Paso 1</span><h4>Pides el dosier y te llega por WhatsApp</h4><div class="pathx"><span class="on"><b>1</b>Dosier</span><span><b>2</b>Presentación gratuita</span><span><b>3</b>Entrevista</span><span><b>4</b>Reserva de plaza</span></div></div>
+            <div class="sl s3"><span class="kk">Paso 2</span><h4>Vienes a una <em>presentación gratuita</em> por Zoom</h4><p class="bt">El equipo docente explica cómo se trabaja y responde a tus preguntas.</p></div>
+            <div class="sl s4"><span class="kk">Paso 3</span><h4>Hablas con una persona del Institut</h4><p class="bt">Una entrevista previa para ver juntos si la formación encaja con tu momento.</p></div>
+            <div class="sl s5"><span class="kk">Respaldo</span><div style="display:flex;gap:14px;align-items:center;margin-top:16px"><span class="seal">AETG<br>certificada</span><span class="big">+40</span></div><h4>años acompañando procesos</h4><p class="bt">Formación certificada por la Asociación Española de Terapia Gestalt.</p></div>
+          </div>
+          <button class="nx p" type="button" aria-label="Anterior">‹</button><button class="nx n" type="button" aria-label="Siguiente">›</button>
+        </div>
+        <div class="cta"><span>Registrarte</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>Así es el camino, paso a paso, antes de decidir nada. <span>… más</span></p>
+      </div><figcaption><b>Carrusel 4:5</b> · cinco tarjetas, desliza o usa las flechas</figcaption></figure>
+      <div class="copy">
+        <div class="hook"><p class="k">Gancho · primera frase</p><pre>Así es el camino, paso a paso, antes de decidir nada.</pre></div>
+        <div><p class="k">Texto principal</p><pre>Así es el camino, paso a paso, antes de decidir nada.
+
+1. Pides el dosier y te llega por WhatsApp.
+2. Vienes a una presentación gratuita por Zoom.
+3. Tienes una entrevista con una persona del equipo.
+4. Si lo vemos claro los dos, reservas tu plaza.
+
+Formación en Terapia Gestalt, certificada por la AETG. Para psicólogos, coaches, educadores y terapeutas que ya acompañan a personas. En Barcelona, Madrid y online.</pre></div>
+        <div class="meta3"><div><p class="k">Titular</p><pre>Primero, una presentación gratuita</pre></div><div><p class="k">Botón</p><pre>Registrarte</pre></div><div><p class="k">Formato</p><pre>Carrusel de 5 tarjetas</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>Vuestro carrusel actual usa las tres tarjetas para decir lo mismo (marca, certificación, años). Aquí cada tarjeta responde una duda: ¿es para mí?, ¿qué pasa si dejo mis datos?, ¿me van a presionar? Ver que hay entrevista tranquiliza al profesional serio y desanima al que solo curiosea. El respaldo (AETG, +40 años) va al final, cuando ya interesa.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C -->
+<section class="sec angle alt" id="c">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">C</span><h2>C · Antes de decidir, conócela por dentro</h2><div class="meta"><span><b>Ángulo</b>la presentación gratuita como producto: bajo compromiso, alto valor para quien duda</span><span><b>Público</b>retargeting: vio la mitad del vídeo A o F, visitó la página de la formación o abrió el formulario sin enviarlo (últimos 30 días)</span><span><b>Lleva a</b>formulario de 3 preguntas → inscripción a la presentación por Zoom, con enlace y recordatorios por WhatsApp</span></div></div>
+    <div class="ads">
+      <figure><div class="ig">
+        <div class="h"><span class="av">IG</span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art inv"><span class="ring" aria-hidden="true"></span><span class="kk">Presentación gratuita</span><h4>Antes de decidir, <em>conócela por dentro</em></h4><p class="bt" style="opacity:.8">Formación en Terapia Gestalt. El equipo docente te cuenta cómo se trabaja y responde a tus preguntas.</p><div class="zoom"><i aria-hidden="true"></i><span>Por Zoom · [fecha de la próxima]<small>Te enviamos el enlace por WhatsApp</small></span></div><div class="ft"><span class="logo">Institut Gestalt<small>Certificada por la AETG</small></span><span>+40 años</span></div></div>
+        <div class="cta"><span>Registrarte</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>Antes de comprometerte con una formación así, conócela por dentro. <span>… más</span></p>
+      </div><figcaption><b>Imagen 4:5</b> · tipo invitación</figcaption></figure>
+      <figure><div class="story"><div class="art inv" style="padding-top:70px"><span class="ring" aria-hidden="true"></span><span class="kk">Presentación gratuita</span><h4>¿Te lo estás pensando?</h4><p class="bt" style="opacity:.8">Ven a verla por dentro antes de decidir nada.</p><div class="zoom"><i aria-hidden="true"></i><span>Por Zoom<small>[fecha de la próxima]</small></span></div></div><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av">IG</span><b>Institut Gestalt</b><small>Publicidad</small></div><div class="up"><span>Reservar mi sitio</span></div></div><figcaption><b>Stories 9:16</b></figcaption></figure>
+      <div class="copy">
+        <div class="hook"><p class="k">Gancho · primera frase</p><pre>Antes de comprometerte con una formación así, conócela por dentro.</pre></div>
+        <div><p class="k">Texto principal</p><pre>Antes de comprometerte con una formación así, conócela por dentro.
+
+Presentación gratuita de la Formación en Terapia Gestalt, por Zoom. El equipo docente explica cómo es el recorrido, cómo se trabaja y para quién es. Puedes preguntar todo lo que quieras.
+
+Te apuntas en un minuto y te enviamos el enlace y un recordatorio por WhatsApp.</pre></div>
+        <div class="meta3"><div><p class="k">Titular</p><pre>Presentación gratuita por Zoom</pre></div><div><p class="k">Botón</p><pre>Registrarte</pre></div><div><p class="k">Formato</p><pre>Imagen 4:5 + story 9:16</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>Quien ya os ha visto no necesita más información: necesita un paso pequeño y concreto. La presentación ya existe en vuestro recorrido; aquí pasa a ser lo que se anuncia. Quien se apunta y asiste es el mejor candidato a entrevista, y esa es la señal que queremos enseñarle a Meta.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- D -->
+<section class="sec angle" id="d">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">D</span><h2>D · Cuando la familia entra en la consulta</h2><div class="meta"><span><b>Ángulo</b>el profesional que ya trabaja en individual y se encuentra con el sistema familiar del cliente; parte de vuestro texto actual, que ya acierta</span><span><b>Público</b>frío: psicólogos, terapeutas y coaches que trabajan en sesión individual, en toda España (es online)</span><span><b>Lleva a</b>formulario de 3 preguntas (la 2 empieza por Constelaciones) → plaza en la presentación gratuita del 27 de enero por Zoom</span></div></div>
+    <div class="ads">
+      <figure><div class="ig">
+        <div class="h"><span class="av">IG</span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art vid b"><svg class="per" aria-hidden="true"><use href="#i-per"/></svg><svg class="plant" viewBox="0 0 60 120" aria-hidden="true"><use href="#i-plant"/></svg><span class="vtag">▶ Vídeo a cámara · 40 s</span><span class="dur">0:02</span><span class="play" aria-hidden="true"></span><p class="subt"><span>¿Qué haces cuando, en una sesión individual, <mark>aparece toda la familia del cliente</mark>?</span></p><p class="name">Docente del Institut<small>Constelaciones en Terapia Individual</small></p></div>
+        <div class="cta"><span>Registrarte</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>¿Qué haces cuando, en una sesión individual, aparece toda la familia del cliente? <span>… más</span></p>
+      </div><figcaption><b>Feed 4:5</b> · docente a cámara, con subtítulos</figcaption></figure>
+      <figure><div class="story"><div class="art vid b"><svg class="per" aria-hidden="true"><use href="#i-per"/></svg><span class="vtag">Reels · 9:16</span><p class="subt"><span>Constelaciones Familiares <mark>en tu consulta individual.</mark></span></p><p class="name">Online · desde el 17 de febrero<small>Presentación gratuita: 27 de enero</small></p></div><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av">IG</span><b>Institut Gestalt</b><small>Publicidad</small></div><div class="up"><span>Apuntarme al 27-ene</span></div></div><figcaption><b>Reels / Stories 9:16</b></figcaption></figure>
+      <div class="copy">
+        <div class="hook"><p class="k">Gancho · primera frase</p><pre>¿Qué haces cuando, en una sesión individual, aparece toda la familia del cliente?</pre></div>
+        <div><p class="k">Texto principal</p><pre>¿Qué haces cuando, en una sesión individual, aparece toda la familia del cliente?
+
+La formación en Constelaciones Familiares en Terapia Individual es para quien ya acompaña procesos y quiere trabajar con el sistema familiar dentro de su propia consulta.
+
+🗓️ Empieza el 17 de febrero de 2027
+💻 Online, los miércoles de 17 a 21 h
+🎥 Presentación gratuita por Zoom el 27 de enero
+
+Apúntate a la presentación y te enviamos el enlace por WhatsApp.</pre></div>
+        <div class="meta3"><div><p class="k">Titular</p><pre>Constelaciones en tu consulta individual</pre></div><div><p class="k">Botón</p><pre>Registrarte</pre></div><div><p class="k">Formato</p><pre>Vídeo a cámara de un docente, 30–45 s</pre></div></div>
+        <div><p class="k">Guion del vídeo</p><ul class="gui">
+          <li><b>0–3 s</b><span>La pregunta del gancho, a cámara.</span></li>
+          <li><b>3–25 s</b><span>Un caso tipo (sin datos reales): el cliente habla de su padre, de su madre… y cómo se trabaja eso en individual.</span></li>
+          <li><b>25–40 s</b><span>Fechas, formato online y «ven a la presentación del 27 de enero».</span></li>
+        </ul></div>
+        <div class="why"><p class="k">Por qué</p><pre>Vuestro anuncio de Constelaciones ya le habla a quien acompaña procesos: es el mejor que tenéis. Lo llevamos a vídeo con un docente, que es lo que hace creíble una especialización así, y cambiamos «Más información» por un paso con fecha: la presentación del 27 de enero.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- E -->
+<section class="sec angle alt" id="e">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">E</span><h2>E · Los miércoles de 17 a 21 h, desde donde estés</h2><div class="meta"><span><b>Ángulo</b>logística resuelta: online, horario de tarde y fechas claras, para quien ya se lo está pensando</span><span><b>Público</b>retargeting: vio el vídeo D, visitó la página de Constelaciones o pidió información de Constelaciones Familiares</span><span><b>Lleva a</b>el mismo formulario (versión Constelaciones) → presentación gratuita del 27 de enero, con recordatorio el día antes y una hora antes</span></div></div>
+    <div class="ads two">
+      <figure><div class="ig">
+        <div class="h"><span class="av">IG</span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art agd"><span class="kk">Constelaciones en Terapia Individual</span><h4>Desde tu consulta, <em>online</em></h4><div class="cal"><div class="hl"><span>Presentación gratuita</span><b>27<small>ENE</small></b><span>por Zoom</span></div><div><span>Inicio</span><b>17<small>FEB</small></b><span>2027</span></div><div class="w"><b>Miércoles · 17–21 h</b><span>Online</span></div></div><div class="ft"><span class="logo">Institut Gestalt<small>+40 años acompañando procesos</small></span></div></div>
+        <div class="cta"><span>Registrarte</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>Los miércoles de 17 a 21 h, online, desde donde estés. <span>… más</span></p>
+      </div><figcaption><b>Imagen 4:5</b> · las fechas como protagonistas</figcaption></figure>
+      <div class="copy">
+        <div class="hook"><p class="k">Gancho · primera frase</p><pre>Los miércoles de 17 a 21 h, online, desde donde estés.</pre></div>
+        <div><p class="k">Texto principal</p><pre>Los miércoles de 17 a 21 h, online, desde donde estés.
+
+Constelaciones Familiares en Terapia Individual empieza el 17 de febrero de 2027. Antes, el 27 de enero, hacemos una presentación gratuita por Zoom para que conozcas al equipo docente y resuelvas tus dudas.
+
+Apúntate y te recordamos la fecha por WhatsApp.</pre></div>
+        <div class="meta3"><div><p class="k">Titular</p><pre>Presentación gratuita: 27 de enero</pre></div><div><p class="k">Botón</p><pre>Registrarte</pre></div><div><p class="k">Formato</p><pre>Imagen 4:5 (y story)</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>Quien ya vio el vídeo sabe de qué va. Lo que le frena ahora es práctico: ¿cuándo?, ¿puedo compaginarlo con la consulta? Responderlo en la imagen ahorra preguntas y deja solo un paso: la fecha del 27.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- F -->
+<section class="sec angle" id="f">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">F</span><h2>F · «Sentía que algo se me escapaba en consulta»</h2><div class="meta"><span><b>Ángulo</b>identificación: un profesional como el que lo ve cuenta qué le cambió la formación</span><span><b>Público</b>frío (mismo perfil que A) y retargeting de quien pidió el dosier y no fue a la presentación</span><span><b>Lleva a</b>formulario de 3 preguntas → dosier por WhatsApp + próxima presentación gratuita</span></div></div>
+    <div class="ads">
+      <figure><div class="ig">
+        <div class="h"><span class="av">IG</span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art tst"><svg class="per" aria-hidden="true"><use href="#i-per"/></svg><span class="vtag">▶ Testimonio · grabado con móvil</span><p class="qt">Llevaba años como psicóloga y sentía que algo se me escapaba en consulta.</p><p class="name">Laia · psicóloga, Barcelona<small>Testimonio de ejemplo</small></p></div>
+        <div class="cta"><span>Descargar</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>«Llevaba años como psicóloga y sentía que algo se me escapaba en consulta.» <span>… más</span></p>
+      </div><figcaption><b>Feed 4:5</b> · testimonio en vídeo · <span class="ej">Ejemplo</span></figcaption></figure>
+      <figure><div class="story"><div class="art tst"><svg class="per" aria-hidden="true"><use href="#i-per"/></svg><p class="qt" style="top:90px">Ahora me quedo con lo que pasa en la sesión, en vez de correr a la siguiente técnica.</p><p class="name">Jordi · educador social, online<small>Testimonio de ejemplo</small></p></div><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av">IG</span><b>Institut Gestalt</b><small>Publicidad</small></div><div class="up"><span>Pedir el dosier</span></div></div><figcaption><b>Reels 9:16</b> · se pueden montar 3–4 testimonios cortos</figcaption></figure>
+      <div class="copy">
+        <div class="hook"><p class="k">Gancho · primera frase <span class="ej">Ejemplo</span></p><pre>«Llevaba años como psicóloga y sentía que algo se me escapaba en consulta.»</pre></div>
+        <div><p class="k">Texto principal <span class="ej">Ejemplo</span></p><pre>«Llevaba años como psicóloga y sentía que algo se me escapaba en consulta. En la formación aprendí a quedarme con lo que pasaba en la sesión, en vez de correr a la siguiente técnica.»
+— Laia, psicóloga en Barcelona
+
+Si te reconoces en esto, pide el dosier de la Formación en Terapia Gestalt. Te lo enviamos por WhatsApp con la fecha de la próxima presentación gratuita.</pre></div>
+        <div class="meta3"><div><p class="k">Titular</p><pre>Lo cuentan quienes ya acompañan</pre></div><div><p class="k">Botón</p><pre>Descargar</pre></div><div><p class="k">Formato</p><pre>Testimonio en vídeo vertical, 20–40 s</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>Un profesional se fía de otro profesional. Las frases y los nombres de esta maqueta son inventados: el anuncio real se graba con alumnos o exalumnos que quieran participar y den su consentimiento, con sus palabras. Mejor varios perfiles (psicóloga, coach, enfermera, terapeuta corporal) para que cada uno se vea reflejado.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- G -->
+<section class="sec angle alt" id="g">
+  <div class="wrap">
+    <div class="ah"><span class="lt" aria-hidden="true">G</span><h2>G · Ya la has visto. El siguiente paso es hablar</h2><div class="meta"><span><b>Ángulo</b>continuidad: a quien ya asistió a la presentación se le invita a la entrevista previa, con una persona del Institut</span><span><b>Público</b>retargeting por lista del CRM: asistió a la presentación (Gestalt o Constelaciones) y aún no ha agendado entrevista</span><span><b>Lleva a</b>no a un formulario: directamente al calendario de entrevistas, con huecos reales del equipo</span></div></div>
+    <div class="ads">
+      <figure><div class="ig">
+        <div class="h"><span class="av">IG</span><div><b>Institut Gestalt</b><small>Publicidad</small></div><span class="dots">···</span></div>
+        <div class="art ent"><span class="kk">Entrevista previa</span><h4>Ya la has visto por dentro. <em style="color:#F6D9B8">¿Hablamos?</em></h4><ul><li>Con una persona del equipo</li><li>Sobre tu momento profesional</li><li>Para ver juntos si encaja</li></ul><span class="door" aria-hidden="true">VERDI 94</span><div class="ft"><span class="logo">Institut Gestalt<small>Gràcia · Barcelona · Madrid · online</small></span></div></div>
+        <div class="cta"><span>Reservar</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></div>
+        <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+        <p class="cap"><b>Institut Gestalt</b>Ya viste la presentación. El siguiente paso es una conversación. <span>… más</span></p>
+      </div><figcaption><b>Imagen 4:5</b> · la puerta de Verdi 94 en versión ilustrada (con foto real si la tenéis)</figcaption></figure>
+      <figure><div class="story"><div class="art ent" style="padding-top:70px"><span class="kk">Entrevista previa</span><h4>¿Te quedaste con ganas de más?</h4><ul><li>Elige tú el día y la hora</li><li>Con una persona del equipo</li></ul><span class="door" aria-hidden="true">VERDI 94</span></div><div class="pb"><i></i><i></i><i></i></div><div class="sh2"><span class="av">IG</span><b>Institut Gestalt</b><small>Publicidad</small></div><div class="up"><span>Elegir día</span></div></div><figcaption><b>Stories 9:16</b></figcaption></figure>
+      <div class="copy">
+        <div class="hook"><p class="k">Gancho · primera frase</p><pre>Ya viste la presentación. El siguiente paso es una conversación.</pre></div>
+        <div><p class="k">Texto principal</p><pre>Ya viste la presentación. El siguiente paso es una conversación.
+
+Una entrevista previa con una persona del equipo del Institut: hablamos de tu momento profesional, de lo que buscas y de si esta formación encaja contigo. Sin compromiso.
+
+Si los dos lo vemos claro, puedes reservar tu plaza con 454 €. Elige el día y la hora que te vayan bien.</pre></div>
+        <div class="meta3"><div><p class="k">Titular</p><pre>Elige día para tu entrevista</pre></div><div><p class="k">Botón</p><pre>Reservar</pre></div><div><p class="k">Formato</p><pre>Imagen 4:5 + story 9:16</pre></div></div>
+        <div class="why"><p class="k">Por qué</p><pre>Entre la presentación y la entrevista es donde más gente se pierde: se enfría en unos días. Este anuncio solo lo ven quienes asistieron, cuesta poco y les recuerda el paso exacto. La entrevista la hace siempre una persona del Institut; el anuncio solo le abre la agenda.</pre></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="arreglos">
+  <div class="wrap">
+    <div class="sh"><div class="no"><b>REGALO</b><span></span></div><h2 class="t">Arreglos rápidos de lo que tenéis activo</h2></div>
+    <p class="lede">Cosas que se pueden cambiar esta semana en el Administrador de anuncios, antes de producir nada nuevo.</p>
+    <div class="tw stack"><table>
+      <thead><tr><th>Qué vemos</th><th>Por qué importa</th><th>Arreglo</th></tr></thead>
+      <tbody>
+        <tr><td data-label="Qué vemos"><b>Formularios instantáneos sin preguntas que filtren</b></td><td data-label="Por qué importa">Meta optimiza para quien rellena. Llegan muchas peticiones y hay que llamarlas todas para saber cuáles encajan.</td><td data-label="Arreglo">Añadir las 3 preguntas (perfil, formación, cuándo) y activar «Mayor intención».</td></tr>
+        <tr><td data-label="Qué vemos"><b>Botón «Más información» / «Ver detalles»</b></td><td data-label="Por qué importa">No dice qué recibe la persona al dejar sus datos.</td><td data-label="Arreglo">«Descargar» cuando se ofrece el dosier; «Registrarte» cuando se ofrece la presentación.</td></tr>
+        <tr><td data-label="Qué vemos"><b>Carrusel con la marca en las tres tarjetas</b></td><td data-label="Por qué importa">Todo es cierto, pero no dice para quién es ni qué pasa después.</td><td data-label="Arreglo">Una duda por tarjeta y el camino a la vista (anuncio B).</td></tr>
+        <tr><td data-label="Qué vemos"><b>«Inicio: Noviembre en Barcelona. Solicita info aquí»</b></td><td data-label="Por qué importa">Con el inicio ya encima, el anuncio caduca en días. Y la primera línea habla del curso, no del profesional.</td><td data-label="Arreglo">Empezar por el profesional y llevar a la próxima presentación gratuita, sea cual sea la convocatoria.</td></tr>
+        <tr><td data-label="Qué vemos"><b>Constelaciones: buen texto, paso vago</b></td><td data-label="Por qué importa">El texto ya filtra bien, pero el siguiente paso no tiene fecha.</td><td data-label="Arreglo">Poner la presentación del 27 de enero como destino (anuncios D y E).</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">Revisado el 4-nov-2026 en la Biblioteca de anuncios de Meta (España), página Institut Gestalt y página de Cercle Gestalt. Puede haber versiones de los anuncios que la Biblioteca no muestra. Los testimonios y nombres de esta página son de ejemplo.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+      <a class="btn pri" href="../recorrido/" style="background:#A9512B;color:#fff">Qué pasa después del formulario <svg class="i"><use href="#i-arrow"/></svg></a>
+      <a class="btn sec" href="../landing/">Ver la landing</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="sig"><b>Maikel Echevarría · Qualivo</b><span>maikel@qualivo.io · <a href="https://qualivo.io">qualivo.io</a></span></div>
+    <p>Maqueta preparada el 9 de noviembre de 2026 para Institut Gestalt con sus datos públicos y su Biblioteca de anuncios. Las creatividades son dibujos en HTML; no son anuncios publicados.</p>
+  </div>
+</footer>
+<script>
+/* Carruseles: flechas y contador */
+document.querySelectorAll('[data-car]').forEach(function(car){
+  var trk=car.querySelector('.trk'),cnt=car.querySelector('.cnt'),n=trk.children.length;
+  function idx(){return Math.round(trk.scrollLeft/Math.max(1,trk.clientWidth));}
+  function upd(){if(cnt)cnt.textContent=(idx()+1)+'/'+n;}
+  function go(d){var i=Math.min(n-1,Math.max(0,idx()+d));trk.scrollTo({left:i*trk.clientWidth,behavior:'smooth'});}
+  car.querySelector('.nx.p').addEventListener('click',function(){go(-1);});
+  car.querySelector('.nx.n').addEventListener('click',function(){go(1);});
+  trk.addEventListener('scroll',function(){window.requestAnimationFrame(upd);},{passive:true});
+  upd();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Institut Gestalt · plan de captación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Plan de captación para Institut Gestalt (reunión 9-nov). Página autónoma; la demo vive en ./demo/. */
+:root{--paper:#F6F7FA;--surface:#FFFFFF;--surface-2:#EEF1F6;--ink:#16241F;--muted:#5B6478;--line:#DCE1EA;--line-2:#E9EDF3;--accent:#2F6B5C;--accent-ink:#fff;--accent-soft:#E3F1EC;--warn:#B45309;--warn-soft:#FDF2E3;--good:#1E7B4F;--good-soft:#E3F3EA;--bad:#B42318;--bad-soft:#FBE7E5;--navy:#1B332D;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--shadow:0 1px 2px rgba(15,30,61,.05),0 8px 24px -12px rgba(15,30,61,.15)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0C1424;--surface:#131D31;--surface-2:#18243B;--ink:#E8EDF6;--muted:#9AA6BC;--line:#26324A;--line-2:#1E2940;--accent:#7CC4AE;--accent-ink:#0C1424;--accent-soft:#17312A;--warn:#F0B35A;--warn-soft:#2E2414;--good:#5CC795;--good-soft:#14301F;--bad:#F08A80;--bad-soft:#341A18;--navy:#070E1C}}
+:root[data-theme="dark"]{--paper:#0C1424;--surface:#131D31;--surface-2:#18243B;--ink:#E8EDF6;--muted:#9AA6BC;--line:#26324A;--line-2:#1E2940;--accent:#7CC4AE;--accent-ink:#0C1424;--accent-soft:#17312A;--warn:#F0B35A;--warn-soft:#2E2414;--good:#5CC795;--good-soft:#14301F;--bad:#F08A80;--bad-soft:#341A18;--navy:#070E1C}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);overflow-x:hidden}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:16px}
+.topnav{position:sticky;top:0;z-index:30;background:rgba(27,51,45,.96);color:#fff;backdrop-filter:blur(10px)}
+.topnav .in{max-width:1120px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.brand{display:flex;gap:10px;align-items:baseline;margin-right:auto;font-weight:700}
+.brand small{font-family:var(--mono);font-weight:500;font-size:11px;opacity:.6}
+.links{display:flex;gap:4px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:3px}
+.links a{color:rgba(255,255,255,.85);text-decoration:none;font-weight:600;font-size:13.5px;padding:6px 14px;border-radius:99px}
+.links a[aria-current]{background:#fff;color:var(--navy)}
+.hero{background:linear-gradient(135deg,#1B332D 0%,#2F6B5C 100%);color:#fff;padding:56px 0 48px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.6vw,52px);line-height:1.08;letter-spacing:-.02em;max-width:22ch;margin-top:10px}
+.lead{font-size:18px;opacity:.88;max-width:70ch;margin-top:14px}
+.note{font-size:13px;border:1px dashed rgba(255,255,255,.35);border-radius:10px;padding:9px 12px;margin-top:18px;max-width:92ch;opacity:.85}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:2px 7px;vertical-align:middle;font-weight:500}
+.tag.real{background:var(--good-soft);color:var(--good)}
+.tag.ej{background:var(--warn-soft);color:var(--warn)}
+.tag.hip{background:var(--accent-soft);color:var(--accent)}
+.hero .tag.ej{background:#C9860A;color:#fff}
+main{padding:36px 0 72px;display:grid;gap:44px}
+section{display:grid;gap:18px}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3vw,32px);line-height:1.15;letter-spacing:-.01em}
+h2 .n{font-family:var(--mono);font-size:13px;color:var(--accent);display:block;letter-spacing:.1em;margin-bottom:4px}
+.sub{color:var(--muted);max-width:78ch}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);min-width:0}
+.card h3{font-size:16px;line-height:1.35;margin-bottom:6px}
+.card p,.card li{font-size:14.5px;color:var(--muted)}
+.card ul,.card ol{padding-left:18px;display:grid;gap:5px}
+.kpi b{display:block;font-family:var(--serif);font-size:30px;line-height:1.1;color:var(--ink)}
+.kpi span{font-size:13px;color:var(--muted)}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line-2);text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td.w{min-width:240px}
+.find{display:grid;gap:10px}
+.find li{list-style:none;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:12px 14px;font-size:14.5px}
+.find li.bad{border-left-color:var(--bad)}
+.find li.good{border-left-color:var(--good)}
+.find b{color:var(--ink)}
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;padding:0;list-style:none}
+.flow li{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:12px;padding:12px;font-size:13.5px;color:var(--muted);display:grid;gap:4px;align-content:start}
+.flow li b{color:var(--ink);font-size:14.5px}
+.weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.weeks .card h3 span{font-family:var(--mono);font-size:11px;color:var(--accent);display:block;letter-spacing:.08em}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:650;border-radius:99px;padding:12px 20px}
+.btn.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+footer{border-top:1px solid var(--line);padding:22px 0 40px;font-size:13px;color:var(--muted);display:grid;gap:6px}
+@media (max-width:960px){.grid,.grid.four,.weeks{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.grid,.grid.two,.grid.four,.weeks,.flow{grid-template-columns:1fr}.hero{padding:40px 0 36px}}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Presentación"><div class="in">
+<div class="brand">Qualivo × Institut Gestalt <small>9-nov-2026</small></div>
+<div class="links"><a href="./" aria-current="page">Plan</a><a href="./recorrido/">Recorrido</a><a href="./anuncios/">Anuncios</a><a href="./demo/">Demo</a><a href="./landing/">Landing</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+<p class="eyebrow">Plan de captación · Institut Gestalt</p>
+<h1>Que Meta os traiga personas que se matriculan, no solo formularios</h1>
+<p class="lead">Más de cuarenta años formando terapeutas, una formación certificada por la AETG y un recorrido cuidado: dosier, presentación gratuita, entrevista y reserva de plaza. El trabajo no es conseguir más peticiones. Es que cada persona que pregunta llegue a la presentación, que el equipo hable con quien de verdad encaja, y que Meta aprenda de quién se matriculó.</p>
+<p class="note"><span class="tag ej">Cómo leer esta página</span> Lo marcado como <b>real</b> sale de vuestra web y de la Biblioteca de anuncios de Meta, o de lo que nos contaste en el formulario. Lo marcado como <b>hipótesis</b> lo comprobamos juntos en la reunión. No hay cifras de resultados: se miden con vuestros datos.</p>
+</div></header>
+
+<main class="wrap">
+
+<section>
+<h2><span class="n">01</span>Lo que ya tenéis</h2>
+<div class="grid four">
+<div class="card kpi"><b>+40 años</b><span>acompañando procesos <span class="tag real">real</span></span></div>
+<div class="card kpi"><b>AETG</b><span>formación certificada por la Asociación Española de Terapia Gestalt <span class="tag real">real</span></span></div>
+<div class="card kpi"><b>+100</b><span>peticiones de información al mes <span class="tag real">dato tuyo</span></span></div>
+<div class="card kpi"><b>+3.000 €</b><span>al mes en captación <span class="tag real">dato tuyo</span></span></div>
+</div>
+<div class="grid">
+<div class="card"><h3>Cómo se matricula hoy un alumno</h3><p>Pide el dosier, va a una presentación gratuita por Zoom, hace una entrevista previa, reserva su plaza con 454 € y se matricula. La Formación en Terapia Gestalt tiene una matrícula de referencia de 2.270 €. <span class="tag real">real</span></p></div>
+<div class="card"><h3>Dónde estáis</h3><p>Sede en Carrer de Verdi 94 (Gràcia, Barcelona), formaciones en Madrid y online. Un catálogo amplio: Terapia Gestalt, Constelaciones Familiares, Constelaciones en Terapia Individual, PNL, coaching, trauma y terapia corporal. <span class="tag real">real</span></p></div>
+<div class="card"><h3>Lo que nos pediste</h3><p>Mejorar <b>la calidad</b> de las peticiones, en los próximos 30 días. Cada alumno os vale entre 1.000 y 4.999 €. <span class="tag real">dato tuyo</span></p></div>
+</div>
+</section>
+
+<section>
+<h2><span class="n">02</span>Vuestros anuncios hoy</h2>
+<p class="sub">Biblioteca de anuncios de Meta, España. Anuncios activos de la página Institut Gestalt que aparecieron en nuestras búsquedas del 4-nov-2026; puede haber más. <span class="tag real">real</span></p>
+<div class="tbl"><table>
+<thead><tr><th>Programa</th><th>Desde</th><th>Formato</th><th>Texto</th><th>Botón</th><th>A dónde lleva</th></tr></thead>
+<tbody>
+<tr><td>Formación en Terapia Gestalt</td><td>26-oct</td><td>Carrusel: «Formación Terapia Gestalt» · «Certificado por Asociación Española de Terapia Gestalt» · «Fórmate en Institut Gestalt +40 años de trayectoria»</td><td class="w">«🗓️ Inicio: Noviembre en Barcelona. Solicita info aquí»</td><td>Ver detalles</td><td>Formulario instantáneo de Meta</td></tr>
+<tr><td>Constelaciones Familiares en Terapia Individual</td><td>2-nov</td><td>Dinámico (varias imágenes y textos)</td><td class="w">«¿Acompañas procesos individuales y quieres incorporar las Constelaciones Familiares a tu consulta? … 📅 Inicio 17 de febrero · Miércoles de 17 a 21h · Online 🎙️ Presentación gratuita el 27 de enero por Zoom»</td><td>Más información</td><td>Formulario instantáneo de Meta</td></tr>
+</tbody>
+</table></div>
+<ul class="find">
+<li class="good"><b>Lo que funciona:</b> cada anuncio habla de un programa concreto, con fecha de inicio. El de Constelaciones se dirige a quien ya acompaña procesos y ofrece la presentación gratuita como siguiente paso. La certificación AETG y los cuarenta años son señales de confianza que pocas escuelas pueden poner.</li>
+<li class="bad"><b>Los dos llevan a un formulario instantáneo con «Más información» o «Ver detalles»:</b> es la forma más barata de conseguir contactos y también la que más curiosos trae. Cuadra con lo que nos dijiste: el problema es la calidad. <span class="tag hip">hipótesis</span></li>
+<li class="bad"><b>El carrusel no dice para quién es:</b> «Inicio: Noviembre en Barcelona. Solicita info aquí» no filtra. No dice que es una formación profesional de varios años, ni para quién está pensada, ni cuál es el siguiente paso.</li>
+<li class="bad"><b>Meta no sabe quién se matriculó:</b> con el carrito de WooCommerce y sin un CRM conectado, lo único que vuelve a Meta es «rellenó el formulario». Por eso sigue buscando gente que rellena, no gente que se matricula. <span class="tag hip">hipótesis</span></li>
+<li><b>La competencia habla al profesional:</b> Cercle Gestalt anuncia su Formación Gestalt Integrativa al mismo público con un vídeo que arranca con «Tu principal herramienta como profesional eres tú», activo desde julio.</li>
+</ul>
+<p class="sub">Las propuestas de anuncios nuevos están en <a href="./anuncios/">Anuncios</a>. No hemos podido revisar Google Ads desde fuera.</p>
+</section>
+
+<section>
+<h2><span class="n">03</span>Dónde se pueden estar perdiendo matrículas</h2>
+<p class="sub">Hipótesis a partir de lo que vemos desde fuera y de lo que nos contaste. Las validamos en la reunión con vuestros números. <span class="tag hip">hipótesis</span></p>
+<div class="grid">
+<div class="card"><h3>1 · Un formulario que no filtra</h3><p>Más de 100 peticiones al mes, pero sin saber si es una psicóloga con consulta, un estudiante o alguien que busca terapia para sí. El equipo trata igual a todos y el tiempo se va en quien no se iba a matricular.</p></div>
+<div class="card"><h3>2 · De la petición a la presentación</h3><p>Entre que alguien pide el dosier y la presentación por Zoom pasan días. Si no hay recordatorio, enlace a mano y un «te esperamos», muchos inscritos no aparecen, y nadie les vuelve a escribir con la grabación y otra fecha.</p></div>
+<div class="card"><h3>3 · De la presentación a la reserva</h3><p>Quien vio la presentación y no pidió entrevista es la persona más caliente que tenéis. Si el seguimiento depende de que alguien se acuerde de escribirle, se enfría. Y nadie sabe qué anuncio trajo a quien sí reservó.</p></div>
+</div>
+</section>
+
+<section>
+<h2><span class="n">04</span>El sistema que proponemos</h2>
+<p class="sub">No cambia vuestra web, ni el carrito, ni la entrevista, que la sigue haciendo siempre una persona del Institut. Añade lo que falta alrededor. Se ve paso a paso en el <a href="./recorrido/">recorrido</a> y, con datos de ejemplo, en la <a href="./demo/">demo</a>.</p>
+<ol class="flow">
+<li><b>1 · Anuncio</b>Un mensaje por perfil profesional y por programa, que diga para quién es.</li>
+<li><b>2 · Formulario que filtra</b>Perfil profesional, programa que le interesa y cuándo quiere empezar.</li>
+<li><b>3 · Respuesta en minutos</b>WhatsApp con el dosier y la próxima presentación, a cualquier hora.</li>
+<li><b>4 · Presentación</b>Recordatorios, enlace y, si no vino, grabación y otra fecha.</li>
+<li><b>5 · Entrevista y reserva</b>La entrevista cae sola en vuestro calendario; después, el enlace de reserva de 454 €.</li>
+<li><b>6 · Señal a Meta</b>Quién llegó a entrevista, a reserva y a matrícula, para que Meta busque más perfiles así.</li>
+</ol>
+<div class="grid">
+<div class="card"><h3>Campaña A · Formación en Terapia Gestalt</h3><p>Para profesionales del acompañamiento (psicología, coaching, educación, salud) que sienten que la técnica no basta. Destino: formulario que filtra y presentación gratuita.</p></div>
+<div class="card"><h3>Campaña B · Constelaciones en Terapia Individual</h3><p>Para quien ya tiene consulta: aplicar la mirada sistémica en sesión individual. Inicio 17-feb-2027, presentación el 27-ene. Destino: inscripción directa a la presentación.</p></div>
+<div class="card"><h3>Campaña C · Vuestra base de datos</h3><p>Antiguos alumnos y personas que pidieron información y no se matricularon: aviso de nuevas ediciones y siguiente formación. Es el público más barato y el que mejor conoce el Institut.</p></div>
+</div>
+<div class="grid two">
+<div class="card"><h3>Retargeting</h3><ul><li>Pidió el dosier y no se inscribió en la presentación (1-7 días): testimonio en vídeo de un antiguo alumno y la próxima fecha.</li><li>Fue a la presentación y no pidió entrevista (1-10 días): «¿hablamos 20 minutos?».</li><li>Quien ya ha reservado plaza deja de ver anuncios.</li></ul></div>
+<div class="card"><h3>Lo que medimos desde el primer día</h3><ul><li>Peticiones por programa, perfil y anuncio.</li><li>Asistencia a las presentaciones.</li><li>Entrevistas, reservas y matrículas por anuncio.</li><li>Coste por matrícula de cada campaña, no solo coste por formulario.</li></ul></div>
+</div>
+</section>
+
+<section>
+<h2><span class="n">05</span>Los primeros 30 días</h2>
+<div class="weeks">
+<div class="card"><h3><span>SEMANA 1</span>Diagnóstico y CRM</h3><p>Medimos el punto de partida: peticiones, asistencia, entrevistas y matrículas. Montamos el CRM con vuestros programas y conectamos los formularios de Meta, la web y el WhatsApp.</p></div>
+<div class="card"><h3><span>SEMANA 2</span>Respuesta y presentaciones</h3><p>Mensajes de bienvenida con el dosier, recordatorios de las presentaciones y agenda de entrevistas, con vuestros textos aprobados. El equipo lo prueba antes de abrirlo.</p></div>
+<div class="card"><h3><span>SEMANA 3</span>Anuncios y señal a Meta</h3><p>Formulario nuevo que filtra, anuncios por perfil y programa, y la señal de entrevista, reserva y matrícula de vuelta a Meta.</p></div>
+<div class="card"><h3><span>SEMANA 4</span>Panel y revisión</h3><p>Panel con el coste por matrícula de cada anuncio. Primera revisión juntos: qué seguimos, qué cambiamos y qué apagamos.</p></div>
+</div>
+</section>
+
+<section>
+<h2><span class="n">06</span>Para cerrar en la reunión</h2>
+<div class="grid two">
+<div class="card"><h3>Lo que queremos entender</h3><ol><li>De las más de 100 peticiones de un mes, ¿cuántas van a la presentación, cuántas a entrevista, cuántas reservan y cuántas se matriculan?</li><li>Cuando decís «calidad», ¿qué es una mala petición para vosotros?</li><li>¿Quién responde hoy a cada formulario, en cuánto tiempo y por qué canal?</li><li>¿Qué programa queréis llenar primero y cuándo empieza la próxima edición?</li><li>¿Dónde se apunta hoy cada persona y qué pasa con quien dijo «el año que viene»?</li></ol></div>
+<div class="card"><h3>Lo que necesitaríamos de vosotros</h3><ul><li>Acceso a la cuenta publicitaria de Meta.</li><li>El calendario de presentaciones y entrevistas, y quién las hace.</li><li>El dosier y los textos que ya usáis, para mantener vuestra voz.</li><li>Una persona de contacto para aprobar mensajes.</li></ul><p style="margin-top:8px">La propuesta económica la vemos en la reunión, con el alcance que acordemos.</p></div>
+</div>
+<div class="cta"><a class="btn" href="./demo/">Ver la demo con datos de ejemplo</a><a class="btn alt" href="./recorrido/">El recorrido del alumno</a><a class="btn alt" href="https://www.institutgestalt.com/" target="_blank" rel="noopener">institutgestalt.com</a></div>
+</section>
+
+</main>
+
+<footer class="wrap">
+<p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · qualivo.io</b></p>
+<p>Plan preparado por Qualivo el 9 de noviembre de 2026 para Institut Gestalt. No es una página del Institut Gestalt. Datos de programas y anuncios tomados de institutgestalt.com y de la Biblioteca de anuncios de Meta; las cifras de peticiones e inversión son las que nos indicasteis en el formulario.</p>
+</footer>
+</body>
+</html>

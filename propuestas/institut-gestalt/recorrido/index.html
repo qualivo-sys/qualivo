@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Institut Gestalt · el recorrido</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Recorrido completo del alumno del Institut Gestalt (reunión del 9-nov): del anuncio a la matrícula,
+   paso a paso, con lo que recibe el alumno, lo que ve el equipo, lo que se mide y dónde entra una persona.
+   Paleta en ../assets/deck.css. */
+:root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--ej:#B87708;--real:#17734A;--ig:#FFFFFF}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ej:#A86A06;--real:#1D7F55;--ig:#111A28}}
+:root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--ej:#A86A06;--real:#1D7F55;--ig:#111A28}
+.topnav .cl{font-weight:700;font-size:14.5px;letter-spacing:.01em;white-space:nowrap}
+.dhero{position:relative;background:var(--f900);color:#fff;overflow:hidden;isolation:isolate}
+.dhero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(circle at 85% 15%,rgba(141,185,238,.3),transparent 42%),linear-gradient(135deg,#0A1A31 0%,#0F2747 55%,#143360 100%)}
+.dhero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 60%);mask-image:linear-gradient(90deg,transparent 0%,#000 60%)}
+.dhero .wrap{padding-block:56px 46px;display:grid;gap:12px}
+.dhero .eyebrow{color:var(--moss)}
+.dhero h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,4.8vw,56px);line-height:1.05;letter-spacing:-.02em;max-width:20ch}
+.dhero .lead{font-size:18px;color:rgba(255,255,255,.84);max-width:74ch;margin-top:6px}
+.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px;max-width:980px}
+.legend > div{border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:13px 15px;background:rgba(255,255,255,.05);font-size:14px;line-height:1.55;color:rgba(255,255,255,.82)}
+.legend b{color:#fff}
+@media (max-width:700px){.legend{grid-template-columns:1fr}}
+.ej,.real,.nv{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;margin-right:4px;line-height:1.5}
+.ej{background:var(--ej)}.real{background:var(--real)}.nv{background:var(--earth)}
+h2 .ej,h2 .real{vertical-align:6px;margin-left:6px}
+.wrap.main{display:grid;gap:26px;padding-bottom:72px}
+.wrap.main > *{min-width:0}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(25px,3vw,34px);line-height:1.14;letter-spacing:-.015em}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;line-height:1.55}
+/* pestañas */
+nav.tabs{position:sticky;top:64px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:5px;margin-top:-26px;box-shadow:var(--shadow-lg)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 10px;cursor:pointer;transition:background .25s,color .25s}
+nav.tabs button:hover{color:var(--ink);background:var(--line-2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-family:var(--mono);font-size:11px;background:var(--line-2);color:var(--muted)}
+nav.tabs button[aria-selected="true"]{background:var(--f700);color:#fff;box-shadow:0 6px 16px -8px rgba(10,26,49,.6)}
+nav.tabs button[aria-selected="true"] span{background:var(--moss);color:var(--f900)}
+@media (max-width:560px){nav.tabs{top:96px}}
+.pane{display:none;gap:22px}
+.pane.on{display:grid;animation:paneIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px;display:grid;gap:10px}
+.pane > header p{color:var(--muted);max-width:80ch;font-size:16.5px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.next{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+/* recorrido en una pantalla */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.flow{grid-template-columns:1fr}}
+.flow button{all:unset;cursor:pointer;display:grid;gap:6px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:var(--shadow);position:relative;transition:transform .2s,border-color .2s}
+.flow button:hover{transform:translateY(-2px);border-color:var(--accent)}
+.flow button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.flow b{font-size:15px;line-height:1.3}
+.flow small{font-size:13px;color:var(--muted);line-height:1.5}
+.flow i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em}
+.flow button.hu{border-color:color-mix(in srgb,var(--good) 45%,var(--line))}
+.flow button.hu::after{content:"Persona del Institut";position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--good);background:var(--good-soft);border-radius:99px;padding:2px 7px}
+.flow button.mt{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.facts{grid-template-columns:1fr}}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 16px;display:grid;gap:4px;align-content:start}
+.fact b{font-family:var(--serif);font-size:30px;line-height:1;letter-spacing:-.02em}
+.fact span{font-size:13.5px;color:var(--muted);line-height:1.45}
+/* paso */
+.stp{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);display:grid;gap:16px;scroll-margin-top:150px}
+.stp > *{min-width:0}
+.stp .hd{display:flex;gap:14px;align-items:center}
+.stp .hd .n{width:40px;height:40px;border-radius:50%;background:var(--f700);color:#fff;display:grid;place-items:center;font-family:var(--mono);font-size:14px;flex:none}
+.stp .hd .k{margin:0 0 2px}
+.stp .hd h3{font-family:var(--serif);font-weight:600;font-size:clamp(20px,2.3vw,25px);line-height:1.2;letter-spacing:-.01em}
+.hm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:12px}
+@media (max-width:800px){.hm{grid-template-columns:1fr}}
+.hm > div{border-radius:12px;padding:13px 15px;font-size:14.5px;line-height:1.55;display:grid;gap:6px;align-content:start}
+.hm .hoy{background:var(--surface-2);border:1px solid var(--line-2)}
+.hm .mon{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent)}
+.hm .k{margin:0}
+.hm ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.q4{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:860px){.q4{grid-template-columns:1fr}}
+.q4 > div{min-width:0}
+.q4 .side{display:grid;gap:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:13px 15px;font-size:14px;line-height:1.55;display:grid;gap:6px}
+.box .k{margin:0}
+.box ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.box.hu{border-color:color-mix(in srgb,var(--good) 40%,var(--line));background:color-mix(in srgb,var(--good-soft) 55%,transparent)}
+.box.hu .k{color:var(--good)}
+.meta{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;background:var(--f700);color:#fff;border-radius:99px;padding:4px 11px;justify-self:start}
+.meta::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--moss)}
+/* móvil del alumno */
+.phn{background:var(--wa-bg);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.phn .bar{background:var(--wa-head);color:#fff;display:flex;align-items:center;gap:10px;padding:9px 12px}
+.phn .bar .lg{width:30px;height:30px;border-radius:50%;background:#fff;color:#0F2747;font-weight:800;display:grid;place-items:center;font-size:11px;flex:none}
+.phn .bar b{font-size:13.5px;display:block;line-height:1.2}
+.phn .bar small{font-size:11.5px;opacity:.8}
+.phn .bd{padding:12px;display:flex;flex-direction:column;gap:7px}
+.bub{max-width:90%;align-self:flex-start;background:var(--wa-in);color:var(--ink);border-radius:10px;border-top-left-radius:2px;padding:8px 10px 5px;font-size:13.5px;line-height:1.5;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.bub.me{align-self:flex-end;background:var(--wa-out);border-radius:10px;border-top-right-radius:2px}
+.bub p + p{margin-top:6px}
+.bub small{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:2px}
+.bub .sg{color:var(--muted);font-size:12.5px}
+.bub .btns{display:grid;gap:4px;margin-top:7px}
+.bub .btns span{display:block;text-align:center;border-top:1px solid var(--line-2);padding-top:5px;color:#027EB5;font-weight:600;font-size:13px}
+.doc{display:flex;gap:9px;align-items:center;background:color-mix(in srgb,var(--line-2) 70%,transparent);border-radius:8px;padding:8px 9px;margin-bottom:6px;font-size:12.5px}
+.doc b{display:block;font-size:12.5px;line-height:1.3}
+.doc .pdf{width:28px;height:34px;border-radius:4px;background:#B3261E;color:#fff;font-family:var(--mono);font-size:9px;display:grid;place-items:center;flex:none}
+.when{align-self:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--muted);background:color-mix(in srgb,var(--surface) 75%,transparent);border-radius:7px;padding:3px 9px}
+.mail{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px;line-height:1.55}
+.mail .mh{padding:10px 14px;border-bottom:1px solid var(--line-2);display:grid;gap:2px;font-size:12.5px;color:var(--muted)}
+.mail .mh b{color:var(--ink);font-size:14px}
+.mail .mb{padding:12px 14px;display:grid;gap:8px}
+.mail .cta{justify-self:start;background:var(--accent);color:var(--accent-ink);font-weight:650;font-size:13px;border-radius:99px;padding:7px 14px}
+/* formulario */
+.form{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;font-size:13.5px}
+.form .fh{background:var(--f800);color:#fff;padding:12px 14px}
+.form .fh b{display:block;font-size:14.5px}
+.form .fh small{opacity:.8}
+.form .fb{padding:12px 14px;display:grid;gap:12px}
+.form .qq b{display:block;font-size:13px;margin-bottom:5px}
+.form .opts{display:flex;flex-wrap:wrap;gap:5px}
+.form .opts span{border:1px solid var(--line);border-radius:99px;padding:3px 10px;font-size:12.5px;color:var(--ink-2)}
+.form .opts span.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.form .chk{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--muted)}
+.form .chk i{width:15px;height:15px;border-radius:4px;background:var(--accent);flex:none;margin-top:2px}
+.form .send{background:#1877F2;color:#fff;text-align:center;font-weight:650;border-radius:8px;padding:9px}
+/* ficha CRM */
+.crm{border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px}
+.crm .ch{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;background:var(--surface-2);padding:9px 13px;border-bottom:1px solid var(--line-2)}
+.crm .ch b{font-size:14px}
+.crm dl{margin:0;padding:9px 13px;display:grid;grid-template-columns:auto 1fr;gap:5px 12px}
+.crm dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.crm dd{margin:0;line-height:1.45;min-width:0}
+/* anuncio */
+.post{background:var(--ig);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);max-width:400px;width:100%}
+.post .ph{display:flex;align-items:center;gap:9px;padding:10px 12px;font-size:13px}
+.post .ph .lg{width:30px;height:30px;border-radius:50%;background:var(--f800);color:#fff;display:grid;place-items:center;font-weight:700;font-size:11px;flex:none}
+.post .ph b{display:block;font-size:13px}
+.post .ph small{color:var(--muted);font-size:11.5px}
+.post .vis{position:relative;aspect-ratio:4/4.2;display:grid;align-content:end;padding:20px;color:#fff;overflow:hidden;isolation:isolate}
+.post .vis::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 80% 12%,rgba(201,154,59,.55) 0,transparent 45%),linear-gradient(160deg,#143360,#0A1A31)}
+.post .vis .tag{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:4px 10px}
+.post .vis .big{font-family:var(--serif);font-weight:600;font-size:25px;line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+.post .vis .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.post .vis .chips span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:99px;font-size:12px;padding:3px 10px}
+.post .tx{padding:11px 12px 6px;font-size:13.5px;line-height:1.5}
+.post .cta{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid var(--line-2);font-size:12.5px;color:var(--muted)}
+.post .cta b{display:block;color:var(--ink);font-size:13px}
+.post .cta span{background:var(--line-2);color:var(--ink);font-weight:650;font-size:13px;border-radius:8px;padding:7px 12px;white-space:nowrap}
+/* algoritmo */
+.loop{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.loop svg{width:100%;height:auto;display:block}
+.loop svg text{font-family:var(--sans);fill:var(--ink)}
+.loop svg .mut{fill:var(--muted)}
+.loop svg .bx{fill:var(--surface-2);stroke:var(--line)}
+.loop svg .acc{fill:var(--accent-soft);stroke:var(--accent)}
+.loop svg .ar{stroke:var(--accent);fill:none;stroke-width:2}
+.loop svg .ar2{stroke:var(--good);fill:none;stroke-width:2;stroke-dasharray:6 5}
+.steps{display:grid;gap:12px;counter-reset:s}
+.steps .card{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.steps .card::before{counter-increment:s;content:counter(s);width:32px;height:32px;border-radius:50%;background:var(--f700);color:#fff;display:grid;place-items:center;font-family:var(--mono);font-size:13px}
+.steps .card p{color:var(--muted);font-size:14.5px;margin-top:4px}
+/* línea de tiempo */
+.tl{display:grid;gap:0;border-left:2px solid var(--line);margin-left:8px}
+.tl > div{position:relative;padding:0 0 16px 20px;font-size:14.5px}
+.tl > div::before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+.tl b{display:block}
+.tl span{color:var(--muted);font-size:13.5px}
+/* chat reproducible */
+.chat{background:var(--wa-bg);border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg);max-width:440px;width:100%;justify-self:center}
+.chat .hd{background:var(--wa-head);color:#fff;display:flex;align-items:center;gap:10px;padding:11px 14px}
+.chat .hd .lg{width:34px;height:34px;border-radius:50%;background:#fff;color:#0F2747;font-weight:800;display:grid;place-items:center;font-size:12px}
+.chat .hd small{display:block;opacity:.8;font-size:12px}
+.chat .bd{padding:14px 12px;display:flex;flex-direction:column;gap:7px;height:540px;overflow-y:auto;scroll-behavior:smooth}
+.msg{max-width:86%;padding:7px 10px 5px;border-radius:10px;font-size:14px;line-height:1.45;color:var(--ink);box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .3s ease-out;white-space:pre-line}
+.msg.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:2px}
+.msg.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:2px}
+.msg small{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:2px}
+.msg.sys{align-self:center;background:var(--accent-soft);color:var(--accent);font-size:12px;font-family:var(--mono);letter-spacing:.03em;box-shadow:none;max-width:95%;text-align:center}
+.msg.day{align-self:center;background:color-mix(in srgb,var(--surface) 80%,transparent);color:var(--muted);font-size:11px;font-family:var(--mono);box-shadow:none;padding:3px 10px}
+.msg .btns{display:grid;gap:4px;margin-top:6px}
+.msg .btns span{display:block;text-align:center;border-top:1px solid var(--line-2);padding-top:5px;color:#027EB5;font-weight:600;font-size:13.5px}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:9px 12px;display:flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bl 1s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes bl{0%,100%{opacity:.3}50%{opacity:1}}
+.scen{display:flex;gap:8px;flex-wrap:wrap}
+.scen button{font:inherit;font-size:13.5px;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:8px 14px;cursor:pointer}
+.scen button[aria-pressed="true"]{background:var(--f700);color:#fff;border-color:var(--f700)}
+.agents{display:grid;gap:10px}
+.agent{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;transition:border-color .3s,box-shadow .3s}
+.agent.lit{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.agent p{font-size:13.5px;color:var(--muted);margin-top:2px}
+/* tablero CRM */
+.kb{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,1fr);gap:10px;overflow-x:auto;padding-bottom:6px}
+.kb .col{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:10px;display:grid;gap:8px;align-content:start}
+.kb .col > b{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
+.kb .it{background:var(--surface);border:1px solid var(--line-2);border-radius:10px;padding:9px 10px;font-size:13px;line-height:1.45;box-shadow:var(--shadow)}
+.kb .it b{display:block;font-size:13.5px}
+.kb .it span{color:var(--muted)}
+.kb .col.hu{border-color:color-mix(in srgb,var(--good) 40%,var(--line))}
+/* calculadora */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+@media (max-width:800px){.calc{grid-template-columns:1fr}}
+.calc label{display:grid;gap:6px;font-size:14px;font-weight:600}
+.calc label span{font-weight:400;color:var(--muted);font-size:13px}
+.calc input[type=range]{width:100%;accent-color:var(--accent)}
+.calc output{font-family:var(--mono);font-size:13px;color:var(--accent)}
+.res{display:grid;gap:12px;align-content:start}
+.fun{display:grid;gap:7px}
+.fun > div{display:grid;grid-template-columns:150px 1fr 52px;gap:10px;align-items:center;font-size:13.5px}
+.fun i{display:block;height:18px;border-radius:6px;background:var(--accent);min-width:3px;transition:width .3s}
+.fun > div:nth-child(n+4) i{background:var(--good)}
+.fun b{font-family:var(--mono);font-size:13px;text-align:right}
+@media (max-width:480px){.fun > div{grid-template-columns:110px 1fr 44px}}
+.res .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.res .fact b{font-size:28px}
+.res .fact.hl{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
+.links3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:800px){.links3{grid-template-columns:1fr}}
+.links3 a{display:grid;gap:6px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+.links3 a:hover{transform:translateY(-2px);border-color:var(--accent)}
+.links3 a small{color:var(--muted);font-size:13.5px;line-height:1.5}
+.links3 a b{font-size:16px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff" stroke="none"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+</svg>
+
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><span class="cl">Institut Gestalt</span><span class="by">9-nov-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="../landing/">Landing</a><a href="./" aria-current="page">Recorrido</a><a href="../demo/">Demo</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<div class="wrap">
+  <p class="eyebrow">El recorrido del alumno · del anuncio a la matrícula</p>
+  <h1>Del anuncio a la matrícula, sin que nadie se quede esperando</h1>
+  <p class="lead">Carles, nos contaste que os llegan más de 100 peticiones de información al mes y que lo que queréis mejorar es su calidad. Aquí está el recorrido entero de una persona que se interesa por el Institut, paso a paso: lo que pasa hoy, lo que montaríamos, qué recibe ella en el móvil, qué ve vuestro equipo en el CRM, qué medimos y dónde entra siempre una persona del Institut. La entrevista previa la sigue haciendo vuestro equipo. Lo demás deja de depender de que alguien se acuerde.</p>
+  <div class="legend">
+    <div><span class="real">Real</span><br><b>De vuestra web, de la Biblioteca de anuncios de Meta (consultada el 4-nov-2026) y de lo que nos contestaste en el formulario:</b> el recorrido dosier → presentación → entrevista → reserva de 454 € → matrícula, el píxel de Meta y WooCommerce en la web, los formularios instantáneos y las más de 100 peticiones al mes.</div>
+    <div><span class="ej">Ejemplo</span><br><b>Propuesta nuestra para enseñar cómo funcionaría:</b> mensajes, nombres, fichas, fechas de la Formación en Terapia Gestalt y cualquier cifra de resultados. Todo número marcado «Ejemplo» es inventado. Los textos definitivos los aprobáis vosotros.</div>
+  </div>
+</div>
+</header>
+
+<main class="wrap main">
+<nav class="tabs" role="tablist" aria-label="Pasos del recorrido">
+  <button role="tab" aria-selected="true" aria-controls="p0" id="t0"><span>0</span>En una pantalla</button>
+  <button role="tab" aria-selected="false" aria-controls="p1" id="t1"><span>1</span>Anuncio y formulario</button>
+  <button role="tab" aria-selected="false" aria-controls="p2" id="t2"><span>2</span>WhatsApp y recordatorios</button>
+  <button role="tab" aria-selected="false" aria-controls="p3" id="t3"><span>3</span>Presentación</button>
+  <button role="tab" aria-selected="false" aria-controls="p4" id="t4"><span>4</span>Entrevista</button>
+  <button role="tab" aria-selected="false" aria-controls="p5" id="t5"><span>5</span>Reserva y matrícula</button>
+  <button role="tab" aria-selected="false" aria-controls="p6" id="t6"><span>6</span>Señal a Meta</button>
+  <button role="tab" aria-selected="false" aria-controls="p7" id="t7"><span>7</span>Aún no · antiguos alumnos</button>
+  <button role="tab" aria-selected="false" aria-controls="p8" id="t8"><span>8</span>Verlo en marcha</button>
+</nav>
+
+<!-- 0 · EN UNA PANTALLA -->
+<section class="pane on" id="p0" role="tabpanel" aria-labelledby="t0">
+  <header>
+    <h2>El recorrido entero, en una pantalla</h2>
+    <p>Diez pasos, los mismos que ya tenéis (dosier, presentación, entrevista, reserva y matrícula) con lo que falta entre uno y otro. Pulsa cualquiera para verlo en detalle. Los marcados en verde los hace siempre una persona del Institut.</p>
+  </header>
+  <div class="flow">
+    <button data-go="1" data-to="s1"><i>01</i><b>Anuncio</b><small>Le habla a un perfil concreto: psicóloga, coach, educador, quien ya tiene consulta.</small></button>
+    <button data-go="1" data-to="s2"><i>02</i><b>Formulario que filtra</b><small>Perfil, formación que le interesa, cuándo quiere empezar y dónde.</small></button>
+    <button data-go="2" data-to="s3"><i>03</i><b>WhatsApp en minutos</b><small>El dosier y la fecha de la próxima presentación, con un botón para apuntarse.</small></button>
+    <button data-go="2" data-to="s4"><i>04</i><b>Recordatorios</b><small>El día antes, 2 h antes y el enlace de Zoom justo antes de empezar.</small></button>
+    <button data-go="3" data-to="s5" class="hu"><i>05</i><b>Presentación por Zoom</b><small>La de siempre, gratuita. El CRM sabe quién se conectó.</small></button>
+    <button data-go="3" data-to="s6"><i>06</i><b>Si no fue</b><small>La grabación y otra fecha, al día siguiente.</small></button>
+    <button data-go="4" data-to="s7" class="hu"><i>07</i><b>Entrevista previa</b><small>Se agenda sola en el calendario del equipo. La hace una persona.</small></button>
+    <button data-go="5" data-to="s8"><i>08</i><b>Reserva de plaza</b><small>454 € con el enlace de pago de vuestro WooCommerce.</small></button>
+    <button data-go="5" data-to="s9"><i>09</i><b>Matrícula</b><small>Bienvenida, y pasa a la lista de alumnos.</small></button>
+    <button data-go="6" class="mt"><i>10</i><b>Señal a Meta</b><small>Entrevista, reserva y matrícula vuelven a Meta para que traiga más perfiles así.</small></button>
+  </div>
+
+  <h3 style="margin-top:6px">Desde dónde partís <span class="real">Real</span></h3>
+  <div class="facts">
+    <div class="fact"><b class="num">+100</b><span>peticiones de información al mes (nos lo contestaste en el formulario).</span></div>
+    <div class="fact"><b class="num">+3.000 €</b><span>al mes en captación, con formularios instantáneos de Meta.</span></div>
+    <div class="fact"><b class="num">454 €</b><span>la reserva de plaza, después de la entrevista previa.</span></div>
+    <div class="fact"><b class="num">1.000–4.999 €</b><span>lo que vale cada alumno, según nos dijiste. Por eso importa más la calidad que el volumen.</span></div>
+  </div>
+
+  <div class="tw stack"><table>
+    <thead><tr><th>Paso</th><th>Hoy</th><th>Lo que montaríamos</th></tr></thead>
+    <tbody>
+      <tr><td data-label="Paso"><b>Anuncio y formulario</b></td><td data-label="Hoy">Formularios instantáneos con «Más información» <span class="real">Real</span>. Meta solo sabe quién rellena.</td><td data-label="Lo que montaríamos">Un anuncio por perfil y un formulario con tres preguntas que separan a quien quiere formarse de quien solo curiosea.</td></tr>
+      <tr><td data-label="Paso"><b>Dosier</b></td><td data-label="Hoy">Lo piden y se les envía <span class="real">Real</span>. Desde fuera no vemos cuánto tarda ni por qué canal <span class="nv">Por ver</span>.</td><td data-label="Lo que montaríamos">WhatsApp en minutos, también de noche, con el dosier de su formación y la próxima presentación.</td></tr>
+      <tr><td data-label="Paso"><b>Presentación por Zoom</b></td><td data-label="Hoy">Gratuita, antes de la entrevista <span class="real">Real</span>.</td><td data-label="Lo que montaríamos">Tres recordatorios, registro de quién se conecta y, si no fue, la grabación y otra fecha.</td></tr>
+      <tr><td data-label="Paso"><b>Entrevista previa</b></td><td data-label="Hoy">Vuestro filtro de calidad <span class="real">Real</span>.</td><td data-label="Lo que montaríamos">La misma entrevista, con la misma persona, pero agendada sola en vuestro calendario y con la ficha preparada.</td></tr>
+      <tr><td data-label="Paso"><b>Reserva y matrícula</b></td><td data-label="Hoy">Reserva de 454 € y matrícula; WooCommerce en la web <span class="real">Real</span>.</td><td data-label="Lo que montaríamos">Enlace de pago de vuestro WooCommerce, recordatorio si no paga y aviso al CRM cuando paga.</td></tr>
+      <tr><td data-label="Paso"><b>Lo que aprende Meta</b></td><td data-label="Hoy">Píxel y Google Tag Manager en la web <span class="real">Real</span>, sin CRM a la vista <span class="real">Real</span>. Quien rellena un formulario instantáneo no pasa por la web, así que el píxel no ve lo que hace después.</td><td data-label="Lo que montaríamos">El CRM le cuenta a Meta quién llega a entrevista, quién reserva y quién se matricula.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout hyp"><svg class="i"><use href="#i-info"/></svg><div><b>La idea en una frase:</b> que cada persona que levanta la mano reciba en minutos el dosier y una fecha, llegue a la presentación y a la entrevista con una persona del Institut, y que Meta deje de buscar a gente que rellena formularios para buscar a gente que llega a la entrevista y reserva plaza.</div></div>
+  <div class="next"><span></span><button class="btn pri" data-go="1">Empezar: el anuncio y el formulario <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 1 · ANUNCIO Y FORMULARIO -->
+<section class="pane" id="p1" role="tabpanel" aria-labelledby="t1">
+  <header>
+    <h2>1 · El anuncio y el formulario que filtra</h2>
+    <p>La calidad del lead se decide aquí, antes de que nadie del equipo haga nada: en lo que dice el anuncio y en lo que pregunta el formulario.</p>
+  </header>
+
+  <article class="stp" id="s1">
+    <div class="hd"><b class="n">1</b><div><p class="k">Paso 1 · ve el anuncio</p><h3>Un anuncio que le habla a alguien concreto</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Hoy <span class="real">Real</span></p>
+        <ul>
+          <li>Formularios instantáneos (enlace fb.me) con «Más información» o «Ver detalles».</li>
+          <li>Un carrusel: «Formación Terapia Gestalt», «Certificado por Asociación Española de Terapia Gestalt», «Fórmate en Institut Gestalt +40 años de trayectoria», con el texto «🗓️ Inicio: Noviembre en Barcelona. Solicita info aquí».</li>
+          <li>Un anuncio dinámico de Constelaciones en Terapia Individual para quien ya acompaña procesos.</li>
+          <li>Al mismo público se anuncia Cercle Gestalt, con un vídeo activo desde julio.</li>
+        </ul></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p>
+        <p>Un anuncio por perfil y por motivo, para que cada persona se reconozca en el primer segundo: la psicóloga que quiere formarse como terapeuta, la coach que quiere ir más hondo, el educador social que acompaña a personas y busca herramientas, quien ya tiene consulta y quiere sumar Constelaciones. Lo que ya funciona se queda: la certificación de la AETG y los más de 40 años.</p>
+        <p>El destino sigue siendo un formulario instantáneo, porque en el móvil es lo más cómodo. Lo que cambia es lo que pregunta (paso 2). Los anuncios completos están en <a href="../anuncios/">Anuncios</a>.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué ve el alumno <span class="ej">Ejemplo</span></p>
+        <div class="post">
+          <div class="ph"><span class="lg">IG</span><div><b>Institut Gestalt</b><small>Publicidad</small></div></div>
+          <div class="vis"><span class="tag">Imagen · psicología</span>
+            <div class="big">Ya acompañas a personas. ¿Y si te formas para hacerlo desde dentro?</div>
+            <div class="chips"><span>Formación en Terapia Gestalt</span><span>Certificada por la AETG</span><span>+40 años</span></div></div>
+          <div class="tx"><b>Para psicólogas y psicólogos que quieren formarse como terapeutas.</b> Pide el dosier y te invitamos a la próxima presentación gratuita.</div>
+          <div class="cta"><div><small>Formulario</small><b>Recibe el dosier por WhatsApp</b></div><span>Más información</span></div>
+        </div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve el equipo en el CRM</p><p>Todavía nada: no ha dejado sus datos. Pero cuando rellene el formulario, su ficha guardará de qué campaña, anuncio y formato viene, para saber qué anuncios traen entrevistas y no solo peticiones.</p></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>Coste por petición, por anuncio y por perfil.</li><li>Lo que importa de verdad: coste por <b>entrevista</b> y por <b>reserva</b> de cada anuncio.</li></ul></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>Aprobar los textos de los anuncios. Y si alguien se presta (un docente o un antiguo alumno), grabar un vídeo corto. Nada más.</p></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="stp" id="s2">
+    <div class="hd"><b class="n">2</b><div><p class="k">Paso 2 · deja sus datos</p><h3>Un formulario que filtra sin espantar</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Hoy <span class="real">Real</span></p>
+        <p>Formulario instantáneo. Con más de 3.000 €/mes y el formulario como única señal, Meta aprende a buscar a quien rellena, no a quien se matricula. Por eso nos dijiste que queréis mejorar la calidad.</p></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p>
+        <p>Tres preguntas cortas y una más de dónde, con respuestas para tocar, no para escribir. Usamos el tipo de formulario de «mayor intención» de Meta, que pide confirmar los datos antes de enviar: llegan algo menos de peticiones, pero más serias.</p>
+        <p>Una casilla para aceptar recibir el dosier y los avisos por WhatsApp y por correo. Sin ella no se envía nada.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué rellena el alumno <span class="ej">Ejemplo</span></p>
+        <div class="form">
+          <div class="fh"><b>Institut Gestalt · Pide el dosier</b><small>Te lo enviamos por WhatsApp en unos minutos</small></div>
+          <div class="fb">
+            <div class="qq"><b>¿A qué te dedicas?</b><div class="opts"><span class="on">Psicología</span><span>Coaching</span><span>Educación o trabajo social</span><span>Sanidad</span><span>Terapia corporal u otra terapia</span><span>Otro / estoy cambiando de camino</span></div></div>
+            <div class="qq"><b>¿Qué formación te interesa?</b><div class="opts"><span class="on">Terapia Gestalt</span><span>Constelaciones Familiares</span><span>Constelaciones en Terapia Individual</span><span>Aún no lo sé</span></div></div>
+            <div class="qq"><b>¿Cuándo te gustaría empezar?</b><div class="opts"><span class="on">En la próxima edición</span><span>En unos meses</span><span>Solo quiero informarme</span></div></div>
+            <div class="qq"><b>¿Dónde?</b><div class="opts"><span class="on">Barcelona</span><span>Madrid</span><span>Online</span></div></div>
+            <div class="chk"><i></i><span>Acepto recibir el dosier y avisos del Institut Gestalt por WhatsApp y correo. Puedo darme de baja cuando quiera.</span></div>
+            <div class="send">Enviar</div>
+          </div>
+        </div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve el equipo en el CRM <span class="ej">Ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Núria R.</b><span class="pill nt">Nueva · hace 1 min</span></div>
+            <dl><dt>Perfil</dt><dd>Psicóloga</dd><dt>Le interesa</dt><dd>Formación en Terapia Gestalt</dd><dt>Empezar</dt><dd>Próxima edición · <b>prioridad alta</b></dd><dt>Dónde</dt><dd>Barcelona</dd><dt>Viene de</dt><dd>Anuncio «Ya acompañas a personas…» · Instagram</dd></dl></div></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>Qué parte de las peticiones responde «en la próxima edición».</li><li>Peticiones por perfil y por formación.</li><li>Cuántas peticiones de cada anuncio acaban en entrevista.</li></ul></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>Nada todavía: el sistema la clasifica y le envía el dosier. Si llega alguien con un perfil que no encaja con lo que buscáis, el equipo lo ve marcado y decide qué hacer.</p></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="0"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="2">WhatsApp y recordatorios <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 2 · WHATSAPP Y RECORDATORIOS -->
+<section class="pane" id="p2" role="tabpanel" aria-labelledby="t2">
+  <header>
+    <h2>2 · El dosier en minutos y los recordatorios</h2>
+    <p>La persona que pide información a las 21:40 está pensando en el Institut a las 21:40. Si el dosier le llega en ese momento, con una fecha concreta para conoceros, el siguiente paso es fácil. Los mensajes salen del número de WhatsApp del Institut y sus textos los aprobáis vosotros.</p>
+  </header>
+
+  <article class="stp" id="s3">
+    <div class="hd"><b class="n">3</b><div><p class="k">Paso 3 · en los primeros minutos</p><h3>WhatsApp con el dosier y la próxima presentación</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Hoy</p><p>Piden el dosier y eso abre el recorrido <span class="real">Real</span>. Desde fuera no vemos cuánto tarda en llegar ni por qué canal <span class="nv">Por ver</span>: es lo primero que mediremos.</p></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><p>En cuanto envía el formulario, un WhatsApp con el dosier de <b>la formación que eligió</b> (no el catálogo entero), la fecha de la próxima presentación gratuita y un botón para apuntarse. El mismo dosier llega también por correo, por si no usa WhatsApp. A cualquier hora, también en fin de semana.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el alumno <span class="ej">Ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg">IG</span><div><b>Institut Gestalt</b><small>Cuenta de empresa</small></div></div>
+          <div class="bd">
+            <span class="when">Martes 21:42</span>
+            <div class="bub"><p>Hola, Núria 🌿 Gracias por escribirnos. Te dejamos el dosier de la Formación en Terapia Gestalt, con el programa, el calendario y las condiciones:</p>
+              <div class="doc"><span class="pdf">PDF</span><div><b>Dosier · Formación en Terapia Gestalt</b><span class="muted">Barcelona</span></div></div>
+              <p>La mejor forma de conocernos es la presentación gratuita por Zoom: el <b>jueves 26 de noviembre a las 19:00 h</b>. Te contamos cómo es la formación por dentro y puedes preguntar todo lo que quieras. ¿Te guardamos un sitio?</p>
+              <p class="sg">Un abrazo,<br>el equipo del Institut Gestalt</p><small>21:42</small>
+              <div class="btns"><span>Sí, apúntame</span><span>Prefiero otra fecha</span><span>Tengo una duda</span></div></div>
+            <div class="bub me">Sí, apúntame<small>21:44 ✓✓</small></div>
+            <div class="bub"><p>¡Apuntada! Te acabamos de enviar la invitación por correo para que la tengas en el calendario. Te escribimos el día antes para recordártelo.</p><small>21:44</small></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve el equipo en el CRM <span class="ej">Ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Núria R.</b><span class="pill ok">Apuntada a presentación</span></div>
+            <dl><dt>Dosier</dt><dd>Enviado 21:42 (2 min) · abierto 21:43</dd><dt>Presentación</dt><dd>Jueves 26-nov · 19:00</dd><dt>Canal</dt><dd>WhatsApp + correo</dd></dl></div></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>Minutos hasta el primer mensaje. Objetivo: menos de 5 <span class="ej">Ejemplo</span>.</li><li>Cuántos abren el dosier.</li><li>Cuántos se apuntan a la presentación.</li></ul></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>Si contesta con una duda, le llega a una persona del equipo en una bandeja de WhatsApp compartida, con su ficha al lado. Las preguntas que se repiten (precio, horarios, modalidad) pueden tener respuestas ya aprobadas por vosotros, para contestar con un clic.</p></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="stp" id="s4">
+    <div class="hd"><b class="n">4</b><div><p class="k">Paso 4 · hasta la presentación</p><h3>Recordatorios: el día antes, 2 h antes y el enlace</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Hoy</p><p>No vemos desde fuera si se envían recordatorios <span class="nv">Por ver</span>. Entre apuntarse y conectarse es donde más gente se suele quedar por el camino.</p></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><p>Al apuntarse, invitación de calendario por correo. Después, tres WhatsApp: el día antes, 2 h antes y, justo antes de empezar, el enlace de Zoom. Si responde «no puedo», le proponemos al momento la siguiente fecha.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el alumno <span class="ej">Ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg">IG</span><div><b>Institut Gestalt</b><small>Cuenta de empresa</small></div></div>
+          <div class="bd">
+            <span class="when">Miércoles 25 · 19:00 · el día antes</span>
+            <div class="bub"><p>Hola, Núria 🌿 Mañana a las 19:00 h nos vemos en la presentación de la Formación en Terapia Gestalt. Si te surge algo, dínoslo y te buscamos otra fecha, sin problema.</p><p class="sg">Hasta mañana,<br>Institut Gestalt</p><small>19:00</small>
+              <div class="btns"><span>Allí estaré</span><span>No puedo, otra fecha</span></div></div>
+            <div class="bub me">Allí estaré 😊<small>19:12 ✓✓</small></div>
+            <span class="when">Jueves 26 · 17:00 · 2 h antes</span>
+            <div class="bub"><p>Hoy a las 19:00 h es la presentación. Te recomendamos conectarte desde un sitio tranquilo y, si puedes, con cámara: es un espacio para conocernos.</p><small>17:00</small></div>
+            <span class="when">Jueves 26 · 18:50 · el enlace</span>
+            <div class="bub"><p>Empezamos en 10 minutos. Aquí tienes el enlace para entrar:</p><small>18:50</small><div class="btns"><span>Entrar en Zoom</span></div></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve el equipo en el CRM <span class="ej">Ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Presentación 26-nov</b><span class="pill nt">Hoy · 19:00</span></div>
+            <dl><dt>Apuntados</dt><dd>34 <span class="ej">Ejemplo</span></dd><dt>Confirmados</dt><dd>27 han respondido «allí estaré»</dd><dt>Cambian fecha</dt><dd>4, ya movidos a la del 10-dic</dd></dl></div></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>De cada 100 apuntados, cuántos se conectan.</li><li>Qué recordatorio recupera más «no puedo».</li></ul></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>Nada, salvo contestar si alguien escribe. La lista de quién viene la tiene quien da la presentación antes de empezar.</p></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="1"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="3">La presentación por Zoom <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 3 · PRESENTACIÓN -->
+<section class="pane" id="p3" role="tabpanel" aria-labelledby="t3">
+  <header>
+    <h2>3 · La presentación gratuita por Zoom y qué pasa si no fue</h2>
+    <p>La presentación es vuestra y no la tocamos. Lo que añadimos es lo de alrededor: saber quién vino, darle las gracias con el siguiente paso a mano y no perder a quien no pudo conectarse.</p>
+  </header>
+
+  <article class="stp" id="s5">
+    <div class="hd"><b class="n">5</b><div><p class="k">Paso 5 · se conecta</p><h3>La presentación, y el siguiente paso justo al acabar</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Hoy <span class="real">Real</span></p><p>Presentación gratuita por Zoom antes de la entrevista previa. Por ejemplo, la de Constelaciones Familiares en Terapia Individual, el 27 de enero.</p></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><p>Zoom conectado al CRM: cada ficha marca si se conectó y cuánto rato. Al terminar, un mensaje de agradecimiento con el enlace para elegir hora de entrevista. Quien da la presentación puede mencionar ese enlace al final, y ya está.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el alumno <span class="ej">Ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg">IG</span><div><b>Institut Gestalt</b><small>Cuenta de empresa</small></div></div>
+          <div class="bd">
+            <span class="when">Jueves 26 · 20:15 · al acabar</span>
+            <div class="bub"><p>Gracias por acompañarnos hoy, Núria. Ha sido un placer tenerte.</p><p>Como contamos, el siguiente paso es una <b>entrevista previa</b> con una persona del equipo: una conversación tranquila para conocerte, resolver tus dudas y ver si la formación encaja con lo que buscas. Elige el día y la hora que mejor te vayan:</p><p class="sg">Un abrazo,<br>Institut Gestalt</p><small>20:15</small>
+              <div class="btns"><span>Elegir hora de entrevista</span><span>Antes tengo una duda</span></div></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve el equipo en el CRM <span class="ej">Ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Núria R.</b><span class="pill ok">Asistió</span></div>
+            <dl><dt>Zoom</dt><dd>Conectada 58 min de 65 <span class="ej">Ejemplo</span></dd><dt>Preguntó</dt><dd>«¿Las prácticas se pueden hacer en Barcelona?»</dd><dt>Siguiente</dt><dd>Invitación a entrevista enviada 20:15</dd></dl></div></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>Asistencia por presentación.</li><li>De cada 100 que asisten, cuántos piden entrevista en las 48 h siguientes <span class="ej">Ejemplo</span>.</li></ul></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>Dar la presentación, como hoy. Si al acabar ve a alguien con quien conviene hablar pronto, lo marca en el CRM con un clic.</p></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="stp" id="s6">
+    <div class="hd"><b class="n">6</b><div><p class="k">Paso 6 · no se conectó</p><h3>Si no fue: la grabación y otra fecha</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Hoy</p><p>No vemos desde fuera qué pasa con quien se apunta y no se conecta <span class="nv">Por ver</span>.</p></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><p>A la mañana siguiente, un mensaje sin reproches con la grabación y la fecha de la próxima presentación. Si ve buena parte de la grabación, recibe la invitación a la entrevista igual que quien asistió. Si en una semana <span class="ej">Ejemplo</span> no hace nada, pasa a «Más adelante» (pestaña 7). Si preferís no grabar la presentación, se envía solo la otra fecha.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el alumno <span class="ej">Ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg">IG</span><div><b>Institut Gestalt</b><small>Cuenta de empresa</small></div></div>
+          <div class="bd">
+            <span class="when">Viernes 27 · 10:00 · al día siguiente</span>
+            <div class="bub"><p>Hola, Javier. Ayer te echamos de menos en la presentación 🌿 No pasa nada: aquí tienes la grabación para verla cuando te vaya bien.</p><p>Y si prefieres vivirla en directo y preguntar, la próxima es el <b>jueves 10 de diciembre a las 19:00 h</b>.</p><p class="sg">Un abrazo,<br>Institut Gestalt</p><small>10:00</small>
+              <div class="btns"><span>Ver la grabación</span><span>Apúntame al 10 de diciembre</span></div></div>
+            <div class="bub me">Ver la grabación<small>10:31 ✓✓</small></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve el equipo en el CRM <span class="ej">Ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Javier M.</b><span class="pill hy">Vio la grabación</span></div>
+            <dl><dt>Perfil</dt><dd>Educador social · Madrid · Terapia Gestalt</dd><dt>26-nov</dt><dd>No se conectó</dd><dt>Grabación</dt><dd>Vista al 80 % <span class="ej">Ejemplo</span> · invitación a entrevista enviada</dd></dl></div></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>De cada 100 que no van, cuántos recuperamos (ven la grabación o van a otra fecha).</li></ul></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>Nada, salvo dudas. Si es un perfil prioritario (próxima edición, encaja muy bien), el CRM propone una llamada breve y la decide el equipo.</p></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="2"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="4">La entrevista previa <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 4 · ENTREVISTA -->
+<section class="pane" id="p4" role="tabpanel" aria-labelledby="t4">
+  <header>
+    <h2>4 · La entrevista previa: siempre una persona del Institut</h2>
+    <p>Es vuestro filtro de calidad y el momento en que alguien decide si se forma con vosotros. No la automatizamos: solo le quitamos el ir y venir de mensajes para encontrar hora, y la persona que entrevista llega sabiendo con quién va a hablar.</p>
+  </header>
+
+  <article class="stp" id="s7">
+    <div class="hd"><b class="n">7</b><div><p class="k">Paso 7 · elige hora y conversa</p><h3>Agendada sola en el calendario del equipo</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Hoy</p><p>Entrevista previa antes de reservar plaza <span class="real">Real</span>. No sabemos cómo se agenda <span class="nv">Por ver</span>: lo vemos con vosotros.</p></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><p>Cada persona que entrevista marca en su calendario los huecos que ofrece. El alumno elige uno desde el enlace; se crea la cita con videollamada (o en Verdi 94, si es presencial) y con su ficha adjunta. Recordatorio el día antes y 1 h antes, y un enlace para cambiar la hora sin escribir a nadie. Si entrevistáis varias personas, las citas se reparten.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el alumno <span class="ej">Ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg">IG</span><div><b>Institut Gestalt</b><small>Cuenta de empresa</small></div></div>
+          <div class="bd">
+            <div class="bub me">Lunes 30 · 17:30<small>20:22 ✓✓</small></div>
+            <div class="bub"><p>¡Hecho, Núria! Tu entrevista previa es el <b>lunes 30 de noviembre a las 17:30 h</b>, por videollamada, con una persona del equipo del Institut. Te llega también al correo con el enlace.</p><p>No hace falta preparar nada: es una conversación para conocerte. Si necesitas cambiar la hora, puedes hacerlo aquí.</p><p class="sg">Hasta el lunes,<br>Institut Gestalt</p><small>20:22</small>
+              <div class="btns"><span>Cambiar la hora</span></div></div>
+            <span class="when">Lunes 30 · 16:30 · 1 h antes</span>
+            <div class="bub"><p>En una hora nos vemos, Núria. Aquí tienes el enlace de la videollamada:</p><small>16:30</small><div class="btns"><span>Entrar a la entrevista</span></div></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve quien entrevista <span class="ej">Ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Núria R. · lun 30 · 17:30</b><span class="pill ok">Entrevista</span></div>
+            <dl><dt>Quién es</dt><dd>Psicóloga · Barcelona · quiere empezar en la próxima edición</dd><dt>Recorrido</dt><dd>Formulario 24-nov → dosier en 2 min → asistió a la presentación 58 min</dd><dt>Preguntó</dt><dd>Por las prácticas en Barcelona</dd><dt>Al acabar</dt><dd><span class="pill ok">Encaja</span> <span class="pill hy">Encaja, más adelante</span> <span class="pill ko">No encaja</span> + nota</dd></dl></div></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>Entrevistas agendadas y celebradas; quién no se presenta.</li><li>De cada 100 entrevistas, cuántas «encajan» y cuántas reservan.</li><li>Qué anuncio y qué perfil traen entrevistas que encajan.</li></ul>
+          <span class="meta">Señal a Meta: entrevista</span></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>La entrevista entera, como hoy. Al terminar, un clic: «Encaja», «Encaja, pero más adelante» o «No encaja», con una nota si quiere. Ese clic decide el siguiente mensaje y la señal que le llega a Meta.</p></div>
+      </div>
+    </div>
+  </article>
+  <div class="callout hyp"><svg class="i"><use href="#i-info"/></svg><div><b>Lo que no cambia:</b> ningún mensaje automático sustituye a la entrevista ni da por hecho que alguien encaja. El enlace de reserva solo sale cuando quien entrevista marca «Encaja».</div></div>
+  <div class="next"><button class="btn sec" data-go="3"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="5">Reserva y matrícula <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 5 · RESERVA Y MATRÍCULA -->
+<section class="pane" id="p5" role="tabpanel" aria-labelledby="t5">
+  <header>
+    <h2>5 · Reserva de plaza y matrícula</h2>
+    <p>El pago va por vuestro WooCommerce, el de siempre. Lo nuevo es que el enlace llega al momento, que alguien se da cuenta si no se completa y que el CRM y Meta se enteran cuando sí.</p>
+  </header>
+
+  <article class="stp" id="s8">
+    <div class="hd"><b class="n">8</b><div><p class="k">Paso 8 · después de «Encaja»</p><h3>Reserva de plaza de 454 €, con el enlace de vuestra web</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Hoy <span class="real">Real</span></p><p>Reserva de plaza de 454 € tras la entrevista. La web tiene WooCommerce (carrito).</p></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><p>Quien entrevista marca «Encaja» y el alumno recibe por WhatsApp y por correo el enlace de pago de la reserva en vuestro WooCommerce, con sus datos ya rellenos. Cuando paga, la ficha pasa sola a «Reserva». Si en 48 h <span class="ej">Ejemplo</span> no ha pagado, un recordatorio amable; a los 5 días <span class="ej">Ejemplo</span>, la misma persona que le entrevistó le llama.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el alumno <span class="ej">Ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg">IG</span><div><b>Institut Gestalt</b><small>Cuenta de empresa</small></div></div>
+          <div class="bd">
+            <span class="when">Lunes 30 · 18:20 · después de la entrevista</span>
+            <div class="bub"><p>Núria, gracias por la conversación de hoy. Nos alegra mucho que quieras empezar este camino con nosotros.</p><p>Como hablamos, aquí tienes el enlace para reservar tu plaza en la Formación en Terapia Gestalt: <b>454 €</b>. Es el pago seguro de nuestra web. Si te surge cualquier duda, responde a este mensaje y te contesta una persona del equipo.</p><p class="sg">Un abrazo,<br>Institut Gestalt</p><small>18:20</small>
+              <div class="btns"><span>Reservar mi plaza</span></div></div>
+            <div class="bub me">¡Hecho! 😊<small>18:41 ✓✓</small></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve el equipo en el CRM <span class="ej">Ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Núria R.</b><span class="pill ok">Reserva pagada</span></div>
+            <dl><dt>Pago</dt><dd>454 € · WooCommerce · 30-nov 18:41</dd><dt>Desde la entrevista</dt><dd>21 minutos</dd><dt>Siguiente</dt><dd>Matrícula · formación de referencia 2.270 €</dd></dl></div></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>De cada 100 «Encaja», cuántos reservan.</li><li>Días entre la entrevista y la reserva.</li><li>Reservas por anuncio y por perfil, con su coste.</li></ul>
+          <span class="meta">Señal a Meta: reserva · 454 €</span></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>Decide cuándo sale el enlace (al marcar «Encaja»). Y si no se paga, llama quien hizo la entrevista: es quien ya tiene la relación.</p></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="stp" id="s9">
+    <div class="hd"><b class="n">9</b><div><p class="k">Paso 9 · ya es alumno</p><h3>Matrícula y bienvenida</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Hoy <span class="real">Real</span></p><p>Matrícula después de la reserva. Matrícula de referencia de la Formación en Terapia Gestalt: 2.270 € (dato de vuestra web según nuestra investigación).</p></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><p>Bienvenida con los próximos pasos tal como los hacéis hoy. La matrícula queda registrada en el CRM (desde WooCommerce o marcada a mano, según cómo se pague) y la persona pasa a la lista de alumnos: deja de ver anuncios de captación y sirve a Meta de modelo de a quién buscar.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el alumno <span class="ej">Ejemplo</span></p>
+        <div class="mail"><div class="mh"><span>De: Institut Gestalt</span><b>Bienvenida al Institut Gestalt, Núria</b></div>
+          <div class="mb"><p>Hola, Núria:</p><p>Ya tienes tu plaza en la Formación en Terapia Gestalt. Nos hace mucha ilusión acompañarte en este proceso.</p><p>Aquí tienes los próximos pasos para completar la matrícula, el calendario del curso y a quién escribir si necesitas cualquier cosa antes de empezar.</p><span class="cta">Ver los próximos pasos</span><p class="muted">Un abrazo,<br>el equipo del Institut Gestalt</p></div></div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve el equipo en el CRM <span class="ej">Ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Núria R.</b><span class="pill ok">Matriculada</span></div>
+            <dl><dt>Formación</dt><dd>Terapia Gestalt · Barcelona · próxima edición</dd><dt>Recorrido</dt><dd>Del formulario a la matrícula en 9 días <span class="ej">Ejemplo</span></dd><dt>Origen</dt><dd>Anuncio «Ya acompañas a personas…»</dd></dl></div></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>Matrículas por anuncio, perfil y formación.</li><li>Coste por matrícula e ingreso por campaña.</li><li>Días del formulario a la matrícula.</li></ul>
+          <span class="meta">Señal a Meta: matrícula · importe</span></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>Lo de siempre con la matrícula y la administración. Si queréis, la bienvenida la firma el docente o tutor de su grupo.</p></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="4"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="6">La señal a Meta <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 6 · SEÑAL A META -->
+<section class="pane" id="p6" role="tabpanel" aria-labelledby="t6">
+  <header>
+    <h2>6 · Que Meta busque a quien llega a la entrevista, no a quien rellena</h2>
+    <p>Hoy Meta encuentra a la gente sola, siempre que le des dos cosas: anuncios que digan a quién le hablan y la señal de quién acabó siendo un buen alumno. Si solo le cuentas que alguien rellenó un formulario, te trae más gente que rellena formularios. Con más de 3.000 € al mes, esa diferencia es la que más pesa.</p>
+  </header>
+  <div class="loop">
+    <svg viewBox="0 0 900 300" role="img" aria-label="Ciclo: el anuncio llega a la persona, rellena el formulario que filtra, el CRM marca quién llega a entrevista, reserva y matrícula, esa señal vuelve a Meta y Meta busca más personas parecidas">
+      <defs><marker id="m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1D5FAE"/></marker><marker id="m2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#17734A"/></marker></defs>
+      <rect class="bx" x="10" y="40" width="190" height="86" rx="14"/><text x="105" y="76" text-anchor="middle" font-size="16" font-weight="700">Anuncio</text><text class="mut" x="105" y="100" text-anchor="middle" font-size="13">habla a un perfil</text>
+      <rect class="bx" x="240" y="40" width="190" height="86" rx="14"/><text x="335" y="76" text-anchor="middle" font-size="16" font-weight="700">Formulario</text><text class="mut" x="335" y="100" text-anchor="middle" font-size="13">que filtra</text>
+      <rect class="bx" x="470" y="40" width="190" height="86" rx="14"/><text x="565" y="76" text-anchor="middle" font-size="16" font-weight="700">CRM</text><text class="mut" x="565" y="100" text-anchor="middle" font-size="13">entrevista · reserva · matrícula</text>
+      <rect class="acc" x="700" y="40" width="190" height="86" rx="14"/><text x="795" y="76" text-anchor="middle" font-size="16" font-weight="700">Señal a Meta</text><text class="mut" x="795" y="100" text-anchor="middle" font-size="13">«esta reservó, 454 €»</text>
+      <path class="ar" d="M200 83H236" marker-end="url(#m)"/><path class="ar" d="M430 83H466" marker-end="url(#m)"/><path class="ar" d="M660 83H696" marker-end="url(#m)"/>
+      <path class="ar2" d="M795 128V220H105V130" marker-end="url(#m2)"/>
+      <rect x="260" y="200" width="380" height="40" rx="20" fill="var(--good-soft)"/><text x="450" y="225" text-anchor="middle" font-size="14" font-weight="700" fill="var(--good)">Meta busca más personas como las que llegan a la entrevista</text>
+      <text class="mut" x="450" y="275" text-anchor="middle" font-size="13">Cada entrevista, reserva y matrícula afina a quién se le enseña el siguiente anuncio.</text>
+    </svg>
+  </div>
+  <div class="steps">
+    <div class="card"><div><h3>El problema de hoy, en una frase</h3><p>Quien rellena un formulario instantáneo no pasa por vuestra web, así que el píxel que ya tenéis <span class="real">Real</span> no ve si esa persona fue a la presentación, hizo la entrevista o reservó. Para Meta, todas las peticiones valen lo mismo.</p></div></div>
+    <div class="card"><div><h3>El CRM le cuenta a Meta lo que pasa después</h3><p>Con la API de conversiones, cada ficha envía a Meta sus pasos: entrevista, reserva con 454 € y matrícula con su importe. Meta tiene un objetivo pensado para esto: optimizar los formularios instantáneos hacia «leads de conversión», usando las etapas que le manda el CRM.</p></div></div>
+    <div class="card"><div><h3>Primero la entrevista, después la reserva</h3><p>Meta aprende mejor con muchas señales (habla de unas 50 a la semana por conjunto de anuncios). Las matrículas son pocas al mes, así que empezamos optimizando hacia la entrevista, que pasa más a menudo y ya separa a quien va en serio. Cuando haya volumen, subimos a la reserva.</p></div></div>
+    <div class="card"><div><h3>Vuestros alumnos, como punto de partida</h3><p>Con más de 40 años de alumnos, la lista de quienes ya se formaron (cifrada, como exige Meta) sirve para que busque gente parecida desde el primer día y para no enseñar anuncios de captación a quien ya es alumno.</p></div></div>
+  </div>
+  <div class="tw stack"><table>
+    <thead><tr><th>Señal</th><th>Cuándo se envía</th><th>Quién la provoca</th><th>Para qué le sirve a Meta</th></tr></thead>
+    <tbody>
+      <tr><td data-label="Señal"><b>Petición</b></td><td data-label="Cuándo">Envía el formulario.</td><td data-label="Quién">Meta ya la tiene.</td><td data-label="Para qué">Volumen. La más rápida y la menos fiable.</td></tr>
+      <tr><td data-label="Señal"><b>Entrevista</b></td><td data-label="Cuándo">Se celebra la entrevista previa.</td><td data-label="Quién">Quien entrevista, al marcarla en el CRM.</td><td data-label="Para qué">Distinguir a quien va en serio. La primera que usaríamos para optimizar.</td></tr>
+      <tr><td data-label="Señal"><b>Reserva · 454 €</b></td><td data-label="Cuándo">Paga la reserva en WooCommerce.</td><td data-label="Quién">Automática, al pagar.</td><td data-label="Para qué">La que mejor predice una matrícula.</td></tr>
+      <tr><td data-label="Señal"><b>Matrícula + importe</b></td><td data-label="Cuándo">Se completa la matrícula.</td><td data-label="Quién">Automática o marcada por administración.</td><td data-label="Para qué">Optimizar hacia ingresos y medir el coste real de cada alumno.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="next"><button class="btn sec" data-go="5"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="7">Quien aún no está listo <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 7 · AÚN NO · ANTIGUOS ALUMNOS -->
+<section class="pane" id="p7" role="tabpanel" aria-labelledby="t7">
+  <header>
+    <h2>7 · Quien no está listo todavía, y quien ya se formó con vosotros</h2>
+    <p>Una formación de este tipo se decide con calma. Mucha gente que hoy dice «más adelante» será alumna dentro de unos meses, y quien ya terminó una formación es quien mejor conoce el Institut. A los dos hay que seguir cuidándolos, sin agobiar.</p>
+  </header>
+
+  <article class="stp" id="s10">
+    <div class="hd"><b class="n">A</b><div><p class="k">Más adelante</p><h3>Quién no está listo todavía</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Quién entra aquí</p><ul><li>Quien responde «en unos meses» o «solo quiero informarme» en el formulario.</li><li>Quien no fue a la presentación ni vio la grabación en una semana <span class="ej">Ejemplo</span>.</li><li>Quien sale de la entrevista con «Encaja, pero más adelante».</li></ul></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><p><b>Nutrición por correo:</b> un correo al mes <span class="ej">Ejemplo</span> con contenido, no con ofertas: una idea de la Gestalt, un fragmento de una clase, una historia de un antiguo alumno. Baja con un clic.</p><p><b>Aviso de próximas ediciones:</b> cuando abre la formación que le interesa, un correo y, si lo aceptó en el formulario, un WhatsApp con la fecha de la presentación. Si se apunta, vuelve al recorrido en el paso 4.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué recibe <span class="ej">Ejemplo</span> · fechas <span class="real">Real</span></p>
+        <div class="mail"><div class="mh"><span>De: Institut Gestalt · para quien ya acompaña procesos individuales</span><b>Constelaciones en tu consulta: nueva formación online desde el 17 de febrero</b></div>
+          <div class="mb"><p>Hola, Elena:</p><p>Cuando nos escribiste nos contaste que acompañas procesos como coach. Por eso pensamos en ti para esta formación.</p><p>El <b>17 de febrero de 2027</b> empieza la formación online en <b>Constelaciones Familiares en Terapia Individual</b>, los miércoles de 17 a 21 h. Es para incorporar las Constelaciones al trabajo uno a uno, en tu consulta.</p><p>Antes, el <b>27 de enero</b>, hacemos una presentación gratuita por Zoom para contarte cómo es y resolver tus dudas.</p><span class="cta">Guardarme un sitio en la presentación</span><p class="muted">Un abrazo,<br>el equipo del Institut Gestalt</p></div></div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve el equipo en el CRM <span class="ej">Ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Elena V.</b><span class="pill nt">Más adelante</span></div>
+            <dl><dt>Perfil</dt><dd>Coach · online · ya acompaña procesos</dd><dt>Le interesa</dt><dd>Constelaciones en Terapia Individual</dd><dt>Aviso</dt><dd>Presentación 27-ene · enviado 8-ene</dd><dt>Correos</dt><dd>Abre 3 de 4</dd></dl></div></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>Cuántos de «más adelante» vuelven a una presentación.</li><li>Aperturas y bajas de los correos.</li><li>Matrículas que vienen de esta lista, aunque la petición fuera de hace meses.</li></ul></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>Aprobar los correos (los escribimos con vosotros, con vuestro tono) y repasar la lista una vez al trimestre <span class="ej">Ejemplo</span>. Nada más.</p></div>
+      </div>
+    </div>
+    <div class="tl">
+      <div><b>Semana 1</b><span>El dosier, sin prisas: «cuando quieras, aquí estamos».</span></div>
+      <div><b>Cada mes <span class="ej">Ejemplo</span></b><span>Un correo de contenido, del Institut y de vuestros docentes.</span></div>
+      <div><b>Al abrir una edición</b><span>Aviso de la formación que le interesa y de su presentación gratuita.</span></div>
+      <div><b>Si se apunta</b><span>Vuelve al recorrido: recordatorios, presentación, entrevista.</span></div>
+      <div><b>Si se da de baja</b><span>Se respeta al momento y sale también de los anuncios.</span></div>
+    </div>
+  </article>
+
+  <article class="stp" id="s11">
+    <div class="hd"><b class="n">B</b><div><p class="k">Ya se formaron con vosotros</p><h3>Antiguos alumnos: la siguiente formación</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Por qué importa</p><p>Ya os conocen, ya confían, y vuestro catálogo tiene un siguiente paso natural para casi todos: Constelaciones Familiares (con Joan Garriga), Constelaciones en Terapia Individual, trauma, terapia corporal, PNL, coaching y talleres <span class="real">Real</span>.</p></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><ul><li>La lista de alumnos en el CRM, con la formación que hizo cada uno.</li><li>Un aviso personal cuando abre una formación que tiene sentido para su camino (por ejemplo, de Terapia Gestalt a Constelaciones en Terapia Individual si ya tiene consulta).</li><li>Fuera de los anuncios de captación, y dentro de los de «siguiente formación».</li></ul></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el antiguo alumno <span class="ej">Ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg">IG</span><div><b>Institut Gestalt</b><small>Cuenta de empresa</small></div></div>
+          <div class="bd">
+            <div class="bub"><p>Hola, Marc 🌿 ¿Qué tal va la consulta? Te escribimos porque abrimos una formación que creemos que te puede encajar ahora que acompañas procesos individuales: <b>Constelaciones Familiares en Terapia Individual</b>, online, desde el 17 de febrero, los miércoles de 17 a 21 h.</p><p>El 27 de enero hacemos la presentación gratuita por Zoom. Nos encantaría volver a verte.</p><p class="sg">Un abrazo,<br>Institut Gestalt</p><small>11:05</small>
+              <div class="btns"><span>Guárdame un sitio</span><span>Ahora no, gracias</span></div></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box"><p class="k">Qué ve el equipo en el CRM <span class="ej">Ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Marc T.</b><span class="pill ok">Antiguo alumno</span></div>
+            <dl><dt>Se formó en</dt><dd>Formación en Terapia Gestalt</dd><dt>Hoy</dt><dd>Terapeuta con consulta · Barcelona</dd><dt>Propuesta</dt><dd>Constelaciones en Terapia Individual</dd></dl></div></div>
+        <div class="box"><p class="k">Qué se mide</p><ul><li>Antiguos alumnos que vuelven a una segunda formación.</li><li>Cuántos recomiendan a alguien (si se pregunta «¿cómo nos conociste?»).</li></ul></div>
+        <div class="box hu"><p class="k">Qué hace una persona del equipo</p><p>Si el alumno tuvo relación con un docente, que el mensaje lo firme o lo envíe esa persona. Quien responde «me interesa» pasa directo a la entrevista, si así lo decidís.</p></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="6"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="8">Verlo en marcha <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 8 · VERLO EN MARCHA -->
+<section class="pane" id="p8" role="tabpanel" aria-labelledby="t8">
+  <header>
+    <h2>8 · Verlo en marcha <span class="ej">Ejemplo</span></h2>
+    <p>Elige una persona y pulsa «Reproducir». A la izquierda, lo que ve en su móvil; a la derecha, quién está trabajando en cada momento: el mensaje automático (con un texto que habéis aprobado), el CRM, una persona del equipo o la señal a Meta.</p>
+  </header>
+  <div class="scen" role="group" aria-label="Situación">
+    <button aria-pressed="true" data-s="nuria">Núria · psicóloga · Barcelona</button>
+    <button aria-pressed="false" data-s="javier">Javier · no fue a la presentación</button>
+    <button aria-pressed="false" data-s="elena">Elena · coach · todavía no</button>
+  </div>
+  <div class="two">
+    <div style="display:grid;gap:10px">
+      <div class="chat">
+        <div class="hd"><span class="lg">IG</span><div><b>Institut Gestalt</b><small>Así lo ve en su móvil</small></div></div>
+        <div class="bd" id="chat" aria-live="polite"></div>
+      </div>
+      <button class="btn pri" id="play" style="justify-self:center"><svg class="i"><use href="#i-play"/></svg> Reproducir</button>
+    </div>
+    <div style="display:grid;gap:18px;align-content:start">
+      <div class="agents">
+        <div class="agent" data-a="auto"><span class="ic">💬</span><div><h3>Mensaje automático</h3><p>Sale al momento, con un texto que habéis aprobado vosotros y firmado por el Institut. Nunca se inventa nada: si hay una duda, la pasa a una persona.</p></div></div>
+        <div class="agent" data-a="crm"><span class="ic">🗂️</span><div><h3>CRM</h3><p>Cada persona en su etapa: nueva, apuntada, asistió, entrevista, reserva, matrícula o más adelante. Con todo lo que ha pasado, en una ficha.</p></div></div>
+        <div class="agent" data-a="equipo"><span class="ic">🤝</span><div><h3>Una persona del Institut</h3><p>Contesta las dudas, hace la entrevista previa y decide cuándo sale el enlace de reserva.</p></div></div>
+        <div class="agent" data-a="meta"><span class="ic">📈</span><div><h3>Señal a Meta</h3><p>Entrevista, reserva y matrícula vuelven a Meta para que busque más personas así.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Lo que ve el equipo cada mañana <span class="ej">Ejemplo</span></h3>
+  <div class="kb" tabindex="0" aria-label="Tablero del CRM de ejemplo">
+    <div class="col"><b>Nueva <span>12</span></b><div class="it"><b>Rosa P.</b><span>Enfermera · Madrid · Gestalt · próxima edición</span></div><div class="it"><b>Àlex G.</b><span>Coach · online · aún no lo sabe</span></div></div>
+    <div class="col"><b>Apuntada <span>34</span></b><div class="it"><b>Núria R.</b><span>Psicóloga · Barcelona · presentación 26-nov</span></div></div>
+    <div class="col"><b>Asistió / grabación <span>19</span></b><div class="it"><b>Javier M.</b><span>Educador social · Madrid · vio la grabación</span></div></div>
+    <div class="col hu"><b>Entrevista <span>8</span></b><div class="it"><b>Pau S.</b><span>Terapeuta corporal · Barcelona · lun 30 · 12:00</span></div></div>
+    <div class="col"><b>Reserva <span>4</span></b><div class="it"><b>Clara F.</b><span>Psicóloga · online · 454 € ✓</span></div></div>
+    <div class="col"><b>Matrícula <span>3</span></b><div class="it"><b>Andreu L.</b><span>Educador social · Barcelona</span></div></div>
+    <div class="col"><b>Más adelante <span>41</span></b><div class="it"><b>Elena V.</b><span>Coach · online · Constelaciones TI · aviso 27-ene</span></div></div>
+  </div>
+
+  <h3>Vuestros números: ¿dónde se queda la gente? <span class="ej">Pon vuestros datos</span></h3>
+  <div class="calc">
+    <div style="display:grid;gap:14px">
+      <label>Peticiones al mes <output id="o-sol">100</output><input type="range" id="sol" min="20" max="400" step="5" value="100"><span>Nos dijiste más de 100 <span class="real">Real</span></span></label>
+      <label>De cada 100 peticiones, ¿cuántas se apuntan a la presentación? <output id="o-apu">50</output><input type="range" id="apu" min="5" max="100" step="1" value="50"><span>Todos los porcentajes son de ejemplo: pon los vuestros.</span></label>
+      <label>De cada 100 apuntados, ¿cuántos se conectan o ven la grabación? <output id="o-asi">55</output><input type="range" id="asi" min="5" max="100" step="1" value="55"></label>
+      <label>De cada 100 que asisten, ¿cuántos hacen la entrevista? <output id="o-ent">40</output><input type="range" id="ent" min="5" max="100" step="1" value="40"></label>
+      <label>De cada 100 entrevistas, ¿cuántos reservan? <output id="o-res">50</output><input type="range" id="res" min="5" max="100" step="1" value="50"></label>
+      <label>De cada 100 reservas, ¿cuántos se matriculan? <output id="o-mat">90</output><input type="range" id="mat" min="5" max="100" step="1" value="90"></label>
+      <label>Inversión en anuncios al mes (€) <output id="o-inv">3.000 €</output><input type="range" id="inv" min="500" max="12000" step="100" value="3000"><span>Nos dijiste más de 3.000 € <span class="real">Real</span></span></label>
+      <label>Importe por matrícula (€) <output id="o-tk">2.270 €</output><input type="range" id="tk" min="500" max="5000" step="10" value="2270"><span>2.270 € es la matrícula de referencia de la Formación en Terapia Gestalt <span class="real">Real</span>.</span></label>
+    </div>
+    <div class="res">
+      <div class="fun" id="fun"></div>
+      <div class="facts">
+        <div class="fact"><b class="num" id="r-cpe">0 €</b><span>coste por entrevista</span></div>
+        <div class="fact"><b class="num" id="r-cpr">0 €</b><span>coste por reserva</span></div>
+        <div class="fact hl"><b class="num" id="r-cpm">0 €</b><span>coste por matrícula</span></div>
+        <div class="fact"><b class="num" id="r-ing">0 €</b><span>en matrículas al mes</span></div>
+      </div>
+      <p class="note">Es una simulación con los números que pongas, no una promesa. Sirve para ver en qué paso se queda más gente y dónde conviene trabajar primero. Las cifras reales salen del CRM a partir del primer mes.</p>
+    </div>
+  </div>
+
+  <div class="links3">
+    <a href="../"><span class="k">Plan</span><b>El plan completo</b><small>Lo que ya tenéis, dónde se escapan alumnos y cómo arrancaríamos.</small></a>
+    <a href="../anuncios/"><span class="k">Anuncios</span><b>Los anuncios por perfil</b><small>Con su porqué, en feed y stories.</small></a>
+    <a href="../demo/"><span class="k">Demo</span><b>El sistema por dentro</b><small>La ficha, los mensajes y el panel, con una alumna de ejemplo.</small></a>
+  </div>
+  <div class="next"><button class="btn sec" data-go="7"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn sec" data-go="0">Volver al principio</button></div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="sig"><b>Qualivo</b><span>Preparado para Institut Gestalt · 9-nov-2026</span></div>
+    <p>Lo marcado como «Real» sale de institutgestalt.com, de la Biblioteca de anuncios de Meta (consultada el 4-nov-2026) y de lo que nos contestasteis en el formulario. Lo marcado como «Ejemplo» es una propuesta para enseñar cómo funcionaría; «Por ver» es lo que no se ve desde fuera y revisaríamos con vosotros. Personas, conversaciones y cifras de ejemplo son inventadas.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('nav.tabs button'));
+  var panes=[].slice.call(document.querySelectorAll('.pane'));
+  function go(n,scroll,to){
+    n=Number(n);
+    tabs.forEach(function(t,i){t.setAttribute('aria-selected',i===n?'true':'false');t.tabIndex=i===n?0:-1;});
+    panes.forEach(function(p,i){p.classList.toggle('on',i===n);});
+    if(tabs[n].scrollIntoView)tabs[n].scrollIntoView({block:'nearest',inline:'center'});
+    var el=to&&document.getElementById(to);
+    if(el){setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'start'});},30);}
+    else if(scroll){var y=document.querySelector('nav.tabs').getBoundingClientRect().top+window.scrollY-80;window.scrollTo({top:y,behavior:'smooth'});}
+    try{history.replaceState(null,'','#p'+n);}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){go(i,false);});
+    t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){var k=(i+1)%tabs.length;go(k);tabs[k].focus();}if(e.key==='ArrowLeft'){var j=(i-1+tabs.length)%tabs.length;go(j);tabs[j].focus();}});
+  });
+  [].slice.call(document.querySelectorAll('[data-go]')).forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-go'),true,b.getAttribute('data-to'));});});
+  var h=(location.hash.match(/^#p(\d)$/)||[])[1]; if(h&&tabs[h])go(h,false);
+
+  // recorridos de ejemplo: [tipo, texto, carril, botones, hora]
+  // tipo: in = mensaje del Institut · out = respuesta del alumno · sys = lo que pasa por dentro · day = cambio de día
+  var S={
+    nuria:[
+      ['day','Martes 24-nov'],
+      ['sys','21:40 · Núria rellena el formulario del anuncio «Ya acompañas a personas…»','crm'],
+      ['sys','Ficha creada: psicóloga · Terapia Gestalt · próxima edición · Barcelona · prioridad alta','crm'],
+      ['in','Hola, Núria 🌿 Gracias por escribirnos. Te dejamos el dosier de la Formación en Terapia Gestalt, con el programa, el calendario y las condiciones.\n📄 Dosier · Formación en Terapia Gestalt.pdf','auto',null,'21:42'],
+      ['in','La próxima presentación gratuita por Zoom es el jueves 26 de noviembre a las 19:00 h. ¿Te guardamos un sitio?\n\nUn abrazo, el equipo del Institut Gestalt','auto',['Sí, apúntame','Prefiero otra fecha','Tengo una duda'],'21:42'],
+      ['out','Sí, apúntame','crm',null,'21:44'],
+      ['sys','Apuntada a la presentación del 26-nov · invitación de calendario enviada por correo','crm'],
+      ['day','Miércoles 25-nov · el día antes'],
+      ['in','Hola, Núria 🌿 Mañana a las 19:00 h nos vemos en la presentación. Si te surge algo, dínoslo y te buscamos otra fecha.','auto',['Allí estaré','No puedo, otra fecha'],'19:00'],
+      ['out','Allí estaré 😊','crm',null,'19:12'],
+      ['day','Jueves 26-nov'],
+      ['in','Hoy a las 19:00 h es la presentación. Si puedes, conéctate desde un sitio tranquilo y con cámara.','auto',null,'17:00'],
+      ['in','Empezamos en 10 minutos. Aquí tienes el enlace:','auto',['Entrar en Zoom'],'18:50'],
+      ['sys','Zoom: Núria conectada 58 min · ficha → «Asistió»','crm'],
+      ['in','Gracias por acompañarnos hoy, Núria. El siguiente paso es una entrevista previa con una persona del equipo, para conocerte y resolver tus dudas. Elige día y hora:','auto',['Elegir hora de entrevista'],'20:15'],
+      ['out','Lunes 30 · 17:30','crm',null,'20:22'],
+      ['sys','Cita creada en el calendario del equipo, con la ficha de Núria adjunta','crm'],
+      ['day','Lunes 30-nov'],
+      ['sys','17:30 · Entrevista previa por videollamada con una persona del Institut','equipo'],
+      ['sys','Quien entrevista marca «Encaja» → señal «entrevista» a Meta','meta'],
+      ['in','Núria, gracias por la conversación de hoy. Como hablamos, aquí tienes el enlace para reservar tu plaza: 454 €. Cualquier duda, responde aquí y te contesta una persona del equipo.','equipo',['Reservar mi plaza'],'18:20'],
+      ['sys','18:41 · Reserva pagada en WooCommerce · 454 € → ficha «Reserva» · señal «reserva» a Meta','meta']
+    ],
+    javier:[
+      ['day','Domingo 22-nov'],
+      ['sys','11:15 · Javier rellena el formulario: educador social · Terapia Gestalt · en unos meses · Madrid','crm'],
+      ['in','Hola, Javier 🌿 Gracias por escribirnos. Te dejamos el dosier de la Formación en Terapia Gestalt.\n📄 Dosier · Formación en Terapia Gestalt.pdf\n\nLa próxima presentación gratuita por Zoom es el jueves 26 de noviembre a las 19:00 h. ¿Te guardamos un sitio?','auto',['Sí, apúntame','Prefiero otra fecha'],'11:16'],
+      ['out','Sí, apúntame','crm',null,'11:30'],
+      ['day','Jueves 26-nov'],
+      ['in','Empezamos en 10 minutos. Aquí tienes el enlace:','auto',['Entrar en Zoom'],'18:50'],
+      ['sys','Zoom: Javier no se conecta · ficha → «No asistió»','crm'],
+      ['day','Viernes 27-nov'],
+      ['in','Hola, Javier. Ayer te echamos de menos en la presentación 🌿 No pasa nada: aquí tienes la grabación para verla cuando te vaya bien. Y si prefieres vivirla en directo, la próxima es el jueves 10 de diciembre a las 19:00 h.','auto',['Ver la grabación','Apúntame al 10 de diciembre'],'10:00'],
+      ['out','Ver la grabación','crm',null,'10:31'],
+      ['sys','Grabación vista al 80 % · ficha → «Vio la grabación» · invitación a entrevista','crm'],
+      ['out','Una duda antes: ¿se puede hacer la formación desde Madrid?','equipo',null,'11:02'],
+      ['sys','Duda → bandeja del equipo, con la ficha de Javier al lado','equipo'],
+      ['in','Hola, Javier, te escribe el equipo del Institut. El Institut está en Barcelona, en Madrid y online, así que lo vemos con calma en la entrevista según la edición que mejor te encaje. ¿Te va bien el miércoles 2 a las 18:00?','equipo',['Me va bien','Prefiero otra hora'],'11:20'],
+      ['out','Me va bien','crm',null,'11:24'],
+      ['sys','Entrevista en el calendario del equipo · miércoles 2-dic · 18:00','crm']
+    ],
+    elena:[
+      ['day','Jueves 12-nov'],
+      ['sys','22:05 · Elena rellena el formulario: coach · ya acompaña procesos · aún no lo sabe · solo quiere informarse · online','crm'],
+      ['in','Hola, Elena 🌿 Gracias por escribirnos. Te dejamos el dosier con nuestras formaciones online. Sin ninguna prisa: cuando quieras, aquí estamos.\n📄 Dosier · Formaciones online.pdf','auto',null,'22:06'],
+      ['sys','Etapa «Más adelante» → un correo de contenido al mes, con baja en un clic','crm'],
+      ['day','Diciembre'],
+      ['sys','Correo de contenido: «Acompañar procesos individuales desde lo que no se dice» · abierto','crm'],
+      ['day','Viernes 8-ene-2027'],
+      ['in','Hola, Elena 🌿 Nos contaste que acompañas procesos como coach. El 17 de febrero empieza online la formación en Constelaciones Familiares en Terapia Individual, los miércoles de 17 a 21 h. Antes, el 27 de enero, hacemos la presentación gratuita por Zoom. ¿Te guardamos un sitio?','auto',['Sí, me interesa','Ahora no, gracias'],'10:00'],
+      ['out','Sí, me interesa','crm',null,'10:47'],
+      ['sys','Apuntada a la presentación del 27-ene · vuelve al recorrido: recordatorios, presentación, entrevista','crm']
+    ]
+  };
+  var cur='nuria',timer=null,chat=document.getElementById('chat'),agents=[].slice.call(document.querySelectorAll('.agent'));
+  function lit(a){agents.forEach(function(x){x.classList.toggle('lit',x.getAttribute('data-a')===a);});}
+  function render(n){
+    chat.innerHTML='';
+    S[cur].slice(0,n).forEach(function(m){
+      var d=document.createElement('div');d.className='msg '+m[0];
+      d.textContent=m[1];
+      if(m[3]){var b=document.createElement('div');b.className='btns';m[3].forEach(function(t){var s=document.createElement('span');s.textContent=t;b.appendChild(s);});d.appendChild(b);}
+      if(m[4]){var t=document.createElement('small');t.textContent=m[4]+(m[0]==='out'?' ✓✓':'');d.appendChild(t);}
+      chat.appendChild(d);
+    });
+    chat.scrollTop=chat.scrollHeight;
+  }
+  function play(){
+    clearTimeout(timer);var i=0,msgs=S[cur];chat.innerHTML='';lit(null);
+    (function step(){
+      if(i>=msgs.length){lit(null);return;}
+      var m=msgs[i];
+      if(m[0]==='in'){var ty=document.createElement('div');ty.className='typing';ty.innerHTML='<i></i><i></i><i></i>';chat.appendChild(ty);chat.scrollTop=chat.scrollHeight;lit(m[2]);
+        timer=setTimeout(function(){i++;render(i);timer=setTimeout(step,800);},900);}
+      else{i++;render(i);if(m[2])lit(m[2]);timer=setTimeout(step,m[0]==='day'?700:m[0]==='sys'?1400:1100);}
+    })();
+  }
+  document.getElementById('play').addEventListener('click',play);
+  [].slice.call(document.querySelectorAll('.scen button')).forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('.scen button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed','true');cur=b.getAttribute('data-s');clearTimeout(timer);render(S[cur].length);lit(null);
+  });});
+  render(S[cur].length);
+
+  // calculadora del embudo
+  var f=new Intl.NumberFormat('es-ES');
+  function $(id){return document.getElementById(id);}
+  function eur(x){return isFinite(x)?f.format(Math.round(x))+' €':'—';}
+  function one(x){return f.format(Math.round(x*10)/10);}
+  function calc(){
+    var v={};['sol','apu','asi','ent','res','mat','inv','tk'].forEach(function(k){v[k]=+$(k).value;});
+    ['sol','apu','asi','ent','res','mat'].forEach(function(k){$('o-'+k).textContent=v[k];});
+    $('o-inv').textContent=f.format(v.inv)+' €';$('o-tk').textContent=f.format(v.tk)+' €';
+    var a=v.sol*v.apu/100,b=a*v.asi/100,c=b*v.ent/100,d=c*v.res/100,e=d*v.mat/100;
+    var rows=[['Peticiones',v.sol],['Apuntados',a],['Asisten o ven grabación',b],['Entrevistas',c],['Reservas',d],['Matrículas',e]];
+    $('fun').innerHTML='';
+    rows.forEach(function(r){
+      var w=document.createElement('div'),l=document.createElement('span'),bar=document.createElement('span'),i=document.createElement('i'),n=document.createElement('b');
+      l.textContent=r[0];i.style.width=(v.sol?Math.max(r[1]/v.sol*100,.5):0)+'%';bar.appendChild(i);n.textContent=one(r[1]);
+      w.appendChild(l);w.appendChild(bar);w.appendChild(n);$('fun').appendChild(w);
+    });
+    $('r-cpe').textContent=c>0?eur(v.inv/c):'—';$('r-cpr').textContent=d>0?eur(v.inv/d):'—';
+    $('r-cpm').textContent=e>0?eur(v.inv/e):'—';$('r-ing').textContent=eur(e*v.tk);
+  }
+  ['sol','apu','asi','ent','res','mat','inv','tk'].forEach(function(id){$(id).addEventListener('input',calc);});calc();
+})();
+</script>
+</body>
+</html>
