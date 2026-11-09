@@ -113,6 +113,10 @@ small,.nota{color:var(--mut);font-size:12.5px}
     h += '<h2>Embudo por puerta de entrada · personas que se registraron ' + (esMes ? 'en ' + nomMes(s) : 'la semana del ' + rango(s)) + '</h2>';
     h += '<div class="tabs" role="group" aria-label="Puerta">' + PUERTAS_EMB.map(function (p) { return '<button class="btn" type="button" data-puerta="' + esc(p) + '" aria-pressed="' + (p === puertaSel) + '">' + esc(p) + '</button>'; }).join('') + '</div><div id="embudo"><p class="cargando">Cargando el embudo…</p></div>';
 
+    // Envíos masivos de email del mes (se cargan aparte)
+    var mesEnv = esMes ? s : s.slice(0, 8) + '01';
+    h += '<h2>Envíos de email · ' + nomMes(mesEnv) + '</h2><p class="sub">Envíos masivos desde Kliking (newsletter, webinar, El Círculo). Los emails automáticos de los flujos no están aquí.</p><div id="envios"><p class="cargando">Cargando los envíos…</p></div>';
+
     // CAC mensual: (publicidad + comercial + agencia + otros) ÷ ventas del mes
     var cos = datos.mes.costes || null, filasCac = [];
     datos.meses.forEach(function (m) {
@@ -186,13 +190,40 @@ small,.nota{color:var(--mut);font-size:12.5px}
     app.innerHTML = h;
     document.getElementById('sem').onchange = function (e) { if (modo === 'mes') mesSel = e.target.value; else semanaSel = e.target.value; pintar(); };
     document.getElementById('modo').onclick = function () { modo = modo === 'mes' ? 'semana' : 'mes'; pintar(); };
-    document.getElementById('refrescar').onclick = function () { recorridos = {}; embudos = {}; comparativas = {}; clasesDatos = null; cargar(true); };
+    document.getElementById('refrescar').onclick = function () { recorridos = {}; embudos = {}; comparativas = {}; clasesDatos = null; enviosDatos = {}; cargar(true); };
     cargarPersonas(s, fin);
     Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (b) { b.onclick = function () { puertaSel = b.getAttribute('data-puerta'); Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarEmbudo(s, fin); }; });
     cargarEmbudo(s, fin);
     Array.prototype.forEach.call(document.querySelectorAll('[data-comp]'), function (b) { b.onclick = function () { compModo = b.getAttribute('data-comp'); Array.prototype.forEach.call(document.querySelectorAll('[data-comp]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarComparativa(s, fin); }; });
     cargarComparativa(s, fin);
     cargarClases();
+    cargarEnvios(mesEnv);
+  }
+
+  var enviosDatos = {};
+  function pintarEnvios(d) {
+    var caja = document.getElementById('envios'); if (!caja) return;
+    var L = d.envios || [];
+    if (!L.length) { caja.innerHTML = '<p class="nota">No hay envíos masivos este mes.</p>'; return; }
+    var pcE = function (a, b) { return b ? pc(a / b) : '—'; };
+    var porTipo = {}, T = { n: 0, sel: 0, ent: 0, ab: 0, cl: 0 };
+    L.forEach(function (x) { var t = porTipo[x.tipo] = porTipo[x.tipo] || { n: 0, sel: 0, ent: 0, ab: 0, cl: 0 }; [t, T].forEach(function (o) { o.n++; o.sel += x.seleccionados; o.ent += x.entregados; o.ab += x.abiertos; o.cl += x.clics; }); });
+    var h = '<div class="card"><b>Resumen por tipo</b><table><tr><th>Tipo</th><th class="n">Envíos</th><th class="n">Personas seleccionadas</th><th class="n">Entregados</th><th class="n pct">Abren</th><th class="n pct">Clics</th></tr>';
+    Object.keys(porTipo).sort(function (a, b) { return porTipo[b].ent - porTipo[a].ent; }).forEach(function (k) { var t = porTipo[k]; h += '<tr><td>' + esc(k) + '</td><td class="n">' + t.n + '</td><td class="n">' + num(t.sel) + '</td><td class="n">' + num(t.ent) + '</td><td class="n pct">' + pcE(t.ab, t.ent) + '</td><td class="n pct">' + pcE(t.cl, t.ent) + '</td></tr>'; });
+    h += '<tr style="font-weight:600"><td>Total</td><td class="n">' + T.n + '</td><td class="n">' + num(T.sel) + '</td><td class="n">' + num(T.ent) + '</td><td class="n pct">' + pcE(T.ab, T.ent) + '</td><td class="n pct">' + pcE(T.cl, T.ent) + '</td></tr></table></div>';
+    h += '<div class="card"><b>Cada envío</b><table><tr><th>Fecha</th><th>Envío</th><th>Tipo</th><th class="n">Seleccionadas</th><th class="n">Entregados</th><th class="n pct">Abren</th><th class="n">Clics</th><th class="n pct">% clics</th></tr>';
+    L.forEach(function (x) { var d2 = new Date(x.fecha + 'T12:00:00Z'); h += '<tr><td>' + d2.getUTCDate() + '-' + MES[d2.getUTCMonth()] + '</td><td>' + esc(x.asunto || x.nombre) + '</td><td><small>' + esc(x.tipo) + '</small></td><td class="n">' + num(x.seleccionados) + '</td><td class="n">' + num(x.entregados) + '</td><td class="n pct">' + pcE(x.abiertos, x.entregados) + '</td><td class="n">' + num(x.clics) + '</td><td class="n pct">' + pcE(x.clics, x.entregados) + '</td></tr>'; });
+    h += '</table><p class="nota">Datos exactos de Kliking. «Seleccionadas»: personas a las que se dirigió el envío; «Entregados»: los que llegaron (la diferencia son bajas, rebotes y emails no válidos). Las aperturas están infladas por Apple y otros gestores: compara envíos entre sí. Los clics sí son fiables.</p></div>';
+    caja.innerHTML = h;
+  }
+  function cargarEnvios(mes) {
+    var hasta = (function () { var d = new Date(mes + 'T12:00:00Z'); d.setUTCMonth(d.getUTCMonth() + 1); return d.toISOString().slice(0, 10); })();
+    var k = mes + '|' + hasta;
+    if (enviosDatos[k]) return pintarEnvios(enviosDatos[k]);
+    fetch(API + '?accion=envios&desde=' + mes + '&hasta=' + hasta, { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { enviosDatos[k] = d; pintarEnvios(d); })
+      .catch(function (e) { var c = document.getElementById('envios'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
   }
 
   var clasesDatos = null;
