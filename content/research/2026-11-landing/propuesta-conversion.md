@@ -1,11 +1,12 @@
-# Landing de formación · propuesta para que convierta (borrador, 5-nov-2026)
+# Landing de formación · propuesta para que convierta (versión final, 9-nov-2026)
 
 - **Encargo:** del CoS, 5-nov.
 - **Entrega:** lunes 9-nov a las 9:00.
 - **Lo prepara:** Creative v2, coordinado con Growth (dueño de la web) y Paid.
 - **Estado:** no se publica nada. Los cambios los hace Growth después del OK de Maikel.
 - **Leyenda:** [C] comprobado, [E] estimación.
-- **Pendientes:** las cifras marcadas «pendiente» las tienen que confirmar Growth y Paid antes del lunes.
+- **Datos:** Paid los entregó el 5-nov.
+- **Lo que falta de Growth:** las visitas reales de Vercel Analytics y la oferta de noviembre, pedidas el 5-nov para el 6-nov a las 18:00. No han llegado. No cambian el orden de los cambios: el cambio 0 sirve justo para tener esas visitas, y la oferta entra en el cambio 4.
 
 **Punto de partida (recuento de Paid, 21-oct a 5-nov, solo visitas que aceptan cookies):**
 - **Píxel de Meta:** 212 PageView → 66 ven el formulario (`DiagnosticoFormView`) → **2 lo empiezan** (`DiagnosticoFormStart`) [C].
@@ -36,7 +37,7 @@ Revisión en móvil (iPhone 13 emulado) de `qualivo.io/formacion/` y de la porta
 | 1 | **Agenda directa para quien ya es lead.** Si se llega desde el formulario nativo, una variante que diga «Ya tenemos tus datos. Elige hora para la videollamada», con el calendario arriba y sin volver a pedir datos. | Alto / bajo | Growth (variante por UTM) y Paid (enlace) | OK al cambio |
 | 2 | **Formulario corto arriba.** Justo después del titular, las mismas 3-4 preguntas que filtran en el formulario nativo: inversión, precio del curso y solicitudes al mes. Después, nombre y WhatsApp, y luego el calendario. La web y el nombre del centro pasan al final o se quitan. El formulario largo de abajo se queda para quien lee toda la página. | Alto / medio | Growth (con el copy de Creative) | OK al cambio |
 | 3 | **Banner de cookies compacto.** Una barra inferior de ≤ 15 % de la pantalla que no tape el botón principal. | Medio / bajo | Growth | No |
-| 4 | **Titular con las palabras del anuncio y una oferta concreta.** Por ejemplo: «Te llegan contactos… y no se matriculan. En 30 minutos te enseñamos dónde se pierden, anuncio por anuncio.» La oferta de noviembre entra aquí, cuando Growth confirme cuál es. **Pendiente.** | Medio / bajo | Creative (copy) y Growth | OK al copy |
+| 4 | **Titular con las palabras del anuncio y una oferta concreta.** Por ejemplo: «Te llegan contactos… y no se matriculan. En 30 minutos te enseñamos dónde se pierden, anuncio por anuncio.» La oferta de noviembre entra aquí cuando Growth confirme cuál es; a 9-nov no ha llegado. | Medio / bajo | Creative (copy) y Growth | OK al copy |
 
 **Fuera de esta propuesta:**
 - Rehacer la página entera.
