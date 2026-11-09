@@ -242,13 +242,16 @@ small,.nota{color:var(--mut);font-size:12.5px}
     var pc1 = fs.reduce(function (a, f) { return a + (f.porCita || 0); }, 0), ph = fs.reduce(function (a, f) { return a + (f.porHoja || 0); }, 0);
     h += '<p class="nota">Agendadas y presentadas: citas de cada agenda de GHL con fecha en el periodo (sin las inválidas; las canceladas cuentan como agendadas). Cada porcentaje se calcula sobre el paso anterior (agendadas sobre leads, presentadas sobre agendadas, ventas sobre presentadas); el último, ventas sobre leads, da la conversión de todo el embudo. Ventas: cada venta de la hoja va al embudo de la última llamada de esa persona antes de comprar (' + pc1 + ' ventas); si no tuvo llamada, a la «Fuente» de la hoja (' + ph + '). Leads: solo en los embudos con registro. En verde el mejor y en rojo el peor de cada columna.</p></div>';
     // closers
+    var embC = Object.keys(d.closersPorEmbudo || {});
+    if (closerEmb !== 'Todos' && embC.indexOf(closerEmb) < 0) closerEmb = 'Todos';
+    var listaC = closerEmb === 'Todos' ? (d.closers || []) : d.closersPorEmbudo[closerEmb];
     if ((d.closers || []).length) {
-      var cc = d.closers.filter(function (c) { return c.closer !== 'Sin closer'; });
+      var cc = listaC.filter(function (c) { return c.closer !== 'Sin closer'; });
       var cP = col(cc.map(function (c) { return c.agendadas >= 5 ? rate(c.presentadas, c.agendadas) : null; }));
       var cC = col(cc.map(function (c) { return c.presentadas >= 5 ? rate(c.ventas, c.presentadas) : null; }));
-      h += '<h3 style="margin-top:18px">Por closer</h3><div class="card"><table><tr><th>Closer</th><th class="n">Agendadas</th><th class="n">Presentadas</th><th class="n pct">%</th><th class="n">No shows</th><th class="n pct">%</th><th class="n">Canceladas</th><th class="n pct">%</th><th class="n">Pendientes</th><th class="n">Sin marcar</th><th class="n">Ventas</th><th class="n pct">% sobre presentadas</th><th class="n">Facturación</th><th class="n">Cobrado</th></tr>';
+      h += '<h3 style="margin-top:18px">Por closer</h3><div class="tabs" role="group" aria-label="Embudo de las closers">' + ['Todos'].concat(embC).map(function (e) { return '<button class="btn" type="button" data-cemb="' + esc(e) + '" aria-pressed="' + (e === closerEmb) + '">' + esc(e === 'Todos' ? 'Todos los embudos' : e) + '</button>'; }).join('') + '</div><div class="card"><table><tr><th>Closer</th><th class="n">Agendadas</th><th class="n">Presentadas</th><th class="n pct">%</th><th class="n">No shows</th><th class="n pct">%</th><th class="n">Canceladas</th><th class="n pct">%</th><th class="n">Pendientes</th><th class="n">Sin marcar</th><th class="n">Ventas</th><th class="n pct">% sobre presentadas</th><th class="n">Facturación</th><th class="n">Cobrado</th></tr>';
       var TC = { a: 0, p: 0, ns: 0, c: 0, pe: 0, v: 0, f: 0, co: 0 };
-      d.closers.forEach(function (c) {
+      listaC.forEach(function (c) {
         var sin = c.closer === 'Sin closer';
         TC.a += c.agendadas; TC.p += c.presentadas; TC.ns += c.noShow; TC.c += c.canceladas; TC.pe += c.pendientes; TC.v += c.ventas; TC.f += c.facturacion; TC.co += c.cobrado;
         h += '<tr><td>' + esc(c.closer) + '</td><td class="n">' + num(c.agendadas) + '</td><td class="n">' + num(c.presentadas) + '</td><td class="' + (sin ? 'n pct' : marca(rate(c.presentadas, c.agendadas), cP, c.agendadas >= 5)) + '">' + pc(rate(c.presentadas, c.agendadas)) + '</td>'
@@ -256,10 +259,12 @@ small,.nota{color:var(--mut);font-size:12.5px}
           + '<td class="n">' + num(c.ventas) + '</td><td class="' + (sin ? 'n pct' : marca(rate(c.ventas, c.presentadas), cC, c.presentadas >= 5)) + '">' + pc(rate(c.ventas, c.presentadas)) + '</td><td class="n">' + eur(c.facturacion) + '</td><td class="n">' + eur(c.cobrado) + '</td></tr>';
       });
       h += '<tr style="font-weight:600"><td>Total</td><td class="n">' + num(TC.a) + '</td><td class="n">' + num(TC.p) + '</td><td class="n pct">' + pc(rate(TC.p, TC.a)) + '</td><td class="n">' + num(TC.ns) + '</td><td class="n pct">' + pc(rate(TC.ns, TC.a)) + '</td><td class="n">' + num(TC.c) + '</td><td class="n pct">' + pc(rate(TC.c, TC.a)) + '</td><td class="n">' + num(TC.pe) + '</td><td class="n">' + num(TC.a - TC.p - TC.ns - TC.c - TC.pe) + '</td><td class="n">' + num(TC.v) + '</td><td class="n pct">' + pc(rate(TC.v, TC.p)) + '</td><td class="n">' + eur(TC.f) + '</td><td class="n">' + eur(TC.co) + '</td></tr></table>';
-      h += '<p class="nota">Citas de todas las agendas con fecha en el periodo, según la closer asignada en GHL (sin las inválidas). Los % de presentadas, no shows y canceladas son sobre agendadas; el de ventas, sobre presentadas. «Sin marcar»: citas ya pasadas que siguen sin resultado en GHL (ni presentada, ni no show, ni cancelada). Ventas: columna «Closer» de la hoja de ventas.</p></div>';
+      h += '<p class="nota">Citas de todas las agendas con fecha en el periodo, según la closer asignada en GHL (sin las inválidas). Los % de presentadas, no shows y canceladas son sobre agendadas; el de ventas, sobre presentadas. «Sin marcar»: citas ya pasadas que siguen sin resultado en GHL (ni presentada, ni no show, ni cancelada). Ventas: columna «Closer» de la hoja de ventas. Por embudo: las citas, según la agenda; las ventas, en el mismo embudo que en la tabla de arriba.</p></div>';
     }
     caja.innerHTML = h;
+    Array.prototype.forEach.call(caja.querySelectorAll('[data-cemb]'), function (b) { b.onclick = function () { closerEmb = b.getAttribute('data-cemb'); pintarComparativa(d); }; });
   }
+  var closerEmb = 'Todos';
   function cargarComparativa(s, fin) {
     var desde = compModo === 'ago' ? (datos.meses[0] > '2026-08-01' ? datos.meses[0] : '2026-08-01') : s, hasta = compModo === 'ago' ? hoyISO() : fin;
     var k = desde + '|' + hasta, caja = document.getElementById('comparativa');
