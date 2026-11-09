@@ -40,7 +40,8 @@
     { id: 'otro', txt: 'Personalizado', desc: 'Cualquier negocio que vende servicios', ico: 'otro' },
     { id: 'qualivo', txt: 'Qualivo', desc: 'Nuestro propio sistema: formulario, WhatsApp, Raquel y diagnóstico', ico: 'rayo' },
     // Cuentas de cliente: se abren por enlace (?sector=almilimetro) y no salen en la pantalla de inicio
-    { id: 'almilimetro', txt: 'Al Milímetro', desc: 'Reformas integrales de Sonia, arquitecta', ico: 'reformas', oculto: true }
+    { id: 'almilimetro', txt: 'Al Milímetro', desc: 'Reformas integrales de Sonia, arquitecta', ico: 'reformas', oculto: true },
+    { id: 'gestalt', txt: 'Institut Gestalt', desc: 'Formación en terapia: presentación, entrevista y reserva', ico: 'formacion', oculto: true }
   ];
   const OBJETIVOS = [
     { id: 'captacion', txt: 'Captación' }, { id: 'conversion', txt: 'Conversión' }, { id: 'seguimiento', txt: 'Seguimiento' },
@@ -376,7 +377,10 @@
     $('#chipSector').textContent = sec.txt + (obj && obj.id !== 'todo' ? ' · ' + obj.txt : '');
     $('#chipSimulado').hidden = !!estado.cfg.real;
     $('#reloj').innerHTML = '<i></i>' + M.hora(estado.ahora);
-    $('#selSector').innerHTML = SECTORES.map(function (s) { return '<option value="' + s.id + '"' + (s.id === estado.sectorId ? ' selected' : '') + '>' + s.txt + '</option>'; }).join('');
+    // En una cuenta de cliente (oculto) el selector solo muestra ese sector: no se enseñan los demás clientes.
+    const actual = SECTORES.filter(function (s) { return s.id === estado.sectorId; })[0];
+    const visibles = actual && actual.oculto ? [actual] : SECTORES.filter(function (s) { return !s.oculto || s.id === estado.sectorId; });
+    $('#selSector').innerHTML = visibles.map(function (s) { return '<option value="' + s.id + '"' + (s.id === estado.sectorId ? ' selected' : '') + '>' + s.txt + '</option>'; }).join('');
     if (QV.demo) QV.demo.pintarBotones();
     if (realDe()) realDe().pintarBarra();
   }
