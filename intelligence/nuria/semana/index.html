@@ -168,8 +168,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     if (!datos.fuentes.meta) avisos.push('No se ha podido leer Meta: revisa NURIA_META_TOKEN.');
     if (!datos.fuentes.hoja) avisos.push('No se ha podido leer la hoja de ventas: revisa NURIA_GOOGLE_SA_JSON.');
     if (!datos.fuentes.googleAds) avisos.push('No se ha podido leer Google Ads: el coste del VSL no aparece.');
-    h += '<div class="grid2"><div><h2>Ventas por closer · desde el ' + dia(datos.meses[0]) + '</h2><div class="card"><table><tr><th>Closer</th><th class="n">Ventas</th><th class="n">Facturación</th></tr>' + cl.map(function (x) { return '<tr><td>' + esc(x[0]) + '</td><td class="n">' + x[1].n + '</td><td class="n">' + eur(x[1].eur) + '</td></tr>'; }).join('') + '</table></div></div>';
-    h += '<div><h2>Avisos</h2><div class="card warn"><ul class="rec">' + avisos.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul></div></div></div>';
+    h += '<h2>Avisos</h2><div class="card warn"><ul class="rec">' + avisos.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul></div>';
 
     // recomendaciones (reglas fijas, con su dato)
     var circ = ult4['El Círculo'], rec = [];
@@ -249,7 +248,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
       var cc = listaC.filter(function (c) { return c.closer !== 'Sin closer'; });
       var cP = col(cc.map(function (c) { return c.agendadas >= 5 ? rate(c.presentadas, c.agendadas) : null; }));
       var cC = col(cc.map(function (c) { return c.presentadas >= 5 ? rate(c.ventas, c.presentadas) : null; }));
-      h += '<h3 style="margin-top:18px">Por closer</h3><div class="tabs" role="group" aria-label="Embudo de las closers">' + ['Todos'].concat(embC).map(function (e) { return '<button class="btn" type="button" data-cemb="' + esc(e) + '" aria-pressed="' + (e === closerEmb) + '">' + esc(e === 'Todos' ? 'Todos los embudos' : e) + '</button>'; }).join('') + '</div><div class="card"><table><tr><th>Closer</th><th class="n">Agendadas</th><th class="n">Presentadas</th><th class="n pct">%</th><th class="n">No shows</th><th class="n pct">%</th><th class="n">Canceladas</th><th class="n pct">%</th><th class="n">Pendientes</th><th class="n">Sin marcar</th><th class="n">Ventas</th><th class="n pct">% sobre presentadas</th><th class="n">Facturación</th><th class="n">Cobrado</th></tr>';
+      h += '<h2 style="margin-top:22px">Por closer · ' + esc(compModo === 'ago' ? 'desde el 1 de agosto' : (modo === 'mes' ? nomMes(d.desde) : 'semana del ' + rango(d.desde))) + '</h2><p class="sub">Agendadas, presentadas, no shows, canceladas y ventas de cada closer, con su %. Elige el embudo:</p><div class="tabs" role="group" aria-label="Embudo de las closers">' + ['Todos'].concat(embC).map(function (e) { return '<button class="btn" type="button" data-cemb="' + esc(e) + '" aria-pressed="' + (e === closerEmb) + '">' + esc(e === 'Todos' ? 'Todos los embudos' : e) + '</button>'; }).join('') + '</div><div class="card"><table><tr><th>Closer</th><th class="n">Agendadas</th><th class="n">Presentadas</th><th class="n pct">%</th><th class="n">No shows</th><th class="n pct">%</th><th class="n">Canceladas</th><th class="n pct">%</th><th class="n">Pendientes</th><th class="n">Sin marcar</th><th class="n">Ventas</th><th class="n pct">% sobre presentadas</th><th class="n">Facturación</th><th class="n">Cobrado</th></tr>';
       var TC = { a: 0, p: 0, ns: 0, c: 0, pe: 0, v: 0, f: 0, co: 0 };
       listaC.forEach(function (c) {
         var sin = c.closer === 'Sin closer';
