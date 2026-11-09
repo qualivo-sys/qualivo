@@ -73,7 +73,7 @@
       { id: 'c7', canal: 'Antiguos alumnos', nombre: 'Antiguos alumnos y recomendación', inversion: 0, ticket: P[TC],
         embudo: { anuncio: 900, dosier: 8, contactado: 8, presentacion: 6, entrevista: 5, reserva: 4, matricula: 4 } }
     ],
-    kpis: ['interesados', 'cpl', 'respuesta', 'cualificados', 'entrevistas', 'show', 'sinReserva', 'ventas', 'cpv', 'ingresos', 'roas'],
+    kpis: ['interesados', 'cpl', 'respuesta', 'cualificados', 'entrevistas', 'show', 'sinReserva', 'ventas', 'cpv', 'ingresos'],
     kpiNombres: { interesados: 'Peticiones de dosier', cualificados: 'Asisten a la presentación', entrevistas: 'Entrevistas previas', ventas: 'Matrículas', cpv: 'Coste por matrícula', ingresos: 'Facturación' },
     kpiEtapas: { interesados: 'dosier', cualificados: 'presentacion', entrevistas: 'entrevista' },
     kpiCustom: function (m, cfg, M) {
