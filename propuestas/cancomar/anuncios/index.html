@@ -337,7 +337,12 @@ addEventListener('DOMContentLoaded',function(){
 .cc{position:relative;flex:0 0 86%;aspect-ratio:4/5;scroll-snap-align:center;border-radius:6px;overflow:hidden;background:var(--deep) center/cover no-repeat;color:#fff;font-family:var(--head);isolation:isolate}
 .cc.ph::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,38,59,.35) 0%,rgba(6,38,59,.1) 35%,rgba(6,38,59,.92) 100%)}
 .cc.gd{background:radial-gradient(120% 90% at 100% 0%,#00D8E8 0%,rgba(0,216,232,0) 45%),linear-gradient(150deg,#0097DA,#00476B 65%,#06263B)}
+.cc.gd .in{justify-content:center}
+.cc.gd::before{content:"";position:absolute;right:-18%;top:-10%;width:75%;aspect-ratio:1;z-index:-1;background:url(../assets/brand/isotipo.png) center/contain no-repeat;filter:brightness(0) invert(1);opacity:.1}
+.cc.gd::after{content:"";position:absolute;left:18px;right:18px;bottom:16px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--amb) 0 30%,rgba(255,255,255,.25) 30%)}
 .cc.lt{background:#F4FAFD;color:#0D2233}
+.cc.lt::before{content:"";position:absolute;left:0;right:0;top:0;height:42%;background:linear-gradient(135deg,#0097DA,#00476B);clip-path:polygon(0 0,100% 0,100% 70%,0 100%)}
+.cc.lt .in{justify-content:flex-end}
 .cc .n{position:absolute;top:10px;right:10px;font:700 10.5px var(--sans);background:rgba(0,0,0,.45);color:#fff;border-radius:99px;padding:3px 8px;z-index:2}
 .cc .in{position:absolute;inset:0;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;gap:9px}
 .cc .in.top{justify-content:flex-start;padding-top:22px}
@@ -738,7 +743,7 @@ Te contestamos con la convocatoria más cercana en Avilés. Si no hay fecha a ti
       <figure><div class="ig car">
           <div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="dots">···</span></div>
           <div class="trk" tabindex="0" role="region" aria-label="Carrusel de 4 tarjetas: desliza o usa las flechas del teclado">
-            <div class="cc ph" style="background-image:url(../assets/brand/puente.jpg);background-position:60% center"><span class="n">1/4</span><div class="in"><div class="dl" style="grid-template-columns:1fr auto"><div><small>EMBARQUE</small><b style="font-size:20px">Lunes, 08:00</b></div><span class="stk" style="transform:rotate(4deg)">Te falta 1</span></div><p class="hk">Te sale embarque <em>y te falta el curso.</em></p></div></div>
+            <div class="cc ph" style="background-image:url(../assets/brand/puente.jpg);background-position:60% center"><span class="n">1/4</span><div class="in"><div class="dl" style="grid-template-columns:1fr auto"><div><small>EMBARQUE</small><b style="font-size:20px">Lunes, 08:00</b></div><i class="stk" style="font-style:normal;transform:rotate(4deg)">Te falta 1</i></div><p class="hk">Te sale embarque <em>y te falta el curso.</em></p></div></div>
             <div class="cc gd"><span class="n">2/4</span><div class="in"><p class="hk">Escríbenos solo dos cosas:</p><ul><li>Qué curso te falta</li><li>Cuándo embarcas</li></ul><p>Sin formularios. Por WhatsApp, a la hora que sea.</p></div></div>
             <div class="cc ph" style="background-image:url(../assets/brand/pesquero.jpg);background-position:center"><span class="n">3/4</span><div class="in"><p class="bub me">Me falta Sanitaria y embarco el lunes</p><p class="bub">Te proponemos la convocatoria más cercana en Avilés. ¿Lo pagas tú o tu empresa?</p><span class="ej">Datos de ejemplo</span></div></div>
             <div class="cc lt"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-color.png" alt=""><p class="hk" style="color:#0D2233">¿Sin fecha a tiempo? Te lo decimos claro.</p><p>Y te apuntamos a la lista de espera para avisarte el primero.</p><span class="pill wa">Enviar mensaje →</span></div></div>
