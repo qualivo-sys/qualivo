@@ -1,0 +1,543 @@
+{
+ "generado": "2026-11-10T16:36:10.485Z",
+ "puertas": [
+  {
+   "puerta": "El Círculo",
+   "desde": "2026-10-16",
+   "hasta": "2026-10-30",
+   "cohorte": 1581,
+   "muestra": 300,
+   "conEmail": 290,
+   "conWa": 300,
+   "agendan": 2,
+   "compran": 1,
+   "emails": [
+    {
+     "asunto": "Te doy la bienvenida, despierta 👁️",
+     "enviados": 292,
+     "abiertos": 119,
+     "clics": 18,
+     "agendaClic": 0,
+     "rebota": 3,
+     "dia": 0
+    },
+    {
+     "asunto": "Esta noche, escucha esto antes de dormir",
+     "enviados": 277,
+     "abiertos": 93,
+     "clics": 14,
+     "agendaClic": 0,
+     "rebota": 2,
+     "dia": 7
+    },
+    {
+     "asunto": "Lo que nadie te ha explicado de tus noches",
+     "enviados": 274,
+     "abiertos": 78,
+     "clics": 3,
+     "agendaClic": 0,
+     "rebota": 2,
+     "dia": 7
+    },
+    {
+     "asunto": "Antes de que llegue la noche",
+     "enviados": 271,
+     "abiertos": 77,
+     "clics": 6,
+     "agendaClic": 0,
+     "rebota": 2,
+     "dia": 8
+    },
+    {
+     "asunto": "Ayer viste por qué. Hoy, por dónde se sale.",
+     "enviados": 270,
+     "abiertos": 73,
+     "clics": 2,
+     "agendaClic": 0,
+     "rebota": 2,
+     "dia": 8
+    },
+    {
+     "asunto": "Hoy a las 19:00, tú y yo",
+     "enviados": 264,
+     "abiertos": 56,
+     "clics": 0,
+     "agendaClic": 0,
+     "rebota": 2,
+     "dia": 9
+    },
+    {
+     "asunto": "En media hora empezamos",
+     "enviados": 263,
+     "abiertos": 59,
+     "clics": 4,
+     "agendaClic": 0,
+     "rebota": 2,
+     "dia": 9
+    },
+    {
+     "asunto": "Esa cabeza que no para cuando apagas la luz",
+     "enviados": 257,
+     "abiertos": 54,
+     "clics": 5,
+     "agendaClic": 0,
+     "rebota": 2,
+     "dia": 10
+    },
+    {
+     "asunto": "Más de veinte años",
+     "enviados": 254,
+     "abiertos": 54,
+     "clics": 3,
+     "agendaClic": 0,
+     "rebota": 2,
+     "dia": 12
+    },
+    {
+     "asunto": "Hoy se cierra (a las 23:59)",
+     "enviados": 250,
+     "abiertos": 50,
+     "clics": 6,
+     "agendaClic": 0,
+     "rebota": 2,
+     "dia": 13
+    },
+    {
+     "asunto": "Quedan tres horas",
+     "enviados": 248,
+     "abiertos": 38,
+     "clics": 1,
+     "agendaClic": 0,
+     "rebota": 2,
+     "dia": 13
+    }
+   ],
+   "whatsapp": [
+    {
+     "texto": "¡Hola {nombre}! Soy Lorena, del equipo de Nuria 😊 Te escribo para dar",
+     "manual": false,
+     "enviados": 285,
+     "leidos": 221,
+     "contestan": 140,
+     "agenda": 2,
+     "dia": 0
+    },
+    {
+     "texto": "[enlace a nuriaroure.com]",
+     "manual": false,
+     "enviados": 14,
+     "leidos": 12,
+     "contestan": 2,
+     "agenda": 1,
+     "dia": 4
+    },
+    {
+     "texto": "¡Hola! Soy Nuria 😊 Gracias por estar en *El Círculo* y por responder ",
+     "manual": false,
+     "enviados": 40,
+     "leidos": 34,
+     "contestan": 31,
+     "agenda": 1,
+     "dia": 6
+    },
+    {
+     "texto": "¡Hola {nombre}! Otra vez Lorena 😊 Te escribo rápido porque *esta tard",
+     "manual": false,
+     "enviados": 275,
+     "leidos": 196,
+     "contestan": 90,
+     "agenda": 2,
+     "dia": 9
+    },
+    {
+     "texto": "[enlace a us02web.zoom.us]",
+     "manual": false,
+     "enviados": 14,
+     "leidos": 11,
+     "contestan": 1,
+     "agenda": 1,
+     "dia": 10
+    },
+    {
+     "texto": "Hola {nombre}, soy Lorena. Solo para avisarte de que *esta noche a las",
+     "manual": false,
+     "enviados": 252,
+     "leidos": 154,
+     "contestan": 28,
+     "agenda": 0,
+     "dia": 13
+    }
+   ],
+   "generado": "2026-11-10T16:32:31.607Z",
+   "compranCohorte": 10
+  },
+  {
+   "puerta": "VSL",
+   "desde": "2026-10-01",
+   "hasta": "2026-11-01",
+   "cohorte": 289,
+   "muestra": 200,
+   "conEmail": 190,
+   "conWa": 35,
+   "agendan": 26,
+   "compran": 9,
+   "emails": [
+    {
+     "asunto": "Si te desvelas esta noche mira este vídeo",
+     "enviados": 191,
+     "abiertos": 79,
+     "clics": 20,
+     "agendaClic": 9,
+     "rebota": 2,
+     "dia": 0
+    },
+    {
+     "asunto": "Dejar de luchar con el sueño",
+     "enviados": 167,
+     "abiertos": 61,
+     "clics": 5,
+     "agendaClic": 2,
+     "rebota": 1,
+     "dia": 1
+    },
+    {
+     "asunto": "¡Aquí tienes tu meditación GRATIS!",
+     "enviados": 7,
+     "abiertos": 5,
+     "clics": 3,
+     "agendaClic": 3,
+     "rebota": 0,
+     "dia": 1
+    },
+    {
+     "asunto": "¡Recupera el control de tu descanso por sólo 27€!",
+     "enviados": 6,
+     "abiertos": 4,
+     "clics": 0,
+     "agendaClic": 0,
+     "rebota": 0,
+     "dia": 1
+    },
+    {
+     "asunto": "Bonus que valen mucho más que 27€",
+     "enviados": 6,
+     "abiertos": 4,
+     "clics": 1,
+     "agendaClic": 1,
+     "rebota": 0,
+     "dia": 1
+    },
+    {
+     "asunto": "Esto se esfuma",
+     "enviados": 6,
+     "abiertos": 4,
+     "clics": 0,
+     "agendaClic": 0,
+     "rebota": 0,
+     "dia": 1
+    },
+    {
+     "asunto": "Esto que te cuento suele aliviar mucho",
+     "enviados": 164,
+     "abiertos": 43,
+     "clics": 1,
+     "agendaClic": 1,
+     "rebota": 1,
+     "dia": 2
+    },
+    {
+     "asunto": "Confirmación de Tu Llamada",
+     "enviados": 28,
+     "abiertos": 17,
+     "clics": 1,
+     "agendaClic": 1,
+     "rebota": 0,
+     "dia": 2
+    },
+    {
+     "asunto": "RE: Confirmación de Tu Llamada",
+     "enviados": 28,
+     "abiertos": 17,
+     "clics": 1,
+     "agendaClic": 1,
+     "rebota": 0,
+     "dia": 2
+    },
+    {
+     "asunto": "{nombre} mira algunos de nuestros casos de éxito",
+     "enviados": 21,
+     "abiertos": 17,
+     "clics": 1,
+     "agendaClic": 1,
+     "rebota": 0,
+     "dia": 2
+    },
+    {
+     "asunto": "El error que mantiene el insomnio aunque hagas \"todo bien\"",
+     "enviados": 162,
+     "abiertos": 38,
+     "clics": 2,
+     "agendaClic": 2,
+     "rebota": 1,
+     "dia": 3
+    },
+    {
+     "asunto": "Recordatorio Importante",
+     "enviados": 31,
+     "abiertos": 23,
+     "clics": 0,
+     "agendaClic": 0,
+     "rebota": 0,
+     "dia": 3
+    },
+    {
+     "asunto": "Pastillas para dormir… ¿Sí o no?",
+     "enviados": 157,
+     "abiertos": 33,
+     "clics": 2,
+     "agendaClic": 1,
+     "rebota": 1,
+     "dia": 4
+    },
+    {
+     "asunto": "Ya no eres tú del todo",
+     "enviados": 156,
+     "abiertos": 41,
+     "clics": 3,
+     "agendaClic": 2,
+     "rebota": 1,
+     "dia": 5
+    },
+    {
+     "asunto": "Esto está afectando tu sueño (y no es lo que crees)",
+     "enviados": 9,
+     "abiertos": 7,
+     "clics": 2,
+     "agendaClic": 2,
+     "rebota": 0,
+     "dia": 5
+    },
+    {
+     "asunto": "Lo que es y no es la llamada que te propongo",
+     "enviados": 154,
+     "abiertos": 31,
+     "clics": 1,
+     "agendaClic": 0,
+     "rebota": 1,
+     "dia": 6
+    },
+    {
+     "asunto": "¿Te despiertas en la madrugada y tu mente arranca?",
+     "enviados": 8,
+     "abiertos": 5,
+     "clics": 3,
+     "agendaClic": 3,
+     "rebota": 0,
+     "dia": 6
+    },
+    {
+     "asunto": "Por fin duermo - Datos de acceso al programa",
+     "enviados": 6,
+     "abiertos": 5,
+     "clics": 4,
+     "agendaClic": 4,
+     "rebota": 0,
+     "dia": 6
+    },
+    {
+     "asunto": "Ya estás dentro del Programa!",
+     "enviados": 6,
+     "abiertos": 5,
+     "clics": 3,
+     "agendaClic": 3,
+     "rebota": 0,
+     "dia": 6
+    },
+    {
+     "asunto": "Y si dentro de un año sigues igual…",
+     "enviados": 154,
+     "abiertos": 34,
+     "clics": 3,
+     "agendaClic": 3,
+     "rebota": 1,
+     "dia": 7
+    },
+    {
+     "asunto": "Tu plaza está confirmada, {nombre}",
+     "enviados": 10,
+     "abiertos": 9,
+     "clics": 3,
+     "agendaClic": 1,
+     "rebota": 0,
+     "dia": 7
+    },
+    {
+     "asunto": "¡Grupo de telegram privado!",
+     "enviados": 6,
+     "abiertos": 5,
+     "clics": 2,
+     "agendaClic": 2,
+     "rebota": 0,
+     "dia": 7
+    },
+    {
+     "asunto": "Dormir fuera de casa y dormir peor (te explico por qué)",
+     "enviados": 8,
+     "abiertos": 6,
+     "clics": 2,
+     "agendaClic": 2,
+     "rebota": 0,
+     "dia": 9
+    },
+    {
+     "asunto": "Mañana a las 18:00 h: tu clase en directo",
+     "enviados": 10,
+     "abiertos": 7,
+     "clics": 2,
+     "agendaClic": 1,
+     "rebota": 0,
+     "dia": 11
+    },
+    {
+     "asunto": "Una pregunta antes del directo",
+     "enviados": 7,
+     "abiertos": 5,
+     "clics": 1,
+     "agendaClic": 0,
+     "rebota": 0,
+     "dia": 11
+    },
+    {
+     "asunto": "No es solo cansancio. Es tu sistema desregulado.",
+     "enviados": 7,
+     "abiertos": 4,
+     "clics": 0,
+     "agendaClic": 0,
+     "rebota": 0,
+     "dia": 12
+    },
+    {
+     "asunto": "Este error nocturno es más común de lo que crees",
+     "enviados": 6,
+     "abiertos": 4,
+     "clics": 3,
+     "agendaClic": 3,
+     "rebota": 0,
+     "dia": 17
+    }
+   ],
+   "whatsapp": [
+    {
+     "texto": "Hola {nombre} 👋 Soy Raquel del equipo de la *Dra. Nuria Roure.* *¡Tu ",
+     "manual": false,
+     "enviados": 6,
+     "leidos": 3,
+     "contestan": 2,
+     "agenda": 5,
+     "dia": 0
+    },
+    {
+     "texto": "Hola {nombre} 👋 Soy Eva del equipo de la *Dra. Nuria Roure.* *¡Tu lla",
+     "manual": false,
+     "enviados": 6,
+     "leidos": 5,
+     "contestan": 2,
+     "agenda": 3,
+     "dia": 1
+    },
+    {
+     "texto": "Hola {nombre} 👋 Te recordamos que *mañana* es tu sesión. Aquí tienes ",
+     "manual": false,
+     "enviados": 10,
+     "leidos": 5,
+     "contestan": 1,
+     "agenda": 9,
+     "dia": 2
+    },
+    {
+     "texto": "Hola {nombre} 👋 En solo *30 minutos* tendremos la llamada. 🔗 Para ac",
+     "manual": false,
+     "enviados": 16,
+     "leidos": 10,
+     "contestan": 3,
+     "agenda": 13,
+     "dia": 3
+    },
+    {
+     "texto": "👋 {nombre}, *estamos en directo en la sesión.* 🔗 Para acceder debes ",
+     "manual": false,
+     "enviados": 15,
+     "leidos": 9,
+     "contestan": 0,
+     "agenda": 12,
+     "dia": 3
+    },
+    {
+     "texto": "¡Hola {nombre}! Soy Lorena, del equipo de Nuria 😊 Te escribo para dar",
+     "manual": false,
+     "enviados": 8,
+     "leidos": 7,
+     "contestan": 5,
+     "agenda": 6,
+     "dia": 5
+    },
+    {
+     "texto": "Hola {nombre} 👋 *Nos vemos dentro de 2 horas.* *Hora de nuestra cita:",
+     "manual": false,
+     "enviados": 24,
+     "leidos": 16,
+     "contestan": 3,
+     "agenda": 15,
+     "dia": 6
+    },
+    {
+     "texto": "Hola {nombre} 👋 Soy del equipo de la Dra. Nuria Roure. Tu plaza para ",
+     "manual": false,
+     "enviados": 11,
+     "leidos": 10,
+     "contestan": 3,
+     "agenda": 4,
+     "dia": 8
+    },
+    {
+     "texto": "¡Hola! Soy Nuria 😊 Gracias por estar en *El Círculo* y por responder ",
+     "manual": false,
+     "enviados": 7,
+     "leidos": 7,
+     "contestan": 4,
+     "agenda": 7,
+     "dia": 8
+    },
+    {
+     "texto": "Hola {nombre} 👋 Soy del equipo de Nuria Roure. El jueves fue la clase",
+     "manual": false,
+     "enviados": 10,
+     "leidos": 9,
+     "contestan": 1,
+     "agenda": 3,
+     "dia": 13
+    },
+    {
+     "texto": "Hola {nombre}, mañana a las 18:00 h es la clase en directo con la Dra.",
+     "manual": false,
+     "enviados": 6,
+     "leidos": 5,
+     "contestan": 0,
+     "agenda": 2,
+     "dia": 13
+    },
+    {
+     "texto": "🔴 Hola {nombre}, ya estamos en directo. Te esperamos dentro.",
+     "manual": false,
+     "enviados": 6,
+     "leidos": 5,
+     "contestan": 0,
+     "agenda": 2,
+     "dia": 14
+    }
+   ],
+   "generado": "2026-11-10T16:36:10.485Z",
+   "compranCohorte": 14
+  }
+ ]
+}

@@ -411,6 +411,13 @@ module.exports = async function (req, res) {
     }
   }
 
+  if (accion === 'mensajes') {
+    // Métricas por email automático y por WhatsApp: análisis de una muestra amplia, generado aparte
+    // (sin datos personales) y guardado en _nuria-mensajes.json.
+    try { return res.status(200).json(require('./_nuria-mensajes.json')); }
+    catch (e) { return res.status(404).json({ error: 'Todavía no hay análisis de mensajes.' }); }
+  }
+
   if (accion === 'grupos') {
     try {
       if (!cacheGrupos || Date.now() - cacheGrupos.t > 1200000) cacheGrupos = { t: Date.now(), datos: await GRUPOS.grupos() };

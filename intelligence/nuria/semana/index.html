@@ -128,6 +128,8 @@ small,.nota{color:var(--mut);font-size:12.5px}
       var c = (cos && cos[m]) || null, fijos = c ? c.comercial + c.agencia + c.otros : 0, total = t.meta + t.google + fijos;
       filasCac.push({ m: m, meta: t.meta, google: t.google, c: c, total: total, ventas: t.ventas, cac: t.ventas ? total / t.ventas : null });
     });
+    h += '<h2>Mensajes automáticos · cada email y cada WhatsApp</h2><p class="sub">Qué pasa con cada mensaje de los flujos: cuántos lo abren o leen, cuántos pulsan o contestan y cuántos acaban pidiendo llamada.</p><div class="tabs" role="group" aria-label="Embudo de los mensajes" id="msjTabs"></div><div id="mensajes"><p class="cargando">Cargando…</p></div>';
+
     h += '<h2>CAC por mes</h2><div class="card"><table><tr><th>Mes</th><th class="n">Meta</th><th class="n">Google</th><th class="n">Comercial</th><th class="n">Agencia</th><th class="n">Otros</th><th class="n">Coste total</th><th class="n">Ventas</th><th class="n pct">CAC</th><th class="n">Frente al mes anterior</th></tr>';
     filasCac.forEach(function (f, k) {
       var ant = k ? filasCac[k - 1] : null, en = k === filasCac.length - 1;
@@ -199,6 +201,39 @@ small,.nota{color:var(--mut);font-size:12.5px}
     cargarClases();
     cargarGrupos();
     cargarEnvios(mesEnv);
+    cargarMensajes();
+  }
+
+  var mensajesDatos = null, msjPuerta = null;
+  function pintarMensajes() {
+    var caja = document.getElementById('mensajes'), tabs = document.getElementById('msjTabs');
+    if (!caja || !mensajesDatos) return;
+    var L = mensajesDatos.puertas || [];
+    if (!L.length) { caja.innerHTML = '<p class="nota">Sin análisis.</p>'; return; }
+    if (!msjPuerta) msjPuerta = L[0].puerta;
+    tabs.innerHTML = L.map(function (x) { return '<button class="btn" type="button" aria-pressed="' + (x.puerta === msjPuerta) + '" data-msj="' + esc(x.puerta) + '">' + esc(x.puerta) + '</button>'; }).join('');
+    Array.prototype.forEach.call(tabs.querySelectorAll('[data-msj]'), function (b) { b.onclick = function () { msjPuerta = b.getAttribute('data-msj'); pintarMensajes(); }; });
+    var d = L.find(function (x) { return x.puerta === msjPuerta; }) || L[0];
+    var pcM = function (a, b) { return b ? pc(a / b) : '—'; };
+    var fd = function (x) { var z = new Date(x + 'T12:00:00Z'); return z.getUTCDate() + '-' + MES[z.getUTCMonth()]; };
+    var marca = function (v, todos, menor) { var vals = todos.filter(function (x) { return x != null; }); if (vals.length < 3 || v == null) return ''; var mx = Math.max.apply(null, vals), mn = Math.min.apply(null, vals); return v === (menor ? mn : mx) ? ' alto' : (v === (menor ? mx : mn) ? ' bajo' : ''); };
+    var h = '<p class="nota">Muestra de <b>' + num(d.muestra) + '</b> de ' + num(d.cohorte) + ' personas registradas del ' + fd(d.desde) + ' al ' + fd(sumaDiasJ(d.hasta, -1)) + ' (recorrido completo). En la muestra, ' + num(d.agendan) + ' piden llamada (' + pcM(d.agendan, d.muestra) + '). En toda la cohorte compran ' + num(d.compranCohorte) + ' (' + pcM(d.compranCohorte, d.cohorte) + ', hoja de ventas).</p>';
+    var Ab = d.emails.map(function (e) { return e.enviados ? e.abiertos / e.enviados : null; }), Cl = d.emails.map(function (e) { return e.enviados ? e.clics / e.enviados : null; });
+    h += '<div class="card"><b>Emails</b><table><tr><th class="n">Día</th><th>Asunto</th><th class="n">Lo reciben</th><th class="n pct">Abren</th><th class="n pct">Pulsan</th><th class="n">De los que pulsan, piden llamada</th></tr>';
+    d.emails.forEach(function (e, i) { h += '<tr><td class="n">' + e.dia + '</td><td>' + esc(e.asunto) + '</td><td class="n">' + num(e.enviados) + '</td><td class="n pct' + marca(Ab[i], Ab) + '">' + pcM(e.abiertos, e.enviados) + '</td><td class="n pct' + marca(Cl[i], Cl) + '">' + pcM(e.clics, e.enviados) + '</td><td class="n">' + (e.clics ? num(e.agendaClic) + ' <small>(' + pcM(e.agendaClic, e.clics) + ')</small>' : '—') + '</td></tr>'; });
+    h += '</table><p class="nota">«Día»: días desde el registro. Aperturas infladas por Apple y otros gestores: compara emails entre sí. Verde y rojo: el mejor y el peor. Los envíos masivos no salen aquí (ver «Envíos de email»).</p></div>';
+    var Le = d.whatsapp.map(function (w) { return w.enviados ? w.leidos / w.enviados : null; }), Co = d.whatsapp.map(function (w) { return w.enviados ? w.contestan / w.enviados : null; });
+    h += '<div class="card"><b>WhatsApp</b><table><tr><th class="n">Día</th><th>Mensaje (inicio)</th><th class="n">Lo reciben</th><th class="n pct">Leen</th><th class="n pct">Contestan</th><th class="n">Piden llamada</th></tr>';
+    d.whatsapp.forEach(function (w, i) { h += '<tr><td class="n">' + w.dia + '</td><td>' + esc(w.texto) + '…</td><td class="n">' + num(w.enviados) + '</td><td class="n pct' + marca(Le[i], Le) + '">' + pcM(w.leidos, w.enviados) + '</td><td class="n pct' + marca(Co[i], Co) + '">' + pcM(w.contestan, w.enviados) + '</td><td class="n">' + num(w.agenda) + ' <small>(' + pcM(w.agenda, w.enviados) + ')</small></td></tr>'; });
+    h += '</table><p class="nota">«Leen»: con doble check azul (quien tiene desactivada la confirmación de lectura no cuenta). «Contestan»: responden en las 48 h siguientes y antes de otro WhatsApp nuestro. Solo mensajes que reciben al menos el 3 % de la muestra; las respuestas a mano del equipo quedan fuera. Análisis del ' + fd(String(mensajesDatos.generado).slice(0, 10)) + '.</p></div>';
+    caja.innerHTML = h;
+  }
+  function cargarMensajes() {
+    if (mensajesDatos) return pintarMensajes();
+    fetch(API + '?accion=mensajes', { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { mensajesDatos = d; pintarMensajes(); })
+      .catch(function (e) { var c = document.getElementById('mensajes'); if (c) c.innerHTML = '<p class="nota">' + esc(e.message) + '</p>'; });
   }
 
   var enviosDatos = {};
