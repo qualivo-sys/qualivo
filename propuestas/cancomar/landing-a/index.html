@@ -15,7 +15,7 @@
 --sh:0 24px 50px -32px rgba(0,71,107,.55),0 2px 6px -2px rgba(0,71,107,.08);
 --head:"Montserrat",system-ui,sans-serif;--sans:"Open Sans",system-ui,sans-serif}
 *{box-sizing:border-box;margin:0}
-html{overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:90px}
+html{overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:110px}
 body{font:17px/1.6 var(--sans);color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -108,7 +108,9 @@ section.alt{background:var(--soft2)}
 .hd.c{text-align:center}.hd.c h2,.hd.c .lead{margin-inline:auto}
 /* para quién */
 .who{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
-.who .ph{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/4.4;box-shadow:var(--sh)}
+.who .ph{position:relative;border-radius:28px;overflow:hidden;min-height:420px;box-shadow:var(--sh)}
+.who .ph img{position:absolute;inset:0}
+.who{align-items:stretch!important}
 .who .ph img{width:100%;height:100%;object-fit:cover}
 .who .ph .tag{position:absolute;left:18px;right:18px;bottom:18px;background:rgba(6,38,59,.86);backdrop-filter:blur(8px);color:#fff;border-radius:16px;padding:14px 16px;font-size:14.5px;line-height:1.45}
 .who .ph .tag b{font-family:var(--head);color:var(--cy)}
@@ -117,12 +119,20 @@ section.alt{background:var(--soft2)}
 .sit .n{flex:none;width:34px;height:34px;border-radius:10px;background:var(--soft);color:var(--b);display:grid;place-items:center}
 .sit b{font:800 16.5px/1.3 var(--head);display:block}
 .sit span{color:var(--mut);font-size:15px}
-.whob{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.chk{margin-top:22px;background:var(--soft2);border:1px solid var(--line);border-radius:18px;padding:18px}
+.chk label b{font:800 16.5px var(--head)}
+.chr{display:flex;gap:8px;margin:10px 0}
+.chr select{flex:1;min-width:0;font:600 15px var(--sans);border:1.5px solid var(--line);border-radius:11px;padding:10px;background:#fff;color:var(--ink)}
+.chk p{font-size:15px;color:var(--mut);margin-bottom:12px}
+.chk p b{color:var(--ink)}
+.chk p.hot{color:#8A5A00}
 /* curso */
 .course{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px;align-items:start}
 .mods{display:grid;gap:18px}
 .mod{display:grid;grid-template-columns:200px minmax(0,1fr);background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--sh)}
 .mod .im{background-size:cover;background-position:center;min-height:200px;position:relative}
+.mod .im.fire{background:radial-gradient(circle at 50% 78%,#FEC42D 0%,#F97316 22%,#B4231A 46%,#3A0F12 78%,#06263B 100%);display:grid;place-items:center}
+.mod .im.fire svg{width:84px;height:84px;fill:none;stroke:#fff;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45))}
 .mod .im span{position:absolute;top:12px;left:12px;background:#fff;color:var(--nv);font:800 12px var(--head);border-radius:99px;padding:4px 10px}
 .mod .tx{padding:22px 24px}
 .mod small{font:700 11.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--b)}
@@ -297,6 +307,7 @@ footer b{color:#fff;font-family:var(--head)}
  .fbox{padding:20px}
  .hero .ctas .btn{flex:1 1 100%}
 }
+@media (max-width:520px){.demo .lg{display:none}}
 @media (max-width:420px){.tbar .grid{grid-template-columns:1fr}.tbar .it{border-top:1px solid var(--line)!important}.tbar .it:first-child{border-top:0!important}.opts.two{grid-template-columns:1fr}}
 </style>
 </head>
@@ -324,7 +335,7 @@ footer b{color:#fff;font-family:var(--head)}
  <symbol id="i-euro" viewBox="0 0 24 24"><path d="M18 6.5A7 7 0 1 0 18 17.5M4 10h10M4 14h10"/></symbol>
 </svg>
 
-<div class="demo">Maqueta de Qualivo para CANCOMAR · no es una página publicada · lo marcado como <span class="ex">Datos de ejemplo</span> o <span class="tbc">[a confirmar]</span> no sale de cancomar.es</div>
+<div class="demo">Maqueta de Qualivo para CANCOMAR · no publicada<span class="lg"> · lo marcado como <span class="ex">Datos de ejemplo</span> o <span class="tbc">[a confirmar]</span> no sale de cancomar.es</span></div>
 
 <nav class="topnav" aria-label="Paquete CANCOMAR">
   <div class="in">
@@ -402,7 +413,12 @@ footer b{color:#fff;font-family:var(--head)}
    <div class="sit"><div class="n"><svg class="i"><use href="#i-anchor"/></svg></div><div><b>Trabajas en buques civiles o en tareas de seguridad a bordo</b><span>Mercante, pasaje, pesca o servicios portuarios: es la formación básica que te exige el STCW.</span></div></div>
    <div class="sit"><div class="n"><svg class="i"><use href="#i-wa"/></svg></div><div><b>Estás embarcado y contestas cuando hay cobertura</b><span>Nos escribes cuando puedas y te guardamos la respuesta por WhatsApp.</span></div></div>
   </div>
-  <div class="whob"><a class="btn nv" href="#reserva">Ver si llego a la próxima fecha</a></div>
+  <div class="chk" aria-live="polite">
+   <label for="cm"><b>¿Cuándo caduca el tuyo?</b></label>
+   <div class="chr"><select id="cm" aria-label="Mes de caducidad"></select><select id="cy" aria-label="Año de caducidad"></select></div>
+   <p id="cr">Elige mes y año y te decimos si llegas a la próxima convocatoria.</p>
+   <a class="btn nv sm" href="#reserva">Reservar plaza</a>
+  </div>
  </div>
 </div></section>
 
@@ -416,7 +432,7 @@ footer b{color:#fff;font-family:var(--head)}
  <div class="course">
   <div class="mods">
    <article class="mod">
-    <div class="im" style="background-image:url(../assets/brand/practicas.jpg)"><span>Módulo 1</span></div>
+    <div class="im fire" aria-hidden="true"><span>Módulo 1</span><svg viewBox="0 0 24 24"><use href="#i-fire"/></svg></div>
     <div class="tx"><small>Práctico · en SADEX</small><h3>Prevención y lucha contra incendios</h3><p>Prácticas de prevención y extinción para saber reaccionar si hay fuego a bordo.</p>
      <div class="meta"><span>Contenido práctico</span><span>Horas por módulo <span class="tbc">[a confirmar]</span></span></div></div>
    </article>
@@ -650,6 +666,19 @@ footer b{color:#fff;font-family:var(--head)}
     document.getElementById('cls').innerHTML='<div class="t"><span class="p">'+t+'</span><b>Lo que vería admisiones en el CRM</b></div>'+why+'<div class="tags">'+tags.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div>';
     show(N+1);};
   show(1);
+  var ms=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var cm=document.getElementById('cm'),cy=document.getElementById('cy'),cr=document.getElementById('cr');
+  cm.innerHTML='<option value="">Mes</option>'+ms.map(function(m,i){return '<option value="'+i+'">'+m+'</option>'}).join('');
+  cy.innerHTML='<option value="">Año</option>'+[2026,2027,2028,2029,2030,2031].map(function(y){return '<option>'+y+'</option>'}).join('');
+  function calc(){if(cm.value===''||cy.value===''){return;}
+    var d=new Date(+cy.value,+cm.value+1,0),now=new Date(2026,10,10),start=new Date(2026,10,30);
+    var mo=(d.getFullYear()-now.getFullYear())*12+d.getMonth()-now.getMonth();cr.className='';
+    if(d<now){cr.innerHTML='<b>Ya está caducado.</b> Escríbenos y te decimos qué curso te corresponde.';cr.className='hot';}
+    else if(d<=start){cr.innerHTML='<b>Caduca antes de la próxima fecha.</b> Escríbenos hoy y buscamos la forma de que no te quedes en tierra.';cr.className='hot';}
+    else if(mo<=6){cr.innerHTML='<b>Te toca ya.</b> La convocatoria del 30 nov y 1 dic te deja renovado con margen.';cr.className='hot';}
+    else if(mo<=12){cr.innerHTML='<b>Te queda menos de un año.</b> Reserva ahora o te apuntamos a la lista de espera de la siguiente.';}
+    else{cr.innerHTML='<b>Tienes margen.</b> Déjanos tu móvil y te avisamos unos meses antes.';}}
+  cm.onchange=cy.onchange=calc;
 })();
 </script>
 </body>
