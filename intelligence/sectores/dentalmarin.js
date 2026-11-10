@@ -32,7 +32,7 @@
       cs: 'recepción', CS: 'Recepción',
       cliente: 'paciente', unCliente: 'un paciente', convierten: 'aceptan el presupuesto', objetivoPaso: 'reservar la primera visita en su sede',
       casoExito: 'cómo es el tratamiento paso a paso', valorAlto: 2000, oportunidades: 'pacientes',
-      laVenta: 'el presupuesto aceptado', Producto: 'Tratamiento', clientes: 'pacientes', propuestas: 'presupuestos', verbo: 'aceptar el presupuesto',
+      laVenta: 'la aceptación del presupuesto', Producto: 'Tratamiento', clientes: 'pacientes', propuestas: 'presupuestos', verbo: 'aceptar el presupuesto',
       clientesReales: 'tratamientos de verdad', empleados: 'empleados', pasoHumano: 'resolver sus dudas del presupuesto y la financiación',
       nombreAgenteVoz: 'Clara',
       senales: { propuesta: 'Presupuesto sin respuesta', nueva: 'Petición nueva', intencion: 'Intención alta', noshow: 'Primera visita en riesgo' }
