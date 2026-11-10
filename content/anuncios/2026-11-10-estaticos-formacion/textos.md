@@ -80,3 +80,45 @@
   - **Texto principal:** Una solicitud no debería esperar a que alguien tenga un hueco. Con Qualivo, cada persona que pide información recibe respuesta en minutos, se cualifica y llega a tu equipo de admisiones con todo el contexto. Si no viene a la reunión, se le vuelve a escribir. Para academias que ya invierten en anuncios. Diagnóstico gratuito de 30 minutos.
 
 **Propuesta de prueba:** C2 (el gancho más fuerte, con el panel), C1 (la propuesta de valor completa) y C3 (la objeción más repetida). C4, de reserva.
+
+---
+
+# v3 (10-nov): voz de las reuniones y pantallas reales
+
+**Qué dijo Maikel de la v2:** que seguía sin transmitir la propuesta de valor. Pidió basarla en lo que dice la gente en las últimas reuniones, en el sistema y en las demos. La fuente es el dossier de Growth del 10-nov (transcripciones de Tactiq del 5-oct al 10-nov, sin nombres).
+
+**Qué enseña:**
+- Pantallas reales de Qualivo Intelligence en el sector genérico «formación», con datos simulados y el sello «Pantalla real · datos simulados». Recortes en `capturas/`, de `qualivo.io/intelligence/?sector=formacion`.
+- No sale ningún sector con nombre de cliente ni la lista de sectores.
+
+**Lo que más engancha en las demos (Growth):**
+1. El panel y la atribución por campaña.
+2. La respuesta en minutos sin perder a nadie.
+3. La puntuación.
+4. La base de datos que se consulta.
+5. El WhatsApp en el que una persona aprueba el mensaje.
+
+La voz y la «IA» no van en el titular.
+
+**Archivos:** fuente `v3.html` (`#d1-45` … `#d4-916`), render con `node render-v3.js`, imágenes en `png-v3/`.
+
+- **D1 · «¿Cuántas matrículas te trajo cada anuncio?»** Pantalla: Anuncios, con el veredicto por campaña.
+  - **Lo que dicen en las reuniones:** «Poder ver: con este anuncio he conseguido más matrículas» y «me quedo un poco tonta: ¿son leads buenos?».
+  - **Titular:** ¿Cuántas matrículas te trajo cada anuncio?
+  - **Texto principal:** Tu agencia te habla de clics y formularios. Tú necesitas saber qué anuncio acaba en matrícula. Conectamos cada campaña con lo que pasa después (quién encaja, quién se pierde en el seguimiento, quién se matricula) y te lo enseñamos en un panel. No sustituimos a quien te lleva los anuncios: le damos el dato que le falta. Para academias que ya invierten en anuncios.
+- **D2 · «Sabes con quién hablar primero.»** Pantalla: Oportunidades, con la puntuación, la prioridad y la siguiente acción.
+  - **Lo que dicen en las reuniones:** «Encaje, actividad, intención… me da más pistas».
+  - **Titular:** Cada solicitud, puntuada y con su siguiente paso.
+  - **Texto principal:** Te llegan solicitudes cada día y no todas valen lo mismo. Cada una llega puntuada (encaje, actividad e intención), con el porqué y lo siguiente que hay que hacer. Tu equipo empieza por quien está más cerca de matricularse. Y lo que se enfría, vuelve. Para academias que ya invierten en anuncios.
+- **D3 · «El sistema prepara el mensaje. Tu equipo lo aprueba.»** Pantalla: Conversaciones.
+  - **Por qué esta:** es la respuesta a la objeción más repetida en reuniones, «no quiero perder el trato humano». También es lo que convenció a quien firmó: el aviso cuando hace falta una persona.
+  - **Titular:** Seguimiento en minutos, sin perder el trato humano.
+  - **Texto principal:** WhatsApp, correo y llamadas en un solo sitio. El sistema escribe con el contexto de cada solicitud, tu equipo aprueba y, cuando alguien pide hablar con una persona, te avisa para que entres tú. Nadie se queda sin respuesta y nadie habla con «una máquina» sin necesidad. Para academias que ya invierten en anuncios.
+- **D4 · «Tu próxima matrícula ya está en tu base de datos.»** Pantalla: Copilot respondiendo «¿Quién dijo que empezaría en la próxima convocatoria?».
+  - **Lo que dicen en las reuniones:** «Tenemos tantísima base de datos… creemos que los estamos desaprovechando».
+  - **Titular:** Pregúntale a tu base de datos.
+  - **Texto principal:** Quién pidió información y dijo «más adelante», a quién le toca volver a escribir y por qué. Se lo preguntas en lenguaje normal y te contesta con nombres y fechas. Antes de pagar más anuncios, recupera a quien ya te escribió. Para academias que ya invierten en anuncios.
+
+**CTA de la imagen:** «Pide una demo», porque en las reuniones piden ver la demo. **Paid tiene que confirmar** que encaja con la portada del formulario, que habla de diagnóstico. Si no encaja, se cambia a «Pide tu diagnóstico».
+
+**Propuesta de prueba:** D1 (lo que más engancha) y D3 (la objeción más repetida), con D2 y D4 de reserva. Así se comparan producto contra objeción.
