@@ -294,7 +294,7 @@ addEventListener('DOMContentLoaded',function(){
 .s9 .hd small{opacity:.75;font-size:10.5px;font-weight:400}
 .s9 .hd .x{margin-left:auto;opacity:.9;font-size:15px}
 .s9 .tag{position:absolute;left:14px;top:58px;background:var(--b);font:700 10.5px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:99px}
-.s9 .lg{position:absolute;right:14px;top:62px;height:13px;width:auto}
+.s9 .bt .lg{position:static;height:12px;width:auto;opacity:.95}
 .s9 .bt{position:absolute;left:16px;right:16px;bottom:74px;display:grid;gap:9px;justify-items:start}
 .s9 .hk{font:800 23px/1.12 var(--head);letter-spacing:-.015em;text-shadow:0 2px 14px rgba(0,20,40,.45)}
 .s9 .sb{font:600 12px/1.35 var(--sans);opacity:.92}
@@ -401,12 +401,13 @@ addEventListener('DOMContentLoaded',function(){
 .vv dt{font:700 10.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .vv dd{margin:0;color:var(--ink)}
 @media (max-width:760px){.vs{grid-template-columns:minmax(0,1fr)}.vsx{justify-self:center}}
-.abm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.abm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.abm .win{grid-column:1/-1}
 .abm>div{display:grid;gap:4px;align-content:start;background:var(--accent-soft);border-radius:12px;padding:12px 14px;font-size:14px;min-width:0}
 .abm b{font:700 10.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
 .abm .win{background:var(--deep);color:#fff}.abm .win b{color:var(--cy)}
 .abm .e{font:800 10px var(--head);color:#3A2B00;background:var(--amb);border-radius:4px;padding:1px 5px;margin-left:4px;letter-spacing:.04em}
-@media (max-width:860px){.abm{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.abm{grid-template-columns:minmax(0,1fr)}}
 .kit2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
 @media (max-width:1060px){.kit2{grid-template-columns:minmax(0,1fr)}}
 .legend{display:flex;gap:8px 16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
@@ -606,10 +607,10 @@ Dinos qué curso te toca y cuándo caduca. Te damos la fecha más cercana.</pre>
           <span class="grain"></span><span class="frame"></span>
           <div class="pb"><i class="on"></i><i></i><i></i></div>
           <div class="hd"><span class="av"></span><b>cancomar</b><small>Publicidad</small><span class="x" aria-hidden="true">✕</span></div>
-          <span class="tag">Actualización STCW</span><img class="lg" src="../assets/brand/logo-blanco.png" alt="">
+          <span class="tag">Actualización STCW</span>
           <div class="poll">¿Cuándo te caduca la Formación Básica?<span><i>2026</i><i class="hot">2027</i></span></div>
           <span class="stamp r" style="right:16px;top:212px"><span>Avilés</span><b>30·XI</b><span>1 dic</span></span>
-          <div class="bt"><p class="hk">Saca la cartera. <em>Mira la fecha.</em></p><p class="sb">Próxima actualización: 30 nov – 1 dic, en Avilés</p></div>
+          <div class="bt"><img class="lg" src="../assets/brand/logo-blanco.png" alt=""><p class="hk">Saca la cartera. <em>Mira la fecha.</em></p><p class="sb">Próxima actualización: 30 nov – 1 dic, en Avilés</p></div>
           <div class="up"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Reservar plaza</span></div>
         </div><figcaption><b>Story / reel 9:16</b> · la encuesta es interactiva: quien vota «2027» entra en un público para el siguiente impacto</figcaption></figure>
       <figure><div class="ig car">
@@ -728,10 +729,10 @@ Te contestamos con la convocatoria más cercana en Avilés. Si no hay fecha a ti
           <span class="grain"></span><span class="frame"></span>
           <div class="pb"><i class="on"></i><i></i><i></i></div>
           <div class="hd"><span class="av"></span><b>cancomar</b><small>Publicidad</small><span class="x" aria-hidden="true">✕</span></div>
-          <span class="tag">Respuesta por WhatsApp</span><img class="lg" src="../assets/brand/logo-blanco.png" alt="">
+          <span class="tag">Respuesta por WhatsApp</span>
           <div class="chat"><p class="me">Me sale embarque el lunes y me falta Sanitaria 😬<small>23:41</small></p><p>Te miramos la fecha más cercana en Avilés y te escribimos mañana a primera hora.<small>23:44</small></p></div>
           <span class="stamp sm" style="left:16px;top:262px"><span>Faltan</span><b>3 días</b><span>embarque</span></span>
-          <div class="bt"><p class="hk">¿Embarcas el lunes <em>y te falta un curso?</em></p><p class="sb">Escríbenos qué curso y cuándo embarcas</p></div>
+          <div class="bt"><img class="lg" src="../assets/brand/logo-blanco.png" alt=""><p class="hk">¿Embarcas el lunes <em>y te falta un curso?</em></p><p class="sb">Escríbenos qué curso y cuándo embarcas</p></div>
           <div class="up"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Enviar mensaje</span></div>
         </div><figcaption><b>Story / reel 9:16</b> · el chat enseña lo que pasa después del clic · conversación: <span class="ej">Datos de ejemplo</span></figcaption></figure>
       <figure><div class="ig car">
@@ -845,10 +846,10 @@ Cuéntanos cuántos tripulantes tienes y qué cursos necesitan. Te llamamos y te
           <span class="grain"></span><span class="frame"></span>
           <div class="pb"><i class="on"></i><i></i><i></i></div>
           <div class="hd"><span class="av"></span><b>cancomar</b><small>Publicidad</small><span class="x" aria-hidden="true">✕</span></div>
-          <span class="tag">Para empresas</span><img class="lg" src="../assets/brand/logo-blanco.png" alt="">
+          <span class="tag">Para empresas</span>
           <div class="chk"><b>Tripulación · revisión 2027</b><span>Patrón<i>En vigor</i></span><span>Mecánico<i class="w">Caduca</i></span><span>Marinero 1<i>En vigor</i></span><span>Marinero 2<i class="w">Caduca</i></span></div>
           <div class="poll" style="top:auto;bottom:186px;width:70%">¿Lo tienes controlado?<span><i class="hot">Sí, todo</i><i>Más o menos</i></span></div>
-          <div class="bt"><p class="hk">Un certificado caducado <em>= un barco en puerto.</em></p><p class="sb">Plan de formación a medida, tripulante a tripulante</p></div>
+          <div class="bt"><img class="lg" src="../assets/brand/logo-blanco.png" alt=""><p class="hk">Un certificado caducado <em>= un barco en puerto.</em></p><p class="sb">Plan de formación a medida, tripulante a tripulante</p></div>
           <div class="up"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Solicitar propuesta</span></div>
         </div><figcaption><b>Story 9:16</b> · la encuesta separa a quien ya lo controla de quien no: el segundo grupo recibe el carrusel · tripulación: <span class="ej">Datos de ejemplo</span></figcaption></figure>
       <figure><div class="ig car">
@@ -961,10 +962,10 @@ Dinos si cumples los requisitos y te contamos por WhatsApp horario, documentaci�
           <span class="grain"></span><span class="frame"></span>
           <div class="pb"><i class="on"></i><i></i><i></i></div>
           <div class="hd"><span class="av"></span><b>cancomar</b><small>Publicidad</small><span class="x" aria-hidden="true">✕</span></div>
-          <span class="tag">Próxima convocatoria</span><img class="lg" src="../assets/brand/logo-blanco.png" alt="">
+          <span class="tag">Próxima convocatoria</span>
           <div class="cd"><small>Cuenta atrás</small><b>Patrón Local de Pesca</b><span><i>11<small>ENE</small></i><i>2027<small>AVILÉS</small></i></span></div>
           <span class="stamp r sm" style="right:16px;top:228px"><span>Hasta</span><b>18 FEB</b><span>2027</span></span>
-          <div class="bt"><p class="hk">De marinero a patrón: <em>empieza el 11 de enero.</em></p><p class="sb">Del 11 de enero al 18 de febrero de 2027, en Avilés</p></div>
+          <div class="bt"><img class="lg" src="../assets/brand/logo-blanco.png" alt=""><p class="hk">De marinero a patrón: <em>empieza el 11 de enero.</em></p><p class="sb">Del 11 de enero al 18 de febrero de 2027, en Avilés</p></div>
           <div class="up"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Más información</span></div>
         </div><figcaption><b>Story / reel 9:16</b> · la pegatina de cuenta atrás de Instagram avisa sola a quien la activa cuando llega el día · fechas <span class="real">Real</span></figcaption></figure>
       <figure><div class="ig car">
