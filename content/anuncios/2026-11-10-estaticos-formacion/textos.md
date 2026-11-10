@@ -119,6 +119,9 @@ La voz y la «IA» no van en el titular.
   - **Titular:** Pregúntale a tu base de datos.
   - **Texto principal:** Quién pidió información y dijo «más adelante», a quién le toca volver a escribir y por qué. Se lo preguntas en lenguaje normal y te contesta con nombres y fechas. Antes de pagar más anuncios, recupera a quien ya te escribió. Para academias que ya invierten en anuncios.
 
-**CTA de la imagen:** «Pide una demo», porque en las reuniones piden ver la demo. **Paid tiene que confirmar** que encaja con la portada del formulario, que habla de diagnóstico. Si no encaja, se cambia a «Pide tu diagnóstico».
+**CTA de la imagen:** «Pide tu diagnóstico».
+- **Por qué no «demo»:** con «Pide una demo», quien hace clic espera ver el producto y la portada del formulario 2063720777591278 le habla de una revisión. Paid lo vio el 10-nov.
+- **El papel de demo:** lo hace la pantalla de Intelligence que va de fondo.
+- **Texto principal:** puede añadir «te enseñamos cómo se ve con tus datos».
 
 **Propuesta de prueba:** D1 (lo que más engancha) y D3 (la objeción más repetida), con D2 y D4 de reserva. Así se comparan producto contra objeción.
