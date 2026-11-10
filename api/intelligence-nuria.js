@@ -50,6 +50,8 @@ const COHORTE = require('./_nuria-embudo.js');
 const COMPARA = require('./_nuria-comparativa.js');
 const CLASES = require('./_nuria-clases.js');
 const ENVIOS = require('./_nuria-envios.js');
+const GRUPOS = require('./_nuria-grupos.js');
+let cacheGrupos = null;   // entradas y salidas de los grupos de WhatsApp: { t, datos }, 20 min
 const cacheEnv = new Map();   // envíos masivos: 'desde|hasta' → { t, datos }, 1 h
 const cacheCla = new Map();   // visualizaciones de clases: 'desde|hasta' → { t, datos }, 6 h
 const cacheComp = new Map();   // comparativas: 'desde|hasta' → { t, datos }, 20 min
@@ -406,6 +408,15 @@ module.exports = async function (req, res) {
       return res.status(200).json(Object.assign({ cacheSegundos: Math.round((Date.now() - cacheSem.t) / 1000) }, cacheSem.datos));
     } catch (e) {
       return res.status(502).json({ error: 'No se han podido leer los datos: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'grupos') {
+    try {
+      if (!cacheGrupos || Date.now() - cacheGrupos.t > 1200000) cacheGrupos = { t: Date.now(), datos: await GRUPOS.grupos() };
+      return res.status(200).json(cacheGrupos.datos);
+    } catch (e) {
+      return res.status(502).json({ error: 'No se han podido leer los grupos: ' + String(e.message || e).slice(0, 80) });
     }
   }
 
