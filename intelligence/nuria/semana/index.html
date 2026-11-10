@@ -140,7 +140,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     // El Círculo por edición (etiquetas de GHL + pipeline + ventas + Meta), con semáforo frente a la edición anterior
     var eT = datos.edicionesEtiquetas || [], porD = {};
     eT.forEach(function (x) { porD[x.directo] = x; });
-    h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Ads / orgánico</th><th class="n">Con etiqueta de grupo en GHL ⚠️</th><th class="n">Salen del grupo</th><th class="n">Llaman o compran</th><th class="n">Compras</th><th class="n">Facturación</th><th class="n">Vistas de clases</th><th class="n">Inversión Meta</th><th class="n">CAC</th><th class="n">ROAS</th></tr>';
+    h += '<h2>El Círculo por edición</h2><div class="card"><table><tr><th>Edición (directo)</th><th class="n">Registros</th><th class="n">Ads / orgánico</th><th class="n">Entran al grupo de WhatsApp</th><th class="n">Salen del grupo</th><th class="n">Llaman o compran</th><th class="n">Compras</th><th class="n">Facturación</th><th class="n">Vistas de clases</th><th class="n">Inversión Meta</th><th class="n">CAC</th><th class="n">ROAS</th></tr>';
     var prevE = null;
     var hace7 = (function () { var d = new Date(datos.hoy + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() - 7); return d.toISOString().slice(0, 10); })();
     datos.ediciones.filter(function (e) { return porD[e.directo] && porD[e.directo].conEtiquetas; }).forEach(function (e) {
@@ -153,15 +153,15 @@ small,.nota{color:var(--mut);font-size:12.5px}
       var sem = function (v, p, menosMejor) { if (v == null || p == null || !madura) return 'n'; var mejor = menosMejor ? v < p * 0.95 : v > p * 1.05, peor = menosMejor ? v > p * 1.05 : v < p * 0.95; return mejor ? 'n alto' : (peor ? 'n bajo' : 'n'); };
       var P = prevE || {};
       h += '<tr><td>Miércoles ' + dia(e.directo) + ' <small>(' + (e.cerrada ? 'directo hecho' : (e.captando ? 'captando' : 'clases')) + ')</small></td><td class="n">' + num(reg) + '</td><td class="n">' + (conE ? num(x.ads) + ' / ' + num(x.org) : '—') + '</td>'
-        + '<td class="n"><span class="neu">' + num(grupo) + '</span></td>'
-        + '<td class="n">' + (conE ? (x.sale ? num(x.sale) : '<span class="neu">sin etiqueta</span>') : num(et['Sale comunidad'])) + '</td>'
+        + '<td class="n" data-grupo="' + e.directo + '" data-reg="' + reg + '"><span class="neu">…</span></td>'
+        + '<td class="n" data-salen="' + e.directo + '"><span class="neu">…</span></td>'
         + '<td class="n">' + num(llaman) + ' <small>(' + pc(reg ? llaman / reg : null) + ')</small></td>'
         + '<td class="' + sem(r.c, P.c) + '">' + (conE ? num(x.compras) + ' <small>(' + pc(r.c) + ')</small>' : '—') + '</td>'
         + '<td class="n">' + (conE ? eur(x.facturacion) : '—') + '</td><td class="n" data-vistas="' + e.directo + '"><span class="neu">…</span></td><td class="n">' + (conE && x.inversion != null ? eur(x.inversion) : '—') + '</td>'
         + '<td class="' + sem(r.cac, P.cac, true) + '">' + (r.cac ? eur(r.cac) : '—') + '</td><td class="' + sem(r.roas, P.roas) + '">' + (r.roas != null ? r.roas.toFixed(1).replace('.', ',') + '×' : '—') + '</td></tr>';
       if (madura) prevE = r;
     });
-    h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>⚠️ Grupo:</b> la etiqueta «ingresa a comunidad» de GHL solo recoge una parte de las entradas; Funnelchat registra muchas más (aprox. 60–75 % de los registros entran al grupo). No usar esta columna para decidir: se sustituirá por los datos del webhook de Funnelchat (entradas y salidas reales por edición). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
+    h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>Grupo de WhatsApp:</b> entradas y salidas reales que avisa Funnelchat, asignadas a cada edición por la etiqueta de registro de la persona en Kliking. Se registran desde el 5-nov por la tarde: las ediciones hasta la del 11-nov (incluida) salen incompletas; la primera completa es la del 18-nov. «Entran»: personas distintas que entran (y su % sobre los registros); «Salen»: personas que salen (y su % sobre las que entraron). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
 
     // closers + avisos
     var cl = Object.keys(datos.closers || {}).map(function (n) { return [n, datos.closers[n]]; }).sort(function (a, b) { return b[1].eur - a[1].eur; });
@@ -190,13 +190,14 @@ small,.nota{color:var(--mut);font-size:12.5px}
     app.innerHTML = h;
     document.getElementById('sem').onchange = function (e) { if (modo === 'mes') mesSel = e.target.value; else semanaSel = e.target.value; pintar(); };
     document.getElementById('modo').onclick = function () { modo = modo === 'mes' ? 'semana' : 'mes'; pintar(); };
-    document.getElementById('refrescar').onclick = function () { recorridos = {}; embudos = {}; comparativas = {}; clasesDatos = null; enviosDatos = {}; cargar(true); };
+    document.getElementById('refrescar').onclick = function () { recorridos = {}; embudos = {}; comparativas = {}; clasesDatos = null; gruposDatos = null; enviosDatos = {}; cargar(true); };
     cargarPersonas(s, fin);
     Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (b) { b.onclick = function () { puertaSel = b.getAttribute('data-puerta'); Array.prototype.forEach.call(document.querySelectorAll('[data-puerta]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarEmbudo(s, fin); }; });
     cargarEmbudo(s, fin);
     Array.prototype.forEach.call(document.querySelectorAll('[data-comp]'), function (b) { b.onclick = function () { compModo = b.getAttribute('data-comp'); Array.prototype.forEach.call(document.querySelectorAll('[data-comp]'), function (x) { x.setAttribute('aria-pressed', String(x === b)); }); cargarComparativa(s, fin); }; });
     cargarComparativa(s, fin);
     cargarClases();
+    cargarGrupos();
     cargarEnvios(mesEnv);
   }
 
@@ -224,6 +225,28 @@ small,.nota{color:var(--mut);font-size:12.5px}
       .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
       .then(function (d) { enviosDatos[k] = d; pintarEnvios(d); })
       .catch(function (e) { var c = document.getElementById('envios'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+  }
+
+  var gruposDatos = null;
+  function pintarGrupos() {
+    if (!gruposDatos) return;
+    var E = gruposDatos.ediciones || {}, inicio = gruposDatos.desde ? gruposDatos.desde.slice(0, 10) : '9999';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-grupo]'), function (td) {
+      var D = td.getAttribute('data-grupo'), reg = Number(td.getAttribute('data-reg')) || 0, x = E[D];
+      var incompleta = sumaDiasJ(D, -12) < inicio;
+      td.innerHTML = incompleta ? (x ? num(x.entran) + ' <small class="neu">incompleto</small>' : '<span class="neu">sin datos</span>') : (x ? num(x.entran) + ' <small>(' + pc(reg ? x.entran / reg : null) + ')</small>' : '0');
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-salen]'), function (td) {
+      var D = td.getAttribute('data-salen'), x = E[D], incompleta = sumaDiasJ(D, -12) < inicio;
+      td.innerHTML = x ? num(x.salen) + (incompleta ? ' <small class="neu">desde el 5-nov</small>' : ' <small>(' + pc(x.entran ? x.salen / x.entran : null) + ')</small>') : '<span class="neu">—</span>';
+    });
+  }
+  function cargarGrupos() {
+    if (gruposDatos) return pintarGrupos();
+    fetch(API + '?accion=grupos', { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { gruposDatos = d; pintarGrupos(); })
+      .catch(function () { Array.prototype.forEach.call(document.querySelectorAll('[data-grupo],[data-salen]'), function (td) { td.innerHTML = '<span class="neu">sin datos</span>'; }); });
   }
 
   var clasesDatos = null;
