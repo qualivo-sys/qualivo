@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Qualivo × Cancomar · presentación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Presentación en directo (10-nov, 10:00). Poco texto: lo explica Maikel. Flechas del teclado para avanzar. */
+:root{--b:#0097DA;--b2:#0080BC;--nv:#00476B;--deep:#06263B;--cy:#00D8E8;--amb:#FEC42D;--red:#D8290F;--ok:#12805A;
+--ink:#0D2233;--mut:#56687A;--bg:#FAFCFE;--soft:#E9F6FC;--soft2:#F2F9FD;--line:#D5E8F3;
+--grad:linear-gradient(135deg,#0097DA 0%,#00476B 100%);--head:"Montserrat",system-ui,sans-serif;--sans:"Open Sans",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:18px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.top{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;gap:14px;padding:10px max(20px,env(safe-area-inset-right,0px)) 10px max(20px,env(safe-area-inset-left,0px));background:rgba(6,38,59,.9);backdrop-filter:blur(10px);color:#fff}
+.top .b{display:flex;align-items:center;gap:10px;font:700 16px var(--head);margin-right:auto;white-space:nowrap}
+.top .b img{height:18px;width:auto}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.dots a{color:rgba(255,255,255,.78);text-decoration:none;font:600 12.5px var(--head);padding:6px 10px;border-radius:99px;white-space:nowrap}
+.dots a:hover{color:#fff}
+.dots a.on{background:#fff;color:var(--nv)}
+.prog{position:fixed;left:0;top:0;height:3px;background:var(--cy);z-index:21;width:0;transition:width .3s}
+.cnt{position:fixed;right:16px;bottom:14px;z-index:20;font:600 12px var(--head);color:var(--mut);background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:99px;padding:5px 11px}
+.s{min-height:100vh;padding:92px max(20px,env(safe-area-inset-right,0px)) 56px max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center}
+.s.alt{background:var(--soft2)}
+.in{max-width:1200px;margin:0 auto;width:100%}
+.n{font:700 13px/1 var(--head);letter-spacing:.16em;text-transform:uppercase;color:var(--b);margin-bottom:14px}
+.n .ph{display:inline-block;background:var(--nv);color:#fff;border-radius:99px;padding:5px 10px;margin-left:8px;letter-spacing:.08em;font-size:11px;vertical-align:1px}
+h1,h2,h3{font-family:var(--head);font-weight:800;letter-spacing:-.02em;line-height:1.08;text-wrap:balance}
+h2{font-size:clamp(30px,4.4vw,56px);margin-bottom:26px}
+h2 em{font-style:normal;color:var(--b)}
+.lead{font-size:clamp(18px,1.8vw,22px);color:var(--mut);max-width:52ch;margin:-12px 0 26px}
+.ej{display:inline-block;font:700 10.5px var(--head);letter-spacing:.1em;text-transform:uppercase;background:#FFF3C4;color:#7A5600;border-radius:6px;padding:3px 7px;vertical-align:middle}
+.note{margin-top:14px;font-size:13px;color:var(--mut)}
+.chip{display:inline-block;font:700 12px var(--head);letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:99px;background:var(--soft);color:var(--b2);margin-left:10px;vertical-align:middle}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 40px -30px rgba(0,71,107,.55)}
+
+/* portada */
+.hero{background:linear-gradient(100deg,rgba(6,38,59,.94) 0%,rgba(0,71,107,.82) 48%,rgba(0,151,218,.25) 100%),url(../assets/brand/hero.jpg) center/cover;color:#fff}
+.hero .x{display:flex;align-items:center;gap:16px;font:800 22px var(--head);margin-bottom:34px}
+.hero .x img{height:34px;width:auto}
+.hero h1{font-size:clamp(40px,6.4vw,86px);max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--cy)}
+.hero p{font-size:clamp(19px,2vw,24px);opacity:.92;margin-top:22px;max-width:44ch}
+.fases{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.fases span{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:9px 16px 9px 9px;font:600 15px var(--head)}
+.fases b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#fff;color:var(--nv);font-size:14px}
+.fases span:first-child{background:#fff;color:var(--nv)}.fases span:first-child b{background:var(--b);color:#fff}
+
+/* qué hacemos */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:s}
+.steps>div{padding:22px 18px;position:relative}
+.steps>div::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--grad);color:#fff;font:800 17px var(--head);margin-bottom:14px}
+.steps b{display:block;font:800 20px/1.2 var(--head);margin-bottom:6px}
+.steps span{font-size:15px;color:var(--mut);display:block}
+.under{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.under div{display:flex;align-items:center;gap:16px;background:var(--deep);color:#fff;border-radius:18px;padding:18px 22px;font-size:16px}
+.under b{font:800 18px var(--head);color:var(--cy);min-width:5.5em}
+
+/* perfil */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.box{padding:30px}
+.box h3{font-size:28px;margin-bottom:18px}
+.box ul{list-style:none;padding:0;display:grid;gap:14px;font-size:19px}
+.box li{display:flex;gap:12px;align-items:flex-start}
+.box li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;margin-top:8px;background:var(--b)}
+.box.ok{border-top:6px solid var(--b)}
+.box.no{background:#FFFBEE;border-color:#F3E2A8}.box.no li::before{background:var(--amb)}
+.box .foot{margin-top:18px;padding-top:14px;border-top:1px dashed #E6D49A;font:600 15px var(--head);color:#7A5600}
+
+/* hoy frente a con Qualivo */
+.cmp{display:grid;gap:12px}
+.cmp .r{display:grid;grid-template-columns:200px minmax(0,1fr) 40px minmax(0,1fr);gap:14px;align-items:stretch}
+.cmp .ph2{background:var(--grad);color:#fff;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;justify-content:center}
+.cmp .ph2 small{font:700 11px var(--head);letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.cmp .ph2 b{font:800 19px/1.2 var(--head)}
+.cmp .r:nth-child(2) .ph2{background:linear-gradient(135deg,#0080BC,#06263B)}
+.cmp .r:nth-child(3) .ph2{background:linear-gradient(135deg,#00476B,#06263B)}
+.cmp .h,.cmp .q{border-radius:18px;padding:14px 18px;font-size:16.5px;display:grid;gap:6px;align-content:center}
+.cmp .h{background:#fff;border:1px solid var(--line);color:var(--mut)}
+.cmp .h div::before{content:"✕  ";color:var(--red);font-weight:700}
+.cmp .q{background:var(--soft);border:1px solid #BFE2F3}
+.cmp .q div::before{content:"✓  ";color:var(--ok);font-weight:700}
+.cmp .ar{display:grid;place-items:center;font:800 28px var(--head);color:var(--b)}
+.cmp .hd{display:grid;grid-template-columns:200px minmax(0,1fr) 40px minmax(0,1fr);gap:14px;font:700 12px var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.cmp .hd span:last-child{color:var(--b)}
+
+/* base de datos */
+.db{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.db .card{padding:24px}
+.db h3{font-size:21px;margin-bottom:6px}
+.db p.s2{font-size:15px;color:var(--mut);margin-bottom:16px}
+.tl{list-style:none;padding:0;display:grid;gap:0;position:relative}
+.tl li{display:grid;grid-template-columns:18px 1fr;gap:12px;padding-bottom:14px;font-size:15px;position:relative}
+.tl li::before{content:"";width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--b);margin-top:4px}
+.tl li::after{content:"";position:absolute;left:6px;top:20px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child::after{display:none}
+.tl li b{display:block;font:700 14px var(--head)}
+.tl li.go::before{background:var(--b)}
+.meter{display:grid;gap:12px}
+.meter div{font-size:14.5px}
+.meter .lb{display:flex;justify-content:space-between;gap:8px;margin-bottom:5px}
+.meter .lb b{font:700 14px var(--head)}
+.meter i{display:block;height:10px;border-radius:99px;background:var(--soft);overflow:hidden}
+.meter i u{display:block;height:100%;border-radius:99px;background:var(--b)}
+.srch{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;display:flex;gap:8px;align-items:center;margin-bottom:12px;background:var(--soft2)}
+.srch svg{flex:none}
+.res{display:grid;gap:8px}
+.res div{display:flex;justify-content:space-between;gap:10px;font-size:14px;border-bottom:1px solid var(--line);padding-bottom:7px}
+.res em{font-style:normal;font:700 11.5px var(--head);color:var(--ok);background:#E3F5EC;border-radius:99px;padding:3px 8px;white-space:nowrap}
+.res em.w{color:#8A5A00;background:#FFF1CC}
+
+/* anuncios */
+.ig{background:#fff;border-radius:18px;border:1px solid #DCE6EE;box-shadow:0 26px 60px -34px rgba(6,38,59,.6);overflow:hidden;max-width:400px;width:100%}
+.ig .h{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:14px}
+.ig .h .av{width:34px;height:34px;border-radius:50%;background:#fff url(../assets/brand/isotipo.png) center/72% no-repeat;border:2px solid #CDE9F6;flex:none}
+.ig .h b{display:block;font-size:14px}.ig .h small{color:#8395A3;font-size:12px}.ig .h .d3{margin-left:auto;color:#8395A3;font-weight:700}
+.ig .cr{position:relative;aspect-ratio:4/5;background:var(--deep) center/cover;overflow:hidden}
+.ig .cr::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,38,59,.05) 25%,rgba(6,38,59,.93) 100%)}
+.ig .cr .hk{position:absolute;left:18px;right:18px;bottom:46px;z-index:2;color:#fff;font:800 25px/1.15 var(--head);letter-spacing:-.01em}
+.ig .cr .hk em{font-style:normal;color:var(--amb)}
+.ig .cr .lg{position:absolute;right:14px;bottom:15px;height:15px;width:auto;z-index:2}
+.ig .cr .tag{position:absolute;left:14px;top:14px;z-index:2;background:var(--b);color:#fff;font:700 11.5px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:99px}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:#F3F6F9;color:#0A66C2;font-weight:700;font-size:14.5px;border-bottom:1px solid #EEE}
+.ig .cap{padding:10px 14px 14px;font-size:13.5px;color:#262626;line-height:1.45}
+.ig .cap b{margin-right:4px}.ig .cap span{color:#8395A3}
+/* elementos dibujados sobre la foto */
+.cert{position:absolute;right:16px;top:16px;z-index:2;background:#fff;border-radius:12px;padding:10px 12px;width:170px;box-shadow:0 10px 24px -10px rgba(0,0,0,.5);font-size:11px;color:var(--mut)}
+.cert b{display:block;font:800 12.5px/1.2 var(--head);color:var(--ink);margin:2px 0 6px}
+.cert .exp{display:flex;align-items:center;gap:6px;font:700 12px var(--head);color:var(--red)}
+.cert .exp::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+.ticket{position:absolute;left:16px;right:16px;top:54px;z-index:2;display:grid;grid-template-columns:1fr auto;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 12px 26px -12px rgba(0,0,0,.6)}
+.ticket div{padding:10px 12px;font-size:11px;color:var(--mut)}
+.ticket b{display:block;font:800 15px var(--head);color:var(--ink)}
+.ticket .st{background:var(--amb);color:#3A2B00;font:800 11px var(--head);display:grid;place-items:center;padding:0 12px;text-transform:uppercase;letter-spacing:.06em;border-left:2px dashed rgba(0,0,0,.25)}
+.crew{position:absolute;right:16px;top:16px;z-index:2;background:#fff;border-radius:12px;padding:10px 12px;width:190px;box-shadow:0 10px 24px -10px rgba(0,0,0,.5);display:grid;gap:5px;font-size:11.5px}
+.crew b{font:800 12px var(--head)}
+.crew span{display:flex;justify-content:space-between;gap:6px;border-top:1px solid #EEF2F5;padding-top:5px}
+.crew i{font-style:normal;font-weight:700;color:var(--ok)}.crew i.w{color:var(--red)}
+.cal{position:absolute;right:16px;top:16px;z-index:2;width:104px;background:#fff;border-radius:14px;overflow:hidden;text-align:center;box-shadow:0 10px 24px -10px rgba(0,0,0,.5)}
+.cal small{display:block;background:var(--red);color:#fff;font:800 12px var(--head);letter-spacing:.12em;padding:5px}
+.cal b{display:block;font:800 40px/1.1 var(--head);color:var(--ink);padding-top:4px}
+.cal span{display:block;font:600 11px var(--head);color:var(--mut);padding-bottom:8px}
+.adx{display:grid;grid-template-columns:minmax(0,390px) minmax(0,1fr);gap:46px;align-items:center}
+.adx .who{display:inline-block;background:var(--soft);color:var(--b2);font:700 12.5px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:7px 13px;border-radius:99px;margin-bottom:14px}
+.adx .hook{font:800 clamp(25px,2.8vw,36px)/1.15 var(--head);letter-spacing:-.01em;margin-bottom:22px}
+.adx .hook::before{content:"«";color:var(--b)}.adx .hook::after{content:"»";color:var(--b)}
+.kv{display:grid;gap:10px}
+.kv div{display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 18px;font-size:16.5px}
+.kv b{font:700 11.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--b);padding-top:4px}
+.alts{display:grid;gap:6px}.alts i{font-style:normal;display:block;padding-left:12px;border-left:3px solid var(--amb)}
+
+/* landings */
+.lds{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.shot{border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -40px rgba(0,71,107,.8);background:#fff}
+.bar{background:#E3EEF5;padding:9px 12px;display:flex;gap:6px;align-items:center}.bar i{width:10px;height:10px;border-radius:50%;background:#B9CFDD}
+.bar span{margin-left:10px;background:#fff;border-radius:6px;font-size:11.5px;color:var(--mut);padding:3px 10px;flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.mini{position:relative;color:#fff;padding:22px 22px 20px;min-height:200px;background:center/cover;display:flex;flex-direction:column;justify-content:flex-end}
+.mini::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,38,59,.92),rgba(6,38,59,.45))}
+.mini>*{position:relative}
+.mini img{height:16px;width:auto;align-self:flex-start;margin-bottom:auto}
+.mini b{font:800 22px/1.15 var(--head);max-width:18ch;margin-top:30px}
+.mini small{opacity:.85;font-size:13px;margin-top:6px}
+.mini .bt{align-self:flex-start;margin-top:12px;background:var(--amb);color:#3A2B00;font:800 12.5px var(--head);border-radius:99px;padding:8px 14px}
+.ldiff{padding:16px 18px;display:grid;gap:8px;font-size:15px}
+.ldiff div{display:grid;grid-template-columns:110px 1fr;gap:10px}
+.ldiff b{font:700 11px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--b);padding-top:3px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font:700 15.5px var(--head);border-radius:99px;padding:13px 22px;box-shadow:0 14px 30px -14px rgba(0,71,107,.8)}
+.btn.y{background:var(--amb);color:#3A2B00}
+.lds .btn{margin:0 18px 18px}
+
+/* formulario */
+.form{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:40px;align-items:center}
+.phone{background:#fff;border-radius:34px;border:10px solid #0B1A26;box-shadow:0 30px 60px -30px rgba(6,38,59,.7);overflow:hidden}
+.phone .hd{background:var(--grad);color:#fff;padding:15px 20px;font:700 15px var(--head);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.phone .hd img{height:12px;width:auto}
+.phone .bd{padding:16px 18px 20px;display:grid;gap:13px}
+.q span{display:block;font:700 14px var(--head);margin-bottom:7px}
+.q em{display:inline-block;font-style:normal;font-size:13px;border:1px solid var(--line);border-radius:99px;padding:5px 10px;margin:0 5px 5px 0}
+.q em.on{background:var(--soft);border-color:var(--b);color:var(--b2);font-weight:700}
+.send{background:var(--amb);color:#3A2B00;text-align:center;border-radius:14px;padding:12px;font:800 15px var(--head)}
+.abc{display:grid;gap:12px}
+.abc div{display:grid;grid-template-columns:62px 1fr;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 20px;font-size:17px}
+.abc div>b{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;font:800 26px var(--head);color:#fff;background:var(--b)}
+.abc div:nth-child(2)>b{background:var(--nv)}
+.abc div:nth-child(3)>b{background:#8EA3B3}
+.abc div:nth-child(4)>b{background:var(--amb);color:#3A2B00;font-size:10.5px;width:62px}
+.abc strong{font-family:var(--head);display:block;font-size:16px}
+.abc span{color:var(--mut);font-size:15.5px}
+
+/* recorrido */
+.wa{display:grid;grid-template-columns:minmax(0,370px) minmax(0,1fr);gap:40px;align-items:center}
+.chat{background:#EAE2D6;border-radius:34px;border:10px solid #0B1A26;padding:14px 12px;display:grid;gap:9px;box-shadow:0 30px 60px -30px rgba(6,38,59,.7)}
+.chat .who{background:#fff;border-radius:14px;padding:8px 12px;font:700 14px var(--head);display:flex;align-items:center;gap:8px}
+.chat .who img{height:16px;width:auto}
+.chat .who small{margin-left:auto;font:600 11px var(--sans);color:var(--ok)}
+.m{max-width:90%;background:#fff;border-radius:14px 14px 14px 4px;padding:9px 11px;font-size:14px;line-height:1.45;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.m.me{justify-self:end;background:#DCF8C6;border-radius:14px 14px 4px 14px}
+.m small{display:block;color:#7A7A7A;font-size:11px;margin-top:3px;text-align:right}
+.appr{justify-self:center;background:rgba(255,255,255,.75);border-radius:99px;font:700 11px var(--head);color:var(--nv);padding:5px 11px;display:flex;align-items:center;gap:6px}
+.appr::before{content:"✓";display:grid;place-items:center;width:15px;height:15px;border-radius:50%;background:var(--ok);color:#fff;font-size:9px}
+.seq{display:grid;gap:8px}
+.seq div{display:grid;grid-template-columns:148px 1fr auto;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:15.5px}
+.seq div>b{font:800 12px var(--head);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--grad);border-radius:99px;padding:6px 10px;text-align:center}
+.who2{font:700 11px var(--head);letter-spacing:.04em;border-radius:99px;padding:4px 9px;white-space:nowrap}
+.who2.sy{background:var(--soft);color:var(--b2)}
+.who2.pe{background:#FFF1CC;color:#7A5600}
+.who2.mx{background:linear-gradient(90deg,var(--soft) 50%,#FFF1CC 50%);color:var(--nv)}
+.seq .hum{background:#FFFBEE;border-color:#F3E2A8}
+.seq .hum>b{background:var(--amb);color:#3A2B00}
+.leg{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:13.5px;color:var(--mut);align-items:center}
+
+/* CRM */
+.crm{padding:16px;overflow:hidden}
+.crm .tb{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:2px 4px 14px;font-size:14px;color:var(--mut)}
+.crm .tb b{font:800 16px var(--head);color:var(--ink);margin-right:auto}
+.crm .tb span{border:1px solid var(--line);border-radius:99px;padding:4px 10px}
+.board{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:10px;overflow-x:auto;padding-bottom:6px}
+.col{background:var(--soft2);border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.col>h4{font:700 12.5px/1.25 var(--head);display:flex;justify-content:space-between;gap:6px;min-height:32px}
+.col>h4 i{font-style:normal;color:var(--mut);font-weight:600}
+.col.lost{background:#F6F6F7}
+.col.ren{background:#EAF7F1;border-color:#C5E8D6}
+.tk{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 9px;font-size:12px;line-height:1.35;box-shadow:0 4px 10px -8px rgba(0,71,107,.5)}
+.tk b{display:block;font:700 12.5px var(--head);color:var(--ink)}
+.tk span{color:var(--mut);display:block}
+.tk .p{display:inline-block;font:800 10px var(--head);border-radius:5px;padding:2px 6px;margin-top:5px;background:var(--b);color:#fff}
+.tk .p.b{background:var(--nv)}.tk .p.c{background:#8EA3B3}.tk .p.e{background:var(--amb);color:#3A2B00}
+.tk.hl{border:2px solid var(--b)}
+.fic{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:18px}
+.fic .card{padding:22px}
+.fic h3{font-size:24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fic h3 .p{font:800 12px var(--head);background:var(--b);color:#fff;border-radius:6px;padding:4px 8px}
+.fic .sub{color:var(--mut);font-size:14.5px;margin:4px 0 14px}
+.dl{display:grid;gap:7px;font-size:14.5px}
+.dl div{display:grid;grid-template-columns:130px 1fr;gap:10px;border-bottom:1px solid var(--line);padding-bottom:7px}
+.dl dt,.dl b{font:700 11.5px var(--head);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding-top:2px}
+.tit{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tit span{font:700 11.5px var(--head);border-radius:99px;padding:4px 10px;background:#E3F5EC;color:var(--ok)}
+.tit span.w{background:#FFE9E5;color:var(--red)}
+.hist{display:grid;gap:8px;font-size:14px;margin-top:6px}
+.hist div{display:grid;grid-template-columns:52px 1fr;gap:10px}
+.hist time{font:700 12px var(--head);color:var(--mut);padding-top:2px}
+.hist p{background:var(--soft2);border:1px solid var(--line);border-radius:10px;padding:7px 10px}
+.hist p.in{background:#F2FBEC;border-color:#D7EFC6}
+.next{margin-top:14px;background:var(--deep);color:#fff;border-radius:14px;padding:14px 16px;display:grid;gap:4px}
+.next small{font:700 11px var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--cy)}
+.next b{font:700 16px var(--head)}
+.next span{font-size:13.5px;opacity:.85}
+
+/* intelligence */
+.intel{background:linear-gradient(180deg,#E9F6FC,#FAFCFE)}
+.ig3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:6px}
+.pan{padding:20px}
+.pan h4{font:800 15px var(--head);margin-bottom:4px}
+.pan p.s2{font-size:13px;color:var(--mut);margin-bottom:14px}
+.kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi div{background:var(--soft2);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.kpi b{display:block;font:800 26px/1.1 var(--head)}
+.kpi span{font-size:12.5px;color:var(--mut)}
+.rlist{display:grid;gap:7px;font-size:13.5px}
+.rlist div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.rlist b{font:700 13.5px var(--head)}
+.ib{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:22px}
+
+/* siguiente paso */
+.fin{background:linear-gradient(160deg,#06263B 0%,#00476B 70%,#0080BC 100%);color:#fff}
+.fin h2{color:#fff}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+.opt{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);border-radius:22px;padding:24px 26px;position:relative;display:flex;flex-direction:column}
+.opt.rec{background:#fff;color:var(--ink);border:3px solid var(--amb);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.opt .rb{position:absolute;top:-14px;left:24px;background:var(--amb);color:#3A2B00;font:800 12px var(--head);letter-spacing:.1em;text-transform:uppercase;border-radius:99px;padding:6px 12px}
+.opt h3{font-size:24px}
+.opt .pr{font:800 clamp(30px,3.4vw,42px)/1.1 var(--head);margin:10px 0 4px}
+.opt .pr small{font-size:16px;font-weight:600;opacity:.75}
+.opt .dur{font:600 14.5px var(--head);opacity:.8;margin-bottom:14px}
+.opt ul{list-style:none;padding:0;display:grid;gap:8px;font-size:15.5px}
+.opt li{display:flex;gap:10px}.opt li::before{content:"✓";font-weight:800;color:var(--cy)}
+.opt.rec li::before{color:var(--ok)}
+.opt .aft{margin-top:auto;padding-top:14px;font-size:14px;color:var(--mut);border-top:1px dashed var(--line);margin-top:14px}
+.months{display:grid;gap:8px;margin-top:2px}
+.months div{display:grid;grid-template-columns:70px 1fr;gap:10px;font-size:15.5px;align-items:start;padding:10px 0;border-top:1px solid rgba(255,255,255,.15)}
+.months b{padding-top:3px}
+.months small{font-size:13.5px;opacity:.8}.months strong{font-family:var(--head)}
+.months b{font:800 12px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--cy)}
+.start{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;font:700 clamp(17px,1.7vw,21px) var(--head)}
+.start span{background:var(--amb);color:#3A2B00;border-radius:99px;padding:7px 14px;font-size:14px}
+.weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+.weeks div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.45}
+.weeks b{display:block;font:800 13px var(--head);letter-spacing:.06em;text-transform:uppercase;color:var(--cy)}
+.weeks small{display:block;font:600 12.5px var(--head);opacity:.75;margin-bottom:6px}
+.weeks div:last-child{background:rgba(254,196,45,.16);border-color:rgba(254,196,45,.5)}
+
+.rv{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+.js .rv{opacity:0;transform:translateY(18px)}.js .rv.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}}
+@media (max-width:1180px){.dots a{padding:6px 7px;font-size:11.5px}}
+@media (max-width:1060px){.dots{display:none}}
+@media (max-width:980px){
+.steps{grid-template-columns:1fr 1fr}.under,.two,.form,.wa,.adx,.lds,.fic,.opts,.db,.ig3{grid-template-columns:1fr}
+.cmp .hd{display:none}.cmp .r{grid-template-columns:1fr}.cmp .ar{transform:rotate(90deg);height:24px}
+.kv div,.seq div{grid-template-columns:1fr}.seq div{gap:6px}.seq .who2,.seq div>b{justify-self:start}
+.weeks{grid-template-columns:1fr 1fr}.cnt{display:none}
+.under div{flex-direction:column;align-items:flex-start;gap:4px}
+}
+@media (max-width:560px){.steps,.weeks{grid-template-columns:1fr}.dl div{grid-template-columns:1fr;gap:2px}.top .b span.t{display:none}.ig .cr .hk{font-size:21px}.box{padding:22px}.box ul{font-size:17px}}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<header class="top"><div class="b">Qualivo <span style="opacity:.6">×</span> <img src="../assets/brand/logo-blanco.png" alt="Cancomar"></div>
+<nav class="dots" aria-label="Bloques">
+<a href="#s1" data-k="s1">Qué hacemos</a><a href="#s2" data-k="s2">Alumno</a><a href="#s3" data-k="s3">Hoy y mañana</a><a href="#s4a" data-k="s4">Anuncios</a><a href="#s5" data-k="s5">Landings</a><a href="#s6" data-k="s6">Formulario</a><a href="#s7" data-k="s7">Recorrido</a><a href="#s8" data-k="s8">CRM</a><a href="#s9" data-k="s9">Intelligence</a><a href="#s10" data-k="s10">Siguiente paso</a>
+</nav></header>
+<div class="cnt" id="cnt" aria-hidden="true"></div>
+
+<!-- 1 · PORTADA -->
+<section class="s hero" id="s0" data-k="s0"><div class="in">
+<div class="x">Qualivo <span style="opacity:.6">×</span> <img src="../assets/brand/logo-blanco.png" alt="Cancomar"></div>
+<h1>Nadie sin respuesta, <em>aunque escriba desde alta mar</em></h1>
+<p>Admisiones en orden, vuestra base de datos trabajando y, después, captación.</p>
+<div class="fases"><span><b>1</b>Orden y respuesta</span><span><b>2</b>Base de datos</span><span><b>3</b>Captación</span></div>
+</div></section>
+
+<!-- 2 · QUÉ HACEMOS -->
+<section class="s" id="s1" data-k="s1"><div class="in rv">
+<p class="n">01 · Qué hacemos</p>
+<h2>Un sistema, de la primera pregunta <em>a la plaza reservada</em></h2>
+<div class="steps">
+<div class="card"><b>Anuncio o entrada</b><span>Web, WhatsApp, teléfono, empresas o vuestra base</span></div>
+<div class="card"><b>Formulario que cualifica</b><span>Curso, fecha, quién paga y cómo contactar</span></div>
+<div class="card"><b>Respuesta en minutos</b><span>Por WhatsApp, con vuestro tono y vuestro visto bueno</span></div>
+<div class="card"><b>Seguimiento</b><span>Recordatorios y avisos de convocatoria, sin olvidos</span></div>
+<div class="card"><b>Plaza reservada</b><span>Matrícula, pago y aviso de renovación a 5 años</span></div>
+</div>
+<div class="under">
+<div><b>CRM</b>Cada persona en su etapa, con su curso, su fecha y su próxima acción</div>
+<div><b>Panel</b>Qué entra, qué está sin responder y qué acaba en matrícula</div>
+</div>
+</div></section>
+
+<!-- 3 · CLIENTE IDEAL -->
+<section class="s alt" id="s2" data-k="s2"><div class="in rv">
+<p class="n">02 · Vuestro alumno ideal</p>
+<h2>¿Qué es una petición cualificada? <span class="chip">Lo validamos hoy</span></h2>
+<div class="two">
+<div class="card box ok"><h3>Sí, prioridad</h3><ul>
+<li>Necesita un curso concreto: STCW, actualización o titulación</li>
+<li>Tiene una fecha: le caduca el certificado o le sale embarque</li>
+<li>Puede venir a Avilés o el curso tiene modalidad online</li>
+<li>Una empresa o armador con tripulación que formar</li></ul></div>
+<div class="card box no"><h3>Todavía no</h3><ul>
+<li>Pregunta precios sin curso ni fecha</li>
+<li>No cumple aún los requisitos del curso</li>
+<li>Se informa para dentro de un año</li></ul>
+<p class="foot">«Todavía no» no es perdido: entra en la base, con aviso cuando le toque.</p></div>
+</div>
+</div></section>
+
+<!-- 4 · HOY FRENTE A CON QUALIVO -->
+<section class="s" id="s3" data-k="s3"><div class="in rv">
+<p class="n">03 · Hoy y con Qualivo</p>
+<h2>Dónde se pierde hoy <em>y qué cambia</em></h2>
+<div class="cmp">
+<div class="hd"><span>Fase</span><span>Hoy</span><span></span><span>Con Qualivo</span></div>
+<div class="r"><div class="ph2"><small>Fase 1</small><b>Orden y respuesta</b></div>
+<div class="h"><div>El teléfono marca el día</div><div>WhatsApp sin orden ni dueño</div></div><div class="ar">→</div>
+<div class="q"><div>Cada petición en el CRM, con prioridad</div><div>Respuesta preparada en minutos; admisiones la aprueba</div></div></div>
+<div class="r"><div class="ph2"><small>Fase 2</small><b>Base de datos</b></div>
+<div class="h"><div>Renovaciones que nadie avisa a tiempo</div><div>Interesados en cursos sin fecha que se olvidan</div></div><div class="ar">→</div>
+<div class="q"><div>Aviso de renovación meses antes de que caduque</div><div>Lista de espera por curso y búsqueda por titulación</div></div></div>
+<div class="r"><div class="ph2"><small>Fase 3</small><b>Captación</b></div>
+<div class="h"><div>Sin anuncios: boca a boca y web</div><div>Sin saber qué canal trae matrículas</div></div><div class="ar">→</div>
+<div class="q"><div>Anuncios por curso y por momento</div><div>Medidos por plaza reservada, no por clic</div></div></div>
+</div>
+</div></section>
+
+<section class="s alt" id="s3b" data-k="s3"><div class="in rv">
+<p class="n">03 · Fase 2 · Vuestra base de datos</p>
+<h2>La base de datos, <em>trabajando para llenar convocatorias</em></h2>
+<div class="db">
+<div class="card"><h3>Avisos de renovación</h3><p class="s2">Los certificados se renuevan cada 5 años. El sistema avisa antes.</p>
+<ul class="tl">
+<li><div><b>Curso hecho</b>Queda en su ficha, con la fecha</div></li>
+<li><div><b>6 meses antes</b>WhatsApp: «Tu certificado caduca en…»</div></li>
+<li><div><b>3 meses antes</b>Próximas fechas de actualización</div></li>
+<li class="go"><div><b>Plaza reservada</b>Renueva a tiempo, sin prisas</div></li></ul></div>
+<div class="card"><h3>Lista de espera por curso</h3><p class="s2">Quien pregunta por un curso sin fecha, se apunta. Al abrir convocatoria, se avisa primero a la lista.</p>
+<div class="meter">
+<div><div class="lb"><b>Patrón Local de Pesca</b><span>14 en espera</span></div><i><u style="width:93%"></u></i></div>
+<div><div class="lb"><b>Operador General del SMSSM</b><span>9</span></div><i><u style="width:60%"></u></i></div>
+<div><div class="lb"><b>Marinero de Puente</b><span>6</span></div><i><u style="width:40%"></u></i></div>
+<div><div class="lb"><b>Buques de Pasaje</b><span>4</span></div><i><u style="width:27%"></u></i></div>
+</div><p class="note"><span class="ej">Datos de ejemplo</span></p></div>
+<div class="card"><h3>Puente con empresas</h3><p class="s2">¿Quién tiene qué titulación en vigor? Se busca en segundos.</p>
+<div class="srch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#56687A" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>Avanzado Lucha Contra Incendios · en vigor</div>
+<div class="res">
+<div><span>Alumno 1 · Avilés</span><em>Hasta 2029</em></div>
+<div><span>Alumno 2 · Gijón</span><em>Hasta 2028</em></div>
+<div><span>Alumno 3 · Embarcado</span><em class="w">Caduca 2027</em></div>
+<div><span>Alumno 4 · Oviedo</span><em>Hasta 2030</em></div>
+</div><p class="note"><span class="ej">Datos de ejemplo</span></p></div>
+</div>
+</div></section>
+
+<!-- 5 · ANUNCIOS -->
+<section class="s" id="s4a" data-k="s4"><div class="in rv">
+<p class="n">04 · Anuncio A · Renovación <span class="ph">Fase 3</span></p>
+<div class="adx"><div class="ig"><div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="d3">···</span></div>
+<div class="cr" style="background-image:url(../assets/brand/seguridad-maritima.jpg)"><span class="tag">Actualización STCW</span>
+<div class="cert">Certificado<b>Formación Básica en Seguridad Marítima</b><span class="exp">Caduca en 2027</span></div>
+<p class="hk">¿Tu certificado caduca en 2027? <em>Renuévalo antes de que te pare un embarque.</em></p><img class="lg" src="../assets/brand/logo-blanco.png" alt=""></div>
+<div class="cta"><span>Reservar plaza</span><span>›</span></div><div class="cap"><b>cancomar</b>Actualización de Formación Básica en Seguridad Marítima en Avilés. Te respondemos por WhatsApp, también si estás embarcado. <span>… más</span></div></div>
+<div><span class="who">Para quien ya tiene el certificado y le toca renovar</span>
+<p class="hook">¿Tu certificado caduca en 2027?</p>
+<div class="kv">
+<div><b>Otros ganchos</b><span class="alts"><i>Cinco años pasan rápido. Mira la fecha de tu Formación Básica.</i><i>Renovar a tiempo es más fácil que hacerlo con el embarque encima.</i></span></div>
+<div><b>Por qué funciona</b><span>Una pregunta que cada marino puede comprobar en su cartera. Y solo le habla a quien de verdad tiene que renovar.</span></div>
+<div><b>Lleva a</b><span>Landing A · Renovación, con formulario de 5 preguntas y respuesta por WhatsApp.</span></div>
+<div><b>Qué medimos</b><span>Coste por plaza reservada en actualizaciones, no por clic.</span></div>
+</div></div></div>
+</div></section>
+
+<section class="s alt" id="s4b" data-k="s4"><div class="in rv">
+<p class="n">04 · Anuncio B · Urgencia de embarque <span class="ph">Fase 3</span></p>
+<div class="adx"><div class="ig"><div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="d3">···</span></div>
+<div class="cr" style="background-image:url(../assets/brand/puente.jpg)"><span class="tag">Respuesta por WhatsApp</span>
+<div class="ticket"><div>Embarque<b>El lunes, 08:00</b>Te falta: Formación Sanitaria</div><span class="st">Pendiente</span></div>
+<p class="hk">Te sale embarque <em>y te falta el curso.</em> Escríbenos y te decimos la fecha más cercana.</p><img class="lg" src="../assets/brand/logo-blanco.png" alt=""></div>
+<div class="cta"><span>Enviar mensaje</span><span>›</span></div><div class="cap"><b>cancomar</b>Dinos qué curso te falta y cuándo embarcas. Te contestamos por WhatsApp con la convocatoria más cercana. <span>… más</span></div></div>
+<div><span class="who">Para el marino con fecha de embarque encima</span>
+<p class="hook">Te sale embarque y te falta el curso.</p>
+<div class="kv">
+<div><b>Otros ganchos</b><span class="alts"><i>¿Embarcas pronto? Dinos qué te falta y te damos la fecha más cercana.</i><i>Un curso no debería costarte un embarque.</i></span></div>
+<div><b>Por qué funciona</b><span>Habla del problema real del alumno, no del curso. Y lleva a WhatsApp, el canal que ya usa.</span></div>
+<div><b>Lleva a</b><span>Directo a WhatsApp (anuncio de mensaje) con 3 preguntas. Si no hay fecha a tiempo, a la lista de espera.</span></div>
+<div><b>Qué medimos</b><span>Tiempo de respuesta y plazas reservadas en menos de 7 días.</span></div>
+</div></div></div>
+</div></section>
+
+<section class="s" id="s4c" data-k="s4"><div class="in rv">
+<p class="n">04 · Anuncio C · Empresas y flotas <span class="ph">Fase 3</span></p>
+<div class="adx"><div class="ig"><div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="d3">···</span></div>
+<div class="cr" style="background-image:url(../assets/brand/pesquero.jpg)"><span class="tag">Para empresas</span>
+<div class="crew"><b>Tu tripulación</b><span>Patrón<i>En vigor</i></span><span>Mecánico<i class="w">Caduca 2027</i></span><span>Marinero 1<i>En vigor</i></span><span>Marinero 2<i class="w">Caduca 2027</i></span></div>
+<p class="hk">¿Sabes cuándo caduca cada certificado <em>de tu tripulación?</em></p><img class="lg" src="../assets/brand/logo-blanco.png" alt=""></div>
+<div class="cta"><span>Solicitar propuesta</span><span>›</span></div><div class="cap"><b>Cancomar</b>Formación para empresas del sector marítimo, pesquero y portuario. Un plan a medida y un solo interlocutor. <span>… más</span></div></div>
+<div><span class="who">Para armadores, navieras y empresas portuarias</span>
+<p class="hook">¿Sabes cuándo caduca cada certificado de tu tripulación?</p>
+<div class="kv">
+<div><b>Otros ganchos</b><span class="alts"><i>Forma a tu tripulación sin parar el barco.</i><i>Un plan de formación a medida, con un solo interlocutor.</i></span></div>
+<div><b>Por qué funciona</b><span>Para la empresa, el riesgo es un barco parado por un certificado caducado. Ofrecemos control, no solo un curso.</span></div>
+<div><b>Lleva a</b><span>Landing B · Empresas: formulario con nº de tripulantes y cursos. Llama siempre una persona.</span></div>
+<div><b>Qué medimos</b><span>Empresas con propuesta enviada y alumnos por empresa.</span></div>
+</div></div></div>
+<p class="note"><span class="ej">Datos de ejemplo</span> Tripulación y fechas de la maqueta, de ejemplo. Fotos de vuestra web.</p>
+</div></section>
+
+<section class="s alt" id="s4d" data-k="s4"><div class="in rv">
+<p class="n">04 · Anuncio D · Convocatoria <span class="ph">Fase 3</span></p>
+<div class="adx"><div class="ig"><div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="d3">···</span></div>
+<div class="cr" style="background-image:url(../assets/brand/pesca.jpg)"><span class="tag">Próxima convocatoria</span>
+<div class="cal"><small>ENE</small><b>11</b><span>2027 · Avilés</span></div>
+<p class="hk">Patrón Local de Pesca: <em>empieza el 11 de enero</em> en Avilés.</p><img class="lg" src="../assets/brand/logo-blanco.png" alt=""></div>
+<div class="cta"><span>Más información</span><span>›</span></div><div class="cap"><b>cancomar</b>Patrón Local de Pesca, del 11 de enero al 18 de febrero de 2027. También con certificados de especialidad. <span>… más</span></div></div>
+<div><span class="who">Para quien quiere dar el salto a patrón</span>
+<p class="hook">Patrón Local de Pesca: empieza el 11 de enero.</p>
+<div class="kv">
+<div><b>Otros ganchos</b><span class="alts"><i>De marinero a patrón: la próxima convocatoria ya tiene fecha.</i><i>Si llevas tiempo pensándolo, enero es buena fecha para empezar.</i></span></div>
+<div><b>Por qué funciona</b><span>Una fecha concreta empuja a decidir. Primero se avisa a la lista de espera; el anuncio llena lo que quede.</span></div>
+<div><b>Lleva a</b><span>Página del curso con formulario y respuesta por WhatsApp.</span></div>
+<div><b>Qué medimos</b><span>Plazas cubiertas por convocatoria: de la lista frente a las del anuncio.</span></div>
+</div></div></div>
+<p class="note">Fechas del curso publicadas en cancomar.es (consulta del 10-nov). Fotos de vuestra web.</p>
+</div></section>
+
+<!-- 6 · LANDINGS -->
+<section class="s" id="s5" data-k="s5"><div class="in rv">
+<p class="n">05 · Landings</p>
+<h2>Dos landings, <em>dos personas distintas</em></h2>
+<div class="lds">
+<div class="shot"><div class="bar"><i></i><i></i><i></i><span>cancomar.es/renovacion</span></div>
+<div class="mini" style="background-image:url(../assets/brand/practicas.jpg)"><img src="../assets/brand/logo-blanco.png" alt=""><b>Renueva tu certificado STCW antes de que caduque</b><small>Actualizaciones homologadas en Avilés</small><span class="bt">Ver fechas y reservar</span></div>
+<div class="ldiff"><div><b>Para</b>El marino particular, con prisa</div><div><b>Promesa</b>Fecha más cercana y respuesta por WhatsApp</div><div><b>Formulario</b>Curso, caducidad o embarque, quién paga</div><div><b>Después</b>WhatsApp en minutos, plaza reservada</div></div>
+<a class="btn" href="../landing-a/" target="_blank" rel="noopener">Abrir landing A →</a></div>
+<div class="shot"><div class="bar"><i></i><i></i><i></i><span>cancomar.es/empresas</span></div>
+<div class="mini" style="background-image:url(../assets/brand/alacarta.jpg)"><img src="../assets/brand/logo-blanco.png" alt=""><b>Formación para tu tripulación, con un solo interlocutor</b><small>Plan a medida para empresas y flotas</small><span class="bt">Pedir propuesta</span></div>
+<div class="ldiff"><div><b>Para</b>Armador, naviera o empresa portuaria</div><div><b>Promesa</b>Plan a medida y control de caducidades</div><div><b>Formulario</b>Sector, tripulantes, cursos y cuándo</div><div><b>Después</b>Llamada de una persona y propuesta</div></div>
+<a class="btn" href="../landing-b/" target="_blank" rel="noopener">Abrir landing B →</a></div>
+</div>
+</div></section>
+
+<!-- 7 · FORMULARIO -->
+<section class="s alt" id="s6" data-k="s6"><div class="in rv">
+<p class="n">06 · Formulario que cualifica</p>
+<h2>Cinco preguntas <em>y cada petición sabe adónde va</em></h2>
+<div class="form">
+<div class="phone"><div class="hd">Te respondemos por WhatsApp<img src="../assets/brand/logo-blanco.png" alt=""></div><div class="bd">
+<div class="q"><span>1. ¿Qué curso necesitas?</span><em class="on">Actualización Formación Básica</em><em>Lucha Contra Incendios</em><em>SMSSM</em><em>Patrón</em><em>Otro</em></div>
+<div class="q"><span>2. ¿Es renovación o primera vez?</span><em class="on">Renovación</em><em>Primera vez</em></div>
+<div class="q"><span>3. ¿Para cuándo lo necesitas?</span><em class="on">Este mes</em><em>1 a 3 meses</em><em>Más adelante</em></div>
+<div class="q"><span>4. ¿Quién lo paga?</span><em class="on">Yo</em><em>Mi empresa</em></div>
+<div class="q"><span>5. ¿Cómo te localizamos mejor?</span><em class="on">WhatsApp</em><em>Llamada</em><em>Estoy embarcado</em></div>
+<div class="send">Enviar</div></div></div>
+<div class="abc">
+<div><b>A</b><p><strong>Curso con fecha y lo necesita ya</strong><span>Respuesta en minutos y plaza propuesta</span></p></div>
+<div><b>B</b><p><strong>Curso claro, en 1 a 3 meses o sin convocatoria</strong><span>Lista de espera del curso y aviso al abrir fechas</span></p></div>
+<div><b>C</b><p><strong>Solo se informa</strong><span>Información y entra en la base con aviso</span></p></div>
+<div><b>Empresa</b><p><strong>Lo paga su empresa o tiene tripulación</strong><span>Ficha de empresa y llamada de una persona</span></p></div>
+</div></div>
+</div></section>
+
+<!-- 8 · RECORRIDO -->
+<section class="s" id="s7" data-k="s7"><div class="in rv">
+<p class="n">07 · Recorrido de una petición</p>
+<h2>El sistema prepara, <em>admisiones aprueba</em></h2>
+<div class="wa">
+<div class="chat">
+<div class="who"><img src="../assets/brand/isotipo.png" alt="">Cancomar · Admisiones<small>en línea</small></div>
+<div class="m">Hola Andrés, te escribimos de Cancomar 👋 Para renovar la Formación Básica, la próxima actualización es el 30 de noviembre y el 1 de diciembre, en Avilés. ¿Te reservamos plaza?<small>10:04</small></div>
+<span class="appr">Preparado por el sistema · aprobado por admisiones</span>
+<div class="m me">Embarco el 15, me cuadra. ¿Qué necesito llevar?<small>10:31</small></div>
+<div class="m">¡Perfecto! Te mandamos ahora la lista y el enlace para reservar. Si estás sin cobertura, contesta cuando puedas: aquí seguimos.<small>10:35</small></div>
+</div>
+<div><div class="seq">
+<div><b>Minuto 0</b><span>Formulario: entra en el CRM como A</span><span class="who2 sy">Sistema</span></div>
+<div><b>Minuto 2</b><span>WhatsApp con vuestro tono</span><span class="who2 mx">Sistema prepara · persona aprueba</span></div>
+<div><b>Recordatorios</b><span>Documentación, pago y el día antes</span><span class="who2 sy">Sistema</span></div>
+<div><b>D+1</b><span>Si no contesta: mensaje corto</span><span class="who2 mx">Sistema prepara · persona aprueba</span></div>
+<div class="hum"><b>D+3</b><span>Llamada, a la hora que dijo</span><span class="who2 pe">Persona</span></div>
+<div><b>D+7</b><span>Último aviso y a la lista de espera</span><span class="who2 sy">Sistema</span></div>
+<div class="hum"><b>Plaza</b><span>Matrícula y pago</span><span class="who2 pe">Persona</span></div>
+<div><b>+ 5 años</b><span>Aviso de renovación</span><span class="who2 sy">Sistema</span></div>
+</div>
+<p class="leg"><span class="ej">Datos de ejemplo</span> Nombre y mensajes de ejemplo. Los textos los aprobáis vosotros.</p></div>
+</div>
+</div></section>
+
+<!-- 9 · CRM -->
+<section class="s alt" id="s8" data-k="s8"><div class="in rv">
+<p class="n">08 · Vuestro CRM</p>
+<h2>Cada petición, <em>en su etapa</em></h2>
+<div class="card crm">
+<div class="tb"><b>Admisiones · Cancomar</b><span>Todos los cursos ▾</span><span>Particulares y empresas ▾</span><span class="ej">Datos de ejemplo</span></div>
+<div class="board">
+<div class="col"><h4>Petición nueva <i>4</i></h4>
+<div class="tk hl"><b>Andrés G.</b><span>Act. Formación Básica</span><span>Embarca el 15</span><span class="p">A</span></div>
+<div class="tk"><b>Lucía F.</b><span>Marinero de Puente</span><span class="p b">B</span></div>
+<div class="tk"><b>Empresa pesquera</b><span>6 tripulantes · LCI</span><span class="p e">Empresa</span></div></div>
+<div class="col"><h4>Contactado <i>5</i></h4>
+<div class="tk"><b>Rubén A.</b><span>Operador General SMSSM</span><span class="p">A</span></div>
+<div class="tk"><b>Carmen V.</b><span>Formación Sanitaria</span><span class="p b">B</span></div></div>
+<div class="col"><h4>Esperando fecha / lista de espera <i>11</i></h4>
+<div class="tk"><b>Diego M.</b><span>Patrón Local de Pesca</span><span class="p b">B</span></div>
+<div class="tk"><b>Sergio P.</b><span>Buques de Pasaje</span><span class="p c">C</span></div></div>
+<div class="col"><h4>Plaza reservada <i>3</i></h4>
+<div class="tk"><b>Nerea L.</b><span>Act. Lucha Contra Incendios</span><span class="p">A</span></div>
+<div class="tk"><b>Naviera de pasaje</b><span>4 alumnos · Buques de Pasaje</span><span class="p e">Empresa</span></div></div>
+<div class="col"><h4>Matriculado y pagado <i>7</i></h4>
+<div class="tk"><b>Marcos T.</b><span>Pack Marinero en la Pesca</span></div>
+<div class="tk"><b>Elena R.</b><span>Protección Marítima</span></div></div>
+<div class="col ren"><h4>Renovación en 5 años <i>120</i></h4>
+<div class="tk"><b>Jorge S.</b><span>Formación Básica · caduca 05/2027</span></div>
+<div class="tk"><b>Pilar D.</b><span>SMSSM · caduca 09/2027</span></div></div>
+<div class="col lost"><h4>Perdido <i>2</i></h4>
+<div class="tk"><b>Hugo C.</b><span>Sin fecha a tiempo</span></div></div>
+</div></div>
+<p class="note">Etapas propuestas: las ajustamos con vosotros. Nombres, cursos y cifras de ejemplo.</p>
+</div></section>
+
+<section class="s" id="s8b" data-k="s8"><div class="in rv">
+<p class="n">08 · Ficha de una petición</p>
+<div class="fic">
+<div class="card"><h3>Andrés G. <span class="p">A</span> <span class="ej">Datos de ejemplo</span></h3>
+<p class="sub">Marinero · Asturias · entra por la landing de renovación</p>
+<dl class="dl">
+<div><dt>Curso</dt><dd>Actualización Formación Básica en Seguridad Marítima</dd></div>
+<div><dt>Motivo</dt><dd>Renovación · caduca 03/2027</dd></div>
+<div><dt>Cuándo</dt><dd>Este mes: embarca el 15</dd></div>
+<div><dt>Paga</dt><dd>Él mismo</dd></div>
+<div><dt>Contacto</dt><dd>WhatsApp · a veces sin cobertura</dd></div>
+<div><dt>Etapa</dt><dd>Petición nueva → Contactado</dd></div>
+</dl>
+<div class="tit"><span class="w">Formación Básica · renovar</span><span>Protección Marítima · en vigor</span><span>Sanitaria · en vigor</span></div>
+</div>
+<div class="card"><h3>Historial</h3>
+<div class="hist">
+<div><time>10:02</time><p>Rellena el formulario: renovación, este mes.</p></div>
+<div><time>10:04</time><p>WhatsApp con fecha 30 nov – 1 dic. Aprobado por admisiones.</p></div>
+<div><time>10:31</time><p class="in">«Embarco el 15, me cuadra. ¿Qué necesito llevar?»</p></div>
+<div><time>10:35</time><p>Lista de documentación y enlace de reserva.</p></div>
+</div>
+<div class="next"><small>Próxima acción · hoy 13:00</small><b>Confirmar plaza y pago</b><span>Si no reserva hoy: recordatorio mañana a las 9:00, preparado para aprobar.</span></div>
+</div>
+</div>
+</div></section>
+
+<!-- 10 · INTELLIGENCE -->
+<section class="s intel" id="s9" data-k="s9"><div class="in rv">
+<p class="n">09 · Qualivo Intelligence</p>
+<h2>Así lo veríais <em>cada mañana</em></h2>
+<div class="ig3">
+<div class="card pan"><h4>Esta mañana</h4><p class="s2">Lo primero que mira admisiones</p>
+<div class="kpi"><div><b>12</b><span>Peticiones nuevas</span></div><div><b>0</b><span>Sin responder</span></div><div><b>6 min</b><span>Tiempo de respuesta</span></div><div><b>9</b><span>Plazas esta semana</span></div></div></div>
+<div class="card pan"><h4>Convocatorias</h4><p class="s2">Plazas cubiertas por curso</p>
+<div class="meter">
+<div><div class="lb"><b>Act. Formación Básica</b><span>14 de 16</span></div><i><u style="width:88%"></u></i></div>
+<div><div class="lb"><b>Patrón Local de Pesca</b><span>9 de 15</span></div><i><u style="width:60%"></u></i></div>
+<div><div class="lb"><b>Marinero de Puente</b><span>5 de 12</span></div><i><u style="width:42%"></u></i></div>
+</div></div>
+<div class="card pan"><h4>Renovaciones</h4><p class="s2">Certificados que caducan en 6 meses</p>
+<div class="rlist"><div><b>Formación Básica</b><span>38</span></div><div><b>Lucha Contra Incendios</b><span>21</span></div><div><b>Operador SMSSM</b><span>17</span></div><div><b>Buques de Pasaje</b><span>9</span></div></div></div>
+</div>
+<div class="ib"><a class="btn" href="/intelligence/?sector=maritima&amp;empresa=Cancomar&amp;objetivo=seguimiento" target="_blank" rel="noopener">Abrir la demo en directo →</a><span class="ej">Datos de ejemplo</span></div>
+</div></section>
+
+<!-- 11 · SIGUIENTE PASO -->
+<section class="s fin" id="s10" data-k="s10"><div class="in rv">
+<p class="n" style="color:var(--cy)">10 · Siguiente paso</p>
+<h2>Dos formas de empezar</h2>
+<div class="opts">
+<div class="opt rec"><span class="rb">Recomendada</span><h3>Solo arranque</h3>
+<p class="pr">1.200 € <small>pago único</small></p><p class="dur">30 días</p>
+<ul><li>CRM con vuestras etapas y la base importada</li><li>Respuestas por WhatsApp con vuestro visto bueno</li><li>Avisos de renovación a 5 años</li><li>Formación de la persona que lo lleve</li><li>Revisión semanal</li></ul>
+<p class="aft">Después, las herramientas quedan a vuestro nombre: unos 100-150 €/mes.</p></div>
+<div class="opt"><h3>Mensualidad</h3>
+<p class="pr">1.000 € <small>/ mes</small></p><p class="dur">Plan de 3 meses</p>
+<div class="months"><div><b>Mes 1</b><span><strong>Orden y respuesta</strong><br><small>CRM, WhatsApp con vuestro visto bueno, nadie sin respuesta</small></span></div><div><b>Mes 2</b><span><strong>Base de datos</strong><br><small>Avisos de renovación y listas de espera por curso</small></span></div><div><b>Mes 3</b><span><strong>Captación</strong><br><small>Anuncios y landings, medidos por plaza reservada</small></span></div></div></div>
+</div>
+<p class="start">Arranque propuesto: lunes 16 de noviembre · entrega viernes 11 de diciembre</p>
+<div class="weeks">
+<div><b>Semana 1</b><small>16-20 nov</small>CRM con vuestras etapas, base importada y WhatsApp conectado</div>
+<div><b>Semana 2</b><small>23-27 nov</small>Formulario, plantillas con vuestro tono y circuito de aprobación</div>
+<div><b>Semana 3</b><small>30 nov-4 dic</small>Avisos de renovación y listas de espera por curso</div>
+<div><b>Semana 4</b><small>7-11 dic</small>Formación, ajustes y entrega el viernes 11<br><small style="margin:4px 0 0">8 dic, festivo</small></div>
+</div>
+</div></section>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('.s')), links=[].slice.call(document.querySelectorAll('.dots a')),
+      cnt=document.getElementById('cnt'), prog=document.getElementById('prog');
+  function cur(){var y=scrollY+innerHeight*.4,i=0;secs.forEach(function(s,j){if(s.offsetTop<=y)i=j});return i}
+  function upd(){var i=cur(),k=secs[i].getAttribute('data-k');
+    links.forEach(function(a){a.classList.toggle('on',a.getAttribute('data-k')===k)});
+    cnt.textContent=(i+1)+' / '+secs.length; prog.style.width=((i+1)/secs.length*100)+'%';}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var r=e.target.querySelector('.rv');if(r)r.classList.add('vis')}})},{threshold:.2});
+  secs.forEach(function(s){io.observe(s)});
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+  setTimeout(function(){document.querySelectorAll('.rv').forEach(function(r){if(r.getBoundingClientRect().top<innerHeight)r.classList.add('vis')})},50);
+  function go(d){var i=cur();var t=secs[Math.max(0,Math.min(secs.length-1,i+d))];var r=t.querySelector('.rv');if(r)r.classList.add('vis');t.scrollIntoView({behavior:'smooth'});}
+  addEventListener('keydown',function(e){if(e.target.closest&&e.target.closest('input,textarea,select'))return;
+    if(['ArrowDown','PageDown','ArrowRight',' '].indexOf(e.key)>-1){e.preventDefault();go(1)} else if(['ArrowUp','PageUp','ArrowLeft'].indexOf(e.key)>-1){e.preventDefault();go(-1)}
+    else if(e.key==='Home'){e.preventDefault();secs[0].scrollIntoView({behavior:'smooth'})} else if(e.key==='End'){e.preventDefault();secs[secs.length-1].scrollIntoView({behavior:'smooth'})}});
+})();
+</script>
+</body>
+</html>

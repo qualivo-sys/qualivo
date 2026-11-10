@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Formación para empresas y flotas · Cancomar (maqueta)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+:root{--b:#0097DA;--nv:#00476B;--deep:#06263B;--cy:#00D8E8;--amb:#FEC42D;--red:#D8290F;--ok:#12805A;--ink:#0D2233;--mut:#56687A;--soft:#E9F6FC;--soft2:#F2F9FD;--line:#D5E8F3;
+--head:"Montserrat",system-ui,sans-serif;--sans:"Open Sans",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip;scroll-behavior:smooth}
+body{font:17px/1.55 var(--sans);color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--head);font-weight:800;letter-spacing:-.02em;line-height:1.1;text-wrap:balance}
+.demo{background:#FFF3C4;color:#7A5600;font:700 12px var(--head);text-align:center;padding:7px 16px;letter-spacing:.04em}
+.demo a{color:inherit}
+.w{max-width:1140px;margin:0 auto;padding:0 20px}
+header.nav{background:#fff;border-bottom:1px solid var(--line)}
+header.nav .w{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;padding-bottom:14px}
+header.nav img{height:24px;width:auto}
+header.nav a{font:700 14px var(--head);color:#fff;background:#25A35A;border-radius:99px;padding:9px 14px;text-decoration:none;white-space:nowrap}
+.hero{position:relative;color:#fff;background:linear-gradient(95deg,rgba(6,38,59,.95) 0%,rgba(0,71,107,.85) 50%,rgba(0,71,107,.35) 100%),url(../assets/brand/alacarta.jpg) center/cover}
+.hero .w{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,440px);gap:40px;align-items:start;padding-top:56px;padding-bottom:56px}
+.hero .k{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:6px 12px;font:700 12.5px var(--head);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-size:clamp(34px,5vw,58px)}
+.hero h1 em{font-style:normal;color:var(--cy)}
+.hero p.sub{font-size:19px;opacity:.92;margin-top:18px;max-width:40ch}
+.hero ul{list-style:none;padding:0;display:grid;gap:10px;margin-top:24px;font-size:16.5px}
+.hero li{display:flex;gap:10px}.hero li::before{content:"✓";color:var(--cy);font-weight:800}
+.fbox{background:#fff;color:var(--ink);border-radius:22px;padding:22px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.fbox h2{font-size:21px;margin-bottom:4px}
+.fbox .s2{font-size:14px;color:var(--mut);margin-bottom:14px}
+.step{display:none}.step.on{display:block}
+.qt{font:700 15px var(--head);margin:12px 0 8px}
+.opts{display:flex;flex-wrap:wrap;gap:7px}
+.opts button{font:600 14px var(--sans);border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:99px;padding:8px 13px;cursor:pointer}
+.opts button[aria-pressed=true]{border-color:var(--b);background:var(--soft);color:#00618F;font-weight:700}
+.fld{display:grid;gap:8px;margin-top:10px}
+.fld input{font:16px var(--sans);border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;width:100%}
+.go{margin-top:16px;width:100%;font:800 16px var(--head);border:0;border-radius:14px;padding:14px;background:var(--amb);color:#3A2B00;cursor:pointer}
+.go:disabled{opacity:.45;cursor:not-allowed}
+.pg{display:flex;gap:5px;margin-bottom:6px}.pg i{flex:1;height:4px;border-radius:99px;background:var(--line)}.pg i.on{background:var(--b)}
+.back{background:none;border:0;color:var(--mut);font:600 13px var(--sans);margin-top:10px;cursor:pointer;padding:0}
+.legal{font-size:11.5px;color:var(--mut);margin-top:10px}
+.ok{text-align:center;padding:10px 4px}
+.ok .ic{width:58px;height:58px;border-radius:50%;background:#25A35A;color:#fff;display:grid;place-items:center;margin:0 auto 12px;font-size:28px}
+.ok h3{font-size:22px;margin-bottom:8px}
+.ok p{color:var(--mut);font-size:15px}
+.cls{margin-top:16px;background:var(--soft2);border:1px dashed var(--b);border-radius:14px;padding:12px;font-size:14px;text-align:left}
+.cls b{font-family:var(--head)}
+.cls .p{display:inline-block;font:800 13px var(--head);background:var(--b);color:#fff;border-radius:6px;padding:2px 8px;margin-right:6px}
+section.blk{padding:64px 0}
+section.blk.alt{background:var(--soft2)}
+.blk h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:10px}
+.blk .lead{color:var(--mut);font-size:18px;margin-bottom:28px;max-width:56ch}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.c{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 14px 30px -26px rgba(0,71,107,.6);display:flex;flex-direction:column;gap:6px}
+.c small{font:700 11.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--b)}
+.c b{font:800 17.5px/1.25 var(--head)}
+.c span{font-size:14.5px;color:var(--mut)}
+.c a{margin-top:auto;padding-top:8px;font:700 14px var(--head);color:var(--nv);text-decoration:none}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:h}
+.how div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}
+.how div::before{counter-increment:h;content:counter(h);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0097DA,#00476B);color:#fff;font:800 16px var(--head);margin-bottom:12px}
+.how b{display:block;font:800 18px var(--head);margin-bottom:4px}
+.how span{color:var(--mut);font-size:15px}
+.trust{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;color:var(--mut);font-size:15px}
+.trust b{color:var(--ink);font-family:var(--head)}
+footer{background:var(--deep);color:rgba(255,255,255,.75);padding:30px 0;font-size:13.5px}
+footer img{height:18px;width:auto;margin-bottom:10px}
+@media (max-width:900px){.hero .w{grid-template-columns:1fr;padding-top:36px}.cards,.how{grid-template-columns:1fr}}
+@media (max-width:480px){header.nav img{height:18px}header.nav a{font-size:12.5px;padding:8px 11px}}
+</style>
+</head>
+<body>
+<div class="demo">Maqueta de Qualivo para Cancomar · Landing B · no es una página publicada · <a href="../presentacion/">volver a la presentación</a></div>
+<header class="nav"><div class="w"><img src="../assets/brand/logo-color.png" alt="Cancomar"><a href="#form" style="background:#00476B">Pedir propuesta</a></div></header>
+
+<section class="hero"><div class="w">
+<div>
+<span class="k">Empresas y flotas · marítimo, pesquero y portuario</span>
+<h1>Formación para tu tripulación, <em>con un solo interlocutor</em></h1>
+<p class="sub">Diseñamos el plan de formación de tu empresa y te avisamos antes de que caduque cada certificado.</p>
+<ul><li>Centro de formación homologado en Avilés</li><li>Formación a la carta y consultoría para el sector</li><li>Control de caducidades de tu tripulación</li><li>Asesoría y tramitación administrativa</li></ul>
+</div>
+<div class="fbox" id="form">
+<div class="pg" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+<h2>Pide tu propuesta</h2><p class="s2">5 preguntas · te llama una persona del equipo</p>
+
+<div class="step on" data-s="1">
+<p class="qt">1. ¿En qué sector trabaja tu empresa?</p>
+<div class="opts" data-q="sector"><button type="button">Pesca</button><button type="button">Pasaje</button><button type="button">Mercante</button><button type="button">Náutica / megayates</button><button type="button">Portuario</button></div>
+<p class="qt">2. ¿Cuántas personas hay que formar?</p>
+<div class="opts" data-q="tam"><button type="button">1 a 5</button><button type="button">6 a 20</button><button type="button">Más de 20</button></div>
+<button class="go" type="button" data-next="2" disabled>Siguiente</button>
+</div>
+
+<div class="step" data-s="2">
+<p class="qt">3. ¿Qué necesitáis?</p>
+<div class="opts" data-q="nec"><button type="button">Certificados STCW</button><button type="button">Actualizaciones</button><button type="button">Formación a la carta</button><button type="button">Aún no lo sé</button></div>
+<p class="qt">4. ¿Para cuándo?</p>
+<div class="opts" data-q="cuando"><button type="button">Este trimestre</button><button type="button">Este año</button><button type="button">Planificando</button></div>
+<button class="go" type="button" data-next="3" disabled>Siguiente</button>
+<button class="back" type="button" data-prev="1">← Atrás</button>
+</div>
+
+<div class="step" data-s="3">
+<p class="qt">5. ¿Cuál es tu papel?</p>
+<div class="opts" data-q="rol"><button type="button">Armador / gerencia</button><button type="button">RR. HH. o formación</button><button type="button">Patrón / capitán</button></div>
+<div class="fld"><input type="text" placeholder="Empresa" aria-label="Empresa" autocomplete="off"><input type="tel" placeholder="Teléfono" aria-label="Teléfono" autocomplete="off"></div>
+<button class="go" type="button" data-send disabled>Quiero la propuesta</button>
+<button class="back" type="button" data-prev="2">← Atrás</button>
+<p class="legal">Maqueta: no se envía ningún dato.</p>
+</div>
+
+<div class="step" data-s="4"><div class="ok"><div class="ic">✓</div><h3>¡Gracias!</h3><p>Una persona del equipo te llama en el horario que elijas para preparar la propuesta.</p>
+<div class="cls" id="cls"></div></div></div>
+</div>
+</div></section>
+
+<section class="blk"><div class="w">
+<h2>Qué incluye</h2>
+<p class="lead">Un plan pensado para que ningún barco se quede parado por un certificado.</p>
+<div class="cards">
+<div class="c"><small>Diagnóstico</small><b>Qué tiene cada tripulante y qué le falta</b><span>Titulaciones, certificados y fechas de caducidad.</span></div>
+<div class="c"><small>Plan</small><b>Calendario de formación a medida</b><span>En fechas que encajen con las mareas y los turnos.</span></div>
+<div class="c"><small>Seguimiento</small><b>Aviso antes de cada caducidad</b><span>Te avisamos con tiempo para renovar sin prisas.</span></div>
+</div></div></section>
+
+<section class="blk alt"><div class="w">
+<h2>Cursos más pedidos por empresas</h2>
+<p class="lead">Del catálogo público de cancomar.es.</p>
+<div class="cards">
+<div class="c"><small>STCW</small><b>Formación Básica en Seguridad Marítima</b><span>Y su actualización</span></div>
+<div class="c"><small>STCW</small><b>Avanzado Lucha Contra Incendios</b><span>Y su actualización</span></div>
+<div class="c"><small>Pasaje</small><b>Buques de Pasaje · Pack Trabaja en Buques de Pasaje</b><span>Para tripulaciones de pasaje</span></div>
+<div class="c"><small>Comunicaciones</small><b>Operador General y Restringido del SMSSM</b><span>GMDSS</span></div>
+<div class="c"><small>Portuario</small><b>Manipulación de Mercancías Peligrosas</b><span>Operadores de muelle y terminal</span></div>
+<div class="c"><small>A la carta</small><b>Consultoría y formación a medida</b><span>Planes de emergencia, inglés marítimo y más</span></div>
+</div></div></section>
+
+<footer><div class="w"><img src="../assets/brand/logo-blanco.png" alt="Cancomar"><p>Maqueta de ejemplo preparada por Qualivo. Textos e imágenes de cancomar.es.</p></div></footer>
+
+<script>
+(function(){
+  var ans={};
+  document.querySelectorAll('.opts').forEach(function(g){g.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});ans[g.dataset.q]=b.textContent;check();});});
+  function check(){document.querySelectorAll('.step').forEach(function(s){var g=s.querySelectorAll('.opts'),ok=[].every.call(g,function(x){return ans[x.dataset.q]});var go=s.querySelector('.go');if(go)go.disabled=!ok;});}
+  function show(n){document.querySelectorAll('.step').forEach(function(s){s.classList.toggle('on',s.dataset.s==n)});
+    document.querySelectorAll('.pg i').forEach(function(i,j){i.classList.toggle('on',j<Math.min(n,3))});}
+  document.querySelectorAll('[data-next]').forEach(function(b){b.onclick=function(){show(b.dataset.next)}});
+  document.querySelectorAll('[data-prev]').forEach(function(b){b.onclick=function(){show(b.dataset.prev)}});
+  document.querySelector('[data-send]').onclick=function(){
+    var t,why;
+    if(ans.cuando==='Este trimestre'&&ans.tam!=='1 a 5'){t='A';why='Empresa con varias personas y necesidad este trimestre: llamada hoy y propuesta.';}
+    else if(ans.cuando==='Planificando'){t='C';why='Está planificando: información y seguimiento en el momento que indique.';}
+    else{t='B';why='Necesidad clara, sin urgencia: llamada esta semana y propuesta.';}
+    document.getElementById('cls').innerHTML='<span class="p">'+t+'</span><b>Lo que vería admisiones en el CRM</b><br>'+why+' Entra como ficha de empresa, con sector y nº de personas.';
+    show(4);};
+})();
+</script>
+</body>
+</html>
