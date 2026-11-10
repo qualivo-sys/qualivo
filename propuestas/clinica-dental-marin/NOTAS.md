@@ -70,3 +70,36 @@ Falta o conviene revisar:
 - Los textos de sus anuncios están abreviados con «…». Solo uso lo que nos pasaron, sin nombrar a nadie.
 
 Comprobado: sin scroll horizontal a 390 y a 1440 px (Playwright) en el plan y en anuncios. He revisado las capturas de las dos páginas y de cada creatividad. Las dos páginas llevan `noindex,nofollow,noarchive`. Sin commit.
+
+## Recorrido y CRM (añadido 10-nov, agente de recorrido/demo)
+- Recorrido del paciente: https://qualivo.io/propuestas/clinica-dental-marin/recorrido/
+- Demo del CRM: https://qualivo.io/propuestas/clinica-dental-marin/demo/
+
+Qué hay:
+- **Recorrido** (7 pestañas, plantilla de Gestalt):
+  - En una pantalla;
+  - Formulario o WhatsApp;
+  - Respuesta en minutos con reparto por sede;
+  - Primera visita (confirmación, 24 h, 2 h y «no vino»);
+  - Presupuesto D+1 · D+3 · D+7, con conmutador implantes / ortodoncia;
+  - Aceptado y señal a Meta;
+  - Verlo en marcha (chat reproducible con 3 pacientes).
+  
+  Cada paso marca qué hace el **Sistema**, qué hace **Recepción** y qué hace la **Clínica**.
+- **CRM** (ventana de producto con 4 vistas que comparten estado):
+  - pipeline de 7 etapas con filtro de sede (Todas · Valencia · Patraix · Torrent), filtro de tratamiento y búsqueda;
+  - fichas con progreso, historial y acciones para mover de etapa;
+  - bandeja de WhatsApp con «Necesitan persona», respuestas rápidas y envío;
+  - presupuestos pendientes con toques D+1/D+3/D+7, estado y botones Aceptado/Perdido.
+  
+  Todo se mueve a la vez y hay un botón «Restaurar».
+- Marca: logo real de `assets/brand/` (logo-marin-blanco.png y diente-blanco.png). Sedes: Patraix (Valencia) y Torrent. Las campañas de origen son sus anuncios públicos de Meta («Implante desde 1 €/día», «Ortodoncia invisible desde 3 €/día», «Limpieza + TAC 29,90 €»), rotuladas como «Real». El recorrido cita su formulario de Meta («te contactaremos lo antes posible»).
+- Personas, mensajes, días y cifras van rotulados como «Datos de ejemplo». No hay precios en los mensajes: las condiciones de financiación, direcciones y teléfonos van como texto genérico entre corchetes.
+- Menú superior: Plan (`../`) · Anuncios (`../anuncios/`) · Landings (`../landing-a/`) · Recorrido · CRM · Intelligence (`sector=dentalmarin`) · Presentación.
+
+Lo que falta o hay que revisar:
+- Los enlaces del menú a `../` (Plan) y `../anuncios/` apuntan a las páginas que han hecho otros agentes. Están en el disco, pero no he revisado lo que tienen.
+- «Landings» lleva a la landing A. La B se enlaza desde la A y la presentación, no desde el menú.
+- La presentación todavía usa `sector=clinica` para Intelligence. Estas dos páginas usan `sector=dentalmarin`.
+
+Comprobado: sin scroll horizontal a 390 y 1440 px en todas las pestañas, sin errores de JS, capturas revisadas, interacciones probadas (enviar WhatsApp, marcar aceptado, filtrar por sede, reproducir el chat). `noindex,nofollow,noarchive` en las dos páginas. Sin commit.

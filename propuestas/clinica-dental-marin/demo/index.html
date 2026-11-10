@@ -123,8 +123,8 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
 .dhero .real{background:rgba(19,134,90,.35);color:#C9F2DD}
 .topnav .lgo{height:40px;margin:-4px 0;width:auto;display:block}
 .dhero img.tooth{aspect-ratio:443/452;opacity:.08}
-.av{background:var(--deep)}
-.av img{width:17px;height:auto;display:block}
+.av{background:#fff}
+.av img{width:17px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(14%) sepia(40%) saturate(2000%) hue-rotate(190deg)}
 .flogo{height:44px;width:auto;display:block}
 
 /* ===== Demo del CRM: pipeline por sede, fichas, WhatsApp y presupuestos pendientes ===== */
@@ -134,7 +134,7 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
 .jump button{font-weight:700;font-size:14.5px;border-radius:99px;padding:11px 18px;cursor:pointer;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff}
 .jump button.pri{background:#fff;color:var(--deep);border-color:#fff}
 /* ventana de la app */
-.app{width:min(1400px,calc(100vw - 32px));justify-self:center;background:#fff;border:1px solid #CFE0EF;border-radius:22px;overflow:hidden;box-shadow:0 2px 4px rgba(11,42,69,.04),0 40px 80px -40px rgba(11,42,69,.55);min-width:0}
+.app{width:min(1400px,calc(100vw - 32px));margin-left:calc((100% - min(1400px,calc(100vw - 32px)))/2);background:#fff;border:1px solid #CFE0EF;border-radius:22px;overflow:hidden;box-shadow:0 2px 4px rgba(11,42,69,.04),0 40px 80px -40px rgba(11,42,69,.55);min-width:0}
 .abar{display:flex;align-items:center;gap:12px;padding:10px 14px;background:linear-gradient(135deg,#0B2A45,#123E66);color:#fff;flex-wrap:wrap}
 .abar .dots{display:flex;gap:6px}.abar .dots i{width:11px;height:11px;border-radius:50%;background:#F0A39B}.abar .dots i:nth-child(2){background:#F2D18A}.abar .dots i:nth-child(3){background:#A9D7A2}
 .abar .wm{font-size:15px}
@@ -166,7 +166,9 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
 .view{display:none;padding:16px;gap:16px;background:linear-gradient(180deg,#F7FAFD,#fff 220px);min-width:0}
 .view.on{display:grid;animation:up .4s ease-out}
 .view > *{min-width:0}
+@media (max-width:1500px) and (min-width:901px){.ashell{grid-template-columns:66px minmax(0,1fr)}.side{padding:14px 8px;align-items:center}.side button{font-size:0;padding:11px;position:relative;gap:0}.side button .i{width:21px;height:21px}.side button em{position:absolute;top:2px;right:0;font-size:10px}.side .lbl{font-size:0;padding:6px 0;border-top:1px solid var(--line);width:70%}.side .lbl:first-child{border:0}.side .me{padding:10px 0;justify-content:center}.side .me div{display:none}}
 @media (max-width:900px){.ashell{grid-template-columns:1fr}.side{display:none}}
+.card{grid-template-columns:minmax(0,1fr)}.card > *{min-width:0}
 @media (max-width:560px){.view{padding:12px}.atop{padding:10px 12px}.atop input{flex:1 1 100%}}
 /* chips */
 .av2{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:12.5px;flex:none;letter-spacing:.02em;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
@@ -307,7 +309,7 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
 .ptable th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);background:var(--soft2);padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
 .ptable td{padding:11px 12px;border-bottom:1px solid #EEF3F8;vertical-align:middle}
 .ptable tr:last-child td{border-bottom:0}
-.ptable tr.today td{background:#FFFCF2}
+.ptable tr.due td{background:#FFFCF2}
 .ptable .pn{display:flex;gap:10px;align-items:center;min-width:0}
 .ptable .pn b{display:block;font-size:13.5px}
 .ptable .pn small{color:var(--mut);font-size:11.5px}
@@ -318,7 +320,7 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
 .tk span.td.r{background:#B0301F;color:#fff;box-shadow:0 0 0 3px rgba(176,48,31,.2)}
 .ptable .acts button{padding:6px 11px;font-size:12.5px}
 .ptable .nxa{font-size:12.5px;color:var(--ink);max-width:28ch}
-@media (max-width:860px){.ptable thead{display:none}.ptable tr{display:grid;grid-template-columns:1fr auto;gap:8px 10px;padding:12px;border-bottom:1px solid var(--line)}.ptable td{padding:0;border:0}.ptable td.c2{grid-column:1/-1}.ptable tr.today td{background:none}.ptable tr.today{background:#FFFCF2}}
+@media (max-width:860px){.ptable thead{display:none}.ptable tr{display:grid;grid-template-columns:1fr auto;gap:8px 10px;padding:12px;border-bottom:1px solid var(--line)}.ptable td{padding:0;border:0}.ptable td.c2{grid-column:1/-1}.ptable tr.due td{background:none}.ptable tr.due{background:#FFFCF2}}
 .ejband{display:flex;gap:12px;align-items:flex-start;background:#FFFBEA;border:1.5px solid #F2D27A;border-radius:14px;padding:11px 15px;font-size:14px;line-height:1.55}
 .ejband .ej{flex:none;margin-top:1px}
 .split2{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px}
@@ -714,7 +716,7 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
       var d=L.d,tk=[[1,'D+1'],[3,'D+3'],[7,'D+7']].map(function(t){var c=d>t[0]?'dn':d===t[0]||(t[0]===7&&d>=7)?'td'+(t[0]===7?' r':''):'';if(t[0]===7&&d>7)c='td r';return '<span class="'+c+'">'+t[1]+'</span>';}).join('');
       var es=PEST[L.pe]||PEST[''],today=d===1||d===3||d>=7;
       var nxa=L.pe==='duda'?'Contestar la duda de cuotas por WhatsApp':L.pe==='quiere'?'Llamar para dar fecha de inicio':d>=7?'Llamada personal de recepción':d>=3?'Esperar respuesta · llamada el día +7':d>=1?'Enviar las cuotas por escrito el día +3':'Mensaje del día +1 mañana';
-      return '<tr class="'+(today?'today':'')+'"><td><span class="pn">'+av(L,'sm')+'<span><b>'+esc(L.n)+'</b>'+chS(L)+'</span></span></td><td class="c2"><span class="chp tr">'+TR[L.tr]+'</span> <small style="color:var(--mut)">'+L.pago+'</small></td><td>'+dl(d)+'</td><td><span class="tk">'+tk+'</span></td><td><span class="chp '+es[1]+'">'+es[0]+'</span></td><td class="c2 nxa">'+nxa+'</td><td class="c2"><span class="acts"><button type="button" class="okb" data-a="aceptado" data-id="'+L.id+'">Aceptado</button><button type="button" class="lo" data-a="perdido" data-id="'+L.id+'">Perdido</button><button type="button" data-a="wa" data-id="'+L.id+'">WhatsApp</button></span></td></tr>';
+      return '<tr class="'+(today?'due':'')+'"><td><span class="pn">'+av(L,'sm')+'<span><b>'+esc(L.n)+'</b>'+chS(L)+'</span></span></td><td class="c2"><span class="chp tr">'+TR[L.tr]+'</span> <small style="color:var(--mut)">'+L.pago+'</small></td><td>'+dl(d)+'</td><td><span class="tk">'+tk+'</span></td><td><span class="chp '+es[1]+'">'+es[0]+'</span></td><td class="c2 nxa">'+nxa+'</td><td class="c2"><span class="acts"><button type="button" class="okb" data-a="aceptado" data-id="'+L.id+'">Aceptado</button><button type="button" class="lo" data-a="perdido" data-id="'+L.id+'">Perdido</button><button type="button" data-a="wa" data-id="'+L.id+'">WhatsApp</button></span></td></tr>';
     }).join(''):'<tr><td colspan="7"><p class="empty">No quedan presupuestos pendientes con este filtro. 🎉</p></td></tr>';
     tb.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){var L=leads[+b.dataset.id];if(b.dataset.a==='wa'){wsel=L.id;show('wa');}else move(L,b.dataset.a);});});
     var mx=Math.max.apply(null,LOSS.map(function(x){return x[1];}));
