@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- Estáticos tipográficos de formación (10-nov-2026). Uno por hash: #s1-45, #s1-916 … #s5-916. Se renderizan con render.js -->
+<style>
+@font-face{font-family:Anton;src:url(../2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--tl:#1FA396;--tld:#0E7C74;--bk:#0A0A0B;--cr:#F4F1EB;--y:#F4CC38;--red:#E5484D}
+html,body{background:#333}
+.p{display:none;width:1080px;position:relative;overflow:hidden;font-family:SG;flex-direction:column;justify-content:space-between}
+.p.on{display:flex}
+.f45{height:1350px;padding:84px 80px 72px}
+.f916{height:1920px;padding:270px 80px 400px}   /* zonas seguras de stories y Reels */
+.A{font-family:Anton;text-transform:uppercase;line-height:1.1;letter-spacing:.005em}
+.eti{font-size:30px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.pie{display:flex;align-items:center;justify-content:space-between;gap:30px}
+.logo{height:64px}
+.oscuro .logo{filter:none}.claro .logo{filter:invert(1)}
+.cta{font-family:Anton;font-size:36px;text-transform:uppercase;padding:20px 34px;border-radius:999px;white-space:nowrap}
+.sub{font-size:38px;line-height:1.3;font-weight:600}
+.burb{position:relative;margin-bottom:34px;border-radius:34px;padding:42px 48px;font-size:52px;line-height:1.2;font-weight:700}
+.burb:after{content:"";position:absolute;left:70px;bottom:-34px;border:18px solid transparent;border-top:20px solid var(--c);border-left:22px solid var(--c)}
+.burb small{display:block;font-size:24px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;margin-bottom:14px;opacity:.6}
+.chk{display:flex;gap:24px;align-items:center;font-size:40px;font-weight:700}
+.chk b{width:60px;height:60px;border-radius:50%;background:var(--y);color:var(--bk);display:flex;align-items:center;justify-content:center;font-size:34px;flex:none}
+.chk.x{color:rgba(244,241,235,.6)}.chk.x b{background:var(--red);color:#fff}
+.col{display:flex;flex-direction:column}
+</style>
+
+<!-- S1 · G1 con las palabras del cliente -->
+<div class="p oscuro" data-k="s1" style="background:var(--bk);color:var(--cr)">
+ <div class="eti" style="color:var(--tl)">Para academias que invierten en anuncios</div>
+ <div class="col" style="gap:30px">
+  <div class="A h" style="font-size:140px">¿Sabes qué campaña te trae matrículas…</div>
+  <div class="A h2" style="font-size:140px;color:var(--y)">…y cuál solo formularios?</div>
+ </div>
+ <div class="pie"><img class="logo" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"><div class="cta" style="background:var(--y);color:var(--bk)">Diagnóstico gratuito →</div></div>
+</div>
+
+<!-- S2 · Objeción: ya tengo a alguien -->
+<div class="p claro" data-k="s2" style="background:var(--tl);color:var(--bk)">
+ <div class="burb" style="--c:var(--cr);background:var(--cr)"><small>Lo que más nos dicen</small>«Ya tengo a alguien que me lleva las campañas.»</div>
+ <div class="col" style="gap:34px">
+  <div class="A h" style="font-size:124px">Perfecto. <span style="color:var(--cr)">Nosotros conectamos lo que viene después.</span></div>
+  <div class="sub">De la solicitud a la matrícula: respuesta, seguimiento y qué campaña trae alumnos.</div>
+ </div>
+ <div class="pie"><img class="logo" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"><div class="cta" style="background:var(--bk);color:var(--y)">Diagnóstico gratuito →</div></div>
+</div>
+
+<!-- S3 · Objeción: no quiero hablar con una máquina -->
+<div class="p claro" data-k="s3" style="background:var(--cr);color:var(--bk)">
+ <div class="burb" style="--c:var(--bk);background:var(--bk);color:var(--cr)"><small>Lo que nos dicen</small>«No quiero hablar con una máquina.»</div>
+ <div class="col" style="gap:34px">
+  <div class="A h" style="font-size:112px">Tus alumnos tampoco. <span style="color:var(--tld)">Quieren una respuesta rápida y alguien que les siga.</span></div>
+  <div class="sub">Te ayudamos a que ninguna solicitud se quede sin respuesta ni seguimiento.</div>
+ </div>
+ <div class="pie"><img class="logo" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"><div class="cta" style="background:var(--tl);color:var(--bk)">Diagnóstico gratuito →</div></div>
+</div>
+
+<!-- S4 · Control (línea de HERO 06, adaptada a formación) -->
+<div class="p claro" data-k="s4" style="background:var(--y);color:var(--bk)">
+ <div class="eti">Antes de subir el presupuesto</div>
+ <div class="col" style="gap:34px">
+  <div class="A h" style="font-size:138px">Llenas grupos y no sabes qué campaña lo ha hecho.</div>
+  <div class="sub">El día que recortes, puedes apagar justo la que te traía alumnos.</div>
+ </div>
+ <div class="pie"><img class="logo" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"><div class="cta" style="background:var(--bk);color:var(--y)">Diagnóstico gratuito →</div></div>
+</div>
+
+<!-- S5 · Filtro dicho -->
+<div class="p oscuro" data-k="s5" style="background:var(--bk);color:var(--cr)">
+ <div class="eti" style="color:var(--y)">Ojo: esto no es para todos</div>
+ <div class="col" style="gap:44px">
+  <div class="A h" style="font-size:118px">Solo para academias que <span style="color:var(--y)">ya invierten en anuncios.</span></div>
+  <div class="col" style="gap:24px">
+   <div class="chk"><b>✓</b>Cursos de 300 € o más</div>
+   <div class="chk"><b>✓</b>Te llegan solicitudes cada semana</div>
+   <div class="chk"><b>✓</b>No sabes cuáles acaban en matrícula</div>
+   <div class="chk x"><b>✕</b>Si aún no inviertes, no es el momento</div>
+  </div>
+ </div>
+ <div class="pie"><img class="logo" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"><div class="cta" style="background:var(--y);color:var(--bk)">Ver si encajo →</div></div>
+</div>
+
+<script>
+function mostrar(){
+  const [k,f]=(location.hash.slice(1)||'s1-45').split('-');
+  document.querySelectorAll('.p').forEach(p=>{const on=p.dataset.k===k; p.classList.toggle('on',on); p.classList.remove('f45','f916'); if(on){p.classList.add('f'+f); p.id='e';} else p.removeAttribute('id');});
+  // en 9:16 los titulares crecen un poco: hay más alto, pero el ancho es el mismo
+  document.querySelectorAll('.p.on .A').forEach(a=>{const b=a.dataset.base||(a.dataset.base=parseFloat(a.style.fontSize)); a.style.fontSize=(f==='916'?b*1.06:b)+'px';});
+}
+window.addEventListener('hashchange',mostrar); mostrar();
+</script>
+</html>
