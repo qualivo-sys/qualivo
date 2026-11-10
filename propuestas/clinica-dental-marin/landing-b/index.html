@@ -4,500 +4,398 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>Ortodoncia invisible en Patraix (Valencia) y Torrent · Marín Clínica Dental (maqueta)</title>
+<title>Ortodoncia invisible en Patraix y Torrent · Marín Clínica Dental (maqueta)</title>
 <meta name="description" content="Maqueta de landing de ortodoncia invisible para Marín Clínica Dental, preparada por Qualivo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Montserrat:wght@400;500;600;700&display=swap">
 <style>
-/* Landing B · ortodoncia invisible · Marín Clínica Dental. Maqueta de Qualivo (10-nov). CSS propio de la página. */
-:root{--ink:#0E1A2B;--mut:#536378;--bg:#FCFBF9;--soft:#F5F2ED;--soft2:#F8F6F2;--line:#E4DED4;--acc:#3B4670;--acc2:#56618A;--deep:#2F3854;--deep2:#262D45;
---grad:linear-gradient(135deg,#56618A 0%,#2F3854 100%);--ok:#13865A;--amb:#F5B83D;--wa:#1FAF5A;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
---sh:0 22px 50px -34px rgba(11,42,69,.55);--r:22px}
-*{box-sizing:border-box;margin:0}
+/* Landing · Marín Clínica Dental. Maqueta de Qualivo. Estructura UX + estética editorial. */
+:root{--navy:#2F3854;--navy2:#262D45;--ink:#1F2538;--mut:#646B7E;--cream:#F7F3EC;--line:#E5E0D6;--beige:#C9B79A;--beige2:#E8DCC8;--wa:#1FAF5A;
+--serif:"Yeseva One",Georgia,serif;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;--g:clamp(16px,5vw,72px)}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:clip}
-body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
-img,svg{display:block;max-width:100%}
-img{height:auto}
-a{color:var(--acc)}
-button{font-family:inherit}
-.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
-.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+body{background:#fff;color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+svg{display:block}
+[hidden]{display:none!important}
+button,input{font:inherit;color:inherit}
+h1,h2,h3,legend,.big{font-family:var(--serif);font-weight:400;letter-spacing:0;text-wrap:balance}
+.in{max-width:1240px;margin:0 auto;padding:0 var(--g)}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.kick{display:block;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9C8763;margin-bottom:18px}
+:focus-visible{outline:2px solid var(--beige);outline-offset:3px}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;font-weight:600;font-size:15px;letter-spacing:.02em;text-decoration:none;border:1px solid transparent;padding:17px 28px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;border-radius:2px}
+.btn .ic{width:19px;height:19px}
+.btn.pri{background:var(--beige);color:var(--navy2)}
+.btn.pri:hover{background:var(--beige2)}
+.btn.pri .ar{width:18px;height:1px;background:currentColor;transition:width .2s}
+.btn.pri:hover .ar{width:26px}
+.btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+.btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.btn.ghost .ic{color:#7FD9A4}
+.btn.dk{background:var(--navy);color:#fff}
+.btn.dk:hover{background:var(--navy2)}
+.btn.sm{padding:11px 18px;font-size:13.5px}
+
 /* menú común */
-.topnav{position:sticky;top:0;z-index:30;background:rgba(11,42,69,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
-.topnav .in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;min-height:58px}
-.topnav .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;white-space:nowrap;margin-right:auto}
-.topnav .brand .x{opacity:.55;font-weight:500}
-.topnav .lgo{height:40px;margin:-4px 0;width:auto;display:block}
-.topnav .links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.topnav{position:sticky;top:0;z-index:30;background:var(--navy2);color:#fff;font-size:12.5px}
+.topnav .row{display:flex;align-items:center;gap:20px;padding:0 var(--g);min-height:44px}
+.topnav .brand{flex:none;display:flex;align-items:center;gap:8px;font-weight:600;white-space:nowrap;margin-right:auto}
+.topnav .brand .x{opacity:.5;font-weight:400}
+.topnav .brand img{height:24px;width:auto}
+.topnav .links{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;min-width:0}
 .topnav .links::-webkit-scrollbar{display:none}
-.topnav .links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;font-weight:600;padding:6px 11px;border-radius:99px;white-space:nowrap}
-.topnav .links a:hover{background:rgba(255,255,255,.1);color:#fff}
-.topnav .links a[aria-current="page"]{background:#fff;color:var(--deep)}
-/* barra de maqueta */
-.demo{background:#FFF6D6;color:#5E4500;font-size:13px;border-bottom:1px solid #F1DFA0}
-.demo .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding-top:9px;padding-bottom:9px}
-.demo p{flex:1 1 320px;min-width:0}
-.demo b{font-weight:700}
-.sw{display:inline-flex;background:#fff;border:1px solid #EAD48C;border-radius:99px;padding:3px;gap:2px}
-.sw a{font-weight:700;font-size:12.5px;text-decoration:none;color:#5E4500;padding:5px 12px;border-radius:99px;white-space:nowrap}
-.sw a[aria-current="page"]{background:var(--deep);color:#fff}
-.tag{display:inline-block;vertical-align:middle;font:700 10.5px/1.25 var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:6px;max-width:100%}
-.tag.r{background:#E3F5EC;color:#0F6B47}
-.tag.c{background:#FFF0CC;color:#7A5300}
-.tag.e{background:#EDE9FE;color:#5B3FC4}
-/* cabecera de la clínica */
-.chead{background:#fff;border-bottom:1px solid var(--line)}
-.chead .wrap{display:flex;align-items:center;gap:18px;min-height:72px}
-.chead .lg{height:46px;width:auto;margin-right:auto}
-.chead .sd{font-size:13.5px;font-weight:600;color:var(--mut);display:flex;gap:7px;align-items:center;white-space:nowrap}
-.chead .sd i{width:8px;height:8px;border-radius:50%;background:var(--acc2);display:inline-block}
-.chead .sd.t i{background:var(--amb)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 16px/1.2 var(--sans);text-decoration:none;border:0;border-radius:14px;padding:16px 24px;cursor:pointer;background:var(--grad);color:#fff;box-shadow:0 16px 34px -18px rgba(47,56,84,.95);transition:transform .15s,box-shadow .15s}
-.btn:hover{transform:translateY(-1px);box-shadow:0 20px 38px -18px rgba(47,56,84,1)}
-.btn.sm{font-size:14.5px;padding:11px 18px;border-radius:99px}
-.btn.wa{background:var(--wa);box-shadow:0 16px 34px -18px rgba(19,134,90,.9)}
-.btn.gh{background:rgba(255,255,255,.1);box-shadow:none;border:1px solid rgba(255,255,255,.35)}
-.btn.ln{background:#fff;color:var(--acc);border:1px solid var(--acc);box-shadow:none}
-.btn:focus-visible,.opt:focus-visible,.fq summary:focus-visible{outline:3px solid rgba(201,183,154,.5);outline-offset:2px}
+.topnav a{color:rgba(255,255,255,.62);text-decoration:none;white-space:nowrap;padding:12px 0}
+.topnav a:hover,.topnav a[aria-current="page"]{color:#fff}
+.topnav .ab{display:flex;gap:12px;padding-left:18px;border-left:1px solid rgba(255,255,255,.18);flex:none}
+.topnav .ab a[aria-current="page"]{color:var(--beige)}
+
+/* cabecera clínica */
+.chead{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.1)}
+.chead .in{display:flex;align-items:center;gap:24px;min-height:76px}
+.chead img{height:46px;width:auto;margin-right:auto}
+.chead .sd{font-size:13px;color:rgba(255,255,255,.7);white-space:nowrap}
+
 /* hero */
-.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(900px 620px at 85% -10%,rgba(201,183,154,.45),transparent 62%),radial-gradient(700px 500px at -10% 110%,rgba(201,183,154,.18),transparent 60%),linear-gradient(150deg,#2F3854 0%,#262D45 55%,#2F3854 100%)}
-.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center;padding-top:72px;padding-bottom:84px}
-.eb{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);margin-bottom:22px}
-.eb i{width:7px;height:7px;border-radius:50%;background:#E2D3BA}
-h1{font-size:clamp(34px,4.4vw,56px);line-height:1.04;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
-h1 em{font-style:normal;color:#E2D3BA}
-.hero .lead{font-size:19.5px;line-height:1.55;margin-top:22px;max-width:38ch;color:rgba(255,255,255,.88)}
-.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-.micro{font-size:13.5px;color:rgba(255,255,255,.72);margin-top:12px;display:flex;align-items:center;gap:8px}
-.micro .ic{width:16px;height:16px}
-.proof{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:30px;padding-top:22px;border-top:1px solid rgba(255,255,255,.16);font-size:14px;font-weight:600;color:rgba(255,255,255,.9)}
-.proof span{display:inline-flex;align-items:center;gap:7px}
-.proof .ic{width:18px;height:18px;color:#E2D3BA}
-/* composición del hero */
-.art{position:relative;aspect-ratio:1/1.02;max-width:470px;width:100%;justify-self:center}
-.art .disc{position:absolute;inset:6% 4% 8% 6%;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.3),rgba(255,255,255,.05) 60%),linear-gradient(160deg,rgba(201,183,154,.55),rgba(47,56,84,.25));border:1px solid rgba(255,255,255,.25);box-shadow:inset 0 0 80px rgba(255,255,255,.08),0 40px 90px -40px rgba(0,0,0,.6)}
-.art .ring{position:absolute;inset:0 0 2% 0;border-radius:50%;border:1px dashed rgba(255,255,255,.22)}
-.art .th{position:absolute;left:50%;top:47%;width:46%;transform:translate(-50%,-50%);filter:drop-shadow(0 24px 30px rgba(0,0,0,.28))}
-.art .aligner{position:absolute;left:50%;top:47%;width:66%;transform:translate(-50%,-50%)}
-.chip{position:absolute;background:#fff;color:var(--ink);border-radius:16px;padding:12px 14px;box-shadow:0 22px 44px -22px rgba(0,0,0,.55);display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;line-height:1.25;max-width:220px}
-.chip small{display:block;font-weight:500;color:var(--mut);font-size:12px}
-.chip .b{display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:var(--soft);color:var(--acc);flex:none}
-.chip .b .ic{width:20px;height:20px}
-.chip.c1{left:-4%;top:12%}
-.chip.c2{right:-6%;top:24%}
-.chip.c3{left:-4%;bottom:2%}
-/* barra de confianza */
-.trust{position:relative;z-index:2;margin-top:-38px}
-.trust .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
-.trust .it{display:flex;gap:14px;align-items:flex-start;padding:22px 22px;min-width:0}
-.trust .it + .it{border-left:1px solid var(--line)}
-.trust .b{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:var(--soft);color:var(--acc);flex:none}
-.trust b{display:block;font-size:15.5px;line-height:1.3}
-.trust small{display:block;color:var(--mut);font-size:13.5px;line-height:1.45;margin-top:3px}
-.trust .tag{margin-top:7px}
+.hero{background:var(--navy);color:#fff;display:grid;grid-template-areas:"photo" "text"}
+.hero .photo{grid-area:photo;position:relative;min-height:34svh;overflow:hidden}
+.hero .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+.hero .chip{position:absolute;left:var(--g);bottom:18px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.96);color:var(--ink);padding:12px 16px;font-size:13px;font-weight:600;line-height:1.3;box-shadow:0 24px 50px -24px rgba(0,0,0,.6)}
+.hero .chip .ic{color:#9C8763}
+.hero .chip.c2{left:auto;right:var(--g);bottom:auto;top:18px;display:none}
+.hero .text{grid-area:text;padding:32px var(--g) 44px}
+.hero .kick{color:var(--beige)}
+.hero h1{font-size:clamp(38px,5vw,76px);line-height:1.04;max-width:12ch}
+.hero .sub{margin:18px 0 30px;font-size:17px;color:rgba(255,255,255,.78);max-width:36ch}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.trustline{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);font-size:13.5px;color:rgba(255,255,255,.82)}
+.trustline span{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.trustline .ic{width:18px;height:18px;color:var(--beige)}
+@media (min-width:900px){
+  .hero{grid-template-columns:minmax(0,47fr) minmax(0,53fr);grid-template-areas:"text photo";min-height:calc(100svh - 120px);max-height:900px}
+  .hero .photo{min-height:560px}
+  .hero .text{align-self:center;padding:72px clamp(32px,4vw,72px) 72px max(var(--g),calc((100vw - 1240px)/2 + var(--g)))}
+  .hero .sub{font-size:18px}
+  .hero .chip{left:32px;bottom:40px}
+  .hero .chip.c2{display:flex;right:32px;top:40px}
+}
+
 /* secciones */
-.sec{padding:96px 0}
-.sec.alt{background:var(--soft2)}
-.sec.dk{background:linear-gradient(160deg,#2F3854,#262D45);color:#fff}
-.kick{display:inline-block;font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:12px}
-.dk .kick{color:#E2D3BA}
-h2.t{font-size:clamp(30px,3.9vw,44px);letter-spacing:-.028em;line-height:1.08;margin-bottom:14px;text-wrap:balance;max-width:22ch}
-p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
-.dk p.s{color:rgba(255,255,255,.78)}
-.head-c{text-align:center}
-.head-c h2.t,.head-c p.s{margin-left:auto;margin-right:auto}
+.sec{padding:clamp(72px,10vw,140px) 0}
+.sec.cr{background:var(--cream)}
+.sec h2{font-size:clamp(32px,3.8vw,54px);line-height:1.08;color:var(--navy);max-width:16ch}
+.sec .lede{margin-top:16px;color:var(--mut);font-size:17px;max-width:44ch}
+
 /* ¿es para ti? */
-.fit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.fc{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--sh);display:flex;gap:14px;align-items:flex-start;min-width:0}
-.fc .b{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;flex:none}
-.fc .b .ic{width:21px;height:21px}
-.fc p{font-size:16px;line-height:1.5;font-weight:600}
-.fc p small{display:block;font-weight:500;color:var(--mut);font-size:14.5px;margin-top:4px}
-.notfit{margin-top:22px;display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px dashed #D6C8B2;border-radius:18px;padding:18px 22px;font-size:15.5px;color:var(--mut)}
-.notfit b{color:var(--ink)}
-.notfit .ic{color:var(--acc);margin-top:2px}
-.mid-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:36px}
-.mid-cta p{font-size:14px;color:var(--mut)}
-/* pasos */
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:st;position:relative}
-.steps::before{content:"";position:absolute;left:8%;right:8%;top:31px;height:2px;background:repeating-linear-gradient(90deg,var(--acc2) 0 8px,transparent 8px 14px);opacity:.5}
-.st{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 22px;box-shadow:var(--sh);min-width:0}
-.st .n{position:relative;display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:#fff;border:2px solid var(--acc2);color:var(--acc);margin:-55px 0 14px;box-shadow:0 10px 24px -14px rgba(47,56,84,.8)}
-.st .n .ic{width:26px;height:26px}
-.st .k{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
-.st h3{font-size:20px;letter-spacing:-.015em;margin:4px 0 8px}
-.st p{color:var(--mut);font-size:15px;line-height:1.55}
-.st .you{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink)}
-.st .you b{color:var(--acc)}
-.steps-wrap{padding-top:34px}
-.note{font-size:13.5px;color:var(--mut);margin-top:22px;display:flex;gap:8px;align-items:flex-start}
-.note .ic{width:18px;height:18px;margin-top:2px;color:var(--acc)}
-/* primera visita */
-.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
-.chk{list-style:none;padding:0;display:grid;gap:14px}
-.chk li{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px}
-.chk li .b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#E3F5EC;color:var(--ok);flex:none}
-.chk li .b .ic{width:17px;height:17px;stroke-width:2.6}
-.chk b{display:block;font-size:16px}
-.chk small{display:block;color:var(--mut);font-size:14.5px;line-height:1.5;margin-top:2px}
-.takeaway{position:relative;background:var(--deep);color:#fff;border-radius:26px;padding:34px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(11,42,69,.9)}
-.takeaway::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(201,183,154,.45),transparent 70%)}
-.takeaway h3{font-size:24px;letter-spacing:-.02em;margin-bottom:6px;position:relative}
-.takeaway > p{color:rgba(255,255,255,.75);font-size:15.5px;margin-bottom:22px;position:relative}
-.doc{position:relative;background:#fff;color:var(--ink);border-radius:16px;padding:20px;display:grid;gap:12px}
-.doc .row{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:14.5px;border-bottom:1px solid var(--line);padding-bottom:10px}
-.doc .row:last-child{border:0;padding-bottom:0}
-.doc .row span{color:var(--mut)}
-.doc .row b{text-align:right}
-.doc .bar{height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
-.doc .bar i{display:block;height:100%;width:62%;background:var(--grad);border-radius:99px}
-.doc .hd{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px}
-.doc .hd img{height:26px;width:auto}
-/* financiación */
-.fin{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.fi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:26px;min-width:0}
-.fi .n{font-size:13px;font-weight:800;letter-spacing:.12em;color:#E2D3BA}
-.fi h3{font-size:20px;margin:8px 0 8px;letter-spacing:-.01em}
-.fi p{color:rgba(255,255,255,.75);font-size:15.5px}
-.legal{margin-top:26px;font-size:13.5px;color:rgba(255,255,255,.6);max-width:80ch}
-/* por qué Marín */
-.why{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
-.quote{position:sticky;top:110px;background:var(--grad);color:#fff;border-radius:26px;padding:38px;box-shadow:0 40px 80px -40px rgba(47,56,84,.9);overflow:hidden}
-.quote img.d{position:absolute;right:-30px;bottom:-30px;width:190px;opacity:.16}
-.quote .big{font-size:clamp(26px,3vw,34px);font-weight:800;line-height:1.15;letter-spacing:-.02em;position:relative}
-.quote p{position:relative;margin-top:16px;color:rgba(255,255,255,.88);font-size:16px}
-.quote .tag{position:relative;margin-top:18px}
-.wl{display:grid;gap:14px}
-.wi{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--sh)}
-.wi .b{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--soft);color:var(--acc);flex:none}
-.wi h3{font-size:18px;margin-bottom:4px;letter-spacing:-.01em}
-.wi p{color:var(--mut);font-size:15.5px}
-.wi .tag{margin-top:8px}
+.fit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:clamp(40px,5vw,72px);border-top:1px solid var(--line)}
+.fc{padding:34px 28px 38px 0;min-width:0}
+.fc + .fc{border-left:1px solid var(--line);padding-left:28px}
+.fc .ic{width:34px;height:34px;color:#9C8763;stroke-width:1.2}
+.fc p{margin-top:22px;font-size:18px;line-height:1.4;font-weight:500;color:var(--navy);max-width:16ch}
+.after{margin-top:clamp(36px,4vw,56px)}
+
+/* cita */
+.quote{display:grid;background:var(--cream)}
+.quote figure{position:relative;min-height:62vw;overflow:hidden}
+.quote figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.quote blockquote{padding:60px var(--g) 68px}
+.quote .stars{display:flex;gap:4px;color:var(--beige);margin-bottom:22px}
+.quote .stars .ic{width:18px;height:18px;fill:currentColor;stroke:none}
+.quote .big{font-size:clamp(40px,5vw,78px);line-height:1.04;color:var(--navy);max-width:10ch}
+.quote .big::before{content:"«";color:var(--beige)}
+.quote .big::after{content:"»";color:var(--beige)}
+.quote cite{display:block;margin-top:30px;padding-top:18px;border-top:1px solid #D9D2C4;max-width:300px;font-style:normal;font-size:14px;color:var(--mut)}
+@media (min-width:900px){
+  .quote{grid-template-columns:minmax(0,56fr) minmax(0,44fr);align-items:center}
+  .quote figure{min-height:min(680px,78vh);height:100%}
+  .quote blockquote{padding:110px var(--g) 110px clamp(48px,6vw,110px)}
+}
+
+/* cómo funciona */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(24px,3vw,48px);margin-top:clamp(44px,6vw,80px)}
+.steps li{border-top:1px solid var(--line);padding-top:28px;min-width:0}
+.steps .n{display:block;font-family:var(--serif);font-size:clamp(72px,7vw,108px);line-height:1;color:var(--beige)}
+.steps h3{font-size:22px;color:var(--navy);margin:22px 0 8px}
+.steps p{font-size:16px;line-height:1.5;color:var(--mut);max-width:24ch}
+
 /* FAQ */
-.fqs{display:grid;gap:12px;max-width:840px;margin:0 auto}
-.fq{background:#fff;border:1px solid var(--line);border-radius:18px;transition:box-shadow .2s}
-.fq[open]{box-shadow:var(--sh);border-color:#BFDCF2}
-.fq summary{font-weight:700;font-size:17px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px}
+.faq{display:grid;gap:48px}
+.fqs{border-top:1px solid var(--line)}
+.fq{border-bottom:1px solid var(--line)}
+.fq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 0;font-size:18px;font-weight:600;color:var(--navy)}
 .fq summary::-webkit-details-marker{display:none}
-.fq summary::after{content:"";flex:none;width:30px;height:30px;border-radius:50%;background:var(--soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231A7FC9' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/16px no-repeat;transition:transform .2s}
+.fq summary::after{content:"+";flex:none;font-family:var(--serif);font-size:28px;line-height:1;color:#9C8763;transition:transform .2s}
 .fq[open] summary::after{transform:rotate(45deg)}
-.fq .a{padding:0 22px 20px;color:var(--mut);font-size:16px}
-/* formulario multi-paso */
-.fsec{background:radial-gradient(800px 500px at 100% 0%,rgba(201,183,154,.16),transparent 60%),var(--soft2)}
-.fgrid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
-.fside .chk li{background:transparent;border:0;padding:0}
-.fbox{background:#fff;border:1px solid var(--line);border-radius:26px;padding:30px;box-shadow:0 40px 80px -44px rgba(11,42,69,.7);scroll-margin-top:90px;min-width:0}
-.prog{display:flex;align-items:center;gap:12px;margin-bottom:22px}
-.prog .tr{flex:1;height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
-.prog .tr i{display:block;height:100%;width:20%;background:var(--grad);border-radius:99px;transition:width .3s}
-.prog span{font-size:13px;font-weight:700;color:var(--mut);white-space:nowrap}
-.step{display:none;border:0;padding:0;min-width:0}
-.step.on{display:block;animation:fi .25s ease}
-@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.step legend{font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.25;padding:0;margin-bottom:6px}
-.step .hint{color:var(--mut);font-size:14.5px;margin-bottom:18px}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.opt{display:flex;align-items:center;gap:12px;text-align:left;font:600 15.5px/1.3 var(--sans);border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:16px;padding:15px 16px;cursor:pointer;transition:border-color .15s,background .15s;min-width:0}
-.opt:hover{border-color:var(--acc2);background:var(--soft2)}
-.opt[aria-pressed="true"]{border-color:var(--acc);background:var(--soft);color:var(--acc)}
-.opt .b{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--soft);color:var(--acc);flex:none}
-.opt .b .ic{width:19px;height:19px}
-.opt small{display:block;font-weight:500;color:var(--mut);font-size:12.5px;margin-top:2px}
-.fields{display:grid;gap:12px}
-.fields label{display:grid;gap:6px;font-weight:700;font-size:14px}
-.fields input[type=text],.fields input[type=tel]{font:500 16px var(--sans);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;width:100%;min-width:0}
-.fields input:focus{outline:3px solid rgba(201,183,154,.35);border-color:var(--acc2)}
-.fields .cb{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:13px;color:var(--mut)}
-.fields .cb input{margin-top:3px;flex:none;width:17px;height:17px}
-.err{display:none;color:#B42318;font-size:13.5px;font-weight:600}
+.fq .a{padding:0 0 26px;color:var(--mut);max-width:60ch}
+@media (min-width:900px){.faq{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+
+/* formulario */
+.fgrid{display:grid;gap:44px}
+.fside h2{max-width:11ch}
+.box{background:#fff;padding:clamp(24px,3.4vw,48px);box-shadow:0 40px 90px -60px rgba(38,45,69,.55);min-width:0;scroll-margin-top:70px}
+.prog{display:flex;align-items:center;gap:14px;margin-bottom:30px;font-size:12.5px;color:var(--mut);letter-spacing:.04em}
+.prog .tr{flex:1;height:2px;background:var(--line)}
+.prog .tr i{display:block;height:100%;width:20%;background:var(--navy);transition:width .3s}
+.step{display:none;border:0;min-width:0}
+.step.on{display:block;animation:fi .35s ease}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+legend{font-size:clamp(26px,2.4vw,34px);line-height:1.15;color:var(--navy);margin-bottom:22px;padding:0}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;background:none;border:0;border-top:1px solid var(--line);padding:19px 4px;text-align:left;font-size:17px;cursor:pointer;transition:padding .2s,color .2s}
+.opts .opt:last-child{border-bottom:1px solid var(--line)}
+.opt::after{content:"→";color:#9C8763;transition:transform .2s}
+.opt:hover{padding-left:12px;color:var(--navy)}
+.opt:hover::after{transform:translateX(4px)}
+.opt[aria-pressed="true"]{color:var(--navy);font-weight:600}
+.opt[aria-pressed="true"]::after{content:"●";font-size:10px}
+.fields{display:grid;gap:22px}
+.fields label{display:block;font-size:13px;color:var(--mut)}
+.fields input[type=text],.fields input[type=tel]{display:block;width:100%;margin-top:6px;border:0;border-bottom:1px solid #C9C4B9;padding:10px 0;font-size:18px;background:none;border-radius:0;outline:0}
+.fields input:focus{border-bottom-color:var(--navy)}
+.fields .cb{display:flex;gap:12px;align-items:flex-start;line-height:1.5}
+.fields .cb input{margin-top:3px;accent-color:var(--navy);width:16px;height:16px;flex:none}
+.err{display:none;font-size:14px;color:#9A3B2E}
 .err.on{display:block}
-.fnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px}
-.back{background:none;border:0;color:var(--mut);font:600 14.5px var(--sans);cursor:pointer;padding:8px 4px;visibility:hidden}
+.fnav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:30px;min-height:56px}
+.back{background:none;border:0;font-size:14px;color:var(--mut);cursor:pointer;visibility:hidden;padding:10px 0}
 .back.on{visibility:visible}
-.send[hidden]{display:none}
-.fbox .priv{font-size:12px;color:var(--mut);margin-top:14px;text-align:center}
-.okv{display:none;text-align:center}
-.fbox.done form{display:none}
-.fbox.done .okv{display:block;animation:fi .3s ease}
-.okv .tick{width:64px;height:64px;border-radius:50%;background:#E3F5EC;color:var(--ok);display:grid;place-items:center;margin:0 auto 14px}
-.okv .tick .ic{width:30px;height:30px;stroke-width:2.6}
-.okv h3{font-size:24px;letter-spacing:-.02em}
-.okv > p{color:var(--mut);margin-top:6px}
-.crm{margin-top:22px;text-align:left;background:var(--soft2);border:1px dashed #D6C8B2;border-radius:18px;padding:18px}
-.crm .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
-.crm .lv{display:flex;gap:14px;align-items:center}
-.crm .L{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;color:#fff;background:var(--ok);font-size:26px;font-weight:800;flex:none}
-.crm .L.B{background:var(--acc)}.crm .L.C{background:#8A97A8}
-.crm .lv b{display:block;font-size:16px}
+.okv{display:none}
+.box.done form{display:none}
+.box.done .okv{display:block;animation:fi .35s ease}
+.okv .tick{width:52px;height:52px;border-radius:50%;border:1px solid var(--beige);color:#9C8763;display:grid;place-items:center;margin-bottom:22px}
+.okv h3{font-size:clamp(30px,3vw,42px);line-height:1.1;color:var(--navy)}
+.okv > p{margin-top:12px;color:var(--mut)}
+.crm{margin-top:30px;border-top:1px solid var(--line);padding-top:22px}
+.crm .hd{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:16px}
+.crm .lv{display:flex;gap:16px;align-items:center}
+.crm .L{display:grid;place-items:center;width:52px;height:52px;flex:none;font-family:var(--serif);font-size:28px;color:#fff;background:var(--navy)}
+.crm .L.B{background:#9C8763}.crm .L.C{background:#9AA0AE}
+.crm .lv b{display:block;font-size:16px;color:var(--navy)}
 .crm .lv small{color:var(--mut);font-size:14px}
-.crm dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin-top:14px;font-size:14px}
+.crm dl{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;margin-top:20px;font-size:14px}
 .crm dt{color:var(--mut)}
 .crm dd{font-weight:600;margin:0}
-.again{margin-top:16px;background:none;border:0;color:var(--acc);font:700 14.5px var(--sans);cursor:pointer}
-/* CTA final */
-.final{position:relative;overflow:hidden;text-align:center;color:#fff;background:radial-gradient(700px 400px at 50% 0%,rgba(201,183,154,.4),transparent 70%),linear-gradient(160deg,#2F3854,#2F3854);padding:100px 0}
-.final .lw{height:64px;width:auto;margin:0 auto 26px}
-.final h2{font-size:clamp(32px,4.4vw,52px);letter-spacing:-.03em;line-height:1.06;max-width:20ch;margin:0 auto;text-wrap:balance}
-.final p{color:rgba(255,255,255,.8);font-size:18.5px;max-width:52ch;margin:16px auto 0}
-.final .ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:32px}
-.final .micro{justify-content:center}
-.sedes{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:34px}
-.sedes span{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:8px 14px}
-.sedes i{width:8px;height:8px;border-radius:50%;background:#E2D3BA}
-.sedes .t i{background:var(--amb)}
-.foot{background:#071C2F;color:rgba(255,255,255,.62);padding:40px 0 110px;font-size:13px}
-.foot .wrap{display:grid;gap:12px}
-.foot img{height:44px;width:auto}
-.foot b{color:rgba(255,255,255,.85)}
-/* barra fija en móvil */
-.mbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);box-shadow:0 -10px 30px -20px rgba(11,42,69,.5);transform:translateY(110%);transition:transform .25s}
+.again{margin-top:26px;background:none;border:0;border-bottom:1px solid currentColor;color:var(--mut);font-size:14px;cursor:pointer;padding:0 0 2px}
+@media (min-width:900px){.fgrid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start}}
+
+/* cierre */
+.final{background:var(--navy);color:#fff;text-align:center;padding:clamp(80px,11vw,150px) 0}
+.final h2{font-size:clamp(36px,4.6vw,66px);line-height:1.05;max-width:14ch;margin:0 auto}
+.final .ctas{justify-content:center;margin-top:38px}
+
+/* pie */
+.foot{background:var(--navy2);color:rgba(255,255,255,.6);font-size:13px;padding:56px 0 calc(56px + env(safe-area-inset-bottom))}
+.foot .in{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px}
+.foot img{height:40px;width:auto;margin-bottom:14px}
+.foot b{color:rgba(255,255,255,.88);font-weight:600}
+.foot .note{max-width:46ch}
+
+/* barra fija móvil */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s}
 .mbar.on{transform:none}
-.mbar a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;text-decoration:none;border-radius:13px;padding:13px 10px;color:#fff;background:var(--grad)}
-.mbar a.wa{flex:0 0 auto;background:var(--wa);padding:13px 16px}
-.mbar .ic{width:19px;height:19px}
-.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:50;background:var(--ink);color:#fff;font-size:14px;font-weight:600;padding:12px 16px;border-radius:12px;max-width:min(92vw,420px);text-align:center;transition:opacity .2s,transform .2s}
+.mbar .btn{flex:1;padding:15px 12px}
+.mbar .btn.wa{flex:0 0 auto;background:var(--navy);color:#fff}
+.mbar .btn.wa .ic{color:#7FD9A4}
+.toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:50;background:var(--navy2);color:#fff;font-size:14px;padding:12px 16px;max-width:min(92vw,420px);text-align:center;transition:opacity .2s,transform .2s}
 .toast.on{opacity:1;transform:translate(-50%,0)}
+
 @media (max-width:980px){
-.hero .wrap{grid-template-columns:1fr;gap:28px;padding-top:48px;padding-bottom:80px}
-.art{max-width:360px}
-.trust .grid{grid-template-columns:1fr 1fr}
-.trust .it:nth-child(3){border-left:0}
-.trust .it:nth-child(n+3){border-top:1px solid var(--line)}
-.fit{grid-template-columns:1fr 1fr}
-.steps{grid-template-columns:1fr 1fr;row-gap:52px}
-.steps::before{display:none}
-.split,.why,.fgrid{grid-template-columns:minmax(0,1fr);gap:36px}
-.quote{position:relative;top:0}
-.fin{grid-template-columns:1fr}
+  .fit{grid-template-columns:1fr 1fr}
+  .fc:nth-child(3){border-left:0;padding-left:0}
+  .fc:nth-child(n+3){border-top:1px solid var(--line)}
+  .steps{grid-template-columns:1fr 1fr}
 }
-@media (max-width:640px){
-body{font-size:16px}
-.topnav .in{flex-wrap:wrap;gap:6px 12px;padding:9px 16px}
-.topnav .links{width:100%;order:2}
-.topnav .brand{font-size:14px}
-.wrap{padding:0 16px}
-.chead .sd{display:none}
-.chead .lg{height:40px}
-.hero .lead{font-size:17.5px}
-.hero .ctas .btn{flex:1 1 100%}
-.art{max-width:300px}
-.chip{font-size:12.5px;padding:9px 11px;max-width:180px}
-.chip .b{width:30px;height:30px}
-.chip.c1{left:-2%}.chip.c2{right:-2%}
-.trust .grid{grid-template-columns:1fr}
-.trust .it + .it{border-left:0;border-top:1px solid var(--line)}
-.trust .it{padding:16px 18px}
-.sec{padding:68px 0}
-p.s{font-size:17px;margin-bottom:30px}
-.fit,.steps{grid-template-columns:1fr}
-.opts{grid-template-columns:1fr}
-.fbox{padding:22px 18px}
-.takeaway,.quote{padding:26px}
-.mbar{display:flex}
-.final{padding:76px 0}
-.final .ctas .btn{flex:1 1 100%}
+@media (max-width:899px){
+  .topnav .brand img,.topnav .brand .x{display:none}
+  .topnav .row{gap:14px}
+  .topnav .ab{padding-left:14px}
+  .chead .in{min-height:62px}
+  .chead img{height:36px}
+  .chead .sd{display:none}
+  .hero h1{font-size:38px}
+  .hero .ctas .btn{flex:1 1 100%}
+  .final .ctas .btn{flex:1 1 100%}
+  .mbar{display:flex}
+  .foot{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"><style>h1,h2,.hero h1,.s h2{font-family:"Yeseva One",Georgia,serif!important;font-weight:400!important;letter-spacing:0!important}</style></head>
+@media (max-width:560px){
+  .fit{grid-template-columns:1fr}
+  .fc,.fc + .fc{border-left:0;padding:24px 0;display:flex;gap:18px;align-items:center}
+  .fc + .fc{border-top:1px solid var(--line)}
+  .fc .ic{width:30px;height:30px}
+  .fc p{margin-top:0;max-width:none;font-size:17px}
+  .steps{grid-template-columns:1fr;gap:0}
+  .steps li{display:grid;grid-template-columns:72px 1fr;gap:0 8px;padding:24px 0}
+  .steps .n{font-size:58px;grid-row:span 2}
+  .steps h3{margin:4px 0 4px;font-size:20px}
+  .trustline{gap:10px 18px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+/* fix-ctas */.ctas{height:auto!important;align-self:start!important;align-items:flex-start!important}.ctas .btn{height:auto!important;align-self:flex-start!important}</style>
+</head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
 <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
-<symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><path d="M8 12h8"/></symbol>
 <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></symbol>
-<symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/><path d="M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></symbol>
 <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20 11.8A8.2 8.2 0 0 1 7.9 19L4 20l1.1-3.8A8.2 8.2 0 1 1 20 11.8z"/><path d="M9 8.6c.2-.4.5-.5.8-.5h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.6l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.2-.1.4-.2.6-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.6-.5.8-.8.5-2 .5-3.6-.4a9 9 0 0 1-3.3-3.3c-.9-1.6-.9-2.8-.1-3.3z"/></symbol>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
-<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
 <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3.5h7l4 4v12a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 19.5V5A1.5 1.5 0 0 1 7.5 3.5z"/><path d="M14 3.5V8h4M9 12.5h6M9 16h4"/></symbol>
-<symbol id="i-talk" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c.5-3.5 3-5.5 6-5.5s5.5 2 6 5.5"/><path d="M16 5.5a3.5 3.5 0 0 1 0 6M18.5 14.8c1.4.9 2.3 2.6 2.5 5.2"/></symbol>
 <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
 <symbol id="i-tooth" viewBox="0 0 24 24"><path d="M7.5 3.5C4.6 3 3 5.6 3.2 9.2c.2 3 1.5 5 2 8.3.4 2.8 1.1 3.9 2.5 3.9 1.6 0 1.9-2.8 2.3-4.7.3-1.5.8-2.2 2-2.2s1.7.7 2 2.2c.4 1.9.7 4.7 2.3 4.7 1.4 0 2.1-1.1 2.5-3.9.5-3.3 1.8-5.3 2-8.3.2-3.6-1.4-6.2-4.3-5.7-1.9.3-2.9 1-4.5 1s-2.6-.7-4.5-1z"/></symbol>
-<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
-<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20z"/></symbol>
-<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5 5 6v5.5c0 4.4 3 7.8 7 9 4-1.2 7-4.6 7-9V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></symbol>
-<symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14c.9 1.3 2.1 2 3.5 2s2.6-.7 3.5-2M9 9.5h.01M15 9.5h.01"/></symbol>
 <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></symbol>
-<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
 <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></symbol>
-<symbol id="i-pause" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M10 9v6M14 9v6"/></symbol>
+<symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14c.9 1.3 2.1 2 3.5 2s2.6-.7 3.5-2M9 9.5h.01M15 9.5h.01"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3.5c.6 4.2 2.3 5.9 6.5 6.5-4.2.6-5.9 2.3-6.5 6.5-.6-4.2-2.3-5.9-6.5-6.5 4.2-.6 5.9-2.3 6.5-6.5zM18.5 15.5c.3 1.8 1 2.5 2.8 2.8-1.8.3-2.5 1-2.8 2.8-.3-1.8-1-2.5-2.8-2.8 1.8-.3 2.5-1 2.8-2.8z"/></symbol>
 </defs></svg>
 
 <nav class="topnav" aria-label="Paquete Marín Clínica Dental">
-  <div class="in">
-    <div class="brand">Qualivo <span class="x">×</span> <img class="lgo" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452"></div>
+  <div class="row">
+    <div class="brand">Qualivo <span class="x">×</span> <img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452"></div>
     <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="../landing-a/" aria-current="page">Landings</a><a href="../recorrido/">Recorrido</a><a href="../demo/">CRM</a><a href="https://qualivo.io/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion">Intelligence</a><a href="../presentacion/">Presentación</a></div>
+    <div class="ab" aria-label="Elegir landing"><a href="../landing-a/">A</a><a href="../landing-b/" aria-current="page">B</a></div>
   </div>
 </nav>
 
-<div class="demo"><div class="wrap">
-  <p><b>Maqueta de ejemplo de Qualivo.</b> No está publicada ni envía datos. Etiquetas: sale de vuestra web o vuestros anuncios · nos lo tenéis que dar · inventado.</p>
-  <div class="sw" aria-label="Elegir landing"><a href="../landing-a/">A · Implantes</a><a href="../landing-b/" aria-current="page">B · Ortodoncia invisible</a></div>
-</div></div>
-
-<header class="chead"><div class="wrap">
-  <img class="lg" src="../assets/brand/logo-marin.png" alt="Marín Clínica Dental" width="1056" height="452">
-  <span class="sd"><i></i>Patraix (Valencia)</span><span class="sd t"><i></i>Torrent</span>
-  <a class="btn sm" href="#cita">Pedir primera visita</a>
+<header class="chead"><div class="in">
+  <img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452">
+  <span class="sd">Patraix (Valencia) · Torrent</span>
+  <a class="btn pri sm" href="#cita">Pide tu primera visita</a>
 </div></header>
 
 <main>
-<section class="hero" id="top"><div class="wrap">
-  <div>
-    <span class="eb"><i></i>Ortodoncia invisible · Patraix (Valencia) y Torrent</span>
-    <h1>Endereza tu sonrisa con alineadores transparentes. <em>Con un plan claro y en cuotas.</em></h1>
-    <p class="lead">Discretos, extraíbles y pensados para tu día a día. En la primera visita valoramos si eres candidato, te explicamos el plan y te damos el presupuesto por escrito, con la opción de pagarlo en cuotas.</p>
+<section class="hero" id="top">
+  <div class="photo">
+    <img src="../assets/ia/ad2.jpg" alt="Persona sonriendo con naturalidad" width="1080" height="1350" fetchpriority="high">
+    <div class="chip"><svg class="ic"><use href="#i-doc"/></svg>Plan y presupuesto por escrito</div>
+    <div class="chip c2"><svg class="ic"><use href="#i-star"/></svg>Trato cercano, según Google</div>
+  </div>
+  <div class="text">
+    <span class="kick">Ortodoncia invisible</span>
+    <h1>Endereza tu sonrisa casi sin que se note</h1>
+    <p class="sub">Alineadores transparentes, con tu plan por escrito.</p>
     <div class="ctas">
-      <a class="btn" href="#cita">Pedir mi primera visita <svg class="ic"><use href="#i-arrow"/></svg></a>
-      <a class="btn wa js-wa" href="#cita"><svg class="ic"><use href="#i-wa"/></svg>Preguntar por WhatsApp</a>
+      <a class="btn pri" href="#cita">Pide tu primera visita <span class="ar"></span></a>
+      <a class="btn ghost js-wa" href="#cita"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp</a>
     </div>
-    <p class="micro"><svg class="ic"><use href="#i-lock"/></svg>Sin compromiso. Te escribimos por WhatsApp para buscarte hora en la sede que prefieras.</p>
-    <div class="proof">
-      <span><svg class="ic"><use href="#i-pin"/></svg>Patraix (Valencia) y Torrent</span>
-      <span><svg class="ic"><use href="#i-card"/></svg>Financiación en cuotas</span>
-      <span><svg class="ic"><use href="#i-star"/></svg>Opiniones de pacientes en Google</span>
+    <div class="trustline">
+      <span><svg class="ic"><use href="#i-pin"/></svg>Patraix</span>
+      <span><svg class="ic"><use href="#i-pin"/></svg>Torrent</span>
+      <span><svg class="ic"><use href="#i-card"/></svg>Pago en cuotas</span>
+      <span><svg class="ic"><use href="#i-star"/></svg>Opiniones en Google</span>
     </div>
   </div>
-  <div class="art" aria-hidden="true">
-    <div class="ring"></div><div class="disc"></div>
-    <img class="th" src="../assets/brand/diente-blanco.png" alt="" width="443" height="452">
-    <svg class="aligner" viewBox="0 0 200 200" fill="none"><path d="M30 150C22 92 46 38 100 34s78 58 70 116" stroke="#fff" stroke-opacity=".55" stroke-width="16" stroke-linecap="round"/><path d="M30 150C22 92 46 38 100 34s78 58 70 116" stroke="#E2D3BA" stroke-opacity=".9" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 7"/></svg>
-    <div class="chip c1"><span class="b"><svg class="ic"><use href="#i-search"/></svg></span><span>¿Eres candidato?<small>lo valoramos en la primera visita</small></span></div>
-    <div class="chip c2"><span class="b"><svg class="ic"><use href="#i-card"/></svg></span><span>Pago en cuotas<small>te lo explicamos sin prisas</small></span></div>
-    <div class="chip c3"><span class="b"><svg class="ic"><use href="#i-pin"/></svg></span><span>2 sedes<small>Patraix (Valencia) y Torrent</small></span></div>
-  </div>
-</div></section>
+</section>
 
-<div class="trust"><div class="wrap"><div class="grid">
-  <div class="it"><span class="b"><svg class="ic"><use href="#i-pin"/></svg></span><div><b>Dos sedes</b><small>Patraix (Valencia) y Torrent. Eliges la que te quede más cerca.</small></div></div>
-  <div class="it"><span class="b"><svg class="ic"><use href="#i-card"/></svg></span><div><b>Financiación en cuotas</b><small>Pago único o mensual, explicado antes de decidir.</small></div></div>
-  <div class="it"><span class="b"><svg class="ic"><use href="#i-scan"/></svg></span><div><b>Planificación digital</b><small>Ves cómo se moverán tus dientes antes de empezar.</small></div></div>
-  <div class="it"><span class="b"><svg class="ic"><use href="#i-star"/></svg></span><div><b>Opiniones en Google</b><small>Pacientes que destacan el trato cercano y humano.</small></div></div>
-</div></div></div>
-
-<section class="sec" id="para-ti"><div class="wrap">
+<section class="sec" id="para-ti"><div class="in">
   <span class="kick">¿Es para ti?</span>
-  <h2 class="t">Si te reconoces en alguna de estas situaciones, vale la pena que lo veamos</h2>
-  <p class="s">No hace falta que sepas qué tratamiento necesitas. Para eso está la primera visita.</p>
+  <h2>Si te reconoces aquí, hablemos</h2>
   <div class="fit">
-    <div class="fc"><span class="b"><svg class="ic"><use href="#i-tooth"/></svg></span><p>Tus dientes se han ido torciendo con los años<small>Y cada vez te fijas más en las fotos.</small></p></div>
-    <div class="fc"><span class="b"><svg class="ic"><use href="#i-swap"/></svg></span><p>Llevaste brackets de pequeño y se han movido<small>Y no quieres volver a los hierros.</small></p></div>
-    <div class="fc"><span class="b"><svg class="ic"><use href="#i-info"/></svg></span><p>Tienes dientes apiñados o separados<small>O te cuesta limpiar bien entre ellos.</small></p></div>
-    <div class="fc"><span class="b"><svg class="ic"><use href="#i-smile"/></svg></span><p>Quieres una ortodoncia discreta<small>Que apenas se note en el trabajo ni en tu día a día.</small></p></div>
-    <div class="fc"><span class="b"><svg class="ic"><use href="#i-card"/></svg></span><p>Quieres saber cuánto supone al mes<small>Antes de decidir nada.</small></p></div>
-    <div class="fc"><span class="b"><svg class="ic"><use href="#i-search"/></svg></span><p>No sabes si los alineadores sirven para tu caso<small>Lo valoramos contigo y te lo decimos claro.</small></p></div>
+    <div class="fc"><svg class="ic"><use href="#i-tooth"/></svg><p>Tus dientes se han ido torciendo</p></div>
+    <div class="fc"><svg class="ic"><use href="#i-swap"/></svg><p>Se movieron tras los brackets</p></div>
+    <div class="fc"><svg class="ic"><use href="#i-sparkle"/></svg><p>Quieres algo que apenas se note</p></div>
+    <div class="fc"><svg class="ic"><use href="#i-search"/></svg><p>No sabes si eres candidato</p></div>
   </div>
-  <div class="notfit"><svg class="ic"><use href="#i-info"/></svg><p><b>Lo que no podemos hacer:</b> decirte sin verte si los alineadores son para ti, ni darte un precio cerrado. Algunos casos se resuelven mejor con otro tipo de ortodoncia, y si es el tuyo te lo diremos.</p></div>
-  <div class="mid-cta"><a class="btn" href="#cita">Quiero saber si soy candidato</a><p>Cuatro preguntas rápidas. Sin compromiso.</p></div>
+  <div class="after"><a class="btn dk" href="#cita">Quiero saber si soy candidato</a></div>
 </div></section>
 
-<section class="sec alt" id="tratamiento"><div class="wrap">
-  <span class="kick">Cómo es el tratamiento</span>
-  <h2 class="t">De la primera visita a tu nueva sonrisa, paso a paso y sin sorpresas</h2>
-  <p class="s">Antes de empezar sabes cómo se moverán tus dientes, cuánto durará aproximadamente y cuánto supone. Tú decides en cada paso.</p>
-  <div class="steps-wrap"><div class="steps">
-    <div class="st"><span class="n"><svg class="ic"><use href="#i-talk"/></svg></span><span class="k">Paso 1</span><h3>Primera visita</h3><p>Nos cuentas qué te gustaría cambiar de tu sonrisa. Revisamos tus dientes y tu mordida con calma.</p><p class="you"><b>Tú:</b> nos cuentas tu caso y tus dudas.</p></div>
-    <div class="st"><span class="n"><svg class="ic"><use href="#i-scan"/></svg></span><span class="k">Paso 2</span><h3>Diagnóstico</h3><p>Tomamos los registros necesarios (fotos, radiografías y el escaneo o los moldes de tu boca) para estudiar tu caso.</p><p class="you"><b>Tú:</b> sabes si eres candidato.</p></div>
-    <div class="st"><span class="n"><svg class="ic"><use href="#i-doc"/></svg></span><span class="k">Paso 3</span><h3>Plan y presupuesto</h3><p>Te explicamos el plan, cómo se moverán tus dientes, la duración aproximada y el presupuesto por escrito, con la opción de cuotas.</p><p class="you"><b>Tú:</b> te lo llevas a casa y decides.</p></div>
-    <div class="st"><span class="n"><svg class="ic"><use href="#i-tooth"/></svg></span><span class="k">Paso 4</span><h3>Tratamiento</h3><p>Llevas tus alineadores y los vas cambiando según el plan, con revisiones periódicas. Al terminar, retenedores para mantener el resultado.</p><p class="you"><b>Tú:</b> llevas los alineadores el tiempo indicado cada día.</p></div>
-  </div></div>
-  <p class="note"><svg class="ic"><use href="#i-info"/></svg>La duración y el número de alineadores dependen de cada caso y de lo constante que seas llevándolos. Te los explica el especialista en el diagnóstico.</p>
+<section class="quote" aria-label="Opinión de un paciente">
+  <figure><img src="../assets/brand/clinica.jpg" alt="Interior de Marín Clínica Dental" width="1800" height="1200" loading="lazy"></figure>
+  <blockquote>
+    <div class="stars" aria-hidden="true"><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg></div>
+    <p class="big">Un equipo humano y cercano</p>
+    <cite>Opinión de un paciente en Google</cite>
+  </blockquote>
+</section>
+
+<section class="sec" id="tratamiento"><div class="in">
+  <span class="kick">Cómo funciona</span>
+  <h2>Paso a paso y sin sorpresas</h2>
+  <ol class="steps">
+    <li><span class="n">1</span><h3>Primera visita</h3><p>Vemos tu sonrisa y tu mordida.</p></li>
+    <li><span class="n">2</span><h3>Diagnóstico</h3><p>Escaneamos tu boca y estudiamos tu caso.</p></li>
+    <li><span class="n">3</span><h3>Plan por escrito</h3><p>Duración y presupuesto. También en cuotas.</p></li>
+    <li><span class="n">4</span><h3>Tratamiento</h3><p>Alineadores, revisiones y retenedores al final.</p></li>
+  </ol>
 </div></section>
 
-
-
-
-
-
-
-<section class="sec alt" id="faq"><div class="wrap">
-  <div class="head-c"><span class="kick">Preguntas frecuentes</span>
-  <h2 class="t">Lo que más nos preguntáis antes de venir</h2>
-  <p class="s">Y si tienes otra duda, escríbenos y te contestamos por WhatsApp.</p></div>
+<section class="sec cr" id="faq"><div class="in faq">
+  <div>
+    <span class="kick">Preguntas frecuentes</span>
+    <h2>Lo que más nos preguntáis</h2>
+  </div>
   <div class="fqs">
-    <details class="fq"><summary>¿Duele llevar alineadores?</summary><div class="a">No suele doler. Es normal notar presión los primeros días con cada alineador nuevo: es la señal de que los dientes se están moviendo. Suele pasar en poco tiempo, y te damos indicaciones para llevarlo bien.</div></details>
-    <details class="fq"><summary>¿Cuánto tiempo dura el tratamiento?</summary><div class="a">Depende de lo que haya que corregir y de que lleves los alineadores el tiempo indicado cada día. La duración aproximada te la damos por escrito en el plan, después del diagnóstico.</div></details>
-    <details class="fq"><summary>¿Cuánto cuesta la ortodoncia invisible?</summary><div class="a">No podemos darte un precio fiable sin verte: cambia según lo que haya que mover y la duración del tratamiento. Por eso, en la primera visita te damos el presupuesto completo por escrito, sin compromiso.</div></details>
-    <details class="fq"><summary>¿Puedo pagarlo en cuotas?</summary><div class="a">Sí. Puedes elegir entre pago único o cuotas mensuales. Te enseñamos cómo quedaría en tu caso con el presupuesto delante. La financiación está sujeta a estudio de la entidad financiera.</div></details>
-    
-    
-    
-    
-    
+    <details class="fq"><summary>¿Duele llevar alineadores?</summary><div class="a">No suele doler. Con cada alineador nuevo es normal notar presión unos días.</div></details>
+    <details class="fq"><summary>¿Cuánto dura el tratamiento?</summary><div class="a">Depende de lo que haya que corregir y de llevarlos el tiempo indicado. Te damos la duración aproximada por escrito.</div></details>
+    <details class="fq"><summary>¿Cuánto cuesta?</summary><div class="a">No podemos darte un precio fiable sin verte. En la primera visita te damos el presupuesto completo por escrito.</div></details>
+    <details class="fq"><summary>¿Puedo pagarlo en cuotas?</summary><div class="a">Sí, pago único o mensual. La financiación está sujeta a estudio de la entidad financiera.</div></details>
   </div>
 </div></section>
 
-<section class="sec fsec" id="cita"><div class="wrap fgrid">
+<section class="sec cr" id="cita" style="padding-top:0"><div class="in fgrid">
   <div class="fside">
     <span class="kick">Pide tu primera visita</span>
-    <h2 class="t">Cuéntanos tu caso en 30 segundos</h2>
-    <p class="s" style="margin-bottom:28px">Cuatro preguntas para preparar tu visita y darte hora en la sede que prefieras.</p>
-    <ul class="chk">
-      <li><span class="b"><svg class="ic"><use href="#i-check"/></svg></span><div><b>Te escribimos por WhatsApp</b><small>Para proponerte día y hora. Tú confirmas.</small></div></li>
-      <li><span class="b"><svg class="ic"><use href="#i-check"/></svg></span><div><b>Sin compromiso</b><small>Pedir información no te obliga a nada.</small></div></li>
-      <li><span class="b"><svg class="ic"><use href="#i-check"/></svg></span><div><b>Tus datos, solo para esto</b><small>Los usamos para contestarte y nada más.</small></div></li>
-    </ul>
+    <h2>Cuéntanos tu caso en 30 segundos</h2>
+    <p class="lede">Te escribimos por WhatsApp para darte día y hora.</p>
   </div>
-  <div class="fbox" id="fm">
+  <div class="box" id="fm">
     <form novalidate>
-      <div class="prog" aria-hidden="true"><div class="tr"><i></i></div><span class="pn">Paso 1 de 5</span></div>
+      <div class="prog" aria-hidden="true"><span class="pn">1 / 5</span><div class="tr"><i></i></div></div>
       <fieldset class="step on" data-q="trat">
-        <legend>¿Qué te gustaría mejorar?</legend><p class="hint">Si no lo sabes, no pasa nada: para eso está la primera visita.</p>
+        <legend>¿Qué te gustaría mejorar?</legend>
         <div class="opts">
-          <button type="button" class="opt" data-v="Dientes torcidos o apiñados" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-tooth"/></svg></span><span>Dientes torcidos<small>o apiñados</small></span></button>
-          <button type="button" class="opt" data-v="Separaciones" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-swap"/></svg></span><span>Separaciones<small>entre los dientes</small></span></button>
-          <button type="button" class="opt" data-v="Mordida" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-smile"/></svg></span><span>La mordida<small>cómo encajan al cerrar</small></span></button>
-          <button type="button" class="opt" data-v="No lo sé" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-info"/></svg></span><span>No lo sé todavía</span></button>
+          <button type="button" class="opt" data-v="Dientes torcidos o apiñados" aria-pressed="false">Dientes torcidos o apiñados</button>
+          <button type="button" class="opt" data-v="Separaciones" aria-pressed="false">Separaciones entre los dientes</button>
+          <button type="button" class="opt" data-v="Mordida" aria-pressed="false">Cómo encajan al cerrar la boca</button>
+          <button type="button" class="opt" data-v="No lo sé" aria-pressed="false">No lo sé todavía</button>
         </div>
       </fieldset>
       <fieldset class="step" data-q="sede">
-        <legend>¿Qué sede te queda mejor?</legend><p class="hint">Te daremos hora allí.</p>
+        <legend>¿Qué sede te queda mejor?</legend>
         <div class="opts">
-          <button type="button" class="opt" data-v="Patraix (Valencia)" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-pin"/></svg></span><span>Patraix<small>Valencia</small></span></button>
-          <button type="button" class="opt" data-v="Torrent" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-pin"/></svg></span><span>Torrent</span></button>
-          <button type="button" class="opt" data-v="Me da igual" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-swap"/></svg></span><span>Me da igual<small>la primera hora libre</small></span></button>
+          <button type="button" class="opt" data-v="Patraix (Valencia)" aria-pressed="false">Patraix, Valencia</button>
+          <button type="button" class="opt" data-v="Torrent" aria-pressed="false">Torrent</button>
+          <button type="button" class="opt" data-v="Me da igual" aria-pressed="false">Me da igual</button>
         </div>
       </fieldset>
       <fieldset class="step" data-q="cuando">
-        <legend>¿Cuándo te gustaría empezar?</legend><p class="hint">Para organizar la agenda, nada más.</p>
+        <legend>¿Cuándo te gustaría empezar?</legend>
         <div class="opts">
-          <button type="button" class="opt" data-v="ya" data-t="Este mes" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-cal"/></svg></span><span>Cuanto antes<small>este mes</small></span></button>
-          <button type="button" class="opt" data-v="pronto" data-t="En 1-3 meses" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-clock"/></svg></span><span>En 1-3 meses</span></button>
-          <button type="button" class="opt" data-v="info" data-t="Solo me informo" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-pause"/></svg></span><span>Solo me estoy informando</span></button>
+          <button type="button" class="opt" data-v="ya" data-t="Este mes" aria-pressed="false">Cuanto antes</button>
+          <button type="button" class="opt" data-v="pronto" data-t="En 1-3 meses" aria-pressed="false">En 1-3 meses</button>
+          <button type="button" class="opt" data-v="info" data-t="Solo me informo" aria-pressed="false">Solo me estoy informando</button>
         </div>
       </fieldset>
       <fieldset class="step" data-q="cuotas">
-        <legend>¿Te interesa pagarlo en cuotas?</legend><p class="hint">Te lo explicamos en la primera visita, sin compromiso.</p>
+        <legend>¿Te interesa pagarlo en cuotas?</legend>
         <div class="opts">
-          <button type="button" class="opt" data-v="Sí, en cuotas" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-card"/></svg></span><span>Sí, en cuotas</span></button>
-          <button type="button" class="opt" data-v="Pago único" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-check"/></svg></span><span>Prefiero pago único</span></button>
-          <button type="button" class="opt" data-v="Aún no lo sé" aria-pressed="false"><span class="b"><svg class="ic"><use href="#i-info"/></svg></span><span>Aún no lo sé</span></button>
+          <button type="button" class="opt" data-v="Sí, en cuotas" aria-pressed="false">Sí, en cuotas</button>
+          <button type="button" class="opt" data-v="Pago único" aria-pressed="false">Prefiero pago único</button>
+          <button type="button" class="opt" data-v="Aún no lo sé" aria-pressed="false">Aún no lo sé</button>
         </div>
       </fieldset>
       <fieldset class="step" data-q="datos">
-        <legend>¿A quién escribimos?</legend><p class="hint">Te escribimos por WhatsApp para proponerte día y hora.</p>
+        <legend>¿A quién escribimos?</legend>
         <div class="fields">
           <label>Nombre<input type="text" name="nombre" placeholder="Tu nombre" autocomplete="off"></label>
-          <label>WhatsApp<input type="tel" name="tel" placeholder="Tu número de móvil" autocomplete="off" inputmode="tel"></label>
+          <label>WhatsApp<input type="tel" name="tel" placeholder="Tu móvil" autocomplete="off" inputmode="tel"></label>
           <label class="cb"><input type="checkbox" name="ok"><span>Acepto que Marín Clínica Dental use mis datos para contestarme.</span></label>
           <p class="err" role="alert">Falta tu nombre, tu WhatsApp o aceptar el aviso.</p>
         </div>
       </fieldset>
       <div class="fnav">
         <button type="button" class="back">← Atrás</button>
-        <button type="submit" class="btn send" hidden>Pedir mi primera visita</button>
+        <button type="submit" class="btn pri send" hidden>Pide tu primera visita <span class="ar"></span></button>
       </div>
-      <p class="priv">Maqueta: no se envía nada a ningún sitio.</p>
     </form>
     <div class="okv" role="status">
       <div class="tick"><svg class="ic"><use href="#i-check"/></svg></div>
-      <h3>¡Recibido, <span class="nm">gracias</span>!</h3>
-      <p>Te escribimos por WhatsApp para proponerte día y hora.</p>
+      <h3>Gracias, <span class="nm"></span></h3>
+      <p>Te escribimos por WhatsApp para darte día y hora.</p>
       <div class="crm">
-        <div class="hd"><span>Lo que vería el equipo en el CRM</span></div>
+        <div class="hd">Lo que vería el equipo en el CRM</div>
         <div class="lv"><span class="L">A</span><div><b class="lt"></b><small class="lw"></small></div></div>
         <dl></dl>
       </div>
@@ -506,34 +404,34 @@ p.s{font-size:17px;margin-bottom:30px}
   </div>
 </div></section>
 
-<section class="final"><div class="wrap">
-  <img class="lw" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452">
-  <h2>Da el primer paso: descubre si los alineadores son para ti</h2>
-  <p>Primera visita, valoración de tu caso y presupuesto en cuotas si lo quieres. En Patraix (Valencia) o en Torrent.</p>
+<section class="final"><div class="in">
+  <span class="kick" style="color:var(--beige)">Patraix · Torrent</span>
+  <h2>Da el primer paso, sin compromiso</h2>
   <div class="ctas">
-    <a class="btn" href="#cita">Pedir mi primera visita <svg class="ic"><use href="#i-arrow"/></svg></a>
-    <a class="btn wa js-wa" href="#cita"><svg class="ic"><use href="#i-wa"/></svg>Preguntar por WhatsApp</a>
+    <a class="btn pri" href="#cita">Pide tu primera visita <span class="ar"></span></a>
+    <a class="btn ghost js-wa" href="#cita"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp</a>
   </div>
-  <p class="micro" style="justify-content:center">Sin compromiso. Tú confirmas la cita.</p>
-  <div class="sedes"><span><i></i>Patraix (Valencia)</span><span class="t"><i></i>Torrent</span></div>
 </div></section>
 </main>
 
-<footer class="foot"><div class="wrap">
-  <img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452">
-  <p><b>Marín Clínica Dental</b> · Patraix (Valencia) y Torrent. Direcciones, horarios y n.º de registro sanitario de cada sede:</p>
-  <p>Los resultados y los plazos de cualquier tratamiento dependen de cada paciente y requieren valoración previa.</p>
-  <p>Maqueta de ejemplo preparada por Qualivo para Marín Clínica Dental. No es una página publicada ni envía datos. <a href="../landing-a/" style="color:#E2D3BA">Ver la landing A, implantes</a>.</p>
+<footer class="foot"><div class="in">
+  <div>
+    <img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452">
+    <p><b>Marín Clínica Dental</b> · Patraix (Valencia) y Torrent</p>
+    <p>Cada tratamiento requiere valoración previa.</p>
+  </div>
+  <p class="note">Maqueta de Qualivo para Marín Clínica Dental: no está publicada ni envía datos.</p>
 </div></footer>
 
 <div class="mbar" aria-label="Acciones rápidas">
-  <a href="#cita">Pedir primera visita</a>
-  <a class="wa js-wa" href="#cita" aria-label="Preguntar por WhatsApp"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp</a>
+  <a class="btn pri" href="#cita">Pide tu primera visita</a>
+  <a class="btn wa js-wa" href="#cita" aria-label="WhatsApp"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp</a>
 </div>
 <div class="toast" role="status"></div>
 
 <script>
 (function () {
+  var CFG = { trat: 'Ortodoncia invisible', origen: 'Landing B · ortodoncia invisible', wa: 'Hola, quiero información sobre ortodoncia invisible' };
   /* Regla de ejemplo: C = solo se informa; A = quiere empezar en menos de 3 meses y ha elegido sede; B = el resto. */
   function regla(r) {
     if (r.cuando === 'info') return 'C';
@@ -550,7 +448,7 @@ p.s{font-size:17px;margin-bottom:30px}
     i = Math.max(0, Math.min(n, steps.length - 1));
     steps.forEach(function (s, k) { s.classList.toggle('on', k === i); });
     bar.style.width = ((i + 1) / steps.length * 100) + '%';
-    pn.textContent = 'Paso ' + (i + 1) + ' de ' + steps.length;
+    pn.textContent = (i + 1) + ' / ' + steps.length;
     back.classList.toggle('on', i > 0);
     send.hidden = i !== steps.length - 1;
   }
@@ -573,8 +471,9 @@ p.s{font-size:17px;margin-bottom:30px}
     box.querySelector('.nm').textContent = nm.split(' ')[0];
     box.querySelector('.lt').textContent = 'Petición ' + L + ' · ' + QUE[L][0];
     box.querySelector('.lw').textContent = QUE[L][1];
-    var rows = [['Tratamiento', 'Ortodoncia invisible · ' + (r.trat || '—')], ['Sede', r.sede || '—'], ['Cuándo', r.cuandoT || '—'], ['Pago', r.cuotas || '—'], ['Origen', 'Landing B · ortodoncia invisible']];
-    box.querySelector('dl').innerHTML = rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('');
+    var rows = [['Tratamiento', CFG.trat + ' · ' + (r.trat || '—')], ['Sede', r.sede || '—'], ['Cuándo', r.cuandoT || '—'], ['Pago', r.cuotas || '—'], ['Origen', CFG.origen]];
+    var dl = box.querySelector('dl'); dl.innerHTML = '';
+    rows.forEach(function (x) { var dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = x[0]; dd.textContent = x[1]; dl.appendChild(dt); dl.appendChild(dd); });
     box.classList.add('done');
     box.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
@@ -589,7 +488,7 @@ p.s{font-size:17px;margin-bottom:30px}
   var toast = document.querySelector('.toast'), tt;
   [].forEach.call(document.querySelectorAll('.js-wa'), function (a) {
     a.addEventListener('click', function () {
-      toast.textContent = 'En la versión real abre WhatsApp con el mensaje «Hola, quiero información sobre ortodoncia invisible».';
+      toast.textContent = 'En la versión real abre WhatsApp con «' + CFG.wa + '».';
       toast.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove('on'); }, 3200);
     });
   });
