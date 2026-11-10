@@ -40,3 +40,19 @@ Se avanza con flechas, AvPág o espacio; Inicio y Fin saltan al principio y al f
 - El sector `intelligence/sectores/maritima.js` ya existía en el repo y no lo he tocado. Conviene abrir la demo una vez antes de la reunión para ver que los cursos que salen encajan con Cancomar.
 - Los textos de los anuncios y de WhatsApp son propuestas. Que Maikel compruebe el tono y que «Patrón Local de Pesca» y «Formación Sanitaria» encajan con su público.
 - No hay commit ni push (lo hace el agente principal).
+
+## Plan y anuncios (agente CANCOMAR, 10-nov)
+- Plan (sustituye la redirección): https://qualivo.io/propuestas/cancomar/
+  - Qué hacemos, cliente ideal, las 3 fases (orden y respuesta → base de datos → captación), enlaces a todas las piezas y las dos opciones: «Solo arranque» (recomendada, 1.200 €) y «Mensualidad» (1.000 €/mes, 3 meses). Arranque el 16-nov y entrega el 11-dic, con las 4 semanas. Sin condiciones de pago.
+- Anuncios: https://qualivo.io/propuestas/cancomar/anuncios/
+  - Orden: alumno ideal y petición cualificada → formulario de 5 preguntas (A / B / C / Empresa) → 4 anuncios: A Renovación → landing-a; B Embarque → WhatsApp, con landing-a de respaldo; C Empresas → landing-b; D Convocatoria → landing-a.
+  - Cada anuncio lleva maqueta de Instagram en 4:5 con su foto a sangre, gancho, ganchos alternativos, texto, titular, botón, por qué funciona, a qué landing lleva y qué medimos.
+  - Más ideas plegadas: E (alta mar), F (lista de espera) y G (primer embarque).
+- Menú común: Plan · Anuncios · Landings · Recorrido · CRM · Intelligence · Presentación. Recorrido enlaza a ./recorrido/ y CRM a ./demo/ (las hacen otros agentes). Intelligence va a ?sector=cancomar.
+- Comprobado con Playwright: sin scroll horizontal a 390 y a 1440 px. Capturas revisadas.
+- Pendiente:
+  - Sección «Lo que vemos hoy» de los anuncios actuales: estaba esperando los datos del coordinador. Según el brief, hoy no hacen anuncios.
+  - Sin versión story 9:16 por anuncio.
+  - Para D, la landing A no tiene «Patrón Local de Pesca» en la pregunta 1: habría que añadirlo o duplicar la landing.
+  - La presentación todavía enlaza a la Intelligence antigua (sector=maritima).
+  - Las landings no tienen el menú común.

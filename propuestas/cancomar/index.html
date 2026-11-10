@@ -1,7 +1,255 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>Qualivo × Cancomar</title>
-<meta http-equiv="refresh" content="0; url=presentacion/">
-<style>body{font:16px system-ui,sans-serif;background:#06263B;color:#fff;display:grid;place-items:center;min-height:100vh;margin:0}a{color:#00D8E8}</style>
-</head><body><p><a href="presentacion/">Abrir la presentación de Qualivo × Cancomar →</a></p></body></html>
+<title>Cancomar · plan</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+/* Plan para Cancomar (reunión 10-nov). Plantilla: institut-gestalt/index.html. Marca de cancomar.es: #0097DA y #00476B, Montserrat + Open Sans. */
+:root{--b:#0097DA;--b2:#0080BC;--nv:#00476B;--deep:#06263B;--cy:#00D8E8;--amb:#FEC42D;--red:#D8290F;--ok:#12805A;
+--grad:linear-gradient(135deg,#0097DA 0%,#00476B 100%);
+--paper:#FAFCFE;--surface:#FFFFFF;--surface-2:#EEF7FC;--ink:#0D2233;--muted:#56687A;--line:#D5E8F3;--line-2:#E6F0F7;--accent:#0080BC;--accent-soft:#E9F6FC;
+--head:"Montserrat",system-ui,sans-serif;--sans:"Open Sans",system-ui,sans-serif;
+--shadow:0 1px 2px rgba(0,71,107,.06),0 14px 34px -18px rgba(0,71,107,.3)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#061A29;--surface:#0B2436;--surface-2:#0E2B40;--ink:#E6F1F8;--muted:#9DB4C4;--line:#1C3C52;--line-2:#163247;--accent:#4CC3F5;--accent-soft:#0F3248}}
+:root[data-theme="dark"]{--paper:#061A29;--surface:#0B2436;--surface-2:#0E2B40;--ink:#E6F1F8;--muted:#9DB4C4;--line:#1C3C52;--line-2:#163247;--accent:#4CC3F5;--accent-soft:#0F3248}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--accent)}
+.wrap{max-width:1140px;margin-inline:auto;padding-inline:16px}
+@media (min-width:800px){.wrap{padding-inline:28px}}
+h1,h2,h3{font-family:var(--head);letter-spacing:-.01em}
+.topnav{position:sticky;top:0;z-index:30;background:rgba(6,38,59,.94);color:#fff;backdrop-filter:blur(10px)}
+.topnav::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:var(--grad)}
+.topnav .in{max-width:1140px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.brand{display:flex;gap:10px;align-items:center;margin-right:auto;font:700 14px var(--head)}
+.brand .x{opacity:.55;font-weight:500}.brand img{height:17px;width:auto}
+.brand small{font-weight:500;font-size:11px;opacity:.6}
+.links{display:flex;gap:2px;flex-wrap:wrap;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:3px}
+.links a{color:rgba(255,255,255,.85);text-decoration:none;font:600 13px var(--head);padding:6px 11px;border-radius:99px;white-space:nowrap}
+.links a:hover{color:#fff}
+.links a[aria-current]{background:#fff;color:var(--nv)}
+@media (max-width:700px){.brand small{display:none}.links{width:100%;justify-content:space-between}.links a{padding:5px 7px;font-size:12px}}
+.hero{position:relative;overflow:hidden;isolation:isolate;background:var(--deep);color:#fff;padding:70px 0 60px}
+.hero .hbg{position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,rgba(6,38,59,.96) 0%,rgba(0,71,107,.86) 50%,rgba(0,151,218,.3) 100%),url(./assets/brand/hero.jpg) 70% 40%/cover no-repeat;animation:kb 18s ease-out both}
+@keyframes kb{from{transform:scale(1.07)}to{transform:scale(1)}}
+.lockup{display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:9px 18px;margin-bottom:22px;backdrop-filter:blur(6px);font:800 15px var(--head)}
+.lockup i{font-style:normal;opacity:.6;font-weight:500}.lockup img{height:18px;width:auto}
+.eyebrow{font:700 12px var(--head);letter-spacing:.18em;text-transform:uppercase;color:var(--cy)}
+h1{font-weight:800;font-size:clamp(34px,5.4vw,62px);line-height:1.05;max-width:18ch;margin-top:10px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--amb)}
+.lead{font-size:clamp(16px,1.6vw,19px);color:rgba(255,255,255,.9);max-width:72ch;margin-top:16px}
+.fases{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.fases span{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:7px 16px 7px 7px;font:700 14px var(--head)}
+.fases b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--cy);color:var(--deep)}
+.note{font-size:13px;border:1px dashed rgba(255,255,255,.35);border-radius:12px;padding:10px 13px;margin-top:22px;max-width:92ch;color:rgba(255,255,255,.85);background:rgba(0,20,40,.25)}
+.ej{display:inline-block;font:700 10.5px var(--head);letter-spacing:.06em;text-transform:uppercase;color:#3A2B00;background:var(--amb);border-radius:6px;padding:3px 8px;vertical-align:middle;line-height:1.4}
+.real{display:inline-block;font:700 10.5px var(--head);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--ok);border-radius:6px;padding:3px 8px;vertical-align:middle;line-height:1.4}
+main{padding:44px 0 72px;display:grid;gap:56px}
+section{display:grid;gap:18px}
+h2{font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.15}
+h2 .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--grad);color:#fff;font-size:13px;margin-bottom:10px;box-shadow:0 8px 18px -8px rgba(0,71,107,.6);vertical-align:middle;margin-right:10px}
+.sub{color:var(--muted);max-width:78ch;font-size:16.5px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-width:0;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-3px)}
+.card h3{font-size:18px;line-height:1.3;margin-bottom:8px}
+.card p,.card li{font-size:15px;color:var(--muted)}
+.card ul,.card ol{padding-left:18px;display:grid;gap:6px}
+.card b{color:var(--ink)}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;padding:0;list-style:none}
+.flow li{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 14px 14px;font-size:14px;color:var(--muted);display:grid;gap:4px;align-content:start;box-shadow:var(--shadow)}
+.flow li::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:var(--grad)}
+.flow li b{color:var(--ink);font:800 15.5px var(--head)}
+.under{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.under div{display:flex;gap:14px;align-items:center;background:var(--deep);color:rgba(255,255,255,.88);border-radius:14px;padding:14px 18px;font-size:15px}
+.under b{font:800 17px var(--head);color:var(--cy);min-width:4.5em}
+.icp .ok{border-top:5px solid var(--b)}.icp .no{border-top:5px solid var(--amb)}.icp .q{border-top:5px solid var(--nv);background:linear-gradient(180deg,var(--accent-soft),var(--surface))}
+.ph3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:f}
+.ph{padding:0;overflow:hidden;display:grid;align-content:start}
+.ph .im{height:150px;background:var(--deep) center/cover;position:relative}
+.ph .im::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(6,38,59,.85))}
+.ph .im span{position:absolute;left:16px;bottom:12px;z-index:2;color:#fff;font:800 13px var(--head);letter-spacing:.12em;text-transform:uppercase}
+.ph .bd{padding:18px 20px 20px;display:grid;gap:10px}
+.ph .bd h3{font-size:21px;margin:0}
+.ph .hoy{font-size:14px;color:var(--muted);border-left:3px solid #C3D3DE;padding-left:10px}
+.ph ul{font-size:14.5px}
+.ph .pz{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.ph .pz a{font:700 12.5px var(--head);text-decoration:none;background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:5px 11px}
+.arrow{display:none}
+.pieces{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.pieces a{display:grid;gap:6px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+.pieces a:hover{transform:translateY(-3px);border-color:var(--b)}
+.pieces .fm{font:700 10.5px var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.pieces b{font:800 16.5px var(--head)}
+.pieces p{font-size:14px;color:var(--muted);line-height:1.5}
+.pieces .go{font:700 13px var(--head);color:var(--accent);margin-top:2px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+.opt{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px 24px;box-shadow:var(--shadow);display:grid;gap:12px;align-content:start}
+.opt.rec{border:2px solid var(--b);box-shadow:0 2px 6px rgba(0,71,107,.08),0 30px 60px -30px rgba(0,151,218,.55)}
+.opt .rb{position:absolute;top:-13px;left:22px;background:var(--grad);color:#fff;font:800 11.5px var(--head);letter-spacing:.12em;text-transform:uppercase;border-radius:99px;padding:5px 12px}
+.opt h3{font-size:22px}
+.opt .pr{font:800 40px/1 var(--head);color:var(--ink)}
+.opt .pr small{font-size:15px;font-weight:600;color:var(--muted)}
+.opt .dur{font:700 14px var(--head);color:var(--accent)}
+.opt ul{list-style:none;padding:0;display:grid;gap:8px}
+.opt li{display:flex;gap:10px;font-size:15px}
+.opt li::before{content:"✓";font-weight:800;color:var(--b)}
+.opt .aft{font-size:14px;color:var(--muted);border-top:1px solid var(--line-2);padding-top:10px}
+.months{display:grid;gap:8px}
+.months div{display:grid;grid-template-columns:62px 1fr;gap:12px;align-items:start;background:var(--paper);border:1px solid var(--line-2);border-radius:12px;padding:10px 12px}
+.months b{font:800 12px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);padding-top:2px}
+.months strong{font-family:var(--head);font-size:15px}
+.months small{display:block;color:var(--muted);font-size:13.5px}
+.start{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--deep);color:#fff;border-radius:16px;padding:16px 20px;font:700 16px var(--head)}
+.start i{font-style:normal;color:var(--cy)}
+.weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.weeks .card h3 span{display:table;background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:2px 10px;margin-bottom:8px;font-size:11.5px;letter-spacing:.08em}
+.weeks .card h3 small{display:block;font:600 13px var(--sans);color:var(--muted);margin-top:2px}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#fff;text-decoration:none;font:700 14.5px var(--head);border-radius:99px;padding:12px 20px;box-shadow:0 12px 24px -12px rgba(0,71,107,.8)}
+.btn.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+footer{border-top:3px solid transparent;border-image:var(--grad) 1;padding:22px 16px 40px;font-size:13px;color:var(--muted);display:grid;gap:6px}
+@media (max-width:1000px){.flow{grid-template-columns:repeat(3,minmax(0,1fr))}.pieces{grid-template-columns:1fr 1fr}.weeks{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){.grid,.ph3,.opts{grid-template-columns:1fr}.under{grid-template-columns:1fr}}
+@media (max-width:600px){.flow,.pieces,.weeks,.grid.two{grid-template-columns:1fr}.hero{padding:44px 0 40px}.lockup{font-size:13px;padding:7px 14px}.under div{flex-direction:column;align-items:flex-start;gap:4px}}
+.hero .wrap>*{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+.hero .wrap>*:nth-child(2){animation-delay:.08s}.hero .wrap>*:nth-child(3){animation-delay:.16s}.hero .wrap>*:nth-child(4){animation-delay:.24s}.hero .wrap>*:nth-child(5){animation-delay:.32s}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.hero .hbg,.hero .wrap>*{animation:none}.js .rv{opacity:1;transform:none;transition:none}.card{transition:none}}
+</style>
+<script>
+document.documentElement.classList.add('js');
+addEventListener('DOMContentLoaded',function(){
+  var els=document.querySelectorAll('main section>h2, main .card, main .flow li, main .pieces a, main .opt');
+  if(!('IntersectionObserver' in window)){return document.documentElement.classList.remove('js');}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var t=e.target;t.classList.add('on');io.unobserve(t);setTimeout(function(){t.classList.remove('rv','on');t.style.transitionDelay='';},1100);}});},{rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el,i){el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms';io.observe(el);});
+  setTimeout(function(){els.forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)el.classList.add('on');});},1200);
+});
+</script>
+</head>
+<body>
+<nav class="topnav" aria-label="Paquete Cancomar"><div class="in">
+<div class="brand"><span>Qualivo</span><span class="x" aria-hidden="true">×</span><img src="./assets/brand/logo-blanco.png" alt="Cancomar" width="120" height="17"><small>10-nov-2026</small></div>
+<div class="links"><a href="./" aria-current="page">Plan</a><a href="./anuncios/">Anuncios</a><a href="./landing-a/">Landings</a><a href="./recorrido/">Recorrido</a><a href="./demo/">CRM</a><a href="https://qualivo.io/intelligence/?sector=cancomar&amp;empresa=CANCOMAR&amp;objetivo=seguimiento" target="_blank" rel="noopener">Intelligence</a><a href="./presentacion/">Presentación</a></div>
+</div></nav>
+
+<header class="hero"><div class="hbg" aria-hidden="true"></div><div class="wrap">
+<div class="lockup"><span>Qualivo</span><i aria-hidden="true">×</i><img src="./assets/brand/logo-blanco.png" alt="Cancomar" width="120" height="17"></div>
+<p class="eyebrow">Plan de trabajo · Cancomar</p>
+<h1>Nadie sin respuesta, <em>aunque escriba desde alta mar</em></h1>
+<p class="lead">Vuestros alumnos escriben a cualquier hora, muchas veces desde un barco. Proponemos un sistema que pone orden en admisiones, prepara cada respuesta por WhatsApp para que la aprobéis vosotras y hace trabajar a vuestra base de datos: renovaciones a 5 años y listas de espera por curso. Los anuncios llegan después, cuando todo eso funciona.</p>
+<div class="fases"><span><b>1</b>Orden y respuesta</span><span><b>2</b>Base de datos</span><span><b>3</b>Captación</span></div>
+<p class="note"><span class="ej">Cómo leer esta página</span> Cursos, fechas, logo y fotos salen de cancomar.es (consulta del 10-nov-2026). Lo marcado como «Datos de ejemplo» es inventado para la maqueta. No hay cifras vuestras ni resultados: se miden con vuestros datos.</p>
+</div></header>
+
+<main class="wrap">
+
+<section>
+<h2><span class="n">01</span>Qué hacemos</h2>
+<p class="sub">Un solo sistema, de la primera pregunta a la plaza reservada. No cambia vuestra web ni vuestra forma de matricular. Añade lo que falta alrededor: orden, rapidez y memoria.</p>
+<ol class="flow">
+<li><b>1 · Entrada</b>Web, WhatsApp, teléfono, empresas o vuestra base. Todo en el mismo sitio.</li>
+<li><b>2 · Formulario que cualifica</b>Curso, renovación o primera vez, para cuándo, quién paga y cómo contactar.</li>
+<li><b>3 · Respuesta en minutos</b>WhatsApp con vuestro tono. El sistema lo prepara y admisiones lo aprueba.</li>
+<li><b>4 · Seguimiento</b>Recordatorios, lista de espera y aviso al abrir convocatoria. Sin olvidos.</li>
+<li><b>5 · Plaza reservada</b>Matrícula, pago y, cinco años después, aviso de renovación.</li>
+</ol>
+<div class="under">
+<div><b>CRM</b>Cada persona en su etapa, con su curso, su fecha y su próxima acción.</div>
+<div><b>Panel</b>Qué entra, qué está sin responder y qué acaba en plaza reservada.</div>
+</div>
+</section>
+
+<section class="icp">
+<h2><span class="n">02</span>Vuestro cliente ideal</h2>
+<p class="sub">Lo primero es acordar qué es una petición cualificada. Esta es nuestra propuesta; vosotras sabéis quién acaba reservando plaza y la corregimos juntos. <span class="ej">Hipótesis · la validamos hoy</span></p>
+<div class="grid">
+<div class="card ok"><h3>Sí, prioridad</h3><ul><li><b>Necesita un curso concreto</b>: actualización STCW, especialidad o titulación.</li><li><b>Tiene una fecha</b>: le caduca el certificado o le sale embarque.</li><li>Puede venir a Avilés en las fechas, o el curso tiene parte online.</li><li><b>Una empresa o armador</b> con tripulación que formar.</li></ul></div>
+<div class="card no"><h3>Todavía no</h3><ul><li>Pregunta precios sin curso ni fecha.</li><li>Aún no cumple los requisitos del curso.</li><li>Se informa para dentro de un año.</li><li><b>No es perdido</b>: entra en la base, con aviso cuando le toque.</li></ul></div>
+<div class="card q"><h3>Lo que validamos hoy</h3><ol><li>¿Cuántos alumnos vienen por renovación y cuántos por primera vez?</li><li>¿Qué curso cuesta más llenar?</li><li>¿Qué parte de las plazas paga una empresa?</li><li>¿Quién aprobará los mensajes de WhatsApp?</li></ol></div>
+</div>
+<p class="sub">Con ese perfil acordado, el formulario pregunta exactamente eso y cada petición entra como A, B, C o Empresa. Más detalle en <a href="./anuncios/#perfil">Anuncios · alumno ideal</a>.</p>
+</section>
+
+<section>
+<h2><span class="n">03</span>Tres fases, en este orden</h2>
+<p class="sub">El orden importa. No tiene sentido pagar anuncios si las peticiones que ya llegan se quedan sin respuesta. Primero se ordena, después se aprovecha lo que ya tenéis y, por último, se capta.</p>
+<div class="ph3">
+<div class="card ph"><div class="im" style="background-image:url(./assets/brand/puente.jpg)"><span>Fase 1</span></div><div class="bd">
+<h3>Orden y respuesta</h3>
+<p class="hoy">Hoy: el teléfono marca el día y el WhatsApp no tiene orden ni dueño.</p>
+<ul><li>Cada petición en el CRM, con su prioridad (A, B, C o Empresa).</li><li>Respuesta por WhatsApp preparada en minutos, con vuestro tono. Admisiones la aprueba.</li><li>Seguimiento con fecha: D+1, D+3 (llamada) y D+7.</li><li>«Estoy embarcado»: se le escribe y se espera, sin perderle la pista.</li></ul>
+<div class="pz"><a href="./recorrido/">Recorrido</a><a href="./demo/">CRM</a></div></div></div>
+<div class="card ph"><div class="im" style="background-image:url(./assets/brand/seguridad-maritima.jpg)"><span>Fase 2</span></div><div class="bd">
+<h3>Base de datos</h3>
+<p class="hoy">Hoy: renovaciones que nadie avisa a tiempo e interesados en cursos sin fecha que se olvidan.</p>
+<ul><li>Aviso de renovación 6 y 3 meses antes de que caduque cada certificado.</li><li>Lista de espera por curso: al abrir convocatoria, se avisa primero a la lista.</li><li>Búsqueda por titulación en vigor, para el puente con empresas.</li></ul>
+<div class="pz"><a href="./demo/">CRM</a><a href="https://qualivo.io/intelligence/?sector=cancomar&amp;empresa=CANCOMAR&amp;objetivo=seguimiento" target="_blank" rel="noopener">Intelligence</a></div></div></div>
+<div class="card ph"><div class="im" style="background-image:url(./assets/brand/pesca.jpg)"><span>Fase 3</span></div><div class="bd">
+<h3>Captación</h3>
+<p class="hoy">Hoy: sin anuncios. Boca a boca y web, sin saber qué canal trae matrículas.</p>
+<ul><li>Cuatro anuncios por momento: renovación, embarque, empresas y convocatoria.</li><li>Dos landings: particular con prisa y empresas y flotas.</li><li>Todo medido por plaza reservada, no por clic.</li></ul>
+<div class="pz"><a href="./anuncios/">Anuncios</a><a href="./landing-a/">Landing A</a><a href="./landing-b/">Landing B</a></div></div></div>
+</div>
+</section>
+
+<section>
+<h2><span class="n">04</span>Todas las piezas</h2>
+<p class="sub">Todo es una maqueta navegable, con vuestra marca. Las personas y cifras que aparecen son de ejemplo.</p>
+<div class="pieces">
+<a href="./presentacion/"><span class="fm">Para la reunión</span><b>Presentación</b><p>El recorrido completo en 16 pantallas.</p><span class="go">Abrir →</span></a>
+<a href="./anuncios/"><span class="fm">Fase 3</span><b>Anuncios</b><p>Alumno ideal, formulario y los 4 anuncios con textos y medición.</p><span class="go">Abrir →</span></a>
+<a href="./landing-a/"><span class="fm">Fase 3 · particular</span><b>Landing A · Renovación</b><p>Para el marino con prisa. Formulario de 5 preguntas y fechas.</p><span class="go">Abrir →</span></a>
+<a href="./landing-b/"><span class="fm">Fase 3 · empresas</span><b>Landing B · Empresas y flotas</b><p>Plan a medida y un solo interlocutor.</p><span class="go">Abrir →</span></a>
+<a href="./recorrido/"><span class="fm">Fase 1</span><b>Recorrido</b><p>Qué pasa desde el formulario hasta la plaza, con WhatsApp y secuencias.</p><span class="go">Abrir →</span></a>
+<a href="./demo/"><span class="fm">Fases 1 y 2</span><b>CRM</b><p>El CRM por dentro, tal como lo veríais vosotras.</p><span class="go">Abrir →</span></a>
+<a href="https://qualivo.io/intelligence/?sector=cancomar&amp;empresa=CANCOMAR&amp;objetivo=seguimiento" target="_blank" rel="noopener"><span class="fm">Cada mañana</span><b>Intelligence</b><p>Peticiones, convocatorias y renovaciones en un panel.</p><span class="go">Abrir la demo →</span></a>
+<a href="https://www.cancomar.es/" target="_blank" rel="noopener"><span class="fm">Fuente</span><b>cancomar.es</b><p>De donde salen cursos, fechas, logo y fotos.</p><span class="go">Abrir →</span></a>
+</div>
+</section>
+
+<section>
+<h2><span class="n">05</span>Dos formas de empezar</h2>
+<div class="opts">
+<div class="opt rec"><span class="rb">Recomendada</span><h3>Solo arranque</h3>
+<p class="pr">1.200 € <small>pago único</small></p><p class="dur">30 días</p>
+<ul><li>CRM con vuestras etapas y la base importada</li><li>Respuestas por WhatsApp con vuestro visto bueno</li><li>Avisos de renovación a 5 años</li><li>Formación de la persona que lo lleve</li><li>Revisión semanal</li></ul>
+<p class="aft">Después, las herramientas quedan a vuestro nombre: unos 100-150 €/mes.</p></div>
+<div class="opt"><h3>Mensualidad</h3>
+<p class="pr">1.000 € <small>/ mes</small></p><p class="dur">Plan de 3 meses</p>
+<div class="months">
+<div><b>Mes 1</b><span><strong>Orden y respuesta</strong><small>CRM, WhatsApp con vuestro visto bueno, nadie sin respuesta</small></span></div>
+<div><b>Mes 2</b><span><strong>Base de datos</strong><small>Avisos de renovación y listas de espera por curso</small></span></div>
+<div><b>Mes 3</b><span><strong>Captación</strong><small>Anuncios y landings, medidos por plaza reservada</small></span></div>
+</div></div>
+</div>
+<p class="start"><i>Arranque</i> lunes 16 de noviembre <span aria-hidden="true">·</span> <i>Entrega</i> viernes 11 de diciembre</p>
+<div class="weeks">
+<div class="card"><h3><span>SEMANA 1</span>CRM y WhatsApp<small>16-20 nov</small></h3><p>CRM con vuestras etapas, base importada y WhatsApp conectado.</p></div>
+<div class="card"><h3><span>SEMANA 2</span>Formulario y tono<small>23-27 nov</small></h3><p>Formulario, plantillas con vuestro tono y circuito de aprobación.</p></div>
+<div class="card"><h3><span>SEMANA 3</span>Base de datos<small>30 nov-4 dic</small></h3><p>Avisos de renovación y listas de espera por curso.</p></div>
+<div class="card"><h3><span>SEMANA 4</span>Formación y entrega<small>7-11 dic</small></h3><p>Formación, ajustes y entrega el viernes 11. El 8 de diciembre es festivo.</p></div>
+</div>
+<div class="cta"><a class="btn" href="./presentacion/">Ver la presentación</a><a class="btn alt" href="./anuncios/">Anuncios</a><a class="btn alt" href="./recorrido/">Recorrido</a><a class="btn alt" href="./demo/">CRM</a></div>
+</section>
+
+</main>
+
+<footer class="wrap">
+<p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · qualivo.io</b></p>
+<p>Plan preparado por Qualivo el 10 de noviembre de 2026 para Cancomar. No es una página de Cancomar. Cursos, fechas, logo y fotos tomados de cancomar.es; personas y cifras marcadas como «Datos de ejemplo» son inventadas.</p>
+</footer>
+</body>
+</html>
