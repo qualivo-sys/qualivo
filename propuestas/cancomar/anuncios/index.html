@@ -262,6 +262,156 @@ addEventListener('DOMContentLoaded',function(){
   setTimeout(function(){els.forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)el.classList.add('on');});},1200);
 });
 </script>
+
+<style>
+/* ===== Nivel agencia: maquetas 4:5 con capas, story 9:16, carrusel, guion y A/B ===== */
+.cr.pro::after{background:linear-gradient(180deg,rgba(6,38,59,.55) 0%,rgba(6,38,59,0) 26%,rgba(6,38,59,.1) 45%,rgba(6,38,59,.78) 72%,rgba(6,38,59,.97) 100%)}
+.grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.22;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.9'/></svg>")}
+.cr.pro .frame,.s9 .frame{position:absolute;inset:9px;z-index:2;border:1px solid rgba(255,255,255,.28);border-radius:10px;pointer-events:none}
+.cr.pro .tag{z-index:4;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+.cr.pro .btm{position:absolute;left:18px;right:18px;bottom:50px;z-index:3;display:grid;gap:9px;justify-items:start}
+.cr.pro .btm .hk{position:static;font-size:clamp(23px,6.6vw,31px)}
+.cr.pro .hk em,.s9 .hk em,.cc .hk em{font-style:normal;color:#06263B;background:var(--amb);padding:0 .16em;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone;text-shadow:none}
+.cr.pro .sub{left:0;right:0;bottom:0;z-index:3;padding:10px 112px 11px 18px;background:linear-gradient(90deg,#0097DA,#00476B);font:700 12px/1.3 var(--sans);opacity:1;letter-spacing:.01em}
+.cr.pro .lg{bottom:13px;z-index:4}
+.stk{display:inline-block;background:var(--amb);color:#2A1F00;font:800 11px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:6px;transform:rotate(-3deg);box-shadow:0 8px 18px -8px rgba(0,0,0,.6)}
+.stk.w{background:#fff;color:var(--nv)}
+.stk.g{background:#25D366;color:#063B1C}
+.stamp{position:absolute;z-index:3;width:92px;height:92px;border-radius:50%;display:grid;place-content:center;text-align:center;gap:1px;color:var(--amb);background:rgba(6,38,59,.62);border:2px solid var(--amb);transform:rotate(-12deg);font:800 9.5px/1.15 var(--head);letter-spacing:.1em;text-transform:uppercase;backdrop-filter:blur(3px);box-shadow:0 10px 24px -10px rgba(0,0,0,.7)}
+.stamp::before{content:"";position:absolute;inset:4px;border-radius:50%;border:1px dashed rgba(254,196,45,.7)}
+.stamp b{font-size:19px;letter-spacing:-.01em;line-height:1}
+.stamp.r{transform:rotate(9deg)}
+.stamp.sm{width:78px;height:78px;font-size:8.5px}.stamp.sm b{font-size:16px}
+/* story 9:16 */
+.s9{position:relative;width:min(290px,100%);aspect-ratio:9/16;border-radius:26px;overflow:hidden;background:var(--deep) center/cover no-repeat;color:#fff;font-family:var(--head);box-shadow:var(--shadow-lg),0 0 0 7px #0B1620,0 0 0 8px #2B3A47}
+.s9::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(6,38,59,.7) 0%,rgba(6,38,59,0) 22%,rgba(6,38,59,.05) 45%,rgba(6,38,59,.85) 75%,rgba(6,38,59,.97) 100%)}
+.s9>*{z-index:3}
+.s9 .pb{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:3px}
+.s9 .pb i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.38)}
+.s9 .pb i.on{background:#fff}
+.s9 .hd{position:absolute;top:20px;left:12px;right:12px;display:flex;align-items:center;gap:7px;font:600 12px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.s9 .hd .av{width:26px;height:26px;box-shadow:none}
+.s9 .hd small{opacity:.75;font-size:10.5px;font-weight:400}
+.s9 .hd .x{margin-left:auto;opacity:.9;font-size:15px}
+.s9 .tag{position:absolute;left:14px;top:58px;background:var(--b);font:700 10.5px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:99px}
+.s9 .lg{position:absolute;right:14px;top:62px;height:13px;width:auto}
+.s9 .bt{position:absolute;left:16px;right:16px;bottom:74px;display:grid;gap:9px;justify-items:start}
+.s9 .hk{font:800 23px/1.12 var(--head);letter-spacing:-.015em;text-shadow:0 2px 14px rgba(0,20,40,.45)}
+.s9 .sb{font:600 12px/1.35 var(--sans);opacity:.92}
+.s9 .up{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:grid;justify-items:center;gap:2px;color:#fff;font:700 11px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.s9 .up span{background:#fff;color:#111;border-radius:99px;padding:8px 18px;font-size:13px;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.35);display:inline-flex;gap:6px;align-items:center}
+.s9 .up svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.s9 .stamp{width:80px;height:80px;font-size:8.5px}.s9 .stamp b{font-size:16px}
+/* pegatinas de story */
+.poll{position:absolute;left:50%;top:118px;width:72%;transform:translateX(-50%) rotate(-2deg);background:#fff;color:#111;border-radius:14px;padding:11px 12px 12px;text-align:center;box-shadow:0 14px 30px -12px rgba(0,0,0,.6);font:800 13px/1.25 var(--head)}
+.poll span{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:9px}
+.poll i{font-style:normal;border-radius:9px;padding:7px 4px;background:#F1F3F5;font:800 13px var(--head);color:#111}
+.poll i.hot{background:linear-gradient(90deg,#FEC42D,#FF8A3D);color:#2A1F00}
+.cd{position:absolute;left:50%;top:112px;width:74%;transform:translateX(-50%) rotate(2deg);border-radius:16px;padding:11px 12px;text-align:center;color:#fff;background:linear-gradient(135deg,#0097DA,#7A3CF0 60%,#E1306C);box-shadow:0 14px 30px -12px rgba(0,0,0,.6)}
+.cd small{display:block;font:700 9.5px var(--head);letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.cd b{display:block;font:800 13.5px/1.2 var(--head);margin:3px 0 7px}
+.cd span{display:flex;justify-content:center;gap:5px}
+.cd i{font-style:normal;background:rgba(255,255,255,.2);border-radius:7px;padding:5px 7px;font:800 15px var(--head);min-width:36px}
+.cd i small{font-size:8px;letter-spacing:.08em;margin-top:1px}
+.chat{position:absolute;left:14px;right:14px;top:104px;display:grid;gap:7px;font:500 11.5px/1.38 var(--sans)}
+.chat p{background:#fff;color:#111;border-radius:12px 12px 12px 4px;padding:7px 10px;max-width:86%;box-shadow:0 8px 20px -10px rgba(0,0,0,.55)}
+.chat p.me{justify-self:end;background:#DCF8C6;border-radius:12px 12px 4px 12px}
+.chat p small{display:block;text-align:right;color:#7F8F9B;font-size:9.5px}
+.chk{position:absolute;left:14px;right:14px;top:104px;background:rgba(255,255,255,.97);color:#0D2233;border-radius:14px;padding:11px 12px;display:grid;gap:5px;font:600 11.5px var(--sans);box-shadow:0 14px 30px -12px rgba(0,0,0,.6)}
+.chk b{font:800 12px var(--head)}
+.chk span{display:flex;justify-content:space-between;gap:6px;border-top:1px solid #EEF2F5;padding-top:5px}
+.chk i{font-style:normal;font-weight:700;color:var(--ok)}.chk i.w{color:var(--red)}
+/* bloque «concepto completo» */
+.kit{margin-top:44px;padding-top:34px;border-top:2px dashed var(--line);display:grid;gap:22px}
+.kith{display:flex;gap:14px;align-items:center}
+.kith h3{font-size:clamp(20px,2.4vw,26px);font-weight:800;line-height:1.2}
+.kith .k{margin-bottom:2px}
+.fmts{display:grid;grid-template-columns:320px minmax(0,1fr);gap:26px;align-items:start}
+@media (max-width:860px){.fmts{grid-template-columns:minmax(0,1fr)}}
+.fmts figcaption{max-width:380px}
+/* carrusel */
+.car{width:min(440px,100%)}
+.trk{position:relative;display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 7%;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.trk::-webkit-scrollbar{display:none}
+.trk:focus-visible{outline:3px solid var(--b);outline-offset:-3px}
+.cc{position:relative;flex:0 0 86%;aspect-ratio:4/5;scroll-snap-align:center;border-radius:6px;overflow:hidden;background:var(--deep) center/cover no-repeat;color:#fff;font-family:var(--head);isolation:isolate}
+.cc.ph::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,38,59,.35) 0%,rgba(6,38,59,.1) 35%,rgba(6,38,59,.92) 100%)}
+.cc.gd{background:radial-gradient(120% 90% at 100% 0%,#00D8E8 0%,rgba(0,216,232,0) 45%),linear-gradient(150deg,#0097DA,#00476B 65%,#06263B)}
+.cc.lt{background:#F4FAFD;color:#0D2233}
+.cc .n{position:absolute;top:10px;right:10px;font:700 10.5px var(--sans);background:rgba(0,0,0,.45);color:#fff;border-radius:99px;padding:3px 8px;z-index:2}
+.cc .in{position:absolute;inset:0;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;gap:9px}
+.cc .in.top{justify-content:flex-start;padding-top:22px}
+.cc .hk{font:800 22px/1.14 var(--head);letter-spacing:-.015em}
+.cc .big{font:800 82px/0.9 var(--head);color:var(--amb);letter-spacing:-.04em}
+.cc p{font:600 13px/1.45 var(--sans)}
+.cc.lt p{color:#3E5263}
+.cc ul{margin:0;padding:0;list-style:none;display:grid;gap:7px;font:600 13px/1.35 var(--sans)}
+.cc li{display:flex;gap:8px;align-items:flex-start}
+.cc li::before{content:"✓";flex:none;display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:var(--amb);color:#2A1F00;font:800 11px var(--head)}
+.cc.lt li::before{background:var(--b);color:#fff}
+.cc .pill{align-self:flex-start;background:#fff;color:var(--nv);font:800 13px var(--head);border-radius:99px;padding:9px 15px;box-shadow:0 10px 20px -10px rgba(0,0,0,.6)}
+.cc .pill.wa{background:#25D366;color:#063B1C}
+.cc .swipe{position:absolute;right:12px;bottom:14px;font:800 11px var(--head);letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.95);color:var(--nv);border-radius:99px;padding:6px 10px;z-index:2}
+.cc .dl{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:#fff;color:#0D2233;border-radius:12px;padding:11px 12px;box-shadow:0 14px 30px -14px rgba(0,0,0,.55)}
+.cc .dl b{font:800 26px/1 var(--head)}.cc .dl small{display:block;font:700 10px var(--head);letter-spacing:.12em;color:var(--red)}
+.cc .dl span{height:2px;background:repeating-linear-gradient(90deg,#9FB4C4 0 6px,transparent 6px 10px)}
+.cc .bub{background:#fff;color:#111;border-radius:12px 12px 12px 4px;padding:8px 11px;font:500 12px/1.4 var(--sans);max-width:90%;box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
+.cc .bub.me{align-self:flex-end;background:#DCF8C6;border-radius:12px 12px 4px 12px}
+.cc .lgc{height:13px;width:auto;align-self:flex-start;margin-bottom:2px}
+.cc .ej{align-self:flex-start}
+.cnav{display:flex;align-items:center;justify-content:center;gap:12px;padding:9px 12px 3px}
+.cnav button{width:30px;height:30px;border-radius:50%;border:1px solid #DBDBDB;background:#fff;color:#262626;font:700 16px/1 system-ui;cursor:pointer;display:grid;place-items:center}
+.cnav button:hover{border-color:#0095F6;color:#0095F6}
+.cnav button:disabled{opacity:.35;cursor:default}
+.dts{display:flex;gap:5px}
+.dts i{width:6px;height:6px;border-radius:50%;background:#C7C7C7;transition:background .2s,transform .2s}
+.dts i.on{background:#0095F6;transform:scale(1.15)}
+/* guion */
+.gn{display:grid;gap:14px}
+.gn .tl{display:flex;height:30px;border-radius:9px;overflow:hidden;font:700 11px var(--head);color:#fff}
+.gn .tl span{display:grid;place-items:center;border-right:2px solid var(--surface);white-space:nowrap;overflow:hidden;min-width:0}
+.gn .tl span:nth-child(5n+1){background:#0097DA}.gn .tl span:nth-child(5n+2){background:#0080BC}.gn .tl span:nth-child(5n+3){background:#00679A}.gn .tl span:nth-child(5n+4){background:#00476B}.gn .tl span:nth-child(5n){background:#06263B}
+.esc{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.esc li{display:grid;grid-template-columns:78px minmax(0,1fr);gap:14px;align-items:start;background:var(--paper);border:1px solid var(--line-2);border-radius:14px;padding:10px}
+.esc .th{position:relative;aspect-ratio:9/16;border-radius:9px;overflow:hidden;background:var(--deep) center/cover no-repeat;display:flex;align-items:flex-end;padding:5px;isolation:isolate}
+.esc .th::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 30%,rgba(6,38,59,.9))}
+.esc .th em{font:800 8.5px/1.15 var(--head);font-style:normal;color:#fff}
+.esc .th i{position:absolute;top:5px;left:5px;font:800 9px var(--head);font-style:normal;background:var(--amb);color:#2A1F00;border-radius:4px;padding:1px 4px}
+.esc .tx{display:grid;gap:5px;font-size:14.5px;min-width:0}
+.esc .tx>b{font:800 14.5px var(--head);color:var(--ink)}
+.esc .row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px}
+.esc .row>span:first-child{font:700 10.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-top:3px}
+.esc .row>span:last-child{color:var(--muted)}
+.esc .row.on>span:last-child{color:var(--ink);font-weight:700}
+.esc .row.vo>span:last-child{font-style:italic;color:var(--ink)}
+@media (min-width:1000px){.esc li{grid-template-columns:88px minmax(0,1fr)}}
+@media (max-width:520px){.esc li{grid-template-columns:62px minmax(0,1fr);gap:10px}.esc .row{grid-template-columns:1fr;gap:0}}
+.gn .nt{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line-2);padding-top:10px}
+/* A/B */
+.abt{display:grid;gap:14px}
+.vs{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:stretch}
+.vsx{align-self:center;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--deep);color:var(--amb);font:800 13px var(--head);box-shadow:0 0 0 5px var(--surface-2)}
+.vv{display:grid;gap:9px;align-content:start;border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--paper);position:relative;overflow:hidden}
+.vv::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--b)}
+.vv.v2::before{background:var(--amb)}
+.vv .vl{font:800 11px var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.vv.v2 .vl{color:var(--warn)}
+.vv .gq{font:800 19px/1.3 var(--head);color:var(--ink)}
+.vv dl{margin:0;display:grid;gap:7px;font-size:14px}
+.vv dt{font:700 10.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.vv dd{margin:0;color:var(--ink)}
+@media (max-width:760px){.vs{grid-template-columns:minmax(0,1fr)}.vsx{justify-self:center}}
+.abm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.abm>div{display:grid;gap:4px;align-content:start;background:var(--accent-soft);border-radius:12px;padding:12px 14px;font-size:14px;min-width:0}
+.abm b{font:700 10.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.abm .win{background:var(--deep);color:#fff}.abm .win b{color:var(--cy)}
+.abm .e{font:800 10px var(--head);color:#3A2B00;background:var(--amb);border-radius:4px;padding:1px 5px;margin-left:4px;letter-spacing:.04em}
+@media (max-width:860px){.abm{grid-template-columns:minmax(0,1fr)}}
+.kit2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:1060px){.kit2{grid-template-columns:minmax(0,1fr)}}
+.legend{display:flex;gap:8px 16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend b{color:var(--ink)}
+</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -280,7 +430,7 @@ addEventListener('DOMContentLoaded',function(){
   <div class="lockup"><span>Qualivo</span><i aria-hidden="true">×</i><img src="../assets/brand/logo-blanco.png" alt="Cancomar" width="120" height="17"></div>
   <p class="eyebrow">Fase 3 · Captación · Anuncios</p>
   <h1>Un anuncio para cada momento <em>de la gente de mar</em></h1>
-  <p class="lead">Hoy no hacéis anuncios, y está bien: primero va el orden y la base de datos. Cuando toque captar, proponemos empezar con cuatro anuncios. Cada uno le habla a una persona con una necesidad concreta: renovar, embarcar, formar a una tripulación o dar el salto a patrón. Todos llevan a un formulario de cinco preguntas o a WhatsApp, y se miden por plaza reservada, no por clic.</p>
+  <p class="lead">Hoy no hacéis anuncios, y está bien: primero va el orden y la base de datos. Cuando toque captar, proponemos empezar con cuatro anuncios. Cada uno le habla a una persona con una necesidad concreta: renovar, embarcar, formar a una tripulación o dar el salto a patrón. Cada anuncio es un concepto completo: feed 4:5, story y reel 9:16, carrusel deslizable, guion de vídeo de 15 a 20 segundos y dos ganchos en prueba A/B. Todos llevan a un formulario de cinco preguntas o a WhatsApp, y se miden por plaza reservada, no por clic.</p>
   <nav class="jump" aria-label="Ir a"><a href="#hoy">Lo que vemos hoy</a><a href="#perfil">Alumno ideal</a><a href="#formulario">El formulario</a><a href="#a">A · Renovación</a><a href="#b">B · Embarque</a><a href="#c">C · Empresas</a><a href="#d">D · Convocatoria</a><a href="#mas">Más ideas</a></nav>
   <p class="maq">Maqueta de Qualivo para Cancomar · logo, fotos, colores, cursos y fechas de cancomar.es (consulta del 10-nov-2026) · creatividades montadas en HTML/CSS sobre vuestras fotos · no son anuncios publicados · lo marcado como «Datos de ejemplo» es inventado</p>
 </div></header>
@@ -392,7 +542,7 @@ addEventListener('DOMContentLoaded',function(){
 <!-- RESUMEN -->
 <section class="sec" style="padding-top:56px"><div class="wrap">
   <div class="sh"><div class="no"><b>LA PROPUESTA</b><span></span></div><h2>Cuatro anuncios, cuatro momentos <span class="ej">Ejemplo</span></h2></div>
-  <p class="lede">Empezamos con pocos y con poco presupuesto. Cada anuncio tiene un público y un destino distintos, así que en dos o tres semanas se ve cuál trae plazas reservadas. A partir de ahí, se refuerza el que funciona.</p>
+  <p class="lede">Empezamos con pocos y con poco presupuesto: la prueba de ganchos de los cuatro suma unos 836 € <span class="ej">[E] estimación</span>. Cada anuncio tiene un público y un destino distintos, así que en dos o tres semanas se ve cuál trae plazas reservadas. A partir de ahí, se refuerza el que funciona.</p>
   <div class="plan4">
     <a href="#a"><span class="ph" style="background-image:url(../assets/brand/seguridad-maritima.jpg)"><span class="lt">A</span></span><span class="tx"><span class="fm">Particular · landing A</span><b>Renovación</b><p>«¿Tu certificado caduca en 2027?» Para quien ya tiene el certificado.</p></span></a>
     <a href="#b"><span class="ph" style="background-image:url(../assets/brand/puente.jpg)"><span class="lt">B</span></span><span class="tx"><span class="fm">Particular · WhatsApp</span><b>Urgencia de embarque</b><p>«Te sale embarque y te falta el curso.» Para quien tiene prisa.</p></span></a>
@@ -406,19 +556,20 @@ addEventListener('DOMContentLoaded',function(){
   <div class="ah"><span class="lt" aria-hidden="true">A</span><h2>A · Renovación: «¿Tu certificado caduca en 2027?»</h2><div class="meta">
     <span><b>Ángulo</b>los certificados STCW se renuevan cada 5 años y casi nadie mira la fecha hasta que le hace falta</span>
     <span><b>Público</b>gente de mar en Asturias y el Cantábrico (pesca, mercante, pasaje), y antiguos alumnos cuyo certificado caduca en los próximos 6 a 12 meses, desde vuestra base</span>
-    <span><b>Formato</b>imagen 4:5 en el feed y story 9:16 con la misma foto</span></div></div>
+    <span><b>Formatos</b>feed 4:5, story y reel 9:16, carrusel de 4 tarjetas y vídeo de 18 s; dos ganchos en prueba A/B</span></div></div>
   <div class="ads">
     <div class="figs">
       <figure><div class="ig">
         <div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="dots">···</span></div>
-        <div class="cr" style="background-image:url(../assets/brand/seguridad-maritima.jpg)"><span class="tag">Actualización STCW</span>
+        <div class="cr pro" style="background-image:url(../assets/brand/seguridad-maritima.jpg)"><span class="grain"></span><span class="frame"></span><span class="tag">Actualización STCW</span>
           <div class="cert">Certificado<b>Formación Básica en Seguridad Marítima</b><span class="exp">Caduca en 2027</span></div>
-          <p class="hk">¿Tu certificado caduca en 2027? <em>Renuévalo antes de que te pare un embarque.</em></p>
+          <span class="stamp" style="left:18px;top:70px"><span>Próxima</span><b>30 NOV</b><span>Avilés</span></span>
+          <div class="btm"><span class="stk">Cada 5 años · STCW</span><p class="hk">¿Tu certificado caduca en 2027? <em>Renuévalo antes de que te pare un embarque.</em></p></div>
           <p class="sub">30 nov – 1 dic · Avilés · respuesta por WhatsApp</p><img class="lg" src="../assets/brand/logo-blanco.png" alt=""></div>
         <div class="cta"><span>Reservar plaza</span><span aria-hidden="true">›</span></div>
         <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
         <p class="cap"><b>cancomar</b>¿Tu certificado caduca en 2027? Los certificados STCW se renuevan cada 5 años… <span>más</span></p>
-      </div><figcaption><b>Feed 4:5</b> · foto de vuestra web · la ficha del certificado imita la tarjeta que cada marino lleva en la cartera</figcaption></figure>
+      </div><figcaption><b>Feed 4:5</b> · foto de vuestra web · capas: ficha del certificado (la tarjeta de la cartera), sello con la fecha real, pegatina y franja de marca</figcaption></figure>
     </div>
     <div class="copy">
       <div class="hook"><p class="k">Gancho · primera frase</p><pre>¿Tu certificado caduca en 2027?</pre></div>
@@ -448,6 +599,73 @@ Dinos qué curso te toca y cuándo caduca. Te damos la fecha más cercana.</pre>
       </ul></div>
     </div>
   </div>
+  <div class="kit">
+    <div class="kith"><span class="lt" aria-hidden="true">A</span><div><p class="k">El concepto completo · A</p><h3>Renovación en story, carrusel, vídeo de 18 s y dos ganchos en prueba</h3></div></div>
+    <div class="fmts">
+      <figure><div class="s9" role="img" aria-label="Maqueta de story: encuesta sobre cuándo caduca el certificado" style="background-image:url(../assets/brand/seguridad-maritima.jpg);background-position:35% center">
+          <span class="grain"></span><span class="frame"></span>
+          <div class="pb"><i class="on"></i><i></i><i></i></div>
+          <div class="hd"><span class="av"></span><b>cancomar</b><small>Publicidad</small><span class="x" aria-hidden="true">✕</span></div>
+          <span class="tag">Actualización STCW</span><img class="lg" src="../assets/brand/logo-blanco.png" alt="">
+          <div class="poll">¿Cuándo te caduca la Formación Básica?<span><i>2026</i><i class="hot">2027</i></span></div>
+          <span class="stamp r" style="right:16px;top:212px"><span>Avilés</span><b>30·XI</b><span>1 dic</span></span>
+          <div class="bt"><p class="hk">Saca la cartera. <em>Mira la fecha.</em></p><p class="sb">Próxima actualización: 30 nov – 1 dic, en Avilés</p></div>
+          <div class="up"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Reservar plaza</span></div>
+        </div><figcaption><b>Story / reel 9:16</b> · la encuesta es interactiva: quien vota «2027» entra en un público para el siguiente impacto</figcaption></figure>
+      <figure><div class="ig car">
+          <div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="dots">···</span></div>
+          <div class="trk" tabindex="0" role="region" aria-label="Carrusel de 4 tarjetas: desliza o usa las flechas del teclado">
+            <div class="cc ph" style="background-image:url(../assets/brand/seguridad-maritima.jpg);background-position:40% center"><span class="n">1/4</span><div class="in"><span class="stk">Desliza y mira la fecha</span><p class="hk">¿Tu certificado caduca en <em>2027?</em></p></div></div>
+            <div class="cc gd"><span class="n">2/4</span><div class="in"><span class="big">5</span><p class="hk">años dura un certificado STCW.</p><p>Si esperas al último mes, puede que no haya plaza antes de tu próximo embarque.</p></div></div>
+            <div class="cc ph" style="background-image:url(../assets/brand/practicas.jpg);background-position:center"><span class="n">3/4</span><div class="in"><div class="dl"><div><small>PRÓXIMA</small><b>30 nov</b></div><span></span><div><small>HASTA</small><b>1 dic</b></div></div><p class="hk">Actualización de Formación Básica, en Avilés.</p><ul><li>Lucha Contra Incendios</li><li>SMSSM</li><li>Buques de Pasaje</li></ul></div></div>
+            <div class="cc lt"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-color.png" alt=""><p class="hk" style="color:#0D2233">Dinos qué curso te toca y cuándo caduca.</p><p>Te damos la fecha más cercana por WhatsApp. También si estás embarcado.</p><span class="pill wa">Reservar plaza →</span></div></div>
+          </div>
+          <div class="cnav"><button class="pv" type="button" aria-label="Tarjeta anterior">‹</button><span class="dts" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><button class="nx" type="button" aria-label="Tarjeta siguiente">›</button></div>
+          <div class="cta"><span>Reservar plaza</span><span aria-hidden="true">›</span></div>
+          <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+          <p class="cap"><b>cancomar</b>Desliza: cuándo caduca, cada cuánto se renueva y la próxima fecha en Avilés… <span>más</span></p>
+        </div><figcaption><b>Carrusel 4:5</b> · desliza o usa las flechas · tarjeta 1 gancho, 2 el porqué, 3 la fecha real, 4 la acción</figcaption></figure>
+    </div>
+    <div class="kit2">
+      <div class="card gn">
+        <div><p class="k">Guion de vídeo · 18 s · reel y story 9:16</p><p class="small muted">Montado con vuestras fotos y planos grabados con móvil en el centro. Voz en off, subtítulos siempre visibles: la mayoría lo ve sin sonido.</p></div>
+        <div class="tl" aria-hidden="true"><span style="flex:2">0–2 s</span><span style="flex:4">2–6 s</span><span style="flex:4">6–10 s</span><span style="flex:4">10–14 s</span><span style="flex:4">14–18 s</span></div>
+        <ol class="esc">
+          <li><span class="th" style="background-image:url(../assets/brand/hero.jpg);background-position:30% center"><i>1</i><em>¿Cuándo caduca el tuyo?</em></span><div class="tx"><b>0–2 s · Gancho</b>
+            <div class="row"><span>Plano</span><span>Plano detalle con móvil: una mano saca la tarjeta del certificado de la cartera.</span></div>
+            <div class="row on"><span>En pantalla</span><span>¿Cuándo caduca el tuyo?</span></div>
+            <div class="row vo"><span>Voz</span><span>«Saca la cartera un segundo.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/seguridad-maritima.jpg);background-position:center"><i>2</i><em>Caduca en 2027</em></span><div class="tx"><b>2–6 s · La fecha</b>
+            <div class="row"><span>Plano</span><span>Zoom a la fecha de caducidad; el año «2027» se marca en rojo con un círculo dibujado.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Caduca en 2027</span></div>
+            <div class="row vo"><span>Voz</span><span>«Si tu Formación Básica caduca en 2027, esto va contigo.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/practicas.jpg);background-position:center"><i>3</i><em>Cada 5 años</em></span><div class="tx"><b>6–10 s · El porqué</b>
+            <div class="row"><span>Plano</span><span>Foto de prácticas con zoom lento (Ken Burns) y un contador «5 años» que gira.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Se renueva cada 5 años</span></div>
+            <div class="row vo"><span>Voz</span><span>«Los certificados STCW se renuevan cada cinco años, y el último mes casi nunca hay plaza.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/seguridad-maritima.jpg);background-position:70% center"><i>4</i><em>30 nov – 1 dic</em></span><div class="tx"><b>10–14 s · La fecha real</b>
+            <div class="row"><span>Plano</span><span>El sello «30 NOV · AVILÉS» cae sobre la foto con un golpe seco de sonido.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Próxima: 30 nov – 1 dic · Avilés</span></div>
+            <div class="row vo"><span>Voz</span><span>«La próxima actualización es el 30 de noviembre y el 1 de diciembre, en Avilés.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/puente.jpg);background-position:center"><i>5</i><em>Reservar plaza</em></span><div class="tx"><b>14–18 s · Cierre</b>
+            <div class="row"><span>Plano</span><span>Chat de WhatsApp en pantalla: «¿Me guardáis plaza?» y la respuesta. Logo y botón.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Reservar plaza · te contestamos aunque estés embarcado</span></div>
+            <div class="row vo"><span>Voz</span><span>«Escríbenos y te guardamos la fecha. Te contestamos aunque estés embarcado.»</span></div></div></li>
+        </ol>
+        <p class="nt">Música: percusión suave que para en seco en el segundo 10 (el sello). Las fechas son las publicadas en cancomar.es; si cambia la convocatoria, cambia la escena 4 y nada más.</p>
+      </div>
+      <div class="card abt">
+        <div><p class="k">Test A/B de gancho · mismo anuncio, solo cambia la primera frase</p><p class="small muted">Misma foto, mismo texto y mismo público: así la diferencia es del gancho y de nada más.</p></div>
+        <div class="vs"><div class="vv"><span class="vl">Variante 1 · Pregunta</span><p class="gq">«¿Tu certificado caduca en 2027?»</p><dl><dt>Hipótesis</dt><dd>Una pregunta que se comprueba en dos segundos filtra sola: solo se para quien de verdad tiene que renovar.</dd><dt>Qué esperamos ver</dt><dd>Menos clics, pero más peticiones A (curso y fecha) y más plazas por euro.</dd></dl></div><span class="vsx">VS</span><div class="vv v2"><span class="vl">Variante 2 · Gesto</span><p class="gq">«Saca la cartera y mira la fecha.»</p><dl><dt>Hipótesis</dt><dd>Pedir un gesto físico frena el scroll mejor que una pregunta, sobre todo en vídeo.</dd><dt>Qué esperamos ver</dt><dd>Más retención a 3 s y más alcance; riesgo de peticiones menos cualificadas.</dd></dl></div></div>
+        <div class="abm">
+          <div><b>Segmentación</b><span>La misma para las dos: gente de mar en Asturias y el Cantábrico, 22–60 años, intereses pesca, marina mercante y náutica profesional. Excluye a quien ya reservó.</span></div>
+          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>10 €/día por variante durante 10 días: <b>200 € en total</b>. Sin tocar nada hasta el día 7.</span></div>
+          <div class="win"><b>Cómo decidimos el ganador</b><span>Gana la de menor coste por plaza reservada. Si ninguna llega a 5 plazas, decide el coste por petición A. Con menos del 15 % de diferencia, empate: se queda la 1 y se prueba otro gancho.</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="legend"><span><b>[E]</b> estimación de Qualivo para la prueba, a ajustar con vosotras</span><span><b>Fotos</b> de cancomar.es, montadas en HTML/CSS</span></p>
+  </div>
 </div></section>
 
 <!-- B -->
@@ -455,19 +673,20 @@ Dinos qué curso te toca y cuándo caduca. Te damos la fecha más cercana.</pre>
   <div class="ah"><span class="lt" aria-hidden="true">B</span><h2>B · Urgencia de embarque: «Te sale embarque y te falta el curso»</h2><div class="meta">
     <span><b>Ángulo</b>el problema real del alumno no es el curso: es el embarque que puede perder</span>
     <span><b>Público</b>gente de mar en Asturias y el Cantábrico, de 20 a 60 años, con intereses en pesca, marina mercante y náutica profesional</span>
-    <span><b>Formato</b>anuncio de mensaje a WhatsApp: imagen 4:5 y story 9:16</span></div></div>
+    <span><b>Formatos</b>anuncio de mensaje a WhatsApp: feed 4:5, story y reel 9:16, carrusel de 4 tarjetas y vídeo de 16 s; dos ganchos en prueba A/B</span></div></div>
   <div class="ads">
     <div class="figs">
       <figure><div class="ig">
         <div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="dots">···</span></div>
-        <div class="cr" style="background-image:url(../assets/brand/puente.jpg)"><span class="tag">Respuesta por WhatsApp</span>
+        <div class="cr pro" style="background-image:url(../assets/brand/puente.jpg)"><span class="grain"></span><span class="frame"></span><span class="tag">Respuesta por WhatsApp</span>
           <div class="ticket"><div>Embarque<b>El lunes, 08:00</b>Te falta: <i>Formación Sanitaria</i></div><span class="st">Pendiente</span></div>
-          <p class="hk">Te sale embarque <em>y te falta el curso.</em></p>
+          <span class="stamp r sm" style="right:20px;top:150px"><span>Embarque</span><b>LUNES</b><span>08:00</span></span>
+          <div class="btm"><span class="stk g">WhatsApp · respuesta en minutos</span><p class="hk">Te sale embarque <em>y te falta el curso.</em></p></div>
           <p class="sub">Escríbenos y te decimos la fecha más cercana</p><img class="lg" src="../assets/brand/logo-blanco.png" alt=""></div>
         <div class="cta"><span>Enviar mensaje</span><span aria-hidden="true">›</span></div>
         <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
         <p class="cap"><b>cancomar</b>Te sale embarque y te falta el curso. Escríbenos con dos cosas… <span>más</span></p>
-      </div><figcaption><b>Feed 4:5</b> · la tarjeta de embarque es <span class="ej">Datos de ejemplo</span></figcaption></figure>
+      </div><figcaption><b>Feed 4:5</b> · capas: tarjeta de embarque, sello de hora, pegatina de WhatsApp y franja de marca · embarque y curso: <span class="ej">Datos de ejemplo</span></figcaption></figure>
     </div>
     <div class="copy">
       <div class="hook"><p class="k">Gancho · primera frase</p><pre>Te sale embarque y te falta el curso.</pre></div>
@@ -502,6 +721,73 @@ Te contestamos con la convocatoria más cercana en Avilés. Si no hay fecha a ti
       </ul></div>
     </div>
   </div>
+  <div class="kit">
+    <div class="kith"><span class="lt" aria-hidden="true">B</span><div><p class="k">El concepto completo · B</p><h3>Embarque en story, carrusel, vídeo de 16 s y dos ganchos en prueba</h3></div></div>
+    <div class="fmts">
+      <figure><div class="s9" role="img" aria-label="Maqueta de story: conversación de WhatsApp sobre un embarque" style="background-image:url(../assets/brand/puente.jpg);background-position:60% center">
+          <span class="grain"></span><span class="frame"></span>
+          <div class="pb"><i class="on"></i><i></i><i></i></div>
+          <div class="hd"><span class="av"></span><b>cancomar</b><small>Publicidad</small><span class="x" aria-hidden="true">✕</span></div>
+          <span class="tag">Respuesta por WhatsApp</span><img class="lg" src="../assets/brand/logo-blanco.png" alt="">
+          <div class="chat"><p class="me">Me sale embarque el lunes y me falta Sanitaria 😬<small>23:41</small></p><p>Te miramos la fecha más cercana en Avilés y te escribimos mañana a primera hora.<small>23:44</small></p></div>
+          <span class="stamp sm" style="left:16px;top:262px"><span>Faltan</span><b>3 días</b><span>embarque</span></span>
+          <div class="bt"><p class="hk">¿Embarcas el lunes <em>y te falta un curso?</em></p><p class="sb">Escríbenos qué curso y cuándo embarcas</p></div>
+          <div class="up"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Enviar mensaje</span></div>
+        </div><figcaption><b>Story / reel 9:16</b> · el chat enseña lo que pasa después del clic · conversación: <span class="ej">Datos de ejemplo</span></figcaption></figure>
+      <figure><div class="ig car">
+          <div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="dots">···</span></div>
+          <div class="trk" tabindex="0" role="region" aria-label="Carrusel de 4 tarjetas: desliza o usa las flechas del teclado">
+            <div class="cc ph" style="background-image:url(../assets/brand/puente.jpg);background-position:60% center"><span class="n">1/4</span><div class="in"><div class="dl" style="grid-template-columns:1fr auto"><div><small>EMBARQUE</small><b style="font-size:20px">Lunes, 08:00</b></div><span class="stk" style="transform:rotate(4deg)">Te falta 1</span></div><p class="hk">Te sale embarque <em>y te falta el curso.</em></p></div></div>
+            <div class="cc gd"><span class="n">2/4</span><div class="in"><p class="hk">Escríbenos solo dos cosas:</p><ul><li>Qué curso te falta</li><li>Cuándo embarcas</li></ul><p>Sin formularios. Por WhatsApp, a la hora que sea.</p></div></div>
+            <div class="cc ph" style="background-image:url(../assets/brand/pesquero.jpg);background-position:center"><span class="n">3/4</span><div class="in"><p class="bub me">Me falta Sanitaria y embarco el lunes</p><p class="bub">Te proponemos la convocatoria más cercana en Avilés. ¿Lo pagas tú o tu empresa?</p><span class="ej">Datos de ejemplo</span></div></div>
+            <div class="cc lt"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-color.png" alt=""><p class="hk" style="color:#0D2233">¿Sin fecha a tiempo? Te lo decimos claro.</p><p>Y te apuntamos a la lista de espera para avisarte el primero.</p><span class="pill wa">Enviar mensaje →</span></div></div>
+          </div>
+          <div class="cnav"><button class="pv" type="button" aria-label="Tarjeta anterior">‹</button><span class="dts" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><button class="nx" type="button" aria-label="Tarjeta siguiente">›</button></div>
+          <div class="cta"><span>Enviar mensaje</span><span aria-hidden="true">›</span></div>
+          <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+          <p class="cap"><b>cancomar</b>Te sale embarque y te falta el curso. Desliza y te contamos qué hacer… <span>más</span></p>
+        </div><figcaption><b>Carrusel 4:5</b> · el problema, lo que tienes que hacer, la respuesta y la honestidad cuando no hay fecha</figcaption></figure>
+    </div>
+    <div class="kit2">
+      <div class="card gn">
+        <div><p class="k">Guion de vídeo · 16 s · reel y story 9:16</p><p class="small muted">Montado con vuestras fotos y planos grabados con móvil en el centro. Voz en off, subtítulos siempre visibles: la mayoría lo ve sin sonido.</p></div>
+        <div class="tl" aria-hidden="true"><span style="flex:2">0–2 s</span><span style="flex:3">2–5 s</span><span style="flex:5">5–10 s</span><span style="flex:4">10–14 s</span><span style="flex:2">14–16 s</span></div>
+        <ol class="esc">
+          <li><span class="th" style="background-image:url(../assets/brand/puente.jpg);background-position:center"><i>1</i><em>¿Embarcas el lunes?</em></span><div class="tx"><b>0–2 s · Gancho</b>
+            <div class="row"><span>Plano</span><span>Móvil en mano en el muelle; entra una notificación: «¿Puedes embarcar el lunes?».</span></div>
+            <div class="row on"><span>En pantalla</span><span>¿Embarcas el lunes?</span></div>
+            <div class="row vo"><span>Voz</span><span>«Te llaman para embarcar el lunes…»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/pesquero.jpg);background-position:center"><i>2</i><em>Te falta 1 certificado</em></span><div class="tx"><b>2–5 s · El problema</b>
+            <div class="row"><span>Plano</span><span>Lista de documentación en pantalla; un certificado se tacha en rojo.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Te falta: Formación Sanitaria (ejemplo)</span></div>
+            <div class="row vo"><span>Voz</span><span>«…y te piden un certificado que no tienes.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/hero.jpg);background-position:30% center"><i>3</i><em>Curso + fecha</em></span><div class="tx"><b>5–10 s · Qué hacer</b>
+            <div class="row"><span>Plano</span><span>Pantalla de WhatsApp: el usuario escribe con dos toques, «Sanitaria · lunes».</span></div>
+            <div class="row on"><span>En pantalla</span><span>Escríbenos: qué curso + cuándo embarcas</span></div>
+            <div class="row vo"><span>Voz</span><span>«Escríbenos dos cosas: qué curso te falta y cuándo embarcas.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/practicas.jpg);background-position:center"><i>4</i><em>Fecha más cercana</em></span><div class="tx"><b>10–14 s · La respuesta</b>
+            <div class="row"><span>Plano</span><span>Llega la respuesta en burbuja sobre la foto de prácticas; check verde.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Te decimos la fecha más cercana. Y si no llega, te lo decimos claro.</span></div>
+            <div class="row vo"><span>Voz</span><span>«Te contestamos con la fecha más cercana en Avilés. Y si no llega, te lo decimos claro.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/puente.jpg);background-position:80% center"><i>5</i><em>Enviar mensaje</em></span><div class="tx"><b>14–16 s · Cierre</b>
+            <div class="row"><span>Plano</span><span>Logo de Cancomar y botón verde de WhatsApp latiendo.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Enviar mensaje</span></div>
+            <div class="row vo"><span>Voz</span><span>«Cancomar, en Avilés.»</span></div></div></li>
+        </ol>
+        <p class="nt">Ritmo rápido, cortes cada 2–4 s. Sonido de notificación en el segundo 0: es lo que hace parar el pulgar. Curso y día del embarque son ejemplo.</p>
+      </div>
+      <div class="card abt">
+        <div><p class="k">Test A/B de gancho · mismo anuncio, solo cambia la primera frase</p><p class="small muted">Misma foto, mismo texto y mismo público: así la diferencia es del gancho y de nada más.</p></div>
+        <div class="vs"><div class="vv"><span class="vl">Variante 1 · Situación</span><p class="gq">«Te sale embarque y te falta el curso.»</p><dl><dt>Hipótesis</dt><dd>Nombrar la situación exacta hace que se reconozca quien la está viviendo ahora mismo.</dd><dt>Qué esperamos ver</dt><dd>Más conversaciones que ya traen curso y fecha en el primer mensaje.</dd></dl></div><span class="vsx">VS</span><div class="vv v2"><span class="vl">Variante 2 · Pérdida</span><p class="gq">«Un curso no debería costarte un embarque.»</p><dl><dt>Hipótesis</dt><dd>Hablar de lo que se pierde (el embarque, el sueldo) mueve también a quien embarca dentro de un mes.</dd><dt>Qué esperamos ver</dt><dd>Más mensajes y más baratos, pero más «solo pregunto».</dd></dl></div></div>
+        <div class="abm">
+          <div><b>Segmentación</b><span>Gente de mar en Asturias y el Cantábrico, 20–60 años, intereses pesca, marina mercante y náutica profesional. Campaña de mensajes a WhatsApp, ubicaciones automáticas.</span></div>
+          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>8 €/día por variante durante 10 días: <b>160 € en total</b>.</span></div>
+          <div class="win"><b>Cómo decidimos el ganador</b><span>Gana el menor coste por conversación con curso y fecha. Desempata quién reserva plaza en menos de 7 días. Mínimo 20 conversaciones por variante para decidir.</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="legend"><span><b>[E]</b> estimación de Qualivo para la prueba, a ajustar con vosotras</span><span><b>Fotos</b> de cancomar.es, montadas en HTML/CSS</span></p>
+  </div>
 </div></section>
 
 <!-- C -->
@@ -509,19 +795,20 @@ Te contestamos con la convocatoria más cercana en Avilés. Si no hay fecha a ti
   <div class="ah"><span class="lt" aria-hidden="true">C</span><h2>C · Empresas y flotas: «¿Sabes cuándo caduca cada certificado de tu tripulación?»</h2><div class="meta">
     <span><b>Ángulo</b>para una empresa, un certificado caducado puede ser un barco parado; ofrecemos control, no solo un curso</span>
     <span><b>Público</b>armadores, navieras, cofradías y empresas portuarias del Cantábrico; y las empresas que ya os han pedido formación, desde vuestra base</span>
-    <span><b>Formato</b>imagen 4:5 en Facebook e Instagram</span></div></div>
+    <span><b>Formatos</b>feed 4:5 en Facebook e Instagram, story 9:16, carrusel de 4 tarjetas y vídeo de 20 s; dos ganchos en prueba A/B</span></div></div>
   <div class="ads">
     <div class="figs">
       <figure><div class="ig">
         <div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="dots">···</span></div>
-        <div class="cr" style="background-image:url(../assets/brand/pesquero.jpg)"><span class="tag">Para empresas</span>
+        <div class="cr pro" style="background-image:url(../assets/brand/pesquero.jpg)"><span class="grain"></span><span class="frame"></span><span class="tag">Para empresas</span>
           <div class="crew"><b>Tu tripulación</b><span>Patrón<i>En vigor</i></span><span>Mecánico<i class="w">Caduca 2027</i></span><span>Marinero 1<i>En vigor</i></span><span>Marinero 2<i class="w">Caduca 2027</i></span></div>
-          <p class="hk">¿Sabes cuándo caduca cada certificado <em>de tu tripulación?</em></p>
-          <p class="sub">Plan de formación a medida · un solo interlocutor</p><img class="lg" src="../assets/brand/logo-blanco.png" alt=""></div>
+          <span class="stamp sm" style="left:18px;top:66px"><span>Revisión</span><b>2027</b><span>flota</span></span>
+          <div class="btm"><span class="stk w">Un solo interlocutor</span><p class="hk">¿Sabes cuándo caduca cada certificado <em>de tu tripulación?</em></p></div>
+          <p class="sub">Plan de formación a medida para tu flota</p><img class="lg" src="../assets/brand/logo-blanco.png" alt=""></div>
         <div class="cta"><span>Solicitar propuesta</span><span aria-hidden="true">›</span></div>
         <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
         <p class="cap"><b>cancomar</b>Para un armador, un certificado caducado puede ser un barco parado… <span>más</span></p>
-      </div><figcaption><b>Feed 4:5</b> · tripulación y fechas: <span class="ej">Datos de ejemplo</span></figcaption></figure>
+      </div><figcaption><b>Feed 4:5</b> · capas: ficha de tripulación, sello de revisión, pegatina y franja de marca · tripulación y fechas: <span class="ej">Datos de ejemplo</span></figcaption></figure>
     </div>
     <div class="copy">
       <div class="hook"><p class="k">Gancho · primera frase</p><pre>¿Sabes cuándo caduca cada certificado de tu tripulación?</pre></div>
@@ -551,6 +838,73 @@ Cuéntanos cuántos tripulantes tienes y qué cursos necesitan. Te llamamos y te
       </ul></div>
     </div>
   </div>
+  <div class="kit">
+    <div class="kith"><span class="lt" aria-hidden="true">C</span><div><p class="k">El concepto completo · C</p><h3>Empresas en story, carrusel, vídeo de 20 s y dos ganchos en prueba</h3></div></div>
+    <div class="fmts">
+      <figure><div class="s9" role="img" aria-label="Maqueta de story: ficha de tripulación y encuesta" style="background-image:url(../assets/brand/pesquero.jpg);background-position:50% center">
+          <span class="grain"></span><span class="frame"></span>
+          <div class="pb"><i class="on"></i><i></i><i></i></div>
+          <div class="hd"><span class="av"></span><b>cancomar</b><small>Publicidad</small><span class="x" aria-hidden="true">✕</span></div>
+          <span class="tag">Para empresas</span><img class="lg" src="../assets/brand/logo-blanco.png" alt="">
+          <div class="chk"><b>Tripulación · revisión 2027</b><span>Patrón<i>En vigor</i></span><span>Mecánico<i class="w">Caduca</i></span><span>Marinero 1<i>En vigor</i></span><span>Marinero 2<i class="w">Caduca</i></span></div>
+          <div class="poll" style="top:auto;bottom:186px;width:70%">¿Lo tienes controlado?<span><i class="hot">Sí, todo</i><i>Más o menos</i></span></div>
+          <div class="bt"><p class="hk">Un certificado caducado <em>= un barco en puerto.</em></p><p class="sb">Plan de formación a medida, tripulante a tripulante</p></div>
+          <div class="up"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Solicitar propuesta</span></div>
+        </div><figcaption><b>Story 9:16</b> · la encuesta separa a quien ya lo controla de quien no: el segundo grupo recibe el carrusel · tripulación: <span class="ej">Datos de ejemplo</span></figcaption></figure>
+      <figure><div class="ig car">
+          <div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="dots">···</span></div>
+          <div class="trk" tabindex="0" role="region" aria-label="Carrusel de 4 tarjetas: desliza o usa las flechas del teclado">
+            <div class="cc ph" style="background-image:url(../assets/brand/pesquero.jpg);background-position:center"><span class="n">1/4</span><div class="in"><span class="stk w">Para armadores y flotas</span><p class="hk">¿Sabes cuándo caduca cada certificado <em>de tu tripulación?</em></p></div></div>
+            <div class="cc gd"><span class="n">2/4</span><div class="in"><span class="big" style="font-size:64px">1</span><p class="hk">certificado caducado basta para que un barco no salga.</p><p>Y casi siempre se descubre el día que hace falta.</p></div></div>
+            <div class="cc ph" style="background-image:url(../assets/brand/practicas.jpg);background-position:center"><span class="n">3/4</span><div class="in"><p class="hk">Lo que te ofrecemos</p><ul><li>Un plan de formación a medida, tripulante a tripulante</li><li>Aviso antes de que caduque cada certificado</li><li>Un solo interlocutor para todo</li></ul></div></div>
+            <div class="cc lt"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-color.png" alt=""><p class="hk" style="color:#0D2233">Cuéntanos cuántos sois y qué cursos necesitáis.</p><p>Te llamamos y te enviamos una propuesta para toda la tripulación, en Avilés.</p><span class="pill" style="background:var(--grad);color:#fff">Solicitar propuesta →</span></div></div>
+          </div>
+          <div class="cnav"><button class="pv" type="button" aria-label="Tarjeta anterior">‹</button><span class="dts" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><button class="nx" type="button" aria-label="Tarjeta siguiente">›</button></div>
+          <div class="cta"><span>Solicitar propuesta</span><span aria-hidden="true">›</span></div>
+          <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+          <p class="cap"><b>cancomar</b>Para un armador, un certificado caducado puede ser un barco parado. Desliza… <span>más</span></p>
+        </div><figcaption><b>Carrusel 4:5</b> · pensado para Facebook, donde está el armador · el riesgo, el coste, la solución y la llamada</figcaption></figure>
+    </div>
+    <div class="kit2">
+      <div class="card gn">
+        <div><p class="k">Guion de vídeo · 20 s · reel y story 9:16</p><p class="small muted">Montado con vuestras fotos y planos grabados con móvil en el centro. Voz en off, subtítulos siempre visibles: la mayoría lo ve sin sonido.</p></div>
+        <div class="tl" aria-hidden="true"><span style="flex:3">0–3 s</span><span style="flex:4">3–7 s</span><span style="flex:5">7–12 s</span><span style="flex:5">12–17 s</span><span style="flex:3">17–20 s</span></div>
+        <ol class="esc">
+          <li><span class="th" style="background-image:url(../assets/brand/pesquero.jpg);background-position:center"><i>1</i><em>Barco listo. ¿Certificados?</em></span><div class="tx"><b>0–3 s · Gancho</b>
+            <div class="row"><span>Plano</span><span>Plano general del pesquero amarrado, zoom lento hacia el puente.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Barco listo. Tripulación lista. ¿Certificados?</span></div>
+            <div class="row vo"><span>Voz</span><span>«El barco está listo. La tripulación, también.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/pesquero.jpg);background-position:80% center"><i>2</i><em>Caduca 2027</em></span><div class="tx"><b>3–7 s · El riesgo</b>
+            <div class="row"><span>Plano</span><span>La ficha de tripulación entra desde la derecha; una fila parpadea en rojo.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Basta uno caducado</span></div>
+            <div class="row vo"><span>Voz</span><span>«¿Y los certificados? Basta uno caducado para no salir.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/practicas.jpg);background-position:center"><i>3</i><em>Plan a medida</em></span><div class="tx"><b>7–12 s · La solución</b>
+            <div class="row"><span>Plano</span><span>Foto de prácticas en el centro, Ken Burns; aparecen tres checks uno a uno.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Plan a medida, tripulante a tripulante</span></div>
+            <div class="row vo"><span>Voz</span><span>«En Cancomar preparamos un plan de formación para toda tu tripulación, en Avilés.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/seguridad-maritima.jpg);background-position:center"><i>4</i><em>Aviso antes</em></span><div class="tx"><b>12–17 s · El control</b>
+            <div class="row"><span>Plano</span><span>Calendario con avisos que se encienden antes de cada caducidad.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Te avisamos antes de cada caducidad · un solo interlocutor</span></div>
+            <div class="row vo"><span>Voz</span><span>«Te avisamos antes de que caduque cada certificado, y hablas siempre con la misma persona.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/puente.jpg);background-position:center"><i>5</i><em>Solicitar propuesta</em></span><div class="tx"><b>17–20 s · Cierre</b>
+            <div class="row"><span>Plano</span><span>Logo de Cancomar sobre el puente; botón «Solicitar propuesta».</span></div>
+            <div class="row on"><span>En pantalla</span><span>Solicitar propuesta</span></div>
+            <div class="row vo"><span>Voz</span><span>«Cuéntanos cuántos sois. Te llamamos.»</span></div></div></li>
+        </ol>
+        <p class="nt">Tono más sobrio que los anuncios a particulares: música ambiente, sin efectos. Tripulación y fechas de la ficha son ejemplo; el aviso de caducidad sale de la base de datos de la fase 2.</p>
+      </div>
+      <div class="card abt">
+        <div><p class="k">Test A/B de gancho · mismo anuncio, solo cambia la primera frase</p><p class="small muted">Misma foto, mismo texto y mismo público: así la diferencia es del gancho y de nada más.</p></div>
+        <div class="vs"><div class="vv"><span class="vl">Variante 1 · Control</span><p class="gq">«¿Sabes cuándo caduca cada certificado de tu tripulación?»</p><dl><dt>Hipótesis</dt><dd>Al responsable de flota le pesa no tener el control. La pregunta le pone delante algo que no sabe responder de memoria.</dd><dt>Qué esperamos ver</dt><dd>Empresas medianas (navieras, portuarias) con varios tripulantes por propuesta.</dd></dl></div><span class="vsx">VS</span><div class="vv v2"><span class="vl">Variante 2 · Barco parado</span><p class="gq">«Que un certificado caducado no deje tu barco en puerto.»</p><dl><dt>Hipótesis</dt><dd>Al armador pequeño, que también es patrón, le mueve más el coste de un día sin salir que la gestión.</dd><dt>Qué esperamos ver</dt><dd>Más peticiones de flotas pequeñas; propuestas de menos alumnos pero que cierran antes.</dd></dl></div></div>
+        <div class="abm">
+          <div><b>Segmentación</b><span>Armadores, navieras, cofradías y empresas portuarias del Cantábrico: intereses de pesca profesional y gestión de flotas, más un público similar a las empresas de vuestra base.</span></div>
+          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>12 €/día por variante durante 14 días: <b>336 € en total</b>. La venta a empresas es lenta: no se decide antes del día 14.</span></div>
+          <div class="win"><b>Cómo decidimos el ganador</b><span>Gana el menor coste por empresa cualificada (tripulación y cursos claros). Desempata el número de alumnos por propuesta. Mínimo 5 empresas cualificadas por variante; si no, se alarga una semana.</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="legend"><span><b>[E]</b> estimación de Qualivo para la prueba, a ajustar con vosotras</span><span><b>Fotos</b> de cancomar.es, montadas en HTML/CSS</span></p>
+  </div>
 </div></section>
 
 <!-- D -->
@@ -558,19 +912,20 @@ Cuéntanos cuántos tripulantes tienes y qué cursos necesitan. Te llamamos y te
   <div class="ah"><span class="lt" aria-hidden="true">D</span><h2>D · Convocatoria: «Patrón Local de Pesca: empieza el 11 de enero»</h2><div class="meta">
     <span><b>Ángulo</b>una fecha concreta empuja a decidir a quien lleva tiempo pensándolo</span>
     <span><b>Público</b>primero, la lista de espera del curso por WhatsApp (sin anuncio); después, marineros de pesca en Asturias y el Cantábrico y quien visitó la página del curso</span>
-    <span><b>Formato</b>imagen 4:5 y story 9:16, activo solo hasta que se llena la convocatoria</span></div></div>
+    <span><b>Formatos</b>feed 4:5, story y reel 9:16, carrusel de 4 tarjetas y vídeo de 17 s; activo solo hasta que se llena la convocatoria; dos ganchos en prueba A/B</span></div></div>
   <div class="ads">
     <div class="figs">
       <figure><div class="ig">
         <div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="dots">···</span></div>
-        <div class="cr" style="background-image:url(../assets/brand/pesca.jpg)"><span class="tag">Próxima convocatoria</span>
+        <div class="cr pro" style="background-image:url(../assets/brand/pesca.jpg)"><span class="grain"></span><span class="frame"></span><span class="tag">Próxima convocatoria</span>
           <div class="cal"><small>ENE</small><b>11</b><span>2027 · Avilés</span></div>
-          <p class="hk">Patrón Local de Pesca: <em>empieza el 11 de enero</em> en Avilés.</p>
+          <span class="stamp" style="left:18px;top:70px"><span>Hasta el</span><b>18 FEB</b><span>2027</span></span>
+          <div class="btm"><span class="stk">De marinero a patrón</span><p class="hk">Patrón Local de Pesca: <em>empieza el 11 de enero</em> en Avilés.</p></div>
           <p class="sub">Del 11 de enero al 18 de febrero de 2027</p><img class="lg" src="../assets/brand/logo-blanco.png" alt=""></div>
         <div class="cta"><span>Más información</span><span aria-hidden="true">›</span></div>
         <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
         <p class="cap"><b>cancomar</b>Patrón Local de Pesca, del 11 de enero al 18 de febrero de 2027… <span>más</span></p>
-      </div><figcaption><b>Feed 4:5</b> · fechas publicadas en cancomar.es (consulta del 10-nov) <span class="real">Real</span></figcaption></figure>
+      </div><figcaption><b>Feed 4:5</b> · capas: calendario, sello de fin, pegatina y franja de marca · fechas publicadas en cancomar.es (consulta del 10-nov) <span class="real">Real</span></figcaption></figure>
     </div>
     <div class="copy">
       <div class="hook"><p class="k">Gancho · primera frase</p><pre>Patrón Local de Pesca: empieza el 11 de enero.</pre></div>
@@ -598,6 +953,73 @@ Dinos si cumples los requisitos y te contamos por WhatsApp horario, documentaci�
         <li><b>Días hasta llenar</b><span>Para planificar la siguiente convocatoria.</span></li>
       </ul></div>
     </div>
+  </div>
+  <div class="kit">
+    <div class="kith"><span class="lt" aria-hidden="true">D</span><div><p class="k">El concepto completo · D</p><h3>Convocatoria en story, carrusel, vídeo de 17 s y dos ganchos en prueba</h3></div></div>
+    <div class="fmts">
+      <figure><div class="s9" role="img" aria-label="Maqueta de story: cuenta atrás para la convocatoria de Patrón Local de Pesca" style="background-image:url(../assets/brand/pesca.jpg);background-position:40% center">
+          <span class="grain"></span><span class="frame"></span>
+          <div class="pb"><i class="on"></i><i></i><i></i></div>
+          <div class="hd"><span class="av"></span><b>cancomar</b><small>Publicidad</small><span class="x" aria-hidden="true">✕</span></div>
+          <span class="tag">Próxima convocatoria</span><img class="lg" src="../assets/brand/logo-blanco.png" alt="">
+          <div class="cd"><small>Cuenta atrás</small><b>Patrón Local de Pesca</b><span><i>11<small>ENE</small></i><i>2027<small>AVILÉS</small></i></span></div>
+          <span class="stamp r sm" style="right:16px;top:228px"><span>Hasta</span><b>18 FEB</b><span>2027</span></span>
+          <div class="bt"><p class="hk">De marinero a patrón: <em>empieza el 11 de enero.</em></p><p class="sb">Del 11 de enero al 18 de febrero de 2027, en Avilés</p></div>
+          <div class="up"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Más información</span></div>
+        </div><figcaption><b>Story / reel 9:16</b> · la pegatina de cuenta atrás de Instagram avisa sola a quien la activa cuando llega el día · fechas <span class="real">Real</span></figcaption></figure>
+      <figure><div class="ig car">
+          <div class="h"><span class="av"></span><div><b>cancomar</b><small>Publicidad</small></div><span class="dots">···</span></div>
+          <div class="trk" tabindex="0" role="region" aria-label="Carrusel de 4 tarjetas: desliza o usa las flechas del teclado">
+            <div class="cc ph" style="background-image:url(../assets/brand/pesca.jpg);background-position:center"><span class="n">1/4</span><div class="in"><span class="stk">Convocatoria 2027</span><p class="hk">Patrón Local de Pesca: <em>empieza el 11 de enero.</em></p></div></div>
+            <div class="cc gd"><span class="n">2/4</span><div class="in"><p class="hk">Las fechas</p><div class="dl"><div><small>EMPIEZA</small><b>11 ene</b></div><span></span><div><small>TERMINA</small><b>18 feb</b></div></div><p>2027 · en Avilés. Horario: [a confirmar con vosotros]</p></div></div>
+            <div class="cc ph" style="background-image:url(../assets/brand/puente.jpg);background-position:center"><span class="n">3/4</span><div class="in"><p class="hk">Antes de reservar, lo comprobamos contigo</p><ul><li>Tiempo de mar</li><li>Titulación previa</li><li>Documentación</li></ul><p>Requisitos exactos: [a confirmar con vosotros]</p></div></div>
+            <div class="cc lt"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-color.png" alt=""><p class="hk" style="color:#0D2233">Llevas tiempo pensándolo. Enero es buena fecha.</p><p>Te contamos por WhatsApp horario, documentación y cómo reservar plaza.</p><span class="pill" style="background:var(--grad);color:#fff">Más información →</span></div></div>
+          </div>
+          <div class="cnav"><button class="pv" type="button" aria-label="Tarjeta anterior">‹</button><span class="dts" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><button class="nx" type="button" aria-label="Tarjeta siguiente">›</button></div>
+          <div class="cta"><span>Más información</span><span aria-hidden="true">›</span></div>
+          <div class="acts" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><svg viewBox="0 0 24 24" class="sv"><use href="#i-save"/></svg></div>
+          <p class="cap"><b>cancomar</b>Patrón Local de Pesca, del 11 de enero al 18 de febrero de 2027. Desliza… <span>más</span></p>
+        </div><figcaption><b>Carrusel 4:5</b> · la fecha, el calendario, los requisitos (sin inventar nada) y la acción</figcaption></figure>
+    </div>
+    <div class="kit2">
+      <div class="card gn">
+        <div><p class="k">Guion de vídeo · 17 s · reel y story 9:16</p><p class="small muted">Montado con vuestras fotos y planos grabados con móvil en el centro. Voz en off, subtítulos siempre visibles: la mayoría lo ve sin sonido.</p></div>
+        <div class="tl" aria-hidden="true"><span style="flex:2">0–2 s</span><span style="flex:3">2–5 s</span><span style="flex:5">5–10 s</span><span style="flex:4">10–14 s</span><span style="flex:3">14–17 s</span></div>
+        <ol class="esc">
+          <li><span class="th" style="background-image:url(../assets/brand/pesca.jpg);background-position:center"><i>1</i><em>De cubierta…</em></span><div class="tx"><b>0–2 s · Gancho</b>
+            <div class="row"><span>Plano</span><span>Marinero de espaldas en cubierta, mirando hacia el puente.</span></div>
+            <div class="row on"><span>En pantalla</span><span>De cubierta…</span></div>
+            <div class="row vo"><span>Voz</span><span>«Llevas años en cubierta.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/puente.jpg);background-position:center"><i>2</i><em>…al puente</em></span><div class="tx"><b>2–5 s · El salto</b>
+            <div class="row"><span>Plano</span><span>Corte al puente de mando: el timón en primer plano.</span></div>
+            <div class="row on"><span>En pantalla</span><span>…al puente.</span></div>
+            <div class="row vo"><span>Voz</span><span>«Y llevas tiempo pensando en ser patrón.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/pesca.jpg);background-position:80% center"><i>3</i><em>11 ENE</em></span><div class="tx"><b>5–10 s · La fecha</b>
+            <div class="row"><span>Plano</span><span>Hoja de calendario que cae hasta el 11 de enero; el sello «18 FEB» cierra el tramo.</span></div>
+            <div class="row on"><span>En pantalla</span><span>Patrón Local de Pesca · 11 ene – 18 feb 2027</span></div>
+            <div class="row vo"><span>Voz</span><span>«La próxima convocatoria de Patrón Local de Pesca empieza el 11 de enero.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/practicas.jpg);background-position:center"><i>4</i><em>En Avilés</em></span><div class="tx"><b>10–14 s · El lugar</b>
+            <div class="row"><span>Plano</span><span>Foto de prácticas con zoom lento.</span></div>
+            <div class="row on"><span>En pantalla</span><span>En Avilés · presencial</span></div>
+            <div class="row vo"><span>Voz</span><span>«En Avilés, del 11 de enero al 18 de febrero.»</span></div></div></li>
+          <li><span class="th" style="background-image:url(../assets/brand/hero.jpg);background-position:30% center"><i>5</i><em>Más información</em></span><div class="tx"><b>14–17 s · Cierre</b>
+            <div class="row"><span>Plano</span><span>Logo y botón; la última semana el botón cambia a «Reservar».</span></div>
+            <div class="row on"><span>En pantalla</span><span>Más información → WhatsApp</span></div>
+            <div class="row vo"><span>Voz</span><span>«Escríbenos y te contamos requisitos, horario y cómo reservar.»</span></div></div></li>
+        </ol>
+        <p class="nt">Fechas reales de cancomar.es (consulta del 10-nov). El vídeo no da requisitos ni precio: eso va en la conversación, cuando ya sabemos si la persona puede matricularse.</p>
+      </div>
+      <div class="card abt">
+        <div><p class="k">Test A/B de gancho · mismo anuncio, solo cambia la primera frase</p><p class="small muted">Misma foto, mismo texto y mismo público: así la diferencia es del gancho y de nada más.</p></div>
+        <div class="vs"><div class="vv"><span class="vl">Variante 1 · Fecha</span><p class="gq">«Patrón Local de Pesca: empieza el 11 de enero.»</p><dl><dt>Hipótesis</dt><dd>Quien ya ha decidido ser patrón solo busca cuándo. La fecha en la primera línea convierte el «algún día» en «este invierno».</dd><dt>Qué esperamos ver</dt><dd>Menos alcance y más peticiones que cumplen requisitos.</dd></dl></div><span class="vsx">VS</span><div class="vv v2"><span class="vl">Variante 2 · Salto</span><p class="gq">«De marinero a patrón: la próxima convocatoria ya tiene fecha.»</p><dl><dt>Hipótesis</dt><dd>La aspiración llega también a quien todavía no buscaba el curso.</dd><dt>Qué esperamos ver</dt><dd>Más peticiones y más baratas; más gente que aún no cumple requisitos (va a la base, no se pierde).</dd></dl></div></div>
+        <div class="abm">
+          <div><b>Segmentación</b><span>Marineros de pesca en Asturias y el Cantábrico, más quien visitó la página del curso en los últimos 30 días. Excluye la lista de espera, que ya recibe el aviso gratis por WhatsApp.</span></div>
+          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>10 €/día por variante durante 7 días: <b>140 € en total</b>. Se apaga en cuanto se llena la convocatoria.</span></div>
+          <div class="win"><b>Cómo decidimos el ganador</b><span>Gana el menor coste por petición que cumple requisitos. Con plazas cubiertas en la prueba, manda el coste por plaza. Si llena antes de decidir, se guarda el aprendizaje para la siguiente convocatoria.</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="legend"><span><b>[E]</b> estimación de Qualivo para la prueba, a ajustar con vosotras</span><span><b>Fotos</b> de cancomar.es, montadas en HTML/CSS</span></p>
   </div>
 </div></section>
 
@@ -654,7 +1076,21 @@ Dinos si cumples los requisitos y te contamos por WhatsApp horario, documentaci�
 <footer class="foot"><div class="wrap">
   <b>Maikel Echevarría · Qualivo</b>
   <span>maikel@qualivo.io · <a href="https://qualivo.io">qualivo.io</a></span>
-  <p>Maqueta preparada el 10 de noviembre de 2026 para Cancomar con datos públicos de cancomar.es. Las creatividades son maquetas en HTML sobre fotos de vuestra web; no son anuncios publicados. Personas, tripulaciones, mensajes y barras marcadas como «Datos de ejemplo» son inventadas. No es una página de Cancomar.</p>
+  <p>Maqueta preparada el 10 de noviembre de 2026 para Cancomar con datos públicos de cancomar.es. Las creatividades son maquetas en HTML sobre fotos de vuestra web; no son anuncios publicados. Personas, tripulaciones, mensajes y barras marcadas como «Datos de ejemplo» son inventadas; los presupuestos marcados [E] son estimaciones. No es una página de Cancomar.</p>
 </div></footer>
+<script>
+addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.car').forEach(function(c){
+    var t=c.querySelector('.trk'),cards=t.children,dots=c.querySelectorAll('.dts i'),pv=c.querySelector('.pv'),nx=c.querySelector('.nx'),idx=0;
+    function cur(){var mid=t.scrollLeft+t.clientWidth/2,b=0,bd=1e9;for(var i=0;i<cards.length;i++){var d=Math.abs(cards[i].offsetLeft+cards[i].offsetWidth/2-mid);if(d<bd){bd=d;b=i;}}return b;}
+    function paint(){idx=cur();dots.forEach(function(d,i){d.classList.toggle('on',i===idx);});pv.disabled=idx===0;nx.disabled=idx===cards.length-1;}
+    function go(i){i=Math.max(0,Math.min(cards.length-1,i));var el=cards[i];t.scrollTo({left:el.offsetLeft-(t.clientWidth-el.offsetWidth)/2,behavior:'smooth'});}
+    pv.addEventListener('click',function(){go(idx-1);});nx.addEventListener('click',function(){go(idx+1);});
+    t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(idx+1);}if(e.key==='ArrowLeft'){e.preventDefault();go(idx-1);}});
+    var tm;t.addEventListener('scroll',function(){clearTimeout(tm);tm=setTimeout(paint,60);},{passive:true});
+    paint();
+  });
+});
+</script>
 </body>
 </html>
