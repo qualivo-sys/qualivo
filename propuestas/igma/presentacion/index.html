@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Qualivo × IGMA · presentación</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;700;800;900&family=Roboto:wght@400;500;700&display=swap">
+<style>
+/* Presentación en directo · IGMA (11-nov, 12:30). Flechas o espacio para avanzar. Marca de igma.es: negro, blanco y cian #00ADFF; Raleway + Roboto. */
+:root{--bk:#08090B;--bk2:#101216;--bk3:#171A20;--wh:#F4F6F8;--mut:#9AA3AE;--dim:#5E6773;--cy:#00ADFF;--cy2:#5CCBFF;--line:rgba(255,255,255,.12);
+--head:"Raleway",system-ui,sans-serif;--sans:"Roboto",system-ui,sans-serif;--glow:0 0 24px rgba(0,173,255,.45)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;background:var(--bk)}
+body{background:var(--bk);color:var(--wh);font:18px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+/* barra */
+.prog{position:fixed;left:0;top:0;height:2px;background:var(--cy);box-shadow:var(--glow);z-index:31;width:0;transition:width .3s}
+.top{position:fixed;inset:0 0 auto;z-index:30;display:flex;align-items:center;gap:18px;padding:12px max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px));background:linear-gradient(180deg,rgba(8,9,11,.92),rgba(8,9,11,.55) 70%,transparent)}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto;font:800 15px var(--head);letter-spacing:.02em;white-space:nowrap}
+.brand i{font-style:normal;opacity:.45;font-weight:300}
+.brand img{height:26px;width:auto}
+.dots{display:flex;gap:2px}
+.dots a{color:rgba(255,255,255,.6);text-decoration:none;font:600 12px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:6px 9px;white-space:nowrap;border-bottom:2px solid transparent}
+.dots a:hover{color:#fff}
+.dots a.on{color:#fff;border-bottom-color:var(--cy)}
+.pz{position:relative}
+.pz summary{list-style:none;cursor:pointer;font:700 12px var(--head);letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:7px 14px;white-space:nowrap}
+.pz summary::-webkit-details-marker{display:none}
+.pz[open] summary,.pz summary:hover{border-color:var(--cy);color:var(--cy)}
+.pz nav{position:absolute;right:0;top:calc(100% + 10px);background:var(--bk2);border:1px solid var(--line);border-radius:14px;padding:8px;display:grid;min-width:200px;box-shadow:0 30px 60px -20px #000}
+.pz nav a{text-decoration:none;padding:9px 12px;border-radius:9px;font:500 15px var(--sans);display:flex;justify-content:space-between;gap:12px}
+.pz nav a:hover{background:var(--bk3);color:var(--cy)}
+.pz nav a span{color:var(--dim)}
+.cnt{position:fixed;right:18px;bottom:16px;z-index:30;font:700 12px var(--head);letter-spacing:.1em;color:var(--mut)}
+/* pantallas */
+.s{position:relative;min-height:100vh;min-height:100svh;padding:96px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.in{max-width:1240px;margin:0 auto;width:100%}
+.n{font:700 12px/1 var(--head);letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:22px}
+h1,h2,h3{font-family:var(--head);font-weight:900;letter-spacing:-.025em;line-height:1;text-wrap:balance}
+h2{font-size:clamp(38px,6vw,88px);margin-bottom:28px}
+h2 em,h1 em{font-style:normal;color:var(--cy);text-shadow:var(--glow)}
+.lead{font-size:clamp(18px,1.7vw,22px);color:var(--mut);max-width:46ch}
+.bg{position:absolute;inset:0;z-index:-1;background:center/cover no-repeat}
+.bg::after{content:"";position:absolute;inset:0}
+/* 1 portada */
+.hero .bg::after{background:linear-gradient(90deg,rgba(8,9,11,.95) 0%,rgba(8,9,11,.72) 45%,rgba(8,9,11,.15) 100%),linear-gradient(0deg,rgba(8,9,11,.9),transparent 40%)}
+.hero .logo{width:min(220px,50vw);margin-bottom:clamp(28px,5vh,52px)}
+.hero h1{font-size:clamp(44px,min(8vw,11vh),124px);max-width:11ch}
+.hero h1+p{font:300 clamp(19px,2vw,26px)/1.4 var(--head);margin-top:30px;max-width:30ch;color:#D8DEE4}
+.hero .meta{margin-top:44px;font:700 12px var(--head);letter-spacing:.2em;text-transform:uppercase;color:var(--mut);display:flex;gap:18px;flex-wrap:wrap}
+.hero .meta b{color:#fff;font-weight:700}
+.hero .meta span{color:var(--cy)}
+/* 2 qué hacemos */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch;min-height:100vh;min-height:100svh;padding:0}
+.split .ph{background:center/cover no-repeat;position:relative}
+.split .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,var(--bk))}
+.split .tx{padding:110px max(16px,6vw) 70px max(16px,5vw);display:flex;flex-direction:column;justify-content:center}
+.split h2{font-size:clamp(36px,4.8vw,72px)}
+.chain{list-style:none;margin-top:34px;border-top:1px solid var(--line)}
+.chain li{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);font:800 clamp(20px,2vw,28px)/1.2 var(--head);letter-spacing:-.01em}
+.chain li small{font:700 12px var(--head);letter-spacing:.14em;color:var(--dim)}
+.chain li:last-child{color:var(--cy);text-shadow:var(--glow)}
+/* 3 alumno */
+.who{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,80px);margin-top:12px}
+.who h3{font-size:clamp(28px,3.2vw,46px);margin-bottom:16px;font-weight:800}
+.who h3 span{color:var(--cy)}
+.who p{color:var(--mut);font-size:clamp(17px,1.5vw,20px);max-width:40ch}
+.who p+p{margin-top:10px}
+.who .fam{margin-top:26px;padding-left:20px;border-left:2px solid var(--cy)}
+.who .fam b{display:block;font:800 clamp(20px,2vw,26px)/1.2 var(--head);color:#fff;margin-bottom:6px}
+.qual{margin-top:clamp(36px,6vh,64px);padding-top:22px;border-top:1px solid var(--line);display:flex;gap:10px 28px;flex-wrap:wrap;align-items:baseline;font:300 clamp(18px,1.7vw,23px)/1.4 var(--head)}
+.qual b{font:700 12px var(--head);letter-spacing:.2em;text-transform:uppercase;color:var(--cy)}
+.qual strong{font-weight:800}
+/* 4 hoy / con Qualivo */
+.vs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-top:1px solid var(--line)}
+.vs>div{display:contents}
+.vs span{padding:20px 0;border-bottom:1px solid var(--line);font-size:clamp(17px,1.6vw,21px)}
+.vs .hd span{font:700 12px var(--head);letter-spacing:.2em;text-transform:uppercase;padding:16px 0}
+.vs span:nth-child(odd){color:var(--dim);padding-right:28px}
+.vs span:nth-child(even){font:700 clamp(18px,1.7vw,23px)/1.35 var(--head);color:#fff;padding-left:28px;border-left:1px solid var(--line)}
+.vs .hd span:nth-child(even){color:var(--cy);font:700 12px var(--head);letter-spacing:.2em}
+/* 5-7 anuncios */
+.ad{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:clamp(36px,6vw,100px);align-items:center}
+.post{background:#000;border:1px solid #23272E;border-radius:20px;overflow:hidden;max-width:400px;width:100%;box-shadow:0 40px 90px -40px rgba(0,173,255,.35)}
+.post .h{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:13.5px}
+.post .av{width:32px;height:32px;border-radius:50%;background:#000 url(img/logo-igma.png) center/80% no-repeat;border:1.5px solid var(--cy);flex:none}
+.post .h b{display:block;font-size:13.5px;font-weight:500}.post .h small{color:#8A939E;font-size:11.5px}
+.post .h .d3{margin-left:auto;color:#8A939E}
+.post .cr{position:relative;aspect-ratio:4/5;background:#111 center/cover no-repeat}
+.post .cr::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 35%,rgba(0,0,0,.88) 100%)}
+.post .hk{position:absolute;left:20px;right:20px;bottom:52px;z-index:2;font:900 31px/1 var(--head);letter-spacing:-.02em;text-transform:uppercase}
+.post .hk em{font-style:normal;color:var(--cy);text-shadow:var(--glow)}
+.post .sub{position:absolute;left:20px;right:20px;bottom:24px;z-index:2;font:500 13px var(--sans);color:#C9D1D9}
+.post .lg{position:absolute;right:16px;top:16px;width:74px;z-index:2}
+.post .cta{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:#14171C;font-weight:500;font-size:14px}
+.post .cta b{color:var(--cy);font-weight:500}
+.post .cap{padding:10px 14px 14px;font-size:13px;color:#C9D1D9;line-height:1.45}
+.post .cap b{font-weight:500;color:#fff;margin-right:4px}
+.ad .hook{font:900 clamp(36px,4.6vw,66px)/1.02 var(--head);letter-spacing:-.025em;margin-bottom:34px}
+.ad .hook em{font-style:normal;color:var(--cy);text-shadow:var(--glow)}
+.dl{display:grid;border-top:1px solid var(--line)}
+.dl div{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:15px 0;border-bottom:1px solid var(--line);font-size:clamp(16px,1.4vw,19px);color:#D8DEE4}
+.dl dt{font:700 11.5px var(--head);letter-spacing:.2em;text-transform:uppercase;color:var(--dim);padding-top:5px}
+.dl dd{margin:0}
+/* 8 landing y formulario */
+.lf{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(30px,5vw,70px);align-items:center}
+.browser{border-radius:14px;overflow:hidden;border:1px solid #262A31;background:#000;box-shadow:0 40px 90px -40px rgba(0,173,255,.3)}
+.browser .bar{display:flex;gap:6px;align-items:center;padding:9px 12px;background:#15181D}
+.browser .bar i{width:9px;height:9px;border-radius:50%;background:#353A43}
+.browser .bar span{margin-left:10px;flex:1;min-width:0;background:#0B0D10;border-radius:6px;font-size:11.5px;color:var(--mut);padding:3px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lp{position:relative;aspect-ratio:16/10;background:center/cover;display:flex;flex-direction:column;justify-content:flex-end;padding:7%}
+.lp::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.35))}
+.lp>*{position:relative}
+.lp img{position:absolute;left:7%;top:8%;width:18%}
+.lp b{font:900 clamp(20px,2.6vw,38px)/1 var(--head);text-transform:uppercase;letter-spacing:-.02em;max-width:13ch}
+.lp b em{font-style:normal;color:var(--cy)}
+.lp small{color:#C9D1D9;font-size:clamp(11px,1vw,14px);margin-top:10px}
+.lp .bt{align-self:flex-start;margin-top:14px;background:var(--cy);color:#001521;font:800 clamp(10px,.9vw,13px) var(--head);letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;border-radius:99px}
+.links{display:flex;gap:14px 26px;flex-wrap:wrap;margin-top:22px}
+.lk{font:700 13px var(--head);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:#fff;border-bottom:2px solid var(--cy);padding-bottom:4px}
+.lk:hover{color:var(--cy)}
+.form h3{font:800 clamp(22px,2.2vw,30px)/1.15 var(--head);margin-bottom:20px}
+.qs{list-style:none;display:grid;gap:16px}
+.qs li{font:500 15px var(--sans);color:#fff}
+.qs li span{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.qs li i{font-style:normal;font-size:13.5px;color:var(--mut);border:1px solid #2B3038;border-radius:99px;padding:5px 11px}
+.qs li i.on{color:#001521;background:var(--cy);border-color:var(--cy);font-weight:500}
+.form .out{margin-top:22px;font:300 17px/1.5 var(--head);color:var(--mut)}
+.form .out b{color:#fff;font-weight:800}
+/* 9 recorrido */
+.rc{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:clamp(36px,6vw,100px);align-items:center}
+.chat{background:#0B141A;border:8px solid #1C1F24;border-radius:34px;padding:12px 10px 16px;display:grid;gap:8px}
+.chat .wh{display:flex;align-items:center;gap:9px;padding:6px 6px 10px;border-bottom:1px solid #1F2A31;font:500 14px var(--sans)}
+.chat .wh img{width:34px;height:34px;border-radius:50%;background:#000;object-fit:contain;padding:4px;border:1px solid #233}
+.chat .wh small{display:block;font-size:11px;color:#7FD39B}
+.m{max-width:88%;background:#202C33;border-radius:12px 12px 12px 4px;padding:8px 10px;font-size:13.5px;line-height:1.45;color:#E9EDEF}
+.m.me{justify-self:end;background:#005C4B;border-radius:12px 12px 4px 12px}
+.m small{display:block;color:#8696A0;font-size:10.5px;text-align:right;margin-top:2px}
+.tl{list-style:none;border-top:1px solid var(--line)}
+.tl li{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.tl b{font:800 13px var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--cy)}
+.tl span{font:700 clamp(17px,1.6vw,21px)/1.3 var(--head)}
+.tl span small{display:block;font:400 15px var(--sans);color:var(--mut);margin-top:3px}
+.tl li.p b{color:#fff}
+/* 10 CRM */
+.crm{border:1px solid #23272E;border-radius:16px;background:var(--bk2);padding:14px;margin-top:6px}
+.crm .tb{display:flex;align-items:center;gap:14px;padding:2px 4px 14px;font-size:13px;color:var(--mut);flex-wrap:wrap}
+.crm .tb b{font:800 15px var(--head);color:#fff;margin-right:auto}
+.board{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:10px;overflow-x:auto;padding-bottom:4px}
+.col{display:flex;flex-direction:column;gap:8px;min-width:0}
+.col h4{font:700 11.5px var(--head);letter-spacing:.14em;text-transform:uppercase;color:var(--mut);display:flex;justify-content:space-between;padding:4px 2px 8px;border-bottom:2px solid #2B3038}
+.col.go h4{border-bottom-color:var(--cy);color:#fff}
+.tk{background:var(--bk3);border:1px solid #262B33;border-radius:10px;padding:10px 11px;font-size:12.5px;line-height:1.4;color:var(--mut)}
+.tk b{display:block;color:#fff;font:700 13.5px var(--head)}
+.tk u{text-decoration:none;display:inline-block;margin-top:6px;font:800 10.5px var(--head);letter-spacing:.06em;color:#001521;background:var(--cy);border-radius:4px;padding:2px 6px}
+.tk u.b{background:#C9D1D9}.tk u.c{background:#4A515C;color:#fff}
+.tk.hl{border-color:var(--cy);box-shadow:0 0 0 1px var(--cy),var(--glow)}
+.crm-f{display:flex;gap:10px 30px;flex-wrap:wrap;margin-top:24px;align-items:baseline}
+.crm-f p{font:300 clamp(17px,1.6vw,21px)/1.4 var(--head);color:var(--mut);max-width:52ch}
+.crm-f p b{color:#fff;font-weight:800}
+/* 11 intelligence */
+.intel .bg{background-image:url(img/botones.jpg);opacity:.22}
+.intel .bg::after{background:linear-gradient(180deg,var(--bk),rgba(8,9,11,.6) 50%,var(--bk))}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:10px 0 36px}
+.kpis div{padding:26px 22px 24px 0}
+.kpis div+div{padding-left:22px;border-left:1px solid var(--line)}
+.kpis b{display:block;font:900 clamp(44px,5.4vw,84px)/1 var(--head);letter-spacing:-.03em}
+.kpis div:first-child b{color:var(--cy);text-shadow:var(--glow)}
+.kpis span{display:block;margin-top:10px;font-size:15px;color:var(--mut)}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--cy);color:#001521;text-decoration:none;font:800 15px var(--head);letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:16px 28px;box-shadow:0 0 0 1px var(--cy),0 10px 40px -8px rgba(0,173,255,.6)}
+.btn:hover{background:#fff}
+/* 12 siguiente paso */
+.fin .bg{background-image:url(img/club.jpg)}
+.fin .bg::after{background:linear-gradient(0deg,rgba(8,9,11,.97) 30%,rgba(8,9,11,.7) 75%,rgba(8,9,11,.5))}
+.fin h2{font-size:clamp(40px,6.4vw,96px);max-width:14ch}
+.bring{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,44px);margin:20px 0 40px;counter-reset:b}
+.bring li{border-top:2px solid var(--cy);padding-top:16px;font:700 clamp(18px,1.7vw,23px)/1.3 var(--head)}
+.bring li small{display:block;font:400 15.5px var(--sans);color:var(--mut);margin-top:6px}
+.fin .sig{display:flex;align-items:center;gap:18px 28px;flex-wrap:wrap}
+.fin .sig p{font:300 17px var(--head);color:var(--mut)}
+.fin .sig p b{color:#fff;font-weight:700}
+.foot{position:absolute;left:max(16px,env(safe-area-inset-left,0px));right:16px;bottom:18px;font-size:12px;color:var(--dim)}
+/* animación */
+.rv{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv{opacity:0;transform:translateY(20px)}.js .rv.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}}
+/* responsive */
+@media (max-width:1180px){.dots{display:none}}
+@media (max-width:900px){
+.split{grid-template-columns:1fr}.split .ph{min-height:42vh}.split .ph::after{background:linear-gradient(180deg,transparent 50%,var(--bk))}.split .tx{padding-top:24px}
+.who,.ad,.lf,.rc{grid-template-columns:1fr}.ad .post,.rc .chat{margin:0 auto;max-width:380px;width:100%}
+.kpis{grid-template-columns:1fr 1fr}.kpis div:nth-child(3){padding-left:0;border-left:0}.kpis div:nth-child(n+3){border-top:1px solid var(--line)}
+.bring{grid-template-columns:1fr}.cnt{display:none}
+}
+@media (max-width:600px){
+body{font-size:16px}
+.brand{font-size:13px}.brand img{height:20px}
+.vs{grid-template-columns:1fr}.vs .hd{display:none}.vs span:nth-child(odd){padding:16px 0 4px;border-bottom:0}.vs span:nth-child(even){padding:0 0 16px;border-left:0}
+.vs span:nth-child(odd)::before{content:"Hoy · ";font:700 11px var(--head);letter-spacing:.14em;text-transform:uppercase}
+.dl div,.tl li{grid-template-columns:1fr;gap:4px}
+.post .hk{font-size:27px}
+.hero .logo{margin-bottom:36px}
+.fin .foot{position:static;margin-top:30px}.fin{padding-bottom:30px;flex-direction:column;justify-content:center;align-items:stretch}
+}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<header class="top">
+<div class="brand"><span>Qualivo</span><i>×</i><img src="img/logo-igma.png" alt="IGMA"></div>
+<nav class="dots" aria-label="Pantallas">
+<a href="#s1" data-k="s1">Qué hacemos</a><a href="#s2" data-k="s2">Alumno</a><a href="#s3" data-k="s3">Hoy</a><a href="#s4a" data-k="s4">Anuncios</a><a href="#s5" data-k="s5">Landing</a><a href="#s6" data-k="s6">Recorrido</a><a href="#s7" data-k="s7">CRM</a><a href="#s8" data-k="s8">Intelligence</a><a href="#s9" data-k="s9">Siguiente paso</a>
+</nav>
+<details class="pz"><summary>Piezas</summary><nav aria-label="Piezas">
+<a href="../" target="_blank">Plan <span>↗</span></a>
+<a href="../anuncios/" target="_blank">Anuncios <span>↗</span></a>
+<a href="../landing-a/" target="_blank">Landing A <span>↗</span></a>
+<a href="../landing-b/" target="_blank">Landing B <span>↗</span></a>
+<a href="../whatsapp/" target="_blank">WhatsApp <span>↗</span></a>
+<a href="../demo/" target="_blank">CRM <span>↗</span></a>
+</nav></details>
+</header>
+<div class="cnt" id="cnt" aria-hidden="true"></div>
+
+<!-- 1 · PORTADA -->
+<section class="s hero" id="s0" data-k="s0"><div class="bg" style="background-image:url(img/manos-mesa.jpg)"></div><div class="in rv">
+<img class="logo" src="img/logo-igma.png" alt="IGMA · Instituto Galego de Música Avanzada">
+<h1>El próximo curso, <em>lleno</em> de alumnos en serio</h1>
+<p>Anuncios, respuesta y seguimiento. Un solo sistema para IGMA.</p>
+<p class="meta"><b>Qualivo</b><span>×</span><b>IGMA</b>Vigo · 11 de noviembre de 2026</p>
+</div></section>
+
+<!-- 2 · QUÉ HACEMOS -->
+<section class="s split" id="s1" data-k="s1"><div class="ph" style="background-image:url(img/cabina.jpg)"></div><div class="tx rv">
+<p class="n">01 · Qué hacemos</p>
+<h2>De la primera duda <em>a la matrícula</em></h2>
+<p class="lead">Atraemos a quien quiere dedicarse a la música, le respondemos en minutos y no le perdemos la pista.</p>
+<ol class="chain">
+<li><small>01</small>Anuncio</li>
+<li><small>02</small>Formulario que filtra</li>
+<li><small>03</small>WhatsApp en minutos</li>
+<li><small>04</small>Visita al estudio</li>
+<li><small>05</small>Matrícula</li>
+</ol>
+</div></section>
+
+<!-- 3 · ALUMNO IDEAL -->
+<section class="s" id="s2" data-k="s2"><div class="in rv">
+<p class="n">02 · El alumno ideal</p>
+<h2>Dos alumnos <em>y una familia</em></h2>
+<div class="who">
+<div><h3>El joven que quiere <span>vivir de la música</span></h3>
+<p>Ya produce o pincha en casa. Quiere hacerlo en serio, como profesión.</p>
+<div class="fam"><b>Y su familia, que es quien paga</b><p>Necesita ver un plan: qué aprende, con quién y qué salida tiene.</p></div></div>
+<div><h3>El adulto que <span>se reinventa</span></h3>
+<p>La música siempre estuvo ahí. Ahora tiene tiempo y decide él.</p>
+<p>Busca método y un estudio de verdad, no tutoriales.</p></div>
+</div>
+<p class="qual"><b>Petición cualificada</b><span>Quiere un programa completo, <strong>puede venir a Vigo</strong> y sabemos <strong>quién decide</strong>.</span></p>
+</div></section>
+
+<!-- 4 · HOY FRENTE A CON QUALIVO -->
+<section class="s" id="s3" data-k="s3"><div class="in rv">
+<p class="n">03 · Hoy y con Qualivo</p>
+<h2>Lo que cambia <em>en cada paso</em></h2>
+<div class="vs">
+<div class="hd"><span>Hoy, en muchas escuelas</span><span>Con Qualivo</span></div>
+<div><span>Anuncios que atraen curiosos</span><span>Anuncios que hablan a quien quiere dedicarse</span></div>
+<div><span>Formulario de nombre y teléfono</span><span>Cuatro preguntas que separan alumno de curioso</span></div>
+<div><span>Respuesta cuando hay un hueco</span><span>WhatsApp en minutos, con vuestro tono</span></div>
+<div><span>La familia decide sin información</span><span>La familia recibe el programa y viene al estudio</span></div>
+<div><span>Si no contesta, se olvida</span><span>Seguimiento con fecha hasta que decide</span></div>
+</div>
+</div></section>
+
+<!-- 5 · ANUNCIO A -->
+<section class="s" id="s4a" data-k="s4"><div class="in rv">
+<p class="n">04 · Anuncio A · Producción</p>
+<div class="ad">
+<div class="post"><div class="h"><span class="av"></span><div><b>igma_vigo</b><small>Publicidad</small></div><span class="d3">···</span></div>
+<div class="cr" style="background-image:url(img/daw.jpg)"><img class="lg" src="img/logo-igma.png" alt="">
+<p class="hk">Haz que tu música <em>suene profesional</em></p><p class="sub">Producción, mezcla y mastering en Vigo</p></div>
+<div class="cta"><span>Programa Profesional en Producción</span><b>Más información</b></div>
+<div class="cap"><b>igma_vigo</b>Tus temas, en un estudio de verdad y con docentes en activo. Presencial, en el centro de Vigo.</div></div>
+<div>
+<p class="hook">Haz que tu música <em>suene profesional</em></p>
+<dl class="dl">
+<div><dt>Para</dt><dd>Quien ya produce en casa y se ha quedado corto.</dd></div>
+<div><dt>Por qué</dt><dd>Habla de su música, no del curso. Y solo atrae a quien ya produce.</dd></div>
+<div><dt>Lleva a</dt><dd>Landing A · Producción, con formulario de cuatro preguntas.</dd></div>
+<div><dt>Medimos</dt><dd>Coste por visita al estudio, no por clic.</dd></div>
+</dl></div>
+</div></div></section>
+
+<!-- 6 · ANUNCIO B -->
+<section class="s" id="s4b" data-k="s4"><div class="in rv">
+<p class="n">04 · Anuncio B · DJ</p>
+<div class="ad">
+<div class="post"><div class="h"><span class="av"></span><div><b>igma_vigo</b><small>Publicidad</small></div><span class="d3">···</span></div>
+<div class="cr" style="background-image:url(img/publico.jpg)"><img class="lg" src="img/logo-igma.png" alt="">
+<p class="hk">De la habitación <em>al club</em></p><p class="sub">Programa Profesional de DJ · presencial</p></div>
+<div class="cta"><span>Cabinas profesionales en Vigo</span><b>Más información</b></div>
+<div class="cap"><b>igma_vigo</b>Técnica, sets y cabina de verdad. De pinchar en tu cuarto a pinchar delante de gente.</div></div>
+<div>
+<p class="hook">De la habitación <em>al club</em></p>
+<dl class="dl">
+<div><dt>Para</dt><dd>El joven que pincha en casa y sueña con cabina.</dd></div>
+<div><dt>Por qué</dt><dd>Pone en imagen el salto que quiere dar. Y la cabina es vuestra ventaja.</dd></div>
+<div><dt>Lleva a</dt><dd>Landing A · DJ, con vídeo de las cabinas y formulario.</dd></div>
+<div><dt>Medimos</dt><dd>Peticiones A y visitas celebradas por semana.</dd></div>
+</dl></div>
+</div></div></section>
+
+<!-- 7 · ANUNCIO C -->
+<section class="s" id="s4c" data-k="s4"><div class="in rv">
+<p class="n">04 · Anuncio C · Familias</p>
+<div class="ad">
+<div class="post"><div class="h"><span class="av"></span><div><b>igma_vigo</b><small>Publicidad</small></div><span class="d3">···</span></div>
+<div class="cr" style="background-image:url(img/estudio.jpg)"><img class="lg" src="img/logo-igma.png" alt="">
+<p class="hk">Pregunta a <em>tus padres</em></p><p class="sub">Y venid juntos a conocer el estudio</p></div>
+<div class="cta"><span>Visita con tu familia</span><b>Reservar visita</b></div>
+<div class="cap"><b>igma_vigo</b>¿Quieres dedicarte a la música? Ven con tu familia, mira el estudio y resolved juntos todas las dudas.</div></div>
+<div>
+<p class="hook">Pregunta a <em>tus padres</em></p>
+<dl class="dl">
+<div><dt>Para</dt><dd>El joven que ya quiere, y la familia que tiene que decir sí.</dd></div>
+<div><dt>Por qué</dt><dd>Mete a quien paga en la conversación desde el primer día.</dd></div>
+<div><dt>Lleva a</dt><dd>Landing B · Familias: programa, salidas y visita al estudio.</dd></div>
+<div><dt>Medimos</dt><dd>Visitas con familia y matrículas que salen de ellas.</dd></div>
+</dl></div>
+</div></div></section>
+
+<!-- 8 · LANDING Y FORMULARIO -->
+<section class="s" id="s5" data-k="s5"><div class="in rv">
+<p class="n">05 · Landing y formulario</p>
+<h2>Cuatro preguntas <em>separan alumno de curioso</em></h2>
+<div class="lf">
+<div><div class="browser"><div class="bar"><i></i><i></i><i></i><span>igma.es/programa-profesional</span></div>
+<div class="lp" style="background-image:url(img/cabina.jpg)"><img src="img/logo-igma.png" alt=""><b>Tu carrera en la música <em>empieza en Vigo</em></b><small>Producción y DJ, presencial y con docentes en activo</small><span class="bt">Quiero información</span></div></div>
+<div class="links"><a class="lk" href="../landing-a/" target="_blank" rel="noopener">Landing A · Alumno →</a><a class="lk" href="../landing-b/" target="_blank" rel="noopener">Landing B · Familias →</a></div></div>
+<div class="form"><h3>Te respondemos por WhatsApp</h3>
+<ol class="qs">
+<li>¿Qué quieres estudiar?<span><i class="on">Producción</i><i>DJ</i><i>Programa superior</i><i>No lo sé</i></span></li>
+<li>¿Para cuándo?<span><i class="on">Próximo curso</i><i>Ya</i><i>Me informo</i></span></li>
+<li>¿Quién decide contigo?<span><i>Yo</i><i class="on">Mi familia</i></span></li>
+<li>¿Puedes venir a Vigo?<span><i class="on">Sí</i><i>Me mudaría</i><i>No</i></span></li>
+</ol>
+<p class="out">Cada respuesta ordena la lista: <b>A</b> se llama hoy, <b>B</b> recibe el programa, <b>C</b> queda en la base.</p></div>
+</div>
+</div></section>
+
+<!-- 9 · RECORRIDO Y WHATSAPP -->
+<section class="s" id="s6" data-k="s6"><div class="in rv">
+<p class="n">06 · Recorrido y WhatsApp</p>
+<div class="rc">
+<div class="chat">
+<div class="wh"><img src="img/logo-igma.png" alt=""><div>IGMA · Admisiones<small>en línea</small></div></div>
+<div class="m">Hola Lucía, soy de IGMA. Vimos que te interesa Producción para el próximo curso.<small>17:02</small></div>
+<div class="m">Te mando el programa para que lo veáis en casa. ¿Os viene bien visitar el estudio el sábado?<small>17:02</small></div>
+<div class="m me">Sí! Vamos con mi madre, a las 11?<small>17:20</small></div>
+<div class="m">Perfecto, sábado a las 11. Os esperamos en Rúa Progreso 14.<small>17:21</small></div>
+</div>
+<div><h2 style="font-size:clamp(34px,4.4vw,64px)">Nadie se queda <em>sin respuesta</em></h2>
+<ol class="tl">
+<li><b>Minuto 0</b><span>Entra en el CRM con su prioridad</span></li>
+<li><b>Minuto 2</b><span>WhatsApp con vuestro tono<small>El sistema lo prepara; vosotros lo aprobáis.</small></span></li>
+<li><b>Día 1</b><span>Programa para enseñar en casa</span></li>
+<li class="p"><b>Día 3</b><span>Llamada de una persona<small>Para invitar a la familia al estudio.</small></span></li>
+<li><b>Visita</b><span>Recordatorio el día antes</span></li>
+</ol>
+<div class="links"><a class="lk" href="../whatsapp/" target="_blank" rel="noopener">Ver la conversación completa →</a></div></div>
+</div>
+</div></section>
+
+<!-- 10 · CRM -->
+<section class="s" id="s7" data-k="s7"><div class="in rv">
+<p class="n">07 · CRM</p>
+<h2>Cada alumno, <em>en su etapa</em></h2>
+<div class="crm">
+<div class="tb"><b>Admisiones · próximo curso</b><span>Producción y DJ</span><span>Esta semana</span></div>
+<div class="board">
+<div class="col"><h4>Nuevos <i>4</i></h4>
+<div class="tk hl"><b>Lucía M.</b>Producción · decide con familia<br><u>A</u></div>
+<div class="tk"><b>Diego R.</b>DJ · próximo curso<br><u class="b">B</u></div>
+<div class="tk"><b>Marta P.</b>Me informo<br><u class="c">C</u></div></div>
+<div class="col"><h4>Contactados <i>6</i></h4>
+<div class="tk"><b>Hugo F.</b>Programa superior · familia<br><u>A</u></div>
+<div class="tk"><b>Andrés L.</b>Producción · se reinventa<br><u>A</u></div></div>
+<div class="col"><h4>Visita agendada <i>3</i></h4>
+<div class="tk"><b>Nerea C.</b>Sábado 11:00 · con su padre<br><u>A</u></div>
+<div class="tk"><b>Pablo G.</b>Jueves 18:30<br><u class="b">B</u></div></div>
+<div class="col"><h4>Visita hecha <i>2</i></h4>
+<div class="tk"><b>Iago V.</b>Esperando respuesta familia<br><u>A</u></div></div>
+<div class="col go"><h4>Matrícula <i>2</i></h4>
+<div class="tk"><b>Sara T.</b>DJ Profesional<br><u>A</u></div>
+<div class="tk"><b>Óscar N.</b>Producción<br><u>A</u></div></div>
+</div></div>
+<div class="crm-f"><p><b>Nadie se pierde entre etapas.</b> Cada ficha dice quién decide y cuál es el siguiente paso.</p><a class="lk" href="../demo/" target="_blank" rel="noopener">Abrir el CRM →</a></div>
+</div></section>
+
+<!-- 11 · INTELLIGENCE -->
+<section class="s intel" id="s8" data-k="s8"><div class="bg"></div><div class="in rv">
+<p class="n">08 · Qualivo Intelligence</p>
+<h2>Cada mañana, <em>cómo va el curso</em></h2>
+<div class="kpis">
+<div><b>18</b><span>Peticiones nuevas</span></div>
+<div><b>4 min</b><span>Tiempo de respuesta</span></div>
+<div><b>7</b><span>Visitas esta semana</span></div>
+<div><b>62%</b><span>Plazas cubiertas</span></div>
+</div>
+<a class="btn" href="https://qualivo.io/intelligence/?sector=igma&amp;empresa=IGMA&amp;objetivo=captacion" target="_blank" rel="noopener">Abrir la demo en directo →</a>
+</div></section>
+
+<!-- 12 · SIGUIENTE PASO -->
+<section class="s fin" id="s9" data-k="s9"><div class="bg"></div><div class="in rv">
+<p class="n">09 · Siguiente paso</p>
+<h2>Una segunda reunión <em>para llenar el curso</em></h2>
+<ol class="bring">
+<li>Vuestro alumno ideal, validado<small>Lo afinamos con lo que nos contéis hoy.</small></li>
+<li>Calendario hasta septiembre<small>Cuándo sale cada anuncio y cada landing.</small></li>
+<li>El sistema montado, en vivo<small>Formulario, WhatsApp y CRM con vuestra marca.</small></li>
+</ol>
+<div class="sig"><a class="btn" href="../" target="_blank">Ver el plan</a><p><b>Maikel Echevarría</b> · Qualivo · maikel@qualivo.io</p></div>
+</div>
+<p class="foot">Fotos, logo y programas de igma.es. Personas y cifras de las maquetas: datos de ejemplo.</p>
+</section>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('.s')),links=[].slice.call(document.querySelectorAll('.dots a')),
+      cnt=document.getElementById('cnt'),prog=document.getElementById('prog'),pz=document.querySelector('.pz');
+  function cur(){var y=scrollY+innerHeight*.4,i=0;secs.forEach(function(s,j){if(s.offsetTop<=y)i=j});return i}
+  function upd(){var i=cur(),k=secs[i].getAttribute('data-k');
+    links.forEach(function(a){a.classList.toggle('on',a.getAttribute('data-k')===k)});
+    cnt.textContent=(i+1)+' / '+secs.length;prog.style.width=((i+1)/secs.length*100)+'%';}
+  function show(s){var r=s.querySelector('.rv');if(r)r.classList.add('vis')}
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)show(e.target)})},{threshold:.15});secs.forEach(function(s){io.observe(s)});}
+  else secs.forEach(show);
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+  setTimeout(function(){secs.forEach(function(s){if(s.getBoundingClientRect().top<innerHeight)show(s)})},60);
+  function go(d){var i=cur(),t=secs[Math.max(0,Math.min(secs.length-1,i+d))];show(t);t.scrollIntoView({behavior:'smooth'});}
+  addEventListener('keydown',function(e){if(e.target.closest&&e.target.closest('input,textarea,select'))return;
+    if(['ArrowDown','PageDown','ArrowRight',' '].indexOf(e.key)>-1){e.preventDefault();go(1)}
+    else if(['ArrowUp','PageUp','ArrowLeft'].indexOf(e.key)>-1){e.preventDefault();go(-1)}
+    else if(e.key==='Home'){e.preventDefault();secs[0].scrollIntoView({behavior:'smooth'})}
+    else if(e.key==='End'){e.preventDefault();secs[secs.length-1].scrollIntoView({behavior:'smooth'})}
+    else if(e.key==='Escape'&&pz)pz.open=false;});
+  document.addEventListener('click',function(e){if(pz&&pz.open&&!pz.contains(e.target))pz.open=false});
+})();
+</script>
+</body>
+</html>

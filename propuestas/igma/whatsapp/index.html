@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>IGMA · WhatsApp</title>
+<link rel="icon" href="../assets/brand/isotipo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap">
+<style>
+/* Simulador de WhatsApp · Qualivo × IGMA: negro, cian #00A5F4 de su logo, Raleway (titulares) y Roboto (texto), como igma.es. */
+:root{
+  --paper:#08090B;--surface:#111317;--surface-2:#171A20;--ink:#F2F5F8;--ink-2:#C9D1DA;--muted:#8B95A1;--line:#242931;
+  --brand:#00A5F4;--brand-2:#00ACFF;--glow:rgba(0,165,244,.35);--accent:#4CC3FF;--accent-soft:rgba(0,165,244,.12);
+  --sys:#4CC3FF;--adm:#5FD69B;--per:#F2C26B;--alu:#AEB7C2;--ej:#F2C26B;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -20px rgba(0,0,0,.8);
+  --head:"Raleway",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --sans:"Roboto",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--head)}
+button{font:inherit;color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
+.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* barra superior */
+.topnav{position:sticky;top:0;z-index:40;background:rgba(8,9,11,.88);color:#fff;backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid rgba(255,255,255,.07)}
+.topnav .in{max-width:1240px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.topnav .brand{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0}
+.topnav .qv{font-family:var(--head);font-weight:800;font-size:14.5px}
+.topnav .x{font-size:13px;opacity:.5}
+.topnav img.lgo{height:26px;width:auto;display:block}
+.topnav .links{display:flex;gap:2px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.topnav .links::-webkit-scrollbar{display:none}
+.topnav .links a{color:rgba(255,255,255,.66);text-decoration:none;font-family:var(--head);font-weight:700;font-size:13px;padding:6px 11px;border-radius:99px;white-space:nowrap;transition:color .2s}
+.topnav .links a:hover{color:#fff}
+.topnav .links a[aria-current="page"]{color:#fff;box-shadow:inset 0 -2px 0 var(--brand);border-radius:0}
+@media (max-width:640px){.topnav .links{width:100%}.topnav .links a{padding:6px 9px;font-size:12.5px}}
+
+/* cabecera */
+.stage{max-width:1240px;margin-inline:auto;padding:28px 16px 32px}
+@media (min-width:900px){.stage{padding:44px 32px 40px}}
+.top{margin-bottom:26px}
+.top .k{font-family:var(--head);font-size:11.5px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--brand);margin-bottom:10px}
+.top h1{font-size:clamp(32px,5vw,62px);font-weight:900;letter-spacing:-.03em;line-height:1;max-width:16ch;text-wrap:balance}
+.top h1 em{font-style:normal;color:var(--brand);text-shadow:0 0 24px var(--glow)}
+
+/* escenarios */
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line);margin-bottom:24px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;display:flex;align-items:baseline;gap:10px;text-align:left;border:0;background:transparent;padding:12px 14px 14px;cursor:pointer;min-width:0;color:var(--muted);box-shadow:inset 0 -2px 0 transparent;transition:color .2s,box-shadow .2s}
+.tab .n{flex:none;font-family:var(--head);font-weight:900;font-size:13px;color:var(--muted)}
+.tab b{display:block;font-family:var(--head);font-weight:700;font-size:14px;line-height:1.25;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+@media (min-width:1100px){.tabs{display:grid;grid-template-columns:repeat(5,1fr)}.tab b{white-space:normal}}
+.tab[aria-selected="true"]{color:#fff;box-shadow:inset 0 -2px 0 var(--brand)}
+.tab[aria-selected="true"] .n{color:var(--brand)}
+
+/* rejilla */
+.grid{display:grid;gap:26px;align-items:start}
+@media (min-width:980px){.grid{grid-template-columns:minmax(380px,440px) 1fr;gap:40px}}
+.phonecol{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
+
+/* controles */
+.ctrls{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.cb{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:8px 14px;font-family:var(--head);font-weight:700;font-size:13px;cursor:pointer;transition:border-color .2s,background .2s}
+.cb:hover{border-color:var(--brand)}
+.cb.primary{background:var(--brand);color:#001018;border-color:var(--brand)}
+.cb.primary:hover{background:#21B4FA}
+.cb[aria-pressed="true"]{background:#fff;color:#000;border-color:#fff}
+.prog{width:min(100%,400px);height:3px;border-radius:99px;background:var(--line);overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--brand);box-shadow:0 0 10px var(--glow);transition:width .4s}
+
+/* el móvil */
+.phone{position:relative;width:min(100%,400px);height:clamp(540px,calc(100vh - 300px),840px);border-radius:46px;padding:12px;background:#000;box-shadow:0 0 0 2px #2A3138,0 0 60px -10px rgba(0,165,244,.25),0 40px 80px -30px rgba(0,0,0,.9)}
+.phone::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:96px;height:26px;border-radius:99px;background:#000;z-index:5}
+.screen{position:relative;height:100%;border-radius:36px;overflow:hidden;display:flex;flex-direction:column;background:#EFE7DD;color:#111B21;font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;color-scheme:light}
+.sbar{flex:none;height:44px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 6px 30px;background:#075E54;color:#fff;font-size:13.5px;font-weight:600}
+.sbar .ic{display:flex;gap:5px;align-items:center}
+.wahead{flex:none;display:flex;align-items:center;gap:10px;padding:6px 12px 9px 8px;background:#075E54;color:#fff}
+.wahead .back{display:flex;align-items:center;opacity:.95}
+.wahead .av{width:38px;height:38px;border-radius:50%;background:#000;display:grid;place-items:center;overflow:hidden;flex:none}
+.wahead .av img{width:38px;height:38px;object-fit:cover}
+.wahead .who{min-width:0;flex:1}
+.wahead .who b{display:flex;align-items:center;gap:4px;font-size:15.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wahead .who b svg{flex:none}
+.wahead .who small{display:block;font-size:12px;opacity:.85;height:16px}
+.wahead .who small.typing{color:#B5F5D9;opacity:1}
+.wahead .acts{display:flex;gap:16px;opacity:.95}
+.chat{flex:1;overflow-y:auto;overflow-x:hidden;padding:10px 10px 14px;scrollbar-width:none;background-color:#EFE7DD;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23C9BBA6' stroke-width='1.3' opacity='.55' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='20' r='7'/%3E%3Ccircle cx='18' cy='20' r='2'/%3E%3Cpath d='M66 10v14a4 4 0 1 1-2-3.5V10l8-2v4'/%3E%3Cpath d='M92 34v-8M98 38V22M104 34v-8M110 30v-4'/%3E%3Cpath d='M14 70h18M23 61v18'/%3E%3Crect x='56' y='56' width='16' height='12' rx='3'/%3E%3Cpath d='M92 74c4-8 14-8 18 0'/%3E%3Cpath d='M20 104l8-8 8 8-8 8z'/%3E%3Ccircle cx='70' cy='104' r='3'/%3E%3Cpath d='M44 36c3 4 9 4 12 0'/%3E%3C/g%3E%3C/svg%3E")}
+.chat::-webkit-scrollbar{display:none}
+.sec{display:flex;justify-content:center;margin:6px 0 4px}
+.sec span{background:#E1F2FB;color:#54656F;font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:8px;box-shadow:0 1px .5px rgba(11,20,26,.13);text-transform:uppercase;letter-spacing:.02em;text-align:center}
+.encr{margin:2px auto 10px;max-width:290px;background:#FFF5C4;color:#54656F;font-size:11.5px;line-height:1.45;padding:6px 10px;border-radius:8px;text-align:center;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.skip{display:flex;justify-content:center;margin:12px 0 8px}
+.skip span{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.82);color:#fff;font-family:var(--head);font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:99px;letter-spacing:.02em}
+.row{display:flex;margin:2px 0;animation:pop .32s cubic-bezier(.2,.9,.3,1.2) both}
+.row.out{justify-content:flex-end}
+.row.first{margin-top:8px}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+.bub{position:relative;max-width:82%;padding:6px 8px 8px 9px;border-radius:8px;font-size:14.2px;line-height:1.38;box-shadow:0 1px .5px rgba(11,20,26,.13);word-wrap:break-word;overflow-wrap:anywhere}
+.in .bub{background:#fff;border-top-left-radius:0}
+.out .bub{background:#D9FDD3;border-top-right-radius:0}
+.row.first.in .bub::before{content:"";position:absolute;top:0;left:-7px;border-top:9px solid #fff;border-left:8px solid transparent}
+.row.first.out .bub::before{content:"";position:absolute;top:0;right:-7px;border-top:9px solid #D9FDD3;border-right:8px solid transparent}
+.row:not(.first).in .bub{border-top-left-radius:8px}
+.row:not(.first).out .bub{border-top-right-radius:8px}
+.bub .meta{float:right;display:inline-flex;align-items:center;gap:3px;margin:6px 0 -4px 10px;font-size:11px;color:#667781;white-space:nowrap;position:relative;top:4px}
+.ticks{width:16px;height:11px;color:#8696A0;transition:color .4s}
+.ticks.read{color:#53BDEB}
+.bub .from{display:block;font-size:12.5px;font-weight:700;color:#0077B3;margin-bottom:1px}
+.btns{display:flex;flex-direction:column;gap:3px;margin-top:3px;max-width:82%}
+.btns span{background:#fff;color:#027EB5;text-align:center;font-size:14px;font-weight:600;padding:8px;border-radius:8px;box-shadow:0 1px .5px rgba(11,20,26,.13);display:flex;align-items:center;justify-content:center;gap:6px}
+.btns span.hit{animation:hit .5s ease both}
+@keyframes hit{50%{background:#E1F2FB;transform:scale(.97)}}
+.colw{display:flex;flex-direction:column;align-items:flex-start;max-width:100%}
+.call{display:flex;align-items:center;gap:10px;min-width:210px}
+.call .ci{width:34px;height:34px;border-radius:50%;background:#F0F2F5;display:grid;place-items:center;color:#EA0038}
+.call .ci.ok{color:#00A884}
+.call b{display:block;font-size:14px;font-weight:600}
+.call small{display:block;font-size:12px;color:#667781}
+.doc{display:flex;align-items:center;gap:10px;background:#F5F6F6;border-radius:6px;padding:9px 10px;margin:-2px -4px 6px -5px;min-width:220px}
+.doc .di{width:30px;height:36px;border-radius:4px;background:#E2504C;color:#fff;font-size:9px;font-weight:800;display:grid;place-items:end center;padding-bottom:4px;flex:none}
+.doc b{display:block;font-size:13.5px;font-weight:600;line-height:1.3}
+.doc small{display:block;font-size:11.5px;color:#667781}
+.loc{width:240px;margin:-2px -4px 4px -5px;border-radius:6px;overflow:hidden;height:118px;position:relative;
+  background:#E8EEF1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='118'%3E%3Crect width='240' height='118' fill='%23E9EEF0'/%3E%3Cpath d='M0 0 H90 C70 30 40 40 0 46Z' fill='%23AADAFF'/%3E%3Cpath d='M0 64 L240 40 M60 0 L100 118 M170 0 L150 118 M0 104 L240 84' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M0 64 L240 40 M60 0 L100 118' stroke='%23FCE9A4' stroke-width='3'/%3E%3Crect x='186' y='92' width='40' height='20' fill='%23D8EFD8'/%3E%3C/svg%3E") center/cover}
+.loc .pin{position:absolute;left:50%;top:44%;transform:translate(-50%,-100%)}
+.lt b{display:block;font-size:14px;font-weight:600}
+.lt small{display:block;font-size:12px;color:#667781}
+.typ{display:flex;margin:4px 0;animation:pop .25s ease both}
+.typ .bub{background:#fff;border-top-left-radius:0;padding:10px 12px}
+.dots{display:flex;gap:4px}
+.dots i{width:7px;height:7px;border-radius:50%;background:#90A0AA;animation:dot 1.1s infinite}
+.dots i:nth-child(2){animation-delay:.18s}.dots i:nth-child(3){animation-delay:.36s}
+@keyframes dot{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.compose{flex:none;display:flex;align-items:center;gap:6px;padding:7px 8px 14px;background:#F0F2F5}
+.compose .fld{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:#fff;border-radius:99px;padding:9px 12px;color:#8696A0;font-size:14.5px}
+.compose .fld span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.compose .mic{width:42px;height:42px;border-radius:50%;background:#00A884;color:#fff;display:grid;place-items:center;flex:none}
+.endcard{display:flex;justify-content:center;margin:14px 0 6px}
+.endcard button{border:0;cursor:pointer;background:#000;color:#fff;font-family:var(--head);font-weight:700;font-size:12.5px;padding:8px 14px;border-radius:99px;display:inline-flex;gap:6px;align-items:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.5)}
+
+/* panel «Qué está pasando» */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+@media (min-width:980px){.panel{height:clamp(540px,calc(100vh - 244px),900px);position:sticky;top:76px}}
+.ph{padding:22px 22px 16px;border-bottom:1px solid var(--line)}
+.ph h2{font-size:22px;font-weight:900;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.ph h2 .live{width:9px;height:9px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 0 var(--glow);animation:live 1.6s infinite}
+.ph h2 .live.off{background:var(--muted);animation:none}
+@keyframes live{70%{box-shadow:0 0 0 10px rgba(0,165,244,0)}100%{box-shadow:0 0 0 0 rgba(0,165,244,0)}}
+.ph p{font-size:14px;color:var(--ink-2);margin-top:6px;max-width:60ch}
+.who-l{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:12px;font-size:12px;color:var(--muted)}
+.who-l span{display:inline-flex;align-items:center;gap:6px}
+.who-l i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.steps{list-style:none;margin:0;padding:14px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:6px;scroll-behavior:smooth}
+.st{position:relative;display:grid;grid-template-columns:auto 1fr;gap:3px 14px;padding:12px 14px;border-radius:14px;border:1px solid transparent;opacity:.36;transition:opacity .35s,background .35s,border-color .35s}
+.st .tm{grid-row:span 2;font-family:var(--head);font-weight:800;font-size:12px;color:var(--muted);min-width:52px;padding-top:2px;font-variant-numeric:tabular-nums}
+.st .by{font-family:var(--head);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.st .by.sys{color:var(--sys)}.st .by.adm{color:var(--adm)}.st .by.per{color:var(--per)}.st .by.alu{color:var(--alu)}
+.st p{font-size:14px;line-height:1.5;color:var(--ink-2)}
+.st p b{color:var(--ink)}
+.st.done{opacity:.66}
+.st.now{opacity:1;background:var(--accent-soft);border-color:rgba(0,165,244,.45)}
+.st.now::before{content:"";position:absolute;left:-1px;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:var(--brand);box-shadow:0 0 10px var(--glow)}
+.st.gap .tm{color:var(--accent)}
+@media (max-width:979px){.steps{max-height:430px}}
+@media (max-width:420px){.wahead .who b{font-size:14.5px}.wahead .acts{gap:12px}}
+.fsl{display:none}
+.pf{padding:12px 20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+
+:fullscreen body,body.fs{background:var(--paper)}
+body.fs .topnav{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tk" viewBox="0 0 16 11"><path d="M11.07.65l-6.4 7.9-2.5-2.37-.94 1 3.5 3.32 7.4-9.13zM15.07.65l-6.4 7.9-.83-.79-.92 1.06 1.85 1.75 7.4-9.13z" fill="currentColor"/></symbol>
+  <symbol id="vf" viewBox="0 0 18 18"><path d="M9 0l2.2 1.6 2.7-.1.8 2.6 2.2 1.6-.9 2.6.9 2.6-2.2 1.6-.8 2.6-2.7-.1L9 18l-2.2-1.6-2.7.1-.8-2.6-2.2-1.6.9-2.6-.9-2.6 2.2-1.6.8-2.6 2.7.1z" fill="#25D366"/><path d="M5.3 9.2l2.4 2.4 5-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 4h3.5v16H7zM13.5 4H17v16h-3.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="i-fast" viewBox="0 0 24 24"><path d="M4 5v14l8-7zM12 5v14l8-7z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-full" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+</svg>
+
+<nav class="topnav" aria-label="Paquete IGMA">
+  <div class="in">
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><img class="lgo" src="../assets/brand/logo-blanco.png" alt="IGMA" width="72" height="26"></div>
+    <div class="links"><a href="../">Plan</a><a href="./" aria-current="page">WhatsApp</a><a href="../demo/">CRM</a><a href="https://qualivo.io/intelligence/?sector=igma&amp;empresa=IGMA&amp;objetivo=captacion">Intelligence</a></div>
+  </div>
+</nav>
+
+<main class="stage">
+  <div class="top">
+    <p class="k">Simulador de WhatsApp</p>
+    <h1>Contestar a las 23:00. <em>Y llenar el estudio.</em></h1>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Escenarios" id="tabs"></div>
+
+  <div class="grid">
+    <div class="phonecol">
+      <div class="ctrls">
+        <button class="cb primary" id="play" type="button"><svg class="i"><use href="#i-pause"/></svg><span>Pausa</span></button>
+        <button class="cb" id="reset" type="button"><svg class="i"><use href="#i-reset"/></svg>Reiniciar</button>
+        <button class="cb" id="speed" type="button" aria-pressed="false"><svg class="i"><use href="#i-fast"/></svg>x2</button>
+        <button class="cb" id="fs" type="button" title="Pantalla completa (F)"><svg class="i"><use href="#i-full"/></svg><span class="fsl">Pantalla completa</span></button>
+      </div>
+      <div class="prog" aria-hidden="true"><i id="bar"></i></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="sbar"><span id="clock">23:04</span><span class="ic">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1" opacity=".45"/></svg>
+            <svg width="15" height="11" viewBox="0 0 15 11" fill="#fff"><path d="M7.5 2.2c2.1 0 4 .8 5.4 2.1l1.1-1.1A9.2 9.2 0 0 0 7.5.6 9.2 9.2 0 0 0 1 3.2l1.1 1.1a7.6 7.6 0 0 1 5.4-2.1zm0 3.1c1.2 0 2.4.5 3.2 1.3l1.1-1.1a6.1 6.1 0 0 0-8.6 0l1.1 1.1c.8-.8 2-1.3 3.2-1.3zm0 3.1c.4 0 .7.1 1 .4L7.5 10 6.5 8.8c.3-.3.6-.4 1-.4z"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3.5" fill="none" stroke="#fff" opacity=".5"/><rect x="2" y="2" width="15" height="8" rx="2" fill="#fff"/><rect x="23" y="4" width="1.6" height="4" rx=".8" fill="#fff" opacity=".5"/></svg>
+          </span></div>
+          <div class="wahead">
+            <span class="back"><svg width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg></span>
+            <span class="av"><img src="../assets/brand/isotipo.png" alt=""></span>
+            <div class="who"><b>IGMA · Admisiones <svg width="15" height="15"><use href="#vf"/></svg></b><small id="status">en línea</small></div>
+            <div class="acts">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="13" height="12" rx="2"/><path d="M15 10.5l6-3.5v10l-6-3.5"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-phone"/></svg>
+            </div>
+          </div>
+          <div class="chat" id="chat" aria-live="polite"></div>
+          <div class="compose">
+            <div class="fld"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8696A0" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1.8 2 5.2 2 7 0M9 9.5h.01M15 9.5h.01"/></svg><span>Mensaje</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8696A0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l7.9-7.9"/></svg></div>
+            <span class="mic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="panel" aria-label="Qué está pasando">
+      <div class="ph">
+        <h2><span class="live" id="live"></span>Qué está pasando</h2>
+        <p id="pdesc"></p>
+        <div class="who-l"><span><i style="background:var(--sys)"></i>Sistema</span><span><i style="background:var(--adm)"></i>Admisiones aprueba</span><span><i style="background:var(--per)"></i>Persona</span><span><i style="background:var(--alu)"></i>Alumno o familia</span></div>
+      </div>
+      <ol class="steps" id="steps"></ol>
+      <p class="pf">Datos de ejemplo: personas, mensajes, horas y fechas inventados. Sin precios: las condiciones las explica el equipo de IGMA.</p>
+    </section>
+  </div>
+</main>
+
+<script>
+/* Tipos de paso:
+   d    = separador de día en el chat
+   gap  = salto de tiempo (y paso en el panel)
+   in   = mensaje del alumno o la familia (derecha, verde, doble check)
+   out  = mensaje de IGMA (izquierda, blanco), con «escribiendo…» antes
+   call = llamada perdida de IGMA · callok = llamada hecha · doc = documento · loc = ubicación
+   c    = quién actúa: sys, adm, per, alu */
+const S = [
+ {t:"Pide información a las 23:00 desde Instagram", desc:"Brais ve un reel de IGMA en la cama y escribe. Le contestan en el momento, le hacen tres preguntas y sale con una clase de prueba.", steps:[
+  {k:"d", t:"Martes, 10 de noviembre"},
+  {k:"in", h:"23:04", t:"Holaa, vi el reel en Instagram. Info del curso porfa 🎧", c:["alu"], n:"<b>Brais, 18 años, escribe desde Instagram a las 23:04.</b> El estudio está cerrado."},
+  {k:"out", h:"23:04", t:"¡Hola, Brais! Gracias por escribir a IGMA 🙌 Para contarte lo que te encaja: ¿qué te tira más?", btns:["Producir mis temas","Pinchar","Las dos cosas"], c:["sys"], n:"<b>Respuesta en el minuto.</b> Primera pregunta: qué quiere hacer."},
+  {k:"in", h:"23:05", t:"Las dos cosas", tap:2, c:["alu"], n:"Un toque y queda apuntado: <b>producción y DJ</b>."},
+  {k:"out", h:"23:05", t:"Buena elección 😎 ¿Ahora estudias o trabajas? Es para ver qué horario te va.", c:["sys"], n:"Segunda pregunta: <b>estudia o trabaja</b>. Marca el horario posible."},
+  {k:"in", h:"23:06", t:"Estoy en 2º de bachillerato. Por las tardes libre casi siempre", c:["alu"], n:"<b>Estudia y tiene las tardes.</b> El sistema lo guarda en su ficha."},
+  {k:"out", h:"23:06", t:"¿Y cuándo te gustaría empezar?", btns:["Lo antes posible","En septiembre","Solo estoy mirando"], c:["sys"], n:"Tercera pregunta: <b>cuándo quiere empezar</b>."},
+  {k:"in", h:"23:07", t:"En septiembre", tap:1, c:["alu"], n:"<b>Septiembre.</b> Petición cualificada en tres minutos."},
+  {k:"out", h:"23:07", t:"Perfecto. Lo mejor es que lo pruebes: ven al estudio en Vigo a una clase de prueba, y si quieres con alguien de casa. Mañana te proponemos hora 🙂", c:["sys"], n:"<b>Propone visita o clase de prueba</b> y no promete una hora que no sabe."},
+  {k:"gap", h:"Noche", c:["sys"], n:"Mientras Brais duerme, <b>el sistema prepara la propuesta</b> con los huecos reales de la agenda del estudio."},
+  {k:"d", t:"Miércoles, 11 de noviembre"},
+  {k:"out", h:"10:02", from:"Alba · Admisiones", t:"Buenos días, Brais. Soy Alba, de IGMA. Te puedo hacer hueco para la clase de prueba el jueves a las 18:00 o el sábado a las 11:00. ¿Cuál te va mejor?", btns:["Jueves 18:00","Sábado 11:00"], c:["sys","adm"], n:"<b>Mensaje preparado por el sistema</b> · <b>Alba lo aprueba</b> con un toque al llegar."},
+  {k:"in", h:"10:19", t:"Sábado 11:00", tap:1, c:["alu"], n:"<b>Brais elige el sábado</b>, sin llamar ni esperar."},
+  {k:"out", h:"10:19", t:"¡Hecho! Te esperamos el sábado a las 11:00 ✅ El viernes te recuerdo cómo llegar.", c:["sys"], n:"<b>Visita en la agenda</b> y recordatorios programados."}
+ ]},
+ {t:"La familia pregunta por el precio y la financiación", desc:"Escribe la madre de Uxía. Quiere cifras y plazos. El sistema no inventa nada: pasa la conversación a una persona.", steps:[
+  {k:"d", t:"Jueves, 12 de noviembre"},
+  {k:"in", h:"13:41", t:"Buenas tardes. Soy Rosa, la madre de Uxía. Ella está mirando el curso de producción. ¿Cuánto cuesta el año? ¿Se puede pagar a plazos?", c:["alu"], n:"<b>Pregunta la familia</b>, que es quien suele pagar."},
+  {k:"out", h:"13:42", t:"Hola, Rosa, encantados. El precio depende del programa y de la forma de pago, y prefiero que te lo explique una persona del equipo con todo el detalle. ¿Te llamamos hoy?", btns:["Sí, llamadme","Mejor por escrito"], c:["sys"], n:"<b>No da cifras inventadas</b> ni promete financiación. Deriva a una persona."},
+  {k:"in", h:"13:45", t:"Sí, llamadme. A partir de las 17:00 mejor", c:["alu"], n:"Rosa elige <b>llamada a partir de las 17:00</b>."},
+  {k:"out", h:"13:45", t:"Hecho. Te llama Alba, de admisiones, hoy a las 17:00 📞", c:["sys"], n:"<b>Aviso a Alba</b> con la ficha: madre de Uxía, producción, pregunta por plazos."},
+  {k:"gap", h:"17:00", c:["per"], n:"<b>Alba llama</b>. Sabe quién es Rosa, qué curso mira Uxía y qué ha preguntado."},
+  {k:"callok", h:"17:00", c:["per"], n:"<b>Llamada de 14 minutos.</b> Precio real, plazos y qué incluye, contado por Alba."},
+  {k:"doc", h:"17:18", from:"Alba · Admisiones", doc:"Producción Musical · condiciones.pdf", t:"Rosa, gracias por la llamada. Te dejo por escrito lo que hablamos: programa, precio y pago a plazos. Y os esperamos a Uxía y a ti el sábado a las 12:00 en el estudio.", c:["per"], n:"<b>Las cifras las pone Alba</b>, de la tarifa real de IGMA. El sistema solo guarda el documento en la ficha."},
+  {k:"in", h:"17:30", t:"Muchas gracias, Alba. El sábado allí estamos las dos", c:["alu"], n:"<b>Visita con la familia</b>: quien decide y quien paga, en el estudio."},
+  {k:"out", h:"17:31", t:"¡Genial! Os mando el viernes la ubicación y un recordatorio 🙂", c:["sys"], n:"Recordatorios en marcha para <b>madre e hija</b>."}
+ ]},
+ {t:"Visita al estudio: confirmación y recordatorios", desc:"Con la visita en la agenda, Brais no tiene que acordarse de nada. Cada aviso llega cuando toca.", steps:[
+  {k:"d", t:"Miércoles, 11 de noviembre"},
+  {k:"out", h:"10:19", t:"Confirmado, Brais ✅ Clase de prueba el sábado 14 a las 11:00 en IGMA, en el centro de Vigo. Dura una hora. Si tienes auriculares, tráetelos.", c:["sys"], n:"<b>Confirmación al instante</b>, con lo que necesita saber."},
+  {k:"d", t:"Viernes, 13 de noviembre"},
+  {k:"out", h:"18:00", t:"¡Mañana a las 11:00 te esperamos! Te dejo la ubicación para que no des vueltas.", c:["sys"], n:"<b>El día antes:</b> recordatorio con ubicación."},
+  {k:"loc", h:"18:00", c:["sys"], n:"Un toque y se abre el mapa."},
+  {k:"in", h:"18:12", t:"Genial. ¿Puede venir mi padre?", c:["alu"], n:"<b>Pregunta si puede ir su padre.</b>"},
+  {k:"out", h:"18:13", from:"Alba · Admisiones", t:"¡Claro! Mejor así: resolvéis las dudas juntos 🙂", c:["sys","adm"], n:"Respuesta preparada · <b>Alba la aprueba</b>. La familia entra en la visita."},
+  {k:"d", t:"Sábado, 14 de noviembre"},
+  {k:"out", h:"10:00", t:"Buenos días, Brais. En una hora nos vemos en el estudio 🎛️", c:["sys"], n:"<b>Una hora antes:</b> último aviso. Menos visitas perdidas."},
+  {k:"gap", h:"Clase de prueba", c:["per"], n:"<b>Iago, profesor de producción, da la clase.</b> Alba atiende al padre."},
+  {k:"out", h:"13:05", from:"Iago · Profesor", t:"¡Gracias por venir, Brais! Ese loop que hiciste tenía muy buena pinta. Aquí tienes el proyecto para seguir en casa.", c:["per"], n:"<b>Mensaje del profesor</b>, escrito por él."},
+  {k:"out", h:"13:06", t:"¿Qué tal la clase?", btns:["Me ha encantado","Bien","Tengo dudas"], c:["sys"], n:"<b>Opinión en caliente</b>, para saber cómo seguir."},
+  {k:"in", h:"13:20", t:"Me ha encantado", tap:0, c:["alu"], n:"Interés alto. <b>Pasa a «Familia decidiendo»</b> en el CRM."}
+ ]},
+ {t:"No contesta: seguimiento a D+1, D+3 y D+7", desc:"Martiña pidió información de DJ y desapareció. Mensajes cortos, una llamada de una persona y una salida fácil.", steps:[
+  {k:"d", t:"Lunes, 16 de noviembre"},
+  {k:"out", h:"18:30", from:"Alba · Admisiones", t:"Hola, Martiña. Soy Alba, de IGMA. Vi que pediste información del curso de DJ. ¿Te apetece venir a probar la cabina un día de esta semana?", c:["sys","adm"], n:"<b>Pidió información en la web.</b> Primer mensaje preparado y aprobado."},
+  {k:"gap", h:"Sin respuesta", c:["sys"], n:"Lo lee y no contesta. <b>El sistema programa el seguimiento</b> en vez de olvidarlo."},
+  {k:"d", t:"Martes, 17 de noviembre · D+1"},
+  {k:"out", h:"18:05", t:"Martiña, por si se te pasó ayer: tenemos huecos el jueves y el sábado para probar la cabina. ¿Alguno te encaja?", btns:["Jueves","Sábado"], c:["sys"], n:"<b>D+1:</b> recordatorio corto con un texto ya aprobado."},
+  {k:"d", t:"Jueves, 19 de noviembre · D+3"},
+  {k:"call", h:"17:40", c:["per"], n:"<b>D+3: llama una persona.</b> Alba ve antes quién es Martiña y qué pidió."},
+  {k:"out", h:"17:42", from:"Alba · Admisiones", t:"Te acabo de llamar, Martiña. Nada urgente: si sigues con ganas de pinchar, aquí estamos. Contesta cuando puedas 🙂", c:["per"], n:"<b>Mensaje personal de Alba</b> tras la llamada."},
+  {k:"d", t:"Lunes, 23 de noviembre · D+7"},
+  {k:"out", h:"18:00", t:"Último mensaje, prometido 🙂 Si ahora no es el momento, dímelo y te escribimos antes del próximo curso.", btns:["Quiero probar la cabina","Más adelante"], c:["sys"], n:"<b>D+7: último toque, con salida fácil.</b> Luego deja de insistir."},
+  {k:"in", h:"22:51", t:"Perdona, semana de exámenes 😅 Quiero probar la cabina", tap:0, c:["alu"], n:"<b>Martiña responde de noche</b>, cuando puede."},
+  {k:"out", h:"22:51", t:"¡Qué bien leerte! Mañana a primera hora te proponemos día y hora.", c:["sys"], n:"Respuesta inmediata fuera de horario."},
+  {k:"d", t:"Martes, 24 de noviembre"},
+  {k:"out", h:"10:04", from:"Alba · Admisiones", t:"Martiña, te espero el sábado a las 12:00 para probar la cabina 🎧 ¿Te va bien?", btns:["Sí, allí estaré"], c:["sys","adm"], n:"<b>Alba aprueba la propuesta.</b> Una petición que se habría perdido."},
+  {k:"in", h:"10:15", t:"Sí, allí estaré", tap:0, c:["alu"], n:"<b>Visita agendada.</b>"}
+ ]},
+ {t:"Reserva de plaza para el curso", desc:"Tras la clase de prueba, Brais y su familia deciden. Reservar es un mensaje. El recibo, a nombre de quien paga.", steps:[
+  {k:"d", t:"Martes, 17 de noviembre"},
+  {k:"out", h:"19:00", t:"Hola, Brais. ¿Habéis podido hablarlo en casa? Si os queda alguna duda, Alba os la resuelve.", c:["sys"], n:"<b>Tres días después de la visita</b>, un mensaje suave."},
+  {k:"in", h:"20:32", t:"Sí! Lo hemos hablado y queremos reservar plaza para septiembre 🔥", c:["alu"], n:"<b>La familia ha decidido.</b>"},
+  {k:"out", h:"20:33", t:"¡Qué buena noticia, Brais! Mañana Alba te escribe con los pasos para reservar.", c:["sys"], n:"Fuera de horario: <b>no improvisa importes</b>. Lo deja listo para Alba."},
+  {k:"d", t:"Miércoles, 18 de noviembre"},
+  {k:"out", h:"9:35", from:"Alba · Admisiones", t:"Buenos días, Brais 🙌 Te reservo plaza en Producción Musical, DJ y Music Business. ¿El recibo a tu nombre o al de tu padre?", btns:["Al de mi padre","Al mío"], c:["sys","adm"], n:"<b>Alba aprueba.</b> El recibo, a nombre de quien paga."},
+  {k:"in", h:"9:48", t:"Al de mi padre", tap:0, c:["alu"], n:"<b>Paga el padre.</b> Queda en la ficha."},
+  {k:"doc", h:"9:50", from:"Alba · Admisiones", doc:"Reserva de plaza · IGMA.pdf", t:"Aquí tienes la reserva con el importe y el enlace de pago. Pásaselo a tu padre cuando quieras.", c:["per"], n:"<b>El documento lo prepara Alba</b> con la tarifa real. Sin cifras del sistema."},
+  {k:"in", h:"12:10", t:"Hecho, ya lo ha pagado ✅", c:["alu"], n:"<b>Reserva pagada</b> desde el móvil."},
+  {k:"out", h:"12:22", from:"Alba · Admisiones", t:"¡Recibido! Plaza reservada para septiembre ✅ Bienvenido a IGMA, Brais.", c:["per"], n:"<b>Alba comprueba el pago</b> y confirma. Pasa a «Plaza reservada»."},
+  {k:"out", h:"12:23", t:"Te iremos avisando por aquí: matrícula, horarios y primer día. Y si te apetece, el proyecto de la clase de prueba sigue siendo tuyo 😉", c:["sys"], n:"<b>Recordatorios hasta septiembre</b>, sin que nadie tenga que acordarse."}
+ ]}
+];
+
+const $=s=>document.querySelector(s);
+const chat=$("#chat"), stepsEl=$("#steps"), statusEl=$("#status"), clockEl=$("#clock"), bar=$("#bar"), live=$("#live");
+const playBtn=$("#play"), speedBtn=$("#speed");
+let cur=0, playing=true, speed=1, token=0, lastSide=null, finished=false;
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const WHO={sys:"Sistema",adm:"Admisiones aprueba",per:"Persona",alu:"Alumno o familia"};
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const TK='<svg class="ticks"><use href="#tk"/></svg>';
+const PH='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-phone"/></svg>';
+
+function wait(ms,tk){
+  return new Promise(res=>{
+    let left=ms,last=performance.now();
+    function f(now){
+      if(tk!==token) return;
+      if(playing) left-=(now-last)*speed;
+      last=now;
+      if(left<=0) res(); else setTimeout(()=>f(performance.now()),40);
+    }
+    setTimeout(()=>f(performance.now()),40);
+  });
+}
+function scrollChat(){chat.scrollTo({top:chat.scrollHeight,behavior:reduce?"auto":"smooth"})}
+
+const tabs=$("#tabs");
+S.forEach((sc,i)=>{
+  const b=document.createElement("button");
+  b.className="tab";b.type="button";b.setAttribute("role","tab");b.dataset.i=i;
+  b.innerHTML=`<span class="n">0${i+1}</span><span><b>${sc.t}</b></span>`;
+  b.onclick=()=>load(i,true);
+  tabs.appendChild(b);
+});
+
+function buildPanel(sc){
+  stepsEl.innerHTML="";
+  sc.steps.forEach((st,i)=>{
+    if(!st.n) return;
+    const li=document.createElement("li");
+    li.className="st"+(st.k==="gap"?" gap":"");li.dataset.i=i;
+    const by=(st.c||[]).map(c=>`<span class="by ${c}">${WHO[c]}</span>`).join(' <span class="by" style="color:var(--muted)">·</span> ');
+    li.innerHTML=`<span class="tm">${st.h||""}</span><span>${by}</span><p>${st.n}</p>`;
+    stepsEl.appendChild(li);
+  });
+}
+function lightPanel(i){
+  let now=null;
+  stepsEl.querySelectorAll(".st").forEach(li=>{
+    const j=+li.dataset.i;
+    li.classList.toggle("done",j<i);
+    li.classList.toggle("now",j===i);
+    if(j===i) now=li;
+  });
+  if(now){
+    const top=now.offsetTop-stepsEl.offsetTop-stepsEl.clientHeight/2+now.offsetHeight/2;
+    stepsEl.scrollTo({top:Math.max(0,top),behavior:reduce?"auto":"smooth"});
+  }
+}
+function addRow(side,html){
+  const row=document.createElement("div");
+  const first=lastSide!==side;
+  row.className=`row ${side}${first?" first":""}`;
+  row.innerHTML=html;
+  chat.appendChild(row);lastSide=side;scrollChat();
+  return row;
+}
+
+async function render(st,i,tk){
+  if(st.k==="d"){
+    const d=document.createElement("div");d.className="sec";d.innerHTML=`<span>${st.t}</span>`;
+    chat.appendChild(d);lastSide=null;scrollChat();
+    await wait(900,tk);return;
+  }
+  if(st.k==="gap"){
+    lightPanel(i);
+    const d=document.createElement("div");d.className="skip";d.innerHTML=`<span><svg class="i" style="width:14px;height:14px"><use href="#i-clock"/></svg>${st.h}</span>`;
+    chat.appendChild(d);lastSide=null;scrollChat();
+    await wait(2600,tk);return;
+  }
+  if(st.h&&/^\d/.test(st.h)) clockEl.textContent=st.h;
+  if(st.k==="in"){
+    if(st.tap!==undefined){
+      const prev=[...chat.querySelectorAll(".btns")].pop();
+      if(prev){const b=prev.children[st.tap];b&&b.classList.add("hit");}
+      await wait(600,tk);if(tk!==token)return;
+    }
+    lightPanel(i);
+    const row=addRow("out",`<div class="bub">${esc(st.t)}<span class="meta">${st.h}${TK}</span></div>`);
+    await wait(900,tk);if(tk!==token)return;
+    row.querySelector(".ticks").classList.add("read");
+    await wait(Math.min(3200,1000+st.t.length*18),tk);return;
+  }
+  const isCall=st.k==="call"||st.k==="callok";
+  lightPanel(i);
+  if(!isCall){
+    const typing=document.createElement("div");typing.className="typ";
+    typing.innerHTML='<div class="bub"><span class="dots"><i></i><i></i><i></i></span></div>';
+    statusEl.textContent="escribiendo…";statusEl.classList.add("typing");
+    chat.appendChild(typing);scrollChat();
+    await wait(Math.min(2600,Math.max(1100,(st.t||"").length*14)),tk);
+    if(tk!==token)return;
+    typing.remove();statusEl.textContent="en línea";statusEl.classList.remove("typing");
+  }else{
+    await wait(700,tk);if(tk!==token)return;
+  }
+  let html;
+  if(st.k==="call"){
+    html=`<div class="bub"><div class="call"><span class="ci">${PH}</span><span><b>Llamada de voz perdida</b><small>Toca para devolver la llamada</small></span></div><span class="meta">${st.h}</span></div>`;
+  }else if(st.k==="callok"){
+    html=`<div class="bub"><div class="call"><span class="ci ok">${PH}</span><span><b>Llamada de voz</b><small>14 min</small></span></div><span class="meta">${st.h}</span></div>`;
+  }else if(st.k==="loc"){
+    html=`<div class="bub"><div class="loc"><svg class="pin" width="30" height="38" viewBox="0 0 24 30"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.5 12 30 12 30s12-9.5 12-18.3C24 5.2 18.6 0 12 0z" fill="#00A5F4"/><circle cx="12" cy="11.5" r="4.3" fill="#fff"/></svg></div><div class="lt"><b>IGMA · Instituto Gallego de Música Avanzada</b><small>Centro de Vigo</small></div><span class="meta">${st.h}</span></div>`;
+  }else{
+    const from=st.from?`<span class="from">${st.from}</span>`:"";
+    const doc=st.doc?`<div class="doc"><span class="di">PDF</span><span><b>${esc(st.doc)}</b><small>2 páginas · PDF</small></span></div>`:"";
+    html=`<div class="colw"><div class="bub" style="max-width:100%">${from}${doc}${esc(st.t)}<span class="meta">${st.h}</span></div>${st.btns?`<div class="btns" style="max-width:100%;width:100%">${st.btns.map(b=>`<span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>${esc(b)}</span>`).join("")}</div>`:""}</div>`;
+  }
+  const row=addRow("in",html);
+  const cw=row.querySelector(".colw");if(cw)cw.style.maxWidth="82%";
+  await wait(Math.min(4200,1400+(st.t||"").length*22),tk);
+}
+
+async function run(tk){
+  const sc=S[cur];
+  for(let i=0;i<sc.steps.length;i++){
+    if(tk!==token) return;
+    bar.style.width=(i/sc.steps.length*100)+"%";
+    await render(sc.steps[i],i,tk);
+    if(tk!==token) return;
+  }
+  bar.style.width="100%";
+  finished=true;playing=false;setPlayUI();
+  lightPanel(9999);
+  const end=document.createElement("div");end.className="endcard";
+  const nxt=(cur+1)%S.length;
+  end.innerHTML=`<button type="button"><svg class="i" style="width:14px;height:14px"><use href="#i-play"/></svg>Siguiente: ${S[nxt].t}</button>`;
+  end.querySelector("button").onclick=()=>load(nxt,true);
+  chat.appendChild(end);scrollChat();
+}
+
+function setPlayUI(){
+  playBtn.innerHTML=`<svg class="i"><use href="#${playing?"i-pause":"i-play"}"/></svg><span>${playing?"Pausa":(finished?"Otra vez":"Reproducir")}</span>`;
+  live.classList.toggle("off",!playing);
+}
+
+function load(i,autoplay){
+  token++;cur=i;finished=false;lastSide=null;
+  tabs.querySelectorAll(".tab").forEach((b,j)=>b.setAttribute("aria-selected",j===i?"true":"false"));
+  const tb=tabs.children[i];tabs.scrollTo({left:tb.offsetLeft-tabs.clientWidth/2+tb.offsetWidth/2,behavior:"smooth"});
+  chat.innerHTML='<div class="encr">🔒 Los mensajes están cifrados de extremo a extremo. Cuenta de empresa verificada.</div>';
+  statusEl.textContent="en línea";statusEl.classList.remove("typing");
+  const firstH=S[i].steps.find(s=>s.h&&/^\d/.test(s.h));clockEl.textContent=firstH?firstH.h:"10:00";
+  bar.style.width="0";
+  $("#pdesc").textContent=S[i].desc;
+  buildPanel(S[i]);stepsEl.scrollTop=0;
+  playing=autoplay;setPlayUI();
+  try{history.replaceState(null,"","#e"+(i+1));}catch(e){}
+  run(token);
+}
+
+playBtn.onclick=()=>{
+  if(finished){load(cur,true);return;}
+  playing=!playing;setPlayUI();
+};
+$("#reset").onclick=()=>load(cur,true);
+speedBtn.onclick=()=>{speed=speed===1?2:1;speedBtn.setAttribute("aria-pressed",speed===2?"true":"false")};
+$("#fs").onclick=()=>{
+  if(document.fullscreenElement){document.exitFullscreen();return;}
+  if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+};
+document.addEventListener("fullscreenchange",()=>document.body.classList.toggle("fs",!!document.fullscreenElement));
+document.addEventListener("keydown",e=>{
+  if(e.target.closest&&e.target.closest("input,textarea")) return;
+  if(e.key===" "){e.preventDefault();playBtn.click();}
+  else if(e.key==="r"||e.key==="R") load(cur,true);
+  else if(e.key==="f"||e.key==="F") $("#fs").click();
+  else if(/^[1-5]$/.test(e.key)) load(+e.key-1,true);
+  else if(e.key==="ArrowRight") load((cur+1)%S.length,true);
+  else if(e.key==="ArrowLeft") load((cur+S.length-1)%S.length,true);
+});
+
+let start=0;
+try{const m=location.hash.match(/^#e([1-5])$/);if(m)start=+m[1]-1;}catch(e){}
+load(start,true);
+</script>
+</body>
+</html>
