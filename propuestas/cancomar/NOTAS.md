@@ -56,3 +56,11 @@ Se avanza con flechas, AvPág o espacio; Inicio y Fin saltan al principio y al f
   - Para D, la landing A no tiene «Patrón Local de Pesca» en la pregunta 1: habría que añadirlo o duplicar la landing.
   - La presentación todavía enlaza a la Intelligence antigua (sector=maritima).
   - Las landings no tienen el menú común.
+
+## Recorrido y CRM (añadido el 10-nov, agente de recorrido y demo)
+- Recorrido: https://qualivo.io/propuestas/cancomar/recorrido/ — 10 pestañas: en una pantalla · la petición (web, WhatsApp, llamada fuera de horario) · WhatsApp preparado por el sistema y aprobado por admisiones (con botón «Aprobar y enviar» que funciona) · lista de espera por curso · recordatorios de la convocatoria · D+1, D+3 y D+7 · plaza y matrícula · renovación a 5 años · empresas (búsqueda por titulación) · «Verlo en marcha» (3 chats reproducibles: Andrés, Lucía y Jorge). Se puede enlazar a una pestaña con #p0…#p9.
+- CRM: https://qualivo.io/propuestas/cancomar/demo/ — aplicación con menú lateral: Pipeline de 7 etapas (fichas que se abren, se pueden mover de etapa y lo apuntan en «Lo que acabas de hacer») · Conversaciones de WhatsApp con la respuesta preparada para aprobar o quedársela · Renovaciones (caducidades mes a mes y avisos) · Empresas (filtro por titulación) · Listas de espera. Hay enlaces directos: #conversaciones, #renovaciones, #empresas y #espera.
+- Las mismas personas de ejemplo que en la presentación (Andrés G., Lucía F., Rubén A., etc.), todas rotuladas como «Datos de ejemplo». Fotos de `assets/brand/` (practicas.jpg, hero.jpg, seguridad-maritima.jpg) y logo blanco. Las dos páginas llevan el CSS dentro, así que no dependen de ningún deck.css.
+- Menú superior: Plan · Anuncios · Landings (lleva a landing-a) · Recorrido · CRM · Intelligence (?sector=cancomar) · Presentación.
+- Comprobado con Playwright: sin scroll horizontal a 390 y a 1440 px en todas las pestañas y sin errores de JS.
+- Pendiente o por revisar: «Plan» (../) y «Anuncios» (../anuncios/) funcionan solo si los publica otro agente. Las fechas que salen en los mensajes de ejemplo (30 nov–1 dic, 25-26 ene, 22-23 feb) son de ejemplo, salvo Patrón Local de Pesca (11 ene–18 feb), que es la publicada. La lista de documentación (DNI, libreta, médico) es orientativa: que la confirme CANCOMAR.
