@@ -11,8 +11,8 @@
 <style>
 /* Presentación en directo (10-nov, primera reunión): poco texto, lo explica Maikel. Flechas del teclado para pasar de pantalla.
    Sin fotos: no hemos podido confirmar su web pública, así que todo es composición CSS y SVG. */
-:root{--ink:#0E1A2B;--mut:#536378;--bg:#FAFCFE;--soft:#EAF4FC;--soft2:#F3F8FD;--line:#D9E6F2;--acc:#1A7FC9;--acc2:#2EA3F2;--deep:#0B2A45;--deep2:#123E66;
---grad:linear-gradient(135deg,#2EA3F2 0%,#1565B8 100%);--amb:#F5B83D;--ok:#13865A;--bad:#C0392B;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif}
+:root{--ink:#0E1A2B;--mut:#536378;--bg:#FCFBF9;--soft:#F5F2ED;--soft2:#F8F6F2;--line:#E4DED4;--acc:#3B4670;--acc2:#56618A;--deep:#2F3854;--deep2:#262D45;
+--grad:linear-gradient(135deg,#56618A 0%,#2F3854 100%);--amb:#F5B83D;--ok:#13865A;--bad:#C0392B;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{background:var(--bg);color:var(--ink);font:18px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
@@ -43,7 +43,7 @@ h2 em{font-style:normal;color:var(--acc)}
 .note{margin-top:16px;font-size:13px;color:var(--mut)}
 .i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 /* portada */
-.hero{background:radial-gradient(1200px 700px at 85% 20%,rgba(46,163,242,.35),transparent 60%),linear-gradient(135deg,#0B2A45 0%,#0F3A63 55%,#1565B8 100%);color:#fff;position:relative;overflow:hidden}
+.hero{background:linear-gradient(100deg,rgba(38,45,69,.92) 0%,rgba(47,56,84,.78) 45%,rgba(47,56,84,.25) 100%),url(../assets/brand/clinica.jpg) center/cover;color:#fff;position:relative;overflow:hidden}
 .hero .in{position:relative;z-index:1}
 .hero .x{display:flex;align-items:center;gap:18px;font-weight:700;font-size:22px;margin-bottom:40px;flex-wrap:wrap}
 .hero .x .wm{font-size:30px}
@@ -83,11 +83,11 @@ h2 em{font-style:normal;color:var(--acc)}
 .vs .c{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 22px;font-size:18px;display:flex;gap:12px;align-items:center;min-width:0}
 .vs .c.h{background:#FFF7F5;border-color:#F5D5CF}
 .vs .c.h::before{content:"✕";color:var(--bad);font-weight:800;flex:none}
-.vs .c.y{border-color:#BFDDF4;box-shadow:0 12px 26px -22px rgba(26,127,201,.8)}
+.vs .c.y{border-color:#BFDDF4;box-shadow:0 12px 26px -22px rgba(59,70,112,.8)}
 .vs .c.y::before{content:"✓";color:var(--ok);font-weight:800;flex:none}
 .vs .ar{display:grid;place-items:center;color:var(--acc);font-weight:800;font-size:24px}
 .vs .c b{font-weight:700}
-.det{display:flex;gap:14px;align-items:flex-start;margin-top:22px;background:var(--soft);border:1px dashed #9FC9EA;border-radius:18px;padding:16px 20px;font-size:16.5px}
+.det{display:flex;gap:14px;align-items:flex-start;margin-top:22px;background:var(--soft);border:1px dashed #D6C8B2;border-radius:18px;padding:16px 20px;font-size:16.5px}
 .det .i{color:var(--acc);flex:none;margin-top:2px}
 /* anuncios */
 .adx{display:grid;grid-template-columns:minmax(0,390px) minmax(0,1fr);gap:48px;align-items:center}
@@ -99,18 +99,18 @@ h2 em{font-style:normal;color:var(--acc)}
 .cr{position:relative;aspect-ratio:4/5;overflow:hidden;color:#fff;background:var(--deep)}
 .cr .tag{position:absolute;left:16px;top:16px;z-index:2;background:rgba(255,255,255,.95);color:var(--deep);font:700 11.5px var(--sans);letter-spacing:.04em;padding:6px 11px;border-radius:99px}
 .cr .hk{position:absolute;left:20px;right:20px;bottom:50px;z-index:2;font:800 25px/1.14 var(--sans);letter-spacing:-.02em}
-.cr .hk em{font-style:normal;color:#8FD3FF}
+.cr .hk em{font-style:normal;color:#E2D3BA}
 .cr .sub{display:block;font:500 13.5px/1.35 var(--sans);letter-spacing:0;margin-top:10px;opacity:.9}
 .cr .lg{position:absolute;right:16px;bottom:16px;z-index:2;font-size:13px}
 .cr .art{position:absolute;inset:0;z-index:1}
-.cr.a1{background:radial-gradient(420px 360px at 70% 28%,rgba(46,163,242,.55),transparent 65%),linear-gradient(160deg,#0F3A63 0%,#0B2A45 70%)}
+.cr.a1{background:radial-gradient(420px 360px at 70% 28%,rgba(201,183,154,.55),transparent 65%),linear-gradient(160deg,#262D45 0%,#2F3854 70%)}
 .cr.a1 .art svg{position:absolute;right:8%;top:9%;width:46%;height:auto}
 .cr.a1 .pill{position:absolute;left:20px;top:56px;z-index:2;background:var(--amb);color:#3A2B00;font:800 13px var(--sans);padding:7px 12px;border-radius:10px;transform:rotate(-3deg)}
-.cr.a2{background:radial-gradient(380px 300px at 50% 32%,#FFFFFF,transparent 70%),linear-gradient(170deg,#DDEFFC 0%,#BFE0F8 100%);color:var(--ink)}
+.cr.a2{background:radial-gradient(380px 300px at 50% 32%,#FFFFFF,transparent 70%),linear-gradient(170deg,#DDEFFC 0%,#E8DFD0 100%);color:var(--ink)}
 .cr.a2 .hk em{color:var(--acc)}
 .cr.a2 .art svg{position:absolute;left:50%;top:10%;transform:translateX(-50%);width:66%;height:auto}
 .cr.a2 .tag{background:var(--deep);color:#fff}
-.cr.a3{background:linear-gradient(160deg,#1565B8 0%,#0B2A45 100%)}
+.cr.a3{background:linear-gradient(160deg,#2F3854 0%,#2F3854 100%)}
 .cr.a3 .art svg{position:absolute;left:6%;top:8%;width:88%;height:auto}
 .ig .cta{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:#F4F7FA;color:#0A66C2;font-weight:700;font-size:14.5px;border-bottom:1px solid #EEF1F4}
 .ig .cap{padding:10px 14px 14px;font-size:13.5px;color:#262626;line-height:1.45}
@@ -129,8 +129,8 @@ h2 em{font-style:normal;color:var(--acc)}
 .bar{background:#E8EEF4;padding:9px 12px;display:flex;gap:6px;align-items:center}.bar i{width:10px;height:10px;border-radius:50%;background:#C3CFDB;flex:none}
 .bar span{margin-left:8px;background:#fff;border-radius:6px;padding:3px 10px;font-size:11.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .mini{display:grid;grid-template-columns:1.15fr 1fr;gap:14px;padding:18px;align-items:start;min-height:250px}
-.mini.a{background:linear-gradient(150deg,#0B2A45,#123E66);color:#fff}
-.mini.b{background:linear-gradient(150deg,#F3F8FD,#DDEFFC)}
+.mini.a{background:linear-gradient(150deg,#2F3854,#262D45);color:#fff}
+.mini.b{background:linear-gradient(150deg,#F8F6F2,#DDEFFC)}
 .mini .wm{font-size:12px;margin-bottom:12px}
 .mini h4{font-size:19px;line-height:1.15;letter-spacing:-.02em;margin-bottom:8px}
 .mini p{font-size:12px;opacity:.85;color:inherit}
@@ -144,7 +144,7 @@ h2 em{font-style:normal;color:var(--acc)}
 .mini .f .go{background:var(--grad);color:#fff;text-align:center;border-radius:8px;padding:7px;font-weight:700;font-size:11.5px}
 .lw h3{font-size:22px}
 .lw p{font-size:16px;color:var(--mut)}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:13px 22px;font-size:16px;box-shadow:0 14px 30px -14px rgba(21,101,184,.85);align-self:flex-start}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:13px 22px;font-size:16px;box-shadow:0 14px 30px -14px rgba(47,56,84,.85);align-self:flex-start}
 .btn:hover{transform:translateY(-1px)}
 .diff{margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .diff div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px;font-size:15.5px;min-width:0}
@@ -214,9 +214,9 @@ h2 em{font-style:normal;color:var(--acc)}
 .hist div{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px}
 .hist small{color:var(--mut);font-weight:700;font-size:12px;padding-top:1px}
 .next{margin-top:14px;background:var(--deep);color:#fff;border-radius:14px;padding:12px 16px;font-size:15px;display:flex;gap:12px;align-items:center}
-.next b{color:#8FD3FF}
+.next b{color:#E2D3BA}
 /* intelligence */
-.intel{background:linear-gradient(180deg,#EAF4FC,#FAFCFE)}
+.intel{background:linear-gradient(180deg,#F5F2ED,#FCFBF9)}
 .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .pan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 20px;box-shadow:0 22px 46px -34px rgba(11,42,69,.7);min-width:0}
 .pan h4{font-size:15px;margin-bottom:12px;display:flex;justify-content:space-between;gap:10px;align-items:center}
@@ -234,12 +234,12 @@ h2 em{font-style:normal;color:var(--acc)}
 .sedes2 b{font-variant-numeric:tabular-nums}
 .ibot{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:26px}
 /* final */
-.fin{background:radial-gradient(900px 600px at 90% 10%,rgba(46,163,242,.35),transparent 60%),linear-gradient(135deg,#0B2A45 0%,#1565B8 100%);color:#fff}
+.fin{background:radial-gradient(900px 600px at 90% 10%,rgba(201,183,154,.35),transparent 60%),linear-gradient(135deg,#2F3854 0%,#2F3854 100%);color:#fff}
 .fin h2{color:#fff;max-width:20ch}
 .fin .need{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:6px}
 .fin .need div{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:16px 18px;font-size:17px;min-width:0}
-.fin .need .i{color:#8FD3FF;flex:none;margin-top:2px}
-.fin .lbl{font:700 13px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#8FD3FF;margin:28px 0 12px}
+.fin .need .i{color:#E2D3BA;flex:none;margin-top:2px}
+.fin .lbl{font:700 13px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#E2D3BA;margin:28px 0 12px}
 .fin .wm{font-size:22px;margin-top:40px;opacity:.9}
 .rv{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
 .js .rv{opacity:0;transform:translateY(18px)}.js .rv.vis{opacity:1;transform:none}
@@ -261,7 +261,7 @@ h2 em{font-style:normal;color:var(--acc)}
   .cr .hk{font-size:21px;bottom:46px}.cr .sub{font-size:12.5px}.cr.a1 .art svg{width:34%;top:12%}.cr.a2 .art svg{width:58%}
 }
 </style>
-<style>.piezas{display:flex;gap:4px;margin-left:10px;padding-left:10px;border-left:1px solid rgba(255,255,255,.3)}.piezas a{color:#fff!important;background:rgba(255,255,255,.14);font-size:12px;font-weight:700;padding:5px 9px;border-radius:99px;text-decoration:none}.piezas a:hover{background:rgba(255,255,255,.3)}@media(max-width:1700px){.piezas{display:none}}</style></head>
+<style>.piezas{display:flex;gap:4px;margin-left:10px;padding-left:10px;border-left:1px solid rgba(255,255,255,.3)}.piezas a{color:#fff!important;background:rgba(255,255,255,.14);font-size:12px;font-weight:700;padding:5px 9px;border-radius:99px;text-decoration:none}.piezas a:hover{background:rgba(255,255,255,.3)}@media(max-width:1700px){.piezas{display:none}}</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"><style>h1,h2,.hero h1,.s h2{font-family:"Yeseva One",Georgia,serif!important;font-weight:400!important;letter-spacing:0!important}</style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="tooth" viewBox="0 0 48 54"><path d="M13 3.5C6.5 2.2 2.6 8 3.1 16.4c.4 7 3.4 11.6 4.6 19.2 1 6.6 2.6 14.9 7 14.9 3.7 0 4.4-6.4 5.4-11 .8-3.4 1.9-5.2 3.9-5.2s3.1 1.8 3.9 5.2c1 4.6 1.7 11 5.4 11 4.4 0 6-8.3 7-14.9 1.2-7.6 4.2-12.2 4.6-19.2.5-8.4-3.4-14.2-9.9-12.9C30.6 4.3 27.6 6 24 6s-6.6-1.7-11-2.5z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M19 10.5c3 2.6 7 2.6 10 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
@@ -328,9 +328,9 @@ h2 em{font-style:normal;color:var(--acc)}
 <div class="cr a1"><span class="tag">Valencia · Torrent</span><span class="pill">Pago en cuotas</span>
 <div class="art" aria-hidden="true"><svg viewBox="0 0 120 210"><defs><linearGradient id="gi" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#CFE9FB"/></linearGradient></defs>
 <path d="M22 22C22 10 38 5 60 5s38 5 38 17c0 22-9 38-38 38S22 44 22 22z" fill="url(#gi)"/>
-<rect x="48" y="62" width="24" height="14" rx="3" fill="#BFE0F8"/>
-<path d="M42 80h36l-5 104c-.4 9-6 15-13 15s-12.6-6-13-15z" fill="rgba(255,255,255,.08)" stroke="#BFE0F8" stroke-width="2.5"/>
-<g stroke="#BFE0F8" stroke-width="3" stroke-linecap="round"><path d="M41 94l38 7M42 110l36 7M43 126l34 7M44 142l32 7M45 158l30 7M47 174l26 6"/></g></svg></div>
+<rect x="48" y="62" width="24" height="14" rx="3" fill="#E8DFD0"/>
+<path d="M42 80h36l-5 104c-.4 9-6 15-13 15s-12.6-6-13-15z" fill="rgba(255,255,255,.08)" stroke="#E8DFD0" stroke-width="2.5"/>
+<g stroke="#E8DFD0" stroke-width="3" stroke-linecap="round"><path d="M41 94l38 7M42 110l36 7M43 126l34 7M44 142l32 7M45 158l30 7M47 174l26 6"/></g></svg></div>
 <p class="hk">¿Te falta una pieza y lo vas dejando <em>por el precio?</em><span class="sub">Primera visita, plan claro y presupuesto en cuotas.</span></p>
 <span class="lg wm"><svg><use href="#tooth"/></svg><span><b>MARÍN</b><small>CLÍNICA DENTAL</small></span></span></div>
 <div class="cta"><span>Pedir primera visita</span><span>›</span></div>
@@ -351,7 +351,7 @@ h2 em{font-style:normal;color:var(--acc)}
 <div class="adx">
 <div class="ig"><div class="h"><span class="av"><svg><use href="#tooth"/></svg></span><div><b>Clínica Dental Marín</b><small>Publicidad</small></div><span class="d3">···</span></div>
 <div class="cr a2"><span class="tag">Para adultos</span>
-<div class="art" aria-hidden="true"><svg viewBox="0 0 200 140"><path d="M22 30A78 88 0 0 0 178 30" fill="none" stroke="rgba(26,127,201,.18)" stroke-width="30" stroke-linecap="round"/>
+<div class="art" aria-hidden="true"><svg viewBox="0 0 200 140"><path d="M22 30A78 88 0 0 0 178 30" fill="none" stroke="rgba(59,70,112,.18)" stroke-width="30" stroke-linecap="round"/>
 <g fill="#fff" stroke="#9CCBEE" stroke-width="2"><ellipse cx="169" cy="40" rx="9" ry="11"/><ellipse cx="165" cy="60" rx="9" ry="11"/><ellipse cx="156" cy="79" rx="9" ry="10.5"/><ellipse cx="143" cy="93" rx="8.5" ry="10"/><ellipse cx="127" cy="104" rx="8" ry="9.5"/><ellipse cx="109" cy="109" rx="8.5" ry="9.5"/><ellipse cx="91" cy="109" rx="8.5" ry="9.5"/><ellipse cx="73" cy="104" rx="8" ry="9.5"/><ellipse cx="57" cy="93" rx="8.5" ry="10"/><ellipse cx="44" cy="79" rx="9" ry="10.5"/><ellipse cx="35" cy="60" rx="9" ry="11"/><ellipse cx="31" cy="40" rx="9" ry="11"/></g>
 <path d="M22 30A78 88 0 0 0 178 30" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/></svg></div>
 <p class="hk">¿Te habría gustado llevar ortodoncia de joven? <em>Hoy hay opciones discretas.</em><span class="sub">Alineadores transparentes. Valencia y Torrent.</span></p>
@@ -375,9 +375,9 @@ h2 em{font-style:normal;color:var(--acc)}
 <div class="ig"><div class="h"><span class="av"><svg><use href="#tooth"/></svg></span><div><b>Clínica Dental Marín</b><small>Publicidad</small></div><span class="d3">···</span></div>
 <div class="cr a3"><span class="tag">Elige tu sede</span>
 <div class="art" aria-hidden="true"><svg viewBox="0 0 200 170"><g stroke="rgba(255,255,255,.07)" stroke-width="1"><path d="M0 20h200M0 50h200M0 80h200M0 110h200M0 140h200M25 0v170M65 0v170M105 0v170M145 0v170M185 0v170"/></g>
-<path d="M40 128C70 120 80 70 120 64s30-26 44-34" fill="none" stroke="#8FD3FF" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round"/>
-<g><path d="M164 8c-9 0-15 7-15 15 0 11 15 24 15 24s15-13 15-24c0-8-6-15-15-15z" fill="#fff"/><circle cx="164" cy="23" r="5.5" fill="#1565B8"/></g>
-<g><path d="M40 104c-9 0-15 7-15 15 0 11 15 24 15 24s15-13 15-24c0-8-6-15-15-15z" fill="#F5B83D"/><circle cx="40" cy="119" r="5.5" fill="#0B2A45"/></g>
+<path d="M40 128C70 120 80 70 120 64s30-26 44-34" fill="none" stroke="#E2D3BA" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round"/>
+<g><path d="M164 8c-9 0-15 7-15 15 0 11 15 24 15 24s15-13 15-24c0-8-6-15-15-15z" fill="#fff"/><circle cx="164" cy="23" r="5.5" fill="#2F3854"/></g>
+<g><path d="M40 104c-9 0-15 7-15 15 0 11 15 24 15 24s15-13 15-24c0-8-6-15-15-15z" fill="#F5B83D"/><circle cx="40" cy="119" r="5.5" fill="#2F3854"/></g>
 <text x="144" y="28" fill="#fff" font-family="Montserrat,sans-serif" font-size="11" font-weight="700" text-anchor="end">Valencia</text>
 <text x="70" y="152" fill="#fff" font-family="Montserrat,sans-serif" font-size="11" font-weight="700">Torrent</text></svg></div>
 <p class="hk">Tu dentista en Valencia <em>o en Torrent.</em><span class="sub">Elige sede y hora. Te confirmamos por WhatsApp.</span></p>
@@ -538,7 +538,7 @@ h2 em{font-style:normal;color:var(--acc)}
 
 <!-- 14 · Siguiente paso -->
 <section class="s fin" id="s10"><div class="in rv">
-<p class="n" style="color:#8FD3FF">10 · Siguiente paso</p>
+<p class="n" style="color:#E2D3BA">10 · Siguiente paso</p>
 <h2>Una segunda reunión esta semana, con vuestros números del último mes</h2>
 <p class="lbl">Lo que necesitamos</p>
 <div class="need">

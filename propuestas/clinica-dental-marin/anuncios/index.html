@@ -12,8 +12,8 @@
 <style>
 /* Anuncios de Meta para Clínica Dental Marín (reunión 10-nov). Plantilla: propuestas/institut-gestalt/anuncios/.
    Marca neutra en texto (MARÍN · CLÍNICA DENTAL con un diente SVG): su web no está confirmada. Sin fotos: todo es CSS y SVG. */
-:root{color-scheme:light;--ink:#0E1A2B;--mut:#536378;--bg:#FAFCFE;--surface:#fff;--soft:#EAF4FC;--soft2:#F3F8FD;--line:#D9E6F2;--line2:#E6EEF6;--acc:#1A7FC9;--acc2:#2EA3F2;--deep:#0B2A45;--deep2:#123E66;
---grad:linear-gradient(135deg,#2EA3F2 0%,#1565B8 100%);--amb:#F5B83D;--ok:#13865A;--bad:#C0392B;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+:root{color-scheme:light;--ink:#0E1A2B;--mut:#536378;--bg:#FCFBF9;--surface:#fff;--soft:#F5F2ED;--soft2:#F8F6F2;--line:#E4DED4;--line2:#E6EEF6;--acc:#3B4670;--acc2:#56618A;--deep:#2F3854;--deep2:#262D45;
+--grad:linear-gradient(135deg,#56618A 0%,#2F3854 100%);--amb:#F5B83D;--ok:#13865A;--bad:#C0392B;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
 --shadow:0 1px 2px rgba(11,42,69,.06),0 16px 36px -24px rgba(11,42,69,.5);--shadow-lg:0 30px 60px -34px rgba(11,26,43,.65)}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth;overflow-x:clip;-webkit-text-size-adjust:100%}
@@ -40,15 +40,15 @@ a{color:var(--acc)}
 .links a:hover{background:rgba(255,255,255,.1);color:#fff}
 .links a[aria-current]{background:#fff;color:var(--deep)}
 /* cabecera */
-.ahero{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:radial-gradient(1100px 620px at 88% 18%,rgba(46,163,242,.38),transparent 60%),linear-gradient(135deg,#0B2A45 0%,#0F3A63 55%,#1565B8 100%)}
+.ahero{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:radial-gradient(1100px 620px at 88% 18%,rgba(201,183,154,.38),transparent 60%),linear-gradient(135deg,#2F3854 0%,#262D45 55%,#2F3854 100%)}
 .ahero .tooth{position:absolute;right:-4%;top:50%;transform:translateY(-46%);width:min(40vw,460px);height:auto;aspect-ratio:48/54;opacity:.09;z-index:-1;color:#fff}
 .ahero .wrap{padding-block:60px 52px;display:grid;gap:14px}
 .lockup{justify-self:start;display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:9px 18px;font-weight:700;font-size:15px}
 .lockup i{font-style:normal;opacity:.6;font-weight:500}
 .lockup .wm{font-size:19px}
-.eyebrow{font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#8FD3FF}
+.eyebrow{font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#E2D3BA}
 .ahero h1{font-weight:800;font-size:clamp(34px,5.2vw,62px);line-height:1.04;letter-spacing:-.025em;max-width:19ch;text-wrap:balance}
-.ahero h1 em{font-style:normal;color:#8FD3FF}
+.ahero h1 em{font-style:normal;color:#E2D3BA}
 .ahero .lead{color:rgba(255,255,255,.9);font-size:clamp(16px,1.6vw,18.5px);max-width:72ch}
 nav.jump{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 nav.jump a{color:#fff;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);border-radius:99px;padding:7px 14px}
@@ -76,15 +76,15 @@ h2.t{font-weight:800;font-size:clamp(26px,3.6vw,40px);line-height:1.1;letter-spa
 .icp .no2{border-top:5px solid var(--amb);background:#FFFCF2}.icp .no2 h3 i{background:var(--amb);color:#3A2B00}
 .icp .q{border-top:5px solid var(--acc);background:linear-gradient(180deg,var(--soft),#fff)}.icp .q h3 i{background:var(--acc)}
 .pet{margin-top:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 18px;align-items:center;background:var(--deep);color:#fff;border-radius:18px;padding:18px 22px}
-.pet .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.12);color:#8FD3FF}
-.pet b{color:#8FD3FF}
+.pet .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.12);color:#E2D3BA}
+.pet b{color:#E2D3BA}
 @media (max-width:900px){.icp{grid-template-columns:1fr}}
 @media (max-width:560px){.pet{grid-template-columns:1fr}}
 /* formulario */
 .fwrap{display:grid;grid-template-columns:370px minmax(0,1fr);gap:32px;align-items:start}
 @media (max-width:900px){.fwrap{grid-template-columns:minmax(0,1fr);justify-items:center}.fwrap > .card{justify-self:stretch}}
 .lf{width:min(370px,100%);background:#fff;color:#1C1E21;border-radius:18px;overflow:hidden;border:1px solid #DADDE1;box-shadow:var(--shadow-lg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-.lf .top{background:linear-gradient(135deg,#0B2A45,#1565B8);color:#fff;padding:18px 18px 16px;display:grid;gap:6px}
+.lf .top{background:linear-gradient(135deg,#2F3854,#2F3854);color:#fff;padding:18px 18px 16px;display:grid;gap:6px}
 .lf .top .wm{font-size:15px;font-family:var(--sans)}
 .lf .top b{font-size:16.5px;line-height:1.3}
 .lf .body{padding:14px 18px 18px;display:grid;gap:13px}
@@ -118,14 +118,14 @@ h2.t{font-weight:800;font-size:clamp(26px,3.6vw,40px);line-height:1.1;letter-spa
 .plan4 b{font-size:16px;line-height:1.3}
 .plan4 p{color:var(--mut);font-size:13.5px;line-height:1.5}
 .plan4 .fm{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)}
-.prud{margin-top:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 16px;align-items:start;background:#fff;border:1px dashed #9FC9EA;border-radius:18px;padding:16px 20px;font-size:14.5px}
+.prud{margin-top:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 16px;align-items:start;background:#fff;border:1px dashed #D6C8B2;border-radius:18px;padding:16px 20px;font-size:14.5px}
 .prud .ic{color:var(--acc)}
 .prud ul{margin:6px 0 0;padding-left:18px;display:grid;gap:4px;color:#33445A}
 @media (max-width:560px){.prud{grid-template-columns:1fr}}
 /* ángulo */
 .angle{scroll-margin-top:64px}
 .ah{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 18px;align-items:start;margin-bottom:22px}
-.ah .lt{grid-row:span 2;width:58px;height:58px;border-radius:17px;font-size:28px;box-shadow:0 12px 24px -12px rgba(21,101,184,.8)}
+.ah .lt{grid-row:span 2;width:58px;height:58px;border-radius:17px;font-size:28px;box-shadow:0 12px 24px -12px rgba(47,56,84,.8)}
 .ah h2{font-weight:800;font-size:clamp(25px,3.3vw,38px);line-height:1.12;letter-spacing:-.02em;text-wrap:balance}
 .ah .meta{display:grid;gap:6px;font-size:14.5px;color:var(--mut);max-width:96ch}
 .ah .meta b{font-weight:700;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--deep2);margin-right:6px}
@@ -159,7 +159,7 @@ figcaption b{color:var(--ink)}
 .art .tag{left:5%;top:4.4%;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.96);color:var(--deep);font-weight:700;font-size:max(10px,2.7cqw);letter-spacing:.03em;padding:.55em 1em;border-radius:99px;box-shadow:0 8px 20px -10px rgba(0,0,0,.45)}
 .art .tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc2)}
 .art .hk{left:5.5%;right:5.5%;bottom:13.5%;font-weight:800;font-size:7.4cqw;line-height:1.04;letter-spacing:-.035em;text-wrap:balance}
-.art .hk em{font-style:normal;color:#8FD3FF}
+.art .hk em{font-style:normal;color:#E2D3BA}
 .art .hk .big{display:block;font-size:10.2cqw;letter-spacing:-.045em;margin-bottom:.12em}
 .art .sub{display:block;font-weight:500;font-size:max(11.5px,3.3cqw);line-height:1.4;letter-spacing:0;margin-top:.75em;opacity:.9}
 .art .lg{right:5%;bottom:4.2%;font-size:max(11px,3.3cqw)}
@@ -167,21 +167,21 @@ figcaption b{color:var(--ink)}
 .art .rule{left:5.5%;right:5.5%;bottom:10%;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.35),transparent)}
 .glass{background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;box-shadow:0 20px 40px -20px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.25)}
 /* 1 · implantes */
-.a1 .bg{background:radial-gradient(55% 45% at 74% 30%,rgba(46,163,242,.62),transparent 70%),radial-gradient(60% 50% at 0% 100%,rgba(21,101,184,.55),transparent 70%),linear-gradient(165deg,#0D3358 0%,#071B31 75%)}
+.a1 .bg{background:radial-gradient(55% 45% at 74% 30%,rgba(201,183,154,.62),transparent 70%),radial-gradient(60% 50% at 0% 100%,rgba(47,56,84,.55),transparent 70%),linear-gradient(165deg,#0D3358 0%,#071B31 75%)}
 .a1 .rings{right:-14%;top:-6%;width:84%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(143,211,255,.16);box-shadow:0 0 0 34px rgba(143,211,255,.035),0 0 0 35px rgba(143,211,255,.12),0 0 0 80px rgba(143,211,255,.025),0 0 0 81px rgba(143,211,255,.08)}
-.a1 .imp{right:10%;top:5%;width:34%;height:auto;filter:drop-shadow(0 28px 30px rgba(0,0,0,.5)) drop-shadow(0 0 40px rgba(46,163,242,.35))}
+.a1 .imp{right:10%;top:5%;width:34%;height:auto;filter:drop-shadow(0 28px 30px rgba(0,0,0,.5)) drop-shadow(0 0 40px rgba(201,183,154,.35))}
 .a1 .pill{left:5.5%;top:14%;background:linear-gradient(135deg,#FFD27A,#F5B83D);color:#3A2B00;font-weight:800;font-size:max(11px,3.2cqw);padding:.6em 1em;border-radius:12px;transform:rotate(-4deg);box-shadow:0 14px 26px -12px rgba(245,184,61,.75)}
 .a1 .checks{left:5.5%;top:25%;width:50%;padding:4% 4.5%;display:grid;gap:.7em;font-size:max(10.5px,3cqw);font-weight:600;line-height:1.25}
 .a1 .checks span{display:flex;gap:.6em;align-items:center}
-.a1 .checks span::before{content:"✓";display:grid;place-items:center;flex:none;width:1.55em;height:1.55em;border-radius:50%;background:#8FD3FF;color:#071B31;font-weight:800;font-size:.85em}
-.a1 .checks small{font-size:.78em;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8FD3FF}
+.a1 .checks span::before{content:"✓";display:grid;place-items:center;flex:none;width:1.55em;height:1.55em;border-radius:50%;background:#E2D3BA;color:#071B31;font-weight:800;font-size:.85em}
+.a1 .checks small{font-size:.78em;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E2D3BA}
 /* 2 · ortodoncia */
 .a2{color:var(--ink)}
-.a2 .bg{background:radial-gradient(70% 50% at 50% 30%,#FFFFFF 0%,rgba(255,255,255,0) 70%),radial-gradient(60% 40% at 100% 100%,rgba(46,163,242,.28),transparent 70%),linear-gradient(170deg,#EEF7FE 0%,#C9E5FA 100%)}
-.a2 .wmk{left:50%;top:3.5%;transform:translateX(-50%);font-weight:800;font-size:17cqw;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px rgba(26,127,201,.2);white-space:nowrap;line-height:1}
-.a2 .arch{left:50%;top:12%;transform:translateX(-50%);width:76%;height:auto;filter:drop-shadow(0 22px 26px rgba(21,101,184,.25))}
+.a2 .bg{background:radial-gradient(70% 50% at 50% 30%,#FFFFFF 0%,rgba(255,255,255,0) 70%),radial-gradient(60% 40% at 100% 100%,rgba(201,183,154,.28),transparent 70%),linear-gradient(170deg,#EEF7FE 0%,#C9E5FA 100%)}
+.a2 .wmk{left:50%;top:3.5%;transform:translateX(-50%);font-weight:800;font-size:17cqw;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px rgba(59,70,112,.2);white-space:nowrap;line-height:1}
+.a2 .arch{left:50%;top:12%;transform:translateX(-50%);width:76%;height:auto;filter:drop-shadow(0 22px 26px rgba(47,56,84,.25))}
 .a2 .co{font-size:max(9.5px,2.7cqw);font-weight:700;color:var(--deep2);background:#fff;border-radius:99px;padding:.5em .95em;box-shadow:0 10px 20px -12px rgba(11,42,69,.45);display:flex;align-items:center;gap:.5em;white-space:nowrap}
-.a2 .co::before{content:"";width:.6em;height:.6em;border-radius:50%;background:var(--acc2);box-shadow:0 0 0 3px rgba(46,163,242,.25)}
+.a2 .co::before{content:"";width:.6em;height:.6em;border-radius:50%;background:var(--acc2);box-shadow:0 0 0 3px rgba(201,183,154,.25)}
 .a2 .co1{left:4%;top:44%}.a2 .co2{right:4%;top:44%}.a2 .co3{left:50%;top:52%;transform:translateX(-50%)}
 .a2 .tag{background:var(--deep);color:#fff}
 .a2 .hk em{color:var(--acc)}
@@ -189,7 +189,7 @@ figcaption b{color:var(--ink)}
 .a2 .rule{background:linear-gradient(90deg,rgba(11,42,69,.25),transparent)}
 .a2::after{background:none}
 /* 3 · sede */
-.a3 .bg{background:radial-gradient(60% 40% at 80% 18%,rgba(46,163,242,.5),transparent 70%),linear-gradient(165deg,#1565B8 0%,#0B2A45 62%,#071B31 100%)}
+.a3 .bg{background:radial-gradient(60% 40% at 80% 18%,rgba(201,183,154,.5),transparent 70%),linear-gradient(165deg,#2F3854 0%,#2F3854 62%,#071B31 100%)}
 .a3 .map{left:0;top:0;width:100%;height:auto}
 .a3 .book{left:5.5%;right:5.5%;top:41%;padding:3.6% 4%;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.55em .9em;align-items:center;background:rgba(255,255,255,.97);color:var(--ink);border-radius:16px;box-shadow:0 24px 40px -18px rgba(0,0,0,.65);font-size:max(10px,2.8cqw)}
 .a3 .book small{font-size:.86em;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
@@ -202,8 +202,8 @@ figcaption b{color:var(--ink)}
 /* 4 · estética */
 .a4{color:var(--ink)}
 .a4 .bg{background:radial-gradient(48% 36% at 50% 27%,#FFFFFF 0%,rgba(255,255,255,.7) 45%,rgba(255,255,255,0) 75%),radial-gradient(70% 50% at 0% 100%,rgba(143,211,255,.45),transparent 70%),linear-gradient(175deg,#F4F9FE 0%,#DCEBF8 55%,#BCD8F0 100%)}
-.a4 .halo{left:50%;top:6%;transform:translateX(-50%);width:76%;aspect-ratio:1.5;border-radius:50%;border:1px solid rgba(26,127,201,.18);box-shadow:0 0 0 22px rgba(255,255,255,.35),0 0 0 23px rgba(26,127,201,.1)}
-.a4 .smile{left:50%;top:11%;transform:translateX(-50%);width:80%;height:auto;filter:drop-shadow(0 18px 22px rgba(21,101,184,.25))}
+.a4 .halo{left:50%;top:6%;transform:translateX(-50%);width:76%;aspect-ratio:1.5;border-radius:50%;border:1px solid rgba(59,70,112,.18);box-shadow:0 0 0 22px rgba(255,255,255,.35),0 0 0 23px rgba(59,70,112,.1)}
+.a4 .smile{left:50%;top:11%;transform:translateX(-50%);width:80%;height:auto;filter:drop-shadow(0 18px 22px rgba(47,56,84,.25))}
 .a4 .guide{right:6%;top:41%;width:34%;height:auto;filter:drop-shadow(0 12px 16px rgba(11,42,69,.25))}
 .a4 .opts{left:5.5%;top:44%;display:grid;gap:.45em;font-size:max(10px,2.8cqw)}
 .a4 .opts span{justify-self:start;background:rgba(255,255,255,.92);border:1px solid #CFE4F5;color:var(--deep2);font-weight:700;border-radius:99px;padding:.45em .9em;box-shadow:0 8px 16px -12px rgba(11,42,69,.5)}
@@ -230,7 +230,7 @@ figcaption b{color:var(--ink)}
 .real{display:inline-block;font:700 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:3px 7px;background:#E3F3EA;color:#13744E;white-space:nowrap;line-height:1.5;vertical-align:middle}
 .pair{display:grid;grid-template-columns:330px 56px minmax(0,1fr);gap:18px;align-items:center;padding:22px 0;border-top:1px solid var(--line2)}
 .pair:first-of-type{border-top:0}
-.pair .arr{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;font-size:22px;box-shadow:0 12px 24px -12px rgba(21,101,184,.8);justify-self:center}
+.pair .arr{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;font-size:22px;box-shadow:0 12px 24px -12px rgba(47,56,84,.8);justify-self:center}
 @media (max-width:900px){.pair{grid-template-columns:minmax(0,1fr);justify-items:center}.pair .arr{transform:rotate(90deg)}.pair .prop{justify-self:stretch}}
 .old{width:min(330px,100%);background:#fff;border:1px solid #DBDBDB;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#111}
 .old .lbl{display:block;background:#F2F4F7;color:#475467;font:700 10px var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:7px 12px;border-bottom:1px solid #E4E7EC}
@@ -239,12 +239,12 @@ figcaption b{color:var(--ink)}
 .old .h b{display:block;line-height:1.2}.old .h small{color:#737373;font-size:11px}
 .vf{position:relative;aspect-ratio:4/5;background:radial-gradient(80% 60% at 50% 40%,#FFFFFF 0%,#E8F5FE 60%,#CFEAFD 100%);display:grid;align-content:center;justify-items:center;text-align:center;padding:16px;gap:8px;font-family:var(--sans);color:#111}
 .vf .vt{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.6);color:#fff;font-size:10.5px;font-weight:600;border-radius:99px;padding:3px 9px}
-.vf .sd{position:absolute;right:10px;top:10px;background:#2EA3F2;color:#fff;font-size:11px;font-weight:800;border-radius:6px;padding:3px 8px}
+.vf .sd{position:absolute;right:10px;top:10px;background:#56618A;color:#fff;font-size:11px;font-weight:800;border-radius:6px;padding:3px 8px}
 .vf .pl{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.35);display:grid;place-items:center}
 .vf .pl::after{content:"";border-left:13px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px}
 .vf b.o{font-weight:800;font-size:25px;line-height:1.08;letter-spacing:-.02em;text-transform:uppercase}
-.vf b.o em{font-style:normal;color:#2EA3F2}
-.vf .pr{font-weight:800;font-size:44px;line-height:1;color:#2EA3F2;letter-spacing:-.03em}
+.vf b.o em{font-style:normal;color:#56618A}
+.vf .pr{font-weight:800;font-size:44px;line-height:1;color:#56618A;letter-spacing:-.03em}
 .vf .pr small{font-size:15px;color:#111;letter-spacing:0}
 .vf .x2{font-size:12.5px;font-weight:600;color:#344054;max-width:26ch}
 .old .cta{display:flex;justify-content:space-between;padding:10px 12px;background:#FAFAFA;border-top:1px solid #EFEFEF;border-bottom:1px solid #EFEFEF;color:#0095F6;font-weight:600;font-size:13px}
@@ -269,7 +269,7 @@ figcaption b{color:var(--ink)}
 @media (max-width:1000px){.lect{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.lect{grid-template-columns:1fr}}
 .lect div{background:var(--deep);color:#fff;border-radius:18px;padding:18px;min-width:0;font-size:14.5px;line-height:1.5}
-.lect b{display:block;color:#8FD3FF;font-size:16px;margin-bottom:6px;line-height:1.3}
+.lect b{display:block;color:#E2D3BA;font-size:16px;margin-bottom:6px;line-height:1.3}
 .lect span{opacity:.88}
 /* panel de texto */
 .copy{display:grid;gap:14px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);min-width:0}
@@ -284,8 +284,8 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 @media (max-width:700px){.meta3,.meta2{grid-template-columns:1fr}}
 .why pre{background:var(--soft);border-color:transparent}
 .dest{display:flex;gap:12px;align-items:flex-start;background:var(--deep);color:#fff;border-radius:14px;padding:12px 14px;font-size:14.5px}
-.dest .i{color:#8FD3FF;flex:none;margin-top:2px}
-.dest a{color:#8FD3FF;font-weight:700}
+.dest .i{color:#E2D3BA;flex:none;margin-top:2px}
+.dest a{color:#E2D3BA;font-weight:700}
 .kpi{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .kpi li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;font-size:14.5px;align-items:start}
 .kpi li::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--grad);margin-top:7px}
@@ -306,21 +306,21 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 .idea .mini{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;max-width:300px;width:100%;justify-self:center;color:#fff;font-family:var(--sans)}
 .idea .mini > *{position:absolute}
 .idea .mini .hk{left:16px;right:16px;bottom:40px;font-weight:800;font-size:20px;line-height:1.15;letter-spacing:-.02em}
-.idea .mini .hk em{font-style:normal;color:#8FD3FF}
+.idea .mini .hk em{font-style:normal;color:#E2D3BA}
 .idea .mini .tag{left:14px;top:14px;background:#fff;color:var(--deep);font-size:10.5px;font-weight:700;padding:5px 9px;border-radius:99px}
 .idea .mini .lg{right:14px;bottom:14px;font-size:11px}
 .idea h3{font-size:18px;line-height:1.25;letter-spacing:-.01em}
 .idea dl{display:grid;grid-template-columns:86px minmax(0,1fr);gap:6px 10px;font-size:14px}
 .idea dt{font-weight:700;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);padding-top:3px}
 .idea dd{margin:0;color:#33445A}
-.m-rev{background:linear-gradient(160deg,#123E66,#0B2A45)}
-.m-pre{background:linear-gradient(160deg,#1565B8,#0F3A63)}
-.m-vid{background:radial-gradient(90% 70% at 50% 35%,#2E5B86 0%,#123E66 55%,#0B2A45 100%)}
+.m-rev{background:linear-gradient(160deg,#262D45,#2F3854)}
+.m-pre{background:linear-gradient(160deg,#2F3854,#262D45)}
+.m-vid{background:radial-gradient(90% 70% at 50% 35%,#2E5B86 0%,#262D45 55%,#2F3854 100%)}
 .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:12px 20px;font-size:15px;box-shadow:0 14px 30px -14px rgba(21,101,184,.85)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:12px 20px;font-size:15px;box-shadow:0 14px 30px -14px rgba(47,56,84,.85)}
 .btn.alt{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
 .btn:hover{transform:translateY(-1px)}
-.foot{background:linear-gradient(135deg,#0B2A45,#1565B8);color:#fff;padding:34px 0 44px;font-size:13.5px}
+.foot{background:linear-gradient(135deg,#2F3854,#2F3854);color:#fff;padding:34px 0 44px;font-size:13.5px}
 .foot .wrap{display:grid;gap:8px}
 .foot p{opacity:.85;max-width:100ch}
 /* entrada suave */
@@ -393,7 +393,7 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 .story .scta b{background:#fff;color:var(--deep);font-weight:800;font-size:max(11px,4.4cqw);border-radius:99px;padding:.7em 1.35em;box-shadow:0 14px 26px -12px rgba(0,0,0,.6)}
 @keyframes upb{50%{transform:translateY(-5px) rotate(45deg)}}
 .story .sh1{left:7%;right:7%;font-weight:800;font-size:11.5cqw;line-height:1;letter-spacing:-.045em;text-wrap:balance}
-.story .sh1 em{font-style:normal;color:#8FD3FF}
+.story .sh1 em{font-style:normal;color:#E2D3BA}
 .story .ss{left:7%;right:7%;font-weight:600;font-size:max(11px,4.6cqw);line-height:1.35;opacity:.92}
 .story .seal{width:27%;height:auto;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35))}
 .story .stk{background:#fff;color:var(--deep);font-weight:800;font-size:max(10px,4.2cqw);padding:.5em .9em;border-radius:10px;box-shadow:0 0 0 3px #fff,0 0 0 4px rgba(11,42,69,.12),0 16px 26px -12px rgba(0,0,0,.55);white-space:nowrap}
@@ -402,20 +402,20 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 .poll{left:12%;right:12%;background:#fff;color:#111;border-radius:16px;padding:4.5cqw;display:grid;gap:3cqw;box-shadow:0 20px 34px -16px rgba(0,0,0,.5);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;text-align:center}
 .poll b{font-size:max(11px,4.4cqw);line-height:1.25}
 .poll .po{display:grid;grid-template-columns:1fr 1fr;gap:2cqw}
-.poll .po span{border-radius:10px;padding:2.6cqw 1cqw;font-weight:800;font-size:max(11px,4.6cqw);background:linear-gradient(90deg,#B4E0FF 58%,#EAF4FC 58%);color:#0B2A45}
+.poll .po span{border-radius:10px;padding:2.6cqw 1cqw;font-weight:800;font-size:max(11px,4.6cqw);background:linear-gradient(90deg,#B4E0FF 58%,#F5F2ED 58%);color:#2F3854}
 .poll .po span + span{background:linear-gradient(90deg,#FFE1A8 42%,#FFF7E6 42%)}
 .poll .po small{display:block;font-size:.72em;font-weight:600;opacity:.75}
 .quiz{left:10%;right:10%;background:#fff;color:#111;border-radius:16px;padding:4cqw;display:grid;gap:2.2cqw;box-shadow:0 20px 34px -16px rgba(11,42,69,.45);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
 .quiz b{display:block;text-align:center;background:var(--grad);color:#fff;margin:-4cqw -4cqw 1cqw;padding:3cqw;border-radius:16px 16px 0 0;font-size:max(11px,4.4cqw)}
-.quiz span{display:flex;align-items:center;gap:2.4cqw;border:1px solid #DDE3EA;border-radius:99px;padding:2cqw 3cqw;font-weight:700;font-size:max(10.5px,4.2cqw);color:#0B2A45}
+.quiz span{display:flex;align-items:center;gap:2.4cqw;border:1px solid #DDE3EA;border-radius:99px;padding:2cqw 3cqw;font-weight:700;font-size:max(10.5px,4.2cqw);color:#2F3854}
 .quiz span::before{content:"";width:3.4cqw;height:3.4cqw;min-width:9px;min-height:9px;border-radius:50%;border:2px solid #9DB3C8}
 .quiz span.on{border-color:var(--acc2);background:#EAF6FF}.quiz span.on::before{border-color:var(--acc2);background:var(--acc2);box-shadow:inset 0 0 0 2px #fff}
 .loc{display:inline-flex;align-items:center;gap:.4em;background:#fff;color:#C13584;font-weight:800;font-size:max(11px,5cqw);letter-spacing:.02em;text-transform:uppercase;padding:.45em .85em;border-radius:10px;box-shadow:0 16px 26px -12px rgba(0,0,0,.55)}
 .loc svg{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:2.4}
 /* temas de story */
-.st1 .sbg{background:radial-gradient(70% 40% at 60% 26%,rgba(46,163,242,.6),transparent 70%),radial-gradient(70% 40% at 0% 100%,rgba(21,101,184,.6),transparent 70%),linear-gradient(170deg,#0D3358,#071B31 80%)}
+.st1 .sbg{background:radial-gradient(70% 40% at 60% 26%,rgba(201,183,154,.6),transparent 70%),radial-gradient(70% 40% at 0% 100%,rgba(47,56,84,.6),transparent 70%),linear-gradient(170deg,#0D3358,#071B31 80%)}
 .st1 .rings{left:50%;top:9%;width:92%;aspect-ratio:1;transform:translateX(-46%);border-radius:50%;border:1px solid rgba(143,211,255,.18);box-shadow:0 0 0 30px rgba(143,211,255,.035),0 0 0 31px rgba(143,211,255,.12),0 0 0 70px rgba(143,211,255,.02),0 0 0 71px rgba(143,211,255,.08)}
-.st1 .vis{left:50%;top:11%;width:34%;transform:translateX(-50%);filter:drop-shadow(0 26px 26px rgba(0,0,0,.5)) drop-shadow(0 0 36px rgba(46,163,242,.35))}
+.st1 .vis{left:50%;top:11%;width:34%;transform:translateX(-50%);filter:drop-shadow(0 26px 26px rgba(0,0,0,.5)) drop-shadow(0 0 36px rgba(201,183,154,.35))}
 .st1 .stk{left:7%;top:20%;transform:rotate(-6deg);background:linear-gradient(135deg,#FFD27A,#F5B83D);color:#3A2B00;box-shadow:0 14px 26px -12px rgba(245,184,61,.75)}
 .st1 .seal{right:6%;top:34%;transform:rotate(10deg)}
 .st1 .sh1{top:46.5%;font-size:10cqw}.st1 .ss{top:71%;font-size:max(11px,4.3cqw)}
@@ -424,11 +424,11 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 .st2 .safe,.st4 .safe{height:15%;background:linear-gradient(180deg,rgba(11,42,69,.72),rgba(11,42,69,.25) 60%,transparent)}
 .st2 .shd{color:#fff}
 .st2 .sh1{top:13.5%;font-size:9.6cqw}.st2 .sh1 em{color:var(--acc)}
-.st2 .vis{left:50%;top:36%;width:82%;transform:translateX(-50%);filter:drop-shadow(0 22px 26px rgba(21,101,184,.25))}
+.st2 .vis{left:50%;top:36%;width:82%;transform:translateX(-50%);filter:drop-shadow(0 22px 26px rgba(47,56,84,.25))}
 .st2 .poll{top:60%}
 .st2 .seal{right:5%;top:30%;width:22%;transform:rotate(10deg)}
 .st2 .scta b{background:var(--deep);color:#fff}.st2 .scta .up{border-color:var(--deep)}
-.st3 .sbg{background:radial-gradient(60% 30% at 80% 20%,rgba(46,163,242,.5),transparent 70%),linear-gradient(170deg,#1565B8 0%,#0B2A45 55%,#071B31 100%)}
+.st3 .sbg{background:radial-gradient(60% 30% at 80% 20%,rgba(201,183,154,.5),transparent 70%),linear-gradient(170deg,#2F3854 0%,#2F3854 55%,#071B31 100%)}
 .st3 .vis{left:-30%;top:30%;width:160%;opacity:.95}
 .st3 .loc{left:7%;top:14%;transform:rotate(-3deg)}
 .st3 .sh1{top:21.5%}
@@ -443,7 +443,7 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 
 .st4 .shd{color:#fff}
 .st4 .sh1{top:13.5%;font-size:10cqw}.st4 .sh1 em{color:var(--acc)}
-.st4 .vis{left:50%;top:34%;width:84%;transform:translateX(-50%);filter:drop-shadow(0 18px 22px rgba(21,101,184,.25))}
+.st4 .vis{left:50%;top:34%;width:84%;transform:translateX(-50%);filter:drop-shadow(0 18px 22px rgba(47,56,84,.25))}
 .st4 .gd{right:4%;top:28%;width:26%;transform:rotate(14deg)}
 .st4 .quiz{top:50%}
 .st4 .scta b{background:var(--deep);color:#fff}.st4 .scta .up{border-color:var(--deep)}
@@ -464,7 +464,7 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 .cv::before{content:"";position:absolute;inset:0;z-index:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");background-size:160px;opacity:.08;mix-blend-mode:overlay}
 .cv .n{left:6%;top:6%;font-weight:800;font-size:max(10px,3.6cqw);letter-spacing:.06em;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:.3em .8em}
 .cv .ct{left:6%;right:6%;bottom:21%;font-weight:800;font-size:8.4cqw;line-height:1.02;letter-spacing:-.04em;text-wrap:balance}
-.cv .ct em{font-style:normal;color:#8FD3FF}
+.cv .ct em{font-style:normal;color:#E2D3BA}
 .cv .ct small{display:block;font-weight:500;font-size:max(11px,4.2cqw);letter-spacing:0;line-height:1.35;margin-top:.55em;opacity:.9}
 .cv .sw{right:6%;top:6%;font-weight:700;font-size:max(10px,3.6cqw);opacity:.85}
 .cv .ic{left:6%;top:19%;width:17cqw;height:17cqw;border-radius:22%;display:grid;place-items:center;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);box-shadow:0 18px 30px -16px rgba(0,0,0,.5)}
@@ -473,19 +473,19 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 .cv .vis{height:auto}
 .cv .clg{right:6%;bottom:5.5%;width:27%;height:auto}
 .cv .bar{left:6%;bottom:7.5%;width:34%;height:3px;border-radius:2px;background:rgba(255,255,255,.25)}
-.cv .bar i{display:block;height:100%;border-radius:2px;background:#8FD3FF}
+.cv .bar i{display:block;height:100%;border-radius:2px;background:#E2D3BA}
 .cv.lite{color:var(--ink)}
 .cv.lite .n{background:rgba(11,42,69,.06);border-color:rgba(11,42,69,.14)}
 .cv.lite .ct em{color:var(--acc)}
 .cv.lite .ic{background:#fff;border-color:#CFE4F5;color:var(--acc)}
-.cv.lite .big{-webkit-text-stroke-color:rgba(26,127,201,.14)}
+.cv.lite .big{-webkit-text-stroke-color:rgba(59,70,112,.14)}
 .cv.lite .bar{background:rgba(11,42,69,.12)}.cv.lite .bar i{background:var(--acc)}
 .cv.cta-c .ct{bottom:30%}
 .cv .go{left:6%;bottom:13%;background:#fff;color:var(--deep);font-weight:800;font-size:max(11px,4.2cqw);border-radius:99px;padding:.65em 1.2em;box-shadow:0 14px 26px -12px rgba(0,0,0,.55)}
 .cv.lite .go{background:var(--deep);color:#fff}
-.cd1{background:radial-gradient(70% 60% at 80% 20%,rgba(46,163,242,.55),transparent 70%),linear-gradient(160deg,#0D3358,#071B31)}
+.cd1{background:radial-gradient(70% 60% at 80% 20%,rgba(201,183,154,.55),transparent 70%),linear-gradient(160deg,#0D3358,#071B31)}
 .cd2{background:radial-gradient(80% 60% at 70% 20%,#fff,transparent 70%),linear-gradient(170deg,#EEF7FE,#C9E5FA)}
-.cd3{background:radial-gradient(60% 50% at 80% 20%,rgba(46,163,242,.5),transparent 70%),linear-gradient(165deg,#1565B8,#0B2A45 70%)}
+.cd3{background:radial-gradient(60% 50% at 80% 20%,rgba(201,183,154,.5),transparent 70%),linear-gradient(165deg,#2F3854,#2F3854 70%)}
 .cd4{background:radial-gradient(60% 50% at 50% 30%,#fff,transparent 75%),linear-gradient(175deg,#F4F9FE,#BCD8F0)}
 .cf{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 10px;border-top:1px solid #EFEFEF}
 .cf span{min-width:0}
@@ -512,7 +512,7 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 .vtags span{font-size:12px;font-weight:600;background:var(--soft2);border:1px solid var(--line2);border-radius:99px;padding:4px 10px;color:#33445A}
 .tl{display:flex;gap:3px;height:34px;border-radius:10px;overflow:hidden}
 .tl span{display:grid;place-items:center;font-size:11.5px;font-weight:700;color:#fff;min-width:0;white-space:nowrap;overflow:hidden}
-.tl span:nth-child(6n+1){background:#0B2A45}.tl span:nth-child(6n+2){background:#123E66}.tl span:nth-child(6n+3){background:#1565B8}.tl span:nth-child(6n+4){background:#1A7FC9}.tl span:nth-child(6n+5){background:#2EA3F2}.tl span:nth-child(6n+6){background:#13865A}
+.tl span:nth-child(6n+1){background:#2F3854}.tl span:nth-child(6n+2){background:#262D45}.tl span:nth-child(6n+3){background:#2F3854}.tl span:nth-child(6n+4){background:#3B4670}.tl span:nth-child(6n+5){background:#56618A}.tl span:nth-child(6n+6){background:#13865A}
 .scs{list-style:none;margin:0;padding:0;display:grid;gap:0}
 .sc{display:grid;grid-template-columns:96px minmax(0,1.15fr) minmax(0,1fr) minmax(0,1.1fr);gap:16px;padding:14px 0;border-top:1px solid var(--line2);font-size:14.5px;align-items:start}
 .sc:first-child{border-top:0}
@@ -546,8 +546,8 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 .var dd{margin:0;color:#33445A}
 @media (max-width:560px){.var dl{grid-template-columns:1fr;gap:2px}.var dd{margin-bottom:6px}}
 .win{grid-column:1/-1;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 16px;align-items:start;background:var(--deep);color:#fff;border-radius:18px;padding:16px 20px;font-size:14.5px}
-.win .ic{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.12);color:#8FD3FF;font-weight:800;font-size:18px}
-.win b{color:#8FD3FF}
+.win .ic{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.12);color:#E2D3BA;font-weight:800;font-size:18px}
+.win b{color:#E2D3BA}
 .win ol{margin:4px 0 0;padding-left:18px;display:grid;gap:3px;opacity:.94}
 @media (max-width:560px){.win{grid-template-columns:1fr}}
 .est{display:inline-block;font:800 10.5px var(--sans);letter-spacing:.06em;border-radius:6px;padding:2px 6px;background:#FFF3C4;color:#7A5600;vertical-align:1px;margin-left:4px;white-space:nowrap}
@@ -611,7 +611,7 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 .copy.side{display:grid;gap:14px;min-width:0}
 .copy.side > div{background:var(--soft2);border:1px solid var(--line2);border-radius:16px;padding:16px 18px}
 .copy.side .hook{background:var(--deep);border-color:var(--deep)}
-.copy.side .hook .k{color:#8FD3FF}
+.copy.side .hook .k{color:#E2D3BA}
 .copy.side .hook pre{color:#fff;font-size:22px;line-height:1.25;font-weight:800}
 .copy.side pre{white-space:pre-wrap;font:inherit;margin:0}
 .copy.side .dest{display:flex;gap:10px;align-items:flex-start}
@@ -620,50 +620,50 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 .fullin{display:grid;gap:14px;padding-bottom:16px}
 .fullin pre{white-space:pre-wrap;font:inherit}
 /* foto a sangre: feed */
-.art.photo{position:relative;overflow:hidden;background:#0B2A45;isolation:isolate}
+.art.photo{position:relative;overflow:hidden;background:#2F3854;isolation:isolate}
 .art.photo > .ph,.cv.photo > .ph,.story.photo > .sph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .art.photo > .shade,.cv.photo > .shade,.story.photo > .shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(8,22,38,.55) 0%,rgba(8,22,38,0) 26%,rgba(8,22,38,0) 40%,rgba(8,22,38,.78) 70%,rgba(6,18,32,.96) 100%)}
 .art.photo > *:not(.ph):not(.shade){z-index:2}
 .art.photo .hk{position:absolute;left:6%;right:6%;bottom:13%;top:auto;color:#fff;font-size:clamp(20px,5.4vw,30px);line-height:1.08;font-weight:800;letter-spacing:-.02em;text-shadow:0 2px 18px rgba(0,0,0,.35);max-width:none}
 .art.photo .hk .big{display:block;font-size:1.25em;line-height:1.02;margin-bottom:.12em}
-.art.photo .hk em{font-style:normal;color:#8FD3FF}
+.art.photo .hk em{font-style:normal;color:#E2D3BA}
 .art.photo .hk .sub{display:block;font-size:13px;font-weight:600;line-height:1.4;letter-spacing:0;color:rgba(255,255,255,.86);margin-top:10px;max-width:92%}
 .art.photo .tag{position:absolute;left:5%;top:5%;right:auto;bottom:auto;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 12px;font-size:11px;font-weight:700;letter-spacing:.04em}
 .art.photo .seal{position:absolute;right:5%;top:4%;left:auto;bottom:auto;width:22%;height:auto;transform:rotate(-10deg);filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
-.art.photo .pill,.art.photo .stk{position:absolute;left:6%;right:auto;top:auto;bottom:calc(13% + 140px);background:#F5B83D;color:#0B2A45;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:800;transform:rotate(-3deg);box-shadow:0 8px 20px -8px rgba(0,0,0,.5)}
+.art.photo .pill,.art.photo .stk{position:absolute;left:6%;right:auto;top:auto;bottom:calc(13% + 140px);background:#F5B83D;color:#2F3854;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:800;transform:rotate(-3deg);box-shadow:0 8px 20px -8px rgba(0,0,0,.5)}
 .art.photo .legal{position:absolute;left:6%;bottom:4.5%;top:auto;font-size:9px;color:rgba(255,255,255,.7)}
 .art.photo .lg{position:absolute;right:5%;bottom:4%;left:auto;top:auto;height:24px;width:auto;opacity:.95}
 .stockc{position:absolute;z-index:3;left:50%;transform:translateX(-50%);bottom:1.2%;font-size:8px;line-height:1;color:rgba(255,255,255,.55);white-space:nowrap;pointer-events:none;letter-spacing:.04em}
 .art.photo .stockc{left:auto;transform:none;right:5%;bottom:auto;top:calc(4% + 24% + 10px)}
 /* story */
-.story.photo{background:#0B2A45;isolation:isolate}
+.story.photo{background:#2F3854;isolation:isolate}
 .story.photo > *:not(.sph):not(.shade){z-index:2}
 .story.photo .sh1{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.4)}
-.story.photo .sh1 em{color:#8FD3FF}
+.story.photo .sh1 em{color:#E2D3BA}
 .story.photo .ss{color:rgba(255,255,255,.88)}
 .story.photo .stockc{bottom:auto;top:calc(14% - 14px)}
 /* carrusel tarjeta 1 */
-.cv.photo{position:relative;overflow:hidden;isolation:isolate;background:#0B2A45}
+.cv.photo{position:relative;overflow:hidden;isolation:isolate;background:#2F3854}
 .cv.photo > *:not(.ph):not(.shade){z-index:2}
 .cv.photo .ct{color:#fff !important;text-shadow:0 2px 16px rgba(0,0,0,.4)}
-.cv.photo .ct em{color:#8FD3FF !important}
+.cv.photo .ct em{color:#E2D3BA !important}
 .cv.photo .n,.cv.photo .sw{color:#fff !important;background:rgba(0,0,0,.28);border-radius:999px;padding:2px 8px}
 /* Lo que vemos hoy: comparativa visual */
 #hoy .pair{display:grid;grid-template-columns:minmax(0,1fr) 92px minmax(0,1.15fr);gap:18px;align-items:center;padding:22px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(90deg,#F4F6F8 0%,#F4F6F8 42%,var(--soft2) 58%,var(--soft2) 100%);margin-top:22px}
 #hoy .pair figure{margin:0;min-width:0;filter:saturate(.75)}
 #hoy .pair .arr{display:grid;justify-items:center;gap:8px;font-size:0;color:var(--acc)}
-#hoy .pair .arr svg{width:58px;height:58px;padding:14px;border-radius:50%;background:var(--grad);stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;box-shadow:0 14px 30px -12px rgba(21,101,184,.7)}
+#hoy .pair .arr svg{width:58px;height:58px;padding:14px;border-radius:50%;background:var(--grad);stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;box-shadow:0 14px 30px -12px rgba(47,56,84,.7)}
 #hoy .pair .arr small{font-size:11px;font-weight:700;line-height:1.25;text-align:center;color:var(--acc);text-transform:uppercase;letter-spacing:.08em}
 #hoy .pair .prop{min-width:0}
 .newmini{position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;margin-bottom:14px;isolation:isolate;box-shadow:var(--shadow)}
 .newmini > img:first-child{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .newmini .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,22,38,.1),rgba(8,22,38,.85) 80%)}
 .newmini > *:not(img):not(.shade){position:absolute;z-index:2}
-.newmini .nmtag{left:12px;top:12px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:#F5B83D;color:#0B2A45;border-radius:6px;padding:4px 8px}
+.newmini .nmtag{left:12px;top:12px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:#F5B83D;color:#2F3854;border-radius:6px;padding:4px 8px}
 .newmini b{left:14px;right:96px;bottom:14px;color:#fff;font-size:clamp(15px,2.2vw,20px);line-height:1.12;font-weight:800}
-.newmini b em{font-style:normal;color:#8FD3FF}
+.newmini b em{font-style:normal;color:#E2D3BA}
 .newmini .nmlg{position:absolute;z-index:2;right:12px;top:12px;height:20px;width:auto}
-.newmini .nmcta{right:12px;bottom:14px;font-size:10px;font-weight:700;color:#0B2A45;background:#fff;border-radius:999px;padding:5px 9px;white-space:nowrap}
+.newmini .nmcta{right:12px;bottom:14px;font-size:10px;font-weight:700;color:#2F3854;background:#fff;border-radius:999px;padding:5px 9px;white-space:nowrap}
 @media (max-width:900px){
   .split{grid-template-columns:minmax(0,1fr);gap:24px}
   .stage{position:static;display:grid;justify-items:center}
@@ -688,10 +688,10 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 #hoy .pair .arr::before,#hoy .pair .arr::after{content:none!important;display:none!important}
 .art.photo .stockc{right:auto;left:5%;top:calc(5% + 36px);bottom:auto;transform:none;color:rgba(255,255,255,.7)}
 @media (max-width:900px){#hoy .pair{grid-template-columns:minmax(0,1fr)}}
-.art.photo .rvw{position:absolute;left:5%;top:calc(5% + 58px);display:grid;gap:1px;max-width:62%;background:rgba(255,255,255,.94);color:#0B2A45;border-radius:12px;padding:8px 11px;box-shadow:0 10px 24px -10px rgba(0,0,0,.55);transform:rotate(-2deg)}
+.art.photo .rvw{position:absolute;left:5%;top:calc(5% + 58px);display:grid;gap:1px;max-width:62%;background:rgba(255,255,255,.94);color:#2F3854;border-radius:12px;padding:8px 11px;box-shadow:0 10px 24px -10px rgba(0,0,0,.55);transform:rotate(-2deg)}
 .art.photo .rvw i{font-style:normal;color:#F5B83D;font-size:13px;letter-spacing:2px;line-height:1}
 .art.photo .rvw b{font-size:11px;font-weight:800;line-height:1.2}
-.art.photo .rvw small{font-size:11px;font-weight:600;line-height:1.25;color:#1A7FC9}
+.art.photo .rvw small{font-size:11px;font-weight:600;line-height:1.25;color:#3B4670}
 @media (max-width:560px){.art.photo .rvw{top:calc(5% + 50px);padding:6px 9px}.art.photo .rvw small,.art.photo .rvw b{font-size:10px}}
 #estetica .art.photo .rvw{left:auto;right:5%;top:auto;bottom:calc(13% + 150px);max-width:46%;transform:rotate(2deg)}
 @media (max-width:560px){#estetica .art.photo .rvw{bottom:calc(13% + 112px);max-width:44%}}
@@ -725,7 +725,7 @@ addEventListener('DOMContentLoaded',function(){
   });
 });
 </script>
-</head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"><style>h1,h2,.hero h1,.s h2{font-family:"Yeseva One",Georgia,serif!important;font-weight:400!important;letter-spacing:0!important}</style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   
@@ -754,7 +754,7 @@ addEventListener('DOMContentLoaded',function(){
               <rect x="89" y="110" width="18" height="22" rx="8" transform="rotate(-78 98 121)"/><rect x="70" y="103" width="17" height="21" rx="8" transform="rotate(-58 79 113)"/><rect x="50" y="89" width="19" height="21" rx="8" transform="rotate(-40 60 99)"/><rect x="34" y="70" width="21" height="23" rx="9" transform="rotate(-26 45 81)"/><rect x="23" y="47" width="22" height="24" rx="9" transform="rotate(-12 34 59)"/><rect x="19" y="22" width="22" height="24" rx="9"/></g>
             <path d="M22 26A88 100 0 0 0 198 26" fill="none" stroke="url(#al2)" stroke-width="30" stroke-linecap="round" opacity=".55"/>
             <path d="M16 24A94 106 0 0 0 204 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".95"/>
-            <path d="M28 28A82 94 0 0 0 192 28" fill="none" stroke="rgba(46,163,242,.45)" stroke-width="1.2" stroke-dasharray="3 5" stroke-linecap="round"/>
+            <path d="M28 28A82 94 0 0 0 192 28" fill="none" stroke="rgba(201,183,154,.45)" stroke-width="1.2" stroke-dasharray="3 5" stroke-linecap="round"/>
           </symbol>
   <symbol id="s-smile" viewBox="0 0 240 110">
             <path d="M14 22c34 62 178 62 212 0" fill="none" stroke="rgba(214,104,128,.14)" stroke-width="20" stroke-linecap="round"/>
@@ -763,7 +763,7 @@ addEventListener('DOMContentLoaded',function(){
               <rect x="102" y="40" width="34" height="46" rx="12"/>
               <rect x="140" y="38" width="26" height="40" rx="11" transform="rotate(5 153 58)"/><rect x="168" y="32" width="22" height="34" rx="10" transform="rotate(14 179 49)"/><rect x="190" y="24" width="20" height="28" rx="9" transform="rotate(24 200 38)"/></g>
             <g stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".95"><path d="M109 48v14M81 46v10M147 46v10"/></g>
-            <g fill="#1A7FC9"><path d="M214 2l2.4 6 6 2.4-6 2.4-2.4 6-2.4-6-6-2.4 6-2.4z"/><path d="M22 0l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" opacity=".55"/><path d="M228 34l1.2 3 3 1.2-3 1.2-1.2 3-1.2-3-3-1.2 3-1.2z" opacity=".5"/></g>
+            <g fill="#3B4670"><path d="M214 2l2.4 6 6 2.4-6 2.4-2.4 6-2.4-6-6-2.4 6-2.4z"/><path d="M22 0l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" opacity=".55"/><path d="M228 34l1.2 3 3 1.2-3 1.2-1.2 3-1.2-3-3-1.2 3-1.2z" opacity=".5"/></g>
           </symbol>
   <symbol id="s-map" viewBox="0 0 200 110">
             <g stroke="rgba(255,255,255,.06)" stroke-width=".6"><path d="M0 15h200M0 35h200M0 55h200M0 75h200M0 95h200M20 0v110M50 0v110M80 0v110M110 0v110M140 0v110M170 0v110"/></g>
@@ -771,10 +771,10 @@ addEventListener('DOMContentLoaded',function(){
             <path d="M168 0c-6 18-2 30 6 44s6 34-2 66" fill="none" stroke="rgba(143,211,255,.35)" stroke-width="1"/>
             <text x="186" y="80" fill="rgba(255,255,255,.35)" font-family="Montserrat,sans-serif" font-size="5" font-weight="700" letter-spacing="1" text-anchor="middle" transform="rotate(-90 186 80)">MEDITERRÁNEO</text>
             <path d="M0 52C30 50 50 58 72 66M150 42c-10 6-30 12-50 18M118 0c4 20 10 34 24 40" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M58 70C84 62 112 50 142 40" fill="none" stroke="#8FD3FF" stroke-width="1.6" stroke-dasharray="3 3.5" stroke-linecap="round"/>
+            <path d="M58 70C84 62 112 50 142 40" fill="none" stroke="#E2D3BA" stroke-width="1.6" stroke-dasharray="3 3.5" stroke-linecap="round"/>
             <circle cx="142" cy="34" r="16" fill="url(#pg3)"/><circle cx="58" cy="66" r="16" fill="url(#pg3)"/>
-            <g><path d="M142 16c-6 0-10 4.6-10 10 0 7.6 10 16 10 16s10-8.4 10-16c0-5.4-4-10-10-10z" fill="#fff"/><circle cx="142" cy="26" r="3.6" fill="#1565B8"/></g>
-            <g><path d="M58 48c-6 0-10 4.6-10 10 0 7.6 10 16 10 16s10-8.4 10-16c0-5.4-4-10-10-10z" fill="#F5B83D"/><circle cx="58" cy="58" r="3.6" fill="#0B2A45"/></g>
+            <g><path d="M142 16c-6 0-10 4.6-10 10 0 7.6 10 16 10 16s10-8.4 10-16c0-5.4-4-10-10-10z" fill="#fff"/><circle cx="142" cy="26" r="3.6" fill="#2F3854"/></g>
+            <g><path d="M58 48c-6 0-10 4.6-10 10 0 7.6 10 16 10 16s10-8.4 10-16c0-5.4-4-10-10-10z" fill="#F5B83D"/><circle cx="58" cy="58" r="3.6" fill="#2F3854"/></g>
             <text x="128" y="22" fill="#fff" font-family="Montserrat,sans-serif" font-size="8" font-weight="800" text-anchor="end">Patraix</text>
             <text x="72" y="62" fill="#fff" font-family="Montserrat,sans-serif" font-size="8" font-weight="800">Torrent</text></symbol>
   <symbol id="s-guide" viewBox="0 0 120 100"><g stroke="rgba(11,42,69,.12)" stroke-width="1">
@@ -783,7 +783,7 @@ addEventListener('DOMContentLoaded',function(){
             <g><rect x="52" y="10" width="16" height="72" rx="8" fill="#EEE1C3"/></g>
             <g transform="rotate(12 60 96)"><rect x="52" y="10" width="16" height="72" rx="8" fill="#E6D4AE"/></g>
             <g transform="rotate(24 60 96)"><rect x="52" y="10" width="16" height="72" rx="8" fill="#DCC79B"/></g></g>
-            <circle cx="60" cy="92" r="6" fill="#0B2A45"/></symbol>
+            <circle cx="60" cy="92" r="6" fill="#2F3854"/></symbol>
   <symbol id="tooth" viewBox="0 0 48 54"><path d="M13 3.5C6.5 2.2 2.6 8 3.1 16.4c.4 7 3.4 11.6 4.6 19.2 1 6.6 2.6 14.9 7 14.9 3.7 0 4.4-6.4 5.4-11 .8-3.4 1.9-5.2 3.9-5.2s3.1 1.8 3.9 5.2c1 4.6 1.7 11 5.4 11 4.4 0 6-8.3 7-14.9 1.2-7.6 4.2-12.2 4.6-19.2.5-8.4-3.4-14.2-9.9-12.9C30.6 4.3 27.6 6 24 6s-6.6-1.7-11-2.5z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M19 10.5c3 2.6 7 2.6 10 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
   <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.8C1.4 8.4 3 5 6.3 5c2 0 3.2 1.1 3.9 2.2h3.6C14.5 6.1 15.7 5 17.7 5 21 5 22.6 8.4 21.2 11.2 19 15.6 12 20 12 20z"/></symbol>
@@ -872,7 +872,7 @@ addEventListener('DOMContentLoaded',function(){
     <div class="pair">
       <figure><div class="old"><span class="lbl">Hoy · anuncio actual · Biblioteca de anuncios de Meta</span>
         <div class="h"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Publicidad</small></div></div>
-        <div class="vf"><span class="vt">▶ Vídeo · 20-30 s</span><span class="sd">¡Torrent!</span><b class="o">Carillas</b><span class="pr" style="font-size:30px">Diseño de Sonrisa <small style="display:block;font-size:22px;color:#2EA3F2;font-weight:800;margin-top:4px">GRATIS</small></span><span class="x2">En otro anuncio: «Recupera tu sonrisa en 24h»</span><span class="pl" aria-hidden="true"></span></div>
+        <div class="vf"><span class="vt">▶ Vídeo · 20-30 s</span><span class="sd">¡Torrent!</span><b class="o">Carillas</b><span class="pr" style="font-size:30px">Diseño de Sonrisa <small style="display:block;font-size:22px;color:#56618A;font-weight:800;margin-top:4px">GRATIS</small></span><span class="x2">En otro anuncio: «Recupera tu sonrisa en 24h»</span><span class="pl" aria-hidden="true"></span></div>
         <div class="cta"><span>Reservar</span><span>›</span></div>
         <p class="cap"><b>Marín Clínica Dental</b> Carillas: Diseño de Sonrisa GRATIS … déjanos tus datos y te contactaremos lo antes posible. <span>… más</span></p>
       </div></figure>
@@ -996,7 +996,7 @@ addEventListener('DOMContentLoaded',function(){
     <div class="adcard"><div class="tabs" role="tablist" aria-label="Formatos del anuncio Implantes"><button type="button" role="tab" id="t-implantes-feed" aria-controls="p-implantes-feed" aria-selected="true" tabindex="0">Feed 4:5</button><button type="button" role="tab" id="t-implantes-story" aria-controls="p-implantes-story" aria-selected="false" tabindex="-1">Story 9:16</button><button type="button" role="tab" id="t-implantes-car" aria-controls="p-implantes-car" aria-selected="false" tabindex="-1">Carrusel</button><button type="button" role="tab" id="t-implantes-vid" aria-controls="p-implantes-vid" aria-selected="false" tabindex="-1">Vídeo</button><button type="button" role="tab" id="t-implantes-ab" aria-controls="p-implantes-ab" aria-selected="false" tabindex="-1">Test A/B</button></div><div class="tp" role="tabpanel" id="p-implantes-feed" aria-labelledby="t-implantes-feed"><div class="split"><div class="stage"><figure><div class="ig">
         <div class="h"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Publicidad</small></div><span class="dots">···</span></div>
         <div class="art photo a1" role="img" aria-label="Maqueta de anuncio con foto de stock, el gancho grande, el logo de Marín y un sello"><img class="ph" src="../assets/stock/sonrisa-mujer-45.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="object-position:50% 30%"><span class="shade" aria-hidden="true"></span>
-          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-a1" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#0B2A45"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#8FD3FF" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#8FD3FF" stroke-width=".8" opacity=".55"/><text fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-a1" textLength="226" lengthAdjust="spacing">FINANCIACIÓN EN CUOTAS · PLAN POR ESCRITO · </textPath></text><text x="50" y="52" fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#8FD3FF" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">PRIMERAS VISITAS</text></svg>
+          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-a1" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#2F3854"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#E2D3BA" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#E2D3BA" stroke-width=".8" opacity=".55"/><text fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-a1" textLength="226" lengthAdjust="spacing">FINANCIACIÓN EN CUOTAS · PLAN POR ESCRITO · </textPath></text><text x="50" y="52" fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#E2D3BA" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">PRIMERAS VISITAS</text></svg>
           <span class="tag">Implantes · Patraix y Torrent</span>
           
           <span class="pill">Pago en cuotas</span>
@@ -1033,7 +1033,7 @@ Pide tu primera visita y te escribimos por WhatsApp en minutos.</pre></div><div 
           
           
           <span class="stk">Pago en cuotas</span>
-          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-s1" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#0B2A45"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#8FD3FF" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#8FD3FF" stroke-width=".8" opacity=".55"/><text fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-s1" textLength="226" lengthAdjust="spacing">FINANCIACIÓN EN CUOTAS · PLAN POR ESCRITO · </textPath></text><text x="50" y="52" fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#8FD3FF" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">PRIMERAS VISITAS</text></svg>
+          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-s1" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#2F3854"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#E2D3BA" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#E2D3BA" stroke-width=".8" opacity=".55"/><text fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-s1" textLength="226" lengthAdjust="spacing">FINANCIACIÓN EN CUOTAS · PLAN POR ESCRITO · </textPath></text><text x="50" y="52" fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#E2D3BA" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">PRIMERAS VISITAS</text></svg>
           <p class="sh1">¿Te falta una pieza? <em>Y lo vas dejando por el precio.</em></p>
           <p class="ss">Primera visita con diagnóstico, plan por escrito y presupuesto en cuotas.</p>
           <div class="scta" aria-hidden="true"><span class="up"></span><b>Pedir primera visita</b></div>
@@ -1073,7 +1073,7 @@ Pide tu primera visita y te escribimos por WhatsApp en minutos.</pre></div><div 
         <div class="h"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Publicidad</small></div><span class="dots">···</span></div>
         <div class="art photo a2" role="img" aria-label="Maqueta de anuncio con foto de stock, el gancho grande, el logo de Marín y un sello"><img class="ph" src="../assets/stock/alineador.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="object-position:50% 50%"><span class="shade" aria-hidden="true"></span>
           
-          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-a2" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#0B2A45"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#8FD3FF" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#8FD3FF" stroke-width=".8" opacity=".55"/><text fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-a2" textLength="226" lengthAdjust="spacing">ORTODONCIA PARA ADULTOS · SIN BRACKETS · </textPath></text><text x="50" y="52" fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#8FD3FF" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">ESTUDIO INICIAL</text></svg><span class="stk" aria-hidden="true"><i>✓</i>Se quita para comer</span>
+          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-a2" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#2F3854"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#E2D3BA" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#E2D3BA" stroke-width=".8" opacity=".55"/><text fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-a2" textLength="226" lengthAdjust="spacing">ORTODONCIA PARA ADULTOS · SIN BRACKETS · </textPath></text><text x="50" y="52" fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#E2D3BA" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">ESTUDIO INICIAL</text></svg><span class="stk" aria-hidden="true"><i>✓</i>Se quita para comer</span>
           <span class="tag">Ortodoncia para adultos</span>
           
           
@@ -1106,7 +1106,7 @@ Pulsa «Ver si es para mí» y te escribimos por WhatsApp.</pre></div><div class
           <div class="sbar" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
           <div class="shd" aria-hidden="true"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small><span class="x">×</span></div>
           <p class="sh1">¿Te habría gustado llevar ortodoncia <em>de joven?</em></p>
-          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-s2" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#0B2A45"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#8FD3FF" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#8FD3FF" stroke-width=".8" opacity=".55"/><text fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-s2" textLength="226" lengthAdjust="spacing">ORTODONCIA PARA ADULTOS · SIN BRACKETS · </textPath></text><text x="50" y="52" fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#8FD3FF" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">ESTUDIO INICIAL</text></svg>
+          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-s2" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#2F3854"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#E2D3BA" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#E2D3BA" stroke-width=".8" opacity=".55"/><text fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-s2" textLength="226" lengthAdjust="spacing">ORTODONCIA PARA ADULTOS · SIN BRACKETS · </textPath></text><text x="50" y="52" fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#E2D3BA" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">ESTUDIO INICIAL</text></svg>
           
           <div class="poll"><b>¿Llevaste ortodoncia de joven?</b><div class="po"><span>Sí<small>58 %</small></span><span>Nunca<small>42 %</small></span></div></div>
           <div class="scta" aria-hidden="true"><span class="up"></span><b>Ver si es para mí</b></div>
@@ -1145,7 +1145,7 @@ Pulsa «Ver si es para mí» y te escribimos por WhatsApp.</pre></div><div class
         <div class="art photo a3" role="img" aria-label="Maqueta de anuncio con foto de stock, el gancho grande, el logo de Marín y un sello"><img class="ph" src="../assets/stock/clinica-gabinete.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="object-position:50% 50%"><span class="shade" aria-hidden="true"></span>
           
           
-          <span class="tag">Primera visita</span><svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-a3" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#FFFFFF"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#1A7FC9" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#1A7FC9" stroke-width=".8" opacity=".55"/><text fill="#0B2A45" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-a3" textLength="226" lengthAdjust="spacing">PATRAIX · TORRENT · DOS SEDES · </textPath></text><text x="50" y="52" fill="#0B2A45" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#1A7FC9" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">AGENDA ABIERTA</text></svg>
+          <span class="tag">Primera visita</span><svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-a3" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#FFFFFF"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#3B4670" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#3B4670" stroke-width=".8" opacity=".55"/><text fill="#2F3854" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-a3" textLength="226" lengthAdjust="spacing">PATRAIX · TORRENT · DOS SEDES · </textPath></text><text x="50" y="52" fill="#2F3854" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#3B4670" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">AGENDA ABIERTA</text></svg>
           
           <p class="hk"><span class="big">Tu dentista,</span>en Patraix <em>o en Torrent.</em><span class="sub">Primera visita con diagnóstico y plan por escrito.</span></p>
           
@@ -1176,7 +1176,7 @@ En la primera visita revisamos tu boca, te explicamos lo que vemos y te damos un
           <div class="shd" aria-hidden="true"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small><span class="x">×</span></div>
           
           <span class="loc"><svg viewBox="0 0 24 24"><use href="#i-pin"/></svg>Torrent</span>
-          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-s3" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#FFFFFF"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#1A7FC9" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#1A7FC9" stroke-width=".8" opacity=".55"/><text fill="#0B2A45" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-s3" textLength="226" lengthAdjust="spacing">PATRAIX · TORRENT · DOS SEDES · </textPath></text><text x="50" y="52" fill="#0B2A45" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#1A7FC9" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">AGENDA ABIERTA</text></svg>
+          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-s3" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#FFFFFF"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#3B4670" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#3B4670" stroke-width=".8" opacity=".55"/><text fill="#2F3854" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-s3" textLength="226" lengthAdjust="spacing">PATRAIX · TORRENT · DOS SEDES · </textPath></text><text x="50" y="52" fill="#2F3854" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#3B4670" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">AGENDA ABIERTA</text></svg>
           <p class="sh1">Tu dentista, <em>en Torrent.</em></p>
           <div class="book"><small>Sede</small><div class="r"><em>Patraix</em><em class="on">Torrent</em></div><small>Cuándo</small><div class="r"><em>Mañana</em><em class="on">Tarde</em></div></div>
           <div class="scta" aria-hidden="true"><span class="up"></span><b>Reservar primera visita</b></div>
@@ -1213,7 +1213,7 @@ En la primera visita revisamos tu boca, te explicamos lo que vemos y te damos un
     <div class="adcard"><div class="tabs" role="tablist" aria-label="Formatos del anuncio Estética"><button type="button" role="tab" id="t-estetica-feed" aria-controls="p-estetica-feed" aria-selected="true" tabindex="0">Feed 4:5</button><button type="button" role="tab" id="t-estetica-story" aria-controls="p-estetica-story" aria-selected="false" tabindex="-1">Story 9:16</button><button type="button" role="tab" id="t-estetica-car" aria-controls="p-estetica-car" aria-selected="false" tabindex="-1">Carrusel</button><button type="button" role="tab" id="t-estetica-vid" aria-controls="p-estetica-vid" aria-selected="false" tabindex="-1">Vídeo</button><button type="button" role="tab" id="t-estetica-ab" aria-controls="p-estetica-ab" aria-selected="false" tabindex="-1">Test A/B</button></div><div class="tp" role="tabpanel" id="p-estetica-feed" aria-labelledby="t-estetica-feed"><div class="split"><div class="stage"><figure><div class="ig">
         <div class="h"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Publicidad</small></div><span class="dots">···</span></div>
         <div class="art photo a4" role="img" aria-label="Maqueta de anuncio con foto de stock, el gancho grande, el logo de Marín y un sello"><img class="ph" src="../assets/stock/sonrisa-profesional.jpg" alt="" loading="lazy" decoding="async" width="1080" height="1350" style="object-position:50% 25%"><span class="shade" aria-hidden="true"></span>
-          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-a4" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#0B2A45"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#8FD3FF" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#8FD3FF" stroke-width=".8" opacity=".55"/><text fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-a4" textLength="226" lengthAdjust="spacing">VALORACIÓN ESTÉTICA · SIN COMPROMISO · </textPath></text><text x="50" y="52" fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#8FD3FF" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">PIDE CON TIEMPO</text></svg><span class="stk" aria-hidden="true">¿Una boda a la vista?</span>
+          <svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="sl-a4" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><circle cx="50" cy="50" r="49" fill="#2F3854"/><circle cx="50" cy="50" r="45.5" fill="none" stroke="#E2D3BA" stroke-width=".8" stroke-dasharray="1.6 2.2" opacity=".7"/><circle cx="50" cy="50" r="27" fill="none" stroke="#E2D3BA" stroke-width=".8" opacity=".55"/><text fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="8.4" font-weight="800" letter-spacing="1.2"><textPath href="#sl-a4" textLength="226" lengthAdjust="spacing">VALORACIÓN ESTÉTICA · SIN COMPROMISO · </textPath></text><text x="50" y="52" fill="#FFFFFF" font-family="Montserrat,sans-serif" font-size="17" font-weight="800" text-anchor="middle" letter-spacing="-.5">NOV</text><text x="50" y="63" fill="#E2D3BA" font-family="Montserrat,sans-serif" font-size="6.4" font-weight="700" text-anchor="middle" letter-spacing="1.4">PIDE CON TIEMPO</text></svg><span class="stk" aria-hidden="true">¿Una boda a la vista?</span>
           <span class="tag">Valoración estética</span>
           
           
@@ -1316,7 +1316,7 @@ Pide tu valoración y te escribimos por WhatsApp.</pre></div><div class="meta3">
 
 <footer class="foot">
   <div class="wrap">
-    <p><b>Maikel Echevarría · Qualivo</b> · maikel@qualivo.io · <a href="https://qualivo.io" style="color:#8FD3FF">qualivo.io</a></p>
+    <p><b>Maikel Echevarría · Qualivo</b> · maikel@qualivo.io · <a href="https://qualivo.io" style="color:#E2D3BA">qualivo.io</a></p>
     <p>Maqueta preparada por Qualivo el 10 de noviembre de 2026 para la reunión con Marín Clínica Dental. No es una página de la clínica ni son anuncios publicados. Las creatividades usan fotos de stock (Unsplash) solo como maqueta: no son pacientes ni equipo de la clínica. No hay precios ni resultados: todo se mide con vuestros datos. Logotipo y colores tomados de dentalmarin.es.</p>
   </div>
 </footer>

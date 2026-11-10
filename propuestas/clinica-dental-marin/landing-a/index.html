@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
 <style>
 /* Landing A · implantes · Marín Clínica Dental. Maqueta de Qualivo (10-nov). CSS propio de la página. */
-:root{--ink:#0E1A2B;--mut:#536378;--bg:#FAFCFE;--soft:#EAF4FC;--soft2:#F3F8FD;--line:#D9E6F2;--acc:#1A7FC9;--acc2:#2EA3F2;--deep:#0B2A45;--deep2:#123E66;
---grad:linear-gradient(135deg,#2EA3F2 0%,#1565B8 100%);--ok:#13865A;--amb:#F5B83D;--wa:#1FAF5A;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+:root{--ink:#0E1A2B;--mut:#536378;--bg:#FCFBF9;--soft:#F5F2ED;--soft2:#F8F6F2;--line:#E4DED4;--acc:#3B4670;--acc2:#56618A;--deep:#2F3854;--deep2:#262D45;
+--grad:linear-gradient(135deg,#56618A 0%,#2F3854 100%);--ok:#13865A;--amb:#F5B83D;--wa:#1FAF5A;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
 --sh:0 22px 50px -34px rgba(11,42,69,.55);--r:22px}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth;overflow-x:clip}
@@ -53,30 +53,30 @@ button{font-family:inherit}
 .chead .sd{font-size:13.5px;font-weight:600;color:var(--mut);display:flex;gap:7px;align-items:center;white-space:nowrap}
 .chead .sd i{width:8px;height:8px;border-radius:50%;background:var(--acc2);display:inline-block}
 .chead .sd.t i{background:var(--amb)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 16px/1.2 var(--sans);text-decoration:none;border:0;border-radius:14px;padding:16px 24px;cursor:pointer;background:var(--grad);color:#fff;box-shadow:0 16px 34px -18px rgba(21,101,184,.95);transition:transform .15s,box-shadow .15s}
-.btn:hover{transform:translateY(-1px);box-shadow:0 20px 38px -18px rgba(21,101,184,1)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 16px/1.2 var(--sans);text-decoration:none;border:0;border-radius:14px;padding:16px 24px;cursor:pointer;background:var(--grad);color:#fff;box-shadow:0 16px 34px -18px rgba(47,56,84,.95);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 20px 38px -18px rgba(47,56,84,1)}
 .btn.sm{font-size:14.5px;padding:11px 18px;border-radius:99px}
 .btn.wa{background:var(--wa);box-shadow:0 16px 34px -18px rgba(19,134,90,.9)}
 .btn.gh{background:rgba(255,255,255,.1);box-shadow:none;border:1px solid rgba(255,255,255,.35)}
 .btn.ln{background:#fff;color:var(--acc);border:1px solid var(--acc);box-shadow:none}
-.btn:focus-visible,.opt:focus-visible,.fq summary:focus-visible{outline:3px solid rgba(46,163,242,.5);outline-offset:2px}
+.btn:focus-visible,.opt:focus-visible,.fq summary:focus-visible{outline:3px solid rgba(201,183,154,.5);outline-offset:2px}
 /* hero */
-.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(900px 620px at 85% -10%,rgba(46,163,242,.45),transparent 62%),radial-gradient(700px 500px at -10% 110%,rgba(46,163,242,.18),transparent 60%),linear-gradient(150deg,#0B2A45 0%,#123E66 55%,#1565B8 100%)}
+.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(900px 620px at 85% -10%,rgba(201,183,154,.45),transparent 62%),radial-gradient(700px 500px at -10% 110%,rgba(201,183,154,.18),transparent 60%),linear-gradient(150deg,#2F3854 0%,#262D45 55%,#2F3854 100%)}
 .hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center;padding-top:72px;padding-bottom:84px}
 .eb{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);margin-bottom:22px}
-.eb i{width:7px;height:7px;border-radius:50%;background:#8FD3FF}
+.eb i{width:7px;height:7px;border-radius:50%;background:#E2D3BA}
 h1{font-size:clamp(34px,4.4vw,56px);line-height:1.04;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
-h1 em{font-style:normal;color:#8FD3FF}
+h1 em{font-style:normal;color:#E2D3BA}
 .hero .lead{font-size:19.5px;line-height:1.55;margin-top:22px;max-width:38ch;color:rgba(255,255,255,.88)}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .micro{font-size:13.5px;color:rgba(255,255,255,.72);margin-top:12px;display:flex;align-items:center;gap:8px}
 .micro .ic{width:16px;height:16px}
 .proof{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:30px;padding-top:22px;border-top:1px solid rgba(255,255,255,.16);font-size:14px;font-weight:600;color:rgba(255,255,255,.9)}
 .proof span{display:inline-flex;align-items:center;gap:7px}
-.proof .ic{width:18px;height:18px;color:#8FD3FF}
+.proof .ic{width:18px;height:18px;color:#E2D3BA}
 /* composición del hero */
 .art{position:relative;aspect-ratio:1/1.02;max-width:470px;width:100%;justify-self:center}
-.art .disc{position:absolute;inset:6% 4% 8% 6%;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.3),rgba(255,255,255,.05) 60%),linear-gradient(160deg,rgba(46,163,242,.55),rgba(21,101,184,.25));border:1px solid rgba(255,255,255,.25);box-shadow:inset 0 0 80px rgba(255,255,255,.08),0 40px 90px -40px rgba(0,0,0,.6)}
+.art .disc{position:absolute;inset:6% 4% 8% 6%;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.3),rgba(255,255,255,.05) 60%),linear-gradient(160deg,rgba(201,183,154,.55),rgba(47,56,84,.25));border:1px solid rgba(255,255,255,.25);box-shadow:inset 0 0 80px rgba(255,255,255,.08),0 40px 90px -40px rgba(0,0,0,.6)}
 .art .ring{position:absolute;inset:0 0 2% 0;border-radius:50%;border:1px dashed rgba(255,255,255,.22)}
 .art .th{position:absolute;left:50%;top:47%;width:46%;transform:translate(-50%,-50%);filter:drop-shadow(0 24px 30px rgba(0,0,0,.28))}
 .art .implant{position:absolute;left:50%;top:69%;width:9%;transform:translateX(-50%)}
@@ -99,9 +99,9 @@ h1 em{font-style:normal;color:#8FD3FF}
 /* secciones */
 .sec{padding:96px 0}
 .sec.alt{background:var(--soft2)}
-.sec.dk{background:linear-gradient(160deg,#0B2A45,#123E66);color:#fff}
+.sec.dk{background:linear-gradient(160deg,#2F3854,#262D45);color:#fff}
 .kick{display:inline-block;font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:12px}
-.dk .kick{color:#8FD3FF}
+.dk .kick{color:#E2D3BA}
 h2.t{font-size:clamp(30px,3.9vw,44px);letter-spacing:-.028em;line-height:1.08;margin-bottom:14px;text-wrap:balance;max-width:22ch}
 p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
 .dk p.s{color:rgba(255,255,255,.78)}
@@ -114,7 +114,7 @@ p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
 .fc .b .ic{width:21px;height:21px}
 .fc p{font-size:16px;line-height:1.5;font-weight:600}
 .fc p small{display:block;font-weight:500;color:var(--mut);font-size:14.5px;margin-top:4px}
-.notfit{margin-top:22px;display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px dashed #9FC9EA;border-radius:18px;padding:18px 22px;font-size:15.5px;color:var(--mut)}
+.notfit{margin-top:22px;display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px dashed #D6C8B2;border-radius:18px;padding:18px 22px;font-size:15.5px;color:var(--mut)}
 .notfit b{color:var(--ink)}
 .notfit .ic{color:var(--acc);margin-top:2px}
 .mid-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:36px}
@@ -123,7 +123,7 @@ p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:st;position:relative}
 .steps::before{content:"";position:absolute;left:8%;right:8%;top:31px;height:2px;background:repeating-linear-gradient(90deg,var(--acc2) 0 8px,transparent 8px 14px);opacity:.5}
 .st{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 22px;box-shadow:var(--sh);min-width:0}
-.st .n{position:relative;display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:#fff;border:2px solid var(--acc2);color:var(--acc);margin:-55px 0 14px;box-shadow:0 10px 24px -14px rgba(21,101,184,.8)}
+.st .n{position:relative;display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:#fff;border:2px solid var(--acc2);color:var(--acc);margin:-55px 0 14px;box-shadow:0 10px 24px -14px rgba(47,56,84,.8)}
 .st .n .ic{width:26px;height:26px}
 .st .k{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
 .st h3{font-size:20px;letter-spacing:-.015em;margin:4px 0 8px}
@@ -142,7 +142,7 @@ p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
 .chk b{display:block;font-size:16px}
 .chk small{display:block;color:var(--mut);font-size:14.5px;line-height:1.5;margin-top:2px}
 .takeaway{position:relative;background:var(--deep);color:#fff;border-radius:26px;padding:34px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(11,42,69,.9)}
-.takeaway::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(46,163,242,.45),transparent 70%)}
+.takeaway::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(201,183,154,.45),transparent 70%)}
 .takeaway h3{font-size:24px;letter-spacing:-.02em;margin-bottom:6px;position:relative}
 .takeaway > p{color:rgba(255,255,255,.75);font-size:15.5px;margin-bottom:22px;position:relative}
 .doc{position:relative;background:#fff;color:var(--ink);border-radius:16px;padding:20px;display:grid;gap:12px}
@@ -157,13 +157,13 @@ p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
 /* financiación */
 .fin{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .fi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:26px;min-width:0}
-.fi .n{font-size:13px;font-weight:800;letter-spacing:.12em;color:#8FD3FF}
+.fi .n{font-size:13px;font-weight:800;letter-spacing:.12em;color:#E2D3BA}
 .fi h3{font-size:20px;margin:8px 0 8px;letter-spacing:-.01em}
 .fi p{color:rgba(255,255,255,.75);font-size:15.5px}
 .legal{margin-top:26px;font-size:13.5px;color:rgba(255,255,255,.6);max-width:80ch}
 /* por qué Marín */
 .why{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
-.quote{position:sticky;top:110px;background:var(--grad);color:#fff;border-radius:26px;padding:38px;box-shadow:0 40px 80px -40px rgba(21,101,184,.9);overflow:hidden}
+.quote{position:sticky;top:110px;background:var(--grad);color:#fff;border-radius:26px;padding:38px;box-shadow:0 40px 80px -40px rgba(47,56,84,.9);overflow:hidden}
 .quote img.d{position:absolute;right:-30px;bottom:-30px;width:190px;opacity:.16}
 .quote .big{font-size:clamp(26px,3vw,34px);font-weight:800;line-height:1.15;letter-spacing:-.02em;position:relative}
 .quote p{position:relative;margin-top:16px;color:rgba(255,255,255,.88);font-size:16px}
@@ -184,7 +184,7 @@ p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
 .fq[open] summary::after{transform:rotate(45deg)}
 .fq .a{padding:0 22px 20px;color:var(--mut);font-size:16px}
 /* formulario multi-paso */
-.fsec{background:radial-gradient(800px 500px at 100% 0%,rgba(46,163,242,.16),transparent 60%),var(--soft2)}
+.fsec{background:radial-gradient(800px 500px at 100% 0%,rgba(201,183,154,.16),transparent 60%),var(--soft2)}
 .fgrid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
 .fside .chk li{background:transparent;border:0;padding:0}
 .fbox{background:#fff;border:1px solid var(--line);border-radius:26px;padding:30px;box-shadow:0 40px 80px -44px rgba(11,42,69,.7);scroll-margin-top:90px;min-width:0}
@@ -207,7 +207,7 @@ p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
 .fields{display:grid;gap:12px}
 .fields label{display:grid;gap:6px;font-weight:700;font-size:14px}
 .fields input[type=text],.fields input[type=tel]{font:500 16px var(--sans);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;width:100%;min-width:0}
-.fields input:focus{outline:3px solid rgba(46,163,242,.35);border-color:var(--acc2)}
+.fields input:focus{outline:3px solid rgba(201,183,154,.35);border-color:var(--acc2)}
 .fields .cb{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:13px;color:var(--mut)}
 .fields .cb input{margin-top:3px;flex:none;width:17px;height:17px}
 .err{display:none;color:#B42318;font-size:13.5px;font-weight:600}
@@ -224,7 +224,7 @@ p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
 .okv .tick .ic{width:30px;height:30px;stroke-width:2.6}
 .okv h3{font-size:24px;letter-spacing:-.02em}
 .okv > p{color:var(--mut);margin-top:6px}
-.crm{margin-top:22px;text-align:left;background:var(--soft2);border:1px dashed #9FC9EA;border-radius:18px;padding:18px}
+.crm{margin-top:22px;text-align:left;background:var(--soft2);border:1px dashed #D6C8B2;border-radius:18px;padding:18px}
 .crm .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
 .crm .lv{display:flex;gap:14px;align-items:center}
 .crm .L{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;color:#fff;background:var(--ok);font-size:26px;font-weight:800;flex:none}
@@ -236,7 +236,7 @@ p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
 .crm dd{font-weight:600;margin:0}
 .again{margin-top:16px;background:none;border:0;color:var(--acc);font:700 14.5px var(--sans);cursor:pointer}
 /* CTA final */
-.final{position:relative;overflow:hidden;text-align:center;color:#fff;background:radial-gradient(700px 400px at 50% 0%,rgba(46,163,242,.4),transparent 70%),linear-gradient(160deg,#0B2A45,#1565B8);padding:100px 0}
+.final{position:relative;overflow:hidden;text-align:center;color:#fff;background:radial-gradient(700px 400px at 50% 0%,rgba(201,183,154,.4),transparent 70%),linear-gradient(160deg,#2F3854,#2F3854);padding:100px 0}
 .final .lw{height:64px;width:auto;margin:0 auto 26px}
 .final h2{font-size:clamp(32px,4.4vw,52px);letter-spacing:-.03em;line-height:1.06;max-width:20ch;margin:0 auto;text-wrap:balance}
 .final p{color:rgba(255,255,255,.8);font-size:18.5px;max-width:52ch;margin:16px auto 0}
@@ -244,7 +244,7 @@ p.s{color:var(--mut);font-size:18.5px;max-width:58ch;margin-bottom:40px}
 .final .micro{justify-content:center}
 .sedes{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:34px}
 .sedes span{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:8px 14px}
-.sedes i{width:8px;height:8px;border-radius:50%;background:#8FD3FF}
+.sedes i{width:8px;height:8px;border-radius:50%;background:#E2D3BA}
 .sedes .t i{background:var(--amb)}
 .foot{background:#071C2F;color:rgba(255,255,255,.62);padding:40px 0 110px;font-size:13px}
 .foot .wrap{display:grid;gap:12px}
@@ -300,7 +300,7 @@ p.s{font-size:17px;margin-bottom:30px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
-</head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"><style>h1,h2,.hero h1,.s h2{font-family:"Yeseva One",Georgia,serif!important;font-weight:400!important;letter-spacing:0!important}</style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
@@ -576,7 +576,7 @@ p.s{font-size:17px;margin-bottom:30px}
   <img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452">
   <p><b>Marín Clínica Dental</b> · Patraix (Valencia) y Torrent. Direcciones, horarios y n.º de registro sanitario de cada sede: <span class="tag c">A confirmar con vosotros</span></p>
   <p>Los resultados y los plazos de cualquier tratamiento dependen de cada paciente y requieren valoración previa.</p>
-  <p>Maqueta de ejemplo preparada por Qualivo para Marín Clínica Dental. No es una página publicada ni envía datos. <a href="../landing-b/" style="color:#8FD3FF">Ver la landing B, ortodoncia invisible</a>.</p>
+  <p>Maqueta de ejemplo preparada por Qualivo para Marín Clínica Dental. No es una página publicada ni envía datos. <a href="../landing-b/" style="color:#E2D3BA">Ver la landing B, ortodoncia invisible</a>.</p>
 </div></footer>
 
 <div class="mbar" aria-label="Acciones rápidas">

@@ -12,8 +12,8 @@
 <style>
 /* Plan de captación para Marín Clínica Dental (reunión 10-nov). Plantilla: propuestas/institut-gestalt/index.html.
    Antes esta raíz redirigía a la presentación; ahora es el plan y enlaza todas las piezas. */
-:root{color-scheme:light;--ink:#0E1A2B;--mut:#536378;--bg:#FAFCFE;--surface:#fff;--soft:#EAF4FC;--soft2:#F3F8FD;--line:#D9E6F2;--line2:#E6EEF6;--acc:#1A7FC9;--acc2:#2EA3F2;--deep:#0B2A45;--deep2:#123E66;
---grad:linear-gradient(135deg,#2EA3F2 0%,#1565B8 100%);--amb:#F5B83D;--ok:#13865A;--bad:#C0392B;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+:root{color-scheme:light;--ink:#0E1A2B;--mut:#536378;--bg:#FCFBF9;--surface:#fff;--soft:#F5F2ED;--soft2:#F8F6F2;--line:#E4DED4;--line2:#E6EEF6;--acc:#3B4670;--acc2:#56618A;--deep:#2F3854;--deep2:#262D45;
+--grad:linear-gradient(135deg,#56618A 0%,#2F3854 100%);--amb:#F5B83D;--ok:#13865A;--bad:#C0392B;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
 --shadow:0 1px 2px rgba(11,42,69,.06),0 16px 36px -24px rgba(11,42,69,.5)}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth;overflow-x:clip;-webkit-text-size-adjust:100%}
@@ -35,20 +35,20 @@ a{color:var(--acc)}
 .links a:hover{background:rgba(255,255,255,.1);color:#fff}
 .links a[aria-current]{background:#fff;color:var(--deep)}
 /* cabecera */
-.hero{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:radial-gradient(1100px 620px at 88% 18%,rgba(46,163,242,.4),transparent 60%),linear-gradient(135deg,#0B2A45 0%,#0F3A63 55%,#1565B8 100%)}
+.hero{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:linear-gradient(100deg,rgba(38,45,69,.92) 0%,rgba(47,56,84,.78) 45%,rgba(47,56,84,.25) 100%),url(./assets/brand/clinica.jpg) center/cover}
 .hero .tooth{position:absolute;right:-3%;top:50%;transform:translateY(-48%);width:min(36vw,420px);height:auto;opacity:.1;z-index:-1}
 .hero .wrap{padding-block:64px 56px;display:grid;gap:16px}
 .lockup{justify-self:start;display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:8px 18px;font-weight:700;font-size:15px}
 .lockup i{font-style:normal;opacity:.6;font-weight:500}
 .lockup img{height:40px;width:auto;display:block}
-.eyebrow{font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#8FD3FF}
+.eyebrow{font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#E2D3BA}
 h1{font-weight:800;font-size:clamp(34px,5.4vw,64px);line-height:1.04;letter-spacing:-.028em;max-width:18ch;text-wrap:balance}
-h1 em{font-style:normal;color:#8FD3FF}
+h1 em{font-style:normal;color:#E2D3BA}
 .lead{font-size:clamp(16px,1.6vw,19px);color:rgba(255,255,255,.9);max-width:70ch}
 .sedes{display:flex;gap:10px;flex-wrap:wrap}
 .sedes span{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:7px 15px;font-weight:600;font-size:14.5px;background:rgba(255,255,255,.06)}
 .sedes span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amb)}
-.sedes span+span::before{background:#8FD3FF}
+.sedes span+span::before{background:#E2D3BA}
 .note{font-size:13px;border:1px dashed rgba(255,255,255,.35);border-radius:12px;padding:10px 14px;max-width:96ch;background:rgba(0,15,40,.25);color:rgba(255,255,255,.9)}
 .tag{display:inline-block;font:700 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:3px 7px;vertical-align:middle;white-space:nowrap;line-height:1.5}
 .tag.real{background:#E3F3EA;color:#13744E}.tag.hip{background:var(--soft);color:var(--acc)}.tag.ej{background:#FFF3C4;color:#7A5600}.tag.hab{background:#FDECEA;color:#9B2C1F}
@@ -57,7 +57,7 @@ h1 em{font-style:normal;color:#8FD3FF}
 main{padding:44px 0 72px;display:grid;gap:56px}
 section{display:grid;gap:18px;scroll-margin-top:70px}
 h2{font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.12;letter-spacing:-.022em;text-wrap:balance}
-h2 .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--grad);color:#fff;font-size:13px;margin-right:12px;vertical-align:middle;box-shadow:0 8px 18px -8px rgba(21,101,184,.7)}
+h2 .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--grad);color:#fff;font-size:13px;margin-right:12px;vertical-align:middle;box-shadow:0 8px 18px -8px rgba(47,56,84,.7)}
 .sub{color:var(--mut);max-width:80ch;font-size:16.5px}
 .grid{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
 .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -80,7 +80,7 @@ h2 .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radiu
 .flow span{font-size:14px;color:var(--mut);line-height:1.45}
 .under{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .under div{display:flex;gap:16px;align-items:center;background:var(--deep);color:#fff;border-radius:18px;padding:16px 20px;min-width:0}
-.under .ic{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.12);color:#8FD3FF}
+.under .ic{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.12);color:#E2D3BA}
 .under b{display:block;font-size:17px}.under span{font-size:14px;opacity:.82}
 /* paciente */
 .icp .ok{border-top:5px solid var(--ok)}.icp .no{border-top:5px solid var(--amb);background:#FFFCF2}.icp .q{border-top:5px solid var(--acc);background:linear-gradient(180deg,var(--soft),#fff)}
@@ -100,23 +100,23 @@ h2 .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radiu
 .pieces b{font-size:17px;line-height:1.25}
 .pieces p{font-size:14px;color:var(--mut);line-height:1.45}
 .pieces .go{font-weight:700;font-size:13.5px;color:var(--acc)}
-.pieces a.hl{background:linear-gradient(135deg,#0B2A45,#1565B8);color:#fff;border-color:transparent}
-.pieces a.hl p{color:rgba(255,255,255,.82)}.pieces a.hl .go{color:#8FD3FF}.pieces a.hl .ic{background:rgba(255,255,255,.14);color:#8FD3FF}
+.pieces a.hl{background:linear-gradient(135deg,#2F3854,#2F3854);color:#fff;border-color:transparent}
+.pieces a.hl p{color:rgba(255,255,255,.82)}.pieces a.hl .go{color:#E2D3BA}.pieces a.hl .ic{background:rgba(255,255,255,.14);color:#E2D3BA}
 /* semanas */
 .weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .weeks h3 span{display:inline-block;background:var(--soft);color:var(--acc);border-radius:99px;padding:2px 10px;margin-bottom:8px;font-size:11px;font-weight:700;letter-spacing:.08em}
 /* siguiente paso */
-.fin{background:radial-gradient(900px 600px at 90% 10%,rgba(46,163,242,.35),transparent 60%),linear-gradient(135deg,#0B2A45 0%,#1565B8 100%);color:#fff;border-radius:26px;padding:clamp(24px,4vw,44px);display:grid;gap:18px}
-.fin .k{font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#8FD3FF}
+.fin{background:radial-gradient(900px 600px at 90% 10%,rgba(201,183,154,.35),transparent 60%),linear-gradient(135deg,#2F3854 0%,#2F3854 100%);color:#fff;border-radius:26px;padding:clamp(24px,4vw,44px);display:grid;gap:18px}
+.fin .k{font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#E2D3BA}
 .fin h2{color:#fff;max-width:22ch}
 .need{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .need div{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 16px;font-size:15.5px;min-width:0}
-.need .i{color:#8FD3FF;flex:none;margin-top:1px}
+.need .i{color:#E2D3BA;flex:none;margin-top:1px}
 .fin .ask{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .fin .ask div{background:rgba(0,15,40,.25);border-radius:16px;padding:16px 18px;font-size:15px}
-.fin .ask b{display:block;color:#8FD3FF;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.fin .ask b{display:block;color:#E2D3BA;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
 .fin .ask ol{padding-left:18px;display:grid;gap:4px}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:12px 20px;font-size:15px;box-shadow:0 14px 30px -14px rgba(21,101,184,.85)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:12px 20px;font-size:15px;box-shadow:0 14px 30px -14px rgba(47,56,84,.85)}
 .btn.alt{background:#fff;color:var(--deep);box-shadow:none}
 .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);box-shadow:none}
 .cta{display:flex;gap:10px;flex-wrap:wrap}
@@ -138,7 +138,7 @@ addEventListener('DOMContentLoaded',function(){
   setTimeout(function(){els.forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)el.classList.add('on');});},1200);
 });
 </script>
-</head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"><style>h1,h2,.hero h1,.s h2{font-family:"Yeseva One",Georgia,serif!important;font-weight:400!important;letter-spacing:0!important}</style></head>
 <body>
 <nav class="topnav" aria-label="Propuesta"><div class="in">
 <div class="brand">Qualivo <span class="x">×</span> <img src="./assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452"><span class="by">10-nov-2026</span></div>
