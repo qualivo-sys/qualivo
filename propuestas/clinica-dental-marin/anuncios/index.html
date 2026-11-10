@@ -552,6 +552,34 @@ pre{white-space:pre-wrap;font:15px/1.55 var(--sans);background:var(--soft2);bord
 @media (max-width:560px){.win{grid-template-columns:1fr}}
 .est{display:inline-block;font:800 10.5px var(--sans);letter-spacing:.06em;border-radius:6px;padding:2px 6px;background:#FFF3C4;color:#7A5600;vertical-align:1px;margin-left:4px;white-space:nowrap}
 .leg{margin-top:12px;font-size:13.5px;color:var(--mut)}
+
+/* conmutador story / reel */
+.stog{display:inline-flex;gap:2px;background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:3px;margin-bottom:12px}
+.stog button{font:700 13px var(--sans);border:0;background:none;color:var(--deep2);border-radius:99px;padding:6px 16px;cursor:pointer}
+.stog button[aria-pressed="true"]{background:var(--deep);color:#fff}
+.story .rtop,.story .rui,.story .rcap{display:none}
+.story.reel .sbar,.story.reel .shd,.story.reel .scta{display:none}
+.story.reel .rtop,.story.reel .rcap{display:block}
+.story.reel .rui{display:grid}
+.story .rtop{left:5%;top:3.6%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-weight:700;font-size:max(13px,5.6cqw);color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.story .rui{right:3.5%;bottom:24%;gap:5.5cqw;justify-items:center;color:#fff;filter:drop-shadow(0 1px 3px rgba(0,0,0,.45))}
+.story .rui svg{width:8.4cqw;height:8.4cqw;min-width:22px;min-height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.story .rui span{font-weight:800;letter-spacing:1px}
+.story .rcap{left:0;right:0;bottom:0;padding:16cqw 4.5% 4.5%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.62));color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:max(11px,4cqw)}
+.story .rcap .ru{display:flex;align-items:center;gap:2.4cqw;margin-bottom:1.6cqw}
+.story .rcap .av{width:8cqw;height:8cqw;min-width:22px;min-height:22px;box-shadow:0 0 0 1.5px #fff}
+.story .rcap small{opacity:.8}
+.story .rcap p{margin:0 0 2.6cqw;opacity:.95;max-width:82%}
+.story .rcap .rb{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.2);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:8px;padding:2.6cqw 3.4cqw;font-weight:700}
+.story .rcap .rb i{font-style:normal;font-size:1.3em;line-height:1}
+.story.reel .sh1,.story.reel .ss{right:17%}
+.story.reel .poll,.story.reel .quiz,.story.reel .book{left:6%;right:17%}
+.st1.reel .vis{top:9%;width:28%}.st1.reel .stk{top:15%}.st1.reel .seal{top:26%;width:23%}
+.st1.reel .sh1{top:41%;font-size:9.4cqw}.st1.reel .ss{top:64.5%;font-size:max(10.5px,3.9cqw)}
+.st2.reel .sh1{top:10%}.st2.reel .vis{top:29%;width:70%;left:43%}.st2.reel .seal{top:25%}.st2.reel .poll{top:49%}
+.st3.reel .vis{top:24%}.st3.reel .loc{top:9%}.st3.reel .sh1{top:16%}.st3.reel .seal{top:7%}.st3.reel .book{top:53%}
+.st4.reel .sh1{top:10%;font-size:8.6cqw}.st4.reel .vis{top:29%;width:66%;left:42%}.st4.reel .gd{top:24%;right:18%;width:18%}.st4.reel .quiz{top:46.5%;gap:1.6cqw}.st4.reel .quiz span{padding:1.5cqw 3cqw}
+.story.reel .safe{height:10%}
 @media (prefers-reduced-motion:reduce){.story .scta .up{animation:none}}
 </style>
 <script>
@@ -567,6 +595,10 @@ addEventListener('DOMContentLoaded',function(){
 
 <script>
 addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.stog').forEach(function(g){
+    var st=g.parentNode.querySelector('.story');
+    g.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});st.classList.toggle('reel',b.dataset.m==='reel');});
+  });
   document.querySelectorAll('.cwrap').forEach(function(w){
     var car=w.querySelector('.car'),cards=car.querySelectorAll('.cd'),dots=w.parentNode.querySelectorAll('.cdots i'),p=w.querySelector('.cnav.p'),n=w.querySelector('.cnav.n');
     function step(){return cards[0].getBoundingClientRect().width+8;}
@@ -906,7 +938,7 @@ Pide tu primera visita y te escribimos por WhatsApp en minutos.</pre></div>
     <div class="more">
       <div class="mh"><h3>Implantes en los demás formatos</h3><div class="chips"><span>Story / reel 9:16</span><span>Carrusel</span><span>Vídeo 15-20 s</span></div></div>
       <div class="fgrid">
-        <figure class="sfig"><p class="flabel">Story / reel 9:16 <span>1080 × 1920</span></p><div class="phone"><div class="story st1" role="img" aria-label="Maqueta de story: implante dibujado, pegatina Pago en cuotas, sello del mes y el gancho">
+        <figure class="sfig"><p class="flabel">Story / reel 9:16 <span>1080 × 1920</span></p><div class="stog" role="group" aria-label="Ver como"><button type="button" aria-pressed="true" data-m="story">Story</button><button type="button" aria-pressed="false" data-m="reel">Reel</button></div><div class="phone"><div class="story st1" role="img" aria-label="Maqueta de story: implante dibujado, pegatina Pago en cuotas, sello del mes y el gancho">
           <div class="sbg"></div><span class="safe" aria-hidden="true"></span>
           <div class="sbar" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
           <div class="shd" aria-hidden="true"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small><span class="x">×</span></div>
@@ -917,7 +949,10 @@ Pide tu primera visita y te escribimos por WhatsApp en minutos.</pre></div>
           <p class="sh1">¿Te falta una pieza? <em>Y lo vas dejando por el precio.</em></p>
           <p class="ss">Primera visita con diagnóstico, plan por escrito y presupuesto en cuotas.</p>
           <div class="scta" aria-hidden="true"><span class="up"></span><b>Pedir primera visita</b></div>
-        </div></div><figcaption><b>Story 9:16</b> · el texto queda fuera del 14 % superior y del 20 % inferior, donde Instagram pone su interfaz</figcaption></figure>
+          <div class="rtop" aria-hidden="true">Reels</div>
+          <div class="rui" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><span>···</span></div>
+          <div class="rcap" aria-hidden="true"><div class="ru"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small></div><p>Primera visita, plan por escrito y cuotas · Patraix y Torrent</p><span class="rb">Pedir primera visita<i>›</i></span></div>
+        </div></div><figcaption><b>Story y reel 9:16</b> · el texto queda fuera del 14 % superior y del 20 % inferior, donde Instagram pone su interfaz · pulsa «Reel» para verlo con la interfaz de reels</figcaption></figure>
         <figure class="cfig"><p class="flabel">Carrusel · 4 tarjetas <span>1080 × 1080 · desliza</span></p><div class="cig">
           <div class="h"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Publicidad</small></div></div>
           <p class="ptxt">¿Te falta una pieza y lo vas dejando por el precio? Así es tu primera visita, en tres pasos. 👉</p>
@@ -999,7 +1034,7 @@ Pulsa «Ver si es para mí» y te escribimos por WhatsApp.</pre></div>
     <div class="more">
       <div class="mh"><h3>Ortodoncia invisible en los demás formatos</h3><div class="chips"><span>Story / reel 9:16</span><span>Carrusel</span><span>Vídeo 15-20 s</span></div></div>
       <div class="fgrid">
-        <figure class="sfig"><p class="flabel">Story / reel 9:16 <span>1080 × 1920</span></p><div class="phone"><div class="story st2" role="img" aria-label="Maqueta de story: arcada con alineador, encuesta ¿Llevaste ortodoncia de joven? y el gancho">
+        <figure class="sfig"><p class="flabel">Story / reel 9:16 <span>1080 × 1920</span></p><div class="stog" role="group" aria-label="Ver como"><button type="button" aria-pressed="true" data-m="story">Story</button><button type="button" aria-pressed="false" data-m="reel">Reel</button></div><div class="phone"><div class="story st2" role="img" aria-label="Maqueta de story: arcada con alineador, encuesta ¿Llevaste ortodoncia de joven? y el gancho">
           <div class="sbg"></div><span class="safe" aria-hidden="true"></span>
           <div class="sbar" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
           <div class="shd" aria-hidden="true"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small><span class="x">×</span></div>
@@ -1008,7 +1043,10 @@ Pulsa «Ver si es para mí» y te escribimos por WhatsApp.</pre></div>
           <svg class="vis" viewBox="0 0 220 150" aria-hidden="true"><use href="#s-arch"/></svg>
           <div class="poll"><b>¿Llevaste ortodoncia de joven?</b><div class="po"><span>Sí<small>58 %</small></span><span>Nunca<small>42 %</small></span></div></div>
           <div class="scta" aria-hidden="true"><span class="up"></span><b>Ver si es para mí</b></div>
-        </div></div><figcaption><b>Story 9:16</b> · con encuesta nativa de Instagram: quien vota ya ha dicho si es un primer tratamiento o una recidiva · porcentajes de ejemplo</figcaption></figure>
+          <div class="rtop" aria-hidden="true">Reels</div>
+          <div class="rui" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><span>···</span></div>
+          <div class="rcap" aria-hidden="true"><div class="ru"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small></div><p>Ortodoncia para adultos, sin brackets a la vista · Patraix y Torrent</p><span class="rb">Ver si es para mí<i>›</i></span></div>
+        </div></div><figcaption><b>Story y reel 9:16</b> · con encuesta nativa de Instagram: quien vota ya ha dicho si es un primer tratamiento o una recidiva · porcentajes de ejemplo</figcaption></figure>
         <figure class="cfig"><p class="flabel">Carrusel · 4 tarjetas <span>1080 × 1080 · desliza</span></p><div class="cig">
           <div class="h"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Publicidad</small></div></div>
           <p class="ptxt">Ortodoncia para adultos, sin brackets a la vista. Lo que tienes que saber antes de preguntar. 👉</p>
@@ -1093,7 +1131,7 @@ En la primera visita revisamos tu boca, te explicamos lo que vemos y te damos un
     <div class="more">
       <div class="mh"><h3>Primera visita en los demás formatos</h3><div class="chips"><span>Story / reel 9:16</span><span>Carrusel</span><span>Vídeo 15-20 s</span></div></div>
       <div class="fgrid">
-        <figure class="sfig"><p class="flabel">Story / reel 9:16 <span>1080 × 1920</span></p><div class="phone"><div class="story st3" role="img" aria-label="Maqueta de story: mapa esquemático, pegatina de ubicación Torrent y tarjeta para elegir sede y franja">
+        <figure class="sfig"><p class="flabel">Story / reel 9:16 <span>1080 × 1920</span></p><div class="stog" role="group" aria-label="Ver como"><button type="button" aria-pressed="true" data-m="story">Story</button><button type="button" aria-pressed="false" data-m="reel">Reel</button></div><div class="phone"><div class="story st3" role="img" aria-label="Maqueta de story: mapa esquemático, pegatina de ubicación Torrent y tarjeta para elegir sede y franja">
           <div class="sbg"></div><span class="safe" aria-hidden="true"></span>
           <div class="sbar" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
           <div class="shd" aria-hidden="true"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small><span class="x">×</span></div>
@@ -1103,7 +1141,10 @@ En la primera visita revisamos tu boca, te explicamos lo que vemos y te damos un
           <p class="sh1">Tu dentista, <em>en Torrent.</em></p>
           <div class="book"><small>Sede</small><div class="r"><em>Patraix</em><em class="on">Torrent</em></div><small>Cuándo</small><div class="r"><em>Mañana</em><em class="on">Tarde</em></div></div>
           <div class="scta" aria-hidden="true"><span class="up"></span><b>Reservar primera visita</b></div>
-        </div></div><figcaption><b>Story 9:16</b> · versión Torrent, con pegatina de ubicación · la de Patraix cambia la pegatina, el titular y la sede marcada</figcaption></figure>
+          <div class="rtop" aria-hidden="true">Reels</div>
+          <div class="rui" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><span>···</span></div>
+          <div class="rcap" aria-hidden="true"><div class="ru"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small></div><p>Tu dentista en Torrent · te confirmamos por WhatsApp</p><span class="rb">Reservar primera visita<i>›</i></span></div>
+        </div></div><figcaption><b>Story y reel 9:16</b> · versión Torrent, con pegatina de ubicación · la de Patraix cambia la pegatina, el titular y la sede marcada</figcaption></figure>
         <figure class="cfig"><p class="flabel">Carrusel · 4 tarjetas <span>1080 × 1080 · desliza</span></p><div class="cig">
           <div class="h"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Publicidad</small></div></div>
           <p class="ptxt">Tu dentista en Torrent. Así de fácil es tu primera visita. 👉</p>
@@ -1190,7 +1231,7 @@ Pide tu valoración y te escribimos por WhatsApp.</pre></div>
     <div class="more">
       <div class="mh"><h3>Estética en los demás formatos</h3><div class="chips"><span>Story / reel 9:16</span><span>Carrusel</span><span>Vídeo 15-20 s</span></div></div>
       <div class="fgrid">
-        <figure class="sfig"><p class="flabel">Story / reel 9:16 <span>1080 × 1920</span></p><div class="phone"><div class="story st4" role="img" aria-label="Maqueta de story: sonrisa dibujada, guía de colores y cuestionario Elige una: color, forma o un diente">
+        <figure class="sfig"><p class="flabel">Story / reel 9:16 <span>1080 × 1920</span></p><div class="stog" role="group" aria-label="Ver como"><button type="button" aria-pressed="true" data-m="story">Story</button><button type="button" aria-pressed="false" data-m="reel">Reel</button></div><div class="phone"><div class="story st4" role="img" aria-label="Maqueta de story: sonrisa dibujada, guía de colores y cuestionario Elige una: color, forma o un diente">
           <div class="sbg"></div><span class="safe" aria-hidden="true"></span>
           <div class="sbar" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
           <div class="shd" aria-hidden="true"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small><span class="x">×</span></div>
@@ -1199,7 +1240,10 @@ Pide tu valoración y te escribimos por WhatsApp.</pre></div>
           <svg class="gd" viewBox="0 0 120 100" aria-hidden="true"><use href="#s-guide"/></svg>
           <div class="quiz"><b>Elige una</b><span class="on">El color</span><span>La forma</span><span>Un diente concreto</span></div>
           <div class="scta" aria-hidden="true"><span class="up"></span><b>Pedir valoración</b></div>
-        </div></div><figcaption><b>Story 9:16</b> · con cuestionario nativo: la respuesta ya nos dice qué valoración preparar · sin antes y después</figcaption></figure>
+          <div class="rtop" aria-hidden="true">Reels</div>
+          <div class="rui" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg><svg viewBox="0 0 24 24"><use href="#i-com"/></svg><svg viewBox="0 0 24 24"><use href="#i-share"/></svg><span>···</span></div>
+          <div class="rcap" aria-hidden="true"><div class="ru"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small></div><p>Color, forma o un diente: primero, saber qué te conviene</p><span class="rb">Pedir valoración<i>›</i></span></div>
+        </div></div><figcaption><b>Story y reel 9:16</b> · con cuestionario nativo: la respuesta ya nos dice qué valoración preparar · sin antes y después</figcaption></figure>
         <figure class="cfig"><p class="flabel">Carrusel · 4 tarjetas <span>1080 × 1080 · desliza</span></p><div class="cig">
           <div class="h"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Publicidad</small></div></div>
           <p class="ptxt">Color, forma o un diente que no te convence. Primero, saber qué te conviene. 👉</p>
