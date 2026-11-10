@@ -121,7 +121,7 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
 
 .real{display:inline-block;font:700 10.5px/1.5 var(--sans);letter-spacing:.09em;text-transform:uppercase;border-radius:6px;padding:2px 8px;vertical-align:middle;white-space:nowrap;background:var(--ok-soft);color:var(--ok)}
 .dhero .real{background:rgba(19,134,90,.35);color:#C9F2DD}
-.topnav .lgo{height:30px;width:auto;display:block}
+.topnav .lgo{height:40px;margin:-4px 0;width:auto;display:block}
 .dhero img.tooth{aspect-ratio:443/452;opacity:.08}
 .av{background:var(--deep)}
 .av img{width:17px;height:auto;display:block}
@@ -134,14 +134,14 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
 .jump button{font-weight:700;font-size:14.5px;border-radius:99px;padding:11px 18px;cursor:pointer;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff}
 .jump button.pri{background:#fff;color:var(--deep);border-color:#fff}
 /* ventana de la app */
-.app{background:#fff;border:1px solid #CFE0EF;border-radius:22px;overflow:hidden;box-shadow:0 2px 4px rgba(11,42,69,.04),0 40px 80px -40px rgba(11,42,69,.55);min-width:0}
+.app{width:min(1400px,calc(100vw - 32px));justify-self:center;background:#fff;border:1px solid #CFE0EF;border-radius:22px;overflow:hidden;box-shadow:0 2px 4px rgba(11,42,69,.04),0 40px 80px -40px rgba(11,42,69,.55);min-width:0}
 .abar{display:flex;align-items:center;gap:12px;padding:10px 14px;background:linear-gradient(135deg,#0B2A45,#123E66);color:#fff;flex-wrap:wrap}
 .abar .dots{display:flex;gap:6px}.abar .dots i{width:11px;height:11px;border-radius:50%;background:#F0A39B}.abar .dots i:nth-child(2){background:#F2D18A}.abar .dots i:nth-child(3){background:#A9D7A2}
 .abar .wm{font-size:15px}
 .abar .crmb{font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:#fff;color:var(--deep);border-radius:99px;padding:3px 9px}
 .abar .url{font-size:12px;color:rgba(255,255,255,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1 1 120px}
 .abar .ej{background:#FFE08A;color:#4A3500}
-.ashell{display:grid;grid-template-columns:212px minmax(0,1fr);min-height:640px}
+.ashell{display:grid;grid-template-columns:184px minmax(0,1fr);min-height:640px}
 .side{background:#F3F8FD;border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;gap:4px}
 .side button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:12px;font-size:14px;font-weight:600;color:var(--mut)}
 .side button:hover{background:#fff;color:var(--ink)}
@@ -194,7 +194,7 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
 .kpi .sp{display:flex;gap:8px;font-size:11.5px;color:var(--mut);margin-top:3px;flex-wrap:wrap}
 .kpi .sp i{font-style:normal;font-weight:700}
 /* pipeline */
-.pipe{display:grid;grid-template-columns:repeat(7,minmax(178px,1fr));gap:10px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x proximity}
+.pipe{display:grid;grid-template-columns:repeat(7,minmax(168px,1fr));gap:10px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x proximity}
 .col{background:#EEF4FA;border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:300px;border-top:4px solid var(--c);scroll-snap-align:start;min-width:0}
 .col.lost{background:#F8EFEE}
 .col h4{font-size:12.5px;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;gap:6px;align-items:flex-start;line-height:1.3;padding:2px 2px 4px}
@@ -209,6 +209,7 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
 .card .r{display:flex;gap:4px;flex-wrap:wrap}
 .card .ft{display:flex;justify-content:space-between;gap:6px;font-size:11px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;align-items:center}
 .card .ft b{color:var(--ink);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.card .ft > span{flex:none;white-space:nowrap}
 .card .ft .al{color:#B0301F;font-weight:700}
 .card.flash{animation:fl 1.6s ease-out}
 @keyframes fl{0%{box-shadow:0 0 0 4px rgba(19,134,90,.45)}100%{box-shadow:0 1px 2px rgba(11,42,69,.08)}}
@@ -369,7 +370,7 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
   <div class="jump"><button class="pri" data-view="pipe">Ver el tablero</button><button data-view="pres">Ir a presupuestos pendientes</button></div>
   <div class="legend">
     <div><b>Las 7 etapas</b><br>Petición nueva · Contactado · Primera visita agendada · Primera visita hecha · Presupuesto entregado · Presupuesto aceptado · Perdido.</div>
-    <div><b>Filtro por sede</b><br>Patraix (Patraix), Torrent o las dos. Cada petición entra ya asignada a su sede, con su letra A, B o C.</div>
+    <div><b>Filtro por sede</b><br>Patraix (Valencia), Torrent o las dos. Cada petición entra ya asignada a su sede, con su letra A, B o C.</div>
     <div><span class="ej">Datos de ejemplo</span> <span class="real">Real</span><br><b>Inventado:</b> pacientes, mensajes, días y cifras; no son datos vuestros ni previsiones. <b>Real:</b> las campañas de origen de cada ficha son vuestros anuncios públicos en Meta.</div>
   </div>
 </div>
@@ -396,14 +397,14 @@ h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
       <button data-view="pres"><svg class="i"><use href="#i-doc"/></svg>Presupuestos<em id="b-pres">0</em></button>
       <span class="lbl">Medir</span>
       <button onclick="location.href='https://qualivo.io/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion'"><svg class="i"><use href="#i-chart"/></svg>Intelligence</button>
-      <div class="me"><span class="av2 sm" style="background:#1A7FC9">RC</span><div><b>Recepción</b>Patraix (Patraix) y Torrent</div></div>
+      <div class="me"><span class="av2 sm" style="background:#1A7FC9">RC</span><div><b>Recepción</b>Patraix (Valencia) y Torrent</div></div>
     </aside>
     <div class="amain">
       <div class="atop">
         <h3 id="vtitle">Pipeline</h3>
         <input type="search" id="q" placeholder="Buscar paciente…" aria-label="Buscar paciente">
         <select id="f-tr" aria-label="Filtrar por tratamiento"><option value="">Todos los tratamientos</option><option value="imp">Implantes</option><option value="orto">Ortodoncia invisible</option><option value="est">Estética</option><option value="rev">Revisión</option></select>
-        <div class="sedesw" role="group" aria-label="Filtrar por sede"><button data-f="all" aria-pressed="true"><i></i>Todas</button><button data-f="v" aria-pressed="false"><i></i>Patraix · Patraix</button><button data-f="t" aria-pressed="false"><i></i>Torrent</button></div>
+        <div class="sedesw" role="group" aria-label="Filtrar por sede"><button data-f="all" aria-pressed="true"><i></i>Todas</button><button data-f="v" aria-pressed="false"><i></i>Valencia · Patraix</button><button data-f="t" aria-pressed="false"><i></i>Torrent</button></div>
         <button class="reset" id="reset" type="button">↺ Restaurar</button>
       </div>
 
