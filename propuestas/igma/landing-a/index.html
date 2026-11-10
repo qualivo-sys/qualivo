@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Producción musical en Vigo · IGMA (maqueta)</title>
+<meta name="description" content="Maqueta de landing del Programa de Producción Musical de IGMA, preparada por Qualivo.">
+<link rel="icon" href="../assets/brand/isotipo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap">
+<style>
+/* Landing · IGMA. Maqueta de Qualivo. Estructura UX de la landing de Marín, estética oscura de igma.es. */
+:root{color-scheme:dark;--bg:#0A0A0B;--bg2:#121214;--bg3:#18191C;--ink:#F4F5F7;--mut:#9A9DA6;--line:#2A2B30;--cy:#00A5F4;--cy2:#5CCBFF;--wa:#25D366;
+--disp:"Montserrat",system-ui,sans-serif;--sans:"Roboto",system-ui,-apple-system,"Segoe UI",sans-serif;--g:clamp(16px,5vw,72px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+svg{display:block}
+[hidden]{display:none!important}
+button,input{font:inherit;color:inherit}
+h1,h2,h3,legend,.big{font-family:var(--disp);font-weight:800;letter-spacing:-.035em;text-wrap:balance}
+h1 em,h2 em{font-style:normal;color:var(--cy);text-shadow:0 0 30px rgba(0,165,244,.35)}
+.in{max-width:1240px;margin:0 auto;padding:0 var(--g)}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.kick{display:block;font:700 12px/1.4 var(--disp);letter-spacing:.18em;text-transform:uppercase;color:var(--cy);margin-bottom:20px}
+:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;font:700 15px/1.2 var(--disp);letter-spacing:.01em;text-decoration:none;border:1px solid transparent;padding:18px 28px;cursor:pointer;transition:background .2s,color .2s,border-color .2s,box-shadow .2s;border-radius:2px}
+.btn .ic{width:19px;height:19px}
+.btn.pri{background:var(--cy);color:#00131F}
+.btn.pri:hover{background:var(--cy2);box-shadow:0 0 32px rgba(0,165,244,.45)}
+.btn.pri .ar{width:18px;height:2px;background:currentColor;transition:width .2s}
+.btn.pri:hover .ar{width:26px}
+.btn.ghost{background:rgba(0,0,0,.25);color:#fff;border-color:rgba(255,255,255,.45)}
+.btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn.ghost .ic{color:var(--wa)}
+.btn.sm{padding:11px 18px;font-size:13.5px}
+
+/* menú común */
+.topnav{position:sticky;top:0;z-index:30;background:#000;color:#fff;font-size:12.5px;border-bottom:1px solid var(--line)}
+.topnav .row{display:flex;align-items:center;gap:20px;padding:0 var(--g);min-height:44px}
+.topnav .brand{flex:none;display:flex;align-items:center;gap:8px;font-weight:600;white-space:nowrap;margin-right:auto}
+.topnav .brand .x{opacity:.5;font-weight:400}
+.topnav .brand img{height:20px;width:auto}
+.topnav .links{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.topnav .links::-webkit-scrollbar{display:none}
+.topnav a{color:rgba(255,255,255,.6);text-decoration:none;white-space:nowrap;padding:12px 0}
+.topnav a:hover,.topnav a[aria-current="page"]{color:#fff}
+.topnav .ab{display:flex;gap:12px;padding-left:18px;border-left:1px solid rgba(255,255,255,.18);flex:none}
+.topnav .ab a[aria-current="page"]{color:var(--cy)}
+
+/* hero a sangre */
+.hero{position:relative;min-height:calc(100svh - 44px);max-height:980px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:#000}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,0) 80%),linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,.3) 50%,rgba(0,0,0,.94) 100%)}
+.hero>*{position:relative;z-index:1}
+.hero .top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px var(--g)}
+.hero .top img{height:44px;width:auto}
+.hero .top span{font-size:13px;color:rgba(255,255,255,.75);white-space:nowrap}
+.hero .text{padding:0 var(--g) clamp(40px,7vh,80px);max-width:1240px;width:100%;margin:0 auto}
+.hero h1{font-size:clamp(42px,7.4vw,108px);line-height:.98;max-width:11ch}
+.hero .sub{margin:22px 0 32px;font-size:clamp(17px,1.5vw,20px);color:rgba(255,255,255,.82);max-width:40ch}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
+.facts{display:flex;flex-wrap:wrap;gap:6px 28px;margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);font-size:14px;color:rgba(255,255,255,.75)}
+.facts b{color:#fff;font-weight:500}
+
+/* secciones */
+.sec{padding:clamp(80px,11vw,150px) 0}
+.sec.alt{background:var(--bg2)}
+.sec h2{font-size:clamp(34px,4.6vw,66px);line-height:1;max-width:14ch}
+.sec .lede{margin-top:18px;color:var(--mut);font-size:17px;max-width:42ch}
+
+/* ¿es para ti? */
+.fit{list-style:none;display:grid;grid-template-columns:1fr 1fr;margin-top:clamp(44px,6vw,80px);border-top:1px solid var(--line)}
+.fit li{display:flex;gap:22px;align-items:baseline;padding:34px 32px 34px 0;border-bottom:1px solid var(--line);min-width:0}
+.fit li:nth-child(even){padding-left:32px;border-left:1px solid var(--line)}
+.fit .n{flex:none;width:26px;font:700 13px/1 var(--disp);color:var(--cy);letter-spacing:.08em}
+.fit p{font:700 clamp(20px,2.1vw,28px)/1.2 var(--disp);letter-spacing:-.02em}
+
+/* curso en 4 pasos */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(24px,3vw,48px);margin-top:clamp(48px,6vw,88px)}
+.steps li{border-top:1px solid var(--line);padding-top:26px;min-width:0}
+.steps .n{display:block;font:800 clamp(64px,6.4vw,100px)/1 var(--disp);letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px var(--cy)}
+.steps h3{font-size:22px;letter-spacing:-.02em;margin:20px 0 8px}
+.steps p{font-size:16px;line-height:1.5;color:var(--mut);max-width:26ch}
+.data{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px clamp(24px,3vw,48px);margin-top:clamp(56px,7vw,96px);padding-top:28px;border-top:1px solid var(--cy)}
+.data dt{font:700 11.5px/1.4 var(--disp);letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.data dd{font-size:17px;line-height:1.4}
+
+/* padres */
+.par{display:grid;background:#000}
+.par figure{position:relative;min-height:70vw;overflow:hidden}
+.par figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.par .tx{padding:64px var(--g) 72px}
+.par h2{font-size:clamp(34px,4.2vw,60px);line-height:1;max-width:12ch}
+.par ul{list-style:none;margin-top:36px;border-top:1px solid var(--line)}
+.par li{padding:22px 0;border-bottom:1px solid var(--line);font-size:clamp(17px,1.5vw,20px);line-height:1.45;color:#D9DBE0}
+.par li b{color:#fff;font-weight:500}
+@media (min-width:900px){
+  .par{grid-template-columns:minmax(0,55fr) minmax(0,45fr);align-items:center}
+  .par figure{min-height:min(720px,82vh);height:100%}
+  .par .tx{padding:110px var(--g) 110px clamp(48px,6vw,110px)}
+}
+
+/* FAQ */
+.faq{display:grid;gap:48px}
+.fqs{border-top:1px solid var(--line)}
+.fq{border-bottom:1px solid var(--line)}
+.fq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 0;font:700 18px/1.35 var(--disp);letter-spacing:-.01em}
+.fq summary::-webkit-details-marker{display:none}
+.fq summary::after{content:"+";flex:none;font-size:28px;font-weight:400;line-height:1;color:var(--cy);transition:transform .2s}
+.fq[open] summary::after{transform:rotate(45deg)}
+.fq .a{padding:0 0 26px;color:var(--mut);max-width:60ch}
+@media (min-width:900px){.faq{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+
+/* formulario */
+.fgrid{display:grid;gap:44px}
+.fside h2{max-width:11ch}
+.box{background:var(--bg3);border:1px solid var(--line);padding:clamp(24px,3.4vw,48px);min-width:0;scroll-margin-top:70px;box-shadow:0 50px 100px -70px rgba(0,165,244,.5)}
+.prog{display:flex;align-items:center;gap:14px;margin-bottom:30px;font-size:12.5px;color:var(--mut);letter-spacing:.04em}
+.prog .tr{flex:1;height:2px;background:var(--line)}
+.prog .tr i{display:block;height:100%;width:20%;background:var(--cy);box-shadow:0 0 12px rgba(0,165,244,.7);transition:width .3s}
+.step{display:none;border:0;min-width:0}
+.step.on{display:block;animation:fi .35s ease}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+legend{font-size:clamp(25px,2.4vw,34px);line-height:1.12;margin-bottom:22px;padding:0}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;background:none;border:0;border-top:1px solid var(--line);padding:19px 4px;text-align:left;font-size:17px;cursor:pointer;transition:padding .2s,color .2s}
+.opts .opt:last-child{border-bottom:1px solid var(--line)}
+.opt::after{content:"→";color:var(--cy);transition:transform .2s}
+.opt:hover{padding-left:12px;color:#fff}
+.opt:hover::after{transform:translateX(4px)}
+.opt[aria-pressed="true"]{color:var(--cy2);font-weight:500}
+.opt[aria-pressed="true"]::after{content:"●";font-size:10px}
+.fields{display:grid;gap:22px}
+.fields label{display:block;font-size:13px;color:var(--mut)}
+.fields input[type=text],.fields input[type=tel]{display:block;width:100%;margin-top:6px;border:0;border-bottom:1px solid #4A4C53;padding:10px 0;font-size:18px;background:none;border-radius:0;outline:0;color:#fff}
+.fields input:focus{border-bottom-color:var(--cy)}
+.fields .cb{display:flex;gap:12px;align-items:flex-start;line-height:1.5}
+.fields .cb input{margin-top:3px;accent-color:var(--cy);width:16px;height:16px;flex:none}
+.err{display:none;font-size:14px;color:#FF8A8A}
+.err.on{display:block}
+.fnav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:30px;min-height:56px}
+.back{background:none;border:0;font-size:14px;color:var(--mut);cursor:pointer;visibility:hidden;padding:10px 0}
+.back.on{visibility:visible}
+.okv{display:none}
+.box.done form{display:none}
+.box.done .okv{display:block;animation:fi .35s ease}
+.okv .tick{width:52px;height:52px;border-radius:50%;border:1px solid var(--cy);color:var(--cy);display:grid;place-items:center;margin-bottom:22px}
+.okv h3{font-size:clamp(30px,3vw,42px);line-height:1.05}
+.okv > p{margin-top:12px;color:var(--mut)}
+.crm{margin-top:30px;border-top:1px solid var(--line);padding-top:22px}
+.crm .hd{font:700 11.5px/1.4 var(--disp);letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:16px}
+.crm .lv{display:flex;gap:16px;align-items:center}
+.crm .L{display:grid;place-items:center;width:52px;height:52px;flex:none;font:800 26px/1 var(--disp);color:#00131F;background:var(--cy)}
+.crm .L.B{background:#C9CCD3}.crm .L.C{background:#5A5D66;color:#fff}
+.crm .lv b{display:block;font-size:16px}
+.crm .lv small{color:var(--mut);font-size:14px}
+.crm dl{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;margin-top:20px;font-size:14px}
+.crm dt{color:var(--mut)}
+.crm dd{font-weight:500;margin:0}
+.again{margin-top:26px;background:none;border:0;border-bottom:1px solid currentColor;color:var(--mut);font-size:14px;cursor:pointer;padding:0 0 2px}
+@media (min-width:900px){.fgrid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start}}
+
+/* cierre */
+.final{position:relative;overflow:hidden;text-align:center;padding:clamp(110px,16vw,220px) 0;background:#000}
+.final>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42}
+.final::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,.2),rgba(0,0,0,.85))}
+.final .in{position:relative;z-index:1}
+.final h2{font-size:clamp(38px,5.6vw,84px);line-height:.98;max-width:13ch;margin:0 auto}
+.final .ctas{justify-content:center;margin-top:40px}
+
+/* pie */
+.foot{background:#000;border-top:2px solid var(--cy);color:rgba(255,255,255,.6);font-size:13px;padding:56px 0 calc(56px + env(safe-area-inset-bottom))}
+.foot .in{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px}
+.foot img{height:44px;width:auto;margin-bottom:16px}
+.foot b{color:rgba(255,255,255,.9);font-weight:500}
+.foot .note{max-width:46ch}
+
+/* barra fija móvil */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(10,10,11,.96);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s}
+.mbar.on{transform:none}
+.mbar .btn{flex:1;padding:15px 12px}
+.mbar .btn.wa{flex:0 0 auto;background:#1A1B1F;color:#fff;border-color:var(--line)}
+.mbar .btn.wa .ic{color:var(--wa)}
+.toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:50;background:#1A1B1F;border:1px solid var(--line);color:#fff;font-size:14px;padding:12px 16px;max-width:min(92vw,420px);text-align:center;transition:opacity .2s,transform .2s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:980px){
+  .steps,.data{grid-template-columns:1fr 1fr}
+}
+@media (max-width:899px){
+  .topnav .brand img,.topnav .brand .x{display:none}
+  .topnav .row{gap:14px}
+  .topnav .ab{padding-left:14px}
+  .hero .top img{height:34px}
+  .hero .top span{display:none}
+  .hero .ctas .btn,.final .ctas .btn{flex:1 1 100%}
+  .mbar{display:flex}
+  .foot{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+}
+@media (max-width:640px){
+  .fit{grid-template-columns:1fr}
+  .fit li,.fit li:nth-child(even){padding:24px 0;border-left:0}
+  .steps{grid-template-columns:1fr;gap:0}
+  .steps li{display:grid;grid-template-columns:76px 1fr;gap:0 8px;padding:24px 0}
+  .steps .n{font-size:56px;grid-row:span 2}
+  .steps h3{margin:4px 0 4px;font-size:20px}
+  .data{grid-template-columns:1fr 1fr;gap:22px 20px}
+  .facts{gap:6px 18px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-wa" viewBox="0 0 24 24"><path d="M20 11.8A8.2 8.2 0 0 1 7.9 19L4 20l1.1-3.8A8.2 8.2 0 1 1 20 11.8z"/><path d="M9 8.6c.2-.4.5-.5.8-.5h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.6l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.2-.1.4-.2.6-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.6-.5.8-.8.5-2 .5-3.6-.4a9 9 0 0 1-3.3-3.3c-.9-1.6-.9-2.8-.1-3.3z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+</defs></svg>
+
+<nav class="topnav" aria-label="Paquete IGMA">
+  <div class="row">
+    <div class="brand">Qualivo <span class="x">×</span> <img src="../assets/brand/logo-blanco.png" alt="IGMA" width="300" height="117"></div>
+    <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="../landing-a/" aria-current="page">Landings</a><a href="../whatsapp/">WhatsApp</a><a href="../demo/">CRM</a><a href="../presentacion/">Presentación</a></div>
+    <div class="ab" aria-label="Elegir landing"><a href="../landing-a/" aria-current="page">A</a><a href="../landing-b/">B</a></div>
+  </div>
+</nav>
+
+<main>
+<section class="hero" id="top">
+  <img src="../presentacion/img/daw.jpg" alt="Mezclador de un DAW en la pantalla del estudio de IGMA" style="object-position:70% 50%" fetchpriority="high">
+  <div class="top"><img src="../assets/brand/logo-blanco.png" alt="IGMA, Instituto Gallego de Música Avanzada" width="300" height="117"><span>Rúa Progreso 14 · Vigo</span></div>
+  <div class="text">
+    <span class="kick">Producción musical · Vigo</span>
+    <h1>Haz que tu música <em>suene profesional</em></h1>
+    <p class="sub">Un año en estudio: sonido, síntesis, mezcla y máster.</p>
+    <div class="ctas">
+      <a class="btn pri" href="#info">Pide información <span class="ar"></span></a>
+      <a class="btn ghost js-wa" href="#info"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp</a>
+    </div>
+    <p class="facts"><span><b>Octubre</b> a julio</span><span><b>160 h</b> presenciales</span><span><b>Dos tardes</b> por semana</span><span>Pago <b>a plazos</b></span></p>
+  </div>
+</section>
+
+<section class="sec" id="para-ti"><div class="in">
+  <span class="kick">¿Es para ti?</span>
+  <h2>Si te reconoces, <em>es tu curso</em></h2>
+  <ul class="fit"><li><span class="n">01</span><p>Tienes temas empezados y ninguno terminado</p></li><li><span class="n">02</span><p>Aprendes con tutoriales y te falta método</p></li><li><span class="n">03</span><p>Quieres que tu mezcla suene como en la radio</p></li><li><span class="n">04</span><p>Empiezas de cero y quieres hacerlo bien</p></li></ul>
+</div></section>
+
+<section class="sec alt" id="curso"><div class="in">
+  <span class="kick">El programa</span>
+  <h2>Un año, en cuatro pasos</h2>
+  <ol class="steps"><li><span class="n">1</span><h3>Sonido y DAW</h3><p>Señal, MIDI, groove y Ableton Live a fondo.</p></li><li><span class="n">2</span><h3>Síntesis y composición</h3><p>Sintes, drum machines, armonía y estructura.</p></li><li><span class="n">3</span><h3>Mezcla y máster</h3><p>Ecualización, compresión, sidechain y máster.</p></li><li><span class="n">4</span><h3>Directo e industria</h3><p>Live set, temas grabados, sellos y promoción.</p></li></ol>
+  <dl class="data"><div><dt>Duración</dt><dd>10 meses, de octubre a julio</dd></div><div><dt>Horas</dt><dd>160 horas presenciales</dd></div><div><dt>Horario</dt><dd>L y X de 17 a 19 h<br>o M y J de 19 a 21 h</dd></div><div><dt>Incluye</dt><dd>Material, diploma y pago a plazos</dd></div></dl>
+</div></section>
+
+<section class="par" id="familias" aria-labelledby="par-t">
+  <figure><img src="../presentacion/img/estudio.jpg" alt="Estudio de producción de IGMA" style="object-position:60% 50%" loading="lazy"></figure>
+  <div class="tx">
+    <span class="kick">Si eres madre o padre</span>
+    <h2 id="par-t">Un curso serio, <em>con horario fijo</em></h2>
+    <ul><li><b>Presencial</b>, dos tardes por semana, en el centro de Vigo.</li><li><b>Grupos reducidos</b>, equipo individual y profesores en activo.</li><li><b>Programa y precio por escrito</b>, con pago a plazos. Y podéis venir a verlo.</li></ul>
+  </div>
+</section>
+
+<section class="sec" id="faq"><div class="in faq">
+  <div>
+    <span class="kick">Preguntas frecuentes</span>
+    <h2>Lo que más nos preguntáis</h2>
+  </div>
+  <div class="fqs"><details class="fq"><summary>¿Necesito saber música?</summary><div class="a">No. El programa empieza desde la base y también sirve a quien ya produce y quiere ordenar lo que sabe.</div></details><details class="fq"><summary>¿Tengo que llevar ordenador?</summary><div class="a">No. En clase cada alumno trabaja con su propio equipo profesional. El material está incluido.</div></details><details class="fq"><summary>¿Cuánto cuesta?</summary><div class="a">Depende del programa y se puede pagar a plazos. Te enviamos el precio por escrito junto al programa.</div></details><details class="fq"><summary>¿Qué título obtengo?</summary><div class="a">Un diploma acreditativo de IGMA al terminar el programa.</div></details></div>
+</div></section>
+
+<section class="sec alt" id="info"><div class="in fgrid">
+  <div class="fside">
+    <span class="kick">Pide información</span>
+    <h2>Te enviamos el programa <em>en 1 minuto</em></h2>
+    <p class="lede">Cuatro preguntas y te escribimos por WhatsApp con el programa y el precio.</p>
+  </div>
+  <div class="box" id="fm">
+    <form novalidate>
+      <div class="prog" aria-hidden="true"><span class="pn">1 / 5</span><div class="tr"><i></i></div></div>
+      <fieldset class="step on" data-q="curso">
+        <legend>¿Qué curso te interesa?</legend>
+        <div class="opts"><button type="button" class="opt" data-v="prod" aria-pressed="false">Producción musical</button><button type="button" class="opt" data-v="dj" aria-pressed="false">DJ profesional</button><button type="button" class="opt" data-v="sup" aria-pressed="false">Programa superior (producción, DJ y music business)</button><button type="button" class="opt" data-v="nose" aria-pressed="false">Aún no lo sé</button></div>
+      </fieldset>
+      <fieldset class="step" data-q="decide">
+        <legend>¿Quién decide la matrícula?</legend>
+        <div class="opts">
+          <button type="button" class="opt" data-v="yo" data-t="El alumno" aria-pressed="false">Yo</button>
+          <button type="button" class="opt" data-v="familia" data-t="El alumno con su familia" aria-pressed="false">Yo, con mi familia</button>
+          <button type="button" class="opt" data-v="padre" data-t="Madre o padre" aria-pressed="false">Soy madre o padre</button>
+        </div>
+      </fieldset>
+      <fieldset class="step" data-q="cuando">
+        <legend>¿Cuándo quieres empezar?</legend>
+        <div class="opts">
+          <button type="button" class="opt" data-v="ya" data-t="Este curso, si hay plaza" aria-pressed="false">Este curso, si queda plaza</button>
+          <button type="button" class="opt" data-v="oct" data-t="Octubre de 2027" aria-pressed="false">En octubre de 2027</button>
+          <button type="button" class="opt" data-v="info" data-t="Solo se informa" aria-pressed="false">Solo me estoy informando</button>
+        </div>
+      </fieldset>
+      <fieldset class="step" data-q="precio">
+        <legend>¿Conoces ya el precio?</legend>
+        <div class="opts">
+          <button type="button" class="opt" data-v="si" data-t="Lo conoce" aria-pressed="false">Sí, lo conozco</button>
+          <button type="button" class="opt" data-v="aprox" data-t="Se hace una idea" aria-pressed="false">Me hago una idea</button>
+          <button type="button" class="opt" data-v="no" data-t="No lo conoce" aria-pressed="false">No, enviádmelo</button>
+        </div>
+      </fieldset>
+      <fieldset class="step" data-q="datos">
+        <legend>¿A quién escribimos?</legend>
+        <div class="fields">
+          <label>Nombre<input type="text" name="nombre" placeholder="Tu nombre" autocomplete="off"></label>
+          <label>WhatsApp<input type="tel" name="tel" placeholder="Tu móvil" autocomplete="off" inputmode="tel"></label>
+          <label class="cb"><input type="checkbox" name="ok"><span>Acepto que IGMA use mis datos para contestarme.</span></label>
+          <p class="err" role="alert">Falta tu nombre, tu WhatsApp o aceptar el aviso.</p>
+        </div>
+      </fieldset>
+      <div class="fnav">
+        <button type="button" class="back">← Atrás</button>
+        <button type="submit" class="btn pri send" hidden>Pide información <span class="ar"></span></button>
+      </div>
+    </form>
+    <div class="okv" role="status">
+      <div class="tick"><svg class="ic"><use href="#i-check"/></svg></div>
+      <h3>Gracias, <span class="nm"></span></h3>
+      <p>Te escribimos por WhatsApp con el programa y el precio.</p>
+      <div class="crm">
+        <div class="hd">Lo que vería el equipo en el CRM</div>
+        <div class="lv"><span class="L">A</span><div><b class="lt"></b><small class="lw"></small></div></div>
+        <dl></dl>
+      </div>
+      <button type="button" class="again">Probar otra combinación</button>
+    </div>
+  </div>
+</div></section>
+
+<section class="final">
+  <img src="../assets/fotos/prod-estudio.jpg" alt="" loading="lazy" style="object-position:50% 55%">
+  <div class="in">
+    <span class="kick">Presencial · Vigo · octubre</span>
+    <h2>Tu primer tema terminado <em>empieza en octubre</em></h2>
+    <div class="ctas">
+      <a class="btn pri" href="#info">Pide información <span class="ar"></span></a>
+      <a class="btn ghost js-wa" href="#info"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><div class="in">
+  <div>
+    <img src="../assets/brand/logo-blanco.png" alt="IGMA, Instituto Gallego de Música Avanzada" width="300" height="117">
+    <p><b>IGMA · Instituto Gallego de Música Avanzada</b></p>
+    <p>Rúa Progreso 14, 36202 Vigo (Pontevedra)</p>
+  </div>
+  <p class="note">Maqueta de Qualivo para IGMA con fotos de igma.es y datos de ejemplo: no está publicada ni envía datos.</p>
+</div></footer>
+
+<div class="mbar" aria-label="Acciones rápidas">
+  <a class="btn pri" href="#info">Pide información</a>
+  <a class="btn wa js-wa" href="#info" aria-label="WhatsApp"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp</a>
+</div>
+<div class="toast" role="status"></div>
+
+<script>
+(function () {
+  var CFG = { origen: 'Landing A · producción musical', wa: 'Hola, quiero información sobre el curso de producción musical' };
+  /* Regla de ejemplo: C = solo se informa; A = quiere empezar y conoce el precio (o se hace una idea); B = el resto. */
+  function regla(r) {
+    if (r.cuando === 'info') return 'C';
+    if ((r.cuando === 'ya' || r.cuando === 'oct') && (r.precio === 'si' || r.precio === 'aprox')) return 'A';
+    return 'B';
+  }
+  var QUE = { A: ['Prioridad alta', 'Llamada hoy e invitación a visitar la escuela.'], B: ['Seguimiento', 'Programa y precio por WhatsApp; seguimiento en 48 h.'], C: ['Se está informando', 'Programa por WhatsApp y aviso cuando abra la matrícula.'] };
+
+  var box = document.getElementById('fm'), form = box.querySelector('form');
+  var steps = [].slice.call(form.querySelectorAll('.step')), i = 0, r = {};
+  var bar = form.querySelector('.prog i'), pn = form.querySelector('.pn'), back = form.querySelector('.back'), send = form.querySelector('.send'), err = form.querySelector('.err');
+
+  function show(n) {
+    i = Math.max(0, Math.min(n, steps.length - 1));
+    steps.forEach(function (s, k) { s.classList.toggle('on', k === i); });
+    bar.style.width = ((i + 1) / steps.length * 100) + '%';
+    pn.textContent = (i + 1) + ' / ' + steps.length;
+    back.classList.toggle('on', i > 0);
+    send.hidden = i !== steps.length - 1;
+  }
+  steps.forEach(function (s) {
+    s.addEventListener('click', function (e) {
+      var b = e.target.closest('.opt'); if (!b) return;
+      [].forEach.call(s.querySelectorAll('.opt'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      r[s.dataset.q] = b.dataset.v; r[s.dataset.q + 'T'] = b.dataset.t || b.textContent;
+      setTimeout(function () { show(i + 1); }, 180);
+    });
+  });
+  back.addEventListener('click', function () { show(i - 1); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nm = form.nombre.value.trim(), tel = form.tel.value.trim();
+    if (!nm || !tel || !form.ok.checked) { err.classList.add('on'); return; }
+    err.classList.remove('on');
+    var L = regla(r), el = box.querySelector('.L');
+    el.textContent = L; el.className = 'L ' + L;
+    box.querySelector('.nm').textContent = nm.split(' ')[0];
+    box.querySelector('.lt').textContent = 'Contacto ' + L + ' · ' + QUE[L][0];
+    var next = QUE[L][1];
+    if (r.decide === 'familia' || r.decide === 'padre') next += ' Invitar también a la familia.';
+    box.querySelector('.lw').textContent = next;
+    var rows = [['Curso', r.cursoT || '—'], ['Decide', r.decideT || '—'], ['Cuándo', r.cuandoT || '—'], ['Precio', r.precioT || '—'], ['Origen', CFG.origen]];
+    var dl = box.querySelector('dl'); dl.innerHTML = '';
+    rows.forEach(function (x) { var dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = x[0]; dd.textContent = x[1]; dl.appendChild(dt); dl.appendChild(dd); });
+    box.classList.add('done');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  box.querySelector('.again').addEventListener('click', function () {
+    form.reset(); r = {};
+    [].forEach.call(form.querySelectorAll('.opt'), function (x) { x.setAttribute('aria-pressed', 'false'); });
+    box.classList.remove('done'); show(0);
+  });
+  show(0);
+
+  /* WhatsApp: en la maqueta solo avisa; en la versión real abre WhatsApp con un mensaje preparado. */
+  var toast = document.querySelector('.toast'), tt;
+  [].forEach.call(document.querySelectorAll('.js-wa'), function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      toast.textContent = 'En la versión real abre WhatsApp con «' + CFG.wa + '».';
+      toast.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove('on'); }, 3200);
+    });
+  });
+
+  /* barra fija en móvil: aparece al pasar el hero y se esconde en el formulario */
+  var mbar = document.querySelector('.mbar'), hero = document.querySelector('.hero'), cita = document.getElementById('info');
+  function onScroll() {
+    var y = window.scrollY, h = hero.offsetTop + hero.offsetHeight - 80, c = cita.getBoundingClientRect();
+    mbar.classList.toggle('on', y > h && !(c.top < window.innerHeight * .6 && c.bottom > 120));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+})();
+</script>
+</body>
+</html>

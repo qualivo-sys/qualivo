@@ -10,10 +10,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap">
 <style>
-/* Simulador de WhatsApp · Qualivo × IGMA: negro, cian #00A5F4 de su logo, Raleway (titulares) y Roboto (texto), como igma.es. */
+/* Simulador de WhatsApp · Qualivo × IGMA: negro, cian #00ADFF de su logo, Raleway (titulares) y Roboto (texto), como igma.es. */
 :root{
   --paper:#08090B;--surface:#111317;--surface-2:#171A20;--ink:#F2F5F8;--ink-2:#C9D1DA;--muted:#8B95A1;--line:#242931;
-  --brand:#00A5F4;--brand-2:#00ACFF;--glow:rgba(0,165,244,.35);--accent:#4CC3FF;--accent-soft:rgba(0,165,244,.12);
+  --brand:#00ADFF;--brand-2:#00ACFF;--glow:rgba(0,173,255,.35);--accent:#4CC3FF;--accent-soft:rgba(0,173,255,.12);
   --sys:#4CC3FF;--adm:#5FD69B;--per:#F2C26B;--alu:#AEB7C2;--ej:#F2C26B;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -20px rgba(0,0,0,.8);
   --head:"Raleway",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -79,7 +79,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brand);outline-offs
 .prog i{display:block;height:100%;width:0;background:var(--brand);box-shadow:0 0 10px var(--glow);transition:width .4s}
 
 /* el móvil */
-.phone{position:relative;width:min(100%,400px);height:clamp(540px,calc(100vh - 300px),840px);border-radius:46px;padding:12px;background:#000;box-shadow:0 0 0 2px #2A3138,0 0 60px -10px rgba(0,165,244,.25),0 40px 80px -30px rgba(0,0,0,.9)}
+.phone{position:relative;width:min(100%,400px);height:clamp(540px,calc(100vh - 300px),840px);border-radius:46px;padding:12px;background:#000;box-shadow:0 0 0 2px #2A3138,0 0 60px -10px rgba(0,173,255,.25),0 40px 80px -30px rgba(0,0,0,.9)}
 .phone::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:96px;height:26px;border-radius:99px;background:#000;z-index:5}
 .screen{position:relative;height:100%;border-radius:36px;overflow:hidden;display:flex;flex-direction:column;background:#EFE7DD;color:#111B21;font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;color-scheme:light}
 .sbar{flex:none;height:44px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 6px 30px;background:#075E54;color:#fff;font-size:13.5px;font-weight:600}
@@ -156,7 +156,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brand);outline-offs
 .ph h2{font-size:22px;font-weight:900;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
 .ph h2 .live{width:9px;height:9px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 0 var(--glow);animation:live 1.6s infinite}
 .ph h2 .live.off{background:var(--muted);animation:none}
-@keyframes live{70%{box-shadow:0 0 0 10px rgba(0,165,244,0)}100%{box-shadow:0 0 0 0 rgba(0,165,244,0)}}
+@keyframes live{70%{box-shadow:0 0 0 10px rgba(0,173,255,0)}100%{box-shadow:0 0 0 0 rgba(0,173,255,0)}}
 .ph p{font-size:14px;color:var(--ink-2);margin-top:6px;max-width:60ch}
 .who-l{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:12px;font-size:12px;color:var(--muted)}
 .who-l span{display:inline-flex;align-items:center;gap:6px}
@@ -169,7 +169,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--brand);outline-offs
 .st p{font-size:14px;line-height:1.5;color:var(--ink-2)}
 .st p b{color:var(--ink)}
 .st.done{opacity:.66}
-.st.now{opacity:1;background:var(--accent-soft);border-color:rgba(0,165,244,.45)}
+.st.now{opacity:1;background:var(--accent-soft);border-color:rgba(0,173,255,.45)}
 .st.now::before{content:"";position:absolute;left:-1px;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:var(--brand);box-shadow:0 0 10px var(--glow)}
 .st.gap .tm{color:var(--accent)}
 @media (max-width:979px){.steps{max-height:430px}}
@@ -198,7 +198,7 @@ body.fs .topnav{display:none}
 <nav class="topnav" aria-label="Paquete IGMA">
   <div class="in">
     <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><img class="lgo" src="../assets/brand/logo-blanco.png" alt="IGMA" width="72" height="26"></div>
-    <div class="links"><a href="../">Plan</a><a href="./" aria-current="page">WhatsApp</a><a href="../demo/">CRM</a><a href="https://qualivo.io/intelligence/?sector=igma&amp;empresa=IGMA&amp;objetivo=captacion">Intelligence</a></div>
+    <div class="links"><a href="../">Plan</a><a href="../presentacion/">Presentación</a><a href="../anuncios/">Anuncios</a><a href="../landing-a/">Landings</a><a href="./" aria-current="page">WhatsApp</a><a href="../demo/">CRM</a><a href="https://qualivo.io/intelligence/?sector=igma&amp;empresa=IGMA&amp;objetivo=captacion">Intelligence</a></div>
   </div>
 </nav>
 
@@ -281,15 +281,15 @@ const S = [
   {k:"in", h:"10:19", t:"Sábado 11:00", tap:1, c:["alu"], n:"<b>Brais elige el sábado</b>, sin llamar ni esperar."},
   {k:"out", h:"10:19", t:"¡Hecho! Te esperamos el sábado a las 11:00 ✅ El viernes te recuerdo cómo llegar.", c:["sys"], n:"<b>Visita en la agenda</b> y recordatorios programados."}
  ]},
- {t:"La familia pregunta por el precio y la financiación", desc:"Escribe la madre de Uxía. Quiere cifras y plazos. El sistema no inventa nada: pasa la conversación a una persona.", steps:[
+ {t:"La familia pregunta por el precio y la financiación", desc:"Escribe la madre de Carla. Quiere cifras y plazos. El sistema no inventa nada: pasa la conversación a una persona.", steps:[
   {k:"d", t:"Jueves, 12 de noviembre"},
-  {k:"in", h:"13:41", t:"Buenas tardes. Soy Rosa, la madre de Uxía. Ella está mirando el curso de producción. ¿Cuánto cuesta el año? ¿Se puede pagar a plazos?", c:["alu"], n:"<b>Pregunta la familia</b>, que es quien suele pagar."},
+  {k:"in", h:"13:41", t:"Buenas tardes. Soy Rosa, la madre de Carla. Ella está mirando el curso de producción. ¿Cuánto cuesta el año? ¿Se puede pagar a plazos?", c:["alu"], n:"<b>Pregunta la familia</b>, que es quien suele pagar."},
   {k:"out", h:"13:42", t:"Hola, Rosa, encantados. El precio depende del programa y de la forma de pago, y prefiero que te lo explique una persona del equipo con todo el detalle. ¿Te llamamos hoy?", btns:["Sí, llamadme","Mejor por escrito"], c:["sys"], n:"<b>No da cifras inventadas</b> ni promete financiación. Deriva a una persona."},
   {k:"in", h:"13:45", t:"Sí, llamadme. A partir de las 17:00 mejor", c:["alu"], n:"Rosa elige <b>llamada a partir de las 17:00</b>."},
-  {k:"out", h:"13:45", t:"Hecho. Te llama Alba, de admisiones, hoy a las 17:00 📞", c:["sys"], n:"<b>Aviso a Alba</b> con la ficha: madre de Uxía, producción, pregunta por plazos."},
-  {k:"gap", h:"17:00", c:["per"], n:"<b>Alba llama</b>. Sabe quién es Rosa, qué curso mira Uxía y qué ha preguntado."},
+  {k:"out", h:"13:45", t:"Hecho. Te llama Alba, de admisiones, hoy a las 17:00 📞", c:["sys"], n:"<b>Aviso a Alba</b> con la ficha: madre de Carla, producción, pregunta por plazos."},
+  {k:"gap", h:"17:00", c:["per"], n:"<b>Alba llama</b>. Sabe quién es Rosa, qué curso mira Carla y qué ha preguntado."},
   {k:"callok", h:"17:00", c:["per"], n:"<b>Llamada de 14 minutos.</b> Precio real, plazos y qué incluye, contado por Alba."},
-  {k:"doc", h:"17:18", from:"Alba · Admisiones", doc:"Producción Musical · condiciones.pdf", t:"Rosa, gracias por la llamada. Te dejo por escrito lo que hablamos: programa, precio y pago a plazos. Y os esperamos a Uxía y a ti el sábado a las 12:00 en el estudio.", c:["per"], n:"<b>Las cifras las pone Alba</b>, de la tarifa real de IGMA. El sistema solo guarda el documento en la ficha."},
+  {k:"doc", h:"17:18", from:"Alba · Admisiones", doc:"Producción Musical · condiciones.pdf", t:"Rosa, gracias por la llamada. Te dejo por escrito lo que hablamos: programa, precio y pago a plazos. Y os esperamos a Carla y a ti el sábado a las 12:00 en el estudio.", c:["per"], n:"<b>Las cifras las pone Alba</b>, de la tarifa real de IGMA. El sistema solo guarda el documento en la ficha."},
   {k:"in", h:"17:30", t:"Muchas gracias, Alba. El sábado allí estamos las dos", c:["alu"], n:"<b>Visita con la familia</b>: quien decide y quien paga, en el estudio."},
   {k:"out", h:"17:31", t:"¡Genial! Os mando el viernes la ubicación y un recordatorio 🙂", c:["sys"], n:"Recordatorios en marcha para <b>madre e hija</b>."}
  ]},
@@ -450,7 +450,7 @@ async function render(st,i,tk){
   }else if(st.k==="callok"){
     html=`<div class="bub"><div class="call"><span class="ci ok">${PH}</span><span><b>Llamada de voz</b><small>14 min</small></span></div><span class="meta">${st.h}</span></div>`;
   }else if(st.k==="loc"){
-    html=`<div class="bub"><div class="loc"><svg class="pin" width="30" height="38" viewBox="0 0 24 30"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.5 12 30 12 30s12-9.5 12-18.3C24 5.2 18.6 0 12 0z" fill="#00A5F4"/><circle cx="12" cy="11.5" r="4.3" fill="#fff"/></svg></div><div class="lt"><b>IGMA · Instituto Gallego de Música Avanzada</b><small>Centro de Vigo</small></div><span class="meta">${st.h}</span></div>`;
+    html=`<div class="bub"><div class="loc"><svg class="pin" width="30" height="38" viewBox="0 0 24 30"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.5 12 30 12 30s12-9.5 12-18.3C24 5.2 18.6 0 12 0z" fill="#00ADFF"/><circle cx="12" cy="11.5" r="4.3" fill="#fff"/></svg></div><div class="lt"><b>IGMA · Instituto Gallego de Música Avanzada</b><small>Centro de Vigo</small></div><span class="meta">${st.h}</span></div>`;
   }else{
     const from=st.from?`<span class="from">${st.from}</span>`:"";
     const doc=st.doc?`<div class="doc"><span class="di">PDF</span><span><b>${esc(st.doc)}</b><small>2 páginas · PDF</small></span></div>`:"";

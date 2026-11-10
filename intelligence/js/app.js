@@ -43,6 +43,7 @@
     { id: 'almilimetro', txt: 'Al Milímetro', desc: 'Reformas integrales de Sonia, arquitecta', ico: 'reformas', oculto: true },
     { id: 'gestalt', txt: 'Institut Gestalt', desc: 'Formación en terapia: presentación, entrevista y reserva', ico: 'formacion', oculto: true },
     { id: 'cancomar', txt: 'CANCOMAR', desc: 'Formación marítima en Avilés: renovaciones a 5 años, listas de espera y convocatorias', ico: 'formacion', oculto: true },
+    { id: 'igma', txt: 'IGMA', desc: 'Producción musical y DJ en Vigo: petición, clase de prueba, familia y matrícula', ico: 'formacion', oculto: true },
     { id: 'dentalmarin', txt: 'Clínica Dental Marín', desc: 'Clínica dental con dos sedes, Patraix y Torrent: primera visita y presupuesto', ico: 'clinica', oculto: true }
   ];
   const OBJETIVOS = [
