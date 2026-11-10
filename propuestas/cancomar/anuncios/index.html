@@ -340,22 +340,23 @@ addEventListener('DOMContentLoaded',function(){
 .cc.gd .in{justify-content:center}
 .cc.gd::before{content:"";position:absolute;right:-18%;top:-10%;width:75%;aspect-ratio:1;z-index:-1;background:url(../assets/brand/isotipo.png) center/contain no-repeat;filter:brightness(0) invert(1);opacity:.1}
 .cc.gd::after{content:"";position:absolute;left:18px;right:18px;bottom:16px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--amb) 0 30%,rgba(255,255,255,.25) 30%)}
-.cc.lt{background:#F4FAFD;color:#0D2233}
-.cc.lt::before{content:"";position:absolute;left:0;right:0;top:0;height:42%;background:linear-gradient(135deg,#0097DA,#00476B);clip-path:polygon(0 0,100% 0,100% 70%,0 100%)}
-.cc.lt .in{justify-content:flex-end}
+.cc.wh{background:#F4FAFD;color:#0D2233}
+.cc.wh::before{content:"";position:absolute;left:0;right:0;top:0;height:30%;background:linear-gradient(135deg,#0097DA,#00476B);clip-path:polygon(0 0,100% 0,100% 100%,0 55%)}
+.cc.wh .lgc{position:absolute;top:18px;left:18px;z-index:2}
+.cc.wh .in{justify-content:flex-end}
 .cc .n{position:absolute;top:10px;right:10px;font:700 10.5px var(--sans);background:rgba(0,0,0,.45);color:#fff;border-radius:99px;padding:3px 8px;z-index:2}
 .cc .in{position:absolute;inset:0;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;gap:9px}
 .cc .in.top{justify-content:flex-start;padding-top:22px}
 .cc .hk{font:800 22px/1.14 var(--head);letter-spacing:-.015em}
 .cc .big{font:800 82px/0.9 var(--head);color:var(--amb);letter-spacing:-.04em}
 .cc p{font:600 13px/1.45 var(--sans)}
-.cc.lt p{color:#3E5263}
+.cc.wh p{color:#3E5263}
 .cc ul{margin:0;padding:0;list-style:none;display:grid;gap:7px;font:600 13px/1.35 var(--sans)}
 .cc li{display:flex;gap:8px;align-items:flex-start}
 .cc li::before{content:"✓";flex:none;display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:var(--amb);color:#2A1F00;font:800 11px var(--head)}
-.cc.lt li::before{background:var(--b);color:#fff}
+.cc.wh li::before{background:var(--b);color:#fff}
 .cc .pill{align-self:flex-start;background:#fff;color:var(--nv);font:800 13px var(--head);border-radius:99px;padding:9px 15px;box-shadow:0 10px 20px -10px rgba(0,0,0,.6)}
-.cc .pill.wa{background:#25D366;color:#063B1C}
+.cc .pill.wapp{background:#25D366;color:#063B1C}
 .cc .swipe{position:absolute;right:12px;bottom:14px;font:800 11px var(--head);letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.95);color:var(--nv);border-radius:99px;padding:6px 10px;z-index:2}
 .cc .dl{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:#fff;color:#0D2233;border-radius:12px;padding:11px 12px;box-shadow:0 14px 30px -14px rgba(0,0,0,.55)}
 .cc .dl b{font:800 26px/1 var(--head)}.cc .dl small{display:block;font:700 10px var(--head);letter-spacing:.12em;color:var(--red)}
@@ -375,7 +376,7 @@ addEventListener('DOMContentLoaded',function(){
 .gn{display:grid;gap:14px}
 .gn .tl{display:flex;height:30px;border-radius:9px;overflow:hidden;font:700 11px var(--head);color:#fff}
 .gn .tl span{display:grid;place-items:center;border-right:2px solid var(--surface);white-space:nowrap;overflow:hidden;min-width:0}
-.gn .tl span:nth-child(5n+1){background:#0097DA}.gn .tl span:nth-child(5n+2){background:#0080BC}.gn .tl span:nth-child(5n+3){background:#00679A}.gn .tl span:nth-child(5n+4){background:#00476B}.gn .tl span:nth-child(5n){background:#06263B}
+.gn .tl span:nth-child(5n+1){background:#0097DA}.gn .tl span:nth-child(5n+2){background:#0080BC}.gn .tl span:nth-child(5n+3){background:#00679A}.gn .tl span:nth-child(5n+4){background:#00476B}.gn .tl span:nth-child(5n){background:#06263B;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
 .esc{margin:0;padding:0;list-style:none;display:grid;gap:10px}
 .esc li{display:grid;grid-template-columns:78px minmax(0,1fr);gap:14px;align-items:start;background:var(--paper);border:1px solid var(--line-2);border-radius:14px;padding:10px}
 .esc .th{position:relative;aspect-ratio:9/16;border-radius:9px;overflow:hidden;background:var(--deep) center/cover no-repeat;display:flex;align-items:flex-end;padding:5px;isolation:isolate}
@@ -409,8 +410,8 @@ addEventListener('DOMContentLoaded',function(){
 .abm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .abm .win{grid-column:1/-1}
 .abm>div{display:grid;gap:4px;align-content:start;background:var(--accent-soft);border-radius:12px;padding:12px 14px;font-size:14px;min-width:0}
-.abm b{font:700 10.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-.abm .win{background:var(--deep);color:#fff}.abm .win b{color:var(--cy)}
+.abm>div>b{font:700 10.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.abm .win{background:var(--deep);color:#fff}.abm .win>b{color:var(--cy)}
 .abm .e{font:800 10px var(--head);color:#3A2B00;background:var(--amb);border-radius:4px;padding:1px 5px;margin-left:4px;letter-spacing:.04em}
 @media (max-width:560px){.abm{grid-template-columns:minmax(0,1fr)}}
 .kit2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
@@ -624,7 +625,7 @@ Dinos qué curso te toca y cuándo caduca. Te damos la fecha más cercana.</pre>
             <div class="cc ph" style="background-image:url(../assets/brand/seguridad-maritima.jpg);background-position:40% center"><span class="n">1/4</span><div class="in"><span class="stk">Desliza y mira la fecha</span><p class="hk">¿Tu certificado caduca en <em>2027?</em></p></div></div>
             <div class="cc gd"><span class="n">2/4</span><div class="in"><span class="big">5</span><p class="hk">años dura un certificado STCW.</p><p>Si esperas al último mes, puede que no haya plaza antes de tu próximo embarque.</p></div></div>
             <div class="cc ph" style="background-image:url(../assets/brand/practicas.jpg);background-position:center"><span class="n">3/4</span><div class="in"><div class="dl"><div><small>PRÓXIMA</small><b>30 nov</b></div><span></span><div><small>HASTA</small><b>1 dic</b></div></div><p class="hk">Actualización de Formación Básica, en Avilés.</p><ul><li>Lucha Contra Incendios</li><li>SMSSM</li><li>Buques de Pasaje</li></ul></div></div>
-            <div class="cc lt"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-color.png" alt=""><p class="hk" style="color:#0D2233">Dinos qué curso te toca y cuándo caduca.</p><p>Te damos la fecha más cercana por WhatsApp. También si estás embarcado.</p><span class="pill wa">Reservar plaza →</span></div></div>
+            <div class="cc wh"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-blanco.png" alt=""><p class="hk" style="color:#0D2233">Dinos qué curso te toca y cuándo caduca.</p><p>Te damos la fecha más cercana por WhatsApp. También si estás embarcado.</p><span class="pill wapp">Reservar plaza →</span></div></div>
           </div>
           <div class="cnav"><button class="pv" type="button" aria-label="Tarjeta anterior">‹</button><span class="dts" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><button class="nx" type="button" aria-label="Tarjeta siguiente">›</button></div>
           <div class="cta"><span>Reservar plaza</span><span aria-hidden="true">›</span></div>
@@ -665,7 +666,7 @@ Dinos qué curso te toca y cuándo caduca. Te damos la fecha más cercana.</pre>
         <div class="vs"><div class="vv"><span class="vl">Variante 1 · Pregunta</span><p class="gq">«¿Tu certificado caduca en 2027?»</p><dl><dt>Hipótesis</dt><dd>Una pregunta que se comprueba en dos segundos filtra sola: solo se para quien de verdad tiene que renovar.</dd><dt>Qué esperamos ver</dt><dd>Menos clics, pero más peticiones A (curso y fecha) y más plazas por euro.</dd></dl></div><span class="vsx">VS</span><div class="vv v2"><span class="vl">Variante 2 · Gesto</span><p class="gq">«Saca la cartera y mira la fecha.»</p><dl><dt>Hipótesis</dt><dd>Pedir un gesto físico frena el scroll mejor que una pregunta, sobre todo en vídeo.</dd><dt>Qué esperamos ver</dt><dd>Más retención a 3 s y más alcance; riesgo de peticiones menos cualificadas.</dd></dl></div></div>
         <div class="abm">
           <div><b>Segmentación</b><span>La misma para las dos: gente de mar en Asturias y el Cantábrico, 22–60 años, intereses pesca, marina mercante y náutica profesional. Excluye a quien ya reservó.</span></div>
-          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>10 €/día por variante durante 10 días: <b>200 € en total</b>. Sin tocar nada hasta el día 7.</span></div>
+          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>10 €/día por variante durante 10 días: <strong>200 € en total</strong>. Sin tocar nada hasta el día 7.</span></div>
           <div class="win"><b>Cómo decidimos el ganador</b><span>Gana la de menor coste por plaza reservada. Si ninguna llega a 5 plazas, decide el coste por petición A. Con menos del 15 % de diferencia, empate: se queda la 1 y se prueba otro gancho.</span></div>
         </div>
       </div>
@@ -746,7 +747,7 @@ Te contestamos con la convocatoria más cercana en Avilés. Si no hay fecha a ti
             <div class="cc ph" style="background-image:url(../assets/brand/puente.jpg);background-position:60% center"><span class="n">1/4</span><div class="in"><div class="dl" style="grid-template-columns:1fr auto"><div><small>EMBARQUE</small><b style="font-size:20px">Lunes, 08:00</b></div><i class="stk" style="font-style:normal;transform:rotate(4deg)">Te falta 1</i></div><p class="hk">Te sale embarque <em>y te falta el curso.</em></p></div></div>
             <div class="cc gd"><span class="n">2/4</span><div class="in"><p class="hk">Escríbenos solo dos cosas:</p><ul><li>Qué curso te falta</li><li>Cuándo embarcas</li></ul><p>Sin formularios. Por WhatsApp, a la hora que sea.</p></div></div>
             <div class="cc ph" style="background-image:url(../assets/brand/pesquero.jpg);background-position:center"><span class="n">3/4</span><div class="in"><p class="bub me">Me falta Sanitaria y embarco el lunes</p><p class="bub">Te proponemos la convocatoria más cercana en Avilés. ¿Lo pagas tú o tu empresa?</p><span class="ej">Datos de ejemplo</span></div></div>
-            <div class="cc lt"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-color.png" alt=""><p class="hk" style="color:#0D2233">¿Sin fecha a tiempo? Te lo decimos claro.</p><p>Y te apuntamos a la lista de espera para avisarte el primero.</p><span class="pill wa">Enviar mensaje →</span></div></div>
+            <div class="cc wh"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-blanco.png" alt=""><p class="hk" style="color:#0D2233">¿Sin fecha a tiempo? Te lo decimos claro.</p><p>Y te apuntamos a la lista de espera para avisarte el primero.</p><span class="pill wapp">Enviar mensaje →</span></div></div>
           </div>
           <div class="cnav"><button class="pv" type="button" aria-label="Tarjeta anterior">‹</button><span class="dts" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><button class="nx" type="button" aria-label="Tarjeta siguiente">›</button></div>
           <div class="cta"><span>Enviar mensaje</span><span aria-hidden="true">›</span></div>
@@ -787,7 +788,7 @@ Te contestamos con la convocatoria más cercana en Avilés. Si no hay fecha a ti
         <div class="vs"><div class="vv"><span class="vl">Variante 1 · Situación</span><p class="gq">«Te sale embarque y te falta el curso.»</p><dl><dt>Hipótesis</dt><dd>Nombrar la situación exacta hace que se reconozca quien la está viviendo ahora mismo.</dd><dt>Qué esperamos ver</dt><dd>Más conversaciones que ya traen curso y fecha en el primer mensaje.</dd></dl></div><span class="vsx">VS</span><div class="vv v2"><span class="vl">Variante 2 · Pérdida</span><p class="gq">«Un curso no debería costarte un embarque.»</p><dl><dt>Hipótesis</dt><dd>Hablar de lo que se pierde (el embarque, el sueldo) mueve también a quien embarca dentro de un mes.</dd><dt>Qué esperamos ver</dt><dd>Más mensajes y más baratos, pero más «solo pregunto».</dd></dl></div></div>
         <div class="abm">
           <div><b>Segmentación</b><span>Gente de mar en Asturias y el Cantábrico, 20–60 años, intereses pesca, marina mercante y náutica profesional. Campaña de mensajes a WhatsApp, ubicaciones automáticas.</span></div>
-          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>8 €/día por variante durante 10 días: <b>160 € en total</b>.</span></div>
+          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>8 €/día por variante durante 10 días: <strong>160 € en total</strong>.</span></div>
           <div class="win"><b>Cómo decidimos el ganador</b><span>Gana el menor coste por conversación con curso y fecha. Desempata quién reserva plaza en menos de 7 días. Mínimo 20 conversaciones por variante para decidir.</span></div>
         </div>
       </div>
@@ -863,7 +864,7 @@ Cuéntanos cuántos tripulantes tienes y qué cursos necesitan. Te llamamos y te
             <div class="cc ph" style="background-image:url(../assets/brand/pesquero.jpg);background-position:center"><span class="n">1/4</span><div class="in"><span class="stk w">Para armadores y flotas</span><p class="hk">¿Sabes cuándo caduca cada certificado <em>de tu tripulación?</em></p></div></div>
             <div class="cc gd"><span class="n">2/4</span><div class="in"><span class="big" style="font-size:64px">1</span><p class="hk">certificado caducado basta para que un barco no salga.</p><p>Y casi siempre se descubre el día que hace falta.</p></div></div>
             <div class="cc ph" style="background-image:url(../assets/brand/practicas.jpg);background-position:center"><span class="n">3/4</span><div class="in"><p class="hk">Lo que te ofrecemos</p><ul><li>Un plan de formación a medida, tripulante a tripulante</li><li>Aviso antes de que caduque cada certificado</li><li>Un solo interlocutor para todo</li></ul></div></div>
-            <div class="cc lt"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-color.png" alt=""><p class="hk" style="color:#0D2233">Cuéntanos cuántos sois y qué cursos necesitáis.</p><p>Te llamamos y te enviamos una propuesta para toda la tripulación, en Avilés.</p><span class="pill" style="background:var(--grad);color:#fff">Solicitar propuesta →</span></div></div>
+            <div class="cc wh"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-blanco.png" alt=""><p class="hk" style="color:#0D2233">Cuéntanos cuántos sois y qué cursos necesitáis.</p><p>Te llamamos y te enviamos una propuesta para toda la tripulación, en Avilés.</p><span class="pill" style="background:var(--grad);color:#fff">Solicitar propuesta →</span></div></div>
           </div>
           <div class="cnav"><button class="pv" type="button" aria-label="Tarjeta anterior">‹</button><span class="dts" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><button class="nx" type="button" aria-label="Tarjeta siguiente">›</button></div>
           <div class="cta"><span>Solicitar propuesta</span><span aria-hidden="true">›</span></div>
@@ -904,7 +905,7 @@ Cuéntanos cuántos tripulantes tienes y qué cursos necesitan. Te llamamos y te
         <div class="vs"><div class="vv"><span class="vl">Variante 1 · Control</span><p class="gq">«¿Sabes cuándo caduca cada certificado de tu tripulación?»</p><dl><dt>Hipótesis</dt><dd>Al responsable de flota le pesa no tener el control. La pregunta le pone delante algo que no sabe responder de memoria.</dd><dt>Qué esperamos ver</dt><dd>Empresas medianas (navieras, portuarias) con varios tripulantes por propuesta.</dd></dl></div><span class="vsx">VS</span><div class="vv v2"><span class="vl">Variante 2 · Barco parado</span><p class="gq">«Que un certificado caducado no deje tu barco en puerto.»</p><dl><dt>Hipótesis</dt><dd>Al armador pequeño, que también es patrón, le mueve más el coste de un día sin salir que la gestión.</dd><dt>Qué esperamos ver</dt><dd>Más peticiones de flotas pequeñas; propuestas de menos alumnos pero que cierran antes.</dd></dl></div></div>
         <div class="abm">
           <div><b>Segmentación</b><span>Armadores, navieras, cofradías y empresas portuarias del Cantábrico: intereses de pesca profesional y gestión de flotas, más un público similar a las empresas de vuestra base.</span></div>
-          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>12 €/día por variante durante 14 días: <b>336 € en total</b>. La venta a empresas es lenta: no se decide antes del día 14.</span></div>
+          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>12 €/día por variante durante 14 días: <strong>336 € en total</strong>. La venta a empresas es lenta: no se decide antes del día 14.</span></div>
           <div class="win"><b>Cómo decidimos el ganador</b><span>Gana el menor coste por empresa cualificada (tripulación y cursos claros). Desempata el número de alumnos por propuesta. Mínimo 5 empresas cualificadas por variante; si no, se alarga una semana.</span></div>
         </div>
       </div>
@@ -979,7 +980,7 @@ Dinos si cumples los requisitos y te contamos por WhatsApp horario, documentaci�
             <div class="cc ph" style="background-image:url(../assets/brand/pesca.jpg);background-position:center"><span class="n">1/4</span><div class="in"><span class="stk">Convocatoria 2027</span><p class="hk">Patrón Local de Pesca: <em>empieza el 11 de enero.</em></p></div></div>
             <div class="cc gd"><span class="n">2/4</span><div class="in"><p class="hk">Las fechas</p><div class="dl"><div><small>EMPIEZA</small><b>11 ene</b></div><span></span><div><small>TERMINA</small><b>18 feb</b></div></div><p>2027 · en Avilés. Horario: [a confirmar con vosotros]</p></div></div>
             <div class="cc ph" style="background-image:url(../assets/brand/puente.jpg);background-position:center"><span class="n">3/4</span><div class="in"><p class="hk">Antes de reservar, lo comprobamos contigo</p><ul><li>Tiempo de mar</li><li>Titulación previa</li><li>Documentación</li></ul><p>Requisitos exactos: [a confirmar con vosotros]</p></div></div>
-            <div class="cc lt"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-color.png" alt=""><p class="hk" style="color:#0D2233">Llevas tiempo pensándolo. Enero es buena fecha.</p><p>Te contamos por WhatsApp horario, documentación y cómo reservar plaza.</p><span class="pill" style="background:var(--grad);color:#fff">Más información →</span></div></div>
+            <div class="cc wh"><span class="n">4/4</span><div class="in"><img class="lgc" src="../assets/brand/logo-blanco.png" alt=""><p class="hk" style="color:#0D2233">Llevas tiempo pensándolo. Enero es buena fecha.</p><p>Te contamos por WhatsApp horario, documentación y cómo reservar plaza.</p><span class="pill" style="background:var(--grad);color:#fff">Más información →</span></div></div>
           </div>
           <div class="cnav"><button class="pv" type="button" aria-label="Tarjeta anterior">‹</button><span class="dts" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span><button class="nx" type="button" aria-label="Tarjeta siguiente">›</button></div>
           <div class="cta"><span>Más información</span><span aria-hidden="true">›</span></div>
@@ -1020,7 +1021,7 @@ Dinos si cumples los requisitos y te contamos por WhatsApp horario, documentaci�
         <div class="vs"><div class="vv"><span class="vl">Variante 1 · Fecha</span><p class="gq">«Patrón Local de Pesca: empieza el 11 de enero.»</p><dl><dt>Hipótesis</dt><dd>Quien ya ha decidido ser patrón solo busca cuándo. La fecha en la primera línea convierte el «algún día» en «este invierno».</dd><dt>Qué esperamos ver</dt><dd>Menos alcance y más peticiones que cumplen requisitos.</dd></dl></div><span class="vsx">VS</span><div class="vv v2"><span class="vl">Variante 2 · Salto</span><p class="gq">«De marinero a patrón: la próxima convocatoria ya tiene fecha.»</p><dl><dt>Hipótesis</dt><dd>La aspiración llega también a quien todavía no buscaba el curso.</dd><dt>Qué esperamos ver</dt><dd>Más peticiones y más baratas; más gente que aún no cumple requisitos (va a la base, no se pierde).</dd></dl></div></div>
         <div class="abm">
           <div><b>Segmentación</b><span>Marineros de pesca en Asturias y el Cantábrico, más quien visitó la página del curso en los últimos 30 días. Excluye la lista de espera, que ya recibe el aviso gratis por WhatsApp.</span></div>
-          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>10 €/día por variante durante 7 días: <b>140 € en total</b>. Se apaga en cuanto se llena la convocatoria.</span></div>
+          <div><b>Presupuesto de prueba<span class="e">[E]</span></b><span>10 €/día por variante durante 7 días: <strong>140 € en total</strong>. Se apaga en cuanto se llena la convocatoria.</span></div>
           <div class="win"><b>Cómo decidimos el ganador</b><span>Gana el menor coste por petición que cumple requisitos. Con plazas cubiertas en la prueba, manda el coste por plaza. Si llena antes de decidir, se guarda el aprendizaje para la siguiente convocatoria.</span></div>
         </div>
       </div>
