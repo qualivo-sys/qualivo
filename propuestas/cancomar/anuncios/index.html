@@ -281,12 +281,55 @@ addEventListener('DOMContentLoaded',function(){
   <p class="eyebrow">Fase 3 · Captación · Anuncios</p>
   <h1>Un anuncio para cada momento <em>de la gente de mar</em></h1>
   <p class="lead">Hoy no hacéis anuncios, y está bien: primero va el orden y la base de datos. Cuando toque captar, proponemos empezar con cuatro anuncios. Cada uno le habla a una persona con una necesidad concreta: renovar, embarcar, formar a una tripulación o dar el salto a patrón. Todos llevan a un formulario de cinco preguntas o a WhatsApp, y se miden por plaza reservada, no por clic.</p>
-  <nav class="jump" aria-label="Ir a"><a href="#perfil">Alumno ideal</a><a href="#formulario">El formulario</a><a href="#a">A · Renovación</a><a href="#b">B · Embarque</a><a href="#c">C · Empresas</a><a href="#d">D · Convocatoria</a><a href="#mas">Más ideas</a></nav>
+  <nav class="jump" aria-label="Ir a"><a href="#hoy">Lo que vemos hoy</a><a href="#perfil">Alumno ideal</a><a href="#formulario">El formulario</a><a href="#a">A · Renovación</a><a href="#b">B · Embarque</a><a href="#c">C · Empresas</a><a href="#d">D · Convocatoria</a><a href="#mas">Más ideas</a></nav>
   <p class="maq">Maqueta de Qualivo para Cancomar · logo, fotos, colores, cursos y fechas de cancomar.es (consulta del 10-nov-2026) · creatividades montadas en HTML/CSS sobre vuestras fotos · no son anuncios publicados · lo marcado como «Datos de ejemplo» es inventado</p>
 </div></header>
 
+<!-- HOY -->
+<section class="sec" id="hoy" style="border-top:0"><div class="wrap">
+  <div class="sh"><div class="no"><b>HOY</b><span></span></div><h2>Lo que vemos hoy <span class="real">Real</span></h2></div>
+  <p class="lede">Lo hemos buscado hoy, 10 de noviembre, en la Biblioteca de anuncios de Meta para España: Cancomar no tiene ningún anuncio activo. Tenéis página de Facebook y vuestra web, cancomar.es. Todo lo que os llega viene de la web, de Google, del boca a boca y de WhatsApp.</p>
+  <div class="hoy">
+    <div class="card hz"><span class="big">0</span><div><p class="k">Anuncios activos en Meta</p><p>Biblioteca de anuncios, España, consulta del 10-nov-2026.</p></div></div>
+    <div class="card hz"><span class="big ic">↗</span><div><p class="k">De dónde llega hoy</p><p>Web, Google, boca a boca y WhatsApp. Todo orgánico y por referencias.</p></div></div>
+  </div>
+  <div class="pos">
+    <div class="card"><b>1</b><h3>Partís de la confianza</h3><p>Hoy no competís en anuncios. Lo que os llega viene porque alguien os recomienda o porque os encuentra. Es el mejor punto de partida: la gente ya os conoce.</p></div>
+    <div class="card"><b>2</b><h3>La fase 1 no gasta en anuncios</h3><p>Orden, respuesta en minutos y base de datos trabajan con lo que ya entra hoy. Ni un euro en Meta hasta que eso funcione.</p></div>
+    <div class="card"><b>3</b><h3>Y cuando toque, está listo</h3><p>Cuando queráis llenar una convocatoria, estos cuatro anuncios están preparados. Se miden hasta la matrícula desde el primer euro.</p></div>
+  </div>
+  <div class="comp">
+    <p class="k">Lo que la competencia sí hace · patrones del sector</p>
+    <div class="cg">
+      <div><b>Anuncio de curso con fecha</b><span>El nombre del curso, la fecha y la ciudad. Funciona para quien ya sabe lo que busca, pero no dice qué pasa después.</span></div>
+      <div><b>«Plazas limitadas»</b><span>Urgencia genérica, igual en todos los cursos y todas las fechas. A fuerza de verla, la gente de mar ya no se la cree.</span></div>
+      <div><b>Formulario y «Más información»</b><span>Muchos contactos, sin curso, fecha ni quién paga. Después alguien tiene que llamar a todos.</span></div>
+    </div>
+    <p class="small">Nuestra diferencia: hablar del momento del marino (renovar, embarcar, formar a una tripulación), preguntar lo justo para cualificar y responder por WhatsApp en minutos.</p>
+  </div>
+</div></section>
+<style>
+#hoy .hoy{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+#hoy .hz{display:flex;gap:18px;align-items:center}
+#hoy .big{font:800 56px/1 var(--head);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;min-width:64px;text-align:center}
+#hoy .hz p{color:var(--muted);font-size:15px}
+#hoy .pos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+#hoy .pos .card{border-top:5px solid var(--b);display:grid;gap:6px;align-content:start}
+#hoy .pos b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--grad);color:#fff;font:800 14px var(--head)}
+#hoy .pos h3{font-size:18px}
+#hoy .pos p{color:var(--muted);font-size:15px}
+#hoy .comp{margin-top:16px;background:var(--deep);color:#fff;border-radius:18px;padding:20px 22px;display:grid;gap:12px}
+#hoy .comp .k{color:var(--cy)}
+#hoy .cg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#hoy .cg div{align-content:start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:13px 14px;display:grid;gap:4px}
+#hoy .cg b{font:800 15px var(--head)}
+#hoy .cg span{font-size:14px;color:rgba(255,255,255,.8)}
+#hoy .comp .small{color:rgba(255,255,255,.9)}
+@media (max-width:860px){#hoy .hoy,#hoy .pos,#hoy .cg{grid-template-columns:1fr}}
+</style>
+
 <!-- PERFIL -->
-<section class="sec" id="perfil" style="border-top:0"><div class="wrap">
+<section class="sec alt" id="perfil"><div class="wrap">
   <div class="sh"><div class="no"><b>PRIMERO</b><span></span></div><h2>Quién es vuestro alumno ideal <span class="ej">Hipótesis · la validamos hoy</span></h2></div>
   <p class="lede">Antes de pagar un solo anuncio hay que acordar qué es una petición buena. Esta es nuestra propuesta, a partir de vuestros cursos y de cómo trabaja la gente de mar. Vosotras sabéis quién acaba reservando plaza: la corregimos juntos.</p>
   <div class="icp">
@@ -313,7 +356,7 @@ addEventListener('DOMContentLoaded',function(){
 </div></section>
 
 <!-- FORMULARIO -->
-<section class="sec alt" id="formulario"><div class="wrap">
+<section class="sec" id="formulario"><div class="wrap">
   <div class="sh"><div class="no"><b>EL FILTRO</b><span></span></div><h2>El formulario: cinco preguntas que cualifican <span class="ej">Ejemplo</span></h2></div>
   <p class="lede">El mismo formulario va en las dos landings y en el formulario instantáneo de Meta. Son cinco toques, sin escribir nada. Cada respuesta llega al CRM con su etiqueta, y la petición entra ya clasificada como A, B, C o Empresa.</p>
   <div class="fwrap">
