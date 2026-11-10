@@ -136,15 +136,15 @@
   function datos(){
     avance(PREGUNTAS.length / (PREGUNTAS.length + 1) * 100, 'Último paso');
     paso.innerHTML =
-      '<div class="q"><div class="qt">¡Encajas en el perfil! ¿Dónde te llamamos?</div>' +
-      '<div class="qh">Te llamamos para agendar tu entrevista de admisión (unos 20 minutos).</div>' +
+      '<div class="q"><div class="qt">¡Encajas en el perfil! ¿Dónde te contactamos?</div>' +
+      '<div class="qh">Te escribimos por WhatsApp para agendar tu entrevista de admisión (unos 20 minutos).</div>' +
       '<form id="f" novalidate>' +
       '<div class="field"><label for="nombre">Nombre y apellidos</label><input type="text" id="nombre" autocomplete="name" required></div>' +
-      '<div class="field"><label for="telefono">Teléfono <span class="hint">(mejor móvil, con WhatsApp)</span></label><input type="tel" id="telefono" autocomplete="tel" inputmode="tel" required></div>' +
+      '<div class="field"><label for="telefono">Tu número de WhatsApp <span class="hint">(con prefijo si no es de España)</span></label><input type="tel" id="telefono" autocomplete="tel" inputmode="tel" placeholder="600 000 000" required></div>' +
       '<div class="field"><label for="email">Email</label><input type="email" id="email" autocomplete="email" required></div>' +
       '<div class="hp" aria-hidden="true"><label for="empresa">Empresa</label><input type="text" id="empresa" tabindex="-1" autocomplete="off"></div>' +
       '<label class="chkline"><input type="checkbox" id="consent"> <span>Acepto la <a href="https://escolaeronauticadecatalunya.cat/politica-privacidad/" target="_blank" rel="noopener">política de privacidad</a> y que la Escola Aeronàutica de Catalunya me contacte por teléfono, WhatsApp o email sobre ' + NOMBRE_CURSO + '.</span></label>' +
-      '<button class="btn" id="enviar" type="submit">Quiero que me llaméis</button>' +
+      '<button class="btn" id="enviar" type="submit">Quiero mi entrevista</button>' +
       '<div class="err" id="err"></div></form></div>';
     var f = document.getElementById('f');
     paso.firstChild.appendChild(atras(function(){ i = PREGUNTAS.length - 1; pregunta(); }));
@@ -159,7 +159,7 @@
     var v = function(id){ return document.getElementById(id).value.trim(); };
     var tel = v('telefono').replace(/[^\d+]/g, '');
     if (!v('nombre')) return error('Escribe tu nombre.');
-    if (tel.replace(/\D/g, '').length < 9) return error('Revisa el teléfono: faltan dígitos.');
+    if (tel.replace(/\D/g, '').length < 9) return error('Revisa tu número de WhatsApp: faltan dígitos.');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email'))) return error('Revisa el email.');
     if (!document.getElementById('consent').checked) return error('Para llamarte necesitamos que aceptes la política de privacidad.');
     var btn = document.getElementById('enviar'); btn.disabled = true; btn.textContent = 'Enviando…';
@@ -170,7 +170,7 @@
       if (r.fuera) return final(fuera(R) || 'info');
       if (!r.ok) throw new Error(r.error || 'error');
     } catch(e) {
-      btn.disabled = false; btn.textContent = 'Quiero que me llaméis';
+      btn.disabled = false; btn.textContent = 'Quiero mi entrevista';
       return error('No se ha podido enviar. Inténtalo de nuevo o llámanos al 936 671 372.');
     }
     // Solo los leads que cumplen el perfil se registran como Lead en Meta y Google (vía Tag Manager de la landing)
@@ -180,7 +180,7 @@
     paso.innerHTML = '';
     var w = el('div', 'q fin');
     w.appendChild(el('h2', null, '¡Gracias, ' + datos.nombre.split(' ')[0] + '!'));
-    w.appendChild(el('p', null, 'Te llamamos en breve para agendar tu entrevista de admisión. Si no puedes cogerlo, te escribimos por WhatsApp.'));
+    w.appendChild(el('p', null, 'Te escribimos en breve por WhatsApp para agendar tu entrevista de admisión.'));
     paso.appendChild(w); alto();
   }
 
