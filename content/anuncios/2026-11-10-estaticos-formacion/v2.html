@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- Estáticos de formación v2 (10-nov): enseñan el sistema, no solo la frase. #c1-45 … #c4-916 -->
+<style>
+@font-face{font-family:Anton;src:url(../2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--tl:#1FA396;--tld:#0E7C74;--bk:#0A0A0B;--cr:#F4F1EB;--y:#F4CC38;--red:#E5484D;--mut:#7A7C82;--ln:rgba(10,10,11,.12)}
+html,body{background:#333}
+.p{display:none;width:1080px;position:relative;overflow:hidden;font-family:SG;flex-direction:column;gap:34px}
+.p.on{display:flex}
+.f45{height:1350px;padding:70px 64px 60px}
+.f916{height:1920px;padding:250px 64px 380px;justify-content:center}
+.A{font-family:Anton;text-transform:uppercase;line-height:1.08}
+.A i{font-style:normal}
+.eti{font-size:24px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.sub{font-size:32px;line-height:1.3;font-weight:600}
+.pie{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.f916 .pie{margin-top:30px}
+.logo{height:58px}.inv{filter:invert(1)}
+.cta{font-family:Anton;font-size:34px;text-transform:uppercase;padding:18px 32px;border-radius:999px;white-space:nowrap}
+.ej{position:absolute;right:26px;top:22px;font-size:18px;font-weight:800;letter-spacing:.14em;padding:6px 12px;border-radius:8px}
+.f916 .ej{top:200px}
+/* tarjetas de interfaz */
+.ui{background:#fff;border:4px solid var(--bk);border-radius:22px;box-shadow:10px 10px 0 var(--bk)}
+.k{font-size:17px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.pill{display:inline-block;font-size:18px;font-weight:800;padding:5px 12px;border-radius:999px}
+/* C1 recorrido */
+.ruta{display:grid;grid-template-columns:1fr 1fr;gap:26px 26px;position:relative}
+.paso{padding:24px 26px;display:flex;flex-direction:column;gap:14px;min-height:250px}
+.paso .n{display:flex;align-items:center;gap:12px;font-family:Anton;font-size:34px;text-transform:uppercase}
+.paso .n b{width:42px;height:42px;border-radius:50%;background:var(--bk);color:var(--y);display:flex;align-items:center;justify-content:center;font-size:24px}
+.paso p{font-size:25px;line-height:1.3;font-weight:600;color:#333}
+.wa{background:#DCF8C6;border-radius:14px 14px 14px 4px;padding:12px 16px;font-size:23px;font-weight:600;align-self:flex-start}
+.bar{height:12px;border-radius:6px;background:#E8E4DA;overflow:hidden}.bar i{display:block;height:100%;background:var(--tl)}
+/* C2 panel */
+.panel{padding:30px 32px}
+.tabla{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 1.1fr;font-size:24px;font-weight:700;align-items:center}
+.tabla>div{padding:16px 6px;border-top:3px solid var(--ln)}
+.tabla .h{font-size:16px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);border-top:none}
+.tabla .num{text-align:right;font-variant-numeric:tabular-nums}
+.gana{background:rgba(31,163,150,.14)}
+.pierde{background:rgba(229,72,77,.08)}
+.nota{font-family:Anton;font-size:30px;text-transform:uppercase;padding:10px 18px;border-radius:12px;display:inline-block}
+/* C3 piezas sueltas vs sistema */
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:26px;flex:1;min-height:0}
+.lado{border-radius:26px;padding:28px 26px;display:flex;flex-direction:column;gap:16px;position:relative}
+.lado h3{font-family:Anton;font-size:40px;text-transform:uppercase;line-height:1.05}
+.suelta{background:#fff;border:3px dashed rgba(10,10,11,.35);border-radius:14px;padding:12px 16px;font-size:22px;font-weight:700;color:#555}
+.cad{background:var(--cr);border:4px solid var(--bk);border-radius:14px;padding:12px 16px;font-size:22px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.flecha{text-align:center;font-family:Anton;font-size:26px;line-height:.8;color:var(--y)}
+/* C4 una solicitud */
+.linea{position:relative;padding-left:58px;display:flex;flex-direction:column;gap:22px}
+.linea:before{content:"";position:absolute;left:21px;top:16px;bottom:16px;width:6px;background:var(--bk);border-radius:3px}
+.ev{position:relative;padding:18px 22px;display:flex;flex-direction:column;gap:8px}
+.ev:before{content:"";position:absolute;left:-49px;top:22px;width:28px;height:28px;border-radius:50%;background:var(--y);border:5px solid var(--bk)}
+.ev .t{display:flex;gap:14px;align-items:baseline}
+.ev .t b{font-family:Anton;font-size:30px}
+.ev .t span{font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--tld)}
+.ev p{font-size:22px;font-weight:600;color:#333;line-height:1.3}
+</style>
+
+<!-- C1 · El recorrido completo, conectado -->
+<div class="p" data-k="c1" style="background:var(--tl);color:var(--bk)">
+ <div class="ej" style="background:var(--bk);color:var(--cr)">EJEMPLO · DATOS SIMULADOS</div>
+ <div class="eti">Para academias y centros de formación</div>
+ <div class="A" style="font-size:96px">Captación y ventas, <i style="color:var(--cr)">por fin conectadas.</i></div>
+ <div class="ruta">
+  <div class="ui paso"><div class="n"><b>1</b>Anuncios</div><p>Ángulos para tu alumno ideal, no para cualquiera.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="pill" style="background:var(--y)">Horarios compatibles</span><span class="pill" style="background:#E8E4DA">Cambio de puesto</span></div></div>
+  <div class="ui paso"><div class="n"><b>2</b>Landing y formulario</div><p>Preguntas que filtran antes de que llegue a tu equipo.</p><div style="display:flex;justify-content:space-between;align-items:center"><span class="k">Cualificación</span><span class="pill" style="background:var(--tl);color:#fff">Nivel A</span></div></div>
+  <div class="ui paso"><div class="n"><b>3</b>Respuesta y seguimiento</div><div class="wa">¡Hola, Laura! ¿Te interesa el curso online o presencial?</div><p>En minutos, y hasta que reserva.</p></div>
+  <div class="ui paso"><div class="n"><b>4</b>Panel</div><p>Qué campaña acaba en matrícula.</p><div class="k" style="display:flex;justify-content:space-between"><span>Campaña A</span><span style="color:var(--tld)">7 matrículas</span></div><div class="bar"><i style="width:78%"></i></div><div class="k" style="display:flex;justify-content:space-between"><span>Campaña C</span><span style="color:var(--red)">0 matrículas</span></div><div class="bar"><i style="width:4%;background:var(--red)"></i></div></div>
+ </div>
+ <div class="sub">Diseñamos todo el recorrido y lo conectamos con tu equipo de admisiones, para que lleguen alumnos cualificados y se matriculen más.</div>
+ <div class="pie"><img class="logo inv" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"><div class="cta" style="background:var(--bk);color:var(--y)">Diagnóstico gratuito →</div></div>
+</div>
+
+<!-- C2 · El panel: qué campaña trae matrículas -->
+<div class="p" data-k="c2" style="background:var(--bk);color:var(--cr)">
+ <div class="ej" style="background:var(--y);color:var(--bk)">EJEMPLO · DATOS SIMULADOS</div>
+ <div class="A" style="font-size:100px">¿Qué campaña te trae <i style="color:var(--y)">matrículas…</i> y cuál solo formularios?</div>
+ <div class="ui panel" style="color:var(--bk)">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div><div class="k">Qualivo · tu academia · 30 días</div><div style="font-family:Anton;font-size:40px;text-transform:uppercase">Del anuncio a la matrícula</div></div><span class="pill" style="background:var(--cr);border:3px solid var(--bk)">En directo</span></div>
+  <div class="tabla">
+   <div class="h">Campaña</div><div class="h num">Solicitudes</div><div class="h num">Aptas</div><div class="h num">Reuniones</div><div class="h num">Matrículas</div>
+   <div class="gana">Horarios compatibles</div><div class="num gana">38</div><div class="num gana">21</div><div class="num gana">12</div><div class="num gana" style="font-family:Anton;font-size:32px;color:var(--tld)">7</div>
+   <div>Cambio de puesto</div><div class="num">25</div><div class="num">11</div><div class="num">5</div><div class="num" style="font-family:Anton;font-size:32px">2</div>
+   <div class="pierde">Curso gratis</div><div class="num pierde">64</div><div class="num pierde">6</div><div class="num pierde">1</div><div class="num pierde" style="font-family:Anton;font-size:32px;color:var(--red)">0</div>
+  </div>
+ </div>
+ <div style="display:flex;gap:16px;flex-wrap:wrap"><span class="nota" style="background:var(--tl);color:var(--bk)">Esta trae alumnos</span><span class="nota" style="background:var(--red);color:#fff">Esta solo formularios</span></div>
+ <div class="sub" style="color:rgba(244,241,235,.8)">Conectamos tus campañas con tu equipo de admisiones. Cada solicitud, seguida hasta la matrícula, y tú lo ves en un panel.</div>
+ <div class="pie"><img class="logo" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"><div class="cta" style="background:var(--y);color:var(--bk)">Diagnóstico gratuito →</div></div>
+</div>
+
+<!-- C3 · Tienes las piezas. Te falta el sistema. -->
+<div class="p" data-k="c3" style="background:var(--cr);color:var(--bk)">
+ <div class="eti" style="color:var(--tld)">¿Ya tienes a alguien con las campañas?</div>
+ <div class="A" style="font-size:104px">Tienes las piezas. <i style="color:var(--tld)">Te falta el sistema.</i></div>
+ <div class="dos">
+  <div class="lado" style="background:#E8E4DA">
+   <h3 style="color:#555">Hoy, sueltas</h3>
+   <div class="suelta" style="transform:rotate(-2deg)">Agencia de anuncios</div>
+   <div class="suelta" style="transform:rotate(1.5deg)">Formulario que pide de todo</div>
+   <div class="suelta" style="transform:rotate(-1deg)">WhatsApp del móvil de alguien</div>
+   <div class="suelta" style="transform:rotate(2deg)">Excel con solicitudes</div>
+   <div class="suelta" style="transform:rotate(-1.5deg)">«¿Esta campaña funciona?»</div>
+  </div>
+  <div class="lado" style="background:var(--bk);color:var(--cr)">
+   <h3 style="color:var(--y)">Con Qualivo, un sistema</h3>
+   <div class="cad" style="color:var(--bk)">Anuncios <span class="pill" style="background:var(--y)">ángulos</span></div><div class="flecha">▼</div>
+   <div class="cad" style="color:var(--bk)">Formulario <span class="pill" style="background:var(--tl);color:#fff">filtra</span></div><div class="flecha">▼</div>
+   <div class="cad" style="color:var(--bk)">Respuesta <span class="pill" style="background:#DCF8C6">minutos</span></div><div class="flecha">▼</div>
+   <div class="cad" style="color:var(--bk)">Admisiones <span class="pill" style="background:var(--cr);border:2px solid var(--bk)">reunión</span></div><div class="flecha">▼</div>
+   <div class="cad" style="color:var(--bk)">Panel <span class="pill" style="background:var(--bk);color:var(--y)">matrículas</span></div>
+  </div>
+ </div>
+ <div class="sub">No sustituimos a quien te lleva los anuncios: conectamos todo lo que viene después.</div>
+ <div class="pie"><img class="logo inv" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"><div class="cta" style="background:var(--bk);color:var(--y)">Diagnóstico gratuito →</div></div>
+</div>
+
+<!-- C4 · Una solicitud, de principio a fin -->
+<div class="p" data-k="c4" style="background:var(--y);color:var(--bk)">
+ <div class="ej" style="background:var(--bk);color:var(--cr)">EJEMPLO · DATOS SIMULADOS</div>
+ <div class="eti">Así trabaja una solicitud con Qualivo</div>
+ <div class="A" style="font-size:96px">Nadie se queda sin respuesta. Nadie se te escapa.</div>
+ <div class="linea">
+  <div class="ui ev"><div class="t"><b>11:02</b><span>Solicitud</span></div><p>Laura pide información del curso desde un anuncio de Instagram.</p></div>
+  <div class="ui ev"><div class="t"><b>11:04</b><span>WhatsApp</span></div><div class="wa">¿Lo buscas online o presencial? ¿Para cuándo te gustaría empezar?</div></div>
+  <div class="ui ev"><div class="t"><b>11:15</b><span>Cualificada · Nivel A</span></div><p>Online, empieza en enero. Pasa a tu equipo con todo el contexto.</p></div>
+  <div class="ui ev"><div class="t"><b>Jueves</b><span>Reunión con admisiones</span></div><p>Recordatorio la víspera. Si no viene, se le vuelve a escribir.</p></div>
+ </div>
+ <div class="pie"><img class="logo inv" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"><div class="cta" style="background:var(--bk);color:var(--y)">Diagnóstico gratuito →</div></div>
+</div>
+
+<script>
+function mostrar(){
+  const [k,f]=(location.hash.slice(1)||'c1-45').split('-');
+  document.querySelectorAll('.p').forEach(p=>{const on=p.dataset.k===k; p.classList.toggle('on',on); p.classList.remove('f45','f916'); if(on){p.classList.add('f'+f); p.id='e';} else p.removeAttribute('id');});
+}
+window.addEventListener('hashchange',mostrar); mostrar();
+</script>
+</html>

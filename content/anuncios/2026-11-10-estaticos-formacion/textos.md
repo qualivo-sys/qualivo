@@ -55,3 +55,28 @@
 - **Qué probar:** S1, S2 y S4 en el mismo conjunto. S1 es el gancho más fuerte del vídeo, S2 responde a la objeción más repetida y S4 es la línea que ya funcionó en estático.
 - **Reserva:** S3 y S5.
 - **Cómo leerlo:** CTR al formulario y coste por lead bueno, con la misma regla de parada que G1: 70 € sin ningún lead bueno, o más de 95 € por lead bueno a los 7 días [E, Paid].
+
+---
+
+# v2 (10-nov, después del comentario de Maikel)
+
+**Qué dijo Maikel:** que la v1 era «muy básica» y no transmitía la propuesta de valor.
+
+**Qué cambia:** cada estático enseña el sistema (el recorrido completo, el panel o una solicitud de principio a fin), no solo una frase. Los datos de ejemplo van marcados como «EJEMPLO · DATOS SIMULADOS».
+
+**Archivos:** fuente `v2.html` (`#c1-45` … `#c4-916`), render con `node render-v2.js`, imágenes en `png-v2/`.
+
+- **C1 · «Captación y ventas, por fin conectadas».** Los 4 pasos (anuncios, landing y formulario que filtra, respuesta y seguimiento, panel) en tarjetas de interfaz.
+  - **Titular:** Captación y ventas, conectadas.
+  - **Texto principal:** Diseñamos todo el recorrido de captación de tu academia: anuncios con ángulos para tu alumno ideal, una landing y un formulario que filtran, respuesta y seguimiento en minutos hasta la reserva, y un panel que te dice qué campaña acaba en matrícula. Lo conectamos con tu equipo de admisiones para que lleguen alumnos cualificados y se matriculen más. Diagnóstico gratuito de 30 minutos.
+- **C2 · «¿Qué campaña te trae matrículas… y cuál solo formularios?».** G1 con el panel: campañas → solicitudes → aptas → reuniones → matrículas.
+  - **Titular:** ¿Qué campaña te trae matrículas?
+  - **Texto principal:** El texto de S1.
+- **C3 · «Tienes las piezas. Te falta el sistema».** Responde a «ya tengo a alguien con las campañas»: a un lado, piezas sueltas (agencia, formulario, WhatsApp, Excel); al otro, la cadena conectada.
+  - **Titular:** No sustituimos a quien te lleva los anuncios.
+  - **Texto principal:** El texto de S2.
+- **C4 · «Nadie se queda sin respuesta. Nadie se te escapa».** Una solicitud de ejemplo, de principio a fin: solicitud → WhatsApp → cualificada → reunión con admisiones. Va de día, para no parecerse a la demo nocturna de AI4Growth.
+  - **Titular:** Del anuncio a la reunión, sin que nadie se olvide.
+  - **Texto principal:** Una solicitud no debería esperar a que alguien tenga un hueco. Con Qualivo, cada persona que pide información recibe respuesta en minutos, se cualifica y llega a tu equipo de admisiones con todo el contexto. Si no viene a la reunión, se le vuelve a escribir. Para academias que ya invierten en anuncios. Diagnóstico gratuito de 30 minutos.
+
+**Propuesta de prueba:** C2 (el gancho más fuerte, con el panel), C1 (la propuesta de valor completa) y C3 (la objeción más repetida). C4, de reserva.
