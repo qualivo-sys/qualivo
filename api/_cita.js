@@ -196,6 +196,23 @@ async function procesarCita(ev, o) {
       }
 
       if (d.accion && A.tiene(c, 'act-baja')) { CI.apuntar(reg, 'no se confirma: baja'); d.accion = null; }
+      // Si después de tocar la cita el lead ha dicho que no puede, no sale la
+      // confirmación: avisa a Maikel (11-nov, Toni: «Cambiada: ahora hablamos a
+      // las 12:45» salió 7 minutos después de su «no me viene bien»).
+      if (d.accion) {
+        try {
+          const tocada = fechaGHL(ev.dateUpdated || ev.dateAdded || '');
+          const freno = A.citaFrenadaPorRespuesta(await A.mensajesDe(c.id), tocada ? tocada.getTime() : 0);
+          if (freno.frenar) {
+            CI.apuntar(reg, 'no se confirma: ' + freno.motivo);
+            d.accion = null;
+            hecho.push('frenada_por_respuesta');
+            await A.nota(c.id, 'CONFIRMACIÓN DE CITA NO ENVIADA · ' + freno.motivo + ': «' + freno.texto + '». Lo lleva Maikel.').catch(function () {});
+            await require('./_aviso.js').movil('CONFIRMACIÓN NO ENVIADA · ' + (c.firstName || c.contactName || '?') +
+              '\n' + freno.motivo + ': «' + freno.texto + '»\nContéstale tú y, si no hay reunión, cancela la cita en GHL.').catch(function () {});
+          }
+        } catch (e) { /* si no se puede leer el hilo, sigue como antes */ }
+      }
       if (d.accion) {
         const inicio = CI.fecha(reg.start_at);
         const f = partesFecha(inicio);

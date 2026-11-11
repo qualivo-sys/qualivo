@@ -234,6 +234,22 @@ async function vuelta(modo, opciones) {
         const mensajes = await A.mensajesDe(c.id);
         const hilo = leerHilo(mensajes, hoy);
         fila.canal = hilo.canal || 'sin hilo';
+        // Si después de tocar la cita el lead ha dicho que no puede, o ha escrito
+        // algo y nadie le ha contestado, no sale ningún recordatorio: avisa a
+        // Maikel y se marca como hecho para no avisar cada 10 minutos (11-nov, Toni).
+        const tocada = CITA.fechaGHL(ev.dateUpdated || ev.dateAdded || '');
+        const freno = A.citaFrenadaPorRespuesta(mensajes, tocada ? tocada.getTime() : 0, { sinContestar: true });
+        if (freno.frenar) {
+          fila.motivo = 'frenado: ' + freno.motivo;
+          resumen.saltados++; resumen.detalle.push(fila);
+          if (!seco) {
+            if (reg) await CI.marcarRecordatorio(c.id, ev.id, cual); else await A.etiquetar(c.id, [etiqueta]);
+            await A.nota(c.id, 'RECORDATORIO DE CITA NO ENVIADO (' + cual + ') · ' + freno.motivo + ': «' + freno.texto + '». Lo lleva Maikel.').catch(function () {});
+            await require('./_aviso.js').movil('RECORDATORIO NO ENVIADO · ' + (c.firstName || c.contactName || '?') + ' · cita ' + horaDe(inicio) +
+              '\n' + freno.motivo + ': «' + freno.texto + '»\nContéstale tú y, si no hay reunión, cancela la cita en GHL.').catch(function () {});
+          }
+          continue;
+        }
         // El de una hora antes sale aunque hoy ya haya salido otro mensaje: es el que lleva el enlace a mano.
         if (hilo.yaHoy && modo !== 'hora') {
           fila.motivo = 'hoy ya salió el enlace o un recordatorio';
