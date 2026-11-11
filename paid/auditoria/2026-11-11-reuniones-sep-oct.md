@@ -19,7 +19,7 @@
 | Gasto en Meta | 697,99 € | 1.142,79 € |
 | Reuniones agendadas | 21 | 12 |
 | Reuniones **celebradas** | **11** | **8** |
-| No presentados | 6 | 1 |
+| No presentados | 5 | 1 |
 | Agendadas con **encaje fuerte** | 8 (se celebraron 5) | 5 (se celebraron 3) |
 | Agendadas con encaje medio | 4 (se celebraron 3) | 5 (se celebraron 4) |
 | Agendadas sin encaje | 9 (se celebraron 3) | 2 (se celebró 1) |
@@ -31,7 +31,7 @@
 ## Lectura
 
 1. **Septiembre llenaba el calendario, pero con mucho relleno.**
-   - 9 de las 21 reuniones agendadas no tenían encaje, y hubo 6 no presentados.
+   - 9 de las 21 reuniones agendadas no tenían encaje, y hubo 5 no presentados.
    - De las 11 celebradas, solo 3 avanzaron.
 2. **Octubre trajo menos reuniones, pero mejores.**
    - 8 celebradas de 12 agendadas.
