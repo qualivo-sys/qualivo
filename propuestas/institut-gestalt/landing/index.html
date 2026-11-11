@@ -942,5 +942,25 @@ addEventListener('DOMContentLoaded',function(){
   });
 })();
 </script>
+<script>
+/* Versión de la landing por cliente potencial (hipótesis): ?perfil=1, 2 o 3. Sin parámetro, la general. */
+(function(){
+  var m=/[?&]perfil=([123])/.exec(location.search); if(!m) return;
+  var V={
+    '1':{eb:'Formación en Terapia Gestalt · para psicólogos y terapeutas',h1:'Acompañas a personas. <em>Fórmate para hacerlo desde ti.</em>',lead:'Para psicólogos y terapeutas con consulta: un marco para trabajar con lo que pasa en la sesión, mientras pasa. Haces tu propio proceso mientras aprendes la técnica gestáltica.',qh:'Si tus sesiones se quedan en lo técnico <em>cuando el cliente toca algo profundo</em>',qs:'La Gestalt te da un marco para trabajar con lo que pasa aquí y ahora, en el cliente y en ti. Y te diferencia en una consulta cada vez más parecida a las demás.',opt:'Psicología'},
+    '2':{eb:'Formación en Terapia Gestalt · para coaches y educadores',h1:'Cuando la técnica se queda corta, <em>la herramienta eres tú.</em>',lead:'Para coaches, docentes y educadores que acompañan a personas: más profundidad y más seguridad cuando la conversación se vuelve personal.',qh:'Sabes hacer buenas preguntas. <em>¿Y cuando llega la emoción?</em>',qs:'No hace falta venir de la psicología. Esta formación trabaja tu manera de estar y tu manera de intervenir, para sostener lo que aparece en una sesión o en el aula.',opt:'Coaching'},
+    '3':{eb:'Formación en Terapia Gestalt · presentación gratuita',h1:'Quieres acompañar a personas. <em>Empieza por conocer la formación por dentro.</em>',lead:'Si has hecho tu propio proceso y quieres dedicarte a acompañar a otros, el primer paso no es matricularte: es venir a la presentación gratuita y resolver tus dudas con el equipo.',qh:'Antes de decidir, <em>conócela por dentro</em>',qs:'Así se entra: te enviamos el dosier, vienes a la presentación gratuita por Zoom, hablas con el equipo en una entrevista y, si encaja, reservas tu plaza. Sin prisa y sin compromiso.',opt:'Otro ámbito'}
+  }[m[1]];
+  function set(sel,html){var e=document.querySelector(sel); if(e) e.innerHTML=html;}
+  set('.hero .eyebrow',V.eb); set('#h-hero',V.h1); set('.hero .hlead',V.lead);
+  set('#h-quien',V.qh); set('#para-quien .sub',V.qs);
+  var r=document.querySelector('input[name="perfil"][value="'+V.opt+'"]'); if(r) r.checked=true;
+  document.title=document.title+' · cliente potencial '+m[1];
+  var b=document.createElement('div');
+  b.setAttribute('style','position:fixed;left:12px;bottom:12px;z-index:60;background:#2A0F5C;color:#fff;font:600 12.5px Montserrat,system-ui,sans-serif;padding:8px 12px;border-radius:99px;box-shadow:0 10px 24px -12px rgba(0,0,0,.5)');
+  b.innerHTML='Cliente potencial '+m[1]+' · hipótesis &nbsp;<a href="?perfil=1" style="color:#D9C2FF">1</a> · <a href="?perfil=2" style="color:#D9C2FF">2</a> · <a href="?perfil=3" style="color:#D9C2FF">3</a>';
+  document.body.appendChild(b);
+})();
+</script>
 </body>
 </html>
