@@ -53,3 +53,27 @@
 - **No hay pruebas de que el formulario de septiembre fuera mejor en calidad.** Dio más reuniones, pero con más relleno y menos avance.
 - **El formulario largo actual tampoco ha demostrado nada todavía:** desde el 19-oct dio 1 cliente y 1 oferta, con una muestra muy pequeña.
 - **La diferencia real entre meses** está en el volumen y en lo que pasa después de la reunión: el seguimiento de los «Más adelante».
+
+## Comprobación de las 8 oportunidades de octubre que avanzaron (pedida por ChatGPT y Maikel, 11-nov)
+
+- **Son 8 contactos distintos y cada uno tiene una sola oportunidad** [C]. No hay duplicados.
+- **Las 8 vienen de Meta:** todas tienen el identificador del lead de Meta (`meta-lead-…`) [C].
+- **Las 8 tuvieron una cita confirmada en el calendario antes de avanzar de etapa** [C].
+- **Encaje económico, medido por lo que se ofertó (no por lo que invierten en anuncios):**
+  - **4 con valor de RC:**
+    - el cliente de 3.600 €;
+    - una oferta abierta de 1.500 €;
+    - dos ofertas abiertas de 1.200 €.
+  - 1 oferta perdida de 1.000 €/mes, de una empresa que invierte más de 2.000 €/mes.
+  - 1 en segunda reunión, todavía sin valor registrado.
+  - 1 oferta abierta sin valor registrado, de una empresa que invierte 500-2.000 €/mes.
+  - 1 perdida sin encaje: invierte menos de 500 € y recibe menos de 5 solicitudes al mes.
+- **Conclusión:** de las 8, unas 4 tienen el perfil económico de una RC. El resto son oportunidades reales, pero con encaje dudoso o sin valor registrado.
+
+## «Más adelante» de septiembre: son 8, no 7
+- Al revisarlas una a una sale una más: 8 oportunidades en «Más adelante».
+- 4 ya tenían oferta registrada:
+  - 1.000 €/mes (valor 4.200 €);
+  - dos de 3.150 €;
+  - 1.500 € de puesta en marcha.
+- El 11-nov se pasan a Growth para que prepare una acción personalizada para cada una. **Nadie se contacta sin el OK de Maikel.**
