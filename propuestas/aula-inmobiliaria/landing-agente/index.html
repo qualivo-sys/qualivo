@@ -524,6 +524,23 @@ h2{font-size:clamp(28px,3.8vw,44px);font-weight:800;letter-spacing:-.02em}
 .band-navy::after,.band-dark::after{content:"";position:absolute;top:-30%;right:-50px;width:110px;height:170%;background:#EC7B2A;transform:rotate(22deg);opacity:.9;pointer-events:none}
 .band-navy>*,.band-dark>*{position:relative;z-index:1}
 .btn-buy{font-weight:700;box-shadow:0 14px 28px -12px rgba(236,123,42,.75)}
+
+/* Formulario por pasos */
+.stepbar{height:6px;border-radius:99px;background:#E4E6EB;overflow:hidden}
+.stepbar i{display:block;height:100%;width:33%;background:#EC7B2A;border-radius:99px;transition:width .3s ease}
+.stepn{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#656E88;margin-top:-4px}
+.step{display:grid;gap:12px}
+.step[hidden]{display:none}
+.step h3{font-size:22px;font-weight:700;color:#3E4A6A;line-height:1.2}
+.opts{display:grid;gap:10px}
+.opt{font:inherit;font-weight:600;font-size:16px;text-align:left;color:#3E4A6A;background:#fff;border:2px solid #D8DCE6;border-radius:10px;padding:15px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:border-color .15s,background .15s,transform .1s}
+.opt::after{content:"→";color:#EC7B2A;font-weight:700}
+.opt:hover,.opt:focus-visible{border-color:#EC7B2A;background:#FFF4EA;outline:none}
+.opt:active{transform:scale(.985)}
+.opt.sel{border-color:#EC7B2A;background:#FFF4EA}
+.back{font:inherit;font-size:14px;font-weight:500;color:#656E88;background:none;border:0;padding:4px 0;cursor:pointer;justify-self:start}
+.back:hover{color:#3E4A6A;text-decoration:underline}
+@media (prefers-reduced-motion:reduce){.stepbar i,.opt{transition:none}}
 </style>
 </head>
 <body>
@@ -1007,29 +1024,38 @@ h2{font-size:clamp(28px,3.8vw,44px);font-weight:800;letter-spacing:-.02em}
     </div>
 
     <form class="call" id="callform" novalidate>
-      <div id="formfields" style="display:grid;gap:12px">
-        <h3>¿Prefieres que te llamemos?</h3>
-        <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="given-name" required></div>
-        <div class="field"><label for="f-wa">WhatsApp</label><input id="f-wa" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="6XX XXX XXX" required></div>
-        <div class="field"><label for="f-sector">¿Trabajas ya en el sector?</label>
-          <select id="f-sector" name="sector" required>
-            <option value="">Elige una opción</option>
-            <option>No, quiero empezar</option>
-            <option>Sí, en una inmobiliaria</option>
-            <option>Quiero montar mi agencia</option>
-          </select></div>
-        <div class="field"><label for="f-cuando">¿Cuándo quieres empezar?</label>
-          <select id="f-cuando" name="cuando" required>
-            <option value="">Elige una opción</option>
-            <option>Cuanto antes</option>
-            <option>Este mes</option>
-            <option>En 1 a 3 meses</option>
-            <option>Todavía no lo sé</option>
-          </select></div>
-        <input type="text" name="web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
-        <label class="consent"><input type="checkbox" id="f-ok" required><span>He leído y acepto la política de privacidad y que Aula Inmobiliaria me contacte por WhatsApp o teléfono sobre este curso.</span></label>
-        <p class="err" id="f-err" role="alert">Rellena todos los campos y marca la casilla, por favor.</p>
-        <button class="btn btn-buy" type="submit" style="width:100%">Quiero que me llaméis</button>
+      <div id="formfields" style="display:grid;gap:14px">
+        <div class="stepbar" aria-hidden="true"><i id="stepfill"></i></div>
+        <p class="stepn" id="stepn" aria-live="polite">Paso 1 de 3</p>
+        <input type="hidden" name="sector"><input type="hidden" name="cuando">
+        <div class="step" data-step="1">
+          <h3>¿Trabajas ya en el sector?</h3>
+          <div class="opts" data-field="sector">
+            <button type="button" class="opt">No, quiero empezar</button>
+            <button type="button" class="opt">Sí, en una inmobiliaria</button>
+            <button type="button" class="opt">Quiero montar mi agencia</button>
+          </div>
+        </div>
+        <div class="step" data-step="2" hidden>
+          <h3>¿Cuándo quieres empezar?</h3>
+          <div class="opts" data-field="cuando">
+            <button type="button" class="opt">Cuanto antes</button>
+            <button type="button" class="opt">Este mes</button>
+            <button type="button" class="opt">En 1 a 3 meses</button>
+            <button type="button" class="opt">Todavía no lo sé</button>
+          </div>
+          <button type="button" class="back">← Volver</button>
+        </div>
+        <div class="step" data-step="3" hidden>
+          <h3>Perfecto. ¿A quién llamamos?</h3>
+          <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="given-name" required></div>
+          <div class="field"><label for="f-wa">WhatsApp</label><input id="f-wa" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="6XX XXX XXX" required></div>
+          <input type="text" name="web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+          <label class="consent"><input type="checkbox" id="f-ok" required><span>He leído y acepto la política de privacidad y que Aula Inmobiliaria me contacte por WhatsApp o teléfono sobre este curso.</span></label>
+          <p class="err" id="f-err" role="alert">Rellena tu nombre y tu WhatsApp y marca la casilla, por favor.</p>
+          <button class="btn btn-buy" type="submit" style="width:100%">Quiero que me llaméis</button>
+          <button type="button" class="back">← Volver</button>
+        </div>
       </div>
       <div class="thanks" id="thanks" aria-live="polite" tabindex="-1">
         <span class="ok"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span>
@@ -1153,6 +1179,23 @@ h2{font-size:clamp(28px,3.8vw,44px);font-weight:800;letter-spacing:-.02em}
 
   /* Formulario de llamada */
   var form = document.getElementById("callform");
+  var paso = 1;
+  function irA(n){ paso = n;
+    form.querySelectorAll(".step").forEach(function(st){ st.hidden = +st.getAttribute("data-step") !== n; });
+    document.getElementById("stepfill").style.width = (n * 100 / 3) + "%";
+    document.getElementById("stepn").textContent = "Paso " + n + " de 3";
+    var f = form.querySelector('.step[data-step="' + n + '"]').querySelector(n === 3 ? "input[name=nombre]" : ".opt"); if (f) f.focus({preventScroll: true});
+  }
+  form.querySelectorAll(".opts").forEach(function(g){
+    g.addEventListener("click", function(e){ var b = e.target.closest(".opt"); if (!b) return;
+      g.querySelectorAll(".opt").forEach(function(o){ o.classList.remove("sel"); }); b.classList.add("sel");
+      form[g.getAttribute("data-field")].value = b.textContent.trim();
+      track("formulario_paso", {paso: paso, valor: b.textContent.trim()});
+      setTimeout(function(){ irA(paso + 1); }, 180);
+    });
+  });
+  form.addEventListener("input", function(){ document.getElementById("f-err").classList.remove("show"); });
+  form.querySelectorAll(".back").forEach(function(b){ b.addEventListener("click", function(){ irA(paso - 1); }); });
   form.addEventListener("submit", function(e){
     e.preventDefault();
     var ok = form.nombre.value.trim() && form.whatsapp.value.trim().length >= 9 && form.sector.value && form.cuando.value && document.getElementById("f-ok").checked;
