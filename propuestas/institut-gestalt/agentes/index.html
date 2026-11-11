@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Agentes · Institut Gestalt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+:root{--v1:#8E2DE2;--v2:#4A00E0;--v:#720EEC;--vd:#2A0F5C;--ink:#17122B;--mut:#5C5670;--bg:#FCFBFE;--soft:#F7F3FF;--line:#E7DEFA;--amb:#FFBA00;--ambs:#FFF6DA;--ok:#14845B;
+--grad:linear-gradient(135deg,#8E2DE2 0%,#4A00E0 100%);--ser:"Zilla Slab",Georgia,serif;--sans:"Montserrat",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:74px}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--v)}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--ser);font-weight:700;letter-spacing:-.01em;line-height:1.08;text-wrap:balance}
+h2{font-size:clamp(32px,4.4vw,54px);margin-bottom:18px}
+h3{font-size:24px;line-height:1.2}
+em{font-style:italic}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.sec{padding:110px 0}
+.sec.alt{background:var(--soft)}
+.kick{font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--v);margin-bottom:16px}
+.lead{font-size:clamp(18px,1.6vw,21px);color:var(--mut);max-width:58ch}
+.tbc{background:var(--ambs);color:#6B4A00;border-bottom:1px dashed #D9A400;padding:0 3px;border-radius:3px;font-weight:600;font-size:.94em;white-space:normal}
+
+/* menú */
+.top{position:fixed;inset:0 0 auto;z-index:30;background:rgba(42,15,92,.94);backdrop-filter:blur(10px);color:#fff}
+.top .wrap{display:flex;align-items:center;gap:18px;height:58px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;margin-right:auto;white-space:nowrap}
+.brand img{height:22px;width:auto}
+.brand span{opacity:.55;font-weight:500}
+.nav{display:flex;gap:4px}
+.nav a{color:rgba(255,255,255,.82);text-decoration:none;font-size:13.5px;font-weight:600;padding:6px 10px;border-radius:8px}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.back{color:#fff;text-decoration:none;font-size:13.5px;font-weight:600;border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:6px 13px;white-space:nowrap}
+
+/* portada */
+.hero{padding:150px 0 90px;position:relative;overflow:hidden}
+.hero .rings{position:absolute;right:-140px;top:40px;width:620px;opacity:.13;pointer-events:none}
+.hero h1{font-size:clamp(42px,6.6vw,88px);max-width:16ch;position:relative}
+.hero h1 em{color:var(--v);font-style:italic;font-weight:600}
+.hero .lead{margin-top:26px;max-width:46ch;color:var(--ink)}
+.hero .lead+.lead{margin-top:10px;color:var(--mut);font-size:17px}
+.road{list-style:none;padding:0;margin-top:70px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line)}
+.road li{padding:22px 22px 0 0;position:relative}
+.road li::before{content:"";position:absolute;top:-6px;left:0;width:11px;height:11px;border-radius:50%;background:var(--v)}
+.road li.p::before{background:var(--bg);border:2px solid var(--amb)}
+.road b{display:block;font:700 21px/1.2 var(--ser);margin-bottom:8px}
+.road small{display:block;font:700 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--v);margin-bottom:8px}
+.road li.p small{color:#9A6B00}
+.road span{font-size:15px;color:var(--mut);line-height:1.5;display:block}
+
+/* whatsapp */
+.wa{display:grid;grid-template-columns:250px 370px minmax(0,1fr);gap:44px;align-items:start;margin-top:50px}
+.pick{list-style:none;padding:0;display:grid;gap:2px}
+.pick button{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:30px 1fr;gap:4px 10px;width:100%;padding:14px 12px 14px 14px;border-left:3px solid transparent;border-radius:0 12px 12px 0}
+.pick button:hover{background:#fff}
+.pick button:focus-visible{outline:2px solid var(--v);outline-offset:2px}
+.pick button[aria-selected=true]{border-left-color:var(--v);background:#fff;box-shadow:0 10px 30px -22px rgba(74,0,224,.6)}
+.pick .no{font:700 22px/1 var(--ser);color:#B9A6E8;grid-row:span 2;padding-top:2px}
+.pick [aria-selected=true] .no{color:var(--v)}
+.pick b{font-size:15px;line-height:1.3}
+.pick small{font-size:12.5px;color:var(--mut)}
+
+.phone{background:#EFEAE2;border:9px solid #1C1430;border-radius:38px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(23,18,43,.65);display:flex;flex-direction:column;height:640px}
+.ph-h{display:flex;align-items:center;gap:10px;background:#fff;padding:12px 14px;border-bottom:1px solid #E6E0D6}
+.ph-h .av{width:38px;height:38px;border-radius:50%;background:var(--grad);flex:none;position:relative}.ph-h .av::after{content:"";position:absolute;inset:0;background:url(../assets/brand/logo-blanco.png) center/74% no-repeat}
+.ph-h b{display:block;font-size:15px;line-height:1.2}
+.ph-h small{font-size:12px;color:#667781}
+.ph-h small.ty{color:#1DAA61;font-weight:600}
+.chat{flex:1;overflow-y:auto;padding:14px 12px 16px;display:flex;flex-direction:column;gap:6px;scrollbar-width:thin;
+background-image:radial-gradient(rgba(42,15,92,.045) 1px,transparent 1px);background-size:14px 14px}
+.day{align-self:center;background:#fff;color:#54656F;font-size:12px;font-weight:600;padding:5px 11px;border-radius:8px;margin:8px 0 4px;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.note{align-self:center;text-align:center;background:var(--ambs);color:#6B4A00;font-size:12px;font-weight:600;padding:6px 11px;border-radius:8px;margin:6px 8px;max-width:92%}
+.b{max-width:86%;background:#fff;border-radius:10px 10px 10px 3px;padding:7px 10px 6px;font-size:14px;line-height:1.45;box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .25s ease both;overflow-wrap:anywhere}
+.b.me{align-self:flex-end;background:#D9FDD3;border-radius:10px 10px 3px 10px}
+.b .who{display:block;font-size:12px;font-weight:700;color:var(--v);margin-bottom:2px}
+.b .who.per{color:#B26B00}
+.b .t{display:block;text-align:right;font-size:10.5px;color:#667781;margin-top:2px;line-height:1}
+.b .t svg{width:16px;height:11px;vertical-align:-1px;margin-left:3px;fill:none;stroke:#53BDEB;stroke-width:1.6}
+.doc{display:flex;align-items:center;gap:10px;background:#F5F6F6;border-radius:8px;padding:10px;margin:2px 0 4px}
+.doc i{flex:none;width:30px;height:36px;border-radius:4px;background:#E2533F;color:#fff;font:700 9px/36px var(--sans);text-align:center;font-style:normal}
+.doc b{display:block;font-size:13px;line-height:1.3}
+.doc small{font-size:11px;color:#667781}
+.typing{align-self:flex-start;background:#fff;border-radius:10px 10px 10px 3px;padding:11px 13px;display:flex;gap:4px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.typing i{width:7px;height:7px;border-radius:50%;background:#9AA5AC;animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+.opts{display:grid;gap:4px;max-width:86%;align-self:flex-start;width:86%}
+.opts button{all:unset;box-sizing:border-box;cursor:pointer;text-align:center;background:#fff;color:#027EB5;font-size:14px;font-weight:600;padding:9px;border-radius:9px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.opts button:hover:not(:disabled){background:#F3F9FC}
+.opts button:focus-visible{outline:2px solid var(--v)}
+.opts button:disabled{cursor:default;color:#9AA5AC}
+.opts.live button{animation:glow 1.6s ease-in-out infinite}
+.ctl{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;min-height:38px}
+.ctl p{font-size:13.5px;color:var(--mut)}
+.ctl p.go{color:var(--v);font-weight:600}
+.reset{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:var(--v);padding:8px 14px;border:1px solid var(--line);border-radius:99px;background:#fff;white-space:nowrap}
+.reset:hover{border-color:var(--v)}
+.reset:focus-visible{outline:2px solid var(--v);outline-offset:2px}
+.reset svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes blink{0%,60%,100%{opacity:.35}30%{opacity:1}}
+@keyframes glow{0%,100%{box-shadow:0 1px 1px rgba(0,0,0,.08)}50%{box-shadow:0 0 0 3px rgba(114,14,236,.18)}}
+
+.panel{padding-top:6px}
+.panel .kick{margin-bottom:10px}
+.panel h3{font-size:clamp(24px,2.2vw,30px);margin-bottom:6px}
+.flag{display:none;margin:14px 0 4px;font:700 15px/1.3 var(--sans);color:#6B4A00;background:var(--ambs);border-left:3px solid var(--amb);padding:10px 14px;border-radius:0 8px 8px 0}
+.flag.on{display:block}
+.does{margin-top:18px;border-top:1px solid var(--line)}
+.does>div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;padding:13px 0;border-bottom:1px solid var(--line);opacity:.32;transition:opacity .5s ease}
+.does>div.on{opacity:1}
+.does dt{font:700 11.5px/1.5 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--v);padding-top:2px}
+.does dd{font-size:15.5px;line-height:1.5}
+.does>div.gain{border-bottom:0;margin-top:10px;background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 12px 30px -24px rgba(74,0,224,.55)}
+.does>div.gain dt{color:var(--ok)}
+
+/* voz */
+.voz{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;margin-top:50px;align-items:start}
+.voz>div:first-child{position:sticky;top:90px}
+.tl{list-style:none;padding:0;border-left:1px solid var(--line);margin-left:6px}
+.tl li{position:relative;padding:0 0 26px 26px}
+.tl li::before{content:"";position:absolute;left:-6px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--v)}
+.tl li.vc::before{background:var(--bg);border:2px solid var(--v)}
+.tl small{display:block;font:700 11.5px/1.4 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--v);margin-bottom:3px}
+.tl p{font-size:16px}
+.rec{margin-top:8px;padding-top:24px;border-top:1px solid var(--line)}
+.rec h3{font-size:22px;margin-bottom:10px}
+.rec p{font-size:16px;color:var(--mut)}
+.rec p+p{margin-top:10px}
+.call{background:#fff;border-radius:22px;box-shadow:0 30px 70px -40px rgba(42,15,92,.6);border:1px solid var(--line);overflow:hidden}
+.call-h{padding:22px 26px 18px;border-bottom:1px solid var(--line)}
+.call-h .kick{margin-bottom:8px}
+.call-h h3{font-size:22px}
+.call-h p{font-size:14px;color:var(--mut);margin-top:4px}
+.aud{display:flex;align-items:center;gap:14px;padding:14px 26px;background:var(--soft);border-bottom:1px solid var(--line)}
+.aud svg.wave{flex:none;width:92px;height:28px}
+.aud audio{width:100%;height:38px}
+.aud p{font-size:13.5px;color:var(--mut);font-style:italic}
+.tr{padding:10px 26px 22px;display:grid}
+.tr div{display:grid;grid-template-columns:44px 84px minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px solid #F1ECFA;font-size:15px;line-height:1.5}
+.tr div:last-child{border-bottom:0}
+.tr time{font:600 12px/1.9 var(--sans);color:#A59CBB;font-variant-numeric:tabular-nums}
+.tr b{font-size:12.5px;line-height:1.9;color:var(--v)}
+.tr .c b{color:#9A6B00}
+.after{padding:16px 26px 20px;background:#FBFAFD;border-top:1px solid var(--line);font-size:14.5px;color:var(--mut)}
+.after strong{color:var(--ink)}
+
+/* configuración */
+.opt2{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:40px 0 60px;max-width:960px}
+.opt2 div{border-top:2px solid var(--line);padding-top:16px}
+.opt2 div.rec2{border-top-color:var(--v)}
+.opt2 h3{font-size:22px;margin-bottom:8px}
+.opt2 h3 small{display:block;font:700 11.5px/1.4 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--v);margin-bottom:6px}
+.opt2 p{font-size:15.5px;color:var(--mut)}
+.sheet{background:#fff;border-radius:22px;border:1px solid var(--line);box-shadow:0 34px 80px -50px rgba(42,15,92,.6);padding:38px 44px 30px;max-width:980px}
+.sheet-h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 30px;padding-bottom:22px;border-bottom:2px solid var(--ink)}
+.sheet-h h3{font-size:clamp(24px,2.6vw,32px)}
+.sheet-h p{font-size:13.5px;color:var(--mut);max-width:40ch}
+.grp{font:700 11.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--v);margin:30px 0 4px}
+.fl{display:grid;grid-template-columns:210px minmax(0,1fr);gap:20px;padding:13px 0;border-bottom:1px dotted #D9CFEF;font-size:15.5px}
+.fl>span:first-child{font-weight:600;color:var(--mut);font-size:14px;padding-top:1px}
+.faq{display:grid;gap:14px;padding-top:12px}
+.faq div{padding-left:16px;border-left:2px solid var(--line)}
+.faq b{display:block;font:700 18px/1.3 var(--ser);margin-bottom:3px}
+.faq p{font-size:15px;color:var(--ink)}
+.no-words{font-family:var(--ser);font-size:17px}
+.no-words s{text-decoration-color:#C0392B;margin-right:14px;white-space:nowrap}
+
+.rules{margin-top:80px}
+.rules h3{font-size:clamp(26px,3vw,36px);margin-bottom:28px}
+.rl{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 60px;counter-reset:r}
+.rl li{counter-increment:r;display:grid;grid-template-columns:44px minmax(0,1fr);padding:18px 0;border-top:1px solid var(--line)}
+.rl li::before{content:counter(r);font:700 28px/1 var(--ser);color:var(--v)}
+.rl b{display:block;font:700 19px/1.3 var(--ser);margin-bottom:4px}
+.rl p{font-size:15.5px;color:var(--mut)}
+
+/* encaje */
+.flow{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr) 54px minmax(0,1.15fr) 54px minmax(0,1fr);align-items:center;margin:54px 0 60px}
+.node{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 18px;min-height:140px;box-shadow:0 18px 40px -32px rgba(74,0,224,.6)}
+.node b{display:block;font:700 21px/1.2 var(--ser);margin-bottom:6px}
+.node p{font-size:14px;color:var(--mut);line-height:1.45}
+.node.ag{background:var(--vd);color:#fff;border-color:var(--vd)}
+.node.ag p{color:rgba(255,255,255,.75)}
+.node.ag b+b{margin-top:2px}
+.node.co{border-color:#F1D88A;background:#FFFCF2}
+.arr{display:grid;place-items:center;color:var(--v)}
+.arr svg{width:40px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.cols h3{font-size:24px;margin-bottom:10px}
+.cols p{font-size:16px;color:var(--mut)}
+.cols p+p{margin-top:12px}
+.cols strong{color:var(--ink)}
+
+/* coste */
+.sup{display:flex;flex-wrap:wrap;gap:8px 34px;margin:34px 0 26px;font-size:15px}
+.sup span b{font:700 26px/1 var(--ser);color:var(--v);margin-right:6px}
+table{width:100%;border-collapse:collapse;font-size:15.5px}
+th{text-align:left;font:700 11.5px/1.4 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:0 18px 12px 0;border-bottom:2px solid var(--ink)}
+td{padding:18px 18px 18px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{font:700 18px/1.3 var(--ser);width:26%}
+td:nth-child(2){color:var(--mut);line-height:1.5}
+td:last-child,th:last-child{text-align:right;padding-right:0;white-space:nowrap}
+td .eur{font:700 22px/1.2 var(--ser);color:var(--ink)}
+td .est{display:block;font-size:11.5px;color:#9A6B00;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
+tr.tot td{border-bottom:0;border-top:2px solid var(--ink)}
+tr.tot td .eur{font-size:30px;color:var(--v)}
+.fine{margin-top:22px;font-size:14.5px;color:var(--mut);max-width:78ch}
+.fine+.fine{margin-top:8px}
+
+/* final */
+.fin{background:linear-gradient(140deg,#4A00E0 0%,#2A0F5C 100%);color:#fff;padding:110px 0}
+.fin h2{color:#fff;max-width:27ch}
+.fin ol{list-style:none;padding:0;margin:36px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;counter-reset:f;max-width:1000px}
+.fin li{counter-increment:f;border-top:1px solid rgba(255,255,255,.3);padding-top:16px;font-size:16.5px;color:rgba(255,255,255,.88)}
+.fin li::before{content:counter(f);display:block;font:700 30px/1 var(--ser);color:#FFD66B;margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;gap:10px;margin-top:44px;background:#fff;color:var(--vd);text-decoration:none;font-weight:700;border-radius:99px;padding:16px 28px;font-size:16.5px;box-shadow:0 18px 36px -16px rgba(0,0,0,.5)}
+.btn:hover{background:#FFF6DA}
+.foot{padding:28px 0 34px;font-size:12.5px;color:var(--mut);text-align:center}
+
+@media (max-width:1180px){
+ .wa{grid-template-columns:370px minmax(0,1fr)}
+ .pick{grid-column:1/-1;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+ .pick button{border-left:0;border-top:3px solid var(--line);border-radius:0 0 12px 12px;padding:12px 10px}
+ .pick button[aria-selected=true]{border-top-color:var(--v)}
+ .flow{grid-template-columns:1fr;gap:0;max-width:520px}
+ .arr{height:44px}.arr svg{transform:rotate(90deg)}
+ .node{min-height:0}
+}
+@media (max-width:980px){
+ .nav{display:none}
+ .road{grid-template-columns:1fr;border-top:0;border-left:1px solid var(--line);margin-left:6px}
+ .road li{padding:0 0 22px 24px}
+ .road li::before{top:7px;left:-6px}
+ .voz,.cols,.opt2,.rl{grid-template-columns:1fr}
+ .voz{gap:50px}.voz>div:first-child{position:static}.cols{gap:36px}.opt2{gap:22px}
+ .fin ol{grid-template-columns:1fr;gap:20px}
+}
+@media (max-width:820px){
+ .wa{grid-template-columns:minmax(0,1fr)}
+ .pick{grid-template-columns:1fr 1fr}
+ .phone{width:100%;max-width:400px;margin:0 auto;height:600px}
+ .ctl{max-width:400px;margin-left:auto;margin-right:auto;width:100%}
+ .sec{padding:80px 0}
+ .sheet{padding:26px 20px 20px;border-radius:18px}
+ .fl{grid-template-columns:1fr;gap:3px}
+ .tr div{grid-template-columns:40px minmax(0,1fr);gap:2px 10px}
+ .tr div>span{grid-column:2}
+ .call-h,.aud,.tr,.after{padding-left:18px;padding-right:18px}
+ .does>div{grid-template-columns:1fr;gap:3px}
+ table,tbody,tr,td{display:block;width:100%!important}
+ thead{display:none}
+ tr{padding:16px 0;border-bottom:1px solid var(--line)}
+ td{border:0;padding:0;text-align:left!important}
+ td:nth-child(2){margin:6px 0 8px;font-size:14.5px}
+ tr.tot{border-top:2px solid var(--ink);border-bottom:0}
+ tr.tot td{border:0}
+ .hero{padding:120px 0 64px}
+ .hero .rings{width:420px;right:-200px;top:60px}
+}
+@media (max-width:420px){.brand>span,.brand>b{display:none}.pick b{font-size:14px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.b{animation:none}.typing i,.opts.live button{animation:none}.does>div{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+ <div class="brand"><b>Qualivo</b> <span>×</span> <img src="../assets/brand/logo-blanco.png" alt="Institut Gestalt"></div>
+ <nav class="nav" aria-label="Secciones"><a href="#whatsapp">WhatsApp</a><a href="#voz">Voz</a><a href="#configuracion">Configuración</a><a href="#encaje">Encaje</a><a href="#coste">Coste</a></nav>
+ <a class="back" href="../presentacion/">← Presentación</a>
+</div></header>
+
+<main>
+<section class="hero"><div class="wrap">
+ <svg class="rings" viewBox="0 0 600 600" fill="none" stroke="#720EEC" stroke-width="2" aria-hidden="true"><circle cx="240" cy="300" r="190"/><circle cx="360" cy="300" r="190"/><circle cx="240" cy="300" r="120"/><circle cx="360" cy="300" r="120"/></svg>
+ <p class="kick">Agentes de WhatsApp y de voz · Institut Gestalt</p>
+ <h1>Agentes que responden <em>como lo haría vuestro equipo</em></h1>
+ <p class="lead">Para que más interesados lleguen a la presentación, a la entrevista y a reservar su plaza.</p>
+ <p class="lead">Y una persona del Institut siempre puede entrar en la conversación.</p>
+ <ol class="road" aria-label="Recorrido de admisión">
+  <li><small>Agente</small><b>Dosier</b><span>Lo envía al momento, también un domingo por la noche.</span></li>
+  <li><small>Agente</small><b>Presentación gratuita</b><span>Guarda la plaza, recuerda el enlace y vuelve a invitar a quien no vino.</span></li>
+  <li class="p"><small>Agente + persona</small><b>Entrevista previa</b><span>El agente la agenda. La hace una persona del Institut.</span></li>
+  <li class="p"><small>Persona</small><b>Reserva de plaza</b><span>454 €. Una persona acompaña la decisión.</span></li>
+  <li class="p"><small>Persona</small><b>Matrícula</b><span>Con el equipo del Institut, como hoy.</span></li>
+ </ol>
+</div></section>
+
+<section class="sec alt" id="whatsapp"><div class="wrap">
+ <p class="kick">01 · Agente de WhatsApp</p>
+ <h2>Cinco conversaciones, tal como llegarían</h2>
+ <p class="lead">Elige una. Al lado, lo que el agente lee, lo que decide y lo que deja apuntado en ActiveCampaign.</p>
+ <div class="wa">
+  <ul class="pick" id="pick" role="tablist" aria-label="Conversaciones de ejemplo"></ul>
+  <div>
+   <div class="phone" aria-label="Simulación de WhatsApp">
+    <div class="ph-h"><span class="av" aria-hidden="true"></span><div><b>Institut Gestalt</b><small id="st">en línea</small></div></div>
+    <div class="chat" id="chat" aria-live="polite"></div>
+   </div>
+   <div class="ctl"><p id="hint">&nbsp;</p><button class="reset" id="reset" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Reiniciar</button></div>
+  </div>
+  <div class="panel" id="panel" role="tabpanel">
+   <p class="kick">Qué está haciendo el agente</p>
+   <h3 id="pt"></h3>
+   <p class="flag" id="pf">Tema sensible → pasa a una persona</p>
+   <dl class="does" id="pd"></dl>
+  </div>
+ </div>
+</div></section>
+
+<section class="sec" id="voz"><div class="wrap">
+ <p class="kick">02 · Agente de voz</p>
+ <h2>Llama a quien no contesta por escrito</h2>
+ <p class="lead">Trabaja junto al de WhatsApp. Se presenta siempre como asistente del Institut: nunca finge ser una persona.</p>
+ <div class="voz">
+  <div>
+   <ol class="tl">
+    <li><small>Minuto 0</small><p>Pide información. El agente de WhatsApp le responde al momento.</p></li>
+    <li class="vc"><small>2 h sin respuesta</small><p>El agente de voz le llama, solo dentro de la franja horaria que decidáis.</p></li>
+    <li><small>No contesta</small><p>WhatsApp: «Te hemos llamado del Institut Gestalt por la formación. ¿Cuándo te va mejor que te llamemos?»</p></li>
+    <li class="vc"><small>Pide otra hora</small><p>Se reprograma la llamada y se le confirma por WhatsApp.</p></li>
+    <li class="vc"><small>No se presenta a la entrevista</small><p>Le llama ese mismo día para buscar otro hueco, sin reproches.</p></li>
+   </ol>
+   <div class="rec">
+    <h3>Lo que recupera</h3>
+    <p>Personas que pidieron el dosier y no contestaron al WhatsApp, pero sí cogen el teléfono.</p>
+    <p>Plantones de la entrevista: en lugar de perderse, vuelven a tener cita esa misma semana.</p>
+   </div>
+  </div>
+  <article class="call">
+   <div class="call-h">
+    <p class="kick">Llamada de ejemplo · 2 min</p>
+    <h3>Carmen pidió el dosier de Terapia Gestalt y no respondió al WhatsApp</h3>
+    <p>Llamada a las 2 horas, un martes por la tarde.</p>
+   </div>
+   <div class="aud">
+    <svg class="wave" viewBox="0 0 92 28" aria-hidden="true" fill="#C9B6F5"><rect x="0" y="11" width="3" height="6" rx="1.5"/><rect x="6" y="7" width="3" height="14" rx="1.5"/><rect x="12" y="3" width="3" height="22" rx="1.5"/><rect x="18" y="9" width="3" height="10" rx="1.5"/><rect x="24" y="5" width="3" height="18" rx="1.5"/><rect x="30" y="10" width="3" height="8" rx="1.5"/><rect x="36" y="2" width="3" height="24" rx="1.5"/><rect x="42" y="8" width="3" height="12" rx="1.5"/><rect x="48" y="11" width="3" height="6" rx="1.5"/><rect x="54" y="6" width="3" height="16" rx="1.5"/><rect x="60" y="9" width="3" height="10" rx="1.5"/><rect x="66" y="4" width="3" height="20" rx="1.5"/><rect x="72" y="10" width="3" height="8" rx="1.5"/><rect x="78" y="7" width="3" height="14" rx="1.5"/><rect x="84" y="11" width="3" height="6" rx="1.5"/></svg>
+    <audio id="aud" controls preload="metadata" src="audio/llamada-ejemplo.mp3" hidden></audio>
+    <p id="audmsg">Grabación de ejemplo: la añadimos en cuanto la generemos</p>
+   </div>
+   <div class="tr">
+    <div><time>0:00</time><b>Asistente</b><span>Hola, ¿hablo con Carmen? Te llamo del Institut Gestalt. Soy el asistente de voz del Institut. Hace un rato pediste información sobre la Formación en Terapia Gestalt. ¿Te va bien hablar un par de minutos?</span></div>
+    <div class="c"><time>0:14</time><b>Carmen</b><span>Eh… sí, sí. Perdona, ¿eres una persona o una grabación?</span></div>
+    <div><time>0:18</time><b>Asistente</b><span>Soy un asistente automático, no una persona. Puedo resolverte lo básico y, si quieres, dejarte una cita con alguien del equipo. Y si prefieres que te llame directamente una persona, también lo organizo.</span></div>
+    <div class="c"><time>0:31</time><b>Carmen</b><span>No, no pasa nada. Dime.</span></div>
+    <div><time>0:34</time><b>Asistente</b><span>Gracias. Para orientarte bien: ¿a qué te dedicas ahora?</span></div>
+    <div class="c"><time>0:39</time><b>Carmen</b><span>Soy maestra de primaria. Hace años hice terapia Gestalt y me ayudó mucho… y desde entonces me ronda la idea.</span></div>
+    <div><time>0:50</time><b>Asistente</b><span>Qué bonito que te ronde desde entonces. ¿Te gustaría aplicarlo en el aula o dedicarte a acompañar a personas?</span></div>
+    <div class="c"><time>0:59</time><b>Carmen</b><span>Un poco las dos cosas. Aún no lo tengo claro.</span></div>
+    <div><time>1:03</time><b>Asistente</b><span>Es muy normal al principio. ¿Te encajaría más en Barcelona, en Madrid u online?</span></div>
+    <div class="c"><time>1:10</time><b>Carmen</b><span>Vivo en Sabadell, así que Barcelona.</span></div>
+    <div><time>1:14</time><b>Asistente</b><span>Perfecto. Lo que más ayuda a decidir es hablar con una persona del equipo: una entrevista previa, sin compromiso, para preguntar todo lo que necesites. ¿Te va bien el jueves a las 18:30 o el viernes a las 10:00?</span></div>
+    <div class="c"><time>1:29</time><b>Carmen</b><span>El jueves a las seis y media.</span></div>
+    <div><time>1:33</time><b>Asistente</b><span>Hecho: jueves a las 18:30, con Montse, la coordinadora de la formación. ¿Hay algo que quieras que le adelante?</span></div>
+    <div class="c"><time>1:42</time><b>Carmen</b><span>Sí, si se puede hacer trabajando a jornada completa.</span></div>
+    <div><time>1:47</time><b>Asistente</b><span>Se lo apunto para que lo habléis con calma. Ahora te llega la confirmación por WhatsApp. Gracias, Carmen, que vaya muy bien la tarde.</span></div>
+   </div>
+   <p class="after"><strong>Al colgar, en ActiveCampaign:</strong> resumen y transcripción en su ficha, etapa «Entrevista agendada», etiquetas «educación» y «Barcelona», y aviso a Montse con su duda sobre compaginarlo con el trabajo.</p>
+  </article>
+ </div>
+</div></section>
+
+<section class="sec alt" id="configuracion"><div class="wrap">
+ <p class="kick">03 · Cómo se configura</p>
+ <h2>Cada formación, con su ficha</h2>
+ <p class="lead">El agente solo dice lo que está en la ficha. La rellena la coordinadora de cada formación y la cambia cuando cambia algo.</p>
+ <div class="opt2">
+  <div><h3><small>Opción A</small>Un agente por formación</h3><p>Cada uno con sus reglas. Más control por formación, pero más mantenimiento: 10-12 agentes que revisar.</p></div>
+  <div class="rec2"><h3><small>Recomendada</small>Un agente general, una ficha por formación</h3><p>Las reglas comunes se escriben una vez. Cada coordinadora mantiene solo su ficha.</p></div>
+ </div>
+
+ <article class="sheet" aria-label="Ficha de formación de ejemplo">
+  <div class="sheet-h"><h3>Ficha · Formación en Terapia Gestalt</h3><p>Con los datos ya publicados. En ámbar, lo que <span class="tbc">[lo confirma la coordinadora]</span>.</p></div>
+
+  <p class="grp">Lo básico</p>
+  <div class="fl"><span>Para quién es</span><span>Psicólogos, coaches, educadores y terapeutas que ya acompañan a personas.</span></div>
+  <div class="fl"><span>Requisitos de acceso</span><span><span class="tbc">[lo confirma la coordinadora]</span>. Siempre, entrevista previa con una persona del Institut.</span></div>
+  <div class="fl"><span>Certificación</span><span>Asociación Española de Terapia Gestalt (AETG).</span></div>
+  <div class="fl"><span>Recorrido</span><span>Dosier → presentación gratuita por Zoom → entrevista previa → reserva de plaza → matrícula.</span></div>
+
+  <p class="grp">Fechas y modalidad</p>
+  <div class="fl"><span>Modalidad y sede</span><span>Barcelona (Carrer de Verdi 94, Gràcia), Madrid u online. En esta edición: <span class="tbc">[lo confirma la coordinadora]</span></span></div>
+  <div class="fl"><span>Inicio y duración</span><span><span class="tbc">[lo confirma la coordinadora]</span></span></div>
+  <div class="fl"><span>Horarios</span><span><span class="tbc">[lo confirma la coordinadora]</span></span></div>
+  <div class="fl"><span>Próximas presentaciones</span><span>Gratuitas, por Zoom. Fechas: <span class="tbc">[lo confirma la coordinadora]</span></span></div>
+
+  <p class="grp">Precio</p>
+  <div class="fl"><span>Matrícula de referencia</span><span>2.270 €</span></div>
+  <div class="fl"><span>Reserva de plaza</span><span>454 €, después de la entrevista previa.</span></div>
+  <div class="fl"><span>Formas de pago publicadas</span><span><span class="tbc">[lo confirma la coordinadora]</span>. Mientras no estén aquí, el agente pasa la pregunta a la coordinadora.</span></div>
+
+  <p class="grp">Preguntas frecuentes</p>
+  <div class="faq">
+   <div><b>¿Tengo que ser psicólogo?</b><p>Está pensada para psicólogos, coaches, educadores y terapeutas que acompañan a personas. Requisitos concretos: <span class="tbc">[lo confirma la coordinadora]</span></p></div>
+   <div><b>¿Está certificada?</b><p>Sí, por la Asociación Española de Terapia Gestalt (AETG).</p></div>
+   <div><b>¿Puedo compaginarla con mi trabajo?</b><p><span class="tbc">[lo confirma la coordinadora]</span></p></div>
+   <div><b>¿Se puede pagar a plazos?</b><p><span class="tbc">[lo confirma la coordinadora]</span></p></div>
+  </div>
+
+  <p class="grp">Cómo habla</p>
+  <div class="fl"><span>Tono</span><span>Cálido, tranquilo y cercano. De tú. Frases cortas; como mucho, un emoji.</span></div>
+  <div class="fl"><span>Palabras que no usa</span><span class="no-words"><s>oferta</s> <s>últimas plazas</s> <s>no te lo pierdas</s> <s>garantizado</s> <s>curar</s> <s>cliente</s></span></div>
+
+  <p class="grp">Cuándo pasa a una persona</p>
+  <div class="fl"><span>Siempre que…</span><span>pida hablar con alguien; cuente algo personal o delicado; pregunte por pagos, becas o descuentos; se queje; o el dato no esté en la ficha.</span></div>
+  <div class="fl"><span>Persona de contacto</span><span>Montse, coordinadora de la formación. Horario de respuesta: <span class="tbc">[lo confirma la coordinadora]</span></span></div>
+ </article>
+
+ <div class="rules">
+  <h3>Reglas comunes a todos los agentes</h3>
+  <ol class="rl">
+   <li><div><b>Horario</b><p>WhatsApp responde a cualquier hora. Las llamadas, solo en la franja que decidáis (por ejemplo, laborables de 10 a 20 h). El equipo, en su horario.</p></div></li>
+   <li><div><b>Temas sensibles, siempre a una persona</b><p>Duelo, salud mental, crisis, quejas o cualquier situación personal delicada: deja de vender, avisa a una persona y pausa la automatización. Si hay riesgo, facilita el 024 o el 112.</p></div></li>
+   <li><div><b>Nunca diagnósticos ni consejos terapéuticos</b><p>Ni siquiera «suaves». Informa sobre formaciones; no acompaña procesos.</p></div></li>
+   <li><div><b>Nunca promete plaza ni descuentos</b><p>Solo da lo que está en la ficha. Si no lo sabe, responde «te lo confirma la coordinadora».</p></div></li>
+   <li><div><b>Siempre dice que es un asistente</b><p>Por escrito y por teléfono. Quien lo pida, habla con una persona.</p></div></li>
+   <li><div><b>Revisión humana al principio</b><p>Las primeras semanas, la coordinadora aprueba cada mensaje antes de que salga. Cuando el agente responde como ella, pasa a revisar una muestra.</p></div></li>
+  </ol>
+ </div>
+</div></section>
+
+<section class="sec" id="encaje"><div class="wrap">
+ <p class="kick">04 · Cómo encaja con lo que ya tenéis</p>
+ <h2>No cambiáis de herramientas</h2>
+ <p class="lead">El agente se suma a lo que ya usáis. Las coordinadoras siguen trabajando donde trabajan hoy.</p>
+ <div class="flow" role="img" aria-label="Anuncio o web, ActiveCampaign, agentes de WhatsApp y de voz, coordinadora">
+  <div class="node"><b>Anuncio o web</b><p>La persona pide información de una formación.</p></div>
+  <div class="arr"><svg viewBox="0 0 40 16" aria-hidden="true"><path d="M2 8h34M30 2l6 6-6 6"/></svg></div>
+  <div class="node"><b>ActiveCampaign</b><p>Contacto, formación y etapa. Como hoy.</p></div>
+  <div class="arr"><svg viewBox="0 0 40 16" aria-hidden="true"><path d="M8 8h26M30 3l5 5-5 5M10 3 5 8l5 5"/></svg></div>
+  <div class="node ag"><b>Agente de WhatsApp</b><b>Agente de voz</b><p>Leen la etapa; escriben etiquetas, notas y tareas.</p></div>
+  <div class="arr"><svg viewBox="0 0 40 16" aria-hidden="true"><path d="M2 8h34M30 2l6 6-6 6"/></svg></div>
+  <div class="node co"><b>Coordinadora</b><p>Recibe avisos y entra en la conversación cuando hace falta.</p></div>
+ </div>
+ <div class="cols">
+  <div><h3>ActiveCampaign sigue siendo vuestro CRM</h3><p>El agente se conecta por API: lee en qué etapa está cada persona y escribe etiquetas, notas y tareas. Vuestras campañas y automatizaciones siguen como están.</p></div>
+  <div><h3>WhatsApp, por la API oficial de Meta</h3><p>Podéis seguir con Spoki si su API nos deja conectar el agente (lo revisamos con ellos) o pasar a otro proveedor oficial compatible, manteniendo el número.</p><p><strong>Dentro de las 24 h</strong> desde el último mensaje de la persona, se responde con libertad. <strong>Fuera de esa ventana</strong>, solo con plantillas aprobadas por Meta, como un recordatorio o un seguimiento.</p></div>
+ </div>
+</div></section>
+
+<section class="sec alt" id="coste"><div class="wrap">
+ <p class="kick">05 · Coste orientativo</p>
+ <h2>Lo que cuesta que funcionen, al mes</h2>
+ <p class="lead">IA, mensajes y minutos. Rangos prudentes que confirmamos con vuestro volumen real.</p>
+ <div class="sup"><span><b>1.000</b>conversaciones de WhatsApp</span><span><b>200</b>llamadas de unos 3 minutos</span><span><b>1.500</b>plantillas fuera de las 24 h</span></div>
+ <table>
+  <thead><tr><th>Concepto</th><th>Supuesto</th><th>Al mes</th></tr></thead>
+  <tbody>
+   <tr><td>IA del agente de WhatsApp (tokens)</td><td>Unas 6 respuestas por conversación. Cada respuesta lee la ficha y la conversación: 40.000-60.000 tokens por conversación, con la ficha en caché. Entre 0,05 y 0,15 € por conversación.</td><td><span class="eur">50-150 €</span><span class="est">estimado</span></td></tr>
+   <tr><td>Mensajes de WhatsApp (Meta)</td><td>Responder dentro de las 24 h no se cobra como plantilla. Fuera: unas 1.000 plantillas de utilidad (recordatorios, «te hemos llamado») a 0,01-0,02 € y 500 de marketing (seguimientos) a 0,05-0,07 €.</td><td><span class="eur">35-60 €</span><span class="est">estimado</span></td></tr>
+   <tr><td>Agente de voz</td><td>Voz, telefonía e IA. 200 llamadas × 3 min = 600 min, a 0,10-0,25 € el minuto. Las llamadas sin respuesta duran segundos.</td><td><span class="eur">60-150 €</span><span class="est">estimado</span></td></tr>
+   <tr><td>Número de teléfono</td><td>Un número español para las llamadas.</td><td><span class="eur">5-15 €</span><span class="est">estimado</span></td></tr>
+   <tr class="tot"><td>Total</td><td>Con estos supuestos.</td><td><span class="eur">150-400 €</span><span class="est">estimado</span></td></tr>
+  </tbody>
+ </table>
+ <p class="fine">No incluye lo que ya pagáis: ActiveCampaign y vuestro proveedor de WhatsApp. Las tarifas de Meta son las de España y Meta las revisa periódicamente.</p>
+ <p class="fine">Con unos 10.000 contactos en 3-6 meses, vuestro volumen puede ser mayor que el del supuesto; el coste de IA y de mensajes crece casi en proporción. Lo recalculamos con los datos de vuestro último trimestre.</p>
+</div></section>
+
+<section class="fin"><div class="wrap">
+ <p class="kick" style="color:#FFD66B">Siguiente paso</p>
+ <h2>Elegimos una formación piloto y montamos su agente con su coordinadora</h2>
+ <ol>
+  <li>Elegimos la formación y rellenamos su ficha juntos, en una sesión.</li>
+  <li>Primeras semanas con la coordinadora aprobando cada mensaje.</li>
+  <li>Miramos cuántos llegan a la presentación, a la entrevista y a la reserva, y decidimos si se amplía.</li>
+ </ol>
+ <a class="btn" href="mailto:maikel@qualivo.io?subject=Piloto%20de%20agentes%20%C2%B7%20Institut%20Gestalt">Escribir a Maikel →</a>
+</div></section>
+</main>
+
+<footer class="foot">Demo preparada por Qualivo para Institut Gestalt. Conversaciones y nombres de ejemplo; precios y costes estimados</footer>
+
+<script>
+(function(){
+var TBC='<span class="tbc">[lo confirma la coordinadora]</span>';
+var ROWS=[['lee','Lee'],['decide','Decide'],['hace','Hace'],['crm','En ActiveCampaign'],['gana','Qué gana la conversión']];
+var SC=[
+{t:'Pide información un domingo a las 23:10',m:'Terapia Gestalt',
+ panel:{lee:'Domingo, 23:10. Contacto nuevo desde el anuncio de Terapia Gestalt. Después, su respuesta: enfermera en paliativos.',
+  decide:'Responder ya, con el dosier y una sola pregunta. Su perfil encaja: acompaña a personas. Toca invitarla a la presentación.',
+  hace:'Envía el dosier, le ofrece la próxima presentación gratuita y le guarda plaza.',
+  crm:'Etapa: Dosier enviado → Inscrita en presentación. Etiquetas: Terapia Gestalt, sanidad, acompaña a personas. Sin aviso: la coordinadora lo ve el lunes en su resumen.',
+  gana:'Respondida en un minuto un domingo por la noche, con el interés en caliente: no se va a otra escuela. Y sale con su plaza en la presentación guardada.'},
+ steps:[
+  {k:'day',t:'Domingo'},
+  {k:'in',h:'23:10',t:'Hola, buenas noches. Me gustaría recibir información sobre la Formación en Terapia Gestalt 🙂',p:0},
+  {k:'out',h:'23:11',t:'¡Hola, Laura! Buenas noches, y gracias por escribirnos 🌿 Te atiende el asistente del Institut Gestalt. Si en algún momento prefieres hablar con una persona del equipo, dímelo y te paso con ella.',p:1},
+  {k:'doc',h:'23:11',t:'Dosier · Formación en Terapia Gestalt',p:2},
+  {k:'out',h:'23:11',t:'Aquí tienes el dosier. Y para orientarte mejor, una pregunta: ¿a qué te dedicas ahora?'},
+  {k:'in',h:'23:14',t:'Soy enfermera en una unidad de cuidados paliativos. Hace tiempo que siento que me faltan recursos para acompañar a los pacientes y a sus familias.'},
+  {k:'out',h:'23:15',t:'Gracias por contármelo, Laura. Es algo que nos dicen a menudo personas que acompañan en momentos así, y la formación trabaja mucho justo eso: cómo estar presente con lo que aparece.'},
+  {k:'out',h:'23:15',t:'La mejor forma de conocerla por dentro es la presentación gratuita por Zoom, con el equipo docente. La próxima es el '+TBC+'. ¿Te guardo plaza?',
+   opts:[{t:'Sí, guárdame plaza',h:'23:16',steps:[
+     {k:'out',h:'23:16',t:'¡Hecho! Te he guardado plaza ✅ El día antes te envío por aquí el enlace de Zoom. Que descanses, Laura.',p:3},
+     {k:'in',h:'23:17',t:'¡Muchas gracias! 🙏',p:4}]},
+    {t:'Prefiero leer antes el dosier',h:'23:16',steps:[
+     {k:'out',h:'23:16',t:'Claro, sin ninguna prisa. Cuando lo hayas leído, escríbeme y te guardo plaza en la presentación. Que descanses, Laura.',p:3}]}]}
+ ]},
+{t:'Pregunta por el precio y los plazos',m:'Terapia Gestalt',
+ panel:{lee:'Pregunta por el precio y por pagar a plazos. Ya tiene el dosier: etapa «Dosier enviado».',
+  decide:'El precio está en la ficha: lo da tal cual. Los plazos no: no los inventa y ofrece hablar con la coordinadora. No presiona.',
+  hace:'Pasa la pregunta a Montse con un resumen de la conversación.',
+  crm:'Etiqueta: duda de precio. Tarea para Montse: «Explicar formas de pago», con aviso. La etapa no cambia.',
+  gana:'Una duda de precio sin respuesta enfría a cualquiera. Aquí tiene respuesta al momento y una persona le escribe al día siguiente.'},
+ steps:[
+  {k:'day',t:'Jueves'},
+  {k:'in',h:'13:42',t:'Hola. Ya he leído el dosier de Terapia Gestalt. ¿Cuánto cuesta en total? ¿Se puede pagar a plazos?',p:0},
+  {k:'out',h:'13:43',t:'Hola, Jordi 🙂 Te cuento lo que está publicado: la matrícula de referencia es de 2.270 €, y la plaza se reserva con 454 € cuando decides empezar, después de la entrevista previa.',p:1},
+  {k:'out',h:'13:43',t:'Las formas de pago de cada edición te las explica mejor Montse, la coordinadora de la formación. ¿Quieres que te escriba ella? Sin compromiso y sin ninguna prisa por decidir.',
+   opts:[{t:'Sí, que me escriba',h:'13:45',steps:[
+     {k:'out',h:'13:45',t:'Perfecto. Ya le he pasado tu pregunta a Montse; te escribirá por aquí en cuanto esté en la oficina.',p:2},
+     {k:'in',h:'13:46',t:'Genial, gracias.',p:3},
+     {k:'day',t:'Viernes'},
+     {k:'out',h:'9:20',who:'Montse · Institut Gestalt',t:'Hola, Jordi, soy Montse. He visto tu pregunta sobre el pago. ¿Te va bien que te llame esta mañana y lo vemos con calma?',p:4},
+     {k:'in',h:'9:31',t:'Sí, a partir de las 11 cuando quieras.'}]},
+    {t:'De momento, solo miraba',h:'13:45',steps:[
+     {k:'out',h:'13:45',t:'Claro, sin problema. Si te surge cualquier duda, escríbeme cuando quieras. Y si te apetece conocer la formación por dentro, la presentación gratuita es el mejor primer paso.',p:2}]}]}
+ ]},
+{t:'«¿Puedo compaginarlo con mi trabajo?»',m:'Constelaciones · online',
+ panel:{lee:'Viene del anuncio de Constelaciones Familiares en Terapia Individual. Es psicóloga y le preocupa el horario.',
+  decide:'Responde con los datos de la ficha (online, miércoles de 17 a 21 h, inicio el 17 de febrero de 2027) e invita a la presentación del 27 de enero.',
+  hace:'La apunta a la presentación y programa el recordatorio con el enlace de Zoom.',
+  crm:'Etapa: Inscrita en presentación (27 de enero). Etiquetas: Constelaciones TI, psicología, duda de horario.',
+  gana:'Resuelve la objeción del horario con datos reales, en el momento, y la convierte en una plaza en la presentación.'},
+ steps:[
+  {k:'day',t:'Martes'},
+  {k:'in',h:'8:05',t:'Buenos días. He visto el anuncio de Constelaciones Familiares en Terapia Individual. Trabajo a jornada completa como psicóloga… ¿Puedo compaginarlo?',p:0},
+  {k:'out',h:'8:06',t:'Buenos días, Marta 🙂 Te atiende el asistente del Institut Gestalt. Es online, los miércoles de 17 a 21 h, así que puedes seguirla desde casa o desde la consulta. Empieza el 17 de febrero de 2027.',p:1},
+  {k:'out',h:'8:06',t:'Antes, el 27 de enero, hacemos una presentación gratuita por Zoom: conoces al equipo docente y puedes preguntar todo lo que necesites. ¿Te apunto?',
+   opts:[{t:'Sí, apúntame',h:'8:09',steps:[
+     {k:'out',h:'8:09',t:'Apuntada a la presentación del 27 de enero ✅ El día antes te envío el enlace por aquí. ¡Que tengas buen día, Marta!',p:2},
+     {k:'in',h:'8:10',t:'¡Gracias! Allí estaré.',p:3}]},
+    {t:'Tengo otra duda',h:'8:09',steps:[
+     {k:'out',h:'8:09',t:'Claro, dime. Si es algo que no sé con seguridad, se lo pregunto a la coordinadora y te lo confirma ella.',p:2}]}]}
+ ]},
+{t:'Cuenta algo personal',m:'Tema sensible',flag:true,
+ panel:{lee:'Cuenta un duelo reciente y que busca terapia para ella, no una formación.',
+  decide:'Tema sensible: deja de vender. No envía dosier ni da consejos ni diagnósticos.',
+  hace:'Responde con delicadeza, avisa al momento a una persona del equipo y se retira de la conversación.',
+  crm:'Automatizaciones en pausa para este contacto. Etiqueta: atención personal. Aviso a Núria con el mensaje completo.',
+  gana:'Aquí no se busca una venta. Se cuida a la persona y la confianza en el Institut, que es también lo que hace que otros se matriculen.'},
+ steps:[
+  {k:'day',t:'Miércoles'},
+  {k:'in',h:'21:34',t:'Hola. No sé si escribo al sitio correcto… Perdí a mi madre hace dos meses y lo estoy pasando muy mal. Una amiga me habló de vosotros. Creo que lo que busco es terapia, no una formación.',p:0},
+  {k:'out',h:'21:35',slow:1,t:'Hola, Elena. Siento mucho lo de tu madre. Gracias por escribirnos y por contárnoslo; sabemos que no es fácil.',p:1},
+  {k:'out',h:'21:35',t:'Para algo tan importante, prefiero que te atienda una persona del equipo, que podrá orientarte con calma. Ya le he pasado tu mensaje y te escribirá ella directamente.',p:2},
+  {k:'note',t:'Conversación pasada a Núria · automatizaciones en pausa',p:3},
+  {k:'in',h:'21:37',t:'Gracias. De verdad.'},
+  {k:'day',t:'Jueves'},
+  {k:'out',h:'9:08',who:'Núria · Institut Gestalt',t:'Buenos días, Elena. Soy Núria, del Institut Gestalt. He leído tu mensaje y siento mucho lo de tu madre. Si te parece bien, te llamo esta mañana y vemos juntas qué te puede ayudar ahora.',p:4},
+  {k:'in',h:'9:15',t:'Sí, por favor. Gracias, Núria.'}
+ ]},
+{t:'Después de la presentación',m:'Entrevista previa',
+ panel:{lee:'El registro de Zoom en ActiveCampaign dice que asistió hoy. Él responde que le han quedado preguntas.',
+  decide:'Es el momento de la entrevista. Ofrece solo dos huecos libres del calendario de la coordinadora.',
+  hace:'Reserva el hueco elegido, envía la invitación y programa el recordatorio.',
+  crm:'Etapa: Asistió a presentación → Entrevista agendada. Aviso a Montse con el resumen: qué le gustó y qué quiere preguntar.',
+  gana:'Entrevista agendada la misma noche, sin ir y venir de mensajes. Y Montse llega sabiendo qué quiere preguntar Pablo.'},
+ steps:[
+  {k:'day',t:'Jueves'},
+  {k:'out',h:'21:20',t:'Hola, Pablo 🌿 Gracias por venir hoy a la presentación de la Formación en Terapia Gestalt. ¿Qué te ha parecido?',p:0},
+  {k:'in',h:'21:32',t:'Me ha gustado mucho. Me quedé con ganas de preguntar algunas cosas, la verdad.'},
+  {k:'out',h:'21:33',t:'Qué bien leerlo. El siguiente paso es una entrevista previa con una persona del Institut: resuelves tus preguntas y veis juntos si la formación encaja contigo. Tengo estos dos huecos:',p:1,
+   opts:[{t:'Martes, 18:00',h:'21:35',steps:[
+     {k:'out',h:'21:35',t:'Reservado ✅ Martes a las 18:00, con Montse, coordinadora de la formación. Te llega la invitación al correo y te lo recuerdo por aquí ese día. Si te surge algo, me lo dices y lo cambiamos.',p:2},
+     {k:'in',h:'21:36',t:'Perfecto, ¡allí estaré!',p:3}]},
+    {t:'Miércoles, 10:30',h:'21:35',steps:[
+     {k:'out',h:'21:35',t:'Reservado ✅ Miércoles a las 10:30, con Montse, coordinadora de la formación. Te llega la invitación al correo y te lo recuerdo por aquí ese día. Si te surge algo, me lo dices y lo cambiamos.',p:2},
+     {k:'in',h:'21:36',t:'Perfecto, ¡allí estaré!',p:3}]},
+    {t:'Ninguno me va bien',h:'21:35',steps:[
+     {k:'out',h:'21:35',t:'Sin problema. ¿Qué días y a qué horas te iría mejor? Busco otro hueco con Montse y te lo confirmo por aquí.',p:2}]}]}
+ ]}
+];
+
+var $=function(s){return document.getElementById(s)};
+var chat=$('chat'),st=$('st'),hint=$('hint'),pick=$('pick'),pt=$('pt'),pf=$('pf'),pd=$('pd');
+var q=new URLSearchParams(location.search);
+var V=parseFloat(q.get('vel'))||1;
+if(matchMedia('(prefers-reduced-motion: reduce)').matches) V=Math.max(V,3);
+var cur=0,tok=0,started=false;
+var TK='<svg viewBox="0 0 16 11" aria-hidden="true"><path d="M1 6l3 3 6-7M6 9l1 0 6-7"/></svg>';
+
+SC.forEach(function(s,i){
+  var li=document.createElement('li'),b=document.createElement('button');
+  b.type='button';b.setAttribute('role','tab');b.setAttribute('aria-selected','false');b.setAttribute('aria-controls','panel');
+  b.innerHTML='<span class="no">'+(i+1)+'</span><b>'+s.t+'</b><small>'+s.m+'</small>';
+  b.addEventListener('click',function(){
+    started=true;play(i);
+    var ph=document.querySelector('.phone'),r=ph.getBoundingClientRect();
+    if(innerWidth<=820&&(r.top<60||r.top>innerHeight*.5)) ph.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  li.appendChild(b);pick.appendChild(li);
+});
+
+function sleep(ms,t){return new Promise(function(res,rej){setTimeout(function(){t===tok?res():rej('stop')},ms/V)})}
+function down(){chat.scrollTop=chat.scrollHeight}
+function add(html,cls){var d=document.createElement('div');d.className=cls;d.innerHTML=html;chat.appendChild(d);down();return d}
+function light(p){if(p==null)return;var r=pd.children[p];if(r)r.classList.add('on')}
+
+function setPanel(s){
+  pt.textContent=s.t;pf.classList.toggle('on',!!s.flag);
+  pd.innerHTML=ROWS.map(function(r){return '<div class="'+(r[0]==='gana'?'gain':'')+'"><dt>'+r[1]+'</dt><dd>'+s.panel[r[0]]+'</dd></div>'}).join('');
+}
+
+function bubble(s){
+  if(s.k==='in') return add(s.t+'<span class="t">'+s.h+' '+TK+'</span>','b me');
+  var who=s.who?'<span class="who per">'+s.who+'</span>':'';
+  if(s.k==='doc') return add('<span class="doc"><i>PDF</i><span><b>'+s.t+'</b><small>PDF · documento</small></span></span><span class="t">'+s.h+'</span>','b');
+  return add(who+s.t+'<span class="t">'+s.h+'</span>','b');
+}
+
+async function step(s,t){
+  if(s.k==='day'){add(s.t,'day');await sleep(450,t);return}
+  if(s.k==='note'){await sleep(500,t);add(s.t,'note');light(s.p);await sleep(900,t);return}
+  if(s.k==='in'){await sleep(1100,t);bubble(s);light(s.p);await sleep(350,t);return}
+  // out / doc: escribiendo…
+  st.textContent='escribiendo…';st.className='ty';
+  var ty=add('<i></i><i></i><i></i>','typing');
+  var len=(s.t||'').replace(/<[^>]+>/g,'').length;
+  await sleep(Math.min(2600,700+len*12)+(s.slow?1200:0),t);
+  ty.remove();st.textContent='en línea';st.className='';
+  bubble(s);light(s.p);
+  await sleep(500,t);
+  if(s.opts) await choose(s.opts,t);
+}
+
+function choose(opts,t){
+  return new Promise(function(res){
+    var box=add('','opts live');
+    hint.textContent='Toca una opción para seguir';hint.className='go';
+    opts.forEach(function(o){
+      var b=document.createElement('button');b.type='button';b.textContent=o.t;
+      b.addEventListener('click',async function(){
+        if(t!==tok)return;
+        box.classList.remove('live');box.querySelectorAll('button').forEach(function(x){x.disabled=true});
+        hint.innerHTML='&nbsp;';hint.className='';
+        try{
+          await sleep(250,t);bubble({k:'in',t:o.t,h:o.h});await sleep(300,t);
+          for(var i=0;i<o.steps.length;i++) await step(o.steps[i],t);
+          res();
+        }catch(e){}
+      });
+      box.appendChild(b);
+    });
+    down();
+  });
+}
+
+async function play(i){
+  var t=++tok;cur=i;
+  pick.querySelectorAll('button').forEach(function(b,j){b.setAttribute('aria-selected',j===i?'true':'false')});
+  chat.innerHTML='';st.textContent='en línea';st.className='';hint.innerHTML='&nbsp;';hint.className='';
+  setPanel(SC[i]);
+  chat.dataset.state='playing';
+  try{
+    var steps=SC[i].steps;
+    for(var k=0;k<steps.length;k++) await step(steps[k],t);
+    pd.querySelectorAll('div').forEach(function(d){d.classList.add('on')});
+    hint.textContent='Fin de la conversación';chat.dataset.state='done';
+  }catch(e){}
+}
+
+$('reset').addEventListener('click',function(){started=true;play(cur)});
+setPanel(SC[0]);pick.querySelector('button').setAttribute('aria-selected','true');
+
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!started){started=true;play(0);io.disconnect()}})},{threshold:.35});
+  io.observe(chat);
+}else{started=true;play(0)}
+
+/* audio: si el fichero no existe, se oculta el reproductor y queda solo el texto */
+var aud=$('aud'),msg=$('audmsg');
+aud.addEventListener('loadedmetadata',function(){if(aud.duration>0){aud.hidden=false;msg.hidden=true}});
+aud.addEventListener('error',function(){aud.hidden=true;msg.hidden=false},true);
+if(aud.readyState>=1&&aud.duration>0){aud.hidden=false;msg.hidden=true}
+})();
+</script>
+</body>
+</html>
