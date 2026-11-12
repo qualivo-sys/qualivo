@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>C.A Makeup Academy · arranque</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Página de arranque (onboarding) para C.A Makeup Academy: qué necesitamos, plan por semanas, grabación de llamadas y categorías. */
+:root{--gold:#C9860A;--gold-soft:#FBEFD6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gold:#F2C26B;--gold-soft:#2E2614}}
+:root[data-theme="dark"]{--gold:#F2C26B;--gold-soft:#2E2614}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{width:min(1080px,100% - 32px);margin-inline:auto}
+.hero{position:relative;background:var(--f900);color:#fff;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(17,15,12,.96) 0%,rgba(17,15,12,.88) 55%,rgba(17,15,12,.55) 100%),url(../assets/hero.jpg) center 40%/cover}
+.hero .wrap{padding-block:56px 44px;display:grid;gap:12px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.hero .eyebrow{color:#F2C26B}
+h1{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 144;font-size:clamp(32px,4.8vw,54px);line-height:1.05;letter-spacing:-.02em;margin:0;max-width:20ch}
+.hero .lead{font-size:18px;color:rgba(255,255,255,.84);max-width:64ch;margin:4px 0 0}
+.start{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 14px;font-size:14px;color:#fff;background:rgba(255,255,255,.06)}
+.pill b{color:#F2C26B;font-weight:600}
+main.wrap{display:grid;gap:56px;padding-block:48px 80px}
+main.wrap > *{min-width:0}
+h2{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 96;font-size:clamp(25px,3vw,34px);line-height:1.12;letter-spacing:-.015em;margin:6px 0 8px}
+.sub{color:var(--muted);max-width:70ch;margin:0 0 22px}
+.note{font-size:13.5px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:10px 13px;line-height:1.5}
+/* progreso */
+.prog{display:flex;align-items:center;gap:12px;margin:0 0 16px;font-size:14px;color:var(--muted)}
+.bar{flex:1;max-width:320px;height:8px;border-radius:99px;background:var(--line-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+/* tarjetas de accesos */
+.need{display:grid;gap:12px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.item summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:16px 18px}
+.item summary::-webkit-details-marker{display:none}
+.chk{appearance:none;width:24px;height:24px;border:2px solid var(--line);border-radius:7px;margin:0;cursor:pointer;display:grid;place-content:center;background:var(--surface)}
+.chk:checked{background:var(--accent);border-color:var(--accent)}
+.chk:checked::after{content:"";width:6px;height:11px;border:solid var(--accent-ink);border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
+.item h3{margin:0;font-size:17px;font-weight:600}
+.item .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.04em;border-radius:6px;padding:2px 7px;background:var(--surface-2);border:1px solid var(--line-2);color:var(--muted)}
+.tag.w{background:var(--gold-soft);border-color:transparent;color:var(--warn)}
+.arrow{color:var(--muted);transition:transform .2s;font-size:18px}
+.item[open] .arrow{transform:rotate(90deg)}
+.item.done h3{text-decoration:line-through;text-decoration-color:var(--muted);color:var(--muted)}
+.body{padding:0 18px 18px 56px;display:grid;gap:10px;font-size:15px}
+.body ol,.body ul{margin:0;padding-left:20px;display:grid;gap:5px}
+code{font-family:var(--mono);font-size:13.5px;background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:5px;word-break:break-all}
+.why{font-size:13.5px;color:var(--muted)}
+/* semanas */
+.weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.wk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:8px;align-content:start}
+.wk .n{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
+.wk h3{margin:0;font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.2}
+.wk p{margin:0;font-size:14.5px;color:var(--ink-2)}
+.wk .out{border-top:1px solid var(--line-2);padding-top:8px;font-size:13.5px;color:var(--muted)}
+.wk .out b{color:var(--ink);font-weight:600}
+/* grabación */
+.rec{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start}
+.flow{display:grid;gap:10px;counter-reset:f}
+.step{display:grid;grid-template-columns:34px 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px}
+.step::before{counter-increment:f;content:counter(f);width:34px;height:34px;border-radius:50%;display:grid;place-content:center;background:var(--accent);color:var(--accent-ink);font-weight:700}
+.step b{display:block;margin-bottom:2px}
+.step span{font-size:14.5px;color:var(--ink-2)}
+.ficha{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-lg);padding:18px;display:grid;gap:12px}
+.ficha .hd{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.ficha .hd b{font-size:16px}
+.ej{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:#fff;border-radius:6px;padding:2px 7px}
+.call{border:1px solid var(--line-2);border-radius:10px;padding:12px;display:grid;gap:8px;background:var(--surface-2)}
+.wave{display:flex;align-items:center;gap:10px}
+.play{width:32px;height:32px;border-radius:50%;background:var(--accent);flex:none;position:relative}
+.play::after{content:"";position:absolute;left:12px;top:9px;border-left:11px solid var(--accent-ink);border-top:7px solid transparent;border-bottom:7px solid transparent}
+.bars{flex:1;height:26px;background:repeating-linear-gradient(90deg,var(--muted) 0 2px,transparent 2px 5px);-webkit-mask:linear-gradient(180deg,transparent 0,#000 20%,#000 80%,transparent 100%);opacity:.45;border-radius:4px}
+.call small{color:var(--muted);font-size:12.5px}
+.call p{margin:0;font-size:14px}
+.call .lbl{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.opt{border:1px solid var(--line);border-radius:var(--r-sm);padding:14px;background:var(--surface)}
+.opt b{display:block;margin-bottom:4px}
+.opt p{margin:0;font-size:14.5px;color:var(--ink-2)}
+/* categorías */
+.cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.cat h3{margin:0 0 10px;font-size:15px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13.5px;border-radius:999px;padding:4px 11px;background:var(--accent-soft);color:var(--ink)}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rule{border-left:3px solid var(--accent);padding:4px 0 4px 14px}
+.rule b{display:block}
+.rule span{font-size:14.5px;color:var(--ink-2)}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:13.5px}
+@media (max-width:900px){.weeks{grid-template-columns:1fr 1fr}.rec{grid-template-columns:1fr}.cats,.rules{grid-template-columns:1fr}}
+@media (max-width:560px){.weeks,.opts{grid-template-columns:1fr}.body{padding-left:18px}.item summary{gap:12px;padding:14px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">C.A Makeup Academy × Qualivo · arranque</span>
+    <h1>Todo listo para empezar el lunes</h1>
+    <p class="lead">Lo que necesitamos de vosotras, qué pasa cada semana y cómo va a quedar la grabación de llamadas. Podéis ir marcando lo que ya está hecho.</p>
+    <div class="start">
+      <span class="pill">Arrancamos con <b>la firma y el primer pago</b></span>
+      <span class="pill">Semana 1 · <b>conexión con Meta</b></span>
+      <span class="pill">Neotel sigue funcionando <b>mientras migramos</b></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <span class="eyebrow">1 · Lo que necesitamos de vosotras</span>
+  <h2>Seis cosas, y casi todas son de cinco minutos</h2>
+  <p class="sub">Están ordenadas por cuándo las necesitamos. Las dos primeras son para la semana 1; el resto puede llegar después, pero si las tenemos antes, mejor.</p>
+  <div class="prog"><div class="bar"><i id="pbar"></i></div><span id="ptxt">0 de 6 hecho</span></div>
+  <div class="need" id="need">
+
+    <details class="item" data-k="meta">
+      <summary><input type="checkbox" class="chk" aria-label="Hecho"><div><h3>Meta: acceso como socio</h3><div class="meta"><span class="tag w">Semana 1</span><span class="tag">Alejandra · 5 min</span></div></div><span class="arrow">›</span></summary>
+      <div class="body">
+        <ol>
+          <li>Entrad en <b>business.facebook.com</b> → <b>Configuración del negocio</b>.</li>
+          <li><b>Usuarios → Socios → Añadir → Dar acceso a tus activos a un socio</b>.</li>
+          <li>Pegad nuestro ID de negocio: <code>637269043855234</code></li>
+          <li>Marcad la <b>página de Facebook</b> (con acceso a los formularios / clientes potenciales) y el <b>píxel o conjunto de datos</b>.</li>
+        </ol>
+        <p class="why">Sirve para que los leads entren solos en el sistema y para devolver a Meta qué leads son buenos y cuáles se matriculan. No tocamos vuestros anuncios ni vuestro presupuesto.</p>
+      </div>
+    </details>
+
+    <details class="item" data-k="web">
+      <summary><input type="checkbox" class="chk" aria-label="Hecho"><div><h3>Web: dónde está y qué formulario usa</h3><div class="meta"><span class="tag w">Semana 1</span><span class="tag">Alejandra · 5 min</span></div></div><span class="arrow">›</span></summary>
+      <div class="body">
+        <ul>
+          <li>Dónde está alojada (WordPress, Wix, Shopify…) y quién la lleva.</li>
+          <li>Qué formulario usáis (el de la propia web, Typeform, Elementor…).</li>
+          <li>Un acceso de editor o 15 minutos con quien la lleve.</li>
+        </ul>
+        <p class="why">Para que quien deja sus datos en la web entre igual que quien llega desde Meta, con su origen bien marcado.</p>
+      </div>
+    </details>
+
+    <details class="item" data-k="tel">
+      <summary><input type="checkbox" class="chk" aria-label="Hecho"><div><h3>Teléfono: quién llama y desde qué número</h3><div class="meta"><span class="tag">Semana 2</span><span class="tag">Alejandra o Carolina · 5 min</span></div></div><span class="arrow">›</span></summary>
+      <div class="body">
+        <ul>
+          <li>Desde qué número llamáis hoy a las alumnas (fijo, móvil, el de Neotel).</li>
+          <li>Cuántas personas llaman y si lo hacen desde el móvil o el ordenador.</li>
+          <li>Si queréis mantener ese número o preferís uno nuevo (lo explicamos abajo, en grabación).</li>
+          <li>Para dar de alta la línea, la normativa española pide los datos de la empresa: razón social, CIF y dirección.</li>
+        </ul>
+        <p class="why">Es lo que decide cómo montamos la grabación de llamadas.</p>
+      </div>
+    </details>
+
+    <details class="item" data-k="carolina">
+      <summary><input type="checkbox" class="chk" aria-label="Hecho"><div><h3>Agenda de Carolina</h3><div class="meta"><span class="tag">Semana 2</span><span class="tag">Carolina · 10 min</span></div></div><span class="arrow">›</span></summary>
+      <div class="body">
+        <ul>
+          <li>Qué días y horas puede atender llamadas con futuras alumnas.</li>
+          <li>Cuánto dura cada llamada y cuánto margen quiere entre una y otra.</li>
+          <li>Qué calendario usa (Google, Outlook, el del móvil).</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="item" data-k="neotel">
+      <summary><input type="checkbox" class="chk" aria-label="Hecho"><div><h3>Neotel: acceso o 15 minutos</h3><div class="meta"><span class="tag">Semana 3</span><span class="tag">Quien lleve Neotel · 15 min</span></div></div><span class="arrow">›</span></summary>
+      <div class="body">
+        <ul>
+          <li>Un acceso de usuario, o 15 minutos con quien lo lleve para ver cómo está organizada la base.</li>
+          <li>De la exportación y el traspaso nos encargamos nosotros.</li>
+          <li><b>Ojo con las grabaciones antiguas:</b> Neotel solo guarda las grabaciones durante un tiempo. Si hay alguna que queráis conservar, conviene descargarla antes de darlo de baja; os ayudamos.</li>
+        </ul>
+        <p class="why">Mantenéis Neotel uno o dos meses mientras migramos. No se pierde el historial: con quién se ha hablado, quién sí y quién no.</p>
+      </div>
+    </details>
+
+    <details class="item" data-k="funnel">
+      <summary><input type="checkbox" class="chk" aria-label="Hecho"><div><h3>Funnelchat: plan y clave de API</h3><div class="meta"><span class="tag">Semana 4</span><span class="tag">Alejandra · 5 min</span></div></div><span class="arrow">›</span></summary>
+      <div class="body">
+        <ul>
+          <li>Qué plan de Funnelchat tenéis.</li>
+          <li>La clave de API: en el panel de Funnelchat, en <b>Integraciones</b>.</li>
+          <li>Qué automatizaciones queréis que lance el sistema (por ejemplo, la de la suscripción de automaquillaje).</li>
+        </ul>
+        <p class="why">La clave mejor por un canal privado (os decimos cuál), no por email.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">2 · Plan por semanas</span>
+  <h2>Qué hacemos y qué veréis al final de cada semana</h2>
+  <p class="sub">Al final de cada semana os enseñamos lo hecho en 20 minutos. Si algo no os convence, se ajusta antes de pasar a lo siguiente.</p>
+  <div class="weeks">
+    <div class="wk"><span class="n">Semana 1</span><h3>Conexión con Meta</h3><p>Formularios de Meta y de la web entrando solos en el sistema. Envío a Meta de la calidad de cada lead.</p><div class="out"><b>Veréis:</b> un lead de prueba entrando con su campaña y su puntuación.</div></div>
+    <div class="wk"><span class="n">Semana 2</span><h3>Agenda y seguimiento</h3><p>Agenda de Carolina, recordatorios y seguimiento, con email de respaldo si el teléfono está mal.</p><div class="out"><b>Veréis:</b> una cita reservada con su recordatorio por WhatsApp.</div></div>
+    <div class="wk"><span class="n">Semana 3</span><h3>Migración de Neotel</h3><p>Traspaso de la base con su historial y las categorías que cerremos con Carolina.</p><div class="out"><b>Veréis:</b> vuestras alumnas y contactos ya ordenados en el sistema.</div></div>
+    <div class="wk"><span class="n">Semana 4</span><h3>Grabación, Funnelchat y panel</h3><p>Llamadas grabadas en la ficha de cada alumna, automatizaciones de Funnelchat y panel por campaña.</p><div class="out"><b>Veréis:</b> el panel con los datos de cada campaña y la entrega final.</div></div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">3 · Grabación de llamadas</span>
+  <h2>Cada llamada, grabada y guardada en la ficha de la alumna</h2>
+  <p class="sub">Es lo que nos dijisteis que era imprescindible antes de dejar Neotel, así que queda resuelto dentro del sistema.</p>
+  <div class="rec">
+    <div class="flow">
+      <div class="step"><div><b>Se llama desde el sistema</b><span>Desde la app en el móvil o desde el ordenador, con un toque en la ficha de la alumna. No hace falta marcar el número.</span></div></div>
+      <div class="step"><div><b>Se graba sola</b><span>Llamadas salientes y entrantes. Nadie tiene que acordarse de darle a grabar.</span></div></div>
+      <div class="step"><div><b>Queda en su ficha</b><span>El audio, la duración y quién llamó, junto al resto de su historial: formulario, WhatsApps, citas.</span></div></div>
+      <div class="step"><div><b>Con transcripción y resumen</b><span>Para no tener que volver a escuchar 20 minutos: qué le interesa, qué le frena y cuál es el siguiente paso.</span></div></div>
+      <div class="step"><div><b>Con aviso de grabación</b><span>En las entrantes suena un aviso automático; en las salientes, quien llama lo dice en una frase al empezar. Y queda explicado en la política de privacidad de la web.</span></div></div>
+    </div>
+    <div class="ficha" aria-label="Ejemplo de llamada en la ficha">
+      <div class="hd"><b>Ficha · Lucía M.</b><span class="ej">Datos de ejemplo</span></div>
+      <div class="call">
+        <span class="lbl">Llamada saliente · 14 min · Carolina</span>
+        <div class="wave"><span class="play"></span><span class="bars"></span></div>
+        <small>Grabada · transcripción disponible</small>
+      </div>
+      <div class="call">
+        <span class="lbl">Resumen</span>
+        <p>Quiere dedicarse al maquillaje de novias. Le interesa el curso presencial, pero trabaja entre semana. Le frena el horario.</p>
+        <p><b>Siguiente paso:</b> enviarle las fechas del grupo de fin de semana y volver a llamar el jueves.</p>
+      </div>
+    </div>
+  </div>
+  <div class="opts">
+    <div class="opt"><b>Opción A · Mantener vuestro número</b><p>Miramos con vuestra operadora si se puede traspasar al sistema. Si se puede, las alumnas os siguen viendo con el mismo número de siempre. Tarda algo más.</p></div>
+    <div class="opt"><b>Opción B · Número nuevo</b><p>Un número español nuevo solo para la academia. Es lo más rápido y no toca vuestra línea actual mientras convivís con Neotel.</p></div>
+  </div>
+  <p class="note" style="margin-top:12px">La línea tiene un coste por minuto de llamada, que paga directamente la academia. Os lo pasamos por escrito antes de activarla, según el volumen de llamadas que hagáis.</p>
+</section>
+
+<section>
+  <span class="eyebrow">4 · Categorías de contactos</span>
+  <h2>Un primer borrador para cerrarlo con Carolina</h2>
+  <p class="sub">Es solo un punto de partida. En la semana 3 lo dejamos a vuestro gusto, con los nombres que ya usáis en Neotel.</p>
+  <div class="cats">
+    <div class="cat"><h3>En qué punto está</h3><div class="chips"><span class="chip">Lead nuevo</span><span class="chip">Contactada</span><span class="chip">Llamada agendada</span><span class="chip">Oferta enviada</span><span class="chip">Matriculada</span><span class="chip">Más adelante</span><span class="chip">No interesada</span></div></div>
+    <div class="cat"><h3>Qué le interesa</h3><div class="chips"><span class="chip">Curso profesional presencial</span><span class="chip">Online</span><span class="chip">Automaquillaje</span><span class="chip">Masterclass</span><span class="chip">Para ella, no como profesión</span></div></div>
+    <div class="cat"><h3>De dónde viene y cuándo</h3><div class="chips"><span class="chip">Formulario de Meta</span><span class="chip">Web</span><span class="chip">Instagram</span><span class="chip">Base de Neotel</span><span class="chip">Exalumna</span><span class="chip">Último contacto: &lt; 6 meses · 6-24 meses · + 2 años</span></div></div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">5 · Cómo trabajamos</span>
+  <h2>Tres reglas para que todo vaya fino</h2>
+  <div class="rules">
+    <div class="rule"><b>Un solo canal</b><span>Todo por WhatsApp y email con Maikel, y Alejandra como contacto principal de vuestro lado.</span></div>
+    <div class="rule"><b>Nada se rompe</b><span>Neotel y Funnelchat siguen funcionando mientras montamos. Solo dejáis Neotel cuando lo nuevo esté probado.</span></div>
+    <div class="rule"><b>Vosotras decidís</b><span>Cada semana lo veis y lo aprobáis antes de que se active con alumnas reales.</span></div>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">Qualivo · página de trabajo para C.A Makeup Academy. Los ejemplos de la ficha son datos de ejemplo.</div></footer>
+
+<script>
+(function(){
+  var KEY='ca-arranque-v1',st={};
+  try{st=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){st={}}
+  var items=[].slice.call(document.querySelectorAll('#need .item'));
+  function pinta(){
+    var n=0;items.forEach(function(it){var on=!!st[it.dataset.k];it.classList.toggle('done',on);it.querySelector('.chk').checked=on;if(on)n++;});
+    document.getElementById('pbar').style.width=(n/items.length*100)+'%';
+    document.getElementById('ptxt').textContent=n+' de '+items.length+' hecho';
+  }
+  items.forEach(function(it){
+    var c=it.querySelector('.chk');
+    c.addEventListener('click',function(e){e.stopPropagation();});
+    c.addEventListener('change',function(){st[it.dataset.k]=c.checked;try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}pinta();});
+  });
+  pinta();
+})();
+</script>
+</body>
+</html>
