@@ -150,6 +150,7 @@ module.exports = async function handler(req, res) {
       const d = await r.json();
       for (const lead of (d.data || [])) {
         if (require('./meta-leadform.js').esLeadDePrueba(lead)) continue;
+        if (require('./meta-leadform.js').SUPRIMIDOS.has(String(lead.id))) { parte.suprimidos = (parte.suprimidos || 0) + 1; continue; }
         const t = Math.floor(new Date(lead.created_time).getTime() / 1000);
         if (t < desde) continue;
         // Con el rescate cada 2 min (1-oct): al webhook se le da un minuto de

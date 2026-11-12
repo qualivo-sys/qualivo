@@ -200,7 +200,17 @@ function esLeadDePrueba(lead) {
   });
 }
 
+// Leads de Meta que no se vuelven a importar nunca: personas que pidieron la
+// supresión de sus datos (RGPD). Sin esto, al borrar el contacto del CRM el
+// rescate (api/rescate-leads.js) lo recreaba en la siguiente vuelta (12-nov: un
+// lead que no había rellenado él el formulario pidió el borrado y a los 2
+// minutos volvía a estar dentro, con el primer WhatsApp programado). Solo el id
+// del lead de Meta, que no es un dato personal por sí mismo. Más por SUPRESION_META_LEADS.
+const SUPRIMIDOS = new Set(['1148045904288057'].concat(
+  String(process.env.SUPRESION_META_LEADS || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean)));
+
 async function guardar(lead, opts) {
+  if (lead && SUPRIMIDOS.has(String(lead.id))) return { ok: false, motivo: 'suprimido_rgpd' };
   opts = opts || {};
   if (esLeadDePrueba(lead)) return { ok: false, motivo: 'lead_de_prueba' };
   const headers = {
@@ -583,5 +593,6 @@ module.exports = async function handler(req, res) {
 module.exports.guardar = guardar;
 module.exports.FORMULARIOS_SECTOR = FORMULARIOS_SECTOR;
 module.exports.esLeadDePrueba = esLeadDePrueba;
+module.exports.SUPRIMIDOS = SUPRIMIDOS;
 // Cuerpo sin parsear, para comprobar la firma de Meta sobre los bytes originales.
 module.exports.config = { api: { bodyParser: false } };
