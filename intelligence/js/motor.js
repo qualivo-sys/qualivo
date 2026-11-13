@@ -404,7 +404,7 @@
       ev.push({ t: t0, tipo: 'form', texto: 'Formulario enviado · ' + c.prod });
     }
     c.conv.forEach(function (m) {
-      const quien = m.de === 'c' ? c.n.split(' ')[0] : m.de === 'a' ? 'Agente' : m.de === 'v' ? (T.agenteVoz || 'Agente de voz') : 'Equipo';
+      const quien = m.de === 'c' ? c.n.split(' ')[0] : m.de === 'a' ? (window.QV && QV.estado && QV.estado.sinTecno ? 'Automático' : 'Agente') : m.de === 'v' ? (T.agenteVoz || 'Agente de voz') : 'Equipo';
       const tipo = m.de === 'c' ? 'respuesta' : 'sistema';
       const canal = m.canal === 'wa' ? 'WhatsApp' : m.canal === 'email' ? 'Correo' : m.canal === 'voz' ? 'Llamada' : m.canal;
       ev.push({ t: m.t, tipo: tipo, texto: canal + (m.de === 'c' ? ' recibido de ' + quien : ' enviado · ' + quien), detalle: m.texto });

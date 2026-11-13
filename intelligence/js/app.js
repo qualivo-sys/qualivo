@@ -166,7 +166,7 @@
     if (estado.historia && estado.historia !== estado.cfg.historiaDefecto) p.set('historia', estado.historia);
     // La web o la ficha del negocio, para la llamada de prueba de Raquel (acciones-demo.js).
     const q = new URLSearchParams(location.search);
-    ['web', 'preset'].forEach(function (k) { if (q.get(k)) p.set(k, q.get(k)); });
+    ['web', 'preset', 'limpio'].forEach(function (k) { if (q.get(k)) p.set(k, q.get(k)); });
     try { history.replaceState(null, '', '?' + p.toString()); } catch (e) { /* nada */ }
   }
 
@@ -274,7 +274,7 @@
         if (m.de === 'c' || estado.ahora - m.t > ventana || m.t > estado.ahora) return;
         const canal = m.canal === 'email' ? 'Correo' : m.canal === 'voz' ? 'Llamada' : m.canal === 'ig' ? 'Mensaje de Instagram' : 'WhatsApp';
         const quien = m.de === 'a' ? 'agente' : m.de === 'v' ? 'agente de voz' : 'equipo';
-        items.push({ t: m.t, ico: m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp', tono: m.de === 'h' ? 't-lila' : 't-teal', titulo: canal + ' enviado por el ' + quien, quien: c.n, id: c.id, detalle: m.texto.length > 90 ? m.texto.slice(0, 88) + '…' : m.texto });
+        items.push({ t: m.t, ico: m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp', tono: m.de === 'h' ? 't-lila' : 't-teal', titulo: estado.sinTecno && m.de === 'a' ? canal + ' enviado automáticamente' : canal + ' enviado por el ' + quien, quien: c.n, id: c.id, detalle: m.texto.length > 90 ? m.texto.slice(0, 88) + '…' : m.texto });
       });
       (c.llamadas || []).forEach(function (l) {
         if (estado.ahora - l.t > ventana || l.t > estado.ahora) return;
@@ -435,7 +435,7 @@
       filas.push([PREG_DEMO[k] || (k.charAt(0).toUpperCase() + k.slice(1)), VAL_DEMO[v] || String(v)]);
     });
     const primero = (c.conv || []).filter(function (m) { return m.de === 'c'; })[0];
-    if (primero) filas.push(['Lo que escribió', '«' + primero.texto.slice(0, 160) + (primero.texto.length > 160 ? '…' : '') + '»']);
+    if (primero && !estado.sinTecno) filas.push(['Lo que escribió', '«' + primero.texto.slice(0, 160) + (primero.texto.length > 160 ? '…' : '') + '»']);
     return '<div class="form-real tarjeta"><dl class="form-dl">' + filas.filter(function (f) { return f[1]; }).map(function (f) { return '<dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd>'; }).join('') + '</dl>' +
       '<p class="gris" style="font-size:11.5px;margin-top:6px">Formulario · ' + esc(c.prod || '') + ' · datos de ejemplo</p></div>';
   }
@@ -444,7 +444,7 @@
     if (estado.cfg.cuenta) return ''; // cuentas de clientes: solo lectura
     if (estado.cfg.sinAgentes) return '<div data-bloque-real><div class="accion-real-caja"><div class="responder"><textarea class="ar-texto" rows="3" placeholder="Escribe tu respuesta a ' + esc(c.n.split(' ')[0]) + '…"></textarea><div class="pie acciones-real"><button class="btn btn-mini btn-primario" type="button" data-real="enviar" data-id="' + c.id + '">' + ico('whatsapp') + 'Enviar por WhatsApp</button><button class="btn btn-mini" type="button" data-real="enviar-correo" data-id="' + c.id + '">' + ico('correo') + 'Enviar por correo</button></div></div></div></div>';
     return '<div data-bloque-real><div class="pie acciones-real"><button class="btn btn-mini" type="button" data-real="redactar" data-id="' + c.id + '">' + ico('rayo') + 'Generar mensaje</button>' +
-      '<button class="btn btn-mini" type="button" data-real="agente" data-id="' + c.id + '">' + ico('whatsapp') + 'Activar agente de WhatsApp</button>' +
+      (estado.sinTecno ? '' : '<button class="btn btn-mini" type="button" data-real="agente" data-id="' + c.id + '">' + ico('whatsapp') + 'Activar agente de WhatsApp</button>') +
       '<button class="btn btn-mini btn-primario" type="button" data-real="llamar" data-id="' + c.id + '">' + ico('voz') + 'Llamada de Raquel</button></div><div class="accion-real-caja"></div></div>';
   }
 
@@ -642,14 +642,14 @@
       const sel = contacto(estado.convSel);
       const lado = con.map(function (c) {
         const u = c.conv[c.conv.length - 1];
-        const qui = u.de === 'c' ? '' : u.de === 'h' ? (cfg.persona || 'Equipo') + ': ' : 'Agente: ';
+        const qui = u.de === 'c' ? '' : u.de === 'h' ? (cfg.persona || 'Equipo') + ': ' : estado.sinTecno ? 'Automático: ' : 'Agente: ';
         return '<div class="conv-el" data-conv="' + c.id + '" aria-current="' + (c.id === estado.convSel) + '"><div class="l1"><b>' + esc(c.n) + '</b><time>' + M.fechaCorta(u.t, estado.ahora) + '</time></div><p>' + esc(qui + u.texto) + '</p><div class="l3">' + pillPrio(c.x.prio) + '<span class="pill t-gris">' + esc(M.ESTADOS[c.x.nba.estado]) + '</span></div></div>';
       }).join('');
       let hilo = '<p class="vacio">Sin conversaciones.</p>';
       if (sel) {
         hilo = '<div class="hilo-conv"><div class="hilo-cab"><div class="quien-fila">' + avatar(sel) + '<div><div class="nombre">' + esc(sel.n) + '</div><div class="meta">' + esc(metaContacto(sel)) + '</div></div></div><button class="btn btn-mini" data-abrir="' + sel.id + '">Ver ficha</button></div>' + '<div class="hilo-contacto">' + contactoRealHtml(sel) + '</div>' +
           '<div class="burbujas">' + sel.conv.filter(function (m) { return m.t <= estado.ahora; }).map(function (m) {
-            const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? (estado.cfg.cuenta ? 'Envío automático' : 'Agente de WhatsApp') : m.de === 'v' ? 'Agente de voz' : (estado.cfg.persona || 'Equipo');
+            const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? (estado.cfg.cuenta || estado.sinTecno ? 'Envío automático' : 'Agente de WhatsApp') : m.de === 'v' ? 'Agente de voz' : (estado.cfg.persona || 'Equipo');
             const ic = m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp';
             return '<div class="burbuja ' + m.de + '"><small>' + ico(ic) + esc(quien) + ' · ' + M.fechaCorta(m.t, estado.ahora) + '</small>' + esc(m.texto) + '</div>';
           }).join('') + '</div>' +
@@ -908,6 +908,8 @@
   // Arranque: enlace preparado o pantalla de inicio
   window.addEventListener('DOMContentLoaded', function () {
     const p = new URLSearchParams(location.search);
+    // ?limpio=1: para grabar. Oculta Copilot y panel del modo demo; el sello «Datos simulados» se queda.
+    if (p.get('limpio') === '1') document.body.classList.add('limpio');
     const sector = p.get('sector');
     if (sector === 'qualivo' && p.get('modo') === 'real' && QV.real) { QV.real.arrancar(); return; }
     const cuenta = p.get('cuenta');
