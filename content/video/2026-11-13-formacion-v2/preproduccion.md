@@ -109,3 +109,30 @@ Solo se representa como real lo que funcione. A confirmar con Automatización y 
 **Cómo grabarla (Maikel):** nota de voz del móvil, en una habitación con muebles o cortinas (sin eco), con el móvil a un palmo de la boca. Hablando como a un director de academia sentado enfrente, sin proyectar la voz. Dos tomas.
 
 **Para comparar:** el mismo texto con tres voces profesionales de ElevenLabs en `voz-prueba/comparativa/` (`javier_rojas`, la del anuncio original; `david`; `emilio`).
+
+## 8 · Respuesta de Automatización (13-nov): qué es real hoy
+
+Comprobado por Automatización leyendo los workflows en producción; no ejecutó nada.
+
+| Lo que enseñaba el storyboard | Realidad hoy | Cómo queda en el vídeo |
+|---|---|---|
+| El WhatsApp cita la pregunta del lead | **No.** El primer WhatsApp es una plantilla fija con nombre, curso y quién escribe. La respuesta con contexto llega cuando el lead contesta | Se enseña el WhatsApp con su nombre y su curso, a los pocos minutos. «Personalizado» sigue siendo cierto. No se cita la pregunta |
+| La llamada de Raquel salta sola si no responde | **No.** Alguien del equipo mete al lead en la cola de llamadas (lunes a viernes, 10-18 h). Además, no hay ninguna llamada reciente registrada | Cambio de frase (abajo). Antes de grabar hay que hacer una llamada de prueba para comprobar que funciona |
+| La llamada queda registrada en la ficha | **Sí, por diseño:** resumen y transcripción como nota en el contacto. Sin llamadas recientes para verlo funcionar | Se enseña como nota en la ficha, tras comprobarlo con la llamada de prueba |
+| El sistema vuelve a escribir tras el «más adelante» | **No en el CRM.** Hoy es una etapa: el agente deja de escribir y lo sigue una comercial a mano | Se enseña como aviso al equipo con fecha, no como mensaje automático |
+| Matrículas por campaña | Pendiente de Growth | — |
+
+### Cambios de narración que propongo
+
+| Bloque | Aprobado | Propuesta ajustada a la realidad |
+|---|---|---|
+| Atención | «Recibe un WhatsApp personalizado. Y si no responde, el sistema puede continuar por teléfono.» | «Recibe un WhatsApp personalizado. Y si no responde, tu equipo puede pasarla a una llamada.» |
+| Seguimiento | «La conversación queda registrada. Tu equipo sabe qué necesita Laura y cuándo volver a contactar, aunque decida dejarlo para más adelante.» | Sin cambios: es cierto tal cual. Cambia la imagen: un aviso al equipo con fecha, no un mensaje que sale solo |
+
+**Alternativa:** si Maikel quiere enseñar la llamada y la vuelta como automáticas, primero hay que construirlas (un disparador «sin respuesta → cola de llamadas» y un envío programado). Eso es trabajo de Automatización, no de creativo.
+
+### Para grabar hace falta
+
+1. **Que Maikel cree una subcuenta de demostración** en GoHighLevel: el plan no permite crearla por API. Automatización carga después el contacto «Laura Vidal» con su historial (unos 30 minutos).
+2. **Que una persona grabe la pantalla:** ningún agente tiene acceso a la interfaz con sesión iniciada ni a un móvil.
+3. **El OK de Maikel y un número de prueba** para el WhatsApp y la llamada de Raquel, y conectar WhatsApp y voz en esa subcuenta.
