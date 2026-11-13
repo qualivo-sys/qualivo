@@ -643,6 +643,8 @@ h2,.final h2{font-weight:700!important;line-height:1.2!important}
 h3{font-weight:600!important}
 .price b,.pcard .price b,.bigprice b,.rbox b,.statband b,.packs .pp{font-weight:700!important;letter-spacing:normal!important}
 .kicker,.qz-n,.eyebrow,.pcard .lbl{letter-spacing:.06em!important}
+/* v6 · franjas de color a todo el ancho */
+.band-navy,.band-dark{--band:#3E4A6A!important;box-shadow:0 0 0 100vmax #3E4A6A!important;clip-path:inset(0 -100vmax)!important;overflow:visible!important}
 </style>
 <path class="st0" d="M0.5,9.1c0,0,3.9,0.5,7.5,3v6.9c0,0-3.2-1.3-7.5-1.8V9.1z"/>
 <path class="st0" d="M16.5,9.1c0,0-3.9,0.5-7.5,3v6.9c0,0,3.2-1.3,7.5-1.8V9.1z"/>
@@ -806,7 +808,7 @@ h3{font-weight:600!important}
 
     <div class="hctas">
       <a class="btn btn-buy" href="#precio" data-track="empezar_matricula" data-cart>Matricúlate · 390 €</a>
-      <a class="btn btn-wa" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>Pregunta por WhatsApp<small>te contestamos al momento</small></span></a>
+      <a class="btn btn-wa" href="#video" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>Pregunta por WhatsApp<small>te contestamos al momento</small></span></a>
     </div>
 
     <div class="htrust">
@@ -834,7 +836,7 @@ h3{font-weight:600!important}
     <div class="vside">
       <p class="vlead">Míralo y, si lo tienes claro, matricúlate ahora. Si te queda alguna duda, escríbenos.</p>
       <a class="btn btn-buy vbuy" href="#precio" data-track="empezar_matricula" data-cart>Matricúlate · 390 €</a>
-      <a class="btn btn-wa" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Pregunta por WhatsApp</a>
+      <a class="btn btn-wa" href="#video" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Pregunta por WhatsApp</a>
       <p class="fine">390 € con IVA · o a plazos con Aplazame</p>
     </div>
   </div>
@@ -866,7 +868,7 @@ h3{font-weight:600!important}
     </article>
   </div>
   <div class="cta-row">
-    <a class="btn btn-line" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>¿No sabes si es para ti? Pregúntanos</a>
+    <a class="btn btn-line" href="#video" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>¿No sabes si es para ti? Pregúntanos</a>
   </div>
 </section>
 
@@ -994,61 +996,6 @@ h3{font-weight:600!important}
   </div>
 </section>
 
-<!-- 5 · Atención a cualquier hora -->
-<section id="atencion" class="band band-navy" aria-labelledby="h-atencion">
-  <p class="kicker">Atención por WhatsApp</p>
-  <h2 id="h-atencion">Te atendemos <b>a cualquier hora</b></h2>
-  <div class="agents">
-    <div style="display:grid;gap:20px">
-      <p class="sub">Escríbenos por WhatsApp cuando te venga bien: a las once de la noche o un domingo. Te contesta Elena, nuestra asistente virtual, en menos de un minuto.</p>
-      <ul class="points">
-        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></span><div><b>Respuesta al momento, a cualquier hora</b><span>No tienes que esperar a que abra la oficina.</span></div></li>
-        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg></span><div><b>Resuelve tus dudas</b><span>Sobre el curso, el precio, el pago a plazos y la bonificación, con la información publicada en esta web.</span></div></li>
-        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg></span><div><b>Si lo necesitas, te pasa con una persona</b><span>Alguien del equipo sigue la conversación contigo por WhatsApp.</span></div></li>
-        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span><div><b>Nunca se inventa nada</b><span>Ni descuentos ni fechas. Lo que no está publicado te lo confirma una persona del equipo.</span></div></li>
-        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span><div><b>Siempre puedes hablar con una persona</b><span>Pídelo en el chat o llama gratis al <a href="tel:900877847">900 877 847</a> (lunes a jueves de 9 a 18 h, viernes de 9 a 14 h).</span></div></li>
-      </ul>
-      <div class="cta-row"><a class="btn btn-wa" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Escríbenos por WhatsApp</a></div>
-
-      <aside class="qnote" aria-label="Nota para Aula Inmobiliaria">
-        <p class="qh">Nota para Aula Inmobiliaria</p>
-        <h3>Lo que pasa por detrás de cada conversación</h3>
-        <ul>
-          <li><b>Ficha en el CRM</b> al primer mensaje: curso, canal, anuncio de origen y lo que ha contestado.</li>
-          <li><b>Puntuación</b> que ordena a quién llamar primero (quiere empezar ya, su empresa puede bonificar, ya trabaja en el sector…).</li>
-          <li><b>Seguimientos</b> para quien no contesta, quien se lo piensa o quien espera la respuesta de su empresa; los que salen por iniciativa propia, solo de 8:00 a 21:30.</li>
-          <li><b>Aviso a la asesora</b> con un resumen cuando alguien pide llamada o está listo. Las asesoras ven cada chat y pueden entrar: en cuanto escriben, Elena se calla.</li>
-        </ul>
-
-      </aside>
-    </div>
-
-    <div class="phonecol">
-      <div class="phone">
-        <div class="wa" role="img" aria-label="Ejemplo de conversación de WhatsApp a las 22:15 entre una persona interesada y Elena, la asistente virtual">
-          <div class="top">
-            <span class="av" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 24V14l9-6.5 9 6.5v10" fill="none" stroke="#3E4A6A" stroke-width="2.4" stroke-linejoin="round"/><path d="M13 24v-6h6v6" fill="none" stroke="#EC7B2A" stroke-width="2.4"/></svg></span>
-            <div><b>Aula Inmobiliaria</b><small>Elena · asistente virtual</small></div>
-            <span class="time">22:15</span>
-          </div>
-          <div class="body chat" id="chat">
-            <span class="day">Hoy</span>
-            <div class="msg out">Hola, he visto el curso de agente inmobiliario. Trabajo con contrato en una empresa, ¿me lo puede pagar ella?<span class="meta">22:15 ✓✓</span></div>
-            <div class="msg in"><span class="who">Elena · asistente virtual</span>¡Hola! Puede que sí: si trabajas por cuenta ajena en el régimen general, el curso se puede bonificar con el crédito de formación de tu empresa. Lo comprobamos gratis, eso sí, antes de comprarlo.<span class="meta">22:15</span></div>
-            <div class="msg out">¿Y cuánto cuesta? ¿Lo puedo hacer trabajando?<span class="meta">22:16 ✓✓</span></div>
-            <div class="msg in"><span class="who">Elena · asistente virtual</span>390 € con IVA. Son 250 horas 100% online, sin horarios, y tienes hasta un año para terminarlo. Incluye el videocurso «Operativa Inmobiliaria 360º» de 30 horas. Si al final no se bonifica, también puedes pagarlo a plazos con Aplazame.<span class="meta">22:16</span></div>
-            <div class="msg out">Vale. ¿Puedo hablar con una persona para lo de la empresa?<span class="meta">22:17 ✓✓</span></div>
-            <div class="msg in"><span class="who">Elena · asistente virtual</span>Claro. Le paso tu consulta a una persona del equipo, que te escribe por aquí y te explica qué datos de tu empresa necesitamos.<span class="meta">22:17</span></div>
-            <div class="typing" id="typing" aria-hidden="true"><i></i><i></i><i></i></div>
-          </div>
-        </div>
-      </div>
-      <p class="phonecap">Conversación de ejemplo</p>
-      <button class="replay" type="button" id="replay">Volver a ver la conversación</button>
-    </div>
-  </div>
-</section>
-
 <!-- 6 · Opiniones -->
 <section id="opiniones" class="band band-dark" aria-labelledby="h-op">
   <p class="kicker">Opiniones</p>
@@ -1105,7 +1052,7 @@ h3{font-weight:600!important}
       <p class="sub" style="margin-top:10px">390 € o a plazos con Aplazame. 250 horas online, a tu ritmo, con tres diplomas y una profesora que te acompaña.</p>
       <div class="cta-row">
         <a class="btn btn-buy" href="#precio" data-track="empezar_matricula" data-cart>Matricúlate · 390 €</a>
-        <a class="btn btn-wa" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Pregunta por WhatsApp</a>
+        <a class="btn btn-wa" href="#video" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Pregunta por WhatsApp</a>
       </div>
       <p class="hours">O llama gratis al <a href="tel:900877847">900 877 847</a> · lunes a jueves de 9 a 18 h, viernes de 9 a 14 h.</p>
     </div>
@@ -1138,7 +1085,7 @@ h3{font-weight:600!important}
 
 <div class="mbar" aria-label="Acciones rápidas">
   <a class="btn btn-buy" href="#precio" data-track="empezar_matricula" data-cart><span>Matricúlate<small>390 € o a plazos</small></span></a>
-  <a class="btn btn-wa" href="#atencion" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp<small>al momento</small></span></a>
+  <a class="btn btn-wa" href="#video" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp<small>al momento</small></span></a>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1194,7 +1141,7 @@ h3{font-weight:600!important}
       var yes = q1 === "ajena" && ans.q2 !== "no" && ans.q3 !== "si";
       if (yes) {
         res.className = "result show yes";
-        res.innerHTML = "<h3>Probablemente sí. Lo comprobamos gratis.</h3><p>Escríbenos <b>antes de comprar el curso</b>: miramos si tu empresa tiene crédito y cuánto cubre. Comprobarlo no cuesta nada; si se tramita, la gestión son 75 € + IVA.</p><a class='btn btn-wa' href='#atencion' data-track='abrir_whatsapp'>Comprobar mi bonificación por WhatsApp</a>";
+        res.innerHTML = "<h3>Probablemente sí. Lo comprobamos gratis.</h3><p>Escríbenos <b>antes de comprar el curso</b>: miramos si tu empresa tiene crédito y cuánto cubre. Comprobarlo no cuesta nada; si se tramita, la gestión son 75 € + IVA.</p><a class='btn btn-wa' href='#video' data-track='abrir_whatsapp'>Comprobar mi bonificación por WhatsApp</a>";
       } else {
         var why = notEmployee ? (q1 === "paro" ? "La bonificación es para personas con contrato en una empresa." : "Autónomos y funcionarios no pueden bonificarse este curso.") : "Sin estar al día con Hacienda y la Seguridad Social, o sin crédito de formación, la empresa no puede bonificarlo.";
         res.className = "result show no";
@@ -1218,6 +1165,7 @@ h3{font-weight:600!important}
 
   /* Conversación animada */
   var chat = document.getElementById("chat"), typing = document.getElementById("typing");
+  if (chat) (function(){
   var msgs = Array.prototype.slice.call(chat.querySelectorAll(".msg")), timers = [];
   function play(){
     timers.forEach(clearTimeout); timers = [];
@@ -1242,6 +1190,7 @@ h3{font-weight:600!important}
     }, {threshold: .3}).observe(chat);
   }
   document.getElementById("replay").addEventListener("click", play);
+  })();
 
   /* Formulario de llamada */
   var form = document.getElementById("callform");
@@ -1318,6 +1267,7 @@ h3{font-weight:600!important}
   /* WhatsApp del CRM (número de publicidad de Aula) con el curso y la comunidad ya escritos */
   var wa='https://wa.me/34691289046?text='+encodeURIComponent('Hola, quiero información del curso de Agente Inmobiliario'+(k==='resto'?'':' ('+v.name+')')+'.');
   document.querySelectorAll('a[data-track="abrir_whatsapp"]').forEach(function(a){a.href=wa;a.target='_blank';a.rel='noopener';});
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-track="abrir_whatsapp"]');if(a&&a.getAttribute('href')!==wa){a.href=wa;a.target='_blank';a.rel='noopener';}},true);
   /* Carrito de aulainmobiliaria.com. PENDIENTE: URL exacta del producto (Redsys, Bizum, transferencia, Aplazame). */
   var CART_URL='https://www.aulainmobiliaria.com/carrito/?add-to-cart='+v.prod; /* un producto por comunidad en su web; comprobar con una compra de prueba */
   var utm=['utm_source','utm_medium','utm_campaign','utm_content','fbclid','gclid'].filter(function(p){return q.get(p)}).map(function(p){return p+'='+encodeURIComponent(q.get(p))});
