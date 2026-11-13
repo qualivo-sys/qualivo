@@ -2,13 +2,13 @@
      Antes de publicar: confirmar con Nuria los datos de CONFIG (fecha, precio, directos, bonus) y que el píxel de Meta esté en los ajustes de la página. -->
 <script>
 window.NR11 = {
-  inicio: '5 de diciembre',           // ❓ confirmar con Nuria (también se habló del 5 de enero)
-  precio: '175',                       // precio que se paga (si hay descuento de Black Friday, poner aquí el precio rebajado)
-  precioAntes: '',                     // precio normal tachado, p. ej. '197'. Vacío = no se muestra
-  blackFriday: true,                   // false = quita todos los banners de Black Friday
-  bfHasta: '2026-11-30T23:59:00+01:00',// ❓ hasta cuándo se ven los banners de Black Friday. Hora de Madrid
-  directos: 3,                         // ❓ confirmar: 3 o 4
-  bonusHoy: true,                      // regalo de 3 meditaciones solo si compras hoy: cuenta atrás hasta las 00:00 (hora de Madrid)
+  inicio: '5 de diciembre',            // programa del 5 al 15 de diciembre (confirmado por Nuria)
+  precio: '175',                       // precio de Black Friday, con regalo, hasta ofertaHasta
+  precioDespues: '185',                // ❓ precio del 1 al 5 de diciembre, sin regalo (Nuria: 5-10 € más)
+  ofertaHasta: '2026-11-30T23:59:59+01:00', // fin de la oferta: precio y regalo. Hora de Madrid
+  cierre: '2026-12-05T00:00:00+01:00', // a partir de aquí la página muestra «inscripciones cerradas»
+  blackFriday: true,                   // false = quita la franja y las etiquetas de Black Friday
+  directos: 3,
   pago: 'https://dranuriaroure.thrivecart.com/a-11-pasos/'
 };
 </script>
@@ -90,7 +90,7 @@ html,body{overflow-x:hidden}
 </style>
 
 <div id="n11">
-  <div class="bf"><span class="t"><b>Black Friday</b>Regalo de 3 meditaciones si te inscribes hoy</span><span class="cd" data-cd></span></div>
+  <div class="bf"><span class="t"><b>Black Friday</b>175 € y 3 meditaciones de regalo hasta el lunes 30</span><span class="cd" data-cd></span></div>
 
   <section>
     <div class="w">
@@ -162,7 +162,7 @@ html,body{overflow-x:hidden}
           <li>Grupo de Telegram para tus preguntas</li>
           <li>Soporte por email para entrar a la plataforma</li>
         </ul>
-        <div class="bonus"><b>Regalo si te inscribes hoy:</b> 3 meditaciones guiadas de Nuria para acompañar tus noches.<span class="bonus-cd" id="n11-bcd"> El regalo termina a las 00:00 · quedan <b data-cd></b></span></div>
+        <div class="bonus"><b>Regalo si te inscribes antes del lunes 30:</b> 3 meditaciones guiadas de Nuria para acompañar tus noches.<span class="bonus-cd" id="n11-bcd"> El precio y el regalo terminan el 30 de noviembre a las 23:59 · quedan <b data-cd></b></span></div>
         <div class="cta" style="justify-content:center"><a class="btn" data-pago href="#">Quiero empezar los 11 pasos</a></div>
         <p style="font-size:13.5px;margin-top:16px">Empezamos el <b data-k="inicio"></b>. Recibes el acceso al momento por email.</p>
       </div>
@@ -202,35 +202,31 @@ html,body{overflow-x:hidden}
   var C = window.NR11 || {}, root = document.getElementById('n11'); if (!root) return;
   // Datos de la configuración
   Array.prototype.forEach.call(root.querySelectorAll('[data-k]'), function (el) { el.textContent = C[el.getAttribute('data-k')]; });
-  // Black Friday: banners y precio tachado (hasta bfHasta)
-  if (C.blackFriday) {
-    var finBF = new Date(C.bfHasta).getTime();
-    if (!isNaN(finBF) && Date.now() < finBF) {
-      root.classList.add('bf-on');
-      var old = document.getElementById('n11-old'); if (old && C.precioAntes) { old.textContent = C.precioAntes + ' €'; old.style.display = 'inline'; }
-    }
+  // Oferta de Black Friday hasta ofertaHasta; después, precio nuevo sin regalo; desde cierre, inscripciones cerradas
+  var ahora = Date.now(), finOf = new Date(C.ofertaHasta).getTime(), cierre = new Date(C.cierre).getTime();
+  var enOferta = !isNaN(finOf) && ahora < finOf;
+  if (enOferta && C.blackFriday) root.classList.add('bf-on');
+  if (!enOferta) {
+    Array.prototype.forEach.call(root.querySelectorAll('[data-k="precio"]'), function (el) { el.textContent = C.precioDespues || C.precio; });
+    var bo = root.querySelector('.bonus'); if (bo) bo.style.display = 'none';
+    Array.prototype.forEach.call(root.querySelectorAll('.bf-badge'), function (el) { el.style.display = 'none'; });
   }
-  // Regalo de hoy: cuenta atrás hasta las 00:00 de Madrid
-  var medianoche = function () {
-    var ahora = new Date(), m = new Date(ahora.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
-    var dif = ahora.getTime() - m.getTime(); m.setHours(24, 0, 0, 0); return m.getTime() + dif;
-  };
   var cds = root.querySelectorAll('[data-cd]');
-  if (C.bonusHoy) {
+  if (enOferta) {
     var pinta = function () {
-      var r = Math.max(0, medianoche() - Date.now()), h = Math.floor(r / 36e5), mi = Math.floor(r % 36e5 / 6e4), sg = Math.floor(r % 6e4 / 1e3);
-      var t = ('0' + h).slice(-2) + ':' + ('0' + mi).slice(-2) + ':' + ('0' + sg).slice(-2);
+      var r = Math.max(0, finOf - Date.now()), d = Math.floor(r / 864e5), h = Math.floor(r % 864e5 / 36e5), mi = Math.floor(r % 36e5 / 6e4), sg = Math.floor(r % 6e4 / 1e3);
+      var t = (d ? d + ' d ' : '') + ('0' + h).slice(-2) + ':' + ('0' + mi).slice(-2) + ':' + ('0' + sg).slice(-2);
       Array.prototype.forEach.call(cds, function (el) { el.textContent = t; });
+      if (r <= 0) location.reload();
     };
     pinta(); setInterval(pinta, 1000);
-  } else {
-    Array.prototype.forEach.call(cds, function (el) { el.style.display = 'none'; });
-    var bcd = document.getElementById('n11-bcd'); if (bcd) bcd.style.display = 'none';
   }
+  var cerrado = !isNaN(cierre) && ahora >= cierre;
   // Botones al pago (con UTM) y evento de Meta si hay consentimiento
   function ok(){ try { return localStorage.getItem('nr_cookies') === 'si'; } catch (e) { return false; } }
   var url = C.pago + (C.pago.indexOf('?') < 0 ? '?' : '&') + 'utm_source=landing&utm_medium=web&utm_campaign=11pasos';
   Array.prototype.forEach.call(root.querySelectorAll('[data-pago]'), function (a) {
+    if (cerrado) { a.removeAttribute('href'); a.textContent = 'Inscripciones cerradas'; a.style.opacity = '.55'; a.style.pointerEvents = 'none'; return; }
     a.href = url;
     a.addEventListener('click', function () { try { if (typeof window.fbq === 'function' && ok()) window.fbq('track', 'InitiateCheckout', { content_name: 'A 11 Pasos del Sueño', value: Number(C.precio) || 0, currency: 'EUR' }); } catch (e) {} });
   });
