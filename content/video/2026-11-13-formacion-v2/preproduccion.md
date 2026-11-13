@@ -1,6 +1,13 @@
 # Formación V2 · preproducción (13-nov-2026)
 
-**Estado:** concepto y dirección visual aprobados por Maikel el 13-nov. Guion revisado por Maikel. **No se produce el vídeo final ni se toca Meta** hasta que apruebe la versión visual.
+**Estado:** concepto y dirección visual aprobados por Maikel el 13-nov. Guion revisado por Maikel.
+**Decisiones de Maikel (13-nov, segunda ronda):**
+- Aprobados los tres recortes: el vídeo queda en unos 53 s.
+- Se mantienen las dos aperturas; su favorita es la 1.
+- Línea visual aprobada; el tamaño de interfaces, los subtítulos y la composición quedan pendientes de que revise los seis fotogramas.
+- No se enseña como automático nada sin confirmar. Lo que no funcione hoy se adapta en la narración o se marca como demostración conceptual.
+- Voz: prueba de 10-15 s con su voz; si no convence, voz profesional.
+- Autorizados materiales y pruebas visuales. No autorizada la producción definitiva ni cambios en Meta. **No se produce el vídeo final ni se toca Meta** hasta que apruebe la versión visual.
 **Documento anterior:** `propuesta.md` (auditoría y concepto).
 
 ## 1 · ¿Cabe la locución?
@@ -93,3 +100,12 @@ Solo se representa como real lo que funcione. A confirmar con Automatización y 
 
 - **Versión corta de 30-35 s:** sale de las mismas grabaciones (gancho, WhatsApp, llamada, matrícula y cierre). Se hace después de la completa.
 - **4:5:** se recompone plano a plano, no se recorta.
+
+## 7 · Prueba de voz (10-15 s)
+
+**Texto de la prueba** (apertura 1 y entrada, unos 14 s):
+«Conseguir solicitudes para tu academia es una cosa. Convertirlas en matrículas es otra. Laura pide información sobre un curso. En segundos entra en el CRM, con el anuncio del que viene y la formación que le interesa.»
+
+**Cómo grabarla (Maikel):** nota de voz del móvil, en una habitación con muebles o cortinas (sin eco), con el móvil a un palmo de la boca. Hablando como a un director de academia sentado enfrente, sin proyectar la voz. Dos tomas.
+
+**Para comparar:** el mismo texto con tres voces profesionales de ElevenLabs en `voz-prueba/comparativa/` (`javier_rojas`, la del anuncio original; `david`; `emilio`).
