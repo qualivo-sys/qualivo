@@ -712,6 +712,20 @@ html.rev .qnote{display:block!important;margin-top:32px}
   section{scroll-margin-top:12px}
   body{padding-bottom:84px}
 }
+
+/* v2.1 · última pasada */
+.bonif-line{margin-top:14px;font-size:14.5px;color:var(--muted);text-align:center}
+.bonif-line a{color:var(--accent-text);font-weight:600}
+@media (max-width:760px){
+  main{gap:36px!important;padding-top:32px!important;padding-bottom:40px!important}
+  .band{padding-block:36px!important}
+  .prof .ph{aspect-ratio:21/9!important}
+  .hero .pcard .incl{display:none}
+  .hero .pcard{padding:16px 18px!important;margin-top:14px!important}
+  .hero .pcard .price b{font-size:52px!important}
+  .hctas{margin-top:14px!important}
+  .statband .sgrid{padding-block:20px!important}
+}
 </style>
 <path class="st0" d="M0.5,9.1c0,0,3.9,0.5,7.5,3v6.9c0,0-3.2-1.3-7.5-1.8V9.1z"/>
 <path class="st0" d="M16.5,9.1c0,0-3.9,0.5-7.5,3v6.9c0,0,3.2-1.3,7.5-1.8V9.1z"/>
@@ -892,6 +906,24 @@ html.rev .qnote{display:block!important;margin-top:32px}
 
 
 <main class="wrap">
+<!-- Vídeo: sitio definitivo. Para publicarlo, quitar la clase rev-only cuando esté el vídeo -->
+<section id="video" class="rev-only" aria-labelledby="h-video">
+  <p class="kicker">El curso en tres minutos</p>
+  <h2 id="h-video">Míralo antes de decidir</h2>
+  <div class="vgrid">
+    <div class="vbox" role="img" aria-label="Hueco para el vídeo de la landing">
+      <span class="vplay" aria-hidden="true"></span>
+      <p><span class="pend">PENDIENTE</span> Aquí va el vídeo de <b data-v="vname">toda España</b>: qué es el curso, qué reconocimiento tiene, qué te llevas, cómo se estudia y cómo se paga.</p>
+    </div>
+    <div class="vside">
+      <p class="vlead">Míralo y, si lo tienes claro, matricúlate ahora. Si te queda alguna duda, escríbenos.</p>
+      <a class="btn btn-buy vbuy" href="#precio" data-track="empezar_matricula" data-cart>Matricúlate ahora · 390 €</a>
+      <a class="btn btn-wa" href="#dudas" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Pregunta por WhatsApp</a>
+      <p class="fine">390 € con IVA · o a plazos con Aplazame</p>
+    </div>
+  </div>
+</section>
+
 <!-- 2 · Para quién es -->
 <section id="para-quien" aria-labelledby="h-quien">
   <p class="kicker">Para quién es</p>
@@ -907,7 +939,7 @@ html.rev .qnote{display:block!important;margin-top:32px}
       <img class="ph" src="img/agente-inmobiliario-administrador-fincas-min.jpg" alt="Agente inmobiliaria con clientes en un salón" width="1200" height="900" loading="lazy" decoding="async">
       <div class="ico"><svg class="i" aria-hidden="true"><use href="#i-badge"/></svg></div>
       <p class="q">«Ya trabajo en una inmobiliaria y quiero formarme»</p>
-      <p>Ordenas y acreditas lo que ya haces cada día: derecho inmobiliario, fiscalidad, valoraciones y la normativa de protección de datos y de prevención de blanqueo. Al terminar tienes tus tres diplomas. Los requisitos de registro dependen de tu comunidad: <a href="#diplomas">consúltalos aquí</a>.</p>
+      <p>Ordenas y acreditas lo que ya haces cada día: derecho inmobiliario, fiscalidad, valoraciones y la normativa de protección de datos y de prevención de blanqueo. Los requisitos de registro dependen de tu comunidad: <a href="#diplomas">consúltalos aquí</a>.</p>
     </article>
     <article class="card prof">
       <img class="ph" src="img/curso-mediacion-civil-conflictos-inmobiliarios-min.jpg" alt="Apretón de manos al cerrar un acuerdo" width="1200" height="900" loading="lazy" decoding="async">
@@ -929,7 +961,7 @@ html.rev .qnote{display:block!important;margin-top:32px}
     <div class="card"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></div><h3>Derecho inmobiliario</h3><p>Propiedad, hipotecas, alquileres urbanos y rústicos, urbanismo y derecho a la vivienda.</p></div>
     <div class="card"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg></div><h3>Fiscalidad y valoraciones</h3><p>Los impuestos de cada operación y cómo se valora un inmueble.</p></div>
     <div class="card"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-store"/></svg></div><h3>Marketing y actividad profesional</h3><p>Promoción y marketing inmobiliario, derecho profesional y consumo, con documentos y modelos.</p></div>
-    <div class="card"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></div><h3>Normativa del día a día</h3><p>Protección de datos y prevención de blanqueo de capitales, cada una con su diploma.</p></div>
+    <div class="card"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></div><h3>Normativa del día a día</h3><p>Protección de datos y prevención de blanqueo de capitales, obligatorias en cualquier operación.</p></div>
   </div>
 
   <details class="more">
@@ -1009,12 +1041,7 @@ html.rev .qnote{display:block!important;margin-top:32px}
 <!-- 6 · Opiniones -->
 <section id="opiniones" class="band band-dark" aria-labelledby="h-op">
   <p class="kicker">Opiniones</p>
-  <h2 id="h-op">Veinte años <b>formando agentes inmobiliarios</b></h2>
-  <div class="grid">
-    <div class="card rbox"><b>4,9</b><div><span class="stars" aria-hidden="true"><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg></span><br><span>955 opiniones en Google</span></div></div>
-    <div class="card rbox"><b>2006</b><span>formando solo en el sector inmobiliario, con profesores especialistas en cada rama</span></div>
-    <div class="card rbox"><b>100%</b><span>online, desde L'Hospitalet de Llobregat para toda España</span></div>
-  </div>
+  <h2 id="h-op">Lo que dicen <b>nuestros alumnos</b></h2>
   <div class="grid">
     <figure class="card quote">
       <blockquote><p>«El curso de Agente Inmobiliario está bien estructurado, con material completo y la posibilidad de estudiar a tu propio ritmo. La plataforma es cómoda y fácil de utilizar. […] Al finalizar la formación, recibí los tres diplomas sin problemas.»</p></blockquote>
@@ -1040,7 +1067,7 @@ html.rev .qnote{display:block!important;margin-top:32px}
 <!-- 7 · Precio -->
 <section id="precio" aria-labelledby="h-precio">
   <p class="kicker">Precio y formas de pago</p>
-  <h2 id="h-precio">Matrícula: <b>390 € y tres maneras de pagarlo</b></h2>
+  <h2 id="h-precio">Matrícula: <b>390 €, de una vez o a plazos</b></h2>
   <div class="pricegrid">
     <div class="card">
       <div class="bigprice"><b>390 €</b> <span class="sub" style="display:inline">IVA incluido</span></div>
@@ -1048,7 +1075,6 @@ html.rev .qnote{display:block!important;margin-top:32px}
       <div class="ways">
         <div class="way"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg><div><b>De una vez</b><span>Con tarjeta, transferencia o Bizum.</span></div></div>
         <div class="way"><svg class="i" aria-hidden="true"><use href="#i-split"/></svg><div><b>A plazos con Aplazame</b><span>Lo pagas en cuotas. El diploma se emite cuando el curso está pagado del todo.</span></div></div>
-        <div class="way"><svg class="i" aria-hidden="true"><use href="#i-build"/></svg><div><b>Lo paga tu empresa (bonificación)</b><span>Si trabajas por cuenta ajena, puede salir a cargo del crédito de formación de tu empresa. Se consulta <b>antes</b> de comprar.</span></div></div>
       </div>
       <div class="aplz rev-only" id="aplazame-sim">
         <!-- Simulador de Aplazame. Se activa con la clave pública de Aula:
@@ -1058,6 +1084,7 @@ html.rev .qnote{display:block!important;margin-top:32px}
       </div>
       <p class="aplz-line"><span class="aplz-logo"><img src="img/aplazame-w.png" alt="Aplazame" width="88" height="28"></span>Para pagar a plazos, pulsa «Matricúlate» y elige Aplazame al pagar.</p>
       <a class="btn btn-buy" style="width:100%;margin-top:18px" href="#precio" data-track="empezar_matricula" data-cart>Matricúlate ahora · 390 €</a>
+      <p class="bonif-line">¿Trabajas con contrato en una empresa? Puede que lo pague ella. <a href="#bonificacion">Compruébalo en 20 segundos</a></p>
     </div>
 
     <div class="card incl-card">
@@ -1160,7 +1187,7 @@ html.rev .qnote{display:block!important;margin-top:32px}
     <div>
       <p class="kicker" style="color:#F5A066">Empieza cuando quieras</p>
       <h2 id="h-final">Tu curso de agente inmobiliario, desde hoy</h2>
-      <p class="sub" style="margin-top:10px">390 € o a plazos con Aplazame. 250 horas online, a tu ritmo, con tres diplomas y una profesora que te acompaña.</p>
+      <p class="sub" style="margin-top:10px">390 € o a plazos con Aplazame. 250 horas online, a tu ritmo y con una profesora que te acompaña.</p>
       <div class="cta-row">
         <a class="btn btn-buy" href="#precio" data-track="empezar_matricula" data-cart>Matricúlate ahora · 390 €</a>
         <a class="btn btn-sec" href="#dudas" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Resolver dudas por WhatsApp</a>
@@ -1172,22 +1199,7 @@ html.rev .qnote{display:block!important;margin-top:32px}
   </div>
 </section>
 
-<section id="video" class="rev-only" aria-labelledby="h-video">
-  <p class="kicker">En tres minutos</p>
-  <h2 id="h-video">Tus dudas, resueltas antes de matricularte</h2>
-  <div class="vgrid">
-    <div class="vbox" role="img" aria-label="Hueco para el vídeo de la landing">
-      <span class="vplay" aria-hidden="true"></span>
-      <p><span class="pend">PENDIENTE</span> Aquí va el vídeo de <b data-v="vname">toda España</b>: qué es el curso, qué reconocimiento tiene, qué te llevas, cómo se estudia y cómo se paga.</p>
-    </div>
-    <div class="vside">
-      <p class="vlead">Míralo y, si lo tienes claro, matricúlate ahora. Si te queda alguna duda, escríbenos.</p>
-      <a class="btn btn-buy vbuy" href="#precio" data-track="empezar_matricula" data-cart>Matricúlate · 390 €</a>
-      <a class="btn btn-wa" href="#dudas" data-track="abrir_whatsapp"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Pregunta por WhatsApp</a>
-      <p class="fine">390 € con IVA · o a plazos con Aplazame</p>
-    </div>
-  </div>
-</section>
+
 <!-- Nota final de Qualivo -->
 <aside class="qnote rev-only" aria-label="Pendiente de Aula">
   <p class="qh">Nota para Aula Inmobiliaria · solo se ve en revisión</p>
