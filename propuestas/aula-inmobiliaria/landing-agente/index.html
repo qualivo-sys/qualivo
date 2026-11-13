@@ -602,6 +602,39 @@ h2{font-size:clamp(28px,3.8vw,44px);font-weight:800;letter-spacing:-.02em}
   <a class="logo alogo" href="#top"><svg viewBox="0 0 105 22" role="img" aria-label="Aula Inmobiliaria">
 <style type="text/css">
 	.alogo .st0{fill:#FFFFFF;}
+
+/* v4 · test de bonificación paso a paso y opiniones */
+.qz{margin-top:16px}
+.qz[hidden],.qz-step[hidden],.qz-back[hidden]{display:none!important}
+.qz-bar{display:flex;gap:6px;margin-bottom:16px}
+.qz-bar i{flex:1;height:6px;border-radius:99px;background:#E3E6EE;transition:background-color .25s}
+.qz-bar i.on{background:#EC7B2A}.qz-bar i.done{background:#3E4A6A}
+.qz-step{animation:qzin .28s ease}
+@keyframes qzin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.qz-step{animation:none}}
+.qz-n{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#EC7B2A;margin:0}
+.qz-q{font-size:20px!important;font-weight:700;line-height:1.3;color:#3E4A6A;margin:6px 0 14px}
+.qz-opts{display:grid;gap:10px}
+.qz-opts button{font:inherit;font-weight:600;font-size:16px;text-align:left;padding:15px 18px;border:2px solid #DDE1EA;border-radius:14px;background:#fff;color:#3E4A6A;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:border-color .15s,background-color .15s,transform .1s}
+.qz-opts button::after{content:"→";color:#EC7B2A;font-weight:700}
+.qz-opts button:hover{border-color:#EC7B2A;background:#FFF6EF}
+.qz-opts button:active{transform:scale(.99)}
+.qz-opts button.sel{border-color:#EC7B2A;background:#EC7B2A;color:#fff}.qz-opts button.sel::after{content:"✓";color:#fff}
+.qz-opts button:focus-visible{outline:3px solid #F2B53A;outline-offset:2px}
+.qz-back{font:inherit;font-size:14px;font-weight:600;color:#6B7285;background:none;border:0;padding:10px 0 0;cursor:pointer;text-decoration:underline}
+#opiniones::after{display:none}
+#opiniones .grid{align-items:stretch}
+#opiniones .rbox{background:transparent!important;border:1px solid rgba(255,255,255,.22)!important;box-shadow:none!important;align-items:center}
+#opiniones .rbox span{color:#DDE1EC}
+#opiniones .quote{background:#fff!important;border-color:#fff!important;display:flex;flex-direction:column;margin:0}
+#opiniones .quote blockquote{margin:0;flex:1}
+#opiniones .quote p{color:#3E4A6A!important;font-size:16px!important;line-height:1.55}
+#opiniones .quote footer{color:#6B7285;border-top:1px solid #E6E9F0;padding-top:12px;margin-top:16px}
+.recon{margin-top:32px;border-top:1px solid rgba(255,255,255,.2);padding-top:26px;display:grid;grid-template-columns:1fr 1fr 1.7fr;gap:28px}
+.recon-t{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#C9CEDB;margin:0 0 14px}
+.recon-l{display:flex;flex-wrap:wrap;align-items:center;gap:22px}
+.recon-l img{height:42px;width:auto;max-width:140px;object-fit:contain}
+@media (max-width:760px){.recon{grid-template-columns:1fr;gap:22px}.recon-l img{height:40px}}
 </style>
 <path class="st0" d="M0.5,9.1c0,0,3.9,0.5,7.5,3v6.9c0,0-3.2-1.3-7.5-1.8V9.1z"/>
 <path class="st0" d="M16.5,9.1c0,0-3.9,0.5-7.5,3v6.9c0,0,3.2-1.3,7.5-1.8V9.1z"/>
@@ -903,35 +936,41 @@ h2{font-size:clamp(28px,3.8vw,44px);font-weight:800;letter-spacing:-.02em}
     <div class="card checker" id="bonificacion">
       <p class="kicker">En 20 segundos</p>
       <h3 style="font-size:21px;margin-top:4px">¿Puede pagarlo tu empresa?</h3>
-      <p>Tres preguntas rápidas. No guardamos nada: es solo para orientarte.</p>
-      <form id="chk" novalidate>
-        <fieldset>
-          <legend>1. ¿Cómo trabajas ahora?</legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="q1" value="ajena"><span>Con contrato en una empresa</span></label>
-            <label class="chip"><input type="radio" name="q1" value="autonomo"><span>Autónomo</span></label>
-            <label class="chip"><input type="radio" name="q1" value="funcionario"><span>Funcionario</span></label>
-            <label class="chip"><input type="radio" name="q1" value="paro"><span>Ahora no trabajo</span></label>
+      <p>Tres toques y lo sabes. No guardamos nada: es solo para orientarte.</p>
+      <div class="qz" id="chk">
+        <div class="qz-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="qz-step" data-q="q1">
+          <p class="qz-n">Pregunta 1 de 3</p>
+          <p class="qz-q">¿Cómo trabajas ahora?</p>
+          <div class="qz-opts">
+            <button type="button" data-v="ajena">Con contrato en una empresa</button>
+            <button type="button" data-v="autonomo">Soy autónomo</button>
+            <button type="button" data-v="funcionario">Soy funcionario</button>
+            <button type="button" data-v="paro">Ahora no trabajo</button>
           </div>
-        </fieldset>
-        <fieldset>
-          <legend>2. ¿Tu empresa está al día con Hacienda y la Seguridad Social?</legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="q2" value="si"><span>Sí</span></label>
-            <label class="chip"><input type="radio" name="q2" value="nose"><span>No lo sé</span></label>
-            <label class="chip"><input type="radio" name="q2" value="no"><span>No</span></label>
+        </div>
+        <div class="qz-step" data-q="q2" hidden>
+          <p class="qz-n">Pregunta 2 de 3</p>
+          <p class="qz-q">¿Tu empresa está al día con Hacienda y la Seguridad Social?</p>
+          <div class="qz-opts">
+            <button type="button" data-v="si">Sí</button>
+            <button type="button" data-v="nose">No lo sé</button>
+            <button type="button" data-v="no">No</button>
           </div>
-        </fieldset>
-        <fieldset>
-          <legend>3. ¿Tu empresa ha gastado ya este año su crédito de formación?</legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="q3" value="no"><span>No</span></label>
-            <label class="chip"><input type="radio" name="q3" value="nose"><span>No lo sé</span></label>
-            <label class="chip"><input type="radio" name="q3" value="si"><span>Sí, ya lo ha gastado</span></label>
+        </div>
+        <div class="qz-step" data-q="q3" hidden>
+          <p class="qz-n">Pregunta 3 de 3</p>
+          <p class="qz-q">¿Tu empresa ha gastado ya este año su crédito de formación?</p>
+          <div class="qz-opts">
+            <button type="button" data-v="no">No</button>
+            <button type="button" data-v="nose">No lo sé</button>
+            <button type="button" data-v="si">Sí, ya lo ha gastado</button>
           </div>
-        </fieldset>
-      </form>
+        </div>
+        <button type="button" class="qz-back" id="chk-back" hidden>← Volver</button>
+      </div>
       <div class="result" id="chk-res" aria-live="polite"></div>
+      <button type="button" class="qz-back" id="chk-again" hidden>Volver a empezar</button>
       <p class="fine">Solo pueden bonificarse trabajadores contratados en el régimen general (autónomos y funcionarios, no). Comprobar el crédito es gratis; si se tramita, la gestión cuesta 75 € + IVA y una parte también es bonificable según el tamaño de tu empresa. Con crédito suficiente se puede cubrir el 100% del curso.</p>
     </div>
   </div>
@@ -1026,10 +1065,10 @@ h2{font-size:clamp(28px,3.8vw,44px);font-weight:800;letter-spacing:-.02em}
     </figure>
   </div>
   
-  <div class="badges">
-    <div class="card"><h3>Con el reconocimiento y colaboración de</h3><div class="blist"><span>AIF</span><span>API <small>Asociación Nacional de Agentes Inmobiliarios</small></span></div></div>
-    <div class="card"><h3>Miembro asociado a</h3><div class="blist"><span>Ganvam</span><span>API</span></div></div>
-    <div class="card"><h3>Centro homologado por</h3><div class="blist"><span>Gobierno de España</span><span>AEGAI</span><span>AICAT</span></div></div>
+  <div class="recon">
+    <div class="recon-g"><p class="recon-t">Con el reconocimiento y colaboración de</p><div class="recon-l"><img src="img/rec-aif-w.png" alt="AIF" loading="lazy"><img src="img/rec-logo-api-profesional-footer.png" alt="API · Asociación Nacional de Agentes Inmobiliarios" loading="lazy"></div></div>
+    <div class="recon-g"><p class="recon-t">Miembro asociado a</p><div class="recon-l"><img src="img/rec-ganvam-peritos.png" alt="Ganvam" loading="lazy"><img src="img/rec-API-Olga.webp" alt="API" loading="lazy"></div></div>
+    <div class="recon-g"><p class="recon-t">Centro homologado por</p><div class="recon-l"><img src="img/rec-gobierno-espana-w.png" alt="Gobierno de España" loading="lazy"><img src="img/rec-aegai-w.png" alt="AEGAI" loading="lazy"><img src="img/rec-aicat-white.png" alt="AICAT" loading="lazy"></div></div>
   </div>
 </section>
 
@@ -1133,22 +1172,41 @@ h2{font-size:clamp(28px,3.8vw,44px);font-weight:800;letter-spacing:-.02em}
 
   /* Comprobador de bonificación */
   var chk = document.getElementById("chk"), res = document.getElementById("chk-res");
-  function val(n){ var r = chk.querySelector('input[name="' + n + '"]:checked'); return r ? r.value : null; }
-  chk.addEventListener("change", function(){
-    var q1 = val("q1"), q2 = val("q2"), q3 = val("q3");
-    var notEmployee = q1 && q1 !== "ajena";
-    if (!notEmployee && !(q1 && q2 && q3)) return;
-    var yes = q1 === "ajena" && q2 !== "no" && q3 !== "si";
-    if (yes) {
-      res.className = "result show yes";
-      res.innerHTML = "<h3>Probablemente sí. Lo comprobamos gratis.</h3><p>Escríbenos <b>antes de comprar el curso</b>: miramos si tu empresa tiene crédito y cuánto cubre. Comprobarlo no cuesta nada; si se tramita, la gestión son 75 € + IVA.</p><a class='btn btn-wa' href='#atencion' data-track='abrir_whatsapp'>Comprobar mi bonificación por WhatsApp</a>";
-    } else {
-      var why = notEmployee ? (q1 === "paro" ? "La bonificación es para personas con contrato en una empresa." : "Autónomos y funcionarios no pueden bonificarse este curso.") : "Sin estar al día con Hacienda y la Seguridad Social, o sin crédito de formación, la empresa no puede bonificarlo.";
-      res.className = "result show no";
-      res.innerHTML = "<h3>No aplica, pero tienes Aplazame.</h3><p>" + why + " Puedes pagar los 390 € a plazos con Aplazame. Y si tienes dudas sobre tu caso, te lo confirmamos por WhatsApp.</p><a class='btn btn-buy' href='#precio' data-track='empezar_matricula'>Matricúlate a plazos</a>";
+  if (chk) (function(){
+    var steps = Array.prototype.slice.call(chk.querySelectorAll(".qz-step")), bars = chk.querySelectorAll(".qz-bar i");
+    var back = document.getElementById("chk-back"), again = document.getElementById("chk-again"), ans = {}, cur = 0;
+    function show(i){
+      cur = i; chk.hidden = false; res.className = "result"; res.innerHTML = ""; again.hidden = true;
+      steps.forEach(function(st, k){ st.hidden = k !== i; });
+      for (var k = 0; k < bars.length; k++) bars[k].className = k < i ? "done" : (k === i ? "on" : "");
+      back.hidden = i === 0;
     }
-    track("comprobar_bonificacion", {resultado: yes ? "probable" : "no_aplica", situacion: q1});
-  });
+    function finish(){
+      var q1 = ans.q1, notEmployee = q1 !== "ajena";
+      var yes = q1 === "ajena" && ans.q2 !== "no" && ans.q3 !== "si";
+      if (yes) {
+        res.className = "result show yes";
+        res.innerHTML = "<h3>Probablemente sí. Lo comprobamos gratis.</h3><p>Escríbenos <b>antes de comprar el curso</b>: miramos si tu empresa tiene crédito y cuánto cubre. Comprobarlo no cuesta nada; si se tramita, la gestión son 75 € + IVA.</p><a class='btn btn-wa' href='#atencion' data-track='abrir_whatsapp'>Comprobar mi bonificación por WhatsApp</a>";
+      } else {
+        var why = notEmployee ? (q1 === "paro" ? "La bonificación es para personas con contrato en una empresa." : "Autónomos y funcionarios no pueden bonificarse este curso.") : "Sin estar al día con Hacienda y la Seguridad Social, o sin crédito de formación, la empresa no puede bonificarlo.";
+        res.className = "result show no";
+        res.innerHTML = "<h3>No aplica, pero tienes Aplazame.</h3><p>" + why + " Puedes pagar los 390 € a plazos con Aplazame. Y si tienes dudas sobre tu caso, te lo confirmamos por WhatsApp.</p><a class='btn btn-buy' href='#precio' data-track='empezar_matricula'>Matricúlate a plazos</a>";
+      }
+      chk.hidden = true; again.hidden = false;
+      track("comprobar_bonificacion", {resultado: yes ? "probable" : "no_aplica", situacion: q1});
+    }
+    chk.addEventListener("click", function(e){
+      var b = e.target.closest(".qz-opts button"); if (!b) return;
+      var st = steps[cur]; ans[st.getAttribute("data-q")] = b.getAttribute("data-v");
+      Array.prototype.forEach.call(st.querySelectorAll("button"), function(x){ x.classList.toggle("sel", x === b); });
+      setTimeout(function(){
+        if (ans.q1 !== "ajena" || ans.q2 === "no" || cur === steps.length - 1) finish(); else show(cur + 1);
+      }, 220);
+    });
+    back.addEventListener("click", function(){ show(Math.max(0, cur - 1)); });
+    again.addEventListener("click", function(){ ans = {}; chk.querySelectorAll(".sel").forEach(function(x){ x.classList.remove("sel"); }); show(0); });
+    show(0);
+  })();
 
   /* Conversación animada */
   var chat = document.getElementById("chat"), typing = document.getElementById("typing");
