@@ -29,3 +29,15 @@
 ## Qué necesita a Maikel
 - **El lunes no se lanza nada sin su OK.** Esta semana se le dio a Meta «una última oportunidad»; si no hay ningún lead real, se apaga todo y se revisa el enfoque.
 - **El tope de noviembre es 1.450 €** (aprobado el 10-nov), no los 780 € que dice la regla del bucle. Llevamos 585,58 € [C].
+
+## Lo que aportó Growth (13-nov, 08:48, sin nombres)
+- **Quién avanza:** decide el dueño o la dirección, ya tienen a alguien con el marketing (dentro de la empresa o una agencia) y ya tienen volumen. Su problema es atender y hacer seguimiento, no conseguir contactos. Hablan con números: «De cada 10 se matricula 1», «Una media de 70 personas», «estoy saturada… no poderla atender rápidamente». Venden formación de 1.000 a 4.000 € o a empresas.
+- **Quién se atasca:** los que están empezando, los que invierten menos de 500 €, los que solo quieren comparar agencias y las clínicas con la agenda llena. Hablan de «conseguir alumnos», no de atenderlos.
+- **La cliente que firmó en octubre (3.600 €):** su primer mensaje fue «Necesito un CRM para gestionar los Leads», con unos 70 contactos al mes y unas 110 matrículas el mes anterior sin medir la conversión. Ya tenía a alguien con las campañas. Cerró en la primera reunión. En palabras de Growth: compró orden y control, no anuncios.
+- **Objeción más repetida entre los que ya invierten:** «eso ya lo tengo» / «ya tengo una empresa que me presta estos servicios».
+- **Lo que da confianza:** precio claro por escrito, sin permanencia, anexo de salida y referencias.
+- **Ángulos que propone Growth:**
+  - A) «Te llega gente y no das abasto».
+  - B) «Les escribís una vez y ya».
+  - C) «No te vendemos anuncios: conectamos los que ya tienes con tus matrículas».
+- **Lectura de Paid:** cuadran con los A1, A2 y A3 de Creative. El anuncio tiene que hablar a quien ya tiene volumen y una agencia, no a quien quiere conseguir alumnos. Eso también filtra a los que empiezan de cero y a los leads falsos.
