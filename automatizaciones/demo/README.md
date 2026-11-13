@@ -6,7 +6,7 @@ Encargo de Creative v2 (13-nov), con decisiones de Maikel: sin automatización n
 
 1. **Maikel crea la subcuenta** «Qualivo · Demo» en GHL (el nombre tiene que llevar «demo»). Crea también su *Private Integration* con permisos de contactos, oportunidades, custom fields y locations (solo lectura). La clave va al entorno como `DEMO_GHL_API_KEY` y `DEMO_GHL_LOCATION_ID`, nunca al chat ni al repo.
 2. En la subcuenta, crear un pipeline «Admisiones» con estas etapas: Nueva solicitud → Contactada → Llamada hecha → Más adelante → Matriculada.
-3. Automatización lanza `node automatizaciones/demo/escenario-laura.js --seco` y después lo lanza sin `--seco`. Crea a Laura Vidal · Escuela Norte (origen Instagram, curso de tarde, su pregunta), su oportunidad, la nota de historial y la nota de llamada. No envía nada a nadie. El script se niega a correr en las subcuentas de Qualivo o de clientes, o si la subcuenta no lleva «demo» en el nombre.
+3. Automatización lanza `node automatizaciones/demo/escenario-laura.js --qualivo` (13-nov, decisión de Maikel: en GHL de Qualivo y borrar al terminar). Laura sin teléfono ni email (nadie puede recibir nada), sin `meta-lead-*` (no hay señales a Meta) y con la etiqueta `demo-anuncio`. Oportunidad en Prospección → Nuevo Lead. Borrado: `--qualivo --borrar`.
 4. **Llamada de prueba de Raquel:** solo al número controlado por Qualivo que dé Maikel, con su OK expreso. Si no funciona, la escena de la llamada sale del vídeo.
 
 ## Pasos de grabación (Maikel)

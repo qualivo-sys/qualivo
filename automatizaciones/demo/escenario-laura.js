@@ -1,36 +1,35 @@
 // Escenario de demostración «Laura Vidal · Escuela Norte» para el anuncio de formación V2.
-// SOLO para la subcuenta de demostración de Qualivo. Datos ficticios. No envía WhatsApp, emails ni llamadas:
-// crea contacto, oportunidad, nota de llamada y nota de historial por API.
+// Datos ficticios. NO envía WhatsApp, emails ni llamadas: Laura se crea SIN teléfono y SIN email, así que
+// ningún workflow puede escribirle. Sin etiqueta meta-lead-*, así que no manda señales a Meta
+// (api/senales-meta.js y api/seguimientos.js solo miran contactos con meta-lead-*).
 //
-//   DEMO_GHL_API_KEY=… DEMO_GHL_LOCATION_ID=… node automatizaciones/demo/escenario-laura.js [--seco]
+//   Crear:   node automatizaciones/demo/escenario-laura.js --qualivo [--seco]
+//   Borrar:  node automatizaciones/demo/escenario-laura.js --qualivo --borrar [--seco]
 //
-// --seco: enseña lo que haría sin escribir nada. Se niega a correr en Qualivo o en subcuentas de clientes.
+// --qualivo: usa GHL de Qualivo (GHL_API_KEY / GHL_LOCATION_ID), decisión de Maikel del 13-nov: probar ahí y
+// borrar al terminar. Sin --qualivo usa DEMO_GHL_API_KEY / DEMO_GHL_LOCATION_ID (subcuenta de demostración).
+// Nunca corre en subcuentas de clientes. Todo lo que crea lleva la etiqueta «demo-anuncio» y se borra por ella.
 const API = 'https://services.leadconnectorhq.com';
-const KEY = process.env.DEMO_GHL_API_KEY, LOC = process.env.DEMO_GHL_LOCATION_ID;
-const SECO = process.argv.includes('--seco');
-const PROHIBIDAS = ['bHGMuZEGUESZmVoNv9HT', '0bISaCnoTBNRmYQbLdbf', '5Eylu2xUj1SoQaQnfmF8'];
+const QUALIVO = process.argv.includes('--qualivo');
+const KEY = QUALIVO ? process.env.GHL_API_KEY : process.env.DEMO_GHL_API_KEY;
+const LOC = QUALIVO ? process.env.GHL_LOCATION_ID : process.env.DEMO_GHL_LOCATION_ID;
+const SECO = process.argv.includes('--seco'), BORRAR = process.argv.includes('--borrar');
+const CLIENTES = ['0bISaCnoTBNRmYQbLdbf', '5Eylu2xUj1SoQaQnfmF8'];
+const ETIQUETA = 'demo-anuncio';
 
-const LAURA = {
-  firstName: 'Laura', lastName: 'Vidal', companyName: 'Escuela Norte',
-  email: 'laura.vidal@ejemplo.invalid', // dominio .invalid: nunca puede recibir correo
-  source: 'Instagram · Anuncio formación V2', tags: ['demo', 'origen-instagram', 'curso-tarde'],
-};
 const PREGUNTA = '¿El curso de tarde se puede compaginar con el trabajo? Salgo a las 17:00.';
-const NOTA_LLAMADA = [
-  '📞 Llamada (demo) · 4 min',
+const LAURA = { firstName: 'Laura', lastName: 'Vidal', companyName: 'Escuela Norte',
+  source: 'Instagram · Anuncio formación V2', tags: [ETIQUETA, 'origen-instagram', 'curso-tarde'] };
+const NOTA_HISTORIAL = ['Historial (demo)', '· Solicitud desde formulario de Instagram · curso de tarde',
+  '· Pregunta: «' + PREGUNTA + '»', '· WhatsApp de respuesta enviado a los 2 minutos', '· Llamada del equipo: ver nota de llamada'].join('\n');
+const NOTA_LLAMADA = ['📞 Llamada (demo) · 4 min',
   'Resumen: Laura trabaja hasta las 17:00 y le encaja el grupo de tarde (18:30). Pregunta por el precio y si hay plazas en enero.',
-  'Siguiente paso: enviarle el calendario de enero y la ficha del curso. Interés alto.',
-].join('\n');
-const NOTA_HISTORIAL = [
-  'Historial (demo)',
-  '· Solicitud desde formulario de Instagram · curso de tarde',
-  '· Pregunta: «' + PREGUNTA + '»',
-  '· WhatsApp de respuesta enviado a los 2 minutos',
-  '· Llamada del equipo: ver nota de llamada',
-].join('\n');
+  'Siguiente paso: enviarle el calendario de enero y la ficha del curso. Interés alto.'].join('\n');
 
 async function ghl(metodo, ruta, cuerpo) {
-  if (SECO && metodo !== 'GET') { console.log('[seco]', metodo, ruta, cuerpo ? JSON.stringify(cuerpo).slice(0, 160) : ''); return { _seco: true }; }
+  if (SECO && metodo !== 'GET' && !(metodo === 'POST' && /\/search/.test(ruta))) {
+    console.log('[seco]', metodo, ruta.split('?')[0], cuerpo ? JSON.stringify(cuerpo).slice(0, 140) : ''); return { _seco: true };
+  }
   const r = await fetch(API + ruta, { method: metodo, body: cuerpo ? JSON.stringify(cuerpo) : undefined,
     headers: { Authorization: 'Bearer ' + KEY, Version: '2021-07-28', Accept: 'application/json', 'Content-Type': 'application/json' } });
   const t = await r.text();
@@ -38,34 +37,43 @@ async function ghl(metodo, ruta, cuerpo) {
   return t ? JSON.parse(t) : {};
 }
 
-async function main() {
-  if (!KEY || !LOC) throw new Error('Faltan DEMO_GHL_API_KEY y DEMO_GHL_LOCATION_ID (subcuenta de demostración).');
-  if (PROHIBIDAS.includes(LOC)) throw new Error('Esa subcuenta no es la de demostración. No se toca.');
-  const loc = await ghl('GET', '/locations/' + LOC);
-  const nombre = ((loc.location || {}).name || '');
-  if (!/demo/i.test(nombre)) throw new Error('La subcuenta se llama «' + nombre + '»; tiene que llevar «demo» en el nombre.');
-  console.log('Subcuenta:', nombre);
+async function demos() {
+  const d = await ghl('POST', '/contacts/search', { locationId: LOC, pageLimit: 100, filters: [{ field: 'tags', operator: 'contains', value: ETIQUETA }] });
+  return d.contacts || [];
+}
 
-  // Campo «Pregunta del formulario» (lo crea si no existe)
+async function crear() {
+  if ((await demos()).length) throw new Error('Ya hay contactos con «' + ETIQUETA + '». Bórralos antes o úsalos.');
   const campos = (await ghl('GET', '/locations/' + LOC + '/customFields?model=contact')).customFields || [];
-  let campo = campos.find((f) => f.fieldKey === 'contact.pregunta_formulario');
-  if (!campo) campo = (await ghl('POST', '/locations/' + LOC + '/customFields', { name: 'Pregunta del formulario', dataType: 'LARGE_TEXT', model: 'contact' })).customField || { id: 'nuevo' };
-  let curso = campos.find((f) => f.fieldKey === 'contact.curso');
-  if (!curso) curso = (await ghl('POST', '/locations/' + LOC + '/customFields', { name: 'Curso', dataType: 'TEXT', model: 'contact' })).customField || { id: 'nuevo' };
-
-  const c = await ghl('POST', '/contacts/upsert', { locationId: LOC, ...LAURA,
-    customFields: [{ id: campo.id, field_value: PREGUNTA }, { id: curso.id, field_value: 'Curso de tarde' }] });
+  const preg = campos.find((f) => f.fieldKey === 'contact.wa__pregunta');
+  const c = await ghl('POST', '/contacts/', { locationId: LOC, ...LAURA,
+    customFields: preg ? [{ id: preg.id, field_value: PREGUNTA }] : [] });
   const cid = (c.contact || {}).id || 'demo-contacto';
-  console.log('Contacto:', cid);
-
   const pipes = (await ghl('GET', '/opportunities/pipelines?locationId=' + LOC)).pipelines || [];
-  const p = pipes[0];
-  if (p) await ghl('POST', '/opportunities/', { locationId: LOC, pipelineId: p.id, pipelineStageId: p.stages[0].id,
-    contactId: cid, name: 'Escuela Norte · Laura Vidal · Curso de tarde', status: 'open', source: LAURA.source });
-  else console.log('⚠ La subcuenta no tiene pipeline: créalo en la interfaz y vuelve a lanzar.');
-
+  const p = pipes.find((x) => /prospecci/i.test(x.name)) || pipes[0];
+  const etapa = p.stages.find((s) => /^nuevo/i.test(s.name)) || p.stages[0];
+  await ghl('POST', '/opportunities/', { locationId: LOC, pipelineId: p.id, pipelineStageId: etapa.id, contactId: cid,
+    name: 'Escuela Norte · Laura Vidal · Curso de tarde (DEMO)', status: 'open', source: LAURA.source });
   await ghl('POST', '/contacts/' + cid + '/notes', { body: NOTA_HISTORIAL });
   await ghl('POST', '/contacts/' + cid + '/notes', { body: NOTA_LLAMADA });
-  console.log('Listo. Nada enviado a nadie.');
+  console.log('Creada:', cid, '· oportunidad en', p.name, '→', etapa.name, '· sin teléfono ni email · nada enviado');
 }
-main().catch((e) => { console.error('✗ ' + e.message); process.exit(1); });
+
+async function borrar() {
+  const cs = await demos();
+  for (const c of cs) {
+    if (!(c.tags || []).includes(ETIQUETA)) continue;
+    const ops = (await ghl('GET', '/opportunities/search?location_id=' + LOC + '&contact_id=' + c.id)).opportunities || [];
+    for (const o of ops) await ghl('DELETE', '/opportunities/' + o.id);
+    await ghl('DELETE', '/contacts/' + c.id); // borra también sus notas y tareas
+    console.log('Borrado:', c.id, '+', ops.length, 'oportunidad(es)');
+  }
+  if (!SECO) { const quedan = await demos(); console.log(quedan.length ? '⚠ Quedan ' + quedan.length : 'Comprobado: no queda nada con «' + ETIQUETA + '».'); }
+}
+
+(async () => {
+  if (!KEY || !LOC) throw new Error('Faltan la clave y la subcuenta.');
+  if (CLIENTES.includes(LOC)) throw new Error('Es una subcuenta de cliente. No se toca.');
+  if (QUALIVO && LOC !== 'bHGMuZEGUESZmVoNv9HT') throw new Error('--qualivo pero la subcuenta no es la de Qualivo.');
+  await (BORRAR ? borrar() : crear());
+})().catch((e) => { console.error('✗ ' + e.message); process.exit(1); });
