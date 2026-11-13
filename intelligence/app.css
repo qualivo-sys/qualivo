@@ -671,7 +671,7 @@ body.sin-ia .app { grid-template-columns: 212px minmax(0, 1fr); }
 
 /* ?limpio=1 (grabaciones): sin Copilot ni controles del modo demo. El sello «Datos simulados» se queda. */
 body.limpio .app { grid-template-columns: 212px minmax(0, 1fr); }
-body.limpio .copilot, body.limpio #btnCopilotMovil, body.limpio .demo-panel, body.limpio .demo-botones, body.limpio #btnReiniciar, body.limpio .humano { display: none !important; }
+body.limpio .copilot, body.limpio #btnCopilotMovil, body.limpio .demo-panel, body.limpio .demo-botones, body.limpio #btnReiniciar, body.limpio #humano { display: none !important; }
 @media (min-width: 1181px) and (max-width: 1439px) { body.limpio .app { grid-template-columns: 64px minmax(0, 1fr); } }
 @media (max-width: 1180px) { body.limpio .app { grid-template-columns: 200px minmax(0, 1fr); } }
 @media (max-width: 760px) { body.limpio .app { grid-template-columns: minmax(0, 1fr); } }

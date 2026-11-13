@@ -656,7 +656,7 @@
           '<div class="hilo-pie">' + ico(icoAccion(sel.x.nba.tipo)) + '<span><b>' + esc(sel.x.nba.accion) + '</b> · ' + esc(sel.x.nba.quien) + ' · ' + esc(M.ESTADOS[sel.x.nba.estado]) + '</span></div>' +
           '<div class="hilo-acciones">' + accionesRealHtml(sel) + '</div></div>';
       }
-      return cabecera('Conversaciones', estado.cfg.sinAgentes ? '¿Qué hemos hablado con cada uno?' : '¿Qué está haciendo el sistema?', estado.cfg.sinAgentes ? 'WhatsApp, correo y llamadas en un solo sitio, con la ficha al lado. Todo lo escribe una persona del equipo.' : 'WhatsApp, correo y llamadas en un solo sitio. El agente escribe con el contexto de cada ' + T.contacto + ' y se aparta cuando hace falta una persona.') +
+      return cabecera('Conversaciones', estado.cfg.sinAgentes || estado.sinTecno ? '¿Qué hemos hablado con cada uno?' : '¿Qué está haciendo el sistema?', estado.sinTecno ? 'WhatsApp, correo y llamadas en un solo sitio, con la ficha al lado.' : estado.cfg.sinAgentes ? 'WhatsApp, correo y llamadas en un solo sitio, con la ficha al lado. Todo lo escribe una persona del equipo.' : 'WhatsApp, correo y llamadas en un solo sitio. El agente escribe con el contexto de cada ' + T.contacto + ' y se aparta cuando hace falta una persona.') +
         '<div class="conv-caja"><div class="conv-lista">' + lado + '</div>' + hilo + '</div>';
     },
 
@@ -916,7 +916,7 @@
     if (cuenta && QV.cuentas && QV.cuentas[cuenta]) { QV.cuentas[cuenta].arrancar(); return; }
     if (sector && SECTORES.some(function (s) { return s.id === sector; })) {
       iniciar({ sector: sector, empresa: p.get('empresa') || '', objetivo: p.get('objetivo') || 'todo', historia: p.get('historia') || '', vista: p.get('vista') || 'resumen' })
-        .then(function () { if (p.get('demo') === '1' && QV.demo) QV.demo.empezar(); })
+        .then(function () { if (p.get('demo') === '1' && QV.demo) QV.demo.empezar({ hasta: parseInt(p.get('paso') || '0', 10) || null, vista: p.get('paso') ? p.get('vista') : null }); })
         .catch(function () { mostrarInicio(); });
     } else {
       mostrarInicio();
