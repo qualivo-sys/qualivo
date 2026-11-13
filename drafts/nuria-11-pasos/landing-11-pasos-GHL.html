@@ -125,8 +125,6 @@ window.NR11 = {
       <div class="kick">Cómo funciona</div>
       <h2>Un paso al día. <em>Acompañada.</em></h2>
       <p>No es un reto ni una masterclass. Cada día aprendes un hábito de sueño y lo pones en práctica esa misma noche. Unos minutos al día.</p>
-      <div class="days" id="n11-days"></div>
-      <div class="legend">Los días en azul hay directo con Nuria (orientativo).</div>
       <div class="grid">
         <div class="card"><b>11 vídeos cortos</b><span>Uno por hábito, con lo que tienes que hacer ese día.</span></div>
         <div class="card"><b><span data-k="directos"></span> directos con Nuria</b><span>30 minutos, por la mañana, para resolver dudas y ajustar.</span></div>
@@ -228,10 +226,6 @@ window.NR11 = {
     Array.prototype.forEach.call(cds, function (el) { el.style.display = 'none'; });
     var bcd = document.getElementById('n11-bcd'); if (bcd) bcd.style.display = 'none';
   }
-  // Calendario de 11 días con los directos repartidos
-  var d = document.getElementById('n11-days'), n = Number(C.directos) || 3, live = {};
-  for (var k = 0; k < n; k++) live[Math.round(1 + k * 10 / Math.max(1, n - 1))] = 1;
-  for (var i = 1; i <= 11; i++) { var x = document.createElement('i'); x.textContent = i; if (live[i]) x.className = 'live'; d.appendChild(x); }
   // Botones al pago (con UTM) y evento de Meta si hay consentimiento
   function ok(){ try { return localStorage.getItem('nr_cookies') === 'si'; } catch (e) { return false; } }
   var url = C.pago + (C.pago.indexOf('?') < 0 ? '?' : '&') + 'utm_source=landing&utm_medium=web&utm_campaign=11pasos';
