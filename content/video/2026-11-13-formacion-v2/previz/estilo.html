@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- Formación V2 · previsualización de estilo (fotogramas fijos, no el vídeo). #f1 … #f6. Render: node render.js
+     Las pantallas son capturas reales de Qualivo Intelligence (sector «formación», datos de ejemplo).
+     La pantalla de llamada (f3) es un marcador: se sustituye por la grabación real. -->
+<style>
+@font-face{font-family:Mont;font-weight:100 900;src:url(rec/montserrat-latin.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#101319;--bg2:#171B23;--ln:rgba(255,255,255,.12);--tx:#F2F4F7;--mut:#8D94A1;--tl:#27BDB1;--y:#F4CC38}
+html,body{background:#000}
+.f{display:none;width:1080px;height:1920px;position:relative;overflow:hidden;font-family:Mont;color:var(--tx);
+  background:radial-gradient(1200px 900px at 50% 38%,#1B212B 0%,var(--bg) 62%)}
+.f.on{display:block}
+/* cabecera: recorrido + reloj (dentro de la zona segura superior) */
+.cab{position:absolute;left:64px;right:64px;top:250px;display:flex;align-items:center;gap:28px}
+.rec{flex:1;display:flex;align-items:center;gap:0}
+.et{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:600;color:var(--mut);white-space:nowrap}
+.et i{width:10px;height:10px;border-radius:50%;background:#3A414D;display:block}
+.et.ok{color:var(--tx)}.et.ok i{background:var(--tl)}
+.et.ya{color:var(--tl)}.et.ya i{background:var(--tl);box-shadow:0 0 0 6px rgba(39,189,177,.18)}
+.et.fin{color:var(--y)}.et.fin i{background:var(--y);box-shadow:0 0 0 6px rgba(244,204,56,.18)}
+.tr{flex:1;height:2px;background:#2A313C;margin:0 12px;min-width:18px}.tr.ok{background:var(--tl)}
+.reloj{font-size:21px;font-weight:600;color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap}
+.reloj b{color:var(--tx);font-weight:700;margin-left:8px}
+.ej{position:absolute;left:64px;top:312px;font-size:17px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#5F6875}
+/* ventana de producto */
+.win{position:absolute;left:44px;right:44px;border-radius:18px;overflow:hidden;background:#fff;border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.4)}
+.win .barra{height:44px;background:#F3F4F6;border-bottom:1px solid #E3E6EA;display:flex;align-items:center;gap:8px;padding:0 16px;font-size:16px;font-weight:600;color:#6B7280}
+.win .barra i{width:11px;height:11px;border-radius:50%;background:#D5D9DF;display:block}
+.win .barra span{margin-left:10px}
+.vista{position:relative;overflow:hidden}
+.vista img{position:absolute;display:block}
+.foco{position:absolute;border:3px solid var(--tl);border-radius:12px;box-shadow:0 0 0 2000px rgba(16,19,25,.14),0 0 0 8px rgba(39,189,177,.18)}
+.nota{position:absolute;font-size:22px;font-weight:600;color:var(--mut);left:64px;right:64px;text-align:center}
+/* subtítulos */
+.sub{position:absolute;left:90px;right:90px;bottom:400px;text-align:center;font-size:44px;line-height:1.24;font-weight:700;text-wrap:balance}
+.sub em{font-style:normal;color:var(--tl)}
+/* llamada (marcador) */
+.tel{position:absolute;left:230px;right:230px;top:470px;height:900px;border-radius:56px;background:#0B0D11;border:1px solid rgba(255,255,255,.16);box-shadow:0 40px 90px rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;padding:110px 40px 60px}
+.tel .av{width:150px;height:150px;border-radius:50%;background:#1F2630;display:flex;align-items:center;justify-content:center;font-size:60px;font-weight:700;color:var(--tl)}
+.tel h3{font-size:40px;font-weight:700;margin-top:34px}.tel p{font-size:24px;color:var(--mut);font-weight:500;margin-top:8px}
+.onda{display:flex;align-items:center;gap:7px;height:120px;margin-top:70px}
+.onda i{width:8px;border-radius:4px;background:var(--tl);display:block}
+.pend{position:absolute;left:0;right:0;bottom:28px;text-align:center;font-size:17px;font-weight:600;color:#5F6875;letter-spacing:.08em;text-transform:uppercase}
+/* cierre */
+.tres{position:absolute;left:0;right:0;top:700px;display:flex;justify-content:center;align-items:center;gap:0;font-size:40px;font-weight:700}
+.tres span{padding:0 6px}.tres u{display:block;width:70px;height:2px;background:var(--tl);margin:0 14px;text-decoration:none}
+.sobre{position:absolute;left:0;right:0;top:790px;text-align:center;font-size:30px;font-weight:500;color:var(--mut)}
+.logo{position:absolute;left:50%;transform:translateX(-50%);top:960px;width:360px}
+.cta{position:absolute;left:50%;transform:translateX(-50%);top:1180px;background:var(--tl);color:#06201E;font-size:34px;font-weight:700;padding:26px 44px;border-radius:16px;white-space:nowrap}
+</style>
+
+<!-- F1 · 0-5 s · la solicitud entra -->
+<div class="f" id="f1">
+ <div class="cab"><div class="rec"><div class="et ya"><i></i>Solicitud</div><div class="tr"></div><div class="et"><i></i>Atención</div><div class="tr"></div><div class="et"><i></i>Seguimiento</div><div class="tr"></div><div class="et"><i></i>Matrícula</div></div><div class="reloj">desde la solicitud<b>00:00</b></div></div>
+ <div class="ej">Caso de ejemplo</div>
+ <div class="win" style="top:430px"><div class="barra"><i></i><i></i><i></i><span>Oportunidades</span></div>
+  <div class="vista" style="height:880px"><img src="rec/oportunidades.png" style="width:2700px;left:0;top:0">
+   <div class="foco" style="left:14px;top:131px;width:964px;height:160px"></div></div></div>
+ <div class="sub">Conseguir solicitudes para tu academia <em>es una cosa.</em></div>
+</div>
+
+<!-- F2 · 12-17 s · WhatsApp -->
+<div class="f" id="f2">
+ <div class="cab"><div class="rec"><div class="et ok"><i></i>Solicitud</div><div class="tr ok"></div><div class="et ya"><i></i>Atención</div><div class="tr"></div><div class="et"><i></i>Seguimiento</div><div class="tr"></div><div class="et"><i></i>Matrícula</div></div><div class="reloj">desde la solicitud<b>02:00</b></div></div>
+ <div class="ej">Caso de ejemplo</div>
+ <div class="win" style="top:430px"><div class="barra"><i></i><i></i><i></i><span>Conversación · WhatsApp</span></div>
+  <div class="vista" style="height:640px"><img src="rec/conversacion.png" style="width:992px;left:0;top:0"></div></div>
+ <div class="sub">Recibe un WhatsApp <em>personalizado.</em></div>
+</div>
+
+<!-- F3 · 17-22 s · llamada de Raquel (marcador hasta tener la grabación real) -->
+<div class="f" id="f3">
+ <div class="cab"><div class="rec"><div class="et ok"><i></i>Solicitud</div><div class="tr ok"></div><div class="et ya"><i></i>Atención</div><div class="tr"></div><div class="et"><i></i>Seguimiento</div><div class="tr"></div><div class="et"><i></i>Matrícula</div></div><div class="reloj">desde la solicitud<b>09:30</b></div></div>
+ <div class="ej">Caso de ejemplo</div>
+ <div class="tel"><div class="av">R</div><h3>Raquel · Escuela Norte</h3><p>Llamada en curso · 00:07</p>
+  <div class="onda" id="onda"></div><div class="pend">Marcador · se sustituye por la grabación real</div></div>
+ <div class="sub" style="font-weight:600"><span style="color:var(--mut);font-size:30px;display:block;margin-bottom:10px">Raquel</span>«Hola, Laura. Te llamo por el curso de tarde…»</div>
+</div>
+
+<!-- F4 · 22-32 s · seguimiento -->
+<div class="f" id="f4">
+ <div class="cab"><div class="rec"><div class="et ok"><i></i>Solicitud</div><div class="tr ok"></div><div class="et ok"><i></i>Atención</div><div class="tr ok"></div><div class="et ya"><i></i>Seguimiento</div><div class="tr"></div><div class="et"><i></i>Matrícula</div></div><div class="reloj">desde la solicitud<b>+3 días</b></div></div>
+ <div class="ej">Caso de ejemplo</div>
+ <div class="win" style="top:430px"><div class="barra"><i></i><i></i><i></i><span>Oportunidades · siguiente acción</span></div>
+  <div class="vista" style="height:720px"><img src="rec/oportunidades.png" style="width:2500px;left:-1500px;top:-10px">
+   <div class="foco" style="left:330px;top:105px;width:640px;height:150px"></div></div></div>
+ <div class="sub">Tu equipo sabe <em>cuándo volver a contactar.</em></div>
+</div>
+
+<!-- F5 · 32-43 s · matrícula y panel -->
+<div class="f" id="f5">
+ <div class="cab"><div class="rec"><div class="et ok"><i></i>Solicitud</div><div class="tr ok"></div><div class="et ok"><i></i>Atención</div><div class="tr ok"></div><div class="et ok"><i></i>Seguimiento</div><div class="tr ok"></div><div class="et fin"><i></i>Matrícula</div></div><div class="reloj">desde la solicitud<b>+42 días</b></div></div>
+ <div class="ej">Caso de ejemplo · datos demostrativos</div>
+ <div class="win" style="top:430px"><div class="barra"><i></i><i></i><i></i><span>Anuncios · del anuncio a la matrícula</span></div>
+  <div class="vista" style="height:760px"><img src="rec/anuncios.png" style="width:1560px;left:-90px;top:0">
+   <div class="foco" style="left:722px;top:70px;width:170px;height:560px"></div></div></div>
+ <div class="sub">Qué campañas terminan <em>trayendo alumnos.</em></div>
+</div>
+
+<!-- F6 · 43-53 s · cierre -->
+<div class="f" id="f6">
+ <div class="tres"><span>Captación</span><u></u><span>Atención</span><u></u><span>Seguimiento</span></div>
+ <div class="sobre">sobre las herramientas que ya utilizas</div>
+ <img class="logo" src="rec/logo-blanco.png">
+ <div class="cta">Solicita un diagnóstico</div>
+</div>
+
+<script>
+const o=document.getElementById('onda');[18,40,70,34,96,58,110,46,84,30,64,100,52,76,26,90,44,66,22,50,80,36,60,28].forEach(h=>{const i=document.createElement('i');i.style.height=h+'px';o.appendChild(i)});
+function m(){const k=(location.hash||'#f1').slice(1);document.querySelectorAll('.f').forEach(f=>f.classList.toggle('on',f.id===k));}
+addEventListener('hashchange',m);m();
+</script>
+</html>
