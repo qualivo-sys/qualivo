@@ -78,3 +78,32 @@
 1. **OK al formulario.** Una vez creado no se puede editar, así que conviene revisar los textos antes. Crearlo no gasta nada y no se publica sin un anuncio.
 2. **OK a cambiar la puntuación en la rama web.** Afecta solo a los leads de este formulario nuevo.
 3. **Quién llama en los primeros 5 minutos** mientras él esté de vacaciones.
+
+---
+## ACTUALIZACIÓN 13-nov: versión decidida por Maikel (sustituye a la propuesta de arriba)
+
+**Formulario «Diagnóstico de captación y matrículas»: 5 preguntas, 2 abiertas y 3 de opciones, y menos de un minuto para rellenarlo.**
+
+**Portada:** «Para academias y centros de formación que quieren mejorar su captación, seguimiento y conversión de alumnos».
+
+**Preguntas:**
+1. **¿Cuál es la web de tu academia o centro de formación?** Abierta y obligatoria (también vale un perfil profesional que se pueda comprobar).
+2. **¿Cuántas solicitudes de información recibís al mes?** Menos de 20 · 20-49 · 50-99 · 100 o más.
+3. **¿Cuánto invertís actualmente en publicidad al mes?** No invertimos actualmente · Menos de 500 € · 500-1.999 € · 2.000 € o más. **«No invertimos» se queda y no descarta** (caso Cancomar).
+4. **¿Qué necesitáis mejorar principalmente?** La calidad de las solicitudes · El seguimiento de interesados · La conversión en matrículas · Saber qué campañas generan matrículas.
+5. **¿Cuándo queréis empezar a mejorarlo?** En los próximos 30 días · En los próximos 3 meses · Solo estamos valorando opciones.
+- **Segundo campo abierto:** pendiente de confirmar con Maikel. Lo más probable es el email de trabajo.
+
+**Reglas:**
+- El email de trabajo es el campo preferente, pero **un gmail no descarta**.
+- Pantalla de «mayor intención» activada, más una pantalla final propia que invite a reservar la reunión.
+- **Las respuestas altas no son prueba de calidad:** en el histórico, ese patrón aparece entre los falsos.
+- **Verificación en GHL:** el agente comprueba que web, empresa, email y respuestas sean coherentes. Si no lo son, el lead pasa a revisión y no entra en la agenda prioritaria.
+
+**Niveles:**
+- **A:** academia que se puede comprobar, con volumen, necesidad clara y capacidad económica → atención prioritaria.
+- **B:** empresa real con potencial, a falta de confirmar presupuesto o urgencia → cualificar por WhatsApp.
+- **C:** poco volumen o necesidad poco clara → seguimiento ligero.
+- **D:** datos falsos confirmados o sin encaje claro → descartar.
+
+**Calendario:** se prepara para el lunes 16. Se prueba de principio a fin con GHL y solo entonces se activa (con su OK).
