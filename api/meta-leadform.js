@@ -177,7 +177,10 @@ const FORMULARIOS_SECTOR = {
   '1904975540667086': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg-filtro' },
   '1159030153221849': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg-filtro' },
   // 2-nov-2026: reformas, mismas 4 preguntas (el precio es el de una obra: ticket-1 < 3.000 €, 2 hasta 10.000, 3 hasta 30.000, 4 más).
-  '1448120514052614': { sector: 'Reformas, construcción o instalaciones', etiqueta: 'sector-reformas', angulo: 'form-4preg' }
+  '1448120514052614': { sector: 'Reformas, construcción o instalaciones', etiqueta: 'sector-reformas', angulo: 'form-4preg' },
+  // 13-nov-2026 (Maikel): formulario V2 de formación. Web obligatoria, email de trabajo y «no invertimos»
+  // sin descartar (caso Cancomar). La clave sin_publi no casa con el filtro de «nada», a propósito.
+  '2252569821991323': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v2-13nov' }
 };
 
 async function nombreFormulario(formId) {
@@ -234,7 +237,7 @@ async function guardar(lead, opts) {
 
   const campos = lead.field_data || [];
   const nombre = valor(campos, ['full_name', 'nombre', 'nombre_completo', 'first_name']);
-  const email = valor(campos, ['email', 'correo', 'correo_electronico']);
+  const email = valor(campos, ['email', 'work_email', 'correo', 'correo_electronico']);
   const telefono = valor(campos, ['phone_number', 'telefono', 'teléfono', 'movil']);
   const empresa = valor(campos, ['company_name', 'empresa']);
   // Formulario horizontal (15-oct): inversión, quién atiende, sector, volumen y momento.
@@ -250,7 +253,9 @@ async function guardar(lead, opts) {
     // Formulario largo de formación (19-oct) y el de 4 preguntas (2-nov). Sin estas claves la etiqueta
     // salía «inv-500-999» o «inv-1000-2999» y la puntuación no la reconocía.
     '500_999': 'Entre 500 y 999 €', '1000_2999': 'Entre 1.000 y 2.999 €', '3000mas': 'Más de 3.000 €',
-    otros_nose: 'Otros canales o no lo sé'
+    otros_nose: 'Otros canales o no lo sé',
+    // Formulario V2 (13-nov). «Sin publicidad» no es «nada»: no se filtra.
+    sin_publi: 'Sin publicidad actualmente', '500_1999': 'Entre 500 y 1.999 €', '2000mas': 'Más de 2.000 €'
   };
   const CLAVES_FUGA = {
     anuncios: 'En los anuncios y la captación', web: 'En la web y los formularios',
