@@ -52,6 +52,14 @@ function textoConfirmacion(nombre, dia, hora, cuando, enlace, prep) {
     'Si te surge algo antes, dímelo por aquí.';
 }
 
+// Sin web ni nada de su negocio: le pedimos contexto para preparar la reunión (regla de Maikel, 13-nov).
+function textoPideContexto(nombre, empresa) {
+  const emp = String(empresa || '').trim();
+  return (nombre ? nombre + ', una' : 'Una') + ' cosa para preparar bien la reunión: ¿me cuentas un poco de ' + (emp ? emp : 'tu negocio') + '? ' +
+    'Qué vendéis, cómo os llegan hoy los clientes y qué es lo que más se os atasca. ' +
+    'Y si tenéis web, Instagram o algo que pueda ver antes, pásamelo. Así vamos directos a lo importante.';
+}
+
 // Funnel v2 (8-oct-2026): solo para quien entró por los formularios nuevos
 // (etiqueta funnel-v2), la confirmación lleva el enlace a la página de
 // preparación. El resto de contactos recibe exactamente el mismo texto de siempre.
@@ -254,6 +262,20 @@ async function procesarCita(ev, o) {
             } catch (e) { reg.confirmation_canal = 'error'; console.error('[cita] confirmación no salió:', e && e.message); }
           }
           CI.apuntar(reg, (cambio ? 'cambio confirmado' : 'confirmación') + ' (' + reg.confirmation_canal + ')');
+          // Regla de Maikel (13-nov): si no sabemos nada de su negocio (ni web, ni Instagram, ni
+          // dominio propio en el correo), justo después de confirmar le pedimos que nos cuente algo
+          // para preparar la reunión. Una vez por persona (etiqueta act-pide-contexto).
+          if (!cambio && primera && ['error', 'whatsapp_fallido', 'enviando'].indexOf(reg.confirmation_canal) < 0 && !A.tiene(c, 'act-pide-contexto')) {
+            try {
+              const EN = require('./_enriquecer.js');
+              if (!EN.webDe(c) && !EN.dominioDe(c)) {
+                await new Promise(function (r) { setTimeout(r, 4000); });
+                await A.enviarMensaje(c.id, textoPideContexto(nombre, c.companyName), { transaccional: true });
+                await A.etiquetar(c.id, ['act-pide-contexto']);
+                hecho.push('pide_contexto');
+              }
+            } catch (e) { console.error('[cita] pide contexto:', e && e.message); }
+          }
         } else {
           reg.confirmation_sent_at = new Date().toISOString(); reg.confirmation_start_at = reg.start_at; reg.confirmation_canal = 'sin teléfono';
           CI.apuntar(reg, 'sin teléfono: solo invitación de Google');
