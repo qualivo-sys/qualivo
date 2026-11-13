@@ -11,9 +11,9 @@
 | Septiembre | 698 € | 37 | ~20 | 18 | 3 |
 | 1-18 oct | ~700 € | 20 | ~15 | 10 | 5 |
 | 19-29 oct | ~200 € | 6 | 5 | 2 | 2 (entre ellos, el cliente de 3.600 €) |
-| **30 oct-13 nov** | **660,88 €** | **14** | **4** | **3** | **0** |
+| **30 oct-13 nov** | **660,88 €** | **14** | **4** | **3** | **2** (1 en 2ª reunión y 1 con oferta enviada) |
 
-En estas dos semanas, cada lead real ha costado unos **165 €** [E]. Ninguna reunión ha avanzado todavía.
+En estas dos semanas, cada lead real ha costado unos **165 €** y cada oportunidad que avanzó, unos **330 €** [E].
 
 **Qué fue de los 14 leads de las dos últimas semanas:**
 - 4 **falsos**, confirmados al llamar o con todas las señales: 8-nov, 11-nov y los dos del 12-nov.
@@ -22,9 +22,9 @@ En estas dos semanas, cada lead real ha costado unos **165 €** [E]. Ninguna re
 - 1 de nivel B que no contestó nunca.
 - **4 reales:**
   - nivel A del 4-nov, que contestó;
-  - nivel A del 5-nov, que agendó y no se presentó;
+  - nivel A del 5-nov, que no se presentó a la primera reunión pero se recolocó y hoy está en 2ª reunión;
   - nivel A del 7-nov, que agendó;
-  - nivel C del 8-nov, que agendó.
+  - nivel C del 8-nov, que agendó y ya tiene oferta enviada.
 
 ## 2. Por qué: las seis causas, de más a menos importante
 
