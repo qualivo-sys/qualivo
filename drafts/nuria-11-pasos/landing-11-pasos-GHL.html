@@ -2,11 +2,19 @@
      Antes de publicar: confirmar con Nuria los datos de CONFIG (fecha, precio, directos, bonus) y que el píxel de Meta esté en los ajustes de la página. -->
 <script>
 window.NR11 = {
-  inicio: '5 de diciembre',            // programa del 5 al 15 de diciembre (confirmado por Nuria)
-  precio: '175',                       // precio de Black Friday, con regalo, hasta ofertaHasta
-  precioDespues: '185',                // ❓ precio del 1 al 5 de diciembre, sin regalo (Nuria: 5-10 € más)
-  ofertaHasta: '2026-11-30T23:59:59+01:00', // fin de la oferta: precio y regalo. Hora de Madrid
-  cierre: '2026-12-05T00:00:00+01:00', // a partir de aquí la página muestra «inscripciones cerradas»
+  inicio: '5 de diciembre',            // programa del 5 al 15 de diciembre
+  // TRAMOS DE LA OFERTA, en orden. La página usa el primero que no ha terminado y pone la cuenta atrás hasta su «hasta».
+  // franja: texto de la franja de arriba · regalo: true = se ofrecen las 3 meditaciones · regaloTexto: texto del recuadro del regalo
+  tramos: [
+    { hasta: '2026-11-22T23:59:59+01:00', precio: '175', regalo: true,
+      franja: 'Oferta anticipada: 175 € y 3 meditaciones de regalo hasta el domingo 22',
+      regaloTexto: 'Regalo si te inscribes antes del domingo 22:' },
+    { hasta: '2026-11-30T23:59:59+01:00', precio: '175', regalo: true,   // ❓ tramo de Black Friday abierto a todo el mundo: confirmar precio y regalo con Nuria
+      franja: 'Black Friday: 175 € y 3 meditaciones de regalo hasta el lunes 30',
+      regaloTexto: 'Regalo si te inscribes antes del lunes 30:' }
+  ],
+  precioDespues: '185',                // precio cuando ya no queda ningún tramo (sin regalo)
+  cierre: '2026-12-05T00:00:00+01:00', // desde aquí los botones dicen «Inscripciones cerradas»
   blackFriday: true,                   // false = quita la franja y las etiquetas de Black Friday
   directos: 3,
   pago: 'https://dranuriaroure.thrivecart.com/a-11-pasos/'
@@ -90,7 +98,7 @@ html,body{overflow-x:hidden}
 </style>
 
 <div id="n11">
-  <div class="bf"><span class="t"><b>Black Friday</b>175 € y 3 meditaciones de regalo hasta el lunes 30</span><span class="cd" data-cd></span></div>
+  <div class="bf"><span class="t"><b>Black Friday</b><span id="n11-franja"></span></span><span class="cd" data-cd></span></div>
 
   <section>
     <div class="w">
@@ -162,7 +170,7 @@ html,body{overflow-x:hidden}
           <li>Grupo de Telegram para tus preguntas</li>
           <li>Soporte por email para entrar a la plataforma</li>
         </ul>
-        <div class="bonus"><b>Regalo si te inscribes antes del lunes 30:</b> 3 meditaciones guiadas de Nuria para acompañar tus noches.<span class="bonus-cd" id="n11-bcd"> El precio y el regalo terminan el 30 de noviembre a las 23:59 · quedan <b data-cd></b></span></div>
+        <div class="bonus"><b id="n11-rt"></b> 3 meditaciones guiadas de Nuria para acompañar tus noches.<span class="bonus-cd" id="n11-bcd"> Quedan <b data-cd></b></span></div>
         <div class="cta" style="justify-content:center"><a class="btn" data-pago href="#">Quiero empezar los 11 pasos</a></div>
         <p style="font-size:13.5px;margin-top:16px">Empezamos el <b data-k="inicio"></b>. Recibes el acceso al momento por email.</p>
       </div>
@@ -202,19 +210,20 @@ html,body{overflow-x:hidden}
   var C = window.NR11 || {}, root = document.getElementById('n11'); if (!root) return;
   // Datos de la configuración
   Array.prototype.forEach.call(root.querySelectorAll('[data-k]'), function (el) { el.textContent = C[el.getAttribute('data-k')]; });
-  // Oferta de Black Friday hasta ofertaHasta; después, precio nuevo sin regalo; desde cierre, inscripciones cerradas
-  var ahora = Date.now(), finOf = new Date(C.ofertaHasta).getTime(), cierre = new Date(C.cierre).getTime();
-  var enOferta = !isNaN(finOf) && ahora < finOf;
-  if (enOferta && C.blackFriday) root.classList.add('bf-on');
-  if (!enOferta) {
-    Array.prototype.forEach.call(root.querySelectorAll('[data-k="precio"]'), function (el) { el.textContent = C.precioDespues || C.precio; });
-    var bo = root.querySelector('.bonus'); if (bo) bo.style.display = 'none';
-    Array.prototype.forEach.call(root.querySelectorAll('.bf-badge'), function (el) { el.style.display = 'none'; });
-  }
+  // Tramos: el primero que no ha terminado manda (precio, regalo, textos y cuenta atrás)
+  var ahora = Date.now(), cierre = new Date(C.cierre).getTime(), T = null;
+  (C.tramos || []).some(function (t) { var h = new Date(t.hasta).getTime(); if (!isNaN(h) && ahora < h) { T = t; T._fin = h; return true; } return false; });
+  var precioActual = T ? T.precio : (C.precioDespues || '');
+  Array.prototype.forEach.call(root.querySelectorAll('[data-k="precio"]'), function (el) { el.textContent = precioActual; });
+  if (T && C.blackFriday) root.classList.add('bf-on');
+  var fr = document.getElementById('n11-franja'); if (fr && T) fr.textContent = T.franja || '';
+  var rt = document.getElementById('n11-rt'); if (rt && T) rt.textContent = T.regaloTexto || 'Regalo:';
+  var bo = root.querySelector('.bonus'); if (bo && !(T && T.regalo)) bo.style.display = 'none';
+  if (!T) Array.prototype.forEach.call(root.querySelectorAll('.bf-badge'), function (el) { el.style.display = 'none'; });
   var cds = root.querySelectorAll('[data-cd]');
-  if (enOferta) {
+  if (T) {
     var pinta = function () {
-      var r = Math.max(0, finOf - Date.now()), d = Math.floor(r / 864e5), h = Math.floor(r % 864e5 / 36e5), mi = Math.floor(r % 36e5 / 6e4), sg = Math.floor(r % 6e4 / 1e3);
+      var r = Math.max(0, T._fin - Date.now()), d = Math.floor(r / 864e5), h = Math.floor(r % 864e5 / 36e5), mi = Math.floor(r % 36e5 / 6e4), sg = Math.floor(r % 6e4 / 1e3);
       var t = (d ? d + ' d ' : '') + ('0' + h).slice(-2) + ':' + ('0' + mi).slice(-2) + ':' + ('0' + sg).slice(-2);
       Array.prototype.forEach.call(cds, function (el) { el.textContent = t; });
       if (r <= 0) location.reload();
