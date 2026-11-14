@@ -1,6 +1,23 @@
 {
   "headers": [
     {
+      "source": "/embeds/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=120, must-revalidate"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
       "source": "/para/(.*)",
       "headers": [
         {
@@ -219,7 +236,10 @@
       "path": "/api/recordatorios-vispera/",
       "schedule": "30 16,17 * * *"
     },
-    { "path": "/api/wa-nuria/", "schedule": "*/2 * * * *" }
+    {
+      "path": "/api/wa-nuria/",
+      "schedule": "*/2 * * * *"
+    }
   ],
   "functions": {
     "api/intelligence-datos.js": {
@@ -264,8 +284,12 @@
     "api/vapi-fin.js": {
       "maxDuration": 60
     },
-    "api/intelligence-nuria.js": { "maxDuration": 120 },
-    "api/wa-nuria.js": { "maxDuration": 60 },
+    "api/intelligence-nuria.js": {
+      "maxDuration": 120
+    },
+    "api/wa-nuria.js": {
+      "maxDuration": 60
+    },
     "api/intelligence-copilot.js": {
       "maxDuration": 30
     }
