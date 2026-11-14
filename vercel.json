@@ -1,23 +1,6 @@
 {
   "headers": [
     {
-      "source": "/embeds/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=120, must-revalidate"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex"
-        }
-      ]
-    },
-    {
       "source": "/para/(.*)",
       "headers": [
         {
@@ -239,6 +222,10 @@
     {
       "path": "/api/wa-nuria/",
       "schedule": "*/2 * * * *"
+    },
+    {
+      "path": "/api/nuria-circulo-activo/",
+      "schedule": "0 6 * * *"
     }
   ],
   "functions": {
@@ -292,6 +279,9 @@
     },
     "api/intelligence-copilot.js": {
       "maxDuration": 30
+    },
+    "api/nuria-circulo-activo.js": {
+      "maxDuration": 300
     }
   }
 }
