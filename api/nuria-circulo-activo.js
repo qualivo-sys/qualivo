@@ -1,13 +1,13 @@
 // Nuria · etiqueta «circulo activo · excluir envios», al día cada mañana (cron 6:00 UTC = 7:00 Madrid).
 // Una edición de El Círculo está activa desde que empieza su captación hasta que acaba su venta:
-// del directo − 12 días (viernes) al directo + 4 días (domingo, el día después de cerrar la venta). Quien tenga la etiqueta de registro
+// del directo − 12 días (viernes de captación) hasta el mismo día del directo (miércoles). Después, en la venta, sí reciben emails (petición de Nuria, 14-nov). Quien tenga la etiqueta de registro
 // o de comunidad de una edición activa recibe la etiqueta; quien ya no esté en ninguna, la pierde.
 // Así las newsletters y campañas pueden excluir con una sola etiqueta a quien está en pleno Círculo.
 // Solo toca esa etiqueta. ?dry=1 calcula sin escribir.
 
 const GHL = 'https://services.leadconnectorhq.com';
 const ETIQUETA = 'circulo activo · excluir envios';
-const ANTES = 12, DESPUES = 4, TIEMPO_MAX = 250000;
+const ANTES = 12, DESPUES = 0, TIEMPO_MAX = 250000;
 
 function clave() { return process.env.NURIA_GHL_API_KEY_ESCRITURA || process.env.NURIA_GHL_API_KEY; }
 
