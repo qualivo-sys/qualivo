@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Maquilladora profesional · Carolina Alvarado</title>
+<meta name="description" content="Propuesta de Qualivo para C.A Makeup Academy: landing de conversión de la Carrera de Maquillaje Profesional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Landing de conversión para la Carrera de Maquillaje de C.A Makeup Academy: anuncio → tres preguntas → llamada con Carolina reservada en la misma página. */
+:root{--ink:#111;--paper:#fff;--soft:#F4F2EE;--line:#E4E0D8;--muted:#5E5A52;--y:#E3B04B;--y-ink:#111;--good:#1F7A3A;--display:"Anton",Impact,"Arial Narrow",sans-serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--r:18px;--shadow:0 24px 60px -24px rgba(0,0,0,.35)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#F4F2EE;--paper:#121212;--soft:#1B1B1A;--line:#2E2C29;--muted:#B5AFA5}}
+:root[data-theme="dark"]{--ink:#F4F2EE;--paper:#121212;--soft:#1B1B1A;--line:#2E2C29;--muted:#B5AFA5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:16px}
+.proposal{background:#000;color:#fff;font-size:12.5px;text-align:center;padding:7px 16px;letter-spacing:.01em}
+.proposal a{color:var(--y);font-weight:600}
+/* barra superior */
+.top{position:sticky;top:0;z-index:30;background:rgba(17,17,17,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.logo{font-family:var(--display);font-size:19px;color:var(--y);letter-spacing:.02em;line-height:1;text-transform:uppercase}
+.logo small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.18em;opacity:.7;margin-top:3px;font-weight:600}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--y);color:var(--y-ink);font-weight:800;text-decoration:none;border:0;border-radius:999px;padding:13px 22px;font-size:15.5px;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .2s;white-space:nowrap}
+.cta:hover{transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(255,230,0,.7)}
+.cta.sm{padding:9px 16px;font-size:14px}
+.cta.ghost{background:transparent;color:inherit;border:1.5px solid currentColor}
+/* hero */
+.hero{position:relative;color:#fff;background:#111;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:url(../assets/hero.jpg) center 20%/cover}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(10,10,10,.94) 0%,rgba(10,10,10,.82) 48%,rgba(10,10,10,.45) 100%)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center;padding-block:56px 72px}
+.kicker{display:inline-block;font-weight:800;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--y)}
+.hero h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(44px,6.4vw,84px);line-height:1.06;letter-spacing:.005em;margin:12px 0 18px}
+.hero h1 em{font-style:normal;background:var(--y);color:#111;padding:.02em .12em 0;line-height:1.12;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hero .sub{font-size:clamp(17px,1.6vw,19.5px);color:rgba(255,255,255,.86);max-width:54ch;margin:0}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.facts li{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);border-radius:999px;padding:7px 13px;font-size:14px;font-weight:600}
+.trust{margin-top:24px;font-size:14px;color:rgba(255,255,255,.75)}
+.trust b{color:#fff}
+.tape{position:absolute;z-index:1;left:-60px;right:-60px;bottom:22px;transform:rotate(-2.2deg);background:var(--y);color:#111;font-family:var(--display);font-size:22px;letter-spacing:.04em;white-space:nowrap;overflow:hidden;padding:6px 0;text-transform:uppercase;pointer-events:none}
+.tape span{display:inline-block;animation:tape 26s linear infinite}
+@keyframes tape{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.tape span{animation:none}}
+/* formulario */
+.form{background:var(--paper);color:var(--ink);border-radius:24px;padding:24px;box-shadow:var(--shadow);display:grid;gap:14px;min-height:430px;align-content:start;position:relative;z-index:2}
+.form .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.form h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:28px;line-height:1;margin:0;letter-spacing:.01em}
+.form .step{font-size:12.5px;color:var(--muted);font-weight:600;white-space:nowrap}
+.bar{height:6px;border-radius:3px;background:var(--soft);overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--y);transition:width .35s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.form .q{font-weight:700;font-size:18px;line-height:1.3;margin:4px 0 0}
+.opts{display:grid;gap:8px}
+.opts button{font:inherit;font-weight:600;font-size:15.5px;text-align:left;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:14px;padding:13px 15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;transition:border-color .15s,background .15s,transform .15s}
+.opts button:hover{border-color:var(--ink);transform:translateX(2px)}
+.opts button small{font-weight:500;color:var(--muted);font-size:13px}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.slots button{font:inherit;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:10px 6px;cursor:pointer;text-align:center;font-size:14px;font-weight:700;line-height:1.25}
+.slots button small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.slots button:hover,.slots button[aria-pressed="true"]{border-color:var(--ink);background:var(--y);color:#111}
+.slots button:hover small,.slots button[aria-pressed="true"] small{color:#111}
+.fld{display:grid;gap:5px;font-size:13.5px;font-weight:600}
+.fld input{font:inherit;font-size:16px;border:1.5px solid var(--line);border-radius:12px;padding:12px 13px;background:var(--paper);color:var(--ink)}
+.fld input:focus{outline:2px solid var(--y);outline-offset:1px;border-color:var(--ink)}
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.45}
+.chk input{margin-top:3px;accent-color:#111}
+.form .cta{width:100%}
+.form .back{background:none;border:0;color:var(--muted);font:inherit;font-size:13.5px;cursor:pointer;justify-self:start;padding:0;text-decoration:underline}
+.micro{font-size:12.5px;color:var(--muted);text-align:center;margin:0}
+.ok{display:grid;gap:12px}
+.ok .big{font-family:var(--display);text-transform:uppercase;font-size:34px;line-height:1}
+.ok .card{border:1.5px solid var(--ink);border-radius:14px;padding:14px;background:var(--soft);font-weight:600}
+.ok ul{margin:0;padding-left:18px;color:var(--muted);font-size:14.5px;display:grid;gap:4px}
+/* secciones */
+section{padding-block:76px}
+section.alt{background:var(--soft)}
+.eyebrow{font-weight:800;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+h2.t{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(34px,4.4vw,56px);line-height:.98;margin:10px 0 16px;letter-spacing:.005em}
+.lead{font-size:18.5px;color:var(--muted);max-width:62ch;margin:0}
+.logos{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;padding-block:22px;border-bottom:1px solid var(--line)}
+.logos span{font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.logos b{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0;text-transform:none;margin-right:6px}
+.mods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
+.mod{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.mod img{aspect-ratio:16/10;object-fit:cover;width:100%}
+.mod div{padding:16px 18px 20px}
+.mod h3{margin:0 0 6px;font-size:18px;line-height:1.25}
+.mod p{margin:0;font-size:15px;color:var(--muted)}
+.mod .tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--y);color:#111;border-radius:6px;padding:2px 7px;margin-bottom:8px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center}
+.split img{border-radius:var(--r);box-shadow:var(--shadow);aspect-ratio:4/3;object-fit:cover;width:100%}
+.ticks{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.ticks li{display:grid;grid-template-columns:28px 1fr;gap:4px;font-size:16.5px}
+.ticks li::before{content:"";width:20px;height:20px;border-radius:50%;background:var(--y) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/12px no-repeat;margin-top:3px}
+.teach{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:34px}
+.teach figure{margin:0}
+.teach img{aspect-ratio:1;object-fit:cover;border-radius:16px;filter:grayscale(1);width:100%}
+.teach figcaption{margin-top:10px;font-size:14px;color:var(--muted);line-height:1.4}
+.teach figcaption b{display:block;color:var(--ink);font-size:16px}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:34px;counter-reset:s}
+.steps div{counter-increment:s;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.steps div::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#111;color:var(--y);font-family:var(--display);font-size:20px;margin-bottom:12px}
+.steps div:first-child::before{background:var(--y);color:#111}
+.steps b{display:block;font-size:17px}
+.steps p{margin:6px 0 0;font-size:14.5px;color:var(--muted)}
+.steps .dur{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:700;border-radius:999px;background:var(--soft);padding:3px 10px}
+.pay{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:34px}
+.pay div{border:1.5px solid var(--line);border-radius:var(--r);padding:22px;background:var(--paper)}
+.pay div.hl{border-color:#111;box-shadow:inset 0 6px 0 var(--y)}
+.pay .n{font-family:var(--display);font-size:46px;line-height:1;text-transform:uppercase}
+.pay .n small{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--muted);text-transform:none}
+.pay h3{margin:12px 0 6px;font-size:17px}
+.pay p{margin:0;font-size:15px;color:var(--muted)}
+.gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:190px;gap:10px;margin-top:34px}
+.gal img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+.gal img:first-child{grid-row:span 2}
+.faq{max-width:820px;margin-top:28px}
+.faq details{border-bottom:1px solid var(--line);padding:16px 0}
+.faq summary{cursor:pointer;font-weight:700;font-size:17.5px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--display);font-size:24px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:10px 0 0;color:var(--muted);font-size:16px;max-width:70ch}
+.final{background:#111;color:#fff;text-align:center}
+.final h2.t{color:#fff}
+.final .lead{color:rgba(255,255,255,.8);margin-inline:auto}
+.final .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+footer{padding:28px 0 110px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+footer p{margin:4px 0}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(17,17,17,.96);color:#fff;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;align-items:center;gap:12px;justify-content:space-between;transform:translateY(110%);transition:transform .3s}
+.sticky.on{transform:none}
+.sticky span{font-size:13px;line-height:1.3}
+.sticky span b{display:block;font-size:14.5px}
+.notes{background:#FFF8C2;color:#111;border:1px dashed #C9B200;border-radius:14px;padding:16px 18px;font-size:14px;margin-top:30px}
+.notes b{display:block;margin-bottom:6px}
+.notes ul{margin:0;padding-left:18px;display:grid;gap:4px}
+@media (max-width:960px){.hero .wrap{grid-template-columns:1fr;gap:28px;padding-block:40px 80px}.mods,.pay{grid-template-columns:1fr 1fr}.teach{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr;gap:26px}.gal{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.gal img:first-child{grid-column:span 2;grid-row:span 1}}
+@media (max-width:620px){body{font-size:16px}section{padding-block:56px}.mods,.pay,.steps{grid-template-columns:1fr}.top .cta{display:none}.sticky{display:flex}.form{padding:18px;border-radius:20px}.slots{grid-template-columns:1fr 1fr}.tape{font-size:18px}.facts li:nth-child(n+4),.trust{display:none}.hero .wrap{padding-block:28px 80px}}
+</style>
+</head>
+<body>
+
+<div class="proposal">Propuesta de Qualivo para C.A Makeup Academy · no publicada · <a href="https://qualivo.io/intelligence/?sector=camakeup&amp;empresa=C.A%20Makeup%20Academy&amp;objetivo=conversion">ver el panel</a></div>
+
+<header class="top">
+  <div class="wrap">
+    <div class="logo">C·A Carolina Alvarado<small>Escuela de Maquillaje</small></div>
+    <a class="cta sm" href="#solicitud">Habla con Carolina</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker">Carrera de Maquillaje Profesional</span>
+      <h1>Conviértete en <em>maquilladora profesional</em> en 90 días</h1>
+      <p class="sub">Con Carolina Alvarado, presidenta de la Asociación de Maquilladores Profesionales de Murcia. Las técnicas que triunfan en Latinoamérica y la visión empresarial para vivir de ello, aunque empieces de cero.</p>
+      <ul class="facts">
+        <li>Desde cero</li>
+        <li>Presencial u online</li>
+        <li>Sesiones individuales</li>
+        <li>También fines de semana</li>
+        <li>Certificado de la Asociación</li>
+      </ul>
+      <p class="trust"><b>Matrículas abiertas.</b> Te contamos fechas y forma de pago en una llamada de 15 minutos.</p>
+    </div>
+    <div class="form" id="solicitud" aria-live="polite"></div>
+  </div>
+  <div class="tape" aria-hidden="true"><span>Matrículas abiertas / Haz de tu pasión tu profesión / Matrículas abiertas / Haz de tu pasión tu profesión / Matrículas abiertas / Haz de tu pasión tu profesión / Matrículas abiertas / Haz de tu pasión tu profesión / Matrículas abiertas / Haz de tu pasión tu profesión / </span></div>
+</div>
+
+<div class="wrap">
+  <div class="logos"><b>Certificado por la</b><span>Asociación de Maquilladores Profesionales de Murcia</span></div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Qué vas a aprender</p>
+    <h2 class="t">De tu pasión<br>a tu profesión.</h2>
+    <p class="lead">Técnica, práctica y la parte de la que nadie habla: cómo conseguir clientas y vivir del maquillaje.</p>
+    <div class="mods">
+      <div class="mod"><img src="../assets/aula01.jpg" alt="Maquillaje profesional de alumna" loading="lazy"><div><span class="tag">Presencial</span><h3>Carrera de Maquillaje Profesional</h3><p>Allface y Beauty Fundamentals: de cero a profesional, con sesiones individuales para avanzar más rápido.</p></div></div>
+      <div class="mod"><img src="../assets/aula02.jpg" alt="Maquillaje de noche" loading="lazy"><div><span class="tag">Especialízate</span><h3>Formaciones específicas</h3><p>Arquitectura de cejas, extensiones, tinte y lifting de pestañas, depilación con hilo y perfeccionamiento.</p></div></div>
+      <div class="mod"><img src="../assets/aula03.jpg" alt="Maquillaje editorial" loading="lazy"><div><span class="tag">Online</span><h3>Desde donde estés</h3><p>Carrera online Start-up y Premium, para España y Latinoamérica.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap split">
+    <img src="../assets/carolina.jpg" alt="Carolina Alvarado en la academia" loading="lazy">
+    <div>
+      <p class="eyebrow">Quién te enseña</p>
+      <h2 class="t">Carolina Alvarado</h2>
+      <p class="lead">Empezó a formarse a los 17 años y lleva más de 7 dedicada al maquillaje. Ha trabajado en dos continentes y hoy preside la Asociación de Maquilladores Profesionales de Murcia, que certifica a sus alumnas.</p>
+      <ul class="ticks">
+        <li>Técnicas que están triunfando en Latinoamérica.</li>
+        <li>Visión empresarial: cómo conseguir clientas y vivir de ello.</li>
+        <li>Certificado de la Asociación al terminar.</li>
+      </ul>
+      <p style="margin-top:26px"><a class="cta" href="#solicitud">Quiero hablar con Carolina</a></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Cómo empezar</p>
+    <h2 class="t">Tres pasos y estás dentro.</h2>
+    <div class="steps" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+      <div><b>Cuéntanos qué buscas</b><p>Tres preguntas y eliges hora para hablar.</p><span class="dur">1 minuto</span></div>
+      <div><b>Llamada con Carolina</b><p>Fechas, modalidad y forma de pago, según tu caso.</p><span class="dur">15 minutos</span></div>
+      <div><b>Matrícula</b><p>Reservas tu plaza y empiezas.</p><span class="dur">En línea</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Ellas ya lo han conseguido</p>
+    <h2 class="t">Trabajos de la escuela.</h2>
+    <div class="gal">
+      <img src="../assets/ad10.jpg" alt="Maquillaje gráfico con delineado blanco">
+      <img src="../assets/aula01.jpg" alt="Maquillaje de alumna">
+      <img src="../assets/aula02.jpg" alt="Maquillaje de noche">
+      <img src="../assets/aula03.jpg" alt="Maquillaje editorial">
+      <img src="../assets/ad1.jpg" alt="Anuncio de la carrera de maquillaje profesional">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Preguntas frecuentes</p>
+    <h2 class="t">Lo que nos preguntan antes de empezar.</h2>
+    <div class="faq">
+      <details open><summary>¿Necesito experiencia?</summary><p>No. La carrera está pensada para empezar de cero, y también para quien ya maquilla y quiere actualizarse.</p></details>
+      <details><summary>¿Presencial u online?</summary><p>Las dos. Presencial con sesiones individuales, incluso los fines de semana, y online para España y Latinoamérica.</p></details>
+      <details><summary>¿Tengo certificado?</summary><p>Sí, con el sello de la Asociación de Maquilladores Profesionales de Murcia.</p></details>
+      <details><summary>¿Cuánto cuesta?</summary><p>Depende de la modalidad y del plan de pago. Te lo cuenta Carolina en la llamada de 15 minutos, sin compromiso.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 class="t">Haz de tu pasión tu profesión.</h2>
+    <p class="lead">Elige hora para hablar con Carolina. En un minuto te escribimos por WhatsApp para confirmarlo.</p>
+    <div class="row"><a class="cta" href="#solicitud">Quiero hablar con Carolina</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="notes">
+      <b>Notas de Qualivo (esto no saldría en la página)</b>
+      <ul>
+        <li>Hecha con vuestras fotos y textos de cursosmaquillajepresencial.es y de vuestros anuncios (30-oct). Los textos finales los aprobáis vosotras.</li>
+        <li>Hoy vuestro WhatsApp contesta con un menú de 10 números y pide nombre, país y horario. Aquí la interesada responde tres preguntas con un toque y elige hora para hablar contigo en el mismo paso.</li>
+        <li>Al enviar: ficha con puntuación, WhatsApp al minuto y aviso a Carolina si quiere dedicarse y empezar ya. Lo ves en el panel.</li>
+        <li>Pendiente de confirmar: sede presencial (los anuncios dicen Madrid y la web, Murcia) y precios. El formulario de esta propuesta no envía datos.</li>
+      </ul>
+    </div>
+    <p style="margin-top:18px">Propuesta preparada por Qualivo el 30 de octubre de 2026. No es una página publicada por la escuela.</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky"><span><b>Carrera de Maquillaje</b>Llamada de 15 min con Carolina</span><a class="cta sm" href="#solicitud">Reservar</a></div>
+<script>
+(function () {
+  var box = document.getElementById('solicitud');
+  var resp = {};
+  var Q = [
+    { k: 'cuando', q: '¿Qué te gustaría?', o: [['Dedicarme al maquillaje', 'desde cero'], ['Mejorar lo que ya hago', 'ya maquillo'], ['Es para mí (automaquillaje)', ''], ['Solo estoy mirando', '']] },
+    { k: 'perfil', q: '¿Cómo lo prefieres?', o: [['Presencial', 'sesiones individuales'], ['Online', 'España y Latinoamérica'], ['Aún no lo sé', '']] },
+    { k: 'pago', q: '¿Cuándo te gustaría empezar?', o: [['Este mes', ''], ['En los próximos 3 meses', ''], ['Más adelante', '']] }
+  ];
+  var TOTAL = 5;
+  function el(t, c, x) { var d = document.createElement(t); if (c) d.className = c; if (x != null) d.textContent = x; return d; }
+  function frame(n, title) {
+    box.innerHTML = '';
+    var h = el('div', 'head'); h.appendChild(el('h2', null, title)); h.appendChild(el('span', 'step', 'Paso ' + Math.min(n + 1, TOTAL) + ' de ' + TOTAL));
+    var bar = el('div', 'bar'), s = el('span'); bar.appendChild(s); box.appendChild(h); box.appendChild(bar);
+    requestAnimationFrame(function () { s.style.width = Math.round(n / TOTAL * 100) + '%'; });
+    return s;
+  }
+  function back(n) { if (n <= 0) return; var b = el('button', 'back', '← Atrás'); b.type = 'button'; b.onclick = function () { paso(n - 1); }; box.appendChild(b); }
+  function paso(n) {
+    if (n < Q.length) {
+      frame(n, n === 0 ? 'Empieza aquí' : 'Solicitud');
+      box.appendChild(el('p', 'q', Q[n].q));
+      var o = el('div', 'opts');
+      Q[n].o.forEach(function (x) {
+        var b = el('button'); b.type = 'button'; b.appendChild(document.createTextNode(x[0])); if (x[1]) b.appendChild(el('small', null, x[1]));
+        b.onclick = function () { resp[Q[n].k] = x[0]; paso((resp.cuando === 'Solo estoy mirando' || resp.cuando === 'Es para mí (automaquillaje)') && n === 0 ? 99 : n + 1); };
+        o.appendChild(b);
+      });
+      box.appendChild(o);
+      if (n === 0) box.appendChild(el('p', 'micro', '1 minuto · sin compromiso'));
+      back(n); return;
+    }
+    if (n === 3) return datos();
+    if (n === 4) return hora();
+    if (n === 99) return folleto();
+  }
+  function datos() {
+    frame(3, 'Tus datos');
+    var f = el('form'); f.style.display = 'grid'; f.style.gap = '12px'; f.noValidate = true;
+    [['nombre', 'Nombre', 'text', 'given-name'], ['wa', 'WhatsApp', 'tel', 'tel'], ['email', 'Correo electrónico', 'email', 'email']].forEach(function (x) {
+      var l = el('label', 'fld', x[1]); var i = el('input'); i.name = x[0]; i.type = x[2]; i.autocomplete = x[3]; i.required = true; if (x[0] === 'wa') i.placeholder = '+34 6__ ___ ___'; l.appendChild(i); f.appendChild(l);
+    });
+    var c = el('label', 'chk'); var cb = el('input'); cb.type = 'checkbox'; cb.required = true; c.appendChild(cb); c.appendChild(el('span', null, 'Acepto que la escuela me contacte por WhatsApp, teléfono y correo sobre los cursos. Puedo darme de baja cuando quiera.')); f.appendChild(c);
+    var s = el('button', 'cta', 'Elegir hora para hablar con Carolina →'); s.type = 'submit'; f.appendChild(s);
+    f.onsubmit = function (e) { e.preventDefault(); resp.nombre = (f.nombre.value || 'Laura').trim().split(' ')[0]; paso(4); };
+    box.appendChild(f); back(3);
+  }
+  function hora() {
+    frame(4, 'Tu llamada');
+    box.appendChild(el('p', 'q', resp.nombre + ', elige cuándo te va bien hablar con Carolina (15 min):'));
+    var d = new Date(), out = [], dias = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
+    for (var i = 1; out.length < 6 && i < 14; i++) {
+      var x = new Date(d.getTime() + i * 864e5); if (x.getDay() === 0 || x.getDay() === 6) continue;
+      out.push([dias[x.getDay()] + ' ' + x.getDate(), out.length % 2 ? '18:00' : '11:00']);
+    }
+    var g = el('div', 'slots'), sel = null;
+    out.forEach(function (x) {
+      var b = el('button'); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.appendChild(document.createTextNode(x[1])); b.appendChild(el('small', null, x[0]));
+      b.onclick = function () { g.querySelectorAll('button').forEach(function (y) { y.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-pressed', 'true'); sel = x; go.disabled = false; go.style.opacity = 1; };
+      g.appendChild(b);
+    });
+    box.appendChild(g);
+    var go = el('button', 'cta', 'Confirmar llamada'); go.type = 'button'; go.disabled = true; go.style.opacity = .45;
+    go.onclick = function () { resp.hora = sel; fin(); };
+    box.appendChild(go);
+    box.appendChild(el('p', 'micro', '¿Ninguna te va bien? Confírmala y la cambiamos por WhatsApp.'));
+    back(4);
+  }
+  function fin() {
+    var s = frame(TOTAL, '¡Reservada!'); setTimeout(function () { s.style.width = '100%'; }, 30);
+    box.querySelector('.step').textContent = 'Listo';
+    var o = el('div', 'ok');
+    o.appendChild(el('span', 'big', 'Nos vemos el ' + resp.hora[0] + ' a las ' + resp.hora[1]));
+    o.appendChild(el('div', 'card', 'Llamada con Carolina · ' + (resp.perfil || 'Carrera de maquillaje') + ' · 15 min'));
+    var ul = el('ul');
+    ['En un minuto te escribimos por WhatsApp para confirmarla.', 'Te llega la invitación de calendario a tu correo.', 'Te recordamos la llamada la víspera y una hora antes.'].forEach(function (t) { ul.appendChild(el('li', null, t)); });
+    o.appendChild(ul);
+    var a = el('a', 'cta', 'Ver cómo le llega a Carolina →'); a.href = 'https://qualivo.io/intelligence/?sector=camakeup&empresa=C.A%20Makeup%20Academy&objetivo=conversion'; o.appendChild(a);
+    box.appendChild(o);
+  }
+  function folleto() {
+    frame(TOTAL, 'Sin prisa');
+    box.querySelector('.step').textContent = 'Listo';
+    var o = el('div', 'ok');
+    o.appendChild(el('span', 'big', 'Te mandamos la masterclass'));
+    o.appendChild(el('p', null, 'Déjanos tu correo y te enviamos la masterclass gratuita «Cómo vivir del maquillaje». Sin llamadas.'));
+    var l = el('label', 'fld', 'Correo electrónico'); var i = el('input'); i.type = 'email'; l.appendChild(i); o.appendChild(l);
+    var b = el('button', 'cta', 'Enviarme la masterclass'); b.type = 'button'; b.onclick = function () { b.textContent = '¡Enviado! Revisa tu correo'; b.disabled = true; }; o.appendChild(b);
+    box.appendChild(o); back(1);
+  }
+  paso(0);
+
+  var st = document.getElementById('sticky');
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { st.classList.toggle('on', !e[0].isIntersecting); }).observe(box);
+})();
+</script>
+</body>
+</html>

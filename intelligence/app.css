@@ -96,11 +96,11 @@ a { color: var(--verde); }
 .principal { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
 .barra { height: 58px; flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 22px; border-bottom: 1px solid var(--borde); background: rgba(255,255,255,.7); backdrop-filter: blur(8px); }
 .barra-titulo { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.sistema { font-weight: 800; font-size: 15px; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sistema { font-weight: 800; font-size: 15px; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 20; }
 .sistema b { color: var(--verde); font-weight: 800; }
-.chip-simulado { font-size: 11px; font-weight: 700; color: #9a5b00; background: #fff4e0; border: 1px solid #f3d9a8; padding: 3px 8px; border-radius: 999px; white-space: nowrap; margin-left: 6px; }
+.chip-simulado { flex: none; font-size: 11px; font-weight: 700; color: #9a5b00; background: #fff4e0; border: 1px solid #f3d9a8; padding: 3px 8px; border-radius: 999px; white-space: nowrap; margin-left: 6px; }
 .chip-simulado[hidden] { display: none; }
-.chip-sector { font-size: 11.5px; font-weight: 700; color: var(--gris); background: var(--hover); padding: 4px 9px; border-radius: 999px; white-space: nowrap; }
+.chip-sector { font-size: 11.5px; font-weight: 700; color: var(--gris); background: var(--hover); padding: 4px 9px; border-radius: 999px; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .barra-acciones { display: flex; align-items: center; gap: 8px; }
 .reloj { font-weight: 700; color: var(--gris); font-size: 12.5px; padding: 0 6px; display: inline-flex; align-items: center; gap: 6px; }
 .reloj i { width: 7px; height: 7px; border-radius: 50%; background: var(--verde-2); box-shadow: 0 0 0 3px rgba(39,189,177,.2); }
@@ -658,3 +658,20 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .inf-nota { font-size: 12px; margin: 8px 2px 0; }
 .inf-tabla th[scope="row"] { text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--tinta); background: var(--superficie); }
 .inf-tabla td small { font-size: 11px; }
+
+/* Modo sin agentes (BSC): sin copiloto de IA; el panel ocupa todo el ancho */
+body.sin-ia .copilot, body.sin-ia #btnCopilotMovil, body.sin-ia [data-demo="preguntar"] { display: none !important; }
+body.sin-ia .app { grid-template-columns: 212px minmax(0, 1fr); }
+@media (min-width: 1181px) and (max-width: 1439px) { body.sin-ia .app { grid-template-columns: 64px minmax(0, 1fr); } }
+@media (max-width: 1180px) { body.sin-ia .app { grid-template-columns: 200px minmax(0, 1fr); } }
+@media (max-width: 760px) { body.sin-ia .app { grid-template-columns: minmax(0, 1fr); } }
+.responder { display: grid; gap: 8px; margin-top: 10px; }
+.responder textarea { width: 100%; border: 1px solid var(--borde); border-radius: 10px; padding: 10px 12px; font: inherit; font-size: 14px; background: var(--fondo); color: inherit; resize: vertical; }
+.responder textarea:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(14,124,116,.14); }
+
+/* ?limpio=1 (grabaciones): sin Copilot ni controles del modo demo. El sello «Datos simulados» se queda. */
+body.limpio .app { grid-template-columns: 212px minmax(0, 1fr); }
+body.limpio .copilot, body.limpio #btnCopilotMovil, body.limpio .demo-panel, body.limpio .demo-botones, body.limpio #btnReiniciar, body.limpio #humano { display: none !important; }
+@media (min-width: 1181px) and (max-width: 1439px) { body.limpio .app { grid-template-columns: 64px minmax(0, 1fr); } }
+@media (max-width: 1180px) { body.limpio .app { grid-template-columns: 200px minmax(0, 1fr); } }
+@media (max-width: 760px) { body.limpio .app { grid-template-columns: minmax(0, 1fr); } }

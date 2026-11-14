@@ -34,6 +34,10 @@ const ROTOS = [
 // Quince segundos dan para el saludo y poco más.
 const CORTA_SEG = 15;
 
+// 19-oct-2026 (Revenue Journey V3): sin mensaje automático de «se nos ha
+// cortado la llamada». Volver a true solo con la voz reparada y probada.
+const RESCATE_AUTOMATICO = false;
+
 // Fallos de la telefonía: la llamada NUNCA llegó a sonar. Es distinto de que se
 // rompa a mitad, y confundir las dos cosas sale caro. El 15-sep le escribimos
 // «perdona, se nos ha cortado la llamada» a un lead cuyo teléfono no sonó
@@ -216,12 +220,17 @@ module.exports = async function handler(req, res) {
       // Buzón o sin respuesta: el analista de Vapi se inventa que «cogió el
       // teléfono» cuando solo habla Raquel (Pilar, 21-sep). Aquí el resumen es fijo.
       const nadieHablo = v.estado === 'sin_respuesta';
-      const resumenFijo = 'Buzón o sin respuesta: no ha hablado nadie. Raquel ha dejado el mensaje.';
+      const resumenFijo = 'Buzón o sin respuesta: no ha hablado nadie.';
       const lineas = [
         'LLAMADA DE RAQUEL · ' + cuando + ' · ' + seg + ' s · ' + (informe.endedReason || ''),
         !nadieHablo && datos.resultado ? 'Resultado: ' + datos.resultado + (datos.cita ? ' (' + datos.cita + ')' : '') : '',
         !nadieHablo && datos.quien_cogio ? 'Quién cogió: ' + datos.quien_cogio + (datos.es_el_lead === false ? ' (no es quien pidió el diagnóstico)' : '') : '',
         !nadieHablo && datos.fuga_declarada ? 'Lo que cuenta: ' + datos.fuga_declarada : '',
+        !nadieHablo && datos.volumen ? 'Solicitudes al mes: ' + datos.volumen : '',
+        !nadieHablo && datos.quien_atiende ? 'Las atiende: ' + datos.quien_atiende : '',
+        !nadieHablo && datos.donde_seguimiento ? 'Seguimiento en: ' + datos.donde_seguimiento : '',
+        !nadieHablo && datos.pide_baja ? 'PIDE NO VOLVER A SER LLAMADO: marcado como baja (act-baja).' : '',
+        !nadieHablo && datos.pide_persona ? 'Pide hablar con una persona.' : '',
         !nadieHablo && datos.objecion ? 'Objeción: ' + datos.objecion : '',
         !nadieHablo && datos.mejora_raquel ? 'Mejora para Raquel: ' + datos.mejora_raquel : '',
         '',
@@ -233,6 +242,13 @@ module.exports = async function handler(req, res) {
       ].filter(function (l, i, arr) { return !(l === '' && arr[i - 1] === ''); });
       await A.nota(contacto.id, lineas.join('\n'));
     } catch (e) { console.error('[vapi-fin] no se pudo anotar la llamada:', e && e.message); }
+    // «No me llaméis» o «no me contactéis» en la llamada: baja en el acto, para que
+    // ninguna cadencia (voz, WhatsApp, nurturing) le vuelva a tocar (superprompt de
+    // voz, 21-oct). La detecta el analista de Vapi (structuredData.pide_baja).
+    const datosFin = ((msg.analysis || {}).structuredData) || {};
+    if (v.estado !== 'sin_respuesta' && datosFin.pide_baja === true) {
+      try { await A.etiquetar(contacto.id, ['act-baja']); } catch (e) { console.error('[vapi-fin] no se pudo marcar la baja:', e && e.message); }
+    }
   }
 
   // Que no cojan el teléfono es el caso normal: no se toca nada y la cadencia
@@ -250,7 +266,7 @@ module.exports = async function handler(req, res) {
         await require('./_aviso.js').seMovio('actividad', {
           nombre: contacto.firstName || contacto.contactName || contacto.name || '', empresa: contacto.companyName || '', email: contacto.email || '', telefono: numero || contacto.phone || '', contactId: contacto.id,
           accion: v.estado === 'normal' ? 'Raquel ha hablado con él (' + Math.round(Number(informe.durationSeconds || 0)) + ' s)' : 'Raquel ha llamado y no ha cogido (' + (v.motivo || 'sin respuesta') + ')',
-          texto: (v.estado === 'sin_respuesta' ? 'Buzón o sin respuesta: no ha hablado nadie. Raquel ha dejado el mensaje.' : String(((msg.analysis || {}).summary) || informe.summary || '').slice(0, 600)) + ((msg.call && msg.call.id) ? '\nEscuchar: https://dashboard.vapi.ai/calls/' + msg.call.id : ''),
+          texto: (v.estado === 'sin_respuesta' ? 'Buzón o sin respuesta: no ha hablado nadie.' : String(((msg.analysis || {}).summary) || informe.summary || '').slice(0, 600)) + ((msg.call && msg.call.id) ? '\nEscuchar: https://dashboard.vapi.ai/calls/' + msg.call.id : ''),
           origen: 'Llamada de Raquel'
         });
       } catch (e) { /* no bloquea */ }
@@ -307,7 +323,12 @@ module.exports = async function handler(req, res) {
     // Rescate: la llamada se ha caído y del otro lado hay alguien que acaba de
     // hablar con un robot que se ha colgado. Se pide perdón y se le devuelve el
     // control, sin volver a llamar automáticamente.
-    if (A.enVentana('whatsapp')) {
+    // 19-oct-2026 (V3): apagado. El 19-oct salió a un lead cuya llamada nunca
+    // conectó (Twilio caído; el motivo no casó con NO_CONECTO). Mientras la voz
+    // esté pausada, solo se avisa a Maikel y decide él.
+    if (!RESCATE_AUTOMATICO) {
+      acciones.push('rescate_pausado');
+    } else if (A.enVentana('whatsapp')) {
       const texto = (nombre ? nombre + ', ' : '') +
         'perdona, se nos ha cortado la llamada. Soy Maikel, de Qualivo. ' +
         'Si te viene bien te escribo por aquí y lo vemos sin llamadas: ' +

@@ -67,6 +67,9 @@
     formacion_vsl_play: ['trackCustom', 'VSLPlay'],
     formacion_agenda_abierta: ['trackCustom', 'FormacionAgenda'],
     formacion_reserva: ['trackCustom', 'FormacionReserva'],
+    // Landing de reformas v22 (22-oct): mismo criterio que formación.
+    reformas_agenda_abierta: ['trackCustom', 'ReformasAgenda'],
+    reformas_reserva: ['trackCustom', 'ReformasReserva'],
     home_vsl_play: ['trackCustom', 'VSLPlay'],
     home_agenda_abierta: ['trackCustom', 'HomeAgenda'],
     home_reserva: ['trackCustom', 'HomeReserva']

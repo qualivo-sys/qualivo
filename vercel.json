@@ -117,6 +117,16 @@
   ],
   "redirects": [
     {
+      "source": "/inicio/v2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/inicio/v2/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/agenda",
       "destination": "https://api.leadconnectorhq.com/widget/booking/zBlsw8BEKA2zah81YlOl",
       "permanent": false
@@ -188,6 +198,10 @@
       "schedule": "45 6 * * *"
     },
     {
+      "path": "/api/senales-meta/",
+      "schedule": "25 */2 * * *"
+    },
+    {
       "path": "/api/seguimientos/",
       "schedule": "15 7 * * 1-5"
     },
@@ -218,6 +232,10 @@
     {
       "path": "/api/recordatorios-vispera/",
       "schedule": "30 16,17 * * *"
+    },
+    {
+      "path": "/api/recordatorios-hora/",
+      "schedule": "*/10 * * * *"
     },
     {
       "path": "/api/wa-nuria/",
@@ -262,10 +280,16 @@
     "api/recordatorios-vispera.js": {
       "maxDuration": 60
     },
+    "api/recordatorios-hora.js": {
+      "maxDuration": 60
+    },
     "api/prueba.js": {
       "maxDuration": 60
     },
     "api/encaja.js": {
+      "maxDuration": 60
+    },
+    "api/seguimientos.js": {
       "maxDuration": 60
     },
     "api/vapi-fin.js": {

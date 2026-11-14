@@ -53,7 +53,9 @@
       { id: 'c5', canal: 'Meta', nombre: 'Certificación en Gestión de Proyectos', inversion: 2100, ticket: 1450,
         embudo: { anuncio: 4300, info: 98, contactado: 52, cualificado: 30, entrevista: 14, matricula: 6, alumno: 5 } },
       { id: 'c6', canal: 'Web', nombre: 'Catálogo abierto (orgánico)', inversion: 0, ticket: 1900,
-        embudo: { anuncio: 2600, info: 70, contactado: 50, cualificado: 29, entrevista: 12, matricula: 7, alumno: 4 } }
+        embudo: { anuncio: 2600, info: 70, contactado: 50, cualificado: 29, entrevista: 12, matricula: 7, alumno: 4 } },
+      { id: 'c7', canal: 'Instagram', nombre: 'Cursos de tarde · Horarios compatibles', inversion: 1200, ticket: 890,
+        embudo: { anuncio: 7800, info: 146, contactado: 121, cualificado: 58, entrevista: 22, matricula: 11, alumno: 10 } }
     ],
     kpis: ['interesados', 'cpl', 'respuesta', 'cualificados', 'entrevistas', 'show', 'ventas', 'cpv', 'ingresos', 'roas'],
     kpiNombres: { interesados: 'Interesados', cualificados: 'Interesados cualificados', entrevistas: 'Entrevistas', ventas: 'Matrículas', cpv: 'Coste por matrícula', ingresos: 'Facturación' },
@@ -142,6 +144,53 @@
           { dur: 7, min: 4, txt: 'La entrevista aparece en la Agenda, confirmada por WhatsApp', feed: 'Entrevista agendada por el agente de voz · ' + Q.hueco(17).txt + ' 17:00', vista: 'agenda', toque: true,
             cambio: { etapa: 4, s: { cita: Q.hueco(17).min - 16, citaOk: true }, conv: ['a', 'wa', 'Nuria, te confirmo la entrevista con Elena el ' + Q.hueco(17).txt + ' a las 17:00. Te dejo aquí el plan de estudios y la bonificación de tu empresa.'] } },
           { dur: 0, min: 1, txt: 'Aviso a una persona: Nuria está lista para la entrevista', feed: 'Aviso enviado a admisiones', humano: { titulo: 'Nuria está lista para la entrevista', texto: 'Quiere pasar a HRBP · su empresa paga la mitad (bonificable) · el resto a plazos · convocatoria de octubre. Entrevista con Elena el ' + Q.hueco(17).txt + ' a las 17:00, agendada por el agente de voz.' } }
+        ]
+      },
+      // Historia para grabar el anuncio de Formación (oculta: solo con ?historia=laura).
+      // Solo enseña lo que funciona hoy: respuesta automática, llamada que lanza una persona,
+      // nota de la llamada en la ficha, aviso al equipo con fecha y matrícula unida a su anuncio.
+      laura: {
+        titulo: 'De Instagram a la matrícula',
+        oculta: true,
+        sinTecno: true,
+        agenteVoz: 'Raquel',
+        contacto: { id: 'demo', n: 'Laura Vidal', rol: 'Particular', seg: 'particular', ciudad: 'Bilbao', prod: 'Curso de tarde', orig: 'c7', canal: 'wa', etapa: 1, valor: 890, creado: 0, act: 0, f: { horario: 'Tardes, a partir de las 18:00' }, s: {}, conv: [],
+          forzar: { arriba: true, fit: 82, prio: 'urgente', porque: 'Prioridad urgente porque acaba de pedir información del Curso de tarde y busca justo ese horario.',
+            nba: { accion: 'Responder por WhatsApp', quien: 'Seguimiento', estado: 'encurso', tipo: 'agente', por: 'Acaba de pedir información desde Instagram. Lo primero es contestar rápido.' } } },
+        pasos: [
+          { dur: 5, min: 0, txt: 'Entra una solicitud desde Instagram: Curso de tarde', feed: 'Nueva solicitud · Curso de tarde · anuncio «Horarios compatibles»', cambio: {} },
+          { dur: 6, min: 2, txt: 'Respuesta por WhatsApp en 2 minutos', feed: 'WhatsApp enviado a los 2 minutos', toque: true,
+            cambio: { etapa: 2, conv: ['a', 'wa', 'Hola, Laura. Te escribimos de Escuela Norte por el Curso de tarde. ¿Te va bien que te llamemos un momento y te contamos horarios y precio?'],
+              forzar: { arriba: true, fit: 82, prio: 'alta', porque: 'Prioridad alta porque encaja con el Curso de tarde y ya tiene respuesta por WhatsApp.',
+                nba: { accion: 'Esperar su respuesta', quien: 'Seguimiento', estado: 'esperando', tipo: 'agente', por: 'Se le ha escrito a los 2 minutos. Si no contesta, mejor una llamada.' } } } },
+          { dur: 5, min: 1440, txt: 'Pasa un día y no responde', feed: 'Sin respuesta al WhatsApp en 24 horas',
+            cambio: { s: { intentos: 1 },
+              forzar: { arriba: true, fit: 82, prio: 'urgente', porque: 'Prioridad urgente porque encaja bien y lleva un día sin contestar al WhatsApp.',
+                nba: { accion: 'Llamar', quien: 'Equipo', estado: 'humano', tipo: 'humano', por: 'No ha contestado al WhatsApp en 24 horas. Mejor una llamada.' } } } },
+          { dur: 5, min: 20, txt: 'Una persona del equipo la pasa a llamada', feed: 'Ana, de admisiones, la pasa a llamada', persona: true,
+            cambio: { forzar: { arriba: true, fit: 82, prio: 'urgente', porque: 'Prioridad urgente porque encaja bien y lleva un día sin contestar al WhatsApp.',
+              nba: { accion: 'Llamada de Raquel', quien: 'Seguimiento', estado: 'encurso', tipo: 'voz', por: 'Ana la ha pasado a llamada.' } } } },
+          { dur: 14, min: 3, txt: 'Llamada de Raquel', feed: 'Llamada de Raquel · 2 min · nota guardada en su ficha', act: true, ficha: true,
+            llamada: { dur: 130, res: 'luego', resumen: 'Cogió a la primera. Le interesa el Curso de tarde, pero hasta enero no puede empezar por trabajo. Pide que la avisen con la convocatoria de enero.', dijo: ['Quiere el Curso de tarde', 'No puede empezar hasta enero', 'Pide aviso con la convocatoria de enero'],
+              trans: [['v', 'Hola, Laura, soy Raquel, de Escuela Norte. Te llamo por el curso de tarde. ¿Tienes un minuto?'], ['c', 'Sí, dime. Me interesa, pero ahora mismo no puedo empezar.'], ['v', 'Entendido. ¿Cuándo te vendría bien?'], ['c', 'En enero. Avisadme con la convocatoria.']] },
+            cambio: { etapa: 3, forzar: { arriba: true, fit: 82, prio: 'alta', porque: 'Prioridad alta porque encaja bien y ha dicho cuándo quiere empezar: en enero.',
+              nba: { accion: 'Retomar en enero · aviso al equipo', quien: 'Equipo', estado: 'programado', tipo: 'humano', por: 'Quiere empezar en la convocatoria de enero. No se le insiste antes.' } } } },
+          { dur: 7, min: 2, txt: 'Queda apuntado «en enero» y el equipo tiene un aviso con fecha', feed: 'Aviso al equipo · primera semana de enero · llamar a Laura', persona: true, ficha: true,
+            cambio: { s: { luego: 'enero', luegoTxt: 'empezaría en la convocatoria de enero' },
+              forzar: { arriba: true, fit: 82, prio: 'alta', porque: 'Prioridad alta porque encaja bien y ha dicho cuándo quiere empezar: en enero.',
+                nba: { accion: 'Retomar en enero · aviso al equipo', quien: 'Equipo', estado: 'programado', tipo: 'humano', por: 'Aviso al equipo para la primera semana de enero, con la convocatoria.' } } } },
+          { dur: 7, min: 8 * 7 * 1440, txt: 'En enero, el equipo le escribe con la convocatoria', feed: 'Ana escribe a Laura con la convocatoria de enero', persona: true, toque: true,
+            cambio: { s: { luego: null, luegoTxt: null }, conv: ['h', 'wa', 'Hola, Laura, soy Ana, de Escuela Norte. Como quedamos, ya está abierta la convocatoria de enero del Curso de tarde. ¿Te reservo plaza?'],
+              forzar: { arriba: true, fit: 82, prio: 'alta', porque: 'Prioridad alta porque es enero, la fecha que ella dio.',
+                nba: { accion: 'Esperar su respuesta', quien: 'Ana · admisiones', estado: 'esperando', tipo: 'humano', por: 'Ana le ha escrito con la convocatoria de enero.' } } } },
+          { dur: 6, min: 25, txt: 'Laura contesta', feed: 'Respuesta recibida', act: true,
+            cambio: { conv: ['c', 'wa', '¡Sí! Resérvamela, porfa.'],
+              forzar: { arriba: true, fit: 82, int: 90, prio: 'urgente', porque: 'Prioridad urgente porque quiere reservar plaza.',
+                nba: { accion: 'Reservar su plaza', quien: 'Ana · admisiones', estado: 'encurso', tipo: 'humano', por: 'Ha pedido que le reserven plaza en la convocatoria de enero.' } } } },
+          { dur: 9, min: 30, txt: 'Matrícula, junto al anuncio del que vino', feed: 'Matrícula · Curso de tarde · vino del anuncio «Horarios compatibles» de Instagram', ficha: true,
+            cambio: { etapa: 5, fin: 'ganado',
+              forzar: { arriba: true, fit: 82, int: 90, riesgo: 4, prio: 'media', porque: 'Ya es alumna del Curso de tarde. Vino del anuncio «Horarios compatibles» de Instagram.',
+                nba: { id: 'nada', accion: 'Ya es alumna', quien: 'Seguimiento', estado: 'matriculada', tipo: 'nada', por: 'Matriculada en la convocatoria de enero del Curso de tarde.' } } } }
         ]
       }
     },

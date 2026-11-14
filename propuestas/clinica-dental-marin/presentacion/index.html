@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Qualivo × Clínica Dental Marín · presentación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+/* Presentación en directo (10-nov, primera reunión): poco texto, lo explica Maikel. Flechas del teclado para pasar de pantalla.
+   Sin fotos: no hemos podido confirmar su web pública, así que todo es composición CSS y SVG. */
+:root{--ink:#0E1A2B;--mut:#536378;--bg:#FCFBF9;--soft:#F5F2ED;--soft2:#F8F6F2;--line:#E4DED4;--acc:#3B4670;--acc2:#56618A;--deep:#2F3854;--deep2:#262D45;
+--grad:linear-gradient(135deg,#56618A 0%,#2F3854 100%);--amb:#F5B83D;--ok:#13865A;--bad:#C0392B;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:18px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+svg{display:block}
+.top{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;gap:14px;padding:10px max(20px,env(safe-area-inset-right,0px)) 10px max(20px,env(safe-area-inset-left,0px));background:rgba(11,42,69,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+.top .b{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;margin-right:auto;white-space:nowrap}
+.top .b .x{opacity:.55;font-weight:500}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.dots a{color:rgba(255,255,255,.78);text-decoration:none;font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:99px;white-space:nowrap}
+.dots a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.dots a.on{background:#fff;color:var(--deep)}
+.cnt{font-size:12px;font-weight:600;opacity:.7;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* marca en texto: MARÍN / CLÍNICA DENTAL */
+.wm{display:inline-flex;align-items:center;gap:.5em;line-height:1;color:inherit}
+.wm svg{width:1.15em;height:1.25em;flex:none}
+.wm span{display:grid;gap:.18em}
+.wm b{font-weight:800;letter-spacing:.06em;font-size:1em}
+.wm small{font-weight:500;letter-spacing:.16em;font-size:.42em}
+.s{min-height:100vh;padding:92px max(20px,env(safe-area-inset-right,0px)) 56px max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center}
+.s.alt{background:var(--soft2)}
+.in{max-width:1180px;margin:0 auto;width:100%;min-width:0}
+.n{font:700 13px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:14px}
+h1,h2,h3{font-weight:700;letter-spacing:-.022em;line-height:1.06;text-wrap:balance}
+h2{font-size:clamp(32px,4.6vw,58px);margin-bottom:30px}
+h2 em{font-style:normal;color:var(--acc)}
+.chip{display:inline-block;font:700 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:99px;background:var(--soft);color:var(--acc);vertical-align:middle;margin-left:8px}
+.ej{display:inline-block;font:700 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;background:#FFF3C4;color:#7A5600;border-radius:6px;padding:3px 7px;vertical-align:middle;white-space:nowrap}
+.note{margin-top:16px;font-size:13px;color:var(--mut)}
+.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* portada */
+.hero{background:linear-gradient(100deg,rgba(38,45,69,.92) 0%,rgba(47,56,84,.78) 45%,rgba(47,56,84,.25) 100%),url(../assets/brand/clinica.jpg) center/cover;color:#fff;position:relative;overflow:hidden}
+.hero .in{position:relative;z-index:1}
+.hero .x{display:flex;align-items:center;gap:18px;font-weight:700;font-size:22px;margin-bottom:40px;flex-wrap:wrap}
+.hero .x .wm{font-size:30px}
+.hero .x .sep{opacity:.5;font-weight:500}
+.hero h1{font-size:clamp(40px,6.6vw,88px);max-width:14ch}
+.hero p{font-size:clamp(19px,2.1vw,25px);opacity:.9;margin-top:24px;max-width:36ch}
+.hero .sedes{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap}
+.hero .sedes span{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:8px 16px;font-weight:600;font-size:15px;background:rgba(255,255,255,.06)}
+.hero .tooth{position:absolute;right:-3%;top:50%;transform:translateY(-46%);width:min(42vw,540px);height:auto;aspect-ratio:48/54;opacity:.1;z-index:0;color:#fff}
+/* qué hacemos */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;position:relative}
+.steps div{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 18px;box-shadow:0 16px 34px -26px rgba(11,42,69,.55);position:relative;min-width:0}
+.steps .ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--grad);color:#fff;margin-bottom:16px}
+.steps small{display:block;font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--acc);margin-bottom:6px}
+.steps b{display:block;font-size:20px;line-height:1.2;letter-spacing:-.01em}
+.steps span{display:block;font-size:14.5px;color:var(--mut);margin-top:8px;line-height:1.4}
+.under{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.under div{display:flex;gap:16px;align-items:center;background:var(--deep);color:#fff;border-radius:20px;padding:18px 22px;min-width:0}
+.under .ic{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.12)}
+.under b{display:block;font-size:18px}.under span{font-size:14.5px;opacity:.8}
+/* paciente ideal */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.box{border-radius:24px;padding:30px;background:#fff;border:1px solid var(--line);box-shadow:0 18px 40px -30px rgba(11,42,69,.6);min-width:0}
+.box h3{font-size:28px;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.box h3 i{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;font-style:normal;font-size:18px;color:#fff;background:var(--ok)}
+.box.no h3 i{background:var(--amb);color:#3A2B00}
+.box ul{list-style:none;padding:0;display:grid;gap:14px;font-size:19px}
+.box li{display:flex;gap:12px;align-items:flex-start}
+.box li::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;margin-top:9px;background:var(--acc)}
+.box.ok{border-top:6px solid var(--ok)}
+.box.no{background:#FFFBEF;border-color:#F6E3A6;border-top:6px solid var(--amb)}.box.no li::before{background:var(--amb)}
+/* hoy frente a con Qualivo */
+.vs{display:grid;gap:12px}
+.vs .row{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr);align-items:stretch}
+.vs .hd{font:700 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mut);padding:0 22px 2px}
+.vs .hd.y{color:var(--acc)}
+.vs .c{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 22px;font-size:18px;display:flex;gap:12px;align-items:center;min-width:0}
+.vs .c.h{background:#FFF7F5;border-color:#F5D5CF}
+.vs .c.h::before{content:"✕";color:var(--bad);font-weight:800;flex:none}
+.vs .c.y{border-color:#BFDDF4;box-shadow:0 12px 26px -22px rgba(59,70,112,.8)}
+.vs .c.y::before{content:"✓";color:var(--ok);font-weight:800;flex:none}
+.vs .ar{display:grid;place-items:center;color:var(--acc);font-weight:800;font-size:24px}
+.vs .c b{font-weight:700}
+.det{display:flex;gap:14px;align-items:flex-start;margin-top:22px;background:var(--soft);border:1px dashed #D6C8B2;border-radius:18px;padding:16px 20px;font-size:16.5px}
+.det .i{color:var(--acc);flex:none;margin-top:2px}
+/* anuncios */
+.adx{display:grid;grid-template-columns:minmax(0,390px) minmax(0,1fr);gap:48px;align-items:center}
+.ig{background:#fff;border-radius:18px;border:1px solid #E1E8EF;box-shadow:0 28px 60px -34px rgba(11,26,43,.6);overflow:hidden;width:100%;max-width:390px}
+.ig .h{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:14px}
+.ig .h .av{width:34px;height:34px;border-radius:50%;background:var(--deep);display:grid;place-items:center;color:#fff;flex:none;border:2px solid #CFE6F8}
+.ig .h .av svg{width:16px;height:18px}
+.ig .h b{display:block;font-size:14px}.ig .h small{color:#8A94A3;font-size:12px}.ig .h .d3{margin-left:auto;color:#8A94A3;font-weight:700}
+.cr{position:relative;aspect-ratio:4/5;overflow:hidden;color:#fff;background:var(--deep)}
+.cr .tag{position:absolute;left:16px;top:16px;z-index:2;background:rgba(255,255,255,.95);color:var(--deep);font:700 11.5px var(--sans);letter-spacing:.04em;padding:6px 11px;border-radius:99px}
+.cr .hk{position:absolute;left:20px;right:20px;bottom:50px;z-index:2;font:800 25px/1.14 var(--sans);letter-spacing:-.02em}
+.cr .hk em{font-style:normal;color:#E2D3BA}
+.cr .sub{display:block;font:500 13.5px/1.35 var(--sans);letter-spacing:0;margin-top:10px;opacity:.9}
+.cr .lg{position:absolute;right:16px;bottom:16px;z-index:2;font-size:13px}
+.cr .art{position:absolute;inset:0;z-index:1}
+.cr.a1{background:radial-gradient(420px 360px at 70% 28%,rgba(201,183,154,.55),transparent 65%),linear-gradient(160deg,#262D45 0%,#2F3854 70%)}
+.cr.a1 .art svg{position:absolute;right:8%;top:9%;width:46%;height:auto}
+.cr.a1 .pill{position:absolute;left:20px;top:56px;z-index:2;background:var(--amb);color:#3A2B00;font:800 13px var(--sans);padding:7px 12px;border-radius:10px;transform:rotate(-3deg)}
+.cr.a2{background:radial-gradient(380px 300px at 50% 32%,#FFFFFF,transparent 70%),linear-gradient(170deg,#DDEFFC 0%,#E8DFD0 100%);color:var(--ink)}
+.cr.a2 .hk em{color:var(--acc)}
+.cr.a2 .art svg{position:absolute;left:50%;top:10%;transform:translateX(-50%);width:66%;height:auto}
+.cr.a2 .tag{background:var(--deep);color:#fff}
+.cr.a3{background:linear-gradient(160deg,#2F3854 0%,#2F3854 100%)}
+.cr.a3 .art svg{position:absolute;left:6%;top:8%;width:88%;height:auto}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:#F4F7FA;color:#0A66C2;font-weight:700;font-size:14.5px;border-bottom:1px solid #EEF1F4}
+.ig .cap{padding:10px 14px 14px;font-size:13.5px;color:#262626;line-height:1.45}
+.ig .cap b{margin-right:4px}.ig .cap span{color:#8A94A3}
+.who{display:inline-block;background:var(--soft);color:var(--acc);font:700 12.5px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:7px 13px;border-radius:99px;margin-bottom:16px}
+.hook{font:700 clamp(25px,2.8vw,36px)/1.16 var(--sans);letter-spacing:-.02em;margin-bottom:24px}
+.hook::before{content:"«";color:var(--acc)}.hook::after{content:"»";color:var(--acc)}
+.kv{display:grid;gap:10px}
+.kv div{display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 18px;font-size:16.5px}
+.kv b{font:700 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--acc);padding-top:4px}
+.alts{display:grid;gap:6px}.alts i{font-style:normal;display:block;padding-left:12px;border-left:3px solid var(--amb)}
+/* landings */
+.lands{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.lw{display:flex;flex-direction:column;gap:14px;min-width:0}
+.shot{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 60px -36px rgba(11,42,69,.7);background:#fff}
+.bar{background:#E8EEF4;padding:9px 12px;display:flex;gap:6px;align-items:center}.bar i{width:10px;height:10px;border-radius:50%;background:#C3CFDB;flex:none}
+.bar span{margin-left:8px;background:#fff;border-radius:6px;padding:3px 10px;font-size:11.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.mini{display:grid;grid-template-columns:1.15fr 1fr;gap:14px;padding:18px;align-items:start;min-height:250px}
+.mini.a{background:linear-gradient(150deg,#2F3854,#262D45);color:#fff}
+.mini.b{background:linear-gradient(150deg,#F8F6F2,#DDEFFC)}
+.mini .wm{font-size:12px;margin-bottom:12px}
+.mini h4{font-size:19px;line-height:1.15;letter-spacing:-.02em;margin-bottom:8px}
+.mini p{font-size:12px;opacity:.85;color:inherit}
+.mini ul{list-style:none;padding:0;margin-top:10px;display:grid;gap:4px;font-size:11.5px}
+.mini li::before{content:"✓ ";color:var(--acc2);font-weight:800}
+.mini .f{background:#fff;color:var(--ink);border-radius:12px;padding:12px;display:grid;gap:8px;box-shadow:0 14px 30px -18px rgba(0,0,0,.5)}
+.mini .f b{font-size:12px}
+.mini .f span{display:block;font-size:10.5px;color:var(--mut);margin-bottom:3px}
+.mini .f em{display:inline-block;font-style:normal;font-size:10px;border:1px solid var(--line);border-radius:99px;padding:3px 7px;margin:0 3px 3px 0}
+.mini .f em.on{background:var(--soft);border-color:var(--acc);color:var(--acc);font-weight:700}
+.mini .f .go{background:var(--grad);color:#fff;text-align:center;border-radius:8px;padding:7px;font-weight:700;font-size:11.5px}
+.lw h3{font-size:22px}
+.lw p{font-size:16px;color:var(--mut)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:13px 22px;font-size:16px;box-shadow:0 14px 30px -14px rgba(47,56,84,.85);align-self:flex-start}
+.btn:hover{transform:translateY(-1px)}
+.diff{margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.diff div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px;font-size:15.5px;min-width:0}
+.diff b{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:4px}
+/* formulario */
+.form{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:44px;align-items:center}
+.phone{background:#fff;border-radius:34px;border:10px solid #0E1A2B;box-shadow:0 30px 60px -30px rgba(11,26,43,.6);overflow:hidden}
+.phone .hd{background:var(--grad);color:#fff;padding:16px 20px;font-weight:700;font-size:15.5px}
+.phone .hd small{display:block;font-weight:500;opacity:.85;font-size:12.5px;margin-top:2px}
+.phone .bd{padding:16px 18px 20px;display:grid;gap:13px}
+.q span{display:block;font-weight:700;font-size:14px;margin-bottom:7px}
+.q em{display:inline-block;font-style:normal;font-size:13px;border:1px solid var(--line);border-radius:99px;padding:5px 10px;margin:0 5px 5px 0}
+.q em.on{background:var(--soft);border-color:var(--acc);color:var(--acc);font-weight:700}
+.send{background:var(--grad);color:#fff;text-align:center;border-radius:14px;padding:12px;font-weight:700}
+.abc{display:grid;gap:12px}
+.abc div{display:grid;grid-template-columns:58px minmax(0,1fr);gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 20px;font-size:17px}
+.abc .l{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;font-weight:800;font-size:26px;color:#fff;background:var(--ok)}
+.abc .lb{background:var(--acc)}.abc .lc{background:#8A97A8}
+.abc p b{display:block;font-size:18px}
+.abc p span{color:var(--mut);font-size:15.5px}
+/* recorrido */
+.tl{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:44px;align-items:start}
+.chat{background:#EFE7DC;border-radius:34px;border:10px solid #0E1A2B;padding:16px 13px;display:grid;gap:9px;box-shadow:0 30px 60px -30px rgba(11,26,43,.6)}
+.chat .who2{background:#fff;border-radius:14px;padding:8px 12px;font-weight:700;font-size:13.5px;display:flex;align-items:center;gap:9px}
+.chat .who2 .av{width:28px;height:28px;border-radius:50%;background:var(--deep);display:grid;place-items:center;color:#fff;flex:none}
+.chat .who2 .av svg{width:13px;height:15px}
+.chat .who2 small{display:block;font-weight:500;color:#667;font-size:11px}
+.m{max-width:88%;background:#fff;border-radius:14px 14px 14px 4px;padding:9px 12px;font-size:14px;line-height:1.45;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.m.me{justify-self:end;background:#DCF8C6;border-radius:14px 14px 4px 14px}
+.m small{display:block;color:#7A7A7A;font-size:10.5px;margin-top:3px;text-align:right}
+.steps2{display:grid;gap:9px;position:relative}
+.steps2 > div{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:16.5px}
+.steps2 .t{font:800 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--grad);border-radius:99px;padding:6px 10px;text-align:center}
+.steps2 .h .t{background:var(--amb);color:#3A2B00}
+.steps2 .h{background:#FFFBEF;border-color:#F6E3A6}
+.tg{font:700 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:4px 8px;white-space:nowrap}
+.tg.sy{background:var(--soft);color:var(--acc)}.tg.eq{background:#FFF0C7;color:#7A5600}
+.leg{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:14.5px;color:var(--mut);align-items:center}
+/* CRM */
+.crmtop{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.filt{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:99px;padding:4px;gap:2px}
+.filt button{font:600 14px var(--sans);border:0;background:none;border-radius:99px;padding:7px 15px;cursor:pointer;color:var(--mut)}
+.filt button.on{background:var(--deep);color:#fff}
+.pipe{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:10px;overflow-x:auto;padding-bottom:6px;max-width:100%}
+.col{background:#EEF4FA;border-radius:16px;padding:10px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.col h4{font-size:12.5px;font-weight:700;color:var(--mut);display:flex;justify-content:space-between;gap:6px;padding:2px 4px 4px;line-height:1.25}
+.col h4 span{background:#fff;border-radius:99px;padding:1px 8px;font-size:11.5px;flex:none;height:fit-content}
+.col.lost{background:#F7EDEC}
+.card{background:#fff;border-radius:12px;padding:10px 11px;font-size:13px;box-shadow:0 1px 2px rgba(11,42,69,.08),0 8px 18px -14px rgba(11,42,69,.45);display:grid;gap:5px;border-left:4px solid var(--acc);cursor:default}
+.card.A{border-left-color:var(--ok)}.card.C{border-left-color:#9AA6B5}
+.card b{font-size:13.5px}
+.card .r{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.sd{font-size:10.5px;font-weight:700;border-radius:5px;padding:2px 6px;background:var(--soft);color:var(--acc)}
+.sd.t{background:#E9F6EF;color:#13744E}
+.card small{color:var(--mut);font-size:11.5px}
+.card.sel{outline:2px solid var(--acc);outline-offset:1px}
+.card.hide{display:none}
+/* ficha */
+.ficha{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:18px}
+.fc{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 22px;min-width:0;box-shadow:0 18px 40px -32px rgba(11,42,69,.6)}
+.fc h3{font-size:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.score{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--ok);color:#fff;font-weight:800;font-size:17px}
+.fc dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px 14px;margin-top:14px;font-size:15px}
+.fc dt{color:var(--mut)}.fc dd{margin:0;font-weight:600}
+.fc h5{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin:16px 0 8px}
+.hist{display:grid;gap:8px;font-size:14px}
+.hist div{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px}
+.hist small{color:var(--mut);font-weight:700;font-size:12px;padding-top:1px}
+.next{margin-top:14px;background:var(--deep);color:#fff;border-radius:14px;padding:12px 16px;font-size:15px;display:flex;gap:12px;align-items:center}
+.next b{color:#E2D3BA}
+/* intelligence */
+.intel{background:linear-gradient(180deg,#F5F2ED,#FCFBF9)}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 20px;box-shadow:0 22px 46px -34px rgba(11,42,69,.7);min-width:0}
+.pan h4{font-size:15px;margin-bottom:12px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tiles div{background:var(--soft2);border-radius:12px;padding:10px 12px}
+.tiles small{display:block;font-size:11.5px;color:var(--mut);font-weight:600}
+.tiles b{font-size:24px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tiles i{font-style:normal;font-size:11.5px;color:var(--ok);font-weight:700;margin-left:4px}
+.bars{display:grid;gap:9px;font-size:13px}
+.bars div{display:grid;grid-template-columns:96px minmax(0,1fr) 30px;gap:10px;align-items:center}
+.bars span{height:12px;border-radius:99px;background:var(--grad);display:block}
+.bars em{font-style:normal;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.sedes2{display:grid;grid-template-columns:auto 1fr 1fr;gap:6px 12px;font-size:13px;align-items:center}
+.sedes2 .hh{font-weight:700;color:var(--mut);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em}
+.sedes2 b{font-variant-numeric:tabular-nums}
+.ibot{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:26px}
+/* final */
+.fin{background:radial-gradient(900px 600px at 90% 10%,rgba(201,183,154,.35),transparent 60%),linear-gradient(135deg,#2F3854 0%,#2F3854 100%);color:#fff}
+.fin h2{color:#fff;max-width:20ch}
+.fin .need{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:6px}
+.fin .need div{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:16px 18px;font-size:17px;min-width:0}
+.fin .need .i{color:#E2D3BA;flex:none;margin-top:2px}
+.fin .lbl{font:700 13px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#E2D3BA;margin:28px 0 12px}
+.fin .wm{font-size:22px;margin-top:40px;opacity:.9}
+.rv{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+.js .rv{opacity:0;transform:translateY(18px)}.js .rv.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}}
+@media (max-width:1180px){.dots a{padding:5px 7px;font-size:12px}}
+@media (max-width:1060px){.dots{display:none}}
+@media (max-width:980px){
+  .steps{grid-template-columns:1fr 1fr}.under,.two,.form,.tl,.adx,.lands,.ficha,.kpis{grid-template-columns:1fr}
+  .diff{grid-template-columns:1fr}.kv div{grid-template-columns:1fr;gap:4px}
+  .vs .row{grid-template-columns:1fr}.vs .ar{transform:rotate(90deg);height:30px}.vs .hd{display:none}
+  .adx .ig,.form .phone,.tl .chat{max-width:390px;margin:0 auto;width:100%}
+}
+@media (max-width:560px){
+  body{font-size:17px}.s{padding-top:80px}
+  .steps{grid-template-columns:1fr}.mini{grid-template-columns:1fr}
+  .steps2 > div{grid-template-columns:1fr auto;gap:8px}.steps2 .t{grid-column:1/-1;justify-self:start}
+  .box{padding:22px}.box ul{font-size:17px}
+  .hero .x .wm{font-size:24px}
+  .cr .hk{font-size:21px;bottom:46px}.cr .sub{font-size:12.5px}.cr.a1 .art svg{width:34%;top:12%}.cr.a2 .art svg{width:58%}
+}
+</style>
+<style>.piezas{display:flex;gap:4px;margin-left:10px;padding-left:10px;border-left:1px solid rgba(255,255,255,.3)}.piezas a{color:#fff!important;background:rgba(255,255,255,.14);font-size:12px;font-weight:700;padding:5px 9px;border-radius:99px;text-decoration:none}.piezas a:hover{background:rgba(255,255,255,.3)}@media(max-width:1700px){.piezas{display:none}}</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"><style>h1,h2,.hero h1,.s h2{font-family:"Yeseva One",Georgia,serif!important;font-weight:400!important;letter-spacing:0!important}</style><style>
+/* Creatividades a medida (10-nov): foto a sangre + titular en su serif */
+.cr .art svg{display:none!important}
+.cr .art{background-position:center;background-size:cover;background-repeat:no-repeat}
+.cr .art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,24,38,0) 38%,rgba(20,24,38,.78) 100%)}
+.cr.a1 .art{background-image:url(../assets/ia/ad1.jpg);background-position:50% 35%}
+.cr.a2 .art{background-image:url(../assets/ia/ad2.jpg);background-position:50% 30%}
+.cr.a3 .art{background-image:url(../assets/brand/clinica.jpg);background-position:50% 60%}
+.cr.a2{color:#fff}.cr.a2 .hk em{color:#E2D3BA}
+.cr .hk{font:400 26px/1.08 "Yeseva One",Georgia,serif!important;letter-spacing:0!important;text-shadow:0 2px 18px rgba(0,0,0,.25)}
+.cr .hk em{color:#E2D3BA!important}
+.cr .sub{font-family:Montserrat,sans-serif!important}
+.cr .tag{background:#fff!important;color:#2F3854!important}
+.cr .pill{background:#E2D3BA!important;color:#2F3854!important}
+.cr .lg,.cr .lg *{color:#fff!important}
+@media(max-width:700px){.cr .hk{font-size:24px!important}}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="tooth" viewBox="0 0 48 54"><path d="M13 3.5C6.5 2.2 2.6 8 3.1 16.4c.4 7 3.4 11.6 4.6 19.2 1 6.6 2.6 14.9 7 14.9 3.7 0 4.4-6.4 5.4-11 .8-3.4 1.9-5.2 3.9-5.2s3.1 1.8 3.9 5.2c1 4.6 1.7 11 5.4 11 4.4 0 6-8.3 7-14.9 1.2-7.6 4.2-12.2 4.6-19.2.5-8.4-3.4-14.2-9.9-12.9C30.6 4.3 27.6 6 24 6s-6.6-1.7-11-2.5z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M19 10.5c3 2.6 7 2.6 10 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+</defs></svg>
+
+<header class="top"><div class="b">Qualivo <span class="x">×</span> <img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" style="height:24px;width:auto;display:inline-block;vertical-align:middle"></div>
+<nav class="dots" aria-label="Pantallas"><a href="#s1">Qué hacemos</a><a href="#s2">Paciente</a><a href="#s3">Hoy</a><a href="#s4a">Anuncios</a><a href="#s5">Landings</a><a href="#s6">Formulario</a><a href="#s7">Recorrido</a><a href="#s8">CRM</a><a href="#s9">Intelligence</a><a href="#s10">Siguiente</a></nav><span class="piezas"><a href="../" target="_blank">Plan</a><a href="../anuncios/" target="_blank">Anuncios</a><a href="../recorrido/" target="_blank">Recorrido</a><a href="../whatsapp/" target="_blank">WhatsApp</a><a href="../demo/" target="_blank">CRM</a></span>
+<span class="cnt" id="cnt" aria-live="polite">1 / 14</span></header>
+
+<!-- 1 · Portada -->
+<section class="s hero" id="s0"><svg class="tooth" aria-hidden="true"><use href="#tooth"/></svg><div class="in">
+<div class="x">Qualivo <span class="sep">×</span> <img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" style="height:46px;width:auto;display:inline-block;vertical-align:middle"></div>
+<h1>Más primeras visitas que acaban en tratamiento</h1>
+<p>De la petición al presupuesto aceptado, en Patraix (Valencia) y en Torrent, sin que nadie se quede sin llamar.</p>
+<div class="sedes"><span>● Patraix (Valencia)</span><span>● Torrent</span></div>
+</div></section>
+
+<!-- 2 · Qué hacemos -->
+<section class="s" id="s1"><div class="in rv">
+<p class="n">01 · Qué hacemos</p>
+<h2>Un sistema, del anuncio <em>al sillón</em></h2>
+<div class="steps">
+<div><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM15 9a3 3 0 0 1 0 6M18 6a7 7 0 0 1 0 12"/></svg></span><small>PASO 1</small><b>Anuncio o entrada</b><span>Meta, Google, web o WhatsApp</span></div>
+<div><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M9 4h6v3H9zM7 5H5v15h14V5h-2M8 12l2 2 4-4M8 17h8"/></svg></span><small>PASO 2</small><b>Formulario que cualifica</b><span>Tratamiento, sede, cuotas y cuándo</span></div>
+<div><span class="ic"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><small>PASO 3</small><b>Respuesta en minutos</b><span>WhatsApp al momento, llamada en el día</span></div>
+<div><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M5 15a8 8 0 0 0 14 2M19 9A8 8 0 0 0 5 7"/></svg></span><small>PASO 4</small><b>Seguimiento</b><span>Recordatorios y presupuestos que no se enfrían</span></div>
+<div><span class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></span><small>PASO 5</small><b>Primera visita</b><span>En la sede que le queda cerca</span></div>
+</div>
+<div class="under">
+<div><span class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg></span><p><b>Un CRM con vuestras etapas</b><span>Valencia y Torrent en el mismo sitio</span></p></div>
+<div><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><p><b>Un panel que lo mide</b><span>Qué anuncio trae presupuestos aceptados</span></p></div>
+</div>
+</div></section>
+
+<!-- 3 · Paciente ideal -->
+<section class="s alt" id="s2"><div class="in rv">
+<p class="n">02 · Vuestro paciente ideal</p>
+<h2>¿Qué es una petición cualificada? <span class="chip">Lo validamos hoy</span></h2>
+<div class="two">
+<div class="box ok"><h3><i>✓</i>Sí</h3><ul><li>Busca un tratamiento concreto: implantes, ortodoncia o estética</li><li>Vive o trabaja cerca de Valencia o de Torrent</li><li>Quiere empezar en las próximas semanas</li><li>Está abierto a hablar de cuotas</li></ul></div>
+<div class="box no"><h3><i>!</i>Todavía no</h3><ul><li>Solo quiere un precio por teléfono</li><li>Vive lejos de las dos sedes</li><li>«Solo estoy mirando», sin fecha</li></ul></div>
+</div>
+<p class="note">Los «todavía no» no se pierden: reciben información y un aviso más adelante.</p>
+</div></section>
+
+<!-- 4 · Hoy frente a con Qualivo -->
+<section class="s" id="s3"><div class="in rv">
+<p class="n">03 · Dónde se pierde <span class="chip">Lo habitual en clínicas</span></p>
+<h2>Hoy frente a <em>con Qualivo</em></h2>
+<div class="vs">
+<div class="row"><div class="hd">Lo habitual</div><div></div><div class="hd y">Con Qualivo</div></div>
+<div class="row"><div class="c h">Peticiones de formulario y WhatsApp que nadie llama a tiempo</div><div class="ar">→</div><div class="c y"><span><b>WhatsApp en minutos</b> y llamada asignada a una persona</span></div></div>
+<div class="row"><div class="c h">Primeras visitas que no se presentan</div><div class="ar">→</div><div class="c y"><span><b>Confirmación y recordatorios</b>, y otra fecha si no puede</span></div></div>
+<div class="row"><div class="c h">Presupuestos de implantes y ortodoncia sin seguimiento</div><div class="ar">→</div><div class="c y"><span><b>Seguimiento a 1, 3 y 7 días</b>, con las cuotas explicadas</span></div></div>
+<div class="row"><div class="c h">Dos sedes, cada una con su lista</div><div class="ar">→</div><div class="c y"><span><b>Un solo CRM</b> con filtro por sede</span></div></div>
+</div>
+</div></section>
+
+<!-- 5 · Anuncio A: implantes -->
+<section class="s alt" id="s4a"><div class="in rv">
+<p class="n">04 · Anuncio 1 de 3 · Implantes con financiación</p>
+<div class="adx">
+<div class="ig"><div class="h"><span class="av"><svg><use href="#tooth"/></svg></span><div><b>Clínica Dental Marín</b><small>Publicidad</small></div><span class="d3">···</span></div>
+<div class="cr a1"><span class="tag">Valencia · Torrent</span><span class="pill">Pago en cuotas</span>
+<div class="art" aria-hidden="true"><svg viewBox="0 0 120 210"><defs><linearGradient id="gi" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#CFE9FB"/></linearGradient></defs>
+<path d="M22 22C22 10 38 5 60 5s38 5 38 17c0 22-9 38-38 38S22 44 22 22z" fill="url(#gi)"/>
+<rect x="48" y="62" width="24" height="14" rx="3" fill="#E8DFD0"/>
+<path d="M42 80h36l-5 104c-.4 9-6 15-13 15s-12.6-6-13-15z" fill="rgba(255,255,255,.08)" stroke="#E8DFD0" stroke-width="2.5"/>
+<g stroke="#E8DFD0" stroke-width="3" stroke-linecap="round"><path d="M41 94l38 7M42 110l36 7M43 126l34 7M44 142l32 7M45 158l30 7M47 174l26 6"/></g></svg></div>
+<p class="hk">¿Te falta una pieza y lo vas dejando <em>por el precio?</em><span class="sub">Primera visita, plan claro y presupuesto en cuotas.</span></p>
+<span class="lg wm"><svg><use href="#tooth"/></svg><span><b>MARÍN</b><small>CLÍNICA DENTAL</small></span></span></div>
+<div class="cta"><span>Pedir primera visita</span><span>›</span></div>
+<div class="cap"><b>Clínica Dental Marín</b>Si llevas tiempo masticando por un lado, no lo dejes más. Te explicamos tu caso y cómo pagarlo en cuotas. <span>… más</span></div></div>
+<div><span class="who">Adulto con una pieza perdida</span>
+<p class="hook">¿Te falta una pieza y lo vas dejando por el precio?</p>
+<div class="kv">
+<div><b>Otros ganchos</b><span class="alts"><i>Si llevas meses masticando por un lado, esto es para ti.</i><i>Un implante, explicado en cuotas mensuales y sin letra pequeña.</i></span></div>
+<div><b>Por qué funciona</b><span>Nombra la objeción real, el dinero, y la resuelve con la financiación que ya ofrecéis. Sin precios ni promesas.</span></div>
+<div><b>Lleva a</b><span>Landing A, de implantes: sede, tratamiento, cuotas y cuándo.</span></div>
+<div><b>Qué medimos</b><span>Coste por primera visita hecha y por presupuesto aceptado. No por formulario.</span></div>
+</div></div></div>
+</div></section>
+
+<!-- 6 · Anuncio B: ortodoncia invisible -->
+<section class="s" id="s4b"><div class="in rv">
+<p class="n">04 · Anuncio 2 de 3 · Ortodoncia invisible para adultos</p>
+<div class="adx">
+<div class="ig"><div class="h"><span class="av"><svg><use href="#tooth"/></svg></span><div><b>Clínica Dental Marín</b><small>Publicidad</small></div><span class="d3">···</span></div>
+<div class="cr a2"><span class="tag">Para adultos</span>
+<div class="art" aria-hidden="true"><svg viewBox="0 0 200 140"><path d="M22 30A78 88 0 0 0 178 30" fill="none" stroke="rgba(59,70,112,.18)" stroke-width="30" stroke-linecap="round"/>
+<g fill="#fff" stroke="#9CCBEE" stroke-width="2"><ellipse cx="169" cy="40" rx="9" ry="11"/><ellipse cx="165" cy="60" rx="9" ry="11"/><ellipse cx="156" cy="79" rx="9" ry="10.5"/><ellipse cx="143" cy="93" rx="8.5" ry="10"/><ellipse cx="127" cy="104" rx="8" ry="9.5"/><ellipse cx="109" cy="109" rx="8.5" ry="9.5"/><ellipse cx="91" cy="109" rx="8.5" ry="9.5"/><ellipse cx="73" cy="104" rx="8" ry="9.5"/><ellipse cx="57" cy="93" rx="8.5" ry="10"/><ellipse cx="44" cy="79" rx="9" ry="10.5"/><ellipse cx="35" cy="60" rx="9" ry="11"/><ellipse cx="31" cy="40" rx="9" ry="11"/></g>
+<path d="M22 30A78 88 0 0 0 178 30" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/></svg></div>
+<p class="hk">¿Te habría gustado llevar ortodoncia de joven? <em>Hoy hay opciones discretas.</em><span class="sub">Alineadores transparentes. Valencia y Torrent.</span></p>
+<span class="lg wm" style="color:var(--deep)"><svg><use href="#tooth"/></svg><span><b>MARÍN</b><small>CLÍNICA DENTAL</small></span></span></div>
+<div class="cta"><span>Ver si es para mí</span><span>›</span></div>
+<div class="cap"><b>Clínica Dental Marín</b>Ortodoncia para adultos sin brackets a la vista. Te contamos si tu caso encaja en la primera visita. <span>… más</span></div></div>
+<div><span class="who">Adulto de 25 a 50 años</span>
+<p class="hook">¿Te habría gustado llevar ortodoncia de joven? Hoy hay opciones discretas.</p>
+<div class="kv">
+<div><b>Otros ganchos</b><span class="alts"><i>Ortodoncia para adultos, sin brackets a la vista.</i><i>¿Trabajas de cara al público? Pregunta por los alineadores transparentes.</i></span></div>
+<div><b>Por qué funciona</b><span>Le habla al adulto que lo lleva años pensando. «Ver si es para mí» quita presión y filtra a quien aún no tiene claro el tratamiento.</span></div>
+<div><b>Lleva a</b><span>Landing B, de ortodoncia invisible: qué le preocupa, si llevó antes y cuándo.</span></div>
+<div><b>Qué medimos</b><span>Estudios de ortodoncia agendados y aceptados por sede.</span></div>
+</div></div></div>
+</div></section>
+
+<!-- 7 · Anuncio C: primera visita en tu sede -->
+<section class="s alt" id="s4c"><div class="in rv">
+<p class="n">04 · Anuncio 3 de 3 · Primera visita en tu sede</p>
+<div class="adx">
+<div class="ig"><div class="h"><span class="av"><svg><use href="#tooth"/></svg></span><div><b>Clínica Dental Marín</b><small>Publicidad</small></div><span class="d3">···</span></div>
+<div class="cr a3"><span class="tag">Elige tu sede</span>
+<div class="art" aria-hidden="true"><svg viewBox="0 0 200 170"><g stroke="rgba(255,255,255,.07)" stroke-width="1"><path d="M0 20h200M0 50h200M0 80h200M0 110h200M0 140h200M25 0v170M65 0v170M105 0v170M145 0v170M185 0v170"/></g>
+<path d="M40 128C70 120 80 70 120 64s30-26 44-34" fill="none" stroke="#E2D3BA" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round"/>
+<g><path d="M164 8c-9 0-15 7-15 15 0 11 15 24 15 24s15-13 15-24c0-8-6-15-15-15z" fill="#fff"/><circle cx="164" cy="23" r="5.5" fill="#2F3854"/></g>
+<g><path d="M40 104c-9 0-15 7-15 15 0 11 15 24 15 24s15-13 15-24c0-8-6-15-15-15z" fill="#F5B83D"/><circle cx="40" cy="119" r="5.5" fill="#2F3854"/></g>
+<text x="144" y="28" fill="#fff" font-family="Montserrat,sans-serif" font-size="11" font-weight="700" text-anchor="end">Valencia</text>
+<text x="70" y="152" fill="#fff" font-family="Montserrat,sans-serif" font-size="11" font-weight="700">Torrent</text></svg></div>
+<p class="hk">Tu dentista en Valencia <em>o en Torrent.</em><span class="sub">Elige sede y hora. Te confirmamos por WhatsApp.</span></p>
+<span class="lg wm"><svg><use href="#tooth"/></svg><span><b>MARÍN</b><small>CLÍNICA DENTAL</small></span></span></div>
+<div class="cta"><span>Reservar primera visita</span><span>›</span></div>
+<div class="cap"><b>Clínica Dental Marín</b>¿Hace más de un año de tu última revisión? Elige la sede que te quede cerca y reserva. <span>… más</span></div></div>
+<div><span class="who">Vecinos de Valencia y Torrent</span>
+<p class="hook">Tu dentista en Valencia o en Torrent. Elige sede y hora.</p>
+<div class="kv">
+<div><b>Otros ganchos</b><span class="alts"><i>¿Hace más de un año de tu última revisión?</i><i>Primera visita con diagnóstico y plan por escrito, cerca de casa.</i></span></div>
+<div><b>Por qué funciona</b><span>La cercanía decide en salud dental. Un anuncio por zona, con la sede en el titular, llena la agenda de cada clínica por separado.</span></div>
+<div><b>Lleva a</b><span>Reserva directa: sede, motivo y hueco libre, con confirmación por WhatsApp.</span></div>
+<div><b>Qué medimos</b><span>Primeras visitas que se presentan, por sede. Y cuántas pasan a presupuesto.</span></div>
+</div></div></div>
+<p class="note">Maquetas de ejemplo, sin fotos de pacientes. Un cuarto ángulo, estética de la sonrisa, queda para la segunda reunión.</p>
+</div></section>
+
+<!-- 8 · Landings -->
+<section class="s" id="s5"><div class="in rv">
+<p class="n">05 · Landings</p>
+<h2>Una landing <em>por tratamiento</em></h2>
+<div class="lands">
+<div class="lw">
+<div class="shot"><div class="bar"><i></i><i></i><i></i><span>clinicadentalmarin · implantes</span></div>
+<div class="mini a"><div><span class="wm"><svg><use href="#tooth"/></svg><span><b>MARÍN</b><small>CLÍNICA DENTAL</small></span></span><h4>Implantes dentales en Valencia y Torrent</h4><p>Primera visita, plan claro y presupuesto en cuotas.</p><ul><li>Financiación</li><li>Dos sedes</li><li>Te respondemos en minutos</li></ul></div>
+<div class="f"><b>¿Hablamos de tu caso?</b><div><span>Sede</span><em class="on">Torrent</em><em>Valencia</em></div><div><span>¿En cuotas?</span><em class="on">Sí</em><em>No</em></div><div><span>¿Cuándo?</span><em class="on">Este mes</em><em>Más adelante</em></div><div class="go">Pedir primera visita</div></div></div></div>
+<h3>A · Implantes</h3><p>Para quien ya sabe lo que necesita. Pregunta sede, tratamiento, cuotas y cuándo.</p>
+<a class="btn" href="../landing-a/" target="_blank" rel="noopener">Abrir landing A →</a></div>
+<div class="lw">
+<div class="shot"><div class="bar"><i></i><i></i><i></i><span>clinicadentalmarin · ortodoncia invisible</span></div>
+<div class="mini b"><div><span class="wm" style="color:var(--deep)"><svg><use href="#tooth"/></svg><span><b>MARÍN</b><small>CLÍNICA DENTAL</small></span></span><h4>Ortodoncia invisible para adultos</h4><p>Descubre en la primera visita si tu caso encaja.</p><ul><li>Alineadores transparentes</li><li>Valencia y Torrent</li><li>Pago en cuotas</li></ul></div>
+<div class="f"><b>¿Es para mí?</b><div><span>¿Qué te preocupa?</span><em class="on">Dientes torcidos</em><em>Mordida</em></div><div><span>¿Llevaste antes?</span><em>Sí</em><em class="on">No</em></div><div><span>Sede</span><em class="on">Valencia</em><em>Torrent</em></div><div class="go">Ver si es para mí</div></div></div></div>
+<h3>B · Ortodoncia invisible</h3><p>Para quien aún duda. Primero resuelve «¿es para mí?» y luego pide la visita.</p>
+<a class="btn" href="../landing-b/" target="_blank" rel="noopener">Abrir landing B →</a></div>
+</div>
+<div class="diff"><div><b>Tono</b>A: directo y práctico. B: tranquilo, quita miedos.</div><div><b>Formulario</b>A: cuotas y cuándo. B: qué le preocupa y si llevó antes.</div><div><b>Siguiente paso</b>A: llamada en el día. B: estudio de ortodoncia.</div></div>
+</div></section>
+
+<!-- 9 · Formulario -->
+<section class="s alt" id="s6"><div class="in rv">
+<p class="n">06 · El formulario que cualifica</p>
+<h2>Cinco preguntas, <em>tres prioridades</em></h2>
+<div class="form">
+<div class="phone"><div class="hd">Pide tu primera visita<small>Te respondemos por WhatsApp en minutos</small></div><div class="bd">
+<div class="q"><span>1. ¿Qué te interesa?</span><em class="on">Implantes</em><em>Ortodoncia invisible</em><em>Estética</em><em>Revisión</em></div>
+<div class="q"><span>2. ¿Qué sede te queda mejor?</span><em>Valencia</em><em class="on">Torrent</em><em>Me da igual</em></div>
+<div class="q"><span>3. ¿Te interesa pagarlo en cuotas?</span><em class="on">Sí</em><em>Pago único</em><em>Aún no lo sé</em></div>
+<div class="q"><span>4. ¿Cuándo te gustaría empezar?</span><em class="on">Este mes</em><em>En 1-3 meses</em><em>Solo me informo</em></div>
+<div class="q"><span>5. ¿Cómo prefieres que te contactemos?</span><em class="on">WhatsApp</em><em>Llamada</em></div>
+<div class="send">Enviar</div></div></div>
+<div class="abc">
+<div><span class="l">A</span><p><b>Llamada en el día</b><span>Implantes u ortodoncia, cerca de una sede y quiere empezar en menos de 3 meses.</span></p></div>
+<div><span class="l lb">B</span><p><b>WhatsApp y seguimiento</b><span>Tratamiento claro pero sin fecha, o una revisión.</span></p></div>
+<div><span class="l lc">C</span><p><b>Información y aviso más adelante</b><span>«Solo me informo» o vive lejos de las dos sedes.</span></p></div>
+<p class="note" style="margin-top:4px">La regla la ajustamos con vosotros. Cada petición entra en el CRM con su letra y su sede.</p>
+</div></div>
+</div></section>
+
+<!-- 10 · Recorrido de un lead -->
+<section class="s" id="s7"><div class="in rv">
+<p class="n">07 · Recorrido de una petición</p>
+<h2>Del formulario <em>al presupuesto aceptado</em></h2>
+<div class="tl">
+<div class="chat">
+<div class="who2"><span class="av"><svg><use href="#tooth"/></svg></span><span>Clínica Dental Marín<small>Sede Torrent</small></span></div>
+<div class="m">Hola, Lucía 😊 Te escribimos de Clínica Dental Marín, en Torrent. Hemos recibido tu consulta sobre implantes. ¿Te llamamos hoy a las 17:30 o mejor mañana por la mañana?<small>10:02</small></div>
+<div class="m me">Hoy a las 17:30 me va bien<small>10:05</small></div>
+<div class="m">¡Perfecto! Te llamamos a esa hora. Si quieres, ve pensando qué días te vienen mejor para la primera visita.<small>10:05</small></div>
+</div>
+<div>
+<div class="steps2">
+<div><span class="t">Minuto 0</span><span>Rellena el formulario. Entra en el CRM como A, sede Torrent</span><span class="tg sy">Sistema</span></div>
+<div><span class="t">Minuto 2</span><span>WhatsApp con vuestro tono y hora para llamar</span><span class="tg sy">Sistema</span></div>
+<div class="h"><span class="t">Mismo día</span><span>Llamada y primera visita agendada</span><span class="tg eq">Equipo</span></div>
+<div><span class="t">24 h y 2 h</span><span>Recordatorios con la dirección de la sede</span><span class="tg sy">Sistema</span></div>
+<div class="h"><span class="t">Primera visita</span><span>Diagnóstico y presupuesto en cuotas</span><span class="tg eq">Equipo</span></div>
+<div><span class="t">Día +1</span><span>«¿Te quedó alguna duda del presupuesto?»</span><span class="tg sy">Sistema</span></div>
+<div><span class="t">Día +3</span><span>Las cuotas, explicadas por escrito</span><span class="tg sy">Sistema</span></div>
+<div class="h"><span class="t">Día +7</span><span>Llamada personal para cerrar o dar otra fecha</span><span class="tg eq">Equipo</span></div>
+</div>
+<div class="leg"><span class="tg sy">Sistema</span> prepara, envía y avisa <span class="tg eq">Equipo</span> llama, diagnostica y cierra</div>
+</div></div>
+<p class="note"><span class="ej">Datos de ejemplo</span> Nombre y mensajes inventados. Los textos los aprobáis vosotros.</p>
+</div></section>
+
+<!-- 11 · CRM: pipeline -->
+<section class="s alt" id="s8"><div class="in rv">
+<p class="n">08 · Vuestro CRM</p>
+<div class="crmtop"><h2 style="margin:0">Las dos sedes, <em>un solo tablero</em></h2>
+<div class="filt" role="group" aria-label="Filtrar por sede"><button class="on" data-f="all">Todas</button><button data-f="v">Valencia</button><button data-f="t">Torrent</button></div></div>
+<div class="pipe" id="pipe">
+<div class="col"><h4>Petición nueva <span>3</span></h4>
+<div class="card A" data-s="t"><b>Lucía G.</b><div class="r"><span class="sd t">Torrent</span><span class="sd">A</span></div><small>Implantes · hace 2 min</small></div>
+<div class="card" data-s="v"><b>Jorge P.</b><div class="r"><span class="sd">Valencia</span><span class="sd">B</span></div><small>Ortodoncia invisible · 1 h</small></div>
+<div class="card C" data-s="v"><b>Ana R.</b><div class="r"><span class="sd">Valencia</span><span class="sd">C</span></div><small>Estética · 3 h</small></div></div>
+<div class="col"><h4>Contactado <span>2</span></h4>
+<div class="card A" data-s="v"><b>Marta S.</b><div class="r"><span class="sd">Valencia</span><span class="sd">A</span></div><small>Implantes · llamar 17:30</small></div>
+<div class="card" data-s="t"><b>Pablo M.</b><div class="r"><span class="sd t">Torrent</span><span class="sd">B</span></div><small>Revisión · WhatsApp</small></div></div>
+<div class="col"><h4>Primera visita agendada <span>2</span></h4>
+<div class="card A" data-s="t"><b>Elena V.</b><div class="r"><span class="sd t">Torrent</span><span class="sd">A</span></div><small>Ortodoncia · jueves 10:00</small></div>
+<div class="card A" data-s="v"><b>Raúl T.</b><div class="r"><span class="sd">Valencia</span><span class="sd">A</span></div><small>Implantes · viernes 18:00</small></div></div>
+<div class="col"><h4>Primera visita hecha <span>1</span></h4>
+<div class="card A" data-s="v"><b>Carmen L.</b><div class="r"><span class="sd">Valencia</span><span class="sd">A</span></div><small>Implantes · ayer</small></div></div>
+<div class="col"><h4>Presupuesto entregado <span>2</span></h4>
+<div class="card A" data-s="t"><b>Sergio B.</b><div class="r"><span class="sd t">Torrent</span><span class="sd">A</span></div><small>Implantes · día +3</small></div>
+<div class="card" data-s="v"><b>Nuria C.</b><div class="r"><span class="sd">Valencia</span><span class="sd">B</span></div><small>Ortodoncia · día +1</small></div></div>
+<div class="col"><h4>Presupuesto aceptado <span>1</span></h4>
+<div class="card A" data-s="t"><b>Isabel F.</b><div class="r"><span class="sd t">Torrent</span><span class="sd">A</span></div><small>Ortodoncia · en cuotas</small></div></div>
+<div class="col lost"><h4>Perdido <span>1</span></h4>
+<div class="card C" data-s="v"><b>David H.</b><div class="r"><span class="sd">Valencia</span><span class="sd">C</span></div><small>Solo precio · lejos</small></div></div>
+</div>
+<p class="note"><span class="ej">Datos de ejemplo</span> Pulsa Valencia o Torrent para filtrar. La ficha de Lucía, en la pantalla siguiente.</p>
+</div></section>
+
+<!-- 12 · CRM: ficha -->
+<section class="s" id="s8b"><div class="in rv">
+<p class="n">08 · La ficha de una petición</p>
+<h2>Todo lo que necesita <em>quien llama</em></h2>
+<div class="ficha">
+<div class="fc">
+<h3><span class="score">A</span>Lucía G. <span class="ej">Datos de ejemplo</span></h3>
+<dl><dt>Sede</dt><dd>Torrent</dd><dt>Tratamiento</dt><dd>Implantes</dd><dt>Origen</dt><dd>Anuncio 1 · cuotas</dd><dt>Etapa</dt><dd>Petición nueva</dd><dt>Responsable</dt><dd>Recepción Torrent</dd></dl>
+<h5>Respuestas del formulario</h5>
+<dl style="margin-top:0"><dt>¿Qué te interesa?</dt><dd>Implantes</dd><dt>¿En cuotas?</dt><dd>Sí</dd><dt>¿Cuándo?</dt><dd>Este mes</dd><dt>Contacto</dt><dd>WhatsApp</dd></dl>
+</div>
+<div class="fc">
+<h5 style="margin-top:0">Historial</h5>
+<div class="hist">
+<div><small>10:00</small><span>Formulario enviado desde la landing de implantes</span></div>
+<div><small>10:02</small><span>WhatsApp de bienvenida enviado</span></div>
+<div><small>10:05</small><span>Responde: «Hoy a las 17:30 me va bien»</span></div>
+<div><small>10:05</small><span>Llamada agendada y aviso a recepción de Torrent</span></div>
+</div>
+<div class="next"><svg class="i" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><b>Próxima acción:</b> llamar hoy a las 17:30 y agendar la primera visita.</span></div>
+<h5>Si no contesta</h5>
+<div class="hist"><div><small>+2 h</small><span>Segundo WhatsApp con dos huecos libres</span></div><div><small>Día +1</small><span>Aviso a recepción para volver a llamar</span></div></div>
+</div>
+</div>
+</div></section>
+
+<!-- 13 · Intelligence -->
+<section class="s intel" id="s9"><div class="in rv">
+<p class="n">09 · Qualivo Intelligence</p>
+<h2>Así lo veríais <em>cada mañana</em></h2>
+<div class="kpis">
+<div class="pan"><h4>Resumen de la semana <span class="ej">Ejemplo</span></h4>
+<div class="tiles"><div><small>Peticiones</small><b>64</b></div><div><small>Respondidas &lt; 5 min</small><b>97 %</b></div><div><small>Primeras visitas</small><b>29</b></div><div><small>Presupuestos aceptados</small><b>11</b></div></div></div>
+<div class="pan"><h4>Qué anuncio trae tratamientos <span class="ej">Ejemplo</span></h4>
+<div class="bars"><div><small>Implantes</small><span style="width:100%"></span><em>6</em></div><div><small>Ortodoncia</small><span style="width:66%"></span><em>4</em></div><div><small>Primera visita</small><span style="width:17%"></span><em>1</em></div></div>
+<p class="note" style="margin-top:12px">Presupuestos aceptados por anuncio.</p></div>
+<div class="pan"><h4>Por sede <span class="ej">Ejemplo</span></h4>
+<div class="sedes2"><span></span><span class="hh">Valencia</span><span class="hh">Torrent</span>
+<span>Peticiones</span><b>38</b><b>26</b><span>Primeras visitas</span><b>17</b><b>12</b><span>No vienen</span><b>2</b><b>1</b><span>Aceptados</span><b>6</b><b>5</b></div></div>
+</div>
+<div class="ibot"><a class="btn" href="/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion" target="_blank" rel="noopener">Abrir la demo en directo →</a><span style="font-size:15px;color:var(--mut)">Quién necesita una llamada hoy · qué anuncio trae tratamientos · cómo va cada sede</span></div>
+<p class="note"><span class="ej">Datos simulados</span> Ninguna cifra es vuestra.</p>
+</div></section>
+
+<!-- 14 · Siguiente paso -->
+<section class="s fin" id="s10"><div class="in rv">
+<p class="n" style="color:#E2D3BA">10 · Siguiente paso</p>
+<h2>Una segunda reunión esta semana, con vuestros números del último mes</h2>
+<p class="lbl">Lo que necesitamos</p>
+<div class="need">
+<div><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Peticiones del último mes, por sede</span></div>
+<div><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Primeras visitas del último mes, por sede</span></div>
+<div><svg class="i" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span>Presupuestos aceptados, por sede</span></div>
+<div><svg class="i" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Acceso de lectura a Meta Ads</span></div>
+<div><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>El programa de gestión que usáis</span></div>
+</div>
+<div class="wm"><svg><use href="#tooth"/></svg><span><b>MARÍN</b><small>CLÍNICA DENTAL</small></span></div> <span style="opacity:.6;margin:0 10px">×</span> <b style="font-size:20px">Qualivo</b>
+</div></section>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('.s')), links=[].slice.call(document.querySelectorAll('.dots a')), cnt=document.getElementById('cnt');
+  var map={s4b:'s4a',s4c:'s4a',s8b:'s8'};
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var r=e.target.querySelector('.rv');if(r)r.classList.add('vis');
+    var id=map[e.target.id]||e.target.id;links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+id)});
+    cnt.textContent=(secs.indexOf(e.target)+1)+' / '+secs.length;}})},{threshold:.35});
+  secs.forEach(function(s){io.observe(s)});
+  setTimeout(function(){document.querySelectorAll('.rv').forEach(function(r){if(r.getBoundingClientRect().top<innerHeight)r.classList.add('vis')})},50);
+  function go(d){var y=scrollY+90,i=secs.findIndex(function(s){return s.offsetTop+s.offsetHeight>y+5});i=Math.max(0,Math.min(secs.length-1,i+d));secs[i].scrollIntoView({behavior:'smooth'});}
+  addEventListener('keydown',function(e){if(e.target.closest&&e.target.closest('input,textarea,button'))return;
+    if(['ArrowDown','PageDown','ArrowRight',' '].indexOf(e.key)>-1){e.preventDefault();go(1)} else if(['ArrowUp','PageUp','ArrowLeft'].indexOf(e.key)>-1){e.preventDefault();go(-1)}});
+  /* filtro por sede del CRM */
+  var bs=[].slice.call(document.querySelectorAll('.filt button'));
+  bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.toggle('on',x===b)});var f=b.dataset.f;
+    document.querySelectorAll('#pipe .col').forEach(function(c){var n=0;c.querySelectorAll('.card').forEach(function(k){var h=f!=='all'&&k.dataset.s!==f;k.classList.toggle('hide',h);if(!h)n++});c.querySelector('h4 span').textContent=n;});
+    b.blur();});});
+})();
+</script>
+</body>
+</html>

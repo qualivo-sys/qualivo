@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Marín Clínica Dental · plan de captación</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+/* Plan de captación para Marín Clínica Dental (reunión 10-nov). Plantilla: propuestas/institut-gestalt/index.html.
+   Antes esta raíz redirigía a la presentación; ahora es el plan y enlaza todas las piezas. */
+:root{color-scheme:light;--ink:#0E1A2B;--mut:#536378;--bg:#FCFBF9;--surface:#fff;--soft:#F5F2ED;--soft2:#F8F6F2;--line:#E4DED4;--line2:#E6EEF6;--acc:#3B4670;--acc2:#56618A;--deep:#2F3854;--deep2:#262D45;
+--grad:linear-gradient(135deg,#56618A 0%,#2F3854 100%);--amb:#F5B83D;--ok:#13865A;--bad:#C0392B;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+--shadow:0 1px 2px rgba(11,42,69,.06),0 16px 36px -24px rgba(11,42,69,.5)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;overflow-x:clip;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+svg{display:block}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:16px}
+.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* menú */
+.topnav{position:sticky;top:0;z-index:30;background:rgba(11,42,69,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+.topnav::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:var(--grad)}
+.topnav .in{max-width:1180px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.brand{display:flex;gap:10px;align-items:center;margin-right:auto;font-weight:700;font-size:14.5px;white-space:nowrap}
+.brand .x{opacity:.55;font-weight:500}
+.brand img{height:32px;width:auto;display:block}
+.brand .by{font-size:11.5px;font-weight:500;opacity:.6}
+.links{display:flex;gap:2px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:3px;flex-wrap:wrap}
+.links a{color:rgba(255,255,255,.85);text-decoration:none;font-weight:600;font-size:13px;padding:6px 12px;border-radius:99px;white-space:nowrap}
+.links a:hover{background:rgba(255,255,255,.1);color:#fff}
+.links a[aria-current]{background:#fff;color:var(--deep)}
+/* cabecera */
+.hero{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:linear-gradient(100deg,rgba(38,45,69,.92) 0%,rgba(47,56,84,.78) 45%,rgba(47,56,84,.25) 100%),url(./assets/brand/clinica.jpg) center/cover}
+.hero .tooth{position:absolute;right:-3%;top:50%;transform:translateY(-48%);width:min(36vw,420px);height:auto;opacity:.1;z-index:-1}
+.hero .wrap{padding-block:64px 56px;display:grid;gap:16px}
+.lockup{justify-self:start;display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:8px 18px;font-weight:700;font-size:15px}
+.lockup i{font-style:normal;opacity:.6;font-weight:500}
+.lockup img{height:40px;width:auto;display:block}
+.eyebrow{font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#E2D3BA}
+h1{font-weight:800;font-size:clamp(34px,5.4vw,64px);line-height:1.04;letter-spacing:-.028em;max-width:18ch;text-wrap:balance}
+h1 em{font-style:normal;color:#E2D3BA}
+.lead{font-size:clamp(16px,1.6vw,19px);color:rgba(255,255,255,.9);max-width:70ch}
+.sedes{display:flex;gap:10px;flex-wrap:wrap}
+.sedes span{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:7px 15px;font-weight:600;font-size:14.5px;background:rgba(255,255,255,.06)}
+.sedes span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amb)}
+.sedes span+span::before{background:#E2D3BA}
+.note{font-size:13px;border:1px dashed rgba(255,255,255,.35);border-radius:12px;padding:10px 14px;max-width:96ch;background:rgba(0,15,40,.25);color:rgba(255,255,255,.9)}
+.tag{display:inline-block;font:700 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:3px 7px;vertical-align:middle;white-space:nowrap;line-height:1.5}
+.tag.real{background:#E3F3EA;color:#13744E}.tag.hip{background:var(--soft);color:var(--acc)}.tag.ej{background:#FFF3C4;color:#7A5600}.tag.hab{background:#FDECEA;color:#9B2C1F}
+.hero .tag.ej{background:var(--amb);color:#3A2B00}
+/* cuerpo */
+main{padding:44px 0 72px;display:grid;gap:56px}
+section{display:grid;gap:18px;scroll-margin-top:70px}
+h2{font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.12;letter-spacing:-.022em;text-wrap:balance}
+h2 .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--grad);color:#fff;font-size:13px;margin-right:12px;vertical-align:middle;box-shadow:0 8px 18px -8px rgba(47,56,84,.7)}
+.sub{color:var(--mut);max-width:80ch;font-size:16.5px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-width:0;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-3px)}
+.card h3{font-size:18px;line-height:1.3;letter-spacing:-.01em;margin-bottom:8px}
+.card p,.card li{font-size:14.5px;color:#33445A}
+.card ul,.card ol{padding-left:18px;display:grid;gap:6px}
+.kpi{position:relative;overflow:hidden;padding-top:22px}
+.kpi::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--grad)}
+.kpi b{display:block;font-size:30px;line-height:1.1;letter-spacing:-.025em;color:var(--deep);margin-bottom:4px}
+.kpi span{font-size:13.5px;color:var(--mut)}
+/* qué hacemos */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:0;list-style:none}
+.flow li{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 16px;box-shadow:var(--shadow);min-width:0;display:grid;gap:6px;align-content:start}
+.flow .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:var(--grad);color:#fff;margin-bottom:6px}
+.flow small{font-weight:700;font-size:11.5px;letter-spacing:.12em;color:var(--acc)}
+.flow b{font-size:17px;line-height:1.25}
+.flow span{font-size:14px;color:var(--mut);line-height:1.45}
+.under{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.under div{display:flex;gap:16px;align-items:center;background:var(--deep);color:#fff;border-radius:18px;padding:16px 20px;min-width:0}
+.under .ic{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.12);color:#E2D3BA}
+.under b{display:block;font-size:17px}.under span{font-size:14px;opacity:.82}
+/* paciente */
+.icp .ok{border-top:5px solid var(--ok)}.icp .no{border-top:5px solid var(--amb);background:#FFFCF2}.icp .q{border-top:5px solid var(--acc);background:linear-gradient(180deg,var(--soft),#fff)}
+/* dónde se pierde */
+.leak{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.leak .card{display:grid;gap:10px;align-content:start;padding:0;overflow:hidden}
+.leak .top{padding:18px 18px 0;display:grid;gap:8px}
+.leak .num{font-weight:800;font-size:13px;letter-spacing:.12em;color:var(--bad)}
+.leak h3{margin:0}
+.leak .fix{margin-top:auto;background:var(--soft);border-top:1px solid #BFDDF4;padding:12px 18px;font-size:14px;color:var(--deep)}
+.leak .fix b{color:var(--acc)}
+/* piezas */
+.pieces{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.pieces a{display:grid;gap:8px;align-content:start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .2s,border-color .2s;min-width:0}
+.pieces a:hover{transform:translateY(-3px);border-color:var(--acc)}
+.pieces .ic{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--soft);color:var(--acc)}
+.pieces b{font-size:17px;line-height:1.25}
+.pieces p{font-size:14px;color:var(--mut);line-height:1.45}
+.pieces .go{font-weight:700;font-size:13.5px;color:var(--acc)}
+.pieces a.hl{background:linear-gradient(135deg,#2F3854,#2F3854);color:#fff;border-color:transparent}
+.pieces a.hl p{color:rgba(255,255,255,.82)}.pieces a.hl .go{color:#E2D3BA}.pieces a.hl .ic{background:rgba(255,255,255,.14);color:#E2D3BA}
+/* semanas */
+.weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.weeks h3 span{display:inline-block;background:var(--soft);color:var(--acc);border-radius:99px;padding:2px 10px;margin-bottom:8px;font-size:11px;font-weight:700;letter-spacing:.08em}
+/* siguiente paso */
+.fin{background:radial-gradient(900px 600px at 90% 10%,rgba(201,183,154,.35),transparent 60%),linear-gradient(135deg,#2F3854 0%,#2F3854 100%);color:#fff;border-radius:26px;padding:clamp(24px,4vw,44px);display:grid;gap:18px}
+.fin .k{font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#E2D3BA}
+.fin h2{color:#fff;max-width:22ch}
+.need{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.need div{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 16px;font-size:15.5px;min-width:0}
+.need .i{color:#E2D3BA;flex:none;margin-top:1px}
+.fin .ask{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fin .ask div{background:rgba(0,15,40,.25);border-radius:16px;padding:16px 18px;font-size:15px}
+.fin .ask b{display:block;color:#E2D3BA;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.fin .ask ol{padding-left:18px;display:grid;gap:4px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:12px 20px;font-size:15px;box-shadow:0 14px 30px -14px rgba(47,56,84,.85)}
+.btn.alt{background:#fff;color:var(--deep);box-shadow:none}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);box-shadow:none}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+footer{border-top:3px solid transparent;border-image:var(--grad) 1;padding:22px 16px 40px;font-size:13px;color:var(--mut);display:grid;gap:6px;max-width:1180px;margin-inline:auto}
+.js .rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv.on{opacity:1;transform:none}
+@media (max-width:1000px){.flow{grid-template-columns:1fr 1fr}.leak,.pieces,.weeks,.grid.four{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){.brand .by{display:none}.links{width:100%;justify-content:space-between}.links a{padding:6px 7px;font-size:12px}.under,.fin .ask{grid-template-columns:1fr}}
+@media (max-width:600px){.flow,.leak,.pieces,.weeks,.grid,.grid.two,.grid.four{grid-template-columns:1fr}.hero .wrap{padding-block:44px 40px}.lockup img{height:32px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}.card{transition:none}}
+</style>
+<script>
+document.documentElement.classList.add('js');
+addEventListener('DOMContentLoaded',function(){
+  var els=document.querySelectorAll('main section>h2, main .card, main .flow li, main .pieces a, main .fin');
+  if(!('IntersectionObserver' in window)){return document.documentElement.classList.remove('js');}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var t=e.target;t.classList.add('on');io.unobserve(t);setTimeout(function(){t.classList.remove('rv','on');t.style.transitionDelay='';},1100);}});},{rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el,i){el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms';io.observe(el);});
+  setTimeout(function(){els.forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)el.classList.add('on');});},1200);
+});
+</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"><style>h1,h2,.hero h1,.s h2{font-family:"Yeseva One",Georgia,serif!important;font-weight:400!important;letter-spacing:0!important}</style></head>
+<body>
+<nav class="topnav" aria-label="Propuesta"><div class="in">
+<div class="brand">Qualivo <span class="x">×</span> <img src="./assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452"><span class="by">10-nov-2026</span></div>
+<div class="links"><a href="./" aria-current="page">Plan</a><a href="./anuncios/">Anuncios</a><a href="./landing-a/">Landings</a><a href="./recorrido/">Recorrido</a><a href="./demo/">CRM</a><a href="/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion">Intelligence</a><a href="./presentacion/">Presentación</a></div>
+</div></nav>
+
+<header class="hero"><img class="tooth" src="./assets/brand/diente-blanco.png" alt="" aria-hidden="true"><div class="wrap">
+<div class="lockup"><span>Qualivo</span><i aria-hidden="true">×</i><img src="./assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452"></div>
+<p class="eyebrow">Plan de captación · Marín Clínica Dental</p>
+<h1>Más primeras visitas que acaban en <em>presupuesto aceptado</em></h1>
+<p class="lead">Dos sedes, implantes, ortodoncia, estética y financiación. Vuestros anuncios ya traen peticiones. El trabajo no es conseguir más formularios: es que cada petición buena reciba respuesta en minutos, venga a la primera visita en la sede que le queda cerca y no se quede con el presupuesto en el cajón. Y que Meta aprenda de quién lo acepta.</p>
+<div class="sedes"><span>Patraix (Valencia)</span><span>Torrent</span></div>
+<p class="note"><span class="tag ej">Cómo leer esta página</span> Lo marcado como <b>real</b> sale de vuestra web (dentalmarin.es) y de la Biblioteca de anuncios de Meta. Lo marcado como <b>hipótesis</b> lo validamos juntos. «Lo habitual en clínicas» describe lo que suele pasar en el sector, no vuestros datos. No hay cifras vuestras ni precios.</p>
+</div></header>
+
+<main class="wrap">
+
+<section id="hacemos">
+<h2><span class="n">01</span>Qué hacemos</h2>
+<p class="sub">Un sistema que va del anuncio al sillón. No cambia cómo diagnosticáis ni cómo presupuestáis: añade lo que pasa alrededor, para que ninguna petición se quede sin llamar.</p>
+<ol class="flow">
+<li><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM15 9a3 3 0 0 1 0 6M18 6a7 7 0 0 1 0 12"/></svg></span><small>PASO 1</small><b>Anuncio por tratamiento</b><span>Implantes, ortodoncia invisible, primera visita por sede y estética.</span></li>
+<li><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M9 4h6v3H9zM7 5H5v15h14V5h-2M8 12l2 2 4-4M8 17h8"/></svg></span><small>PASO 2</small><b>Formulario que cualifica</b><span>Tratamiento, sede, cuotas y cuándo. Cada petición entra como A, B o C.</span></li>
+<li><span class="ic"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><small>PASO 3</small><b>Respuesta en minutos</b><span>WhatsApp al momento desde la sede que toca, y llamada en el día para las A.</span></li>
+<li><span class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></span><small>PASO 4</small><b>Primera visita</b><span>Confirmación y recordatorios con la dirección de su sede.</span></li>
+<li><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M5 15a8 8 0 0 0 14 2M19 9A8 8 0 0 0 5 7"/></svg></span><small>PASO 5</small><b>Seguimiento del presupuesto</b><span>A 1, 3 y 7 días, con las cuotas explicadas por escrito.</span></li>
+</ol>
+<div class="under">
+<div><span class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg></span><p><b>Un CRM con vuestras etapas</b><span>De petición nueva a presupuesto aceptado. Patraix y Torrent en el mismo tablero.</span></p></div>
+<div><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><p><b>Un panel que lo mide</b><span>Qué anuncio trae presupuestos aceptados, y cómo va cada sede.</span></p></div>
+</div>
+</section>
+
+<section id="tenéis">
+<h2><span class="n">02</span>Lo que ya tenéis</h2>
+<div class="grid four">
+<div class="card kpi"><b>2 sedes</b><span>Patraix (Valencia) y Torrent, que abrió en octubre de 2025 <span class="tag real">real</span></span></div>
+<div class="card kpi"><b>7 áreas</b><span>Implantes, ortodoncia, estética, endodoncia, periodoncia, odontopediatría y prótesis <span class="tag real">real</span></span></div>
+<div class="card kpi"><b>Financiación</b><span>Para pagar los tratamientos en cuotas <span class="tag real">real</span></span></div>
+<div class="card kpi"><b>~130</b><span>anuncios en Meta; ahora ninguno activo <span class="tag real">real</span></span></div>
+</div>
+<p class="sub">Vuestros anuncios usan ofertas con precio y una versión para cada sede. Los hemos repasado uno a uno, con la propuesta al lado, en <a href="./anuncios/#hoy">Anuncios · Lo que vemos hoy</a>.</p>
+</section>
+
+<section id="paciente">
+<h2><span class="n">03</span>Vuestro paciente ideal</h2>
+<p class="sub">Antes de tocar un anuncio hay que acordar qué es una petición buena para vosotros. Esta es nuestra propuesta; vosotros sabéis quién acaba aceptando un presupuesto y la corregimos juntos. <span class="tag hip">hipótesis</span></p>
+<div class="grid icp">
+<div class="card ok"><h3>Petición cualificada</h3><ul><li>Busca un tratamiento concreto: implantes, ortodoncia invisible o estética.</li><li>Vive o trabaja cerca de Patraix o de Torrent.</li><li>Quiere empezar este mes o en los próximos tres.</li><li>Está abierto a hablar de cuotas y acepta venir a una primera visita.</li></ul></div>
+<div class="card no"><h3>Todavía no es el momento</h3><ul><li>Solo quiere un precio por teléfono.</li><li>Vive lejos de las dos sedes.</li><li>«Solo estoy mirando», sin fecha.</li><li>No recibe un «no»: recibe información y un aviso más adelante.</li></ul></div>
+<div class="card q"><h3>Lo que validamos con vosotros</h3><ol><li>De los presupuestos aceptados del último mes, ¿qué tratamiento y qué sede?</li><li>¿Qué es para vosotros una mala petición?</li><li>¿Qué tratamiento queréis llenar primero?</li><li>¿Qué sede tiene más hueco en agenda?</li></ol></div>
+</div>
+</section>
+
+<section id="pierde">
+<h2><span class="n">04</span>Dónde se pierde <span class="tag hab">Lo habitual en clínicas</span></h2>
+<p class="sub">No son datos vuestros. Es lo que suele pasar en clínicas dentales que anuncian en Meta, y lo que conviene comprobar con vuestros números en la segunda reunión.</p>
+<div class="leak">
+<div class="card"><div class="top"><span class="num">01</span><h3>Peticiones que nadie llama a tiempo</h3><p>Un formulario a las 22:00 o un WhatsApp en plena consulta. Cuando se llama al día siguiente, ya ha pedido cita en otra clínica.</p></div><p class="fix"><b>Con Qualivo:</b> WhatsApp en minutos y llamada asignada a una persona.</p></div>
+<div class="card"><div class="top"><span class="num">02</span><h3>Primeras visitas que no se presentan</h3><p>La cita se da por teléfono y nadie la recuerda. El hueco se pierde y la persona no vuelve a pedir.</p></div><p class="fix"><b>Con Qualivo:</b> confirmación, recordatorios a 24 h y 2 h, y otra fecha si no puede.</p></div>
+<div class="card"><div class="top"><span class="num">03</span><h3>Presupuestos sin seguimiento</h3><p>Implantes y ortodoncia son decisiones grandes. Sin una llamada o un mensaje después, el presupuesto se enfría.</p></div><p class="fix"><b>Con Qualivo:</b> seguimiento a 1, 3 y 7 días, con las cuotas por escrito.</p></div>
+<div class="card"><div class="top"><span class="num">04</span><h3>Dos sedes sin un sitio común</h3><p>Cada recepción con su lista. Nadie ve el total ni sabe qué anuncio trae tratamientos a cada sede.</p></div><p class="fix"><b>Con Qualivo:</b> un solo CRM con filtro por sede y un panel diario.</p></div>
+</div>
+</section>
+
+<section id="piezas">
+<h2><span class="n">05</span>Las piezas, con vuestra marca</h2>
+<p class="sub">Todo es una maqueta con datos de ejemplo para verlo funcionar. Nada se publica ni envía datos.</p>
+<div class="pieces">
+<a href="./anuncios/" class="hl"><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM15 9a3 3 0 0 1 0 6"/></svg></span><b>Anuncios</b><p>Lo que vemos hoy, el formulario y cuatro anuncios: implantes, ortodoncia invisible, primera visita en tu sede y estética.</p><span class="go">Ver anuncios →</span></a>
+<a href="./landing-a/"><span class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h6M7 16h4"/></svg></span><b>Landing A · implantes</b><p>Para quien ya sabe lo que necesita. Pregunta sede, tratamiento, cuotas y cuándo.</p><span class="go">Abrir →</span></a>
+<a href="./landing-b/"><span class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h6M7 16h4"/></svg></span><b>Landing B · ortodoncia invisible</b><p>Para quien aún duda. Primero resuelve «¿es para mí?».</p><span class="go">Abrir →</span></a>
+<a href="./recorrido/"><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg></span><b>Recorrido de una petición</b><p>Del formulario al presupuesto aceptado: WhatsApp, recordatorios y seguimiento.</p><span class="go">Ver recorrido →</span></a>
+<a href="./demo/"><span class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg></span><b>CRM</b><p>Vuestras etapas, de petición nueva a presupuesto aceptado, con filtro por sede.</p><span class="go">Ver el CRM →</span></a>
+<a href="/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion"><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b>Intelligence</b><p>El panel de cada mañana: quién necesita una llamada hoy y qué anuncio trae tratamientos.</p><span class="go">Abrir la demo →</span></a>
+<a href="./presentacion/"><span class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><b>Presentación</b><p>La de la reunión de hoy, pantalla a pantalla.</p><span class="go">Abrir →</span></a>
+<a href="./anuncios/#formulario"><span class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M9 4h6v3H9zM7 5H5v15h14V5h-2M8 12l2 2 4-4"/></svg></span><b>El formulario</b><p>Cinco preguntas y la regla A, B y C que decide a quién se llama primero.</p><span class="go">Ver formulario →</span></a>
+</div>
+</section>
+
+<section id="dias">
+<h2><span class="n">06</span>Los primeros 30 días</h2>
+<div class="weeks">
+<div class="card"><h3><span>SEMANA 1</span><br>Punto de partida y CRM</h3><p>Medimos peticiones, primeras visitas y presupuestos aceptados por sede. Montamos el CRM con vuestras etapas y conectamos formularios, web y WhatsApp.</p></div>
+<div class="card"><h3><span>SEMANA 2</span><br>Respuesta y recordatorios</h3><p>WhatsApp de bienvenida, recordatorios de la primera visita y seguimiento del presupuesto, con vuestros textos aprobados.</p></div>
+<div class="card"><h3><span>SEMANA 3</span><br>Anuncios y landings</h3><p>Relanzamos con el formulario que cualifica, los cuatro anuncios y una landing por tratamiento. Primera visita y aceptado vuelven a Meta.</p></div>
+<div class="card"><h3><span>SEMANA 4</span><br>Panel y revisión</h3><p>Coste por presupuesto aceptado de cada anuncio y de cada sede. Revisamos juntos qué seguimos, qué cambiamos y qué apagamos.</p></div>
+</div>
+</section>
+
+<section id="siguiente">
+<div class="fin">
+<p class="k">07 · Siguiente paso</p>
+<h2>Una segunda reunión esta semana, con vuestros números del último mes</h2>
+<p style="opacity:.9;max-width:70ch">Con ellos sabremos dónde se pierde de verdad en cada sede y por dónde empezar. La propuesta económica la vemos en esa reunión, con el alcance que acordemos.</p>
+<div class="need">
+<div><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Peticiones del último mes, por sede</span></div>
+<div><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Primeras visitas del último mes, por sede</span></div>
+<div><svg class="i" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span>Presupuestos aceptados, por sede</span></div>
+<div><svg class="i" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Acceso de lectura a Meta Ads</span></div>
+<div><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>El programa de gestión que usáis</span></div>
+</div>
+<div class="ask">
+<div><b>Lo que queremos entender</b><ol><li>¿Quién responde hoy a cada petición, y en cuánto tiempo?</li><li>¿Cuántas primeras visitas no se presentan?</li><li>¿Qué pasa con un presupuesto que no se acepta en la visita?</li></ol></div>
+<div><b>Lo que preparamos nosotros</b><ol><li>El punto de partida, con vuestros números.</li><li>Los textos de WhatsApp para que los aprobéis.</li><li>El plan de relanzamiento de los anuncios.</li></ol></div>
+</div>
+<div class="cta"><a class="btn alt" href="./anuncios/">Ver los anuncios</a><a class="btn ghost" href="./presentacion/">Volver a la presentación</a></div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · qualivo.io</b></p>
+<p>Plan preparado por Qualivo el 10 de noviembre de 2026 para Marín Clínica Dental. No es una página de la clínica. Logotipo, sedes y tratamientos tomados de dentalmarin.es; anuncios, de la Biblioteca de anuncios de Meta. «Lo habitual en clínicas» describe el sector, no vuestros datos. Sin precios ni resultados: se miden con vuestros números.</p>
+</footer>
+</body>
+</html>

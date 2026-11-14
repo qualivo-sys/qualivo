@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Luanda · demo y propuesta</title>
+<style>
+/* Demo y propuesta para el diagnóstico con Peluquería Luanda (20-oct, 16:00). Cursos y precios tomados de su web pública; el resto es ejemplo. */
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 100 900; font-display: swap; src: url("/assets/fonts/montserrat-latin.woff2") format('woff2'); }
+:root {
+  --tinta: #101319; --gris: #5A5E66; --gris-2: #8A8D93; --fondo: #F6F6F3; --sup: #fff; --borde: #E6E5E0;
+  --verde: #0E7C74; --verde-2: #27BDB1; --verde-bg: #E6F4F2; --verde-txt: #0B635C;
+  --rosa: #B5446E; --rosa-bg: #FBEEF3; --ambar: #B7791F; --ambar-bg: #FDF4E0;
+  --wa: #E7FFDB; --wa-fondo: #EFEAE2;
+  --f: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--f); color: var(--tinta); background: var(--fondo); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p { margin: 0; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+nav { position: sticky; top: 0; z-index: 5; background: rgba(246,246,243,.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--borde); }
+nav .wrap { display: flex; gap: 16px; align-items: center; height: 52px; overflow-x: auto; white-space: nowrap; }
+nav b { margin-right: 6px; }
+nav a { color: var(--gris); text-decoration: none; font-weight: 600; font-size: 13.5px; }
+nav a:hover { color: var(--tinta); }
+header { padding: 44px 0 26px; }
+.eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--verde); }
+header h1 { font-size: clamp(26px, 4vw, 38px); letter-spacing: -.02em; line-height: 1.15; margin-top: 8px; max-width: 760px; }
+header p { color: var(--gris); margin-top: 12px; max-width: 700px; }
+section { padding: 34px 0; border-top: 1px solid var(--borde); }
+section h2 { font-size: 22px; letter-spacing: -.01em; }
+section .sub { color: var(--gris); margin-top: 6px; max-width: 720px; }
+.num { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; background: var(--tinta); color: #fff; font-size: 13px; font-weight: 800; align-items: center; justify-content: center; margin-right: 8px; vertical-align: 2px; }
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; margin-top: 22px; }
+.card { background: var(--sup); border: 1px solid var(--borde); border-radius: 14px; padding: 18px; }
+.card h3 { font-size: 15px; margin-bottom: 8px; }
+.card ul { margin: 0; padding-left: 18px; color: var(--gris); }
+.card li { margin: 4px 0; }
+/* móvil */
+.movil { width: 100%; max-width: 360px; margin: 0 auto; border: 10px solid #1d1f24; border-radius: 34px; overflow: hidden; background: #fff; box-shadow: 0 20px 50px rgba(16,19,25,.18); }
+.tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 14px; flex-wrap: wrap; }
+.tab { border: 1px solid var(--borde); background: var(--sup); border-radius: 99px; padding: 7px 14px; font-weight: 700; font-size: 13px; cursor: pointer; font-family: inherit; }
+.tab.on { background: var(--tinta); color: #fff; border-color: var(--tinta); }
+.lp-hero { padding: 26px 18px 20px; color: #fff; background: linear-gradient(160deg, #3b1d2b 0%, #8e3a5e 55%, #d58aa8 100%); }
+.lp-hero small { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 10.5px; opacity: .85; }
+.lp-hero h3 { font-size: 23px; line-height: 1.15; margin-top: 8px; }
+.lp-hero p { font-size: 13.5px; margin-top: 8px; opacity: .92; }
+.lp-precio { display: inline-block; margin-top: 12px; background: #fff; color: var(--rosa); font-weight: 800; padding: 6px 12px; border-radius: 99px; font-size: 14px; }
+.lp-body { padding: 16px 18px 20px; font-size: 13.5px; }
+.lp-body h4 { margin: 14px 0 6px; font-size: 13.5px; }
+.lp-body ul { margin: 0; padding-left: 18px; color: var(--gris); }
+.lp-plazas { margin-top: 12px; background: var(--ambar-bg); color: var(--ambar); font-weight: 700; padding: 8px 10px; border-radius: 10px; font-size: 12.5px; }
+.lp-form { margin-top: 14px; border: 1px solid var(--borde); border-radius: 12px; padding: 12px; }
+.lp-form label { display: block; font-weight: 700; font-size: 12px; margin: 8px 0 4px; }
+.lp-form select, .lp-form input { width: 100%; height: 36px; border: 1px solid var(--borde); border-radius: 8px; padding: 0 10px; font-family: inherit; font-size: 13px; background: #fff; }
+.lp-btn { display: block; width: 100%; margin-top: 12px; height: 42px; border: 0; border-radius: 10px; background: #25D366; color: #fff; font-weight: 800; font-family: inherit; font-size: 14px; cursor: pointer; }
+.lp-nota { color: var(--gris-2); font-size: 11.5px; margin-top: 8px; text-align: center; }
+.ej { display: inline-block; font-size: 11px; font-weight: 700; color: var(--ambar); background: var(--ambar-bg); padding: 2px 8px; border-radius: 99px; margin-left: 6px; vertical-align: 2px; }
+/* WhatsApp */
+.wa { background: var(--wa-fondo); padding: 12px; min-height: 420px; display: flex; flex-direction: column; gap: 8px; }
+.wa-top { background: #075E54; color: #fff; padding: 12px 14px; font-weight: 700; font-size: 14px; }
+.wa-top small { display: block; font-weight: 500; opacity: .8; font-size: 11.5px; }
+.b { max-width: 84%; padding: 8px 10px; border-radius: 10px; font-size: 13px; box-shadow: 0 1px 1px rgba(0,0,0,.08); white-space: pre-line; }
+.b small { display: block; text-align: right; color: var(--gris-2); font-size: 10.5px; margin-top: 2px; }
+.in { background: #fff; align-self: flex-start; }
+.out { background: var(--wa); align-self: flex-end; }
+/* línea de seguimiento */
+.linea { margin-top: 22px; display: grid; gap: 10px; }
+.hito { display: grid; grid-template-columns: 110px 1fr; gap: 14px; background: var(--sup); border: 1px solid var(--borde); border-radius: 12px; padding: 12px 14px; }
+.hito b { color: var(--verde-txt); }
+.hito p { color: var(--gris); font-size: 14px; }
+/* panel */
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+.kpi { background: var(--sup); border: 1px solid var(--borde); border-radius: 12px; padding: 14px; }
+.kpi b { display: block; font-size: 24px; }
+.kpi span { color: var(--gris); font-size: 12.5px; }
+.tabla { margin-top: 12px; background: var(--sup); border: 1px solid var(--borde); border-radius: 12px; overflow: hidden; }
+.fila { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 10px; padding: 10px 14px; border-bottom: 1px solid #EFEEEA; font-size: 14px; }
+.fila.h { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--gris-2); font-weight: 700; }
+/* calculadora */
+.calc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+.calc label { display: block; font-weight: 700; font-size: 12.5px; margin-bottom: 4px; }
+.calc input { width: 100%; height: 40px; border: 1px solid var(--borde); border-radius: 8px; padding: 0 10px; font-family: inherit; font-size: 15px; }
+.res { margin-top: 14px; background: var(--verde-bg); color: var(--verde-txt); border-radius: 12px; padding: 14px 16px; font-weight: 600; }
+.res b { font-size: 20px; }
+/* propuesta */
+.fases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+.fase small { color: var(--verde); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; font-size: 11.5px; }
+.necesita { margin-top: 16px; }
+footer { padding: 26px 0 40px; color: var(--gris-2); font-size: 12.5px; border-top: 1px solid var(--borde); }
+@media (max-width: 820px) {
+  .dos, .fases { grid-template-columns: 1fr; }
+  .kpis, .calc { grid-template-columns: repeat(2, 1fr); }
+  .fila { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+  .fila .opc { display: none; }
+  .hito { grid-template-columns: 1fr; gap: 2px; }
+}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><b>Qualivo × Luanda</b><a href="#landing">Landing</a><a href="#whatsapp">WhatsApp</a><a href="#seguimiento">Seguimiento</a><a href="#panel">Panel</a><a href="#cuenta">Tu cuenta</a><a href="#propuesta">Propuesta</a></div></nav>
+
+<header class="wrap">
+  <div class="eyebrow">Demo para Peluquería Luanda · Alfafar</div>
+  <h1>Cada persona que pregunta por un curso, contestada en minutos y acompañada hasta la matrícula</h1>
+  <p>Cómo quedaría el recorrido de vuestros cursos: una página por curso, el WhatsApp que contesta al momento, el seguimiento a quien no se decide y un panel para saber qué curso se llena y de dónde viene cada alumna. Cursos y precios tomados de vuestra web; el resto son ejemplos.</p>
+</header>
+
+<section id="landing"><div class="wrap">
+  <h2><span class="num">1</span>Una página por curso</h2>
+  <p class="sub">Hoy todo pasa por WhatsApp y el teléfono, sin una página que explique el curso. Una página por curso responde lo que todo el mundo pregunta (precio, fechas, qué incluye) y recoge 2 datos antes de abrir el WhatsApp.</p>
+  <div class="dos">
+    <div>
+      <div class="tabs"><button class="tab on" data-c="unas">Uñas</button><button class="tab" data-c="trenzas">Trenzas</button><button class="tab" data-c="pestanas">Pestañas</button></div>
+      <div class="movil" id="lp"></div>
+    </div>
+    <div class="card">
+      <h3>Qué lleva cada página</h3>
+      <ul>
+        <li>Precio y fechas de la próxima edición, a la vista: es lo primero que pregunta todo el mundo.</li>
+        <li>Plazas que quedan: la edición tiene fecha y la decisión también.</li>
+        <li>Qué aprendes y qué te llevas (material, certificado), con fotos reales de vuestras clases.</li>
+        <li>Opiniones de alumnas reales, cuando las tengamos: no se inventa ninguna.</li>
+        <li>Dos preguntas cortas antes del botón: cuándo quiere empezar y si ya tiene experiencia. Con eso sabéis a quién llamar primero.</li>
+        <li>El botón abre WhatsApp con el mensaje ya escrito, y queda registrado de qué curso y de qué anuncio viene.</li>
+      </ul>
+      <h3 style="margin-top:16px">Para cada curso, un anuncio</h3>
+      <ul>
+        <li>Instagram y TikTok, con vídeos de vuestras clases y del resultado final.</li>
+        <li>Público: Valencia y alrededores, personas que quieren formarse o cambiar de profesión.</li>
+        <li>Empezar con poco y medir en matrículas, no en «me gusta».</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="whatsapp"><div class="wrap">
+  <h2><span class="num">2</span>El WhatsApp contesta en minutos, también de noche</h2>
+  <p class="sub">La mayoría pregunta fuera de horario. El asistente responde con vuestro tono, da precio y fechas, y propone apartar plaza. Lo que no sabe, os lo pasa.</p>
+  <div class="dos">
+    <div class="movil">
+      <div class="wa-top">Luanda · Formación<small>en línea</small></div>
+      <div class="wa">
+        <div class="b in">Hola! Vi el curso de uñas, ¿cuánto cuesta y cuándo empieza?<small>22:47</small></div>
+        <div class="b out">¡Hola! Soy el asistente de Luanda 💅 El curso de uñas son 390 € por módulo, con material incluido y certificado. La próxima edición empieza el [fecha] y quedan [n] plazas.
+¿Ya has hecho uñas antes o empezarías desde cero?<small>22:47</small></div>
+        <div class="b in">Desde cero, nunca he hecho nada<small>22:49</small></div>
+        <div class="b out">Perfecto, el módulo 1 está pensado justo para empezar desde cero.
+¿Te guardo plaza? Se reserva con una señal y el resto el primer día. Si prefieres, mañana te llama el equipo y te resuelve dudas.<small>22:49</small></div>
+        <div class="b in">Que me llamen mañana mejor<small>22:50</small></div>
+        <div class="b out">Hecho ✅ Mañana entre las 10 y las 12 te llama alguien del equipo. ¡Buenas noches!<small>22:50</small></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Qué hace y qué no</h3>
+      <ul>
+        <li>Contesta al momento, todos los días de 8:00 a 21:30, y por la noche deja el primer mensaje con precio y fechas.</li>
+        <li>Pregunta lo justo (experiencia y cuándo quiere empezar) y os deja la ficha hecha.</li>
+        <li>Si pide hablar con alguien, o pregunta algo que no sabe, os avisa y se calla.</li>
+        <li>No inventa precios, fechas ni descuentos: solo lo que vosotras le digáis.</li>
+        <li>Vosotras veis cada conversación y podéis entrar cuando queráis.</li>
+      </ul>
+      <p class="lp-nota" style="text-align:left">Fechas y plazas entre corchetes: se rellenan con las vuestras.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="seguimiento"><div class="wrap">
+  <h2><span class="num">3</span>Seguimiento a quien pregunta y no se decide</h2>
+  <p class="sub">Casi nadie se matricula en el primer mensaje. Lo que más alumnas pierde es que nadie vuelva a escribir.</p>
+  <div class="linea">
+    <div class="hito"><b>Minuto 1</b><p>Respuesta con precio, fechas y una pregunta.</p></div>
+    <div class="hito"><b>Día 1</b><p>Si no contestó: «¿Te quedó alguna duda del curso?», más una foto del resultado de una alumna.</p></div>
+    <div class="hito"><b>Día 3</b><p>Aviso a vosotras: «Esta persona preguntó por uñas y no ha contestado. ¿La llamáis?», con su ficha.</p></div>
+    <div class="hito"><b>Día 7</b><p>Último mensaje: quedan [n] plazas para el [fecha]; si no es ahora, le avisamos de la siguiente edición.</p></div>
+    <div class="hito"><b>Siguiente edición</b><p>Quien dijo «ahora no» recibe el aviso cuando abrís fechas nuevas. Ahí está la lista de espera que hoy se pierde.</p></div>
+  </div>
+</div></section>
+
+<section id="panel"><div class="wrap">
+  <h2><span class="num">4</span>Un panel para saber qué curso se llena y por qué <span class="ej">ejemplo</span></h2>
+  <p class="sub">Cuántas personas preguntan, cuántas reservan y de dónde vienen. Las cifras de abajo son inventadas, para que se vea cómo quedaría.</p>
+  <div class="kpis">
+    <div class="kpi"><b>34</b><span>consultas este mes</span></div>
+    <div class="kpi"><b>3 min</b><span>tiempo de respuesta</span></div>
+    <div class="kpi"><b>9</b><span>plazas reservadas</span></div>
+    <div class="kpi"><b>12</b><span>en lista de espera</span></div>
+  </div>
+  <div class="tabla">
+    <div class="fila h"><span>Curso</span><span>Consultas</span><span>Reservas</span><span>Lista de espera</span><span class="opc">Viene de</span></div>
+    <div class="fila"><span>Uñas · módulo 1</span><span>18</span><span>5</span><span>6</span><span class="opc">Instagram</span></div>
+    <div class="fila"><span>Trenzas profesionales</span><span>9</span><span>3</span><span>2</span><span class="opc">TikTok</span></div>
+    <div class="fila"><span>Extensiones de pestañas</span><span>7</span><span>1</span><span>4</span><span class="opc">Recomendación</span></div>
+  </div>
+</div></section>
+
+<section id="cuenta"><div class="wrap">
+  <h2><span class="num">5</span>Haz tu cuenta</h2>
+  <p class="sub">Pon tus números y mira cuánto se queda por el camino. Es una estimación, no una promesa.</p>
+  <div class="calc">
+    <div><label for="c1">Consultas al mes</label><input id="c1" type="number" min="0" value="15"></div>
+    <div><label for="c2">Precio medio del curso (€)</label><input id="c2" type="number" min="0" value="400"></div>
+    <div><label for="c3">% que hoy se queda sin seguimiento</label><input id="c3" type="number" min="0" max="100" value="50"></div>
+    <div><label for="c4">% de esas que se podría recuperar</label><input id="c4" type="number" min="0" max="100" value="20"></div>
+  </div>
+  <div class="res" id="res"></div>
+</div></section>
+
+<section id="propuesta"><div class="wrap">
+  <h2><span class="num">6</span>Propuesta: cómo lo montaríamos</h2>
+  <p class="sub">Empezamos por un curso, lo medimos y, si funciona, lo copiamos a los demás.</p>
+  <div class="fases">
+    <div class="card fase"><small>Semanas 1-2</small><h3>Montaje</h3><ul><li>Página del curso que más os interesa llenar (por ejemplo, uñas).</li><li>Asistente de WhatsApp con vuestros precios, fechas y tono.</li><li>Seguimiento de los días 1, 3 y 7, y lista de espera.</li><li>Todo conectado a un CRM para ver cada consulta.</li></ul></div>
+    <div class="card fase"><small>Semanas 3-6</small><h3>Captación y medida</h3><ul><li>Anuncios en Instagram y TikTok hacia esa página, con vídeos vuestros.</li><li>Panel con consultas, reservas y de dónde viene cada una.</li><li>Ajustes cada semana según lo que pregunta la gente.</li></ul></div>
+    <div class="card fase"><small>Después</small><h3>El resto de cursos</h3><ul><li>Página y anuncio para trenzas, pestañas, y moldeado y color.</li><li>Aviso automático a la lista de espera al abrir fechas.</li><li>Lo mismo para las citas del salón, si os interesa.</li></ul></div>
+  </div>
+  <div class="card necesita">
+    <h3>Lo que necesitaríamos de vosotras</h3>
+    <ul>
+      <li>Fechas y plazas de las próximas ediciones, y el temario de cada curso.</li>
+      <li>Fotos y vídeos cortos de clases y resultados (con el permiso de las alumnas).</li>
+      <li>Acceso a vuestro WhatsApp Business y a la cuenta de anuncios de Instagram.</li>
+      <li>Media hora a la semana para revisar el panel juntos.</li>
+    </ul>
+  </div>
+</div></section>
+
+<footer class="wrap">Qualivo · documento de trabajo para Peluquería Luanda. Cursos y precios de vuestra web; conversaciones y cifras del panel, de ejemplo. No indexado.</footer>
+
+<script>
+var CURSOS = {
+  unas: { t: 'Curso de uñas · módulo 1', d: 'Aprende desde cero en nuestro centro de Alfafar. Material incluido y certificado.', p: '390 € por módulo', l: ['Preparación de la uña y manicura', 'Esmaltado semipermanente', 'Prácticas con modelos reales'] },
+  trenzas: { t: 'Curso de trenzas profesionales', d: 'Formación práctica con las técnicas que más se piden hoy.', p: '450 €', l: ['Trenzas de tendencia y de evento', 'Práctica en cada sesión', 'Cómo cobrar el servicio en tu salón'] },
+  pestanas: { t: 'Curso de extensiones de pestañas', d: 'Formación intensiva con el kit profesional incluido y certificado.', p: 'Precio a consultar', l: ['Pelo a pelo y volumen', 'Higiene y seguridad', 'Kit profesional para empezar'] }
+};
+function txt(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function lp(k) {
+  var c = CURSOS[k];
+  document.getElementById('lp').innerHTML =
+    '<div class="lp-hero"><small>Luanda · Formación presencial</small><h3>' + txt(c.t) + '</h3><p>' + txt(c.d) + '</p><span class="lp-precio">' + txt(c.p) + '</span></div>' +
+    '<div class="lp-body"><div class="lp-plazas">Próxima edición: [fecha] · quedan [n] plazas</div><h4>Qué aprendes</h4><ul>' + c.l.map(function (x) { return '<li>' + txt(x) + '</li>'; }).join('') + '</ul>' +
+    '<div class="lp-form"><label>¿Cuándo te gustaría empezar?</label><select><option>En la próxima edición</option><option>En 1-3 meses</option><option>Solo estoy mirando</option></select>' +
+    '<label>¿Tienes experiencia?</label><select><option>Empiezo desde cero</option><option>Algo, quiero perfeccionar</option><option>Ya trabajo de esto</option></select>' +
+    '<button class="lp-btn" type="button">Pedir información por WhatsApp</button><p class="lp-nota">Te contestamos en minutos, también por la noche.</p></div></div>';
+}
+document.querySelectorAll('.tab').forEach(function (b) {
+  b.addEventListener('click', function () { document.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('on', x === b); }); lp(b.getAttribute('data-c')); });
+});
+lp('unas');
+function calc() {
+  var n = +document.getElementById('c1').value || 0, p = +document.getElementById('c2').value || 0;
+  var s = Math.min(100, +document.getElementById('c3').value || 0) / 100, r = Math.min(100, +document.getElementById('c4').value || 0) / 100;
+  var perdidas = n * s, rec = perdidas * r, eur = rec * p, f = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 1 });
+  document.getElementById('res').innerHTML = 'Unas <b>' + f.format(perdidas) + '</b> personas al mes preguntan y nadie les vuelve a escribir. Recuperando el ' + f.format(r * 100) + ' %, serían <b>' + f.format(rec) + '</b> alumnas más al mes: unos <b>' + new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(eur) + ' €</b> al mes y ' + new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(eur * 12) + ' € al año.';
+}
+['c1', 'c2', 'c3', 'c4'].forEach(function (id) { document.getElementById(id).addEventListener('input', calc); });
+calc();
+</script>
+</body>
+</html>

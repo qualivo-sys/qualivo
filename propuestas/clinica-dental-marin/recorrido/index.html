@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Marín Clínica Dental · el recorrido</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+/* Paquete Qualivo × Marín Clínica Dental (10-nov). Misma paleta y marca en texto que presentacion/ y assets/landing.css:
+   Montserrat, azul clínico, «MARÍN · CLÍNICA DENTAL» con un diente SVG. Sin logo ni fotos: su web no está confirmada. */
+:root{--ink:#0E1A2B;--mut:#536378;--bg:#FCFBF9;--soft:#F5F2ED;--soft2:#F8F6F2;--line:#E4DED4;--acc:#3B4670;--acc2:#56618A;--deep:#2F3854;--deep2:#262D45;
+--grad:linear-gradient(135deg,#56618A 0%,#2F3854 100%);--amb:#F5B83D;--amb-soft:#FFF4D6;--amb-ink:#7A5600;--ok:#13865A;--ok-soft:#E3F5EC;--bad:#C0392B;--bad-soft:#FBEDEB;
+--wa-bg:#EFE7DC;--wa-in:#FFFFFF;--wa-out:#DCF8C6;--wa-head:#2F3854;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+--sh:0 16px 34px -26px rgba(11,42,69,.55);--sh-lg:0 30px 60px -34px rgba(11,42,69,.65)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+svg{display:block}
+a{color:var(--acc)}
+button{font-family:inherit}
+.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+@media (max-width:560px){.wrap{padding:0 16px}}
+/* marca en texto */
+.wm{display:inline-flex;align-items:center;gap:.5em;line-height:1;color:inherit;text-decoration:none}
+.wm svg{width:1.15em;height:1.25em;flex:none}
+.wm span{display:grid;gap:.18em}
+.wm b{font-weight:800;letter-spacing:.06em}
+.wm small{font-weight:500;letter-spacing:.16em;font-size:.42em}
+/* barra superior del paquete */
+.topnav{position:sticky;top:0;z-index:30;background:rgba(11,42,69,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+.topnav .in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;min-height:58px}
+.topnav .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;white-space:nowrap;margin-right:auto}
+.topnav .brand .x{opacity:.55;font-weight:500}
+.topnav .brand .wm{font-size:16px}
+.topnav .links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.topnav .links::-webkit-scrollbar{display:none}
+.topnav .links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;font-weight:600;padding:6px 11px;border-radius:99px;white-space:nowrap}
+.topnav .links a:hover{background:rgba(255,255,255,.1);color:#fff}
+.topnav .links a[aria-current="page"]{background:#fff;color:var(--deep)}
+@media (max-width:860px){.topnav .in{flex-wrap:wrap;gap:6px 12px;padding:9px 16px}.topnav .links{width:100%;order:2}.topnav .brand{font-size:14px}}
+/* cabecera */
+.dhero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(1100px 620px at 88% 10%,rgba(201,183,154,.38),transparent 60%),linear-gradient(135deg,#2F3854 0%,#262D45 55%,#2F3854 100%)}
+.dhero .tooth{position:absolute;right:-4%;top:50%;transform:translateY(-50%);width:min(40vw,460px);height:auto;aspect-ratio:48/54;opacity:.09;color:#fff;pointer-events:none}
+.dhero .wrap{position:relative;padding-top:52px;padding-bottom:70px;display:grid;gap:14px}
+.eyebrow{justify-self:start;display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.26);border-radius:99px;padding:6px 14px;max-width:100%}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc2);box-shadow:0 0 0 3px rgba(201,183,154,.3);flex:none}
+.dhero h1{font-weight:800;font-size:clamp(32px,5vw,58px);line-height:1.05;letter-spacing:-.025em;max-width:19ch;text-wrap:balance}
+.dhero h1 em{font-style:normal;color:#E2D3BA}
+.dhero .lead{font-size:17.5px;line-height:1.6;color:rgba(255,255,255,.9);max-width:70ch}
+.legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+.legend > div{border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:13px 15px;background:rgba(255,255,255,.08);font-size:14px;line-height:1.55;color:rgba(255,255,255,.88);min-width:0}
+.legend b{color:#fff}
+@media (max-width:860px){.legend{grid-template-columns:1fr}}
+/* etiquetas */
+.ej,.sy,.eq,.dr{display:inline-block;font:700 10.5px/1.5 var(--sans);letter-spacing:.09em;text-transform:uppercase;border-radius:6px;padding:2px 8px;vertical-align:middle;white-space:nowrap}
+.ej{background:#FFF3C4;color:#7A5600}
+.sy{background:var(--soft);color:var(--acc)}
+.eq{background:#FFF0C7;color:#7A5600}
+.dr{background:var(--ok-soft);color:var(--ok)}
+.dhero .sy{background:rgba(143,211,255,.2);color:#BFE6FF}.dhero .eq{background:rgba(245,184,61,.25);color:#FFE3A6}.dhero .ej{background:#FFF3C4;color:#7A5600}
+h2 .ej{vertical-align:8px;margin-left:6px}
+/* pestañas */
+.wrap.main{display:grid;gap:26px;padding-bottom:70px}
+.wrap.main > *{min-width:0}
+nav.tabs{position:sticky;top:66px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px;padding:5px;margin-top:-30px;box-shadow:0 2px 6px rgba(11,42,69,.05),0 24px 48px -24px rgba(11,42,69,.45)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--mut);border-radius:13px;padding:10px 12px;cursor:pointer;transition:background .2s,color .2s}
+nav.tabs button:hover{color:var(--ink);background:var(--soft2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;font-size:11px;font-weight:700;background:var(--soft);color:var(--acc)}
+nav.tabs button[aria-selected="true"]{background:var(--grad);color:#fff;box-shadow:0 10px 22px -10px rgba(47,56,84,.8)}
+nav.tabs button[aria-selected="true"] span{background:#fff;color:var(--acc)}
+@media (max-width:860px){nav.tabs{top:96px}}
+.pane{display:none;gap:22px}
+.pane.on{display:grid}
+.pane.on > *{animation:up .5s cubic-bezier(.2,.7,.2,1) both}
+.pane.on > :nth-child(2){animation-delay:.06s}.pane.on > :nth-child(3){animation-delay:.12s}.pane.on > :nth-child(n+4){animation-delay:.18s}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.pane.on > *{animation:none}html{scroll-behavior:auto}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px;display:grid;gap:10px}
+.pane > header p{color:var(--mut);max-width:80ch}
+h2{font-weight:800;font-size:clamp(26px,3.4vw,40px);line-height:1.1;letter-spacing:-.022em;text-wrap:balance}
+h2 em{font-style:normal;color:var(--acc)}
+h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
+.k{font:700 11.5px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+.note{font-size:13.5px;color:var(--mut);border:1px dashed #D6C8B2;background:var(--soft2);border-radius:12px;padding:10px 14px;line-height:1.55}
+.btn{display:inline-flex;align-items:center;gap:9px;border:0;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;font-size:15px;border-radius:99px;padding:11px 20px;cursor:pointer;box-shadow:0 14px 30px -14px rgba(47,56,84,.85)}
+.btn.sec{background:#fff;color:var(--acc);border:1px solid var(--line);box-shadow:none}
+.btn:hover{transform:translateY(-1px)}
+.next{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.links3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:800px){.links3{grid-template-columns:1fr}}
+.links3 a{display:grid;gap:6px;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--sh);transition:transform .2s,border-color .2s}
+.links3 a:hover{transform:translateY(-3px);border-color:var(--acc2)}
+.links3 a b{font-size:18px}
+.links3 a small{color:var(--mut);font-size:14px;line-height:1.5}
+/* WhatsApp */
+.phn{background:var(--wa-bg);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--sh)}
+.phn .bar{background:var(--wa-head);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 12px}
+.av{width:32px;height:32px;border-radius:50%;background:#fff;color:var(--deep);display:grid;place-items:center;flex:none}
+.av svg{width:14px;height:16px}
+.phn .bar b{font-size:13.5px;display:block;line-height:1.2}
+.phn .bar small{font-size:11.5px;opacity:.8}
+.phn .bd{padding:12px;display:flex;flex-direction:column;gap:7px}
+.bub{max-width:88%;align-self:flex-start;background:var(--wa-in);color:var(--ink);border-radius:12px;border-top-left-radius:3px;padding:8px 10px 5px;font-size:13.5px;line-height:1.5;box-shadow:0 1px 1px rgba(0,0,0,.08);white-space:pre-line}
+.bub.me{align-self:flex-end;background:var(--wa-out);border-radius:12px;border-top-right-radius:3px}
+.bub small{display:block;text-align:right;font-size:10.5px;color:#7A7A7A;margin-top:2px}
+.bub .by{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.bub .by.s{color:var(--acc)}.bub .by.r{color:#9A6A00}
+.bub .btns{display:grid;gap:4px;margin-top:7px}
+.bub .btns span{display:block;text-align:center;border-top:1px solid #E4E8EC;padding-top:5px;color:#027EB5;font-weight:600;font-size:13px}
+.when{align-self:center;font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--mut);background:rgba(255,255,255,.75);border-radius:7px;padding:3px 9px}
+.sysm{align-self:center;max-width:95%;text-align:center;font-size:11.5px;font-weight:600;color:var(--acc);background:var(--soft);border-radius:8px;padding:4px 10px}
+
+.real{display:inline-block;font:700 10.5px/1.5 var(--sans);letter-spacing:.09em;text-transform:uppercase;border-radius:6px;padding:2px 8px;vertical-align:middle;white-space:nowrap;background:var(--ok-soft);color:var(--ok)}
+.dhero .real{background:rgba(19,134,90,.35);color:#C9F2DD}
+.topnav .lgo{height:40px;margin:-4px 0;width:auto;display:block}
+.dhero img.tooth{aspect-ratio:443/452;opacity:.08}
+.av{background:#fff}
+.av img{width:17px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(14%) sepia(40%) saturate(2000%) hue-rotate(190deg)}
+.flogo{height:44px;width:auto;display:block}
+
+/* ===== Recorrido del paciente: del formulario o WhatsApp al presupuesto aceptado ===== */
+/* resumen en una pantalla */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.flow{grid-template-columns:1fr}}
+.flow button{all:unset;box-sizing:border-box;cursor:pointer;display:grid;gap:6px;align-content:start;background:#fff;border:1px solid var(--line);border-top:4px solid var(--acc2);border-radius:16px;padding:14px 15px 15px;box-shadow:var(--sh);transition:transform .2s,box-shadow .2s;min-width:0}
+.flow button:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
+.flow button:focus-visible{outline:3px solid var(--acc2);outline-offset:2px}
+.flow button.r{border-top-color:var(--amb);background:linear-gradient(170deg,#FFFBEF,#fff 60%)}
+.flow button.d{border-top-color:var(--ok);background:linear-gradient(170deg,#F1FAF5,#fff 60%)}
+.flow i{font-style:normal;font-weight:800;font-size:12px;color:var(--acc);letter-spacing:.08em;display:flex;justify-content:space-between;gap:6px;align-items:center}
+.flow b{font-size:16px;line-height:1.25}
+.flow small{font-size:13px;color:var(--mut);line-height:1.5}
+.who{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--mut);align-items:center}
+.who span{display:inline-flex;gap:8px;align-items:center}
+/* tabla hoy / con Qualivo */
+.tw{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--sh)}
+.tw table{width:100%;border-collapse:collapse;font-size:14.5px}
+.tw th{text-align:left;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);background:var(--soft2);padding:11px 14px;border-bottom:1px solid var(--line)}
+.tw td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5}
+.tw tr:last-child td{border-bottom:0}
+.tw td:nth-child(2){color:var(--mut)}
+@media (max-width:700px){.tw thead{display:none}.tw tr{display:grid;padding:10px 0;border-bottom:1px solid var(--line)}.tw tr:last-child{border-bottom:0}.tw td{border:0;padding:4px 14px}.tw td::before{content:attr(data-label);display:block;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)}}
+.callout{display:flex;gap:14px;align-items:flex-start;background:var(--deep);color:#fff;border-radius:18px;padding:16px 20px;font-size:15.5px;line-height:1.6}
+.callout .i{color:#E2D3BA;margin-top:2px}
+.callout b{color:#E2D3BA}
+/* paso */
+.stp{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--sh-lg);display:grid;gap:18px;scroll-margin-top:160px}
+.stp > *{min-width:0}
+.stp .hd{display:flex;gap:14px;align-items:center}
+.stp .hd .n{width:42px;height:42px;border-radius:13px;background:var(--grad);color:#fff;display:grid;place-items:center;font-weight:800;font-size:16px;flex:none;box-shadow:0 8px 18px -8px rgba(47,56,84,.8)}
+.stp .hd h3{font-size:clamp(20px,2.4vw,26px)}
+.stp .hd .k{margin-bottom:3px}
+.hm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:12px}
+@media (max-width:800px){.hm{grid-template-columns:1fr}}
+.hm > div{border-radius:14px;padding:13px 16px;font-size:14.5px;line-height:1.55;display:grid;gap:6px;align-content:start}
+.hm .hoy{background:#FFF7F5;border:1px solid #F5D5CF}
+.hm .hoy .k{color:var(--bad)}
+.hm .mon{background:var(--soft2);border:1px solid #BFDDF4}
+.hm ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.q4{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:16px;align-items:start}
+@media (max-width:860px){.q4{grid-template-columns:1fr}}
+.q4 > div{min-width:0;display:grid;gap:10px;align-content:start}
+.box{border:1px solid var(--line);border-radius:14px;padding:13px 16px;font-size:14.5px;line-height:1.55;display:grid;gap:6px;background:#fff}
+.box ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.box.s{border-color:#BFDDF4;background:var(--soft2)}
+.box.r{border-color:#F6E3A6;background:#FFFBEF}
+.box.d{border-color:#BFE3CF;background:#F1FAF5}
+.box h4{font-size:14.5px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+/* formulario */
+.form{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh);overflow:hidden;font-size:13.5px}
+.form .fh{background:var(--grad);color:#fff;padding:13px 16px}
+.form .fh b{display:block;font-size:15px}
+.form .fh small{opacity:.85}
+.form .fb{padding:13px 16px 16px;display:grid;gap:12px}
+.form .qq b{display:block;font-size:13px;margin-bottom:6px}
+.form .opts{display:flex;flex-wrap:wrap;gap:5px}
+.form .opts span{border:1px solid var(--line);border-radius:99px;padding:4px 11px;font-size:12.5px}
+.form .opts span.on{background:var(--soft);border-color:var(--acc);color:var(--acc);font-weight:700}
+.form .chk{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--mut)}
+.form .chk i{width:15px;height:15px;border-radius:4px;background:var(--acc);flex:none;margin-top:2px}
+.form .send{background:var(--grad);color:#fff;text-align:center;font-weight:700;border-radius:12px;padding:10px}
+/* ficha mini */
+.crm{border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:13.5px;background:#fff}
+.crm .ch{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;background:var(--soft2);padding:9px 13px;border-bottom:1px solid var(--line)}
+.crm .ch b{font-size:14px;display:flex;gap:8px;align-items:center}
+.crm dl{margin:0;padding:10px 13px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 14px}
+.crm dt{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);padding-top:2px}
+.crm dd{margin:0;line-height:1.45;min-width:0;font-weight:600}
+.lt{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:var(--ok);color:#fff;font-weight:800;font-size:13px}
+.lt.B{background:var(--acc)}.lt.C{background:#8A97A8}
+.pill{font-size:11px;font-weight:700;border-radius:99px;padding:3px 9px;background:var(--soft);color:var(--acc);white-space:nowrap}
+.pill.t{background:#E9F6EF;color:#13744E}
+.pill.w{background:var(--amb-soft);color:var(--amb-ink)}
+/* reparto por sede */
+.route{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:center}
+.route .src{background:var(--deep);color:#fff;border-radius:16px;padding:14px 16px;font-size:14px;display:grid;gap:4px}
+.route .src b{font-size:15px}
+.route .arr{color:var(--acc);font-weight:800;font-size:22px;text-align:center}
+.route .dst{display:grid;gap:8px}
+.route .dst div{border:1px solid var(--line);border-radius:14px;padding:10px 14px;background:#fff;font-size:13.5px;display:grid;gap:2px}
+.route .dst div b{display:flex;gap:8px;align-items:center;font-size:14.5px}
+.route .dst div b i{width:10px;height:10px;border-radius:50%;background:var(--acc2);display:inline-block}
+.route .dst div.t b i{background:var(--amb)}
+.route .dst div.x b i{background:#8A97A8}
+@media (max-width:640px){.route{grid-template-columns:1fr}.route .arr{transform:rotate(90deg)}}
+/* línea de tiempo */
+.tl{display:grid;gap:9px}
+.tl > div{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 14px;font-size:14.5px}
+.tl .t{font-weight:800;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--grad);border-radius:99px;padding:5px 10px;text-align:center}
+.tl > div.r{background:#FFFBEF;border-color:#F6E3A6}
+.tl > div.r .t{background:var(--amb);color:#3A2B00}
+.tl > div.d{background:#F1FAF5;border-color:#BFE3CF}
+.tl > div.d .t{background:var(--ok)}
+.tl small{display:block;color:var(--mut);font-size:13px;margin-top:2px}
+@media (max-width:560px){.tl > div{grid-template-columns:1fr auto;gap:6px 10px}.tl .t{grid-column:1/-1;justify-self:start}}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:99px;padding:4px;gap:2px;flex-wrap:wrap}
+.seg button{font-weight:600;font-size:14px;border:0;background:none;border-radius:99px;padding:7px 15px;cursor:pointer;color:var(--mut)}
+.seg button[aria-pressed="true"]{background:var(--deep);color:#fff}
+.vx{display:none}.vx.on{display:flex}
+/* chat reproducible */
+.chat{background:var(--wa-bg);border-radius:30px;border:9px solid #0E1A2B;overflow:hidden;box-shadow:var(--sh-lg);max-width:420px;width:100%;justify-self:center}
+.chat .hd{background:var(--wa-head);color:#fff;display:flex;align-items:center;gap:10px;padding:11px 14px}
+.chat .hd small{display:block;opacity:.8;font-size:12px}
+.chat .bd{padding:14px 12px;display:flex;flex-direction:column;gap:7px;height:520px;overflow-y:auto;scroll-behavior:smooth}
+.msg{max-width:86%;padding:7px 10px 5px;border-radius:12px;font-size:14px;line-height:1.45;color:var(--ink);box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .3s ease-out;white-space:pre-line}
+.msg.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:3px}
+.msg.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:3px}
+.msg small{display:block;text-align:right;font-size:10.5px;color:#7A7A7A;margin-top:2px}
+.msg .by{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px;color:var(--acc)}
+.msg .by.r{color:#9A6A00}
+.msg.sys{align-self:center;background:var(--soft);color:var(--acc);font-size:12px;font-weight:600;box-shadow:none;max-width:95%;text-align:center}
+.msg.sys.r{background:#FFF0C7;color:#7A5600}
+.msg.sys.d{background:var(--ok-soft);color:var(--ok)}
+.msg.day{align-self:center;background:rgba(255,255,255,.8);color:var(--mut);font-size:11px;font-weight:700;box-shadow:none;padding:3px 10px}
+.msg .btns{display:grid;gap:4px;margin-top:6px}
+.msg .btns span{display:block;text-align:center;border-top:1px solid #E4E8EC;padding-top:5px;color:#027EB5;font-weight:600;font-size:13.5px}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:9px 12px;display:flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:#8A97A8;animation:bl 1s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes bl{0%,100%{opacity:.3}50%{opacity:1}}
+.scen{display:flex;gap:8px;flex-wrap:wrap}
+.scen button{font-size:13.5px;font-weight:600;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:99px;padding:8px 14px;cursor:pointer}
+.scen button[aria-pressed="true"]{background:var(--grad);color:#fff;border-color:transparent}
+.agents{display:grid;gap:10px}
+.agent{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 15px;transition:border-color .3s,box-shadow .3s}
+.agent .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--soft);color:var(--acc)}
+.agent[data-a="rec"] .ic{background:#FFF0C7;color:#9A6A00}
+.agent[data-a="doc"] .ic{background:var(--ok-soft);color:var(--ok)}
+.agent.lit{border-color:var(--acc2);box-shadow:0 0 0 3px rgba(201,183,154,.2),var(--sh)}
+.agent[data-a="rec"].lit{border-color:var(--amb);box-shadow:0 0 0 3px rgba(245,184,61,.3),var(--sh)}
+.agent[data-a="doc"].lit{border-color:var(--ok);box-shadow:0 0 0 3px rgba(19,134,90,.2),var(--sh)}
+.agent h3{font-size:15.5px}
+.agent p{font-size:13.5px;color:var(--mut);margin-top:2px}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"><style>h1,h2,.hero h1,.s h2{font-family:"Yeseva One",Georgia,serif!important;font-weight:400!important;letter-spacing:0!important}</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="tooth" viewBox="0 0 48 54"><path d="M13 3.5C6.5 2.2 2.6 8 3.1 16.4c.4 7 3.4 11.6 4.6 19.2 1 6.6 2.6 14.9 7 14.9 3.7 0 4.4-6.4 5.4-11 .8-3.4 1.9-5.2 3.9-5.2s3.1 1.8 3.9 5.2c1 4.6 1.7 11 5.4 11 4.4 0 6-8.3 7-14.9 1.2-7.6 4.2-12.2 4.6-19.2.5-8.4-3.4-14.2-9.9-12.9C30.6 4.3 27.6 6 24 6s-6.6-1.7-11-2.5z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M19 10.5c3 2.6 7 2.6 10 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+<symbol id="i-crm" viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M12 3v4M10 5h4"/><path d="M6 9h12v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><path d="M10 14h4M12 12v4"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+</defs></svg>
+
+<nav class="topnav" aria-label="Paquete Marín Clínica Dental">
+  <div class="in">
+    <div class="brand">Qualivo <span class="x">×</span> <img class="lgo" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452"></div>
+    <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="../landing-a/">Landings</a><a href="./" aria-current="page">Recorrido</a><a href="../demo/">CRM</a><a href="https://qualivo.io/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion">Intelligence</a><a href="../presentacion/">Presentación</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<img class="tooth" src="../assets/brand/diente-blanco.png" alt="" aria-hidden="true">
+<div class="wrap">
+  <p class="eyebrow">El recorrido de un paciente · Patraix (Valencia) y Torrent</p>
+  <h1>De la petición al <em>presupuesto aceptado</em>, sin que nadie se quede esperando</h1>
+  <p class="lead">Una persona pide información sobre implantes u ortodoncia, por el formulario o por WhatsApp. Aquí está todo lo que pasa después, paso a paso: qué recibe en el móvil, qué ve recepción en el CRM, qué hace el sistema solo y dónde entra siempre una persona de la clínica. El diagnóstico y el presupuesto los sigue haciendo vuestro equipo. Lo demás deja de depender de que alguien se acuerde.</p>
+  <div class="legend">
+    <div><span class="sy">Sistema</span><br><b>Lo hace solo:</b> crea la ficha, la asigna a su sede, envía los WhatsApp con textos que aprobáis vosotros, recuerda las citas y avisa a recepción de lo que toca.</div>
+    <div><span class="eq">Recepción</span><br><b>Lo hace una persona:</b> llama, agenda la primera visita, contesta las dudas de cuotas y hace la llamada del día +7. Cada sede, sus pacientes.</div>
+    <div><span class="ej">Datos de ejemplo</span> <span class="real">Real</span><br><b>Inventado:</b> pacientes, mensajes, horas y cifras; no son datos vuestros ni resultados. <b>Real:</b> las dos clínicas y las campañas de origen, tomadas de vuestros anuncios públicos en Meta.</div>
+  </div>
+</div>
+</header>
+
+<main class="wrap main">
+<nav class="tabs" role="tablist" aria-label="Pasos del recorrido">
+  <button role="tab" aria-selected="true" aria-controls="p0" id="t0"><span>0</span>En una pantalla</button>
+  <button role="tab" aria-selected="false" aria-controls="p1" id="t1"><span>1</span>Formulario o WhatsApp</button>
+  <button role="tab" aria-selected="false" aria-controls="p2" id="t2"><span>2</span>Respuesta en minutos</button>
+  <button role="tab" aria-selected="false" aria-controls="p3" id="t3"><span>3</span>Primera visita</button>
+  <button role="tab" aria-selected="false" aria-controls="p4" id="t4"><span>4</span>Presupuesto D+1 · D+3 · D+7</button>
+  <button role="tab" aria-selected="false" aria-controls="p5" id="t5"><span>5</span>Aceptado</button>
+  <button role="tab" aria-selected="false" aria-controls="p6" id="t6"><span>6</span>Verlo en marcha</button>
+</nav>
+
+<!-- 0 · EN UNA PANTALLA -->
+<section class="pane on" id="p0" role="tabpanel" aria-labelledby="t0">
+  <header>
+    <h2>El recorrido entero, <em>en una pantalla</em></h2>
+    <p>Diez momentos, desde que alguien levanta la mano hasta que acepta el presupuesto. Pulsa cualquiera para verlo en detalle. Los azules los hace el sistema; los ámbar, recepción; el verde, el equipo clínico.</p>
+    <div class="who"><span><span class="sy">Sistema</span> prepara, envía y avisa</span><span><span class="eq">Recepción</span> llama, agenda y resuelve dudas</span><span><span class="dr">Clínica</span> diagnostica y presupuesta</span></div>
+  </header>
+  <div class="flow">
+    <button data-go="1" data-to="s1"><i>01 <span class="sy">Sistema</span></i><b>Formulario o WhatsApp</b><small>Tratamiento, sede, cuotas y cuándo. Entra en el CRM con su letra A, B o C.</small></button>
+    <button data-go="2" data-to="s2"><i>02 <span class="sy">Sistema</span></i><b>A su sede</b><small>Torrent a recepción de Torrent; Patraix a recepción de Patraix.</small></button>
+    <button data-go="2" data-to="s3"><i>03 <span class="sy">Sistema</span></i><b>WhatsApp en minutos</b><small>Con el nombre de su sede y una hora para llamarle. También de noche.</small></button>
+    <button class="r" data-go="2" data-to="s3"><i>04 <span class="eq">Recepción</span></i><b>Llamada en el día</b><small>Con la ficha delante. Agenda la primera visita.</small></button>
+    <button data-go="3" data-to="s4"><i>05 <span class="sy">Sistema</span></i><b>Confirmación y recordatorios</b><small>Al agendar, 24 h antes y 2 h antes, con la dirección de su sede.</small></button>
+    <button class="d" data-go="3" data-to="s5"><i>06 <span class="dr">Clínica</span></i><b>Primera visita</b><small>Diagnóstico y presupuesto. Si no viene, otra fecha ese mismo día.</small></button>
+    <button data-go="4" data-to="s6"><i>07 <span class="sy">Sistema</span></i><b>Día +1</b><small>«¿Te quedó alguna duda del presupuesto?»</small></button>
+    <button data-go="4" data-to="s6"><i>08 <span class="sy">Sistema</span></i><b>Día +3</b><small>Cómo funcionan las cuotas, por escrito, y las dudas a recepción.</small></button>
+    <button class="r" data-go="4" data-to="s6"><i>09 <span class="eq">Recepción</span></i><b>Día +7</b><small>Llamada personal para cerrar o dar otra fecha.</small></button>
+    <button data-go="5"><i>10 <span class="sy">Sistema</span></i><b>Aceptado</b><small>Primera cita de tratamiento y señal a Meta para que traiga más pacientes así.</small></button>
+  </div>
+
+  <h3 style="margin-top:4px">Lo habitual en clínicas, frente a lo que montaríamos</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Momento</th><th>Lo habitual en clínicas</th><th>Lo que montaríamos</th></tr></thead>
+    <tbody>
+      <tr><td data-label="Momento"><b>Petición</b></td><td data-label="Lo habitual">Formularios y WhatsApp que llegan a sitios distintos. Si entra a las 22:00, se ve al día siguiente.</td><td data-label="Lo que montaríamos">Todo entra en el mismo CRM, con tratamiento, sede y prioridad. WhatsApp en minutos, a cualquier hora.</td></tr>
+      <tr><td data-label="Momento"><b>Dos sedes</b></td><td data-label="Lo habitual">Cada sede con su lista, o una sola bandeja para las dos. Nadie sabe de quién es cada paciente.</td><td data-label="Lo que montaríamos">Cada petición va a recepción de su sede. Un solo tablero con filtro: Patraix, Torrent o las dos.</td></tr>
+      <tr><td data-label="Momento"><b>Primera visita</b></td><td data-label="Lo habitual">Se agenda por teléfono y se espera que venga. Si no viene, el hueco se pierde.</td><td data-label="Lo que montaríamos">Confirmación al momento, recordatorios 24 h y 2 h antes, y otra fecha el mismo día si no viene.</td></tr>
+      <tr><td data-label="Momento"><b>Presupuesto</b></td><td data-label="Lo habitual">Se entrega y se espera a que llame. El de implantes u ortodoncia se enfría en una semana.</td><td data-label="Lo que montaríamos">Seguimiento el día +1, +3 y +7: duda, cuotas por escrito y llamada personal. Recepción ve cada día qué toca.</td></tr>
+      <tr><td data-label="Momento"><b>Lo que aprende Meta</b></td><td data-label="Lo habitual">Meta solo sabe quién rellena el formulario.</td><td data-label="Lo que montaríamos">El CRM le cuenta quién viene a la primera visita y quién acepta el presupuesto.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout"><svg class="i"><use href="#i-info"/></svg><div><b>La idea en una frase:</b> que cada persona que pregunta por implantes u ortodoncia reciba respuesta en minutos desde su sede, llegue a la primera visita y no se quede con el presupuesto en un cajón.</div></div>
+  <div class="next"><span></span><button class="btn" data-go="1">Empezar: formulario o WhatsApp <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 1 · FORMULARIO O WHATSAPP -->
+<section class="pane" id="p1" role="tabpanel" aria-labelledby="t1">
+  <header>
+    <h2>1 · Por el formulario <em>o por WhatsApp</em></h2>
+    <p>Las dos puertas llevan al mismo sitio. Por el formulario, la persona contesta cinco preguntas tocando, sin escribir. Por WhatsApp, el sistema le hace las mismas preguntas con botones. En los dos casos, la ficha nace completa.</p>
+  </header>
+  <article class="stp" id="s1">
+    <div class="hd"><b class="n">1</b><div><p class="k">Paso 1 · deja sus datos</p><h3>Cinco preguntas que ordenan la agenda de recepción</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Hoy y lo habitual en clínicas</p><ul><li><span class="real">Real</span> Vuestros anuncios de Meta («Limpieza + TAC 29,90 €», «Implante desde 1 €/día», «Ortodoncia invisible desde 3 €/día») llevan a un formulario que dice «te contactaremos lo antes posible». ¿Cuánto es «lo antes posible» un sábado por la noche?</li><li>Mensajes de WhatsApp con «¿cuánto cuesta un implante?» que se contestan cuando se puede.</li><li>Recepción llama sin saber qué quiere ni en qué sede.</li></ul></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><p>Tratamiento, sede, si le interesa pagar en cuotas, cuándo quiere empezar y cómo prefiere que le contacten. Con eso el sistema le pone una letra: <b>A</b> llamada en el día, <b>B</b> WhatsApp y seguimiento, <b>C</b> información y aviso más adelante. La regla la ajustamos con vosotros.</p></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué rellena el paciente <span class="ej">Datos de ejemplo</span></p>
+        <div class="form">
+          <div class="fh"><b>Pide tu primera visita</b><small>Te respondemos por WhatsApp en minutos</small></div>
+          <div class="fb">
+            <div class="qq"><b>1. ¿Qué te interesa?</b><div class="opts"><span class="on">Implantes</span><span>Ortodoncia invisible</span><span>Estética</span><span>Revisión</span></div></div>
+            <div class="qq"><b>2. ¿Qué sede te queda mejor?</b><div class="opts"><span>Patraix</span><span class="on">Torrent</span><span>Me da igual</span></div></div>
+            <div class="qq"><b>3. ¿Te interesa pagarlo en cuotas?</b><div class="opts"><span class="on">Sí</span><span>Pago único</span><span>Aún no lo sé</span></div></div>
+            <div class="qq"><b>4. ¿Cuándo te gustaría empezar?</b><div class="opts"><span class="on">Este mes</span><span>En 1-3 meses</span><span>Solo me informo</span></div></div>
+            <div class="qq"><b>5. ¿Cómo prefieres que te contactemos?</b><div class="opts"><span class="on">WhatsApp</span><span>Llamada</span></div></div>
+            <div class="chk"><i></i><span>Acepto que la clínica me contacte por WhatsApp o teléfono sobre mi consulta. Puedo darme de baja cuando quiera.</span></div>
+            <div class="send">Enviar</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="k">O escribe por WhatsApp <span class="ej">Datos de ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Cuenta de empresa</small></div></div>
+          <div class="bd">
+            <span class="when">Hoy</span>
+            <div class="bub me">Hola, ¿hacéis ortodoncia invisible para adultos?<small>21:48 ✓✓</small></div>
+            <div class="bub"><span class="by s">Mensaje automático</span>¡Hola! Gracias por escribirnos 😊 Sí, la hacemos. Para que te atienda la sede que te queda mejor, ¿nos dices dos cosas?
+¿Qué sede prefieres?<div class="btns"><span>Patraix</span><span>Torrent</span><span>Me da igual</span></div><small>21:48</small></div>
+            <div class="bub me">Patraix<small>21:49 ✓✓</small></div>
+            <div class="bub"><span class="by s">Mensaje automático</span>¿Cuándo te gustaría empezar?<div class="btns"><span>Este mes</span><span>En 1-3 meses</span><span>Solo me informo</span></div><small>21:49</small></div>
+            <div class="bub me">En 1-3 meses<small>21:50 ✓✓</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="q4">
+      <div class="box s"><h4><span class="sy">Sistema</span> Lo que hace solo</h4><ul><li>Crea la ficha con las respuestas y de dónde viene: anuncio, landing, web o WhatsApp directo.</li><li>Le pone su letra (A, B o C) y su sede.</li><li>Si escribe por WhatsApp, le hace las preguntas que faltan con botones. Si pregunta un precio, no lo inventa: lo pasa a recepción.</li></ul></div>
+      <div class="box r"><h4><span class="eq">Recepción</span> Lo que hace una persona</h4><p>Nada todavía. Ve la ficha nueva en su tablero, con la letra y la hora a la que hay que llamar.</p>
+        <div class="crm"><div class="ch"><b><span class="lt">A</span>Lucía G. <span class="ej">Ejemplo</span></b><span class="pill">Petición nueva · hace 1 min</span></div>
+          <dl><dt>Tratamiento</dt><dd>Implantes</dd><dt>Sede</dt><dd>Torrent</dd><dt>Cuotas</dt><dd>Sí</dd><dt>Cuándo</dt><dd>Este mes</dd><dt>Viene de</dt><dd>Meta · «Implante desde 1 €/día»</dd></dl></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="0"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn" data-go="2">Respuesta en minutos <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 2 · RESPUESTA EN MINUTOS -->
+<section class="pane" id="p2" role="tabpanel" aria-labelledby="t2">
+  <header>
+    <h2>2 · Respuesta en minutos, <em>desde la sede correcta</em></h2>
+    <p>Quien pregunta por implantes a las 21:40 está pensando en sus dientes a las 21:40. Si le contesta su sede en ese momento, con una hora concreta para hablar, el siguiente paso es fácil.</p>
+  </header>
+  <article class="stp" id="s2">
+    <div class="hd"><b class="n">2</b><div><p class="k">Paso 2 · se asigna sola</p><h3>Cada petición, a la recepción de su sede</h3></div></div>
+    <div class="route">
+      <div class="src"><span class="k" style="color:#E2D3BA">Petición nueva</span><b>Lucía G. · implantes · A</b><span style="opacity:.8">«¿Qué sede te queda mejor?» → Torrent</span></div>
+      <div class="arr" aria-hidden="true">→</div>
+      <div class="dst">
+        <div><b><i></i>Patraix</b><span>Recepción de Patraix: la ve en su tablero y recibe el aviso.</span></div>
+        <div class="t"><b><i></i>Torrent</b><span>Recepción de Torrent: <b>aquí va Lucía</b>. Aviso con la hora a la que llamar.</span></div>
+        <div class="x"><b><i></i>«Me da igual»</b><span>El sistema le pregunta su código postal y propone la más cercana. Si duda, la ve recepción.</span></div>
+      </div>
+    </div>
+    <p class="note">Cada mensaje sale con el nombre de su sede, y la llamada la hace el teléfono de esa sede. Las dos recepciones trabajan en el mismo CRM, pero cada una ve primero lo suyo.</p>
+  </article>
+  <article class="stp" id="s3">
+    <div class="hd"><b class="n">3</b><div><p class="k">Paso 3 · en los primeros minutos</p><h3>WhatsApp con su sede y una hora para llamarle</h3></div></div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el paciente <span class="ej">Datos de ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Sede Torrent</small></div></div>
+          <div class="bd">
+            <span class="when">Martes</span>
+            <span class="sysm">10:00 · Lucía rellena el formulario del anuncio «Implante desde 1 €/día»</span>
+            <div class="bub"><span class="by s">Mensaje automático</span>Hola, Lucía 😊 Te escribimos de Marín Clínica Dental, en Torrent. Hemos recibido tu consulta sobre implantes. ¿Te llamamos hoy a las 17:30 o mejor mañana por la mañana?<div class="btns"><span>Hoy a las 17:30</span><span>Mañana por la mañana</span><span>Prefiero WhatsApp</span></div><small>10:02</small></div>
+            <div class="bub me">Hoy a las 17:30 me va bien<small>10:05 ✓✓</small></div>
+            <div class="bub"><span class="by s">Mensaje automático</span>¡Perfecto! Te llamamos a esa hora desde la clínica de Torrent. Si quieres, ve pensando qué días te vienen mejor para la primera visita.<small>10:05</small></div>
+            <span class="sysm">17:30 · llamada de recepción de Torrent</span>
+            <div class="bub"><span class="by r">Recepción · Torrent</span>Lucía, como hablamos: primera visita el jueves a las 10:00 en la clínica de Torrent. Te mandamos ahora la confirmación.<small>17:41</small></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tl">
+          <div><span class="t">Minuto 0</span><span>Entra la petición. Ficha creada, letra A, sede Torrent.</span><span class="sy">Sistema</span></div>
+          <div><span class="t">Minuto 2</span><span>WhatsApp con el nombre de la sede y dos horas para llamar.<small>Si es de noche, propone la mañana siguiente.</small></span><span class="sy">Sistema</span></div>
+          <div><span class="t">Al contestar</span><span>Llamada en la agenda de recepción de Torrent, con aviso.</span><span class="sy">Sistema</span></div>
+          <div class="r"><span class="t">17:30</span><span>Llama, resuelve lo básico y agenda la primera visita.<small>Con la ficha delante: tratamiento, cuotas y cuándo.</small></span><span class="eq">Recepción</span></div>
+          <div><span class="t">+2 h</span><span>Si no contesta al WhatsApp: segundo mensaje con dos huecos libres.</span><span class="sy">Sistema</span></div>
+          <div class="r"><span class="t">Día +1</span><span>Si sigue sin contestar: aviso a recepción para volver a llamar.</span><span class="eq">Recepción</span></div>
+        </div>
+        <div class="box"><h4>Qué se mide</h4><ul><li>Minutos hasta el primer mensaje y hasta la primera llamada, por sede.</li><li>De cada 10 peticiones A, cuántas acaban con primera visita agendada.</li></ul></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="1"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn" data-go="3">Primera visita <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 3 · PRIMERA VISITA -->
+<section class="pane" id="p3" role="tabpanel" aria-labelledby="t3">
+  <header>
+    <h2>3 · Primera visita: <em>que venga</em></h2>
+    <p>Un hueco de primera visita vacío es un presupuesto que no se entrega. Tres mensajes cortos, con la dirección de su sede y un botón para cambiar la hora, hacen que más gente venga o avise a tiempo.</p>
+  </header>
+  <article class="stp" id="s4">
+    <div class="hd"><b class="n">4</b><div><p class="k">Paso 4 · confirmación y recordatorios</p><h3>Al agendar, 24 h antes y 2 h antes</h3></div></div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el paciente <span class="ej">Datos de ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Sede Torrent</small></div></div>
+          <div class="bd">
+            <span class="when">Martes · al agendar</span>
+            <div class="bub"><span class="by s">Mensaje automático</span>Lucía, tu primera visita está confirmada ✅
+📅 Jueves a las 10:00
+📍 Marín Clínica Dental · Torrent · [dirección de la sede]
+Trae, si la tienes, alguna radiografía reciente.<div class="btns"><span>Cómo llegar</span><span>Cambiar la hora</span></div><small>17:42</small></div>
+            <span class="when">Miércoles · 24 h antes</span>
+            <div class="bub"><span class="by s">Mensaje automático</span>Te esperamos mañana a las 10:00 en la clínica de Torrent. ¿Nos confirmas?<div class="btns"><span>Allí estaré</span><span>Necesito cambiarla</span></div><small>10:00</small></div>
+            <div class="bub me">Allí estaré<small>10:14 ✓✓</small></div>
+            <span class="when">Jueves · 2 h antes</span>
+            <div class="bub"><span class="by s">Mensaje automático</span>Nos vemos a las 10:00 😊 Si llegas un poco antes, mejor: así rellenas la ficha con calma.<small>08:00</small></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="box s"><h4><span class="sy">Sistema</span> Lo que hace solo</h4><ul><li>Confirma la cita con la dirección de <b>su</b> sede, no la de la otra.</li><li>Recuerda 24 h y 2 h antes, y apunta en la ficha si confirma.</li><li>Si pulsa «Necesito cambiarla», ofrece dos huecos libres y avisa a recepción.</li></ul></div>
+        <div class="box r"><h4><span class="eq">Recepción</span> Lo que hace una persona</h4><ul><li>Ve cada mañana quién ha confirmado y quién no.</li><li>Llama solo a quien no ha contestado al recordatorio de 24 h.</li></ul></div>
+        <div class="box"><h4>Qué se mide</h4><ul><li>De cada 10 primeras visitas agendadas, cuántas vienen. Por sede y por tratamiento.</li><li>Cuántas se cambian a tiempo en vez de perderse.</li></ul></div>
+      </div>
+    </div>
+  </article>
+  <article class="stp" id="s5">
+    <div class="hd"><b class="n">5</b><div><p class="k">Paso 5 · la visita</p><h3>Diagnóstico y presupuesto: siempre vuestro equipo</h3></div></div>
+    <div class="q4">
+      <div>
+        <div class="box d"><h4><span class="dr">Clínica</span> Lo que hace el equipo clínico</h4><p>La primera visita, el diagnóstico y el presupuesto. El sistema no toca nada de esto.</p></div>
+        <div class="box r"><h4><span class="eq">Recepción</span> Al terminar</h4><p>Marca en la ficha «Primera visita hecha» y «Presupuesto entregado», con el tratamiento y si lo quiere en cuotas. Son dos clics. Con eso arranca el seguimiento.</p></div>
+      </div>
+      <div>
+        <p class="k">Y si no viene <span class="ej">Datos de ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Sede Patraix</small></div></div>
+          <div class="bd">
+            <span class="sysm">10:20 · recepción marca «No vino»</span>
+            <div class="bub"><span class="by s">Mensaje automático</span>Hola, Raúl. Hoy te esperábamos a las 10:00 en la clínica de Patraix. ¿Todo bien? Te dejamos dos huecos esta semana para tu primera visita:<div class="btns"><span>Viernes 18:00</span><span>Lunes 9:30</span><span>Prefiero que me llaméis</span></div><small>10:25</small></div>
+            <div class="bub me">Perdón, se me complicó el trabajo. Viernes 18:00<small>11:02 ✓✓</small></div>
+            <div class="bub"><span class="by s">Mensaje automático</span>¡Hecho! Viernes a las 18:00 en Patraix. Te lo recordamos el día antes.<small>11:02</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="2"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn" data-go="4">Presupuesto y seguimiento <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 4 · PRESUPUESTO -->
+<section class="pane" id="p4" role="tabpanel" aria-labelledby="t4">
+  <header>
+    <h2>4 · El presupuesto <em>no se enfría</em></h2>
+    <p>Un presupuesto de implantes o de ortodoncia se piensa en casa, con la familia y con la cuenta del banco. Lo habitual es que nadie vuelva a hablar con el paciente hasta que llame él. Aquí hay tres toques, cada uno con un motivo: la duda, las cuotas y una llamada personal.</p>
+  </header>
+  <article class="stp" id="s6">
+    <div class="hd"><b class="n">6</b><div><p class="k">Paso 6 · seguimiento del presupuesto</p><h3>Día +1, día +3 y día +7</h3></div></div>
+    <div class="seg" role="group" aria-label="Tratamiento">
+      <button type="button" aria-pressed="true" data-v="imp">Implantes</button>
+      <button type="button" aria-pressed="false" data-v="orto">Ortodoncia invisible</button>
+    </div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el paciente <span class="ej">Datos de ejemplo</span></p>
+        <div class="phn vx on" data-v="imp" style="flex-direction:column"><div class="bar"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Sede Torrent</small></div></div>
+          <div class="bd">
+            <span class="when">Día +1</span>
+            <div class="bub"><span class="by s">Mensaje automático</span>Hola, Sergio. Gracias por venir ayer a la clínica de Torrent. Sabemos que un tratamiento de implantes se piensa con calma. ¿Te quedó alguna duda del presupuesto?<div class="btns"><span>Todo claro</span><span>Tengo una duda</span><span>Me lo estoy pensando</span></div><small>11:00</small></div>
+            <div class="bub me">Tengo una duda<small>13:20 ✓✓</small></div>
+            <div class="bub"><span class="by s">Mensaje automático</span>Claro. Cuéntanos y te contesta una persona de recepción de Torrent.<small>13:20</small></div>
+            <div class="bub me">¿Las cuotas tienen intereses? ¿Y puedo empezar antes de pagarlo todo?<small>13:22 ✓✓</small></div>
+            <span class="sysm">Duda de cuotas → bandeja de recepción de Torrent</span>
+            <div class="bub"><span class="by r">Recepción · Torrent</span>Hola, Sergio. Te lo explico: [condiciones de financiación de la clínica]. Si quieres, el jueves lo vemos en 5 minutos por teléfono.<small>13:41</small></div>
+            <span class="when">Día +3</span>
+            <div class="bub"><span class="by s">Mensaje automático</span>Sergio, te dejamos por escrito cómo quedaría tu presupuesto en cuotas, para que lo mires con calma:
+📄 Tu presupuesto en cuotas · [según tu plan]
+Sin compromiso: si quieres otra opción de plazos, dínoslo.<div class="btns"><span>Quiero empezar</span><span>Otra opción de plazos</span><span>Aún lo pienso</span></div><small>11:00</small></div>
+            <span class="when">Día +7</span>
+            <span class="sysm r">Recepción de Torrent llama a Sergio</span>
+          </div>
+        </div>
+        <div class="phn vx" data-v="orto" style="flex-direction:column"><div class="bar"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Sede Patraix</small></div></div>
+          <div class="bd">
+            <span class="when">Día +1</span>
+            <div class="bub"><span class="by s">Mensaje automático</span>Hola, Nuria. Gracias por venir ayer a la clínica de Patraix. ¿Te quedó alguna duda sobre la ortodoncia invisible o el presupuesto?<div class="btns"><span>Todo claro</span><span>Tengo una duda</span><span>Me lo estoy pensando</span></div><small>11:00</small></div>
+            <div class="bub me">Me lo estoy pensando<small>19:05 ✓✓</small></div>
+            <div class="bub"><span class="by s">Mensaje automático</span>Normal, es una decisión de meses. Lo que más se suele preguntar: cuánto dura, si se nota al hablar y cada cuánto hay revisión. ¿Te mandamos las respuestas?<div class="btns"><span>Sí, mándamelas</span><span>No hace falta</span></div><small>19:05</small></div>
+            <div class="bub me">Sí, mándamelas<small>19:06 ✓✓</small></div>
+            <div class="bub"><span class="by s">Mensaje automático</span>📄 Ortodoncia invisible · preguntas frecuentes
+Lo que es de tu caso concreto te lo explica el equipo de la sede.<small>19:06</small></div>
+            <span class="when">Día +3</span>
+            <div class="bub"><span class="by s">Mensaje automático</span>Nuria, te dejamos cómo quedaría el tratamiento en cuotas mensuales, para que lo veas con calma:
+📄 Tu presupuesto en cuotas · [según tu plan]<div class="btns"><span>Quiero empezar</span><span>Tengo una duda</span><span>Aún lo pienso</span></div><small>11:00</small></div>
+            <span class="when">Día +7</span>
+            <span class="sysm r">Recepción de Patraix llama a Nuria</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tl">
+          <div class="d"><span class="t">Día 0</span><span>Primera visita y presupuesto.<small>Recepción marca «Presupuesto entregado» con el tratamiento.</small></span><span class="dr">Clínica</span></div>
+          <div><span class="t">Día +1</span><span>«¿Te quedó alguna duda?» con tres botones.<small>Si tiene una duda, pasa a recepción de su sede.</small></span><span class="sy">Sistema</span></div>
+          <div><span class="t">Día +3</span><span>Las cuotas, explicadas por escrito.<small>Con el plan que le dio la clínica, sin cifras inventadas.</small></span><span class="sy">Sistema</span></div>
+          <div class="r"><span class="t">Día +7</span><span>Llamada personal para cerrar o dar otra fecha.<small>El CRM la pone en «Para hoy» con su historial.</small></span><span class="eq">Recepción</span></div>
+          <div><span class="t">Día +30</span><span>Si dijo «más adelante», un último mensaje con la fecha que eligió.</span><span class="sy">Sistema</span></div>
+        </div>
+        <div class="box s"><h4><span class="sy">Sistema</span> Reglas para todos</h4><ul><li>Cualquier respuesta del paciente para la secuencia y la pasa a recepción.</li><li>Nunca da un precio ni una condición que no esté en su presupuesto.</li><li>Nada de presión: «sin compromiso» y baja en un clic.</li></ul></div>
+        <div class="box r"><h4><span class="eq">Recepción</span> Lo que hace una persona</h4><ul><li>Contesta las dudas de cuotas y de plazos.</li><li>Hace la llamada del día +7.</li><li>Marca «Aceptado» o «Perdido» con el motivo.</li></ul></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="3"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn" data-go="5">Aceptado <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 5 · ACEPTADO -->
+<section class="pane" id="p5" role="tabpanel" aria-labelledby="t5">
+  <header>
+    <h2>5 · Presupuesto aceptado: <em>y Meta aprende</em></h2>
+    <p>Cuando acepta, el recorrido no acaba: se agenda la primera cita de tratamiento y el CRM le cuenta a Meta qué anuncio trajo a ese paciente. Así Meta deja de buscar gente que rellena formularios y empieza a buscar gente que acepta presupuestos.</p>
+  </header>
+  <article class="stp" id="s7">
+    <div class="hd"><b class="n">7</b><div><p class="k">Paso 7 · aceptado</p><h3>Primera cita de tratamiento y señal a Meta</h3></div></div>
+    <div class="q4">
+      <div><p class="k">Qué recibe el paciente <span class="ej">Datos de ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small>Sede Torrent</small></div></div>
+          <div class="bd">
+            <span class="when">Día +7</span>
+            <span class="sysm r">Llamada de recepción · Sergio acepta en cuotas</span>
+            <div class="bub"><span class="by s">Mensaje automático</span>¡Qué bien, Sergio! Ya tienes tu primera cita de tratamiento:
+📅 Martes 1 a las 9:30
+📍 Marín Clínica Dental · Torrent
+Te lo recordamos el día antes. Cualquier duda, escríbenos aquí.<small>12:10</small></div>
+            <div class="bub me">Genial, gracias 🙌<small>12:15 ✓✓</small></div>
+          </div>
+        </div>
+        <div class="crm"><div class="ch"><b><span class="lt">A</span>Sergio B. <span class="ej">Ejemplo</span></b><span class="pill t">Presupuesto aceptado</span></div>
+          <dl><dt>Sede</dt><dd>Torrent</dd><dt>Tratamiento</dt><dd>Implantes · en cuotas</dd><dt>Viene de</dt><dd>Meta · «Implante desde 1 €/día»</dd><dt>Recorrido</dt><dd>Petición → primera visita en 3 días → aceptado en 7</dd></dl></div>
+      </div>
+      <div>
+        <div class="box s"><h4><span class="sy">Sistema</span> Lo que hace solo</h4><ul><li>Mueve la ficha a «Presupuesto aceptado» y para el seguimiento.</li><li>Confirma la primera cita de tratamiento y la recuerda.</li><li>Envía a Meta las señales «primera visita» y «presupuesto aceptado», con la campaña por la que entró.</li></ul></div>
+        <div class="box r"><h4><span class="eq">Recepción</span> Lo que hace una persona</h4><p>La llamada en la que acepta y la cita. Si no acepta, marca «Perdido» con el motivo (precio, lejos, otra clínica, ahora no). Ese motivo también se mide.</p></div>
+        <div class="box"><h4>Qué se mide, por sede y por anuncio</h4><ul><li>Peticiones → primeras visitas → presupuestos entregados → aceptados.</li><li>Qué anuncio trae presupuestos aceptados, no solo formularios.</li><li>Por qué se pierden: así se ve si el problema es el precio, la sede o el seguimiento.</li></ul></div>
+        <a class="btn" href="https://qualivo.io/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion"><svg class="i"><use href="#i-chart"/></svg> Verlo en Intelligence</a>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="4"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn" data-go="6">Verlo en marcha <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 6 · VERLO EN MARCHA -->
+<section class="pane" id="p6" role="tabpanel" aria-labelledby="t6">
+  <header>
+    <h2>6 · Verlo en marcha <span class="ej">Datos de ejemplo</span></h2>
+    <p>Elige un paciente y pulsa «Reproducir». A la izquierda, lo que ve en su móvil. A la derecha, quién trabaja en cada momento: el sistema, el CRM, recepción de su sede o el equipo clínico.</p>
+  </header>
+  <div class="scen" role="group" aria-label="Paciente de ejemplo">
+    <button type="button" aria-pressed="true" data-s="lucia">Lucía · implantes · Torrent</button>
+    <button type="button" aria-pressed="false" data-s="jorge">Jorge · ortodoncia · Patraix · WhatsApp</button>
+    <button type="button" aria-pressed="false" data-s="raul">Raúl · no vino a la primera visita</button>
+  </div>
+  <div class="two">
+    <div style="display:grid;gap:12px">
+      <div class="chat">
+        <div class="hd"><span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span><div><b>Marín Clínica Dental</b><small id="chat-sede">Sede Torrent · así lo ve en su móvil</small></div></div>
+        <div class="bd" id="chat" aria-live="polite"></div>
+      </div>
+      <button type="button" class="btn" id="play" style="justify-self:center"><svg class="i"><use href="#i-play"/></svg> Reproducir</button>
+    </div>
+    <div class="agents">
+      <div class="agent" data-a="auto"><span class="ic"><svg class="i"><use href="#i-chat"/></svg></span><div><h3>Mensaje automático <span class="sy">Sistema</span></h3><p>Sale al momento, con un texto que habéis aprobado y el nombre de la sede. Nunca inventa precios ni condiciones: si hay una duda, la pasa a una persona.</p></div></div>
+      <div class="agent" data-a="crm"><span class="ic"><svg class="i"><use href="#i-crm"/></svg></span><div><h3>CRM <span class="sy">Sistema</span></h3><p>Cada paciente en su etapa y en su sede: petición nueva, contactado, primera visita agendada, hecha, presupuesto entregado, aceptado o perdido.</p></div></div>
+      <div class="agent" data-a="rec"><span class="ic"><svg class="i"><use href="#i-phone"/></svg></span><div><h3>Recepción de su sede <span class="eq">Recepción</span></h3><p>Llama, agenda, contesta las dudas de cuotas y hace la llamada del día +7.</p></div></div>
+      <div class="agent" data-a="doc"><span class="ic"><svg class="i"><use href="#i-doc"/></svg></span><div><h3>Equipo clínico <span class="dr">Clínica</span></h3><p>Primera visita, diagnóstico y presupuesto. El sistema no toca nada de esto.</p></div></div>
+      <div class="agent" data-a="meta"><span class="ic"><svg class="i"><use href="#i-chart"/></svg></span><div><h3>Señal a Meta <span class="sy">Sistema</span></h3><p>Primera visita y presupuesto aceptado vuelven a Meta para que busque más pacientes así.</p></div></div>
+    </div>
+  </div>
+  <div class="links3">
+    <a href="../demo/"><span class="k">CRM</span><b>El CRM por dentro</b><small>El tablero de 7 etapas con filtro por sede, las fichas, los WhatsApp y los presupuestos pendientes.</small></a>
+    <a href="../landing-a/"><span class="k">Landings</span><b>Implantes y ortodoncia</b><small>Las dos landings, implantes (A) y ortodoncia invisible (B), con el formulario que cualifica.</small></a>
+    <a href="../presentacion/"><span class="k">Presentación</span><b>La presentación de hoy</b><small>Qué hacemos, anuncios, recorrido, CRM y siguiente paso.</small></a>
+  </div>
+  <div class="next"><button class="btn sec" data-go="5"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn sec" data-go="0">Volver al principio</button></div>
+</section>
+</main>
+
+<footer style="background:var(--deep);color:rgba(255,255,255,.75);padding:34px 0 46px;font-size:13.5px">
+  <div class="wrap" style="display:grid;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:#fff"><img class="flogo" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452"><span style="opacity:.6">×</span><b>Qualivo</b></div>
+    <p>Propuesta preparada por Qualivo para Marín Clínica Dental · 10 de noviembre de 2026. No es una página de la clínica. Todas las personas, mensajes, horas y cifras son datos de ejemplo. La marca, las dos clínicas (Patraix, en Valencia, y Torrent) y las campañas de origen salen de dentalmarin.es y de vuestros anuncios públicos en Meta; direcciones, teléfonos y condiciones de financiación van como texto genérico.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('nav.tabs button'));
+  var panes=[].slice.call(document.querySelectorAll('.pane'));
+  function go(n,scroll,to){
+    n=Number(n);
+    tabs.forEach(function(t,i){t.setAttribute('aria-selected',i===n?'true':'false');t.tabIndex=i===n?0:-1;});
+    panes.forEach(function(p,i){p.classList.toggle('on',i===n);});
+    var bar=tabs[n].parentNode;bar.scrollLeft=tabs[n].offsetLeft-(bar.clientWidth-tabs[n].offsetWidth)/2;
+    var el=to&&document.getElementById(to);
+    if(el){setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'start'});},30);}
+    else if(scroll){var y=document.querySelector('nav.tabs').getBoundingClientRect().top+window.scrollY-80;window.scrollTo({top:y,behavior:'smooth'});}
+    try{history.replaceState(null,'','#p'+n);}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){go(i,false);});
+    t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){var k=(i+1)%tabs.length;go(k);tabs[k].focus();}if(e.key==='ArrowLeft'){var j=(i-1+tabs.length)%tabs.length;go(j);tabs[j].focus();}});
+  });
+  [].slice.call(document.querySelectorAll('[data-go]')).forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-go'),true,b.getAttribute('data-to'));});});
+  var h=(location.hash.match(/^#p(\d)$/)||[])[1]; if(h&&tabs[h])go(h,false);
+
+  // implantes / ortodoncia
+  [].slice.call(document.querySelectorAll('.seg button')).forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('.seg button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    document.querySelectorAll('.vx').forEach(function(x){x.classList.toggle('on',x.getAttribute('data-v')===b.getAttribute('data-v'));});
+  });});
+
+  // recorridos de ejemplo: [tipo, texto, carril, botones, hora, firma]
+  // in = mensaje de la clínica · out = respuesta del paciente · sys = lo que pasa por dentro · day = cambio de día
+  var S={
+    lucia:{sede:'Sede Torrent',m:[
+      ['day','Martes'],
+      ['sys','10:00 · Lucía envía el formulario del anuncio «Implante desde 1 €/día»','crm'],
+      ['sys','Ficha creada: implantes · Torrent · cuotas: sí · este mes → letra A · recepción de Torrent','crm'],
+      ['in','Hola, Lucía 😊 Te escribimos de Marín Clínica Dental, en Torrent. Hemos recibido tu consulta sobre implantes. ¿Te llamamos hoy a las 17:30 o mejor mañana por la mañana?','auto',['Hoy a las 17:30','Mañana por la mañana'],'10:02'],
+      ['out','Hoy a las 17:30','crm',null,'10:05'],
+      ['sys','Etapa → Contactado · llamada a las 17:30 en la agenda de recepción de Torrent','crm'],
+      ['sys','17:30 · Recepción de Torrent llama a Lucía y agenda la primera visita','rec'],
+      ['in','Lucía, tu primera visita está confirmada ✅\n📅 Jueves a las 10:00\n📍 Marín Clínica Dental · Torrent · [dirección]','auto',['Cómo llegar','Cambiar la hora'],'17:42'],
+      ['day','Miércoles · 24 h antes'],
+      ['in','Te esperamos mañana a las 10:00 en la clínica de Torrent. ¿Nos confirmas?','auto',['Allí estaré','Necesito cambiarla'],'10:00'],
+      ['out','Allí estaré','crm',null,'10:14'],
+      ['day','Jueves'],
+      ['sys','10:00 · Primera visita: diagnóstico y presupuesto de implantes en cuotas','doc'],
+      ['sys','Etapa → Presupuesto entregado · señal «primera visita» a Meta','meta'],
+      ['day','Viernes · día +1'],
+      ['in','Hola, Lucía. Gracias por venir ayer. Sabemos que un tratamiento de implantes se piensa con calma. ¿Te quedó alguna duda del presupuesto?','auto',['Todo claro','Tengo una duda','Me lo estoy pensando'],'11:00'],
+      ['out','¿Las cuotas se pueden alargar un poco más?','rec',null,'12:30'],
+      ['sys','Duda de cuotas → bandeja de recepción de Torrent, con la ficha al lado','rec'],
+      ['in','Hola, Lucía, te escribe recepción de Torrent. Sí, hay varias opciones de plazos: [condiciones de financiación]. ¿Te llamo el lunes y lo vemos en 5 minutos?','rec',['Sí, el lunes','Mejor por aquí'],'12:48','Recepción · Torrent'],
+      ['out','Sí, el lunes','crm',null,'12:51'],
+      ['day','Lunes · día +4'],
+      ['sys','Llamada de recepción de Torrent: Lucía acepta en cuotas','rec'],
+      ['sys','Etapa → Presupuesto aceptado · seguimiento parado · señal «presupuesto aceptado» a Meta','meta'],
+      ['in','¡Qué bien, Lucía! Ya tienes tu primera cita de tratamiento:\n📅 Jueves 4 a las 9:30 · Torrent\nTe lo recordamos el día antes.','auto',null,'17:20']
+    ]},
+    jorge:{sede:'Sede Patraix',m:[
+      ['day','Domingo'],
+      ['out','Hola, ¿hacéis ortodoncia invisible para adultos? ¿Cuánto cuesta?','crm',null,'21:48'],
+      ['sys','WhatsApp directo · ficha creada · origen: WhatsApp','crm'],
+      ['in','¡Hola! Gracias por escribirnos 😊 Sí, la hacemos. El precio depende de cada caso: te lo damos en la primera visita, con un plan cerrado y opción de cuotas. Para que te atienda tu sede, ¿cuál prefieres?','auto',['Patraix','Torrent','Me da igual'],'21:48'],
+      ['out','Patraix','crm',null,'21:49'],
+      ['in','¿Y cuándo te gustaría empezar?','auto',['Este mes','En 1-3 meses','Solo me informo'],'21:49'],
+      ['out','En 1-3 meses','crm',null,'21:50'],
+      ['sys','Ortodoncia invisible · Patraix · en 1-3 meses → letra B · recepción de Patraix','crm'],
+      ['in','Perfecto. Mañana por la mañana te escribe recepción de Patraix con dos huecos para la primera visita. ¡Buenas noches!','auto',null,'21:50'],
+      ['day','Lunes'],
+      ['in','Hola, Jorge, soy de recepción de la clínica de Patraix. Para tu primera visita de ortodoncia tengo estos huecos:','rec',['Miércoles 19:00','Viernes 10:30','Llamadme mejor'],'9:35','Recepción · Patraix'],
+      ['out','Miércoles 19:00','crm',null,'10:02'],
+      ['sys','Etapa → Primera visita agendada · confirmación y recordatorios 24 h y 2 h programados','crm'],
+      ['day','Miércoles'],
+      ['sys','19:00 · Primera visita: estudio de ortodoncia y presupuesto','doc'],
+      ['sys','Etapa → Presupuesto entregado · seguimiento D+1, D+3, D+7','crm'],
+      ['day','Jueves · día +1'],
+      ['in','Hola, Jorge. ¿Te quedó alguna duda sobre la ortodoncia invisible o el presupuesto?','auto',['Todo claro','Tengo una duda','Me lo estoy pensando'],'11:00'],
+      ['out','Me lo estoy pensando','crm',null,'20:10'],
+      ['day','Sábado · día +3'],
+      ['in','Jorge, te dejamos cómo quedaría en cuotas mensuales, para que lo veas con calma:\n📄 Tu presupuesto en cuotas · [según tu plan]','auto',['Quiero empezar','Tengo una duda','Aún lo pienso'],'11:00'],
+      ['day','Miércoles · día +7'],
+      ['sys','«Para hoy» de recepción de Patraix: llamar a Jorge','rec'],
+      ['sys','Jorge prefiere empezar en enero → recordatorio guardado para el 8 de enero','crm']
+    ]},
+    raul:{sede:'Sede Patraix',m:[
+      ['day','Lunes'],
+      ['sys','18:20 · Raúl rellena el formulario del anuncio «Implante desde 1 €/día»: implantes · Patraix · cuotas: aún no lo sé · este mes → A','crm'],
+      ['in','Hola, Raúl 😊 Te escribimos de Marín Clínica Dental, en Patraix. ¿Te llamamos mañana a las 10:00 o a las 13:00?','auto',['Mañana 10:00','Mañana 13:00'],'18:22'],
+      ['out','Mañana 13:00','crm',null,'18:40'],
+      ['sys','Martes 13:00 · recepción de Patraix llama y agenda la primera visita para el jueves a las 10:00','rec'],
+      ['day','Miércoles · 24 h antes'],
+      ['in','Te esperamos mañana a las 10:00 en la clínica de Patraix. ¿Nos confirmas?','auto',['Allí estaré','Necesito cambiarla'],'10:00'],
+      ['sys','Sin respuesta al recordatorio → aparece en «Para hoy» de recepción','rec'],
+      ['day','Jueves'],
+      ['sys','10:20 · Recepción marca «No vino»','rec'],
+      ['in','Hola, Raúl. Hoy te esperábamos a las 10:00. ¿Todo bien? Te dejamos dos huecos esta semana:','auto',['Viernes 18:00','Lunes 9:30','Prefiero que me llaméis'],'10:25'],
+      ['out','Perdón, se me complicó el trabajo. Viernes 18:00','crm',null,'11:02'],
+      ['sys','Primera visita reagendada · viernes 18:00 · recordatorios de nuevo','crm'],
+      ['day','Viernes'],
+      ['sys','18:00 · Primera visita hecha · presupuesto de implantes','doc'],
+      ['sys','Etapa → Presupuesto entregado · señal «primera visita» a Meta','meta']
+    ]}
+  };
+  var cur='lucia',timer=null,chat=document.getElementById('chat'),sedeEl=document.getElementById('chat-sede'),agents=[].slice.call(document.querySelectorAll('.agent'));
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function lit(a){agents.forEach(function(x){x.classList.toggle('lit',x.getAttribute('data-a')===a);});}
+  function render(n){
+    chat.innerHTML='';
+    S[cur].m.slice(0,n).forEach(function(m){
+      var d=document.createElement('div');d.className='msg '+m[0]+(m[0]==='sys'&&m[2]==='rec'?' r':'')+(m[0]==='sys'&&m[2]==='doc'?' d':'');
+      if(m[0]==='in'){var by=document.createElement('span');by.className='by'+(m[2]==='rec'?' r':'');by.textContent=m[5]||'Mensaje automático';d.appendChild(by);}
+      d.appendChild(document.createTextNode(m[1]));
+      if(m[3]){var b=document.createElement('div');b.className='btns';m[3].forEach(function(t){var s=document.createElement('span');s.textContent=t;b.appendChild(s);});d.appendChild(b);}
+      if(m[4]){var t=document.createElement('small');t.textContent=m[4]+(m[0]==='out'?' ✓✓':'');d.appendChild(t);}
+      chat.appendChild(d);
+    });
+    chat.scrollTop=chat.scrollHeight;
+  }
+  function play(){
+    clearTimeout(timer);var i=0,msgs=S[cur].m;chat.innerHTML='';lit(null);
+    if(reduce){render(msgs.length);return;}
+    (function step(){
+      if(i>=msgs.length){lit(null);return;}
+      var m=msgs[i];
+      if(m[0]==='in'){var ty=document.createElement('div');ty.className='typing';ty.innerHTML='<i></i><i></i><i></i>';chat.appendChild(ty);chat.scrollTop=chat.scrollHeight;lit(m[2]);
+        timer=setTimeout(function(){i++;render(i);timer=setTimeout(step,850);},900);}
+      else{i++;render(i);if(m[2])lit(m[2]);timer=setTimeout(step,m[0]==='day'?700:m[0]==='sys'?1400:1100);}
+    })();
+  }
+  document.getElementById('play').addEventListener('click',play);
+  [].slice.call(document.querySelectorAll('.scen button')).forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('.scen button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed','true');cur=b.getAttribute('data-s');clearTimeout(timer);sedeEl.textContent=S[cur].sede+' · así lo ve en su móvil';render(S[cur].m.length);lit(null);
+  });});
+  render(S[cur].m.length);
+})();
+</script>
+</body>
+</html>

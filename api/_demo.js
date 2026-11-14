@@ -143,9 +143,12 @@ function promptSaliente(b, nombre, ctx) {
     '\nCÓMO LLEVARLA\nEn tu primera frase menciona como mucho UN dato concreto del CRM (por ejemplo, que vio el directo) y pregunta si es buen momento; nada más. Lo demás que sabes sale solo si viene a cuento, una cosa por turno: no enumeres la ficha ni sumes dos preguntas seguidas. Escucha, resuelve sus dudas con lo que sabes y lleva la conversación a ' + (ctx.objetivo || ('reservar una ' + b.tipoCita)) + ': ofrece dos opciones concretas de esta semana, confirma en voz alta día y hora y di que le llega la confirmación por WhatsApp. No hace falta que exista la agenda: es una demostración. Si no le interesa, respétalo, pregunta qué le frena y despídete con amabilidad.\n\n' +
     'LO QUE SABES DEL NEGOCIO\nServicios: ' + (servicios || 'los habituales') + '.\n' + (b.gancho ? 'Dato a tener en cuenta: ' + b.gancho + '\n' : '') +
     'Si te preguntan algo que no sabes (un precio exacto, una fecha), no lo inventes: di que eso se lo confirma el equipo por WhatsApp.\n\n' +
-    'CUANDO ROMPER EL PAPEL\nSolo cuando la cita quede confirmada en voz alta o la conversación pase de tres minutos. Si dice que es una prueba o una demo, NO rompas el papel: sigue como si fuera ' + quien + '. Cuando toque, cambia de registro y di, con estas ideas y tus palabras: ' +
-    '«' + nombre + ', esto es lo que haría Raquel con cada persona de tu CRM que se queda a medias: llamarla con lo que ya sabe de ella, en el momento justo. En un minuto te llega un correo con lo que verías tú: el resumen de esta llamada y el siguiente paso. Si quieres verlo con tus datos de verdad, Maikel te lo enseña en media hora.» ' +
-    'Despídete y cuelga.\n\n' +
+    (b.romper === false
+      // Demo en una reunión (Hunty, 23-oct): no se rompe el papel, se oye en altavoz delante del cliente.
+      ? 'CÓMO TERMINAR\nNo rompas nunca el papel. Cuando la llamada con Pablo quede confirmada en voz alta, o si no le interesa, despídete con amabilidad y cuelga.\n\n'
+      : 'CUANDO ROMPER EL PAPEL\nSolo cuando la cita quede confirmada en voz alta o la conversación pase de tres minutos. Si dice que es una prueba o una demo, NO rompas el papel: sigue como si fuera ' + quien + '. Cuando toque, cambia de registro y di, con estas ideas y tus palabras: ' +
+    '«' + nombre + ', esto es lo que haría ' + b.agente + ' con cada persona de tu CRM que se queda a medias: llamarla con lo que ya sabe de ella, en el momento justo. En un minuto te llega un correo con lo que verías tú: el resumen de esta llamada y el siguiente paso. Si quieres verlo con tus datos de verdad, Maikel te lo enseña en media hora.» ' +
+    'Despídete y cuelga.\n\n') +
     'REGLAS\nNunca digas que eres una inteligencia artificial salvo que te lo pregunten directamente (entonces sí, con naturalidad). No hables de Qualivo hasta romper el papel. Una pregunta por turno. Si hay silencio de más de cinco segundos, pregunta si sigue ahí; si no contesta, despídete y cuelga.';
 }
 

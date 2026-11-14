@@ -56,7 +56,10 @@ function componer(vertical, n, c) {
   const plantilla = (CORREOS[vertical] || [])[n];
   if (!plantilla) return null;
   const nombre = nombrePila(c.firstName || c.contactName || '');
-  const empresa = String(c.companyName || '').trim().slice(0, 60) || EN_BLANCO[vertical];
+  // Un «.», un guion o «no» en el formulario no son empresa (12-nov: salió «lo que vamos a mirar en .»).
+  let empresa = String(c.companyName || '').trim().slice(0, 60);
+  if (!/[a-z0-9áéíóúüñç]{2,}/i.test(empresa) || /^(no|n\/?a|ninguna|ninguno|particular|aut[oó]nom[oa]|-+)$/i.test(empresa)) empresa = '';
+  empresa = empresa || EN_BLANCO[vertical];
   const poner = function (s, html) {
     let out = s.replace(/Hola \{\{nombre\}\}:/g, nombre ? 'Hola ' + (html ? escapar(nombre) : nombre) + ':' : 'Hola:');
     out = out.replace(/\{\{nombre\}\}/g, html ? escapar(nombre) : nombre).replace(/\{\{empresa\}\}/g, html ? escapar(empresa) : empresa);

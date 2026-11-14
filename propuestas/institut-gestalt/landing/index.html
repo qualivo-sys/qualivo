@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Formación en Terapia Gestalt · maqueta</title>
+<meta name="description" content="Maqueta de Qualivo: landing de la Formación en Terapia Gestalt del Institut Gestalt, destino de los anuncios.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%234A00E0%27/%3E%3Ccircle cx=%2713%27 cy=%2716%27 r=%276.5%27 fill=%27none%27 stroke=%27%23ffffff%27 stroke-width=%272.2%27/%3E%3Ccircle cx=%2719%27 cy=%2716%27 r=%276.5%27 fill=%27none%27 stroke=%27%23FFBA00%27 stroke-width=%272.2%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+/* Maqueta de landing para Institut Gestalt (reunión 9-nov-2026). Página autónoma; plan en ../ y demo en ../demo/.
+   Hechos usados: AETG, +40 años, sedes, recorrido de admisión, 2.270 € / 454 €. Fecha de presentación y estructura del programa: ejemplo.
+   Los formularios no envían nada. */
+:root{--paper:#FAF7F2;--surface:#FFFFFF;--surface-2:#F3EEE6;--ink:#24302C;--muted:#5E6B66;--line:#E6DFD3;--line-2:#EFE9DF;--accent:#B8573A;--accent-ink:#fff;--accent-soft:#F7E6DE;--accent-text:#9C4127;--accent-num:#B8573A;--accent-hover:#C96A4C;--sage:#4F7A68;--sage-soft:#E3EEE8;--sage-text:#3B6553;--band-soft:#F3EEE6;--warn:#B45309;--warn-soft:#FDF2E3;--good:#2E7A55;--good-soft:#E3F1E9;--bad:#B42318;--forest:#2F4A40;--night:#1E2B27;--wa:#25D366;--wa-ink:#06301A;--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--wa-text:#111B21;--wa-meta:#667781;--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,sans-serif;--shadow:0 1px 2px rgba(36,48,44,.04),0 14px 34px -18px rgba(47,74,64,.30);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141A18;--surface:#1D2522;--surface-2:#25302C;--ink:#EEF1EE;--muted:#A9B5AF;--line:#33403B;--line-2:#2A3531;--accent:#D9785A;--accent-ink:#1A0F0B;--accent-soft:#3A231B;--accent-text:#F0A386;--accent-num:#E88B6C;--accent-hover:#E48A6D;--sage:#7FB39B;--sage-soft:#1C3229;--sage-text:#8CC7AE;--band-soft:#182019;--warn:#F0B35A;--warn-soft:#2E2414;--good:#5CC795;--good-soft:#14301F;--bad:#F08A80;--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--wa-text:#E9EDEF;--wa-meta:#8696A0;--shadow:0 1px 2px rgba(0,0,0,.2),0 14px 34px -18px rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#141A18;--surface:#1D2522;--surface-2:#25302C;--ink:#EEF1EE;--muted:#A9B5AF;--line:#33403B;--line-2:#2A3531;--accent:#D9785A;--accent-ink:#1A0F0B;--accent-soft:#3A231B;--accent-text:#F0A386;--accent-num:#E88B6C;--accent-hover:#E48A6D;--sage:#7FB39B;--sage-soft:#1C3229;--sage-text:#8CC7AE;--band-soft:#182019;--warn:#F0B35A;--warn-soft:#2E2414;--good:#5CC795;--good-soft:#14301F;--bad:#F08A80;--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;--wa-text:#E9EDEF;--wa-meta:#8696A0;--shadow:0 1px 2px rgba(0,0,0,.2),0 14px 34px -18px rgba(0,0,0,.6);color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:56px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);overflow-x:hidden}
+a{color:var(--accent-text)}
+button,input,select{font:inherit;color:inherit}
+.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:16px}
+h1,h2,.serif{font-family:var(--serif)}
+
+/* Franja de maqueta (Qualivo) */
+.ribbon{position:sticky;top:0;z-index:60;background:#C9860A;color:#1B1203;font-size:12.5px;line-height:1.35}
+.ribbon .in{max-width:1120px;margin-inline:auto;padding:6px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px}
+.ribbon b{font-weight:700}
+.ribbon nav{display:flex;gap:5px;margin-left:auto;flex-wrap:wrap}
+.ribbon nav a{color:#1B1203;font-weight:700;text-decoration:none;background:rgba(255,255,255,.35);border-radius:99px;padding:1px 10px}
+.ribbon nav a:hover,.ribbon nav a[aria-current]{background:#1B1203;color:#FCE7B8}
+
+/* Cabecera de la web */
+.site{background:var(--surface);border-bottom:1px solid var(--line);position:relative;z-index:5}
+.site .in{max-width:1120px;margin-inline:auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-right:auto;min-width:0}
+.logo svg{width:34px;height:34px;flex:none}
+.logo b{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:-.01em;white-space:nowrap}
+.logo small{display:block;font-size:11px;color:var(--muted);line-height:1.2;font-weight:500;letter-spacing:.02em}
+.site nav{display:flex;gap:2px}
+.site nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;padding:6px 10px;border-radius:8px}
+.site nav a:hover{color:var(--accent-text);background:var(--accent-soft)}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;cursor:pointer;text-decoration:none;font-weight:600;font-size:16px;line-height:1.2;border-radius:999px;padding:15px 24px;min-height:52px;text-align:center;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,filter .18s}
+.btn small{display:block;font-weight:500;font-size:12.5px;opacity:.85;margin-top:2px}
+.btn-main{background:var(--accent);color:var(--accent-ink);box-shadow:0 12px 26px -12px rgba(184,87,58,.85)}
+.btn-main:hover{background:var(--accent-hover);transform:translateY(-2px)}
+.btn-wa{background:var(--wa);color:var(--wa-ink)}
+.btn-wa:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.btn-line{background:transparent;color:inherit;border:1.5px solid currentColor}
+.btn-line:hover{transform:translateY(-2px)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
+.btn:focus-visible,.chip input:focus-visible+span,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.btn,.card{transition:none!important}.btn:hover,.card:hover{transform:none!important}}
+
+/* Etiquetas */
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:1px 7px;vertical-align:middle;white-space:nowrap;font-family:var(--sans)}
+.tag.ej{border:1px dashed var(--warn);color:var(--warn);background:var(--warn-soft)}
+.tag.ok{border:1px solid color-mix(in srgb,var(--sage) 50%,transparent);color:var(--sage-text);background:var(--sage-soft)}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;isolation:isolate;color:#fff;padding:76px 0 86px;background:radial-gradient(900px 500px at 85% 20%,rgba(217,120,90,.28),transparent 60%),radial-gradient(700px 500px at 0% 100%,rgba(127,179,155,.22),transparent 60%),linear-gradient(135deg,#1A2622 0%,#2F4A40 58%,#3C5C4E 100%)}
+.hero .deco{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:620px;max-width:none;opacity:.16;z-index:-1;pointer-events:none}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr);grid-template-areas:"copy card" "ctas card" "trust card";column-gap:52px;align-items:start}
+.hcopy{grid-area:copy}
+.hctas{grid-area:ctas;display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.htrust{grid-area:trust;margin-top:24px;font-size:14px;color:rgba(255,255,255,.82)}
+.eyebrow{display:inline-block;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:rgba(217,120,90,.18);color:#FFC2AA;border:1px solid rgba(217,120,90,.5);padding:6px 12px;border-radius:99px}
+h1{font-weight:600;font-size:clamp(34px,4.8vw,58px);line-height:1.06;letter-spacing:-.025em;margin-top:18px;max-width:17ch}
+h1 em{font-style:italic;color:#F2B49B;font-weight:500}
+.hlead{margin-top:18px;font-size:17.5px;line-height:1.65;color:rgba(255,255,255,.9);max-width:54ch}
+.hsub{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;padding:0;list-style:none}
+.hsub li{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:5px 13px;font-size:14px;font-weight:600}
+.hsub .i{width:16px;height:16px;color:#F2B49B}
+.hero .btn{min-height:56px;padding:16px 26px;font-size:16.5px}
+
+.pcard{grid-area:card;background:var(--surface);color:var(--ink);border-radius:22px;padding:26px;box-shadow:0 34px 70px -28px rgba(0,0,0,.7);position:relative}
+.pcard::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;border-radius:22px 22px 0 0;background:linear-gradient(90deg,var(--accent),#E9A27F,var(--sage))}
+.pcard .lbl{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.live{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(184,87,58,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(184,87,58,.55)}70%{box-shadow:0 0 0 10px rgba(184,87,58,0)}100%{box-shadow:0 0 0 0 rgba(184,87,58,0)}}
+@media (prefers-reduced-motion:reduce){.live{animation:none}}
+.pcard h2{font-size:26px;line-height:1.15;margin-top:10px;font-weight:600}
+.when{display:flex;gap:14px;align-items:center;margin-top:16px;padding:14px;border-radius:16px;background:var(--surface-2)}
+.cal{width:62px;flex:none;border-radius:12px;overflow:hidden;text-align:center;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+.cal span{display:block;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 0}
+.cal b{display:block;font-family:var(--serif);font-size:28px;line-height:1.15;padding:3px 0 5px}
+.when p{font-size:14.5px;line-height:1.45}
+.when p b{display:block;font-size:16px}
+.pays{list-style:none;padding:0;margin-top:16px;display:grid;gap:9px}
+.pays li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45}
+.pays .i{color:var(--sage);margin-top:1px}
+.pcard .btn{width:100%;margin-top:18px}
+.pcard .fine{text-align:center}
+
+/* Secciones */
+main{display:grid;gap:88px;padding:80px 0 88px}
+section{display:grid;gap:22px;scroll-margin-top:52px}
+.kicker{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--accent);flex:none}
+h2{font-weight:600;font-size:clamp(28px,3.6vw,42px);line-height:1.12;letter-spacing:-.02em;max-width:24ch}
+h2 em{font-style:italic;color:var(--accent-text);font-weight:500}
+.sub{color:var(--muted);max-width:66ch;font-size:17px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);min-width:0;transition:transform .2s ease,box-shadow .2s ease}
+.grid>.card:hover{transform:translateY(-3px)}
+.card h3{font-size:17.5px;line-height:1.3;margin-bottom:6px;font-weight:600}
+.card p,.card li{font-size:15px;color:var(--muted)}
+.card ul{padding-left:18px;display:grid;gap:5px;margin-top:8px}
+.ico{width:46px;height:46px;border-radius:50%;background:var(--accent-soft);color:var(--accent-text);display:grid;place-items:center;margin-bottom:14px}
+.ico .i{width:22px;height:22px}
+.ico.s{background:var(--sage-soft);color:var(--sage-text)}
+.fine{font-size:13.5px;color:var(--muted);margin-top:10px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+
+/* Para quién */
+.who .q{font-family:var(--serif);font-size:20px;line-height:1.25;color:var(--ink);margin-bottom:8px;font-weight:600}
+.alsofor{display:flex;gap:14px;align-items:center;padding:16px 20px;border-radius:16px;border:1px dashed var(--line);background:var(--surface);font-size:15px;color:var(--muted)}
+.alsofor b{color:var(--ink)}
+
+/* Qué vas a vivir */
+.live-grid{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:14px;align-items:stretch}
+.op{display:grid;place-items:center;font-family:var(--serif);font-size:38px;color:var(--accent);font-weight:500}
+.vcard{position:relative;overflow:hidden}
+.vcard .big{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);line-height:1.15;margin-bottom:8px}
+.vcard.res{background:var(--forest);border-color:var(--forest);color:#fff}
+.vcard.res .big{color:#fff}
+.vcard.res p{color:rgba(255,255,255,.82)}
+.vcard svg.bg{position:absolute;right:-30px;bottom:-30px;width:140px;opacity:.12}
+.pull{font-family:var(--serif);font-size:clamp(22px,2.6vw,30px);line-height:1.3;font-weight:500;font-style:italic;max-width:36ch;color:var(--ink);border-left:3px solid var(--accent);padding-left:20px}
+
+/* Estructura */
+.band{position:relative;padding-block:72px;background:var(--band);box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax)}
+.band-light{--band:var(--band-soft)}
+.band-forest{--band:#2F4A40;--surface:#38574B;--surface-2:#406154;--ink:#FFFFFF;--muted:#D3E0D9;--line:#4C6C5F;--line-2:#46665A;--accent-text:#F4B49B;--sage-soft:rgba(127,179,155,.22);--sage-text:#A9DCC4;--warn:#FFC977;--warn-soft:rgba(255,201,119,.08);--shadow:0 18px 40px -24px rgba(0,0,0,.6);color:var(--ink)}
+.band-dark{--band:#1E2B27;--surface:#273631;--surface-2:#2F403A;--ink:#F3F5F3;--muted:#B5C2BC;--line:#3A4B45;--line-2:#34443E;--accent-text:#F4B49B;--warn:#F0B35A;--warn-soft:rgba(240,179,90,.08);--shadow:0 18px 40px -24px rgba(0,0,0,.7);color:var(--ink)}
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;position:relative}
+.steps li{position:relative}
+.steps .n{font-family:var(--serif);font-size:44px;line-height:1;color:var(--accent-num);font-weight:600;display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:12px}
+.steps .n .tag{font-size:10px}
+.rhythm{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.rhythm span{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-weight:600;font-size:14.5px}
+.rhythm .i{width:17px;height:17px;color:var(--sage-text)}
+.rhythm i{font-style:normal;color:var(--muted)}
+
+/* Confianza */
+.stat{display:flex;flex-direction:column;gap:6px}
+.stat b{font-family:var(--serif);font-size:52px;line-height:1;font-weight:600;color:var(--accent-text);letter-spacing:-.02em}
+.stat span{font-size:15px;color:var(--muted)}
+.team{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center}
+.faces{display:flex}
+.faces span{width:64px;height:64px;border-radius:50%;border:3px solid var(--surface);margin-left:-14px;display:grid;place-items:center}
+.faces span:first-child{margin-left:0}
+.faces svg{width:30px;height:30px}
+
+/* Precio y admisión */
+.pricegrid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;align-items:stretch}
+.pbox{display:grid;gap:14px;align-content:start}
+.pline{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid var(--line-2);flex-wrap:wrap}
+.pline:last-of-type{border-bottom:0}
+.pline span{font-size:15px;color:var(--muted)}
+.pline span b{display:block;color:var(--ink);font-size:16px}
+.pline strong{font-family:var(--serif);font-size:40px;line-height:1;font-weight:600;color:var(--accent-num);letter-spacing:-.02em}
+.pline strong.s{font-size:30px;color:var(--ink)}
+.becas{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:14px;background:var(--sage-soft);font-size:14.5px}
+.becas .i{color:var(--sage-text);margin-top:2px}
+.path{list-style:none;padding:0;display:grid;gap:0;counter-reset:p}
+.path li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;position:relative;padding-bottom:18px}
+.path li:last-child{padding-bottom:0}
+.path li::before{counter-increment:p;content:counter(p);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);color:var(--ink);font-weight:700;font-size:15px;position:relative;z-index:1}
+.path li::after{content:"";position:absolute;left:19px;top:40px;bottom:0;width:2px;background:var(--line)}
+.path li:last-child::after{display:none}
+.path li.hl::before{background:var(--accent);color:var(--accent-ink)}
+.path b{display:block;font-size:16px;margin-top:8px}
+.path span{font-size:14.5px;color:var(--muted)}
+
+/* WhatsApp */
+.agents{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:32px;align-items:start}
+.points{list-style:none;padding:0;display:grid;gap:14px}
+.points li{display:flex;gap:12px;align-items:flex-start;font-size:16px}
+.points .dot{width:32px;height:32px;border-radius:50%;background:var(--sage-soft);color:var(--sage-text);display:grid;place-items:center;flex:none}
+.points .dot .i{width:17px;height:17px}
+.points b{display:block}
+.points span{color:var(--muted);font-size:15px}
+.phone{max-width:360px;width:100%;justify-self:center;border-radius:36px;padding:10px;background:#0E1311;box-shadow:0 40px 80px -30px rgba(0,0,0,.65)}
+.wa{border-radius:28px;overflow:hidden;background:var(--wa-bg);display:flex;flex-direction:column}
+.wa .top{background:var(--wa-head);color:#fff;display:flex;align-items:center;gap:10px;padding:12px 14px}
+.wa .av{width:36px;height:36px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.wa .av svg{width:24px;height:24px}
+.wa .top b{display:block;font-size:15px;line-height:1.2}
+.wa .top small{font-size:12px;opacity:.8}
+.wa .body{padding:12px 10px 14px;display:flex;flex-direction:column;gap:6px;min-height:470px}
+.wa .day{align-self:center;background:var(--wa-in);color:var(--wa-meta);font-size:11.5px;border-radius:7px;padding:3px 9px;margin:4px 0;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.msg{max-width:86%;padding:7px 10px 5px;border-radius:10px;font-size:14px;line-height:1.42;color:var(--wa-text);box-shadow:0 1px 1px rgba(0,0,0,.1);transition:opacity .35s,transform .35s}
+.msg.in{align-self:flex-start;background:var(--wa-in);border-top-left-radius:3px}
+.msg.out{align-self:flex-end;background:var(--wa-out);border-top-right-radius:3px}
+.msg .meta{display:block;text-align:right;font-size:10.5px;color:var(--wa-meta);margin-top:2px}
+.msg .who{display:block;font-size:11.5px;font-weight:700;color:#1F8F5F;margin-bottom:1px}
+.doc{display:flex;gap:9px;align-items:center;background:rgba(0,0,0,.05);border-radius:8px;padding:8px;margin:6px 0 2px}
+.doc i{width:30px;height:36px;border-radius:5px;background:#C8452F;color:#fff;font-style:normal;font-size:9px;font-weight:700;display:grid;place-items:end center;padding-bottom:4px;flex:none}
+.doc b{display:block;font-size:13px;line-height:1.25}
+.doc small{font-size:11px;color:var(--wa-meta)}
+.chat.anim .msg,.chat.anim .day{opacity:0;transform:translateY(6px)}
+.chat.anim .msg.on,.chat.anim .day.on{opacity:1;transform:none}
+.chat .day{transition:opacity .35s,transform .35s}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:9px 12px;display:none;gap:4px}
+.typing.on{display:flex}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--wa-meta);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.replay{justify-self:center;background:none;border:0;color:var(--muted);font-size:13px;cursor:pointer;text-decoration:underline;margin-top:8px}
+.phonecol{display:grid;gap:4px}
+.phonecap{text-align:center;font-size:12.5px;color:var(--muted)}
+
+/* Notas de Qualivo */
+.qnote{border:2px dashed var(--warn);background:var(--warn-soft);border-radius:14px;padding:16px 18px;color:var(--ink);font-size:14.5px}
+.qnote .qh{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--warn);margin-bottom:6px}
+.qnote .qh::before{content:"Q";display:grid;place-items:center;width:20px;height:20px;border-radius:6px;background:var(--warn);color:var(--surface);font-weight:700;letter-spacing:0}
+.qnote h3{font-size:16.5px;margin-bottom:6px}
+.qnote ul{padding-left:18px;display:grid;gap:5px}
+.qnote li{color:var(--ink)}
+.qnote code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+.qnote a{font-weight:700;color:var(--warn)}
+
+/* FAQ */
+.faq{display:grid;gap:10px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);transition:border-color .2s}
+.faq details[open]{border-color:var(--accent)}
+.faq summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:600;display:flex;justify-content:space-between;gap:14px;align-items:center;font-size:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .i{color:var(--accent);transition:transform .2s}
+.faq details[open] summary .i{transform:rotate(45deg)}
+.faq .a{padding:0 18px 16px;color:var(--muted);font-size:15px;display:grid;gap:8px}
+
+/* Cierre y formulario */
+.final{position:relative;overflow:hidden;isolation:isolate;color:#fff;border-radius:28px;padding:44px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:36px;align-items:start;background:radial-gradient(600px 400px at 0% 0%,rgba(217,120,90,.28),transparent 60%),linear-gradient(135deg,#1A2622 0%,#2F4A40 100%);box-shadow:0 30px 60px -30px rgba(30,43,39,.6)}
+.final .deco{position:absolute;left:-90px;bottom:-110px;width:420px;opacity:.12;z-index:-1}
+.final h2{color:#fff}
+.final h2 em{color:#F2B49B}
+.final .sub{color:rgba(255,255,255,.85);margin-top:12px}
+.final .kicker{color:#F2B49B}
+.final .kicker::before{background:#F2B49B}
+.final .pays li{color:rgba(255,255,255,.9)}
+.final .pays .i{color:#A9DCC4}
+.final .when{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff}
+.final .cal{background:#fff;color:var(--night);border:0}
+form.call{background:var(--surface);color:var(--ink);border-radius:20px;padding:26px;display:grid;gap:16px;box-shadow:0 24px 50px -24px rgba(0,0,0,.5);position:relative}
+form.call::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;border-radius:20px 20px 0 0;background:linear-gradient(90deg,var(--accent),#E9A27F,var(--sage))}
+form.call h3{font-family:var(--serif);font-size:23px;font-weight:600;line-height:1.2}
+form.call fieldset{border:0;padding:0;min-width:0}
+form.call legend{font-weight:600;font-size:14.5px;margin-bottom:8px;padding:0;display:flex;gap:8px;align-items:baseline}
+form.call legend .qn{font-size:12px;color:var(--accent-text);font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip span{display:inline-block;border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:7px 13px;font-size:14px;font-weight:500;cursor:pointer;color:var(--ink);transition:border-color .15s,background-color .15s}
+.chip span:hover{border-color:var(--accent)}
+.chip input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:grid;gap:5px}
+.field label{font-weight:600;font-size:14px}
+.field input,.field select{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:12px;font-size:16px}
+.field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.hide{display:none!important}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted)}
+.consent input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--accent)}
+.err{color:var(--bad);font-size:13.5px;display:none}
+.err.show{display:block}
+.thanks{display:none;gap:14px}
+.thanks.show{display:grid}
+.thanks .ok{width:52px;height:52px;border-radius:50%;background:var(--good-soft);color:var(--good);display:grid;place-items:center}
+.thanks .ok .i{width:28px;height:28px}
+.thanks h3{font-size:24px}
+.next{list-style:none;padding:0;display:grid;gap:10px}
+.next li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;padding:12px;border-radius:14px;background:var(--surface-2);font-size:14.5px;line-height:1.45}
+.next li.now{background:var(--good-soft)}
+.next .k{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--surface);color:var(--sage-text)}
+.next li.now .k{background:var(--good);color:#fff}
+.next .k .i{width:17px;height:17px}
+.next b{display:block;font-size:15px;color:var(--ink)}
+.next small{color:var(--muted);font-size:13px}
+.crm{border:2px dashed var(--warn);background:var(--warn-soft);border-radius:14px;padding:12px 14px;font-size:13.5px}
+.crm .qh{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--warn);margin-bottom:6px}
+.crm dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px}
+.crm dt{color:var(--muted)}
+.crm dd{margin:0;font-weight:600}
+.prio{display:inline-block;border-radius:6px;padding:0 7px;font-weight:700}
+.prio.a{background:var(--good);color:#fff}
+.prio.b{background:var(--accent);color:var(--accent-ink)}
+.prio.c{background:var(--muted);color:var(--surface)}
+.linkbtn{background:none;border:0;padding:0;color:var(--accent-text);text-decoration:underline;cursor:pointer;font-size:13.5px;justify-self:start}
+
+/* Pie */
+.foot{background:var(--night);color:#B5C2BC;border-top:4px solid var(--accent);padding:30px 0 40px;font-size:13.5px}
+.foot .in{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.foot b{color:#fff}
+.foot a{color:#F4B49B}
+.foot .mock{grid-column:1/-1;border-top:1px solid #34443E;padding-top:14px}
+
+/* Barra fija móvil y aviso */
+.mbar{display:none}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:80;max-width:min(92vw,440px);background:var(--surface);border:2px dashed var(--warn);border-radius:12px;padding:10px 14px;font-size:13.5px;box-shadow:var(--shadow);transition:opacity .25s,transform .25s;color:var(--ink)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--warn);font-weight:600}
+
+@media (max-width:960px){
+  .grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .agents,.pricegrid,.final{grid-template-columns:1fr}
+  .live-grid{grid-template-columns:1fr;gap:6px}
+  .op{font-size:30px;line-height:1}
+  .site nav{display:none}
+  .steps{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .hgrid{grid-template-columns:1fr;grid-template-areas:"copy" "trust" "card" "ctas"}
+  .hero{padding:40px 0 44px}
+  .hero .deco{width:420px;right:-160px;top:30%}
+  .pcard{margin-top:22px;padding:22px 18px}
+  .hctas .btn{flex:1 1 100%}
+  .htrust{margin-top:14px}
+  .grid,.grid.two,.grid.four,.foot .in,.row2{grid-template-columns:1fr}
+  .team{grid-template-columns:1fr}
+  .ribbon{font-size:11.5px}
+  .ribbon .in{padding:5px 12px}
+  .ribbon nav{margin-left:0}
+  .ribbon nav a{padding:0 8px}
+  .logo small{display:none}
+  .hbtn{display:none}
+  .band{padding-block:52px}
+  main{gap:64px;padding:56px 0 64px}
+  .final{padding:28px 16px;border-radius:22px}
+  form.call{padding:20px 16px}
+  .wa .body{min-height:0}
+  .mbar{display:grid;grid-template-columns:1.25fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:var(--night);border-top:3px solid var(--accent);box-shadow:0 -10px 30px -12px rgba(0,0,0,.45)}
+  .mbar .btn{padding:9px 8px;min-height:50px;font-size:14.5px}
+  .mbar .btn small{font-size:11.5px}
+  body{padding-bottom:80px}
+  .toast{bottom:90px}
+}
+@media (max-width:420px){
+  h1{font-size:33px}
+  .hlead{font-size:16px}
+  .logo b{font-size:18px}
+  .stat b{font-size:44px}
+  .pline strong{font-size:34px}
+}
+</style>
+<style>
+/* Identidad visual del Institut Gestalt: violeta #8E2DE2 → #4A00E0, Zilla Slab + Montserrat, su logo y sus fotos. */
+:root{--grad:linear-gradient(135deg,#8E2DE2 0%,#4A00E0 100%);--sun:#FFBA00;--paper:#FCFBFE;--surface-2:#F1F4FF;--ink:#212529;--muted:#495057;--line:#E4E0F0;--line-2:#EEEBF7;--accent:#720EEC;--accent-soft:#F1E8FE;--accent-text:#5B0BC4;--accent-num:#720EEC;--accent-hover:#8E2DE2;--sage:#6A3FD8;--sage-soft:#EEE8FD;--sage-text:#4A2BA8;--band-soft:#F1F4FF;--forest:#2A0B66;--night:#1A0545;--serif:"Zilla Slab",Georgia,serif;--sans:"Montserrat",system-ui,sans-serif;--shadow:0 1px 2px rgba(74,0,224,.05),0 16px 36px -18px rgba(74,0,224,.32)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0F0A1C;--surface:#181128;--surface-2:#1E1633;--ink:#F1EDF9;--muted:#B7AECB;--line:#2E2447;--line-2:#251C3B;--accent:#9D5CFF;--accent-ink:#fff;--accent-soft:#2A1A4D;--accent-text:#C9A6FF;--accent-num:#C9A6FF;--accent-hover:#B07BFF;--sage:#B39BFF;--sage-soft:#241A40;--sage-text:#CDBBFF;--band-soft:#140E24}}
+:root[data-theme="dark"]{--paper:#0F0A1C;--surface:#181128;--surface-2:#1E1633;--ink:#F1EDF9;--muted:#B7AECB;--line:#2E2447;--line-2:#251C3B;--accent:#9D5CFF;--accent-ink:#fff;--accent-soft:#2A1A4D;--accent-text:#C9A6FF;--accent-num:#C9A6FF;--accent-hover:#B07BFF;--sage:#B39BFF;--sage-soft:#241A40;--sage-text:#CDBBFF;--band-soft:#140E24}
+body{font-family:var(--sans)}
+h1,h2{font-weight:700}
+.ribbon{background:var(--sun);color:#2A1A00}
+.ribbon nav a{color:#2A1A00}
+.ribbon nav a:hover,.ribbon nav a[aria-current]{background:#2A0B66;color:#fff}
+.site{box-shadow:0 6px 24px -18px rgba(74,0,224,.5)}
+.site .in{padding-block:10px}
+.logo .lgimg{height:44px;width:auto;display:block}
+.logo .lgsub small{font-size:11px;border-left:1px solid var(--line);padding-left:10px;margin-left:2px}
+.site nav a:hover{color:#720EEC;background:#F1E8FE}
+.btn-main{background:var(--grad);color:#fff;box-shadow:0 14px 28px -12px rgba(74,0,224,.75)}
+.btn-main:hover{background:linear-gradient(135deg,#9B45EA,#5A14EA)}
+.hero{background:#2A0B66;padding:84px 0 96px}
+.hero .hbg{position:absolute;inset:0;z-index:-2;background:linear-gradient(110deg,rgba(74,0,224,.95) 0%,rgba(114,14,236,.86) 42%,rgba(142,45,226,.5) 100%),url(../assets/brand/home.jpg) center/cover no-repeat;animation:kb 18s ease-out both}
+@keyframes kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero .deco{opacity:.1}
+.eyebrow{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35);backdrop-filter:blur(4px)}
+h1{font-size:clamp(38px,5.6vw,68px);line-height:1.02;text-wrap:balance}
+h1 em{color:#FFD15C;font-weight:500}
+.hsub li{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.28);backdrop-filter:blur(4px)}
+.hsub .i{color:#FFD15C}
+.hcopy>*,.pcard,.hctas,.htrust{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+.hcopy>*:nth-child(2){animation-delay:.08s}.hcopy>*:nth-child(3){animation-delay:.16s}.hcopy>*:nth-child(4){animation-delay:.24s}.pcard{animation-delay:.3s}.hctas{animation-delay:.36s}.htrust{animation-delay:.42s}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.pcard::before{background:var(--grad);height:7px}
+.live{box-shadow:0 0 0 0 rgba(114,14,236,.6);animation-name:pulse2}
+@keyframes pulse2{0%{box-shadow:0 0 0 0 rgba(114,14,236,.55)}70%{box-shadow:0 0 0 10px rgba(114,14,236,0)}100%{box-shadow:0 0 0 0 rgba(114,14,236,0)}}
+.cal span{background:var(--grad)}
+.kicker::before{background:var(--grad);height:3px}
+h2{font-size:clamp(30px,3.8vw,46px)}
+.card{border-radius:20px}
+.grid>.card:hover{box-shadow:0 2px 4px rgba(74,0,224,.06),0 24px 48px -22px rgba(74,0,224,.45)}
+.who{padding-top:0;overflow:hidden}
+.who .wph{display:block;width:calc(100% + 44px);max-width:none;margin:0 -22px 0;height:150px;object-fit:cover}
+.who .ico{margin-top:-23px;position:relative;border:3px solid var(--surface);background:var(--grad);color:#fff;width:50px;height:50px}
+.who .ico.s{background:linear-gradient(135deg,#FFBA00,#FF8A00)}
+.vbanner{position:relative;margin:0;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:21/8}
+.vbanner img{width:100%;height:100%;object-fit:cover;display:block}
+.vbanner::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(74,0,224,.55),transparent 60%)}
+.vbanner figcaption{position:absolute;left:22px;bottom:18px;z-index:1;color:#fff;font-family:var(--serif);font-weight:600;font-size:clamp(17px,2.2vw,24px)}
+.vcard.res{background:var(--grad);border-color:transparent}
+.band-forest{--band:#2A0B66;--surface:#36157A;--surface-2:#3F1D88;--line:#4C2A96;--line-2:#45238E;--accent-text:#FFD15C;--sage-soft:rgba(185,139,255,.2);--sage-text:#D7C2FF}
+.band-dark{--band:#1A0545;--surface:#25105A;--surface-2:#2E1868;--line:#3A2478;--line-2:#331F70;--accent-text:#FFD15C;--muted:#C9BEE6}
+.band-dark .stat b{background:linear-gradient(135deg,#FFD15C,#FFBA00);-webkit-background-clip:text;background-clip:text;color:transparent}
+.prog-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.prog-strip figure{position:relative;margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow);min-width:0}
+.prog-strip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.prog-strip figure:hover img{transform:scale(1.06)}
+.prog-strip figcaption{position:absolute;inset:auto 0 0;padding:30px 14px 12px;background:linear-gradient(transparent,rgba(42,11,102,.92));color:#fff;font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.2}
+.final{background:linear-gradient(120deg,rgba(74,0,224,.95),rgba(142,45,226,.82)),url(../assets/brand/home.jpg) center/cover}
+.final h2 em,.final .kicker{color:#FFD15C}.final .kicker::before{background:#FFD15C}
+.final .pays .i{color:#FFD15C}
+.wa .av{background:var(--grad);overflow:hidden}
+.wa .av img{width:84%;height:auto;display:block}
+.foot{background:linear-gradient(135deg,#1A0545,#2A0B66);color:#CFC4EA;border-top:0;position:relative}
+.foot::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--grad)}
+.foot a{color:#FFD15C}
+.flogo{height:34px;width:auto;margin-bottom:4px}
+.mbar{background:#1A0545}
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv.on{opacity:1;transform:none}
+@media (max-width:900px){.prog-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.logo .lgimg{height:36px}.logo .lgsub{display:none}.hero{padding:52px 0 60px}.vbanner{aspect-ratio:16/10}}
+html{overflow-x:clip}
+@media (max-width:600px){.links,.topnav .links{width:100%;justify-content:space-between;flex-wrap:wrap}.links a,.topnav .links a{padding:6px 8px;font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){.hero .hbg,.hcopy>*,.pcard,.hctas,.htrust{animation:none}.js .rv{opacity:1;transform:none;transition:none}.prog-strip img{transition:none}}
+</style>
+<script>
+document.documentElement.classList.add('js');
+addEventListener('DOMContentLoaded',function(){
+  var els=document.querySelectorAll('main section>h2, main section>.kicker, main .card, main .vbanner, main .prog-strip figure, main .final');
+  if(!('IntersectionObserver' in window)){return document.documentElement.classList.remove('js');}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var t=e.target;t.classList.add('on');io.unobserve(t);setTimeout(function(){t.classList.remove('rv','on');t.style.transitionDelay='';},1100);}});},{rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el,i){el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms';io.observe(el);});
+  setTimeout(function(){els.forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)el.classList.add('on');});},1200);
+});
+</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 8.5c0 3.3 3.2 6.5 6.5 6.5l1-1.6-2-1-1 .9c-1.2-.5-2.3-1.6-2.8-2.8l.9-1-1-2z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="2"/><path d="m15.5 10.5 6-3.5v10l-6-3.5"/></symbol>
+  <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-2.5 5 2.5-1.5-7"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19 13 11"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-4.6-8-10.4A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8 2.6C20 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.2A6.5 6.5 0 0 1 21.5 20"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-loop" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3L20 9"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5.3L4 15"/><path d="M4 20v-5h5"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="11.5" rx="1.5"/><path d="M2.5 9h19v-3.5h-19zM12 5.5v15"/><path d="M12 5.5C10.5 2.5 7 3 7.5 5.5M12 5.5c1.5-3 5-2.5 4.5 0"/></symbol>
+</svg>
+
+<div class="ribbon" role="note"><div class="in">
+  <span><b>Maqueta de Qualivo para Institut Gestalt</b> · datos de ejemplo</span>
+  <nav aria-label="Qualivo × Institut Gestalt"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="./" aria-current="page">Landing</a><a href="../recorrido/">Recorrido</a><a href="../demo/">Demo</a></nav>
+</div></div>
+
+<header class="site"><div class="in">
+  <a class="logo" href="#top" aria-label="Institut Gestalt, inicio">
+    <img class="lgimg" src="../assets/brand/logo-color.png" alt="Institut Gestalt" width="2362" height="987">
+    <span class="lgsub"><small>Barcelona · Madrid · online</small></span>
+  </a>
+  <nav aria-label="Secciones"><a href="#para-quien">Para quién</a><a href="#vivir">La formación</a><a href="#admision" data-track="ver_precio">Matrícula</a><a href="#preguntas">Preguntas</a></nav>
+  <a class="btn btn-main hbtn" href="#reserva" data-track="reservar_presentacion" style="min-height:42px;padding:10px 18px;font-size:14.5px">Presentación gratuita</a>
+</div></header>
+
+<section class="hero" id="top" aria-labelledby="h-hero">
+  <div class="hbg" aria-hidden="true"></div>
+  <svg class="deco" viewBox="0 0 600 600" fill="none" stroke="#ffffff" stroke-width="1.4" aria-hidden="true"><circle cx="240" cy="300" r="190"/><circle cx="360" cy="300" r="190"/><circle cx="240" cy="300" r="130"/><circle cx="360" cy="300" r="130"/><circle cx="240" cy="300" r="70"/><circle cx="360" cy="300" r="70"/></svg>
+  <div class="wrap hgrid">
+    <div class="hcopy">
+      <p class="eyebrow">Formación en Terapia Gestalt</p>
+      <h1 id="h-hero">Acompañas a personas. <em>Fórmate para hacerlo desde ti.</em></h1>
+      <p class="hlead">Una formación vivencial: haces tu propio proceso personal mientras aprendes la técnica gestáltica, para llevarla a tu consulta, a tus sesiones o a tu equipo. Para psicólogos, coaches, educadores, terapeutas y profesionales de la salud.</p>
+      <ul class="hsub" aria-label="Lo principal">
+        <li><svg class="i" aria-hidden="true"><use href="#i-badge"/></svg>Certificada por la AETG</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-leaf"/></svg>Más de 40 años acompañando procesos</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg>Barcelona · Madrid · online</li>
+      </ul>
+    </div>
+
+    <aside class="pcard" aria-labelledby="h-pres">
+      <p class="lbl"><span class="live" aria-hidden="true"></span>Próxima presentación gratuita <span class="tag ej">fecha de ejemplo</span></p>
+      <h2 id="h-pres">Conoce la formación y al equipo docente, por Zoom</h2>
+      <div class="when">
+        <div class="cal" aria-hidden="true"><span>nov</span><b>26</b></div>
+        <p><b>Jueves 26 de noviembre</b>19:00 h · online por Zoom · gratuita</p>
+      </div>
+      <ul class="pays">
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Cómo es la formación por dentro y cómo se compagina con tu trabajo</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Preguntas en directo al equipo docente del Institut</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Al apuntarte, te llega el dosier por WhatsApp</span></li>
+      </ul>
+      <a class="btn btn-main" href="#reserva" data-track="reservar_presentacion">Guardar mi plaza <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <p class="fine">Sin compromiso · 4 preguntas · 1 minuto</p>
+    </aside>
+
+    <div class="hctas">
+      <a class="btn btn-main" href="#reserva" data-track="reservar_presentacion"><svg class="i" aria-hidden="true"><use href="#i-video"/></svg>Quiero ir a la presentación</a>
+      <a class="btn btn-ghost" href="#reserva" data-track="pedir_dosier"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>Solo el dosier, por ahora</a>
+    </div>
+
+    <p class="htrust">Sede en Carrer de Verdi 94, Gràcia (Barcelona) · también en Madrid y online</p>
+  </div>
+</section>
+
+<main class="wrap">
+
+<!-- Para quién es -->
+<section id="para-quien" aria-labelledby="h-quien">
+  <p class="kicker">Para quién es</p>
+  <h2 id="h-quien">Para quien ya acompaña a otras personas <em>y quiere hacerlo mejor</em></h2>
+  <p class="sub">Si tu trabajo consiste en estar con otras personas en momentos importantes, la herramienta que más usas eres tú. Esta formación trabaja las dos cosas: tu manera de estar y tu manera de intervenir.</p>
+  <div class="grid four">
+    <article class="card who"><img class="wph" src="../assets/brand/gestalt.jpg" alt=""><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></div><p class="q">Psicólogos y terapeutas</p><p>Que quieren sumar un enfoque humanista y vivencial a su consulta, individual o de grupo.</p></article>
+    <article class="card who"><img class="wph" src="../assets/brand/coaching.jpg" alt=""><div class="ico s"><svg class="i" aria-hidden="true"><use href="#i-compass"/></svg></div><p class="q">Coaches</p><p>Que sienten que la técnica se les queda corta cuando la sesión toca algo más profundo.</p></article>
+    <article class="card who"><img class="wph" src="../assets/brand/pedagogia-sistemica.jpg" alt=""><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-people"/></svg></div><p class="q">Educadores y trabajo social</p><p>Docentes, educadores sociales y orientadores que acompañan a niños, jóvenes o familias.</p></article>
+    <article class="card who"><img class="wph" src="../assets/brand/terapia-corporal.jpg" alt=""><div class="ico s"><svg class="i" aria-hidden="true"><use href="#i-cross"/></svg></div><p class="q">Profesionales de la salud</p><p>Enfermería, medicina, fisioterapia o terapia corporal: quien cuida y quiere cuidar también el vínculo.</p></article>
+  </div>
+  <p class="alsofor"><svg class="i" aria-hidden="true" style="color:var(--sage-text)"><use href="#i-leaf"/></svg><span><b>¿Vienes de otro ámbito?</b> Cuéntanoslo en el formulario. En la entrevista previa vemos juntos si esta formación es para ti o si te encaja mejor otra del Institut.</span></p>
+</section>
+
+<!-- Qué vas a vivir -->
+<section id="vivir" aria-labelledby="h-vivir">
+  <p class="kicker">Qué vas a vivir</p>
+  <h2 id="h-vivir">No es un curso para tomar apuntes. <em>Es una formación vivencial.</em></h2>
+  <figure class="vbanner"><img src="../assets/brand/gestalt.jpg" alt="Grupo de formación en el Institut Gestalt" loading="lazy"><figcaption>Formación en Terapia Gestalt · Institut Gestalt</figcaption></figure>
+  <div class="live-grid">
+    <div class="card vcard">
+      <div class="ico"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></div>
+      <p class="big">Tu proceso personal</p>
+      <p>Te miras a ti en grupo: lo que te mueve, lo que te frena, cómo te relacionas. Lo que vives en ti es lo que luego podrás sostener en otros.</p>
+    </div>
+    <div class="op" aria-hidden="true">+</div>
+    <div class="card vcard">
+      <div class="ico s"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></div>
+      <p class="big">La técnica gestáltica</p>
+      <p>Teoría y metodología de la terapia Gestalt, y práctica entre compañeros para llevarla a situaciones reales de acompañamiento.</p>
+    </div>
+    <div class="op" aria-hidden="true">=</div>
+    <div class="card vcard res">
+      <svg class="bg" viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="3" aria-hidden="true"><circle cx="40" cy="50" r="30"/><circle cx="60" cy="50" r="30"/></svg>
+      <div class="ico" style="background:rgba(255,255,255,.14);color:#FFD15C"><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg></div>
+      <p class="big">Tu manera de acompañar</p>
+      <p>Más presencia, más recursos y más confianza para estar con lo que trae cada persona, en tu consulta, en clase o en tus sesiones.</p>
+    </div>
+  </div>
+  <p class="pull">«Aquí y ahora, darse cuenta, contacto»: en la Gestalt estas palabras no se estudian solo en un libro; primero se viven en el grupo.</p>
+</section>
+
+<!-- Estructura -->
+<section id="programa" class="band band-light" aria-labelledby="h-prog">
+  <p class="kicker">Cómo se estructura</p>
+  <h2 id="h-prog">Un recorrido por etapas, <em>con el mismo grupo</em></h2>
+  <p class="sub">Horas, módulos y calendario de tu edición vienen en el dosier. Aquí, la idea general de cómo avanza la formación.</p>
+  <ol class="steps">
+    <li class="card"><p class="n">01 <span class="tag ej">ejemplo</span></p><h3>Fundamentos y proceso personal</h3><p>Las bases de la terapia Gestalt, vividas primero en ti y en el grupo. Se crea el grupo de formación con el que harás el camino.</p></li>
+    <li class="card"><p class="n">02 <span class="tag ej">ejemplo</span></p><h3>Metodología y práctica</h3><p>Las herramientas de la Gestalt, practicadas entre compañeros, con observación y devolución del equipo docente.</p></li>
+    <li class="card"><p class="n">03 <span class="tag ej">ejemplo</span></p><h3>Práctica acompañada e integración</h3><p>Llevas lo aprendido a tu trabajo con acompañamiento del equipo docente, y cierras el proceso con el grupo.</p></li>
+  </ol>
+  <div class="rhythm" aria-label="Cómo es un encuentro, ejemplo">
+    <span><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>Teoría</span><i aria-hidden="true">→</i>
+    <span><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg>Vivencia</span><i aria-hidden="true">→</i>
+    <span><svg class="i" aria-hidden="true"><use href="#i-people"/></svg>Práctica en grupo</span><i aria-hidden="true">→</i>
+    <span><svg class="i" aria-hidden="true"><use href="#i-loop"/></svg>Integración</span>
+    <span class="tag ej">ejemplo</span>
+  </div>
+  <aside class="qnote" aria-label="Nota para Institut Gestalt">
+    <p class="qh">Nota para Institut Gestalt</p>
+    <p>Las tres etapas son una estructura de ejemplo para la maqueta. En la versión real va vuestro programa tal cual (cursos, módulos, horas y sede), y el dosier completo se envía por WhatsApp en cuanto alguien se apunta.</p>
+  </aside>
+  <div class="cta-row"><a class="btn btn-main" href="#reserva" data-track="pedir_dosier"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>Recibir el programa completo</a></div>
+</section>
+
+<!-- Confianza -->
+<section id="institut" class="band band-dark" aria-labelledby="h-inst">
+  <p class="kicker">Por qué el Institut Gestalt</p>
+  <h2 id="h-inst">Más de cuarenta años <em>acompañando procesos</em></h2>
+  <div class="grid">
+    <div class="card stat"><b>+40</b><span>años de trayectoria formando a profesionales del acompañamiento</span></div>
+    <div class="card stat"><b>AETG</b><span>Formación certificada por la Asociación Española de Terapia Gestalt</span></div>
+    <div class="card stat"><b>3</b><span>espacios para formarte: Barcelona (Gràcia), Madrid y online</span></div>
+  </div>
+  <div class="card team">
+    <div class="faces" aria-hidden="true">
+      <span style="background:#8E2DE2"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+      <span style="background:#4A00E0"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+      <span style="background:#720EEC"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+      <span style="background:#2A0B66"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+    </div>
+    <div>
+      <h3 style="font-size:20px">El equipo docente del Institut</h3>
+      <p>La formación la imparte el equipo docente del Institut Gestalt. En la presentación por Zoom los conoces, te explican cómo trabajan y les preguntas lo que necesites antes de decidir.</p>
+      <p class="fine"><span class="tag ej">Qualivo</span> Aquí irían las fotos y una línea de presentación de cada docente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Matrícula y admisión -->
+<section id="admision" aria-labelledby="h-adm">
+  <p class="kicker">Matrícula y admisión</p>
+  <h2 id="h-adm">Sin sorpresas: <em>precio claro y una conversación antes de decidir</em></h2>
+  <div class="pricegrid">
+    <div class="card pbox">
+      <div class="pline"><span><b>Matrícula de referencia</b>Formación en Terapia Gestalt</span><strong>2.270 €</strong></div>
+      <div class="pline"><span><b>Reserva de plaza</b>Cuando decides empezar, tras la entrevista</span><strong class="s">454 €</strong></div>
+      <div class="becas"><svg class="i" aria-hidden="true"><use href="#i-gift"/></svg><span><b>¿Descuentos o becas?</b> Pregúntalo en la entrevista: te contamos qué hay disponible en tu edición. <span class="tag ej">a confirmar</span></span></div>
+      <p class="fine" style="margin-top:0">Importe de referencia según la web del Institut. Condiciones y formas de pago de cada edición: en el dosier.</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:19px;margin-bottom:16px">Cómo se entra en la formación</h3>
+      <ol class="path">
+        <li class="hl"><div><b>Pides el dosier</b><span>Te llega por WhatsApp en minutos, con el programa y las fechas.</span></div></li>
+        <li class="hl"><div><b>Vienes a la presentación gratuita por Zoom</b><span>Conoces la formación y al equipo docente, y preguntas en directo.</span></div></li>
+        <li><div><b>Entrevista previa con una persona del Institut</b><span>Una conversación para ver si es tu momento y tu formación.</span></div></li>
+        <li><div><b>Reservas tu plaza</b><span>454 €.</span></div></li>
+        <li><div><b>Matrícula</b><span>Y empiezas con tu grupo.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Qué pasa después -->
+<section id="despues" class="band band-forest" aria-labelledby="h-desp">
+  <p class="kicker">Qué pasa cuando te apuntas</p>
+  <h2 id="h-desp">El dosier en tu WhatsApp, <em>en minutos</em></h2>
+  <div class="agents">
+    <div style="display:grid;gap:22px">
+      <p class="sub">Nada de esperar días a que alguien te escriba. Te llega el dosier al momento, te guardamos plaza en la presentación y te la recordamos para que no se te pase.</p>
+      <ul class="points">
+        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg></span><div><b>El dosier, al momento</b><span>Programa, fechas, sede y matrícula, en un PDF por WhatsApp (o por email, si lo prefieres).</span></div></li>
+        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg></span><div><b>Tu plaza en la presentación</b><span>Te guardamos sitio en la próxima presentación gratuita por Zoom.</span></div></li>
+        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-bell"/></svg></span><div><b>Un recordatorio, con el enlace</b><span>El día antes y un rato antes de empezar, para que entres con un clic.</span></div></li>
+        <li><span class="dot"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span><div><b>La entrevista, siempre con una persona</b><span>Si después quieres seguir, eliges hora para hablar con alguien del Institut.</span></div></li>
+      </ul>
+      <aside class="qnote" aria-label="Nota para Institut Gestalt">
+        <p class="qh">Nota para Institut Gestalt</p>
+        <h3>Lo que pasa por detrás de cada solicitud</h3>
+        <ul>
+          <li><b>Ficha en el CRM</b> con perfil, formación, cuándo quiere empezar y anuncio de origen.</li>
+          <li><b>Prioridad</b> para que el equipo hable primero con quien encaja y quiere empezar ya.</li>
+          <li><b>Los mensajes los aprobáis vosotros</b>; la entrevista la hace siempre una persona del Institut.</li>
+          <li><b>Señal a Meta</b> de quién llega a entrevista, reserva y matrícula, para que traiga más perfiles así.</li>
+        </ul>
+        <p style="margin-top:8px"><a href="../demo/">Verlo paso a paso en la demo →</a></p>
+      </aside>
+    </div>
+
+    <div class="phonecol">
+      <div class="phone">
+        <div class="wa" role="img" aria-label="Ejemplo de conversación de WhatsApp entre el Institut Gestalt y Nuria, psicóloga, después de apuntarse a la presentación">
+          <div class="top">
+            <span class="av" aria-hidden="true"><img src="../assets/brand/logo-blanco.png" alt=""></span>
+            <div><b>Institut Gestalt</b><small>Admisiones</small></div>
+          </div>
+          <div class="body chat" id="chat">
+            <span class="day">Hoy · 21:42</span>
+            <div class="msg in"><span class="who">Institut Gestalt</span>Hola, Nuria. Gracias por tu interés en la Formación en Terapia Gestalt. Aquí tienes el dosier:
+              <span class="doc"><i>PDF</i><span><b>Dosier · Formación en Terapia Gestalt</b><small>Programa, fechas y matrícula</small></span></span><span class="meta">21:42</span></div>
+            <div class="msg in"><span class="who">Institut Gestalt</span>Te hemos guardado plaza en la presentación gratuita por Zoom del <b>jueves 26 de noviembre a las 19:00 h</b>. ¿Te va bien?<span class="meta">21:42</span></div>
+            <div class="msg out">Sí, perfecto. Soy psicóloga, ¿se puede compaginar con la consulta?<span class="meta">21:44 ✓✓</span></div>
+            <div class="msg in"><span class="who">Institut Gestalt</span>Es justo de lo que se habla en la presentación, y allí puedes preguntarlo al equipo docente. Si luego quieres seguir, te proponemos una entrevista con una persona del Institut.<span class="meta">21:44</span></div>
+            <div class="msg out">Genial, allí estaré.<span class="meta">21:45 ✓✓</span></div>
+            <span class="day">Jueves 26 · 18:00</span>
+            <div class="msg in"><span class="who">Institut Gestalt</span>Nuria, hoy a las 19:00 h es la presentación. Tu enlace de Zoom: zoom.us/j/…<span class="meta">18:00</span></div>
+            <div class="typing" id="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+      <p class="phonecap">Conversación de ejemplo · nombre y fecha inventados</p>
+      <button class="replay" type="button" id="replay">Volver a ver la conversación</button>
+    </div>
+  </div>
+</section>
+
+<!-- Otras formaciones (identidad visual) -->
+<section id="otras" aria-labelledby="h-otras">
+  <p class="kicker">También en el Institut</p>
+  <h2 id="h-otras">Otras formaciones <em>del Institut Gestalt</em></h2>
+  <div class="prog-strip">
+    <figure><img src="../assets/brand/constelaciones.jpg" alt=""><figcaption>Constelaciones Familiares</figcaption></figure>
+    <figure><img src="../assets/brand/terapia-corporal.jpg" alt=""><figcaption>Terapia corporal</figcaption></figure>
+    <figure><img src="../assets/brand/coaching.jpg" alt=""><figcaption>Coaching</figcaption></figure>
+    <figure><img src="../assets/brand/pnl.jpg" alt=""><figcaption>PNL</figcaption></figure>
+  </div>
+</section>
+
+<!-- Preguntas -->
+<section id="preguntas" aria-labelledby="h-faq">
+  <p class="kicker">Preguntas frecuentes</p>
+  <h2 id="h-faq">Lo que más nos preguntan</h2>
+  <div class="faq">
+    <details><summary>¿Tengo que ser psicólogo para hacer la formación?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Está pensada para profesionales que acompañan a personas: psicólogos, coaches, educadores, terapeutas y profesionales de la salud. Si vienes de otro ámbito, lo hablamos en la entrevista previa y vemos juntos si es tu formación.</p></div></details>
+    <details><summary>¿Qué certificación tiene?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>La formación está certificada por la Asociación Española de Terapia Gestalt (AETG). En el dosier y en la presentación te explicamos qué implica para tu práctica profesional.</p></div></details>
+    <details><summary>¿Es presencial u online?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>El Institut forma en Barcelona (Carrer de Verdi 94, Gràcia), en Madrid y online. En el dosier ves la modalidad, la sede y las fechas de cada edición.</p></div></details>
+    <details><summary>¿Cuánto cuesta?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>La matrícula de referencia es de 2.270 € y la plaza se reserva con 454 €. Las condiciones y formas de pago de tu edición vienen en el dosier, y en la entrevista puedes preguntar por descuentos o becas.</p></div></details>
+    <details><summary>¿Cómo es la presentación por Zoom?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Es gratuita y sin compromiso. El equipo docente explica cómo es la formación por dentro y responde preguntas en directo. Te enviamos el enlace por WhatsApp y te lo recordamos antes de empezar.</p></div></details>
+    <details><summary>¿Para qué sirve la entrevista previa?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Para que una persona del Institut te conozca, resuelva tus dudas y veáis juntos si es tu momento. Siempre la hace una persona, nunca un sistema automático.</p></div></details>
+    <details><summary>¿Tenéis otras formaciones?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="a"><p>Sí: Constelaciones Familiares, Constelaciones Familiares en Terapia Individual (online), PNL, coaching, trauma, terapia corporal y talleres. Puedes marcar la que te interesa en el formulario.</p></div></details>
+  </div>
+</section>
+
+<!-- Cierre y formulario -->
+<section id="reserva" aria-labelledby="h-final">
+  <div class="final">
+    <svg class="deco" viewBox="0 0 400 400" fill="none" stroke="#ffffff" stroke-width="1.4" aria-hidden="true"><circle cx="160" cy="200" r="130"/><circle cx="240" cy="200" r="130"/><circle cx="160" cy="200" r="80"/><circle cx="240" cy="200" r="80"/></svg>
+    <div>
+      <p class="kicker">Presentación gratuita por Zoom</p>
+      <h2 id="h-final">Ven a conocerla <em>antes de decidir</em></h2>
+      <p class="sub">Cuatro preguntas para que te enviemos la información que de verdad te sirve. Te llega el dosier por WhatsApp y te guardamos plaza en la presentación.</p>
+      <div class="when" style="margin-top:20px">
+        <div class="cal" aria-hidden="true"><span>nov</span><b>26</b></div>
+        <p><b>Jueves 26 de noviembre · 19:00 h</b>Online por Zoom · gratuita <span class="tag ej" style="background:transparent">fecha de ejemplo</span></p>
+      </div>
+      <ul class="pays" style="margin-top:18px">
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Formación certificada por la AETG</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Más de 40 años acompañando procesos</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Matrícula de referencia 2.270 € · reserva de plaza 454 €</span></li>
+      </ul>
+    </div>
+
+    <form class="call" id="callform" novalidate>
+      <div id="formfields" style="display:grid;gap:16px">
+        <h3>Guarda tu plaza en la presentación</h3>
+        <fieldset>
+          <legend><span class="qn">1/4</span>¿A qué te dedicas?</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="perfil" value="Psicología"><span>Psicología</span></label>
+            <label class="chip"><input type="radio" name="perfil" value="Coaching"><span>Coaching</span></label>
+            <label class="chip"><input type="radio" name="perfil" value="Educación / trabajo social"><span>Educación / trabajo social</span></label>
+            <label class="chip"><input type="radio" name="perfil" value="Salud"><span>Salud</span></label>
+            <label class="chip"><input type="radio" name="perfil" value="Terapia corporal / otras terapias"><span>Otras terapias</span></label>
+            <label class="chip"><input type="radio" name="perfil" value="Otro ámbito"><span>Otro ámbito</span></label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="f-form"><span class="qn" style="font-size:12px;color:var(--accent-text);font-weight:700;margin-right:8px">2/4</span>¿Qué formación te interesa?</label>
+          <select id="f-form" name="formacion">
+            <option value="Formación en Terapia Gestalt" selected>Formación en Terapia Gestalt</option>
+            <option value="Constelaciones Familiares">Constelaciones Familiares</option>
+            <option value="Constelaciones Familiares en Terapia Individual">Constelaciones Familiares en Terapia Individual (online)</option>
+            <option value="PNL">PNL</option>
+            <option value="Coaching">Coaching</option>
+            <option value="Trauma">Trauma</option>
+            <option value="Terapia corporal">Terapia corporal</option>
+            <option value="Aún no lo sé">Aún no lo sé</option>
+          </select>
+        </div>
+        <fieldset>
+          <legend><span class="qn">3/4</span>¿Cuándo te gustaría empezar?</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="cuando" value="En la próxima edición"><span>En la próxima edición</span></label>
+            <label class="chip"><input type="radio" name="cuando" value="En los próximos meses"><span>En los próximos meses</span></label>
+            <label class="chip"><input type="radio" name="cuando" value="El curso que viene"><span>El curso que viene</span></label>
+            <label class="chip"><input type="radio" name="cuando" value="Solo me estoy informando"><span>Solo me estoy informando</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><span class="qn">4/4</span>¿Cómo prefieres que te contactemos?</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="canal" value="WhatsApp" checked><span>WhatsApp</span></label>
+            <label class="chip"><input type="radio" name="canal" value="Llamada"><span>Llamada</span></label>
+            <label class="chip"><input type="radio" name="canal" value="Email"><span>Email</span></label>
+          </div>
+        </fieldset>
+        <div class="row2">
+          <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="given-name"></div>
+          <div class="field"><label for="f-tel">Móvil</label><input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="6XX XXX XXX"></div>
+        </div>
+        <div class="field hide" id="f-mail-wrap"><label for="f-mail">Email</label><input id="f-mail" name="mail" type="email" autocomplete="email" placeholder="tu@email.com"></div>
+        <label class="consent"><input type="checkbox" id="f-ok"><span>Acepto la política de privacidad y que el Institut Gestalt me contacte sobre esta formación por el canal que he elegido.</span></label>
+        <p class="err" id="f-err" role="alert">Responde las cuatro preguntas, deja tu nombre y tu móvil y marca la casilla, por favor.</p>
+        <button class="btn btn-main" type="submit" style="width:100%">Guardar mi plaza y recibir el dosier</button>
+        <p class="fine" style="margin-top:-6px;text-align:center">Maqueta: no se envía ningún dato.</p>
+      </div>
+
+      <div class="thanks" id="thanks" aria-live="polite" tabindex="-1">
+        <span class="ok"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span>
+        <h3 id="thanks-h">¡Hecho!</h3>
+        <p id="thanks-p" style="color:var(--muted);font-size:15px"></p>
+        <ol class="next" id="next"></ol>
+        <div class="crm" id="crm"></div>
+        <button class="linkbtn" type="button" id="again">Probar con otras respuestas</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Nota final de Qualivo -->
+<aside class="qnote" aria-label="Qué cambia respecto al formulario instantáneo">
+  <p class="qh">Nota para Institut Gestalt</p>
+  <h3>Qué cambia respecto al formulario instantáneo de los anuncios</h3>
+  <ul>
+    <li><b>Una sola llamada a la acción:</b> la presentación gratuita por Zoom, que es el paso que ya usáis para convertir; el dosier llega como parte de ella.</li>
+    <li><b>Cuatro preguntas que filtran</b> (perfil, formación, cuándo empezar y canal), para que el equipo llegue antes a quien encaja.</li>
+    <li><b>El siguiente paso, en pantalla y en WhatsApp:</b> nadie se queda con un «gracias, te contactaremos».</li>
+    <li><b>Un evento medido por cada botón:</b> <code>reservar_presentacion</code>, <code>pedir_dosier</code>, <code>ver_precio</code> y <code>enviar_formulario</code>, para saber qué anuncio trae entrevistas y matrículas, no solo formularios.</li>
+  </ul>
+</aside>
+
+</main>
+
+<footer class="foot"><div class="wrap in">
+  <div><img class="flogo" src="../assets/brand/logo-blanco.png" alt="Institut Gestalt" width="150" height="52"><br>Formación en terapia y acompañamiento. Más de 40 años acompañando procesos.</div>
+  <div><b>Dónde estamos</b><br>Carrer de Verdi 94 · Gràcia, Barcelona<br>También en Madrid y online</div>
+  <div><b>Web</b><br>institutgestalt.com</div>
+  <p class="mock">Maqueta preparada por Qualivo el 9 de noviembre de 2026 para la reunión con el Institut Gestalt. No es una página publicada por el Institut Gestalt. Son datos de ejemplo la fecha de la presentación, la estructura del programa, la conversación de WhatsApp y la ficha del CRM; la certificación AETG, la trayectoria, las sedes, el recorrido de admisión y los importes salen de su web y sus anuncios.</p>
+</div></footer>
+
+<div class="mbar" aria-label="Acciones rápidas">
+  <a class="btn btn-main" href="#reserva" data-track="reservar_presentacion"><span>Presentación gratuita<small>por Zoom</small></span></a>
+  <a class="btn btn-ghost" href="#reserva" data-track="pedir_dosier"><span>Dosier<small>por WhatsApp</small></span></a>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.dataLayer = window.dataLayer || [];
+  var PRES = "jueves 26 de noviembre (19:00 h, por Zoom)"; /* fecha de ejemplo */
+  var PRES_CONST_IND = "27 de enero, por Zoom";            /* presentación publicada de Constelaciones en Terapia Individual */
+
+  /* Eventos: en la web real irían a Meta (píxel + API de conversiones) y a GTM. Aquí solo se muestran. */
+  var toastEl = document.getElementById("toast"), toastT;
+  var notes = {
+    reservar_presentacion: "En la web real: lleva al formulario y registra el interés por la presentación.",
+    pedir_dosier: "En la web real: lleva al formulario; el dosier sale por WhatsApp al enviarlo.",
+    ver_precio: "En la web real: registra que ha visto la matrícula.",
+    enviar_formulario: "En la web real: crea la ficha en el CRM, envía el dosier y avisa a Meta (Lead con perfil)."
+  };
+  function track(name, params){
+    window.dataLayer.push(Object.assign({event: name, formacion: "terapia_gestalt"}, params || {}));
+    toastEl.innerHTML = "<code>Evento: " + name + "</code><br>" + notes[name];
+    toastEl.classList.add("show");
+    clearTimeout(toastT);
+    toastT = setTimeout(function(){ toastEl.classList.remove("show"); }, 2600);
+  }
+  document.addEventListener("click", function(e){
+    var a = e.target.closest("[data-track]");
+    if (a) track(a.getAttribute("data-track"), {origen: a.closest(".mbar") ? "barra_movil" : (a.closest(".hero") ? "hero" : "pagina")});
+  });
+
+  /* ver_precio al ver la sección de matrícula por primera vez */
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function(en, ob){
+      en.forEach(function(x){ if (x.isIntersecting) { window.dataLayer.push({event:"ver_precio", origen:"scroll"}); ob.disconnect(); } });
+    }, {threshold: .35}).observe(document.getElementById("admision"));
+  }
+
+  /* Conversación animada */
+  var chat = document.getElementById("chat"), typing = document.getElementById("typing");
+  var items = Array.prototype.slice.call(chat.querySelectorAll(".msg,.day")), timers = [];
+  function play(){
+    timers.forEach(clearTimeout); timers = [];
+    if (reduce) return;
+    chat.classList.add("anim");
+    items.forEach(function(m){ m.classList.remove("on"); });
+    var t = 300;
+    items.forEach(function(m){
+      var isIn = m.classList.contains("in");
+      if (isIn) {
+        timers.push(setTimeout(function(){ chat.insertBefore(typing, m); typing.classList.add("on"); }, t));
+        t += 800;
+      }
+      timers.push(setTimeout(function(){ typing.classList.remove("on"); m.classList.add("on"); }, t));
+      t += isIn ? 1300 : (m.classList.contains("day") ? 500 : 800);
+    });
+  }
+  if (!reduce && "IntersectionObserver" in window) {
+    chat.classList.add("anim");
+    new IntersectionObserver(function(en, ob){
+      en.forEach(function(x){ if (x.isIntersecting) { play(); ob.disconnect(); } });
+    }, {threshold: .3}).observe(chat);
+  }
+  document.getElementById("replay").addEventListener("click", play);
+
+  /* Formulario que filtra (no envía nada) */
+  var form = document.getElementById("callform");
+  var mailWrap = document.getElementById("f-mail-wrap");
+  function radio(n){ var r = form.querySelector('input[name="' + n + '"]:checked'); return r ? r.value : ""; }
+  form.addEventListener("change", function(e){
+    if (e.target.name === "canal") mailWrap.classList.toggle("hide", radio("canal") !== "Email");
+  });
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function li(cls, icon, title, sub){
+    return '<li class="' + cls + '"><span class="k"><svg class="i" aria-hidden="true"><use href="#' + icon + '"/></svg></span><span><b>' + title + '</b>' + (sub ? '<small>' + sub + '</small>' : '') + '</span></li>';
+  }
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var d = {perfil: radio("perfil"), formacion: form.formacion.value, cuando: radio("cuando"), canal: radio("canal"),
+             nombre: form.nombre.value.trim(), tel: form.tel.value.replace(/\s/g, ""), mail: form.mail.value.trim()};
+    var ok = d.perfil && d.cuando && d.canal && d.nombre && d.tel.length >= 9 && document.getElementById("f-ok").checked && (d.canal !== "Email" || /.+@.+\..+/.test(d.mail));
+    var err = document.getElementById("f-err");
+    if (!ok) { err.classList.add("show"); return; }
+    err.classList.remove("show");
+
+    var name = esc(d.nombre.split(" ")[0]);
+    var pres = d.formacion === "Constelaciones Familiares en Terapia Individual" ? PRES_CONST_IND : PRES;
+    var via = d.canal === "Email" ? "por email" : "por WhatsApp";
+    var justLooking = d.cuando === "Solo me estoy informando";
+
+    document.getElementById("thanks-h").textContent = "¡Hecho, " + d.nombre.split(" ")[0] + "!";
+    document.getElementById("thanks-p").innerHTML = "Te llega el dosier de <b>" + esc(d.formacion) + "</b> " + via + " y te guardamos plaza en la presentación del <b>" + pres + "</b>.";
+
+    var steps = li("now", "i-doc", "Ahora mismo: el dosier " + via, d.canal === "Llamada" ? "Y te llamamos en horario de oficina para resolver tus dudas." : "Programa, fechas y matrícula, en un PDF.");
+    steps += li("", "i-cal", "Tu plaza en la presentación del " + pres, justLooking ? "Sin compromiso: si al final no puedes, te avisamos de la siguiente." : "La conoces por dentro y preguntas al equipo docente.");
+    steps += li("", "i-bell", "Recordatorio con el enlace de Zoom", "El día antes y un rato antes de empezar.");
+    steps += li("", "i-user", "Si encaja, entrevista con una persona del Institut", "Eliges la hora que te vaya bien.");
+    document.getElementById("next").innerHTML = steps;
+
+    /* Prioridad de ejemplo: lógica a definir con el Institut */
+    var pro = d.perfil !== "Otro ámbito";
+    var soon = d.cuando === "En la próxima edición" || d.cuando === "En los próximos meses";
+    var p = pro && soon ? ["a", "A · alta: llamar antes de la presentación"] : (justLooking ? ["c", "C · seguimiento con contenidos"] : ["b", "B · media: ver en la presentación"]);
+    document.getElementById("crm").innerHTML = '<p class="qh">Qualivo · lo que ve el Institut en el CRM (ejemplo)</p><dl>' +
+      '<dt>Perfil</dt><dd>' + esc(d.perfil) + '</dd><dt>Formación</dt><dd>' + esc(d.formacion) + '</dd>' +
+      '<dt>Empezar</dt><dd>' + esc(d.cuando) + '</dd><dt>Canal</dt><dd>' + esc(d.canal) + '</dd>' +
+      '<dt>Etapa</dt><dd>Inscrita en presentación</dd><dt>Prioridad</dt><dd><span class="prio ' + p[0] + '">' + p[1] + '</span></dd></dl>';
+
+    document.getElementById("formfields").style.display = "none";
+    var th = document.getElementById("thanks"); th.classList.add("show"); th.focus();
+    track("enviar_formulario", {perfil: d.perfil, formacion_interes: d.formacion, cuando: d.cuando, canal: d.canal, prioridad: p[0]});
+  });
+  document.getElementById("again").addEventListener("click", function(){
+    document.getElementById("thanks").classList.remove("show");
+    document.getElementById("formfields").style.display = "grid";
+  });
+})();
+</script>
+<script>
+/* Versión de la landing por cliente potencial (hipótesis): ?perfil=1, 2 o 3. Sin parámetro, la general. */
+(function(){
+  var m=/[?&]perfil=([123])/.exec(location.search); if(!m) return;
+  var V={
+    '1':{eb:'Formación en Terapia Gestalt · para psicólogos y terapeutas',h1:'Acompañas a personas. <em>Fórmate para hacerlo desde ti.</em>',lead:'Para psicólogos y terapeutas con consulta: un marco para trabajar con lo que pasa en la sesión, mientras pasa. Haces tu propio proceso mientras aprendes la técnica gestáltica.',qh:'Si tus sesiones se quedan en lo técnico <em>cuando el cliente toca algo profundo</em>',qs:'La Gestalt te da un marco para trabajar con lo que pasa aquí y ahora, en el cliente y en ti. Y te diferencia en una consulta cada vez más parecida a las demás.',opt:'Psicología'},
+    '2':{eb:'Formación en Terapia Gestalt · para coaches y educadores',h1:'Cuando la técnica se queda corta, <em>la herramienta eres tú.</em>',lead:'Para coaches, docentes y educadores que acompañan a personas: más profundidad y más seguridad cuando la conversación se vuelve personal.',qh:'Sabes hacer buenas preguntas. <em>¿Y cuando llega la emoción?</em>',qs:'No hace falta venir de la psicología. Esta formación trabaja tu manera de estar y tu manera de intervenir, para sostener lo que aparece en una sesión o en el aula.',opt:'Coaching'},
+    '3':{eb:'Formación en Terapia Gestalt · presentación gratuita',h1:'Quieres acompañar a personas. <em>Empieza por conocer la formación por dentro.</em>',lead:'Si has hecho tu propio proceso y quieres dedicarte a acompañar a otros, el primer paso no es matricularte: es venir a la presentación gratuita y resolver tus dudas con el equipo.',qh:'Antes de decidir, <em>conócela por dentro</em>',qs:'Así se entra: te enviamos el dosier, vienes a la presentación gratuita por Zoom, hablas con el equipo en una entrevista y, si encaja, reservas tu plaza. Sin prisa y sin compromiso.',opt:'Otro ámbito'}
+  }[m[1]];
+  function set(sel,html){var e=document.querySelector(sel); if(e) e.innerHTML=html;}
+  set('.hero .eyebrow',V.eb); set('#h-hero',V.h1); set('.hero .hlead',V.lead);
+  set('#h-quien',V.qh); set('#para-quien .sub',V.qs);
+  var r=document.querySelector('input[name="perfil"][value="'+V.opt+'"]'); if(r) r.checked=true;
+  document.title=document.title+' · cliente potencial '+m[1];
+  var b=document.createElement('div');
+  b.setAttribute('style','position:fixed;left:12px;bottom:12px;z-index:60;background:#2A0F5C;color:#fff;font:600 12.5px Montserrat,system-ui,sans-serif;padding:8px 12px;border-radius:99px;box-shadow:0 10px 24px -12px rgba(0,0,0,.5)');
+  b.innerHTML='Cliente potencial '+m[1]+' · hipótesis &nbsp;<a href="?perfil=1" style="color:#D9C2FF">1</a> · <a href="?perfil=2" style="color:#D9C2FF">2</a> · <a href="?perfil=3" style="color:#D9C2FF">3</a>';
+  document.body.appendChild(b);
+})();
+</script>
+</body>
+</html>

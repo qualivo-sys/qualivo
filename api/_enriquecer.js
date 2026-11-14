@@ -344,4 +344,4 @@ async function paraElAviso(c) {
   }
 }
 
-module.exports = { enriquecer: enriquecer, investigarYAnotar: investigarYAnotar, paraElAviso: paraElAviso, textoNota: textoNota, datosDe: datosDe, ETIQUETA: ETIQUETA };
+module.exports = { webDe: webDe, dominioDe: dominioDe, enriquecer: enriquecer, investigarYAnotar: investigarYAnotar, paraElAviso: paraElAviso, textoNota: textoNota, datosDe: datosDe, ETIQUETA: ETIQUETA };

@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Hunty · reactivar la base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Explorador de la base de Hunty (reunión 23-oct): eliges un segmento y una ficha real de hunty.es, y se ve cuántos encajan (cifras simuladas), el email personalizado y lo que pasa después. */
+.bx{max-width:1560px;margin-inline:auto;padding:14px 16px 28px;display:grid;gap:12px}
+.bx > *{min-width:0}
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;box-shadow:var(--shadow)}
+.head h1{font-family:var(--serif);font-weight:600;font-size:clamp(20px,2.2vw,26px);letter-spacing:-.01em;line-height:1.1}
+.head p{color:var(--muted);font-size:14px;flex:1 1 380px;min-width:0}
+.sim{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;background:#C9860A;color:#fff;border-radius:6px;padding:3px 7px;white-space:nowrap}
+.area{font-size:12px;font-weight:700;color:#0C2109;background:var(--moss);border-radius:6px;padding:3px 8px;white-space:nowrap}
+.cols{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr) minmax(0,1.1fr);gap:14px;align-items:start}
+.cols > *{min-width:0}
+.panel > *{min-width:0}
+.mbar{overflow:hidden}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow);display:grid;gap:12px;min-width:0}
+.ph{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ph b{color:var(--ink);font-weight:500}
+/* segmentos */
+.segs{display:grid;gap:6px}
+.sg{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;text-align:left;font:inherit;border:1.5px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:12px;padding:9px 11px;cursor:pointer;transition:border-color .2s,background .2s}
+.sg:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+.sg b{font-size:13.5px;line-height:1.3}
+.sg small{grid-column:1;font-size:12px;color:var(--muted);line-height:1.35}
+.sg em{grid-row:1/3;grid-column:2;align-self:center;font-style:normal;font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.sg[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.sg[aria-pressed="true"] em{color:var(--good)}
+.tot{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;padding:2px 4px}
+/* fichas */
+.fis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.fi{font:inherit;text-align:left;border:1.5px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:12px;padding:0;overflow:hidden;cursor:pointer;display:grid;transition:border-color .2s}
+.fi:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+.fi[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.fi .im{height:62px;background:#333 center/cover}
+.fi .tx{padding:7px 9px;display:grid;gap:1px}
+.fi b{font-size:13px;line-height:1.25}
+.fi small{font-size:11.5px;color:var(--muted);line-height:1.3}
+.fi .pr{font-size:12.5px;font-weight:700;color:var(--accent)}
+.fi .tg{font-size:10.5px;font-weight:650;border-radius:5px;padding:1px 6px;background:var(--warn-soft);color:var(--warn);width:fit-content;margin-top:2px}
+.real{font-size:11.5px;color:var(--muted)}
+.real a{font-weight:600}
+/* embudo */
+.fn{display:grid;gap:4px}
+.fr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:7px 10px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line-2);animation:rin .35s ease-out both}
+.fr span{font-size:13px;font-weight:600}
+.fr small{grid-column:1;font-size:11.5px;color:var(--muted);line-height:1.35}
+.fr b{grid-row:1/3;grid-column:2;align-self:center;font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums}
+.fr.minus b{color:var(--bad)}
+.fr.end{background:var(--f900);border-color:var(--f900);color:#fff}
+.fr.end small{color:#BFE3B6}.fr.end b{color:#fff;font-size:20px}
+.fr.no{background:var(--bad-soft);border-color:transparent}
+.fr.no b{color:var(--bad)}
+@keyframes rin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.why{font-size:12.5px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 10px;line-height:1.5}
+.why b{color:var(--ink-2)}
+/* después */
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0;position:relative}
+.tl li{display:grid;grid-template-columns:86px minmax(0,1fr);gap:10px;padding:7px 0;border-bottom:1px solid var(--line-2);font-size:13px}
+.tl li:last-child{border-bottom:0}
+.tl time{font-family:var(--mono);font-size:11px;color:var(--accent);padding-top:2px}
+.tl small{display:block;color:var(--muted);font-size:12px;line-height:1.4;margin-top:1px}
+.who{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;border-radius:5px;padding:1px 6px;margin-right:5px;color:#0b1408;vertical-align:1px}
+.w-ac{background:#F5B36A}.w-clara{background:#7CC873}.w-bruno{background:#F2D46B}.w-com{background:#8FE3D5}.w-orq{background:#E3E3E3}
+/* email */
+.ctab{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.tog{font:inherit;font-size:12px;font-weight:600;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);border-radius:99px;padding:5px 11px;cursor:pointer}
+.tog[aria-pressed="true"]{background:var(--f700);border-color:var(--f700);color:#fff}
+.lg{display:flex;gap:10px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:-1px;margin-right:4px}
+.lg .a{background:#CFE8C9}.lg .b{background:#CFE0F7}
+.pc{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:9px 11px;background:var(--surface-2)}
+.pc .av{width:38px;height:38px;border-radius:50%;background:var(--f700);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
+.pc b{font-size:14px;display:block}
+.pc small{font-size:12px;color:var(--muted);line-height:1.35;display:block}
+.mail{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;color:#222;box-shadow:var(--shadow-lg);animation:rin .4s ease-out}
+.mbar{display:flex;align-items:center;gap:7px;padding:9px 12px;background:#F4F2EC;border-bottom:1px solid #e6e1d4;font-size:11.5px;color:#666;font-family:var(--mono)}
+.mbar i{width:10px;height:10px;border-radius:50%;background:#E5DFD2}
+.mbar i:nth-child(1){background:#F0A39B}.mbar i:nth-child(2){background:#F2D18A}.mbar i:nth-child(3){background:#A9D7A2}
+.mbar span{margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mb{padding:14px 16px 16px;display:grid;gap:9px;font-size:13.5px;line-height:1.55}
+.mb .sj{font-size:17px;font-weight:700;line-height:1.3;color:#111}
+.mb .fr2{font-size:12px;color:#777}
+.mb .hero{height:120px;border-radius:10px;background:#333 center/cover}
+.mb ul{margin:0;padding-left:18px;display:grid;gap:2px}
+.mb .bts{display:flex;gap:8px;flex-wrap:wrap}
+.mb .b1{background:#2C7C24;color:#fff;font-weight:700;border-radius:10px;padding:9px 14px;font-size:13px}
+.mb .b2{border:1.5px solid #2C7C24;color:#2C7C24;font-weight:700;border-radius:10px;padding:8px 13px;font-size:13px}
+.mb .ft{font-size:11px;color:#888}
+.prov .f{background:#DDF0D7;border-radius:3px;box-shadow:0 0 0 1px #B9DDAF}
+.prov .h{background:#DCE8FA;border-radius:3px;box-shadow:0 0 0 1px #B7CDEE}
+.chk{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:12.5px}
+.chk li{display:flex;gap:7px;align-items:flex-start}
+.chk li i{flex:none;width:17px;height:17px;border-radius:50%;background:var(--good);color:#fff;font-style:normal;font-size:11px;display:grid;place-items:center;margin-top:1px}
+.chk li.x i{background:var(--bad)}
+.task{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.task .th{background:var(--f900);color:#fff;padding:10px 12px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.task .th b{font-size:14.5px}
+.task .th span{font-family:var(--mono);font-size:10.5px;background:#E5484D;border-radius:6px;padding:2px 7px}
+.task .tb{padding:10px 12px;display:grid;gap:7px;font-size:13px}
+.task .say{background:var(--accent-soft);border-radius:10px;padding:8px 10px;font-style:italic}
+.none{border:1px dashed var(--line);border-radius:14px;padding:16px;font-size:14px;color:var(--muted);display:grid;gap:6px}
+.none b{color:var(--ink)}
+.sfoot{display:grid;gap:8px;font-size:13px;color:var(--muted);padding:4px}
+.sfoot b{color:var(--ink-2)}
+.sfoot .lk{display:flex;flex-wrap:wrap;gap:8px}
+.sfoot .lk a{font-weight:600;border:1px solid var(--line);border-radius:99px;padding:5px 12px;text-decoration:none;background:var(--surface)}
+@media (max-width:1180px){.cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cols > :last-child{grid-column:1/-1}}
+@media (max-width:760px){.cols{grid-template-columns:minmax(0,1fr)}.tl li{grid-template-columns:72px minmax(0,1fr)}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .prov .f{background:#DDF0D7}}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><img src="../assets/logo-white.svg" alt="Hunty" width="75" height="18"><span class="x">×</span><span class="qv">Qualivo</span><span class="by">23-oct-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="../en-directo/">En directo</a><a href="./" aria-current="page">Base</a><a href="../recorrido/">Recorrido</a><a href="../demo/">Demo</a></div>
+  </div>
+</nav>
+
+<main class="bx">
+  <div class="head">
+    <h1>Vuestra base, segmento a segmento</h1>
+    <span class="area">Área 2 · Seguimiento: recuperar y reactivar</span>
+    <span class="sim">Simulación</span>
+    <p>Elige a quién y elige una ficha real de hunty.es. Se ve cuántos encajan, el email que recibiría uno de ellos y qué pasa después. Lo envía vuestro ActiveCampaign y contestan Clara y vuestro equipo.</p>
+  </div>
+
+  <div class="cols">
+    <section class="panel" aria-label="Elegir segmento y ficha">
+      <div class="ph"><b>1 · A quién</b><span class="sim" style="font-size:9px;padding:1px 5px">cifras inventadas</span></div>
+      <div class="segs" id="segs"></div>
+      <div class="tot"><span>Contactos en la base (ejemplo)</span><b class="num" id="totN"></b></div>
+      <div class="ph"><b>2 · Con qué ficha</b><span>hunty.es · 22-oct</span></div>
+      <div class="fis" id="fis"></div>
+      <p class="real">Datos de las fichas comprobados en hunty.es el 22-oct-2026: precio, Prime, reserva, fecha, finca, reseñas y observaciones. Se vuelven a comprobar antes de cada envío.</p>
+    </section>
+
+    <section class="panel" aria-label="Cuántos encajan y qué pasa después">
+      <div class="ph"><b>3 · Cuántos encajan</b><span class="sim" style="font-size:9px;padding:1px 5px">simulado</span></div>
+      <div class="fn" id="fn"></div>
+      <p class="why" id="why"></p>
+      <div class="ph"><b>4 · Qué pasa después</b></div>
+      <ol class="tl" id="tl"></ol>
+      <p class="why"><b>Cómo se sabe si funciona:</b> el 10 % del segmento no recibe nada. Se comparan sus reservas con las de quien lo recibe, por segmento y por ficha. Así se mide la reserva ganada de verdad, no la que habría llegado igual.</p>
+    </section>
+
+    <section class="panel" aria-label="Lo que recibe">
+      <div class="ctab"><div class="ph"><b>5 · Lo que recibe</b></div><button class="tog" id="tog" aria-pressed="true">De dónde sale cada dato</button></div>
+      <div class="lg" id="lg"><span><i class="a"></i>de la ficha de hunty.es</span><span><i class="b"></i>de su historial en vuestra base</span></div>
+      <div class="pc" id="pc"></div>
+      <div id="out" class="prov"></div>
+      <ul class="chk" id="chk"></ul>
+    </section>
+  </div>
+
+  <div class="sfoot">
+    <p><b>Qué es real y qué no.</b> Real: las cuatro fichas (Valmorisco, Río Frío, Los Jaronales y el rececho de macho montés en Ronda), con sus datos de hunty.es del 22-oct-2026. Inventado: las personas, sus historiales, los mensajes y todas las cifras de contactos. Los números reales salen del diagnóstico de la semana 0 con vuestra exportación de reservas y ActiveCampaign. Ninguna cifra es una previsión. Los textos finales los aprueba Hunty.</p>
+    <div class="lk"><a href="../en-directo/">Simulación en directo</a><a href="../recorrido/">Recorrido paso a paso</a><a href="../demo/">Demo del 16-oct</a></div>
+    <p>Maikel Echevarría · Qualivo · maikel@qualivo.io · No es una página de Hunty.</p>
+  </div>
+</main>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+const nf=(n,d)=>n.toLocaleString('de-DE',{minimumFractionDigits:d||0,maximumFractionDigits:2});
+const eur=(n,d)=>nf(n,d)+' €';
+const F=(t)=>`<span class="f">${t}</span>`, H=(t)=>`<span class="h">${t}</span>`;
+
+const FICHAS={
+ vm:{name:'Valmorisco',mod:'montería',img:'../assets/coto.jpg',lugar:'Jarandilla de la Vera (Cáceres)',prov:'Cáceres',region:'Extremadura',when:'sábado 9 de enero',whenS:'el 9 de enero',price:300,prime:280,res:40,left:1,
+  rv:'4,3/5 en 4 reseñas',facts:['Finca abierta, 60 puestos y sin cupo de venados ni jabalíes.','Último resultado: 33 jabalíes, 1 venado y 14 ciervas.','Desayuno y comida incluidos.'],note:'La ficha dice que solo queda 1 puesto.',tag:'Solo 1 puesto',url:'hunty.es/monterias/monteria-en-valmorisco-1790',
+  en:{what:'driven hunt (montería)',where:'Jarandilla de la Vera, Cáceres (Extremadura)',when:'Saturday 9 January',facts:['Open estate, 60 stands, no quota on red stag or wild boar.','Last result: 33 wild boar, 1 stag and 14 hinds.','Breakfast and lunch included.'],rv:'4.3/5 from 4 reviews',note:'Only 1 stand left, according to the listing.'}},
+ rf:{name:'Río Frío',mod:'montería',img:'../assets/monteria.jpg',lugar:'Robledo del Mazo (Toledo)',prov:'Toledo',region:'Castilla-La Mancha',when:'sábado 26 de diciembre',whenS:'el 26 de diciembre',price:350,prime:332.5,res:35,left:0,
+  rv:'aún sin reseñas',facts:['Finca abierta, 50 puestos y sin cupo.','Jabalí, ciervo y cierva. Desayuno y comida incluidos.','Es la primera temporada de esta organización en la finca.'],note:'Después de reservar, hay que hacer una reserva de 100 € a la organización para confirmar el puesto.',tag:'Sin reseñas aún',url:'hunty.es/monterias/NWR24E',
+  en:{what:'driven hunt (montería)',where:'Robledo del Mazo, Toledo (Castilla-La Mancha)',when:'Saturday 26 December',facts:['Open estate, 50 stands, no quota.','Wild boar, red stag and hinds. Breakfast and lunch included.','First season of this organiser on the estate.'],rv:'no reviews yet',note:'After booking, a €100 deposit to the organiser confirms the stand.'}},
+ jr:{name:'Los Jaronales',mod:'montería',img:'../assets/ciervo.jpg',lugar:'Robledo del Buey (Toledo)',prov:'Toledo',region:'Castilla-La Mancha',when:'sábado 26 de diciembre',whenS:'el 26 de diciembre',price:350,prime:325,res:50,left:0,
+  rv:'5/5 en 1 reseña',facts:['Finca abierta, 35 puestos. Sin cupo de venados y jabalíes; ciervas con cupo.','Último resultado publicado: 18 venados y 6 jabalíes.','Desayuno y comida incluidos.'],note:'Los puestos se adjudican por sorteo. Los acompañantes pueden ir por 20 €, con desayuno y comida.',tag:'5/5 · 1 reseña',url:'hunty.es/monterias/monteria-en-los-jaronales-1320',
+  en:{what:'driven hunt (montería)',where:'Robledo del Buey, Toledo (Castilla-La Mancha)',when:'Saturday 26 December',facts:['Open estate, 35 stands. No quota on stag and wild boar; hinds with quota.','Last published result: 18 stags and 6 wild boar.','Breakfast and lunch included.'],rv:'5/5 from 1 review',note:'Stands are allocated by draw. Companions can come for €20, breakfast and lunch included.'}},
+ rd:{name:'Macho montés en Ronda',mod:'rececho',img:'../assets/rececho.jpg',lugar:'Ronda (Málaga)',prov:'Málaga',region:'Andalucía',when:'del 15 de septiembre al 30 de mayo',whenS:'de septiembre a mayo',price:3300,prime:3150,res:300,left:3,
+  rv:'aún sin reseñas',facts:['Trofeo representativo: de 50 a 60 cm de cuerna.','Coto abierto, con guías profesionales.','Fecha a elegir entre el 15 de septiembre y el 30 de mayo.'],note:'Según la ficha, quedan 3 disponibles.',tag:'3 disponibles',url:'hunty.es/recechos/EDY1ME',
+  en:{what:'Spanish ibex stalk',where:'Ronda, Málaga (Andalusia)',when:'any date from 15 September to 30 May',facts:['Representative trophy: 50 to 60 cm horns.','Open estate, with professional guides.','You choose the date between 15 September and 30 May.'],rv:'no reviews yet',note:'3 available, according to the listing.'}}
+};
+const SEGS={
+ rep:{n:1840,t:'Repiten y están en su mes',d:'2 o más temporadas; suelen reservar en octubre y noviembre.',mod:'montería'},
+ una:{n:3920,t:'Reservaron una vez y no han vuelto',d:'Una reserva hace 1 o 2 temporadas.',mod:'montería'},
+ sin:{n:11300,t:'Cuenta creada, sin ninguna reserva',d:'Se registraron y miraron fichas.',mod:'montería'},
+ prm:{n:410,t:'Socios Prime que no usan el descuento',d:'Pagan Prime y esta temporada no han reservado.',mod:'montería'},
+ alt:{n:260,t:'Recechos de trofeo, ticket alto',d:'Más de 1.500 € por cacería.',mod:'rececho'},
+ int:{n:1150,t:'Clientes de fuera de España',d:'Reservaron desde otro país; se les escribe en su idioma.',mod:'any'},
+ dor:{n:6700,t:'Sin actividad en más de 18 meses',d:'Ni reservan ni abren los emails.',mod:'any'}
+};
+let seg='rep',fic='rf',prov=true;
+
+function people(){
+  const f=FICHAS[fic];const solo=f.left===1;
+  return {
+   rep:{n:'Andrés',hist:f.mod==='rececho'?'Cliente de 3 temporadas. Monterías en Toledo y un rececho de corzo en Burgos.':`Cliente de 2 temporadas. Última: montería en ${f.prov}, diciembre, ${solo?'1 puesto':'3 puestos'}.`,p:solo?1:3},
+   una:{n:'Rubén',hist:f.mod==='rececho'?'Una reserva en 2025: rececho de gamo.':`Una reserva en 2025: montería en ${f.region}, ${solo?'1 puesto':'2 puestos'}.`,p:solo?1:2},
+   sin:{n:'Marta',hist:`Cuenta desde septiembre. Ha mirado ${f.mod==='rececho'?'recechos en Andalucía':'monterías en '+f.region}. Ninguna reserva.`,p:1},
+   prm:{n:'Sergio',hist:`Socio Prime desde 2025. Monterías en ${f.region}. Esta temporada aún no ha reservado.`,p:solo?1:2},
+   alt:{n:'Ignacio',hist:'Rececho de macho montés en Granada en 2025 y de muflón en Cazorla en 2024.',p:1},
+   int:{n:'Thomas',hist:`Reino Unido · inglés. Reservó una ${f.mod==='rececho'?'cacería de trofeo':'montería'} en 2024.`,p:solo?1:2},
+   dor:{n:'Ramón',hist:`Última reserva en la temporada 2023-24, montería en ${f.prov}. No abre los emails desde entonces.`,p:1}
+  }[seg];
+}
+
+function renderLists(){
+  $('#segs').innerHTML=Object.entries(SEGS).map(([k,s])=>`<button class="sg" data-s="${k}" aria-pressed="${k===seg}"><b>${s.t}</b><small>${s.d}</small><em>${s.n.toLocaleString('de-DE')}</em></button>`).join('');
+  $('#totN').textContent=Object.values(SEGS).reduce((a,s)=>a+s.n,0).toLocaleString('de-DE');
+  $('#fis').innerHTML=Object.entries(FICHAS).map(([k,f])=>`<button class="fi" data-f="${k}" aria-pressed="${k===fic}"><span class="im" style="background-image:url(${f.img})"></span><span class="tx"><b>${f.mod==='rececho'?'Rececho · ':''}${f.name}</b><small>${f.lugar} · ${f.whenS}</small><span class="pr">${eur(f.price)}${f.mod==='montería'?' el puesto':''}</span><span class="tg">${f.tag}</span></span></button>`).join('');
+}
+
+function funnel(){
+  const s=SEGS[seg],f=FICHAS[fic];
+  const rows=[];let v=s.n;
+  rows.push({t:s.t,d:'Contactos del segmento en vuestra base.',v});
+  if(seg==='alt'&&f.mod!=='rececho') return {rows:rows.concat([{t:'No se les escribe',d:'Cazan trofeo con ticket alto. Una montería de 300-350 € no es lo suyo, y escribirles a destiempo gasta la base.',v:0,no:1}]),send:0};
+  if(seg==='alt') return {rows:rows.concat([{t:'Encaja la especie y el presupuesto',d:'Han cazado macho montés o buscan trofeo de más de 1.500 €.',v:Math.round(v*.31),minus:0},{t:'Sin email: lo llama el comercial',d:'Con este ticket, la atención es personal. Se crea la tarea para Pablo.',v:Math.round(v*.31),end:1}]),send:-1};
+  if(s.mod==='montería'&&f.mod==='rececho'){v=Math.round(v*.06);rows.push({t:'También cazan rececho',d:'Del segmento, solo quien ha cazado o mirado recechos.',v})}
+  else if(seg!=='dor'){const z=f.region==='Extremadura'?.16:.22;v=Math.round(v*(seg==='int'?.5:z));rows.push({t:seg==='int'?'Cazan esta modalidad':'Cazan en '+f.region,d:seg==='int'?'Del segmento, quien ha reservado o mirado '+(f.mod==='rececho'?'trofeo':'monterías')+'.':'Por sus reservas o por lo que han mirado en la web.',v})}
+  else {v=Math.round(v*.22);rows.push({t:'Cazaban en '+f.region,d:'Solo para el email de confirmación: se les recuerda lo último de su zona.',v})}
+  if(f.left===1&&seg!=='dor'){const nv=Math.round(v*.3);rows.push({t:'Van solos',d:'La ficha dice que solo queda 1 puesto: a los grupos no se les escribe.',v:nv-v,minus:1});v=nv}
+  const c=Math.round(v*.17);rows.push({t:'Sin consentimiento comercial',d:'No se les escribe.',v:-c,minus:1});v-=c;
+  const w=Math.round(v*.08);rows.push({t:'Ya recibieron un email de cacería esta semana',d:'Como mucho uno por semana y persona.',v:-w,minus:1});v-=w;
+  if(seg==='prm'||seg==='rep'||seg==='una'){const r=Math.max(1,Math.round(v*.02));rows.push({t:'Ya han reservado esta cacería',d:'Fuera, para no escribir a quien ya está dentro.',v:-r,minus:1});v-=r}
+  const g=Math.round(v*.1);rows.push({t:'Grupo de control (10 %)',d:'No lo reciben. Sirven para medir.',v:-g,minus:1});v-=g;
+  rows.push({t:seg==='dor'?'Reciben el email de confirmación':'Reciben el email',d:'Lo envía ActiveCampaign con la etiqueta de esta ficha.',v,end:1});
+  return {rows,send:v};
+}
+function why(){
+  const f=FICHAS[fic];
+  const W={
+   rep:`Les escribimos <b>en el mes en que suelen reservar</b>, con lo más parecido a lo que ya hicieron y el precio calculado para su grupo. Es el primer segmento que probaríamos.`,
+   una:`Reservaron una vez y no volvieron. Les enseñamos lo más parecido a lo que hicieron y <b>las opiniones de quien ya fue</b>${f.rv.startsWith('aún')?'. Esta ficha no tiene reseñas, así que se dice tal cual':''}.`,
+   sin:`Nunca han reservado: el freno suele ser no saber cómo funciona. El email <b>explica la reserva con esta ficha</b> y les ofrece un aviso.`,
+   prm:`Pagan Prime y no lo usan: corren el riesgo de no renovar. Les enseñamos <b>lo que se ahorran en esta cacería</b>. Lo decide Bruno.`,
+   alt:f.mod==='rececho'?`Con trofeos de más de 3.000 €, <b>no se manda un email masivo</b>: lo llama el comercial con la ficha preparada.`:`<b>Saber a quién no escribir también es segmentar.</b> Mejor no gastar la base con algo que no es lo suyo.`,
+   int:`Clientes de otros países, <b>en su idioma</b>: aquí, en inglés. Vendéis en unos 20 países.`,
+   dor:`Antes de escribirles nada, <b>preguntamos si quieren seguir recibiendo</b>. Quien no contesta sale de la lista: la base queda limpia y los emails llegan mejor a la bandeja de entrada.`
+  };
+  return W[seg];
+}
+function timeline(){
+  if(seg==='alt'&&FICHAS[fic].mod!=='rececho') return [['—','No hay secuencia','Se esperará a una ficha de su nivel.']];
+  if(seg==='alt') return [['Hoy','<span class="who w-orq">orquestador</span>Tarea para Pablo','Con la ficha del rececho y el historial de cada uno.'],['24 h','<span class="who w-com">comercial</span>Llamada personal','Si no coge: WhatsApp corto para elegir hora.'],['Si reserva','<span class="who w-bruno">bruno</span>Prime','En esta ficha Prime ahorra 150 €, lo mismo que cuesta al año: se lo explica Bruno.']];
+  if(seg==='dor') return [['Día 0','<span class="who w-ac">activecampaign</span>Email «¿seguimos?»','Dos botones: seguir recibiendo o darse de baja.'],['Día 7','<span class="who w-ac">activecampaign</span>Recordatorio, solo si no abrió',''],['Día 14','<span class="who w-ac">activecampaign</span>Sale de la lista si no contesta','Si dice que sí, vuelve a su segmento.']];
+  return [['Día 0','<span class="who w-ac">activecampaign</span>Email desde la ficha','En la franja en que suele abrir.'],
+   ['Si pulsa','<span class="who w-orq">orquestador</span>«Que me llame el asesor»','Pasa al comercial con la ficha completa, en el día.'],
+   ['Día 3','<span class="who w-clara">clara</span>WhatsApp si abrió y no reservó','Solo con consentimiento. Una pregunta concreta, y contesta Clara.'],
+   ['Si no abre','<span class="who w-ac">activecampaign</span>No se insiste','Vuelve a entrar con la siguiente ficha que le encaje, como mucho una por semana.'],
+   ['Si reserva','<span class="who w-bruno">bruno</span>Sale de la secuencia','Bruno mira si le compensa Prime.'],
+   ['«Este año no»','<span class="who w-ac">activecampaign</span>Se para','Se le vuelve a escribir en su mes del año que viene.']];
+}
+
+function email(){
+  const f=FICHAS[fic],p=people(),s=seg;
+  if(s==='alt'&&f.mod!=='rececho') return {html:`<div class="none"><b>No sale ningún email a este segmento con esta ficha.</b><span>Prueba con el rececho de macho montés en Ronda, o con otro segmento.</span></div>`,chk:[['x','Cacería de 300-350 € para clientes de trofeo: no encaja.']]};
+  if(s==='alt') return {html:`<div class="task"><div class="th"><b>Llamar a ${H(p.n)}</b><span>TAREA · COMERCIAL</span></div><div class="tb">
+   <div><b>Quién es:</b> ${H(p.hist)}</div>
+   <div><b>Qué ofrecer:</b> ${F('rececho de macho montés en Ronda (Málaga)')}, ${F('trofeo de 50 a 60 cm')}, ${F('3.300 €')} (${F('3.150 € con Prime')}). ${F('Fecha a elegir de septiembre a mayo')}. ${F('Quedan 3 disponibles')}.</div>
+   <div><b>Ojo:</b> ${F('aún sin reseñas')}. Se dice tal cual.</div>
+   <div class="say">«${H(p.n)}, soy Pablo, de Hunty. Te llamo porque se ha publicado un rececho de macho montés en Ronda, de 50 a 60 centímetros, y me acordé de tu montés de Granada. ¿Te cuento?»</div></div></div>`,
+   chk:[['','Precio, Prime y disponibilidad salen de la ficha.'],['','Sin email masivo: con este ticket, atención personal.']]};
+  const isR=f.mod==='rececho';
+  const unit=isR?'':' el puesto';
+  const priceLine=`${F(eur(f.price)+unit)} (${F(eur(f.prime)+' con Prime')}). Se reserva con ${F(eur(f.res))}${isR?'':' por puesto'}.`;
+  const facts=`<ul>${f.facts.map(x=>`<li>${F(x)}</li>`).join('')}</ul>`;
+  const note=f.note?`<p>${F(f.note)}</p>`:'';
+  const rv=`${f.rv.startsWith('aún')?'Esta cacería '+F('aún no tiene reseñas')+'.':'Opiniones de quien ya fue: '+F(f.rv)+'.'}`;
+  const head=(sj)=>`<div class="mbar"><i></i><i></i><i></i><span>De: Hunty · Para: ${p.n.toLowerCase()}@… · ActiveCampaign</span></div><div class="mb"><div class="sj">${sj}</div><div class="fr2">Hunty · 10:30</div><div class="hero" style="background-image:url(${f.img})"></div>`;
+  const foot=`<p class="ft">Te escribimos porque ${s==='sin'?'creaste tu cuenta':'reservaste'} con Hunty y aceptaste recibir novedades. Darte de baja.</p></div>`;
+  const calc=(!isR&&p.p>1)?` Para ${H(p.p+' puestos')}, ${eur(f.price*p.p)}.`:'';
+  let h='',chk=[];
+  if(s==='rep'){
+    h=head(`${H(p.n)}, ${F(f.name)}: ${F(f.mod)} en ${F(f.prov)}, ${F(f.whenS)}`)+
+    `<p>Hola, ${H(p.n)}:</p><p>${isR?`Llevas ${H('3 temporadas')} cazando con nosotros y en tu historial hay ${H('un rececho de corzo en Burgos')}. Se acaba de publicar un rececho de trofeo:`:`La temporada pasada por estas fechas reservasteis ${H(p.p===1?'1 puesto':p.p+' puestos')} para una montería en ${H(f.prov)}. Ya está publicada ${F(f.name)}, en ${F(f.lugar)}, el ${F(f.when)}.`}</p>${facts}<p>${priceLine}${calc}</p>${note}<p>${rv}</p><div class="bts"><span class="b1">Ver la ficha y reservar</span><span class="b2">Que me llame el asesor</span></div>`+foot;
+    chk=[['','Su mes: escribe en octubre, cuando suele reservar.'],['',`${p.p>1?'Calcula el precio para su grupo.':'Va solo: encaja con el único puesto que queda.'}`]];
+  }
+  if(s==='una'){
+    h=head(`${H(p.n)}, ${isR?'un rececho':'una montería'} parecida a la tuya: ${F(f.name)}`)+
+    `<p>Hola, ${H(p.n)}:</p><p>En ${H('2025')} cazaste con nosotros ${H(isR?'un rececho de gamo':'una montería en '+f.region)}. Esta es la más parecida que tenemos publicada: ${F(f.name)}, en ${F(f.lugar)}, ${isR?F(f.when):'el '+F(f.when)}.</p>${facts}<p>${rv}</p><p>${priceLine}${calc}</p>${note}<div class="bts"><span class="b1">Ver la ficha</span><span class="b2">Avísame de otras parecidas</span></div>`+foot;
+    chk=[['','Lo parecido a lo que hizo, no un catálogo.'],['','Reseñas tal como están en la ficha.']];
+  }
+  if(s==='sin'){
+    h=head(`${H(p.n)}, así se reserva ${isR?'un rececho':'una montería'} en Hunty: ${F(f.name)}`)+
+    `<p>Hola, ${H(p.n)}:</p><p>Hace unas semanas miraste ${H(isR?'recechos en Andalucía':'monterías en '+f.region)}. Se acaba de publicar ${F(f.name)}, en ${F(f.lugar)}. Así funciona reservarla:</p><ul><li>Pagas ${F(eur(f.res))} para reservar${isR?'':' tu puesto'}. Mismo precio que el organizador.</li><li>${F(eur(f.price)+unit)} (${F(eur(f.prime)+' con Prime')}).</li>${f.note?`<li>${F(f.note)}</li>`:''}</ul>${facts}<div class="bts"><span class="b1">Ver la ficha</span><span class="b2">Crear un aviso</span></div>`+foot;
+    chk=[['','Explica la reserva: es lo que frena a quien no ha reservado nunca.'],['','Ofrece un aviso si esta no es la suya.']];
+  }
+  if(s==='prm'){
+    const d=f.price-f.prime;
+    h=head(`${H(p.n)}, en ${F(f.name)} te ahorras ${eur(d*p.p)} por ser Prime`)+
+    `<p>Hola, ${H(p.n)}:</p><p>Eres ${H('socio Prime')} y esta temporada aún no has usado tu precio de socio. En ${F(f.name)} (${F(f.lugar)}, ${F(f.whenS)}) ${isR?'el rececho':'el puesto'} te sale a ${F(eur(f.prime))} en vez de ${F(eur(f.price))}.${p.p>1?` Para ${H(p.p+' puestos')}, te ahorras ${eur(d*p.p)}.`:''}</p>${facts}${note}<div class="bts"><span class="b1">Reservar con precio Prime</span></div>`+foot;
+    chk=[['','El ahorro sale de la ficha: precio normal menos precio Prime.'],['','No se inventan descuentos: solo el precio Prime publicado.']];
+  }
+  if(s==='int'){
+    const e=f.en;const unitE=isR?'':' per stand';
+    h=head(`${H(p.n)}, a new ${F(e.what)} in ${F(e.where.split(', ').pop())}`)+
+    `<p>Hi ${H(p.n)},</p><p>A ${F(e.what)} has just been published in ${F(e.where)}, ${F(e.when)}.</p><ul>${e.facts.map(x=>`<li>${F(x)}</li>`).join('')}</ul><p>${F('€'+f.price.toLocaleString('en-GB')+unitE)} (${F('€'+f.prime.toLocaleString('en-GB')+' for Prime members')}). Book with ${F('€'+f.res)}${isR?'':' per stand'}. Same price as the organiser.</p><p>${F(e.note)} Reviews: ${F(e.rv)}.</p><div class="bts"><span class="b1">See the listing</span><span class="b2">Ask us on WhatsApp</span></div><p class="ft">You receive this because you booked with Hunty and agreed to receive news. Unsubscribe.</p></div>`;
+    chk=[['','En su idioma, con los datos de la ficha traducidos.'],['','Precio en el mismo formato que la ficha.']];
+  }
+  if(s==='dor'){
+    h=head(`${H(p.n)}, ¿seguimos avisándote de cacerías?`)+
+    `<p>Hola, ${H(p.n)}:</p><p>Hace tiempo que no te vemos por Hunty. Tu última reserva fue ${H('en la temporada 2023-24, en '+f.prov)}. Antes de seguir escribiéndote, preferimos preguntarte.</p><div class="bts"><span class="b1">Sí, quiero seguir</span><span class="b2">Darme de baja</span></div><p>Por si te sirve, lo último en tu zona: ${F(f.name)}, ${F(f.whenS)}, ${F(eur(f.price)+unit)}.</p>`+foot;
+    chk=[['','Primero se pregunta; quien no contesta sale de la lista.'],['','Una sola cacería, como referencia y sin presión.']];
+  }
+  chk.push(['','Todo lo verde está en la ficha. Si un dato no está en la ficha, no sale en el email.']);
+  if(f.left===1&&s!=='dor')chk.push(['','La ficha dice «solo 1 puesto»: solo se escribe a quien va solo.']);
+  if(f.rv.startsWith('aún'))chk.push(['','Sin reseñas: no se menciona ninguna valoración.']);
+  return {html:`<div class="mail">${h}</div>`,chk};
+}
+
+function render(){
+  renderLists();
+  const fu=funnel();
+  $('#fn').innerHTML=fu.rows.map((r,k)=>`<div class="fr${r.minus?' minus':''}${r.end?' end':''}${r.no?' no':''}" style="animation-delay:${k*60}ms"><span>${r.t}</span><small>${r.d}</small><b>${r.minus&&r.v<0?'−'+Math.abs(r.v).toLocaleString('de-DE'):r.v.toLocaleString('de-DE')}</b></div>`).join('');
+  $('#why').innerHTML=why();
+  $('#tl').innerHTML=timeline().map(([t,a,b])=>`<li><time>${t}</time><div>${a}${b?`<small>${b}</small>`:''}</div></li>`).join('');
+  const p=people();
+  $('#pc').innerHTML=`<span class="av">${p.n[0]}</span><div><b>Ejemplo: ${p.n} <span class="sim" style="font-size:9px;padding:1px 5px">inventado</span></b><small>${p.hist}</small></div>`;
+  const e=email();$('#out').innerHTML=e.html;
+  $('#chk').innerHTML=e.chk.map(([x,t])=>`<li class="${x}"><i>${x?'✕':'✓'}</i><span>${t}</span></li>`).join('');
+}
+$('#segs').addEventListener('click',e=>{const b=e.target.closest('.sg');if(b){seg=b.dataset.s;render()}});
+$('#fis').addEventListener('click',e=>{const b=e.target.closest('.fi');if(b){fic=b.dataset.f;render()}});
+$('#tog').onclick=()=>{prov=!prov;$('#tog').setAttribute('aria-pressed',prov);$('#out').classList.toggle('prov',prov);$('#lg').style.visibility=prov?'visible':'hidden'};
+render();
+})();
+</script>
+</body>
+</html>

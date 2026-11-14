@@ -160,7 +160,27 @@ const FORMULARIOS_SECTOR = {
   // un punto de menos, el primer WhatsApp y el nurturing saldrían genéricos y no tendría etiqueta
   // sector-*. Los dos anteriores (V2_, con pregunta abierta obligatoria) están archivados.
   '1068055576128365': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'funnel-v2' },
-  '1117848330732644': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'funnel-v2' }
+  '1117848330732644': { sector: 'Salud, clínica o bienestar', etiqueta: 'sector-clinicas', angulo: 'funnel-v2' },
+  // 15-oct-2026: horizontal «ya inviertes» (Qualivo_HZ_demo). Pregunta el sector, así que
+  // el sector sale de la respuesta (api/_funnel-hz.js), no de esta tabla.
+  '1593733452501786': { sector: '', angulo: 'hz-demo' },
+  // 19-oct-2026: test de cualificación de formación (21-31 oct). La copia es la que lleva el anuncio.
+  // Sin estas entradas el rescate no los miraba y el primer lead apto (22-oct) no llegó al CRM.
+  '2063720777591278': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' },
+  '1419526843110847': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' },
+  // 1-nov-2026: formulario corto de formación (2 preguntas: ticket del alumno e inversión), para el anuncio de Javier (E-03).
+  '1426444132403939': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-corto' },
+  // 2-nov-2026: formulario de 4 preguntas (inversión, precio del curso, cuándo y problema), con revisión de «mayor intención».
+  '1656098466017561': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg' },
+  // 4-nov-2026 (Maikel): el mismo de 4 preguntas sin «No invertimos todavía» ni «Menos de 300 €»; la portada dice para quién es.
+  '1756765488760255': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg-filtro' },
+  '1904975540667086': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg-filtro' },
+  '1159030153221849': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-4preg-filtro' },
+  // 2-nov-2026: reformas, mismas 4 preguntas (el precio es el de una obra: ticket-1 < 3.000 €, 2 hasta 10.000, 3 hasta 30.000, 4 más).
+  '1448120514052614': { sector: 'Reformas, construcción o instalaciones', etiqueta: 'sector-reformas', angulo: 'form-4preg' },
+  // 13-nov-2026 (Maikel): formulario V2 de formación. Web obligatoria, email de trabajo y «no invertimos»
+  // sin descartar (caso Cancomar). La clave sin_publi no casa con el filtro de «nada», a propósito.
+  '2252569821991323': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v2-13nov' }
 };
 
 async function nombreFormulario(formId) {
@@ -183,7 +203,17 @@ function esLeadDePrueba(lead) {
   });
 }
 
+// Leads de Meta que no se vuelven a importar nunca: personas que pidieron la
+// supresión de sus datos (RGPD). Sin esto, al borrar el contacto del CRM el
+// rescate (api/rescate-leads.js) lo recreaba en la siguiente vuelta (12-nov: un
+// lead que no había rellenado él el formulario pidió el borrado y a los 2
+// minutos volvía a estar dentro, con el primer WhatsApp programado). Solo el id
+// del lead de Meta, que no es un dato personal por sí mismo. Más por SUPRESION_META_LEADS.
+const SUPRIMIDOS = new Set(['1148045904288057'].concat(
+  String(process.env.SUPRESION_META_LEADS || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean)));
+
 async function guardar(lead, opts) {
+  if (lead && SUPRIMIDOS.has(String(lead.id))) return { ok: false, motivo: 'suprimido_rgpd' };
   opts = opts || {};
   if (esLeadDePrueba(lead)) return { ok: false, motivo: 'lead_de_prueba' };
   const headers = {
@@ -207,16 +237,25 @@ async function guardar(lead, opts) {
 
   const campos = lead.field_data || [];
   const nombre = valor(campos, ['full_name', 'nombre', 'nombre_completo', 'first_name']);
-  const email = valor(campos, ['email', 'correo', 'correo_electronico']);
+  const email = valor(campos, ['email', 'work_email', 'correo', 'correo_electronico']);
   const telefono = valor(campos, ['phone_number', 'telefono', 'teléfono', 'movil']);
   const empresa = valor(campos, ['company_name', 'empresa']);
-  const sector = conocido ? conocido.sector : '';
-  const volumen = valor(campos, ['volumen']);
+  // Formulario horizontal (15-oct): inversión, quién atiende, sector, volumen y momento.
+  const hz = require('./_funnel-hz.js').desdeCampos(campos);
+  const sector = (hz && hz.sector) || (conocido ? conocido.sector : '');
+  // En el horizontal el tramo de volumen lo traduce _funnel-hz.js a las etiquetas vol-* de siempre.
+  const volumen = hz ? '' : valor(campos, ['volumen']);
   const web = valor(campos, ['website', 'web', 'sitio_web']);
   // Meta devuelve la CLAVE de la opción elegida, no el texto que ve el usuario.
   const CLAVES_INV = {
-    nada: 'Nada todavía', menos500: 'Menos de 500 €', '500_2000': 'Entre 500 y 2.000 €',
-    '2000_5000': 'Entre 2.000 y 5.000 €', mas5000: 'Más de 5.000 €'
+    nada: 'Nada todavía', menos500: 'Menos de 500 €', '500_2000': 'Entre 500 y 2.000 €', '500_1500': 'Entre 500 y 1.500 €', mas1500: 'Más de 1.500 €',
+    '2000_5000': 'Entre 2.000 y 5.000 €', mas5000: 'Más de 5.000 €',
+    // Formulario largo de formación (19-oct) y el de 4 preguntas (2-nov). Sin estas claves la etiqueta
+    // salía «inv-500-999» o «inv-1000-2999» y la puntuación no la reconocía.
+    '500_999': 'Entre 500 y 999 €', '1000_2999': 'Entre 1.000 y 2.999 €', '3000mas': 'Más de 3.000 €',
+    otros_nose: 'Otros canales o no lo sé',
+    // Formulario V2 (13-nov). «Sin publicidad» no es «nada»: no se filtra.
+    sin_publi: 'Sin publicidad actualmente', '500_1999': 'Entre 500 y 1.999 €', '2000mas': 'Más de 2.000 €'
   };
   const CLAVES_FUGA = {
     anuncios: 'En los anuncios y la captación', web: 'En la web y los formularios',
@@ -226,14 +265,14 @@ async function guardar(lead, opts) {
   };
   const inversionCruda = respuesta(campos, ['invers', 'presupuesto'], ['nada todav', '€']);
   const fugaCruda = respuesta(campos, ['escapa', 'fuga', 'donde_crees'], ['anuncios', 'web', 'respuesta', 'seguimiento', 'no lo s']);
-  const inversion = CLAVES_INV[inversionCruda] || inversionCruda;
+  const inversion = (hz && hz.inversionTexto) || CLAVES_INV[inversionCruda] || inversionCruda;
   let fuga = CLAVES_FUGA[fugaCruda] || fugaCruda;
   // Formulario del 28-sep-2026: «¿Cuándo te gustaría empezar?» y «Nuestros
   // proyectos empiezan desde 750 €/mes. ¿Encaja con lo que buscas?». Entran
   // como etiquetas cuando-* y precio-* y las lee la puntuación (api/_scoring.js).
   const cuandoCruda = respuesta(campos, ['cuando', 'empezar'], null).toLowerCase();
   const precioCruda = respuesta(campos, ['encaja', 'precio', '750'], null).toLowerCase();
-  const cuando = /este|mes$|^este_mes/.test(cuandoCruda) && !/1|3/.test(cuandoCruda) ? 'este-mes'
+  const cuando = hz ? hz.cuando : /este|mes$|^este_mes/.test(cuandoCruda) && !/1|3/.test(cuandoCruda) ? 'este-mes'
     : /1.?3|1_3|meses/.test(cuandoCruda) ? '1-3-meses'
     : /mirando|mirar/.test(cuandoCruda) ? 'mirando' : '';
   const precio = /depende/.test(precioCruda) ? 'depende'
@@ -257,6 +296,13 @@ async function guardar(lead, opts) {
     const dol = (v2.etiquetas.filter(function (t) { return /^dolor-/.test(t); })[0] || '').slice(6);
     fuga = dol === 'seguimiento' ? CLAVES_FUGA.seguimiento : (dol === 'captacion' || dol === 'calidad') ? CLAVES_FUGA.anuncios : dol === 'nose' ? CLAVES_FUGA.nose : '';
   }
+  // Formularios con ticket, cuándo o problema pero sin «quién decide» (los de formación de oct-nov):
+  // se leen igual que en el funnel v2 para que esas respuestas lleguen a GHL como etiquetas.
+  const sueltas = (v2 || hz) ? null : require('./_funnel-v2.js').etiquetasSueltas(campos);
+  if (sueltas && !fuga) {
+    const dol = (sueltas.filter(function (t) { return /^dolor-/.test(t); })[0] || '').slice(6);
+    fuga = dol === 'seguimiento' ? CLAVES_FUGA.seguimiento : (dol === 'captacion' || dol === 'calidad') ? CLAVES_FUGA.anuncios : dol === 'nose' ? CLAVES_FUGA.nose : '';
+  }
   const invierte = v2 ? true : (!!inversion && String(inversionCruda) !== 'nada' &&
     !/^nada/i.test(String(inversion)));
 
@@ -267,7 +313,24 @@ async function guardar(lead, opts) {
   // sin-inversion para medirlo aparte, y deja de salir el correo de «fuera».
   // Benjamín (Talavera) recibió ese correo y lo leyó como «no nos interesa».
   const llamarSinInversion = process.env.LLAMAR_SIN_INVERSION !== '0';
-  if (deEstaCampana && !invierte && !llamarSinInversion) {
+  // 4-nov-2026, Maikel: «quitemos a la gente que no invierte nada y tiene tickets pequeños».
+  // Sin inversión y con ticket bajo (curso o tratamiento de menos de 1.000 €; en reformas,
+  // obra de menos de 3.000 €) el lead se guarda en el CRM pero no se activa: ni WhatsApp, ni
+  // llamada, ni nurturing, ni correo de «fuera» (se leía como «no nos interesa»). A Meta le
+  // llega Disqualified para que deje de traer ese perfil. Sin dato de ticket no se filtra.
+  const F2 = require('./_funnel-v2.js');
+  const tramoTic = F2.tramoTicket(F2.campo(campos, ['ticket', 'paga_de_media', 'vale_de_media', 'cuanto_paga',
+    'cuanto_vale', 'tratamiento', 'alumno', 'precio_del_curso', 'precio_de_la_obra', 'valor_a', 'valor_b', 'valor_c'])) ||
+    Number((((sueltas || []).filter(function (t) { return /^ticket-\d$/.test(t); })[0]) || 'ticket-0').slice(7));
+  // 4-nov-2026, 12:00 (Maikel, en el chat de Paid): «los que ponen no invierten nada todavía O
+  // tienen un ticket de menos de 300 €, descartémoslos». Basta UNA de las dos. «Nada» es solo la
+  // respuesta explícita (nada / no invertimos todavía): un formulario sin pregunta de inversión no
+  // filtra a nadie. Ticket bajo = tramo 1 (menos de 300 €; en reformas, obra de menos de 3.000 €).
+  const declaraNada = String(inversionCruda || '').toLowerCase() === 'nada' || /^(nada|no invertimos|todav[ií]a no)/i.test(String(inversion || ''));
+  const filtrado = deEstaCampana && !v2 && !hz && (declaraNada || tramoTic === 1);
+  if (filtrado) {
+    etiquetas.push('diagnostico-landing', 'paid', 'sin-inversion', 'filtro-sin-inversion-ticket-bajo', 'nut-stop');
+  } else if (deEstaCampana && !invierte && !llamarSinInversion) {
     etiquetas.push('diagnostico-landing', 'paid', 'act-fuera');
   } else if (deEstaCampana) {
     etiquetas.push('diagnostico-landing', 'diagnostico-cualificado', 'paid',
@@ -294,6 +357,8 @@ async function guardar(lead, opts) {
   if (lead.id) etiquetas.push('meta-lead-' + String(lead.id).slice(0, 24));
   if (lead.ad_id) etiquetas.push('creativo-' + String(lead.ad_id).slice(0, 34));
   if (v2) v2.etiquetas.forEach(function (t) { etiquetas.push(t); });
+  if (hz) hz.etiquetas.forEach(function (t) { etiquetas.push(t); });
+  if (sueltas) sueltas.forEach(function (t) { if (etiquetas.indexOf(t) === -1) etiquetas.push(t); });
 
   // Completar un contacto que ya existía (lo creó la landing porque el webhook
   // no procesó el aviso de Meta): se añaden los datos del formulario, pero no
@@ -347,9 +412,25 @@ async function guardar(lead, opts) {
       contactId: contactId, nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
       empresa: empresa, origen: 'Meta', fuente: 'formulario instantáneo',
       sector: sector, adId: lead.ad_id,
-      detalle: !deEstaCampana ? 'otra campaña' : (invierte ? '' : 'nada todavía')
+      detalle: !deEstaCampana ? 'otra campaña' : filtrado ? 'filtrado: no invierte o ticket de menos de 300 €' : (invierte ? '' : 'nada todavía')
     });
     if (t.existia) console.log('[leadform] trato en Prospección ya existía', contactId, t.id);
+    // Filtrado (4-nov): el trato se cierra como perdido y Meta recibe Disqualified.
+    if (filtrado && !completar) {
+      if (t && t.id && !t.existia) {
+        await fetch(GHL_BASE + '/opportunities/' + t.id, {
+          method: 'PUT', headers: headers, body: JSON.stringify({ status: 'lost' })
+        }).catch(function () {});
+      }
+      try {
+        await require('./_meta.js').calidadLead('Disqualified', { leadgenId: String(lead.id || ''), email: EMAIL_RE.test(email) ? email : '',
+          telefono: telefono, contactId: contactId, motivo: declaraNada ? 'no invierte nada' : 'ticket de menos de 300 €' });
+      } catch (e) { console.error('[leadform] Disqualified (filtro):', e && e.message); }
+      await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
+        method: 'POST', headers: headers,
+        body: JSON.stringify({ body: 'FILTRADO AL ENTRAR (regla de Maikel del 4-nov): ' + (declaraNada ? 'no invierte nada en captación' : 'ticket de menos de 300 €') + ' (tramo de ticket ' + tramoTic + '). Se guarda sin activar: sin WhatsApp, llamada ni nurturing. Meta recibe Disqualified.\n\n' + new Date().toISOString() })
+      }).catch(function () {});
+    }
   }
   if (contactId && v2) {
     await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
@@ -357,7 +438,13 @@ async function guardar(lead, opts) {
       body: JSON.stringify({ body: v2.nota + (lead.form_id ? '\nFormulario: ' + lead.form_id : '') + '\n\n' + new Date().toISOString() })
     }).catch(function () {});
   }
-  if (contactId && (inversion || fuga)) {
+  if (contactId && hz) {
+    await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
+      method: 'POST', headers: headers,
+      body: JSON.stringify({ body: hz.nota + (lead.form_id ? '\nFormulario: ' + lead.form_id : '') + '\n\n' + new Date().toISOString() })
+    }).catch(function () {});
+  }
+  if (contactId && !hz && (inversion || fuga)) {
     await fetch(GHL_BASE + '/contacts/' + contactId + '/notes', {
       method: 'POST', headers: headers,
       body: JSON.stringify({
@@ -374,7 +461,7 @@ async function guardar(lead, opts) {
 
   // Aviso a Maikel. Mismo agujero que en la landing: de estos leads no avisa
   // nadie (ver api/_aviso.js). Los de otra campaña no se avisan, que son ruido.
-  if (deEstaCampana && !completar) {
+  if (deEstaCampana && !completar && !filtrado) {
     try {
       await require('./_aviso.js').leadNuevo({
         nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
@@ -389,7 +476,7 @@ async function guardar(lead, opts) {
   return {
     ok: true, contactId: contactId, nombre: nombre, telefono: telefono,
     email: EMAIL_RE.test(email) ? email : '', invierte: invierte,
-    inversion: inversion, fuga: fuga, sector: sector, campos: campos, activar: deEstaCampana
+    inversion: inversion, fuga: fuga, sector: sector, campos: campos, activar: deEstaCampana && !filtrado, filtrado: filtrado
   };
 }
 
@@ -455,7 +542,7 @@ module.exports = async function handler(req, res) {
       parte.guardados++;
 
       if (!r.activar) {
-        console.log('[leadform] guardado sin activar (formulario fuera de la lista)',
+        console.log(r.filtrado ? '[leadform] guardado sin activar (no invierte y ticket bajo)' : '[leadform] guardado sin activar (formulario fuera de la lista)',
           av.leadgen_id, 'form', lead.form_id || '?');
         parte.sin_activar++;
         continue;
@@ -511,5 +598,6 @@ module.exports = async function handler(req, res) {
 module.exports.guardar = guardar;
 module.exports.FORMULARIOS_SECTOR = FORMULARIOS_SECTOR;
 module.exports.esLeadDePrueba = esLeadDePrueba;
+module.exports.SUPRIMIDOS = SUPRIMIDOS;
 // Cuerpo sin parsear, para comprobar la firma de Meta sobre los bytes originales.
 module.exports.config = { api: { bodyParser: false } };

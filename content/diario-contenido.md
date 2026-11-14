@@ -1397,3 +1397,358 @@ Las dos van sin «suele» ni «muchos» sin fuente. El caso va contado como en e
 5. **Guion del vídeo 5** (pieza 5 del brief, la ficha de un contacto con sus dos notas). Te lo paso mañana jueves, como dice el brief. Necesita 45 segundos de tu voz.
 
 **Hipótesis para mañana:** el carrusel «Lo que tu formulario pregunta y lo que debería preguntar» funcionará mejor en LinkedIn como documento que en Instagram, porque lo comparte quien lleva el formulario y no quien lo rellena. Se mira el viernes 16 con los comentarios de perfiles de dirección.
+
+**Home nueva en producción (14-oct, OK de Maikel).** `qualivo.io` pasa a la versión de `/inicio/v2/`.
+- **Qué lleva:** el VSL, los casos, el formulario de tres pasos con el precio al lado y, debajo, el resto.
+- **Contactos:** los de la home entran por `/api/diagnostico` (etiqueta `pagina-inicio`), con primer WhatsApp y correo, y sin el filtro de facturación de la home anterior.
+- **SEO:** sin `noindex`, datos estructurados nuevos, `/inicio/v2/` redirige a `/` y las anclas antiguas siguen funcionando.
+- **Detalle:** `inicio/v2/CAMBIOS.md`.
+
+### Jueves 15-oct · trabajo del día (semana 42, cualificación)
+
+**Estrategia del mes (encargo de Maikel del 14-oct):** «Ya invierten, no convierten», del 15-oct al 8-nov.
+- **Dónde está:** en el documento compartido «Estrategia «Ya invierten, no convierten» · oct-nov 2026» y en el repo, `content/estrategia/2026-10-estrategia-icp-inversores-que-no-convierten.md`.
+- **Qué incluye:**
+  - el ICP con criterios medibles y los cinco problemas, cada uno con su dato real;
+  - tres recursos gratuitos nuevos: la auditoría de leads, el formulario que filtra y la calculadora de coste por venta;
+  - la landing multisector L3, la secuencia ICP-14 y la newsletter;
+  - un banco de ideas por canal, la prospección con la Biblioteca de anuncios de Meta, el calendario y la medición.
+- **Pendiente:** ocho decisiones de Maikel.
+
+**Publicado:**
+- **Re-apunte de [/blog/marketing-que-no-convierte/](https://qualivo.io/blog/marketing-que-no-convierte/).**
+  - **Los dos últimos párrafos:** separar al curioso desde el formulario, con los formularios de una prueba desde el 8-oct y el enlace a cualificar-leads.
+  - **El cierre:** un solo botón; antes había dos al mismo sitio.
+  - Sitemap y registro de keywords al día.
+
+**Borradores:**
+- **Carrusel** `content/borradores/2026-10-15-carrusel-lo-que-tu-formulario-pregunta.md`: la pieza 4 del brief y el adelanto del recurso B. Ocupa el hueco «Agentizando» del jueves.
+- **Guion del vídeo 5** `content/borradores/2026-10-15-video-5-ficha-dos-notas.md`: 45 segundos, voz el viernes.
+
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-15.md`): re-apunte 7, carrusel 5 y vídeo 5 6. Aplicados todos los críticos. Lo importante:
+- El carrusel decía que a quien «solo mira» no se le pide reunión, pero `/gracias/` le enseña el calendario. Ahora es una recomendación.
+- El caso de la «A que no era» sale del carrusel, porque el trato sigue abierto.
+- La pregunta del precio solo deja marca y no entra en la nota. Ahora lo dicen el artículo y el vídeo.
+- Nuevo para la sesión del ICP: los formularios v2 no preguntan la inversión, así que ningún contacto v2 llega a A directa por encaje alto.
+
+**Descartado:**
+- **Artículo nuevo (A).** La semana 42 ya lleva dos piezas fuertes. El primero de la estrategia, «Lead scoring con dos notas», va el lunes 19 si Maikel aprueba la cadencia de dos por semana.
+- **Newsletter.** Hoy es jueves, y el brief la deja para la semana 45. La estrategia propone adelantarla a la 44.
+
+**Decisiones para Maikel:**
+1. **Las ocho decisiones de la estrategia** (sección 10 del documento). La más urgente son los permisos de tres casos. Recomendación: pedirlos hoy.
+2. **La pantalla del vídeo 5.** Intelligence no enseña las dos notas. Recomendación: una ficha montada con «Ejemplo · datos simulados».
+3. **El carrusel**, hoy a las 13:30, si le das el ok antes.
+
+**Hipótesis para mañana:** el carrusel tendrá más guardados que comentarios, porque es una plantilla. Si es así, el recurso B («El formulario que filtra») tiene demanda y se adelanta a la semana 43.
+
+### Viernes 16-oct · trabajo del día (cierre de la semana 42)
+
+**Publicado:**
+- **Re-apunte de [/blog/equipo-comercial-no-usa-el-crm/](https://qualivo.io/blog/equipo-comercial-no-usa-el-crm/).**
+  - **Los dos últimos párrafos:** las dos notas de nuestro sistema para ver a quién llamar primero, con enlace a cualificar-leads, y un cierre concreto.
+  - **La caja final:** sin «plan por escrito en 24 horas».
+  - Sitemap y registro de keywords al día.
+  - **Por qué este artículo:** habla a empresas con equipo comercial, el ICP de la estrategia.
+
+**Borradores:**
+- **Tesis contraria del viernes:** `content/borradores/2026-10-16-tesis-coste-por-lead-barato.md`, «Bajar el coste por lead es la forma más cara de captar». Dato: la campaña de septiembre ya publicada (mismo coste por contacto en reformas y en formación, el doble de citas en formación).
+- **Artículo del lunes (B1, el pilar de la semana 43):** `content/borradores/2026-10-19-blog-lead-scoring-dos-notas.md`, «Lead scoring con dos notas». Lleva los puntos exactos de `api/_scoring.js` y qué pasa con cada letra. Se publica el lunes.
+
+**Master Reviewer** (`content/borradores/revision-master-reviewer-2026-10-16.md`): re-apunte 7, tesis 7 y borrador de lead scoring 5. Aplicados todos los críticos. Lo importante:
+- Las tablas del artículo no coincidían del todo con el código (volumen, sector, qué pasa con la A y la C). Ya coinciden.
+- El titular de la tesis pasa a «El contacto más barato me salió el doble de caro», que sale del dato.
+- En `/blog/coste-por-lead/`, las filas suman 290,90 € y el total dice 291,90 €. Hay que comprobarlo en Meta.
+
+**Descartado:**
+- **Publicar hoy un artículo nuevo.** Sería la tercera pieza fuerte de la semana 42. El de lead scoring queda escrito y revisado para el lunes.
+- **Newsletter.** No toca hasta la semana 44 o 45.
+
+**Decisiones para Maikel:**
+1. **Titular de la tesis** (R4): «El contacto más barato me salió el doble de caro». Recomendación: sí, es tu dato. Hay una variante más suave en el borrador.
+2. **Publicar el lunes el artículo de lead scoring.** Recomendación: sí. Abre la semana 43 y es la base del recurso A (auditoría de leads).
+3. **Siguen pendientes** las ocho decisiones de la estrategia, con los permisos de casos en primer lugar.
+
+**Hipótesis para el lunes:** con los puntos exactos a la vista, el artículo de lead scoring traerá más diagnósticos desde el blog que cualificar-leads. Se compara en dos semanas por `utm_content`.
+
+### Lunes 19-oct · trabajo del día (abre la semana 43)
+
+**Publicado:**
+- **Artículo nuevo: [/blog/lead-scoring/](https://qualivo.io/blog/lead-scoring/)**, «Lead scoring: cómo puntuar tus leads con dos notas (y qué hacer con cada letra)». Es el B1 de la estrategia del mes.
+  - Las tablas se han vuelto a comprobar hoy contra `api/_scoring.js`; no ha cambiado desde la revisión del 16-oct.
+  - Tarjeta en el blog, sitemap, llms.txt y registro de keywords.
+  - Comprobado en móvil (390 px): sin desbordes.
+- **Re-apunte de [/blog/cualificar-leads/](https://qualivo.io/blog/cualificar-leads/):**
+  - «Qué hacemos nosotros con esto» pasa a «dos notas» y enlaza al artículo nuevo;
+  - la caja final va sin «plan por escrito en 24 horas»;
+  - «scoring de leads» sale de sus keywords secundarias y pasa a `/blog/lead-scoring/`.
+- **Enlaces al artículo nuevo** desde `/diccionario/lead-scoring/` y `/blog/equipo-comercial-no-usa-el-crm/`.
+
+**Borradores:**
+- **Agentizando del lunes:** `content/borradores/2026-10-19-agentizando-la-linea-se-cae.md`, «Mi agente de voz lleva cuatro días sin llamar a nadie».
+  - **Dato:** cierres de Growth del 15 al 18-oct. La línea de Twilio está caída, Raquel ha hecho 0 llamadas y el registro apuntó «no conectó», no «no contestó».
+  - Tiene dos variantes: con la línea caída o cuando vuelva.
+- **Sigue en el banco:** `2026-10-08-agentizando-se-corrige.md`, como alternativa si no se quiere contar el fallo.
+
+**Aviso:** el artículo de hoy describe las reglas del sistema («si en 2 h 30 no contesta, le llama Raquel»). Las reglas son esas. Pero desde el 15-oct esas llamadas no salen, porque Twilio está caído. No se cambia el artículo: se arregla la línea.
+
+**Descartado:**
+- **Segundo artículo.** El de hoy es largo y es la pieza fuerte de la semana.
+- **Newsletter.** Hoy es lunes.
+
+**Decisiones para Maikel:**
+1. **Twilio.** Revisar el saldo o la cuenta hoy. Sin eso, la B y la C no reciben su llamada y el artículo de hoy describe algo que no está pasando. Recomendación: es lo primero del día.
+2. **Agentizando:** ¿se cuenta el fallo de la línea? Recomendación: sí, cuando vuelva (variante B), con la causa y el día.
+3. **Siguen pendientes:**
+   - las ocho decisiones de la estrategia, con los permisos de casos en primer lugar;
+   - la tesis del viernes;
+   - el carrusel;
+   - el vídeo 5;
+   - el 290,90 € frente a 291,90 € en Meta.
+
+**Hipótesis para mañana:** las búsquedas de «lead scoring» van a llegar más por el diccionario que por el blog, porque el diccionario ya posiciona. Si es así, el enlace de hoy desde el diccionario será la primera fuente de visitas del artículo. Se mira en dos semanas.
+
+### Martes 20-oct · trabajo del día
+
+**Publicado:**
+- **Artículo nuevo: [/blog/conversiones-offline-meta/](https://qualivo.io/blog/conversiones-offline-meta/)**, «Conversiones offline en Meta: cómo decirle a la campaña qué contactos acabaron comprando».
+  - Es el B4 de la estrategia, adelantado de la semana 44 porque el dato es de ayer.
+  - **Dato:** el cambio del 19-oct en `api/_tratos.js` (commit 75b4349). «Qualified» pasa a ser reunión celebrada con encaje, no reserva. Había 28 «Qualified» en el píxel que eran reservas.
+  - **Segundo dato:** el fallo del 28-sep, cuando a Meta le llegaron dos «Contacted» y ningún «Qualified» en diez días.
+  - **No se publica** la cifra de no presentados que está en el mismo comentario (R7).
+  - Tarjeta, sitemap, llms.txt y registro de keywords al día.
+- **Re-apunte de [/blog/meta-ads/](https://qualivo.io/blog/meta-ads/):**
+  - un sexto error en la lista final («no contarle a Meta qué contactos compraron»), con enlace al artículo nuevo;
+  - la caja final va sin la promesa «coste real por cliente de cada canal» y con un solo botón al diagnóstico.
+- **Corrección en [/blog/lead-scoring/](https://qualivo.io/blog/lead-scoring/):**
+  - **Por qué:** desde la tarde del 19-oct la voz está pausada en el código (`VOZ_PAUSADA`, Revenue Journey V3), así que la llamada de Raquel a la B y la C no sale.
+  - **Qué cambia:** el artículo lo dice en una nota bajo la tabla de letras. Sin esa nota incumplía R2.
+
+**Borradores:**
+- **Sin humo del martes:** `content/borradores/2026-10-20-sin-humo-28-cualificados.md`, «28 cualificados que no lo eran». Va con el artículo de hoy.
+- **Agentizando de ayer** (`2026-10-19-agentizando-la-linea-se-cae.md`): actualizado con la pausa de la voz. La variante «volvió» no vale hasta que Maikel reactive la voz.
+
+**Descartado:**
+- **Pieza sobre el no presentado de ayer** (escuela de formación). Rozaría la tasa de plantones (R7) y es un trato abierto (R5).
+- **Newsletter.** Hoy es martes.
+
+**Decisiones para Maikel:**
+1. **Cadencia.** Esta semana van dos piezas fuertes (lead scoring y conversiones offline), tirando de tu «caña máxima». Recomendación: dejarlo en dos por semana, que es la decisión 2 de la estrategia.
+2. **Sin humo «28 cualificados».** Recomendación: sí, hoy o mañana, con el enlace en el primer comentario.
+3. **La voz de Raquel.** Cuando vuelva, avísame para quitar la nota de lead scoring y cerrar el Agentizando.
+4. **Siguen pendientes:**
+   - las ocho decisiones de la estrategia, con los permisos de casos en primer lugar;
+   - la tesis del viernes;
+   - el carrusel;
+   - el vídeo 5;
+   - el 290,90 € frente a 291,90 €.
+
+**Hipótesis para mañana:** el artículo de conversiones offline traerá menos visitas que lead scoring, pero más diagnósticos de empresas que ya invierten, porque solo lo busca quien ya tiene campañas. Se compara por `utm_content` en dos semanas.
+
+### Miércoles 21-oct · trabajo del día
+
+**Publicado:**
+- **Re-apunte de [/blog/agencia-meta-ads/](https://qualivo.io/blog/agencia-meta-ads/):**
+  - «Las preguntas antes de firmar» pasa de cinco a seis. La sexta: «¿Qué le devolvéis a Meta de mis contactos, y qué cuenta como cualificado?». Lleva el dato del 19-oct y enlaza a `/blog/conversiones-offline-meta/`.
+  - La caja final va sin «coste real por cliente de cada canal», una promesa sin comprobar, y con un solo botón al diagnóstico.
+  - Meta description, entradilla, llms.txt, sitemap y registro de keywords al día.
+  - **Por qué este:** habla a quien ya paga una agencia, el ICP del mes.
+
+**Borradores:**
+- **Bandera roja:** `content/borradores/2026-10-21-bandera-roja-trato-sin-importe.md`, «Un trato en negociación sin importe».
+  - **Dato:** el cierre de Growth del 20-oct (un trato pasa a Negociación sin importe) y los dos tratos de 0 € del 1-oct, ya publicados.
+  - **Corregido antes de guardarlo:** había escrito que el trato tenía tareas a los 2, 5 y 10 días. En `api/seguimientos.js` esas tareas son solo para propuestas enviadas; Negociación tiene una a los 30 días. Sale del texto.
+
+**Descartado:**
+- **Artículo nuevo (A).** La semana 43 ya lleva dos piezas fuertes (lead scoring y conversiones offline), y mi recomendación es dos por semana hasta que Maikel decida.
+- **Newsletter (D).** Sigue en la semana 44 o 45, pendiente del ok de Maikel, y sin envío masivo sin su autorización (R17).
+- **Pieza sobre los dos plantones de Meta de esta semana** (cierre del 20-oct). Rozaría la tasa de plantones (R7).
+
+**Decisiones para Maikel:**
+1. **La bandera roja.** Recomendación: sí, después de poner un rango de importe al trato del 20-oct.
+2. **Twilio.** Growth ha encontrado que el trunk de Qualivo da 404 desde el 15-oct y que el de Equipzilla sí conecta. Falta que revises la consola. Recomendación: hoy; sin eso no vuelve la voz.
+3. **Siguen pendientes:**
+   - la cadencia de dos piezas por semana;
+   - el Sin humo «28 cualificados»;
+   - el Agentizando de la línea;
+   - las ocho decisiones de la estrategia, con los permisos de casos en primer lugar;
+   - la tesis, el carrusel y el vídeo 5;
+   - el 290,90 € frente a 291,90 €.
+
+**Hipótesis para mañana:** la pregunta nueva de agencia-meta-ads hará que ese artículo mande visitas a conversiones-offline-meta. Si en dos semanas el enlace no tiene clics, la pregunta va más arriba en el artículo.
+
+**Entrega a Growth (21-oct, encargo «hipótesis para noviembre»):** `content/estrategia/2026-10-21-hipotesis-contenido-noviembre.md`.
+- **H-12** se descarta tal como estaba.
+- **Cinco hipótesis nuevas**, de C-1 a C-5. La de mayor ICE es C-2, la página para reenviar al que decide, con 7,0.
+- **Dato nuevo, de una lectura de solo lectura del CRM:** ninguno de los 1.159 contactos lleva la etiqueta de un artículo del blog, aunque los botones llevan `utm_content` al menos desde el 6-oct.
+- **Aviso:** el documento del ICP del CoS está en una rama del repositorio público, con nombres de prospectos e importes.
+
+**Copy y Conversión (21-oct, mensaje del CoS): primer encargo entregado antes de plazo.**
+- **Entrega para Growth:** `content/copy/2026-10-22-abm-formacion.md`.
+  - **Qué lleva:** el primer email ABM, la cabecera de landing y la apertura de la demo, todo para formación.
+  - **Estado:** borrador. No se envía ni se activa nada.
+- **Referencia de marca:** `content/copy/referencia-marca.md`.
+- **Bloqueo:** el kit de demo de formación no tiene pantallas de anuncio ni de formulario, y su titular («Del primer mensaje al cliente») reduce Qualivo a lo que pasa después del formulario. El email lleva dos versiones de la línea de la demo según si se arregla.
+- **Pendiente de Maikel:** confirmar que asumo la función. El mensaje del CoS lo da por decidido, pero en este chat aún no lo ha dicho él.
+
+### Jueves 22-oct · trabajo del día
+
+**Incidencia al arrancar:** el entorno se reinició con la rama `claude/pensive-cray-u3k7kx` activa, que tiene 37 commits de otro trabajo. El `pull --rebase` empezó a ponerlos sobre la rama de contenido y se paró en un conflicto de `.gitignore`. Lo aborté (`git rebase --abort`): esa rama queda como estaba (0212f20), sin ningún push. La rutina sigue en `claude/qualivo-landing-vercel-nubk1i`.
+
+**Publicado:**
+- **Re-apunte de [/blog/presupuestos-sin-respuesta/](https://qualivo.io/blog/presupuestos-sin-respuesta/):**
+  - **El último bloque:** las tareas de seguimiento de propuestas a los 2, 5 y 10 días, con borrador, que envía una persona (desde el 19-oct). Y la lección de esta semana: un contacto se quejó de recibir demasiados toques, así que un presupuesto lo sigue una sola persona con nombre.
+  - **Lo que sale:**
+    - la caja del caso Nuria Roure, porque no hay permiso por escrito (R6);
+    - «no cambiamos tu sistema», porque no está comprobado;
+    - «plan por escrito en 24 horas», porque no está confirmado.
+  - Sitemap, llms.txt y registro de keywords al día.
+  - **Por qué este artículo:** es el de reformas, que es el primer sector del piloto ABM.
+
+**Borradores:**
+- **Agentizando del jueves:** `content/borradores/2026-10-22-agentizando-demasiados-toques.md`, «Me escribía demasiada gente».
+  - **Dato:** el daily de Growth del 21-oct (la queja por exceso de toques y 4 respuestas en unas horas a seguimientos manuales).
+  - **Dos variantes:** A, si Maikel aprueba el cambio de un solo remitente humano; B, si aún no.
+
+**Descartado:**
+- **Artículo nuevo (A).** La semana 43 ya lleva dos piezas fuertes, y mi recomendación sigue siendo dos por semana.
+- **Newsletter.** Hoy es jueves.
+
+**Decisiones para Maikel:**
+1. **Un solo remitente humano desde el segundo toque** (propuesta de Growth). Recomendación: sí. Desbloquea el Agentizando de hoy.
+2. **La landing interactiva de la demo de formación** (preguntado ayer). Recomendación:
+   - publicarla en `/formacion/demo/` sin indexar;
+   - con el formulario de formación como único botón;
+   - con la voz marcada «en pausa hoy»;
+   - después de que la revise Growth.
+3. **Siguen pendientes:**
+   - la cadencia;
+   - el Sin humo «28 cualificados»;
+   - la bandera roja del trato sin importe;
+   - los permisos de casos;
+   - la LSSI de la secuencia ABM;
+   - el 290,90 € frente a 291,90 €.
+
+**Hipótesis para mañana:** si se aprueba el remitente único, los seguimientos de la semana que viene tendrán más respuestas por toque que los de la semana 42. Se compara con el registro de Growth, sin publicar tasas.
+
+### Viernes 23-oct · trabajo del día
+
+**Publicado:**
+- **Re-apunte de [/blog/funnel-de-ventas/](https://qualivo.io/blog/funnel-de-ventas/):**
+  - **El último bloque** cuenta lo que hacemos en nuestra propia captación: tareas a los 2, 5 y 10 días con el mensaje escrito después de cada propuesta (desde el 19-oct, commit 2cd71d9). Enlaza las demos de /formacion/ y /reformas/ con UTM.
+  - **Botón:** uno solo, «Pide tu diagnóstico», a /diagnostico/ («identificamos qué conviene revisar primero»).
+  - **Lo que sale:**
+    - el 8,3× de BelloVinilo, porque no hay permiso escrito (R6);
+    - «el diagnóstico completo te da el mapa con tus datos reales», porque no los tenemos antes de la reunión.
+  - **Metadatos:** dateModified y sitemap al día.
+  - **Por qué este artículo:** es de la semana 44 (seguimiento de propuestas), no se había tocado nunca y el plan de redes lleva tráfico al tema.
+  - **Queda en el cuerpo, sin tocar:** la frase de «una academia con la que trabajamos… el doble de entrevistas» es un resultado de cliente sin permiso. La regla del re-apunte no deja tocar el cuerpo, así que lo apunto para cuando llegue el permiso o se decida reescribir ese bloque.
+
+**Borradores:**
+- **Tesis contraria del viernes:** `content/borradores/2026-10-23-tesis-recordatorio-que-pide-un-si.md`, «Un recordatorio que no pide nada no te dice nada».
+  - **Dato:** el recordatorio de la víspera pide un «sí» desde el 19-oct (`api/_recordatorios.js`).
+  - **Riesgo:** ninguno.
+  - **Destino:** el lote de la semana 45, en lugar de la opinión sobre la tasa de plantones.
+
+**Redes (el estado nuevo del parte):**
+- **Publicado ayer:** nada.
+- **Programado para los próximos 7 días:** nada todavía.
+- **Espera aprobación:** el lote de la semana 44 (Notion, «Lote semana 44»), que Maikel aprueba hoy. Si no responde, el lunes solo salen las piezas sin riesgo.
+- **Resultados de la semana:** no hay piezas publicadas.
+
+**Descartado:**
+- **Artículo nuevo (A).** La semana 43 ya tiene dos piezas fuertes (lead scoring y conversiones offline). Mi recomendación sigue siendo dos por semana.
+- **Newsletter.** No es miércoles. La general sale el 28-oct si Maikel la autoriza (R17).
+
+**Decisiones para Maikel:**
+1. **Aprobar hoy el lote de la semana 44.** Recomendación: aprobar todo lo marcado sin riesgo y decidir el remitente único. Con eso sale también el post del lunes.
+2. **La frase del cuerpo de /blog/funnel-de-ventas/** («una academia con la que trabajamos»). Recomendación: pedir el permiso a ese cliente junto con los demás (EAC, BelloVinilo, Nail Boss), o quitar la frase en la próxima revisión del artículo.
+3. **Siguen pendientes:**
+   - la cámara de los guiones y el día de grabación;
+   - la autorización de la newsletter del 28-oct;
+   - el planificador de GHL para programar.
+
+**Hipótesis para mañana:** las piezas del lote que cierran con una pregunta concreta (por ejemplo, «¿cuántos días pasan hasta el primer seguimiento?») abrirán más conversaciones con perfiles que encajan que las que llevan a un recurso. Se mide en `content/redes/registro.md` a las 48 horas.
+
+### Lunes 26-oct · trabajo del día
+
+**Publicado:**
+- **Artículo nuevo: [/blog/propuesta-comercial/](https://qualivo.io/blog/propuesta-comercial/),** «Propuesta comercial: qué poner y qué hacer en los 10 días después de enviarla».
+  - **Contenido:**
+    - qué debe incluir una propuesta;
+    - cuándo enviarla (la tarea «Propuesta sin enviar» a los 3 días de la reunión);
+    - los seguimientos de los días 2, 5 y 10 con los borradores reales;
+    - la tarea a 30 días en Negociación;
+    - cómo montarlo en un CRM.
+  - **Fuente:** `api/seguimientos.js` y commit 2cd71d9.
+  - **Por qué:** es el artículo de la semana 44 (seguimiento de propuestas). La palabra clave «propuesta comercial» no estaba usada y no compite con presupuestos-sin-respuesta.
+  - **Dónde queda registrado:** tarjeta en el blog, sitemap, llms.txt y registro de palabras clave.
+- **Re-apunte de [/blog/agencia-google-ads/](https://qualivo.io/blog/agencia-google-ads/):**
+  - **Cambio:** el final dice que antes de hablar de Google Ads miramos el recorrido entero, y el botón lleva al diagnóstico («qué conviene revisar primero»).
+  - **Lo que sale:**
+    - la caja de EAC, porque no hay permiso escrito (R6);
+    - «plan por escrito en 24 horas», «sin permanencia» y «no cobramos porcentaje», porque no están confirmados (R10).
+- **Registro de re-apuntes:** añadido el de /blog/funnel-de-ventas/ del 23-oct, que faltaba.
+
+**Borradores:**
+- **Agentizando del lunes:** `content/borradores/2026-10-26-agentizando-vigia-primer-mensaje.md`, «Tres horas sin nada».
+  - **Dato:** el vigía del primer mensaje (commit 2c48f7dc, 22-oct). Si un contacto nuevo lleva 15 minutos sin primer WhatsApp con el horario abierto, avisa a Maikel.
+  - **Destino:** el lote de la semana 45.
+
+**Redes:**
+- **Publicado ayer:** nada.
+- **Programado para los próximos 7 días:** nada. El lote de la semana 44 no tiene respuesta de Maikel, y el planificador de GHL sigue sin confirmar.
+- **Espera aprobación:** el lote de la semana 44. Hoy tocaba el Agentizando «Me escribía demasiada gente», que necesita ok, así que no sale.
+- **Resultados de la semana:** ninguno, porque no hay nada publicado.
+
+**Descartado:**
+- **Newsletter.** No es miércoles. La general del 28-oct sigue pendiente del recuento de Growth y de la autorización escrita (R17).
+
+**Decisiones para Maikel:**
+1. **El lote de la semana 44.** Recomendación: aprobar lo que no tiene riesgo para que salga desde el martes 27, y decidir el remitente único.
+2. **La frase del Agentizando nuevo** («no puede pasar que entre un lead y no le enviemos nada»). Está en el comentario del código, atribuida a Maikel. Recomendación: confirmarla y usarla, porque es el gancho.
+3. **Siguen pendientes:**
+   - el planificador de GHL;
+   - la cámara de los guiones;
+   - la newsletter del 28-oct;
+   - los permisos de casos.
+
+**Hipótesis para mañana:** el artículo de propuesta comercial traerá más clics al diagnóstico que el de presupuestos sin respuesta, porque lleva los mensajes listos para copiar. Se compara con Search Console a las cuatro semanas.
+
+## Martes 27-oct-2026
+
+**Publicado:**
+- **Artículo nuevo:** https://qualivo.io/blog/leads-de-mala-calidad/, «Leads de mala calidad: cinco cosas que revisar antes de culpar a Meta».
+  - **Keyword:** «leads de mala calidad».
+  - **Datos reales:**
+    - los 28 «cualificados» que eran reservas, hasta el 19-oct (`api/_tratos.js`, sin la cifra de no presentados, R7);
+    - la respuesta «Más adelante, solo estoy mirando» del formulario v2;
+    - los 120 anuncios de la Biblioteca de Meta del 26-oct, sin nombrar al anunciante.
+  - **Ejemplo:** la tabla A/B va marcada como ejemplo.
+  - **Registro:** tarjeta en el blog, sitemap, llms.txt y keywords.
+- **Re-apuntado:** /blog/formulario-de-facebook-o-landing-page/.
+  - **Añadido:** el cambio del 19-oct en lo que se devuelve a Meta y el enlace al artículo nuevo.
+  - **Quitado:** «el plan por escrito te lo quedas en 24 horas», porque no está confirmado.
+  - **Botón:** uno solo, a /diagnostico/.
+
+**Borradores:**
+- **Pieza 4 del plan de 30 días** (miércoles 4-nov): `content/redes/piezas/2026-11-04-landing-que-filtra/`, «Déjanos tus datos y te llamamos».
+  - **Formato:** 5 bodegones de Higgsfield.
+  - **Dato real:** la respuesta «solo estoy mirando» del formulario.
+- **Serie de los martes:** «Sin humo» ya no se usa. La guía de voz veta ese rótulo y el plan de 30 días sustituye las series por días.
+
+**Ayer, con Maikel (26-oct):**
+- **Plan nuevo:** de 30 días por dolores.
+- **Pieza 1:** aprobada tras seis versiones. El estilo final son bodegones fotográficos y de 5 a 15 palabras por lámina.
+- **Piezas 2 y 3:** hechas con el mismo estilo.
+- **Radares de Growth:** el de octubre y el visual.
+- **Biblioteca de dolores:** creada en Notion.
+
+**Pide el OK de Maikel:**
+1. **Piezas 2, 3 y 4.** Recomendación: aprobarlas. Las tres siguen el estilo de la pieza 1 y no tienen riesgo.
+2. **Cambio de tema de la pieza 4** (de la auditoría de 20 minutos a la landing que filtra). Recomendación: sí, por su petición de más captación.
+3. **Planificador de GHL:** confirmar que están conectados su LinkedIn y su Instagram. Sin eso no se programa nada.
+
+**Descartes:** no hay newsletter, porque no es miércoles.
+
+**Hipótesis para mañana:** la portada de la pieza 1 como imagen única en LinkedIn sacará más comentarios que los posts solo de texto del radar (mediana de 0). Se mide a las 48 horas en `content/redes/registro.md`.

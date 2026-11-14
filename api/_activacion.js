@@ -863,8 +863,44 @@ async function enviarCorreo(email, asunto, html) {
   }
 }
 
+// ¿Hay que frenar los mensajes automáticos de una cita porque el lead ha
+// contestado? 11-nov: Toni (IGMA) escribió «no me viene bien ni una
+// videoconferencia» y aun así le salieron solos «Cambiada: ahora hablamos a las
+// 12:45» (7 minutos después) y «Nos vemos a las 12:45» (una hora antes).
+// Mira solo lo que el lead escribió DESPUÉS de `desdeMs` (la última vez que se
+// tocó la cita), para no frenar el caso normal: «hoy no puedo, ¿mañana?» y
+// Maikel la mueve.
+// Frena si:
+//   · ha dicho que no puede, que lo anula o algo parecido, o
+//   · con `sinContestar`, ha escrito algo que no es un simple «ok» o «gracias»
+//     y nadie le ha contestado después.
+// Mejor silencio y aviso a Maikel que un mensaje que contradice al lead.
+const NEGATIVA_CITA = /\bno\s+(me\s+)?(viene|va\b|puedo|podr[eé]|voy a poder|cuadra|encaja)|\banul|\bcancel|imposible|no me es posible|\bno\s+(quiero|me interesa)\b/i;
+const SOLO_ACUSE = /^[\s¡!.,;:]*(ok(i|ey|is)?|vale|perfecto|genial|gracias|muchas gracias|s[ií]|de acuerdo|hecho|guay|top|estupendo|entendido|recibido|claro|okey|nos vemos|hasta (luego|mañana|ahora))?[\s¡!.,;:]*(👍|👌|🙏|😊|🙂|☺️|😉|💪|👏)*[\s¡!.,;:]*$/i;
+function citaFrenadaPorRespuesta(mensajes, desdeMs, opciones) {
+  opciones = opciones || {};
+  const desde = Number(desdeMs) || (Date.now() - 6 * 3600 * 1000);
+  let ultimo = null, negativa = '';
+  for (const m of (mensajes || [])) {
+    if (/ACTIVITY/i.test(String(m.messageType || ''))) continue;
+    if (String(m.status || '').toLowerCase() === 'failed') continue;
+    const cuerpo = String(m.body || '');
+    if (/Reacted|type message: other/i.test(cuerpo)) continue;
+    ultimo = m;
+    const t = Date.parse(m.dateAdded || 0);
+    if (String(m.direction) === 'inbound' && t > desde && NEGATIVA_CITA.test(cuerpo)) negativa = cuerpo.slice(0, 200);
+  }
+  const ultimaEntrante = !!ultimo && String(ultimo.direction) === 'inbound' && Date.parse(ultimo.dateAdded || 0) > desde;
+  const sinContestar = !!opciones.sinContestar && ultimaEntrante && !SOLO_ACUSE.test(String(ultimo.body || ''));
+  return {
+    frenar: !!negativa || sinContestar,
+    motivo: negativa ? 'ha dicho que no puede' : sinContestar ? 'ha escrito y nadie le ha contestado' : '',
+    texto: negativa || (ultimo ? String(ultimo.body || '').slice(0, 200) : '')
+  };
+}
+
 module.exports = {
-  PAUSA_TOTAL,
+  PAUSA_TOTAL, citaFrenadaPorRespuesta,
   GHL_BASE, GHL_VERSION, cabeceras, ahoraMadrid, enVentana, buscarPorEtiqueta, saldriaPorGateway, enviarCorreo,
   etiquetar, nota, enviarWhatsApp, enviarSMS, enviarPorGateway, esWhatsApp, GATEWAY_PROVIDER, enviarMensaje, primerWhatsApp, primerWhatsAppCompleto, yaTienePrimerWhatsApp, retenerParaMaikel, nivelDe, camposWA, leerCamposWA, CAMPOS_WA, estadoMensaje, mensajesDe, reenviarFallidos,
   lanzarLlamada, telefonoE164, tiene, minutosDesde, revisarRespuesta, tieneCitaGHL, BAJA,

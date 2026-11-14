@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Qualivo × Marín Clínica Dental · segunda reunión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Yeseva+One&display=swap">
+<style>
+/* Segunda reunión (20 minutos). Una idea por pantalla; lo explica Maikel. Flechas del teclado o scroll. */
+:root{--ink:#1D2333;--mut:#5E667A;--bg:#FBFAF7;--soft:#F4F1EA;--line:#E6E0D4;--deep:#2F3854;--deep2:#252C44;--beige:#E2D3BA;--acc:#8C6E3F;
+--serif:"Yeseva One",Georgia,serif;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-snap-type:y proximity}
+body{background:var(--bg);color:var(--ink);font:18px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.top{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;gap:16px;padding:12px max(20px,env(safe-area-inset-right,0px)) 12px max(20px,env(safe-area-inset-left,0px));background:rgba(37,44,68,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+.top img{height:26px;width:auto}
+.top .x{opacity:.5;font-size:14px}
+.top .q{font-weight:700;font-size:14px;letter-spacing:.04em;margin-right:auto}
+.top .cnt{font-size:12px;font-weight:600;opacity:.7;font-variant-numeric:tabular-nums}
+.s{min-height:100vh;min-height:100svh;padding:96px max(22px,env(safe-area-inset-right,0px)) 64px max(22px,env(safe-area-inset-left,0px));display:flex;align-items:center;scroll-snap-align:start}
+.s.alt{background:var(--soft)}
+.s.dark{background:var(--deep);color:#fff}
+.in{max-width:1120px;margin:0 auto;width:100%;min-width:0}
+.k{font:600 12.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:22px}
+.dark .k{color:var(--beige)}
+h1,h2{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.05;text-wrap:balance}
+h1{font-size:clamp(44px,7.4vw,96px);max-width:13ch}
+h2{font-size:clamp(34px,5vw,64px);max-width:18ch;margin-bottom:40px}
+.lead{font-size:clamp(18px,1.8vw,22px);color:var(--mut);max-width:40ch}
+.dark .lead{color:rgba(255,255,255,.78)}
+
+/* portada */
+.hero{background:linear-gradient(95deg,rgba(37,44,68,.95) 0%,rgba(47,56,84,.82) 48%,rgba(47,56,84,.35) 100%),url(../assets/brand/clinica.jpg) center/cover;color:#fff}
+.hero .logo{height:54px;width:auto;margin-bottom:44px}
+.hero p{font-size:clamp(18px,2vw,24px);opacity:.85;margin-top:26px;max-width:34ch}
+.hero .meta{margin-top:44px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+
+/* lo que nos contaste */
+.quotes{display:grid;gap:0;border-top:1px solid var(--line)}
+.quotes blockquote{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:28px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.quotes blockquote span{font:400 15px var(--sans);color:var(--acc);font-weight:600;letter-spacing:.1em}
+.quotes blockquote p{font-family:var(--serif);font-size:clamp(22px,2.6vw,34px);line-height:1.2}
+
+/* tres cambios */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid rgba(255,255,255,.2)}
+.three div{padding:30px 28px 10px 0;min-width:0}
+.three div+div{padding-left:28px;border-left:1px solid rgba(255,255,255,.2)}
+.three b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,32px);line-height:1.1;margin:10px 0 14px}
+.three small{font-weight:600;letter-spacing:.18em;color:var(--beige);font-size:12px}
+.three p{font-size:16px;color:rgba(255,255,255,.78);line-height:1.5}
+
+/* lo llevamos nosotros */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.ads{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ads img{border-radius:14px;aspect-ratio:4/5;object-fit:cover;width:100%;box-shadow:0 30px 60px -36px rgba(29,35,51,.6)}
+.ads img:nth-child(2){margin-top:46px}
+.list{list-style:none;padding:0;border-top:1px solid var(--line)}
+.list li{padding:18px 0;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:baseline}
+.list li b{font-weight:600;min-width:9.5ch}
+.list li span{color:var(--mut)}
+
+/* primer mes */
+.weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--deep)}
+.weeks div{padding:24px 22px 0 0;min-width:0}
+.weeks div+div{padding-left:22px;border-left:1px solid var(--line)}
+.weeks small{display:block;font-weight:700;letter-spacing:.16em;font-size:12px;color:var(--acc);margin-bottom:12px}
+.weeks b{display:block;font-size:19px;line-height:1.25;margin-bottom:10px}
+.weeks p{font-size:15px;color:var(--mut);line-height:1.5}
+
+/* inversión */
+.price{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(255,255,255,.22);border-bottom:1px solid rgba(255,255,255,.22)}
+.price div{padding:34px 34px 34px 0;min-width:0}
+.price div+div{padding-left:34px;border-left:1px solid rgba(255,255,255,.22)}
+.price small{display:block;font-weight:600;letter-spacing:.18em;font-size:12px;color:var(--beige);text-transform:uppercase}
+.price strong{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(46px,6vw,78px);line-height:1;margin:16px 0 6px}
+.price strong em{font-style:normal;font-family:var(--sans);font-size:.3em;font-weight:500;opacity:.75;margin-left:6px}
+.price p{font-size:15.5px;color:rgba(255,255,255,.78);margin-top:12px}
+.aparte{margin-top:26px;font-size:15.5px;color:rgba(255,255,255,.7);max-width:60ch}
+
+/* cierre */
+.close h2{max-width:16ch}
+.steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;counter-reset:n}
+.steps3 div{border-top:1px solid var(--line);padding-top:20px;min-width:0}
+.steps3 div::before{counter-increment:n;content:"0" counter(n);display:block;font-family:var(--serif);font-size:34px;color:var(--acc);margin-bottom:8px}
+.steps3 b{display:block;font-size:19px;margin-bottom:6px}
+.steps3 p{font-size:15.5px;color:var(--mut)}
+.links{margin-top:54px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:var(--mut)}
+.links a{text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+.links a:hover{color:var(--ink);border-color:var(--ink)}
+.foot{padding:26px 22px 34px;text-align:center;font-size:12.5px;color:var(--mut)}
+
+@media (max-width:900px){
+  .three,.weeks,.steps3{grid-template-columns:1fr}
+  .three div,.three div+div{padding:22px 0;border-left:0;border-bottom:1px solid rgba(255,255,255,.2)}
+  .weeks div,.weeks div+div{padding:20px 0;border-left:0;border-bottom:1px solid var(--line)}
+  .split{grid-template-columns:1fr;gap:36px}
+  .price{grid-template-columns:1fr}
+  .price div,.price div+div{padding:26px 0;border-left:0}
+  .price div+div{border-top:1px solid rgba(255,255,255,.22)}
+  .quotes blockquote{grid-template-columns:1fr;gap:6px}
+  .top .q{display:none}
+  .top{justify-content:space-between}
+  html{scroll-snap-type:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental"><span class="x">×</span><span class="q">QUALIVO</span>
+  <span class="cnt" id="cnt">1 / 7</span>
+</header>
+
+<section class="s hero" id="p0">
+  <div class="in">
+    <img class="logo" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental">
+    <h1>Del anuncio al sillón, sin perder a nadie</h1>
+    <p>Lo que hablamos el martes y cómo lo arrancamos en Patraix y en Torrent.</p>
+    <div class="meta">Segunda reunión · Qualivo</div>
+  </div>
+</section>
+
+<section class="s" id="p1">
+  <div class="in">
+    <div class="k">01 · Lo que nos contaste</div>
+    <div class="quotes">
+      <blockquote><span>LEADS</span><p>«Entran bastantes leads que no conseguimos convertir en citas.»</p></blockquote>
+      <blockquote><span>AGENDA</span><p>«Una cita para la semana que viene es humo en agenda.»</p></blockquote>
+      <blockquote><span>RETORNO</span><p>«Es mucho dinero en Facebook cuando no ves el retorno.»</p></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="s dark" id="p2">
+  <div class="in">
+    <div class="k">02 · Qué cambiamos</div>
+    <h2>Tres cambios, uno por cada problema</h2>
+    <div class="three">
+      <div><small>FILTRAR</small><b>Pacientes que se pueden tratar</b><p>Anuncios por tratamiento y un formulario que pregunta por la financiación antes de dar cita.</p></div>
+      <div><small>CITAR</small><b>Citas que vienen</b><p>Cita en 48-72 h, recordatorios por WhatsApp y aviso cuando hay riesgo de plantón.</p></div>
+      <div><small>MEDIR</small><b>Coste por paciente tratado</b><p>Cada mañana, qué campaña y qué sede traen tratamientos, no clics.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="p3">
+  <div class="in split">
+    <div>
+      <div class="k">03 · Lo llevamos nosotros</div>
+      <h2>Una sola mano, de la campaña al presupuesto</h2>
+      <ul class="list">
+        <li><b>Campañas</b><span>Meta, por tratamiento y por sede.</span></li>
+        <li><b>Creatividades</b><span>Imagen y vídeo para cada campaña.</span></li>
+        <li><b>Respuesta</b><span>WhatsApp en minutos, con vuestro tono.</span></li>
+        <li><b>Seguimiento</b><span>CRM con las dos sedes y cada paso con fecha.</span></li>
+        <li><b>Panel</b><span>Coste por primera visita y por tratamiento.</span></li>
+      </ul>
+    </div>
+    <div class="ads">
+      <img src="../assets/ia/ad1.jpg" alt="Anuncio de implantes con financiación">
+      <img src="../assets/ia/ad2.jpg" alt="Anuncio de ortodoncia invisible">
+    </div>
+  </div>
+</section>
+
+<section class="s alt" id="p4">
+  <div class="in">
+    <div class="k">04 · El primer mes</div>
+    <h2>En cuatro semanas, funcionando</h2>
+    <div class="weeks">
+      <div><small>SEMANA 1</small><b>Accesos y punto de partida</b><p>Revisamos vuestras campañas y medimos de dónde salen hoy los pacientes.</p></div>
+      <div><small>SEMANA 2</small><b>Formulario, WhatsApp y CRM</b><p>Montados con vuestra marca, para Patraix y para Torrent.</p></div>
+      <div><small>SEMANA 3</small><b>Campañas nuevas</b><p>Por tratamiento, con creatividades nuevas y la financiación por delante.</p></div>
+      <div><small>SEMANA 4</small><b>Primer informe</b><p>Coste por primera visita y por paciente tratado. Decidimos qué escalar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s dark" id="p5">
+  <div class="in">
+    <div class="k">05 · Inversión</div>
+    <h2>Claro desde el primer día</h2>
+    <div class="price">
+      <div><small>Puesta en marcha</small><strong>1.500 €<em>+ IVA</em></strong><p>Pago único. Todo montado y funcionando en el primer mes.</p></div>
+      <div><small>Cada mes</small><strong>1.000 €<em>+ IVA</em></strong><p>Campañas, creatividades, seguimiento y panel. Sin permanencia.</p></div>
+    </div>
+    <p class="aparte">La inversión en anuncios va aparte y la pagáis directamente a Meta.</p>
+  </div>
+</section>
+
+<section class="s close" id="p6">
+  <div class="in">
+    <div class="k">06 · Siguiente paso</div>
+    <h2>Si os encaja, arrancamos ya</h2>
+    <div class="steps3">
+      <div><b>Hoy</b><p>Nos decís sí y fijamos la fecha de arranque.</p></div>
+      <div><b>Esta semana</b><p>Os mandamos el acuerdo y la lista de accesos.</p></div>
+      <div><b>Semana 1</b><p>Empezamos con vuestras campañas actuales.</p></div>
+    </div>
+    <div class="links">
+      <a href="../presentacion/">Presentación del martes</a>
+      <a href="../landing-a/">Landing implantes</a>
+      <a href="../landing-b/">Landing ortodoncia</a>
+      <a href="../whatsapp/">WhatsApp</a>
+      <a href="../demo/">CRM</a>
+      <a href="https://qualivo.io/intelligence/?sector=dentalmarin">Panel</a>
+    </div>
+  </div>
+</section>
+
+<p class="foot">Propuesta preparada por Qualivo para Marín Clínica Dental. Logo y fotografía de la clínica; las creatividades son de ejemplo.</p>
+
+<script>
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('.s')),cnt=document.getElementById('cnt'),cur=0;
+  function go(i){i=Math.max(0,Math.min(secs.length-1,i));secs[i].scrollIntoView({behavior:'smooth'});}
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowDown'||e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(cur+1);}
+    if(e.key==='ArrowUp'||e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur-1);}
+  });
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){cur=secs.indexOf(en.target);cnt.textContent=(cur+1)+' / '+secs.length;}});},{threshold:.55});
+    secs.forEach(function(s){io.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>

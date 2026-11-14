@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Marín · Anuncios</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Yeseva+One&display=swap">
+<style>
+/* Anuncios de Meta para Marín Clínica Dental. Rediseño «menos IA, más agencia» (10-nov).
+   Estrategia, guiones y A/B: dentro del desplegable final. Versión anterior completa: copia de seguridad del 10-nov en el scratchpad de la sesión. */
+:root{color-scheme:light;--navy:#2F3854;--ink:#1E2333;--mut:#6B7080;--bg:#fff;--soft:#F4F4F4;--beige:#E8DED0;--sand:#B79E7E;--line:#E4E4E4;
+--serif:"Yeseva One",Georgia,serif;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:max(16px,env(safe-area-inset-left,0px))}
+@media(min-width:760px){.wrap{padding-inline:40px}}
+
+/* menú común, discreto */
+.topnav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topnav .in{max-width:1240px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:8px 20px;flex-wrap:wrap}
+@media(min-width:760px){.topnav .in{padding-inline:40px}}
+.brand{margin-right:auto}.brand img{height:30px;width:auto}
+.links{display:flex;gap:2px 16px;flex-wrap:wrap}
+.links a{font-size:12.5px;font-weight:500;color:var(--mut);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent}
+.links a:hover{color:var(--navy)}
+.links a[aria-current=page]{color:var(--navy);border-bottom-color:var(--navy)}
+
+/* portada */
+.cover{padding:clamp(72px,14vh,160px) 0 clamp(64px,11vh,120px)}
+.by{font-size:13px;letter-spacing:.04em;color:var(--mut);margin-bottom:28px}
+h1{font:400 clamp(46px,8.4vw,128px)/1 var(--serif);color:var(--navy);letter-spacing:-.01em;max-width:13ch}
+h1 em{font-style:normal;color:var(--sand)}
+.line{margin-top:32px;font-size:clamp(17px,1.6vw,21px);color:var(--mut);padding-left:clamp(0px,30vw,420px)}
+
+h2{font:400 clamp(32px,4.4vw,60px)/1.05 var(--serif);color:var(--navy)}
+
+/* hoy → propuesta */
+.vs{background:var(--soft);padding:clamp(64px,10vw,130px) 0}
+.vs-head{display:grid;gap:14px;margin-bottom:clamp(40px,6vw,80px)}
+.vs-head p{font-size:clamp(18px,1.8vw,24px);color:var(--ink);max-width:28ch}
+@media(min-width:900px){.vs-head{grid-template-columns:1fr 1fr;align-items:end}.vs-head p{justify-self:end}}
+.pair{display:grid;gap:18px;align-items:center;margin-bottom:clamp(48px,7vw,96px)}
+.pair:last-child{margin-bottom:0}
+.lab{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+.now .lab{color:var(--navy);font-weight:600}
+.then{width:78%;max-width:340px}
+.now{max-width:520px}
+.arrow{font:400 40px/1 var(--serif);color:var(--sand);transform:rotate(90deg);justify-self:start;margin-left:24px}
+@media(min-width:760px){.pair{grid-template-columns:minmax(0,340px) 80px minmax(0,500px);justify-content:center}.then{width:auto}.arrow{transform:none;justify-self:center;margin:0;font-size:52px}}
+.pair:nth-child(odd of .pair){}
+
+/* ======= maqueta feed (Meta) ======= */
+.fb{container-type:inline-size;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 30px 60px -36px rgba(30,35,51,.45),0 0 0 1px rgba(30,35,51,.06)}
+.fb-h{display:flex;align-items:center;gap:2.4cqw;padding:3cqw 3.4cqw 2cqw}
+.av{flex:none;width:8cqw;height:8cqw;border-radius:50%;background:var(--navy);display:grid;place-items:center;overflow:hidden}
+.av img{width:86%;height:auto}
+.who{display:grid;line-height:1.25;margin-right:auto}
+.who b{font-size:3.1cqw;font-weight:600}
+.who small{font-size:2.6cqw;color:var(--mut)}
+.dots{font-size:4cqw;color:var(--mut);letter-spacing:.05em}
+.fb-t{font-size:3cqw;line-height:1.4;padding:0 3.4cqw 2.6cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fb-m{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--navy)}
+.fb-m .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fb-m::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(180deg,rgba(20,24,38,0),rgba(20,24,38,.62))}
+.fb-m .lg{position:absolute;z-index:1;top:5cqw;left:5.5cqw;width:17cqw;height:auto;filter:drop-shadow(0 1px 6px rgba(0,0,0,.25))}
+.fb-m h3{position:absolute;z-index:1;left:5.5cqw;right:8cqw;bottom:6.5cqw;font:400 9.4cqw/1.02 var(--serif);color:#fff;text-wrap:balance}
+.fb-c{display:flex;align-items:center;gap:3cqw;background:#F0F2F5;padding:3cqw 3.4cqw}
+.fb-c span:first-child{display:grid;margin-right:auto;line-height:1.3;min-width:0}
+.fb-c small{font-size:2.5cqw;color:var(--mut);text-transform:uppercase;letter-spacing:.03em}
+.fb-c b{font-size:3.3cqw;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{flex:none;background:#E2E5E9;color:#1C1E21;font-size:3cqw;font-weight:600;padding:2.2cqw 3.6cqw;border-radius:1.4cqw}
+
+/* anuncio actual, redibujado */
+.hoy{filter:saturate(.9)}
+.promo{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:3cqw;padding:0 8cqw;background:#F7F7F5}
+.promo::after{display:none}
+.promo .pt{font-size:5cqw;font-weight:700;color:var(--navy)}
+.promo strong{font:800 11cqw/1.02 var(--sans);color:var(--navy);letter-spacing:-.02em}
+.promo .ps{font-size:4cqw;font-weight:600;color:#C0392B}
+.play{position:absolute;top:5cqw;right:5cqw;width:9cqw;height:9cqw;border-radius:50%;background:rgba(47,56,84,.12)}
+.play::before{content:"";position:absolute;left:38%;top:30%;border-left:3.2cqw solid var(--navy);border-top:2cqw solid transparent;border-bottom:2cqw solid transparent}
+
+/* ======= galería ======= */
+.gal{padding:clamp(80px,11vw,150px) 0 clamp(40px,6vw,80px)}
+.gal h2{margin-bottom:clamp(40px,6vw,88px)}
+.grid{display:grid;gap:clamp(72px,9vw,120px)}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr;column-gap:clamp(40px,5vw,80px);row-gap:clamp(64px,7vw,96px);align-items:start}}
+.g{max-width:540px;width:100%}
+
+.gl{display:grid;gap:4px;margin-bottom:20px}
+.gl b{font:400 clamp(22px,2.2vw,28px)/1.15 var(--serif);color:var(--navy)}
+.gl span{font-size:15px;color:var(--mut)}
+.minis{display:grid;grid-template-columns:36% 1fr;gap:16px;align-items:end;margin-top:16px}
+
+/* story 9:16 */
+.st{container-type:inline-size;position:relative;aspect-ratio:9/16;border-radius:10px;overflow:hidden;background:var(--navy);box-shadow:0 20px 40px -28px rgba(30,35,51,.5)}
+.st .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.st::after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(180deg,rgba(20,24,38,0),rgba(20,24,38,.7))}
+.st-top{position:absolute;z-index:1;top:4cqw;left:4cqw;right:4cqw;display:flex;gap:2cqw}
+.st-top i{flex:1;height:1.4cqw;border-radius:2cqw;background:rgba(255,255,255,.45)}
+.st-top i:first-child{background:#fff}
+.st-h{position:absolute;z-index:1;top:9cqw;left:4cqw;right:4cqw;display:flex;align-items:center;gap:3cqw;color:#fff}
+.st-h .av{width:11cqw;height:11cqw}
+.st-h b{font-size:5.4cqw;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-h small{display:none}
+.st h3{position:absolute;z-index:1;left:8cqw;right:8cqw;bottom:30cqw;font:400 12cqw/1.04 var(--serif);color:#fff;text-wrap:balance}
+.st-cta{position:absolute;z-index:1;left:50%;bottom:9cqw;transform:translateX(-50%);background:#fff;color:#1C1E21;font-size:5.6cqw;font-weight:600;padding:2.8cqw 6cqw;border-radius:99px;white-space:nowrap}
+
+/* carrusel */
+.ca{container-type:inline-size;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 20px 40px -28px rgba(30,35,51,.5),0 0 0 1px rgba(30,35,51,.06);padding-bottom:3cqw}
+.ca-h{display:flex;align-items:center;gap:3cqw;padding:4cqw}
+.ca-h .av{width:9cqw;height:9cqw}
+.ca-h b{font-size:4.4cqw;font-weight:600}
+.ca-t{display:flex;gap:2cqw;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 4cqw;scrollbar-width:none}
+.ca-t::-webkit-scrollbar{display:none}
+.cc{position:relative;flex:0 0 78%;aspect-ratio:1;border-radius:6px;overflow:hidden;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:flex-end;padding:7cqw 6cqw}
+.cc .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cc.photo::after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(180deg,rgba(20,24,38,0),rgba(20,24,38,.65))}
+.cc .lg{position:absolute;z-index:1;top:6cqw;left:6cqw;width:20cqw;height:auto}
+.cc p{position:relative;z-index:1;font:400 8.6cqw/1.05 var(--serif);color:#fff;text-wrap:balance}
+.cc.navy{background:var(--navy)}
+.cc.beige{background:var(--beige)}.cc.beige p{color:var(--navy)}
+.cc-b{position:relative;z-index:1;margin-top:4cqw;font-size:4cqw;font-weight:600;color:rgba(255,255,255,.8)}
+.cc.beige .cc-b{color:var(--navy)}
+.ca-d{display:flex;justify-content:center;gap:1.6cqw;margin-top:3.4cqw}
+.ca-d i{width:1.8cqw;height:1.8cqw;border-radius:50%;background:#C9CCD3}.ca-d i:first-child{background:#1877F2}
+
+/* ======= desplegable ======= */
+.more{padding:clamp(40px,6vw,80px) 0 clamp(64px,8vw,110px)}
+details#estrategia{border-top:1px solid var(--navy);border-bottom:1px solid var(--line)}
+#estrategia>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:28px 0;font:400 clamp(22px,2.6vw,34px)/1.15 var(--serif);color:var(--navy)}
+#estrategia>summary::-webkit-details-marker{display:none}
+#estrategia>summary i{flex:none;position:relative;width:22px;height:22px}
+#estrategia>summary i::before,#estrategia>summary i::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;background:var(--navy);transition:transform .2s}
+#estrategia>summary i::after{transform:rotate(90deg)}
+#estrategia[open]>summary i::after{transform:rotate(0)}
+.more-in{padding:8px 0 48px;font-size:15px;max-width:1040px}
+.k{font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:18px 0 6px}
+.rules ul,.dt ul{padding-left:18px}
+.rules li,.dt li{margin:4px 0}
+.dt{padding-top:56px;margin-top:48px;border-top:1px solid var(--line)}
+.dt h3{font:400 clamp(24px,2.6vw,32px)/1.15 var(--serif);color:var(--navy)}
+.dt h4{font-size:15px;font-weight:600;color:var(--navy);margin:36px 0 12px}
+.dt-copy{display:grid;gap:8px 48px}
+@media(min-width:860px){.dt-copy{grid-template-columns:1.2fr 1fr}}
+pre{white-space:pre-wrap;font:inherit;background:var(--soft);padding:18px 20px;border-radius:4px}
+.gt{width:100%;border-collapse:collapse;font-size:14px}
+.gt th,.gt td{text-align:left;vertical-align:top;padding:12px 14px 12px 0;border-bottom:1px solid var(--line)}
+.gt thead th{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.gt tbody th{white-space:nowrap;font-weight:600;color:var(--navy)}
+.gt .ost{font-weight:600}
+@media(max-width:759px){.gt thead{display:none}.gt,.gt tbody,.gt tr,.gt th,.gt td{display:block}.gt tr{padding:12px 0;border-bottom:1px solid var(--line)}.gt th,.gt td{border:0;padding:2px 0}}
+.vf{display:grid;gap:6px;margin-top:16px;color:var(--mut);font-size:14px}
+.vf b{color:var(--ink);font-weight:600}
+.ab{display:grid;gap:28px}
+@media(min-width:860px){.ab{grid-template-columns:1fr 1fr;gap:48px}}
+.vl{font-weight:600;color:var(--navy)}
+blockquote{font:400 21px/1.25 var(--serif);color:var(--navy);margin:10px 0 14px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px}
+dt{font-weight:600;color:var(--mut)}
+.win{margin-top:28px;font-size:14px}
+.win ol{padding-left:18px;margin-top:6px}
+
+.foot{border-top:1px solid var(--line);padding:28px 0 40px;font-size:12.5px;color:var(--mut)}
+
+.minis{display:none!important}.g{max-width:520px;justify-self:center}.fb-m .ph{object-position:50% 50%!important}</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Propuesta"><div class="in"><a class="brand" href="../"><img src="../assets/brand/logo-marin.png" alt="Marín Clínica Dental" width="1056" height="452"></a><div class="links"><a href="../">Plan</a><a href="./" aria-current="page">Anuncios</a><a href="../landing-a/">Landings</a><a href="../recorrido/">Recorrido</a><a href="../demo/">CRM</a><a href="/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion">Intelligence</a><a href="../presentacion/">Presentación</a></div></div></nav>
+
+<header class="cover"><div class="wrap">
+<p class="by">Qualivo para Marín Clínica Dental · Meta Ads</p>
+<h1>Menos precio.<br>Más gente que <em>quiere empezar.</em></h1>
+<p class="line">Cuatro anuncios para Patraix y Torrent.</p>
+</div></header>
+
+<section class="vs" aria-labelledby="vs-t"><div class="wrap">
+<div class="vs-head"><h2 id="vs-t">Hoy <span aria-hidden="true">→</span> Propuesta</h2><p>El precio atrae a quien compara. Esto, a quien quiere empezar.</p></div>
+<div class="pair"><div class="side then"><p class="lab">Hoy</p><figure class="fb hoy"><div class="fb-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><span class="who"><b>Marín Clínica Dental</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<p class="fb-t">IMPLANTE desde SOLO 1 € AL DÍA… déjanos tus datos.</p>
+<div class="fb-m promo"><span class="play" aria-hidden="true"></span><span class="pt">¡Torrent!</span><strong>Implante<br>desde 1&nbsp;€/día</strong><span class="ps">Prótesis fija provisional GRATIS</span></div>
+<div class="fb-c"><span><small>Formulario</small><b>Déjanos tus datos</b></span><span class="btn">Obtener oferta</span></div></figure></div><div class="arrow" aria-hidden="true">→</div><div class="side now"><p class="lab">Propuesta</p><figure class="fb "><div class="fb-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><span class="who"><b>Marín Clínica Dental</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<p class="fb-t">Si llevas tiempo masticando por un lado, no lo dejes más.</p>
+<div class="fb-m"><img class="ph" src="../assets/ia/ad1.jpg" alt="" style="object-position:60% 40%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental"><h3>¿Te falta una pieza?</h3></div>
+<div class="fb-c"><span><small>Patraix · Torrent</small><b>Implantes, explicados en cuotas</b></span><span class="btn">Más información</span></div></figure></div></div><div class="pair"><div class="side then"><p class="lab">Hoy</p><figure class="fb hoy"><div class="fb-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><span class="who"><b>Marín Clínica Dental</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<p class="fb-t">Limpieza + TAC… te contactaremos lo antes posible.</p>
+<div class="fb-m promo"><span class="play" aria-hidden="true"></span><span class="pt">¡Patraix!</span><strong>Limpieza + TAC<br>29,90&nbsp;€</strong><span class="ps">Déjanos tus datos</span></div>
+<div class="fb-c"><span><small>Formulario</small><b>Déjanos tus datos</b></span><span class="btn">Obtener oferta</span></div></figure></div><div class="arrow" aria-hidden="true">→</div><div class="side now"><p class="lab">Propuesta</p><figure class="fb "><div class="fb-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><span class="who"><b>Marín Clínica Dental</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<p class="fb-t">Primera visita con diagnóstico y plan por escrito, cerca de casa.</p>
+<div class="fb-m"><img class="ph" src="../assets/brand/clinica.jpg" alt="" style="object-position:50% 60%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental"><h3>Tu dentista, a dos calles.</h3></div>
+<div class="fb-c"><span><small>Sede de Torrent</small><b>Primera visita en Torrent</b></span><span class="btn">Reservar</span></div></figure></div></div>
+</div></section>
+
+<section class="gal" aria-labelledby="gal-t"><div class="wrap">
+<h2 id="gal-t">Los cuatro anuncios</h2>
+<div class="grid"><article class="g g1" id="implantes"><p class="gl"><b>Implantes con financiación</b><span>«¿Te falta una pieza y lo vas dejando por el precio?»</span></p><figure class="fb "><div class="fb-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><span class="who"><b>Marín Clínica Dental</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<p class="fb-t">Si llevas tiempo masticando por un lado, no lo dejes más.</p>
+<div class="fb-m"><img class="ph" src="../assets/ia/ad1.jpg" alt="" style="object-position:60% 40%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental"><h3>¿Te falta una pieza?</h3></div>
+<div class="fb-c"><span><small>Patraix · Torrent</small><b>Implantes, explicados en cuotas</b></span><span class="btn">Más información</span></div></figure><div class="minis"><figure class="st"><img class="ph" src="../assets/stock/sonrisa-mujer-45.jpg" alt="" style="object-position:50% 30%"><div class="st-top"><i></i><i></i><i></i></div><div class="st-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small></div><h3>Y lo vas dejando por el precio.</h3><span class="st-cta">Más información</span></figure><figure class="ca"><div class="ca-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><b>Marín Clínica Dental</b></div><div class="ca-t" tabindex="0" aria-label="Carrusel de Implantes con financiación"><div class="cc photo"><img class="ph" src="../assets/ia/ad1.jpg" alt="" style="object-position:45% 40%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt=""><p>¿Te falta una pieza?</p><span class="cc-b">Desliza</span></div><div class="cc navy"><p>Primera visita y plan por escrito.</p><span class="cc-b">Desliza</span></div><div class="cc beige"><p>Y en cuotas, antes de decidir.</p><span class="cc-b">Más información</span></div></div><div class="ca-d" aria-hidden="true"><i></i><i></i><i></i></div></figure></div></article><article class="g g2" id="ortodoncia"><p class="gl"><b>Ortodoncia invisible para adultos</b><span>«¿Te habría gustado llevar ortodoncia de joven? Hoy hay opciones discretas.»</span></p><figure class="fb "><div class="fb-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><span class="who"><b>Marín Clínica Dental</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<p class="fb-t">Los alineadores transparentes se notan poco y se quitan para comer.</p>
+<div class="fb-m"><img class="ph" src="../assets/ia/ad2.jpg" alt="" style="object-position:50% 55%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental"><h3>Nunca es tarde para preguntar.</h3></div>
+<div class="fb-c"><span><small>Patraix · Torrent</small><b>¿Es para mí? Te lo decimos</b></span><span class="btn">Más información</span></div></figure><div class="minis"><figure class="st"><img class="ph" src="../assets/stock/sonrisa-mujer-30.jpg" alt="" style="object-position:50% 30%"><div class="st-top"><i></i><i></i><i></i></div><div class="st-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small></div><h3>¿Ortodoncia, a tu edad?</h3><span class="st-cta">Más información</span></figure><figure class="ca"><div class="ca-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><b>Marín Clínica Dental</b></div><div class="ca-t" tabindex="0" aria-label="Carrusel de Ortodoncia invisible para adultos"><div class="cc photo"><img class="ph" src="../assets/ia/ad2.jpg" alt="" style="object-position:50% 50%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt=""><p>¿Ortodoncia, a tu edad?</p><span class="cc-b">Desliza</span></div><div class="cc navy"><p>Se nota poco. Se quita para comer.</p><span class="cc-b">Desliza</span></div><div class="cc beige"><p>Primero, te decimos si encaja.</p><span class="cc-b">Más información</span></div></div><div class="ca-d" aria-hidden="true"><i></i><i></i><i></i></div></figure></div></article><article class="g g3" id="sede"><p class="gl"><b>Primera visita en tu sede</b><span>«Tu dentista en Torrent. Elige día y te confirmamos por WhatsApp.»</span></p><figure class="fb "><div class="fb-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><span class="who"><b>Marín Clínica Dental</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<p class="fb-t">Primera visita con diagnóstico y plan por escrito, cerca de casa.</p>
+<div class="fb-m"><img class="ph" src="../assets/brand/clinica.jpg" alt="" style="object-position:50% 60%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental"><h3>Tu dentista, a dos calles.</h3></div>
+<div class="fb-c"><span><small>Sede de Torrent</small><b>Primera visita en Torrent</b></span><span class="btn">Reservar</span></div></figure><div class="minis"><figure class="st"><img class="ph" src="../assets/stock/clinica-recepcion.jpg" alt="" style="object-position:50% 50%"><div class="st-top"><i></i><i></i><i></i></div><div class="st-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small></div><h3>Tu dentista, en Torrent.</h3><span class="st-cta">Reservar</span></figure><figure class="ca"><div class="ca-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><b>Marín Clínica Dental</b></div><div class="ca-t" tabindex="0" aria-label="Carrusel de Primera visita en tu sede"><div class="cc photo"><img class="ph" src="../assets/brand/clinica.jpg" alt="" style="object-position:50% 60%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt=""><p>Torrent</p><span class="cc-b">Desliza</span></div><div class="cc photo"><img class="ph" src="../assets/stock/clinica-gabinete.jpg" alt="" style="object-position:50% 50%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt=""><p>Patraix</p><span class="cc-b">Desliza</span></div><div class="cc navy"><p>Elige día. Te confirmamos por WhatsApp.</p><span class="cc-b">Reservar</span></div></div><div class="ca-d" aria-hidden="true"><i></i><i></i><i></i></div></figure></div></article><article class="g g4" id="estetica"><p class="gl"><b>Estética de la sonrisa</b><span>«¿Hay algo de tu sonrisa que te gustaría cambiar?»</span></p><figure class="fb "><div class="fb-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><span class="who"><b>Marín Clínica Dental</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<p class="fb-t">Blanqueamiento, carillas o contorneado: primero, saber qué te conviene.</p>
+<div class="fb-m"><img class="ph" src="../assets/ia/ad4.jpg" alt="" style="object-position:50% 35%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental"><h3>¿Qué cambiarías de tu sonrisa?</h3></div>
+<div class="fb-c"><span><small>Patraix · Torrent</small><b>Valoración de tu sonrisa</b></span><span class="btn">Reservar</span></div></figure><div class="minis"><figure class="st"><img class="ph" src="../assets/stock/sonrisa-profesional.jpg" alt="" style="object-position:50% 25%"><div class="st-top"><i></i><i></i><i></i></div><div class="st-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><b>Marín Clínica Dental</b><small>Publicidad</small></div><h3>Primero, saber qué te conviene.</h3><span class="st-cta">Reservar</span></figure><figure class="ca"><div class="ca-h"><span class="av"><img src="../assets/brand/logo-marin-blanco.png" alt=""></span><b>Marín Clínica Dental</b></div><div class="ca-t" tabindex="0" aria-label="Carrusel de Estética de la sonrisa"><div class="cc photo"><img class="ph" src="../assets/ia/ad4.jpg" alt="" style="object-position:50% 30%"><img class="lg" src="../assets/brand/logo-marin-blanco.png" alt=""><p>¿Qué cambiarías?</p><span class="cc-b">Desliza</span></div><div class="cc navy"><p>Color, forma o un solo diente.</p><span class="cc-b">Desliza</span></div><div class="cc beige"><p>Primero, una valoración.</p><span class="cc-b">Reservar</span></div></div><div class="ca-d" aria-hidden="true"><i></i><i></i><i></i></div></figure></div></article></div>
+</div></section>
+
+<section class="more"><div class="wrap">
+<details id="estrategia"><summary><span>Ver estrategia, guiones y test A/B</span><i aria-hidden="true"></i></summary>
+<div class="more-in">
+<div class="rules"><p class="k">Publicidad sanitaria prudente, en los cuatro</p><ul><li>Sin «garantizado», «el mejor» ni «sin dolor», y sin plazos prometidos.</li><li>Sin antes y después, sin pacientes reconocibles y sin nombrar a nadie del equipo.</li><li>Sin precios: la cuota se explica en la primera visita, por escrito y según el caso.</li><li>Siempre «tras valoración del especialista». Lo revisáis vosotros antes de publicar.</li></ul></div>
+<section class="dt" aria-labelledby="dt-implantes"><h3 id="dt-implantes">Implantes con financiación: lo vas dejando por el precio</h3>
+<div class="dt-copy"><div><p class="k">Texto principal</p><pre>¿Te falta una pieza y lo vas dejando por el precio?
+
+En la primera visita el especialista revisa tu caso, te explica las opciones y te da el plan por escrito. Si lo prefieres, te lo presupuestamos en cuotas mensuales, con números claros y antes de que decidas nada.
+
+✓ Implantes, coronas y prótesis sobre implantes
+✓ Financiación en cuotas
+✓ Dos sedes: Patraix (Valencia) y Torrent
+
+Pide tu primera visita y te escribimos por WhatsApp en minutos.</pre></div><div><p class="k">Titular</p><p>Implantes, explicados en cuotas</p><p class="k">Botón</p><p>Pedir primera visita</p><p class="k">Formato</p><p>4:5 · 9:16 · carrusel · vídeo 18 s</p><p class="k">Ganchos alternativos</p><ul><li>Si llevas meses masticando por un lado, esto es para ti.</li><li>Un implante, explicado en cuotas mensuales y sin letra pequeña.</li><li>Antes de decidir nada, sal de la primera visita sabiendo qué necesitas y cómo pagarlo.</li></ul></div></div>
+<h4>Guion de vídeo · «Lo vas dejando» · 18 s</h4><table class="gt"><thead><tr><th scope="col">Tiempo</th><th scope="col">Plano</th><th scope="col">Texto en pantalla</th><th scope="col">Voz</th></tr></thead><tbody><tr><th scope="row">0-2 s</th><td>Plano detalle: un plato y una mano que corta la comida en trozos pequeños. Se intuye que mastica por un lado. Sin cara.</td><td class="ost">¿Masticas solo por un lado?</td><td>«¿Te falta una pieza y masticas solo por un lado?»</td></tr><tr><th scope="row">2-5 s</th><td>Animación: el implante dibujado entra girando sobre fondo azul noche y encaja. Sonido suave de «clic».</td><td class="ost">Y lo vas dejando por el precio</td><td>«Y lo vas dejando por el precio…»</td></tr><tr><th scope="row">5-9 s</th><td>Recepción de la clínica, cámara en mano: alguien del equipo (de espaldas) recibe a un paciente que no se ve.</td><td class="ost">Primera visita · diagnóstico · plan por escrito</td><td>«En la primera visita el especialista revisa tu caso y te da el plan por escrito.»</td></tr><tr><th scope="row">9-13 s</th><td>Manos con una hoja «Tu plan» y una línea de cuotas sin cifras. Se subraya «en cuotas».</td><td class="ost">Te lo explicamos en cuotas</td><td>«Y si lo prefieres, te lo explicamos en cuotas, antes de decidir nada.»</td></tr><tr><th scope="row">13-16 s</th><td>Pantalla partida: fachada de Patraix y fachada de Torrent, con el rótulo de cada una.</td><td class="ost">Patraix (Valencia) · Torrent</td><td>«En Patraix y en Torrent.»</td></tr><tr><th scope="row">16-18 s</th><td>Cierre en azul: logo, sello del mes y botón. Legal pequeño debajo.</td><td class="ost">Pide tu primera visita · te escribimos por WhatsApp</td><td>«Pide tu primera visita. Te escribimos por WhatsApp.»</td></tr></tbody></table><div class="vf"><p><b>Gancho en 1,5 s.</b> La pregunta sale escrita en el primer fotograma: casi todo el mundo lo ve sin sonido.</p><p><b>Legal en pantalla.</b> «Tratamiento tras valoración del especialista», en las escenas 5 y 6.</p><p><b>Qué grabáis.</b> Tres planos en la clínica (recepción, manos con el plan y fachadas). La animación la hacemos nosotros.</p></div>
+<h4>Test A/B · mismo público y misma creatividad, solo cambia el gancho</h4><div class="ab"><div class="v"><p class="vl">Variante A · El dinero, dicho claro</p><blockquote>¿Te falta una pieza y lo vas dejando por el precio?</blockquote><dl><dt>Hipótesis</dt><dd>Nombrar la objeción del dinero atrae a quien ya sabe que necesita el implante y frena por el pago. Esperamos más peticiones con «cuotas: sí» y más A.</dd><dt>Segmentación</dt><dd>40-70 años, unos 15 km alrededor de cada sede, Advantage+ con intereses de salud dental como sugerencia. Sin datos de salud.</dd><dt>Prueba</dt><dd>10 €/día durante 10 días, por sede (unos 100 € por sede). <em>(estimación)</em></dd></dl></div><div class="v"><p class="vl">Variante B · La vida diaria</p><blockquote>¿Llevas meses masticando por un lado?</blockquote><dl><dt>Hipótesis</dt><dd>El síntoma cotidiano engancha antes que el precio y llega a quien aún no ha pedido presupuesto. Más volumen, quizá menos A.</dd><dt>Segmentación</dt><dd>El mismo público que la A, para que solo cambie el gancho.</dd><dt>Prueba</dt><dd>10 €/día durante 10 días, por sede. <em>(estimación)</em></dd></dl></div></div><div class="win"><p><b>Criterio para decidir la ganadora</b></p><ol><li>Gana el menor coste por petición A, con al menos 15 peticiones por variante.</li><li>Lo confirmamos a los 21 días con las primeras visitas hechas y los presupuestos aceptados del CRM.</li><li>Si la diferencia es menor del 20 %, seguimos con las dos y probamos otro gancho contra la mejor.</li></ol></div></section><section class="dt" aria-labelledby="dt-ortodoncia"><h3 id="dt-ortodoncia">Ortodoncia invisible para adultos: lo llevas años pensando</h3>
+<div class="dt-copy"><div><p class="k">Texto principal</p><pre>¿Te habría gustado llevar ortodoncia de joven? Hoy hay opciones discretas.
+
+Los alineadores transparentes son una forma de ortodoncia pensada para adultos: se notan poco y se quitan para comer. No sirven para todos los casos, por eso empezamos por un estudio en la primera visita.
+
+✓ Te decimos si tu caso encaja
+✓ Plan y presupuesto por escrito, también en cuotas
+✓ En Patraix (Valencia) y en Torrent
+
+Pulsa «Ver si es para mí» y te escribimos por WhatsApp.</pre></div><div><p class="k">Titular</p><p>¿Es para mí? Te lo decimos</p><p class="k">Botón</p><p>Ver si es para mí</p><p class="k">Formato</p><p>4:5 · 9:16 · carrusel · vídeo 17 s</p><p class="k">Ganchos alternativos</p><ul><li>Ortodoncia para adultos, sin brackets a la vista.</li><li>¿Trabajas de cara al público? Pregunta por los alineadores transparentes.</li><li>Nunca es tarde para preguntar si tu caso tiene solución.</li></ul></div></div>
+<h4>Guion de vídeo · «Nunca es tarde para preguntar» · 17 s</h4><table class="gt"><thead><tr><th scope="col">Tiempo</th><th scope="col">Plano</th><th scope="col">Texto en pantalla</th><th scope="col">Voz</th></tr></thead><tbody><tr><th scope="row">0-2 s</th><td>Plano detalle: un alineador transparente sobre la yema de un dedo, fondo blanco, luz de ventana.</td><td class="ost">¿Ortodoncia a tu edad?</td><td>«¿Crees que la ortodoncia ya no es para ti?»</td></tr><tr><th scope="row">2-6 s</th><td>Mesa de trabajo: portátil, taza de café y el estuche de los alineadores. Una mano lo cierra y sigue con el día.</td><td class="ost">Se nota poco · se quita para comer</td><td>«Los alineadores transparentes se notan poco y se quitan para comer.»</td></tr><tr><th scope="row">6-10 s</th><td>Animación: la arcada dibujada y el alineador que baja y encaja, con un brillo que la recorre.</td><td class="ost">Ortodoncia para adultos</td><td>«Es ortodoncia pensada para adultos.»</td></tr><tr><th scope="row">10-14 s</th><td>Gabinete: pantalla con un modelo 3D genérico de una arcada (sin datos de ningún paciente) que gira.</td><td class="ost">Primero, un estudio: te decimos si encaja</td><td>«No sirve para todos los casos. Por eso empezamos con un estudio en la primera visita.»</td></tr><tr><th scope="row">14-17 s</th><td>Cierre claro: logo, «Patraix · Torrent» y botón.</td><td class="ost">Ver si es para mí</td><td>«Pulsa y te escribimos por WhatsApp.»</td></tr></tbody></table><div class="vf"><p><b>Gancho en 1,5 s.</b> El alineador en la yema del dedo se entiende sin sonido y sin leer.</p><p><b>Legal en pantalla.</b> «Indicación según valoración del especialista», en las escenas 4 y 5.</p><p><b>Qué grabáis.</b> Dos planos de detalle y la pantalla del escáner. Sin caras.</p></div>
+<h4>Test A/B · mismo público y misma creatividad, solo cambia el gancho</h4><div class="ab"><div class="v"><p class="vl">Variante A · La espina de no haberla llevado</p><blockquote>¿Te habría gustado llevar ortodoncia de joven? Hoy hay opciones discretas.</blockquote><dl><dt>Hipótesis</dt><dd>Toca a quien nunca la llevó y cree que ya no le toca. Esperamos más primeros tratamientos y más estudios agendados.</dd><dt>Segmentación</dt><dd>28-50 años, alrededor de cada sede, Advantage+ sin restringir intereses.</dd><dt>Prueba</dt><dd>8 €/día durante 10 días, por sede. <em>(estimación)</em></dd></dl></div><div class="v"><p class="vl">Variante B · La discreción en el trabajo</p><blockquote>¿Trabajas de cara al público? Pregunta por los alineadores transparentes.</blockquote><dl><dt>Hipótesis</dt><dd>La razón práctica (que no se note en el trabajo) mueve a quien ya lo ha pensado y pospone por imagen. Menos volumen, más intención.</dd><dt>Segmentación</dt><dd>25-45 años, el mismo radio. Mismo público que la A para comparar solo el gancho.</dd><dt>Prueba</dt><dd>8 €/día durante 10 días, por sede. <em>(estimación)</em></dd></dl></div></div><div class="win"><p><b>Criterio para decidir la ganadora</b></p><ol><li>Gana el menor coste por estudio de ortodoncia agendado, con al menos 12 por variante.</li><li>Desempate: la que tenga menos ausencias al estudio.</li><li>La ganadora pasa al reel y al carrusel. La perdedora se recicla como texto del carrusel.</li></ol></div></section><section class="dt" aria-labelledby="dt-sede"><h3 id="dt-sede">Primera visita en tu sede: Patraix o Torrent</h3>
+<div class="dt-copy"><div><p class="k">Texto principal</p><pre>Tu dentista en Torrent. Elige día y te confirmamos por WhatsApp.
+
+En la primera visita revisamos tu boca, te explicamos lo que vemos y te damos un plan por escrito. Sin prisas y sin compromiso.
+
+📍 Marín Clínica Dental · sede de Torrent
+🗓️ Mañana o tarde, según la agenda de cada sede
+💬 Confirmación y recordatorio por WhatsApp
+
+¿Te queda mejor Patraix, en Valencia? También estamos allí.</pre></div><div><p class="k">Titular</p><p>Primera visita en Torrent</p><p class="k">Botón</p><p>Reservar</p><p class="k">Formato</p><p>4:5 · 9:16 · carrusel · vídeo 15 s, uno por sede</p><p class="k">Ganchos alternativos</p><ul><li>¿Hace más de un año de tu última revisión?</li><li>Primera visita con diagnóstico y plan por escrito, cerca de casa.</li><li>Vives en Torrent y tu dentista está en Torrent. Así de fácil.</li></ul></div></div>
+<h4>Guion de vídeo · «A dos calles» · 15 s</h4><table class="gt"><thead><tr><th scope="col">Tiempo</th><th scope="col">Plano</th><th scope="col">Texto en pantalla</th><th scope="col">Voz</th></tr></thead><tbody><tr><th scope="row">0-2 s</th><td>Cámara a pie de calle, caminando hacia la fachada de la sede de Torrent. El rótulo entra en el plano.</td><td class="ost">¿Buscas dentista en Torrent?</td><td>«¿Buscas dentista en Torrent?»</td></tr><tr><th scope="row">2-5 s</th><td>Se abre la puerta: recepción con luz cálida y alguien del equipo que saluda (sin nombre en pantalla).</td><td class="ost">Sede de Torrent</td><td>«Estamos aquí, en Torrent.»</td></tr><tr><th scope="row">5-9 s</th><td>Gabinete vacío y ordenado; la cámara se acerca despacio al sillón y al instrumental.</td><td class="ost">Primera visita: revisión y plan por escrito</td><td>«En la primera visita revisamos tu boca y te damos un plan por escrito.»</td></tr><tr><th scope="row">9-12 s</th><td>Un móvil en la mano: llega un WhatsApp de ejemplo «Te confirmamos tu hora».</td><td class="ost">Te confirmamos por WhatsApp</td><td>«Eliges mañana o tarde y te confirmamos por WhatsApp.»</td></tr><tr><th scope="row">12-15 s</th><td>Cierre: mapa dibujado con las dos sedes, logo y botón.</td><td class="ost">Torrent · Patraix (Valencia)</td><td>«Y si te va mejor Patraix, también estamos allí.»</td></tr></tbody></table><div class="vf"><p><b>Gancho en 1,5 s.</b> El nombre del barrio en el primer fotograma: es lo que hace parar el dedo.</p><p><b>Dos versiones.</b> Se graba una vez en cada sede. Cambian la fachada, el titular y el número de WhatsApp.</p><p><b>Qué grabáis.</b> Un paseo hasta la puerta, la recepción y el gabinete. Unos 20 minutos por sede.</p></div>
+<h4>Test A/B · mismo público y misma creatividad, solo cambia el gancho</h4><div class="ab"><div class="v"><p class="vl">Variante A · El barrio en el titular</p><blockquote>Tu dentista, en Torrent. Elige día y te confirmamos por WhatsApp.</blockquote><dl><dt>Hipótesis</dt><dd>Ver el nombre de tu barrio para el dedo y da sensación de cercanía. Esperamos más clics y más visitas presentadas.</dd><dt>Segmentación</dt><dd>25-65 años, radio de unos 10 km en Torrent y de unos 5 km en Patraix. Sin intereses: aquí manda la ubicación.</dd><dt>Prueba</dt><dd>7 €/día durante 7 días, por sede. <em>(estimación)</em></dd></dl></div><div class="v"><p class="vl">Variante B · El recordatorio</p><blockquote>¿Hace más de un año de tu última revisión?</blockquote><dl><dt>Hipótesis</dt><dd>Activa a quien tiene la revisión pendiente y no lo había pensado. Más volumen de revisiones, que luego destapan tratamientos.</dd><dt>Segmentación</dt><dd>El mismo radio y la misma edad que la A.</dd><dt>Prueba</dt><dd>7 €/día durante 7 días, por sede. <em>(estimación)</em></dd></dl></div></div><div class="win"><p><b>Criterio para decidir la ganadora</b></p><ol><li>Gana el menor coste por primera visita presentada, por sede (cada sede puede tener su ganadora).</li><li>Mínimo 10 visitas presentadas por variante antes de decidir.</li><li>Miramos también cuántas visitas pasan a presupuesto: si la B trae menos visitas pero más tratamientos, gana la B.</li></ol></div></section><section class="dt" aria-labelledby="dt-estetica"><h3 id="dt-estetica">Estética de la sonrisa: primero, saber qué te conviene</h3>
+<div class="dt-copy"><div><p class="k">Texto principal</p><pre>¿Hay algo de tu sonrisa que te gustaría cambiar?
+
+El color, la forma o un diente que no te convence. Hay varias opciones y no todas sirven para todos. En la primera visita el especialista valora tu caso y te explica qué se puede hacer, cuánto tiempo lleva y cómo pagarlo, por escrito.
+
+✓ Valoración estética en la primera visita
+✓ Opciones explicadas sin compromiso
+✓ Patraix (Valencia) y Torrent
+
+Pide tu valoración y te escribimos por WhatsApp.</pre></div><div><p class="k">Titular</p><p>Valoración de tu sonrisa</p><p class="k">Botón</p><p>Pedir valoración</p><p class="k">Formato</p><p>4:5 · 9:16 · carrusel · vídeo 16 s</p><p class="k">Ganchos alternativos</p><ul><li>Blanqueamiento, carillas o contorneado: primero, saber qué te conviene.</li><li>¿Tienes una boda o un evento en unos meses? Pregunta con tiempo.</li><li>Antes de decidir nada, una valoración de tu sonrisa con el especialista.</li></ul></div></div>
+<h4>Guion de vídeo · «Elige una» · 16 s</h4><table class="gt"><thead><tr><th scope="col">Tiempo</th><th scope="col">Plano</th><th scope="col">Texto en pantalla</th><th scope="col">Voz</th></tr></thead><tbody><tr><th scope="row">0-2 s</th><td>Plano detalle: una guía de colores dental que se abre en abanico, sobre fondo claro.</td><td class="ost">¿Qué te gustaría cambiar?</td><td>«¿Hay algo de tu sonrisa que te gustaría cambiar?»</td></tr><tr><th scope="row">2-5 s</th><td>La cámara recorre la guía de colores, pieza a pieza.</td><td class="ost">¿El color?</td><td>«¿El color…»</td></tr><tr><th scope="row">5-8 s</th><td>Animación: la sonrisa dibujada; se ilumina el contorno de un diente.</td><td class="ost">¿La forma? ¿Un diente?</td><td>«…la forma, o un diente concreto?»</td></tr><tr><th scope="row">8-13 s</th><td>Gabinete: una tablet con un esquema de opciones (texto, sin fotos de pacientes) y una mano que señala.</td><td class="ost">Primero, una valoración</td><td>«Primero hay que valorar tu caso. Te explicamos qué opciones tienes, por escrito.»</td></tr><tr><th scope="row">13-16 s</th><td>Cierre claro: logo, «Patraix · Torrent» y botón. Legal pequeño.</td><td class="ost">Pide tu valoración</td><td>«Pide tu valoración y te escribimos por WhatsApp.»</td></tr></tbody></table><div class="vf"><p><b>Gancho en 1,5 s.</b> El abanico de colores es raro de ver y se entiende sin sonido.</p><p><b>Legal en pantalla.</b> «Resultados según cada caso y valoración clínica», en las escenas 4 y 5.</p><p><b>Qué grabáis.</b> La guía de colores y la tablet en el gabinete. La animación la hacemos nosotros.</p></div>
+<h4>Test A/B · mismo público y misma creatividad, solo cambia el gancho</h4><div class="ab"><div class="v"><p class="vl">Variante A · La pregunta abierta</p><blockquote>¿Hay algo de tu sonrisa que te gustaría cambiar?</blockquote><dl><dt>Hipótesis</dt><dd>Deja que cada uno se reconozca (color, forma o un diente). Más volumen, y el formulario separa después qué busca cada uno.</dd><dt>Segmentación</dt><dd>25-55 años, alrededor de cada sede, Advantage+ con intereses de imagen personal como sugerencia.</dd><dt>Prueba</dt><dd>8 €/día durante 10 días, por sede. <em>(estimación)</em></dd></dl></div><div class="v"><p class="vl">Variante B · Con fecha</p><blockquote>¿Tienes una boda o un evento en unos meses? Pregúntanos con tiempo.</blockquote><dl><dt>Hipótesis</dt><dd>Trae peticiones con fecha, que se deciden antes. Menos volumen y más A.</dd><dt>Segmentación</dt><dd>La misma que la A. Si la cuenta lo permite, una tercera prueba con «acontecimientos: compromiso reciente».</dd><dt>Prueba</dt><dd>8 €/día durante 10 días, por sede. <em>(estimación)</em></dd></dl></div></div><div class="win"><p><b>Criterio para decidir la ganadora</b></p><ol><li>Gana el menor coste por valoración agendada, con al menos 12 por variante.</li><li>A los 30 días, la que tenga más valoraciones con presupuesto aceptado se queda como gancho principal.</li><li>Si la B gana en aceptados y pierde en volumen, las dos siguen: la A para llenar agenda y la B para cerrar.</li></ol></div></section>
+</div></details>
+</div></section>
+
+<footer class="foot"><div class="wrap"><p>Maqueta de Qualivo. Fotos de stock y datos de ejemplo; los anuncios de «Hoy» están redibujados de la Biblioteca de anuncios de Meta (10-nov-2026).</p></div></footer>
+<script>
+/* Abre el desplegable si se llega con #estrategia o con el ancla de un anuncio dentro. */
+(function(){var d=document.getElementById('estrategia');if(location.hash==='#estrategia'&&d)d.open=true;})();
+</script>
+</body>
+</html>

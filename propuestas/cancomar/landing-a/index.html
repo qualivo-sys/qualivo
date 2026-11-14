@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Renueva tu Formación Básica STCW · CANCOMAR (maqueta)</title>
+<meta name="description" content="Maqueta de Qualivo: landing de renovación de la Formación Básica en Seguridad Marítima de CANCOMAR en Avilés.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+:root{--b:#0097DA;--nv:#00476B;--deep:#06263B;--cy:#00D8E8;--amb:#FEC42D;--wa:#25A35A;--ink:#0D2233;--mut:#56687A;--soft:#E9F6FC;--soft2:#F4FAFD;--line:#D9EAF4;
+--grad:linear-gradient(135deg,#0097DA 0%,#00476B 100%);
+--sh:0 24px 50px -32px rgba(0,71,107,.55),0 2px 6px -2px rgba(0,71,107,.08);
+--head:"Montserrat",system-ui,sans-serif;--sans:"Open Sans",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:110px}
+body{font:17px/1.6 var(--sans);color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--head);font-weight:800;letter-spacing:-.02em;line-height:1.1;text-wrap:balance}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.w{max-width:1160px;margin:0 auto;padding:0 20px}
+.ex{display:inline-block;font:700 10.5px var(--head);letter-spacing:.06em;text-transform:uppercase;background:#FFF3C4;color:#7A5600;border-radius:6px;padding:2px 7px;vertical-align:middle;white-space:nowrap}
+.tbc{background:#FFF3C4;color:#6B4B00;border-radius:5px;padding:0 5px;font-weight:600;font-size:.92em;white-space:nowrap}
+/* demo + nav */
+.demo{background:#FFF3C4;color:#7A5600;font:700 12px/1.4 var(--head);text-align:center;padding:7px 16px;letter-spacing:.03em}
+.demo a{color:inherit}
+.topnav{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,rgba(6,38,59,.97) 0%,rgba(0,71,107,.96) 100%);color:#fff;backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.topnav .in{max-width:1180px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.topnav .brand{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0}
+.topnav .qv{font-family:var(--head);font-weight:800;font-size:14.5px}
+.topnav .x{font-size:13px;opacity:.6}
+.topnav img.lgo{height:20px;width:auto;display:block}
+.topnav .by{font-size:11.5px;opacity:.6;white-space:nowrap}
+.topnav .links{display:flex;gap:3px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:99px;padding:3px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.topnav .links::-webkit-scrollbar{display:none}
+.topnav .links a{color:rgba(255,255,255,.84);text-decoration:none;font-family:var(--head);font-weight:600;font-size:13px;padding:6px 12px;border-radius:99px;white-space:nowrap;transition:background .2s,color .2s}
+.topnav .links a:hover{background:rgba(255,255,255,.12);color:#fff}
+.topnav .links a[aria-current="page"]{background:#fff;color:var(--nv);box-shadow:0 4px 14px -6px rgba(0,0,0,.4)}
+.subnav{background:var(--soft2);border-bottom:1px solid var(--line);font:600 13px var(--head)}
+.subnav .w{display:flex;gap:8px;align-items:center;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+.subnav span{color:var(--mut);margin-right:4px}
+.subnav a{text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 12px;color:var(--nv)}
+.subnav a[aria-current="page"]{background:var(--nv);border-color:var(--nv);color:#fff}
+/* site header (la landing real) */
+.site{background:#fff;border-bottom:1px solid var(--line)}
+.site .w{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;padding-bottom:14px}
+.site img{height:26px;width:auto}
+.site nav{display:flex;gap:22px;font:600 14px var(--head)}
+.site nav a{text-decoration:none;color:var(--nv)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font:800 16px var(--head);text-decoration:none;border:0;border-radius:14px;padding:15px 22px;cursor:pointer;transition:transform .15s,box-shadow .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn.pri{background:var(--amb);color:#3A2B00;box-shadow:0 14px 28px -14px rgba(254,196,45,.9)}
+.btn.wa{background:var(--wa);color:#fff;box-shadow:0 14px 28px -14px rgba(37,163,90,.9)}
+.btn.gh{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.btn.sm{font-size:14px;padding:10px 14px;border-radius:11px}
+.btn.nv{background:var(--nv);color:#fff}
+.micro{font-size:13.5px;opacity:.8;margin-top:10px;display:flex;align-items:center;gap:7px}
+/* hero */
+.hero{position:relative;color:#fff;background:#06263B;overflow:hidden}
+.hero .bg{position:absolute;inset:0;background:url(../assets/brand/practicas.jpg) 70% center/cover}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(6,38,59,.97) 0%,rgba(0,71,107,.9) 42%,rgba(0,71,107,.45) 72%,rgba(0,71,107,.25) 100%)}
+.hero .w{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,420px);gap:48px;align-items:center;padding-top:72px;padding-bottom:88px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:7px 14px 7px 8px;font:700 12.5px var(--head);letter-spacing:.05em;text-transform:uppercase}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--amb);box-shadow:0 0 0 4px rgba(254,196,45,.25);margin-left:4px}
+.hero h1{font-size:clamp(36px,5.4vw,64px);margin-top:20px;font-weight:900}
+.hero h1 em{font-style:normal;color:var(--cy)}
+.hero .sub{font-size:clamp(17px,1.6vw,20px);opacity:.92;margin-top:20px;max-width:46ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.proof{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:26px;font-size:14px;opacity:.9}
+.proof span{display:inline-flex;align-items:center;gap:7px}
+.proof svg{width:16px;height:16px;color:var(--cy)}
+.next{background:#fff;color:var(--ink);border-radius:24px;box-shadow:0 40px 80px -30px rgba(0,0,0,.65);overflow:hidden}
+.next .top{background:var(--grad);color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.next .top small{font:700 11.5px var(--head);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.next .top b{display:block;font:800 19px/1.2 var(--head);margin-top:2px}
+.cal{flex:none;background:#fff;color:var(--nv);border-radius:14px;text-align:center;padding:6px 12px;min-width:74px;font-family:var(--head)}
+.cal small{display:block;font:800 10.5px var(--head);letter-spacing:.12em;color:var(--b);opacity:1}
+.cal b{font:900 26px/1 var(--head);color:var(--nv);margin:0}
+.next ul{list-style:none;padding:16px 22px 4px;display:grid;gap:11px}
+.next li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.4}
+.next li svg{color:var(--b);width:20px;height:20px;margin-top:1px}
+.next li b{font-family:var(--head)}
+.next .cta{padding:16px 22px 20px}
+.next .cta .btn{width:100%}
+.next .cta p{font-size:12.5px;color:var(--mut);text-align:center;margin-top:9px}
+.seats{display:flex;align-items:center;gap:10px;margin:4px 22px 0;padding:10px 12px;background:var(--soft2);border-radius:12px;font-size:13.5px}
+.seats .bar{flex:1;height:7px;border-radius:99px;background:var(--line);overflow:hidden}
+.seats .bar i{display:block;height:100%;width:68%;background:linear-gradient(90deg,var(--amb),#F59E0B)}
+/* trust bar */
+.tbar{position:relative;z-index:2;margin-top:-44px}
+.tbar .grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--sh)}
+.tbar .it{display:flex;gap:12px;align-items:center;padding:20px 18px;border-left:1px solid var(--line)}
+.tbar .it:first-child{border-left:0}
+.tbar .ic{width:44px;height:44px;border-radius:13px;background:var(--soft);color:var(--b);display:grid;place-items:center;flex:none}
+.tbar small{display:block;font:700 11px var(--head);letter-spacing:.09em;text-transform:uppercase;color:var(--mut)}
+.tbar b{font:800 15.5px/1.25 var(--head);color:var(--nv)}
+.src{font-size:12.5px;color:var(--mut);margin-top:12px;text-align:center}
+/* sections */
+section.blk{padding:96px 0}
+section.alt{background:var(--soft2)}
+.eyb{font:800 12.5px var(--head);letter-spacing:.14em;text-transform:uppercase;color:var(--b);margin-bottom:12px;display:block}
+.blk h2{font-size:clamp(30px,3.8vw,46px);max-width:22ch}
+.blk .lead{color:var(--mut);font-size:clamp(17px,1.5vw,19px);margin-top:16px;max-width:60ch}
+.hd{margin-bottom:44px}
+.hd.c{text-align:center}.hd.c h2,.hd.c .lead{margin-inline:auto}
+/* para quién */
+.who{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.who .ph{position:relative;border-radius:28px;overflow:hidden;min-height:420px;box-shadow:var(--sh)}
+.who .ph img{position:absolute;inset:0}
+.who{align-items:stretch!important}
+.who .ph img{width:100%;height:100%;object-fit:cover}
+.who .ph .tag{position:absolute;left:18px;right:18px;bottom:18px;background:rgba(6,38,59,.86);backdrop-filter:blur(8px);color:#fff;border-radius:16px;padding:14px 16px;font-size:14.5px;line-height:1.45}
+.who .ph .tag b{font-family:var(--head);color:var(--cy)}
+.sits{display:grid;gap:12px;margin-top:28px}
+.sit{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:0 10px 24px -22px rgba(0,71,107,.6)}
+.sit .n{flex:none;width:34px;height:34px;border-radius:10px;background:var(--soft);color:var(--b);display:grid;place-items:center}
+.sit b{font:800 16.5px/1.3 var(--head);display:block}
+.sit span{color:var(--mut);font-size:15px}
+.chk{margin-top:22px;background:var(--soft2);border:1px solid var(--line);border-radius:18px;padding:18px}
+.chk label b{font:800 16.5px var(--head)}
+.chr{display:flex;gap:8px;margin:10px 0}
+.chr select{flex:1;min-width:0;font:600 15px var(--sans);border:1.5px solid var(--line);border-radius:11px;padding:10px;background:#fff;color:var(--ink)}
+.chk p{font-size:15px;color:var(--mut);margin-bottom:12px}
+.chk p b{color:var(--ink)}
+.chk p.hot{color:#8A5A00}
+/* curso */
+.course{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px;align-items:start}
+.mods{display:grid;gap:18px}
+.mod{display:grid;grid-template-columns:200px minmax(0,1fr);background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--sh)}
+.mod .im{background-size:cover;background-position:center;min-height:200px;position:relative}
+.mod .im.fire{background:radial-gradient(circle at 50% 78%,#FEC42D 0%,#F97316 22%,#B4231A 46%,#3A0F12 78%,#06263B 100%);display:grid;place-items:center}
+.mod .im.fire svg{width:84px;height:84px;fill:none;stroke:#fff;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45))}
+.mod .im span{position:absolute;top:12px;left:12px;background:#fff;color:var(--nv);font:800 12px var(--head);border-radius:99px;padding:4px 10px}
+.mod .tx{padding:22px 24px}
+.mod small{font:700 11.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--b)}
+.mod h3{font-size:21px;margin:6px 0 8px}
+.mod p{color:var(--mut);font-size:15.5px}
+.mod .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.mod .meta span{font:700 12.5px var(--head);background:var(--soft2);border:1px solid var(--line);border-radius:99px;padding:4px 10px;color:var(--nv)}
+.what{background:var(--soft2);border:1px solid var(--line);border-radius:22px;padding:24px;margin-top:4px}
+.what h3{font-size:19px;margin-bottom:12px}
+.what p{font-size:15.5px;color:var(--mut)}
+.spec{position:sticky;top:96px;background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--sh);overflow:hidden}
+.spec .hd2{background:var(--grad);color:#fff;padding:22px 24px}
+.spec .hd2 small{font:700 11.5px var(--head);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.spec .hd2 h3{font-size:21px;margin-top:4px}
+.spec .hd2 .pr{display:flex;align-items:baseline;gap:8px;margin-top:12px}
+.spec .hd2 .pr b{font:900 34px var(--head)}
+.spec .hd2 .pr span{font-size:13.5px;opacity:.85}
+.spec dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0;padding:6px 24px}
+.spec dt,.spec dd{padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.spec dt{font:700 13px var(--head);color:var(--mut);padding-right:14px;text-transform:uppercase;letter-spacing:.05em;font-size:11.5px;padding-top:13px}
+.spec dd{font-weight:600}
+.spec dl>*:nth-last-child(-n+2){border-bottom:0}
+.spec .ft{padding:4px 24px 24px}
+.spec .ft .btn{width:100%}
+.spec .ft p{font-size:12.5px;color:var(--mut);text-align:center;margin-top:9px}
+.req{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.rq{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}
+.rq .ic{width:44px;height:44px;border-radius:13px;background:var(--grad);color:#fff;display:grid;place-items:center;margin-bottom:14px}
+.rq h4{font-size:17px;margin-bottom:8px}
+.rq ul{padding-left:18px;color:var(--mut);font-size:15px;display:grid;gap:5px}
+/* convocatorias */
+.tbl{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--sh);overflow:hidden}
+.row{display:grid;grid-template-columns:150px minmax(0,1.6fr) minmax(0,1fr) 110px 150px 150px;gap:16px;align-items:center;padding:18px 22px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row.th{background:var(--soft2);font:700 11.5px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);padding-top:13px;padding-bottom:13px}
+.row.star{background:linear-gradient(90deg,rgba(0,151,218,.07),rgba(0,151,218,0) 60%)}
+.dt{font:800 16px/1.2 var(--head);color:var(--nv)}
+.dt small{display:block;font:600 12.5px var(--sans);color:var(--mut);margin-top:3px}
+.cn b{font:800 15.5px/1.3 var(--head);display:block}
+.cn .bd{display:inline-block;font:800 10.5px var(--head);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--b);border-radius:6px;padding:2px 7px;margin-bottom:5px}
+.cn small{color:var(--mut);font-size:13px}
+.pl{font-size:14.5px;color:var(--mut)}
+.pz{font:800 16px var(--head)}
+.st{display:inline-flex;align-items:center;gap:6px;font:700 13px var(--head);border-radius:99px;padding:5px 11px;white-space:nowrap}
+.st i{width:7px;height:7px;border-radius:50%;background:currentColor}
+.st.g{background:#E6F6EE;color:#12805A}.st.a{background:#FFF4D6;color:#8A5A00}.st.r{background:#FDEBEA;color:#B42318}.st.n{background:var(--soft);color:var(--nv)}
+.tnote{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--mut);margin-top:14px}
+/* cómo funciona */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;position:relative}
+.stp{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px 24px;box-shadow:var(--sh);position:relative}
+.stp .num{font:900 54px/1 var(--head);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.9}
+.stp h3{font-size:20px;margin:14px 0 8px}
+.stp p{color:var(--mut);font-size:15.5px}
+.stp .when{display:inline-flex;gap:6px;align-items:center;margin-top:14px;font:700 12.5px var(--head);color:var(--b);background:var(--soft);border-radius:99px;padding:5px 11px}
+.wa-mock{margin-top:16px;background:#E7F3EC;border-radius:14px;padding:10px;font-size:13.5px;line-height:1.45}
+.wa-mock p{background:#fff;border-radius:10px 10px 10px 2px;padding:8px 10px;color:var(--ink);box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.wa-mock p+p{margin-top:6px}
+.wa-mock p.me{background:#D7F7C4;border-radius:10px 10px 2px 10px;margin-left:24px}
+/* por qué */
+.why{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px;align-items:center}
+.why .ph{border-radius:28px;overflow:hidden;box-shadow:var(--sh);aspect-ratio:1.1/1}
+.why .ph img{width:100%;height:100%;object-fit:cover}
+.wgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:28px}
+.wc{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.wc .ic{width:42px;height:42px;border-radius:12px;background:var(--soft);color:var(--b);display:grid;place-items:center;margin-bottom:12px}
+.wc b{font:800 16.5px/1.3 var(--head);display:block;margin-bottom:5px}
+.wc span{color:var(--mut);font-size:14.5px}
+/* faq */
+.faq{max-width:860px;margin:0 auto;display:grid;gap:12px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 24px -22px rgba(0,71,107,.6)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 22px;font:800 17px/1.35 var(--head);display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:30px;height:30px;border-radius:50%;background:var(--soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230097DA' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/16px no-repeat;transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 22px 20px;color:var(--mut);font-size:16px}
+.faq .a p+p{margin-top:8px}
+/* formulario */
+.fsec{background:var(--deep);color:#fff;position:relative;overflow:hidden}
+.fsec::before{content:"";position:absolute;inset:0;background:url(../assets/brand/hero.jpg) center/cover;opacity:.28}
+.fsec::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,38,59,.96) 0%,rgba(6,38,59,.8) 55%,rgba(0,71,107,.6) 100%)}
+.fsec .w{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);gap:56px;align-items:center}
+.fsec h2{color:#fff}
+.fsec .lead{color:rgba(255,255,255,.82)}
+.fsec ul.ck{list-style:none;padding:0;display:grid;gap:12px;margin-top:26px}
+.fsec ul.ck li{display:flex;gap:12px;align-items:flex-start}
+.fsec ul.ck svg{color:var(--cy);margin-top:2px}
+.fbox{background:#fff;color:var(--ink);border-radius:26px;padding:26px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.fbox .fh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.fbox .fh b{font:800 20px var(--head)}
+.fbox .fh span{font:700 12.5px var(--head);color:var(--mut)}
+.prog{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:6px}
+.prog i{display:block;height:100%;width:20%;background:var(--grad);border-radius:99px;transition:width .35s}
+.step{display:none;animation:fi .3s ease}.step.on{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.qt{font:800 18px/1.3 var(--head);margin:18px 0 4px}
+.qh{font-size:13.5px;color:var(--mut);margin-bottom:12px}
+.opts{display:grid;gap:8px}
+.opts button{display:flex;align-items:center;gap:10px;text-align:left;font:600 15px/1.3 var(--sans);border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:13px;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.opts button::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;border:2px solid #B8D3E3;transition:all .15s}
+.opts button:hover{border-color:#9FD3EE}
+.opts button[aria-pressed=true]{border-color:var(--b);background:var(--soft);color:#00618F;font-weight:700}
+.opts button[aria-pressed=true]::before{border-color:var(--b);background:var(--b);box-shadow:inset 0 0 0 3px #fff}
+.opts.two{grid-template-columns:1fr 1fr}
+.fld{display:grid;gap:9px;margin-top:12px}
+.fld input{font:16px var(--sans);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;width:100%}
+.fld input:focus{outline:2px solid var(--b);outline-offset:1px}
+.go{margin-top:18px;width:100%}
+.go:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.back{background:none;border:0;color:var(--mut);font:600 13.5px var(--sans);margin-top:12px;cursor:pointer;padding:0}
+.legal{font-size:12px;color:var(--mut);margin-top:12px}
+.ok{text-align:center;padding:8px 2px}
+.ok .ic{width:62px;height:62px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;margin:0 auto 14px}
+.ok h3{font-size:24px;margin-bottom:8px}
+.ok p{color:var(--mut);font-size:15px}
+.cls{margin-top:18px;background:var(--soft2);border:1.5px dashed var(--b);border-radius:16px;padding:14px 16px;font-size:14px;text-align:left}
+.cls .t{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.cls .p{display:grid;place-items:center;min-width:34px;height:34px;padding:0 8px;font:900 15px var(--head);background:var(--grad);color:#fff;border-radius:9px}
+.cls .t b{font:800 14.5px var(--head)}
+.cls .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.cls .tags span{font:700 11.5px var(--head);background:#fff;border:1px solid var(--line);border-radius:99px;padding:3px 9px;color:var(--nv)}
+.again{margin-top:12px;background:none;border:0;color:var(--b);font:700 13.5px var(--head);cursor:pointer}
+/* cta final */
+.final{background:var(--grad);color:#fff;text-align:center;padding:84px 0;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;width:680px;height:680px;border-radius:50%;border:1px solid rgba(255,255,255,.12);right:-200px;top:-260px}
+.final::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;border:1px solid rgba(255,255,255,.12);left:-140px;bottom:-240px}
+.final .w{position:relative}
+.final h2{font-size:clamp(30px,4.4vw,52px);max-width:20ch;margin:0 auto}
+.final p{opacity:.9;font-size:19px;margin:16px auto 0;max-width:52ch}
+.final .ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:30px}
+.final .micro{justify-content:center}
+footer{background:var(--deep);color:rgba(255,255,255,.72);padding:40px 0 120px;font-size:13.5px}
+footer .w{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer img{height:22px;width:auto;margin-bottom:12px}
+footer b{color:#fff;font-family:var(--head)}
+/* barra móvil */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);box-shadow:0 -10px 30px -18px rgba(0,71,107,.6)}
+.mbar .btn{flex:1;font-size:15px;padding:13px 10px}
+@media (max-width:1020px){
+ .hero .w,.who,.course,.why,.fsec .w{grid-template-columns:1fr}
+ .tbar .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .tbar .it{border-left:0;border-top:1px solid var(--line)}
+ .tbar .it:nth-child(-n+2){border-top:0}
+ .tbar .it:last-child{grid-column:1/-1}
+ .spec{position:static}
+ .row{grid-template-columns:120px minmax(0,1fr) auto;row-gap:8px}
+ .row.th{display:none}
+ .row .pl{grid-column:2/3}
+ .row .pz{grid-column:3/4;grid-row:1}
+ .row .stc{grid-column:2/3}
+ .row .act{grid-column:3/4}
+ .who .ph{aspect-ratio:16/10;min-height:0;width:100%}
+ .why .ph{aspect-ratio:16/9}
+ .site nav{display:none}
+}
+@media (max-width:760px){
+ section.blk{padding:68px 0}
+ .hero .w{padding-top:44px;padding-bottom:76px;gap:32px}
+ .steps,.req,.wgrid{grid-template-columns:1fr}
+ .mod{grid-template-columns:1fr}
+ .mod .im{min-height:170px}
+ .mbar{display:flex}
+ .topnav .by{display:none}.topnav .links{width:100%}.topnav .links a{padding:6px 10px;font-size:12.5px}
+ .row{grid-template-columns:minmax(0,1fr) auto;padding:18px}
+ .row .dt{grid-column:1/-1}
+ .row .cn{grid-column:1/-1}
+ .row .pl{grid-column:1/2}
+ .row .pz{grid-column:2/3;grid-row:auto;text-align:right}
+ .row .stc{grid-column:1/2}
+ .row .act{grid-column:2/3}
+ .dt small{display:inline;margin-left:6px}
+ .site .btn{display:none}
+ .fbox{padding:20px}
+ .hero .ctas .btn{flex:1 1 100%}
+}
+@media (max-width:520px){.demo .lg{display:none}}
+@media (max-width:420px){.tbar .grid{grid-template-columns:1fr}.tbar .it{border-top:1px solid var(--line)!important}.tbar .it:first-child{border-top:0!important}.opts.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.4 2.4L15.5 10"/></symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+ <symbol id="i-cert" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M7 8h10M7 11h6"/><circle cx="16.5" cy="17.5" r="2.5"/><path d="M15 19.5V22l1.5-1 1.5 1v-2.5"/></symbol>
+ <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></symbol>
+ <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+ <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 22c4 0 7-2.8 7-6.8 0-3-1.7-5.2-3.6-7.2-.3 1.8-1.2 3-2.4 3.6.2-3.4-1.2-6.5-4-8.6.3 3.1-1.3 5.3-2.9 7.2C4.8 11.8 5 13.6 5 15.2 5 19.2 8 22 12 22z"/></symbol>
+ <symbol id="i-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></symbol>
+ <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M9 8.5c0 3.5 2.9 6.5 6.5 6.5l1-1.6-2-1-1 1c-1.2-.5-2.3-1.6-2.8-2.8l1-1-1-2z"/></symbol>
+ <symbol id="i-ship" viewBox="0 0 24 24"><path d="M2 20c2 1 4 1 6 0s4-1 6 0 4 1 6 0M4 17l-1-5h18l-2 5M6 12V7h12v5M12 7V3"/></symbol>
+ <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4M12 17.2v.3"/></symbol>
+ <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+ <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+ <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+ <symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><path d="M12 7.5V21M5 13H3a9 9 0 0 0 18 0h-2M8 11h8"/></symbol>
+ <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+ <symbol id="i-euro" viewBox="0 0 24 24"><path d="M18 6.5A7 7 0 1 0 18 17.5M4 10h10M4 14h10"/></symbol>
+</svg>
+
+<div class="demo">Maqueta de Qualivo para CANCOMAR · no publicada<span class="lg"> · lo marcado como <span class="ex">Datos de ejemplo</span> o <span class="tbc">[a confirmar]</span> no sale de cancomar.es</span></div>
+
+<nav class="topnav" aria-label="Paquete CANCOMAR">
+  <div class="in">
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><img class="lgo" src="../assets/brand/logo-blanco.png" alt="CANCOMAR" width="137" height="20"><span class="by">10-nov-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="./" aria-current="page">Landings</a><a href="../recorrido/">Recorrido</a><a href="../demo/">CRM</a><a href="https://qualivo.io/intelligence/?sector=cancomar&amp;empresa=CANCOMAR&amp;objetivo=seguimiento">Intelligence</a><a href="../presentacion/">Presentación</a></div>
+  </div>
+</nav>
+<div class="subnav"><div class="w"><span>Landings:</span><a href="./" aria-current="page">A · Renovación (particular)</a><a href="../landing-b/">B · Empresas y flotas</a></div></div>
+
+<!-- ===== A partir de aquí, la landing tal como la vería el marino ===== -->
+<header class="site"><div class="w">
+ <img src="../assets/brand/logo-color.png" alt="CANCOMAR" width="178" height="26">
+ <nav aria-label="Secciones"><a href="#curso">El curso</a><a href="#fechas">Fechas</a><a href="#faq">Dudas</a></nav>
+ <a class="btn wa sm" href="#reserva"><svg class="i"><use href="#i-wa"/></svg>Escríbenos</a>
+</div></header>
+
+<section class="hero">
+ <div class="bg" aria-hidden="true"></div>
+ <div class="w">
+  <div>
+   <span class="chip"><i></i>Actualización STCW · Avilés</span>
+   <h1>Renueva tu Formación Básica <em>en dos días</em> y vuelve a embarcar en regla</h1>
+   <p class="sub">Actualización de Formación Básica en Seguridad Marítima: 16 horas de prácticas de lucha contra incendios y supervivencia en la mar. Certificado homologado por la Dirección General de la Marina Mercante, válido 5 años.</p>
+   <div class="ctas">
+    <a class="btn pri" href="#reserva">Reservar mi plaza <svg class="i"><use href="#i-arrow"/></svg></a>
+    <a class="btn gh" href="#reserva"><svg class="i"><use href="#i-wa"/></svg>Pregúntanos por WhatsApp</a>
+   </div>
+   <p class="micro"><svg class="i" style="width:16px;height:16px"><use href="#i-clock"/></svg>Te respondemos en minutos, también si estás embarcado.</p>
+   <div class="proof">
+    <span><svg class="i"><use href="#i-shield"/></svg>Centro de formación homologado</span>
+    <span><svg class="i"><use href="#i-cert"/></svg>Convenio STCW 2010</span>
+    <span><svg class="i"><use href="#i-pin"/></svg>C/ Pedro Solís 1, Avilés</span>
+   </div>
+  </div>
+
+  <aside class="next" aria-label="Próxima convocatoria">
+   <div class="top">
+    <div><small>Próxima convocatoria</small><b>Actualización Formación Básica en Seguridad Marítima</b></div>
+    <div class="cal"><small>NOV–DIC</small><b>30·1</b></div>
+   </div>
+   <ul>
+    <li><svg class="i"><use href="#i-cal"/></svg><span><b>30 nov y 1 dic 2026</b> · de 09:00 a 18:00</span></li>
+    <li><svg class="i"><use href="#i-pin"/></svg><span><b>Presencial en Avilés</b> · prácticas de incendios en SADEX</span></li>
+    <li><svg class="i"><use href="#i-euro"/></svg><span><b>370 €</b> · precio publicado en cancomar.es</span></li>
+    <li><svg class="i"><use href="#i-globe"/></svg><span>Certificado con <b>validez internacional de 5 años</b></span></li>
+   </ul>
+   <div class="seats"><span>Plazas</span><div class="bar"><i></i></div><span class="ex">Datos de ejemplo</span></div>
+   <div class="cta"><a class="btn pri" href="#reserva">Reservar plaza en esta fecha</a><p>1 minuto · sin pagar nada todavía</p></div>
+  </aside>
+ </div>
+</section>
+
+<div class="tbar"><div class="w">
+ <div class="grid">
+  <div class="it"><div class="ic"><svg class="i"><use href="#i-shield"/></svg></div><div><small>Homologado</small><b>Dirección General de la Marina Mercante</b></div></div>
+  <div class="it"><div class="ic"><svg class="i"><use href="#i-clock"/></svg></div><div><small>Duración</small><b>16 h prácticas · 2 jornadas</b></div></div>
+  <div class="it"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><div><small>Modalidad</small><b>Presencial</b></div></div>
+  <div class="it"><div class="ic"><svg class="i"><use href="#i-pin"/></svg></div><div><small>Lugar</small><b>Avilés, Asturias</b></div></div>
+  <div class="it"><div class="ic"><svg class="i"><use href="#i-cert"/></svg></div><div><small>Certificado</small><b>Válido 5 años, internacional</b></div></div>
+ </div>
+ <p class="src">Datos de la ficha del curso en cancomar.es, consultada el 10-nov-2026.</p>
+</div></div>
+
+<!-- Para quién -->
+<section class="blk"><div class="w who">
+ <div class="ph"><img src="../assets/brand/hero.jpg" alt="Marina en cubierta mirando al horizonte" loading="lazy">
+  <div class="tag"><b>Cada 5 años toca.</b> El certificado de Formación Básica se renueva con una actualización práctica. Si caduca, no te dejan embarcar con él.</div>
+ </div>
+ <div>
+  <span class="eyb">¿Es para ti?</span>
+  <h2>Si te reconoces en alguna, este curso es el tuyo</h2>
+  <div class="sits">
+   <div class="sit"><div class="n"><svg class="i"><use href="#i-alert"/></svg></div><div><b>Tu certificado caduca en los próximos meses</b><span>Y no quieres llegar justo al próximo embarque con el papel vencido.</span></div></div>
+   <div class="sit"><div class="n"><svg class="i"><use href="#i-ship"/></svg></div><div><b>Te ha salido un embarque y te lo piden en vigor</b><span>Necesitas fecha ya, no un «te llamamos la semana que viene».</span></div></div>
+   <div class="sit"><div class="n"><svg class="i"><use href="#i-anchor"/></svg></div><div><b>Trabajas en buques civiles o en tareas de seguridad a bordo</b><span>Mercante, pasaje, pesca o servicios portuarios: es la formación básica que te exige el STCW.</span></div></div>
+   <div class="sit"><div class="n"><svg class="i"><use href="#i-wa"/></svg></div><div><b>Estás embarcado y contestas cuando hay cobertura</b><span>Nos escribes cuando puedas y te guardamos la respuesta por WhatsApp.</span></div></div>
+  </div>
+  <div class="chk" aria-live="polite">
+   <label for="cm"><b>¿Cuándo caduca el tuyo?</b></label>
+   <div class="chr"><select id="cm" aria-label="Mes de caducidad"></select><select id="cy" aria-label="Año de caducidad"></select></div>
+   <p id="cr">Elige mes y año y te decimos si llegas a la próxima convocatoria.</p>
+   <a class="btn nv sm" href="#reserva">Reservar plaza</a>
+  </div>
+ </div>
+</div></section>
+
+<!-- El curso -->
+<section class="blk alt" id="curso"><div class="w">
+ <div class="hd">
+  <span class="eyb">El curso, explicado</span>
+  <h2>Dos días de prácticas para renovar lo que te exige el STCW</h2>
+  <p class="lead">Es la actualización del certificado de Formación Básica en Seguridad Marítima. Sirve para que puedas seguir ejerciendo a bordo de buques civiles y para que sepas actuar ante una emergencia: un incendio o un abandono del buque. Cumple el convenio STCW 2010 y su Código de Formación.</p>
+ </div>
+ <div class="course">
+  <div class="mods">
+   <article class="mod">
+    <div class="im fire" aria-hidden="true"><span>Módulo 1</span><svg viewBox="0 0 24 24"><use href="#i-fire"/></svg></div>
+    <div class="tx"><small>Práctico · en SADEX</small><h3>Prevención y lucha contra incendios</h3><p>Prácticas de prevención y extinción para saber reaccionar si hay fuego a bordo.</p>
+     <div class="meta"><span>Contenido práctico</span><span>Horas por módulo <span class="tbc">[a confirmar]</span></span></div></div>
+   </article>
+   <article class="mod">
+    <div class="im" style="background-image:url(../assets/brand/seguridad-maritima.jpg)"><span>Módulo 2</span></div>
+    <div class="tx"><small>Práctico · en CANCOMAR</small><h3>Supervivencia en la mar en caso de abandono del buque</h3><p>Prácticas de supervivencia en la mar para el momento en que hay que abandonar el barco.</p>
+     <div class="meta"><span>Contenido práctico</span><span>Horas por módulo <span class="tbc">[a confirmar]</span></span></div></div>
+   </article>
+   <div class="what">
+    <h3>Qué te llevas</h3>
+    <p>Al superar el curso actualizas tu <b>certificado de Formación Básica en Seguridad Marítima, homologado por la Dirección General de la Marina Mercante</b>, con validez internacional durante <b>5 años</b>. Y nosotros te avisamos antes de la próxima renovación para que no te pille el toro.</p>
+   </div>
+  </div>
+
+  <aside class="spec" aria-label="Ficha del curso">
+   <div class="hd2"><small>Ficha del curso</small><h3>Actualización Formación Básica en Seguridad Marítima</h3>
+    <div class="pr"><b>370 €</b><span>precio publicado</span></div></div>
+   <dl>
+    <dt>Fechas</dt><dd>30 nov – 1 dic 2026</dd>
+    <dt>Horario</dt><dd>09:00 a 18:00</dd>
+    <dt>Duración</dt><dd>16 h de contenido práctico</dd>
+    <dt>Modalidad</dt><dd>Presencial</dd>
+    <dt>Sede</dt><dd>C/ Pedro Solís 1, 33401 Avilés · incendios en SADEX <span class="tbc">[ubicación a confirmar]</span></dd>
+    <dt>Plazas</dt><dd><span class="tbc">[a confirmar]</span></dd>
+    <dt>Pago</dt><dd>Matrícula y reserva + resto antes del inicio <span class="tbc">[importes a confirmar]</span></dd>
+    <dt>Validez</dt><dd>5 años · internacional</dd>
+   </dl>
+   <div class="ft"><a class="btn pri" href="#reserva">Reservar plaza</a><p>Te confirmamos fecha y plaza por WhatsApp</p></div>
+  </aside>
+ </div>
+
+ <div class="req">
+  <div class="rq"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><h4>Para quién</h4>
+   <ul><li>Personal que quiere ejercer funciones profesionales marítimas en buques civiles.</li><li>Quien tiene encomendadas tareas de seguridad o de prevención de la contaminación a bordo.</li></ul></div>
+  <div class="rq"><div class="ic"><svg class="i"><use href="#i-check"/></svg></div><h4>Requisitos</h4>
+   <ul><li>Tener el certificado de Formación Básica que vas a renovar <span class="tbc">[a confirmar]</span></li><li>Si ya está caducado, qué hacer <span class="tbc">[a confirmar]</span></li></ul></div>
+  <div class="rq"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h4>Documentación</h4>
+   <ul><li>Lista de documentos para la matrícula <span class="tbc">[a confirmar con vosotros]</span></li><li>Te la mandamos por WhatsApp al reservar.</li></ul></div>
+ </div>
+</div></section>
+
+<!-- Convocatorias -->
+<section class="blk" id="fechas"><div class="w">
+ <div class="hd">
+  <span class="eyb">Próximas convocatorias</span>
+  <h2>Elige fecha y asegura tu plaza antes de que se llene</h2>
+  <p class="lead">Fechas, sedes y precios publicados en cancomar.es el 10-nov-2026. El estado de plazas es de ejemplo: en la versión real se lee de vuestro calendario.</p>
+ </div>
+ <div class="tbl" role="table" aria-label="Próximas convocatorias">
+  <div class="row th" role="row"><span>Fecha</span><span>Curso</span><span>Duración y sede</span><span>Precio</span><span>Plazas <span class="ex">Ejemplo</span></span><span></span></div>
+  <div class="row" role="row">
+   <div class="dt">24 nov<small>martes</small></div>
+   <div class="cn"><b>Actualización Formación Sanitaria Específica Inicial</b><small>Requisito: tener la Sanitaria Específica Inicial en vigor</small></div>
+   <div class="pl">8 h · 1 jornada<br>Avilés</div>
+   <div class="pz">216 €</div>
+   <div class="stc"><span class="st a"><i></i>Últimas plazas</span></div>
+   <div class="act"><a class="btn pri sm" href="#reserva" data-pick="Actualización Sanitaria Específica">Reservar</a></div>
+  </div>
+  <div class="row star" role="row">
+   <div class="dt">30 nov – 1 dic<small>lun y mar</small></div>
+   <div class="cn"><span class="bd">El más pedido</span><b>Actualización Formación Básica en Seguridad Marítima</b><small>Incendios + supervivencia en la mar</small></div>
+   <div class="pl">16 h · 2 jornadas<br>Avilés</div>
+   <div class="pz">370 €</div>
+   <div class="stc"><span class="st g"><i></i>Plazas libres</span></div>
+   <div class="act"><a class="btn pri sm" href="#reserva" data-pick="Actualización Formación Básica">Reservar</a></div>
+  </div>
+  <div class="row" role="row">
+   <div class="dt">1 dic<small>martes</small></div>
+   <div class="cn"><b>Actualización Avanzado Lucha Contra Incendios</b><small>Para quien ya tiene el Avanzado y necesita renovarlo</small></div>
+   <div class="pl">8 h · 1 jornada<br>Oviedo</div>
+   <div class="pz">325 €</div>
+   <div class="stc"><span class="st g"><i></i>Plazas libres</span></div>
+   <div class="act"><a class="btn pri sm" href="#reserva" data-pick="Actualización Avanzado Lucha Contra Incendios">Reservar</a></div>
+  </div>
+  <div class="row" role="row">
+   <div class="dt">2027<small>fecha <span class="tbc">[a confirmar]</span></small></div>
+   <div class="cn"><b>Siguiente Actualización de Formación Básica</b><small>¿No llegas al 30 de noviembre? Te guardamos sitio en la lista de espera</small></div>
+   <div class="pl">16 h · 2 jornadas<br>Avilés</div>
+   <div class="pz">—</div>
+   <div class="stc"><span class="st n"><i></i>Lista de espera</span></div>
+   <div class="act"><a class="btn nv sm" href="#reserva" data-pick="Actualización Formación Básica">Avísame</a></div>
+  </div>
+ </div>
+ <div class="tnote"><span>Precios y fechas: cancomar.es (10-nov-2026). Estado de plazas: <span class="ex">Datos de ejemplo</span></span><span>¿No ves tu curso? <a href="#reserva">Pídelo y te avisamos</a></span></div>
+</div></section>
+
+<!-- Cómo funciona -->
+<section class="blk alt"><div class="w">
+ <div class="hd c">
+  <span class="eyb">Cómo funciona</span>
+  <h2>De «me caduca» a plaza reservada en tres pasos</h2>
+  <p class="lead">Pensado para quien está embarcado y contesta cuando tiene cobertura.</p>
+ </div>
+ <div class="steps">
+  <div class="stp"><div class="num">01</div><h3>Nos dices qué te falta</h3><p>Curso, para cuándo lo necesitas y cómo localizarte. Cinco preguntas, menos de un minuto.</p><span class="when"><svg class="i" style="width:15px;height:15px"><use href="#i-clock"/></svg>1 minuto</span></div>
+  <div class="stp"><div class="num">02</div><h3>Te confirmamos fecha y plaza por WhatsApp</h3><p>Una persona del equipo te escribe con la fecha más cercana y lo que necesitas llevar.</p>
+   <div class="wa-mock" aria-label="Ejemplo de conversación"><p>Hola, soy del equipo de CANCOMAR. Para la Actualización de Formación Básica tienes plaza el 30 nov y 1 dic en Avilés. ¿Te la guardo?</p><p class="me">Sí, guárdamela 👍</p></div>
+   <span class="when"><svg class="i" style="width:15px;height:15px"><use href="#i-wa"/></svg>En minutos <span class="ex">Ejemplo</span></span></div>
+  <div class="stp"><div class="num">03</div><h3>Reservas y te olvidas</h3><p>Pagas la matrícula, haces el curso y renuevas. Te avisamos antes de que vuelva a tocar dentro de 5 años.</p><span class="when"><svg class="i" style="width:15px;height:15px"><use href="#i-bell"/></svg>Aviso de renovación</span></div>
+ </div>
+</div></section>
+
+<!-- Por qué -->
+<section class="blk"><div class="w why">
+ <div class="ph"><img src="../assets/brand/puente.jpg" alt="Instructor y alumno en el puente de un buque" loading="lazy"></div>
+ <div>
+  <span class="eyb">Por qué con CANCOMAR</span>
+  <h2>Un centro de Avilés que vive del mar, como tú</h2>
+  <div class="wgrid">
+   <div class="wc"><div class="ic"><svg class="i"><use href="#i-shield"/></svg></div><b>Centro de formación homologado</b><span>Y cursos homologados por la Dirección General de la Marina Mercante.</span></div>
+   <div class="wc"><div class="ic"><svg class="i"><use href="#i-ring"/></svg></div><b>Prácticas reales, no diapositivas</b><span>Las 16 horas del curso son de contenido práctico: incendios y supervivencia en la mar.</span></div>
+   <div class="wc"><div class="ic"><svg class="i"><use href="#i-grid"/></svg></div><b>Todo en un mismo sitio</b><span>Marítimo y pasaje, pesca, náutica de recreo y profesional, y megayates. Si te falta otro certificado, también lo tenemos.</span></div>
+   <div class="wc"><div class="ic"><svg class="i"><use href="#i-heart"/></svg></div><b>Las personas por delante del beneficio</b><span>Así lo dice CANCOMAR de sí misma. Y lo dicen sus alumnos en las opiniones de su web.</span></div>
+  </div>
+  <p class="src" style="text-align:left">Diferenciales sacados de cancomar.es. Certificación ISO 9001: aparece su logo en la web <span class="tbc">[a confirmar antes de usarla]</span>.</p>
+ </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="blk alt" id="faq"><div class="w">
+ <div class="hd c"><span class="eyb">Dudas frecuentes</span><h2>Lo que nos preguntan antes de reservar</h2></div>
+ <div class="faq">
+  <details open><summary>¿Cuánto cuesta y cómo se paga?</summary><div class="a"><p>El precio publicado de la Actualización de Formación Básica es de <b>370 €</b>. Se paga una parte como matrícula y reserva de plaza, y el resto antes de empezar el curso.</p><p>Importes exactos de la matrícula y del resto: <span class="tbc">[a confirmar con vosotros]</span>.</p></div></details>
+  <details><summary>¿Lo puede pagar mi empresa o bonificarse?</summary><div class="a"><p>Si lo paga tu empresa, márcalo en el formulario y lo gestionamos con ella directamente. Bonificación por FUNDAE: <span class="tbc">[a confirmar con vosotros]</span>.</p></div></details>
+  <details><summary>¿Y si me sale un embarque después de reservar?</summary><div class="a"><p>Escríbenos por WhatsApp en cuanto lo sepas y buscamos contigo la siguiente fecha. Condiciones de cambio o devolución de la matrícula: <span class="tbc">[a confirmar con vosotros]</span>.</p></div></details>
+  <details><summary>¿Cada cuánto hay que renovar?</summary><div class="a"><p>El certificado que obtienes tiene una validez de <b>5 años</b>. Mira la fecha de caducidad en tu certificado actual: si vence en los próximos meses, este es el momento de reservar. Al apuntarte, te avisamos antes de la siguiente renovación.</p></div></details>
+  <details><summary>¿Puedo hacer la actualización si ya me ha caducado?</summary><div class="a"><p>Depende de tu caso <span class="tbc">[a confirmar con vosotros]</span>. Cuéntanoslo en el formulario y te decimos qué curso te corresponde.</p></div></details>
+  <details><summary>¿Qué documentación tengo que llevar?</summary><div class="a"><p>Te mandamos la lista por WhatsApp al confirmar tu plaza. Lista exacta: <span class="tbc">[a confirmar con vosotros]</span>.</p></div></details>
+  <details><summary>¿Dónde se hacen las prácticas?</summary><div class="a"><p>La supervivencia en la mar se hace en CANCOMAR (C/ Pedro Solís 1, Avilés) y la lucha contra incendios en SADEX. Dirección de SADEX y cómo llegar: <span class="tbc">[a confirmar]</span>.</p></div></details>
+  <details><summary>Estoy embarcado, ¿cómo hablo con vosotros?</summary><div class="a"><p>Por WhatsApp. Escribe cuando tengas cobertura: te contestamos en minutos en horario de oficina y no te llamamos si nos dices que estás a bordo.</p></div></details>
+ </div>
+</div></section>
+
+<!-- Formulario -->
+<section class="blk fsec" id="reserva"><div class="w">
+ <div>
+  <span class="eyb" style="color:var(--cy)">Reserva tu plaza</span>
+  <h2>Cuéntanos qué te toca renovar y te guardamos sitio</h2>
+  <p class="lead">Cinco preguntas. Con eso sabemos qué fecha te encaja y te escribimos por WhatsApp sin hacerte perder el tiempo.</p>
+  <ul class="ck">
+   <li><svg class="i"><use href="#i-check"/></svg><span>Sin pagar nada todavía: primero te confirmamos fecha y plaza.</span></li>
+   <li><svg class="i"><use href="#i-check"/></svg><span>Una persona del equipo, no un robot.</span></li>
+   <li><svg class="i"><use href="#i-check"/></svg><span>Si no llegas a esta convocatoria, te avisamos de la siguiente.</span></li>
+  </ul>
+ </div>
+
+ <div class="fbox" id="form">
+  <div class="fh"><b>Reserva en 1 minuto</b><span id="pc">Paso 1 de 5</span></div>
+  <div class="prog" aria-hidden="true"><i id="pb"></i></div>
+
+  <div class="step on" data-s="1">
+   <p class="qt">¿Qué curso necesitas?</p><p class="qh">Elige el que más se parezca.</p>
+   <div class="opts" data-q="curso">
+    <button type="button">Actualización Formación Básica</button>
+    <button type="button">Actualización Avanzado Lucha Contra Incendios</button>
+    <button type="button">Actualización Sanitaria Específica</button>
+    <button type="button">Patrón Local de Pesca</button>
+    <button type="button">Otro curso</button>
+   </div>
+  </div>
+  <div class="step" data-s="2">
+   <p class="qt">¿Es una renovación o la primera vez?</p><p class="qh">Así te decimos qué curso te corresponde.</p>
+   <div class="opts two" data-q="motivo"><button type="button">Renovación</button><button type="button">Primera vez</button></div>
+  </div>
+  <div class="step" data-s="3">
+   <p class="qt">¿Para cuándo lo necesitas?</p><p class="qh">Fecha de caducidad o de embarque.</p>
+   <div class="opts" data-q="cuando"><button type="button">Este mes</button><button type="button">En 1 a 3 meses</button><button type="button">Más adelante</button><button type="button">Solo me informo</button></div>
+  </div>
+  <div class="step" data-s="4">
+   <p class="qt">¿Quién lo paga?</p><p class="qh">Si es tu empresa, lo hablamos con ella.</p>
+   <div class="opts two" data-q="paga"><button type="button">Yo</button><button type="button">Mi empresa</button></div>
+  </div>
+  <div class="step" data-s="5">
+   <p class="qt">¿Cómo te localizamos mejor?</p>
+   <div class="opts" data-q="canal"><button type="button">WhatsApp</button><button type="button">Llamada</button><button type="button">Estoy embarcado: solo WhatsApp</button></div>
+   <div class="fld"><input type="text" placeholder="Nombre" aria-label="Nombre" autocomplete="off"><input type="tel" placeholder="Móvil (WhatsApp)" aria-label="Móvil" autocomplete="off"></div>
+   <button class="btn pri go" type="button" data-send disabled>Quiero mi plaza</button>
+   <p class="legal">Maqueta: no se envía ningún dato.</p>
+  </div>
+  <div class="step" data-s="6"><div class="ok">
+   <div class="ic"><svg class="i" style="width:30px;height:30px"><use href="#i-check"/></svg></div>
+   <h3>¡Recibido!</h3><p id="okp">En unos minutos te escribimos por WhatsApp con la fecha más cercana.</p>
+   <div class="cls" id="cls"></div>
+   <button class="again" type="button" data-reset>Probar otra combinación</button>
+  </div></div>
+  <button class="back" type="button" id="back" hidden>← Atrás</button>
+ </div>
+</div></section>
+
+<!-- CTA final -->
+<section class="final"><div class="w">
+ <h2>No dejes que un certificado caducado te deje en tierra</h2>
+ <p>Próxima Actualización de Formación Básica: 30 de noviembre y 1 de diciembre en Avilés.</p>
+ <div class="ctas"><a class="btn pri" href="#reserva">Reservar plaza</a><a class="btn gh" href="#reserva"><svg class="i"><use href="#i-wa"/></svg>Escribir por WhatsApp</a></div>
+ <p class="micro">Te respondemos en minutos, también si estás embarcado.</p>
+</div></section>
+
+<footer><div class="w">
+ <div><img src="../assets/brand/logo-blanco.png" alt="CANCOMAR" width="150" height="22"><p><b>CANCOMAR</b> · C/ Pedro Solís 1, 33401 Avilés (Asturias)</p></div>
+ <p style="max-width:52ch">Maqueta preparada por Qualivo. Datos del curso, fechas, precios y fotos de cancomar.es (10-nov-2026). Lo marcado como «Datos de ejemplo» o «a confirmar» no está publicado.</p>
+</div></footer>
+
+<div class="mbar"><a class="btn pri" href="#reserva">Reservar plaza</a><a class="btn wa" href="#reserva"><svg class="i"><use href="#i-wa"/></svg>WhatsApp</a></div>
+
+<script>
+(function(){
+  var ans={},cur=1,N=5;
+  var steps=[].slice.call(document.querySelectorAll('.step'));
+  var back=document.getElementById('back'),pb=document.getElementById('pb'),pc=document.getElementById('pc');
+  function show(n){cur=n;steps.forEach(function(s){s.classList.toggle('on',+s.dataset.s===n)});
+    pb.style.width=(Math.min(n,N+1)/(N+1)*100)+'%';
+    pc.textContent=n<=N?('Paso '+n+' de '+N):'Hecho';
+    back.hidden=(n===1||n>N);}
+  document.querySelectorAll('.opts').forEach(function(g){g.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});ans[g.dataset.q]=b.textContent;
+    var s=+g.closest('.step').dataset.s;
+    if(s<N){setTimeout(function(){show(s+1)},220);}else{document.querySelector('[data-send]').disabled=false;}});});
+  back.onclick=function(){if(cur>1)show(cur-1)};
+  function pick(name){var g=document.querySelector('.opts[data-q=curso]');g.querySelectorAll('button').forEach(function(x){var on=x.textContent===name;x.setAttribute('aria-pressed',on);if(on)ans.curso=name;});if(ans.curso===name)show(2);}
+  document.querySelectorAll('[data-pick]').forEach(function(a){a.addEventListener('click',function(){pick(a.dataset.pick)})});
+  document.querySelector('[data-reset]').onclick=function(){ans={};document.querySelectorAll('.opts button').forEach(function(x){x.removeAttribute('aria-pressed')});document.querySelector('[data-send]').disabled=true;show(1);};
+  document.querySelector('[data-send]').onclick=function(){
+    var t,why,tags=[ans.curso,ans.motivo,ans.cuando,'Paga: '+ans.paga];
+    var plp=ans.curso==='Patrón Local de Pesca';
+    if(ans.paga==='Mi empresa'){t='Emp';why='Lo paga su empresa: se abre ficha de empresa y le llama una persona de admisiones.';}
+    else if(ans.cuando==='Solo me informo'){t='C';why='Se está informando: recibe la ficha del curso y queda en la base con aviso de próximas fechas.';}
+    else if(ans.cuando==='Este mes'&&ans.curso!=='Otro curso'){t='A';why='Curso con fecha y lo necesita ya: WhatsApp en minutos con la fecha más cercana y la plaza.';}
+    else if(plp&&ans.cuando==='En 1 a 3 meses'){t='A';why='Patrón Local de Pesca con plazo cercano: WhatsApp hoy con la próxima convocatoria y la documentación.';}
+    else{t='B';why='Curso claro pero sin urgencia o sin fecha: entra en la lista de espera del curso y recibe aviso al abrir convocatoria.';}
+    if(ans.canal&&ans.canal.indexOf('embarcado')>-1){why+=' Marcado «embarcado»: solo WhatsApp, sin llamadas, y se espera su respuesta.';tags.push('Embarcado');}
+    document.getElementById('cls').innerHTML='<div class="t"><span class="p">'+t+'</span><b>Lo que vería admisiones en el CRM</b></div>'+why+'<div class="tags">'+tags.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div>';
+    show(N+1);};
+  show(1);
+  var ms=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var cm=document.getElementById('cm'),cy=document.getElementById('cy'),cr=document.getElementById('cr');
+  cm.innerHTML='<option value="">Mes</option>'+ms.map(function(m,i){return '<option value="'+i+'">'+m+'</option>'}).join('');
+  cy.innerHTML='<option value="">Año</option>'+[2026,2027,2028,2029,2030,2031].map(function(y){return '<option>'+y+'</option>'}).join('');
+  function calc(){if(cm.value===''||cy.value===''){return;}
+    var d=new Date(+cy.value,+cm.value+1,0),now=new Date(2026,10,10),start=new Date(2026,10,30);
+    var mo=(d.getFullYear()-now.getFullYear())*12+d.getMonth()-now.getMonth();cr.className='';
+    if(d<now){cr.innerHTML='<b>Ya está caducado.</b> Escríbenos y te decimos qué curso te corresponde.';cr.className='hot';}
+    else if(d<=start){cr.innerHTML='<b>Caduca antes de la próxima fecha.</b> Escríbenos hoy y buscamos la forma de que no te quedes en tierra.';cr.className='hot';}
+    else if(mo<=6){cr.innerHTML='<b>Te toca ya.</b> La convocatoria del 30 nov y 1 dic te deja renovado con margen.';cr.className='hot';}
+    else if(mo<=12){cr.innerHTML='<b>Te queda menos de un año.</b> Reserva ahora o te apuntamos a la lista de espera de la siguiente.';}
+    else{cr.innerHTML='<b>Tienes margen.</b> Déjanos tu móvil y te avisamos unos meses antes.';}}
+  cm.onchange=cy.onchange=calc;
+})();
+</script>
+</body>
+</html>

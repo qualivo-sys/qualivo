@@ -463,7 +463,8 @@ async function mover(b) {
   if (!r.ok) throw new Error('GHL no ha aceptado el cambio (' + r.status + ').');
   const j = await r.json().catch(function () { return {}; });
   // La calidad del lead también vuelve a Meta cuando Maikel mueve la tarjeta a mano (28-sep).
-  const clave = /segunda|reuni/i.test(etapa.txt) ? 'reunion' : /oferta/i.test(etapa.txt) ? 'oferta' : /negoci/i.test(etapa.txt) ? 'seguimiento'
+  // Reunión agendada ya no manda nada (la reserva va como Schedule); Segunda reunión = celebrada con encaje.
+  const clave = /segunda/i.test(etapa.txt) ? 'celebrada' : /oferta/i.test(etapa.txt) ? 'oferta' : /negoci/i.test(etapa.txt) ? 'seguimiento'
     : /piloto/i.test(etapa.txt) ? 'piloto' : /cliente/i.test(etapa.txt) ? 'cliente' : /conversaci/i.test(etapa.txt) ? 'conversacion' : '';
   if (clave) {
     try { const ct = (await ghl('/contacts/' + encodeURIComponent(contactId))).contact; await require('./_tratos.js').calidadAMeta(ct, clave); } catch (e) { /* no bloquea */ }

@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Ventanas en Alicante · Plan Renove 150 € · HOCO (maqueta)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+<style>
+:root{--or:#fa720a;--or-dk:#d85f00;--or-tint:#fff1e6;--ink:#1f2124;--ink2:#33373d;--muted:#5d636b;--bg:#ffffff;--soft:#f4f4f2;--line:#e6e4df;--green:#2e9935;--r:14px;--font:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--font);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{margin:0;line-height:1.12;letter-spacing:-.01em}
+p{margin:0}
+.wrap{width:min(1160px,100% - 32px);margin-inline:auto}
+svg{width:1em;height:1em;flex:none}
+
+/* barras superiores */
+.maqueta{background:#111;color:#cfcfcf;font-size:12.5px;text-align:center;padding:6px 12px}
+.maqueta b{color:#fff}
+.promo{background:var(--or);color:#fff;font-weight:800;text-align:center;padding:9px 12px;font-size:15px;letter-spacing:.01em}
+.promo small{font-weight:700;opacity:.9}
+.promo .pill{display:inline-block;background:#fff;color:var(--or-dk);border-radius:99px;padding:1px 10px;margin-right:8px;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+
+/* cabecera */
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:12px;height:68px}
+.hd img{height:46px;width:auto}
+.hd-r{display:flex;align-items:center;gap:14px}
+.hd-store{font-size:13.5px;color:var(--muted);text-align:right;line-height:1.25}
+.hd-store b{display:block;color:var(--ink);font-size:14.5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;font:800 16px/1 var(--font);padding:15px 22px;cursor:pointer;text-decoration:none;transition:transform .12s ease,background .12s ease}
+.btn:active{transform:translateY(1px)}
+.btn-or{background:var(--or);color:#fff;box-shadow:0 6px 18px rgba(250,114,10,.32)}
+.btn-or:hover{background:var(--or-dk)}
+.btn-line{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+.btn-call{background:var(--ink);color:#fff;padding:12px 18px;font-size:15px}
+.btn-call:hover{background:#000}
+
+/* hero */
+.hero{position:relative;background:var(--ink);color:#fff;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url(../assets/hero.jpg) center 30%/cover no-repeat}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,26,29,.94) 0%,rgba(24,26,29,.86) 42%,rgba(24,26,29,.45) 100%)}
+.hero-in{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:52px 0 60px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:6px 14px;font-size:14px;font-weight:700}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--or);box-shadow:0 0 0 4px rgba(250,114,10,.25)}
+.hero h1{font-size:clamp(32px,4.4vw,52px);font-weight:900;margin:18px 0 16px}
+.hero h1 span{color:var(--or)}
+.hero .sub{font-size:19px;color:#e4e4e4;max-width:56ch}
+.checks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:10px}
+.checks li{display:flex;gap:10px;align-items:flex-start;font-weight:700;font-size:17px}
+.checks svg{color:var(--or);font-size:22px;margin-top:1px}
+.hero-trust{display:flex;align-items:center;gap:16px;margin-top:26px}
+.hero-trust img{height:74px;width:auto}
+.hero-trust p{font-size:14.5px;color:#d6d6d6;max-width:30ch}
+.hero-trust b{color:#fff}
+
+/* formulario */
+.form{background:#fff;color:var(--ink);border-radius:20px;padding:26px 24px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35);scroll-margin-top:90px}
+.form-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.form-top .k{font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--or-dk)}
+.form-top .paso{font-size:12.5px;font-weight:700;color:var(--muted)}
+.bar{height:6px;background:var(--soft);border-radius:9px;overflow:hidden;margin-bottom:18px}
+.bar i{display:block;height:100%;width:50%;background:var(--or);border-radius:9px;transition:width .3s ease}
+.form h2{font-size:24px;font-weight:900;margin-bottom:6px}
+.form .hint{color:var(--muted);font-size:15px;margin-bottom:16px}
+.step{display:none}
+.step.on{display:block;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.counter{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--soft);border-radius:var(--r);padding:10px}
+.counter button{width:52px;height:52px;border-radius:12px;border:2px solid var(--line);background:#fff;font:900 26px/1 var(--font);color:var(--ink);cursor:pointer}
+.counter button:hover{border-color:var(--or);color:var(--or)}
+.counter .n{text-align:center}
+.counter .n b{display:block;font-size:40px;font-weight:900;line-height:1}
+.counter .n span{font-size:13px;color:var(--muted);font-weight:700}
+.quick{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
+.quick button{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:7px 12px;font:700 14px var(--font);cursor:pointer;color:var(--ink2)}
+.quick button.sel,.quick button:hover{border-color:var(--or);color:var(--or-dk);background:var(--or-tint)}
+.ahorro{margin:16px 0 18px;border:2px dashed var(--or);background:var(--or-tint);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ahorro p{font-size:14.5px;font-weight:700;color:var(--ink2);line-height:1.3}
+.ahorro b{font-size:34px;font-weight:900;color:var(--or-dk);white-space:nowrap}
+.form .btn{width:100%;font-size:17.5px;padding:18px 20px}
+.micro{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--muted);font-weight:700}
+.micro span{display:inline-flex;align-items:center;gap:5px}
+.micro svg{color:var(--green)}
+.field{display:grid;gap:5px;margin-bottom:11px}
+.field label{font-size:14px;font-weight:800}
+.field input{font:600 16.5px var(--font);padding:14px 14px;border:1.5px solid #cfccc6;border-radius:12px;width:100%;color:var(--ink);background:#fff}
+.field input:focus{outline:3px solid rgba(250,114,10,.25);border-color:var(--or)}
+.field input.err{border-color:#c62828;background:#fff6f6}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.legal{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--muted);margin:4px 0 14px}
+.legal input{margin-top:3px;accent-color:var(--or)}
+.back{background:none;border:0;color:var(--muted);font:700 14px var(--font);cursor:pointer;margin-top:10px;width:100%}
+.resumen{display:flex;justify-content:space-between;align-items:center;background:var(--soft);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:14.5px;font-weight:700}
+.resumen b{color:var(--or-dk)}
+.ok{text-align:center;padding:6px 0}
+.ok .ico{width:64px;height:64px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;margin:0 auto 12px;font-size:34px}
+.ok h2{margin-bottom:8px}
+.ok p{color:var(--ink2);margin-bottom:10px}
+.ok .note{font-size:13px;color:var(--muted);background:var(--soft);border-radius:10px;padding:10px 12px;margin-top:12px;text-align:left}
+
+/* sellos */
+.seals{background:var(--soft);border-bottom:1px solid var(--line)}
+.seals-in{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 0;flex-wrap:wrap}
+.seals p{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.seals .logos{display:flex;align-items:center;gap:30px;flex-wrap:wrap}
+.seals img{height:34px;width:auto;filter:grayscale(1);opacity:.75;mix-blend-mode:multiply}
+
+section{padding:72px 0}
+.kicker{font-size:13px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--or-dk);margin-bottom:10px}
+.h2{font-size:clamp(28px,3.4vw,40px);font-weight:900;max-width:24ch}
+.lead{font-size:18.5px;color:var(--muted);max-width:62ch;margin-top:12px}
+
+/* dolores */
+.pains{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.pain{border:1px solid var(--line);border-radius:18px;padding:24px 22px;display:flex;flex-direction:column;gap:10px;background:#fff}
+.pain-k{font-size:12.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pain h3{font-size:21px;font-weight:900}
+.pain-d{color:var(--muted)}
+.pain-s{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:9px;font-weight:700;color:var(--ink2)}
+.pain-s svg{color:var(--or);font-size:22px}
+
+/* plan renove */
+.renove{background:var(--ink);color:#fff}
+.renove-in{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.renove .h2{color:#fff}
+.renove .lead{color:#cfd1d4}
+.renove img{border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.tabla{margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tabla div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 10px;text-align:center}
+.tabla span{display:block;font-size:13px;color:#c9c9c9;font-weight:700}
+.tabla b{font-size:24px;font-weight:900;color:var(--or)}
+.renove .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.renove .btn-line{background:transparent;color:#fff;border-color:#fff}
+.fine{font-size:12.5px;color:#a9acb0;margin-top:14px}
+
+/* pasos */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px;counter-reset:s}
+.st{position:relative;background:var(--soft);border-radius:18px;padding:22px 20px;counter-increment:s}
+.st::before{content:counter(s);display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--or);color:#fff;font-weight:900;font-size:20px;margin-bottom:14px}
+.st h3{font-size:19px;font-weight:900;margin-bottom:6px}
+.st p{color:var(--muted);font-size:16px}
+.st .tag{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:800;color:var(--green);background:#e9f6ea;border-radius:99px;padding:3px 10px}
+
+/* por qué */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.why div{border:1px solid var(--line);border-radius:16px;padding:20px}
+.why h3{font-size:18.5px;font-weight:900;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.why h3 svg{color:var(--or);font-size:22px}
+.why p{color:var(--muted);font-size:16px}
+
+/* reseñas */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+.rev{border:2px dashed #d3cfc7;border-radius:16px;padding:20px;background:#fcfbf9}
+.stars{color:#f5a400;letter-spacing:2px;font-size:18px}
+.rev p{color:var(--muted);font-style:italic;margin:8px 0 10px}
+.rev small{font-weight:800;color:var(--ink2)}
+
+/* tienda */
+.store{background:var(--soft)}
+.store-in{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:stretch}
+.store-card{background:#fff;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;border:1px solid var(--line)}
+.store-card .addr{font-size:19px;font-weight:800}
+.store-card .tel{font-size:28px;font-weight:900;color:var(--or-dk);text-decoration:none}
+.store-card ul{margin:0;padding-left:18px;color:var(--muted);display:grid;gap:4px}
+.store-card .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.map{border-radius:18px;overflow:hidden;min-height:340px;border:1px solid var(--line);background:#e9e7e2}
+.map iframe{width:100%;height:100%;min-height:340px;border:0;display:block}
+
+/* faq */
+.faq{margin-top:28px;display:grid;gap:10px;max-width:860px}
+.faq details{border:1px solid var(--line);border-radius:14px;padding:4px 20px;background:#fff}
+.faq summary{cursor:pointer;font-weight:800;font-size:18px;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--or);font-size:24px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{color:var(--muted);padding:0 0 16px}
+
+/* cierre */
+.final{background:var(--or);color:#fff;text-align:center}
+.final .h2{margin-inline:auto;max-width:22ch}
+.final p{font-size:19px;margin:14px auto 26px;max-width:52ch;color:#fff3e8}
+.final .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.final .btn-or{background:var(--ink);box-shadow:none}
+.final .btn-or:hover{background:#000}
+.final .btn-line{background:transparent;border-color:#fff;color:#fff}
+
+footer{background:#111;color:#a7a7a7;font-size:14px;padding:30px 0 100px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer img{height:36px;width:auto;margin-bottom:8px}
+
+/* barra móvil */
+.mbar{display:none}
+
+@media (max-width:959px){
+  body{font-size:16.5px}
+  .hd-store{display:none}
+  .hero-bg{background-position:center 20%}
+  .hero-bg::after{background:linear-gradient(180deg,rgba(24,26,29,.78) 0%,rgba(24,26,29,.92) 55%,rgba(24,26,29,.97) 100%)}
+  .hero-in{grid-template-columns:1fr;gap:26px;padding:30px 0 34px}
+  .hero .sub{font-size:17.5px}
+  .pains,.why,.revs{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .renove-in,.store-in{grid-template-columns:1fr}
+  .tabla{grid-template-columns:repeat(2,1fr)}
+  section{padding:52px 0}
+  .mbar{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;padding:10px 12px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -6px 20px rgba(0,0,0,.12)}
+  .mbar .btn{padding:15px 10px;font-size:15.5px}
+  .mbar{transition:transform .2s ease}
+  .mbar.off{transform:translateY(110%)}
+  .hero-trust{display:none}
+  .hero h1{margin:14px 0 12px}
+  .checks{margin-top:16px}
+}
+@media (max-width:560px){
+  .hd img{height:40px}
+  .btn-call span{display:none}
+  .btn-call{padding:12px}
+  .btn-call svg{font-size:20px}
+  .steps{grid-template-columns:1fr}
+  .row2{grid-template-columns:1fr}
+  .form{padding:22px 18px 18px}
+  .ahorro b{font-size:29px}
+  .promo{font-size:14px}
+  .hero .sub{display:none}
+  .eyebrow{font-size:12.5px}
+  .hero h1{font-size:30px}
+}
+</style>
+</head>
+<body>
+
+<div class="maqueta">Maqueta de <b>Qualivo</b> para HOCO · tienda de Alicante · el formulario no envía datos</div>
+<div class="promo"><span class="pill">Últimos días</span>Plan Renove: <u>150 € por tu vieja ventana</u> <small>· consulta condiciones</small></div>
+
+<header>
+  <div class="wrap hd">
+    <img src="../assets/logo.png" alt="HOCO · Son mis ventanas" width="260" height="100">
+    <div class="hd-r">
+      <p class="hd-store"><b>Tienda HOCO Alicante</b>C. Alfonso Guixot Guixot, 5 · 03010 Alicante</p>
+      <a class="btn btn-call" href="tel:+34865451060" data-ev="llamada_cabecera"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><span>865 451 060</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <div>
+      <span class="eyebrow"><i></i>Tienda HOCO en Alicante · Alicante, San Vicente, San Juan y Elche</span>
+      <h1>Que el sol de Alicante no convierta tu casa en un horno <span>y que no entre el ruido</span></h1>
+      <p class="sub">Cambiamos las ventanas de tu casa en Alicante y Elche en un solo día y sin obras. Te medimos gratis en casa o te lo enseñamos en la tienda de Alfonso Guixot.</p>
+      <ul class="checks">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Medición gratis en tu casa, sin compromiso</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Instalación en un solo día y sin obras</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>150 € de descuento por cada ventana vieja que cambies</li>
+      </ul>
+      <div class="hero-trust">
+        <img src="../assets/garantia-10.png" alt="Garantía HOCO 10 años" width="300" height="246">
+        <p><b>Somos fabricantes.</b> Hacemos tus ventanas en nuestra fábrica de Bocairent (Valencia) y las instala nuestro equipo.</p>
+      </div>
+    </div>
+
+    <form class="form" id="form" novalidate>
+      <div class="form-top"><span class="k">Calcula tu descuento</span><span class="paso" id="paso">Paso 1 de 2</span></div>
+      <div class="bar"><i id="barra"></i></div>
+
+      <div class="step on" data-step="1">
+        <h2>¿Cuántas ventanas te gustaría cambiar?</h2>
+        <p class="hint">Aproximado, sin compromiso. Lo afinamos en la medición.</p>
+        <div class="counter">
+          <button type="button" id="menos" aria-label="Una ventana menos">−</button>
+          <div class="n"><b id="num">3</b><span id="numtxt">ventanas</span></div>
+          <button type="button" id="mas" aria-label="Una ventana más">+</button>
+        </div>
+        <div class="quick" id="quick">
+          <button type="button" data-n="1">1 ventana</button>
+          <button type="button" data-n="3" class="sel">2-4</button>
+          <button type="button" data-n="6">5-8</button>
+          <button type="button" data-n="10">Toda la casa</button>
+        </div>
+        <div class="ahorro"><p>Tu descuento<br>Plan Renove*</p><b id="dto">450 €</b></div>
+        <button type="button" class="btn btn-or" id="sig" data-ev="paso1">Quiero mi medición gratis →</button>
+        <div class="micro"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Gratis</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Sin compromiso</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Te llama la tienda de Alicante</span></div>
+      </div>
+
+      <div class="step" data-step="2">
+        <h2>¿Dónde te llamamos?</h2>
+        <p class="hint">Te llama la tienda de Alicante para fijar el día de la medición. Nada de call centers.</p>
+        <div class="resumen"><span id="resn">3 ventanas</span><span>Descuento: <b id="resd">450 €</b></span></div>
+        <div class="field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="given-name" placeholder="Tu nombre"></div>
+        <div class="row2">
+          <div class="field"><label for="tel">Teléfono</label><input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="600 000 000"></div>
+          <div class="field"><label for="pob">Población</label><input id="pob" name="pob" autocomplete="address-level2" placeholder="Ej.: Elche"></div>
+        </div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="tu@email.com"></div>
+        <label class="legal"><input type="checkbox" id="acepto"> <span>Acepto que HOCO me contacte para la medición y la <a href="#">política de privacidad</a>.</span></label>
+        <button type="submit" class="btn btn-or">Reservar mi medición gratis</button>
+        <button type="button" class="back" id="atras">← Cambiar número de ventanas</button>
+      </div>
+
+      <div class="step" data-step="3">
+        <div class="ok">
+          <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></div>
+          <h2 id="okt">¡Hecho!</h2>
+          <p>La tienda HOCO de Alicante te llamará para fijar el día de la medición gratuita. Tienes reservado tu descuento de <b id="okd">450 €</b>*.</p>
+          <a class="btn btn-line" href="tel:+34865451060" data-ev="llamada_gracias"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg> ¿Prefieres llamar ya? 865 451 060</a>
+          <p class="note"><b>Maqueta:</b> en la versión real este contacto entra en Dynamics 365 asignado a la tienda de Alicante, con el nº de ventanas, la población y el anuncio del que viene.</p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="seals">
+  <div class="wrap seals-in">
+    <p>Calidad certificada</p>
+    <div class="logos">
+      <img src="../assets/applus.png" alt="Applus" height="34">
+      <img src="../assets/asefave.png" alt="ASEFAVE" height="34">
+      <img src="../assets/asoven.jpg" alt="ASOVEN" height="34">
+      <img src="../assets/ensatec.png" alt="Ensatec" height="34">
+      <img src="../assets/eficiencia.png" alt="Eficiencia energética" height="34">
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Ventanas en Alicante</p>
+    <h2 class="h2">Lo que nos cuentan cada semana en la tienda de Alicante</h2>
+    <div class="pains">
+<article class="pain"><p class="pain-k">¿Te suena?</p><h3>Mucho sol y mucho calor</h3><p class="pain-d">Terrazas y fachadas al sol todo el día: la casa acumula calor y el aire no da abasto.</p><p class="pain-s"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span>Vidrios y perfiles con aislamiento térmico: el calor se queda fuera.</span></p></article>
+<article class="pain"><p class="pain-k">¿Te suena?</p><h3>Ventanas que ya no cierran bien</h3><p class="pain-d">Correderas viejas que silban con el viento, dejan pasar polvo y cuestan de abrir.</p><p class="pain-s"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span>Ventanas nuevas que cierran y sellan bien, con mantenimiento mínimo.</span></p></article>
+<article class="pain"><p class="pain-k">¿Te suena?</p><h3>Ruido de la calle y del vecindario</h3><p class="pain-d">Tráfico, terrazas, verano con todo abierto. Dormir con la ventana cerrada tampoco ayuda.</p><p class="pain-s"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span>Soluciones acústicas que cortan el ruido sin renunciar a la luz.</span></p></article>
+    </div>
+  </div>
+</section>
+
+<section class="renove">
+  <div class="wrap renove-in">
+    <div>
+      <p class="kicker">Plan Renove HOCO</p>
+      <h2 class="h2">Tu ventana vieja vale 150 €</h2>
+      <p class="lead">Por cada ventana antigua que cambies por una HOCO, te descontamos 150 €. Cuantas más cambies, más ahorras.</p>
+      <div class="tabla">
+        <div><span>2 ventanas</span><b>300 €</b></div>
+        <div><span>4 ventanas</span><b>600 €</b></div>
+        <div><span>6 ventanas</span><b>900 €</b></div>
+        <div><span>8 ventanas</span><b>1.200 €</b></div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-or" href="#form" data-ev="cta_renove">Calcular mi descuento</a>
+        <a class="btn btn-line" href="tel:+34865451060" data-ev="llamada_renove"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg> 865 451 060</a>
+      </div>
+      <p class="fine">*Promoción por tiempo limitado. Consulta las condiciones en la tienda.</p>
+    </div>
+    <img src="../assets/banner-octubre.jpg" alt="Plan Renove HOCO: 150 € por tu vieja ventana" width="1120" height="332" loading="lazy">
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Cómo funciona</p>
+    <h2 class="h2">De tu ventana vieja a la nueva, sin líos</h2>
+    <div class="steps">
+      <div class="st"><h3>Nos dices cuántas</h3><p>Rellenas el formulario en 30 segundos o llamas a la tienda de Alicante.</p></div>
+      <div class="st"><h3>Te medimos en casa</h3><p>Un técnico de HOCO va a tu casa, mide y te aconseja qué ventana necesitas.</p><span class="tag">Gratis y sin compromiso</span></div>
+      <div class="st"><h3>Presupuesto cerrado</h3><p>Precio final por escrito, con tu descuento Plan Renove y opciones de financiación.</p></div>
+      <div class="st"><h3>Instalación en un día</h3><p>Nuestro equipo quita las viejas y pone las nuevas. Sin obras y sin escombros.</p><span class="tag">Sin obras</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Por qué HOCO</p>
+    <h2 class="h2">Fabricamos, instalamos y respondemos nosotros</h2>
+    <div class="why">
+      <div><h3><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Fábrica propia</h3><p>Cada ventana sale de nuestra fábrica de Bocairent. Controlamos todo el proceso, sin intermediarios.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Garantía de 10 años</h3><p>Respondemos de lo que fabricamos e instalamos, con nuestro propio servicio postventa.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Un día, sin obras</h3><p>Instalación limpia en una jornada. Sin romper paredes ni dejarte la casa patas arriba.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Aislamiento térmico</h3><p>Menos frío en invierno, menos calor en verano y menos gasto en calefacción y aire.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Aislamiento acústico</h3><p>Soluciones para cortar el ruido de la calle y descansar mejor.</p></div>
+      <div><h3><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Financiación</h3><p>Paga tus ventanas a plazos. Te lo explicamos en el presupuesto.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Clientes de Alicante</p>
+    <h2 class="h2">Lo que dicen los vecinos que ya han cambiado</h2>
+    <div class="revs">
+      <div class="rev"><div class="stars">★★★★★</div><p>[Reseña real de Google de un cliente de la tienda de Alicante. La elige HOCO.]</p><small>Nombre · barrio</small></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>[Reseña real que hable del ruido, del frío o del calor.]</p><small>Nombre · barrio</small></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>[Reseña real que hable de la instalación en un día.]</p><small>Nombre · barrio</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="store">
+  <div class="wrap store-in">
+    <div class="store-card">
+      <p class="kicker" style="margin:0">Tu tienda HOCO</p>
+      <h2 class="h2" style="font-size:32px">HOCO Alicante</h2>
+      <p class="addr">C. Alfonso Guixot Guixot, 5 · 03010 Alicante</p>
+      <a class="tel" href="tel:+34865451060" data-ev="llamada_tienda">865 451 060</a>
+      <ul>
+        <li>Ven a ver y tocar las ventanas antes de decidir</li>
+        <li>Atendemos Alicante, San Vicente, San Juan y Elche</li>
+      </ul>
+      <div class="btns">
+        <a class="btn btn-or" href="#form" data-ev="cta_tienda">Pedir medición gratis</a>
+        <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=HOCO+Calle+Alfonso+Guixot+Guixot+5+03010+Alicante" target="_blank" rel="noopener" data-ev="como_llegar">Cómo llegar</a>
+      </div>
+    </div>
+    <div class="map"><iframe title="Mapa de la tienda HOCO Alicante" loading="lazy" src="https://www.google.com/maps?q=HOCO+Calle+Alfonso+Guixot+Guixot+5+03010+Alicante&output=embed"></iframe></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Preguntas frecuentes</p>
+    <h2 class="h2">Lo que nos preguntan antes de pedir la medición</h2>
+    <div class="faq">
+      <details><summary>¿Cuánto cuesta cambiar las ventanas?</summary><p>Depende del tamaño, el número de ventanas y el tipo que elijas. Por eso medimos gratis en casa: te damos un presupuesto cerrado por escrito, ya con tu descuento Plan Renove.</p></details>
+      <details><summary>¿La medición tiene algún coste o compromiso?</summary><p>Ninguno. Vamos, medimos, te aconsejamos y te dejamos el presupuesto. Decides tú, sin presión.</p></details>
+      <details><summary>¿De verdad no hay obras?</summary><p>Sí. Instalamos en un solo día, sin romper paredes ni dejar escombros. Por la tarde ya tienes tus ventanas nuevas.</p></details>
+      <details><summary>¿Cómo funciona el descuento de 150 €?</summary><p>Por cada ventana vieja que cambies por una HOCO te descontamos 150 € en el presupuesto. Es una promoción por tiempo limitado: consulta las condiciones en la tienda.</p></details>
+      <details><summary>¿Puedo pagarlo a plazos?</summary><p>Sí, tenemos financiación. Te explicamos las opciones junto con el presupuesto.</p></details>
+      <details><summary>Ya tengo un presupuesto de otra empresa, ¿me sirve?</summary><p>Claro. Pide la medición y compáralo: somos fabricantes, sin intermediarios, y con garantía de 10 años.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 class="h2">Pide tu medición gratis y asegura tus 150 € por ventana</h2>
+    <p>Te llama la tienda de Alicante, quedamos el día que te venga bien y te dejamos el presupuesto cerrado. Sin compromiso.</p>
+    <div class="cta-row">
+      <a class="btn btn-or" href="#form" data-ev="cta_final">Calcular mi descuento</a>
+      <a class="btn btn-line" href="tel:+34865451060" data-ev="llamada_final"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg> Llamar a la tienda</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><img src="../assets/logo.png" alt="HOCO" width="260" height="100"><p>HOCO Alicante · C. Alfonso Guixot Guixot, 5 · 03010 Alicante · 865 451 060</p></div>
+    <p>Maqueta de Qualivo para HOCO · página de ejemplo, no indexada.<br>Reseñas y condiciones de la promoción, pendientes de HOCO.</p>
+  </div>
+</footer>
+
+<div class="mbar">
+  <a class="btn btn-line" href="tel:+34865451060" data-ev="llamada_barra"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg> Llamar</a>
+  <a class="btn btn-or" href="#form" data-ev="cta_barra">Medición gratis</a>
+</div>
+
+<script>
+(function(){
+  var TIENDA = "alicante", POR_VENTANA = 150, n = 3;
+  var $ = function(id){return document.getElementById(id)};
+  var eur = function(v){return v.toLocaleString("es-ES") + " €"};
+  function track(ev, extra){ /* en la versión real: dataLayer / Meta Pixel / Google Ads */
+    (window.dataLayer = window.dataLayer || []).push(Object.assign({event: ev, tienda: TIENDA, ventanas: n}, extra || {}));
+  }
+  function pinta(){
+    $("num").textContent = n;
+    $("numtxt").textContent = n === 1 ? "ventana" : "ventanas";
+    $("dto").textContent = eur(n * POR_VENTANA);
+    $("resn").textContent = n + (n === 1 ? " ventana" : " ventanas");
+    $("resd").textContent = $("okd").textContent = eur(n * POR_VENTANA);
+    [].forEach.call(document.querySelectorAll("#quick button"), function(b){
+      var v = +b.dataset.n, sel = (v === 1 && n === 1) || (v === 3 && n >= 2 && n <= 4) || (v === 6 && n >= 5 && n <= 8) || (v === 10 && n >= 9);
+      b.classList.toggle("sel", sel);
+    });
+  }
+  function ir(p){
+    [].forEach.call(document.querySelectorAll(".step"), function(s){ s.classList.toggle("on", +s.dataset.step === p) });
+    $("paso").textContent = p === 3 ? "Listo" : "Paso " + p + " de 2";
+    $("barra").style.width = p === 1 ? "50%" : p === 2 ? "85%" : "100%";
+    if (p === 2) setTimeout(function(){ $("nombre").focus({preventScroll:true}) }, 60);
+  }
+  $("menos").onclick = function(){ if (n > 1) { n--; pinta(); } };
+  $("mas").onclick = function(){ if (n < 30) { n++; pinta(); } };
+  $("quick").onclick = function(e){ var b = e.target.closest("button"); if (b) { n = +b.dataset.n; pinta(); } };
+  $("sig").onclick = function(){ track("paso1_ventanas"); ir(2); };
+  $("atras").onclick = function(){ ir(1); };
+  $("form").onsubmit = function(e){
+    e.preventDefault();
+    var ok = true;
+    var nombre = $("nombre"), tel = $("tel"), pob = $("pob"), email = $("email");
+    [nombre, pob].forEach(function(i){ var bad = i.value.trim().length < 2; i.classList.toggle("err", bad); if (bad) ok = false; });
+    var t = tel.value.replace(/\D/g, ""); var badT = !/^(34)?[6789]\d{8}$/.test(t); tel.classList.toggle("err", badT); if (badT) ok = false;
+    var badE = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim()); email.classList.toggle("err", badE); if (badE) ok = false;
+    if (!$("acepto").checked) { ok = false; $("acepto").parentNode.style.color = "#c62828"; } else { $("acepto").parentNode.style.color = ""; }
+    if (!ok) return;
+    $("okt").textContent = "¡Hecho, " + nombre.value.trim().split(" ")[0] + "!";
+    track("lead", {poblacion: pob.value.trim()});
+    ir(3);
+    $("form").scrollIntoView({behavior: "smooth", block: "start"});
+  };
+  document.addEventListener("click", function(e){ var a = e.target.closest("[data-ev]"); if (a && a.id !== "sig") track(a.dataset.ev); });
+  if ("IntersectionObserver" in window) {
+    var mbar = document.querySelector(".mbar");
+    new IntersectionObserver(function(es){ mbar.classList.toggle("off", es[0].isIntersecting); }, {threshold: .25}).observe($("form"));
+  }
+  pinta();
+})();
+</script>
+</body>
+</html>

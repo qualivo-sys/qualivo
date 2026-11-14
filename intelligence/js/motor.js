@@ -239,7 +239,9 @@
   // ---------------------------------------------------------------------------
   const ESTADOS = {
     vigilando: 'Vigilando', trabajando: 'Trabajando', esperando: 'Esperando respuesta',
-    escalado: 'Escalado', humano: 'Requiere persona', cerrado: 'Cerrado'
+    escalado: 'Escalado', humano: 'Requiere persona', cerrado: 'Cerrado',
+    // Textos neutros para historias de demo grabadas (sin sugerir automatismos)
+    encurso: 'En curso', programado: 'Programado', matriculada: 'Matriculada'
   };
 
   function nbaGenerica(c, k, x, T) {
@@ -373,12 +375,12 @@
       out.push({ tipo: tipo, t: t, que: que, importa: importa, accion: accionTomada(x.nba, T), humano: humano, id: c.id + ':' + tipo });
     };
     if (c.fin !== 'perdido') {
-      if (k.creado < 180 && x.fit >= 55 && !c.fin) add('nueva', c.tCreado, 'Pide información de ' + c.prod + ' desde ' + ((cfg.campana(c.orig) || {}).canal || 'la web'), 'Encaje ' + x.fit + '. Si se contesta en el minuto uno, la probabilidad de hablar con él se multiplica.');
+      if (k.creado < 180 && x.fit >= 55 && !c.fin) add('nueva', c.tCreado, 'Pide información de ' + c.prod + ' desde ' + ((cfg.campana(c.orig) || {}).canal || 'la web'), 'Encaje ' + x.fit + '. ' + (cfg.sinAgentes ? 'Si se le llama hoy, la probabilidad de hablar con él se multiplica.' : 'Si se contesta en el minuto uno, la probabilidad de hablar con él se multiplica.'));
       if (x.int >= 75 && !c.fin) add('intencion', c.tAct, x.intM.filter(function (m) { return m.pts > 0; }).slice(0, 2).map(function (m) { return m.txt.charAt(0).toUpperCase() + m.txt.slice(1); }).join(' · '), 'Intención ' + x.int + ' con encaje ' + x.fit + '. Es de los ' + T.contactos + ' que ' + T.convierten + ' si alguien les atiende ahora.');
       if (contesto(c) > 0 && k.toque > 2880 && !c.fin && !c.s.luego && !c.s.tProp && x.fit >= 40) add('sinseg', c.tToque, duracion(k.toque) + ' sin que nadie le escriba después de contestar', 'Ya contestó y mostró interés. Cada día sin seguimiento baja la probabilidad de ' + T.venta + '.');
       if (c.s.tProp != null && k.toque > 2880 && !c.fin) add('propuesta', c.tToque, T.Propuesta + ' de ' + euros(c.valor) + (c.s.propVista ? ' vista ' + c.s.propVista + (c.s.propVista === 1 ? ' vez' : ' veces') : ' sin abrir') + ', sin respuesta', 'Es dinero casi ganado: ya se hizo el trabajo de preparar ' + T.propuesta + '.');
       if (c.s.noshow || (c.s.tCita != null && !c.s.citaOk && k.cita > 0 && k.cita < 2880)) add('noshow', c.s.noshow ? c.tAct : c.tAct, c.s.noshow ? 'No se presentó a ' + T.laCita : T.Cita + ' ' + dentroDe(k.cita) + ' sin confirmar', c.s.noshow ? 'Tenía interés suficiente para reservar. Se recupera con un mensaje, no con una llamada fría.' : 'Las citas sin confirmar son las que más fallan. El recordatorio del mismo día lo evita.');
-      if (c.s.luego && !c.fin) add('reactivar', c.tAct, 'Dijo que ' + (c.s.luegoTxt || 'lo retomaría más adelante') + ' (' + c.s.luego + ')', 'No es un no. El sistema le vuelve a escribir en el momento que él mismo dijo.');
+      if (c.s.luego && !c.fin) add('reactivar', c.tAct, 'Dijo que ' + (c.s.luegoTxt || 'lo retomaría más adelante') + ' (' + c.s.luego + ')', (cfg.sinAgentes ? 'No es un no. Te sale en la lista para llamarle en el momento que él mismo dijo.' : 'No es un no. El sistema le vuelve a escribir en el momento que él mismo dijo.'));
       if (c.fin === 'ganado' && x.riesgo >= 45) add('baja', c.tAct, x.riesgoM.slice(0, 2).map(function (m) { return m.txt; }).join(' · '), 'Perder a ' + T.unCliente + ' cuesta más que captar uno nuevo. Se detecta antes de que avise.');
       if (c.s.revision) add('revision', c.tAct, c.s.revisionTxt || 'Revisión pendiente', 'Quien ya confía en vosotros vuelve si se lo recuerdan en el momento justo.');
       if (c.s.exp) add('expansion', c.tAct, c.s.expTxt || 'Señales de que necesita más', 'Crecer con quien ya confía en vosotros es la venta más barata.');
@@ -404,7 +406,7 @@
       ev.push({ t: t0, tipo: 'form', texto: 'Formulario enviado · ' + c.prod });
     }
     c.conv.forEach(function (m) {
-      const quien = m.de === 'c' ? c.n.split(' ')[0] : m.de === 'a' ? 'Agente' : m.de === 'v' ? (T.agenteVoz || 'Agente de voz') : 'Equipo';
+      const quien = m.de === 'c' ? c.n.split(' ')[0] : m.de === 'a' ? (window.QV && QV.estado && QV.estado.sinTecno ? 'Automático' : 'Agente') : m.de === 'v' ? (T.agenteVoz || 'Agente de voz') : 'Equipo';
       const tipo = m.de === 'c' ? 'respuesta' : 'sistema';
       const canal = m.canal === 'wa' ? 'WhatsApp' : m.canal === 'email' ? 'Correo' : m.canal === 'voz' ? 'Llamada' : m.canal;
       ev.push({ t: m.t, tipo: tipo, texto: canal + (m.de === 'c' ? ' recibido de ' + quien : ' enviado · ' + quien), detalle: m.texto });
@@ -439,13 +441,20 @@
     const rie = aplicar((rg.riesgo || []).concat(rg.soloPropiasRiesgo ? [] : R.riesgo), c, k, T, 4);
     const x = { fit: fit.v, comp: comp.v, int: int.v, riesgo: rie.v, fitM: fit.motivos, compM: comp.motivos, intM: int.motivos, riesgoM: rie.motivos, k: k };
     if (c.fin === 'ganado' && cfg.clienteSinIntencion) { x.int = Math.min(x.int, 40); }
-    x.prio = prioridad(x, c);
+    // Historias de demo grabadas: cada paso puede fijar encaje, prioridad y siguiente acción (c.forzar).
+    const F = c.forzar || null;
+    if (F && F.fit != null) x.fit = F.fit;
+    if (F && F.int != null) x.int = F.int;
+    if (F && F.riesgo != null) x.riesgo = F.riesgo;
+    x.prio = prioridad(x, c); // calcula también x.oportunidad
+    if (F && F.prio) x.prio = F.prio;
     x.prioN = PRIO[x.prio].n;
-    x.nba = (cfg.nba && cfg.nba(c, k, x, T, QV.motor)) || nbaGenerica(c, k, x, T);
-    x.porque = porque(x, c, T);
+    x.nba = (F && F.nba) ? Object.assign({ id: 'forzada', tipo: 'humano', estado: 'encurso', por: '' }, F.nba) : (cfg.nba && cfg.nba(c, k, x, T, QV.motor)) || nbaGenerica(c, k, x, T);
+    x.porque = (F && F.porque) || porque(x, c, T);
     x.senales = senales(c, k, x, T, cfg);
     x.atencion = (x.prio === 'urgente' || x.prio === 'alta') && ['nada', 'asignado', 'cerrar', 'esperar'].indexOf(x.nba.id) < 0;
-    x.orden = x.prioN * 1000 + x.oportunidad + x.riesgo * 0.2;
+    x.orden = x.prioN * 1000 + (x.oportunidad || 0) + x.riesgo * 0.2; // los cerrados no tienen oportunidad (antes daba NaN y desordenaba la lista)
+    if (F && F.arriba) x.orden += 100000; // la historia grabada va la primera de la lista
     return x;
   }
 

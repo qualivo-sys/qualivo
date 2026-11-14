@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conversiones offline en Meta: cómo decirle a la campaña qué contactos acabaron comprando · Qualivo</title>
+<meta name="description" content="Meta optimiza hacia lo que le cuentas. Cómo mandarle desde el CRM qué contactos encajaron y cuáles compraron, qué evento va en cada etapa y el error que corregimos en el nuestro.">
+<link rel="canonical" href="https://qualivo.io/blog/conversiones-offline-meta/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://qualivo.io/blog/conversiones-offline-meta/">
+<meta property="og:site_name" content="Qualivo">
+<meta property="og:title" content="Conversiones offline en Meta: cómo decirle a la campaña qué contactos acabaron comprando">
+<meta property="og:description" content="Una reserva no es una reunión, y una reunión no es una venta. Qué evento mandamos a Meta en cada etapa del CRM y por qué cambiamos el nuestro el 19 de octubre.">
+<meta property="og:image" content="https://qualivo.io/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v=7">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Conversiones offline en Meta: cómo decirle a la campaña qué contactos acabaron comprando",
+      "description": "Meta optimiza hacia lo que le cuentas. Cómo mandarle desde el CRM qué contactos encajaron y cuáles compraron, qué evento va en cada etapa y el error que corregimos en el nuestro.",
+      "url": "https://qualivo.io/blog/conversiones-offline-meta/",
+      "datePublished": "2026-10-20",
+      "dateModified": "2026-10-20",
+      "inLanguage": "es",
+      "image": "https://qualivo.io/assets/img/og-image.png",
+      "author": {
+        "@type": "Person",
+        "name": "Maikel Echevarría",
+        "url": "https://qualivo.io/#maikel"
+      },
+      "publisher": {
+        "@id": "https://qualivo.io/#organizacion"
+      },
+      "about": [
+        "conversiones offline",
+        "API de conversiones",
+        "Meta Ads",
+        "calidad de leads",
+        "CRM"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué son las conversiones offline en Meta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lo que pasa con un contacto fuera del anuncio y de la web: la conversación, la reunión, la venta. Se le manda a Meta desde el CRM para que la campaña aprenda qué contactos acaban comprando."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué evento se manda cuando un lead encaja?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nosotros mandamos «Qualified» solo cuando la reunión se ha celebrado y el contacto encaja. La reserva va aparte, como «Schedule». Una reserva no es una reunión."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hay que mandar también los que no encajan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. «Disqualified» le dice a Meta a quién no traer, y eso vale tanto como saber a quién sí."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Funciona con leads de una landing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El aviso de cada etapa con el id del lead solo funciona con el formulario de Meta, porque ese id lo pone Meta. Con la landing se pueden mandar eventos como la reserva con el correo y el teléfono cifrados, para que Meta los asocie."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Qualivo",
+          "item": "https://qualivo.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://qualivo.io/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Conversiones offline en Meta",
+          "item": "https://qualivo.io/blog/conversiones-offline-meta/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://qualivo.io/#organizacion",
+  "name": "Qualivo",
+  "url": "https://qualivo.io/",
+  "logo": "https://qualivo.io/assets/img/qualivo-logo.png",
+  "description": "Qualivo es una consultora de growth B2B con sede en España, fundada por Maikel Echevarría, que diagnostica sistemas de captación y ventas: encuentra dónde se pierden oportunidades y dinero, prioriza por impacto y construye sistemas que se pueden medir.",
+  "areaServed": "ES",
+  "founder": { "@type": "Person", "@id": "https://qualivo.io/#maikel", "name": "Maikel Echevarría", "url": "https://qualivo.io/sobre/", "sameAs": ["https://maikelechevarria.com"] },
+  "sameAs": ["https://maikelechevarria.com"]
+}
+</script>
+</head>
+<body>
+<div style="color:#101319; background:#FFFFFF; min-height:100vh">
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/img/qualivo-logo.png" alt="Qualivo">
+        <span class="brand-tagline">Agentes de IA para tu sistema comercial</span>
+      </a>
+      <nav class="site-nav">
+        <a href="/servicios/" class="nav-link">Servicios</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/diagnostico/?utm_source=blog&amp;utm_medium=organic&amp;utm_campaign=articulo&amp;utm_content=conversiones-offline-meta" class="btn-dark btn-nav">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="post-main">
+    <p class="cs-eyebrow">Métricas</p>
+    <h1>Conversiones offline en Meta: cómo decirle a la campaña qué contactos acabaron comprando.</h1>
+    <p style="font-size:14.5px; color:#7A7C82; margin:-20px 0 24px">Parte de la guía sobre <a href="/blog/captacion-de-leads/" style="font-weight:700">captación de leads</a>.</p>
+
+    <p class="post-lede">Meta optimiza hacia lo que le cuentas. <strong>Si solo le cuentas que alguien dejó sus datos, te trae más gente que deja datos.</strong> Si le cuentas quién encajó y quién compró, puede buscar más gente parecida a esa.</p>
+
+    <p>A eso se le llama conversiones offline: lo que pasa con un contacto después del anuncio, en tu CRM, devuelto a Meta. Aquí va qué mandamos nosotros en cada etapa, el error que corregimos el 19 de octubre y cómo montarlo.</p>
+
+    <div class="post-resumen">
+      <p class="rl">En 30 segundos</p>
+      <ul>
+        <li>Cada vez que un contacto avanza en el CRM, se le puede decir a Meta: habló con nosotros, encaja, compró o no encaja.</li>
+        <li>Hasta el 19 de octubre, nuestro sistema le decía «cualificado» a Meta cuando el contacto reservaba. Una reserva no es una reunión. Ahora «cualificado» es reunión celebrada y con encaje.</li>
+        <li>Lo que más importa: que cada evento signifique una sola cosa, que se mande también el «no» y que compruebes que llega.</li>
+      </ul>
+    </div>
+
+    <h2>Qué le mandamos a Meta en cada etapa</h2>
+    <p>Con los contactos que entran por el formulario de Meta, el CRM guarda el id que Meta le puso al lead. Con ese id, cada etapa vuelve a Meta como un evento. La reserva va aparte, con el correo y el teléfono cifrados en vez del id:</p>
+    <div class="post-tabla-scroll">
+    <table class="post-tabla">
+      <thead><tr><th>Lo que pasa en el CRM</th><th>Evento a Meta</th></tr></thead>
+      <tbody>
+        <tr><td>Contesta y empieza la conversación</td><td>Contacted</td></tr>
+        <tr><td>Reserva una reunión</td><td>Schedule</td></tr>
+        <tr><td>La reunión se celebra y encaja (pasa a segunda reunión, oferta o negociación)</td><td>Qualified</td></tr>
+        <tr><td>Empieza un piloto o se hace cliente</td><td>Converted</td></tr>
+        <tr><td>No encaja</td><td>Disqualified</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Cada evento sale una sola vez por contacto. Meta solo descarta duplicados durante 48 horas, así que el CRM marca la ficha cuando ya lo ha mandado.</p>
+
+    <div class="post-destacado"><p>Una reserva no es una reunión. Y una reunión no es una venta.</p></div>
+
+    <h2>El error que corregimos el 19 de octubre</h2>
+    <p>Hasta ese día, nuestro sistema mandaba «Qualified» en cuanto el contacto reservaba. En el píxel se habían juntado 28 «Qualified» que en realidad eran reservas. Y una reserva no dice si la reunión se celebró ni si el contacto encajaba.</p>
+    <p>Para Meta, todos eran contactos buenos. Así que aprendía a traer gente que reserva, no gente que compra.</p>
+    <p>Desde el 19 de octubre, la reserva va como «Schedule» y «Qualified» solo sale cuando la reunión se ha celebrado y el trato avanza, o cuando Maikel marca en la ficha que encaja. Y como muchas etapas se mueven a mano en el CRM, el sistema repasa cada mañana los tratos y manda lo que falte.</p>
+
+    <h2>Lo que aprendimos antes: comprobar que llega</h2>
+    <p>El 28 de septiembre descubrimos que en diez días a Meta le habían llegado dos «Contacted» y ningún «Qualified». El envío existía, pero se cortaba antes de terminar. Nadie lo había visto porque nadie miraba el otro lado.</p>
+
+    <h2>Cómo montarlo en tu CRM</h2>
+
+    <h2><span class="pnum">1</span>Guarda el id del lead de Meta en la ficha</h2>
+    <p>Sin él, Meta no sabe de qué contacto le hablas. Con los contactos de una landing no hay id: ahí se mandan eventos como la reserva con el correo y el teléfono cifrados.</p>
+
+    <h2><span class="pnum">2</span>Decide qué etapa es cada evento, y escríbelo</h2>
+    <p>Que «cualificado» signifique una sola cosa para todo el equipo. Nosotros lo atamos a la reunión celebrada con encaje, no a la reserva.</p>
+
+    <h2><span class="pnum">3</span>Manda también el «no»</h2>
+    <p>«Disqualified» le enseña a Meta a quién no traer. Es tan útil como saber a quién sí.</p>
+
+    <h2><span class="pnum">4</span>Una sola vez por evento</h2>
+    <p>Marca la ficha cuando el evento ya ha salido. Si la etapa vuelve atrás y adelante, que no se mande dos veces.</p>
+
+    <h2><span class="pnum">5</span>Barre lo que se mueve a mano</h2>
+    <p>Si tu equipo mueve tratos a mano, un repaso diario manda lo que el CRM no avisó.</p>
+
+    <h2><span class="pnum">6</span>Comprueba que llega</h2>
+    <p>Abre el administrador de eventos de Meta la primera semana y cuenta. Si tu CRM dice diez reuniones con encaje y Meta ve dos, algo se corta por el camino.</p>
+
+    <div class="post-regla"><span class="ico">Regla</span><p>Ningún evento se llama «cualificado» si no ha habido una conversación de verdad. Y ningún envío se da por bueno sin mirarlo desde el lado de Meta.</p></div>
+
+    <h2>Lo que todavía no sabemos</h2>
+    <p>El cambio es del 19 de octubre. Si con esto Meta nos trae más contactos que encajan, lo contaremos cuando haya datos para decirlo. Cómo decidimos quién encaja antes de la reunión está en <a href="/blog/lead-scoring/">lead scoring con dos notas</a>, y lo que cuesta cada paso, en <a href="/blog/coste-por-lead/">coste por lead</a>.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <details class="faq-item"><summary>¿Qué son las conversiones offline en Meta?</summary><p>Lo que pasa con un contacto fuera del anuncio y de la web: la conversación, la reunión, la venta. Se le manda a Meta desde el CRM para que la campaña aprenda qué contactos acaban comprando.</p></details>
+    <details class="faq-item"><summary>¿Qué evento se manda cuando un lead encaja?</summary><p>Nosotros mandamos «Qualified» solo cuando la reunión se ha celebrado y el contacto encaja. La reserva va aparte, como «Schedule». Una reserva no es una reunión.</p></details>
+    <details class="faq-item"><summary>¿Hay que mandar también los que no encajan?</summary><p>Sí. «Disqualified» le dice a Meta a quién no traer, y eso vale tanto como saber a quién sí.</p></details>
+    <details class="faq-item"><summary>¿Funciona con leads de una landing?</summary><p>El aviso de cada etapa con el id del lead solo funciona con el formulario de Meta, porque ese id lo pone Meta. Con la landing se pueden mandar eventos como la reserva con el correo y el teléfono cifrados, para que Meta los asocie.</p></details>
+
+    <div class="post-cta">
+      <p class="titulo">¿Sabe tu campaña qué contactos te compraron?</p>
+      <p class="sub">30 minutos con tu CRM y tu cuenta de anuncios delante. Salimos con qué le estás contando a Meta y qué le falta.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:12px">
+        <a href="/diagnostico/?utm_source=blog&amp;utm_medium=organic&amp;utm_campaign=articulo&amp;utm_content=conversiones-offline-meta" class="btn-dark btn-nav" style="background:#27BDB1; color:#04231F">Pedir el diagnóstico</a>
+      </div>
+    </div>
+
+    <p style="font-size:14.5px; color:#7A7C82; margin:28px 0 6px; font-weight:700">Sigue leyendo</p>
+    <p style="font-size:15px; line-height:1.9; margin:0 0 8px">
+      <a href="/blog/lead-scoring/">Lead scoring: cómo puntuar tus leads con dos notas</a><br>
+      <a href="/blog/cualificar-leads/">Cualificar leads: por qué el formulario no basta</a><br>
+      <a href="/blog/meta-ads/">Meta Ads: qué es y cómo funciona la publicidad en Facebook e Instagram</a>
+    </p>
+
+    <div class="post-autor">
+      <img loading="lazy" decoding="async" src="/assets/img/maikel-echevarria.jpg" alt="Maikel Echevarría">
+      <div>
+        <p class="n">Maikel Echevarría</p>
+        <p class="r">Fundador de Qualivo. Construye y diagnostica sistemas de captación y ventas para empresas de formación, servicios y B2B.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background:#08090C; border-top:1px solid rgba(255,255,255,.1); color:#fff">
+    <div class="container" style="padding-top:28px; padding-bottom:28px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center">
+      <img loading="lazy" decoding="async" src="/assets/img/qualivo-logo-blanco.png" alt="Qualivo" style="height:20px; width:auto; display:block">
+      <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:center">
+        <a href="/blog/" class="footer-legal">Blog</a>
+        <a href="/aviso-legal/" class="footer-legal">Aviso legal</a>
+        <a href="/privacidad/" class="footer-legal">Privacidad</a>
+        <a href="/cookies/" class="footer-legal">Cookies</a>
+        <p style="margin:0; font-size:13px; color:#5E7DA0">© 2026 Qualivo · España</p>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="/assets/consent.js?v=1"></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

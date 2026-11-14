@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Qualivo × Institut Gestalt · presentación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+/* Presentación en directo (9-nov): pocas palabras, lo explica Maikel. Flechas del teclado para pasar de bloque. */
+:root{--v1:#8E2DE2;--v2:#4A00E0;--v:#720EEC;--vd:#2A0F5C;--ink:#17122B;--mut:#5C5670;--bg:#FCFBFE;--soft:#F3EDFF;--line:#E7DEFA;--amb:#FFBA00;--ok:#14845B;
+--grad:linear-gradient(135deg,#8E2DE2 0%,#4A00E0 100%);--ser:"Zilla Slab",Georgia,serif;--sans:"Montserrat",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:18px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.top{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;gap:14px;padding:12px max(20px,env(safe-area-inset-right,0px)) 12px max(20px,env(safe-area-inset-left,0px));background:rgba(42,15,92,.9);backdrop-filter:blur(10px);color:#fff}
+.top .b{display:flex;align-items:center;gap:10px;font-weight:700;margin-right:auto}
+.top .b img{height:26px}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dots a{color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;font-weight:600;padding:5px 10px;border-radius:99px}
+.dots a.on{background:#fff;color:var(--vd)}
+.s{min-height:100vh;padding:96px max(20px,env(safe-area-inset-right,0px)) 56px max(20px,env(safe-area-inset-left,0px));display:flex;align-items:center}
+.in{max-width:1180px;margin:0 auto;width:100%}
+.n{font:600 14px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--v);margin-bottom:14px}
+h1,h2{font-family:var(--ser);font-weight:700;letter-spacing:-.01em;line-height:1.05;text-wrap:balance}
+h2{font-size:clamp(34px,5vw,64px);margin-bottom:28px}
+.big{font-size:clamp(20px,2vw,24px);color:var(--mut);max-width:42ch}
+/* portada */
+.hero{background:linear-gradient(120deg,rgba(74,0,224,.92),rgba(142,45,226,.78)),url(../assets/brand/home.jpg) center/cover;color:#fff}
+.hero h1{font-size:clamp(44px,7vw,96px);max-width:15ch}
+.hero .x{display:flex;align-items:center;gap:16px;font-weight:700;font-size:22px;margin-bottom:34px}
+.hero .x img{height:44px}
+.hero p{font-size:clamp(20px,2.2vw,26px);opacity:.92;margin-top:22px;max-width:38ch}
+/* qué hacemos */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:s}
+.steps div{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 18px;box-shadow:0 14px 34px -24px rgba(74,0,224,.5);position:relative}
+.steps div::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--grad);color:#fff;font:700 18px var(--sans);margin-bottom:14px}
+.steps b{display:block;font-family:var(--ser);font-size:23px;line-height:1.15}
+/* perfil */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.box{border-radius:24px;padding:30px;background:#fff;border:1px solid var(--line);box-shadow:0 18px 40px -28px rgba(74,0,224,.55)}
+.box h3{font-family:var(--ser);font-size:30px;margin-bottom:16px}
+.box ul{list-style:none;padding:0;display:grid;gap:14px;font-size:20px}
+.box li{display:flex;gap:12px;align-items:flex-start}
+.box li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;margin-top:9px;background:var(--v)}
+.box.no{background:#FFFBEF;border-color:#F6E3A6}.box.no li::before{background:var(--amb)}
+.ok{border-top:6px solid var(--v)}
+.chip{display:inline-block;font:700 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:99px;background:var(--soft);color:var(--v);margin-left:10px;vertical-align:middle}
+/* anuncios */
+.ads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.ad{background:#fff;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 22px 50px -30px rgba(74,0,224,.6);display:flex;flex-direction:column}
+.ad .ph{position:relative;aspect-ratio:4/5;background:var(--vd) center/cover}
+.ad .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,15,92,0) 35%,rgba(42,15,92,.92) 100%)}
+.ad .ph p{position:absolute;left:18px;right:18px;bottom:46px;z-index:1;color:#fff;font:700 clamp(19px,1.7vw,24px)/1.2 var(--ser)}
+.ad .ph img.lg{position:absolute;right:14px;bottom:12px;height:22px;z-index:1;width:auto}
+.ad .ph .tag{position:absolute;left:14px;top:14px;z-index:1;background:#fff;color:var(--vd);font:700 12px var(--sans);padding:6px 10px;border-radius:99px}
+.ad .tx{padding:18px 20px 22px;display:grid;gap:6px}
+.ad .tx small{font:700 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--v)}
+.ad .tx span{font-size:16px;color:var(--mut)}
+/* formulario */
+.form{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:40px;align-items:center}
+.phone{background:#fff;border-radius:34px;border:10px solid #1C1430;box-shadow:0 30px 60px -30px rgba(23,18,43,.6);overflow:hidden}
+.phone .hd{background:var(--grad);color:#fff;padding:18px 20px;font-weight:600;font-size:16px}
+.phone .bd{padding:18px 20px 22px;display:grid;gap:16px}
+.q span{display:block;font-weight:700;font-size:15px;margin-bottom:8px}
+.q em{display:inline-block;font-style:normal;font-size:13.5px;border:1px solid var(--line);border-radius:99px;padding:6px 11px;margin:0 6px 6px 0}
+.q em.on{background:var(--soft);border-color:var(--v);color:var(--v);font-weight:700}
+.send{background:var(--grad);color:#fff;text-align:center;border-radius:14px;padding:12px;font-weight:700}
+.rules{display:grid;gap:14px}
+.rules div{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 22px;font-size:19px}
+.rules b{font-family:var(--ser);font-size:22px;min-width:7.5em;color:var(--v)}
+/* landing */
+.shot{border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -36px rgba(74,0,224,.7)}
+.bar{background:#EDE7F8;padding:10px 14px;display:flex;gap:7px}.bar i{width:11px;height:11px;border-radius:50%;background:#C9BEE6}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;border-radius:99px;padding:15px 26px;margin-top:26px;font-size:17px;box-shadow:0 14px 30px -14px rgba(74,0,224,.8)}
+.btn.alt{background:#fff;color:var(--v);border:1px solid var(--line);box-shadow:none;margin-left:10px}
+/* whatsapp */
+.wa{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:40px;align-items:center}
+.chat{background:#EFE7DC;border-radius:34px;border:10px solid #1C1430;padding:18px 14px;display:grid;gap:10px;box-shadow:0 30px 60px -30px rgba(23,18,43,.6)}
+.chat .who{background:#fff;border-radius:14px;padding:8px 12px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px}
+.chat .who img{height:20px}
+.m{max-width:88%;background:#fff;border-radius:14px 14px 14px 4px;padding:10px 12px;font-size:14.5px;line-height:1.45;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.m.me{justify-self:end;background:#DCF8C6;border-radius:14px 14px 4px 14px}
+.m small{display:block;color:#7A7A7A;font-size:11px;margin-top:4px;text-align:right}
+.seq{display:grid;gap:12px;position:relative}
+.seq div{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 20px;font-size:18px}
+.seq b{font:700 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--grad);border-radius:99px;padding:7px 12px;text-align:center}
+.seq .h{background:#FFF8E1;border-color:#F6E3A6}.seq .h b{background:var(--amb);color:#3A2B00}
+/* intelligence */
+.intel{background:linear-gradient(180deg,#F3EDFF,#FCFBFE)}
+.intel .grid2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:30px;align-items:center}
+.intel ul{list-style:none;padding:0;display:grid;gap:14px;font-size:20px}
+.intel li b{color:var(--v)}
+.fin{background:var(--grad);color:#fff;text-align:left}
+.fin h2{color:#fff}
+.fin ol{font-size:clamp(20px,2.2vw,26px);display:grid;gap:14px;padding-left:28px}
+.ej{display:inline-block;font:700 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;background:#FFF3C4;color:#7A5600;border-radius:6px;padding:3px 7px;vertical-align:middle}
+.rv{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+.js .rv{opacity:0;transform:translateY(18px)}.js .rv.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}}
+@media (max-width:980px){.steps{grid-template-columns:1fr 1fr}.two,.form,.wa,.intel .grid2{grid-template-columns:1fr}.ads{grid-template-columns:1fr}.dots{display:none}.seq div{grid-template-columns:1fr}.btn.alt{margin-left:0}}
+
+/* anuncios detallados */
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:26px;align-items:center}
+.vs .arrow{font:700 46px var(--ser);color:var(--v)}
+.col h3{font-family:var(--ser);font-size:28px;margin-bottom:12px}
+.col.hoy h3{color:#8A8399}
+.pts{list-style:none;padding:0;display:grid;gap:8px;margin-top:14px;font-size:17px}
+.pts li{display:flex;gap:10px}.pts li::before{content:"✕";color:#C0392B;font-weight:700}
+.col.prop .pts li::before{content:"✓";color:var(--ok)}
+.ig{background:#fff;border-radius:18px;border:1px solid #E4E0EC;box-shadow:0 26px 60px -34px rgba(23,18,43,.55);overflow:hidden;max-width:400px;width:100%}
+.ig .h{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:14px}
+.ig .h .av{width:34px;height:34px;border-radius:50%;background:#fff url(../assets/brand/logo-color.png) center/80% no-repeat;border:2px solid #E9DDFF;flex:none}
+.ig .h b{display:block;font-size:14px}.ig .h small{color:#8A8399;font-size:12px}.ig .h .dots3{margin-left:auto;color:#8A8399;font-weight:700}
+.ig .cr{position:relative;aspect-ratio:4/5;background:var(--vd) center/cover}
+.ig .cr::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,15,92,0) 30%,rgba(42,15,92,.9) 100%)}
+.ig .cr .hk{position:absolute;left:18px;right:18px;bottom:44px;z-index:1;color:#fff;font:700 24px/1.18 var(--ser)}
+.ig .cr .hk em{font-style:normal;color:var(--amb)}
+.ig .cr .lg{position:absolute;right:14px;bottom:14px;height:22px;width:auto;z-index:1}
+.ig .cr .play{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.28);backdrop-filter:blur(4px);z-index:1;display:grid;place-items:center;color:#fff;font-size:22px}
+.ig .cr .flat{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;z-index:1;color:#fff;font:700 30px/1.15 var(--ser)}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:#F6F5F9;color:#0A66C2;font-weight:700;font-size:14.5px;border-bottom:1px solid #EEE}
+.ig .cap{padding:10px 14px 14px;font-size:13.5px;color:#262626;line-height:1.45}
+.ig .cap b{margin-right:4px}.ig .cap span{color:#8A8399}
+.hyps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.hyp{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line,#E7E1F2);border-radius:20px;padding:24px;min-width:0}.hyp span{display:block;font:700 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--v);margin-bottom:10px}.hyp b{font:700 22px/1.2 var(--ser)}.kv a{font-weight:700;color:var(--v);white-space:nowrap}@media (max-width:980px){.hyps{grid-template-columns:1fr}}
+.hyp small{display:block;margin-top:10px;font-size:14.5px;color:var(--mut);line-height:1.4}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:26px;font-size:14px;font-weight:600}.flow span{background:#fff;border:1px solid var(--line);border-radius:99px;padding:7px 14px}.flow i{font-style:normal;color:var(--v)}
+h2.hp{font-size:clamp(28px,3.4vw,44px);margin-bottom:22px}
+.perf{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:26px}
+.perf>div{padding:16px 22px 16px 0;min-width:0}.perf>div+div{padding-left:22px;border-left:1px solid var(--line)}
+.perf b{display:block;font:700 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--v);margin-bottom:8px}
+.perf p,.perf li{font-size:15.5px;line-height:1.45}.perf ul{padding-left:18px;display:grid;gap:4px}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+.adf{margin:0;min-width:0}.adf figcaption{font:700 11.5px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--v);margin:0 2px 10px}
+.igf{background:#fff;border:1px solid #E6E1EE;border-radius:16px;overflow:hidden;box-shadow:0 26px 50px -34px rgba(42,15,92,.55)}
+.ih{display:flex;align-items:center;gap:9px;padding:9px 11px}.ih .av,.ru .av{width:30px;height:30px;border-radius:50%;background:#fff url(../assets/brand/logo-color.png) center/78% no-repeat;border:2px solid #E9DDFF;flex:none}
+.ih b{display:block;font-size:13px;line-height:1.1}.ih small{font-size:11px;color:#8A8399}.ih .d3{margin-left:auto;color:#8A8399;font-weight:700}
+.med{position:relative;background:center/cover #2A0F5C;width:100%}
+.mp{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.mp::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,18,43,.05) 35%,rgba(42,15,92,.88) 100%)}
+.mp p{position:relative;color:#fff;font:700 clamp(19px,1.75vw,25px)/1.12 var(--ser)}.mp p em,.mc p em{font-style:italic;color:#FFD66B}
+.mp .kk{position:absolute;top:14px;left:14px;background:#FFBA00;color:#2A0F5C;font:700 10.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:99px;z-index:1}
+.mp .lg{position:absolute;top:14px;right:14px;height:20px;width:auto;z-index:1}
+.ib{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:#F6F3FA;border-top:1px solid #EEE9F5}
+.ib small{display:block;font-size:10.5px;color:#8A8399;text-transform:uppercase;letter-spacing:.04em}.ib b{font-size:13.5px;line-height:1.2}
+.ib em{font-style:normal;flex:none;background:#E9E3F3;color:#17122B;font-weight:700;font-size:12.5px;padding:7px 12px;border-radius:8px}
+.ia{display:flex;gap:14px;padding:9px 12px 2px}.ia svg,.rs svg{width:22px;height:22px;fill:none;stroke:#17122B;stroke-width:1.8;stroke-linejoin:round}
+.ic{padding:4px 12px 12px;font-size:13px;line-height:1.4;color:#17122B}.ic b{font-weight:700}.ic span{color:#8A8399}
+.mc{aspect-ratio:4/5;overflow:hidden}
+.trk{display:flex;gap:0;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.trk::-webkit-scrollbar{display:none}
+.trk .sl2{flex:0 0 100%;min-height:0;padding:18px;scroll-snap-align:start;position:relative;display:flex;align-items:flex-end;background:center/cover}
+.trk .sl2.im::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,18,43,0) 30%,rgba(42,15,92,.9) 100%)}
+.trk .sl2.pl{background:var(--grad);align-items:center}
+.trk .sl2 p{position:relative;color:#fff;font:700 clamp(20px,1.9vw,27px)/1.12 var(--ser)}.trk .sl2 p small{display:block;font:700 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#FFD66B;margin-bottom:8px}
+.trk .no{position:absolute;top:12px;right:12px;background:rgba(23,18,43,.6);color:#fff;font:600 11px var(--sans);padding:4px 8px;border-radius:99px;z-index:1}
+.dts{display:flex;justify-content:center;gap:5px;padding:8px 0 2px}.dts i{width:6px;height:6px;border-radius:50%;background:#D6CFE2}.dts i.on{background:var(--v)}
+.reel{position:relative;aspect-ratio:9/16;max-height:620px;margin:0 auto;border-radius:18px;overflow:hidden;background:center/cover #2A0F5C;box-shadow:0 26px 50px -30px rgba(42,15,92,.7)}
+.reel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 55%,rgba(23,18,43,.85) 100%)}
+.reel .pg{position:absolute;top:10px;left:10px;right:10px;height:3px;border-radius:3px;background:rgba(255,255,255,.35)}.reel .pg i{display:block;width:38%;height:100%;border-radius:3px;background:#fff}
+.ru{position:absolute;top:22px;left:12px;display:flex;align-items:center;gap:8px;color:#fff;font-size:12.5px}.ru small{opacity:.8;font-size:11px}
+.reel .pl{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.88);display:grid;place-items:center;color:var(--v);font-size:22px}
+.reel .sb{position:absolute;left:14px;right:52px;bottom:66px;color:#fff;font:700 clamp(17px,1.5vw,21px)/1.2 var(--ser)}
+.reel .sb{text-shadow:0 2px 12px rgba(0,0,0,.4)}
+.rs{position:absolute;right:10px;bottom:70px;display:grid;gap:14px}.rs svg{stroke:#fff}
+.rc{position:absolute;left:12px;right:12px;bottom:12px;background:rgba(255,255,255,.95);color:#17122B;font-weight:700;font-size:13px;text-align:center;padding:10px;border-radius:10px}
+.cir{position:absolute;width:90%;right:-26%;top:-20%;opacity:.2;z-index:0;pointer-events:none}
+.mp::before{background:linear-gradient(195deg,rgba(74,0,224,0) 38%,rgba(42,15,92,.94) 100%)!important}
+.mp .q{position:relative;font:700 74px/.55 var(--ser);color:#FFD66B;height:30px}
+.mp p{font-size:clamp(21px,2vw,30px)!important;letter-spacing:-.01em}
+.mp p em,.trk .sl2 p em{font-style:italic;color:#FFD66B;background:linear-gradient(transparent 64%,rgba(255,186,0,.28) 64%)}
+.seal{position:relative;margin-top:14px;align-self:flex-start;border:1px solid rgba(255,255,255,.45);color:#fff;font:600 10.5px var(--sans);letter-spacing:.07em;text-transform:uppercase;padding:6px 10px;border-radius:99px;background:rgba(255,255,255,.1);backdrop-filter:blur(6px)}
+.mc{background:#F3EDFF!important;padding:10px 0 10px 10px}
+.trk{gap:8px}
+.trk .sl2{flex:0 0 84%!important;border-radius:12px;overflow:hidden;flex-direction:column;justify-content:flex-end;align-items:flex-start}
+.trk .sl2:last-child{margin-right:10px}
+.trk .sl2.pl{background:linear-gradient(150deg,#8E2DE2 0%,#4A00E0 60%,#2A0F5C 100%)!important;justify-content:center}
+.trk .sl2.pl p{font-size:clamp(23px,2.2vw,31px)!important}
+.trk .sl2 .sw{position:absolute;top:12px;left:12px;background:#fff;color:#2A0F5C;font:700 11px var(--sans);padding:5px 9px;border-radius:99px;z-index:1}
+.trk .sl2 .bt{position:relative;order:3;margin-top:12px;background:#FFBA00;color:#2A0F5C;font:700 13px var(--sans);padding:9px 14px;border-radius:99px}
+.reel .sb{bottom:88px!important}
+.reel .sb mark{background:#FFD66B;color:#2A0F5C;padding:0 5px;border-radius:5px;-webkit-box-decoration-break:clone;box-decoration-break:clone;text-shadow:none}
+.reel .au{position:absolute;left:14px;bottom:62px;color:#fff;font:600 11.5px var(--sans);opacity:.9}
+.beats{list-style:none;padding:0;margin:12px 2px 0;display:grid;gap:5px;font-size:13px;color:var(--mut)}
+.nx{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.nx>div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;min-width:0}
+.nx b{display:block;font:700 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--v);margin-bottom:6px}.nx p{font-size:15.5px}.nx strong{color:var(--v)}.nx a{font-weight:700;color:var(--v);white-space:nowrap}
+@media (max-width:980px){.perf,.trio,.nx{grid-template-columns:1fr}.perf>div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}.reel{max-width:330px}.mp .lg{display:none}}
+.adx{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:46px;align-items:center}
+.adx .who{display:inline-block;background:var(--soft);color:var(--v);font:700 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:7px 13px;border-radius:99px;margin-bottom:14px}
+.adx .hook{font:700 clamp(26px,3vw,38px)/1.15 var(--ser);margin-bottom:22px}
+.adx .hook::before{content:"«";color:var(--v)}.adx .hook::after{content:"»";color:var(--v)}
+.kv{display:grid;gap:12px}
+.kv div{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px;font-size:17px}
+.kv b{font:700 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--v);padding-top:3px}
+.alts{display:grid;gap:6px}.alts i{font-style:normal;display:block;padding-left:14px;border-left:3px solid var(--amb)}
+.vs .ig{max-width:290px}.vs .ig .cr .hk{font-size:19px;bottom:38px}.vs .ig .cr .flat{font-size:24px}.vs .col{display:flex;flex-direction:column;align-items:flex-start}
+@media (max-width:980px){.vs,.adx{grid-template-columns:1fr}.vs .arrow{transform:rotate(90deg);justify-self:center}.kv div{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="b">Qualivo <span style="opacity:.6">×</span> <img src="../assets/brand/logo-blanco.png" alt="Institut Gestalt"></div>
+<nav class="dots" aria-label="Bloques"><a href="#s1">Qué hacemos</a><a href="#s2">Alumno ideal</a><a href="#s3">Anuncios</a><a href="#s4">Formulario</a><a href="#s5">Landing</a><a href="#s6">WhatsApp</a><a href="#s7">Intelligence</a></nav></header>
+
+<section class="s hero" id="s0"><div class="in">
+<div class="x">Qualivo <span style="opacity:.6">×</span> <img src="../assets/brand/logo-blanco.png" alt="Institut Gestalt"></div>
+<h1>Más matrículas con las peticiones que ya os llegan</h1>
+<p>Que Meta os traiga personas que se matriculan, no solo formularios.</p>
+</div></section>
+
+<section class="s" id="s1"><div class="in rv">
+<p class="n">01 · Qué hacemos</p>
+<h2>Un sistema, de la petición a la matrícula</h2>
+<div class="steps">
+<div><b>Definir el alumno ideal</b></div>
+<div><b>Anuncios para ese perfil</b></div>
+<div><b>Formulario que filtra</b></div>
+<div><b>WhatsApp y seguimiento</b></div>
+<div><b>Un panel que lo mide</b></div>
+</div>
+</div></section>
+
+<section class="s" id="s2" style="background:#F7F3FF"><div class="in rv">
+<p class="n">02 · Vuestro alumno ideal</p>
+<h2>¿Quién es un lead cualificado? <span class="chip">Lo validamos hoy</span></h2>
+<div class="two">
+<div class="box ok"><h3>Sí</h3><ul><li>Acompaña a personas: psicología, coaching, educación, salud</li><li>Busca una formación profesional certificada</li><li>Quiere empezar en la próxima convocatoria</li><li>Barcelona, Madrid u online</li></ul></div>
+<div class="box no"><h3>Todavía no</h3><ul><li>Busca terapia para sí</li><li>No acompaña a nadie</li><li>«Solo me estoy informando»</li></ul></div>
+</div>
+</div></section>
+
+<section class="s" id="s3"><div class="in rv">
+<p class="n">03 · Vuestro cliente potencial</p>
+<h2>Primero, diseñamos <em>a quién le hablamos</em></h2>
+<p class="lead" style="max-width:56ch;margin:-10px 0 30px">Partimos de tres clientes potenciales, cada uno con sus puntos de dolor. Para cada uno probamos anuncios, una landing y preguntas en el formulario. Hoy los validamos con vosotros: cuál es real, cuál falta y cuál sobra.</p>
+<div class="hyps"><a class="hyp" href="#s3a"><span>Cliente potencial 1</span><b>El psicólogo o terapeuta con consulta</b><small>Sus sesiones se quedan en lo técnico cuando el cliente toca algo profundo.</small></a><a class="hyp" href="#s3d"><span>Cliente potencial 2</span><b>El coach o educador al que la técnica se le queda corta</b><small>Sus herramientas se le quedan cortas cuando la conversación se vuelve personal.</small></a><a class="hyp" href="#s3g"><span>Cliente potencial 3</span><b>Quien quiere dedicarse a acompañar</b><small>Quiere un trabajo con sentido, pero no sabe por dónde empezar.</small></a></div>
+<div class="flow"><span>Cliente potencial</span><i>→</i><span>Puntos de dolor</span><i>→</i><span>Anuncios: post, carrusel y vídeo</span><i>→</i><span>Su landing</span><i>→</i><span>Formulario que lo detecta</span></div>
+</div></section>
+<section class="s" id="s3a" style="background:#F7F3FF"><div class="in rv">
+<p class="n">03 · Cliente potencial 1 de 3 · hipótesis</p>
+<h2 class="hp">El psicólogo o terapeuta con consulta</h2>
+<div class="perf"><div><b>Quién es</b><p>Psicólogo o terapeuta con consulta propia, individual o de grupo. Ya tiene oficio y busca un enfoque humanista y vivencial.</p></div><div><b>Puntos de dolor</b><ul><li>Sus sesiones se quedan en lo técnico cuando el cliente toca algo profundo.</li><li>Le falta un marco para trabajar con lo que pasa en el momento.</li><li>Quiere diferenciarse en una consulta cada vez más parecida a las demás.</li></ul></div><div><b>Qué le frena</b><p>Compaginar una formación de varios años con su consulta.</p></div></div>
+<div class="trio"><figure class="adf"><figcaption>Post · 4:5</figcaption><div class="igf"><div class="ih"><span class="av"></span><div><b>institutgestalt</b><small>Publicidad</small></div><span class="d3">···</span></div><div class="med mp" style="background-image:url(../assets/brand/ad2.jpg)"><svg class="cir" viewBox="0 0 600 600" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><circle cx="240" cy="300" r="190"/><circle cx="360" cy="300" r="190"/><circle cx="240" cy="300" r="120"/><circle cx="360" cy="300" r="120"/></svg><span class="kk">Para psicólogos y terapeutas</span><img class="lg" src="../assets/brand/logo-blanco.png" alt=""><span class="q">“</span><p>Lo que pasa en la sesión, <em>mientras pasa.</em></p><span class="seal">Certificada por la AETG · +40 años</span></div><div class="ib"><span><small>institutgestalt.com</small><b>Formación en Terapia Gestalt</b></span><em>Descargar</em></div><div class="ia"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 4 3 11l7 2 2 7z"/></svg></div><p class="ic"><b>institutgestalt</b> Hay algo que pocas formaciones enseñan: qué hacer con lo que está pasando en la sesión, mientras pasa. <span>… más</span></p></div></figure><figure class="adf"><figcaption>Carrusel · desliza</figcaption><div class="igf"><div class="ih"><span class="av"></span><div><b>institutgestalt</b><small>Publicidad</small></div><span class="d3">···</span></div><div class="med mc"><div class="trk"><div class="sl2 im" style="background-image:url(../assets/brand/terapia-corporal.jpg)"><span class="sw">Desliza →</span><span class="no">1/3</span><p>¿Tu cliente se emociona <em>y tú vuelves a la técnica?</em></p></div><div class="sl2 pl"><svg class="cir" viewBox="0 0 600 600" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><circle cx="240" cy="300" r="190"/><circle cx="360" cy="300" r="190"/><circle cx="240" cy="300" r="120"/><circle cx="360" cy="300" r="120"/></svg><span class="no">2/3</span><p>La Gestalt trabaja con lo que pasa <em>aquí y ahora</em>: en el cliente y en ti.</p></div><div class="sl2 im" style="background-image:url(../assets/brand/gestalt.jpg)"><span class="bt">Descargar →</span><span class="no">3/3</span><p>Certificada por la AETG. <em>Descarga el dosier.</em></p></div></div></div><div class="dts"><i class="on"></i><i></i><i></i></div><div class="ib"><span><small>institutgestalt.com</small><b>Dosier de la formación</b></span><em>Descargar</em></div><p class="ic"><b>institutgestalt</b> Tres cosas que cambian en tu consulta cuando trabajas desde la Gestalt. Desliza → <span>… más</span></p></div></figure><figure class="adf"><figcaption>Reel · 9:16</figcaption><div class="reel" style="background-image:url(../assets/brand/ad3.jpg)"><div class="pg"><i></i></div><div class="ru"><span class="av"></span><b>institutgestalt</b><small>Patrocinado</small></div><span class="pl">▶</span><p class="sb">¿Qué haces cuando en sesión pasa algo que <mark>no está en el manual</mark>?</p><p class="au">♪ Audio original · institutgestalt</p><div class="rs"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 4 3 11l7 2 2 7z"/></svg></div><div class="rc">Registrarte ›</div></div><ul class="beats"><li>0-3 s · la pregunta, a cámara</li><li>3-20 s · un docente lo explica con un caso</li><li>20-30 s · «Ven a la presentación gratuita»</li></ul></figure></div>
+<div class="nx"><div><b>Su landing</b><p>«Acompañas a personas. Fórmate para hacerlo desde ti.» <a href="../landing/?perfil=1" target="_blank" rel="noopener">Ver la landing →</a></p></div><div><b>Cómo lo detecta el formulario</b><p>«¿A qué te dedicas?» → Psicología. «¿Acompañas ya a personas?» → con consulta propia. Si quiere empezar en la próxima convocatoria, es <strong>A</strong>.</p></div></div>
+</div></section>
+<section class="s" id="s3d"><div class="in rv">
+<p class="n">03 · Cliente potencial 2 de 3 · hipótesis</p>
+<h2 class="hp">El coach o educador al que la técnica se le queda corta</h2>
+<div class="perf"><div><b>Quién es</b><p>Coach, docente, educador social u orientador. Acompaña a personas en su trabajo, pero no viene de la psicología.</p></div><div><b>Puntos de dolor</b><ul><li>Sus herramientas se le quedan cortas cuando la conversación se vuelve personal.</li><li>Le cuesta sostener emociones intensas en una sesión o en el aula.</li><li>Quiere más profundidad y más seguridad en lo que hace.</li></ul></div><div><b>Qué le frena</b><p>Dudar si una formación «de terapeutas» es para él, y el precio.</p></div></div>
+<div class="trio"><figure class="adf"><figcaption>Post · 4:5</figcaption><div class="igf"><div class="ih"><span class="av"></span><div><b>institutgestalt</b><small>Publicidad</small></div><span class="d3">···</span></div><div class="med mp" style="background-image:url(../assets/brand/coaching.jpg)"><svg class="cir" viewBox="0 0 600 600" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><circle cx="240" cy="300" r="190"/><circle cx="360" cy="300" r="190"/><circle cx="240" cy="300" r="120"/><circle cx="360" cy="300" r="120"/></svg><span class="kk">Para coaches y educadores</span><img class="lg" src="../assets/brand/logo-blanco.png" alt=""><span class="q">“</span><p>Cuando la técnica se queda corta, <em>la herramienta eres tú.</em></p><span class="seal">Certificada por la AETG · +40 años</span></div><div class="ib"><span><small>institutgestalt.com</small><b>Formación en Terapia Gestalt</b></span><em>Descargar</em></div><div class="ia"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 4 3 11l7 2 2 7z"/></svg></div><p class="ic"><b>institutgestalt</b> Sabes hacer buenas preguntas. La Gestalt te enseña a sostener lo que aparece cuando la conversación se vuelve personal. <span>… más</span></p></div></figure><figure class="adf"><figcaption>Carrusel · desliza</figcaption><div class="igf"><div class="ih"><span class="av"></span><div><b>institutgestalt</b><small>Publicidad</small></div><span class="d3">···</span></div><div class="med mc"><div class="trk"><div class="sl2 im" style="background-image:url(../assets/brand/pnl.jpg)"><span class="sw">Desliza →</span><span class="no">1/3</span><p>Sabes hacer <em>buenas preguntas.</em></p></div><div class="sl2 pl"><svg class="cir" viewBox="0 0 600 600" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><circle cx="240" cy="300" r="190"/><circle cx="360" cy="300" r="190"/><circle cx="240" cy="300" r="120"/><circle cx="360" cy="300" r="120"/></svg><span class="no">2/3</span><p>Pero ¿qué haces <em>cuando llega la emoción?</em></p></div><div class="sl2 im" style="background-image:url(../assets/brand/pedagogia-sistemica.jpg)"><span class="bt">Registrarte →</span><span class="no">3/3</span><p>No hace falta venir de la psicología. <em>Ven a conocerla.</em></p></div></div></div><div class="dts"><i class="on"></i><i></i><i></i></div><div class="ib"><span><small>institutgestalt.com</small><b>Presentación gratuita</b></span><em>Registrarte</em></div><p class="ic"><b>institutgestalt</b> Para coaches, docentes y educadores que acompañan a personas. Desliza → <span>… más</span></p></div></figure><figure class="adf"><figcaption>Reel · 9:16</figcaption><div class="reel" style="background-image:url(../assets/brand/ad3.jpg)"><div class="pg"><i></i></div><div class="ru"><span class="av"></span><b>institutgestalt</b><small>Patrocinado</small></div><span class="pl">▶</span><p class="sb">Tres momentos de una sesión en los que <mark>la técnica no basta</mark></p><p class="au">♪ Audio original · institutgestalt</p><div class="rs"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 4 3 11l7 2 2 7z"/></svg></div><div class="rc">Registrarte ›</div></div><ul class="beats"><li>0-3 s · «¿Te ha pasado esto con un cliente?»</li><li>3-22 s · un docente cuenta los tres momentos</li><li>22-30 s · «Lo vemos en la presentación gratuita»</li></ul></figure></div>
+<div class="nx"><div><b>Su landing</b><p>«Cuando la técnica se queda corta, la herramienta eres tú.» <a href="../landing/?perfil=2" target="_blank" rel="noopener">Ver la landing →</a></p></div><div><b>Cómo lo detecta el formulario</b><p>«¿A qué te dedicas?» → Coaching o Educación. «¿Acompañas ya a personas?» → en mi trabajo. Es <strong>A</strong> o <strong>B</strong> según cuándo quiere empezar.</p></div></div>
+</div></section>
+<section class="s" id="s3g" style="background:#F7F3FF"><div class="in rv">
+<p class="n">03 · Cliente potencial 3 de 3 · hipótesis</p>
+<h2 class="hp">Quien quiere dedicarse a acompañar</h2>
+<div class="perf"><div><b>Quién es</b><p>Persona que ha hecho su propio proceso terapéutico y quiere darle un giro a su carrera para acompañar a otros.</p></div><div><b>Puntos de dolor</b><ul><li>Quiere un trabajo con sentido, pero no sabe por dónde empezar.</li><li>Duda si tendrá salida profesional.</li><li>Le da miedo equivocarse con una formación larga.</li></ul></div><div><b>Qué le frena</b><p>Comprometerse sin conocer la formación ni al equipo. Necesita ver y preguntar antes.</p></div></div>
+<div class="trio"><figure class="adf"><figcaption>Post · 4:5</figcaption><div class="igf"><div class="ih"><span class="av"></span><div><b>institutgestalt</b><small>Publicidad</small></div><span class="d3">···</span></div><div class="med mp" style="background-image:url(../assets/brand/ad1.jpg)"><svg class="cir" viewBox="0 0 600 600" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><circle cx="240" cy="300" r="190"/><circle cx="360" cy="300" r="190"/><circle cx="240" cy="300" r="120"/><circle cx="360" cy="300" r="120"/></svg><span class="kk">Presentación gratuita por Zoom</span><img class="lg" src="../assets/brand/logo-blanco.png" alt=""><span class="q">“</span><p>Antes de decidir, <em>conócela por dentro.</em></p><span class="seal">Certificada por la AETG · +40 años</span></div><div class="ib"><span><small>institutgestalt.com</small><b>Presentación gratuita</b></span><em>Registrarte</em></div><div class="ia"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 4 3 11l7 2 2 7z"/></svg></div><p class="ic"><b>institutgestalt</b> ¿Quieres dedicarte a acompañar a personas? Ven a la presentación gratuita: conoce la formación y resuelve tus dudas con el equipo docente. <span>… más</span></p></div></figure><figure class="adf"><figcaption>Carrusel · desliza</figcaption><div class="igf"><div class="ih"><span class="av"></span><div><b>institutgestalt</b><small>Publicidad</small></div><span class="d3">···</span></div><div class="med mc"><div class="trk"><div class="sl2 im" style="background-image:url(../assets/brand/constelaciones.jpg)"><span class="sw">Desliza →</span><span class="no">1/3</span><p><small>Paso 1</small>Te enviamos <em>el dosier.</em></p></div><div class="sl2 pl"><svg class="cir" viewBox="0 0 600 600" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><circle cx="240" cy="300" r="190"/><circle cx="360" cy="300" r="190"/><circle cx="240" cy="300" r="120"/><circle cx="360" cy="300" r="120"/></svg><span class="no">2/3</span><p><small>Paso 2</small>Vienes a la presentación <em>gratuita por Zoom.</em></p></div><div class="sl2 im" style="background-image:url(../assets/brand/ad1.jpg)"><span class="bt">Registrarte →</span><span class="no">3/3</span><p><small>Paso 3</small>Hablas con el equipo <em>y, si encaja, reservas.</em></p></div></div></div><div class="dts"><i class="on"></i><i></i><i></i></div><div class="ib"><span><small>institutgestalt.com</small><b>Presentación gratuita</b></span><em>Registrarte</em></div><p class="ic"><b>institutgestalt</b> Así se entra en la formación, paso a paso. Sin prisa y sin compromiso. Desliza → <span>… más</span></p></div></figure><figure class="adf"><figcaption>Reel · 9:16</figcaption><div class="reel" style="background-image:url(../assets/brand/ad4.jpg)"><div class="pg"><i></i></div><div class="ru"><span class="av"></span><b>institutgestalt</b><small>Patrocinado</small></div><span class="pl">▶</span><p class="sb">¿Te ves <mark>acompañando</mark> a otras personas?</p><p class="au">♪ Audio original · institutgestalt</p><div class="rs"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></svg><svg viewBox="0 0 24 24"><path d="M21 4 3 11l7 2 2 7z"/></svg></div><div class="rc">Registrarte ›</div></div><ul class="beats"><li>0-3 s · la pregunta, sobre una clase</li><li>3-20 s · cómo es la formación por dentro</li><li>20-30 s · «Primer paso: la presentación gratuita»</li></ul></figure></div>
+<div class="nx"><div><b>Su landing</b><p>«Quieres acompañar a personas. Empieza por conocer la formación por dentro.» <a href="../landing/?perfil=3" target="_blank" rel="noopener">Ver la landing →</a></p></div><div><b>Cómo lo detecta el formulario</b><p>«¿A qué te dedicas?» → Otro ámbito. «¿Acompañas ya a personas?» → todavía no. Es <strong>B</strong> si quiere empezar en unos meses y <strong>C</strong> si solo se informa.</p></div></div>
+</div></section>
+<section class="s" id="s4" style="background:#F7F3FF"><div class="in rv">
+<p class="n">04 · Formulario</p>
+<h2>Cuatro preguntas que <em>detectan y cualifican</em></h2>
+<div class="form">
+<div class="phone"><div class="hd">Te enviamos el dosier por WhatsApp</div><div class="bd">
+<div class="q"><span>1. ¿A qué te dedicas?</span><em class="on">Psicología o terapia</em><em>Coaching</em><em>Educación</em><em>Salud</em><em>Otro ámbito</em></div>
+<div class="q"><span>2. ¿Acompañas ya a personas?</span><em class="on">Sí, con consulta propia</em><em>Sí, en mi trabajo</em><em>Todavía no, quiero dedicarme</em></div>
+<div class="q"><span>3. ¿Qué formación te interesa?</span><em class="on">Terapia Gestalt</em><em>Constelaciones</em><em>Aún no lo sé</em></div>
+<div class="q"><span>4. ¿Cuándo quieres empezar?</span><em class="on">Próxima convocatoria</em><em>En unos meses</em><em>Solo me informo</em></div>
+<div class="send">Enviar</div></div></div>
+<div class="rules">
+<div><b>Preguntas 1 y 2</b>Qué cliente potencial es: 1, 2 o 3</div>
+<div><b>Pregunta 3</b>Qué dosier y qué presentación recibe</div>
+<div><b>Pregunta 4</b>Su prioridad: A (ahora), B (en unos meses) o C (solo se informa)</div>
+<div><b>Resultado</b>Entra en el CRM con su perfil y su prioridad, y recibe el mensaje pensado para él. Así medimos qué cliente potencial matricula.</div>
+</div></div>
+</div></section>
+
+<section class="s" id="s5"><div class="in rv">
+<p class="n">05 · Landing</p>
+<h2>Una landing, <em>un titular por hipótesis</em></h2>
+<div class="shot"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/brand/landing-hero.jpg" alt="Maqueta de la landing de la Formación en Terapia Gestalt" loading="lazy"></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="../landing/?perfil=1" target="_blank" rel="noopener">Hipótesis 1 →</a><a class="btn" href="../landing/?perfil=2" target="_blank" rel="noopener">Hipótesis 2 →</a><a class="btn" href="../landing/?perfil=3" target="_blank" rel="noopener">Hipótesis 3 →</a></div>
+</div></section>
+
+<section class="s" id="s6" style="background:#F7F3FF"><div class="in rv">
+<p class="n">06 · Por dentro</p>
+<h2>WhatsApp en minutos y un seguimiento que no se olvida</h2>
+<div class="wa">
+<div class="chat">
+<div class="who"><img src="../assets/brand/logo-color.png" alt="">Institut Gestalt</div>
+<div class="m">Hola Irene, soy Montse, del Institut Gestalt 🌿 Te dejo el dosier de la Formación en Terapia Gestalt. La próxima presentación gratuita es el jueves a las 19:00 por Zoom. ¿Te guardo plaza?<small>22:16</small></div>
+<div class="m me">Sí, porfa 🙏<small>22:18</small></div>
+<div class="m">¡Hecho! Te llega el enlace el mismo día. Si te surge cualquier duda antes, escríbeme por aquí.<small>22:18</small></div>
+</div>
+<div class="seq">
+<div><b>Minuto 0</b>Dosier y próxima presentación</div>
+<div><b>Día antes</b>Recordatorio con el enlace</div>
+<div><b>Si no vino</b>Grabación y otra fecha</div>
+<div><b>Tras la presentación</b>Agendar la entrevista</div>
+<div class="h"><b>Entrevista</b>Siempre una persona del Institut</div>
+<div><b>Reserva</b>Enlace de pago de 454 €</div>
+</div></div>
+<p style="margin-top:14px;font-size:13px;color:var(--mut)">Nombres y mensajes de ejemplo. Los textos los aprobáis vosotros.</p>
+</div></section>
+
+<section class="s intel" id="s7"><div class="in rv">
+<p class="n">07 · Qualivo Intelligence</p>
+<h2>Así lo veríais cada mañana</h2>
+<div class="grid2">
+<div class="shot"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/brand/intel-resumen.jpg" alt="Qualivo Intelligence con datos simulados del Institut Gestalt" loading="lazy"></div>
+<div><ul><li><b>Quién</b> necesita una llamada hoy</li><li><b>Cuántos</b> van a la presentación</li><li><b>Qué anuncio</b> trae matrículas, no solo formularios</li></ul>
+<a class="btn" href="/intelligence/?sector=gestalt&amp;empresa=Institut%20Gestalt&amp;objetivo=conversion" target="_blank" rel="noopener">Abrir la demo en directo →</a>
+<p style="margin-top:12px"><span class="ej">Datos simulados</span></p></div>
+</div>
+</div></section>
+
+<section class="s fin" id="s8"><div class="in rv">
+<h2>Siguiente paso</h2>
+<ol><li>Validamos juntos el alumno ideal</li><li>Os enviamos la propuesta con vuestros números</li><li>Arranque en 30 días</li></ol>
+</div></section>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('.s')), links=[].slice.call(document.querySelectorAll('.dots a'));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var r=e.target.querySelector('.rv');if(r)r.classList.add('vis');
+    links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)});}})},{threshold:.35});
+  secs.forEach(function(s){io.observe(s)});
+  setTimeout(function(){document.querySelectorAll('.rv').forEach(function(r){if(r.getBoundingClientRect().top<innerHeight)r.classList.add('vis')})},50);
+  function go(d){var y=scrollY+90,i=secs.findIndex(function(s){return s.offsetTop+s.offsetHeight>y+5});i=Math.max(0,Math.min(secs.length-1,i+d));secs[i].scrollIntoView({behavior:'smooth'});}
+  addEventListener('keydown',function(e){if(e.target.closest&&e.target.closest('input,textarea'))return;
+    if(['ArrowDown','PageDown','ArrowRight',' '].indexOf(e.key)>-1){e.preventDefault();go(1)} else if(['ArrowUp','PageUp','ArrowLeft'].indexOf(e.key)>-1){e.preventDefault();go(-1)}});
+})();
+</script>
+</body>
+</html>

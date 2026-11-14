@@ -18,23 +18,34 @@
     if (!el) return;
     if (!historia()) { el.innerHTML = ''; return; }
     const hs = E().cfg.historias || {};
-    const ids = Object.keys(hs);
-    const sel = ids.length > 1 && (!d || d.fin) ? '<select class="select demo-hist" data-demo-historia aria-label="Historia del modo demo">' + ids.map(function (k) { return '<option value="' + k + '"' + (k === (E().historia || E().cfg.historiaDefecto) ? ' selected' : '') + '>' + esc(hs[k].titulo) + '</option>'; }).join('') + '</select>' : '';
+    const actual = E().historia || E().cfg.historiaDefecto;
+    // Las historias ocultas (p. ej. la del anuncio) solo salen si se piden por URL.
+    const ids = Object.keys(hs).filter(function (k) { return !hs[k].oculta || k === actual; });
+    const sel = ids.length > 1 && (!d || d.fin) ? '<select class="select demo-hist" data-demo-historia aria-label="Historia del modo demo">' + ids.map(function (k) { return '<option value="' + k + '"' + (k === actual ? ' selected' : '') + '>' + esc(hs[k].titulo) + '</option>'; }).join('') + '</select>' : '';
     if (!d) el.innerHTML = sel + '<button class="btn btn-verde" type="button" data-demo="empezar">' + ico('play') + '<span>Iniciar demo</span></button>';
     else if (d.fin) el.innerHTML = sel + '<button class="btn btn-verde" type="button" data-demo="empezar">' + ico('reinicio') + '<span>Repetir demo</span></button>';
     else el.innerHTML = '<button class="btn" type="button" data-demo="' + (d.pausado ? 'reanudar' : 'pausar') + '">' + ico(d.pausado ? 'play' : 'pausa') + '<span>' + (d.pausado ? 'Reanudar' : 'Pausar') + '</span></button>';
   }
 
-  function empezar() {
+  // opciones.hasta: salta sin esperar hasta ese paso (1 = primero) y deja la historia en pausa.
+  // opciones.vista: al llegar, abre esa vista (con el contacto de la historia seleccionado).
+  function empezar(opciones) {
+    opciones = opciones || {};
     const h = historia();
     if (!h) return;
     parar(true);
     const est = E();
     est.contactos = est.contactos.filter(function (c) { return c.id !== 'demo'; });
     const c = M.preparar(h.contacto, est.ahora);
+    if (h.contacto.forzar) c.forzar = h.contacto.forzar;
     est.contactos.push(c);
     est.nuevos = { demo: true };
-    d = { historia: h, paso: -1, pausado: false, antes: null, fin: false };
+    // Nombre propio del agente de voz y textos sin tecnología, si la historia lo pide.
+    const t = est.cfg.t;
+    if (!('_vozOrig' in t)) t._vozOrig = t.agenteVoz;
+    t.agenteVoz = h.agenteVoz || t._vozOrig;
+    est.sinTecno = !!h.sinTecno;
+    d = { historia: h, paso: -1, pausado: false, antes: null, fin: false, hasta: opciones.hasta ? Math.min(opciones.hasta, h.pasos.length) - 1 : null, vista: opciones.vista || null };
     QV.cerrarFicha();
     QV.recalcular();
     est.filtro = 'todos';
@@ -67,7 +78,7 @@
     if (paso.toque) c.tToque = est.ahora;
     if (paso.act) c.tAct = est.ahora;
     if (!k.conv && !paso.llamada && d.paso > 0) c.ev.push({ t: est.ahora, tipo: /visita|página|web/i.test(paso.feed) ? 'web' : 'sistema', texto: paso.feed });
-    est.feed.push({ t: est.ahora, ico: paso.humano ? 'persona' : paso.llamada ? 'voz' : k.conv ? (k.conv[0] === 'c' ? 'conversaciones' : 'whatsapp') : d.paso === 0 ? 'nueva' : 'auto', tono: paso.humano ? 't-coral' : 't-teal', titulo: paso.feed, quien: c.n, id: c.id, nuevo: true });
+    est.feed.push({ t: est.ahora, ico: (paso.humano || paso.persona) ? 'persona' : paso.llamada ? 'voz' : k.conv ? (k.conv[0] === 'c' ? 'conversaciones' : 'whatsapp') : d.paso === 0 ? 'nueva' : 'auto', tono: (paso.humano || paso.persona) ? 't-coral' : 't-teal', titulo: paso.feed, quien: c.n, id: c.id, nuevo: true });
   }
 
   function siguiente() {
@@ -91,10 +102,21 @@
     QV.pintarBarra();
     if (paso.vista === 'agenda' && c0 && demoC().s.tCita) E().agendaOff = QV.voz.semanaDe(demoC().s.tCita, E().ahora);
     if (paso.vista) QV.irA(paso.vista); else QV.pintarVista();
-    if (E().fichaId === 'demo') QV.abrirFicha('demo');
+    if (paso.ficha || E().fichaId === 'demo') QV.abrirFicha('demo');
     pintarPanel(paso);
     if (paso.humano) return final(paso);
     d.restante = (paso.dur || 6) * 1000 * VEL;
+    if (d.hasta != null) {
+      if (d.paso < d.hasta) return siguiente();
+      // Llegó al paso pedido: quieto, y en la vista pedida.
+      d.hasta = null;
+      d.pausado = true;
+      if (d.vista) { QV.cerrarFicha(); if (d.vista === 'conversaciones') E().convSel = 'demo'; QV.irA(d.vista); }
+      pintarPanel(paso);
+      pintarBotones();
+      return;
+    }
+    if (d.pausado) { pintarPanel(paso); pintarBotones(); return; }
     programar();
   }
 
@@ -181,6 +203,14 @@
     if (!s) return;
     E().historia = s.value;
     if (QV.guardarUrl) QV.guardarUrl();
+  });
+  // Flecha derecha: siguiente paso ya (si está en pausa, sigue en pausa). Útil para grabar.
+  document.addEventListener('keydown', function (e) {
+    if (e.code !== 'ArrowRight' || !d || d.fin) return;
+    if (/input|textarea|select/i.test((e.target.tagName || ''))) return;
+    e.preventDefault();
+    clearTimeout(d.timer);
+    siguiente();
   });
   // Barra espaciadora: pausar / reanudar (cómodo al presentar)
   document.addEventListener('keydown', function (e) {

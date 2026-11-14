@@ -79,6 +79,10 @@ async function calidadLead(etapa, d) {
     user_data: userData,
     custom_data: { event_source: 'crm', lead_event_source: 'GoHighLevel', motivo: d.motivo || undefined }
   };
+  // 24-oct-2026 (Paid): la venta va con su importe, para que Meta distinga un cliente de 3.600 € de uno de 300 €.
+  if (Number(d.valor) > 0) { evento.custom_data.value = Number(d.valor); evento.custom_data.currency = 'EUR'; }
+  // Hora real de la etapa (por ejemplo, la de la reunión), si se conoce y no es futura.
+  if (d.cuando) { const t = Math.floor(Date.parse(d.cuando) / 1000); if (t && t <= evento.event_time) evento.event_time = t; }
   const body = { data: [evento] };
   if (process.env.META_TEST_EVENT_CODE) body.test_event_code = process.env.META_TEST_EVENT_CODE;
   const r = await fetch('https://graph.facebook.com/v21.0/' + PIXEL_ID + '/events?access_token=' + encodeURIComponent(token), {

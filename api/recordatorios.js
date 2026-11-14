@@ -22,11 +22,12 @@ module.exports = async function handler(req, res) {
   if (!process.env.GHL_API_KEY || !process.env.GHL_LOCATION_ID) return res.status(500).json({ ok: false, error: 'not_configured' });
 
   const q = req.query || {};
-  const modo = String(q.modo || '') === 'vispera' ? 'vispera' : 'dia';
+  const modo = String(q.modo || '') === 'vispera' ? 'vispera' : String(q.modo || '') === 'hora' ? 'hora' : 'dia';
   const seco = String(q.dry || '') === '1';
   if (modo === 'dia' && DIA_PAUSADO && !seco) return res.status(200).json({ ok: true, pausado: true, modo: modo });
   const t = A.ahoraMadrid();
-  const horaBuena = modo === 'vispera' ? t.hora === 18 : t.hora === 9;
+  // 'hora' (una hora antes de la cita) corre cada 10 minutos de 8:00 a 21:00 de Madrid.
+  const horaBuena = modo === 'vispera' ? t.hora === 18 : modo === 'hora' ? (t.hora >= 8 && t.hora <= 21) : t.hora === 9;
   if (!horaBuena && !seco) return res.status(200).json({ ok: true, esperando: 'no es la hora de Madrid (' + t.hora + ':' + String(t.minuto).padStart(2, '0') + ')', modo: modo });
 
   const resumen = await R.vuelta(modo, { seco: seco });

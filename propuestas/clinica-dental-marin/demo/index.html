@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Marín Clínica Dental · el CRM</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+/* Paquete Qualivo × Marín Clínica Dental (10-nov). Misma paleta y marca en texto que presentacion/ y assets/landing.css:
+   Montserrat, azul clínico, «MARÍN · CLÍNICA DENTAL» con un diente SVG. Sin logo ni fotos: su web no está confirmada. */
+:root{--ink:#0E1A2B;--mut:#536378;--bg:#FCFBF9;--soft:#F5F2ED;--soft2:#F8F6F2;--line:#E4DED4;--acc:#3B4670;--acc2:#56618A;--deep:#2F3854;--deep2:#262D45;
+--grad:linear-gradient(135deg,#56618A 0%,#2F3854 100%);--amb:#F5B83D;--amb-soft:#FFF4D6;--amb-ink:#7A5600;--ok:#13865A;--ok-soft:#E3F5EC;--bad:#C0392B;--bad-soft:#FBEDEB;
+--wa-bg:#EFE7DC;--wa-in:#FFFFFF;--wa-out:#DCF8C6;--wa-head:#2F3854;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+--sh:0 16px 34px -26px rgba(11,42,69,.55);--sh-lg:0 30px 60px -34px rgba(11,42,69,.65)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+svg{display:block}
+a{color:var(--acc)}
+button{font-family:inherit}
+.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+@media (max-width:560px){.wrap{padding:0 16px}}
+/* marca en texto */
+.wm{display:inline-flex;align-items:center;gap:.5em;line-height:1;color:inherit;text-decoration:none}
+.wm svg{width:1.15em;height:1.25em;flex:none}
+.wm span{display:grid;gap:.18em}
+.wm b{font-weight:800;letter-spacing:.06em}
+.wm small{font-weight:500;letter-spacing:.16em;font-size:.42em}
+/* barra superior del paquete */
+.topnav{position:sticky;top:0;z-index:30;background:rgba(11,42,69,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+.topnav .in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;min-height:58px}
+.topnav .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;white-space:nowrap;margin-right:auto}
+.topnav .brand .x{opacity:.55;font-weight:500}
+.topnav .brand .wm{font-size:16px}
+.topnav .links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.topnav .links::-webkit-scrollbar{display:none}
+.topnav .links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;font-weight:600;padding:6px 11px;border-radius:99px;white-space:nowrap}
+.topnav .links a:hover{background:rgba(255,255,255,.1);color:#fff}
+.topnav .links a[aria-current="page"]{background:#fff;color:var(--deep)}
+@media (max-width:860px){.topnav .in{flex-wrap:wrap;gap:6px 12px;padding:9px 16px}.topnav .links{width:100%;order:2}.topnav .brand{font-size:14px}}
+/* cabecera */
+.dhero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(1100px 620px at 88% 10%,rgba(201,183,154,.38),transparent 60%),linear-gradient(135deg,#2F3854 0%,#262D45 55%,#2F3854 100%)}
+.dhero .tooth{position:absolute;right:-4%;top:50%;transform:translateY(-50%);width:min(40vw,460px);height:auto;aspect-ratio:48/54;opacity:.09;color:#fff;pointer-events:none}
+.dhero .wrap{position:relative;padding-top:52px;padding-bottom:70px;display:grid;gap:14px}
+.eyebrow{justify-self:start;display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.26);border-radius:99px;padding:6px 14px;max-width:100%}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc2);box-shadow:0 0 0 3px rgba(201,183,154,.3);flex:none}
+.dhero h1{font-weight:800;font-size:clamp(32px,5vw,58px);line-height:1.05;letter-spacing:-.025em;max-width:19ch;text-wrap:balance}
+.dhero h1 em{font-style:normal;color:#E2D3BA}
+.dhero .lead{font-size:17.5px;line-height:1.6;color:rgba(255,255,255,.9);max-width:70ch}
+.legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+.legend > div{border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:13px 15px;background:rgba(255,255,255,.08);font-size:14px;line-height:1.55;color:rgba(255,255,255,.88);min-width:0}
+.legend b{color:#fff}
+@media (max-width:860px){.legend{grid-template-columns:1fr}}
+/* etiquetas */
+.ej,.sy,.eq,.dr{display:inline-block;font:700 10.5px/1.5 var(--sans);letter-spacing:.09em;text-transform:uppercase;border-radius:6px;padding:2px 8px;vertical-align:middle;white-space:nowrap}
+.ej{background:#FFF3C4;color:#7A5600}
+.sy{background:var(--soft);color:var(--acc)}
+.eq{background:#FFF0C7;color:#7A5600}
+.dr{background:var(--ok-soft);color:var(--ok)}
+.dhero .sy{background:rgba(143,211,255,.2);color:#BFE6FF}.dhero .eq{background:rgba(245,184,61,.25);color:#FFE3A6}.dhero .ej{background:#FFF3C4;color:#7A5600}
+h2 .ej{vertical-align:8px;margin-left:6px}
+/* pestañas */
+.wrap.main{display:grid;gap:26px;padding-bottom:70px}
+.wrap.main > *{min-width:0}
+nav.tabs{position:sticky;top:66px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px;padding:5px;margin-top:-30px;box-shadow:0 2px 6px rgba(11,42,69,.05),0 24px 48px -24px rgba(11,42,69,.45)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--mut);border-radius:13px;padding:10px 12px;cursor:pointer;transition:background .2s,color .2s}
+nav.tabs button:hover{color:var(--ink);background:var(--soft2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;font-size:11px;font-weight:700;background:var(--soft);color:var(--acc)}
+nav.tabs button[aria-selected="true"]{background:var(--grad);color:#fff;box-shadow:0 10px 22px -10px rgba(47,56,84,.8)}
+nav.tabs button[aria-selected="true"] span{background:#fff;color:var(--acc)}
+@media (max-width:860px){nav.tabs{top:96px}}
+.pane{display:none;gap:22px}
+.pane.on{display:grid}
+.pane.on > *{animation:up .5s cubic-bezier(.2,.7,.2,1) both}
+.pane.on > :nth-child(2){animation-delay:.06s}.pane.on > :nth-child(3){animation-delay:.12s}.pane.on > :nth-child(n+4){animation-delay:.18s}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.pane.on > *{animation:none}html{scroll-behavior:auto}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px;display:grid;gap:10px}
+.pane > header p{color:var(--mut);max-width:80ch}
+h2{font-weight:800;font-size:clamp(26px,3.4vw,40px);line-height:1.1;letter-spacing:-.022em;text-wrap:balance}
+h2 em{font-style:normal;color:var(--acc)}
+h3{font-weight:700;letter-spacing:-.01em;line-height:1.25}
+.k{font:700 11.5px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+.note{font-size:13.5px;color:var(--mut);border:1px dashed #D6C8B2;background:var(--soft2);border-radius:12px;padding:10px 14px;line-height:1.55}
+.btn{display:inline-flex;align-items:center;gap:9px;border:0;background:var(--grad);color:#fff;text-decoration:none;font-weight:700;font-size:15px;border-radius:99px;padding:11px 20px;cursor:pointer;box-shadow:0 14px 30px -14px rgba(47,56,84,.85)}
+.btn.sec{background:#fff;color:var(--acc);border:1px solid var(--line);box-shadow:none}
+.btn:hover{transform:translateY(-1px)}
+.next{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.links3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:800px){.links3{grid-template-columns:1fr}}
+.links3 a{display:grid;gap:6px;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--sh);transition:transform .2s,border-color .2s}
+.links3 a:hover{transform:translateY(-3px);border-color:var(--acc2)}
+.links3 a b{font-size:18px}
+.links3 a small{color:var(--mut);font-size:14px;line-height:1.5}
+/* WhatsApp */
+.phn{background:var(--wa-bg);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--sh)}
+.phn .bar{background:var(--wa-head);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 12px}
+.av{width:32px;height:32px;border-radius:50%;background:#fff;color:var(--deep);display:grid;place-items:center;flex:none}
+.av svg{width:14px;height:16px}
+.phn .bar b{font-size:13.5px;display:block;line-height:1.2}
+.phn .bar small{font-size:11.5px;opacity:.8}
+.phn .bd{padding:12px;display:flex;flex-direction:column;gap:7px}
+.bub{max-width:88%;align-self:flex-start;background:var(--wa-in);color:var(--ink);border-radius:12px;border-top-left-radius:3px;padding:8px 10px 5px;font-size:13.5px;line-height:1.5;box-shadow:0 1px 1px rgba(0,0,0,.08);white-space:pre-line}
+.bub.me{align-self:flex-end;background:var(--wa-out);border-radius:12px;border-top-right-radius:3px}
+.bub small{display:block;text-align:right;font-size:10.5px;color:#7A7A7A;margin-top:2px}
+.bub .by{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.bub .by.s{color:var(--acc)}.bub .by.r{color:#9A6A00}
+.bub .btns{display:grid;gap:4px;margin-top:7px}
+.bub .btns span{display:block;text-align:center;border-top:1px solid #E4E8EC;padding-top:5px;color:#027EB5;font-weight:600;font-size:13px}
+.when{align-self:center;font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--mut);background:rgba(255,255,255,.75);border-radius:7px;padding:3px 9px}
+.sysm{align-self:center;max-width:95%;text-align:center;font-size:11.5px;font-weight:600;color:var(--acc);background:var(--soft);border-radius:8px;padding:4px 10px}
+
+.real{display:inline-block;font:700 10.5px/1.5 var(--sans);letter-spacing:.09em;text-transform:uppercase;border-radius:6px;padding:2px 8px;vertical-align:middle;white-space:nowrap;background:var(--ok-soft);color:var(--ok)}
+.dhero .real{background:rgba(19,134,90,.35);color:#C9F2DD}
+.topnav .lgo{height:40px;margin:-4px 0;width:auto;display:block}
+.dhero img.tooth{aspect-ratio:443/452;opacity:.08}
+.av{background:#fff}
+.av img{width:17px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(14%) sepia(40%) saturate(2000%) hue-rotate(190deg)}
+.flogo{height:44px;width:auto;display:block}
+
+/* ===== Demo del CRM: pipeline por sede, fichas, WhatsApp y presupuestos pendientes ===== */
+:root{--s1:#E2D3BA;--s2:#56618A;--s3:#3B4670;--s4:#2F3854;--s5:#F5B83D;--s6:#13865A;--s7:#C0392B}
+.dhero .wrap{padding-bottom:76px}
+.jump{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.jump button{font-weight:700;font-size:14.5px;border-radius:99px;padding:11px 18px;cursor:pointer;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff}
+.jump button.pri{background:#fff;color:var(--deep);border-color:#fff}
+/* ventana de la app */
+.app{width:min(1400px,calc(100vw - 32px));margin-left:calc((100% - min(1400px,calc(100vw - 32px)))/2);background:#fff;border:1px solid #CFE0EF;border-radius:22px;overflow:hidden;box-shadow:0 2px 4px rgba(11,42,69,.04),0 40px 80px -40px rgba(11,42,69,.55);min-width:0}
+.abar{display:flex;align-items:center;gap:12px;padding:10px 14px;background:linear-gradient(135deg,#2F3854,#262D45);color:#fff;flex-wrap:wrap}
+.abar .dots{display:flex;gap:6px}.abar .dots i{width:11px;height:11px;border-radius:50%;background:#F0A39B}.abar .dots i:nth-child(2){background:#F2D18A}.abar .dots i:nth-child(3){background:#A9D7A2}
+.abar .wm{font-size:15px}
+.abar .crmb{font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:#fff;color:var(--deep);border-radius:99px;padding:3px 9px}
+.abar .url{font-size:12px;color:rgba(255,255,255,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1 1 120px}
+.abar .ej{background:#FFE08A;color:#4A3500}
+.ashell{display:grid;grid-template-columns:184px minmax(0,1fr);min-height:640px}
+.side{background:#F8F6F2;border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;gap:4px}
+.side button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:12px;font-size:14px;font-weight:600;color:var(--mut)}
+.side button:hover{background:#fff;color:var(--ink)}
+.side button[aria-current="true"]{background:#fff;color:var(--acc);box-shadow:0 1px 2px rgba(11,42,69,.08),0 8px 18px -12px rgba(11,42,69,.4)}
+.side button em{margin-left:auto;font-style:normal;font-size:11px;font-weight:700;background:var(--s5);color:#3A2B00;border-radius:99px;padding:1px 7px}
+.side .lbl{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8A97A8;padding:12px 11px 4px}
+.side .me{margin-top:auto;display:flex;gap:10px;align-items:center;padding:10px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+.side .me b{display:block;color:var(--ink);font-size:13px}
+.amain{min-width:0;display:grid;align-content:start}
+.atop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line);background:#fff}
+.atop h3{font-size:18px;margin-right:auto}
+.atop input{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--soft2);border-radius:10px;padding:8px 12px;min-width:0;flex:0 1 220px}
+.atop select{font:inherit;font-size:14px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;max-width:100%}
+.sedesw{display:inline-flex;background:#EEF4FA;border-radius:99px;padding:3px;gap:2px}
+.sedesw button{font-weight:600;font-size:13.5px;border:0;background:none;border-radius:99px;padding:6px 13px;cursor:pointer;color:var(--mut);display:inline-flex;gap:6px;align-items:center}
+.sedesw button i{width:8px;height:8px;border-radius:50%;background:var(--s2)}
+.sedesw button[data-f="t"] i{background:var(--amb)}
+.sedesw button[data-f="all"] i{background:linear-gradient(90deg,var(--s2) 50%,var(--amb) 50%)}
+.sedesw button[aria-pressed="true"]{background:var(--deep);color:#fff;box-shadow:0 4px 10px -4px rgba(11,42,69,.6)}
+.reset{font-size:13px;font-weight:600;border:1px solid var(--line);background:#fff;color:var(--mut);border-radius:10px;padding:8px 11px;cursor:pointer}
+.reset:hover{color:var(--ink);border-color:var(--acc2)}
+.view{display:none;padding:16px;gap:16px;background:linear-gradient(180deg,#F7FAFD,#fff 220px);min-width:0}
+.view.on{display:grid;animation:up .4s ease-out}
+.view > *{min-width:0}
+@media (max-width:1500px) and (min-width:901px){.ashell{grid-template-columns:66px minmax(0,1fr)}.side{padding:14px 8px;align-items:center}.side button{font-size:0;padding:11px;position:relative;gap:0}.side button .i{width:21px;height:21px}.side button em{position:absolute;top:2px;right:0;font-size:10px}.side .lbl{font-size:0;padding:6px 0;border-top:1px solid var(--line);width:70%}.side .lbl:first-child{border:0}.side .me{padding:10px 0;justify-content:center}.side .me div{display:none}}
+@media (max-width:900px){.ashell{grid-template-columns:1fr}.side{display:none}}
+.card{grid-template-columns:minmax(0,1fr)}.card > *{min-width:0}
+@media (max-width:560px){.view{padding:12px}.atop{padding:10px 12px}.atop input{flex:1 1 100%}}
+/* chips */
+.av2{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:12.5px;flex:none;letter-spacing:.02em;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.av2.sm{width:28px;height:28px;font-size:11px}
+.av2.lg{width:52px;height:52px;font-size:18px}
+.chp{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;border-radius:99px;padding:2px 8px;white-space:nowrap;line-height:1.6}
+.chp.v{background:#E3F1FC;color:#2F3854}.chp.v::before,.chp.t::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.chp.t{background:#FFF1CF;color:#8A5A00}
+.chp.tr{background:#F1F4F8;color:#3D4B5E}
+.chp.A{background:var(--ok);color:#fff}.chp.B{background:var(--acc);color:#fff}.chp.C{background:#8A97A8;color:#fff}
+.chp.hot{background:#FDE7E4;color:#B0301F}
+.chp.wait{background:#FFF1CF;color:#8A5A00}
+.chp.okc{background:var(--ok-soft);color:var(--ok)}
+.chp.auto{background:var(--soft);color:var(--acc)}
+.chp.st{color:#fff}
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px;display:grid;gap:3px;box-shadow:var(--sh)}
+.kpi::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--grad)}
+.kpi.w::before{background:var(--amb)}.kpi.g::before{background:var(--ok)}
+.kpi b{font-size:30px;line-height:1.05;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi.w b{color:#9A6A00}.kpi.g b{color:var(--ok)}
+.kpi span{font-size:12.5px;color:var(--mut);line-height:1.4}
+.kpi .sp{display:flex;gap:8px;font-size:11.5px;color:var(--mut);margin-top:3px;flex-wrap:wrap}
+.kpi .sp i{font-style:normal;font-weight:700}
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(7,minmax(168px,1fr));gap:10px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x proximity}
+.col{background:#EEF4FA;border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:300px;border-top:4px solid var(--c);scroll-snap-align:start;min-width:0}
+.col.lost{background:#F8EFEE}
+.col h4{font-size:12.5px;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;gap:6px;align-items:flex-start;line-height:1.3;padding:2px 2px 4px}
+.col h4 small{display:block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8A97A8;margin-bottom:1px}
+.col h4 em{font-style:normal;font-size:11.5px;font-weight:800;color:#fff;background:var(--c);border-radius:99px;padding:1px 8px;flex:none}
+.card{all:unset;box-sizing:border-box;cursor:pointer;background:#fff;border-radius:13px;padding:10px 11px;display:grid;gap:7px;box-shadow:0 1px 2px rgba(11,42,69,.08),0 10px 20px -16px rgba(11,42,69,.5);border:1px solid transparent;transition:transform .15s,box-shadow .15s,border-color .15s;width:100%}
+.card:hover,.card:focus-visible{transform:translateY(-2px);border-color:var(--acc2);box-shadow:0 0 0 3px rgba(201,183,154,.18),0 14px 26px -16px rgba(11,42,69,.55)}
+.card .tp{display:flex;gap:9px;align-items:center;min-width:0}
+.card .tp b{font-size:13.5px;display:block;line-height:1.2}
+.card .tp small{display:block;font-size:11.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .tp > div{min-width:0}
+.card .r{display:flex;gap:4px;flex-wrap:wrap}
+.card .ft{display:flex;justify-content:space-between;gap:6px;font-size:11px;color:var(--mut);border-top:1px dashed var(--line);padding-top:6px;align-items:center}
+.card .ft b{color:var(--ink);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.card .ft > span{flex:none;white-space:nowrap}
+.card .ft .al{color:#B0301F;font-weight:700}
+.card.flash{animation:fl 1.6s ease-out}
+@keyframes fl{0%{box-shadow:0 0 0 4px rgba(19,134,90,.45)}100%{box-shadow:0 1px 2px rgba(11,42,69,.08)}}
+.empty{font-size:12.5px;color:#8A97A8;text-align:center;padding:14px 4px;border:1.5px dashed #CFE0EF;border-radius:12px}
+.hint{font-size:13px;color:var(--mut);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+/* fichas */
+.fx{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:980px){.fx{grid-template-columns:1fr}}
+.plist{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;max-height:720px;overflow-y:auto}
+.plist button{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border-bottom:1px solid #F3F1EC;font-size:13px}
+.plist button:hover{background:var(--soft2)}
+.plist button[aria-current="true"]{background:var(--soft);box-shadow:inset 3px 0 0 var(--acc)}
+.plist b{display:block;font-size:13.5px}
+.plist small{color:var(--mut);font-size:11.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:980px){.plist{max-height:260px}}
+.fic{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh);display:grid;gap:0;overflow:hidden}
+.fic .fh{display:flex;gap:14px;align-items:center;padding:18px 20px;background:linear-gradient(135deg,#F8F6F2,#fff);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.fic .fh h3{font-size:22px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fic .fh p{color:var(--mut);font-size:13.5px;margin-top:3px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.fic .fh .acts{margin-left:auto}
+.prog{padding:14px 20px 4px;display:grid;gap:8px}
+.prog .bars{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px}
+.prog .bars i{height:7px;border-radius:4px;background:#E3ECF5}
+.prog .bars i.on{background:var(--grad)}
+.prog .bars.ok i.on{background:var(--ok)}
+.prog .bars.lost i.on{background:#C9D2DC}
+.prog .lbls{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;font-size:10.5px;color:#8A97A8;font-weight:600;line-height:1.25}
+.prog .lbls span.on{color:var(--acc)}
+@media (max-width:560px){.prog .lbls{display:none}}
+.fbody{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:16px 20px 20px}
+@media (max-width:700px){.fbody{grid-template-columns:1fr}}
+.fbody > div{display:grid;gap:12px;align-content:start;min-width:0}
+.sec5{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+.dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px 14px;font-size:14px;margin:0}
+.dl dt{color:var(--mut)}.dl dd{margin:0;font-weight:600;min-width:0}
+.hist{list-style:none;padding:0;margin:0;display:grid;gap:0;border-left:2px solid #DCE8F3;margin-left:6px}
+.hist li{position:relative;padding:0 0 11px 16px;font-size:13.5px;line-height:1.45}
+.hist li::before{content:"";position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--acc2)}
+.hist li.r::before{border-color:var(--amb)}.hist li.d::before{border-color:var(--ok)}.hist li.m::before{border-color:#7B61FF}
+.hist li small{display:block;color:#8A97A8;font-size:11.5px;font-weight:600}
+.nx{background:var(--deep);color:#fff;border-radius:14px;padding:12px 14px;font-size:14px;display:flex;gap:10px;align-items:flex-start}
+.nx b{color:#E2D3BA}
+.nx .i{color:#E2D3BA;margin-top:1px}
+.wa{background:var(--wa-out);border-radius:12px 3px 12px 12px;padding:10px 12px;font-size:13.5px;white-space:pre-line;line-height:1.5;position:relative}
+.wa small{display:block;font-size:10.5px;color:#5E7A55;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.acts button{font-weight:700;font-size:13.5px;border-radius:99px;padding:9px 15px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.acts button:hover{border-color:var(--acc2)}
+.acts button.pri{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 10px 20px -12px rgba(47,56,84,.9)}
+.acts button.okb{background:var(--ok);color:#fff;border-color:transparent}
+.acts button.lo{color:var(--bad)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;z-index:50;background:var(--deep);color:#fff;border-radius:14px;padding:12px 18px;font-size:14px;box-shadow:var(--sh-lg);transition:all .3s;max-width:calc(100vw - 32px);pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.toast b{color:#E2D3BA}
+/* conversaciones */
+.inbox{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;min-height:600px;box-shadow:var(--sh)}
+@media (max-width:900px){.inbox{grid-template-columns:1fr}}
+.ilist{border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0;max-height:680px}
+.ifil{display:flex;gap:6px;padding:10px;border-bottom:1px solid var(--line);flex-wrap:wrap;background:#FBFDFF}
+.ifil button{font-size:12.5px;font-weight:600;border:1px solid var(--line);background:#fff;color:var(--mut);border-radius:99px;padding:5px 11px;cursor:pointer}
+.ifil button[aria-pressed="true"]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.ilist .items{overflow-y:auto;min-height:0}
+.conv{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:11px 12px;border-bottom:1px solid #F3F1EC;width:100%}
+.conv:hover{background:var(--soft2)}
+.conv[aria-current="true"]{background:var(--soft)}
+.conv .tx{min-width:0}
+.conv .tx b{display:flex;gap:6px;align-items:center;font-size:13.5px}
+.conv .tx small{display:block;font-size:12.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.conv .mt{display:grid;gap:4px;justify-items:end;font-size:11px;color:#8A97A8}
+.conv .un{background:#25D366;color:#fff;font-weight:800;font-size:10.5px;border-radius:99px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 5px}
+.thread{display:flex;flex-direction:column;min-width:0;background:var(--wa-bg);background-image:radial-gradient(rgba(11,42,69,.05) 1px,transparent 1px);background-size:16px 16px}
+.th{display:flex;gap:10px;align-items:center;padding:10px 14px;background:var(--wa-head);color:#fff;flex-wrap:wrap}
+.th b{font-size:14.5px;display:block}
+.th small{opacity:.8;font-size:12px}
+.th .tg{margin-left:auto;display:flex;gap:6px;align-items:center;font-size:12px;font-weight:600;background:rgba(255,255,255,.12);border-radius:99px;padding:5px 10px;cursor:pointer;border:0;color:#fff}
+.th .tg i{width:28px;height:16px;border-radius:99px;background:#25D366;position:relative;flex:none}
+.th .tg i::after{content:"";position:absolute;right:2px;top:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:right .2s}
+.th .tg[aria-pressed="false"] i{background:#8A97A8}
+.th .tg[aria-pressed="false"] i::after{right:14px}
+.tbody{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:7px;min-height:340px;max-height:500px}
+.tbody .bub{max-width:80%}
+.tbody .bub .chk{color:#34B7F1}
+.need{align-self:center;background:#FFF0C7;color:#7A5600;font-size:12px;font-weight:700;border-radius:8px;padding:5px 10px;text-align:center}
+.comp{background:#F0F2F5;padding:10px;display:grid;gap:8px;border-top:1px solid #E0E4E8}
+.qr{display:flex;gap:6px;flex-wrap:wrap}
+.qr button{font-size:12.5px;font-weight:600;border:1px solid #CFE0EF;background:#fff;color:var(--acc);border-radius:99px;padding:5px 11px;cursor:pointer;text-align:left}
+.qr button:hover{background:var(--soft)}
+.cbox{display:flex;gap:8px}
+.cbox input{flex:1;min-width:0;font:inherit;font-size:14px;border:0;border-radius:99px;padding:10px 14px;background:#fff}
+.cbox button{border:0;background:#25D366;color:#fff;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;cursor:pointer;flex:none}
+.cbox button .i{width:18px;height:18px}
+/* presupuestos */
+.ptable{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--sh)}
+.ptable table{width:100%;border-collapse:collapse;font-size:13.5px}
+.ptable th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);background:var(--soft2);padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.ptable td{padding:11px 12px;border-bottom:1px solid #F3F1EC;vertical-align:middle}
+.ptable tr:last-child td{border-bottom:0}
+.ptable tr.due td{background:#FFFCF2}
+.ptable .pn{display:flex;gap:10px;align-items:center;min-width:0}
+.ptable .pn b{display:block;font-size:13.5px}
+.ptable .pn small{color:var(--mut);font-size:11.5px}
+.tk{display:flex;gap:5px;align-items:center}
+.tk span{display:inline-grid;place-items:center;min-width:38px;height:24px;border-radius:7px;font-size:10.5px;font-weight:800;background:#F3F1EC;color:#8A97A8;padding:0 5px}
+.tk span.dn{background:var(--soft);color:var(--acc)}
+.tk span.td{background:var(--amb);color:#3A2B00;box-shadow:0 0 0 3px rgba(245,184,61,.3)}
+.tk span.td.r{background:#B0301F;color:#fff;box-shadow:0 0 0 3px rgba(176,48,31,.2)}
+.ptable .acts button{padding:6px 11px;font-size:12.5px}
+.ptable .nxa{font-size:12.5px;color:var(--ink);max-width:28ch}
+@media (max-width:860px){.ptable thead{display:none}.ptable tr{display:grid;grid-template-columns:1fr auto;gap:8px 10px;padding:12px;border-bottom:1px solid var(--line)}.ptable td{padding:0;border:0}.ptable td.c2{grid-column:1/-1}.ptable tr.due td{background:none}.ptable tr.due{background:#FFFCF2}}
+.ejband{display:flex;gap:12px;align-items:flex-start;background:#FFFBEA;border:1.5px solid #F2D27A;border-radius:14px;padding:11px 15px;font-size:14px;line-height:1.55}
+.ejband .ej{flex:none;margin-top:1px}
+.split2{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px}
+@media (max-width:900px){.split2{grid-template-columns:1fr}}
+.pan{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:var(--sh);display:grid;gap:10px;align-content:start}
+.pan h4{font-size:14px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.fun{display:grid;gap:8px}
+.fun div{display:grid;grid-template-columns:150px minmax(0,1fr) 36px;gap:10px;align-items:center;font-size:12.5px}
+.fun i{display:block;height:14px;border-radius:99px;background:var(--grad);min-width:4px;transition:width .4s}
+.fun div:nth-child(n+5) i{background:var(--ok)}
+.fun b{text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.fun div{grid-template-columns:110px minmax(0,1fr) 30px}}
+.why{display:grid;gap:7px}
+.why div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;font-size:13px;align-items:center}
+.why div i{grid-column:1/-1;height:6px;border-radius:99px;background:#F3F1EC;overflow:hidden;display:block}
+.why div i s{display:block;height:100%;background:#E2826F;text-decoration:none}
+.today{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+.today button{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;border:1px solid var(--line);border-left:4px solid var(--amb);border-radius:12px;padding:8px 10px;font-size:13px;background:#fff}
+.today button:hover{border-color:var(--acc2)}
+.today button b{display:block;font-size:13.5px}
+.today button small{color:var(--mut);display:block}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"><style>h1,h2,.hero h1,.s h2{font-family:"Yeseva One",Georgia,serif!important;font-weight:400!important;letter-spacing:0!important}</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="tooth" viewBox="0 0 48 54"><path d="M13 3.5C6.5 2.2 2.6 8 3.1 16.4c.4 7 3.4 11.6 4.6 19.2 1 6.6 2.6 14.9 7 14.9 3.7 0 4.4-6.4 5.4-11 .8-3.4 1.9-5.2 3.9-5.2s3.1 1.8 3.9 5.2c1 4.6 1.7 11 5.4 11 4.4 0 6-8.3 7-14.9 1.2-7.6 4.2-12.2 4.6-19.2.5-8.4-3.4-14.2-9.9-12.9C30.6 4.3 27.6 6 24 6s-6.6-1.7-11-2.5z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M19 10.5c3 2.6 7 2.6 10 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+<symbol id="i-crm" viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2-7z"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</defs></svg>
+
+<nav class="topnav" aria-label="Paquete Marín Clínica Dental">
+  <div class="in">
+    <div class="brand">Qualivo <span class="x">×</span> <img class="lgo" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452"></div>
+    <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="../landing-a/">Landings</a><a href="../recorrido/">Recorrido</a><a href="./" aria-current="page">CRM</a><a href="https://qualivo.io/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion">Intelligence</a><a href="../presentacion/">Presentación</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<img class="tooth" src="../assets/brand/diente-blanco.png" alt="" aria-hidden="true">
+<div class="wrap">
+  <p class="eyebrow">El CRM por dentro · tal como lo vería recepción</p>
+  <h1>Las dos sedes, <em>un solo tablero</em>, y ningún presupuesto en el cajón</h1>
+  <p class="lead">Esto es lo que vería cada mañana recepción de Patraix o de Torrent. Pulsa lo que quieras: filtra por sede, abre una ficha, contesta un WhatsApp o marca un presupuesto como aceptado. Todo se mueve a la vez.</p>
+  <div class="jump"><button class="pri" data-view="pipe">Ver el tablero</button><button data-view="pres">Ir a presupuestos pendientes</button></div>
+  <div class="legend">
+    <div><b>Las 7 etapas</b><br>Petición nueva · Contactado · Primera visita agendada · Primera visita hecha · Presupuesto entregado · Presupuesto aceptado · Perdido.</div>
+    <div><b>Filtro por sede</b><br>Patraix (Valencia), Torrent o las dos. Cada petición entra ya asignada a su sede, con su letra A, B o C.</div>
+    <div><span class="ej">Datos de ejemplo</span> <span class="real">Real</span><br><b>Inventado:</b> pacientes, mensajes, días y cifras; no son datos vuestros ni previsiones. <b>Real:</b> las campañas de origen de cada ficha son vuestros anuncios públicos en Meta.</div>
+  </div>
+</div>
+</header>
+
+<main class="wrap main">
+<nav class="tabs" role="tablist" aria-label="Vistas del CRM">
+  <button role="tab" id="t-pipe" data-view="pipe" aria-selected="true"><span>1</span>Pipeline por sede</button>
+  <button role="tab" id="t-ficha" data-view="ficha" aria-selected="false"><span>2</span>Fichas</button>
+  <button role="tab" id="t-wa" data-view="wa" aria-selected="false"><span>3</span>Conversaciones de WhatsApp</button>
+  <button role="tab" id="t-pres" data-view="pres" aria-selected="false"><span>4</span>Presupuestos pendientes</button>
+</nav>
+
+<div class="ejband" role="note"><span class="ej">Datos de ejemplo</span><span>Pacientes, mensajes y cifras inventados, pero coherentes entre sí. Los cambios que hagas se quedan solo en tu pantalla; «Restaurar» lo deja como al principio.</span></div>
+
+<div class="app">
+  <div class="abar" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><img src="../assets/brand/logo-marin-blanco.png" alt="" style="height:24px;width:auto;display:block"><span class="crmb">CRM</span><span class="url">crm · Marín Clínica Dental · hoy, martes</span><span class="ej">Datos de ejemplo</span></div>
+  <div class="ashell">
+    <aside class="side" aria-label="Menú del CRM">
+      <span class="lbl">Pacientes</span>
+      <button data-view="pipe" aria-current="true"><svg class="i"><use href="#i-crm"/></svg>Pipeline</button>
+      <button data-view="ficha"><svg class="i"><use href="#i-user"/></svg>Fichas</button>
+      <button data-view="wa"><svg class="i"><use href="#i-chat"/></svg>WhatsApp<em id="b-wa">0</em></button>
+      <button data-view="pres"><svg class="i"><use href="#i-doc"/></svg>Presupuestos<em id="b-pres">0</em></button>
+      <span class="lbl">Medir</span>
+      <button onclick="location.href='https://qualivo.io/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion'"><svg class="i"><use href="#i-chart"/></svg>Intelligence</button>
+      <div class="me"><span class="av2 sm" style="background:#3B4670">RC</span><div><b>Recepción</b>Patraix (Valencia) y Torrent</div></div>
+    </aside>
+    <div class="amain">
+      <div class="atop">
+        <h3 id="vtitle">Pipeline</h3>
+        <input type="search" id="q" placeholder="Buscar paciente…" aria-label="Buscar paciente">
+        <select id="f-tr" aria-label="Filtrar por tratamiento"><option value="">Todos los tratamientos</option><option value="imp">Implantes</option><option value="orto">Ortodoncia invisible</option><option value="est">Estética</option><option value="rev">Revisión</option></select>
+        <div class="sedesw" role="group" aria-label="Filtrar por sede"><button data-f="all" aria-pressed="true"><i></i>Todas</button><button data-f="v" aria-pressed="false"><i></i>Valencia · Patraix</button><button data-f="t" aria-pressed="false"><i></i>Torrent</button></div>
+        <button class="reset" id="reset" type="button">↺ Restaurar</button>
+      </div>
+
+      <!-- 1 · PIPELINE -->
+      <section class="view on" id="v-pipe" aria-label="Pipeline">
+        <div class="kpis" id="kpis"></div>
+        <div class="pipe" id="pipe" tabindex="0" aria-label="Pacientes por etapa"></div>
+        <p class="hint"><span class="chp A">A</span> llamada en el día <span class="chp B">B</span> WhatsApp y seguimiento <span class="chp C">C</span> información y aviso más adelante · Pulsa una tarjeta para abrir su ficha.</p>
+        <div class="split2">
+          <div class="pan"><h4>Embudo del mes <span class="ej">Datos de ejemplo</span></h4><div class="fun" id="fun"></div></div>
+          <div class="pan"><h4>Para hoy <span class="chp wait" id="today-n">0</span></h4><ul class="today" id="today"></ul></div>
+        </div>
+      </section>
+
+      <!-- 2 · FICHAS -->
+      <section class="view" id="v-ficha" aria-label="Fichas">
+        <div class="fx">
+          <div class="plist" id="plist" aria-label="Pacientes"></div>
+          <div class="fic" id="fic"></div>
+        </div>
+      </section>
+
+      <!-- 3 · WHATSAPP -->
+      <section class="view" id="v-wa" aria-label="Conversaciones de WhatsApp">
+        <div class="inbox">
+          <div class="ilist">
+            <div class="ifil" role="group" aria-label="Filtrar conversaciones"><button data-w="all" aria-pressed="true">Todas</button><button data-w="need" aria-pressed="false">Necesitan persona</button><button data-w="auto" aria-pressed="false">Automáticas</button></div>
+            <div class="items" id="items"></div>
+          </div>
+          <div class="thread">
+            <div class="th" id="th"></div>
+            <div class="tbody" id="tbody" aria-live="polite"></div>
+            <div class="comp">
+              <div class="qr" id="qr"></div>
+              <form class="cbox" id="cbox"><input id="ctext" placeholder="Escribe como recepción…" aria-label="Mensaje"><button type="submit" aria-label="Enviar"><svg class="i"><use href="#i-send"/></svg></button></form>
+            </div>
+          </div>
+        </div>
+        <p class="hint">Los mensajes azules los manda el sistema con textos aprobados por la clínica. Cuando un paciente pregunta algo que no está en un texto aprobado (un precio, una condición de pago), la conversación pasa a «Necesitan persona» y la contesta recepción de su sede.</p>
+      </section>
+
+      <!-- 4 · PRESUPUESTOS -->
+      <section class="view" id="v-pres" aria-label="Presupuestos pendientes">
+        <div class="kpis" id="pkpis"></div>
+        <div class="ptable"><table>
+          <thead><tr><th>Paciente</th><th>Tratamiento</th><th>Entregado</th><th>Seguimiento</th><th>Estado</th><th>Siguiente paso</th><th></th></tr></thead>
+          <tbody id="ptb"></tbody>
+        </table></div>
+        <div class="split2">
+          <div class="pan"><h4>Por qué se pierden <span class="ej">Datos de ejemplo</span></h4><div class="why" id="why"></div><p class="hint" style="margin:0">Recepción marca el motivo al cerrar como «Perdido». Así se ve si el problema es el precio, la distancia o el seguimiento.</p></div>
+          <div class="pan"><h4>Cómo funciona el seguimiento</h4>
+            <div class="tk"><span class="dn">D+1</span><small style="font-size:13px">«¿Te quedó alguna duda del presupuesto?» · sistema</small></div>
+            <div class="tk"><span class="dn">D+3</span><small style="font-size:13px">Las cuotas por escrito, con su plan · sistema</small></div>
+            <div class="tk"><span class="td">D+7</span><small style="font-size:13px">Llamada personal para cerrar o dar otra fecha · recepción</small></div>
+            <p class="hint" style="margin:0">Cualquier respuesta del paciente para la secuencia y avisa a recepción.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div class="links3">
+  <a href="../recorrido/"><span class="k">Recorrido</span><b>El recorrido de un paciente</b><small>Del formulario o WhatsApp al presupuesto aceptado, paso a paso, con qué hace el sistema y qué hace recepción.</small></a>
+  <a href="https://qualivo.io/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion"><span class="k">Intelligence</span><b>El panel que lo mide</b><small>Qué anuncio trae presupuestos aceptados, por sede.</small></a>
+  <a href="../presentacion/"><span class="k">Presentación</span><b>La presentación de hoy</b><small>Qué hacemos, anuncios, recorrido, CRM y siguiente paso.</small></a>
+</div>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<footer style="background:var(--deep);color:rgba(255,255,255,.75);padding:34px 0 46px;font-size:13.5px">
+  <div class="wrap" style="display:grid;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:#fff"><img class="flogo" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="1056" height="452"><span style="opacity:.6">×</span><b>Qualivo</b></div>
+    <p>Demo preparada por Qualivo para Marín Clínica Dental · 10 de noviembre de 2026. No es una herramienta de la clínica ni contiene datos suyos. Pacientes, mensajes, días y cifras son datos de ejemplo. La marca, las dos clínicas y las campañas de origen salen de dentalmarin.es y de vuestros anuncios públicos en Meta. Direcciones, teléfonos y condiciones de financiación van como texto genérico.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---------- datos de ejemplo ----------
+  var ST=[['nueva','Petición nueva','var(--s1)'],['contactado','Contactado','var(--s2)'],['agendada','Primera visita agendada','var(--s3)'],['hecha','Primera visita hecha','var(--s4)'],['entregado','Presupuesto entregado','var(--s5)'],['aceptado','Presupuesto aceptado','var(--s6)'],['perdido','Perdido','var(--s7)']];
+  var SL={},SI={};ST.forEach(function(s,i){SL[s[0]]=s[1];SI[s[0]]=i;});
+  var TR={imp:'Implantes',orto:'Ortodoncia invisible',est:'Estética',rev:'Revisión'};
+  var SEDE={v:'Patraix',t:'Torrent'};
+  var COLORS=['#3B4670','#13865A','#7B61FF','#D9822B','#0E9AA7','#C2457A','#5B6B82','#2E7D32','#8E5CD9','#B5651D'];
+  // [nombre, sede, trat, letra, origen, etapa, días en la etapa, pago, cuándo, nota, estado presupuesto]
+  var SEED=[
+    ['Lucía G.','t','imp','A','Meta · «Implante desde 1 €/día»','nueva',0,'Cuotas','Este mes','',''],
+    ['Miguel A.','t','imp','A','WhatsApp directo','nueva',0,'Aún no lo sabe','Este mes','Pregunta por el precio',''],
+    ['Jorge P.','v','orto','B','Meta · «Ortodoncia invisible desde 3 €/día»','nueva',0,'Cuotas','En 1-3 meses','',''],
+    ['Ana R.','v','est','C','Web','nueva',0,'Pago único','Solo se informa','',''],
+    ['Marta S.','v','imp','A','Landing de implantes','contactado',0,'Cuotas','Este mes','Llamar hoy a las 17:30',''],
+    ['Pablo M.','t','rev','B','Meta · «Limpieza + TAC 29,90 €»','contactado',1,'Pago único','Este mes','Prefiere WhatsApp',''],
+    ['Laura P.','v','orto','B','Meta · «Ortodoncia invisible desde 3 €/día»','contactado',2,'Cuotas','En 1-3 meses','No contesta al segundo WhatsApp',''],
+    ['Beatriz S.','t','imp','A','Meta · «Limpieza + TAC 29,90 €»','contactado',0,'Cuotas','Este mes','',''],
+    ['Elena V.','t','orto','A','Landing de ortodoncia','agendada',1,'Cuotas','Este mes','Jueves 10:00 · confirmada',''],
+    ['Raúl T.','v','imp','A','Meta · «Implante desde 1 €/día»','agendada',2,'Aún no lo sabe','Este mes','Viernes 18:00 · sin confirmar',''],
+    ['Teresa C.','t','est','B','Web','agendada',0,'Pago único','En 1-3 meses','Lunes 12:00 · confirmada',''],
+    ['Hugo D.','v','orto','A','Meta · «Ortodoncia invisible desde 3 €/día»','agendada',3,'Cuotas','Este mes','Hoy 19:00 · confirmada',''],
+    ['Carmen L.','v','imp','A','Landing de implantes','hecha',1,'Cuotas','Este mes','Presupuesto en preparación',''],
+    ['Andrés V.','v','rev','B','Meta · «Limpieza + TAC 29,90 €»','hecha',0,'Pago único','Este mes','',''],
+    ['Sergio B.','t','imp','A','Meta · «Implante desde 1 €/día»','entregado',3,'Cuotas','Este mes','Duda: intereses de las cuotas','duda'],
+    ['Nuria C.','v','orto','B','Meta · «Ortodoncia invisible desde 3 €/día»','entregado',1,'Cuotas','En 1-3 meses','Se lo está pensando','piensa'],
+    ['Antonio R.','t','imp','A','Landing de implantes','entregado',7,'Cuotas','Este mes','Sin respuesta desde el día +3','sin'],
+    ['Rosa M.','v','imp','A','Meta · «Limpieza + TAC 29,90 €»','entregado',4,'Cuotas','Este mes','Quiere más plazos','duda'],
+    ['Javier L.','v','orto','A','Landing de ortodoncia','entregado',2,'Pago único','Este mes','Quiere empezar ya','quiere'],
+    ['Pilar G.','t','imp','B','Web','entregado',9,'Aún no lo sabe','En 1-3 meses','Lo consulta con su familia','piensa'],
+    ['Isabel F.','t','orto','A','Meta · «Ortodoncia invisible desde 3 €/día»','aceptado',2,'Cuotas','Este mes','Empieza el lunes',''],
+    ['Cristina N.','v','imp','A','Landing de implantes','aceptado',5,'Cuotas','Este mes','Primera cita de tratamiento el día 18',''],
+    ['David H.','v','est','C','Web','perdido',6,'Pago único','Solo se informa','Motivo: solo buscaba precio',''],
+    ['Óscar F.','t','orto','B','Meta · «Ortodoncia invisible desde 3 €/día»','perdido',12,'Cuotas','En 1-3 meses','Motivo: eligió otra clínica','']
+  ];
+  var LOSS=[['Solo buscaba precio',4],['Vive lejos de las dos sedes',2],['Eligió otra clínica',3],['Lo deja para más adelante',5],['No contesta tras 3 mensajes',3]];
+  var NEXT={nueva:'WhatsApp en minutos con dos horas para llamar',contactado:'Llamada de recepción y agendar la primera visita',agendada:'Recordatorios 24 h y 2 h antes con la dirección de la sede',hecha:'Marcar «Presupuesto entregado» con el tratamiento y el pago',entregado:'Seguimiento D+1, D+3 y llamada el día +7',aceptado:'Confirmar y recordar la primera cita de tratamiento',perdido:'Sin más mensajes · el motivo queda guardado'};
+  var PEST={duda:['Duda de cuotas','wait'],piensa:['Se lo piensa','tr'],sin:['Sin respuesta','hot'],quiere:['Quiere empezar','okc'],'':['Sin respuesta todavía','tr']};
+
+  function ini(n){return n.replace('.','').split(' ').map(function(x){return x[0];}).join('').slice(0,2).toUpperCase();}
+  function col(n){var h=0;for(var i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))%997;return COLORS[h%COLORS.length];}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function first(L){return L.n.split(' ')[0];}
+  function dl(d){return d===0?'hoy':d===1?'ayer':'hace '+d+' d';}
+  function av(L,c){return '<span class="av2'+(c?' '+c:'')+'" style="background:'+col(L.n)+'">'+ini(L.n)+'</span>';}
+  function chS(L){return '<span class="chp '+L.s+'">'+SEDE[L.s]+'</span>';}
+
+  function convFor(L){
+    var n=first(L),s=SEDE[L.s],t=TR[L.tr].toLowerCase(),c=[],k=SI[L.st];
+    if(L.ori==='WhatsApp directo'){
+      c.push(['me','Hola, ¿cuánto cuesta un implante? ¿Hacéis financiación?','21:12']);
+      c.push(['auto','¡Hola! Gracias por escribirnos 😊 El precio depende de cada caso: te lo damos en la primera visita, con un plan cerrado y opción de cuotas. ¿Qué sede te queda mejor?','21:12',['Patraix','Torrent','Me da igual']]);
+      c.push(['me','Torrent. Pero aproximadamente, ¿cuánto sería?','21:15']);
+      c.push(['need','Pregunta un precio · pasa a recepción de Torrent']);
+      return c;
+    }
+    c.push(['sys',L.ori+' · formulario enviado']);
+    c.push(['auto','Hola, '+n+' 😊 Te escribimos de Marín Clínica Dental, en '+s+'. Hemos recibido tu consulta sobre '+t+'. ¿Te llamamos hoy a las 17:30 o mejor mañana por la mañana?','10:02',['Hoy a las 17:30','Mañana por la mañana','Prefiero WhatsApp']]);
+    if(k===0)return c;
+    if(L.n==='Laura P.'){c.push(['auto',n+', te escribimos de nuevo por si se te pasó. Tenemos estos huecos para llamarte:','12:02',['Hoy 18:00','Mañana 10:00']]);return c;}
+    c.push(['me',L.s==='t'?'Hoy a las 17:30 me va bien':'Mejor mañana por la mañana','10:05']);
+    c.push(['auto','¡Perfecto! Te llamamos a esa hora desde la sede de '+s+'.','10:05']);
+    if(k===1)return c;
+    c.push(['rec',n+', como hablamos: primera visita en la sede de '+s+'. Te mandamos ahora la confirmación.','17:41']);
+    c.push(['auto','Tu primera visita está confirmada ✅\n📍 Marín Clínica Dental · '+s+' · [dirección]','17:42',['Cómo llegar','Cambiar la hora']]);
+    if(k===2){c.push(['auto','Te esperamos mañana en la sede de '+s+'. ¿Nos confirmas?','10:00',['Allí estaré','Necesito cambiarla']]);if(!/sin confirmar/.test(L.nota))c.push(['me','Allí estaré','10:12']);return c;}
+    c.push(['sys','Primera visita hecha']);
+    if(k===3||L.st==='perdido'&&L.n==='David H.'){if(L.st==='perdido')c.push(['me','Gracias, de momento solo quería saber el precio.','12:20']);return c;}
+    c.push(['auto','Hola, '+n+'. Gracias por venir a la sede de '+s+'. Sabemos que un tratamiento así se piensa con calma. ¿Te quedó alguna duda del presupuesto?','11:00',['Todo claro','Tengo una duda','Me lo estoy pensando']]);
+    if(L.pe==='duda'){c.push(['me',L.n==='Rosa M.'?'¿Se puede pagar en más plazos? Con los que me dijisteis se me queda alto.':'¿Las cuotas tienen intereses? ¿Puedo empezar antes de pagarlo todo?','13:22']);c.push(['need','Duda de cuotas · pasa a recepción de '+s]);return c;}
+    if(L.pe==='piensa'){c.push(['me','Me lo estoy pensando','19:05']);}
+    if(L.pe==='quiere'){c.push(['me','Todo claro. ¿Cuándo podría empezar?','12:40']);c.push(['need','Quiere empezar · llamar para dar fecha']);return c;}
+    if(L.d>=3||SI[L.st]>4){c.push(['auto',n+', te dejamos por escrito cómo quedaría tu presupuesto en cuotas, para que lo mires con calma:\n📄 Tu presupuesto en cuotas · [según tu plan]','11:00',['Quiero empezar','Otra opción de plazos','Aún lo pienso']]);}
+    if(L.st==='aceptado'){c.push(['me','Quiero empezar','18:30']);c.push(['rec','¡Qué bien, '+n+'! Te llamamos ahora para darte la primera cita de tratamiento.','18:41']);}
+    if(L.n==='Óscar F.'){c.push(['me','Gracias, al final lo haré en otra clínica más cerca de casa.','09:50']);}
+    return c;
+  }
+  function histFor(L){
+    var k=SI[L.st],p=L.st==='perdido'?(L.n==='David H.'?['nueva','contactado','agendada','hecha','perdido']:['nueva','contactado','agendada','hecha','entregado','perdido']):ST.slice(0,k+1).map(function(s){return s[0];});
+    return p.map(function(s,i){var back=L.d+(p.length-1-i)*2;var tx={nueva:'Petición · '+L.ori+' · letra '+L.l+' · sede '+SEDE[L.s],contactado:'WhatsApp enviado y llamada de recepción',agendada:'Primera visita agendada · confirmación enviada',hecha:'Primera visita hecha · diagnóstico',entregado:'Presupuesto entregado · '+TR[L.tr]+' · '+L.pago.toLowerCase(),aceptado:'Presupuesto aceptado · señal a Meta',perdido:L.nota||'Perdido'}[s];
+      return [dl(back),tx,{contactado:'r',hecha:'d',aceptado:'m'}[s]||''];});
+  }
+  var leads,sel=0,wsel=0,wfil='all',fil={s:'all',q:'',tr:''},view='pipe';
+  function seed(){
+    leads=SEED.map(function(r,id){var L={id:id,n:r[0],s:r[1],tr:r[2],l:r[3],ori:r[4],st:r[5],d:r[6],pago:r[7],cuando:r[8],nota:r[9],pe:r[10],auto:true,unread:0,flash:false};
+      L.conv=convFor(L);L.hist=histFor(L);L.need=L.conv.some(function(m){return m[0]==='need';});L.unread=L.need?(L.n==='Miguel A.'?2:1):(L.st==='nueva'?0:0);return L;});
+    sel=0;wsel=leads.filter(function(L){return L.need;})[0].id;
+  }
+  function pass(L){
+    if(fil.s!=='all'&&L.s!==fil.s)return false;
+    if(fil.tr&&L.tr!==fil.tr)return false;
+    if(fil.q&&L.n.toLowerCase().indexOf(fil.q.toLowerCase())<0)return false;
+    return true;
+  }
+  function vis(){return leads.filter(pass);}
+  var toastT;
+  function toast(h){var t=document.getElementById('toast');t.innerHTML=h;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on');},2600);}
+
+  // ---------- pipeline ----------
+  function count(arr,f){return arr.filter(f).length;}
+  function bySede(f){return '<span class="sp"><span><i style="color:#2F3854">Patraix</i> '+count(leads,function(L){return L.s==='v'&&f(L);})+'</span><span><i style="color:#8A5A00">Torrent</i> '+count(leads,function(L){return L.s==='t'&&f(L);})+'</span></span>';}
+  function kpis(){
+    var V=vis();
+    function k(c,v,t,f){return '<div class="kpi '+c+'"><b>'+v+'</b><span>'+t+'</span>'+bySede(f)+'</div>';}
+    var fNew=function(L){return L.st==='nueva';},fVis=function(L){return L.st==='agendada';},fPen=function(L){return L.st==='entregado';},fOk=function(L){return L.st==='aceptado';};
+    document.getElementById('kpis').innerHTML=k('',count(V,fNew),'peticiones nuevas sin llamar',fNew)+k('',count(V,fVis),'primeras visitas agendadas',fVis)+k('w',count(V,fPen),'presupuestos pendientes de respuesta',fPen)+k('g',count(V,fOk),'presupuestos aceptados este mes',fOk);
+  }
+  function pipe(){
+    var V=vis();
+    document.getElementById('pipe').innerHTML=ST.map(function(s,i){
+      var inS=V.filter(function(L){return L.st===s[0];});
+      return '<div class="col'+(s[0]==='perdido'?' lost':'')+'" style="--c:'+s[2]+'"><h4><span><small>'+(i<6?'Etapa '+(i+1):'Fuera')+'</small>'+s[1]+'</span><em>'+inS.length+'</em></h4>'+
+        (inS.length?inS.map(function(L){
+          var alert=(L.st==='entregado'&&L.d>=7)||(L.need&&L.st!=='perdido');
+          return '<button type="button" class="card'+(L.flash?' flash':'')+'" data-id="'+L.id+'"><span class="tp">'+av(L,'sm')+'<div><b>'+esc(L.n)+'</b><small>'+TR[L.tr]+'</small></div></span><span class="r">'+chS(L)+'<span class="chp '+L.l+'">'+L.l+'</span>'+(L.need?'<span class="chp hot">WhatsApp</span>':'')+'</span><span class="ft"><b>'+esc(L.nota||NEXT[L.st])+'</b><span class="'+(alert?'al':'')+'">'+dl(L.d)+'</span></span></button>';
+        }).join(''):'<p class="empty">Nadie en esta etapa</p>')+'</div>';
+    }).join('');
+    leads.forEach(function(L){L.flash=false;});
+    document.querySelectorAll('#pipe .card').forEach(function(c){c.addEventListener('click',function(){sel=+c.dataset.id;show('ficha');});});
+    // embudo
+    var F=[['Peticiones',0],['Contactados',1],['Primera visita agendada',2],['Primera visita hecha',3],['Presupuesto entregado',4],['Presupuesto aceptado',5]];
+    var tot=V.filter(function(L){return true;}).length||1;
+    document.getElementById('fun').innerHTML=F.map(function(f){
+      var n=V.filter(function(L){var k=SI[L.st];if(L.st==='perdido')return f[1]<=(L.n==='David H.'?3:4);return k>=f[1];}).length;
+      return '<div><span>'+f[0]+'</span><span><i style="width:'+Math.max(n/tot*100,2)+'%"></i></span><b>'+n+'</b></div>';
+    }).join('');
+    // para hoy
+    var T=[];
+    V.forEach(function(L){
+      if(L.need)T.push([0,'Contestar WhatsApp',L,L.conv.filter(function(m){return m[0]==='need';})[0][1]]);
+      if(L.st==='entregado'&&L.d>=7)T.push([1,'Llamada día +7',L,'presupuesto de '+TR[L.tr].toLowerCase()+' sin respuesta']);
+      if(L.st==='contactado'&&/Llamar|No contesta/.test(L.nota))T.push([2,'Llamar',L,L.nota]);
+      if(L.st==='agendada'&&/sin confirmar/.test(L.nota))T.push([3,'Confirmar visita',L,L.nota]);
+      if(L.st==='nueva'&&!L.need&&L.l==='A')T.push([4,'Llamada en el día',L,'petición A · '+TR[L.tr].toLowerCase()]);
+    });
+    T.sort(function(a,b){return a[0]-b[0];});
+    document.getElementById('today-n').textContent=T.length+' tareas';
+    var ul=document.getElementById('today');
+    ul.innerHTML=T.length?T.slice(0,6).map(function(x){return '<li><button type="button" data-id="'+x[2].id+'" data-k="'+x[0]+'">'+av(x[2],'sm')+'<span><b>'+x[1]+' · '+esc(x[2].n)+'</b><small>'+esc(x[3])+'</small></span>'+chS(x[2])+'</button></li>';}).join(''):'<li class="empty">Nada pendiente con este filtro.</li>';
+    ul.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){var id=+b.dataset.id;if(b.dataset.k==='0'){wsel=id;show('wa');}else{sel=id;show('ficha');}});});
+  }
+
+  // ---------- fichas ----------
+  function plist(){
+    var V=vis();if(V.length&&!V.some(function(L){return L.id===sel;}))sel=V[0].id;
+    var el=document.getElementById('plist');
+    el.innerHTML=V.length?V.map(function(L){return '<button type="button" data-id="'+L.id+'"'+(L.id===sel?' aria-current="true"':'')+'>'+av(L,'sm')+'<span style="min-width:0"><b>'+esc(L.n)+'</b><small>'+TR[L.tr]+' · '+SL[L.st]+'</small></span>'+chS(L)+'</button>';}).join(''):'<p class="empty" style="margin:12px">Nadie con estos filtros.</p>';
+    el.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){sel=+b.dataset.id;plist();ficha();});});
+  }
+  function ficha(){
+    var L=leads[sel],el=document.getElementById('fic');
+    if(!vis().some(function(x){return x.id===sel;})){el.innerHTML='<p class="empty" style="margin:20px">Elige un paciente de la lista.</p>';return;}
+    var k=SI[L.st],off=L.st==='perdido',reach=off?(L.n==='David H.'?3:4):k,bars='',lbls='';
+    for(var i=0;i<6;i++){bars+='<i class="'+(i<=reach?'on':'')+'"></i>';lbls+='<span class="'+(i===k?'on':'')+'">'+ST[i][1]+'</span>';}
+    var nx=k<5?ST[k+1]:null,acts='';
+    if(nx&&!off)acts+='<button type="button" class="pri" data-a="'+nx[0]+'">Pasar a «'+nx[1]+'»</button>';
+    if(off)acts+='<button type="button" class="pri" data-a="contactado">Recuperar · «Contactado»</button>';
+    if(!off&&L.st!=='aceptado')acts+='<button type="button" class="lo" data-a="perdido">Perdido</button>';
+    acts+='<button type="button" data-a="wa">Abrir WhatsApp</button>';
+    var last=L.conv.filter(function(m){return m[0]==='auto';}).slice(-1)[0];
+    el.innerHTML=
+      '<div class="fh">'+av(L,'lg')+'<div><h3>'+esc(L.n)+' <span class="chp '+L.l+'">'+L.l+'</span> <span class="ej">Datos de ejemplo</span></h3><p>'+chS(L)+'<span class="chp tr">'+TR[L.tr]+'</span><span class="chp st" style="background:'+ST[k][2]+(L.st==='nueva'?';color:var(--deep)':'')+'">'+SL[L.st]+'</span><span>· en esta etapa desde '+dl(L.d)+'</span></p></div></div>'+
+      '<div class="prog"><div class="bars'+(L.st==='aceptado'?' ok':off?' lost':'')+'">'+bars+'</div><div class="lbls">'+lbls+'</div></div>'+
+      '<div class="fbody"><div>'+
+        '<p class="sec5">Datos</p><dl class="dl"><dt>Sede</dt><dd>'+SEDE[L.s]+'</dd><dt>Tratamiento</dt><dd>'+TR[L.tr]+'</dd><dt>Origen</dt><dd>'+esc(L.ori)+'</dd><dt>Responsable</dt><dd>Recepción '+SEDE[L.s]+'</dd><dt>Contacto</dt><dd>WhatsApp · [teléfono]</dd></dl>'+
+        '<p class="sec5">Respuestas del formulario</p><dl class="dl"><dt>¿Qué te interesa?</dt><dd>'+TR[L.tr]+'</dd><dt>¿En cuotas?</dt><dd>'+L.pago+'</dd><dt>¿Cuándo?</dt><dd>'+L.cuando+'</dd><dt>Nota</dt><dd>'+esc(L.nota||'—')+'</dd></dl>'+
+      '</div><div>'+
+        '<p class="sec5">Historial</p><ol class="hist">'+L.hist.map(function(h){return '<li class="'+h[2]+'"><small>'+h[0]+'</small>'+esc(h[1])+'</li>';}).join('')+'</ol>'+
+        '<div class="nx"><svg class="i"><use href="#i-next"/></svg><span><b>Próxima acción:</b> '+esc(NEXT[L.st])+'</span></div>'+
+        (last?'<div class="wa"><small>Último mensaje automático · WhatsApp</small>'+esc(last[1])+'</div>':'')+
+        '<div class="acts">'+acts+'</div>'+
+      '</div></div>';
+    el.querySelectorAll('[data-a]').forEach(function(b){b.addEventListener('click',function(){var a=b.dataset.a;if(a==='wa'){wsel=L.id;show('wa');}else move(L,a);});});
+  }
+  function move(L,to,silent){
+    var from=L.st;L.st=to;L.d=0;L.flash=true;
+    if(to==='perdido'&&!/Motivo/.test(L.nota))L.nota='Motivo: marcado por recepción';
+    if(to==='aceptado'){L.nota='Primera cita de tratamiento por agendar';L.need=false;L.pe='';L.conv.push(['rec','¡Qué bien, '+first(L)+'! Te llamamos ahora para darte la primera cita de tratamiento.','ahora']);}
+    if(to==='entregado'){L.pe='';}
+    L.hist.push(['hoy',SL[to]+(to==='aceptado'?' · señal a Meta':''),to==='aceptado'?'m':'r']);
+    render();
+    if(!silent)toast('<b>'+esc(L.n)+'</b> · '+SL[from]+' → '+SL[to]+(to==='aceptado'||to==='hecha'?' · señal enviada a Meta':''));
+  }
+
+  // ---------- WhatsApp ----------
+  function lastMsg(L){var m=L.conv.filter(function(x){return x[0]!=='sys'&&x[0]!=='need';}).slice(-1)[0];return m||['sys',''];}
+  function items(){
+    var V=vis().filter(function(L){return wfil==='all'||(wfil==='need'?L.need:!L.need);});
+    V.sort(function(a,b){return (b.need-a.need)||(a.d-b.d);});
+    if(V.length&&!V.some(function(L){return L.id===wsel;}))wsel=V[0].id;
+    var el=document.getElementById('items');
+    el.innerHTML=V.length?V.map(function(L){var m=lastMsg(L);return '<button type="button" class="conv" data-id="'+L.id+'"'+(L.id===wsel?' aria-current="true"':'')+'>'+av(L)+'<span class="tx"><b>'+esc(L.n)+' '+chS(L)+'</b><small>'+(m[0]==='me'?'':m[0]==='rec'?'Recepción: ':'✓✓ ')+esc(m[1].split('\n')[0])+'</small></span><span class="mt"><span>'+(m[2]||dl(L.d))+'</span>'+(L.unread?'<span class="un">'+L.unread+'</span>':L.need?'':'<span class="chp auto">auto</span>')+'</span></button>';}).join(''):'<p class="empty" style="margin:12px">Ninguna conversación con estos filtros.</p>';
+    el.querySelectorAll('.conv').forEach(function(b){b.addEventListener('click',function(){wsel=+b.dataset.id;leads[wsel].unread=0;items();thread();});});
+    document.getElementById('b-wa').textContent=leads.filter(function(L){return L.need;}).length;
+  }
+  function thread(){
+    var L=leads[wsel],th=document.getElementById('th'),tb=document.getElementById('tbody');
+    if(!vis().some(function(x){return x.id===wsel;})){th.innerHTML='';tb.innerHTML='<p class="empty">Elige una conversación.</p>';document.getElementById('qr').innerHTML='';return;}
+    th.innerHTML=av(L,'sm')+'<div><b>'+esc(L.n)+'</b><small>'+TR[L.tr]+' · sede '+SEDE[L.s]+' · '+SL[L.st]+'</small></div><button type="button" class="tg" aria-pressed="'+(L.auto?'true':'false')+'" id="tg"><i></i>'+(L.auto?'Automático activo':'Lo lleva recepción')+'</button>';
+    document.getElementById('tg').addEventListener('click',function(){L.auto=!L.auto;thread();toast(L.auto?'Mensajes automáticos <b>activados</b> para '+esc(L.n):'Recepción <b>toma el control</b>: el sistema no enviará nada a '+esc(L.n));});
+    tb.innerHTML='<span class="when">'+(L.d===0?'Hoy':dl(L.d))+'</span>'+L.conv.map(function(m){
+      if(m[0]==='sys')return '<span class="sysm">'+esc(m[1])+'</span>';
+      if(m[0]==='need')return '<span class="need">⚠ '+esc(m[1])+'</span>';
+      var me=m[0]==='me';
+      return '<div class="bub'+(me?' me':'')+'">'+(me?'':'<span class="by '+(m[0]==='rec'?'r':'s')+'">'+(m[0]==='rec'?'Recepción · '+SEDE[L.s]:'Mensaje automático')+'</span>')+esc(m[1])+(m[3]?'<span class="btns">'+m[3].map(function(b){return '<span>'+esc(b)+'</span>';}).join('')+'</span>':'')+'<small>'+(m[2]||'')+(me?'':' <span class="chk">✓✓</span>')+'</small></div>';
+    }).join('');
+    tb.scrollTop=tb.scrollHeight;
+    var Q=L.tr==='imp'||L.tr==='orto'?['Te explico las cuotas: [condiciones de financiación]. ¿Te llamo y lo vemos en 5 minutos?','El precio exacto te lo damos en la primera visita, con un plan cerrado. ¿Te busco un hueco esta semana?','Tengo estos huecos para la primera visita: [hueco 1] o [hueco 2]. ¿Cuál te va mejor?']:['Tengo estos huecos: [hueco 1] o [hueco 2]. ¿Cuál te va mejor?','¿Te llamamos y lo vemos en 5 minutos?'];
+    document.getElementById('qr').innerHTML=Q.map(function(q){return '<button type="button">'+esc(q)+'</button>';}).join('');
+    document.querySelectorAll('#qr button').forEach(function(b){b.addEventListener('click',function(){document.getElementById('ctext').value=b.textContent;document.getElementById('ctext').focus();});});
+  }
+  document.getElementById('cbox').addEventListener('submit',function(e){
+    e.preventDefault();var inp=document.getElementById('ctext'),v=inp.value.trim();if(!v)return;
+    var L=leads[wsel];L.conv=L.conv.filter(function(m){return m[0]!=='need';});L.conv.push(['rec',v,'ahora']);L.need=false;L.unread=0;inp.value='';
+    if(L.st==='nueva'){L.st='contactado';L.d=0;L.hist.push(['hoy','Contactado · WhatsApp de recepción','r']);}
+    render();toast('Mensaje enviado a <b>'+esc(L.n)+'</b> desde recepción de '+SEDE[L.s]);
+  });
+  document.querySelectorAll('.ifil button').forEach(function(b){b.addEventListener('click',function(){wfil=b.dataset.w;document.querySelectorAll('.ifil button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});items();thread();});});
+
+  // ---------- presupuestos pendientes ----------
+  function pres(){
+    var V=vis(),P=V.filter(function(L){return L.st==='entregado';}).sort(function(a,b){return b.d-a.d;});
+    var hoy=P.filter(function(L){return L.d===1||L.d===3||L.d>=7;}).length,du=P.filter(function(L){return L.pe==='duda';}).length,ok=V.filter(function(L){return L.st==='aceptado';}).length;
+    var fP=function(L){return L.st==='entregado';};
+    document.getElementById('pkpis').innerHTML='<div class="kpi w"><b>'+P.length+'</b><span>presupuestos pendientes</span>'+bySede(fP)+'</div><div class="kpi"><b>'+hoy+'</b><span>toques de seguimiento hoy</span></div><div class="kpi w"><b>'+du+'</b><span>con una duda de cuotas por contestar</span></div><div class="kpi g"><b>'+ok+'</b><span>aceptados este mes</span>'+bySede(function(L){return L.st==='aceptado';})+'</div>';
+    document.getElementById('b-pres').textContent=leads.filter(fP).length;
+    var tb=document.getElementById('ptb');
+    tb.innerHTML=P.length?P.map(function(L){
+      var d=L.d,tk=[[1,'D+1'],[3,'D+3'],[7,'D+7']].map(function(t){var c=d>t[0]?'dn':d===t[0]||(t[0]===7&&d>=7)?'td'+(t[0]===7?' r':''):'';if(t[0]===7&&d>7)c='td r';return '<span class="'+c+'">'+t[1]+'</span>';}).join('');
+      var es=PEST[L.pe]||PEST[''],today=d===1||d===3||d>=7;
+      var nxa=L.pe==='duda'?'Contestar la duda de cuotas por WhatsApp':L.pe==='quiere'?'Llamar para dar fecha de inicio':d>=7?'Llamada personal de recepción':d>=3?'Esperar respuesta · llamada el día +7':d>=1?'Enviar las cuotas por escrito el día +3':'Mensaje del día +1 mañana';
+      return '<tr class="'+(today?'due':'')+'"><td><span class="pn">'+av(L,'sm')+'<span><b>'+esc(L.n)+'</b>'+chS(L)+'</span></span></td><td class="c2"><span class="chp tr">'+TR[L.tr]+'</span> <small style="color:var(--mut)">'+L.pago+'</small></td><td>'+dl(d)+'</td><td><span class="tk">'+tk+'</span></td><td><span class="chp '+es[1]+'">'+es[0]+'</span></td><td class="c2 nxa">'+nxa+'</td><td class="c2"><span class="acts"><button type="button" class="okb" data-a="aceptado" data-id="'+L.id+'">Aceptado</button><button type="button" class="lo" data-a="perdido" data-id="'+L.id+'">Perdido</button><button type="button" data-a="wa" data-id="'+L.id+'">WhatsApp</button></span></td></tr>';
+    }).join(''):'<tr><td colspan="7"><p class="empty">No quedan presupuestos pendientes con este filtro. 🎉</p></td></tr>';
+    tb.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){var L=leads[+b.dataset.id];if(b.dataset.a==='wa'){wsel=L.id;show('wa');}else move(L,b.dataset.a);});});
+    var mx=Math.max.apply(null,LOSS.map(function(x){return x[1];}));
+    document.getElementById('why').innerHTML=LOSS.map(function(x){return '<div><span>'+x[0]+'</span><b>'+x[1]+'</b><i><s style="width:'+(x[1]/mx*100)+'%"></s></i></div>';}).join('');
+  }
+
+  // ---------- vistas ----------
+  var TITLES={pipe:'Pipeline',ficha:'Fichas',wa:'Conversaciones de WhatsApp',pres:'Presupuestos pendientes'};
+  function render(){kpis();pipe();plist();ficha();items();thread();pres();}
+  function show(v,noScroll){
+    if(!TITLES[v])v='pipe';view=v;
+    ['pipe','ficha','wa','pres'].forEach(function(x){document.getElementById('v-'+x).classList.toggle('on',x===v);var t=document.getElementById('t-'+x);t.setAttribute('aria-selected',x===v?'true':'false');t.tabIndex=x===v?0:-1;});
+    document.querySelectorAll('.side button[data-view]').forEach(function(b){b.setAttribute('aria-current',b.dataset.view===v?'true':'false');});
+    document.getElementById('vtitle').textContent=TITLES[v];
+    if(v==='wa'&&leads[wsel])leads[wsel].unread=0;
+    render();
+    var bar=document.getElementById('t-'+v).parentNode,at=document.getElementById('t-'+v);bar.scrollLeft=at.offsetLeft-(bar.clientWidth-at.offsetWidth)/2;
+    if(!noScroll){var y=document.querySelector('.app').getBoundingClientRect().top+window.scrollY-130;window.scrollTo({top:y,behavior:'smooth'});}
+    try{history.replaceState(null,'','#'+v);}catch(e){}
+  }
+  document.querySelectorAll('[data-view]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.view);});});
+  document.querySelectorAll('nav.tabs button').forEach(function(b,i,all){b.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){var n=all[(i+(e.key==='ArrowRight'?1:all.length-1))%all.length];show(n.dataset.view);n.focus();}});});
+  document.querySelectorAll('.sedesw button').forEach(function(b){b.addEventListener('click',function(){fil.s=b.dataset.f;document.querySelectorAll('.sedesw button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});render();});});
+  document.getElementById('q').addEventListener('input',function(e){fil.q=e.target.value.trim();render();});
+  document.getElementById('f-tr').addEventListener('change',function(e){fil.tr=e.target.value;render();});
+  document.getElementById('reset').addEventListener('click',function(){seed();fil={s:'all',q:'',tr:''};document.getElementById('q').value='';document.getElementById('f-tr').value='';document.querySelectorAll('.sedesw button').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.f==='all'?'true':'false');});render();toast('Ejemplo <b>restaurado</b>');});
+  seed();
+  show(location.hash.slice(1),true);
+})();
+</script>
+</body>
+</html>

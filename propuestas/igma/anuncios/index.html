@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>IGMA · Anuncios</title>
+<link rel="icon" href="../assets/brand/isotipo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap">
+<style>
+/* Anuncios de Meta para IGMA. Galería limpia; estrategia, guiones y A/B dentro del desplegable final. */
+:root{color-scheme:dark;--bg:#0A0A0B;--bg2:#121214;--ink:#F4F5F7;--mut:#9A9DA6;--line:#26272B;--cy:#00A5F4;--cy2:#5CCBFF;
+--disp:"Montserrat",system-ui,sans-serif;--sans:"Roboto",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:max(16px,env(safe-area-inset-left,0px))}
+@media(min-width:760px){.wrap{padding-inline:40px}}
+
+/* menú común */
+.topnav{position:sticky;top:0;z-index:20;background:rgba(10,10,11,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topnav .in{max-width:1240px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:8px 20px;flex-wrap:wrap}
+@media(min-width:760px){.topnav .in{padding-inline:40px}}
+.brand{margin-right:auto}.brand img{height:26px;width:auto}
+.links{display:flex;gap:2px 16px;flex-wrap:wrap}
+.links a{font-size:12.5px;font-weight:500;color:var(--mut);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent}
+.links a:hover{color:#fff}
+.links a[aria-current=page]{color:#fff;border-bottom-color:var(--cy)}
+
+/* portada */
+.cover{padding:clamp(72px,14vh,160px) 0 clamp(64px,11vh,120px)}
+.by{font-size:13px;letter-spacing:.04em;color:var(--mut);margin-bottom:28px}
+h1{font:800 clamp(44px,8vw,120px)/.98 var(--disp);letter-spacing:-.035em;max-width:12ch}
+h1 em,h2 em{font-style:normal;color:var(--cy);text-shadow:0 0 28px rgba(0,165,244,.35)}
+.line{margin-top:32px;font-size:clamp(17px,1.6vw,21px);color:var(--mut);padding-left:clamp(0px,30vw,420px)}
+h2{font:800 clamp(32px,4.4vw,60px)/1.02 var(--disp);letter-spacing:-.03em}
+
+/* hoy */
+.vs{background:var(--bg2);padding:clamp(64px,10vw,130px) 0;border-block:1px solid var(--line)}
+.vs-head{display:grid;gap:16px;margin-bottom:clamp(40px,6vw,72px)}
+.vs-head p{font-size:clamp(17px,1.6vw,21px);color:var(--mut);max-width:34ch}
+.vs-head p b{color:var(--ink);font-weight:500}
+@media(min-width:900px){.vs-head{grid-template-columns:1fr 1fr;align-items:end}.vs-head p{justify-self:end}}
+.today{display:grid;gap:40px}
+@media(min-width:900px){.today{grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:start}}
+.today .t{max-width:440px;width:100%;justify-self:center}
+.lab{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+.keep{margin-top:clamp(40px,6vw,72px);padding-top:28px;border-top:1px solid var(--line);display:grid;gap:10px 48px;font-size:17px;color:var(--mut)}
+.keep b{color:var(--ink);font-weight:500}
+@media(min-width:900px){.keep{grid-template-columns:1fr 1fr}}
+
+/* ======= maqueta Instagram 4:5 ======= */
+.ig{container-type:inline-size;background:#000;border:1px solid #262626;border-radius:12px;overflow:hidden;color:#F5F5F5;font-family:-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 40px 80px -48px rgba(0,165,244,.35)}
+.ig-h{display:flex;align-items:center;gap:2.6cqw;padding:2.8cqw 3.2cqw}
+.av{flex:none;width:7.6cqw;height:7.6cqw;border-radius:50%;background:#000;padding:.5cqw;box-shadow:0 0 0 .45cqw #00A5F4;overflow:hidden;display:grid;place-items:center}
+.av img{width:100%;height:100%;object-fit:contain;border-radius:50%}
+.who{display:grid;line-height:1.2;margin-right:auto;min-width:0}
+.who b{font-size:3.3cqw;font-weight:600}
+.who small{font-size:2.8cqw;color:#A8A8A8}
+.dots{font-size:4.4cqw;line-height:1;letter-spacing:.05em}
+.ig-m{position:relative;aspect-ratio:4/5;overflow:hidden;background:#111}
+.ig-m .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ig-m::after{content:"";position:absolute;inset:38% 0 0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.82))}
+.ig-m .lg{position:absolute;z-index:1;top:5.5cqw;left:6cqw;width:20cqw;height:auto}
+.ig-m h3{position:absolute;z-index:1;left:6cqw;right:8cqw;bottom:7cqw;font:800 9.2cqw/1 var(--disp);letter-spacing:-.03em;color:#fff;text-wrap:balance}
+.ig-m h3 em{font-style:normal;color:var(--cy2)}
+.ig-c{display:flex;align-items:center;justify-content:space-between;padding:3cqw 3.4cqw;background:#00A5F4;color:#00131F;font-size:3.4cqw;font-weight:600}
+.ig-a{display:flex;gap:3.6cqw;padding:3cqw 3.4cqw 1.6cqw}
+.ig-a svg{width:6.2cqw;height:6.2cqw;fill:none;stroke:#F5F5F5;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ig-a .bm{margin-left:auto}
+.ig-t{padding:0 3.4cqw 3.6cqw;font-size:3.3cqw;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ig-t b{font-weight:600;margin-right:1cqw}
+
+/* anuncio actual, redibujado */
+.hoy .ig-m::after{display:none}
+.flyer{display:flex;flex-direction:column;justify-content:flex-end;gap:2cqw;padding:7cqw}
+.flyer .ph{filter:saturate(1.3) hue-rotate(-25deg) brightness(.55)}
+.flyer>*{position:relative;z-index:1}
+.flyer .ft{font:800 4cqw/1 var(--disp);letter-spacing:.06em;color:#FF4D6D;text-transform:uppercase}
+.flyer strong{font:800 10cqw/.98 var(--disp);text-transform:uppercase;letter-spacing:-.02em}
+.flyer span:last-child{font-size:3.6cqw;color:#ddd}
+.play{position:absolute;z-index:2;top:50%;left:50%;width:15cqw;height:15cqw;margin:-7.5cqw 0 0 -7.5cqw;border-radius:50%;background:rgba(0,0,0,.45);border:.5cqw solid rgba(255,255,255,.85)}
+.play::before{content:"";position:absolute;left:40%;top:30%;border-left:5cqw solid #fff;border-top:3cqw solid transparent;border-bottom:3cqw solid transparent}
+.long{padding:0 3.4cqw 3.6cqw;font-size:3.2cqw;line-height:1.45;color:#ddd}
+.long b{color:#fff;font-weight:600}
+
+/* ======= galería ======= */
+.gal{padding:clamp(80px,11vw,150px) 0 clamp(40px,6vw,80px)}
+.gal h2{margin-bottom:clamp(40px,6vw,88px)}
+.grid{display:grid;gap:clamp(72px,9vw,120px)}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr;column-gap:clamp(40px,5vw,80px);row-gap:clamp(72px,8vw,110px);align-items:start}}
+.g{max-width:520px;width:100%;justify-self:center}
+.gl{display:grid;gap:4px;margin-bottom:22px}
+.gl b{font:700 clamp(21px,2vw,26px)/1.2 var(--disp);letter-spacing:-.01em}
+.gl span{font-size:15.5px;color:var(--mut)}
+
+/* ======= desplegable ======= */
+.more{padding:clamp(40px,6vw,80px) 0 clamp(64px,8vw,110px)}
+details#estrategia{border-top:1px solid var(--cy);border-bottom:1px solid var(--line)}
+#estrategia>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:28px 0;font:700 clamp(21px,2.4vw,32px)/1.15 var(--disp);letter-spacing:-.02em}
+#estrategia>summary::-webkit-details-marker{display:none}
+#estrategia>summary i{flex:none;position:relative;width:22px;height:22px}
+#estrategia>summary i::before,#estrategia>summary i::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;background:var(--cy);transition:transform .2s}
+#estrategia>summary i::after{transform:rotate(90deg)}
+#estrategia[open]>summary i::after{transform:rotate(0)}
+.more-in{padding:8px 0 48px;font-size:15px;max-width:1040px;color:#D7D9DE}
+.k{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:18px 0 6px}
+.rules{display:grid;gap:24px 48px}
+@media(min-width:860px){.rules{grid-template-columns:1fr 1fr}}
+.rules ul,.dt ul{padding-left:18px}
+.rules li,.dt li{margin:4px 0}
+.dt{padding-top:56px;margin-top:48px;border-top:1px solid var(--line)}
+.dt h3{font:800 clamp(23px,2.4vw,30px)/1.15 var(--disp);letter-spacing:-.02em;color:#fff}
+.dt h4{font-size:15px;font-weight:700;color:#fff;margin:36px 0 12px}
+.dt-copy{display:grid;gap:8px 48px}
+@media(min-width:860px){.dt-copy{grid-template-columns:1.2fr 1fr}}
+pre{white-space:pre-wrap;font:inherit;background:var(--bg2);border:1px solid var(--line);padding:18px 20px;border-radius:4px}
+.gt{width:100%;border-collapse:collapse;font-size:14px}
+.gt th,.gt td{text-align:left;vertical-align:top;padding:12px 14px 12px 0;border-bottom:1px solid var(--line)}
+.gt thead th{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.gt tbody th{white-space:nowrap;font-weight:700;color:var(--cy2)}
+.gt .ost{font-weight:600;color:#fff}
+@media(max-width:759px){.gt thead{display:none}.gt,.gt tbody,.gt tr,.gt th,.gt td{display:block}.gt tr{padding:12px 0;border-bottom:1px solid var(--line)}.gt th,.gt td{border:0;padding:2px 0}}
+.ab{display:grid;gap:28px}
+@media(min-width:860px){.ab{grid-template-columns:1fr 1fr;gap:48px}}
+.vl{font-weight:700;color:var(--cy2)}
+blockquote{font:700 20px/1.25 var(--disp);letter-spacing:-.01em;color:#fff;margin:10px 0 14px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px}
+dt{font-weight:700;color:var(--mut)}
+.win{margin-top:28px;font-size:14px}
+.win ol{padding-left:18px;margin-top:6px}
+
+.foot{border-top:1px solid var(--line);padding:28px 0 40px;font-size:12.5px;color:var(--mut)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.2-9.3C1.7 7.6 3.7 4.5 6.9 4.5c2 0 3.4 1.1 5.1 3 1.7-1.9 3.1-3 5.1-3 3.2 0 5.2 3.1 4.1 6.2C19.5 15.4 12 20 12 20z"/></symbol>
+<symbol id="i-com" viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-4.1a8.5 8.5 0 1 1 15.8-4.4z"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-6.5 18-4-7-7-4z"/></symbol>
+<symbol id="i-bm" viewBox="0 0 24 24"><path d="M6 3.5h12v17l-6-4.5-6 4.5z"/></symbol>
+</defs></svg>
+
+<nav class="topnav" aria-label="Propuesta"><div class="in"><a class="brand" href="../"><img src="../assets/brand/logo-blanco.png" alt="IGMA, Instituto Gallego de Música Avanzada" width="300" height="117"></a><div class="links"><a href="../">Plan</a><a href="./" aria-current="page">Anuncios</a><a href="../landing-a/">Landings</a><a href="../whatsapp/">WhatsApp</a><a href="../demo/">CRM</a><a href="../presentacion/">Presentación</a></div></div></nav>
+
+<header class="cover"><div class="wrap">
+<p class="by">Qualivo para IGMA · Meta Ads</p>
+<h1>Menos curso. Más <em>«quiero estar ahí».</em></h1>
+<p class="line">Cuatro anuncios para llenar octubre desde Vigo.</p>
+</div></header>
+
+<section class="vs" aria-labelledby="vs-t"><div class="wrap">
+<div class="vs-head"><h2 id="vs-t">Lo que vemos hoy</h2><p><b>Ya anunciáis con constancia</b>, con vídeo, carrusel y un mensaje claro: octubre, presencial, en Vigo. Es una base muy buena.</p></div>
+<div class="today">
+<div class="t"><p class="lab">Hoy · ago-sept 2026</p><figure class="ig hoy"><div class="ig-h"><span class="av"><img src="../assets/brand/isotipo.png" alt=""></span><span class="who"><b>Instituto Gallego de Música Avanzada</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<div class="ig-m flyer"><img class="ph" src="../assets/fotos/publico.jpg" alt="" style="object-position:50% 40%"><span class="play" aria-hidden="true"></span><span class="ft">Cursos octubre</span><strong>Producción<br>DJ<br>Programa superior</strong><span>Vigo · Plazas abiertas</span></div>
+<div class="ig-c"><span>Más información</span><span aria-hidden="true">›</span></div>
+<p class="long"><b>igma.es</b> 🚨 CURSOS OCTUBRE | Si la música es solo un hobby para ti, este anuncio no es para ti. Pero si alguna vez has pensado en dedicarte profesionalmente a ella, sigue leyendo… <span style="color:#8e8e8e">más</span></p></figure></div>
+<div class="t"><p class="lab">Hoy · sept-oct 2026</p><figure class="ig hoy"><div class="ig-h"><span class="av"><img src="../assets/brand/isotipo.png" alt=""></span><span class="who"><b>Instituto Gallego de Música Avanzada</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<div class="ig-m flyer"><img class="ph" src="../assets/fotos/consola.jpg" alt="" style="object-position:50% 50%"><span class="ft">Nueva convocatoria</span><strong>Tu futuro en la música</strong><span>DJ · Producción · Programa superior · Iniciación</span></div>
+<div class="ig-c"><span>Más información</span><span aria-hidden="true">›</span></div>
+<p class="long"><b>igma.es</b> TU FUTURO EN LA MÚSICA PUEDE EMPEZAR ESTE OCTUBRE. Si quieres aprender a pinchar, producir música, mejorar tu sonido… <span style="color:#8e8e8e">más</span></p></figure></div>
+</div>
+<div class="keep"><p><b>Lo que mantenemos:</b> la constancia, el «presencial en Vigo» y el pago a plazos.</p><p><b>Lo que proponemos:</b> un curso por anuncio, un gancho corto con vuestras fotos y un anuncio pensado para las familias.</p></div>
+</div></section>
+
+<section class="gal" aria-labelledby="gal-t"><div class="wrap">
+<h2 id="gal-t">Los cuatro anuncios</h2>
+<div class="grid">
+
+<article class="g" id="produccion"><p class="gl"><b>A · Producción musical</b><span>«Haz que tu música suene profesional.»</span></p>
+<figure class="ig"><div class="ig-h"><span class="av"><img src="../assets/brand/isotipo.png" alt=""></span><span class="who"><b>igma.es</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<div class="ig-m"><img class="ph" src="../presentacion/img/daw.jpg" alt="" style="object-position:62% 50%"><img class="lg" src="../assets/brand/logo-blanco.png" alt="IGMA"><h3>Haz que tu música <em>suene profesional.</em></h3></div>
+<div class="ig-c"><span>Más información</span><span aria-hidden="true">›</span></div>
+<div class="ig-a" aria-hidden="true"><svg><use href="#i-heart"/></svg><svg><use href="#i-com"/></svg><svg><use href="#i-send"/></svg><svg class="bm"><use href="#i-bm"/></svg></div>
+<p class="ig-t"><b>igma.es</b>Producción, mezcla y mastering en Vigo. Un año en estudio, desde octubre.</p></figure></article>
+
+<article class="g" id="dj"><p class="gl"><b>B · DJ profesional</b><span>«De la habitación al club.»</span></p>
+<figure class="ig"><div class="ig-h"><span class="av"><img src="../assets/brand/isotipo.png" alt=""></span><span class="who"><b>igma.es</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<div class="ig-m"><img class="ph" src="../presentacion/img/publico.jpg" alt="" style="object-position:45% 50%"><img class="lg" src="../assets/brand/logo-blanco.png" alt="IGMA"><h3>De la habitación <em>al club.</em></h3></div>
+<div class="ig-c"><span>Más información</span><span aria-hidden="true">›</span></div>
+<div class="ig-a" aria-hidden="true"><svg><use href="#i-heart"/></svg><svg><use href="#i-com"/></svg><svg><use href="#i-send"/></svg><svg class="bm"><use href="#i-bm"/></svg></div>
+<p class="ig-t"><b>igma.es</b>Platos, CDJ y controladora en cabinas individuales. Y al final, tu set grabado.</p></figure></article>
+
+<article class="g" id="familias"><p class="gl"><b>C · Para decidir en familia</b><span>«Pregunta a tus padres. Y venid juntos a conocer el estudio.»</span></p>
+<figure class="ig"><div class="ig-h"><span class="av"><img src="../assets/brand/isotipo.png" alt=""></span><span class="who"><b>igma.es</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<div class="ig-m"><img class="ph" src="../presentacion/img/estudio.jpg" alt="" style="object-position:62% 50%"><img class="lg" src="../assets/brand/logo-blanco.png" alt="IGMA"><h3>Pregunta a <em>tus padres.</em></h3></div>
+<div class="ig-c"><span>Pedir el programa</span><span aria-hidden="true">›</span></div>
+<div class="ig-a" aria-hidden="true"><svg><use href="#i-heart"/></svg><svg><use href="#i-com"/></svg><svg><use href="#i-send"/></svg><svg class="bm"><use href="#i-bm"/></svg></div>
+<p class="ig-t"><b>igma.es</b>Te enviamos el programa y el precio por escrito para verlo juntos. Y venid a conocer el estudio.</p></figure></article>
+
+<article class="g" id="visita"><p class="gl"><b>D · Visita la escuela</b><span>«Antes de decidir, ven a ver el estudio y la cabina.»</span></p>
+<figure class="ig"><div class="ig-h"><span class="av"><img src="../assets/brand/isotipo.png" alt=""></span><span class="who"><b>igma.es</b><small>Publicidad</small></span><span class="dots" aria-hidden="true">···</span></div>
+<div class="ig-m"><img class="ph" src="../assets/fotos/dj-manos.jpg" alt="" style="object-position:40% 50%"><img class="lg" src="../assets/brand/logo-blanco.png" alt="IGMA"><h3>Antes de decidir, <em>ven a verlo.</em></h3></div>
+<div class="ig-c"><span>Reservar visita</span><span aria-hidden="true">›</span></div>
+<div class="ig-a" aria-hidden="true"><svg><use href="#i-heart"/></svg><svg><use href="#i-com"/></svg><svg><use href="#i-send"/></svg><svg class="bm"><use href="#i-bm"/></svg></div>
+<p class="ig-t"><b>igma.es</b>Rúa Progreso 14, Vigo. Te enseñamos el estudio y la cabina, y resolvemos dudas.</p></figure></article>
+
+</div>
+</div></section>
+
+<section class="more"><div class="wrap">
+<details id="estrategia"><summary><span>Ver estrategia, guiones y test A/B</span><i aria-hidden="true"></i></summary>
+<div class="more-in">
+<div class="rules">
+<div><p class="k">La estrategia, en cuatro líneas</p><ul><li>Un curso por anuncio: producción y DJ por separado, cada uno con su landing.</li><li>Dos públicos: quien quiere estudiar (18-28) y quien suele pagar (madres y padres, 40-60).</li><li>El formulario pregunta quién decide y si conoce el precio, para llamar primero a quien está listo.</li><li>La visita a la escuela es el paso intermedio: en un curso de un año, ver el estudio convence más que un anuncio.</li></ul></div>
+<div><p class="k">Reglas para los cuatro</p><ul><li>Solo fotos vuestras (estudio, cabina, alumnos con permiso).</li><li>Sin premios, cifras de alumnos ni promesas de trabajo.</li><li>Sin precio en el anuncio: se envía con el programa, por escrito.</li><li>Siempre «presencial en Vigo» y «octubre» a la vista.</li></ul></div>
+</div>
+
+<section class="dt" aria-labelledby="dt-produccion"><h3 id="dt-produccion">A · Producción musical: haz que tu música suene profesional</h3>
+<div class="dt-copy"><div><p class="k">Texto principal</p><pre>Haz que tu música suene profesional.
+
+En el Programa de Producción Musical de IGMA trabajas un año en estudio: sonido, síntesis, composición, mezcla y máster, hasta grabar tus propios temas.
+
+🎛 160 horas presenciales, de octubre a julio
+🎧 Equipo profesional individual en cada clase
+💳 Pago a plazos
+
+Pide el programa y te escribimos por WhatsApp.</pre></div><div><p class="k">Titular</p><p>Producción musical en Vigo</p><p class="k">Botón</p><p>Más información</p><p class="k">Formato</p><p>4:5 · 9:16 · carrusel · vídeo 18 s</p><p class="k">Ganchos alternativos</p><ul><li>¿Tienes diez proyectos empezados y ninguno terminado?</li><li>Deja los tutoriales. Aprende en un estudio.</li><li>Tu primer tema terminado, con criterio de estudio.</li><li>¿Produces de oído y quieres saber por qué suena así?</li></ul></div></div>
+<h4>Guion de vídeo · «Proyecto sin terminar» · 18 s</h4><table class="gt"><thead><tr><th scope="col">Tiempo</th><th scope="col">Plano</th><th scope="col">Texto en pantalla</th><th scope="col">Voz</th></tr></thead><tbody>
+<tr><th scope="row">0-2 s</th><td>Pantalla de un portátil: una carpeta con diez proyectos («final_v3», «final_def»…). Un dedo baja la lista.</td><td class="ost">¿Diez temas empezados?</td><td>«¿Diez temas empezados y ninguno terminado?»</td></tr>
+<tr><th scope="row">2-6 s</th><td>Corte al estudio de IGMA: monitores, pantalla del DAW, luz baja.</td><td class="ost">Termínalos en un estudio</td><td>«Aquí los terminas. En un estudio de verdad.»</td></tr>
+<tr><th scope="row">6-11 s</th><td>Detalle de manos en la mesa y en el Push; una forma de onda que se ordena.</td><td class="ost">Síntesis · mezcla · máster</td><td>«Un año de sonido, síntesis, mezcla y máster.»</td></tr>
+<tr><th scope="row">11-15 s</th><td>Alumno de espaldas, con cascos, mueve la cabeza al ritmo. Plano abierto del aula.</td><td class="ost">Presencial · Vigo · octubre</td><td>«Presencial, en el centro de Vigo, desde octubre.»</td></tr>
+<tr><th scope="row">15-18 s</th><td>Cierre en negro: logo, línea azul y botón.</td><td class="ost">Pide el programa</td><td>«Pide el programa y te escribimos.»</td></tr>
+</tbody></table>
+<h4>Test A/B · mismo público y misma creatividad, solo cambia el gancho</h4><div class="ab"><div class="v"><p class="vl">Variante A · El resultado</p><blockquote>Haz que tu música suene profesional.</blockquote><dl><dt>Hipótesis</dt><dd>Habla del deseo (sonar bien) y llega a quien produce y a quien quiere empezar.</dd><dt>Público</dt><dd>18-28, Pontevedra y A Coruña, intereses de producción musical y Ableton.</dd><dt>Prueba</dt><dd>12 €/día durante 10 días. <em>(estimación)</em></dd></dl></div><div class="v"><p class="vl">Variante B · El atasco</p><blockquote>¿Tienes diez proyectos empezados y ninguno terminado?</blockquote><dl><dt>Hipótesis</dt><dd>Quien ya produce se reconoce y busca método. Menos volumen, más «empezar en octubre».</dd><dt>Público</dt><dd>El mismo que la A.</dd><dt>Prueba</dt><dd>12 €/día durante 10 días. <em>(estimación)</em></dd></dl></div></div><div class="win"><p><b>Criterio para decidir la ganadora</b></p><ol><li>Gana el menor coste por contacto A (empieza este año y conoce el precio).</li><li>Mínimo 15 contactos por variante.</li><li>Se confirma con las visitas a la escuela del CRM a los 21 días.</li></ol></div></section>
+
+<section class="dt" aria-labelledby="dt-dj"><h3 id="dt-dj">B · DJ profesional: de la habitación al club</h3>
+<div class="dt-copy"><div><p class="k">Texto principal</p><pre>De la habitación al club.
+
+En el Programa Profesional de DJ de IGMA aprendes con platos, CDJ y controladora, en cabinas individuales. Mezcla, técnica, construcción de sets y cómo moverte en la escena.
+
+🎧 160 horas presenciales, de octubre a julio
+🎚 Grabas tu set y tu videoset profesional
+💳 Pago a plazos
+
+Pide el programa y te escribimos por WhatsApp.</pre></div><div><p class="k">Titular</p><p>DJ profesional en Vigo</p><p class="k">Botón</p><p>Más información</p><p class="k">Formato</p><p>4:5 · 9:16 · carrusel · vídeo 15 s</p><p class="k">Ganchos alternativos</p><ul><li>¿Pinchas en casa y quieres probar una cabina de verdad?</li><li>Mezclar en casa está bien. En cabina es otra cosa.</li><li>Vinilo, CDJ y controladora. En el mismo curso.</li><li>Acaba el curso con tu set grabado.</li></ul></div></div>
+<h4>Guion de vídeo · «De la habitación al club» · 15 s</h4><table class="gt"><thead><tr><th scope="col">Tiempo</th><th scope="col">Plano</th><th scope="col">Texto en pantalla</th><th scope="col">Voz</th></tr></thead><tbody>
+<tr><th scope="row">0-2 s</th><td>Móvil vertical: una controladora pequeña en un escritorio de habitación, luz de flexo.</td><td class="ost">¿Pinchas en casa?</td><td>«¿Pinchas en casa?»</td></tr>
+<tr><th scope="row">2-5 s</th><td>Corte seco, mismo gesto con la mano, ahora en la cabina de IGMA. Sube el volumen.</td><td class="ost">Esto es una cabina</td><td>«Esto es una cabina.»</td></tr>
+<tr><th scope="row">5-9 s</th><td>Detalles rápidos: vinilo, jog de CDJ, crossfader, ecualizador.</td><td class="ost">Vinilo · CDJ · controladora</td><td>«Platos, CDJ y controladora, desde el primer día.»</td></tr>
+<tr><th scope="row">9-12 s</th><td>Pilotito rojo de grabación encendido; el alumno empieza su set.</td><td class="ost">Acabas con tu set grabado</td><td>«Y acabas con tu set grabado.»</td></tr>
+<tr><th scope="row">12-15 s</th><td>Cierre en negro: logo y botón.</td><td class="ost">DJ profesional · Vigo · octubre</td><td>«Pide el programa.»</td></tr>
+</tbody></table>
+<h4>Test A/B · mismo público y misma creatividad, solo cambia el gancho</h4><div class="ab"><div class="v"><p class="vl">Variante A · La habitación</p><blockquote>De la habitación al club.</blockquote><dl><dt>Hipótesis</dt><dd>Habla al que ya pincha: más intención de empezar.</dd><dt>Público</dt><dd>18-28, Galicia, intereses de DJ, techno, Pioneer DJ y festivales.</dd><dt>Prueba</dt><dd>12 €/día durante 10 días. <em>(estimación)</em></dd></dl></div><div class="v"><p class="vl">Variante B · El resultado</p><blockquote>Acaba el curso con tu set grabado.</blockquote><dl><dt>Hipótesis</dt><dd>Lo tangible (un set para enseñar) mueve a quien duda si le servirá.</dd><dt>Público</dt><dd>El mismo que la A.</dd><dt>Prueba</dt><dd>12 €/día durante 10 días. <em>(estimación)</em></dd></dl></div></div><div class="win"><p><b>Criterio para decidir la ganadora</b></p><ol><li>Gana el menor coste por contacto A.</li><li>Mínimo 15 contactos por variante.</li><li>Desempate: más visitas a la escuela reservadas.</li></ol></div></section>
+
+<section class="dt" aria-labelledby="dt-familias"><h3 id="dt-familias">C · Pregunta a tus padres: decidir en familia</h3>
+<div class="dt-copy"><div><p class="k">Texto principal</p><pre>¿Quieres estudiar música? Pregunta a tus padres.
+
+Te enviamos el programa y el precio por escrito, para que lo veáis juntos. En IGMA la formación es presencial, con horario fijo dos tardes por semana, grupos reducidos y profesores en activo en la industria. Un año completo, de octubre a julio, en el centro de Vigo.
+
+✓ Programa y precio por escrito
+✓ Pago a plazos
+✓ Podéis venir juntos a ver la escuela
+
+Pide el programa y venid a conocer el estudio.</pre></div><div><p class="k">Titular</p><p>El programa, por escrito</p><p class="k">Botón</p><p>Pedir el programa</p><p class="k">Formato</p><p>4:5 · carrusel de 3 · vídeo 20 s</p><p class="k">Ganchos alternativos</p><ul><li>Para madres y padres: ¿quiere dedicarse a la música? Que aprenda en serio.</li><li>Si va a estudiar música, que sea en un estudio.</li><li>Dos tardes por semana, un año, en el centro de Vigo.</li><li>Antes de pagar nada, venid a verlo.</li></ul></div></div>
+<h4>Guion de vídeo · «Dos tardes por semana» · 20 s</h4><table class="gt"><thead><tr><th scope="col">Tiempo</th><th scope="col">Plano</th><th scope="col">Texto en pantalla</th><th scope="col">Voz</th></tr></thead><tbody>
+<tr><th scope="row">0-3 s</th><td>Puerta de una habitación entreabierta; dentro, alguien con cascos frente al ordenador.</td><td class="ost">¿Quiere dedicarse a la música?</td><td>«¿Tu hijo quiere dedicarse a la música?»</td></tr>
+<tr><th scope="row">3-8 s</th><td>Entrada a IGMA desde la calle; recepción y pasillo hacia el estudio.</td><td class="ost">Presencial · centro de Vigo</td><td>«En IGMA se forma en persona, en el centro de Vigo.»</td></tr>
+<tr><th scope="row">8-13 s</th><td>Clase en marcha: profesor de espaldas señalando la pantalla; alumnos con su equipo.</td><td class="ost">Horario fijo · grupos reducidos</td><td>«Dos tardes por semana, grupos reducidos y profesores en activo.»</td></tr>
+<tr><th scope="row">13-17 s</th><td>Mesa con el programa impreso y un móvil con WhatsApp.</td><td class="ost">Programa y precio por escrito</td><td>«Os enviamos el programa y el precio por escrito, con pago a plazos.»</td></tr>
+<tr><th scope="row">17-20 s</th><td>Cierre: logo y botón.</td><td class="ost">Venid a verlo</td><td>«Y si queréis, venid juntos a verlo.»</td></tr>
+</tbody></table>
+<h4>Test A/B · misma creatividad; cambian el gancho y a quién habla</h4><div class="ab"><div class="v"><p class="vl">Variante A · Al alumno</p><blockquote>Pregunta a tus padres.</blockquote><dl><dt>Hipótesis</dt><dd>El joven pide el programa para enseñarlo en casa: llega con la familia ya hablando del tema.</dd><dt>Público</dt><dd>18-24, Pontevedra y A Coruña, intereses de producción musical y DJ.</dd><dt>Prueba</dt><dd>10 €/día durante 10 días. <em>(estimación)</em></dd></dl></div><div class="v"><p class="vl">Variante B · A la familia</p><blockquote>¿Quiere dedicarse a la música? Que aprenda en serio.</blockquote><dl><dt>Hipótesis</dt><dd>Habla directamente a quien suele pagar. Menos volumen, más decisión.</dd><dt>Público</dt><dd>40-60, la misma zona, Advantage+ con intereses de educación y música.</dd><dt>Prueba</dt><dd>10 €/día durante 10 días. <em>(estimación)</em></dd></dl></div></div><div class="win"><p><b>Criterio para decidir la ganadora</b></p><ol><li>Gana el menor coste por visita a la escuela reservada.</li><li>Mínimo 10 visitas por variante.</li><li>Si una trae más matrículas en el CRM, gana aunque cueste más.</li></ol></div></section>
+
+<section class="dt" aria-labelledby="dt-visita"><h3 id="dt-visita">D · Visita la escuela: antes de decidir, ven a verlo</h3>
+<div class="dt-copy"><div><p class="k">Texto principal</p><pre>Antes de decidir, ven a ver el estudio y la cabina.
+
+Te enseñamos las aulas, pruebas el equipo y te contamos cómo es un curso en IGMA: horarios, programa y formas de pago. Puedes venir con tu familia.
+
+📍 Rúa Progreso 14, Vigo
+🗓 Tardes de lunes a jueves
+💬 Te confirmamos por WhatsApp
+
+Reserva tu visita.</pre></div><div><p class="k">Titular</p><p>Visita IGMA en Vigo</p><p class="k">Botón</p><p>Reservar</p><p class="k">Formato</p><p>4:5 · 9:16 · vídeo 15 s, para remarketing</p><p class="k">Ganchos alternativos</p><ul><li>¿Lo estás pensando? Ven a verlo.</li><li>Prueba la cabina antes de apuntarte.</li><li>Un año de curso se decide mejor en persona.</li></ul></div></div>
+<h4>Guion de vídeo · «Pasa» · 15 s</h4><table class="gt"><thead><tr><th scope="col">Tiempo</th><th scope="col">Plano</th><th scope="col">Texto en pantalla</th><th scope="col">Voz</th></tr></thead><tbody>
+<tr><th scope="row">0-2 s</th><td>Plano subjetivo: una mano abre la puerta de IGMA.</td><td class="ost">¿Lo estás pensando?</td><td>«¿Lo estás pensando?»</td></tr>
+<tr><th scope="row">2-6 s</th><td>Recorrido en un solo plano: pasillo, estudio, cabina.</td><td class="ost">Ven a verlo</td><td>«Ven a verlo.»</td></tr>
+<tr><th scope="row">6-11 s</th><td>Alguien del equipo (sin nombre en pantalla) ofrece unos cascos a cámara.</td><td class="ost">Prueba el equipo</td><td>«Prueba el equipo y pregunta lo que quieras.»</td></tr>
+<tr><th scope="row">11-15 s</th><td>Cierre: dirección, logo y botón.</td><td class="ost">Rúa Progreso 14 · Vigo</td><td>«Reserva tu visita.»</td></tr>
+</tbody></table>
+<h4>Test A/B · mismo público y misma creatividad, solo cambia el gancho</h4><div class="ab"><div class="v"><p class="vl">Variante A · La duda</p><blockquote>¿Lo estás pensando? Ven a verlo.</blockquote><dl><dt>Hipótesis</dt><dd>Recoge a quien visitó la landing y no dejó datos.</dd><dt>Público</dt><dd>Remarketing: visitas a la landing y a igma.es de los últimos 30 días.</dd><dt>Prueba</dt><dd>6 €/día durante 14 días. <em>(estimación)</em></dd></dl></div><div class="v"><p class="vl">Variante B · La prueba</p><blockquote>Prueba la cabina antes de apuntarte.</blockquote><dl><dt>Hipótesis</dt><dd>Lo físico (tocar el equipo) empuja más a reservar.</dd><dt>Público</dt><dd>El mismo que la A.</dd><dt>Prueba</dt><dd>6 €/día durante 14 días. <em>(estimación)</em></dd></dl></div></div><div class="win"><p><b>Criterio para decidir la ganadora</b></p><ol><li>Gana el menor coste por visita realizada (no solo reservada).</li><li>Mínimo 8 visitas por variante.</li><li>La ganadora se queda fija en remarketing hasta el cierre de matrícula.</li></ol></div></section>
+
+</div></details>
+</div></section>
+
+<footer class="foot"><div class="wrap"><p>Maqueta de Qualivo. Fotos de igma.es y datos de ejemplo; los anuncios de «Hoy» están redibujados de la Biblioteca de anuncios de Meta (10-nov-2026).</p></div></footer>
+<script>
+/* Abre el desplegable si se llega con #estrategia. */
+(function(){var d=document.getElementById('estrategia');if(location.hash==='#estrategia'&&d)d.open=true;})();
+</script>
+</body>
+</html>

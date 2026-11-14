@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Marín Clínica Dental · WhatsApp</title>
+<link rel="icon" href="../assets/brand/diente-blanco.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+/* Simulador de WhatsApp · Qualivo × Marín Clínica Dental: azul #56618A, marino #2F3854, Montserrat. */
+:root{
+  --paper:#FCFBF9;--surface:#FFFFFF;--surface-2:#F8F6F2;--ink:#0E1A2B;--ink-2:#22344A;--muted:#536378;--line:#E4DED4;
+  --brand:#56618A;--navy:#2F3854;--deep:#2F3854;--accent:#3B4670;--accent-soft:#F5F2ED;
+  --sys:#3B4670;--sys-soft:#F5F2ED;--adm:#12805A;--adm-soft:#E0F3EA;--per:#8A5A00;--per-soft:#FFF3C4;--alu:#56687A;--alu-soft:#ECF0F3;
+  --ej:#A86A00;
+  --shadow:0 1px 2px rgba(11,42,69,.06),0 12px 30px -16px rgba(11,42,69,.25);
+  --head:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --sans:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#061723;--surface:#0B2131;--surface-2:#0F293C;--ink:#E8F3FA;--ink-2:#CFE2EE;--muted:#9DB6C7;--line:#1D3C52;
+  --accent:#CDBB9C;--accent-soft:#0E3550;--sys:#CDBB9C;--sys-soft:#0E3550;--adm:#6FD3A0;--adm-soft:#103024;--per:#F2C26B;--per-soft:#2E2614;--alu:#9DB6C7;--alu-soft:#16303F;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px -16px rgba(0,0,0,.65);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#061723;--surface:#0B2131;--surface-2:#0F293C;--ink:#E8F3FA;--ink-2:#CFE2EE;--muted:#9DB6C7;--line:#1D3C52;
+  --accent:#CDBB9C;--accent-soft:#0E3550;--sys:#CDBB9C;--sys-soft:#0E3550;--adm:#6FD3A0;--adm-soft:#103024;--per:#F2C26B;--per-soft:#2E2614;--alu:#9DB6C7;--alu-soft:#16303F;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px -16px rgba(0,0,0,.65);color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--head)}
+button{font:inherit;color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:8px}
+.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* barra superior (común) */
+.topnav{position:sticky;top:0;z-index:40;background:rgba(11,42,69,.95);color:#fff;backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.topnav .in{max-width:1180px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.topnav .brand{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0}
+.topnav .qv{font-family:var(--head);font-weight:800;font-size:14.5px}
+.topnav .x{font-size:13px;opacity:.6}
+.topnav img.lgo{height:40px;margin:-4px 0;width:auto;display:block}
+.topnav .by{font-size:11.5px;opacity:.6;white-space:nowrap}
+.topnav .links{display:flex;gap:3px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:99px;padding:3px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.topnav .links::-webkit-scrollbar{display:none}
+.topnav .links a{color:rgba(255,255,255,.84);text-decoration:none;font-family:var(--head);font-weight:600;font-size:13px;padding:6px 12px;border-radius:99px;white-space:nowrap;transition:background .2s,color .2s}
+.topnav .links a:hover{background:rgba(255,255,255,.12);color:#fff}
+.topnav .links a[aria-current="page"]{background:#fff;color:var(--navy);box-shadow:0 4px 14px -6px rgba(0,0,0,.4)}
+@media (max-width:640px){.topnav .by{display:none}.topnav .links{width:100%}.topnav .links a{padding:6px 10px;font-size:12.5px}}
+
+/* cabecera del simulador */
+.stage{max-width:1240px;margin-inline:auto;padding:18px 16px 28px}
+@media (min-width:900px){.stage{padding:20px 32px 32px}}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 20px;margin-bottom:14px}
+.top .k{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ejb{display:inline-flex;align-items:center;gap:5px;background:#FFF3C4;color:#7A4E00;border:1px solid #F3D67A;border-radius:99px;padding:2px 9px;font-size:10.5px;letter-spacing:.06em}
+.top h1{font-size:clamp(21px,2.3vw,28px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.top h1 em{font-style:normal;color:var(--brand)}
+.fsbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:7px 14px;font-family:var(--head);font-weight:600;font-size:13px;cursor:pointer}
+.fsbtn:hover{border-color:var(--brand)}
+
+/* pestañas de escenarios */
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin-bottom:16px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;display:flex;align-items:center;gap:10px;text-align:left;border:0;background:transparent;border-radius:12px;padding:9px 14px;cursor:pointer;min-width:0;transition:background .2s,color .2s}
+.tab .n{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);color:var(--accent);font-family:var(--head);font-weight:800;font-size:13px}
+.tab b{display:block;font-family:var(--head);font-weight:700;font-size:13px;line-height:1.25;white-space:nowrap}
+.tab small{display:block;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.tab:hover{background:var(--surface-2)}
+@media (min-width:1100px){.tabs{display:grid;grid-template-columns:repeat(5,1fr)}.tab b{white-space:normal}.tab small{display:none}.tab{padding:9px 12px}}
+.tab[aria-selected="true"]{background:linear-gradient(135deg,#56618A 0%,#2F3854 100%);color:#fff}
+.tab[aria-selected="true"] .n{background:#fff;color:var(--navy)}
+.tab[aria-selected="true"] small{color:rgba(255,255,255,.8)}
+
+/* rejilla principal */
+.grid{display:grid;gap:22px;align-items:start}
+@media (min-width:980px){.grid{grid-template-columns:minmax(380px,440px) 1fr;gap:34px}}
+.phonecol{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
+
+/* controles */
+.ctrls{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.cb{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:8px 14px;font-family:var(--head);font-weight:700;font-size:13px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s,border-color .2s,background .2s}
+.cb:hover{border-color:var(--brand);transform:translateY(-1px)}
+.cb.primary{background:#56618A;color:#fff;border-color:#56618A}
+.cb.primary:hover{background:#1A8FDB}
+.cb[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.prog{width:min(100%,400px);height:4px;border-radius:99px;background:var(--line);overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#56618A,#2F3854);transition:width .4s}
+
+/* el móvil */
+.phone{position:relative;width:min(100%,400px);height:clamp(540px,calc(100vh - 300px),840px);border-radius:46px;padding:12px;background:#0B0F12;box-shadow:0 0 0 2px #2A3138,0 40px 80px -30px rgba(0,40,70,.55),0 10px 30px -10px rgba(0,0,0,.35)}
+.phone::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:96px;height:26px;border-radius:99px;background:#000;z-index:5}
+.screen{position:relative;height:100%;border-radius:36px;overflow:hidden;display:flex;flex-direction:column;background:#EFE7DD;color:#111B21;font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",var(--sans);color-scheme:light}
+.sbar{flex:none;height:44px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 6px 30px;background:#075E54;color:#fff;font-size:13.5px;font-weight:600}
+.sbar .ic{display:flex;gap:5px;align-items:center}
+.wahead{flex:none;display:flex;align-items:center;gap:10px;padding:6px 12px 9px 8px;background:#075E54;color:#fff}
+.wahead .back{display:flex;align-items:center;opacity:.95}
+.wahead .av{width:38px;height:38px;border-radius:50%;background:#56618A;display:grid;place-items:center;overflow:hidden;flex:none}
+.wahead .av img{width:24px;height:24px;object-fit:contain}
+.wahead .who{min-width:0;flex:1}
+.wahead .who b{display:flex;align-items:center;gap:4px;font-size:15.5px;font-weight:600;white-space:nowrap;min-width:0}
+.wahead .who b span{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.wahead .who b svg{flex:none}
+.wahead .who small{display:block;font-size:12px;opacity:.85;height:16px;transition:color .2s}
+.wahead .who small.typing{color:#B5F5D9;opacity:1}
+.wahead .acts{display:flex;gap:16px;opacity:.95}
+.chat{flex:1;overflow-y:auto;overflow-x:hidden;padding:10px 10px 14px;scrollbar-width:none;
+  background-color:#EFE7DD;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23C9BBA6' stroke-width='1.3' opacity='.55' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='20' r='7'/%3E%3Cpath d='M70 12l6 10h-12z'/%3E%3Cpath d='M100 30c4-6 12-6 12 2 0 6-12 12-12 12s-12-6-12-12c0-8 8-8 12-2z' transform='scale(.7) translate(40 6)'/%3E%3Cpath d='M14 70h18M23 61v18'/%3E%3Crect x='56' y='56' width='16' height='12' rx='3'/%3E%3Cpath d='M92 74c4-8 14-8 18 0'/%3E%3Cpath d='M20 104l8-8 8 8-8 8z'/%3E%3Ccircle cx='70' cy='104' r='3'/%3E%3Cpath d='M96 100h14v10H96z'/%3E%3Cpath d='M44 36c3 4 9 4 12 0'/%3E%3Cpath d='M40 88l4 6 4-6'/%3E%3C/g%3E%3C/svg%3E");}
+.chat::-webkit-scrollbar{display:none}
+.sec{display:flex;justify-content:center;margin:6px 0 4px}
+.sec span{background:#E1F2FB;color:#54656F;font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:8px;box-shadow:0 1px .5px rgba(11,20,26,.13);text-transform:uppercase;letter-spacing:.02em}
+.encr{margin:2px auto 10px;max-width:290px;background:#FFF5C4;color:#54656F;font-size:11.5px;line-height:1.45;padding:6px 10px;border-radius:8px;text-align:center;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.skip{display:flex;justify-content:center;margin:12px 0 8px}
+.skip span{display:inline-flex;align-items:center;gap:6px;background:rgba(11,42,69,.88);text-align:center;color:#fff;font-family:var(--head);font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:99px;letter-spacing:.02em}
+.row{display:flex;margin:2px 0;animation:pop .32s cubic-bezier(.2,.9,.3,1.2) both}
+.row.out{justify-content:flex-end}
+.row.first{margin-top:8px}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+.bub{position:relative;max-width:82%;white-space:pre-line;padding:6px 8px 8px 9px;border-radius:8px;font-size:14.2px;line-height:1.38;box-shadow:0 1px .5px rgba(11,20,26,.13);word-wrap:break-word;overflow-wrap:anywhere}
+.in .bub{background:#fff;border-top-left-radius:0}
+.out .bub{background:#D9FDD3;border-top-right-radius:0}
+.row.first.in .bub::before{content:"";position:absolute;top:0;left:-7px;border:0 solid transparent;border-top:9px solid #fff;border-left:8px solid transparent}
+.row.first.out .bub::before{content:"";position:absolute;top:0;right:-7px;border-top:9px solid #D9FDD3;border-right:8px solid transparent}
+.row:not(.first).in .bub{border-top-left-radius:8px}
+.row:not(.first).out .bub{border-top-right-radius:8px}
+.bub .meta{float:right;display:inline-flex;align-items:center;gap:3px;margin:6px 0 -4px 10px;font-size:11px;color:#667781;white-space:nowrap;position:relative;top:4px}
+.ticks{width:16px;height:11px;color:#8696A0;transition:color .4s}
+.ticks.read{color:#53BDEB}
+.bub .from{display:block;font-size:12.5px;font-weight:700;color:#3B4670;margin-bottom:1px}
+.btns{display:flex;flex-direction:column;gap:3px;margin-top:3px;max-width:82%}
+.btns span{background:#fff;color:#027EB5;text-align:center;font-size:14px;font-weight:600;padding:8px;border-radius:8px;box-shadow:0 1px .5px rgba(11,20,26,.13);display:flex;align-items:center;justify-content:center;gap:6px}
+.btns span.hit{animation:hit .5s ease both}
+@keyframes hit{50%{background:#E1F2FB;transform:scale(.97)}}
+.colw{display:flex;flex-direction:column;align-items:flex-start;max-width:100%}
+.call{display:flex;align-items:center;gap:10px;min-width:210px}
+.call .ci{width:34px;height:34px;border-radius:50%;background:#F0F2F5;display:grid;place-items:center;color:#EA0038}
+.call b{display:block;font-size:14px;font-weight:600}
+.call small{display:block;font-size:12px;color:#667781}
+.loc{width:240px;margin:-2px -4px 4px -5px;border-radius:6px;overflow:hidden;height:118px;position:relative;
+  background:#E8EEF1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='118'%3E%3Crect width='240' height='118' fill='%23E9EEF0'/%3E%3Cpath d='M0 92 C60 70 120 110 240 64 V118 H0Z' fill='%23AADAFF'/%3E%3Cpath d='M0 30 L240 52 M70 0 L96 118 M160 0 L140 118 M0 72 L240 20' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M0 30 L240 52 M70 0 L96 118' stroke='%23FCE9A4' stroke-width='3'/%3E%3Crect x='14' y='6' width='40' height='18' fill='%23D8EFD8'/%3E%3Crect x='178' y='70' width='46' height='22' fill='%23D8EFD8'/%3E%3C/svg%3E") center/cover}
+.loc .pin{position:absolute;left:50%;top:44%;transform:translate(-50%,-100%);color:#EA4335}
+.lt b{display:block;font-size:14px;font-weight:600}
+.lt small{display:block;font-size:12px;color:#667781}
+.att{display:flex;gap:4px;margin:-2px -4px 4px -5px}
+.att i{display:block;width:96px;height:84px;border-radius:6px;background:linear-gradient(135deg,#C8D8E4,#9FB4C4);position:relative}
+.att i::after{content:"";position:absolute;inset:22px 26px;border:2px solid rgba(255,255,255,.85);border-radius:3px}
+.typ{display:flex;margin:4px 0;animation:pop .25s ease both}
+.typ .bub{background:#fff;border-top-left-radius:0;padding:10px 12px}
+.dots{display:flex;gap:4px}
+.dots i{width:7px;height:7px;border-radius:50%;background:#90A0AA;animation:dot 1.1s infinite}
+.dots i:nth-child(2){animation-delay:.18s}.dots i:nth-child(3){animation-delay:.36s}
+@keyframes dot{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.compose{flex:none;display:flex;align-items:center;gap:6px;padding:7px 8px 14px;background:#F0F2F5}
+.compose .fld{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:#fff;border-radius:99px;padding:9px 12px;color:#8696A0;font-size:14.5px}
+.compose .fld span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.compose .mic{width:42px;height:42px;border-radius:50%;background:#00A884;color:#fff;display:grid;place-items:center;flex:none}
+.endcard{display:flex;justify-content:center;margin:14px 0 6px}
+.endcard button{border:0;cursor:pointer;background:#2F3854;color:#fff;font-family:var(--head);font-weight:700;font-size:12.5px;padding:8px 14px;border-radius:99px;display:inline-flex;gap:6px;align-items:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.5)}
+
+.form{margin:10px auto 10px;width:min(92%,300px);background:#fff;border-radius:12px;box-shadow:0 1px .5px rgba(11,20,26,.13),0 8px 20px -12px rgba(11,42,69,.4);overflow:hidden;animation:pop .32s ease both;font-family:var(--head)}
+.form .fh{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#56618A 0%,#2F3854 100%);color:#fff;padding:8px 12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.form .fh img{width:16px;height:16px}
+.form .fb{padding:9px 12px 10px;font-size:12.5px;color:#22344A;line-height:1.5}
+.form .fb b{display:block;font-size:13px;color:#0E1A2B;margin-bottom:4px}
+.form .fb div{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #EEF2F6;padding:3px 0}
+.form .fb div span:first-child{color:#667781}
+.form .fb div span:last-child{font-weight:600;text-align:right}
+.form .ft{font-size:11px;color:#667781;padding:0 12px 9px;display:flex;align-items:center;gap:5px}
+.form .ft::before{content:"";width:7px;height:7px;border-radius:50%;background:#25D366}
+
+/* panel «Qué está pasando» */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+@media (min-width:980px){.panel{height:clamp(540px,calc(100vh - 244px),900px);position:sticky;top:76px}}
+.ph{padding:18px 20px 14px;border-bottom:1px solid var(--line);background:linear-gradient(120deg,#2F3854 0%,#262D45 60%,#2F3854 100%);color:#fff}
+.ph h2{font-size:20px;font-weight:800;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.ph h2 .live{width:9px;height:9px;border-radius:50%;background:#3BE38B;box-shadow:0 0 0 0 rgba(59,227,139,.6);animation:live 1.6s infinite}
+.ph h2 .live.off{background:#9DB6C7;animation:none}
+@keyframes live{70%{box-shadow:0 0 0 10px rgba(59,227,139,0)}100%{box-shadow:0 0 0 0 rgba(59,227,139,0)}}
+.ph p{font-size:13.5px;opacity:.85;margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.03em;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.chip.sys{background:var(--sys-soft);color:var(--sys)}
+.chip.adm{background:var(--adm-soft);color:var(--adm)}
+.chip.per{background:var(--per-soft);color:var(--per)}
+.chip.alu{background:var(--alu-soft);color:var(--alu)}
+.ph .chip.sys{background:#F5F2ED;color:#3B4670}.ph .chip.adm{background:#E0F3EA;color:#12805A}.ph .chip.per{background:#FFF3C4;color:#8A5A00}.ph .chip.alu{background:#ECF0F3;color:#56687A}
+.chip svg{width:12px;height:12px}
+.steps{list-style:none;margin:0;padding:14px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.st{position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);opacity:.38;transition:opacity .35s,background .35s,border-color .35s,transform .35s,box-shadow .35s}
+.st .tm{grid-row:span 2;font-family:var(--head);font-weight:700;font-size:12px;color:var(--muted);min-width:52px;padding-top:2px;font-variant-numeric:tabular-nums}
+.st .cs{display:flex;flex-wrap:wrap;gap:5px}
+.st p{font-size:14px;line-height:1.5;color:var(--ink-2)}
+.st p b{color:var(--ink)}
+.st.done{opacity:.72}
+.st.now{opacity:1;background:var(--accent-soft);border-color:var(--brand);box-shadow:0 0 0 3px rgba(201,183,154,.2),var(--shadow);transform:scale(1.015)}
+.st.now::before{content:"";position:absolute;left:-1px;top:12px;bottom:12px;width:4px;border-radius:0 4px 4px 0;background:#56618A}
+.st.gap{background:transparent;border-style:dashed}
+.st.gap .tm{color:var(--accent)}
+@media (max-width:979px){.steps{max-height:430px}}
+.wahead .acts svg:first-child{display:none}
+.wahead .who b{font-size:14.5px}
+@media (max-width:420px){.wahead .who b{font-size:13.5px}.wahead .acts{display:none}.wahead{gap:8px}}
+.fsl{display:none}
+.pf{padding:12px 18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);display:flex;gap:8px;align-items:flex-start;background:var(--surface-2)}
+.pf svg{flex:none;margin-top:2px;color:var(--ej)}
+
+/* pantalla completa */
+:fullscreen body,body.fs{background:var(--paper)}
+body.fs .topnav{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"><style>h1,h2,.hero h1,.s h2{font-family:"Yeseva One",Georgia,serif!important;font-weight:400!important;letter-spacing:0!important}</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tk" viewBox="0 0 16 11"><path d="M11.07.65l-6.4 7.9-2.5-2.37-.94 1 3.5 3.32 7.4-9.13zM15.07.65l-6.4 7.9-.83-.79-.92 1.06 1.85 1.75 7.4-9.13z" fill="currentColor"/></symbol>
+  <symbol id="vf" viewBox="0 0 18 18"><path d="M9 0l2.2 1.6 2.7-.1.8 2.6 2.2 1.6-.9 2.6.9 2.6-2.2 1.6-.8 2.6-2.7-.1L9 18l-2.2-1.6-2.7.1-.8-2.6-2.2-1.6.9-2.6-.9-2.6 2.2-1.6.8-2.6 2.7.1z" fill="#25D366"/><path d="M5.3 9.2l2.4 2.4 5-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 4h3.5v16H7zM13.5 4H17v16h-3.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="i-fast" viewBox="0 0 24 24"><path d="M4 5v14l8-7zM12 5v14l8-7z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-full" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+  <symbol id="i-sys" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+</svg>
+
+<nav class="topnav" aria-label="Paquete Marín Clínica Dental">
+  <div class="in">
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><img class="lgo" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental" width="93" height="40"></div>
+    <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="../landing-a/">Landings</a><a href="../recorrido/">Recorrido</a><a href="./" aria-current="page">WhatsApp</a><a href="../demo/">CRM</a><a href="https://qualivo.io/intelligence/?sector=dentalmarin&amp;empresa=Cl%C3%ADnica%20Dental%20Mar%C3%ADn&amp;objetivo=conversion">Intelligence</a><a href="../presentacion/">Presentación</a></div>
+  </div>
+</nav>
+
+<main class="stage">
+  <div class="top">
+    <div>
+      <p class="k">Simulador de WhatsApp <span class="ejb">Datos de ejemplo</span></p>
+      <h1>Así le llega a un paciente: <em>rápido, cercano y con una persona de la clínica detrás</em></h1>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Escenarios" id="tabs"></div>
+
+  <div class="grid">
+    <div class="phonecol">
+      <div class="ctrls">
+        <button class="cb primary" id="play" type="button"><svg class="i"><use href="#i-pause"/></svg><span>Pausa</span></button>
+        <button class="cb" id="reset" type="button"><svg class="i"><use href="#i-reset"/></svg>Reiniciar</button>
+        <button class="cb" id="speed" type="button" aria-pressed="false"><svg class="i"><use href="#i-fast"/></svg>x2</button>
+        <button class="cb" id="fs" type="button" title="Pantalla completa (F)"><svg class="i"><use href="#i-full"/></svg><span class="fsl">Pantalla completa</span></button>
+      </div>
+      <div class="prog" aria-hidden="true"><i id="bar"></i></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="sbar"><span id="clock">23:40</span><span class="ic">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1" opacity=".45"/></svg>
+            <svg width="15" height="11" viewBox="0 0 15 11" fill="#fff"><path d="M7.5 2.2c2.1 0 4 .8 5.4 2.1l1.1-1.1A9.2 9.2 0 0 0 7.5.6 9.2 9.2 0 0 0 1 3.2l1.1 1.1a7.6 7.6 0 0 1 5.4-2.1zm0 3.1c1.2 0 2.4.5 3.2 1.3l1.1-1.1a6.1 6.1 0 0 0-8.6 0l1.1 1.1c.8-.8 2-1.3 3.2-1.3zm0 3.1c.4 0 .7.1 1 .4L7.5 10 6.5 8.8c.3-.3.6-.4 1-.4z"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3.5" fill="none" stroke="#fff" opacity=".5"/><rect x="2" y="2" width="15" height="8" rx="2" fill="#fff"/><rect x="23" y="4" width="1.6" height="4" rx=".8" fill="#fff" opacity=".5"/></svg>
+          </span></div>
+          <div class="wahead">
+            <span class="back"><svg width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg></span>
+            <span class="av"><img src="../assets/brand/diente-blanco.png" alt=""></span>
+            <div class="who"><b><span id="waname">Marín Clínica Dental · Torrent</span> <svg width="15" height="15"><use href="#vf"/></svg></b><small id="status">en línea</small></div>
+            <div class="acts">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="13" height="12" rx="2"/><path d="M15 10.5l6-3.5v10l-6-3.5"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+            </div>
+          </div>
+          <div class="chat" id="chat" aria-live="polite"></div>
+          <div class="compose">
+            <div class="fld"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8696A0" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1.8 2 5.2 2 7 0M9 9.5h.01M15 9.5h.01"/></svg><span>Mensaje</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8696A0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l7.9-7.9"/></svg></div>
+            <span class="mic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="panel" aria-label="Qué está pasando">
+      <div class="ph">
+        <h2><span class="live" id="live"></span>Qué está pasando</h2>
+        <p id="pdesc">Cada mensaje del móvil, explicado: quién lo prepara y quién lo decide.</p>
+        <div class="legend">
+          <span class="chip sys"><svg class="i"><use href="#i-sys"/></svg>Sistema</span>
+          <span class="chip adm"><svg class="i"><use href="#i-ok"/></svg>Recepción aprueba</span>
+          <span class="chip per"><svg class="i"><use href="#i-user"/></svg>Persona</span>
+          <span class="chip alu"><svg class="i"><use href="#i-msg"/></svg>Paciente</span>
+        </div>
+      </div>
+      <ol class="steps" id="steps"></ol>
+      <div class="pf"><svg class="i"><use href="#i-info"/></svg><span><b>Datos de ejemplo.</b> Pacientes, mensajes, horas y huecos de agenda son inventados para enseñar el funcionamiento. Los nombres de recepción (Paula en Patraix, Rocío en Torrent) también. Por WhatsApp no se dan precios, condiciones de financiación ni diagnósticos: eso lo explica la clínica en persona. Los textos definitivos los aprueba la clínica.</span></div>
+    </section>
+  </div>
+</main>
+
+<script>
+/* Tipos de paso:
+   d    = separador de día en el chat
+   form = tarjeta del formulario del anuncio
+   in   = mensaje del paciente (derecha, verde, doble check)
+   out  = mensaje de la clínica (izquierda, blanco), con «escribiendo…» antes
+   call = llamada de recepción
+   loc  = ubicación de la sede
+   gap  = salto de tiempo
+   c    = chips del panel: sys, adm, per, alu */
+const S = [
+ {t:"Pide implantes a las 22:00 desde el anuncio", s:"Torrent · fuera de horario", sede:"Torrent", desc:"Carmen rellena el formulario del anuncio por la noche. En minutos le escribe la clínica de Torrent, le hace tres preguntas cortas y le aparta un hueco para la primera visita.", steps:[
+  {k:"d", t:"Martes, 10 de noviembre"},
+  {k:"form", h:"22:00", t:"Anuncio «Implante desde 1 €/día»", c:["per"], n:"<b>Carmen rellena el formulario del anuncio</b> de implantes a las 22:00. Nombre, teléfono y sede: Torrent. La clínica está cerrada."},
+  {k:"out", h:"22:03", t:"¡Hola, Carmen! Soy el asistente de Marín Clínica Dental en Torrent 🙂 Hemos recibido tu solicitud sobre implantes. Para que el equipo te pueda atender bien, ¿te hago tres preguntas muy cortas?", btns:["Sí, claro","Mejor llamadme"], c:["sys"], n:"<b>En 3 minutos le llega el WhatsApp desde la sede de Torrent.</b> El sistema crea su ficha y la asigna a Rocío, de recepción. El texto lo aprobó la clínica de antemano."},
+  {k:"in", h:"22:05", t:"Sí, claro", tap:0, c:["per"], n:"<b>Carmen acepta con un toque.</b>"},
+  {k:"out", h:"22:05", t:"Gracias 😊 La primera: ¿qué te pasa? Por ejemplo, te falta alguna pieza, se te mueve un diente o llevas prótesis y no estás a gusto.", c:["sys"], n:"<b>Pregunta 1: qué le pasa</b>, con sus palabras. El sistema no diagnostica: solo recoge lo que cuenta para que recepción llegue preparada."},
+  {k:"in", h:"22:07", t:"Me falta una muela de abajo desde hace tiempo y ahora me molesta al masticar por ese lado", c:["per"], n:"<b>Carmen lo cuenta con sus palabras.</b> Queda apuntado en su ficha."},
+  {k:"out", h:"22:07", t:"Entendido, gracias por contármelo. ¿Desde cuándo te pasa, más o menos?", btns:["Unas semanas","Unos meses","Más de un año"], c:["sys"], n:"<b>Pregunta 2: desde cuándo.</b> Respuesta con un toque."},
+  {k:"in", h:"22:08", t:"Más de un año", tap:2, c:["per"], n:"<b>Más de un año.</b> El sistema lo anota."},
+  {k:"out", h:"22:08", t:"Y la última: ¿te gustaría que en la visita te expliquen también la opción de pagar el tratamiento en cuotas?", btns:["Sí, me interesa","No hace falta"], c:["sys"], n:"<b>Pregunta 3: interés en cuotas.</b> No se dan cifras ni condiciones por WhatsApp: eso lo explica recepción en persona."},
+  {k:"in", h:"22:09", t:"Sí, me interesa", tap:0, c:["per"], n:"<b>Le interesan las cuotas.</b> Rocío lo verá marcado en la ficha."},
+  {k:"out", h:"22:10", t:"Perfecto, Carmen. El primer paso es una visita en la clínica para que el equipo te vea con calma y te explique las opciones. Tengo estos dos huecos en Torrent, ¿cuál te viene mejor?", btns:["Jueves 12 · 17:30","Viernes 13 · 10:00","Otro día"], c:["sys"], n:"<b>Propone 2 huecos reales</b> de primera visita, sacados de la agenda de Torrent. Sin promesas de resultado: el diagnóstico lo hace el equipo en la visita."},
+  {k:"in", h:"22:11", t:"Jueves 12 · 17:30", tap:0, c:["per"], n:"<b>Carmen elige el jueves a las 17:30.</b>"},
+  {k:"out", h:"22:11", t:"¡Apuntado! Te dejo apartado el jueves 12 a las 17:30 en Torrent. Mañana a primera hora Rocío, de recepción, te lo confirma por aquí. ¡Que descanses! 🌙", c:["sys"], n:"<b>El hueco queda apartado</b> en la agenda, pendiente de que recepción lo confirme. Nadie ha tenido que trabajar de noche."},
+  {k:"gap", h:"Noche", c:["sys"], n:"<b>El sistema deja a Rocío el resumen</b>: qué le pasa, desde cuándo, interés en cuotas y el hueco elegido."},
+  {k:"d", t:"Miércoles, 11 de noviembre"},
+  {k:"out", h:"9:04", from:"Rocío · Recepción Torrent", t:"¡Buenos días, Carmen! Soy Rocío, de recepción. Te confirmo tu primera visita el jueves 12 a las 17:30 aquí en Torrent ✅ Y ya tengo anotado que quieres que te expliquemos lo de las cuotas.", c:["sys","adm"], n:"<b>El sistema prepara la confirmación</b> · <b>Rocío la revisa y la envía con un toque</b> al llegar."},
+  {k:"in", h:"9:12", t:"Genial, muchas gracias Rocío!", c:["per"], n:"<b>De un formulario a las 22:00 a una cita confirmada a las 9:04.</b>"}
+ ]},
+ {t:"Primera visita: confirmación y recordatorios", s:"Torrent · 24 h y 2 h antes", sede:"Torrent", desc:"Con la cita confirmada, Carmen recibe lo justo y cuando toca. Y si un día no puede venir, nadie le riñe: se le busca otro hueco.", steps:[
+  {k:"d", t:"Miércoles, 11 de noviembre"},
+  {k:"out", h:"9:06", t:"Carmen, te dejo los datos de tu primera visita 🦷\n📅 Jueves 12 de noviembre, 17:30\n📍 Marín Clínica Dental · Torrent\nSi tomas alguna medicación o tienes radiografías recientes, tráetelas. Cualquier duda, escríbenos por aquí.", c:["sys"], n:"<b>Confirmación con todo lo necesario</b>: día, hora, sede y qué traer. Texto aprobado por la clínica."},
+  {k:"in", h:"9:10", t:"👍", c:["per"], n:"Carmen lo lee y lo deja guardado en el chat."},
+  {k:"out", h:"17:30", t:"¡Hola, Carmen! Te recordamos que mañana a las 17:30 tienes tu primera visita en Torrent. Te dejo la ubicación para que llegues sin vueltas 🙂", btns:["Allí estaré","Necesito cambiarla"], c:["sys"], n:"<b>Recordatorio 24 h antes</b>, con la ubicación y un botón para cambiar la cita sin llamar."},
+  {k:"loc", h:"17:30", c:["sys"], n:"Un toque y se abre el mapa."},
+  {k:"in", h:"17:42", t:"Allí estaré", tap:0, c:["per"], n:"<b>Carmen confirma.</b> Recepción lo ve en la agenda."},
+  {k:"d", t:"Jueves, 12 de noviembre"},
+  {k:"out", h:"15:30", t:"Carmen, te esperamos a las 17:30 en Torrent. ¡Hasta ahora! 😊", c:["sys"], n:"<b>Recordatorio 2 h antes.</b> Corto, sin agobiar."},
+  {k:"gap", h:"17:30 · no llega", c:["sys"], n:"<b>Carmen no llega a la cita.</b> El sistema avisa a Rocío y le prepara un mensaje amable."},
+  {k:"out", h:"18:05", from:"Rocío · Recepción Torrent", t:"Hola, Carmen. Soy Rocío. Te esperábamos a las 17:30 y hemos visto que no has podido venir. No pasa nada, de verdad 🙂 ¿Te busco otro hueco que te venga mejor?", btns:["Sí, otro día","Ya os escribo yo"], c:["sys","adm"], n:"<b>Reprogramación amable:</b> sin reproches. El sistema lo prepara · <b>Rocío lo revisa y lo envía</b>."},
+  {k:"in", h:"20:41", t:"Ay perdona!! Se me complicó el trabajo y no me dio tiempo ni a avisar. Sí, otro día por favor", c:["per"], n:"<b>Carmen contesta por la noche</b>, cuando sale de trabajar."},
+  {k:"out", h:"20:41", t:"¡Tranquila, Carmen! Te propongo estos dos huecos en Torrent:", btns:["Lunes 16 · 18:00","Martes 17 · 10:30"], c:["sys"], n:"<b>El sistema propone dos huecos</b> libres de la agenda, también fuera de horario."},
+  {k:"in", h:"20:44", t:"Lunes 16 · 18:00", tap:0, c:["per"], n:"<b>Elige el lunes a las 18:00.</b>"},
+  {k:"out", h:"20:44", t:"¡Apuntado! Lunes 16 a las 18:00. Mañana Rocío te lo confirma, y te avisaremos el día antes como siempre 😊", c:["sys"], n:"<b>Cita recuperada</b> en lugar de un hueco vacío y una paciente perdida. Arrancan solos los recordatorios."}
+ ]},
+ {t:"Presupuesto de ortodoncia invisible sin respuesta", s:"Patraix · D+1, D+3, D+7", sede:"Patraix", desc:"Laura salió de la visita con su presupuesto y no ha dicho nada. Se le acompaña con mensajes cortos y humanos, una llamada de Paula y, al final, la opción de cuotas explicada por una persona.", steps:[
+  {k:"d", t:"Lunes, 16 de noviembre"},
+  {k:"out", h:"19:30", t:"Laura, gracias por venir hoy a Marín Clínica Dental en Patraix 😊 Te hemos entregado tu presupuesto de ortodoncia invisible. Tómate el tiempo que necesites y, si te surge cualquier duda, pregúntanos por aquí.", c:["sys"], n:"<b>Laura sale de la visita con su presupuesto.</b> El sistema la marca como «presupuesto entregado» y programa el seguimiento."},
+  {k:"gap", h:"Sin respuesta", c:["sys"], n:"Laura no contesta. <b>El sistema no la olvida</b>: tiene apuntados el D+1, D+3 y D+7."},
+  {k:"d", t:"Martes, 17 de noviembre · D+1"},
+  {k:"out", h:"18:30", t:"Hola, Laura 👋 Por si te ayuda, estas son las dudas que más nos preguntan sobre ortodoncia invisible:\n• ¿Se nota? Los alineadores son transparentes y muy discretos.\n• ¿Cuánto dura? Depende de cada caso; en la visita te explicaron el tuyo.\n• ¿Puedo quitármelos para comer? Sí.\nSi tienes otra duda, escríbeme 🙂", c:["sys","adm"], n:"<b>D+1: dudas frecuentes</b>, sin precios ni promesas de resultado. Textos que la clínica revisó y aprobó."},
+  {k:"d", t:"Jueves, 19 de noviembre · D+3"},
+  {k:"call", h:"12:15", c:["per"], n:"<b>D+3: llama Paula, de recepción.</b> El sistema le recuerda qué presupuesto tiene Laura y qué se le ha enviado."},
+  {k:"out", h:"12:17", from:"Paula · Recepción Patraix", t:"Te acabo de llamar, Laura. Soy Paula, de recepción. Nada urgente: solo quería saber si te quedó alguna duda del presupuesto. Contesta cuando puedas 🙂", c:["per"], n:"<b>Paula deja un mensaje personal</b>, escrito por ella."},
+  {k:"d", t:"Lunes, 23 de noviembre · D+7"},
+  {k:"out", h:"18:45", from:"Paula · Recepción Patraix", t:"Hola de nuevo, Laura. Último mensaje, te lo prometo 🙂 Mucha gente nos pregunta si puede pagar el tratamiento en cuotas. Si te interesa, te llamo y te lo explico con calma, sin compromiso.", btns:["Sí, llámame","Ahora no, gracias"], c:["sys","adm"], n:"<b>D+7: último toque, con salida fácil.</b> Se menciona la opción de cuotas, pero <b>las condiciones las explica Paula</b>, nunca el WhatsApp."},
+  {k:"in", h:"21:02", t:"Hola Paula! Perdona, he tenido unas semanas de locos. Sí, llámame mañana por la tarde si puedes, lo de las cuotas me interesa", c:["per"], n:"<b>Laura responde</b> justo por lo que le frenaba."},
+  {k:"out", h:"21:02", t:"¡Qué bien leerte, Laura! Se lo dejo a Paula: mañana por la tarde te llama 😊", c:["sys"], n:"Respuesta inmediata fuera de horario. <b>El sistema crea la tarea de llamada</b> para Paula."},
+  {k:"d", t:"Martes, 24 de noviembre"},
+  {k:"call", h:"17:10", c:["per"], n:"<b>Paula llama y explica las cuotas en persona</b>, con las condiciones reales de la clínica."},
+  {k:"in", h:"17:34", t:"Gracias por explicármelo todo tan bien, Paula. ¡Adelante, empezamos! 😊", c:["per"], n:"<b>Laura acepta el presupuesto.</b>"},
+  {k:"out", h:"17:36", from:"Paula · Recepción Patraix", t:"¡Qué alegría, Laura! 🎉 Te escribo ahora con la cita para empezar. Bienvenida 💙", c:["per"], n:"<b>Paula marca el presupuesto como aceptado.</b> Un tratamiento que sin seguimiento se habría quedado en un cajón."}
+ ]},
+ {t:"Limpieza + TAC → descubre que necesita más", s:"Patraix · de la promo al tratamiento", sede:"Patraix", desc:"Javier llegó por la promoción de limpieza y TAC. En la revisión surge que quiere mirarse algo más: el sistema lo detecta y lo pasa a recepción, sin venderle nada por WhatsApp.", steps:[
+  {k:"d", t:"Miércoles, 18 de noviembre"},
+  {k:"out", h:"10:00", t:"¡Hola, Javier! Te recordamos tu cita de limpieza y TAC mañana jueves a las 11:00 en Patraix 😊", btns:["Allí estaré","Necesito cambiarla"], c:["sys"], n:"<b>Javier llegó por la promo de limpieza + TAC.</b> Recordatorio 24 h antes, como cualquier paciente."},
+  {k:"in", h:"10:12", t:"Allí estaré", tap:0, c:["per"], n:"Confirma con un toque."},
+  {k:"d", t:"Jueves, 19 de noviembre"},
+  {k:"gap", h:"11:00 · revisión", c:["per"], n:"<b>Javier viene a su limpieza y TAC.</b> En la revisión, el equipo le comenta lo que ve. Eso queda entre él y la clínica."},
+  {k:"out", h:"16:00", t:"Javier, gracias por venir hoy a Patraix 😊 ¿Qué tal te has sentido en la visita?", btns:["Muy bien","Bien","Mejorable"], c:["sys"], n:"<b>Mensaje de después de la visita</b>, para saber cómo ha ido."},
+  {k:"in", h:"16:40", t:"Muy bien, muy amables todos. Oye, en la revisión me comentaron lo del hueco de la muela de arriba. ¿Eso cómo se haría? Lo tengo hace años y me gustaría solucionarlo", c:["per"], n:"<b>Javier pregunta por un tratamiento.</b>"},
+  {k:"gap", h:"Interés detectado", c:["sys"], n:"<b>El sistema detecta interés en tratamiento</b> y no contesta él: marca a Javier como «interesado» y <b>se lo pasa a Paula</b> con el contexto."},
+  {k:"out", h:"16:41", t:"¡Qué bien que nos lo preguntes, Javier! Eso te lo tiene que explicar bien la clínica, así que se lo paso ahora a Paula, de recepción, que te escribe enseguida 🙂", c:["sys"], n:"<b>Respuesta honesta:</b> sin diagnóstico ni opciones de tratamiento por WhatsApp."},
+  {k:"out", h:"16:52", from:"Paula · Recepción Patraix", t:"Hola, Javier, soy Paula. Lo mejor es que vengas a una visita de valoración y el equipo te explique con calma las opciones para tu caso. ¿Te va bien alguno de estos huecos?", btns:["Lunes 23 · 17:00","Miércoles 25 · 12:30"], c:["sys","adm"], n:"<b>El sistema propone dos huecos</b> · <b>Paula revisa el mensaje y lo envía</b>."},
+  {k:"in", h:"17:05", t:"Lunes 23 · 17:00", tap:0, c:["per"], n:"<b>Javier reserva la valoración.</b>"},
+  {k:"out", h:"17:06", from:"Paula · Recepción Patraix", t:"¡Hecho, Javier! Lunes 23 a las 17:00 en Patraix ✅ Te recordaremos la cita el día antes.", c:["per"], n:"<b>De una promo de limpieza a una visita de tratamiento</b>, con una persona de la clínica llevando la conversación."}
+ ]},
+ {t:"Paciente que vuelve", s:"Torrent · revisión y limpieza anual", sede:"Torrent", desc:"Seis meses después, la clínica se acuerda antes que el paciente. Reserva en un toque y la limpieza anual queda avisada.", steps:[
+  {k:"gap", h:"6 meses", c:["sys"], n:"<b>El sistema guarda cuándo le toca la revisión</b> a cada paciente desde su última visita."},
+  {k:"d", t:"Lunes, 10 de mayo de 2027"},
+  {k:"out", h:"10:00", t:"¡Hola, Carmen! 👋 Ya han pasado seis meses desde tu última visita en Torrent y te toca la revisión. ¿Te reservo un hueco?", btns:["Martes 18 · 17:30","Jueves 20 · 10:00","Otro día"], c:["sys"], n:"<b>Aviso de revisión a los 6 meses</b>, con dos huecos libres de la agenda."},
+  {k:"in", h:"10:26", t:"Uy, ¡ni me acordaba! Jueves 20 · 10:00", tap:1, c:["per"], n:"<b>Carmen ni se acordaba.</b> Reserva con un toque."},
+  {k:"out", h:"10:27", from:"Rocío · Recepción Torrent", t:"¡Qué alegría volver a verte, Carmen! 😊 Te espero el jueves 20 a las 10:00. Por cierto: te toca también la limpieza anual. ¿Quieres que la hagamos el mismo día y así vienes una sola vez?", btns:["Sí, el mismo día","Mejor otro día"], c:["sys","adm"], n:"<b>Aviso de la limpieza anual</b> en el mismo mensaje · <b>Rocío lo revisa y lo envía</b>."},
+  {k:"in", h:"10:30", t:"Sí, el mismo día", tap:0, c:["per"], n:"<b>Revisión y limpieza en una sola visita.</b>"},
+  {k:"out", h:"10:31", t:"¡Hecho! Jueves 20 a las 10:00: revisión y limpieza ✅ Te avisamos el día antes con la ubicación, como siempre.", c:["sys"], n:"<b>El ciclo vuelve a empezar:</b> recordatorios, visita y el siguiente aviso dentro de seis meses."},
+  {k:"d", t:"Viernes, 21 de mayo de 2027"},
+  {k:"out", h:"11:00", t:"Gracias por venir ayer, Carmen 💙 Si estás contenta con nosotros, nos ayudarías mucho dejando tu opinión en Google. ¡Y aquí estamos para lo que necesites!", btns:["Dejar mi opinión"], c:["sys"], n:"<b>Petición de reseña</b> a una paciente contenta, en el mejor momento."},
+  {k:"in", h:"11:20", t:"Hecho! ⭐⭐⭐⭐⭐", c:["per"], n:"<b>Paciente fiel</b> y una reseña más para la sede de Torrent."}
+ ]}
+];
+S.forEach(sc=>sc.steps.forEach(st=>{if(st.k==="in"||st.k==="form")st.c=["alu"]}));
+
+const $=s=>document.querySelector(s);
+const chat=$("#chat"), stepsEl=$("#steps"), statusEl=$("#status"), clockEl=$("#clock"), bar=$("#bar"), live=$("#live");
+const playBtn=$("#play"), speedBtn=$("#speed");
+let cur=0, playing=true, speed=1, token=0, lastSide=null, finished=false;
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const CHIP={sys:['sys','i-sys','Sistema'],adm:['adm','i-ok','Recepción aprueba'],per:['per','i-user','Persona'],alu:['alu','i-msg','Paciente']};
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const TK='<svg class="ticks"><use href="#tk"/></svg>';
+
+function wait(ms,tk){
+  return new Promise(res=>{
+    let left=ms,last=performance.now();
+    function f(now){
+      if(tk!==token) return;
+      if(playing) left-=(now-last)*speed;
+      last=now;
+      if(left<=0) res(); else setTimeout(()=>f(performance.now()),40);
+    }
+    setTimeout(()=>f(performance.now()),40);
+  });
+}
+function scrollChat(){chat.scrollTo({top:chat.scrollHeight,behavior:reduce?"auto":"smooth"})}
+
+/* pestañas */
+const tabs=$("#tabs");
+S.forEach((sc,i)=>{
+  const b=document.createElement("button");
+  b.className="tab";b.type="button";b.setAttribute("role","tab");b.dataset.i=i;
+  b.innerHTML=`<span class="n">${i+1}</span><span><b>${sc.t}</b><small>${sc.s}</small></span>`;
+  b.onclick=()=>load(i,true);
+  tabs.appendChild(b);
+});
+
+function buildPanel(sc){
+  stepsEl.innerHTML="";
+  sc.steps.forEach((st,i)=>{
+    if(!st.n) return;
+    const li=document.createElement("li");
+    li.className="st"+(st.k==="gap"?" gap":"");li.dataset.i=i;
+    const chips=(st.c||[]).map(c=>{const d=CHIP[c];return `<span class="chip ${d[0]}"><svg class="i"><use href="#${d[1]}"/></svg>${d[2]}</span>`}).join("");
+    li.innerHTML=`<span class="tm">${st.k==="gap"?'<svg class="i" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-clock"/></svg> ':''}${st.h||""}</span><span class="cs">${chips}</span><p>${st.n}</p>`;
+    stepsEl.appendChild(li);
+  });
+}
+function lightPanel(i){
+  let now=null;
+  stepsEl.querySelectorAll(".st").forEach(li=>{
+    const j=+li.dataset.i;
+    li.classList.toggle("done",j<i);
+    li.classList.toggle("now",j===i);
+    if(j===i) now=li;
+  });
+  if(now){
+    const top=now.offsetTop-stepsEl.offsetTop-stepsEl.clientHeight/2+now.offsetHeight/2;
+    stepsEl.scrollTo({top:Math.max(0,top),behavior:reduce?"auto":"smooth"});
+  }
+}
+
+function addRow(side,html,cls=""){
+  const row=document.createElement("div");
+  const first=lastSide!==side;
+  row.className=`row ${side}${first?" first":""} ${cls}`;
+  row.innerHTML=html;
+  chat.appendChild(row);lastSide=side;scrollChat();
+  return row;
+}
+
+async function render(st,i,tk){
+  if(st.k==="d"){
+    const d=document.createElement("div");d.className="sec";d.innerHTML=`<span>${st.t}</span>`;
+    chat.appendChild(d);lastSide=null;scrollChat();
+    await wait(900,tk);return;
+  }
+  if(st.k==="gap"){
+    lightPanel(i);
+    const d=document.createElement("div");d.className="skip";d.innerHTML=`<span><svg class="i" style="width:14px;height:14px"><use href="#i-clock"/></svg>${st.h}</span>`;
+    chat.appendChild(d);lastSide=null;scrollChat();
+    await wait(2600,tk);return;
+  }
+  if(st.k==="form"){
+    lightPanel(i);
+    if(st.h) clockEl.textContent=st.h;
+    const sede=S[cur].sede;
+    const d=document.createElement("div");d.className="form";
+    d.innerHTML=`<div class="fh"><img src="../assets/brand/diente-blanco.png" alt="">Formulario del anuncio · ${st.h}</div><div class="fb"><b>${esc(st.t)}</b><div><span>Nombre</span><span>Carmen</span></div><div><span>Teléfono</span><span>6•• ••• •••</span></div><div><span>Sede</span><span>${sede}</span></div><div><span>Interés</span><span>Implantes</span></div></div><div class="ft">Enviado desde Instagram</div>`;
+    chat.appendChild(d);lastSide=null;scrollChat();
+    await wait(3000,tk);return;
+  }
+  if(st.h) clockEl.textContent=/^\d/.test(st.h)?st.h:clockEl.textContent;
+  if(st.k==="in"){
+    // si responde a un botón, se ve el toque
+    if(st.tap!==undefined){
+      const prev=[...chat.querySelectorAll(".btns")].pop();
+      if(prev){const b=prev.children[st.tap];b&&b.classList.add("hit");}
+      await wait(600,tk);if(tk!==token)return;
+    }
+    lightPanel(i);
+    const att=st.att?'<div class="att"><i></i><i></i></div>':'';
+    const row=addRow("out",`<div class="bub">${att}${esc(st.t)}<span class="meta">${st.h}${TK}</span></div>`);
+    await wait(900,tk);if(tk!==token)return;
+    row.querySelector(".ticks").classList.add("read");
+    await wait(Math.min(3200,1000+st.t.length*18),tk);return;
+  }
+  // mensajes de la clínica: «escribiendo…» antes
+  const typing=document.createElement("div");typing.className="typ";
+  typing.innerHTML='<div class="bub"><span class="dots"><i></i><i></i><i></i></span></div>';
+  lightPanel(i);
+  if(st.k!=="call"){
+    statusEl.textContent="escribiendo…";statusEl.classList.add("typing");
+    chat.appendChild(typing);scrollChat();
+    await wait(Math.min(2600,Math.max(1100,(st.t||"").length*14)),tk);
+    if(tk!==token)return;
+    typing.remove();statusEl.textContent="en línea";statusEl.classList.remove("typing");
+  }else{
+    await wait(700,tk);if(tk!==token)return;
+  }
+  let html;
+  if(st.k==="call"){
+    html=`<div class="bub"><div class="call"><span class="ci"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><span><b>Llamada de voz perdida</b><small>Toca para devolver la llamada</small></span></div><span class="meta">${st.h}</span></div>`;
+  }else if(st.k==="loc"){
+    html=`<div class="bub"><div class="loc"><svg class="pin" width="30" height="38" viewBox="0 0 24 30"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.5 12 30 12 30s12-9.5 12-18.3C24 5.2 18.6 0 12 0z" fill="#EA4335"/><circle cx="12" cy="11.5" r="4.3" fill="#fff"/></svg></div><div class="lt"><b>Marín Clínica Dental · ${S[cur].sede}</b><small>${S[cur].sede==="Patraix"?"Patraix, Valencia":"Torrent, Valencia"}</small></div><span class="meta">${st.h}</span></div>`;
+  }else{
+    const from=st.from?`<span class="from">${st.from}</span>`:"";
+    html=`<div class="colw"><div class="bub" style="max-width:100%">${from}${esc(st.t)}<span class="meta">${st.h}</span></div>${st.btns?`<div class="btns" style="max-width:100%;width:100%">${st.btns.map(b=>`<span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>${esc(b)}</span>`).join("")}</div>`:""}</div>`;
+  }
+  const row=addRow("in",html);
+  if(st.btns) row.querySelector(".colw").style.maxWidth="82%";
+  await wait(Math.min(4200,1400+(st.t||"").length*22),tk);
+}
+
+async function run(tk){
+  const sc=S[cur];
+  for(let i=0;i<sc.steps.length;i++){
+    if(tk!==token) return;
+    bar.style.width=(i/sc.steps.length*100)+"%";
+    await render(sc.steps[i],i,tk);
+    if(tk!==token) return;
+  }
+  bar.style.width="100%";
+  finished=true;playing=false;setPlayUI();
+  lightPanel(9999);
+  const end=document.createElement("div");end.className="endcard";
+  const nxt=(cur+1)%S.length;
+  end.innerHTML=`<button type="button"><svg class="i" style="width:14px;height:14px"><use href="#i-play"/></svg>Siguiente: ${S[nxt].t}</button>`;
+  end.querySelector("button").onclick=()=>load(nxt,true);
+  chat.appendChild(end);scrollChat();
+}
+
+function setPlayUI(){
+  playBtn.innerHTML=`<svg class="i"><use href="#${playing?"i-pause":"i-play"}"/></svg><span>${playing?"Pausa":(finished?"Otra vez":"Reproducir")}</span>`;
+  live.classList.toggle("off",!playing);
+}
+
+function load(i,autoplay){
+  token++;cur=i;finished=false;lastSide=null;
+  tabs.querySelectorAll(".tab").forEach((b,j)=>b.setAttribute("aria-selected",j===i?"true":"false"));
+  const tb=tabs.children[i];tabs.scrollTo({left:tb.offsetLeft-tabs.clientWidth/2+tb.offsetWidth/2,behavior:"smooth"});
+  chat.innerHTML='<div class="encr">🔒 Los mensajes están cifrados de extremo a extremo. Cuenta de empresa verificada.</div>';
+  statusEl.textContent="en línea";statusEl.classList.remove("typing");
+  const firstH=S[i].steps.find(s=>s.h&&/^\d/.test(s.h));clockEl.textContent=firstH?firstH.h:"10:00";
+  bar.style.width="0";
+  $("#pdesc").textContent=S[i].desc;
+  $("#waname").textContent="Marín Clínica Dental · "+S[i].sede;
+  buildPanel(S[i]);stepsEl.scrollTop=0;
+  playing=autoplay;setPlayUI();
+  run(token);
+}
+
+playBtn.onclick=()=>{
+  if(finished){load(cur,true);return;}
+  playing=!playing;setPlayUI();
+};
+$("#reset").onclick=()=>load(cur,true);
+speedBtn.onclick=()=>{speed=speed===1?2:1;speedBtn.setAttribute("aria-pressed",speed===2?"true":"false")};
+$("#fs").onclick=()=>{
+  if(document.fullscreenElement){document.exitFullscreen();return;}
+  if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+};
+document.addEventListener("fullscreenchange",()=>document.body.classList.toggle("fs",!!document.fullscreenElement));
+document.addEventListener("keydown",e=>{
+  if(e.target.closest&&e.target.closest("input,textarea")) return;
+  if(e.key===" "){e.preventDefault();playBtn.click();}
+  else if(e.key==="r"||e.key==="R") load(cur,true);
+  else if(e.key==="f"||e.key==="F") $("#fs").click();
+  else if(/^[1-5]$/.test(e.key)) load(+e.key-1,true);
+  else if(e.key==="ArrowRight") load((cur+1)%S.length,true);
+  else if(e.key==="ArrowLeft") load((cur+S.length-1)%S.length,true);
+});
+
+try{const nl=document.querySelector(".topnav .links"),na=nl.querySelector("[aria-current]");nl.scrollLeft=na.offsetLeft-nl.clientWidth/2+na.offsetWidth/2;}catch(e){}
+let start=0;
+try{const m=location.hash.match(/^#e([1-5])$/);if(m)start=+m[1]-1;}catch(e){}
+load(start,true);
+</script>
+</body>
+</html>
