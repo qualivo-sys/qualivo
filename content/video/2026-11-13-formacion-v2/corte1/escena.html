@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- Formación V2 · corte 1 (prueba visual, no es el montaje final). 9:16. window.setT(t) pinta el fotograma.
+     Pantallas: capturas reales de Qualivo Intelligence, historia de demostración «Laura» (datos simulados). -->
+<style>
+@font-face{font-family:Mont;font-weight:100 900;src:url(rec/montserrat-latin.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#101319;--tx:#F2F4F7;--mut:#8D94A1;--tl:#27BDB1;--y:#F4CC38}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:Mont;color:var(--tx);background:radial-gradient(1300px 1000px at 50% 40%,#1B212B 0%,var(--bg) 62%)}
+.cab{position:absolute;left:56px;right:56px;top:236px;display:flex;align-items:center;gap:22px}
+.rec{flex:1;display:flex;align-items:center}
+.et{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:600;color:var(--mut);white-space:nowrap}
+.et i{width:10px;height:10px;border-radius:50%;background:#3A414D;display:block}
+.tr{flex:1;height:2px;background:#2A313C;margin:0 10px;min-width:14px;position:relative;overflow:hidden}
+.tr b{position:absolute;left:0;top:0;bottom:0;background:var(--tl);width:0}
+.reloj{font-size:21px;font-weight:600;color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap}
+.reloj b{color:var(--tx);font-weight:700;margin-left:8px}
+.ej{position:absolute;left:56px;top:290px;font-size:17px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6A7380}
+#win{position:absolute;left:40px;top:350px;width:1000px;height:1150px;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.10)}
+.capa{position:absolute;left:0;top:0;width:1000px;height:1150px;overflow:hidden;opacity:0}
+.capa img{position:absolute;left:0;top:0;transform-origin:0 0;display:block}
+.foco{position:absolute;border:4px solid var(--tl);border-radius:12px;box-shadow:0 0 0 10px rgba(39,189,177,.16);opacity:0}
+.foco.am{border-color:var(--y);box-shadow:0 0 0 10px rgba(244,204,56,.2)}
+#sub{position:absolute;left:70px;right:70px;top:1535px;text-align:center;font-size:42px;line-height:1.22;font-weight:700;text-wrap:balance}
+#sub small{display:block;font-size:26px;font-weight:600;color:var(--tl);margin-bottom:6px}
+#llam{position:absolute;left:50%;transform:translateX(-50%);top:1380px;background:#0B0D11;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:14px 26px;display:flex;align-items:center;gap:16px;font-size:24px;font-weight:700;opacity:0;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+#llam .on{display:flex;align-items:center;gap:4px;height:34px}#llam .on i{width:5px;border-radius:3px;background:var(--tl);display:block}
+#cierre{position:absolute;inset:0;opacity:0}
+.tres{position:absolute;left:0;right:0;top:700px;display:flex;justify-content:center;align-items:center;font-size:40px;font-weight:700}
+.tres span{padding:0 6px}.tres u{display:block;height:2px;background:var(--tl);margin:0 14px;width:0}
+.sobre{position:absolute;left:0;right:0;top:790px;text-align:center;font-size:30px;font-weight:500;color:var(--mut)}
+.logo{position:absolute;left:50%;transform:translateX(-50%);top:960px;width:360px}
+.cta{position:absolute;left:50%;transform:translateX(-50%);top:1180px;background:var(--tl);color:#06201E;font-size:34px;font-weight:700;padding:26px 44px;border-radius:16px;white-space:nowrap}
+</style>
+<div id="e">
+ <div id="sup">
+  <div class="cab"><div class="rec">
+   <div class="et" id="et0"><i></i>Solicitud</div><div class="tr"><b id="tr0"></b></div>
+   <div class="et" id="et1"><i></i>Atención</div><div class="tr"><b id="tr1"></b></div>
+   <div class="et" id="et2"><i></i>Seguimiento</div><div class="tr"><b id="tr2"></b></div>
+   <div class="et" id="et3"><i></i>Matrícula</div></div>
+   <div class="reloj">desde la solicitud<b id="rj">00:00</b></div></div>
+  <div class="ej">Caso de ejemplo · datos simulados</div>
+  <div id="win"></div>
+  <div id="llam"><span>Raquel · llamada</span><div class="on" id="on"></div></div>
+ </div>
+ <div id="cierre"><div class="tres"><span>Captación</span><u id="u1"></u><span>Atención</span><u id="u2"></u><span>Seguimiento</span></div>
+  <div class="sobre" id="sobre">sobre las herramientas que ya utilizas</div><img class="logo" id="logo" src="rec/logo-blanco.png"><div class="cta" id="cta">Solicita un diagnóstico</div></div>
+ <div id="sub"></div>
+</div>
+<script src="subs-h1.js"></script>
+<script>
+const ap=(location.hash||'#h1').slice(1);
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1), ez=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const W=1000,H=1150,$=id=>document.getElementById(id);
+function build(T){
+ const a=T[ap]||T.h1||0, e2=T.e2c, e3=T.e3c, rq=T.RAQUEL, e4=T.e4c, e5=T.e5d, e6=T.e6c;
+ // cada plano: imagen, intervalo y cámara [t, x, y, ancho] en píxeles de la captura; focos [t0,t1,x,y,w,h,amarillo]
+ return {a,e2,e3,rq,e4,e5,e6,FIN:T.FIN,planos:[
+  {img:'l0',t0:0,t1:1.25,cam:[[0,440,470,1400],[1.25,440,470,1380]]},
+  {img:'l1',t0:1.0,t1:e2+.1,cam:[[1.0,440,470,1380],[2.2,440,470,1380],[e2,452,500,1060]],foco:[[1.35,e2+.1,474,560,2356,118]]},
+  {img:'p1',t0:e2-.25,t1:e3+.1,cam:[[e2,0,0,1200],[e2+2.4,0,0,1200],[e2+3.6,0,40,1060],[e2+5.6,0,40,1060],[e2+6.8,0,560,1100]],
+    foco:[[e2+3.7,e2+6.0,26,186,760,44],[e2+6.9,e3,26,1076,1150,170]]},
+  {img:'c2',t0:e3-.25,t1:e3+2.55,cam:[[e3,1530,420,1330],[e3+2.4,1550,440,1270]],foco:[[e3+.5,e3+2.5,1578,594,1206,128]]},
+  {img:'p5',t0:e3+2.3,t1:e4+2.2,cam:[[e3+2.4,0,2070,1200],[rq-.5,0,2070,1200],[rq+.4,0,1690,1200],[e4+.2,0,1690,1200],[e4+1.6,0,2070,1200]],
+    foco:[[e3+2.9,rq-.3,60,2500,1100,116],[rq+.5,e4+.3,26,1764,1150,330],[e4+1.7,e4+2.2,60,2500,1100,250]]},
+  {img:'p6',t0:e4+1.95,t1:e5+.1,cam:[[e4+2.1,0,1220,1200],[e4+6.6,0,1240,1150],[e4+7.6,0,2260,1200],[e5,0,2280,1180]],
+    foco:[[e4+2.5,e4+6.6,26,1306,1150,420],[e4+7.8,e5,60,2778,1100,60]]},
+  {img:'p9',t0:e5-.25,t1:e6+.05,cam:[[e5,0,0,1200],[e5+1.0,0,0,1200],[e5+2.2,0,40,1040],[e6,0,60,1020]],
+    foco:[[e5+.5,e6,26,186,300,44,1],[e5+2.3,e6,26,224,880,44]]}
+ ]};
+}
+const P=build(window.T);
+const win=$('win'); P.planos.forEach((p,i)=>{const c=document.createElement('div');c.className='capa';c.id='c'+i;c.innerHTML='<img src="rec/'+p.img+'.png">'+(p.foco||[]).map((f,j)=>'<div class="foco'+(f[6]?' am':'')+'" id="f'+i+'_'+j+'"></div>').join('');win.appendChild(c);});
+const on=$('on');for(let i=0;i<14;i++)on.appendChild(document.createElement('i'));
+function cam(p,t){const k=p.cam;if(t<=k[0][0])return k[0];for(let i=1;i<k.length;i++){if(t<=k[i][0]){const u=ez(nm(t,k[i-1][0],k[i][0]));return [t,k[i-1][1]+(k[i][1]-k[i-1][1])*u,k[i-1][2]+(k[i][2]-k[i-1][2])*u,k[i-1][3]+(k[i][3]-k[i-1][3])*u];}}return k[k.length-1];}
+const RELOJ=[[0,'00:00'],[P.e2+3.4,'00:04'],[P.e3,'02:00'],[P.e3+2.4,'+1 día'],[P.e4+2.1,'+1 día'],[P.e4+7.6,'enero'],[P.e5,'+8 semanas']];
+window.setT=function(t){
+ // planos (fundido cruzado de 0,3 s)
+ P.planos.forEach((p,i)=>{const c=$('c'+i);const o=Math.min(nm(t,p.t0,p.t0+.3),i===P.planos.length-1?1:1-nm(t,p.t1,p.t1+.3))*(t>=p.t0?1:0);c.style.opacity=i===0?(t<p.t1+.3?1:0):o;
+  if(o<=0&&i!==0)return;const k=cam(p,t),s=W/k[3];c.firstChild.style.transform='translate('+(-k[1]*s)+'px,'+(-k[2]*s)+'px) scale('+s+')';
+  (p.foco||[]).forEach((f,j)=>{const d=$('f'+i+'_'+j);const fo=Math.min(nm(t,f[0],f[0]+.25),1-nm(t,f[1]-.2,f[1]));d.style.opacity=fo;
+   d.style.left=((f[2]-k[1])*s-6)+'px';d.style.top=((f[3]-k[2])*s-6)+'px';d.style.width=(f[4]*s+12)+'px';d.style.height=(f[5]*s+12)+'px';});});
+ // recorrido
+ const fase=t<P.e3?0:t<P.e4?1:t<P.e5?2:3;
+ for(let i=0;i<4;i++){const e=$('et'+i),pt=e.firstChild;const hecho=i<fase,ya=i===fase;
+  e.style.color=ya?(i===3?'var(--y)':'var(--tl)'):hecho?'var(--tx)':'var(--mut)';
+  pt.style.background=ya?(i===3?'var(--y)':'var(--tl)'):hecho?'var(--tl)':'#3A414D';pt.style.boxShadow=ya?('0 0 0 6px '+(i===3?'rgba(244,204,56,.2)':'rgba(39,189,177,.18)')):'none';}
+ $('tr0').style.width=(nm(t,P.e3-.5,P.e3)*100)+'%';$('tr1').style.width=(nm(t,P.e4-.5,P.e4)*100)+'%';$('tr2').style.width=(nm(t,P.e5-.5,P.e5)*100)+'%';
+ let r=RELOJ[0][1];RELOJ.forEach(x=>{if(t>=x[0])r=x[1]});$('rj').textContent=r;
+ // llamada de Raquel
+ const lo=Math.min(nm(t,P.rq,P.rq+.3),1-nm(t,P.e4-.35,P.e4-.05));$('llam').style.opacity=lo;
+ [...on.children].forEach((b,i)=>{b.style.height=(8+26*Math.abs(Math.sin(t*7.3+i*1.7)*Math.cos(t*3.1+i*.9)))+'px';});
+ // cierre
+ const ci=nm(t,P.e6-.15,P.e6+.35);$('sup').style.opacity=1-ci;$('cierre').style.opacity=ci;
+ $('u1').style.width=(ez(nm(t,P.e6+.9,P.e6+1.6))*70)+'px';$('u2').style.width=(ez(nm(t,P.e6+1.8,P.e6+2.5))*70)+'px';
+ $('sobre').style.opacity=nm(t,P.e6+3.2,P.e6+3.8);$('logo').style.opacity=nm(t,P.e6+5.4,P.e6+6.0);$('cta').style.opacity=nm(t,P.e6+6.4,P.e6+7.0);
+ // subtítulo
+ const s=window.SUBS.find(x=>t>=x.s&&t<x.e);const el=$('sub');
+ if(s){el.innerHTML=(s.q?'<small>'+s.q+'</small>':'')+s.x;el.style.opacity=Math.min(nm(t,s.s,s.s+.12),1);}else el.style.opacity=0;
+ el.style.top=(t>=P.e6-.15?1420:1535)+'px';
+};
+window.DUR=P.FIN;window.setT(0);
+</script>
+</html>
