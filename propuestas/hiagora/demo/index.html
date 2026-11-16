@@ -277,7 +277,7 @@ footer p b{color:var(--ink)}
 <nav class="topnav" aria-label="Presentación">
   <div class="in">
     <div class="brand"><span class="chip"><img src="../assets/hiagora-logo.webp" alt="Hiágora" width="46" height="16"></span><span class="x">×</span><span class="qv">Qualivo</span><span class="by">16-nov-2026</span></div>
-    <div class="links"><a href="./" aria-current="page">Recorrido</a><a href="https://qualivo.io/casos/eac/" target="_blank" rel="noopener">Caso EAC</a><a href="https://qualivo.io/intelligence/?sector=hiagora&amp;empresa=Hi%C3%A1gora" target="_blank" rel="noopener">Panel en vivo</a></div>
+    <div class="links"><a href="./" aria-current="page">Recorrido</a><a href="../landing/" target="_blank" rel="noopener">Landing</a><a href="https://qualivo.io/intelligence/?sector=hiagora&amp;empresa=Hi%C3%A1gora" target="_blank" rel="noopener">Panel en vivo</a></div>
   </div>
 </nav>
 
@@ -286,65 +286,58 @@ footer p b{color:var(--ink)}
 <div class="wrap">
   <p class="eyebrow">Demo · Hiágora · paso a paso</p>
   <h1>Del dossier descargado a la visita con José Antonio, sin que nadie se enfríe</h1>
-  <p class="lead">Así lo vivirían Ricardo, gerente de una distribuidora de la Axarquía, y tú, José Antonio. El método de venta es el vuestro. Nosotros ponemos dos cosas: que nadie se quede sin respuesta ni sin seguimiento, y saber qué anuncio trae contratos.</p>
-  <p class="note"><span class="ej">Datos de ejemplo</span> Demo preparada por Qualivo el 16-nov-2026. Programas, condiciones y testimonios tomados de hiagora.com ese día. Ricardo, las demás personas, los mensajes y las cifras del panel son inventados. Los anuncios son propuestas nuestras, no vuestros anuncios. Los textos finales los aprobáis vosotros. La asistente no da precios que no estén publicados ni cierra contratos: eso lo hace José Antonio.</p>
+  <p class="lead">Cómo trabajaríamos con Hiágora: a quién nos dirigimos, qué le decimos y qué pasa desde que pide información hasta que firma.</p>
+  <p class="note"><span class="ej">Datos de ejemplo</span> Programas y testimonios tomados de hiagora.com el 16-nov. Personas, mensajes y cifras, inventados. Los anuncios son propuestas nuestras.</p>
 </div>
 </header>
 
 <div class="wrap main">
 
-<div class="para" style="margin-top:-28px;position:relative;z-index:21">
+<div class="para" style="margin-top:-28px;position:relative;z-index:21;grid-template-columns:1fr">
   <div>
-    <p class="eyebrow">Para José Antonio · lo que vemos desde fuera</p>
-    <h2>El método lo tenéis; nosotros ponemos la constancia y la medición.</h2>
-    <div class="said">
-      <div><b><span class="tag c">[C]</span>Desde 2011, más de 5.000 vendedores formados</b>Presencial en Málaga y online. Venta a empresas: gerentes, directores comerciales y sus equipos. <span class="muted">Fuente: hiagora.com</span></div>
-      <div><b><span class="tag c">[C]</span>Hoy se capta por teléfono, email y «descarga el dossier»</b>El dossier pide solo el email. No hay WhatsApp ni un tiempo de respuesta prometido. <span class="muted">Fuente: hiagora.com</span></div>
-      <div class="e"><b><span class="tag e">[E]</span>Lo que suponemos (corrígenos)</b>El dossier se queda en un email sin seguimiento. La venta es larga (visita → Check Comercial → Top Business) y un contrato perdido vale mucho. Y no sabéis qué anuncio trae contratos, solo cuál trae descargas.</div>
-    </div>
-    <p class="note" style="margin-top:14px">No tenemos tu formulario: no sabemos inversión, volumen ni ticket. Nos escribiste por el <a href="https://qualivo.io/casos/eac/" target="_blank" rel="noopener">caso de EAC</a> (ROAS 10,2×, 44.000 € atribuidos en un mes). En la reunión, mejor que nos lo cuentes tú.</p>
-  </div>
-  <div>
-    <p class="cap" style="margin-top:4px">Cada pestaña responde a un sitio donde se puede perder un contrato</p>
-    <ol class="map">
-      <li data-go="anuncios"><span>1</span><div><b>Antes de que pidan nada</b>Qué anuncio trae contratos, no solo descargas.</div></li>
-      <li data-go="test"><span>2</span><div><b>Al pedir el dossier</b>Solo el email: no sabéis quién es, ni cuántos comerciales tiene, ni qué le preocupa.</div></li>
-      <li data-go="whatsapp"><span>3-4</span><div><b>La primera hora</b>Quien descarga a las 21:40 se enfría. Aquí recibe un WhatsApp en un minuto o una llamada.</div></li>
-      <li data-go="ficha"><span>5</span><div><b>Antes de la visita</b>Llegas sabiendo su problema, su equipo y su duda.</div></li>
-      <li data-go="seguimiento"><span>6</span><div><b>Después de la visita y de la propuesta</b>«Lo hablo con mi socio», «en enero». Nadie se queda sin seguimiento.</div></li>
-      <li data-go="panel"><span>7</span><div><b>En una pantalla</b>Coste por contrato por anuncio, y a quién llamar hoy.</div></li>
+    <p class="eyebrow">Cómo trabajamos</p>
+    <h2>El método de venta es vuestro. Nosotros ponemos la constancia y la medición.</h2>
+    <ol class="map" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));display:grid;gap:10px">
+      <li data-go="cliente"><span>1</span><div><b>Cliente potencial</b>A quién nos dirigimos y qué le duele.</div></li>
+      <li data-go="anuncios"><span>2</span><div><b>Anuncios</b>Uno para cada perfil, con vuestra propuesta de valor.</div></li>
+      <li data-go="landing"><span>3</span><div><b>Landing</b>Del anuncio a la visita agendada, en un paso.</div></li>
+      <li data-go="test"><span>4</span><div><b>Solicitud</b>Sabéis quién es antes de llamarle.</div></li>
+      <li data-go="whatsapp"><span>5-6</span><div><b>WhatsApp y llamada</b>Respuesta en un minuto, a cualquier hora.</div></li>
+      <li data-go="ficha"><span>7</span><div><b>Ficha</b>José Antonio llega a la visita sabiéndolo todo.</div></li>
+      <li data-go="seguimiento"><span>8</span><div><b>Seguimientos</b>Nadie se queda en «ya os diremos».</div></li>
+      <li data-go="panel"><span>9</span><div><b>Panel</b>Qué anuncio trae contratos, no solo descargas.</div></li>
     </ol>
   </div>
 </div>
 
 <nav class="tabs" role="tablist" aria-label="Pasos de la demo" style="margin-top:0">
-  <button role="tab" id="t-anuncios" aria-controls="p-anuncios" data-p="anuncios"><span>1</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mega"/></svg>Anuncios</button>
-  <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>2</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-bell"/></svg>Solicitud</button>
-  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chat"/></svg>WhatsApp</button>
-  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>4</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mic"/></svg>Llamada (voz)</button>
-  <button role="tab" id="t-ficha" aria-controls="p-ficha" data-p="ficha"><span>5</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-user"/></svg>Ficha de Ricardo</button>
-  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>6</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-route"/></svg>Seguimientos</button>
-  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>7</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chart"/></svg>Panel</button>
+  <button role="tab" id="t-cliente" aria-controls="p-cliente" data-p="cliente"><span>1</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-user"/></svg>Cliente potencial</button>
+  <button role="tab" id="t-anuncios" aria-controls="p-anuncios" data-p="anuncios"><span>2</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mega"/></svg>Anuncios</button>
+  <button role="tab" id="t-landing" aria-controls="p-landing" data-p="landing"><span>3</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-route"/></svg>Landing</button>
+  <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>4</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-bell"/></svg>Solicitud</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>5</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chat"/></svg>WhatsApp</button>
+  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>6</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mic"/></svg>Llamada (voz)</button>
+  <button role="tab" id="t-ficha" aria-controls="p-ficha" data-p="ficha"><span>7</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-user"/></svg>Ficha de Ricardo</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>8</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-route"/></svg>Seguimientos</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>9</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chart"/></svg>Panel</button>
 </nav>
 
+<section class="pane" id="p-cliente" role="tabpanel" aria-labelledby="t-cliente">
+  <header><h2>1 · Cliente potencial y propuesta de valor</h2><p>Antes de un anuncio, decidimos a quién le hablamos. Estos son los tres perfiles que vemos en vuestra oferta; los afinamos con vosotros.</p></header>
+  <div class="cols">
+    <div class="box"><p class="cap">Perfil 1 · el que más vale</p><h3>Gerente o dueño de pyme con equipo comercial</h3><p><b>Le duele:</b> «mi equipo visita mucho y cierra poco», «vendemos por precio».</p><p><b>Le encaja:</b> Consultoría (Check Comercial → Top Business) e In Company.</p></div>
+    <div class="box"><p class="cap">Perfil 2</p><h3>Director o directora comercial</h3><p><b>Le duele:</b> cada comercial vende a su manera y no hay un método común.</p><p><b>Le encaja:</b> Aprender a Vender Valor (una empresa por sector) e In Company.</p></div>
+    <div class="box"><p class="cap">Perfil 3 · la puerta de entrada</p><h3>Comercial o autónomo que quiere ponerse al día</h3><p><b>Le duele:</b> se está quedando atrás con lo digital y la IA.</p><p><b>Le encaja:</b> Vendedor Digital en la Era de la IA (550 €).</p></div>
+  </div>
+  <div class="box" style="margin-top:14px"><p class="cap">Vuestra propuesta de valor, en una frase</p><h3>Vender por valor, no por precio, y dominar la facturación.</h3><p>Con un método propio, formación práctica y resultados que ya contáis: Trasteros Plus pasó del 30 % al 40 % de conversión y Dulces Costa del Sol subió su ticket medio un 10-15 % <span class="muted">(testimonios de hiagora.com)</span>.</p><p class="muted" style="margin:0">No es para: estudiantes sin empresa detrás ni quien busca formación gratuita.</p></div>
+  <div class="navnext"><button data-go="anuncios">Siguiente: los anuncios <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
 <section class="pane" id="p-anuncios" role="tabpanel" aria-labelledby="t-anuncios">
-  <header><h2>1 · Tres anuncios que proponemos, medidos hasta el contrato <span class="ej">Propuesta de Qualivo</span></h2><p>No son vuestros anuncios: hoy no hemos encontrado ninguno activo en la Biblioteca de Meta. Son tres ideas con vuestros programas y vuestros testimonios. Lo importante no es el diseño, sino que cada uno quede unido al contrato que trae.</p></header>
+  <header><h2>2 · Un anuncio para cada perfil <span class="ej">Propuesta de Qualivo</span></h2><p>Hoy no tenéis anuncios activos en Meta. Tres ideas, una por perfil, con vuestra propuesta de valor.</p></header>
   <div class="cols">
     <div>
-      <p class="cap">Aprender a Vender Valor · plazas</p>
-      <article class="ad" aria-label="Anuncio propuesto: Aprender a Vender Valor">
-        <span class="prop">Propuesta de Qualivo</span>
-        <div class="hd"><img src="../assets/hiagora-simbolo.jpg" alt="" width="36" height="36"><div><b>Hiágora · Escuela de Ventas</b><small>Publicidad</small></div></div>
-        <p class="tx">Si tu competencia entra antes, tú ya no puedes.
-En cada edición de Aprender a Vender Valor admitimos una sola empresa por sector. 12 horas, 3 tardes, una por semana. ¿Está libre el tuyo?</p>
-        <div class="cr"><span class="dot" aria-hidden="true"></span><span class="k1">Aprender a Vender Valor</span><p class="h">Una empresa <em>por sector.</em></p><div class="chips"><span>12 plazas</span><span>3 tardes · 12 h</span><span>Devolución tras la 1.ª clase</span></div></div>
-        <div class="ft"><div><small>hiagora.com</small><b>¿Está libre tu sector?</b></div><span class="cta">Más información</span></div>
-      </article>
-      <div class="proof">Ticket medio +10-15 % tras Aprender a Vender Valor.<cite>Antonio Mancilla, Dulces Costa del Sol · testimonio en hiagora.com [C]</cite></div>
-      <div class="why"><b>Qué mide:</b> qué sectores piden plaza y cuántas plazas acaban pagadas. <b>Lo que hace después:</b> Elena comprueba si su sector está libre y lo reserva 48 h.</div>
-    </div>
-    <div>
-      <p class="cap">Consultoría · Check Comercial</p>
+      <p class="cap">Para el perfil 1 · gerente de pyme</p>
       <article class="ad" aria-label="Anuncio propuesto: Check Comercial">
         <span class="prop">Propuesta de Qualivo</span>
         <div class="hd"><img src="../assets/hiagora-simbolo.jpg" alt="" width="36" height="36"><div><b>Hiágora · Escuela de Ventas</b><small>Publicidad</small></div></div>
@@ -353,11 +346,20 @@ Descarga el Check Comercial: test, análisis, diagnóstico y plan. Si quieres, J
         <div class="cr b2"><span class="dot" aria-hidden="true"></span><span class="k1">Check Comercial</span><p class="h">Mucha visita, <em>poca venta.</em></p><div class="chips"><span>Test</span><span>Análisis</span><span>Diagnóstico</span><span>Plan</span></div></div>
         <div class="ft"><div><small>hiagora.com</small><b>Descarga el Check Comercial</b></div><span class="cta">Descargar</span></div>
       </article>
-      <div class="proof">La conversión pasó del 30 % al 40 % en tres años.<cite>Alberto Serrano, CEO de Trasteros Plus · testimonio en hiagora.com [C]</cite></div>
-      <div class="why"><b>Qué mide:</b> no las descargas, sino cuántas acaban en visita y en Top Business. <b>Lo que hace después:</b> WhatsApp en un minuto con una sola pregunta (pestaña 3).</div>
     </div>
     <div>
-      <p class="cap">Vendedor Digital en la Era de la IA</p>
+      <p class="cap">Para el perfil 2 · director comercial</p>
+      <article class="ad" aria-label="Anuncio propuesto: Aprender a Vender Valor">
+        <span class="prop">Propuesta de Qualivo</span>
+        <div class="hd"><img src="../assets/hiagora-simbolo.jpg" alt="" width="36" height="36"><div><b>Hiágora · Escuela de Ventas</b><small>Publicidad</small></div></div>
+        <p class="tx">Si tu competencia entra antes, tú ya no puedes.
+En cada edición de Aprender a Vender Valor admitimos una sola empresa por sector. 12 horas, 3 tardes, una por semana. ¿Está libre el tuyo?</p>
+        <div class="cr"><span class="dot" aria-hidden="true"></span><span class="k1">Aprender a Vender Valor</span><p class="h">Una empresa <em>por sector.</em></p><div class="chips"><span>12 plazas</span><span>3 tardes · 12 h</span><span>Devolución tras la 1.ª clase</span></div></div>
+        <div class="ft"><div><small>hiagora.com</small><b>¿Está libre tu sector?</b></div><span class="cta">Más información</span></div>
+      </article>
+    </div>
+    <div>
+      <p class="cap">Para el perfil 3 · comercial o autónomo</p>
       <article class="ad" aria-label="Anuncio propuesto: Vendedor Digital en la Era de la IA">
         <span class="prop">Propuesta de Qualivo</span>
         <div class="hd"><img src="../assets/hiagora-simbolo.jpg" alt="" width="36" height="36"><div><b>Hiágora · Escuela de Ventas</b><small>Publicidad</small></div></div>
@@ -366,16 +368,19 @@ Una jornada para aprender a usarla en tu día a día comercial.</p>
         <div class="cr b3"><span class="dot" aria-hidden="true"></span><span class="k1">Vendedor Digital en la Era de la IA</span><p class="h">Vende con IA, <em>no contra ella.</em></p><div class="chips"><span>1 jornada</span><span>550 €</span><span>495 € antiguos alumnos</span></div></div>
         <div class="ft"><div><small>hiagora.com</small><b>Plazas para la próxima jornada</b></div><span class="cta">Reservar</span></div>
       </article>
-      <div class="proof">Más de 5.000 vendedores formados desde 2011, presencial en Málaga y online.<cite>hiagora.com [C] · 550 € y 495 €: precios publicados en hiagora.com</cite></div>
-      <div class="why"><b>Qué mide:</b> quién viene solo y quién trae a su equipo. <b>Lo que hace después:</b> si son tres o más, aviso a José Antonio: puede ser un In Company.</div>
     </div>
   </div>
-  <p class="note">[C] Biblioteca de anuncios de Meta, consulta del 16-nov-2026 (España, anuncios activos, búsqueda «Hiágora»): no aparece ningún anuncio de la página de Hiágora. Solo uno de APYMESPA que os nombra (taller «El modelo de negocio: Canvas», 25-nov, San Pedro Alcántara). Sin iniciar sesión no se ven los anuncios inactivos. Por eso estos tres son propuestas de Qualivo, maquetadas en CSS: textos y diseño los decidís vosotros. Testimonios copiados de hiagora.com.</p>
-  <div class="navnext"><button data-go="test">Siguiente: la solicitud <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+  <div class="navnext"><button data-go="landing">Siguiente: la landing <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-landing" role="tabpanel" aria-labelledby="t-landing">
+  <header><h2>3 · La landing: del anuncio a la visita agendada <span class="ej">Maqueta</span></h2><p>El anuncio de consultoría lleva aquí. Una sola llamada a la acción y la visita sin compromiso queda agendada en el mismo paso, sin esperar a que alguien llame.</p></header>
+  <div style="border:1px solid var(--line,#e5e7eb);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)"><iframe src="../landing/" title="Landing de consultoría de Hiágora (maqueta)" loading="lazy" style="display:block;width:100%;height:640px;border:0"></iframe></div>
+  <div class="navnext"><a class="btnl" href="../landing/" target="_blank" rel="noopener">Abrir la landing a pantalla completa</a><button data-go="test">Siguiente: la solicitud <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
 </section>
 
 <section class="pane" id="p-test" role="tabpanel" aria-labelledby="t-test">
-  <header><h2>2 · Del «déjanos tu email» a cinco toques <span class="ej">Ejemplo</span></h2><p>Hoy, para descargar el dossier basta el email. Aquí, con cinco toques, sabéis si es una empresa, cuántos comerciales tiene, qué le preocupa, qué programa le encaja y cuándo. Pruébalo como si fueras Ricardo.</p></header>
+  <header><h2>4 · Del «déjanos tu email» a cinco toques <span class="ej">Ejemplo</span></h2><p>Hoy, para descargar el dossier basta el email. Aquí, con cinco toques, sabéis si es una empresa, cuántos comerciales tiene, qué le preocupa, qué programa le encaja y cuándo. Pruébalo como si fueras Ricardo.</p></header>
   <div class="two">
     <div class="quiz" id="quiz" aria-live="polite"></div>
     <div class="list">
@@ -384,14 +389,13 @@ Una jornada para aprender a usarla en tu día a día comercial.</p>
         <p><span class="grp a">A</span>70 puntos o más: empresa con equipo, problema claro y prisa. WhatsApp de Elena en un minuto, visita sin compromiso propuesta en el mismo chat y aviso a José Antonio con la ficha.</p>
         <p><span class="grp b">B</span>De 40 a 69: interés real, sin prisa. WhatsApp con una pregunta, el dossier y la próxima convocatoria. Sube a A si contesta.</p>
         <p><span class="grp c">C</span>Menos de 40, estudiantes o «solo me informo»: email con el dossier y un contenido al mes. Sin llamadas. No ocupa la agenda de José Antonio.</p></div>
-      <div><h3>Qué pasa al terminar</h3><p>Se crea su ficha con la puntuación y el anuncio del que viene. Los pesos son de ejemplo: los ajustáis vosotros y se recalibran cada mes con los contratos reales.</p></div>
     </div>
   </div>
   <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
 </section>
 
 <section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
-  <header><h2>3 · En 52 segundos, por WhatsApp <span class="ej">Datos de ejemplo</span></h2><p>Ricardo Núñez, gerente de Distribuciones Axarquía (34 empleados, 6 comerciales, Vélez-Málaga), descarga el dossier de consultoría a las 21:40. Le escribe Elena, la asistente, con una sola pregunta. Elige sus respuestas; al lado, lo que pasa por detrás.</p></header>
+  <header><h2>5 · En 52 segundos, por WhatsApp <span class="ej">Datos de ejemplo</span></h2><p>Ricardo Núñez, gerente de Distribuciones Axarquía (34 empleados, 6 comerciales, Vélez-Málaga), descarga el dossier de consultoría a las 21:40. Le escribe Elena, la asistente, con una sola pregunta. Elige sus respuestas; al lado, lo que pasa por detrás.</p></header>
   <div class="two">
     <div class="phone"><div class="sbar" aria-hidden="true"><b>21:40</b><span class="isl"></span><span>5G</span></div>
     <div class="wa" aria-label="Simulación de WhatsApp">
@@ -407,7 +411,7 @@ Una jornada para aprender a usarla en tu día a día comercial.</p>
 </section>
 
 <section class="pane" id="p-voz" role="tabpanel" aria-labelledby="t-voz">
-  <header><h2>4 · Si no contesta, llama la asistente de voz <span class="ej">Datos de ejemplo</span></h2><p>Pilar Vega, gerente de Instalaciones Vega (Fuengirola), descarga el dossier a las 11:05 y no contesta al WhatsApp. A las 11:20 la llama la asistente. Se presenta como asistente virtual, no vende: pregunta lo justo y deja la visita en la agenda de José Antonio.</p></header>
+  <header><h2>6 · Si no contesta, llama la asistente de voz <span class="ej">Datos de ejemplo</span></h2><p>Pilar Vega, gerente de Instalaciones Vega (Fuengirola), descarga el dossier a las 11:05 y no contesta al WhatsApp. A las 11:20 la llama la asistente. Se presenta como asistente virtual, no vende: pregunta lo justo y deja la visita en la agenda de José Antonio.</p></header>
   <div class="two">
     <div class="call">
       <div class="top"><span class="av" aria-hidden="true"><svg class="i"><use href="#i-mic"/></svg></span><span><b>Llamada saliente · Elena, asistente virtual de Hiágora</b> → Pilar V.</span><small>Martes 11:20 · 2 min 05 s · Ejemplo</small><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
@@ -436,7 +440,7 @@ Una jornada para aprender a usarla en tu día a día comercial.</p>
 </section>
 
 <section class="pane" id="p-ficha" role="tabpanel" aria-labelledby="t-ficha">
-  <header><h2>5 · Lo que ves antes de la visita <span class="ej">Datos de ejemplo</span></h2><p>Una ficha, no un email suelto. José Antonio solo recibe aviso de las empresas con más opciones. El resto lo mueve el sistema hasta que suben o se apartan.</p></header>
+  <header><h2>7 · Lo que ves antes de la visita <span class="ej">Datos de ejemplo</span></h2><p>Una ficha, no un email suelto. José Antonio solo recibe aviso de las empresas con más opciones. El resto lo mueve el sistema hasta que suben o se apartan.</p></header>
   <div class="two">
     <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Interesados › Ricardo Núñez · ficha</span><em>Ejemplo</em></div>
     <div class="ficha">
@@ -483,7 +487,7 @@ Una jornada para aprender a usarla en tu día a día comercial.</p>
 </section>
 
 <section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
-  <header><h2>6 · Seguimientos: la constancia la ponemos nosotros <span class="ej">Datos de ejemplo</span></h2><p>Vuestra venta es larga: visita, Check Comercial, propuesta, Top Business. Estos mensajes salen solos, en horario laboral. Cualquier respuesta los para y pasa la conversación a José Antonio. Cada texto lo aprobáis vosotros.</p></header>
+  <header><h2>8 · Seguimientos: la constancia la ponemos nosotros <span class="ej">Datos de ejemplo</span></h2><p>Vuestra venta es larga: visita, Check Comercial, propuesta, Top Business. Estos mensajes salen solos, en horario laboral. Cualquier respuesta los para y pasa la conversación a José Antonio. Cada texto lo aprobáis vosotros.</p></header>
   <div class="seq">
     <div><h3>A · Después de la visita sin compromiso</h3><p>Para que la visita no se quede en «ya os diremos».</p><ol class="tl">
       <li class="mail"><span class="w">Mismo día · email</span><b>Resumen de la visita</b><blockquote><span class="subj">Asunto: Lo que hablamos hoy en Distribuciones Axarquía</span>Los tres puntos que salieron y el siguiente paso. Lo revisa José Antonio antes de salir.</blockquote></li>
@@ -496,28 +500,18 @@ Una jornada para aprender a usarla en tu día a día comercial.</p>
       <li class="mail"><span class="w">D+3 · email</span><b>Cómo es el primer mes</b><blockquote><span class="subj">Asunto: Las primeras semanas del Top Business</span>Qué pasa el primer mes, quién del equipo participa y cuánto tiempo os pide.</blockquote></li>
       <li class="alert"><span class="w">D+7 · aviso a José Antonio</span><b>Abre y no contesta</b><blockquote>Ricardo N. · abrió la propuesta 3 veces · 7 días sin respuesta. Mejor una llamada tuya que otro email.</blockquote></li>
       <li><span class="w">D+14 · WhatsApp</span><b>Sin presión</b><blockquote>¿Lo dejamos para más adelante o seguimos? Si es cuestión de fechas, te lo guardo. [Seguimos] [Más adelante] [Ya no]</blockquote></li>
-      <li class="stop"><span class="w">Si dice «más adelante»</span><b>Pasa a C, con su fecha</b></li></ol></div>
-    <div><h3>C · «Más adelante», con fecha</h3><p>Ejemplo: Tomás H., «en febrero, después de los cierres».</p><ol class="tl">
-      <li><span class="w">Hoy · WhatsApp</span><b>Guardado</b><blockquote>Perfecto, Tomás. Te escribo a principios de febrero. Si cambia algo antes, aquí estoy.</blockquote></li>
-      <li><span class="w">2 de febrero · WhatsApp</span><b>Vuelve</b><blockquote>Tomás, como quedamos: ¿retomamos el Check Comercial? José Antonio tiene hueco esta semana. [Sí] [Más adelante]</blockquote></li>
-      <li class="stop"><span class="w">Si dice sí</span><b>Vuelve a la lista de José Antonio, con su ficha</b></li></ol></div>
-    <div><h3>D · Antiguos alumnos: In Company y consultoría</h3><p>Lo que enseñáis, aplicado a vuestra cartera. Paula Rueda (ERFRI) cuenta en vuestra web que reactivó un 10 % de sus clientes [C].</p><ol class="tl">
+      <li class="stop"><span class="w">Si dice «más adelante»</span><b>Se guarda con su fecha y le escribimos ese día</b></li></ol></div>
+    <div><h3>C · Antiguos alumnos: In Company y consultoría</h3><p>Lo que enseñáis, aplicado a vuestra cartera. Paula Rueda (ERFRI) cuenta en vuestra web que reactivó un 10 % de sus clientes [C].</p><ol class="tl">
       <li><span class="w">30 días tras el curso · WhatsApp</span><b>¿Cómo va?</b><blockquote>Antonio, ¿qué tal aplicando las 11 fases? ¿Lo está notando el equipo?</blockquote></li>
       <li><span class="w">90 días · WhatsApp</span><b>El resto del equipo</b><blockquote>Si quieres que el resto del equipo trabaje igual, hacemos una formación In Company de 8 h con vuestro manual de ventas. ¿Te cuento cómo? [Sí] [Ahora no]</blockquote></li>
       <li><span class="w">Antes de la jornada de IA · WhatsApp</span><b>Precio de antiguo alumno</b><blockquote>Como antiguo alumno, el Vendedor Digital en la Era de la IA te sale a 495 € en vez de 550 €. ¿Te reservo plaza?</blockquote></li>
       <li class="stop"><span class="w">Si contesta</span><b>Aviso a José Antonio: posible In Company o Check Comercial</b></li></ol></div>
-    <div><h3>E · No se presenta a la visita</h3><p>Para que José Antonio no pierda la mañana.</p><ol class="tl">
-      <li><span class="w">Víspera · WhatsApp</span><b>Recordatorio</b><blockquote>Ricardo, mañana a las 10:00 te visita José Antonio. Si te viene mal, contesta aquí y lo movemos.</blockquote></li>
-      <li class="alert"><span class="w">15 min después · WhatsApp</span><b>Recuperación</b><blockquote>Ricardo, José Antonio no ha podido verte. ¿Lo movemos? [Mañana] [La semana que viene] [Por videollamada]</blockquote></li></ol></div>
-    <div><h3>F · Antes de cada convocatoria</h3><p>Aprender a Vender Valor: una empresa por sector.</p><ol class="tl">
-      <li><span class="w">3 semanas antes · WhatsApp</span><b>Su sector, libre o no</b><blockquote>Inés, la próxima edición empieza pronto y climatización sigue libre. ¿Os lo reservo 48 h?</blockquote></li>
-      <li class="stop"><span class="w">Si reserva</span><b>Aviso a José Antonio para cerrar la inscripción</b></li></ol></div>
   </div>
   <div class="navnext"><button data-go="panel">Siguiente: el panel <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
 </section>
 
 <section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
-  <header><h2>7 · Lo que verías cada día <span class="ej">Datos de ejemplo</span></h2><p>Por anuncio y por empresa, hasta el contrato. Cifras inventadas, no son previsiones. La versión interactiva, con la historia de Ricardo y avisos en vivo, está en el panel.</p></header>
+  <header><h2>9 · Lo que verías cada día <span class="ej">Datos de ejemplo</span></h2><p>Por anuncio y por empresa, hasta el contrato. Cifras inventadas, no son previsiones. La versión interactiva, con la historia de Ricardo y avisos en vivo, está en el panel.</p></header>
   <div class="cta-panel">
     <div><h3>Abre el panel de Hiágora y pregúntale</h3><p>Está preparado con vuestros programas. Tiene dos historias para ver en directo:</p>
       <ul><li>Ricardo descarga el dossier a las 21:40 y tiene la visita agendada antes de dormir.</li><li>Una directora comercial pide Aprender a Vender Valor y reserva la plaza de su sector antes que su competencia.</li></ul>
@@ -556,20 +550,11 @@ Una jornada para aprender a usarla en tu día a día comercial.</p>
     </table></div>
   </div>
   </div></div>
-  <div class="box" style="box-shadow:var(--shadow)">
-    <h3>Para arrancar en 30 días</h3>
-    <ol style="margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px">
-      <li>Conectar el formulario del dossier, vuestros anuncios y un WhatsApp de empresa.</li>
-      <li>Aprobar los textos de Elena: programas, convocatorias y qué puede decir (y qué no) de precios y bonificación.</li>
-      <li>Definir con José Antonio qué empresa es «A» para Hiágora.</li>
-      <li>A los 30 días, mirar juntos: cuántas solicitudes acabaron en visita y cuántas visitas en contrato, por anuncio.</li>
-    </ol>
-  </div>
   <div class="navnext"><a class="btnl" href="https://qualivo.io/intelligence/?sector=hiagora&amp;empresa=Hi%C3%A1gora" target="_blank" rel="noopener">Abrir el panel en vivo <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></a></div>
 </section>
 
 <footer>
-  <div class="links"><a class="btnl" href="https://qualivo.io/intelligence/?sector=hiagora&amp;empresa=Hi%C3%A1gora" target="_blank" rel="noopener">Panel en vivo</a><a class="btnl" href="https://qualivo.io/casos/eac/" target="_blank" rel="noopener">Caso EAC</a></div>
+  <div class="links"><a class="btnl" href="https://qualivo.io/intelligence/?sector=hiagora&amp;empresa=Hi%C3%A1gora" target="_blank" rel="noopener">Panel en vivo</a><a class="btnl" href="../landing/" target="_blank" rel="noopener">Landing</a></div>
   <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
   <p>Demo preparada el 16 de noviembre de 2026 para Hiágora (Escuela de Ventas y Capacitación Comercial Hiágora, S.L.U., Málaga). No es una página de Hiágora. Logotipo, programas, precios publicados y testimonios tomados de hiagora.com ese día. Anuncios propuestos por Qualivo; personas, empresas, mensajes y cifras de ejemplo.</p>
 </footer>
@@ -577,10 +562,10 @@ Una jornada para aprender a usarla en tu día a día comercial.</p>
 
 <script>
 (function () {
-  var panes = ['anuncios', 'test', 'whatsapp', 'voz', 'ficha', 'seguimiento', 'panel'];
+  var panes = ['cliente', 'anuncios', 'landing', 'test', 'whatsapp', 'voz', 'ficha', 'seguimiento', 'panel'];
   var started = false;
   function show(id, push) {
-    if (panes.indexOf(id) < 0) id = 'anuncios';
+    if (panes.indexOf(id) < 0) id = 'cliente';
     panes.forEach(function (p) {
       document.getElementById('p-' + p).classList.toggle('on', p === id);
       var t = document.getElementById('t-' + p);
