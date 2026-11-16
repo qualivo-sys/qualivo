@@ -112,3 +112,23 @@ No hace falta ninguna captura nueva del producto ni pedir nada a Growth o a Auto
 2. **«Gratis».** No aparece. La página del diagnóstico dice 30 minutos, no que sea gratis.
 3. **Música definitiva.** La de los cortes es provisional.
 4. **El botón** «Solicita un diagnóstico de captación y ventas» tiene 46 caracteres: cabe en una línea a 34 px en 9:16; si se quiere más grande, va en dos líneas.
+
+## 7 · Versión producida (16-nov, tarde)
+
+Tras los últimos ajustes de Maikel (vía Paid) se produjo `corte6/formacion-v2-corte6-916.mp4` y `-45.mp4`. Duración: **36,4 s**. No está publicado ni montado en Meta.
+
+Locución definitiva:
+1. «Tu academia consigue solicitudes. ¿Pero cuántas acaban en matrícula?»
+2. «En Qualivo gestionamos la captación y mejoramos todo el proceso hasta la matrícula.»
+3. «Laura ve el anuncio y pide información.»
+4. «Recibe un WhatsApp. Si no responde, tu equipo la pasa a una llamada.»
+5. Raquel: «Hola, Laura, soy Raquel, de Escuela Norte.»
+6. «Y si lo deja para más adelante, queda apuntado cuándo retomarlo.»
+7. «Cuando reserva plaza, sabes de qué anuncio vino.»
+8. «Nos ocupamos de la captación, el seguimiento y la mejora continua. Para que tu equipo se centre en matricular.»
+
+Cambios frente a las secciones 1-4:
+- Son 36,4 s y no 34,2: la frase de posicionamiento nueva es más larga y la del seguimiento va entera («cuándo retomarlo»), sin acelerar la voz.
+- La ficha final es la del paso 8 de la demo (`corte2/rec/p8.png`, «Etapa: Cualificado»), no la del paso 9 («Etapa: Matrícula»). El cuarto paso de la línea de progreso dice «Reserva».
+- El formulario no es un gráfico nuevo: se usa el bloque real «Lo que respondió en el formulario» de la ficha.
+- Botón: «Diagnóstico gratuito de captación y ventas». Música: la provisional, a volumen bajo.
