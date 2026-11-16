@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Hiágora · demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Demo guiada en pestañas para Hiágora: anuncios propuestos, solicitud, WhatsApp, voz, ficha de Ricardo, seguimientos y panel. */
+:root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--body:var(--sans)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}}
+:root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}
+/* cabecera: composición en CSS con el rombo de Hiágora */
+.dhero{position:relative;background:var(--f900);color:#fff;overflow:hidden;isolation:isolate}
+.dhero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(120% 90% at 85% 30%,#24566A 0%,#16323B 45%,#0E2128 100%)}
+.dhero .rombo{position:absolute;z-index:-1;right:-60px;top:40px;width:340px;height:340px;border-radius:70px;transform:rotate(45deg);background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12)}
+.dhero .rombo::after{content:"";position:absolute;width:56px;height:56px;border-radius:14px;background:#E6425C;left:34px;top:34px;opacity:.9}
+@media (max-width:700px){.dhero .rombo{width:200px;height:200px;right:-90px;top:20px;border-radius:44px;opacity:.6}.dhero .rombo::after{width:34px;height:34px;left:22px;top:22px;border-radius:9px}}
+.dhero .wrap{padding-block:56px 40px;display:grid;gap:12px}
+.dhero .eyebrow{color:#F49AA8}
+.dhero h1{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 144;font-size:clamp(32px,4.8vw,56px);line-height:1.05;letter-spacing:-.02em;max-width:20ch}
+.dhero .lead{font-size:18px;color:rgba(255,255,255,.84);max-width:68ch;margin-top:6px}
+.dhero .note{color:rgba(255,255,255,.74);border-color:rgba(255,255,255,.22);margin-top:10px;max-width:90ch}
+.wrap.main{display:grid;gap:26px;padding-top:0;padding-bottom:72px}
+.wrap.main > *{min-width:0}
+h2{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 96;font-size:clamp(25px,3vw,34px);line-height:1.12;letter-spacing:-.015em}
+.eyebrow{font-family:var(--mono)}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;line-height:1.5}
+.note a{color:var(--accent)}
+.ej{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;background:#C9860A;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;margin-right:4px}
+h2 .ej{vertical-align:6px;margin-left:6px}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.06em;border-radius:6px;padding:1px 6px;margin-right:4px;vertical-align:1px}
+.tag.c{background:var(--good-soft);color:var(--good)}
+.tag.e{background:var(--warn-soft);color:var(--warn)}
+/* pestañas tipo producto */
+nav.tabs{position:sticky;top:57px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:5px;margin-top:-28px;box-shadow:var(--shadow-lg)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 9px;cursor:pointer;transition:background .25s,color .25s}
+nav.tabs button:hover{color:var(--ink);background:var(--line-2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-family:var(--mono);font-size:11px;background:var(--line-2);color:var(--muted);transition:background .25s,color .25s}
+nav.tabs button[aria-selected="true"]{background:var(--f700);color:#fff;box-shadow:0 6px 16px -8px rgba(12,33,40,.6)}
+nav.tabs button[aria-selected="true"] span{background:var(--moss);color:#fff}
+@media (max-width:560px){nav.tabs{top:96px;border-radius:14px}nav.tabs button{padding:9px 12px;font-size:13.5px}}
+.pane{display:none;gap:22px}
+.pane.on{display:grid;animation:paneIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px}
+.pane > header p{color:var(--muted);margin-top:8px;max-width:76ch;font-size:16.5px}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.two{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:22px;align-items:start}
+.cap{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--muted);margin-top:12px;line-height:1.55}
+.why b{color:var(--ink)}
+/* maqueta de anuncio de Meta en CSS */
+.ad{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.ad .prop{display:block;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:#C9860A;color:#fff;padding:5px 8px}
+.ad .hd{display:flex;gap:9px;align-items:center;padding:12px 12px 8px}
+.ad .hd img{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none;border:1px solid var(--line)}
+.ad .hd b{display:block;font-size:13.5px;line-height:1.2}
+.ad .hd small{font-size:11.5px;color:var(--muted)}
+.ad .tx{padding:0 12px 10px;font-size:13.5px;line-height:1.5;white-space:pre-line}
+.ad .cr{position:relative;aspect-ratio:1/1;overflow:hidden;color:#fff;padding:22px;display:flex;flex-direction:column;justify-content:space-between;isolation:isolate;background:linear-gradient(150deg,#1C404C 0%,#12303A 60%,#0C2027 100%)}
+.ad .cr::before{content:"";position:absolute;z-index:-1;width:62%;aspect-ratio:1;right:-18%;bottom:-18%;border-radius:22%;transform:rotate(45deg);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+.ad .cr.b2{background:linear-gradient(150deg,#F4F1EC 0%,#E9EEF0 100%);color:#1C404C}
+.ad .cr.b2::before{background:rgba(28,64,76,.06);border-color:rgba(28,64,76,.15)}
+.ad .cr.b3{background:linear-gradient(150deg,#0F5E8C 0%,#1C404C 100%)}
+.ad .cr .k1{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.ad .cr .h{font-family:var(--serif);font-weight:600;font-size:clamp(25px,2.6vw,31px);line-height:1.05;letter-spacing:-.015em;max-width:12ch}
+.ad .cr .h em{font-style:normal;color:#F27A8D}
+.ad .cr.b2 .h em{color:#C92A45}
+.ad .cr .chips{display:flex;flex-wrap:wrap;gap:6px}
+.ad .cr .chips span{font-size:11.5px;font-weight:600;border:1px solid currentColor;border-radius:99px;padding:3px 9px;opacity:.92}
+.ad .cr .dot{position:absolute;top:22px;right:22px;width:16px;height:16px;border-radius:4px;background:#E6425C;transform:rotate(45deg)}
+.ad .cr .lg{height:18px;width:auto;align-self:flex-start;background:#fff;border-radius:6px;padding:3px 7px;box-sizing:content-box}
+.ad .ft{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:var(--surface-2);border-top:1px solid var(--line-2)}
+.ad .ft small{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.ad .ft b{font-size:13.5px;line-height:1.3}
+.ad .ft span.cta{flex:none;background:var(--line-2);border-radius:8px;padding:7px 11px;font-size:13px;font-weight:650}
+.proof{margin-top:12px;border-left:3px solid var(--moss);background:var(--surface);border-radius:0 12px 12px 0;padding:10px 12px;font-size:13.5px;line-height:1.5}
+.proof cite{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:4px}
+/* captura y test */
+.capt{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;box-shadow:var(--shadow)}
+.capt .row{display:flex;gap:8px;flex-wrap:wrap}
+.capt .fake{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--paper);color:var(--muted);flex:1 1 160px}
+.capt .btn{display:inline-block;background:#1C404C;color:#fff;font-weight:650;border-radius:99px;padding:9px 16px;font-size:14.5px;width:fit-content}
+.quiz{width:min(420px,100%);margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:24px;display:grid;gap:14px;min-height:540px;align-content:start;box-shadow:var(--shadow-lg)}
+.quiz h3{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:-.01em;line-height:1.2}
+.quiz .bar{height:6px;border-radius:3px;background:var(--line-2);overflow:hidden}
+.quiz .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--moss));transition:width .35s}
+.quiz .qopts{display:grid;gap:8px}
+.quiz .qopts button{font:inherit;font-weight:550;text-align:left;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .15s,transform .15s,background .15s}
+.quiz .qopts button:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateX(2px)}
+.quiz .done{display:grid;gap:10px;padding-top:10px}
+.quiz .done b.t{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.2}
+.quiz .done p{color:var(--muted);font-size:15px}
+.grp{display:inline-block;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px}
+.grp.a{background:var(--good-soft);color:var(--good)}
+.grp.b{background:var(--warn-soft);color:var(--warn)}
+.grp.c{background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+.list{display:grid;gap:12px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.list p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.list p .grp{font-size:12.5px;padding:2px 8px;margin-right:4px}
+.btnl{display:inline-flex;align-items:center;gap:6px;font-weight:650;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:99px;padding:10px 18px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit;transition:transform .15s}
+.btnl:hover{transform:translateY(-1px)}
+/* móvil: WhatsApp */
+.phone{width:min(380px,100%);margin-inline:auto;background:#0E1316;border-radius:46px;padding:12px;box-shadow:0 0 0 1px #2b3236,0 30px 60px -20px rgba(12,24,30,.55),inset 0 0 0 2px #262d31;position:relative}
+.phone .sbar{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:12.5px;padding:6px 22px 8px;font-weight:600}
+.phone .isl{width:96px;height:26px;border-radius:20px;background:#000}
+.phone .home{width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.55);margin:10px auto 2px}
+.wa{border-radius:30px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:620px;background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1px);background-size:14px 14px}
+.wa .top{background:var(--wa-head);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.wa .top img{width:36px;height:36px;border-radius:50%;flex:none;object-fit:cover;background:#fff}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.b{max-width:84%;padding:8px 10px 6px;border-radius:12px;font-size:14.5px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08);animation:pop .3s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+.b.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:4px}
+.b.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:4px}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:color-mix(in srgb,var(--surface) 92%,transparent);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center;border-radius:8px}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:12px;padding:8px 12px;font-size:13px;color:var(--muted);font-style:italic}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:62px;align-items:center}
+.wa .opts button{font:inherit;font-size:13.5px;font-weight:600;border:1.5px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer;transition:background .15s,color .15s;animation:pop .3s ease-out}
+.wa .opts button:hover{background:var(--accent);color:var(--accent-ink)}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;align-content:start;max-height:690px;overflow-y:auto;box-shadow:var(--shadow)}
+.log h3{display:flex;align-items:center;gap:8px}
+.log h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--moss);box-shadow:0 0 0 4px var(--accent-soft)}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border:1px solid var(--line-2);border-left:3px solid var(--accent);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--surface-2);animation:pop .3s ease-out}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-left-color:#C9860A}
+.log li.g{border-left-color:var(--good)}
+/* voz */
+.call{border-radius:28px;background:var(--surface);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.call .top{background:linear-gradient(160deg,#1C404C,#0C1D23);color:#fff;padding:22px 20px 18px;display:grid;justify-items:center;gap:6px;text-align:center;font-size:14px}
+.call .av{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25)}
+.call .av svg{width:28px;height:28px}
+.call .top small{opacity:.75;font-family:var(--mono);font-size:11.5px}
+.wave{display:flex;gap:3px;align-items:center;height:26px;margin-top:4px}
+.wave i{width:3px;border-radius:2px;background:var(--moss);animation:wv 1.2s ease-in-out infinite}
+.wave i:nth-child(odd){animation-delay:-.4s}.wave i:nth-child(3n){animation-delay:-.8s}
+@keyframes wv{0%,100%{height:5px}50%{height:24px}}
+.call .body{padding:16px;display:flex;flex-direction:column;gap:9px}
+.v{max-width:86%;padding:9px 13px;border-radius:14px;font-size:14.5px;line-height:1.5}
+.v small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-bottom:2px;letter-spacing:.06em}
+.v.r{background:var(--accent-soft);align-self:flex-start;border-top-left-radius:4px}
+.v.c{background:var(--paper);border:1px solid var(--line);align-self:flex-end;border-top-right-radius:4px}
+.res{margin:4px 16px 16px;border-radius:14px;background:var(--good-soft);color:var(--ink);padding:12px 14px;font-size:14.5px;line-height:1.5;border:1px solid color-mix(in srgb,var(--good) 25%,transparent)}
+.res b{color:var(--good)}
+.rules{display:grid;gap:10px}
+.rules > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:14.5px;line-height:1.55}
+.rules b{display:block;font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+/* ventanas de aplicación (ficha y panel) */
+.win{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);min-width:0}
+.wbar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.wbar i{width:11px;height:11px;border-radius:50%;background:#E5DFD2}
+.wbar i:nth-child(1){background:#F0A39B}.wbar i:nth-child(2){background:#F2D18A}.wbar i:nth-child(3){background:#A9D7A2}
+.wbar span{margin-left:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbar em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#fff;background:#C9860A;border-radius:6px;padding:2px 7px;white-space:nowrap}
+.winbody{padding:18px;display:grid;gap:16px;background:var(--paper)}
+.ficha{background:var(--surface);overflow:hidden}
+.ficha .hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 20px;border-bottom:1px solid var(--line);align-items:center}
+.ficha .hd > div:first-child{flex:1 1 300px}
+.ficha .hd b{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+.ficha .sc{font-family:var(--serif);font-size:44px;font-weight:600;line-height:1;color:var(--good)}
+.dims{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.dims > div{padding:12px 16px;border-right:1px solid var(--line-2);display:grid;gap:4px}
+.dims > div:last-child{border-right:0}
+.dims small{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.dims b{font-size:15px}
+.dims .m{height:6px;border-radius:3px;background:var(--line-2);overflow:hidden}
+.dims .m i{display:block;height:100%;background:var(--accent)}
+.dims .m i.lo{background:var(--good)}
+.ficha .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.ficha .grid > div{padding:14px 20px;border-bottom:1px solid var(--line-2);border-right:1px solid var(--line-2);font-size:14.5px}
+.ficha .grid > div:nth-child(3n){border-right:0}
+.ficha dl{margin:0}
+.ficha dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ficha dd{margin:3px 0 0;font-weight:550}
+.ficha .why2{padding:16px 20px;font-size:14.5px;border-bottom:1px solid var(--line-2);line-height:1.6}
+.ficha .next{padding:16px 20px;background:var(--accent-soft);font-weight:600;line-height:1.55;border-left:4px solid var(--accent)}
+.pts{width:100%;border-collapse:collapse;font-size:14px}
+.pts td{padding:8px 0;border-bottom:1px dashed var(--line);white-space:normal;text-align:left;background:none!important}
+.pts td:last-child{text-align:right;white-space:nowrap;padding-left:10px;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
+.pts tr:last-child td{border-bottom:0;font-size:16px;padding-top:12px}
+.notif{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--moss);border-radius:14px;padding:14px 16px;display:grid;gap:6px;box-shadow:var(--shadow)}
+.notif .t{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.notif p{font-size:14.5px;line-height:1.55}
+/* seguimiento */
+.seq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0;box-shadow:var(--shadow)}
+.seq h3{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:14px}
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{position:relative;padding:0 0 16px 24px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-8px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--surface)}
+.tl li.stop::before{background:var(--good)}
+.tl li.alert::before{background:#C9860A}
+.tl li.mail::before{background:#5B7FB8}
+.tl .w{font-family:var(--mono);font-size:11.5px;color:var(--accent);letter-spacing:.02em}
+.tl b{display:block;font-size:14.5px;margin-top:1px}
+.tl blockquote{margin:8px 0 0;background:var(--accent-soft);border-radius:4px 12px 12px 12px;padding:10px 12px;font-size:14px;white-space:pre-line;line-height:1.5}
+.tl li.mail blockquote{background:var(--paper);border:1px solid var(--line);border-radius:10px}
+.tl .subj{display:block;font-weight:700;font-size:13px;margin-bottom:4px}
+/* panel */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;min-width:0}
+.tbl{overflow-x:auto}
+.tbl table,.box > table{width:100%;border-collapse:collapse;font-size:14px}
+.tbl table{min-width:640px}
+.tbl th,.tbl td{padding:10px 10px;border-bottom:1px solid var(--line-2);text-align:right;white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child,.tbl td.l,.tbl th.l{text-align:left}
+.tbl td:first-child{position:sticky;left:0;background:var(--surface);font-weight:600}
+.tbl th{white-space:normal;vertical-align:bottom;line-height:1.35}
+.tbl td.k{font-weight:700;color:var(--accent)}
+.tbl th{position:sticky;top:0;background:var(--surface-2);font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.tbl tbody tr:last-child td{border-bottom:0}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:4px;align-content:start}
+.kpi b{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1;letter-spacing:-.02em}
+.kpi span{font-size:13px;color:var(--muted);line-height:1.4}
+.kpi.alert{border-color:#C9860A;background:var(--warn-soft)}
+.kpi.alert b{color:var(--warn)}
+.cta-panel{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:22px;align-items:center;background:linear-gradient(150deg,#1C404C,#0E2128);color:#fff;border-radius:20px;padding:26px;box-shadow:var(--shadow-lg)}
+.cta-panel h3{font-family:var(--serif);font-weight:600;font-size:clamp(22px,2.6vw,30px);line-height:1.15;letter-spacing:-.01em}
+.cta-panel p{color:rgba(255,255,255,.8);margin-top:8px;font-size:15px}
+.cta-panel ul{margin:12px 0 0;padding-left:18px;color:rgba(255,255,255,.85);font-size:14.5px;display:grid;gap:4px}
+.cta-panel .go{display:grid;gap:10px;justify-items:start}
+.cta-panel .btnl{background:#E6425C;color:#fff;font-size:16px;padding:14px 22px}
+.cta-panel small{color:rgba(255,255,255,.65);font-size:12.5px;word-break:break-all}
+footer{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:22px;font-size:13.5px;color:var(--muted)}
+footer p b{color:var(--ink)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links .btnl{background:var(--surface);color:var(--ink);border:1px solid var(--line);margin:0}
+.links .btnl:hover{border-color:var(--accent);color:var(--accent)}
+.navnext{display:flex;justify-content:flex-end}
+.navnext button,.navnext .btnl{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:650;background:var(--f700);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s}
+.navnext button:hover,.navnext .btnl:hover{transform:translateX(3px);box-shadow:var(--shadow)}
+@media (max-width:900px){.cols,.seq,.two,.cta-panel{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.ficha .grid{grid-template-columns:1fr 1fr}.ficha .grid > div:nth-child(3n){border-right:1px solid var(--line-2)}.ficha .grid > div:nth-child(2n){border-right:0}.cols > div{max-width:440px;margin-inline:auto;width:100%}.dims{grid-template-columns:1fr 1fr}.dims > div:nth-child(2){border-right:0}.dims > div:nth-child(-n+2){border-bottom:1px solid var(--line-2)}}
+@media (max-width:520px){.ficha .grid{grid-template-columns:1fr}.ficha .grid > div{border-right:0!important}.wa{height:560px}.phone{border-radius:40px;padding:9px}.winbody{padding:10px}.kpi b{font-size:32px}.dhero .wrap{padding-block:40px 44px}.cta-panel{padding:20px}}
+@media print{.pane{display:grid!important;break-before:page}nav.tabs,.navnext{display:none}.wave i{animation:none;height:10px}}
+/* marca Hiágora: azul petróleo #1C404C, rojo #E6425C, azul #1890D7 (hiagora.com) */
+:root{--f900:#0E2128;--f800:#16323B;--f700:#1C404C;--f600:#1890D7;--moss:#E6425C;--accent:#12699E;--accent-ink:#fff;--accent-soft:#E5F0F7;
+  --paper:#F3F5F6;--surface-2:#F8FAFB;--ink:#132A31;--ink-2:#26404A;--muted:#54676E;--line:#D9E1E4;--line-2:#E7EDEF}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent:#6CB8EA;--accent-ink:#06202D;--accent-soft:#14303D;
+  --paper:#0B161A;--surface:#112128;--surface-2:#14272F;--ink:#E8F0F2;--ink-2:#CFDCE0;--muted:#9DB0B6;--line:#24393F;--line-2:#1C2F36}}
+:root[data-theme="dark"]{--accent:#6CB8EA;--accent-ink:#06202D;--accent-soft:#14303D;
+  --paper:#0B161A;--surface:#112128;--surface-2:#14272F;--ink:#E8F0F2;--ink-2:#CFDCE0;--muted:#9DB0B6;--line:#24393F;--line-2:#1C2F36}
+.topnav{background:rgba(14,33,40,.95)!important}
+.topnav .chip{display:inline-flex;align-items:center;background:#fff;border-radius:7px;padding:4px 8px;flex:none}
+.topnav .chip img{height:16px}
+.pane > .kpis{margin-top:4px}
+.para{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:22px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.para h2{font-size:clamp(22px,2.6vw,30px)}
+.para .said{display:grid;gap:10px;margin-top:14px}
+.para .said div{border-left:4px solid var(--accent);background:var(--surface-2);border-radius:0 12px 12px 0;padding:10px 14px;font-size:14.5px;line-height:1.5}
+.para .said div.e{border-left-color:#C9860A}
+.para .said b{display:block;font-size:15.5px;margin-bottom:2px}
+.map{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.map li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:1px solid var(--line-2);border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.45;cursor:pointer;transition:border-color .15s,background .15s}
+.map li:hover{border-color:var(--accent);background:var(--accent-soft)}
+.map li > span{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--f700);color:#fff;font-family:var(--mono);font-size:12px}
+.map li b{display:block;font-size:15px}
+@media (max-width:900px){.para{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol><symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M19 5.5a9 9 0 0 1 0 13"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M12 19h4.5a3.5 3.5 0 0 0 0-7h-8a3.5 3.5 0 0 1 0-7H12"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></symbol></svg>
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="chip"><img src="../assets/hiagora-logo.webp" alt="Hiágora" width="46" height="16"></span><span class="x">×</span><span class="qv">Qualivo</span><span class="by">16-nov-2026</span></div>
+    <div class="links"><a href="./" aria-current="page">Recorrido</a><a href="https://qualivo.io/casos/eac/" target="_blank" rel="noopener">Caso EAC</a><a href="https://qualivo.io/intelligence/?sector=hiagora&amp;empresa=Hi%C3%A1gora" target="_blank" rel="noopener">Panel en vivo</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<span class="rombo" aria-hidden="true"></span>
+<div class="wrap">
+  <p class="eyebrow">Demo · Hiágora · paso a paso</p>
+  <h1>Del dossier descargado a la visita con José Antonio, sin que nadie se enfríe</h1>
+  <p class="lead">Así lo vivirían Ricardo, gerente de una distribuidora de la Axarquía, y tú, José Antonio. El método de venta es el vuestro. Nosotros ponemos dos cosas: que nadie se quede sin respuesta ni sin seguimiento, y saber qué anuncio trae contratos.</p>
+  <p class="note"><span class="ej">Datos de ejemplo</span> Demo preparada por Qualivo el 16-nov-2026. Programas, condiciones y testimonios tomados de hiagora.com ese día. Ricardo, las demás personas, los mensajes y las cifras del panel son inventados. Los anuncios son propuestas nuestras, no vuestros anuncios. Los textos finales los aprobáis vosotros. La asistente no da precios que no estén publicados ni cierra contratos: eso lo hace José Antonio.</p>
+</div>
+</header>
+
+<div class="wrap main">
+
+<div class="para" style="margin-top:-28px;position:relative;z-index:21">
+  <div>
+    <p class="eyebrow">Para José Antonio · lo que vemos desde fuera</p>
+    <h2>El método lo tenéis; nosotros ponemos la constancia y la medición.</h2>
+    <div class="said">
+      <div><b><span class="tag c">[C]</span>Desde 2011, más de 5.000 vendedores formados</b>Presencial en Málaga y online. Venta a empresas: gerentes, directores comerciales y sus equipos. <span class="muted">Fuente: hiagora.com</span></div>
+      <div><b><span class="tag c">[C]</span>Hoy se capta por teléfono, email y «descarga el dossier»</b>El dossier pide solo el email. No hay WhatsApp ni un tiempo de respuesta prometido. <span class="muted">Fuente: hiagora.com</span></div>
+      <div class="e"><b><span class="tag e">[E]</span>Lo que suponemos (corrígenos)</b>El dossier se queda en un email sin seguimiento. La venta es larga (visita → Check Comercial → Top Business) y un contrato perdido vale mucho. Y no sabéis qué anuncio trae contratos, solo cuál trae descargas.</div>
+    </div>
+    <p class="note" style="margin-top:14px">No tenemos tu formulario: no sabemos inversión, volumen ni ticket. Nos escribiste por el <a href="https://qualivo.io/casos/eac/" target="_blank" rel="noopener">caso de EAC</a> (ROAS 10,2×, 44.000 € atribuidos en un mes). En la reunión, mejor que nos lo cuentes tú.</p>
+  </div>
+  <div>
+    <p class="cap" style="margin-top:4px">Cada pestaña responde a un sitio donde se puede perder un contrato</p>
+    <ol class="map">
+      <li data-go="anuncios"><span>1</span><div><b>Antes de que pidan nada</b>Qué anuncio trae contratos, no solo descargas.</div></li>
+      <li data-go="test"><span>2</span><div><b>Al pedir el dossier</b>Solo el email: no sabéis quién es, ni cuántos comerciales tiene, ni qué le preocupa.</div></li>
+      <li data-go="whatsapp"><span>3-4</span><div><b>La primera hora</b>Quien descarga a las 21:40 se enfría. Aquí recibe un WhatsApp en un minuto o una llamada.</div></li>
+      <li data-go="ficha"><span>5</span><div><b>Antes de la visita</b>Llegas sabiendo su problema, su equipo y su duda.</div></li>
+      <li data-go="seguimiento"><span>6</span><div><b>Después de la visita y de la propuesta</b>«Lo hablo con mi socio», «en enero». Nadie se queda sin seguimiento.</div></li>
+      <li data-go="panel"><span>7</span><div><b>En una pantalla</b>Coste por contrato por anuncio, y a quién llamar hoy.</div></li>
+    </ol>
+  </div>
+</div>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo" style="margin-top:0">
+  <button role="tab" id="t-anuncios" aria-controls="p-anuncios" data-p="anuncios"><span>1</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mega"/></svg>Anuncios</button>
+  <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>2</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-bell"/></svg>Solicitud</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>3</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chat"/></svg>WhatsApp</button>
+  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>4</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mic"/></svg>Llamada (voz)</button>
+  <button role="tab" id="t-ficha" aria-controls="p-ficha" data-p="ficha"><span>5</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-user"/></svg>Ficha de Ricardo</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>6</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-route"/></svg>Seguimientos</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>7</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chart"/></svg>Panel</button>
+</nav>
+
+<section class="pane" id="p-anuncios" role="tabpanel" aria-labelledby="t-anuncios">
+  <header><h2>1 · Tres anuncios que proponemos, medidos hasta el contrato <span class="ej">Propuesta de Qualivo</span></h2><p>No son vuestros anuncios: hoy no hemos encontrado ninguno activo en la Biblioteca de Meta. Son tres ideas con vuestros programas y vuestros testimonios. Lo importante no es el diseño, sino que cada uno quede unido al contrato que trae.</p></header>
+  <div class="cols">
+    <div>
+      <p class="cap">Aprender a Vender Valor · plazas</p>
+      <article class="ad" aria-label="Anuncio propuesto: Aprender a Vender Valor">
+        <span class="prop">Propuesta de Qualivo</span>
+        <div class="hd"><img src="../assets/hiagora-simbolo.jpg" alt="" width="36" height="36"><div><b>Hiágora · Escuela de Ventas</b><small>Publicidad</small></div></div>
+        <p class="tx">Si tu competencia entra antes, tú ya no puedes.
+En cada edición de Aprender a Vender Valor admitimos una sola empresa por sector. 12 horas, 3 tardes, una por semana. ¿Está libre el tuyo?</p>
+        <div class="cr"><span class="dot" aria-hidden="true"></span><span class="k1">Aprender a Vender Valor</span><p class="h">Una empresa <em>por sector.</em></p><div class="chips"><span>12 plazas</span><span>3 tardes · 12 h</span><span>Devolución tras la 1.ª clase</span></div></div>
+        <div class="ft"><div><small>hiagora.com</small><b>¿Está libre tu sector?</b></div><span class="cta">Más información</span></div>
+      </article>
+      <div class="proof">Ticket medio +10-15 % tras Aprender a Vender Valor.<cite>Antonio Mancilla, Dulces Costa del Sol · testimonio en hiagora.com [C]</cite></div>
+      <div class="why"><b>Qué mide:</b> qué sectores piden plaza y cuántas plazas acaban pagadas. <b>Lo que hace después:</b> Elena comprueba si su sector está libre y lo reserva 48 h.</div>
+    </div>
+    <div>
+      <p class="cap">Consultoría · Check Comercial</p>
+      <article class="ad" aria-label="Anuncio propuesto: Check Comercial">
+        <span class="prop">Propuesta de Qualivo</span>
+        <div class="hd"><img src="../assets/hiagora-simbolo.jpg" alt="" width="36" height="36"><div><b>Hiágora · Escuela de Ventas</b><small>Publicidad</small></div></div>
+        <p class="tx">¿Tu equipo visita mucho y cierra poco?
+Descarga el Check Comercial: test, análisis, diagnóstico y plan. Si quieres, José Antonio Padilla va a tu empresa: visita sin compromiso.</p>
+        <div class="cr b2"><span class="dot" aria-hidden="true"></span><span class="k1">Check Comercial</span><p class="h">Mucha visita, <em>poca venta.</em></p><div class="chips"><span>Test</span><span>Análisis</span><span>Diagnóstico</span><span>Plan</span></div></div>
+        <div class="ft"><div><small>hiagora.com</small><b>Descarga el Check Comercial</b></div><span class="cta">Descargar</span></div>
+      </article>
+      <div class="proof">La conversión pasó del 30 % al 40 % en tres años.<cite>Alberto Serrano, CEO de Trasteros Plus · testimonio en hiagora.com [C]</cite></div>
+      <div class="why"><b>Qué mide:</b> no las descargas, sino cuántas acaban en visita y en Top Business. <b>Lo que hace después:</b> WhatsApp en un minuto con una sola pregunta (pestaña 3).</div>
+    </div>
+    <div>
+      <p class="cap">Vendedor Digital en la Era de la IA</p>
+      <article class="ad" aria-label="Anuncio propuesto: Vendedor Digital en la Era de la IA">
+        <span class="prop">Propuesta de Qualivo</span>
+        <div class="hd"><img src="../assets/hiagora-simbolo.jpg" alt="" width="36" height="36"><div><b>Hiágora · Escuela de Ventas</b><small>Publicidad</small></div></div>
+        <p class="tx">La IA no vende por ti. Pero tu competencia ya la usa para preparar cada visita.
+Una jornada para aprender a usarla en tu día a día comercial.</p>
+        <div class="cr b3"><span class="dot" aria-hidden="true"></span><span class="k1">Vendedor Digital en la Era de la IA</span><p class="h">Vende con IA, <em>no contra ella.</em></p><div class="chips"><span>1 jornada</span><span>550 €</span><span>495 € antiguos alumnos</span></div></div>
+        <div class="ft"><div><small>hiagora.com</small><b>Plazas para la próxima jornada</b></div><span class="cta">Reservar</span></div>
+      </article>
+      <div class="proof">Más de 5.000 vendedores formados desde 2011, presencial en Málaga y online.<cite>hiagora.com [C] · 550 € y 495 €: precios publicados en hiagora.com</cite></div>
+      <div class="why"><b>Qué mide:</b> quién viene solo y quién trae a su equipo. <b>Lo que hace después:</b> si son tres o más, aviso a José Antonio: puede ser un In Company.</div>
+    </div>
+  </div>
+  <p class="note">[C] Biblioteca de anuncios de Meta, consulta del 16-nov-2026 (España, anuncios activos, búsqueda «Hiágora»): no aparece ningún anuncio de la página de Hiágora. Solo uno de APYMESPA que os nombra (taller «El modelo de negocio: Canvas», 25-nov, San Pedro Alcántara). Sin iniciar sesión no se ven los anuncios inactivos. Por eso estos tres son propuestas de Qualivo, maquetadas en CSS: textos y diseño los decidís vosotros. Testimonios copiados de hiagora.com.</p>
+  <div class="navnext"><button data-go="test">Siguiente: la solicitud <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-test" role="tabpanel" aria-labelledby="t-test">
+  <header><h2>2 · Del «déjanos tu email» a cinco toques <span class="ej">Ejemplo</span></h2><p>Hoy, para descargar el dossier basta el email. Aquí, con cinco toques, sabéis si es una empresa, cuántos comerciales tiene, qué le preocupa, qué programa le encaja y cuándo. Pruébalo como si fueras Ricardo.</p></header>
+  <div class="two">
+    <div class="quiz" id="quiz" aria-live="polite"></div>
+    <div class="list">
+      <div class="capt"><p class="cap" style="margin:0">Hoy, en hiagora.com [C]</p><p style="font-size:14px">«Descarga el dossier»</p><div class="row"><span class="fake">Tu email</span><span class="btn">Descargar</span></div><p style="font-size:13px;color:var(--muted)">Llega un email con el PDF. Nadie sabe quién lo ha pedido ni si lo ha leído.</p></div>
+      <div><h3>La regla A/B/C</h3>
+        <p><span class="grp a">A</span>70 puntos o más: empresa con equipo, problema claro y prisa. WhatsApp de Elena en un minuto, visita sin compromiso propuesta en el mismo chat y aviso a José Antonio con la ficha.</p>
+        <p><span class="grp b">B</span>De 40 a 69: interés real, sin prisa. WhatsApp con una pregunta, el dossier y la próxima convocatoria. Sube a A si contesta.</p>
+        <p><span class="grp c">C</span>Menos de 40, estudiantes o «solo me informo»: email con el dossier y un contenido al mes. Sin llamadas. No ocupa la agenda de José Antonio.</p></div>
+      <div><h3>Qué pasa al terminar</h3><p>Se crea su ficha con la puntuación y el anuncio del que viene. Los pesos son de ejemplo: los ajustáis vosotros y se recalibran cada mes con los contratos reales.</p></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>3 · En 52 segundos, por WhatsApp <span class="ej">Datos de ejemplo</span></h2><p>Ricardo Núñez, gerente de Distribuciones Axarquía (34 empleados, 6 comerciales, Vélez-Málaga), descarga el dossier de consultoría a las 21:40. Le escribe Elena, la asistente, con una sola pregunta. Elige sus respuestas; al lado, lo que pasa por detrás.</p></header>
+  <div class="two">
+    <div class="phone"><div class="sbar" aria-hidden="true"><b>21:40</b><span class="isl"></span><span>5G</span></div>
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><img src="../assets/hiagora-simbolo.jpg" alt="" width="36" height="36"><div><b>Hiágora · Escuela de Ventas</b><small>Elena, asistente · Ejemplo</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="home" aria-hidden="true"></div></div>
+    <div class="log"><h3>Por detrás</h3><ol id="log"></ol></div>
+  </div>
+  <p class="note">Elena no da precios que no estén publicados, no promete bonificaciones ni cierra contratos. José Antonio ve cada conversación y puede entrar cuando quiera: en cuanto escribe él, Elena se calla con esa empresa. Mensajes automáticos de 9:00 a 22:00; si escriben más tarde, contesta a la mañana siguiente.</p>
+  <div class="navnext"><button data-go="voz">Siguiente: la llamada <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-voz" role="tabpanel" aria-labelledby="t-voz">
+  <header><h2>4 · Si no contesta, llama la asistente de voz <span class="ej">Datos de ejemplo</span></h2><p>Pilar Vega, gerente de Instalaciones Vega (Fuengirola), descarga el dossier a las 11:05 y no contesta al WhatsApp. A las 11:20 la llama la asistente. Se presenta como asistente virtual, no vende: pregunta lo justo y deja la visita en la agenda de José Antonio.</p></header>
+  <div class="two">
+    <div class="call">
+      <div class="top"><span class="av" aria-hidden="true"><svg class="i"><use href="#i-mic"/></svg></span><span><b>Llamada saliente · Elena, asistente virtual de Hiágora</b> → Pilar V.</span><small>Martes 11:20 · 2 min 05 s · Ejemplo</small><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+      <div class="body">
+        <div class="v r"><small>ELENA</small>Hola, ¿Pilar? Soy Elena, la asistente virtual de Hiágora, la escuela de ventas de Málaga. Te llamo porque hace un rato descargaste el dossier de consultoría. ¿Te pillo bien un minuto?</div>
+        <div class="v c"><small>PILAR</small>Sí, dime, pero rápido.</div>
+        <div class="v r"><small>ELENA</small>Claro. Una sola pregunta: ¿qué os preocupa más, captar clientes nuevos o cerrar más de los que os llegan?</div>
+        <div class="v c"><small>PILAR</small>Captar. Dependemos de tres clientes grandes y eso me quita el sueño.</div>
+        <div class="v r"><small>ELENA</small>Tiene sentido. ¿Cuántas personas venden en tu empresa?</div>
+        <div class="v c"><small>PILAR</small>Cuatro, contándome a mí. ¿Y cuánto cuesta esto?</div>
+        <div class="v r"><small>ELENA</small>Depende de lo que salga en el diagnóstico, y eso te lo cuenta José Antonio Padilla, el director, en una visita sin compromiso. ¿Te va el miércoles a las 9:30 o el jueves a las 16:00?</div>
+        <div class="v c"><small>PILAR</small>Miércoles a las 9:30, por videollamada.</div>
+        <div class="v r"><small>ELENA</small>Hecho. Te mando el enlace por WhatsApp y te lo recuerdo la víspera. Gracias, Pilar.</div>
+      </div>
+      <div class="res"><b>Resultado:</b> visita sin compromiso agendada, miércoles 9:30, por videollamada. Ficha: quiere captar, 4 vendedores, depende de tres clientes grandes, preguntó el precio. Aviso a José Antonio.</div>
+    </div>
+    <div class="rules">
+      <div><b>Cuándo llama</b>15 minutos después de la solicitud, solo si no ha contestado al WhatsApp y es A o B. En días laborables, de 9:00 a 20:00.</div>
+      <div><b>Cómo se presenta</b>Siempre como asistente virtual de Hiágora. Si preguntan, lo dice claro.</div>
+      <div><b>Qué deja hecho</b>Captar o cerrar, cuántos venden, quién decide y la visita en la agenda de José Antonio.</div>
+      <div><b>Qué no hace</b>No da precios de consultoría ni promete bonificaciones. «Eso te lo cuenta José Antonio en la visita».</div>
+      <div><b>Cuándo se calla</b>Si pide no recibir llamadas, si quiere hablar con una persona (le llama la oficina) o si José Antonio ya ha hablado con él.</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="ficha">Siguiente: la ficha <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-ficha" role="tabpanel" aria-labelledby="t-ficha">
+  <header><h2>5 · Lo que ves antes de la visita <span class="ej">Datos de ejemplo</span></h2><p>Una ficha, no un email suelto. José Antonio solo recibe aviso de las empresas con más opciones. El resto lo mueve el sistema hasta que suben o se apartan.</p></header>
+  <div class="two">
+    <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Interesados › Ricardo Núñez · ficha</span><em>Ejemplo</em></div>
+    <div class="ficha">
+      <div class="hd"><div><b style="font-size:19px">Ricardo Núñez · Gerente · Distribuciones Axarquía</b><p style="font-size:14px;color:var(--muted)">Vélez-Málaga · Entró por: anuncio «Check Comercial» → dossier a las 21:40 → WhatsApp con Elena</p></div><div style="text-align:right"><span class="sc">86</span><br><span class="grp a">A · visita</span></div></div>
+      <div class="dims">
+        <div><small>Encaje</small><b>Alto</b><span class="m"><i style="width:92%"></i></span></div>
+        <div><small>Actividad</small><b>Alta</b><span class="m"><i style="width:78%"></i></span></div>
+        <div><small>Intención</small><b>Alta</b><span class="m"><i style="width:88%"></i></span></div>
+        <div><small>Riesgo</small><b>Bajo</b><span class="m"><i class="lo" style="width:25%"></i></span></div>
+      </div>
+      <div class="grid">
+        <div><dl><dt>Empresa</dt><dd>34 empleados · distribución</dd></dl></div>
+        <div><dl><dt>Equipo</dt><dd>6 comerciales</dd></dl></div>
+        <div><dl><dt>Decide</dt><dd>Él (gerente)</dd></dl></div>
+        <div><dl><dt>Problema</dt><dd>Mucha visita, poca venta</dd></dl></div>
+        <div><dl><dt>Desde cuándo</dt><dd>Facturación plana 2 años</dd></dl></div>
+        <div><dl><dt>Herramientas</dt><dd>Cada comercial con su Excel</dd></dl></div>
+        <div><dl><dt>Programa</dt><dd>Consultoría · Check Comercial</dd></dl></div>
+        <div><dl><dt>Duda</dt><dd>¿Se puede bonificar?</dd></dl></div>
+        <div><dl><dt>Visita</dt><dd>Jueves 10:00 · confirmada</dd></dl></div>
+      </div>
+      <div class="why2"><b>Por qué:</b> empresa con equipo, problema de cierre claro y prisa («antes de enero»). Contestó en 6 minutos y agendó solo. El riesgo es la bonificación: si no cuadra, puede frenar.</div>
+      <div class="next">Siguiente acción: visita del jueves a las 10:00. Llevar el test del Check Comercial. Preguntar quién más decide y resolver la bonificación. Si encaja: propuesta de Top Business esa misma semana.</div>
+    </div></div>
+    <div style="display:grid;gap:16px">
+      <div class="box" style="box-shadow:var(--shadow)">
+        <h3>Por qué tiene 86</h3>
+        <table class="pts">
+          <tr><td>Empresa de 34 empleados</td><td>20</td></tr>
+          <tr><td>Equipo de 6 comerciales</td><td>16</td></tr>
+          <tr><td>Decide él (gerente)</td><td>14</td></tr>
+          <tr><td>Problema claro: no cierran, facturación plana</td><td>12</td></tr>
+          <tr><td>Quiere actuar antes de enero</td><td>10</td></tr>
+          <tr><td>Contestó en 6 min y agendó solo</td><td>8</td></tr>
+          <tr><td>Pregunta por la bonificación</td><td>6</td></tr>
+          <tr><td><b>Total</b></td><td>86</td></tr>
+        </table>
+        <p class="note">Pesos de ejemplo. Los ajustáis vosotros y se recalibran cada mes con los contratos reales.</p>
+      </div>
+      <div class="notif"><div class="t"><span>Aviso a José Antonio · WhatsApp</span><span>21:49</span></div><p><b>Ricardo está listo para la visita.</b> Distribuciones Axarquía · 34 empleados · 6 comerciales · facturación plana dos años · cada comercial con su Excel · quiere actuar antes de enero · pregunta por bonificación. Visita: jueves 10:00. [Ver ficha]</p></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: los seguimientos <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header><h2>6 · Seguimientos: la constancia la ponemos nosotros <span class="ej">Datos de ejemplo</span></h2><p>Vuestra venta es larga: visita, Check Comercial, propuesta, Top Business. Estos mensajes salen solos, en horario laboral. Cualquier respuesta los para y pasa la conversación a José Antonio. Cada texto lo aprobáis vosotros.</p></header>
+  <div class="seq">
+    <div><h3>A · Después de la visita sin compromiso</h3><p>Para que la visita no se quede en «ya os diremos».</p><ol class="tl">
+      <li class="mail"><span class="w">Mismo día · email</span><b>Resumen de la visita</b><blockquote><span class="subj">Asunto: Lo que hablamos hoy en Distribuciones Axarquía</span>Los tres puntos que salieron y el siguiente paso. Lo revisa José Antonio antes de salir.</blockquote></li>
+      <li><span class="w">D+1 · WhatsApp</span><b>Dudas y quién más decide</b><blockquote>Ricardo, gracias por recibir ayer a José Antonio. ¿Te quedó alguna duda? ¿Hay alguien más que deba verlo antes de la propuesta?</blockquote></li>
+      <li class="mail"><span class="w">D+3 · email</span><b>Un caso parecido</b><blockquote><span class="subj">Asunto: De 30 a 40 de cada 100</span>Lo que cuenta Alberto Serrano (Trasteros Plus) de su conversión, con su permiso y en sus palabras.</blockquote></li>
+      <li><span class="w">D+7 · WhatsApp</span><b>¿Preparamos la propuesta?</b><blockquote>¿Te preparamos la propuesta del Top Business con lo que vio José Antonio? [Sí] [Más adelante] [Hablar con José Antonio]</blockquote></li>
+      <li class="alert"><span class="w">D+14 · aviso a José Antonio</span><b>Sin respuesta</b><blockquote>Ricardo N. · abrió el resumen 2 veces · 14 días sin contestar. Mejor una llamada tuya.</blockquote></li></ol></div>
+    <div><h3>B · Después de enviar la propuesta de consultoría</h3><p>Donde más se pierde: «lo hablo con mi socio».</p><ol class="tl">
+      <li><span class="w">D+1 · WhatsApp</span><b>¿Te llegó bien?</b><blockquote>Ricardo, te enviamos ayer la propuesta. ¿La repasamos 15 minutos con José Antonio esta semana? [Sí] [La estoy leyendo]</blockquote></li>
+      <li class="mail"><span class="w">D+3 · email</span><b>Cómo es el primer mes</b><blockquote><span class="subj">Asunto: Las primeras semanas del Top Business</span>Qué pasa el primer mes, quién del equipo participa y cuánto tiempo os pide.</blockquote></li>
+      <li class="alert"><span class="w">D+7 · aviso a José Antonio</span><b>Abre y no contesta</b><blockquote>Ricardo N. · abrió la propuesta 3 veces · 7 días sin respuesta. Mejor una llamada tuya que otro email.</blockquote></li>
+      <li><span class="w">D+14 · WhatsApp</span><b>Sin presión</b><blockquote>¿Lo dejamos para más adelante o seguimos? Si es cuestión de fechas, te lo guardo. [Seguimos] [Más adelante] [Ya no]</blockquote></li>
+      <li class="stop"><span class="w">Si dice «más adelante»</span><b>Pasa a C, con su fecha</b></li></ol></div>
+    <div><h3>C · «Más adelante», con fecha</h3><p>Ejemplo: Tomás H., «en febrero, después de los cierres».</p><ol class="tl">
+      <li><span class="w">Hoy · WhatsApp</span><b>Guardado</b><blockquote>Perfecto, Tomás. Te escribo a principios de febrero. Si cambia algo antes, aquí estoy.</blockquote></li>
+      <li><span class="w">2 de febrero · WhatsApp</span><b>Vuelve</b><blockquote>Tomás, como quedamos: ¿retomamos el Check Comercial? José Antonio tiene hueco esta semana. [Sí] [Más adelante]</blockquote></li>
+      <li class="stop"><span class="w">Si dice sí</span><b>Vuelve a la lista de José Antonio, con su ficha</b></li></ol></div>
+    <div><h3>D · Antiguos alumnos: In Company y consultoría</h3><p>Lo que enseñáis, aplicado a vuestra cartera. Paula Rueda (ERFRI) cuenta en vuestra web que reactivó un 10 % de sus clientes [C].</p><ol class="tl">
+      <li><span class="w">30 días tras el curso · WhatsApp</span><b>¿Cómo va?</b><blockquote>Antonio, ¿qué tal aplicando las 11 fases? ¿Lo está notando el equipo?</blockquote></li>
+      <li><span class="w">90 días · WhatsApp</span><b>El resto del equipo</b><blockquote>Si quieres que el resto del equipo trabaje igual, hacemos una formación In Company de 8 h con vuestro manual de ventas. ¿Te cuento cómo? [Sí] [Ahora no]</blockquote></li>
+      <li><span class="w">Antes de la jornada de IA · WhatsApp</span><b>Precio de antiguo alumno</b><blockquote>Como antiguo alumno, el Vendedor Digital en la Era de la IA te sale a 495 € en vez de 550 €. ¿Te reservo plaza?</blockquote></li>
+      <li class="stop"><span class="w">Si contesta</span><b>Aviso a José Antonio: posible In Company o Check Comercial</b></li></ol></div>
+    <div><h3>E · No se presenta a la visita</h3><p>Para que José Antonio no pierda la mañana.</p><ol class="tl">
+      <li><span class="w">Víspera · WhatsApp</span><b>Recordatorio</b><blockquote>Ricardo, mañana a las 10:00 te visita José Antonio. Si te viene mal, contesta aquí y lo movemos.</blockquote></li>
+      <li class="alert"><span class="w">15 min después · WhatsApp</span><b>Recuperación</b><blockquote>Ricardo, José Antonio no ha podido verte. ¿Lo movemos? [Mañana] [La semana que viene] [Por videollamada]</blockquote></li></ol></div>
+    <div><h3>F · Antes de cada convocatoria</h3><p>Aprender a Vender Valor: una empresa por sector.</p><ol class="tl">
+      <li><span class="w">3 semanas antes · WhatsApp</span><b>Su sector, libre o no</b><blockquote>Inés, la próxima edición empieza pronto y climatización sigue libre. ¿Os lo reservo 48 h?</blockquote></li>
+      <li class="stop"><span class="w">Si reserva</span><b>Aviso a José Antonio para cerrar la inscripción</b></li></ol></div>
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>7 · Lo que verías cada día <span class="ej">Datos de ejemplo</span></h2><p>Por anuncio y por empresa, hasta el contrato. Cifras inventadas, no son previsiones. La versión interactiva, con la historia de Ricardo y avisos en vivo, está en el panel.</p></header>
+  <div class="cta-panel">
+    <div><h3>Abre el panel de Hiágora y pregúntale</h3><p>Está preparado con vuestros programas. Tiene dos historias para ver en directo:</p>
+      <ul><li>Ricardo descarga el dossier a las 21:40 y tiene la visita agendada antes de dormir.</li><li>Una directora comercial pide Aprender a Vender Valor y reserva la plaza de su sector antes que su competencia.</li></ul>
+      <p>Y preguntas como «¿qué anuncio trae contratos, no solo descargas?» o «¿qué antiguos alumnos podrían pasar a In Company?».</p></div>
+    <div class="go"><a class="btnl" href="https://qualivo.io/intelligence/?sector=hiagora&amp;empresa=Hi%C3%A1gora" target="_blank" rel="noopener">Abrir el panel en vivo <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></a><small>qualivo.io/intelligence · sector Hiágora · datos de ejemplo</small></div>
+  </div>
+  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Panel · hoy · José Antonio</span><em>Datos de ejemplo</em></div><div class="winbody">
+  <div class="kpis">
+    <div class="kpi"><b>2 min</b><span>hasta el primer mensaje a cada solicitud · ejemplo</span></div>
+    <div class="kpi"><b>39</b><span>visitas sin compromiso agendadas este mes · ejemplo</span></div>
+    <div class="kpi alert"><b>4</b><span>descargaron el dossier y nadie ha hablado con ellos · ejemplo</span></div>
+    <div class="kpi"><b>17</b><span>contratos este mes, cada uno con su origen · ejemplo</span></div>
+  </div>
+  <div class="box">
+    <p class="cap">Por anuncio · 30 días · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Anuncio</th><th>Inversión</th><th>Solicitudes</th><th>Cualificadas</th><th>Visitas</th><th>Contratos</th><th>Coste por contrato</th></tr></thead>
+      <tbody>
+        <tr><td>Aprender a Vender Valor · plazas</td><td>720 €</td><td>46</td><td>17</td><td>9</td><td>5</td><td class="k">144 €</td></tr>
+        <tr><td>Consultoría · Check Comercial</td><td>640 €</td><td>38</td><td>11</td><td>5</td><td>2</td><td class="k">320 €</td></tr>
+        <tr><td>Vendedor Digital en la Era de la IA</td><td>420 €</td><td>41</td><td>15</td><td>7</td><td>6</td><td class="k">70 €</td></tr>
+        <tr><td>Web, teléfono y recomendación</td><td>0 €</td><td>22</td><td>13</td><td>8</td><td>4</td><td class="k">—</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="box">
+    <p class="cap">A quién llamar hoy · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Empresa</th><th>Nota</th><th class="l">Por qué hoy</th><th class="l">Siguiente paso</th></tr></thead>
+      <tbody>
+        <tr><td>Recambios Costa Sol</td><td>88 A</td><td class="l" style="white-space:normal;min-width:220px">Quiere el plan comercial antes de enero · ha vuelto a la página de consultoría hace 23 min</td><td class="l" style="white-space:normal;min-width:200px">Llamar ahora: proponer visita</td></tr>
+        <tr><td>Grupo Inmobiliario Bahía</td><td>80 A</td><td class="l" style="white-space:normal;min-width:220px">Abre la propuesta In Company por tercera vez</td><td class="l" style="white-space:normal;min-width:200px">Llamada corta para cerrar fechas</td></tr>
+        <tr><td>Bodegas Serranía</td><td>71 A</td><td class="l" style="white-space:normal;min-width:220px">No se presentó a la visita</td><td class="l" style="white-space:normal;min-width:200px">Proponer otra hora</td></tr>
+        <tr><td>Mobiliario Oficina Sur</td><td>63 B</td><td class="l" style="white-space:normal;min-width:220px">«Vendemos por precio» · 5 días sin seguimiento</td><td class="l" style="white-space:normal;min-width:200px">WhatsApp tuyo, no llamada</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  </div></div>
+  <div class="box" style="box-shadow:var(--shadow)">
+    <h3>Para arrancar en 30 días</h3>
+    <ol style="margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px">
+      <li>Conectar el formulario del dossier, vuestros anuncios y un WhatsApp de empresa.</li>
+      <li>Aprobar los textos de Elena: programas, convocatorias y qué puede decir (y qué no) de precios y bonificación.</li>
+      <li>Definir con José Antonio qué empresa es «A» para Hiágora.</li>
+      <li>A los 30 días, mirar juntos: cuántas solicitudes acabaron en visita y cuántas visitas en contrato, por anuncio.</li>
+    </ol>
+  </div>
+  <div class="navnext"><a class="btnl" href="https://qualivo.io/intelligence/?sector=hiagora&amp;empresa=Hi%C3%A1gora" target="_blank" rel="noopener">Abrir el panel en vivo <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></a></div>
+</section>
+
+<footer>
+  <div class="links"><a class="btnl" href="https://qualivo.io/intelligence/?sector=hiagora&amp;empresa=Hi%C3%A1gora" target="_blank" rel="noopener">Panel en vivo</a><a class="btnl" href="https://qualivo.io/casos/eac/" target="_blank" rel="noopener">Caso EAC</a></div>
+  <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+  <p>Demo preparada el 16 de noviembre de 2026 para Hiágora (Escuela de Ventas y Capacitación Comercial Hiágora, S.L.U., Málaga). No es una página de Hiágora. Logotipo, programas, precios publicados y testimonios tomados de hiagora.com ese día. Anuncios propuestos por Qualivo; personas, empresas, mensajes y cifras de ejemplo.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['anuncios', 'test', 'whatsapp', 'voz', 'ficha', 'seguimiento', 'panel'];
+  var started = false;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'anuncios';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  // Solicitud: cinco toques con puntuación (pesos de ejemplo)
+  var quiz = document.getElementById('quiz');
+  var Q = [
+    ['¿Cómo es tu empresa?', [['20 empleados o más', 25], ['De 5 a 19 empleados', 18], ['Autónomo o menos de 5', 8], ['Soy estudiante o busco trabajo', 0]]],
+    ['¿Cuántas personas venden?', [['6 o más', 20], ['De 2 a 5', 14], ['Solo yo', 6], ['Nadie todavía', 0]]],
+    ['¿Qué os preocupa más ahora?', [['Cerrar más de lo que nos llega', 15], ['Captar clientes nuevos', 12], ['El seguimiento: se nos escapan', 15], ['Quiero formarme yo', 8]]],
+    ['¿Qué te interesa?', [['Consultoría (Check Comercial)', 20], ['Formación para el equipo (In Company)', 18], ['Aprender a Vender Valor', 14], ['Máster en Dirección Comercial', 12], ['Vendedor Digital en la Era de la IA', 10]]],
+    ['¿Cuándo querríais empezar?', [['Este trimestre', 20], ['En 3-6 meses', 10], ['Solo me informo', 0]]]
+  ];
+  var resp = [], pts = 0;
+  function el(tag, cls, txt) { var d = document.createElement(tag); if (cls) d.className = cls; if (txt != null) d.textContent = txt; return d; }
+  function grupo() {
+    if (resp[0] === 'Soy estudiante o busco trabajo') return ['c', 'C · sin empresa detrás', 'Email con el dossier y un contenido al mes. Sin llamadas: no ocupa la agenda de José Antonio.'];
+    if (resp[4] === 'Solo me informo') return ['c', 'C · se informa · ' + pts + ' puntos', 'Email con el dossier y, más adelante, un WhatsApp para preguntar si es el momento.'];
+    var ia = resp[3] === 'Vendedor Digital en la Era de la IA';
+    if (pts >= 70) return ['a', 'A · ' + pts + ' puntos', ia ? 'WhatsApp de Elena en un minuto con fechas y el precio publicado (550 €; 495 € antiguos alumnos). Si son tres o más, aviso a José Antonio: puede ser un In Company.' : 'WhatsApp de Elena en un minuto y visita sin compromiso con José Antonio propuesta en el mismo chat. Si no contesta, llamada de la asistente a los 15 min. Aviso a José Antonio con la ficha.'];
+    if (pts >= 40) return ['b', 'B · ' + pts + ' puntos', 'WhatsApp con una pregunta, el dossier y la próxima convocatoria. Si contesta y sube, pasa a A y se le propone la visita.'];
+    return ['c', 'C · ' + pts + ' puntos', 'Email con el dossier y un contenido al mes. Sin llamadas.'];
+  }
+  function paso(n) {
+    quiz.innerHTML = '';
+    var cap = el('p', 'cap', 'Ejemplo · ' + Math.min(n + 1, Q.length) + ' de ' + Q.length);
+    var bar = el('div', 'bar'); var s = el('span'); s.style.width = Math.round(n / Q.length * 100) + '%'; bar.appendChild(s);
+    quiz.appendChild(cap); quiz.appendChild(bar);
+    if (n >= Q.length) {
+      s.style.width = '100%'; cap.textContent = 'Ejemplo · listo';
+      var g = grupo(), d = el('div', 'done');
+      d.appendChild(el('b', 't', g[0] === 'c' ? 'Te enviamos el dossier a tu email' : 'Te escribimos por WhatsApp en un minuto'));
+      d.appendChild(el('p', null, 'En la versión real aquí van nombre, empresa, email y WhatsApp, con consentimiento. Tus respuestas: ' + resp.join(' · ') + '.'));
+      var gp = el('p'); gp.appendChild(el('span', 'grp ' + g[0], g[1])); d.appendChild(gp);
+      d.appendChild(el('p', null, g[2]));
+      var row = el('div'); row.style.display = 'flex'; row.style.gap = '8px'; row.style.flexWrap = 'wrap';
+      var w = el('button', 'btnl', 'Ver el WhatsApp ›'); w.type = 'button'; w.addEventListener('click', function () { show('whatsapp', true); });
+      var r = el('button', 'btnl', '↺ Repetir'); r.type = 'button'; r.style.background = 'var(--muted)'; r.style.color = 'var(--surface)'; r.addEventListener('click', function () { resp = []; pts = 0; paso(0); });
+      row.appendChild(w); row.appendChild(r); d.appendChild(row);
+      quiz.appendChild(d); return;
+    }
+    quiz.appendChild(el('h3', null, Q[n][0]));
+    var o = el('div', 'qopts');
+    Q[n][1].forEach(function (t) {
+      var b = el('button', null, t[0]); b.type = 'button';
+      b.addEventListener('click', function () { resp.push(t[0]); pts += t[1]; paso(n + 1); });
+      o.appendChild(b);
+    });
+    quiz.appendChild(o);
+  }
+  paso(0);
+
+  // WhatsApp: la historia de Ricardo
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t0 = 21 * 60 + 40, mins = 0, dia = 'el jueves a las 10:00', bonif = false;
+  function hora() { var m = t0 + mins; return String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+  function bubble(cls, txt) {
+    var d = document.createElement('div'); d.className = 'b ' + cls; d.textContent = txt;
+    if (cls !== 'sys') { var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = document.createElement('li'); if (tipo) li.className = tipo;
+    li.innerHTML = '<b></b><span></span>'; li.firstChild.textContent = txt; li.lastChild.textContent = sub || '';
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = document.createElement('div'); ty.className = 'typing'; ty.textContent = 'escribiendo…';
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      setTimeout(function () { ty.remove(); bubble('in', msgs[i++]); next(); }, reduce ? 0 : 750);
+    })();
+  }
+  // cada opción: [texto del botón, nodo siguiente, texto completo que envía Ricardo]
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = c[0];
+      b.addEventListener('click', function () { opts.innerHTML = ''; mins += (chat.querySelectorAll('.b.out').length ? 1 : 6); bubble('out', c[2] || c[0]); setTimeout(function () { N[c[1]](); }, reduce ? 0 : 300); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'restart'; b.textContent = '↺ Probar otro camino';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  function agenda(intro) {
+    bot([intro, 'José Antonio Padilla, director de la escuela, hace una visita sin compromiso: en vuestra oficina o por videollamada. ¿Os va bien el jueves a las 10:00?'],
+      function () { choices([['Jueves 10:00, en la oficina', 'cita'], ['Mejor otro día', 'otro']]); });
+  }
+  var N = {
+    inicio: function () {
+      bot(['Hola, Ricardo. Soy Elena, de Hiágora. Te acaba de llegar a tu correo el dossier del Check Comercial.', 'Para orientarte bien, una sola pregunta: ¿qué os preocupa más ahora mismo, captar clientes nuevos o cerrar más de los que ya os llegan?'],
+        function () { choices([['Cerrar', 'cerrar', 'Cerrar. Tengo 6 comerciales, mucha visita y poca venta. La facturación lleva dos años plana y quiero cambiarlo antes de enero.'], ['Captar', 'captar', 'Captar. Nos llegan pocos clientes nuevos.'], ['¿Cuánto cuesta?', 'precio', '¿Cuánto cuesta la consultoría?']]); });
+    },
+    cerrar: function () {
+      apunta('Problema: cierre', 'contesta a los 6 minutos · 6 comerciales · facturación plana 2 años\nquiere actuar antes de enero', 'g');
+      bot(['Te entiendo, es de lo más habitual. ¿Tenéis algo para ver en qué fase está cada cliente, o cada comercial lo lleva a su manera?'],
+        function () { choices([['Cada uno con su Excel', 'excel', 'Cada uno con su Excel, y yo no veo nada.'], ['Tenemos CRM, pero nadie lo usa', 'crm', 'Tenemos un CRM, pero nadie lo rellena.']]); });
+    },
+    captar: function () {
+      apunta('Problema: captación', 'se anota para la visita', 'h');
+      bot(['Entendido. ¿Cuántas personas venden en tu empresa y cómo lleváis a cada cliente?'],
+        function () { choices([['6, cada uno con su Excel', 'excel', 'Seis comerciales, cada uno con su Excel. Y la facturación lleva dos años plana.']]); });
+    },
+    precio: function () {
+      apunta('Pregunta por el precio', 'interés real · no se da cifra: no está publicada', 'h');
+      bot(['Depende de lo que salga en el Check Comercial y de la duración: el acompañamiento Top Business va de 3 a 12 meses. Eso te lo cuenta José Antonio en la visita, sin compromiso.', 'Antes: ¿qué os preocupa más, captar o cerrar?'],
+        function () { choices([['Cerrar', 'cerrar', 'Cerrar. Tengo 6 comerciales, mucha visita y poca venta. La facturación lleva dos años plana y quiero cambiarlo antes de enero.'], ['Captar', 'captar', 'Captar. Nos llegan pocos clientes nuevos.']]); });
+    },
+    crm: function () { apunta('Tiene CRM, sin uso', 'diagnóstico: sin proceso común', 'h'); N.diag(); },
+    excel: function () { apunta('Cada comercial con su Excel', 'diagnóstico: sin proceso común · se anota para la visita', 'h'); N.diag(); },
+    diag: function () {
+      apunta('Puntuación provisional 86 → A', 'encaje alto · intención alta · riesgo bajo', 'g');
+      bot(['Es justo lo que mira el Check Comercial: en qué fase se pierde cada venta y por qué.'],
+        function () { choices([['¿Se puede bonificar?', 'bonif', 'Una cosa: ¿esto se puede bonificar?'], ['¿Nos vemos esta semana?', 'visita', '¿Podemos hablarlo esta semana?']]); });
+    },
+    bonif: function () {
+      bonif = true;
+      apunta('Pregunta por la bonificación', 'intención al alza · lo responde José Antonio, no Elena', 'h');
+      agenda('Depende de cada empresa, y José Antonio te dice en la visita qué opciones tenéis.');
+    },
+    visita: function () { apunta('Pide hablar esta semana', 'intención al alza', 'g'); agenda('Claro, Ricardo.'); },
+    otro: function () {
+      bot(['Sin problema. ¿Viernes a las 9:30 o lunes a las 17:00?'],
+        function () { choices([['Viernes 9:30', 'vie'], ['Lunes 17:00', 'lun']]); });
+    },
+    vie: function () { dia = 'el viernes a las 9:30'; N.cita(); },
+    lun: function () { dia = 'el lunes a las 17:00'; N.cita(); },
+    cita: function () {
+      apunta('Visita sin compromiso agendada', dia + ' · en Vélez-Málaga · en la agenda de José Antonio\nrecordatorio la víspera', 'g');
+      apunta('Aviso a José Antonio', 'Ricardo Núñez · Distribuciones Axarquía · A 86\n34 empleados · 6 comerciales · facturación plana 2 años · cada uno con su Excel' + (bonif ? ' · pregunta por bonificación' : '') + '\nVino del anuncio «Check Comercial»', 'g');
+      bot(['Hecho, Ricardo: ' + dia + ' José Antonio va a Distribuciones Axarquía. Te lo recuerdo la víspera.', 'Si quieres adelantar, el test del Check Comercial está en el dossier: con eso la visita va más al grano.'], fin);
+    }
+  };
+  function start() {
+    started = true; mins = 0; dia = 'el jueves a las 10:00'; bonif = false; chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    bubble('sys', 'Ejemplo · Ricardo descarga el dossier de consultoría a las 21:40');
+    apunta('Ficha creada', 'origen: anuncio «Check Comercial» → dossier de consultoría');
+    apunta('Dossier enviado por email', 'como hoy, pero no se queda ahí');
+    apunta('WhatsApp en 52 segundos', 'con su nombre y una sola pregunta');
+    N.inicio();
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
