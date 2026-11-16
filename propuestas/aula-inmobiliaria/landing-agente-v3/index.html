@@ -26,7 +26,7 @@ h2{font-size:clamp(25px,3.2vw,34px);margin-top:8px}
 .btn:hover{transform:translateY(-1px)}
 .btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #F2B53A;outline-offset:2px}
 .buy{background:var(--na);color:#1B1203;box-shadow:0 10px 22px -12px rgba(236,123,42,.9)}
-.waL{background:#fff;color:#0B6B34;border-color:#BFE8CF}
+.waL{background:#fff;color:var(--ink);border-color:#C9CCD8}.waL .i{color:var(--na)}
 .i{width:19px;height:19px;flex:none}
 /* hero */
 .hero{padding:56px 0 44px;text-align:center}
@@ -81,7 +81,7 @@ details.tem p{font-size:13px;color:var(--mut);margin-top:10px}
 .box aside b{font-size:42px;font-weight:700;line-height:1}
 .box aside span{font-size:13px;color:#C9CEE0}
 .box aside .btn{width:100%}
-.waD{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}.waD .i{color:var(--wa)}
+.waD{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}.waD .i{color:var(--na)}
 .box aside small{text-align:center;font-size:12.5px;color:#AEB4CC}
 /* dudas */
 .faqg{display:grid;grid-template-columns:1fr 1.5fr;gap:40px;align-items:start}
@@ -145,7 +145,7 @@ html:not(.rev) .rev-only{display:none!important}
     <div class="p"><b>390 €</b><span>IVA incluido · o a plazos con Aplazame</span></div>
     <div class="cta">
       <a class="btn buy" href="#matricula" data-track="empezar_matricula" data-cart>Matricúlate ahora</a>
-      <a class="btn waL" href="#hablar" data-track="abrir_whatsapp"><svg class="i"><use href="#wa"/></svg>Pregúntanos por WhatsApp</a>
+      <a class="btn waL" href="#hablar" data-track="reservar_llamada" data-book><svg class="i"><use href="#cal"/></svg>Agenda tu llamada</a>
     </div>
   </div>
   <p class="trust"><span><span class="st">★★★★★</span> <b>4,9</b> en Google · +940 opiniones</span><span>Formando agentes <b>desde 2006</b></span><span>Acceso al campus <b>el mismo día</b></span></p>
@@ -211,7 +211,7 @@ html:not(.rev) .rev-only{display:none!important}
     <aside>
       <b>390 €</b><span>IVA incluido · pago único o a plazos con Aplazame</span>
       <a class="btn buy" href="#matricula" data-track="empezar_matricula" data-cart>Matricúlate ahora</a>
-      <a class="btn waD" href="#hablar" data-track="abrir_whatsapp"><svg class="i"><use href="#wa"/></svg>Hablar antes por WhatsApp</a>
+      <a class="btn waD" href="#hablar" data-track="reservar_llamada" data-book><svg class="i"><use href="#cal"/></svg>Agenda tu llamada</a>
       <small>Tarjeta · Transferencia · Bizum · Aplazame</small>
     </aside>
   </div>
@@ -230,14 +230,14 @@ html:not(.rev) .rev-only{display:none!important}
 </div></section>
 
 <section class="end" id="hablar"><div class="w">
-  <h2>¿Prefieres hablar<br>con una persona?</h2>
-  <p>Te resolvemos dudas sobre el curso, el registro de tu comunidad o el pago a plazos. Te atiende una persona, no un robot.</p>
+  <h2>¿Tienes alguna duda<br>antes de decidir?</h2>
+  <p>Pregúntanos por WhatsApp lo que necesites sobre el curso, el registro de tu comunidad o el pago a plazos. Y si prefieres hablarlo, agenda una llamada.</p>
   <div class="cta">
-    <a class="btn waS" href="#hablar" data-track="abrir_whatsapp"><svg class="i"><use href="#wa"/></svg>WhatsApp 691 28 90 46</a>
-    <a class="btn tel" href="#hablar" data-track="reservar_llamada" data-book><svg class="i"><use href="#cal"/></svg>Reserva una llamada</a>
+    <a class="btn waS" href="#hablar" data-track="abrir_whatsapp"><svg class="i"><use href="#wa"/></svg>Pregunta por WhatsApp</a>
+    <a class="btn tel" href="#hablar" data-track="reservar_llamada" data-book><svg class="i"><use href="#cal"/></svg>Agenda tu llamada</a>
   </div>
   <p class="hrs">O llama gratis al <a href="tel:900877847" data-track="llamar">900 877 847</a> · lunes a jueves de 9:00 a 18:00 · viernes de 9:00 a 14:00</p>
-  <div class="note rev-only" style="max-width:640px;margin:22px auto 0">1) El WhatsApp es el número conectado al CRM (691 28 90 46), no el de vuestra referencia: si se cambia, las conversaciones no entran en el CRM. 2) «Te atiende una persona, no un robot» no encaja con Elena, la asistente: hay que decidir cuál de las dos cosas se queda. 3) La reserva abre el calendario del CRM; falta decir quién atiende las llamadas para activarlo.</div>
+  <div class="note rev-only" style="max-width:640px;margin:22px auto 0">Orden de los botones: 1) Matricúlate, 2) Agenda tu llamada, 3) WhatsApp para dudas, atendido por la asistente. El WhatsApp es el número conectado al CRM (691 28 90 46). El calendario es el del CRM; falta asignar quién atiende.</div>
 </div></section>
 
 <footer><div class="w">
