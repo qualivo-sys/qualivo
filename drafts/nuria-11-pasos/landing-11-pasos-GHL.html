@@ -87,6 +87,7 @@ html,body{overflow-x:hidden}
 #n11 .bf .cd{display:inline-block;margin-left:10px;font-variant-numeric:tabular-nums;font-weight:600;color:#fff}
 #n11 .bf-badge{display:none;align-self:flex-start;background:#111827;color:#E7C98B;border-radius:999px;padding:7px 14px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:16px}
 #n11 .price .bf-badge{margin:0 auto 12px;display:none}
+#n11 .bf-urg{display:none;font-size:14.5px;font-weight:600;color:#9a3b2e;margin:6px 0 4px}#n11.bf-on .bf-urg{display:block}
 #n11 .old{font-family:var(--serif);font-size:26px;color:#9a937f;text-decoration:line-through;margin-right:10px;vertical-align:middle;display:none}
 #n11 .bonus-cd{display:block;margin-top:6px;font-size:14px;color:#708B9D}#n11 .bonus-cd b{color:#20304F;font-variant-numeric:tabular-nums}
 #n11 .bf-box{display:none;margin-top:14px;background:#111827;color:#F3EEE4;border-radius:14px;padding:14px 16px;font-size:14.5px;line-height:1.5}
@@ -138,7 +139,7 @@ html,body{overflow-x:hidden}
       <p><b>No tiene por qué ser así.</b> Cómo duermes tiene mucho que ver con lo que haces antes, durante y después de irte a la cama. Y eso se aprende, paso a paso.</p>
       <div class="vs">
         <div class="a"><b>Hoy</b><ul><li>Te acuestas sin rutina y sin señales para tu cuerpo.</li><li>Te desvelas y das vueltas a todo.</li><li>Pruebas cosas sueltas que no sabes si sirven.</li></ul></div>
-        <div class="b"><b>En 11 días</b><ul><li>Tienes una rutina sencilla que tu cuerpo reconoce.</li><li>Sabes qué hacer cuando te despiertas por la noche.</li><li>Entiendes por qué haces cada cosa.</li></ul></div>
+        <div class="b"><b>En 11 días</b><ul><li>Tienes una rutina sencilla que tu cuerpo reconoce.</li><li>Te despiertas menos por la noche gracias a mejores hábitos.</li><li>Entiendes por qué haces cada cosa.</li></ul></div>
       </div>
     </div>
   </section>
@@ -151,7 +152,7 @@ html,body{overflow-x:hidden}
       <p>Muchas veces dejamos los hábitos por el camino. La constancia, la disciplina y el acompañamiento de una persona cada día durante unos minutos te darán el gran empujón que necesitas para aplicar hábitos saludables a tu sueño.</p>
       <div class="grid">
         <div class="card"><b>11 vídeos cortos</b><span>Uno por hábito, con lo que tienes que hacer ese día.</span></div>
-        <div class="card"><b><span data-k="directos"></span> directos con Nuria</b><span>30 minutos, por la mañana, para resolver dudas y ajustar.</span></div>
+        <div class="card"><b><span data-k="directos"></span> directos con Nuria</b><span>Por Zoom, para resolver tus dudas personalmente.</span></div>
         <div class="card"><b>Grabaciones</b><span>Si no puedes conectarte, tienes todo grabado durante 1 año.</span></div>
         <div class="card"><b>Grupo de Telegram</b><span>Para tus preguntas durante el programa.</span></div>
       </div>
@@ -193,10 +194,11 @@ html,body{overflow-x:hidden}
         <div class="kick">A 11 Pasos del Sueño</div>
         <span class="bf-badge">Precio Black Friday</span>
         <div class="amt"><span class="old" id="n11-old"></span><span data-k="precio"></span> €</div>
+        <div class="bf-urg">Esta oferta desaparecerá pronto. Aprovecha este precio exclusivo.</div>
         <div style="font-size:14px;color:#8d8778">Un solo pago</div>
         <ul>
           <li>11 vídeos, uno por hábito</li>
-          <li><span data-k="directos"></span> sesiones en directo con Nuria</li>
+          <li><span data-k="directos"></span> sesiones en directo por Zoom con Nuria</li>
           <li>Grabaciones disponibles durante 1 año</li>
           <li>Grupo de Telegram para tus preguntas</li>
           <li>Soporte por email para entrar a la plataforma</li>
@@ -250,7 +252,7 @@ html,body{overflow-x:hidden}
   var fr = document.getElementById('n11-franja'); if (fr && T) fr.textContent = T.franja || '';
   var rt = document.getElementById('n11-rt'); if (rt && T) rt.textContent = T.regaloTexto || 'Regalo:';
   var bo = root.querySelector('.bonus'); if (bo && !(T && T.regalo)) bo.style.display = 'none';
-  if (!T) Array.prototype.forEach.call(root.querySelectorAll('.bf-badge'), function (el) { el.style.display = 'none'; });
+  if (!T) Array.prototype.forEach.call(root.querySelectorAll('.bf-badge,.bf-urg'), function (el) { el.style.display = 'none'; });
   var cds = root.querySelectorAll('[data-cd]');
   if (T) {
     var pinta = function () {
