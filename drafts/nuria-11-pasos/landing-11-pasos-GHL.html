@@ -9,9 +9,9 @@ window.NR11 = {
     { hasta: '2026-11-22T23:59:59+01:00', precio: '175', regalo: true,
       franja: 'Oferta anticipada: 175 € y 3 meditaciones de regalo hasta el domingo 22',
       regaloTexto: 'Regalo si te inscribes antes del domingo 22:' },
-    { hasta: '2026-11-30T23:59:59+01:00', precio: '175', regalo: true,   // ❓ tramo de Black Friday abierto a todo el mundo: confirmar precio y regalo con Nuria
-      franja: 'Black Friday: 175 € y 3 meditaciones de regalo hasta el lunes 30',
-      regaloTexto: 'Regalo si te inscribes antes del lunes 30:' }
+    { hasta: '2026-11-30T23:59:59+01:00', precio: '175', regalo: false,  // Black Friday abierto a todo el mundo: 175 € sin meditaciones (Nuria, 16-nov)
+      franja: 'Black Friday: A 11 Pasos del Sueño por 175 € hasta el lunes 30',
+      regaloTexto: '' }
   ],
   precioDespues: '185',                // precio cuando ya no queda ningún tramo (sin regalo)
   cierre: '2026-12-05T00:00:00+01:00', // desde aquí los botones dicen «Inscripciones cerradas»
@@ -104,15 +104,15 @@ html,body{overflow-x:hidden}
     <div class="w">
       <span class="bf-badge">Black Friday</span>
       <div class="kick">Programa de la Dra. Nuria Roure</div>
-      <h1>Recupera tus noches.<br><em>Recupera tu vida.</em></h1>
-      <p class="lede">A 11 Pasos del Sueño: 11 hábitos en 11 días para volver a entender tu sueño y cuidarlo cada día, con la guía de Nuria.</p>
+      <h1>Descubre los 11 pasos<br><em>para mejorar tu sueño.</em></h1>
+      <p class="lede">A 11 Pasos del Sueño: descubre los 11 hábitos con evidencia científica para dormir mejor, uno cada día, con la guía de Nuria.</p>
       <div class="chips">
         <span class="chip">Empezamos el <b data-k="inicio"></b></span>
         <span class="chip">1 paso al día</span>
         <span class="chip"><b data-k="directos"></b> directos con Nuria</span>
-        <span class="chip">Grabaciones durante 1 mes</span>
+        <span class="chip">Grabaciones durante 1 año</span>
       </div>
-      <div class="cta"><a class="btn" data-pago href="#">Quiero empezar los 11 pasos</a><small>Pago seguro · 14 días de garantía</small></div>
+      <div class="cta"><a class="btn" data-pago href="#">Quiero empezar los 11 pasos</a><small>Pago seguro</small></div>
     </div>
   </section>
 
@@ -124,7 +124,7 @@ html,body{overflow-x:hidden}
       <p><b>No tiene por qué ser así.</b> Cómo duermes tiene mucho que ver con lo que haces antes, durante y después de irte a la cama. Y eso se aprende, paso a paso.</p>
       <div class="vs">
         <div class="a"><b>Hoy</b><ul><li>Te acuestas sin rutina y sin señales para tu cuerpo.</li><li>Te desvelas y das vueltas a todo.</li><li>Pruebas cosas sueltas que no sabes si sirven.</li></ul></div>
-        <div class="b"><b>En 11 días</b><ul><li>Tienes una rutina sencilla que tu cuerpo reconoce.</li><li>Sabes qué hacer cuando te desvelas.</li><li>Entiendes por qué haces cada cosa.</li></ul></div>
+        <div class="b"><b>En 11 días</b><ul><li>Tienes una rutina sencilla que tu cuerpo reconoce.</li><li>Sabes qué hacer cuando te despiertas por la noche.</li><li>Entiendes por qué haces cada cosa.</li></ul></div>
       </div>
     </div>
   </section>
@@ -133,11 +133,12 @@ html,body{overflow-x:hidden}
     <div class="w">
       <div class="kick">Cómo funciona</div>
       <h2>Un paso al día. <em>Acompañada.</em></h2>
-      <p>No es un reto ni una masterclass. Cada día aprendes un hábito de sueño y lo pones en práctica esa misma noche. Unos minutos al día.</p>
+      <p>No es un reto ni una masterclass. Cada día aprendes un hábito de sueño y pones en práctica el hábito de ese paso. Unos minutos al día.</p>
+      <p>Muchas veces dejamos los hábitos por el camino. La constancia, la disciplina y el acompañamiento de una persona cada día durante unos minutos te darán el gran empujón que necesitas para aplicar hábitos saludables a tu sueño.</p>
       <div class="grid">
         <div class="card"><b>11 vídeos cortos</b><span>Uno por hábito, con lo que tienes que hacer ese día.</span></div>
         <div class="card"><b><span data-k="directos"></span> directos con Nuria</b><span>30 minutos, por la mañana, para resolver dudas y ajustar.</span></div>
-        <div class="card"><b>Grabaciones</b><span>Si no puedes conectarte, tienes todo grabado durante 1 mes.</span></div>
+        <div class="card"><b>Grabaciones</b><span>Si no puedes conectarte, tienes todo grabado durante 1 año.</span></div>
         <div class="card"><b>Grupo de Telegram</b><span>Para tus preguntas durante el programa.</span></div>
       </div>
       <div class="cta"><a class="btn" data-pago href="#">Quiero empezar los 11 pasos</a></div>
@@ -151,7 +152,7 @@ html,body{overflow-x:hidden}
         <div class="kick">Quién te acompaña</div>
         <h2>Dra. Nuria Roure</h2>
         <p>Doctora en Psicología y especialista en trastornos del sueño. Primera psicóloga de España acreditada como Somnologist por la Sociedad Europea de Investigación del Sueño (ESRS).</p>
-        <p>Más de 20 años ayudando a personas que no descansan. Autora de <i>Por Fin Duermo</i> (7.ª edición).</p>
+        <p>Más de 20 años ayudando a personas que no descansan. Autora de tres libros: <i>Por Fin Duermo</i> (9.ª edición), <i>Los hábitos del sueño</i> y <i>Dormir no es gratis</i>.</p>
       </div>
     </div>
   </section>
@@ -166,26 +167,26 @@ html,body{overflow-x:hidden}
         <ul>
           <li>11 vídeos, uno por hábito</li>
           <li><span data-k="directos"></span> sesiones en directo con Nuria</li>
-          <li>Grabaciones disponibles durante 1 mes</li>
+          <li>Grabaciones disponibles durante 1 año</li>
           <li>Grupo de Telegram para tus preguntas</li>
           <li>Soporte por email para entrar a la plataforma</li>
         </ul>
         <div class="bonus"><b id="n11-rt"></b> 3 meditaciones guiadas de Nuria para acompañar tus noches.<span class="bonus-cd" id="n11-bcd"> Quedan <b data-cd></b></span></div>
         <div class="cta" style="justify-content:center"><a class="btn" data-pago href="#">Quiero empezar los 11 pasos</a></div>
         <p style="font-size:13.5px;margin-top:16px">Empezamos el <b data-k="inicio"></b>. Recibes el acceso al momento por email.</p>
+        <p style="font-size:12px;color:#9a937f;margin-top:8px">14 días de garantía de devolución si no has accedido al contenido.</p>
       </div>
     </div>
   </section>
 
   <section class="alt">
     <div class="w">
-      <h2>Garantía</h2>
-      <p>Tienes 14 días para pedir la devolución completa, siempre que no hayas accedido al contenido. Escríbenos y te devolvemos el dinero.</p>
-      <h2 style="margin-top:36px">Preguntas frecuentes</h2>
-      <details><summary>¿Y si no puedo conectarme a los directos?</summary><p>Tendrás todas las grabaciones durante 1 mes.</p></details>
-      <details><summary>¿Cuánto tiempo necesito cada día?</summary><p>Unos minutos para ver el vídeo del día y poner en práctica el hábito esa noche.</p></details>
-      <details><summary>¿Sustituye a un tratamiento?</summary><p>No. Es un programa de hábitos de sueño. Si tienes un trastorno diagnosticado o tomas medicación, sigue las indicaciones de tu médico.</p></details>
+      <h2>Preguntas frecuentes</h2>
+      <details><summary>¿Y si no puedo conectarme a los directos?</summary><p>Tendrás todas las grabaciones durante 1 año.</p></details>
+      <details><summary>¿Cuánto tiempo necesito cada día?</summary><p>Unos minutos al día para ver el vídeo y poner en práctica el hábito de ese paso.</p></details>
+      <details><summary>¿Sustituye a un tratamiento?</summary><p>No. Es un programa de implementación de hábitos de sueño. Si sufres un trastorno del sueño, como un insomnio crónico, o tomas medicación, podemos ofrecerte otras alternativas. Este programa es un primer paso.</p></details>
       <details><summary>¿Cuándo recibo el acceso?</summary><p>Al momento, por email, con los pasos para entrar a la plataforma y al grupo de Telegram.</p></details>
+      <details><summary>¿Tiene garantía?</summary><p>Sí. Tienes 14 días para pedir la devolución completa, siempre que no hayas accedido al contenido.</p></details>
       <details><summary>Tengo un problema con el pago o el acceso</summary><p>Escríbenos a <a href="mailto:hola@nuriaroure.com">hola@nuriaroure.com</a> y te ayudamos.</p></details>
     </div>
   </section>
