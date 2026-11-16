@@ -44,7 +44,8 @@
     { id: 'gestalt', txt: 'Institut Gestalt', desc: 'Formación en terapia: presentación, entrevista y reserva', ico: 'formacion', oculto: true },
     { id: 'cancomar', txt: 'CANCOMAR', desc: 'Formación marítima en Avilés: renovaciones a 5 años, listas de espera y convocatorias', ico: 'formacion', oculto: true },
     { id: 'igma', txt: 'IGMA', desc: 'Producción musical y DJ en Vigo: petición, clase de prueba, familia y matrícula', ico: 'formacion', oculto: true },
-    { id: 'dentalmarin', txt: 'Clínica Dental Marín', desc: 'Clínica dental con dos sedes, Patraix y Torrent: primera visita y presupuesto', ico: 'clinica', oculto: true }
+    { id: 'dentalmarin', txt: 'Clínica Dental Marín', desc: 'Clínica dental con dos sedes, Patraix y Torrent: primera visita y presupuesto', ico: 'clinica', oculto: true },
+    { id: 'hiagora', txt: 'Hiágora', desc: 'Escuela de ventas y consultoría comercial en Málaga: dossier, visita sin compromiso y contrato', ico: 'formacion', oculto: true }
   ];
   const OBJETIVOS = [
     { id: 'captacion', txt: 'Captación' }, { id: 'conversion', txt: 'Conversión' }, { id: 'seguimiento', txt: 'Seguimiento' },
