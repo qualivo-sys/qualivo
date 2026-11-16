@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- Galería de anuncios de la academia ficticia «Escuela Norte» (caso de ejemplo). 3×2 creatividades 4:5 de 900×1125. -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:2940px;height:2430px;background:#E4E7EC;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;--az:#12337A;--am:#FFC914}
+.g{position:absolute;width:900px;height:1125px;overflow:hidden;box-shadow:0 10px 30px rgba(20,30,60,.18)}
+img{display:block;object-fit:cover;width:100%;height:100%}
+.logo{position:absolute;z-index:3;left:36px;top:34px;display:flex;align-items:center;gap:12px;font-weight:800;font-size:34px;line-height:.9;color:#fff}
+.logo i{display:flex;align-items:center;justify-content:center;width:62px;height:62px;background:var(--am);color:var(--az);font-style:normal;font-size:46px}
+.logo.o{color:var(--az)}
+h1{font-weight:800;line-height:.9}em{font-style:normal;color:var(--am)}
+.faja{position:absolute;z-index:3;left:0;right:0;bottom:0;height:92px;background:var(--am);color:var(--az);display:flex;align-items:center;justify-content:space-around;font-weight:700;font-size:33px}
+.eti{display:inline-block;background:#fff;color:var(--az);font-weight:800;font-size:30px;padding:5px 12px}
+/* 1 · foto a sangre (la del anuncio principal) */
+#a1:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,22,56,.55) 0%,rgba(9,22,56,0) 26%,rgba(9,22,56,0) 44%,rgba(9,22,56,.94) 78%)}
+#a1 img{object-position:38% 40%}
+#a1 .sello{position:absolute;z-index:3;right:30px;top:30px;background:var(--am);color:var(--az);font-weight:800;font-size:30px;line-height:1;padding:12px 16px;transform:rotate(3deg)}
+#a1 .t{position:absolute;z-index:3;left:36px;right:36px;bottom:122px;color:#fff}#a1 h1{font-size:118px;margin-top:14px}
+/* 2 · tipográfico amarillo */
+#a2{background:var(--am);color:var(--az)}
+#a2 h1{position:absolute;left:44px;right:30px;top:170px;font-size:150px;letter-spacing:-.01em}#a2 h1 span{display:block;color:#fff;-webkit-text-stroke:0;background:var(--az);padding:6px 16px 12px;margin:14px 0 0 -16px;width:max-content}
+#a2 p{position:absolute;left:44px;right:44px;bottom:140px;font-family:'Open Sans',sans-serif;text-transform:none;font-size:36px;font-weight:600;line-height:1.3}
+#a2 .b{position:absolute;left:44px;bottom:50px;background:var(--az);color:#fff;font-size:36px;font-weight:700;padding:12px 26px}
+/* 3 · foto arriba, bloque azul abajo */
+#a3{background:var(--az);color:#fff}#a3 img{height:610px;object-position:50% 25%}
+#a3 .t{position:absolute;left:40px;right:40px;top:650px}#a3 h1{font-size:98px;margin-top:16px}
+#a3 ul{position:absolute;left:40px;bottom:54px;list-style:none;font-family:'Open Sans',sans-serif;text-transform:none;font-size:30px;font-weight:600;line-height:1.5}#a3 li:before{content:'✓';color:var(--am);margin-right:12px;font-weight:700}
+/* 4 · blanco y negro con bloque amarillo */
+#a4 img{object-position:55% 40%;filter:contrast(1.05)}
+#a4 .t{position:absolute;z-index:3;left:0;bottom:120px;background:var(--am);color:var(--az);padding:26px 40px 30px 40px;max-width:800px}#a4 h1{font-size:104px}
+#a4 .s{position:absolute;z-index:3;left:40px;bottom:50px;color:#fff;font-size:38px;font-weight:700;background:var(--az);padding:8px 16px}
+/* 5 · calendario */
+#a5{background:var(--az);color:#fff}
+#a5 .c{position:absolute;left:60px;right:60px;top:210px;background:#fff;color:var(--az);text-align:center}
+#a5 .c b{display:block;background:var(--am);font-size:54px;font-weight:800;padding:16px}#a5 .c strong{display:block;font-size:330px;line-height:.9;font-weight:800;padding:20px 0 0}#a5 .c span{display:block;font-size:60px;font-weight:700;padding:0 0 30px}
+#a5 h1{position:absolute;left:60px;right:60px;bottom:150px;font-size:86px}
+#a5 .b{position:absolute;left:60px;bottom:56px;font-family:'Open Sans',sans-serif;text-transform:none;font-size:32px;font-weight:600}
+/* 6 · retrato */
+#a6{background:#fff;color:var(--az)}#a6 img{height:700px;object-position:60% 30%}
+#a6 .t{position:absolute;left:40px;right:40px;top:734px}#a6 h1{font-size:96px}#a6 h1 em{color:var(--az);background:var(--am);padding:0 10px}
+#a6 p{position:absolute;left:40px;right:40px;bottom:54px;font-family:'Open Sans',sans-serif;text-transform:none;font-size:31px;font-weight:600;color:#333;line-height:1.35}
+</style>
+<body>
+<div class="g" id="a1" style="left:60px;top:60px"><img src="fotos/h3.jpg"><div class="logo"><i>N</i><span>Escuela<br>Norte</span></div><div class="sello">Matrícula abierta<br>Enero</div><div class="t"><span class="eti">Curso online en directo</span><h1>Administración<br>y Finanzas<br><em>por las tardes</em></h1></div><div class="faja"><span>De 18:30 a 20:30</span><span>Desde casa</span><span>Con tutor</span></div></div>
+<div class="g" id="a2" style="left:1020px;top:60px"><div class="logo o"><i style="background:var(--az);color:var(--am)">N</i><span>Escuela<br>Norte</span></div><h1>¿Trabajas<br>por la<br>mañana?<span>Estudia por<br>la tarde.</span></h1><p>Administración y Finanzas, online y en directo.</p><div class="b">Plazas para enero</div></div>
+<div class="g" id="a3" style="left:1980px;top:60px"><img src="fotos/h2.jpg"><div class="logo o" style="background:#fff;padding:8px 14px 8px 8px;left:28px;top:26px"><i>N</i><span>Escuela<br>Norte</span></div><div class="t"><span class="eti" style="background:var(--am)">Online en directo</span><h1>Tu clase,<br><em>en tu salón</em></h1></div><ul><li>De 18:30 a 20:30, de lunes a jueves</li><li>Tutor durante todo el curso</li></ul></div>
+<div class="g" id="a4" style="left:60px;top:1245px"><img src="fotos/h1.jpg"><div class="logo"><i>N</i><span>Escuela<br>Norte</span></div><div class="t"><h1>Dos horas<br>al día.<br>Desde casa.</h1></div><div class="s">Administración y Finanzas · Enero</div></div>
+<div class="g" id="a5" style="left:1020px;top:1245px"><div class="logo"><i>N</i><span>Escuela<br>Norte</span></div><div class="c"><b>Empezamos en</b><strong>ENE</strong><span>Lunes a jueves · 18:30</span></div><h1>Últimas plazas <em>del grupo de tarde</em></h1><div class="b">Pide información y te llamamos</div></div>
+<div class="g" id="a6" style="left:1980px;top:1245px"><img src="fotos/h4.jpg"><div class="logo o" style="background:#fff;padding:8px 14px 8px 8px;left:28px;top:26px"><i>N</i><span>Escuela<br>Norte</span></div><div class="t"><h1>Fórmate <em>sin dejar</em><br>tu trabajo</h1></div><p>Clases en directo por la tarde y un tutor que resuelve tus dudas.</p></div>
+</body></html>

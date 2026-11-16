@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8">
+<!-- Landing completa de la academia ficticia «Escuela Norte» (caso de ejemplo). Ancho de móvil 640 px.
+     ?e=0 vacía · ?e=1 formulario relleno · ?e=2 enviado -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:640px;background:#fff;color:#1c2330;font-family:'Open Sans',sans-serif;--az:#12337A;--am:#FFC914}
+img{display:block;object-fit:cover;width:100%}
+.bc{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;font-weight:800;line-height:.95}
+.st{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 30px;font-size:17px;font-weight:700}
+.url{margin:0 14px 10px;height:46px;border-radius:12px;background:#EEF0F2;display:flex;align-items:center;justify-content:center;font-size:17px;color:#333}
+.top{background:var(--az);color:#fff;font-size:14px;padding:8px 18px;display:flex;justify-content:space-between}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid #e3e6ea}
+.logo{display:flex;align-items:center;gap:10px;font-size:25px;color:var(--az);line-height:.9}.logo i{display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--am);font-style:normal;font-size:32px}
+.ham{width:30px;height:20px;border-top:3px solid var(--az);border-bottom:3px solid var(--az);position:relative}.ham:after{content:'';position:absolute;left:0;right:0;top:5.5px;border-top:3px solid var(--az)}
+.hero{position:relative;height:520px;overflow:hidden}.hero img{height:100%;object-position:38% 45%}
+.hero:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,22,56,.5),rgba(9,22,56,.9))}
+.hero div{position:absolute;z-index:2;left:22px;right:22px;bottom:30px;color:#fff}
+.eti{display:inline-block;background:var(--am);color:var(--az);font-size:20px;padding:3px 9px}
+.hero h1{font-size:74px;margin:12px 0}.hero em,h2 em{font-style:normal;color:var(--am)}
+.hero p{font-size:18px;line-height:1.4}
+.hero b{display:inline-block;background:var(--am);color:var(--az);font-size:19px;padding:14px 22px;margin-top:18px;border-radius:4px}
+.tri{display:flex;border-bottom:1px solid #e3e6ea}.tri div{flex:1;padding:16px 8px;text-align:center;font-size:13px;color:#555;border-right:1px solid #e3e6ea}.tri b{display:block;font-size:26px;color:var(--az)}
+section{padding:34px 22px}h2{font-size:44px;color:var(--az);margin-bottom:8px}section>p{font-size:17px;line-height:1.5;color:#444}
+.paso{display:flex;gap:16px;margin-top:20px;align-items:flex-start}.paso i{flex:none;width:52px;height:52px;background:var(--az);color:var(--am);font-style:normal;font-size:30px;display:flex;align-items:center;justify-content:center}
+.paso b{display:block;font-size:19px;color:#1c2330}.paso span{font-size:16px;line-height:1.45;color:#555}
+.foto{margin:26px 0 0;height:300px}.foto img{height:100%;object-position:50% 25%}
+.tem{background:#F3F5F8}.mod{display:flex;justify-content:space-between;align-items:center;background:#fff;border-left:5px solid var(--am);padding:15px 16px;margin-top:10px;font-size:17px;font-weight:600}.mod span{font-size:14px;color:#777;font-weight:400}
+.cal{background:var(--az);color:#fff}.cal h2{color:#fff}.cal .f{display:flex;gap:12px;margin-top:18px}.cal .f div{flex:1;background:rgba(255,255,255,.1);padding:16px 12px;font-size:14px;color:#cfd6e6}.cal .f b{display:block;font-size:30px;color:var(--am)}
+.form{margin:0 16px;background:#F3F5F8;border-top:5px solid var(--am);padding:22px 18px}
+.form h3{font-size:34px;color:var(--az);margin-bottom:12px}
+.cam{border:1px solid #C9CED6;border-radius:4px;padding:14px;font-size:17px;color:#7b8089;margin-bottom:10px;background:#fff;display:flex;justify-content:space-between}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.35;color:#555;margin:12px 0}.chk i{flex:none;width:18px;height:18px;border:1.5px solid #888;border-radius:3px;display:block;margin-top:1px;font-style:normal}
+.btn{background:var(--az);color:#fff;text-align:center;font-weight:700;font-size:19px;padding:16px;border-radius:4px;text-transform:uppercase}
+.gra{font-size:16px;color:#333;margin:-4px 0 12px;line-height:1.4;display:none}
+.faq{padding-top:30px}.q{border-bottom:1px solid #e3e6ea;padding:16px 0;font-size:17px;font-weight:600;display:flex;justify-content:space-between}
+footer{background:#0C1F4D;color:#aab4cf;font-size:13px;padding:26px 22px;line-height:1.6}
+</style>
+<body>
+<div class="st"><span>18:42</span><span>5G ▮▮▮</span></div><div class="url">🔒 escuelanorte.example</div>
+<div class="top"><span>Lunes a viernes · 9:00–20:00</span><span>Campus virtual</span></div>
+<div class="nav"><div class="logo bc"><i>N</i><span>Escuela<br>Norte</span></div><div class="ham"></div></div>
+<div class="hero"><img src="fotos/h3.jpg"><div><span class="eti bc">Curso online en directo</span><h1 class="bc">Administración y Finanzas <em>por las tardes</em></h1><p>Clases en directo de 18:30 a 20:30, desde casa y con un tutor durante todo el curso.</p><b class="bc">Solicita información</b></div></div>
+<div class="tri bc"><div><b>Online</b>en directo</div><div><b>Enero</b>próximo inicio</div><div><b>Tutor</b>todo el curso</div></div>
+<section><h2 class="bc">Así son <em style="color:var(--az);background:var(--am);padding:0 8px">las clases</em></h2><p>Pensadas para quien trabaja por la mañana y quiere avanzar sin dejar su empleo.</p>
+ <div class="paso"><i class="bc">1</i><div><b>Clase en directo, cada tarde</b><span>De lunes a jueves, de 18:30 a 20:30, con el profesor y tu grupo.</span></div></div>
+ <div class="paso"><i class="bc">2</i><div><b>Si un día no puedes, la ves grabada</b><span>Todas las sesiones quedan en el campus virtual.</span></div></div>
+ <div class="paso"><i class="bc">3</i><div><b>Un tutor que te conoce</b><span>Resuelve tus dudas y te acompaña hasta el final del curso.</span></div></div>
+ <div class="foto"><img src="fotos/h2.jpg"></div></section>
+<section class="tem"><h2 class="bc">Qué vas a aprender</h2>
+ <div class="mod">Contabilidad general<span>Módulo 1</span></div><div class="mod">Facturación e impuestos<span>Módulo 2</span></div><div class="mod">Nóminas y seguros sociales<span>Módulo 3</span></div><div class="mod">Tesorería y bancos<span>Módulo 4</span></div><div class="mod">Hojas de cálculo aplicadas<span>Módulo 5</span></div></section>
+<section class="cal"><h2 class="bc">Próxima convocatoria</h2><p style="color:#cfd6e6">Grupo de tarde. Plazas limitadas por grupo.</p><div class="f bc"><div><b>Enero</b>inicio</div><div><b>L–J</b>18:30 a 20:30</div><div><b>Online</b>en directo</div></div></section>
+<section style="padding:30px 0 10px"><div class="form" id="form"><h3 class="bc" id="h3">Solicita información</h3><div class="gra" id="gra">Hemos recibido tu solicitud. Te escribimos por WhatsApp en unos minutos.</div>
+ <div class="cam">Nombre y apellidos</div><div class="cam">Teléfono</div><div class="cam">Email</div><div class="cam"><span>¿Qué horario prefieres?</span><span>▾</span></div>
+ <div class="chk"><i id="ck"></i><span>He leído y acepto la política de privacidad.</span></div><div class="btn" id="btn">Quiero información</div></div></section>
+<section class="faq"><h2 class="bc">Preguntas frecuentes</h2><div class="q">¿Necesito conocimientos previos?<span>+</span></div><div class="q">¿Qué pasa si falto a una clase?<span>+</span></div><div class="q">¿Cómo se paga el curso?<span>+</span></div></section>
+<footer><b style="color:#fff">Escuela Norte</b><br>Formación para el empleo · Campus virtual<br>Aviso legal · Privacidad · Cookies<br><br>Academia ficticia. Caso de ejemplo.</footer>
+<script>
+const E=+(new URLSearchParams(location.search).get('e')||0);
+if(E>=1){const v=['Laura Vidal','600 000 000','laura@correo.es','Tardes, a partir de las 18:00'];document.querySelectorAll('.cam').forEach((c,i)=>{c.style.color='#1a1a1a';if(c.firstElementChild)c.firstElementChild.textContent=v[i];else c.textContent=v[i];});
+ const k=document.getElementById('ck');k.style.cssText='background:#12337A;border-color:#12337A;color:#fff;font-size:14px;line-height:16px;text-align:center';k.textContent='✓';}
+if(E>=2){const b=document.getElementById('btn');b.style.background='#1E8E5A';b.textContent='✓ Solicitud enviada';document.getElementById('h3').textContent='¡Gracias, Laura!';document.getElementById('gra').style.display='block';}
+</script>
+</body></html>
