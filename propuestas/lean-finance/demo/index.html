@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Lean Finance · demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Demo guiada en pestañas para Lean Finance: cliente potencial, anuncios, landing, test ENISA, WhatsApp, voz, ficha, seguimientos y panel. */
+:root{--wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--body:var(--sans)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}}
+:root[data-theme="dark"]{--wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}
+.wrap.main{display:grid;gap:26px;padding-top:0;padding-bottom:72px}
+.wrap.main > *{min-width:0}
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(24px,3vw,33px);line-height:1.15;letter-spacing:-.02em}
+.eyebrow{font-family:var(--mono)}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;line-height:1.5}
+.note a{color:var(--accent)}
+.ej{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;background:#B7790A;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;margin-right:4px}
+h2 .ej{vertical-align:5px;margin-left:6px}
+/* pestañas tipo producto */
+nav.tabs{position:sticky;top:57px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:5px;box-shadow:var(--shadow-lg)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:5px;font:inherit;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 7px;cursor:pointer;transition:background .25s,color .25s}
+nav.tabs button:hover{color:var(--ink);background:var(--line-2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-family:var(--mono);font-size:11px;background:var(--line-2);color:var(--muted);transition:background .25s,color .25s}
+nav.tabs button[aria-selected="true"]{background:var(--f700);color:#fff;box-shadow:0 6px 16px -8px rgba(15,26,69,.6)}
+nav.tabs button[aria-selected="true"] span{background:var(--moss);color:#0F1A45}
+@media (max-width:560px){nav.tabs{top:96px;border-radius:14px}nav.tabs button{padding:9px 12px;font-size:13.5px}}
+.pane{display:none;gap:22px}
+.pane.on{display:grid;animation:paneIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px}
+.pane > header p{color:var(--muted);margin-top:8px;max-width:76ch;font-size:16.5px}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.two{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:22px;align-items:start}
+.cap{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
+/* insignia de marca (avatar) */
+.lfav{display:inline-grid;place-items:center;position:relative;width:36px;height:36px;border-radius:50%;flex:none;background:#0F1A45;color:#fff;font-family:var(--serif);font-weight:800;font-size:14px;letter-spacing:-.02em;border:1px solid var(--line)}
+.lfav::after{content:"";position:absolute;top:8px;right:8px;width:6px;height:6px;border-top:2px solid #23D4D0;border-right:2px solid #23D4D0}
+/* maqueta de anuncio de Meta en CSS (4:5) */
+.ad{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.ad .prop{display:block;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:#B7790A;color:#fff;padding:5px 8px}
+.ad .hd{display:flex;gap:9px;align-items:center;padding:12px 12px 8px}
+.ad .hd b{display:block;font-size:13.5px;line-height:1.2}
+.ad .hd small{font-size:11.5px;color:var(--muted)}
+.ad .tx{padding:0 12px 10px;font-size:13.5px;line-height:1.5;white-space:pre-line}
+.ad .cr{position:relative;aspect-ratio:4/5;overflow:hidden;color:#fff;padding:24px;display:flex;flex-direction:column;justify-content:space-between;isolation:isolate;background:linear-gradient(155deg,#16245C 0%,#0F1A45 55%,#0A1233 100%)}
+.ad .cr::before{content:"";position:absolute;z-index:-1;width:58%;aspect-ratio:1;right:-14%;top:-14%;border-top:26px solid rgba(35,212,208,.16);border-right:26px solid rgba(35,212,208,.16)}
+.ad .cr.b2{background:linear-gradient(155deg,#F4F8FA 0%,#E2F4F5 100%);color:#0F1A45}
+.ad .cr.b2::before{border-color:rgba(0,131,151,.14)}
+.ad .cr.b3{background:linear-gradient(155deg,#009AAE 0%,#00788A 55%,#0F1A45 100%)}
+.ad .cr.b3::before{border-color:rgba(255,255,255,.14)}
+.ad .cr .k1{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.88}
+.ad .cr .h{font-family:var(--serif);font-weight:800;font-size:clamp(27px,2.8vw,34px);line-height:1.08;letter-spacing:-.025em;max-width:11ch}
+.ad .cr .h em{font-style:normal;color:#23D4D0}
+.ad .cr.b2 .h em{color:#00788A}
+.ad .cr.b3 .h em{color:#B5E7EA}
+.ad .cr .k2{margin-top:12px;font-size:13.5px;font-weight:600;opacity:.9}
+.ad .cr .chips{display:flex;flex-wrap:wrap;gap:6px}
+.ad .cr .chips span{font-size:11.5px;font-weight:600;border:1px solid currentColor;border-radius:99px;padding:3px 9px;opacity:.92}
+.ad .cr .lg{height:20px;width:auto;align-self:flex-start;background:#fff;border-radius:6px;padding:4px 8px;box-sizing:content-box}
+.ad .ft{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:var(--surface-2);border-top:1px solid var(--line-2)}
+.ad .ft small{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.ad .ft b{font-size:13.5px;line-height:1.3}
+.ad .ft span.cta{flex:none;background:var(--line-2);border-radius:8px;padding:7px 11px;font-size:13px;font-weight:650}
+.proof{margin-top:12px;border-left:3px solid var(--moss);background:var(--surface);border-radius:0 12px 12px 0;padding:10px 12px;font-size:13.5px;line-height:1.5}
+.proof cite{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:4px}
+/* captura y test */
+.capt{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;box-shadow:var(--shadow)}
+.capt .row{display:flex;gap:8px;flex-wrap:wrap}
+.capt .fake{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--paper);color:var(--muted);flex:1 1 140px}
+.capt .btn{display:inline-block;background:#0F1A45;color:#fff;font-weight:650;border-radius:99px;padding:9px 16px;font-size:14.5px;width:fit-content}
+.quiz{width:min(420px,100%);margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:24px;display:grid;gap:14px;min-height:540px;align-content:start;box-shadow:var(--shadow-lg)}
+.quiz h3{font-family:var(--serif);font-weight:700;font-size:22px;letter-spacing:-.015em;line-height:1.25}
+.quiz .bar{height:6px;border-radius:3px;background:var(--line-2);overflow:hidden}
+.quiz .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--moss));transition:width .35s}
+.quiz .qopts{display:grid;gap:8px}
+.quiz .qopts button{font:inherit;font-weight:550;text-align:left;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .15s,transform .15s,background .15s}
+.quiz .qopts button:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateX(2px)}
+.quiz .done{display:grid;gap:10px;padding-top:10px}
+.quiz .done b.t{font-family:var(--serif);font-weight:700;font-size:23px;line-height:1.2}
+.quiz .done p{color:var(--muted);font-size:15px}
+.grp{display:inline-block;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px}
+.grp.a{background:var(--good-soft);color:var(--good)}
+.grp.b{background:var(--warn-soft);color:var(--warn)}
+.grp.c{background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+.list{display:grid;gap:12px}
+.list > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.list p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.list p .grp{font-size:12.5px;padding:2px 8px;margin-right:4px}
+.btnl{display:inline-flex;align-items:center;gap:6px;font-weight:650;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:99px;padding:10px 18px;margin-top:6px;border:0;font-size:15px;cursor:pointer;font-family:inherit;transition:transform .15s}
+.btnl:hover{transform:translateY(-1px)}
+/* móvil: WhatsApp */
+.phone{width:min(380px,100%);margin-inline:auto;background:#0E1316;border-radius:46px;padding:12px;box-shadow:0 0 0 1px #2b3236,0 30px 60px -20px rgba(12,24,30,.55),inset 0 0 0 2px #262d31;position:relative}
+.phone .sbar{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:12.5px;padding:6px 22px 8px;font-weight:600}
+.phone .isl{width:96px;height:26px;border-radius:20px;background:#000}
+.phone .home{width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.55);margin:10px auto 2px}
+.wa{border-radius:30px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr auto;height:620px;background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1px);background-size:14px 14px}
+.wa .top{background:var(--wa-head);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.wa .top .lfav{border-color:rgba(255,255,255,.3)}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.b{max-width:84%;padding:8px 10px 6px;border-radius:12px;font-size:14.5px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08);animation:pop .3s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+.b.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:4px}
+.b.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:4px}
+.b.hum{border-left:3px solid #00A3B5}
+.b .who{display:block;font-size:12px;font-weight:700;color:#00788A;margin-bottom:2px}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:color-mix(in srgb,var(--surface) 92%,transparent);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center;border-radius:8px}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:12px;padding:8px 12px;font-size:13px;color:var(--muted);font-style:italic}
+.wa .opts{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line);min-height:62px;align-items:center}
+.wa .opts button{font:inherit;font-size:13.5px;font-weight:600;border:1.5px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 12px;cursor:pointer;transition:background .15s,color .15s;animation:pop .3s ease-out}
+.wa .opts button:hover{background:var(--accent);color:var(--accent-ink)}
+.wa .opts button.restart{border-color:var(--line);color:var(--muted)}
+.log{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;align-content:start;max-height:690px;overflow-y:auto;box-shadow:var(--shadow)}
+.log h3{display:flex;align-items:center;gap:8px}
+.log h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--moss);box-shadow:0 0 0 4px var(--accent-soft)}
+.log ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.log li{border:1px solid var(--line-2);border-left:3px solid var(--accent);border-radius:10px;padding:8px 12px;font-size:14px;background:var(--surface-2);animation:pop .3s ease-out}
+.log li b{display:block;font-size:14px}
+.log li span{color:var(--muted);font-size:13px;white-space:pre-line}
+.log li.h{border-left-color:#B7790A}
+.log li.g{border-left-color:var(--good)}
+/* voz */
+.call{border-radius:28px;background:var(--surface);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.call .top{background:linear-gradient(160deg,#16245C,#0A1233);color:#fff;padding:22px 20px 18px;display:grid;justify-items:center;gap:6px;text-align:center;font-size:14px}
+.call .av{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25)}
+.call .av svg{width:28px;height:28px}
+.call .top small{opacity:.75;font-family:var(--mono);font-size:11.5px}
+.wave{display:flex;gap:3px;align-items:center;height:26px;margin-top:4px}
+.wave i{width:3px;border-radius:2px;background:var(--moss);animation:wv 1.2s ease-in-out infinite}
+.wave i:nth-child(odd){animation-delay:-.4s}.wave i:nth-child(3n){animation-delay:-.8s}
+@keyframes wv{0%,100%{height:5px}50%{height:24px}}
+.call .body{padding:16px;display:flex;flex-direction:column;gap:9px}
+.v{max-width:86%;padding:9px 13px;border-radius:14px;font-size:14.5px;line-height:1.5}
+.v small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-bottom:2px;letter-spacing:.06em}
+.v.r{background:var(--accent-soft);align-self:flex-start;border-top-left-radius:4px}
+.v.c{background:var(--paper);border:1px solid var(--line);align-self:flex-end;border-top-right-radius:4px}
+.res{margin:4px 16px 16px;border-radius:14px;background:var(--good-soft);color:var(--ink);padding:12px 14px;font-size:14.5px;line-height:1.5;border:1px solid color-mix(in srgb,var(--good) 25%,transparent)}
+.res b{color:var(--good)}
+.rules{display:grid;gap:10px}
+.rules > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:14.5px;line-height:1.55}
+.rules b{display:block;font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+/* ventanas de aplicación (ficha y panel) */
+.win{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);min-width:0}
+.wbar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.wbar i{width:11px;height:11px;border-radius:50%;background:#E5DFD2}
+.wbar i:nth-child(1){background:#F0A39B}.wbar i:nth-child(2){background:#F2D18A}.wbar i:nth-child(3){background:#A9D7A2}
+.wbar span{margin-left:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbar em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#fff;background:#B7790A;border-radius:6px;padding:2px 7px;white-space:nowrap}
+.winbody{padding:18px;display:grid;gap:16px;background:var(--paper)}
+.ficha{background:var(--surface);overflow:hidden}
+.ficha .hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 20px;border-bottom:1px solid var(--line);align-items:center}
+.ficha .hd > div:first-child{flex:1 1 300px}
+.ficha .hd b{font-family:var(--serif);font-weight:700;letter-spacing:-.015em}
+.ficha .sc{font-family:var(--serif);font-size:44px;font-weight:800;line-height:1;color:var(--good)}
+.dims{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.dims > div{padding:12px 16px;border-right:1px solid var(--line-2);display:grid;gap:4px}
+.dims > div:last-child{border-right:0}
+.dims small{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.dims b{font-size:15px}
+.dims .m{height:6px;border-radius:3px;background:var(--line-2);overflow:hidden}
+.dims .m i{display:block;height:100%;background:var(--accent)}
+.dims .m i.lo{background:var(--good)}
+.ficha .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.ficha .grid > div{padding:14px 20px;border-bottom:1px solid var(--line-2);border-right:1px solid var(--line-2);font-size:14.5px}
+.ficha .grid > div:nth-child(3n){border-right:0}
+.ficha dl{margin:0}
+.ficha dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ficha dd{margin:3px 0 0;font-weight:550}
+.ficha .why2{padding:16px 20px;font-size:14.5px;border-bottom:1px solid var(--line-2);line-height:1.6}
+.ficha .next{padding:16px 20px;background:var(--accent-soft);font-weight:600;line-height:1.55;border-left:4px solid var(--accent)}
+.pts{width:100%;border-collapse:collapse;font-size:14px}
+.pts td{padding:8px 0;border-bottom:1px dashed var(--line);white-space:normal;text-align:left;background:none!important}
+.pts td:last-child{text-align:right;white-space:nowrap;padding-left:10px;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
+.pts tr:last-child td{border-bottom:0;font-size:16px;padding-top:12px}
+.notif{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--moss);border-radius:14px;padding:14px 16px;display:grid;gap:6px;box-shadow:var(--shadow)}
+.notif.x{border-left-color:#B7790A}
+.notif .t{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.notif p{font-size:14.5px;line-height:1.55}
+/* seguimiento */
+.seq{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.seq > div{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0;box-shadow:var(--shadow)}
+.seq h3{font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:-.015em;margin-bottom:4px}
+.seq > div > p{color:var(--muted);font-size:14px;margin-bottom:14px}
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{position:relative;padding:0 0 16px 24px;border-left:2px solid var(--line);margin-left:6px}
+.tl li:last-child{border-left-color:transparent}
+.tl li::before{content:"";position:absolute;left:-8px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--surface)}
+.tl li.stop::before{background:var(--good)}
+.tl li.alert::before{background:#B7790A}
+.tl li.mail::before{background:#5B7FB8}
+.tl .w{font-family:var(--mono);font-size:11.5px;color:var(--accent);letter-spacing:.02em}
+.tl b{display:block;font-size:14.5px;margin-top:1px}
+.tl blockquote{margin:8px 0 0;background:var(--accent-soft);border-radius:4px 12px 12px 12px;padding:10px 12px;font-size:14px;white-space:pre-line;line-height:1.5}
+.tl li.mail blockquote{background:var(--paper);border:1px solid var(--line);border-radius:10px}
+.tl .subj{display:block;font-weight:700;font-size:13px;margin-bottom:4px}
+/* panel */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;min-width:0}
+.box h3{font-family:var(--serif);font-weight:700;letter-spacing:-.01em}
+.box p{font-size:14.5px}
+.tbl{overflow-x:auto}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;min-width:700px}
+.tbl th,.tbl td{padding:10px 10px;border-bottom:1px solid var(--line-2);text-align:right;white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child,.tbl td.l,.tbl th.l{text-align:left}
+.tbl td:first-child{position:sticky;left:0;background:var(--surface);font-weight:600}
+.tbl th{white-space:normal;vertical-align:bottom;line-height:1.35}
+.tbl td.k{font-weight:700;color:var(--accent)}
+.tbl th{position:sticky;top:0;background:var(--surface-2);font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.tbl tbody tr:last-child td{border-bottom:0}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:4px;align-content:start}
+.kpi b{font-family:var(--serif);font-weight:800;font-size:38px;line-height:1;letter-spacing:-.03em}
+.kpi span{font-size:13px;color:var(--muted);line-height:1.4}
+.kpi.alert{border-color:#B7790A;background:var(--warn-soft)}
+.kpi.alert b{color:var(--warn)}
+.socio{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:22px;align-items:center;background:linear-gradient(150deg,#16245C,#0A1233);color:#fff;border-radius:20px;padding:26px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;isolation:isolate}
+.socio::before{content:"";position:absolute;z-index:-1;right:-40px;top:-40px;width:180px;height:180px;border-top:22px solid rgba(35,212,208,.18);border-right:22px solid rgba(35,212,208,.18)}
+.socio .eyebrow{color:#23D4D0}
+.socio h3{font-family:var(--serif);font-weight:700;font-size:clamp(21px,2.4vw,28px);line-height:1.18;letter-spacing:-.02em;margin-top:6px}
+.socio ul{margin:0;padding-left:18px;color:rgba(255,255,255,.88);font-size:15px;display:grid;gap:8px;line-height:1.5}
+footer{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:22px;font-size:13.5px;color:var(--muted)}
+footer p b{color:var(--ink)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links .btnl{background:var(--surface);color:var(--ink);border:1px solid var(--line);margin:0}
+.links .btnl:hover{border-color:var(--accent);color:var(--accent)}
+.navnext{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px}
+.navnext button,.navnext .btnl{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:650;background:var(--f700);color:#fff;border:0;border-radius:99px;padding:12px 20px;margin:0;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s}
+.navnext .btnl.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.navnext button:hover,.navnext .btnl:hover{transform:translateX(3px);box-shadow:var(--shadow)}
+@media (max-width:900px){.cols,.seq,.two,.socio{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.ficha .grid{grid-template-columns:1fr 1fr}.ficha .grid > div:nth-child(3n){border-right:1px solid var(--line-2)}.ficha .grid > div:nth-child(2n){border-right:0}.cols > div{max-width:440px;margin-inline:auto;width:100%}.dims{grid-template-columns:1fr 1fr}.dims > div:nth-child(2){border-right:0}.dims > div:nth-child(-n+2){border-bottom:1px solid var(--line-2)}}
+@media (max-width:520px){.ficha .grid{grid-template-columns:1fr}.ficha .grid > div{border-right:0!important}.wa{height:560px}.phone{border-radius:40px;padding:9px}.winbody{padding:10px}.kpi b{font-size:30px}.socio{padding:20px}}
+@media print{.pane{display:grid!important;break-before:page}nav.tabs,.navnext{display:none}.wave i{animation:none;height:10px}}
+/* marca Lean Finance: azul marino #0F1A45, petróleo #008397, turquesa #23D4D0 (leanfinance.es) */
+:root{--serif:"Plus Jakarta Sans","Inter",system-ui,sans-serif;
+  --f900:#0A1233;--f800:#0F1A45;--f700:#0F1A45;--f600:#008397;--moss:#23D4D0;--accent:#00788A;--accent-ink:#fff;--accent-soft:#E2F4F6;
+  --good:#0E7A55;--good-soft:#DFF3EA;
+  --paper:#F3F5F9;--surface:#FFFFFF;--surface-2:#F8FAFC;--ink:#131C44;--ink-2:#2A3358;--muted:#535B78;--line:#DBE0EA;--line-2:#E8ECF3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent:#23D4D0;--accent-ink:#06202A;--accent-soft:#0F2D38;--good:#5FD3A5;--good-soft:#123026;
+  --paper:#090E22;--surface:#10173A;--surface-2:#141C42;--ink:#E8ECF7;--ink-2:#CDD3E6;--muted:#A0A8C3;--line:#252F57;--line-2:#1C2549}}
+:root[data-theme="dark"]{--accent:#23D4D0;--accent-ink:#06202A;--accent-soft:#0F2D38;--good:#5FD3A5;--good-soft:#123026;
+  --paper:#090E22;--surface:#10173A;--surface-2:#141C42;--ink:#E8ECF7;--ink-2:#CDD3E6;--muted:#A0A8C3;--line:#252F57;--line-2:#1C2549}
+.topnav{background:rgba(15,26,69,.96)!important}
+.topnav .chip{display:inline-flex;align-items:center;background:#fff;border-radius:7px;padding:6px 9px;flex:none}
+.topnav .chip img{height:16px;width:auto}
+.pane > .kpis{margin-top:4px}
+.para{display:grid;gap:22px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-top:28px;position:relative;z-index:21}
+.para h2{font-size:clamp(22px,2.6vw,30px)}
+.map{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.map li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:1px solid var(--line-2);border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.45;cursor:pointer;transition:border-color .15s,background .15s}
+.map li:hover{border-color:var(--accent);background:var(--accent-soft)}
+.map li > span{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 4px;border-radius:13px;background:var(--f700);color:#fff;font-family:var(--mono);font-size:12px}
+.map li b{display:block;font-size:15px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .map li > span{background:#23D4D0;color:#0F1A45}}
+:root[data-theme="dark"] .map li > span{background:#23D4D0;color:#0F1A45}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol><symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M19 5.5a9 9 0 0 1 0 13"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M12 19h4.5a3.5 3.5 0 0 0 0-7h-8a3.5 3.5 0 0 1 0-7H12"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol></svg>
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="chip"><img src="../assets/leanfinance-logo.png" alt="Lean Finance" width="118" height="18"></span><span class="x">×</span><span class="qv">Qualivo</span><span class="by">18-nov-2026</span></div>
+    <div class="links"><a href="./" aria-current="page">Recorrido</a><a href="../landing/" target="_blank" rel="noopener">Landing</a></div>
+  </div>
+</nav>
+
+<div class="wrap main">
+
+<div class="para">
+  <div>
+    <p class="eyebrow">Cómo trabajamos</p>
+    <h2>Vuestro equipo asesora. Nosotros ponemos la constancia y la medición.</h2>
+    <ol class="map">
+      <li data-go="cliente"><span>1</span><div><b>Cliente potencial</b>A quién nos dirigimos y qué le duele.</div></li>
+      <li data-go="anuncios"><span>2</span><div><b>Anuncios</b>Uno para cada perfil, con vuestra propuesta de valor.</div></li>
+      <li data-go="landing"><span>3</span><div><b>Landing</b>Del anuncio al test de ENISA, en un paso.</div></li>
+      <li data-go="test"><span>4</span><div><b>Solicitud</b>Sabéis si encaja antes de llamarle.</div></li>
+      <li data-go="whatsapp"><span>5-6</span><div><b>WhatsApp y llamada</b>Respuesta en minutos, a cualquier hora.</div></li>
+      <li data-go="ficha"><span>7</span><div><b>Ficha del lead</b>El equipo llega a la llamada sabiéndolo todo.</div></li>
+      <li data-go="seguimiento"><span>8</span><div><b>Seguimientos</b>Nadie se enfría esperando sus cuentas.</div></li>
+      <li data-go="panel"><span>9</span><div><b>Panel</b>Qué anuncio trae expedientes firmados, no solo formularios.</div></li>
+    </ol>
+  </div>
+</div>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-cliente" aria-controls="p-cliente" data-p="cliente"><span>1</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-user"/></svg>Cliente</button>
+  <button role="tab" id="t-anuncios" aria-controls="p-anuncios" data-p="anuncios"><span>2</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mega"/></svg>Anuncios</button>
+  <button role="tab" id="t-landing" aria-controls="p-landing" data-p="landing"><span>3</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-route"/></svg>Landing</button>
+  <button role="tab" id="t-test" aria-controls="p-test" data-p="test"><span>4</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-check"/></svg>Solicitud</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>5</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chat"/></svg>WhatsApp</button>
+  <button role="tab" id="t-voz" aria-controls="p-voz" data-p="voz"><span>6</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-mic"/></svg>Llamada</button>
+  <button role="tab" id="t-ficha" aria-controls="p-ficha" data-p="ficha"><span>7</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-user"/></svg>Ficha</button>
+  <button role="tab" id="t-seguimiento" aria-controls="p-seguimiento" data-p="seguimiento"><span>8</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-bell"/></svg>Seguimientos</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>9</span><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-chart"/></svg>Panel</button>
+</nav>
+
+<section class="pane" id="p-cliente" role="tabpanel" aria-labelledby="t-cliente">
+  <header><h2>1 · Cliente potencial y propuesta de valor</h2><p>Tres perfiles que vemos en vuestra oferta. ENISA abre la puerta; CFO externo y asesoría son el siguiente paso. Los afinamos con vosotros.</p></header>
+  <div class="cols">
+    <div class="box"><p class="cap" style="margin:0">Perfil 1 · la puerta de entrada</p><h3>Fundador de startup que busca financiación sin dilución</h3><p><b>Le duele:</b> «necesito caja, pero no quiero ceder capital» y «no sé si soy elegible».</p><p><b>Le encaja:</b> Consultora ENISA (de 25.000 € a 1,5 M €, sin avales ni dilución).</p></div>
+    <div class="box"><p class="cap" style="margin:0">Perfil 2 · el que más dura</p><h3>Pyme en crecimiento sin dirección financiera</h3><p><b>Le duele:</b> factura más, pero no ve márgenes ni caja, y decide a ojo.</p><p><b>Le encaja:</b> CFO externo, «un miembro más de tu equipo para dirigir las finanzas».</p></div>
+    <div class="box"><p class="cap" style="margin:0">Perfil 3 · cambia de asesoría</p><h3>Empresa con una asesoría genérica</h3><p><b>Le duele:</b> «mi gestoría presenta impuestos, pero nadie me asesora».</p><p><b>Le encaja:</b> Asesoría fiscal y contable, donde «tecnología y especialización se unen».</p></div>
+  </div>
+  <div class="box"><p class="cap" style="margin:0">Vuestra propuesta de valor, en una frase</p><h3 style="font-size:22px">Estructura y control para tomar mejores decisiones.</h3><p>Financiación, dirección financiera y asesoría en un mismo equipo: +200 empresas satisfechas, +30 M € conseguidos en financiación y +200 reseñas en Google <span class="muted">(leanfinance.es)</span>.</p><p class="muted">No es para: proyectos sin sociedad constituida ni quien solo busca la gestoría más barata.</p></div>
+  <div class="navnext"><button data-go="anuncios">Siguiente: los anuncios <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-anuncios" role="tabpanel" aria-labelledby="t-anuncios">
+  <header><h2>2 · Un anuncio para cada perfil <span class="ej">Propuesta de Qualivo</span></h2><p>Formato 4:5 para Instagram y Facebook. Vuestras cifras publicadas y, debajo, el testimonio que lo respalda.</p></header>
+  <div class="cols">
+    <div>
+      <p class="cap">Perfil 1 · fundador de startup</p>
+      <article class="ad" aria-label="Anuncio propuesto: ENISA">
+        <span class="prop">Propuesta de Qualivo</span>
+        <div class="hd"><span class="lfav" aria-hidden="true">lf</span><div><b>Lean Finance</b><small>Publicidad</small></div></div>
+        <p class="tx">¿Necesitas financiación y no quieres ceder capital?
+ENISA presta de 25.000 € a 1,5 M € sin avales ni dilución. Comprueba en 1 minuto si tu empresa encaja.</p>
+        <div class="cr"><span class="k1">Préstamo ENISA 2026</span><div><p class="h">Financiación <em>sin ceder capital.</em></p><p class="k2">+30 M € conseguidos en financiación</p></div><div class="chips"><span>25.000 € – 1,5 M €</span><span>Sin avales</span><span>Sin dilución</span></div></div>
+        <div class="ft"><div><small>leanfinance.es</small><b>¿Encajas? Test de 1 minuto</b></div><span class="cta">Hacer el test</span></div>
+      </article>
+      <div class="proof">«Súper profesional y bien organizada toda la gestión de la solicitud de Enisa de la mano de Lean Finance.»<cite>Eduardo Medina Banderas · Chargia (testimonio de leanfinance.es)</cite></div>
+    </div>
+    <div>
+      <p class="cap">Perfil 2 · pyme en crecimiento</p>
+      <article class="ad" aria-label="Anuncio propuesto: CFO externo">
+        <span class="prop">Propuesta de Qualivo</span>
+        <div class="hd"><span class="lfav" aria-hidden="true">lf</span><div><b>Lean Finance</b><small>Publicidad</small></div></div>
+        <p class="tx">Facturas más que el año pasado. ¿Sabes cuánto ganas?
+Un CFO externo se suma a tu equipo para dirigir las finanzas: márgenes, caja y decisiones.</p>
+        <div class="cr b2"><span class="k1">CFO externo</span><div><p class="h">Creces. <em>¿Con control?</em></p><p class="k2">+200 empresas satisfechas</p></div><div class="chips"><span>Márgenes</span><span>Caja</span><span>Preparación de ronda</span></div></div>
+        <div class="ft"><div><small>leanfinance.es</small><b>Un miembro más de tu equipo</b></div><span class="cta">Más información</span></div>
+      </article>
+      <div class="proof">«Su equipo de CFO nos ha ayudado a "poner orden" y profesionalizar nuestras finanzas.»<cite>Albert Serrat · Ooptimo (testimonio de leanfinance.es)</cite></div>
+    </div>
+    <div>
+      <p class="cap">Perfil 3 · asesoría genérica</p>
+      <article class="ad" aria-label="Anuncio propuesto: Asesoría fiscal y contable">
+        <span class="prop">Propuesta de Qualivo</span>
+        <div class="hd"><span class="lfav" aria-hidden="true">lf</span><div><b>Lean Finance</b><small>Publicidad</small></div></div>
+        <p class="tx">Tu gestoría presenta impuestos. ¿Quién te asesora?
+Asesoría fiscal y contable especializada en pymes y startups, con contabilidad colaborativa en Holded.</p>
+        <div class="cr b3"><span class="k1">Asesoría fiscal y contable</span><div><p class="h">Más que <em>presentar impuestos.</em></p><p class="k2">+200 reseñas en Google</p></div><div class="chips"><span>Fiscal</span><span>Contable</span><span>Holded</span></div></div>
+        <div class="ft"><div><small>leanfinance.es</small><b>Habla con el equipo</b></div><span class="cta">Contactar</span></div>
+      </article>
+      <div class="proof">«Servicio de Lean Finance excelente en asesoría contable y fiscal.»<cite>Romain Richard · Pom medical (testimonio de leanfinance.es)</cite></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="landing">Siguiente: la landing <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-landing" role="tabpanel" aria-labelledby="t-landing">
+  <header><h2>3 · La landing: del anuncio a la llamada agendada <span class="ej">Maqueta</span></h2><p>El anuncio de ENISA lleva aquí. Un test de elegibilidad y, si encaja, la llamada con el equipo queda agendada en el mismo paso.</p></header>
+  <div style="border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface)"><iframe src="../landing/" title="Landing de ENISA de Lean Finance (maqueta)" loading="lazy" style="display:block;width:100%;height:640px;border:0"></iframe></div>
+  <div class="navnext"><a class="btnl alt" href="../landing/" target="_blank" rel="noopener">Abrir la landing a pantalla completa</a><button data-go="test">Siguiente: la solicitud <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-test" role="tabpanel" aria-labelledby="t-test">
+  <header><h2>4 · El test de elegibilidad: cinco toques <span class="ej">Ejemplo</span></h2><p>Antes de llamar, el equipo ya sabe si hay sociedad, proyecto innovador, fondos propios y cuentas depositadas. Pruébalo como si fueras un fundador.</p></header>
+  <div class="two">
+    <div class="quiz" id="quiz" aria-live="polite"></div>
+    <div class="list">
+      <div class="capt"><p class="cap" style="margin:0">Hoy, en leanfinance.es</p><p style="font-size:14px"><b>«Calcula tu ENISA en 1 min»</b>: facturación, años y empleados → importe orientativo.</p><div class="row"><span class="fake">Facturación anual</span><span class="fake">Años</span><span class="btn">Calcular</span></div><p style="font-size:13px;color:var(--muted)">Da una cifra al visitante, pero no le dice al equipo si cumple los requisitos ni a quién llamar primero.</p></div>
+      <div><h3>Cómo clasifica</h3>
+        <p><span class="grp a">A</span>70 puntos o más, con sociedad constituida: WhatsApp en minutos y llamada de 10-15 min con el equipo agendada en el mismo paso.</p>
+        <p><span class="grp b">B</span>De 40 a 69, o le falta algo (fondos propios justos, cuentas sin depositar): WhatsApp con lo que falta y fecha para retomarlo.</p>
+        <p><span class="grp c">C</span>Menos de 40 o sin sociedad: email con la guía de ENISA y la newsletter. Sin llamadas.</p>
+        <p style="font-size:13px">El test orienta; no garantiza la concesión. Eso lo valora el equipo y lo decide ENISA.</p></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>5 · En minutos, por WhatsApp <span class="ej">Datos de ejemplo</span></h2><p>Marta Ibarra (ficticia), cofundadora de una startup de sensores de riego, hace el test a las 22:15 y sale A. Le escribe el asistente virtual. Cuando pregunta por honorarios, pasa a una persona del equipo.</p></header>
+  <div class="two">
+    <div class="phone"><div class="sbar" aria-hidden="true"><b>22:15</b><span class="isl"></span><span>5G</span></div>
+    <div class="wa" aria-label="Simulación de WhatsApp">
+      <div class="top"><span class="lfav" aria-hidden="true">lf</span><div><b>Lean Finance</b><small>Asistente virtual · Ejemplo</small></div></div>
+      <div class="body" id="chat" aria-live="polite"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="home" aria-hidden="true"></div></div>
+    <div class="log"><h3>Por detrás</h3><ol id="log"></ol></div>
+  </div>
+  <p class="note">El asistente se presenta como asistente virtual, no da honorarios, no promete que ENISA se conceda ni prepara el expediente. En cuanto escribe alguien del equipo, se calla con ese contacto.</p>
+  <div class="navnext"><button data-go="voz">Siguiente: la llamada <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-voz" role="tabpanel" aria-labelledby="t-voz">
+  <header><h2>6 · Si no contesta, llama el asistente de voz <span class="ej">Datos de ejemplo</span></h2><p>Sergio (ficticio), fundador de una startup de software logístico, hace el test a las 10:05 y no contesta al WhatsApp. A las 10:20 le llama el asistente: pregunta lo justo y deja la llamada con el equipo en la agenda.</p></header>
+  <div class="two">
+    <div class="call">
+      <div class="top"><span class="av" aria-hidden="true"><svg class="i"><use href="#i-mic"/></svg></span><span><b>Llamada saliente · asistente virtual de Lean Finance</b> → Sergio</span><small>Martes 10:20 · 1 min 40 s · Ejemplo</small><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+      <div class="body">
+        <div class="v r"><small>ASISTENTE</small>Hola, ¿Sergio? Soy el asistente virtual de Lean Finance. Has hecho el test de ENISA hace un rato. ¿Tienes un minuto?</div>
+        <div class="v c"><small>SERGIO</small>Sí, dime.</div>
+        <div class="v r"><small>ASISTENTE</small>¿Cuánto necesitas y para qué?</div>
+        <div class="v c"><small>SERGIO</small>Unos 150.000 € para contratar a dos desarrolladores.</div>
+        <div class="v r"><small>ASISTENTE</small>¿Tenéis depositadas las cuentas del último ejercicio?</div>
+        <div class="v c"><small>SERGIO</small>Sí. ¿Y cuánto me cobráis vosotros?</div>
+        <div class="v r"><small>ASISTENTE</small>Eso te lo explica una persona del equipo, porque depende de tu caso. ¿Te va una llamada de 15 minutos mañana a las 9:30 o a las 13:00?</div>
+        <div class="v c"><small>SERGIO</small>A las 13:00.</div>
+        <div class="v r"><small>ASISTENTE</small>Hecho. Te llega la invitación por WhatsApp. Gracias, Sergio.</div>
+      </div>
+      <div class="res"><b>Resultado:</b> llamada con el equipo mañana a las 13:00. Ficha: 150.000 € para contratar, cuentas depositadas, preguntó honorarios.</div>
+    </div>
+    <div class="rules">
+      <div><b>Cuándo llama</b>15 minutos después del test, solo si es A o B y no ha contestado al WhatsApp. Días laborables, de 9:00 a 20:00.</div>
+      <div><b>Cómo se presenta</b>Siempre como asistente virtual de Lean Finance.</div>
+      <div><b>Qué deja hecho</b>Importe, para qué, cuentas y la llamada en la agenda del equipo.</div>
+      <div><b>Qué no hace</b>No da honorarios ni promete la concesión: «eso te lo explica el equipo».</div>
+      <div><b>Cuándo se calla</b>Si pide no recibir llamadas, si quiere hablar con una persona o si el equipo ya ha hablado con él.</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="ficha">Siguiente: la ficha <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-ficha" role="tabpanel" aria-labelledby="t-ficha">
+  <header><h2>7 · La ficha del lead <span class="ej">Datos de ejemplo</span></h2><p>Lo que ve el equipo antes de la llamada: puntuación, datos del test y siguiente acción. Y si podría necesitar algo más que ENISA.</p></header>
+  <div class="two">
+    <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Solicitudes › Marta Ibarra · ficha</span><em>Ejemplo</em></div>
+    <div class="ficha">
+      <div class="hd"><div><b style="font-size:19px">Marta Ibarra · Cofundadora · startup agrotech (ficticia)</b><p style="font-size:14px;color:var(--muted)">Entró por: anuncio «Financiación sin ceder capital» → test ENISA a las 22:15 → WhatsApp</p></div><div style="text-align:right"><span class="sc">82</span><br><span class="grp a">A · llamada</span></div></div>
+      <div class="dims">
+        <div><small>Elegibilidad</small><b>Alta</b><span class="m"><i style="width:86%"></i></span></div>
+        <div><small>Actividad</small><b>Alta</b><span class="m"><i style="width:80%"></i></span></div>
+        <div><small>Intención</small><b>Alta</b><span class="m"><i style="width:84%"></i></span></div>
+        <div><small>Riesgo</small><b>Bajo</b><span class="m"><i class="lo" style="width:28%"></i></span></div>
+      </div>
+      <div class="grid">
+        <div><dl><dt>Sociedad</dt><dd>SL desde 2021</dd></dl></div>
+        <div><dl><dt>Proyecto</dt><dd>Tecnología propia</dd></dl></div>
+        <div><dl><dt>Fondos propios</dt><dd>Cubren lo que pide</dd></dl></div>
+        <div><dl><dt>Cuentas</dt><dd>2025 depositadas</dd></dl></div>
+        <div><dl><dt>Necesita</dt><dd>250.000 €</dd></dl></div>
+        <div><dl><dt>Para qué</dt><dd>2 contrataciones y lanzamiento</dd></dl></div>
+        <div><dl><dt>Finanzas hoy</dt><dd>Ella, con un Excel</dd></dl></div>
+        <div><dl><dt>Duda</dt><dd>Honorarios</dd></dl></div>
+        <div><dl><dt>Llamada</dt><dd>Mañana 10:00 · confirmada</dd></dl></div>
+      </div>
+      <div class="why2"><b>Por qué:</b> cumple los cuatro requisitos del test, sabe cuánto necesita y para qué, y contestó en 4 minutos. Preguntó honorarios: eso lo explica el equipo.</div>
+      <div class="next">Siguiente acción: llamada de 10-15 min mañana a las 10:00. Confirmar línea y fondos propios con el último balance y explicar honorarios. Si sigue adelante, plantear CFO externo.</div>
+    </div></div>
+    <div style="display:grid;gap:16px">
+      <div class="box" style="box-shadow:var(--shadow)">
+        <h3>Por qué tiene 82</h3>
+        <table class="pts">
+          <tr><td>Sociedad constituida</td><td>20</td></tr>
+          <tr><td>Proyecto con tecnología propia</td><td>18</td></tr>
+          <tr><td>Fondos propios ≥ importe pedido</td><td>16</td></tr>
+          <tr><td>Cuentas depositadas</td><td>12</td></tr>
+          <tr><td>Importe dentro del rango (250.000 €)</td><td>6</td></tr>
+          <tr><td>Contestó en 4 minutos</td><td>6</td></tr>
+          <tr><td>Pregunta por honorarios</td><td>4</td></tr>
+          <tr><td><b>Total</b></td><td>82</td></tr>
+        </table>
+        <p class="note">Pesos de ejemplo. Los ajustáis vosotros y se recalibran con los expedientes firmados.</p>
+      </div>
+      <div class="notif x"><div class="t"><span>Venta cruzada detectada</span><span>Ejemplo</span></div><p><b>Posible CFO externo.</b> Nadie dirige las finanzas (las lleva la fundadora en un Excel) y va a contratar con el préstamo. Se apunta para después de ENISA, no en la primera llamada.</p></div>
+      <div class="notif"><div class="t"><span>Aviso al equipo · WhatsApp</span><span>22:24</span></div><p><b>Marta Ibarra, A 82, llamada mañana 10:00.</b> SL 2021 · tecnología propia · cuentas 2025 depositadas · pide 250.000 € · preguntó honorarios. [Ver ficha]</p></div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="seguimiento">Siguiente: los seguimientos <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-seguimiento" role="tabpanel" aria-labelledby="t-seguimiento">
+  <header><h2>8 · Seguimientos: solo a quien encaja <span class="ej">Datos de ejemplo</span></h2><p>A, B y «más adelante». Los C reciben la newsletter, sin llamadas. Cualquier respuesta para la secuencia y la pasa al equipo. Cada texto lo aprobáis vosotros.</p></header>
+  <div class="seq">
+    <div><h3>A · Tras la llamada</h3><p>Para que el expediente arranque.</p><ol class="tl">
+      <li class="mail"><span class="w">Mismo día · email</span><b>Resumen y documentos</b><blockquote><span class="subj">Asunto: Tu ENISA: lo que hablamos</span>Siguiente paso y la lista de documentos. Lo revisa el equipo antes de salir.</blockquote></li>
+      <li><span class="w">D+2 · WhatsApp</span><b>¿Te cuadra la lista?</b><blockquote>Marta, ¿te falta algún documento? Dime cuál y te decimos dónde sacarlo.</blockquote></li>
+      <li><span class="w">D+5 · WhatsApp</span><b>¿Seguimos?</b><blockquote>¿Arrancamos el expediente? [Sí] [Tengo dudas] [Más adelante]</blockquote></li>
+      <li class="alert"><span class="w">D+7 · aviso al equipo</span><b>Abre y no contesta</b><blockquote>Abrió la propuesta 3 veces · 7 días sin respuesta. Mejor una llamada vuestra.</blockquote></li></ol></div>
+    <div><h3>B · Le falta algo</h3><p>Por ejemplo, fondos propios justos.</p><ol class="tl">
+      <li><span class="w">D+1 · WhatsApp</span><b>Lo que falta</b><blockquote>Los fondos propios tienen que cubrir al menos lo que pides. Si tenéis una ampliación prevista, el equipo te dice cómo encaja.</blockquote></li>
+      <li class="mail"><span class="w">D+4 · email</span><b>Un artículo de vuestro blog</b><blockquote><span class="subj">Asunto: ENISA, CDTI e I+D en el mismo ejercicio</span>Vuestro artículo «Cómo combinar ENISA, CDTI y deducciones por I+D en el mismo ejercicio».</blockquote></li>
+      <li><span class="w">D+10 · WhatsApp</span><b>¿Ha cambiado algo?</b><blockquote>¿Ya cumplís? [Sí] [Aún no]</blockquote></li>
+      <li class="stop"><span class="w">Si dice «sí»</span><b>Pasa a A y se agenda la llamada</b></li></ol></div>
+    <div><h3>Más adelante · «cuando deposite las cuentas»</h3><p>Se guarda con su fecha. Nadie la pierde de vista.</p><ol class="tl">
+      <li><span class="w">Al responder · WhatsApp</span><b>Se apunta la fecha</b><blockquote>Perfecto: te escribimos en agosto, cuando tengáis las cuentas depositadas.</blockquote></li>
+      <li class="mail"><span class="w">Cada mes · email</span><b>Vuestra newsletter</b><blockquote>«Tu dosis mensual de claridad financiera».</blockquote></li>
+      <li><span class="w">Ese día · WhatsApp</span><b>Retomar ENISA</b><blockquote>Hola, Marta. Nos dijiste que en agosto tendríais las cuentas. ¿Repasamos tu ENISA? [Sí] [Aún no]</blockquote></li>
+      <li class="stop"><span class="w">Si dice «sí»</span><b>Aviso al equipo y llamada agendada</b></li></ol></div>
+  </div>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>9 · El panel: qué anuncio trae expedientes firmados <span class="ej">Datos de ejemplo</span></h2><p>Por anuncio, hasta la firma. Cifras inventadas para la demo: no son previsiones.</p></header>
+  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Panel · últimos 30 días</span><em>Datos de ejemplo</em></div><div class="winbody">
+  <div class="kpis">
+    <div class="kpi"><b>4 min</b><span>hasta el primer mensaje a cada solicitud · ejemplo</span></div>
+    <div class="kpi"><b>82</b><span>solicitudes válidas (A+B) · ejemplo</span></div>
+    <div class="kpi alert"><b>3</b><span>A sin hablar todavía con nadie del equipo · ejemplo</span></div>
+    <div class="kpi"><b>16</b><span>firmados, cada uno con su anuncio de origen · ejemplo</span></div>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">Por anuncio · 30 días · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Anuncio</th><th>Inversión</th><th>Solicitudes</th><th>Válidas (A+B)</th><th>Llamadas</th><th>Firmados</th><th>Coste por solicitud válida</th><th>Coste por firmado</th></tr></thead>
+      <tbody>
+        <tr><td>ENISA · sin ceder capital</td><td>1.200 €</td><td>140</td><td>38</td><td>24</td><td>7</td><td class="k">32 €</td><td>171 €</td></tr>
+        <tr><td>CFO externo · ¿con control?</td><td>600 €</td><td>34</td><td>15</td><td>9</td><td>3</td><td class="k">40 €</td><td>200 €</td></tr>
+        <tr><td>Asesoría · más que impuestos</td><td>450 €</td><td>41</td><td>12</td><td>8</td><td>2</td><td class="k">38 €</td><td>225 €</td></tr>
+        <tr><td>Web, Google y recomendación</td><td>0 €</td><td>30</td><td>17</td><td>11</td><td>4</td><td class="k">—</td><td>—</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted" style="font-size:13px">Firmados: expediente ENISA o contrato de CFO o asesoría. El anuncio de ENISA trae más volumen; solo una de cada cuatro solicitudes es válida.</p>
+  </div>
+  <div class="box">
+    <p class="cap" style="margin:0">A quién llamar hoy · datos de ejemplo</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Contacto</th><th>Nota</th><th class="l">Por qué hoy</th><th class="l">Siguiente paso</th></tr></thead>
+      <tbody>
+        <tr><td>Startup de salud digital</td><td>86 A</td><td class="l" style="white-space:normal;min-width:220px">Ha vuelto al test hoy y aún no tiene llamada</td><td class="l" style="white-space:normal;min-width:180px">Llamar ahora</td></tr>
+        <tr><td>Pyme industrial</td><td>78 A</td><td class="l" style="white-space:normal;min-width:220px">ENISA firmado · nadie dirige sus finanzas</td><td class="l" style="white-space:normal;min-width:180px">Proponer CFO externo</td></tr>
+        <tr><td>Startup edtech</td><td>72 A</td><td class="l" style="white-space:normal;min-width:220px">No se presentó a la llamada</td><td class="l" style="white-space:normal;min-width:180px">Proponer otra hora</td></tr>
+        <tr><td>Estudio de software</td><td>58 B</td><td class="l" style="white-space:normal;min-width:220px">Dijo «cuando deposite las cuentas»: ya lo ha hecho</td><td class="l" style="white-space:normal;min-width:180px">WhatsApp: retomar ENISA</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  </div></div>
+  <div class="socio">
+    <div><p class="eyebrow">Y para vuestros clientes</p><h3>El mismo sistema, para las pymes que asesoráis</h3></div>
+    <ul>
+      <li>Vuestros clientes también necesitan captar: anuncios, respuesta en minutos, seguimiento y panel, con su marca.</li>
+      <li>Vosotros ya veis sus números: sabéis a quién le vendría bien y cuándo.</li>
+      <li>Encaje como socio: lo recomendáis a quien le encaje y lo montamos nosotros.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="links"><a class="btnl" href="../landing/" target="_blank" rel="noopener">Landing</a></div>
+  <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · +34 647 11 84 91 · qualivo.io</b></p>
+  <p>Demo preparada el 17 de noviembre de 2026 para Lean Finance. No es una página de Lean Finance. Logotipo, servicios, cifras publicadas y testimonios tomados de leanfinance.es ese día. Anuncios propuestos por Qualivo; personas, empresas, mensajes y cifras de ejemplo.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['cliente', 'anuncios', 'landing', 'test', 'whatsapp', 'voz', 'ficha', 'seguimiento', 'panel'];
+  var started = false;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'cliente';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+      if (p === id) { var nv = t.parentNode; nv.scrollTo({ left: t.offsetLeft - (nv.clientWidth - t.offsetWidth) / 2 }); }
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (id === 'whatsapp' && !started) start();
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.go, true); }); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+
+  // Test de elegibilidad ENISA: cinco toques con puntuación (pesos de ejemplo)
+  var quiz = document.getElementById('quiz');
+  var NOSOC = 'Todavía no: soy autónomo o es una idea', ENCONS = 'Está en constitución', CUENTAS_LUEGO = 'Las depositamos en unas semanas';
+  var Q = [
+    ['¿Tu empresa ya está constituida como sociedad?', [['Sí, es una SL o SA', 25], [ENCONS, 8], [NOSOC, 0]]],
+    ['¿Tu proyecto es innovador?', [['Sí: producto o tecnología propia', 25], ['En parte: mejoramos algo que ya existe', 14], ['No especialmente', 3]]],
+    ['¿Tus fondos propios cubren al menos lo que vas a pedir?', [['Sí', 25], ['Casi, con una ampliación prevista', 12], ['No lo sé', 8], ['No', 0]]],
+    ['¿Tienes depositadas las cuentas del último ejercicio?', [['Sí', 15], [CUENTAS_LUEGO, 8], ['No, aún no hemos cerrado ninguno', 0]]],
+    ['¿Cuánto necesitas?', [['De 25.000 € a 100.000 €', 8], ['De 100.000 € a 300.000 €', 10], ['De 300.000 € a 1,5 M €', 10], ['Aún no lo sé', 4]]]
+  ];
+  var resp = [], pts = 0;
+  function el(tag, cls, txt) { var d = document.createElement(tag); if (cls) d.className = cls; if (txt != null) d.textContent = txt; return d; }
+  function grupo() {
+    if (resp[0] === NOSOC) return ['c', 'C · sin sociedad', 'ENISA pide sociedad constituida. Email con la guía de ENISA y la newsletter; si constituye, se retoma. Sin llamadas.'];
+    if (pts < 40) return ['c', 'C · ' + pts + ' puntos', 'Email con la guía de ENISA y la newsletter. Sin llamadas: no ocupa la agenda del equipo.'];
+    if (resp[3] === CUENTAS_LUEGO) return ['b', 'B · más adelante · ' + pts + ' puntos', 'WhatsApp para contarle que hacen falta las cuentas depositadas. Se guarda la fecha y ese día le escribimos.'];
+    if (resp[0] === ENCONS) return ['b', 'B · en constitución · ' + pts + ' puntos', 'WhatsApp con lo que falta y una fecha para retomarlo cuando la sociedad esté inscrita.'];
+    if (pts >= 70) return ['a', 'A · ' + pts + ' puntos', 'WhatsApp en minutos y llamada de 10-15 min con el equipo agendada en este mismo paso. Si no contesta, llama el asistente a los 15 min.'];
+    return ['b', 'B · ' + pts + ' puntos', 'WhatsApp con lo que falta (por ejemplo, fondos propios) y una fecha para retomarlo. Si lo resuelve, pasa a A.'];
+  }
+  function paso(n) {
+    quiz.innerHTML = '';
+    var cap = el('p', 'cap', 'Ejemplo · ' + Math.min(n + 1, Q.length) + ' de ' + Q.length);
+    var bar = el('div', 'bar'); var s = el('span'); s.style.width = Math.round(n / Q.length * 100) + '%'; bar.appendChild(s);
+    quiz.appendChild(cap); quiz.appendChild(bar);
+    if (n >= Q.length) {
+      s.style.width = '100%'; cap.textContent = 'Ejemplo · listo';
+      var g = grupo(), d = el('div', 'done');
+      d.appendChild(el('b', 't', g[0] === 'a' ? 'Elige hora para hablar con el equipo' : g[0] === 'b' ? 'Te escribimos por WhatsApp en unos minutos' : 'Te enviamos la guía de ENISA a tu email'));
+      d.appendChild(el('p', null, 'En la versión real aquí van nombre, empresa, email y WhatsApp, con consentimiento. Tus respuestas: ' + resp.join(' · ') + '.'));
+      var gp = el('p'); gp.appendChild(el('span', 'grp ' + g[0], g[1])); d.appendChild(gp);
+      d.appendChild(el('p', null, g[2]));
+      var row = el('div'); row.style.display = 'flex'; row.style.gap = '8px'; row.style.flexWrap = 'wrap';
+      var w = el('button', 'btnl', 'Ver el WhatsApp ›'); w.type = 'button'; w.addEventListener('click', function () { show('whatsapp', true); });
+      var r = el('button', 'btnl', '↺ Repetir'); r.type = 'button'; r.style.background = 'var(--muted)'; r.style.color = 'var(--surface)'; r.addEventListener('click', function () { resp = []; pts = 0; paso(0); });
+      row.appendChild(w); row.appendChild(r); d.appendChild(row);
+      quiz.appendChild(d); return;
+    }
+    quiz.appendChild(el('h3', null, Q[n][0]));
+    var o = el('div', 'qopts');
+    Q[n][1].forEach(function (t) {
+      var b = el('button', null, t[0]); b.type = 'button';
+      b.addEventListener('click', function () { resp.push(t[0]); pts += t[1]; paso(n + 1); });
+      o.appendChild(b);
+    });
+    quiz.appendChild(o);
+  }
+  paso(0);
+
+  // WhatsApp: la historia de Marta (ficticia)
+  var chat = document.getElementById('chat'), opts = document.getElementById('opts'), log = document.getElementById('log');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t0 = 22 * 60 + 15, mins = 0, dia = 'mañana a las 10:00', humano = false, cfo = false;
+  var HUM = 'Equipo de Lean Finance';
+  function hora() { var m = t0 + mins; return String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+  function bubble(cls, txt, who) {
+    var d = document.createElement('div'); d.className = 'b ' + cls;
+    if (who) { var w = document.createElement('span'); w.className = 'who'; w.textContent = who; d.appendChild(w); }
+    d.appendChild(document.createTextNode(txt));
+    if (cls !== 'sys') { var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t); }
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+  }
+  function apunta(txt, sub, tipo) {
+    var li = document.createElement('li'); if (tipo) li.className = tipo;
+    li.innerHTML = '<b></b><span></span>'; li.firstChild.textContent = txt; li.lastChild.textContent = sub || '';
+    log.appendChild(li); log.scrollTop = log.scrollHeight;
+  }
+  function bot(msgs, cb) {
+    var i = 0;
+    (function next() {
+      if (i >= msgs.length) { cb && cb(); return; }
+      var ty = document.createElement('div'); ty.className = 'typing'; ty.textContent = 'escribiendo…';
+      chat.appendChild(ty); chat.scrollTop = chat.scrollHeight;
+      setTimeout(function () { ty.remove(); if (humano) bubble('in hum', msgs[i++], HUM); else bubble('in', msgs[i++]); next(); }, reduce ? 0 : 750);
+    })();
+  }
+  // cada opción: [texto del botón, nodo siguiente, texto completo que envía Marta]
+  function choices(list) {
+    opts.innerHTML = '';
+    list.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = c[0];
+      b.addEventListener('click', function () { opts.innerHTML = ''; mins += (chat.querySelectorAll('.b.out').length ? 1 : 4); bubble('out', c[2] || c[0]); setTimeout(function () { N[c[1]](); }, reduce ? 0 : 300); });
+      opts.appendChild(b);
+    });
+  }
+  function fin() {
+    opts.innerHTML = '';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'restart'; b.textContent = '↺ Probar otro camino';
+    b.addEventListener('click', start); opts.appendChild(b);
+  }
+  var HONOR = ['¿Cuánto cobráis?', 'honorarios', '¿Y cuánto cobráis vosotros por el expediente?'];
+  var N = {
+    inicio: function () {
+      bot(['Hola, Marta. Soy el asistente virtual de Lean Finance. Hemos recibido tu test de ENISA: sociedad desde 2021, tecnología propia y cuentas de 2025 depositadas.', 'Para que el equipo prepare la llamada, una pregunta: ¿para qué sería la financiación?'],
+        function () { choices([['Contratar y lanzar', 'uso', 'Para contratar a dos personas y lanzar el producto. Calculamos unos 250.000 €.'], ['Vender fuera', 'uso', 'Para salir a Portugal y Francia. Unos 250.000 €.'], HONOR]); });
+    },
+    uso: function () {
+      apunta('Uso e importe', 'contesta a los 4 minutos · pide 250.000 €\ndentro del rango de ENISA', 'g');
+      bot(['Apuntado. ¿Y quién lleva hoy las finanzas: previsiones, caja, el plan financiero?'],
+        function () { choices([['Yo, con un Excel', 'excel', 'Yo, con un Excel. No me da la vida.'], ['Una gestoría', 'gestoria', 'Tenemos una gestoría, pero solo presenta impuestos.']]); });
+    },
+    excel: function () {
+      cfo = true;
+      apunta('Posible CFO externo', 'nadie dirige las finanzas · se apunta para después de ENISA', 'h');
+      N.sigue('Entendido. El plan financiero del expediente lo prepara el equipo contigo, así que no te preocupes por eso.');
+    },
+    gestoria: function () {
+      apunta('Posible asesoría', 'gestoría que solo presenta impuestos · se apunta para después de ENISA', 'h');
+      N.sigue('Entendido. El plan financiero del expediente lo prepara el equipo contigo.');
+    },
+    sigue: function (txt) {
+      apunta('Puntuación 82 → A', 'elegibilidad alta · intención alta · riesgo bajo', 'g');
+      bot([txt, 'El primer paso es una llamada de 10-15 minutos con el equipo para confirmar que ENISA encaja. ¿Te va mañana a las 10:00?'],
+        function () { choices([['Mañana 10:00', 'cita', 'Mañana a las 10:00 me va bien.'], HONOR]); });
+    },
+    honorarios: function () {
+      apunta('Pregunta por honorarios → pasa a una persona', 'el asistente no da precios · aviso al equipo por WhatsApp', 'h');
+      bot(['Buena pregunta. Eso te lo cuenta una persona del equipo, porque depende de tu caso. Le aviso ahora y te escribe por aquí.'], function () {
+        bubble('sys', 'Una persona del equipo de Lean Finance entra en la conversación · el asistente deja de escribir');
+        humano = true; mins += 3;
+        apunta('El equipo toma la conversación', 'el asistente se calla con este contacto', 'g');
+        bot(['Hola, Marta, soy del equipo de financiación pública. Los honorarios dependen del importe y de la línea; te los explico con calma en una llamada de 10-15 minutos.', '¿Te va mañana a las 10:00 o a las 16:30?'],
+          function () { choices([['Mañana 10:00', 'cita', 'Mañana a las 10:00.'], ['Mañana 16:30', 'tarde', 'Mejor a las 16:30.']]); });
+      });
+    },
+    tarde: function () { dia = 'mañana a las 16:30'; N.cita(); },
+    cita: function () {
+      apunta('Llamada agendada', dia + ' · en la agenda del equipo\nrecordatorio una hora antes', 'g');
+      apunta('Ficha lista para la llamada', 'A 82 · 250.000 € · cuentas 2025 depositadas' + (cfo ? '\nventa cruzada: posible CFO externo' : '') + '\nvino del anuncio «Financiación sin ceder capital»', 'g');
+      bot(['Hecho, Marta: ' + dia + '. Te llega la invitación por aquí y por correo.', 'Si puedes, ten a mano el último balance: con eso la llamada va al grano.'], fin);
+    }
+  };
+  function start() {
+    started = true; mins = 0; dia = 'mañana a las 10:00'; humano = false; cfo = false; chat.innerHTML = ''; log.innerHTML = ''; opts.innerHTML = '';
+    bubble('sys', 'Ejemplo · Marta termina el test de ENISA a las 22:15 · sale A');
+    apunta('Ficha creada', 'origen: anuncio «Financiación sin ceder capital» → test ENISA');
+    apunta('WhatsApp en 1 minuto', 'con su nombre, lo que contestó en el test y una sola pregunta');
+    N.inicio();
+  }
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
