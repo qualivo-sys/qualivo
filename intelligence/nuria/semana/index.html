@@ -168,6 +168,9 @@ small,.nota{color:var(--mut);font-size:12.5px}
     });
     h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>Grupo de WhatsApp:</b> entradas y salidas reales que avisa Funnelchat, asignadas a cada edición por la etiqueta de registro de la persona en Kliking. Se registran desde el 5-nov por la tarde: las ediciones hasta la del 11-nov (incluida) salen incompletas; la primera completa es la del 18-nov. «Entran»: personas distintas que entran (y su % sobre los registros); «Salen»: personas que salen (y su % sobre las que entraron). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
 
+    // Quién ve las clases (personas, con el enlace personal)
+    h += '<h2>Quién ve las clases de El Círculo (personas)</h2><p class="sub">Personas distintas que empiezan, llegan a la mitad y acaban cada clase, gracias al enlace personal de los emails y WhatsApp. Se mide desde el 18-nov.</p><div id="cper"><p class="cargando">Cargando…</p></div>';
+
     // El Círculo de viernes a jueves: la semana natural de cada captación
     var SC = datos.semanasCirculo || [];
     if (SC.length) {
@@ -228,6 +231,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     cargarClases();
     cargarGrupos();
     cargarBF();
+    cargarCPer();
     cargarEnvios(mesEnv);
     cargarMensajes();
   }
@@ -291,6 +295,27 @@ small,.nota{color:var(--mut);font-size:12.5px}
       .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
       .then(function (d) { enviosDatos[k] = d; pintarEnvios(d); })
       .catch(function (e) { var c = document.getElementById('envios'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+  }
+
+  function cargarCPer() {
+    var c = document.getElementById('cper'); if (!c) return;
+    fetch(API + '?accion=clasespersonas', { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) {
+        var h = '';
+        d.ediciones.forEach(function (e) {
+          h += '<div class="card"><b>Edición del miércoles ' + dia(e.edicion) + '</b> <small>· ' + num(e.registros) + ' registros</small>';
+          if (!e.conDatos) { h += '<p class="nota">Todavía no hay datos de esta edición: empiezan a llegar cuando las alumnas abren las clases desde su enlace personal.</p></div>'; return; }
+          h += '<table><tr><th>Clase</th><th class="n">Empiezan</th><th class="n">Llegan a la mitad</th><th class="n">Acaban</th><th class="n">Acaban de las que empiezan</th></tr>';
+          e.clases.forEach(function (x) {
+            h += '<tr><td>Clase ' + x.clase + '</td><td class="n">' + num(x.empieza) + ' <small>(' + pc(e.registros ? x.empieza / e.registros : null) + ')</small></td><td class="n">' + num(x.mitad) + '</td><td class="n">' + num(x.acaba) + '</td><td class="n">' + pc(x.empieza ? x.acaba / x.empieza : null) + '</td></tr>';
+          });
+          h += '</table></div>';
+        });
+        h += '<p class="nota">Cuenta personas (no reproducciones) con las etiquetas «clase N · empieza / mitad / acaba · fecha del directo» que se ponen en Kliking. «Acaban»: llegan al 90 % del vídeo. Solo cuenta a quien entra con su enlace personal (o ya entró antes con él en ese navegador); quien llega por un enlace reenviado no cuenta. El % de «Empiezan» es sobre los registros de la edición.</p>';
+        c.innerHTML = h;
+      })
+      .catch(function (e) { c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
   }
 
   var bfDatos = null;
