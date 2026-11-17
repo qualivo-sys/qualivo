@@ -45,7 +45,8 @@
     { id: 'cancomar', txt: 'CANCOMAR', desc: 'Formación marítima en Avilés: renovaciones a 5 años, listas de espera y convocatorias', ico: 'formacion', oculto: true },
     { id: 'igma', txt: 'IGMA', desc: 'Producción musical y DJ en Vigo: petición, clase de prueba, familia y matrícula', ico: 'formacion', oculto: true },
     { id: 'dentalmarin', txt: 'Clínica Dental Marín', desc: 'Clínica dental con dos sedes, Patraix y Torrent: primera visita y presupuesto', ico: 'clinica', oculto: true },
-    { id: 'hiagora', txt: 'Hiágora', desc: 'Escuela de ventas y consultoría comercial en Málaga: dossier, visita sin compromiso y contrato', ico: 'formacion', oculto: true }
+    { id: 'hiagora', txt: 'Hiágora', desc: 'Escuela de ventas y consultoría comercial en Málaga: dossier, visita sin compromiso y contrato', ico: 'formacion', oculto: true },
+    { id: 'leanfinance', txt: 'Lean Finance', desc: 'Consultora financiera para pymes y startups: test de ENISA, llamada de diagnóstico y encargo', ico: 'b2b', oculto: true }
   ];
   const OBJETIVOS = [
     { id: 'captacion', txt: 'Captación' }, { id: 'conversion', txt: 'Conversión' }, { id: 'seguimiento', txt: 'Seguimiento' },
@@ -326,7 +327,7 @@
       if (ver) { /* veredicto propio del sector */ }
       else if (!c.inversion) ver = { id: 'organico', txt: 'Orgánico', tono: 't-gris', por: 'No tiene inversión. Sirve de referencia de calidad: ' + (fitMedio != null ? 'encaje medio ' + fitMedio + '.' : '') };
       else if (roas >= R * 1.3) ver = { id: 'escalar', txt: 'Escalar', tono: 't-teal', por: 'Devuelve ' + M_.num(roas, 1) + '× (la media es ' + M_.num(R, 1) + '×). Aquí hay margen para subir presupuesto.' };
-      else if (roas < R * 0.6 && fitMedio != null && fitMedio < 45) ver = { id: 'publico', txt: 'Revisar público', tono: 't-coral', por: 'Trae ' + T.contactos + ' baratos que no encajan (encaje medio ' + fitMedio + ', ' + bajo + ' de ' + cs.length + ' por debajo de 40). El anuncio funciona; el público no.' };
+      else if (roas < R * 0.6 && fitMedio != null && fitMedio < 45) ver = { id: 'publico', txt: 'Revisar público', tono: 't-coral', por: 'Trae ' + T.contactos + (T.nuevos === 'nuevas' ? ' baratas' : ' baratos') + ' que no encajan (encaje medio ' + fitMedio + ', ' + bajo + ' de ' + cs.length + ' por debajo de 40). El anuncio funciona; el público no.' };
       else if (roas < R * 0.6) ver = { id: 'despues', txt: 'No es el anuncio', tono: 't-amber', por: 'Lo que trae encaja (encaje medio ' + (fitMedio != null ? fitMedio : '—') + '), pero solo el ' + M_.pct(post) + ' de los contactados acaba en ' + T.venta + ' (media ' + M_.pct(postTotal) + '). Se pierde después: es seguimiento, no campaña.' };
       else ver = { id: 'mantener', txt: 'Mantener', tono: 't-lila', por: 'Retorno de ' + M_.num(roas, 1) + '×, en línea con la media. Sin cambios.' };
       return { c: c, entra: e, ventas: v, ingresos: ingC, roas: roas, cpl: c.inversion ? c.inversion / Math.max(1, e) : null, cpv: c.inversion ? c.inversion / Math.max(1, v) : null, fitMedio: fitMedio, n: cs.length, post: post, ver: ver };
@@ -686,7 +687,7 @@
           return '<div class="chipc" draggable="true" data-mover-demo="' + c.id + '" data-abrir="' + c.id + '"><b>' + esc(c.n) + '</b><span>' + pillPrio(c.x.prio) + '<em style="font-style:normal">' + M.euros(c.valor) + '</em></span></div>';
         }).join('') + '</div>';
       }).join('');
-      return cabecera('Recorrido', '¿Dónde se pierde el negocio?', 'Del anuncio a ' + T.laVenta + '. Cada salto compara lo que pasa hoy con lo que pasa cuando el seguimiento está bien hecho.') +
+      return cabecera('Recorrido', '¿Dónde se pierde el negocio?', 'Del anuncio ' + (/^el /.test(T.laVenta) ? 'al ' + T.laVenta.slice(3) : 'a ' + T.laVenta) + '. Cada salto compara lo que pasa hoy con lo que pasa cuando el seguimiento está bien hecho.') +
         '<div class="rejilla r-2"><div class="tarjeta"><h3>Últimos 30 días <span class="sub">% que pasa de la etapa anterior</span></h3><div class="embudo" style="margin-top:12px">' + filas + '</div></div>' +
         '<div class="tarjeta"><h3>Fugas, de mayor a menor</h3><div class="tabla-caja" style="margin-top:10px;border:0"><table class="tabla"><thead><tr><th>Fuga</th><th class="num">Hoy</th><th class="num">Bien hecho</th><th class="num">Al mes</th></tr></thead><tbody>' + tablaFugas + '</tbody></table></div>' +
         (peor ? '<p class="gris" style="font-size:12.5px;margin-top:10px">La mayor: <b style="color:var(--tinta)">' + esc((nombres[peor.a.id] || {}).exp || '') + '</b>.</p>' : '') + '</div></div>' +
@@ -726,7 +727,7 @@
           '<td><span class="pill ' + f.ver.tono + '">' + esc(f.ver.txt) + '</span><div class="meta" style="white-space:normal;max-width:none;margin-top:4px">' + esc(f.ver.por) + '</div></td></tr>';
       }).join('');
       const maxEv = Math.max.apply(null, a.eventos.map(function (e) { return e.n; }));
-      return cabecera('Anuncios', '¿Qué anuncio trae clientes de verdad?', T.anunciosIntro || 'Vuestra agencia sigue llevando las campañas. El sistema une cada anuncio con lo que pasa después (quién encaja, quién se pierde en el seguimiento, quién compra) y se lo devuelve, para que optimice a ' + T.laVenta + ' y no al formulario.') +
+      return cabecera('Anuncios', '¿Qué anuncio trae clientes de verdad?', T.anunciosIntro || 'Vuestra agencia sigue llevando las campañas. El sistema une cada anuncio con lo que pasa después (quién encaja, quién se pierde en el seguimiento, quién compra) y se lo devuelve, para que optimice ' + (/^el /.test(T.laVenta) ? 'al ' + T.laVenta.slice(3) : 'a ' + T.laVenta) + ' y no al formulario.') +
         (masEntra && peor && cfg.bannerAnuncios !== false ? '<div class="tarjeta" style="margin-bottom:14px;display:flex;gap:14px;align-items:flex-start"><span class="feed-ico t-coral" style="width:34px;height:34px;border-radius:10px;flex:none">' + ico('anuncio') + '</span><p style="font-size:14px"><b>' + esc(masEntra.c.nombre) + '</b> trae más ' + T.contactos + ' que ninguna (' + M.num(masEntra.entra) + ' a ' + M.euros(masEntra.cpl) + ') y ' + M.pl(masEntra.ventas, T.venta, T.ventas) + '. El anuncio más barato no es el que más vende: sin esta capa, la plataforma sigue premiando lo barato.</p></div>' : '') +
         '<div class="tabla-caja"><table class="tabla"><thead><tr><th>Campaña</th><th class="num">' + esc(T.Contactos) + '</th><th class="num ocultar-movil">Encaje medio</th><th class="num">' + esc(T.Ventas) + '</th><th class="num">Retorno</th><th>Lo que dice el sistema</th></tr></thead><tbody>' + filas + '</tbody></table></div>' +
         '<div class="rejilla r-2" style="margin-top:14px">' +

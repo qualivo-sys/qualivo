@@ -196,8 +196,8 @@
       const hoyTxt = [];
       if (sinResp.length) hoyTxt.push(sinResp.length + ' sin responder todavía');
       if (sinSeg.length) hoyTxt.push(sinSeg.length + ' sin seguimiento después de contestar');
-      if (props.length) hoyTxt.push(props.length + ' ' + (T.propuestas || 'propuestas') + ' sin respuesta (' + M.euros(suma(props)) + ')');
-      if (nos.length) hoyTxt.push(nos.length + ' que no se presentaron');
+      if (props.length) hoyTxt.push(props.length + ' ' + (props.length === 1 ? String(T.propuesta || 'la propuesta').replace(/^(la|el) /, '') : (T.propuestas || 'propuestas')) + ' sin respuesta (' + M.euros(suma(props)) + ')');
+      if (nos.length) hoyTxt.push(nos.length + (nos.length === 1 ? ' que no se presentó' : ' que no se presentaron'));
       if (hoyTxt.length) out.push(texto('Hoy mismo, en el sistema: ' + M.unir(hoyTxt) + '.'));
       out.push(accion('Lo primero que taparía: ' + ((nombres[f.a.id] || {}).exp || 'este salto') + '. ' + ((E().cfg && E().cfg.sinAgentes) ? 'Es donde una llamada a tiempo rinde más.' : 'Es donde un agente rinde antes.')));
       return out;

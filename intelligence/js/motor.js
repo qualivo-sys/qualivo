@@ -259,7 +259,7 @@
     if (c.fin === 'ganado') return { id: 'nada', accion: 'Nada que hacer ahora', quien: 'Sistema', tipo: 'nada', estado: 'vigilando', por: 'Ya es ' + T.cliente + '. El sistema sigue mirando por si aparece una oportunidad nueva o un riesgo.' };
     if (x.int >= 78 && x.fit >= 62) {
       return { id: 'comercial', accion: 'Avisar ' + al(T.comercial), quien: T.Comercial, tipo: 'humano', estado: 'humano',
-        por: 'Está listo para hablar con una persona: ' + unir(x.intM.filter(function (m) { return m.pts > 0; }).slice(0, 2).map(function (m) { return m.txt; })) + '. El agente ya ha hecho la parte que no necesita a nadie; ahora le toca a ' + T.comercial + ', con todo el contexto.' };
+        por: 'Está listo para hablar con una persona: ' + unir(x.intM.filter(function (m) { return m.pts > 0; }).slice(0, 2).map(function (m) { return m.txt; })) + '. El agente ya ha hecho la parte que no necesita a nadie; ahora le toca ' + al(T.comercial) + ', con todo el contexto.' };
     }
     if (llamadas(c, 'nointeresa').length && !c.fin) {
       return { id: 'nada', accion: 'No insistir', quien: 'Sistema', tipo: 'nada', estado: 'cerrado', por: 'Dijo por teléfono que no le interesa. Se respeta: queda guardado por si vuelve a dar señales.' };
@@ -376,7 +376,7 @@
     };
     if (c.fin !== 'perdido') {
       if (k.creado < 180 && x.fit >= 55 && !c.fin) add('nueva', c.tCreado, 'Pide información de ' + c.prod + ' desde ' + ((cfg.campana(c.orig) || {}).canal || 'la web'), 'Encaje ' + x.fit + '. ' + (cfg.sinAgentes ? 'Si se le llama hoy, la probabilidad de hablar con él se multiplica.' : 'Si se contesta en el minuto uno, la probabilidad de hablar con él se multiplica.'));
-      if (x.int >= 75 && !c.fin) add('intencion', c.tAct, x.intM.filter(function (m) { return m.pts > 0; }).slice(0, 2).map(function (m) { return m.txt.charAt(0).toUpperCase() + m.txt.slice(1); }).join(' · '), 'Intención ' + x.int + ' con encaje ' + x.fit + '. Es de los ' + T.contactos + ' que ' + T.convierten + ' si alguien les atiende ahora.');
+      if (x.int >= 75 && !c.fin) add('intencion', c.tAct, x.intM.filter(function (m) { return m.pts > 0; }).slice(0, 2).map(function (m) { return m.txt.charAt(0).toUpperCase() + m.txt.slice(1); }).join(' · '), 'Intención ' + x.int + ' con encaje ' + x.fit + '. Es de ' + (T.nuevos === 'nuevas' ? 'las ' : 'los ') + T.contactos + ' que ' + T.convierten + ' si alguien les atiende ahora.');
       if (contesto(c) > 0 && k.toque > 2880 && !c.fin && !c.s.luego && !c.s.tProp && x.fit >= 40) add('sinseg', c.tToque, duracion(k.toque) + ' sin que nadie le escriba después de contestar', 'Ya contestó y mostró interés. Cada día sin seguimiento baja la probabilidad de ' + T.venta + '.');
       if (c.s.tProp != null && k.toque > 2880 && !c.fin) add('propuesta', c.tToque, T.Propuesta + ' de ' + euros(c.valor) + (c.s.propVista ? ' vista ' + c.s.propVista + (c.s.propVista === 1 ? ' vez' : ' veces') : ' sin abrir') + ', sin respuesta', 'Es dinero casi ganado: ya se hizo el trabajo de preparar ' + T.propuesta + '.');
       if (c.s.noshow || (c.s.tCita != null && !c.s.citaOk && k.cita > 0 && k.cita < 2880)) add('noshow', c.s.noshow ? c.tAct : c.tAct, c.s.noshow ? 'No se presentó a ' + T.laCita : T.Cita + ' ' + dentroDe(k.cita) + ' sin confirmar', c.s.noshow ? 'Tenía interés suficiente para reservar. Se recupera con un mensaje, no con una llamada fría.' : 'Las citas sin confirmar son las que más fallan. El recordatorio del mismo día lo evita.');
