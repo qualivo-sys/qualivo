@@ -99,6 +99,9 @@ small,.nota{color:var(--mut);font-size:12.5px}
     ];
     h += '<div class="kpis">' + k.map(function (x) { return '<div class="k"><div class="l">' + x[0] + '</div><div class="v">' + x[1] + '</div>' + x[2] + '</div>'; }).join('') + '</div>';
 
+    // Black Friday de A 11 Pasos del Sueño (se carga aparte)
+    if (datos.hoy <= '2026-12-06') h += '<h2>Black Friday · A 11 Pasos del Sueño</h2><p class="sub">Lista VIP, grupo de Telegram, emails del plan y compras. Empezamos el 5 de diciembre.</p><div id="bf"><p class="cargando">Cargando el Black Friday…</p></div>';
+
     // comparativa de embudos (se carga aparte)
     h += '<h2>Comparativa de embudos</h2><div class="tabs" role="group" aria-label="Periodo de la comparativa"><button class="btn" type="button" data-comp="per" aria-pressed="' + (compModo === 'per') + '">' + (esMes ? nomMes(s) : 'Semana del ' + rango(s)) + '</button><button class="btn" type="button" data-comp="ago" aria-pressed="' + (compModo === 'ago') + '">Desde el 1 de agosto</button></div><div id="comparativa"><p class="cargando">Cargando la comparativa…</p></div>';
 
@@ -179,7 +182,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
         h += '<tr><td>Vie ' + dia(w.desde) + ' – jue ' + dia(w.hasta) + ' <small>(' + (w.enCurso ? 'en curso' : 'capta la edición del ' + dia(w.edicion)) + ')</small></td>'
           + '<td class="' + sem(r.reg, P.reg) + '">' + (reg != null ? num(reg) : '—') + '</td>'
           + '<td class="n">' + (g != null ? eur(g) : '—') + '</td>'
-          + '<td class="' + sem(r.cpr, P.cpr, true) + '">' + (r.cpr != null ? eur(r.cpr) : '—') + '</td>'
+          + '<td class="' + sem(r.cpr, P.cpr, true) + '">' + (r.cpr != null ? r.cpr.toFixed(2).replace('.', ',') + ' €' : '—') + '</td>'
           + '<td class="n">' + (vc ? num(vc.n) : '—') + '</td><td class="n">' + (vc ? eur(vc.eur) : '—') + '</td>'
           + '<td class="' + sem(r.cac, P.cac, true) + '">' + (r.cac != null ? eur(r.cac) : '—') + '</td>'
           + '<td class="' + sem(r.roas, P.roas) + '">' + (r.roas != null ? r.roas.toFixed(1).replace('.', ',') + '×' : '—') + '</td>'
@@ -224,6 +227,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     cargarComparativa(s, fin);
     cargarClases();
     cargarGrupos();
+    cargarBF();
     cargarEnvios(mesEnv);
     cargarMensajes();
   }
@@ -287,6 +291,40 @@ small,.nota{color:var(--mut);font-size:12.5px}
       .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
       .then(function (d) { enviosDatos[k] = d; pintarEnvios(d); })
       .catch(function (e) { var c = document.getElementById('envios'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+  }
+
+  var bfDatos = null;
+  function pintarBF() {
+    var c = document.getElementById('bf'); if (!c || !bfDatos) return;
+    var d = bfDatos, tg = d.telegram, h = '';
+    var envVIP = (d.plan || []).filter(function (p) { return p.n <= 3 && p.campana && p.estado === 'enviado'; });
+    var clicsVIP = envVIP.reduce(function (t, p) { return t + p.campana.clics; }, 0);
+    h += '<div class="kpis">'
+      + '<div class="k"><div class="l">Se apuntan a la lista VIP</div><div class="v">' + num(d.vip) + '</div><div class="neu">pulsan el botón del email (etiqueta en Kliking)</div></div>'
+      + '<div class="k"><div class="l">En el grupo de Telegram</div><div class="v">' + (tg && tg.miembros != null ? num(tg.miembros) : '—') + '</div><div class="neu">' + (tg && tg.miembros != null && d.vip ? pc(tg.miembros / d.vip) + ' de las que se apuntan' : 'sin datos de Telegram') + '</div></div>'
+      + '<div class="k"><div class="l">Clics en los emails VIP</div><div class="v">' + num(clicsVIP) + '</div><div class="neu">' + envVIP.length + ' de 3 enviados</div></div>'
+      + '<div class="k"><div class="l">Compras de diciembre</div><div class="v">' + num(d.compras) + '</div><div class="neu">etiqueta «cliente 11 pasos dic2026»</div></div>'
+      + '</div>';
+    if (d.plan) {
+      h += '<div class="card"><b>Los 6 emails del plan</b><table><tr><th>Día</th><th>Email</th><th>A quién</th><th>Estado</th><th class="n">Entregados</th><th class="n">Abren</th><th class="n">Clics</th></tr>';
+      d.plan.forEach(function (p) {
+        var x = p.campana, env = p.estado === 'enviado', tarde = !env && p.estado !== 'programado' && p.dia <= datos.hoy;
+        var est = env ? '<span class="up">✓ enviado</span>' : (p.estado === 'programado' ? '<span class="neu">programado' + (x && x.fecha ? ' · ' + esc(x.fecha) : '') + '</span>' : '<span class="' + (tarde || p.dia <= sumaDiasJ(datos.hoy, 2) ? 'down' : 'neu') + '">' + (p.estado === 'borrador' ? 'borrador' : 'sin programar') + '</span>');
+        h += '<tr><td>' + dia(p.dia) + '</td><td>' + esc(p.nombre) + '</td><td><small>' + esc(p.a) + '</small></td><td>' + est + '</td>'
+          + '<td class="n">' + (env ? num(x.entregados) : '—') + '</td><td class="n">' + (env && x.entregados ? pc(x.abiertos / x.entregados) : '—') + '</td><td class="n">' + (env ? num(x.clics) + ' <small>(' + pc(x.entregados ? x.clics / x.entregados : null) + ')</small>' : '—') + '</td></tr>';
+      });
+      h += '</table></div>';
+    }
+    h += '<p class="nota"><b>Lista VIP:</b> personas a las que Kliking ha puesto la etiqueta «lista vip black friday 2026» al pulsar el botón de un email VIP. <b>Telegram:</b> miembros del grupo «BLACK FRIDAY VIP» según su página pública de invitación (incluye al equipo). Que haya menos en el grupo que en la lista es normal: algunas pulsan pero no acaban de entrar. <b>Emails:</b> datos exactos de Kliking; en rojo, los que tocan en los próximos 2 días y aún no están programados. <b>Compras:</b> salen cuando el flujo de compra ponga la etiqueta de diciembre. Se actualiza cada 10 minutos.</p>';
+    c.innerHTML = h;
+  }
+  function cargarBF() {
+    if (!document.getElementById('bf')) return;
+    if (bfDatos) return pintarBF();
+    fetch(API + '?accion=blackfriday', { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) { bfDatos = d; pintarBF(); })
+      .catch(function (e) { var c = document.getElementById('bf'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
   }
 
   var gruposDatos = null;
