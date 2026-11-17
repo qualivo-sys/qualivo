@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Préstamo ENISA · Lean Finance (maqueta)</title>
+<meta name="description" content="Maqueta de Qualivo para Lean Finance: landing de ENISA con test de elegibilidad que agenda la llamada en el mismo paso.">
+<link rel="icon" href="../assets/landing/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Landing · Lean Finance · Consultora ENISA (test de elegibilidad → llamada agendada). Maqueta de Qualivo, 17-nov-2026.
+   Marca tomada de leanfinance.es: azul noche #0F1A45 / #0B1333, azul #2A3665, petróleo #005175, turquesa #00B0B7 / #008397, cian del logo #23D4D0.
+   Su tipografía es Carmen Sans (de pago): se usa si está instalada; si no, Figtree. */
+:root{color-scheme:light;
+  --navy:#0F1A45;--navy-2:#0B1333;--navy-3:#070D24;--indigo:#2A3665;--petrol:#005175;--teal:#00B0B7;--teal-d:#008397;--teal-dd:#006B7B;--cyan:#23D4D0;--ice:#B5E7EA;
+  --ink:#121A33;--paper:#FFFFFF;--soft:#F4F7F9;--soft-2:#E8EEF2;--line:#DCE3EA;--muted:#566079;--good:#0B7A55;
+  --sans:"Carmen Sans","Figtree",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:16px;--shadow:0 30px 70px -30px rgba(7,13,36,.6);--g:16px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:var(--g)}
+@media (min-width:700px){:root{--g:28px}}
+h1,h2,h3{font-family:var(--sans);font-weight:800;letter-spacing:-.025em;text-wrap:balance;line-height:1.06}
+
+/* franja de maqueta */
+.proposal{background:var(--navy-3);color:rgba(255,255,255,.78);font-size:12.5px;text-align:center;padding:7px 16px;letter-spacing:.01em}
+.proposal b{color:#fff;font-weight:600}
+
+/* barra superior */
+.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:13px}
+.top .brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
+.top .brand img{height:22px;width:auto}
+.top .brand span{font-size:12.5px;color:var(--muted);border-left:1px solid var(--line);padding-left:14px;line-height:1.25;font-weight:600}
+
+/* botones */
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--teal-d);color:#fff;font-weight:700;font-size:16px;text-decoration:none;border:0;border-radius:12px;padding:15px 24px;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s;white-space:nowrap}
+.cta:hover{transform:translateY(-1px);background:var(--teal-dd);box-shadow:0 12px 26px -12px rgba(0,131,151,.85)}
+.cta .ar{transition:transform .2s}
+.cta:hover .ar{transform:translateX(3px)}
+.cta.sm{padding:10px 16px;font-size:14.5px;border-radius:10px}
+.cta.lt{background:var(--cyan);color:var(--navy)}
+.cta.lt:hover{background:#4BE0DC;box-shadow:0 12px 26px -12px rgba(35,212,208,.8)}
+.cta[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* esquina de marca (el «⌝» del logo) */
+.corner{position:relative}
+.corner::after{content:"";position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-top:4px solid var(--cyan);border-right:4px solid var(--cyan)}
+
+/* hero */
+.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(900px 520px at 88% -10%,rgba(0,176,183,.30),transparent 60%),
+  radial-gradient(700px 520px at -10% 110%,rgba(42,54,101,.9),transparent 60%),
+  linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.55;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:52px;align-items:center;padding-block:64px 80px}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
+.kicker::before{content:"";width:10px;height:10px;border-top:3px solid var(--cyan);border-right:3px solid var(--cyan)}
+.hero h1{font-size:clamp(40px,5.6vw,70px);margin:16px 0 18px}
+.hero h1 em{font-style:normal;color:var(--cyan)}
+.hero h1 .l2{display:block;font-size:.5em;font-weight:600;letter-spacing:-.01em;color:rgba(255,255,255,.88);margin-top:.35em}
+.hero .sub{font-size:clamp(17px,1.5vw,19px);color:rgba(255,255,255,.82);max-width:52ch;margin:0}
+.hero .sub b{color:#fff;font-weight:600}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.facts li{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:500}
+.proof{display:flex;align-items:center;gap:14px;margin-top:28px}
+.faces{display:flex}
+.faces img,.faces i{width:42px;height:42px;border-radius:50%;border:2px solid var(--navy);object-fit:cover}
+.faces i{display:grid;place-items:center;background:var(--indigo);font-style:normal;font-weight:700;font-size:13px;color:var(--ice)}
+.faces>*+*{margin-left:-12px}
+.proof p{margin:0;font-size:14.5px;color:rgba(255,255,255,.76);line-height:1.4}
+.proof p b{color:#fff;font-weight:700}
+.hero .go{display:none;margin-top:24px}
+
+/* test */
+.form{background:var(--paper);color:var(--ink);border-radius:20px;padding:26px;box-shadow:var(--shadow);display:grid;gap:14px;min-height:430px;align-content:start;position:relative;z-index:2;scroll-margin-top:76px}
+.form .head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.form h2{font-size:24px;margin:0;color:var(--navy);letter-spacing:-.02em}
+.form .step{font-size:12.5px;color:var(--muted);font-weight:600;white-space:nowrap}
+.demo{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#7A4B00;background:#FFF1C9;border:1px dashed #D9A72C;border-radius:6px;padding:2px 7px;margin-left:8px;vertical-align:3px}
+.bar{height:5px;border-radius:3px;background:var(--soft-2);overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal-d),var(--cyan));transition:width .4s}
+.form .q{font-weight:700;font-size:19px;line-height:1.3;margin:4px 0 0;color:var(--navy)}
+.form .hint{margin:-8px 0 0;font-size:14px;color:var(--muted);line-height:1.4}
+.opts{display:grid;gap:9px}
+.opts button{text-align:left;border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:13px 15px;cursor:pointer;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;transition:border-color .15s,background .15s,transform .15s}
+.opts button:hover{border-color:var(--teal-d);background:var(--soft);transform:translateX(2px)}
+.opts button[aria-pressed="true"]{border-color:var(--teal-d);background:#E6F6F7}
+.opts b{display:block;font-size:16px;font-weight:700}
+.opts small{display:block;color:var(--muted);font-size:13.5px;line-height:1.35}
+.opts .chev{color:var(--teal-d);font-size:20px;font-weight:700}
+.fld{display:grid;gap:5px;font-size:13.5px;font-weight:600;color:var(--indigo)}
+.fld input{font-size:16px;font-weight:400;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--paper);color:var(--ink);width:100%}
+.fld input:focus{outline:2px solid var(--teal);outline-offset:1px;border-color:var(--teal-d)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;border:0;padding:0;margin:0}
+.chips legend{font-size:13.5px;font-weight:600;color:var(--indigo);margin-bottom:5px;padding:0}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:7px 13px;font-size:14px;font-weight:600;transition:all .15s}
+.chips label:hover span{border-color:var(--teal-d)}
+.chips input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+.chips input:focus-visible+span{outline:2px solid var(--teal);outline-offset:2px}
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--muted);line-height:1.45}
+.chk input{margin-top:3px;accent-color:var(--teal-d)}
+.form .cta{width:100%}
+.back{background:none;border:0;color:var(--muted);font-size:13.5px;cursor:pointer;justify-self:start;padding:0;text-decoration:underline}
+.micro{font-size:12.5px;color:var(--muted);text-align:center;margin:0}
+.err{color:#B3261E;font-size:13px;margin:-4px 0 0}
+.res{display:grid;gap:8px;border-radius:14px;padding:15px 16px;background:var(--soft)}
+.res.a{background:#E3F6EF}
+.res.b{background:#E6F6F7}
+.res.c{background:#EEF0F8}
+.res .grade{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.res .grade b{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--navy);color:#fff;font-size:15px;letter-spacing:0}
+.res.a .grade b{background:var(--good)}
+.res.b .grade b{background:var(--teal-d)}
+.res.c .grade b{background:var(--indigo)}
+.res h3{margin:0;font-size:22px;color:var(--navy);letter-spacing:-.02em;line-height:1.15}
+.res p{margin:0;font-size:14.5px;line-height:1.45;color:var(--ink)}
+.res ul{margin:0;padding-left:18px;font-size:14.5px;line-height:1.45;display:grid;gap:2px}
+.lbl2{font-size:13.5px;font-weight:600;color:var(--indigo);margin:2px 0 -6px}
+.lbl2 .demo{margin-left:6px}
+.slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.slots button{border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:10px 4px;cursor:pointer;text-align:center;font-size:15px;font-weight:700;line-height:1.25}
+.slots button small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+.slots button:hover{border-color:var(--teal-d)}
+.slots button[aria-pressed="true"]{border-color:var(--navy);background:var(--navy);color:#fff}
+.slots button[aria-pressed="true"] small{color:var(--ice)}
+.ok{display:grid;gap:12px}
+.ok .big{font-weight:800;font-size:28px;line-height:1.1;letter-spacing:-.025em;color:var(--navy)}
+.ok .card{border:1.5px solid var(--navy);border-radius:14px;padding:13px 14px;background:var(--soft);font-weight:500;font-size:15px;line-height:1.45}
+.ok .card b{display:block;font-size:16px}
+.wa{display:flex;gap:10px;align-items:flex-start;background:#E7F7EE;border-radius:14px;padding:12px 14px;font-size:14.5px;line-height:1.4;color:#14412A}
+.wa svg{width:22px;height:22px;flex:none;color:#1FA855;margin-top:1px}
+.ficha{border:1px dashed #B9C4D0;border-radius:14px;padding:12px 14px;font-size:13.5px;display:grid;gap:6px}
+.ficha .t{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ficha div{display:flex;justify-content:space-between;gap:12px}
+.ficha div span{color:var(--muted);flex:none}
+.ficha div b{text-align:right;font-weight:600}
+.pill{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12.5px;font-weight:700;background:#DDF0F2;color:var(--teal-dd)}
+.pill.hi{background:#DDF3E9;color:var(--good)}
+.pill.lo{background:#E7E9F3;color:var(--indigo)}
+
+/* cifras */
+.nums{background:var(--navy-3);color:#fff}
+.nums .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.nums div div{padding:24px 16px;text-align:center}
+.nums div div+div{border-left:1px solid rgba(255,255,255,.12)}
+.nums b{display:block;font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1;color:#fff}
+.nums b small{font-size:.6em;font-weight:700}
+.nums span{display:block;margin-top:8px;font-size:14px;color:rgba(255,255,255,.7);line-height:1.35}
+
+/* secciones */
+section{padding-block:84px}
+section.alt{background:var(--soft)}
+.eyebrow{font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-d);margin:0}
+h2.t{font-size:clamp(32px,4vw,50px);margin:10px 0 16px;color:var(--navy)}
+h2.t em{font-style:normal;color:var(--teal-d)}
+.lead{font-size:18.5px;color:var(--muted);max-width:60ch;margin:0}
+
+/* qué es */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px}
+.three article{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.three .ico{width:44px;height:44px;border-radius:12px;background:#E3F5F6;color:var(--teal-d);display:grid;place-items:center;margin-bottom:14px}
+.three .ico svg{width:24px;height:24px}
+.three h3{margin:0 0 6px;font-size:21px;color:var(--navy);letter-spacing:-.02em}
+.three p{margin:0;font-size:15.5px;color:var(--muted);line-height:1.5}
+.fund{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;border:1.5px solid var(--navy);border-radius:var(--r);padding:16px 20px;background:var(--paper)}
+.fund b{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--navy)}
+.fund span{font-size:15.5px;color:var(--muted)}
+
+/* opiniones */
+.reviews-h{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.gbadge{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:10px 16px;background:var(--paper)}
+.gbadge .stars{color:#F4B400;letter-spacing:2px;font-size:16px;line-height:1}
+.gbadge b{display:block;font-size:15px;color:var(--navy)}
+.gbadge small{display:block;font-size:12.5px;color:var(--muted)}
+.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:32px}
+.case{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;grid-template-rows:auto 1fr auto;gap:14px;position:relative}
+.case .tag{justify-self:start;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-dd);background:#E3F5F6;border-radius:6px;padding:3px 8px}
+.case blockquote{margin:0;font-size:17px;line-height:1.5;color:var(--ink)}
+.who{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--line)}
+.who img,.who i{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none}
+.who i{display:grid;place-items:center;background:var(--navy);color:var(--ice);font-style:normal;font-weight:700;font-size:15px}
+.who b{display:block;font-size:15.5px;line-height:1.25}
+.who span{font-size:13.5px;color:var(--muted);line-height:1.3;display:block}
+
+/* cómo funciona */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:36px;counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--navy);color:var(--cyan);font-weight:800;font-size:16px;margin-bottom:14px}
+.steps li:first-child{background:var(--navy);color:#fff;border-color:var(--navy)}
+.steps li:first-child::before{background:var(--cyan);color:var(--navy)}
+.steps b{display:block;font-size:18px;line-height:1.25;color:var(--navy);letter-spacing:-.01em}
+.steps li:first-child b{color:#fff}
+.steps p{margin:6px 0 0;font-size:15px;color:var(--muted);line-height:1.45}
+.steps li:first-child p{color:rgba(255,255,255,.78)}
+
+/* faq */
+.faq{max-width:840px;margin-top:26px}
+.faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.faq summary{cursor:pointer;font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--navy)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:26px;line-height:.9;color:var(--teal-d);font-weight:500}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:10px 0 0;color:var(--muted);font-size:16.5px;max-width:70ch}
+
+/* cierre */
+.final{background:var(--navy);color:#fff;text-align:center;position:relative;overflow:hidden;isolation:isolate}
+.final::before{content:"";position:absolute;z-index:-1;width:420px;height:420px;right:-120px;top:-150px;border-top:46px solid rgba(35,212,208,.12);border-right:46px solid rgba(35,212,208,.12)}
+.final h2.t{color:#fff}
+.final h2.t em{color:var(--cyan)}
+.final .lead{color:rgba(255,255,255,.8);margin-inline:auto}
+.final .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+
+footer{padding:40px 0 120px;font-size:14px;color:var(--muted);background:var(--soft)}
+.foot{display:grid;grid-template-columns:auto 1fr;gap:20px 40px;align-items:center}
+.foot img{height:24px;width:auto}
+.foot p{margin:0;line-height:1.5}
+.notes{background:#FFF8D6;color:#2B2410;border:1px dashed #C9A62C;border-radius:14px;padding:16px 18px;font-size:14px;margin-top:30px}
+.notes b{display:block;margin-bottom:6px}
+.notes ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.small{margin-top:16px;font-size:13px}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(11,19,51,.97);color:#fff;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;align-items:center;gap:12px;justify-content:space-between;transform:translateY(110%);transition:transform .3s}
+.sticky.on{transform:none}
+.sticky span{font-size:12.5px;line-height:1.3;color:rgba(255,255,255,.78)}
+.sticky span b{display:block;font-size:14.5px;color:#fff}
+
+@media (max-width:1000px){
+  .hero .wrap{grid-template-columns:1fr;gap:30px;padding-block:44px 56px}
+  .hero .go{display:inline-flex}
+  .cases,.three{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .nums .wrap{grid-template-columns:1fr 1fr}
+  .nums div div:nth-child(3){border-left:0}
+  .nums div div:nth-child(n+3){border-top:1px solid rgba(255,255,255,.12)}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  section{padding-block:60px}
+  .top .cta{display:none}
+  .top .brand img{height:19px}
+  .sticky{display:flex}
+  .form{padding:20px 16px;border-radius:18px;min-height:0}
+  .form h2{font-size:22px}
+  .row2{grid-template-columns:1fr}
+  .slots{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
+  .facts{display:none}
+  .hero h1{font-size:40px}
+  .nums b{font-size:28px}
+  .nums div div{padding:20px 10px}
+  .foot{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="proposal"><b>Maqueta · Datos de ejemplo</b> · Qualivo para Lean Finance. No es la web oficial y no envía datos.</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Lean Finance, inicio"><img src="../assets/landing/logo.png" alt="Lean Finance" width="580" height="82"><span>Consultora<br>ENISA</span></a>
+    <a class="cta sm" href="#test">Haz el test de ENISA</a>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker">Consultora ENISA · Préstamo participativo</span>
+      <h1>Financiación ENISA <em>sin avales ni dilución.</em><span class="l2">De 25.000&nbsp;€ a 1,5&nbsp;M&nbsp;€ para tu empresa.</span></h1>
+      <p class="sub">Responde <b>5 preguntas</b> y sabrás en un minuto si tu empresa cumple lo básico. Si encaja, eliges en el mismo paso cuándo te llama el equipo.</p>
+      <ul class="facts">
+        <li>Sin avales personales</li>
+        <li>Mantienes el 100 % de tu empresa</li>
+        <li>Nos ocupamos de toda la documentación</li>
+        <li>Fondos ENISA 2026: 303 millones</li>
+      </ul>
+      <div class="proof">
+        <div class="faces"><img src="../assets/landing/eduardo-medina.webp" alt="" width="160" height="160"><img src="../assets/landing/albert-llongueras.webp" alt="" width="160" height="160"><i aria-hidden="true">AS</i></div>
+        <p><b>+200 empresas satisfechas</b><br>y +30M € conseguidos en financiación.</p>
+      </div>
+      <a class="cta lt go" href="#test">Haz el test de ENISA <span class="ar">→</span></a>
+    </div>
+    <div class="form corner" id="test" aria-live="polite"></div>
+  </div>
+</div>
+
+<div class="nums">
+  <div class="wrap">
+    <div><b>+200</b><span>empresas satisfechas</span></div>
+    <div><b>+30M&nbsp;€</b><span>conseguidos en financiación</span></div>
+    <div><b>+200</b><span>reseñas en Google</span></div>
+    <div><b>1,5&nbsp;M&nbsp;€</b><span>importe máximo de ENISA, desde 25.000&nbsp;€</span></div>
+  </div>
+</div>
+
+<section id="enisa">
+  <div class="wrap">
+    <p class="eyebrow">Qué es ENISA</p>
+    <h2 class="t">Dinero público para crecer, <em>sin ceder tu empresa.</em></h2>
+    <p class="lead">Un préstamo para empresas con un proyecto viable. Sin tecnicismos: no te piden avales ni que cedas parte de tu empresa a cambio.</p>
+    <div class="three">
+      <article>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Sin avales personales</h3>
+        <p>No respondes con tu patrimonio personal.</p>
+      </article>
+      <article>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15.9A10 10 0 1 1 8 2.8"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div>
+        <h3>Sin ceder capital</h3>
+        <p>Es un préstamo, no una inversión privada: mantienes el 100 % de la propiedad.</p>
+      </article>
+      <article>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
+        <h3>Entre 25.000&nbsp;€ y 1,5&nbsp;M&nbsp;€</h3>
+        <p>Según tu facturación, antigüedad y el proyecto que presentes.</p>
+      </article>
+    </div>
+    <div class="fund"><b>Fondos ENISA 2026: 303 millones</b><span>Amplios plazos de carencia y un único desembolso, sin fraccionamientos.</span></div>
+  </div>
+</section>
+
+<section class="alt" id="opiniones">
+  <div class="wrap">
+    <div class="reviews-h">
+      <div>
+        <p class="eyebrow">Nuestros clientes</p>
+        <h2 class="t">Lo cuentan ellos.</h2>
+      </div>
+      <div class="gbadge"><span class="stars" aria-hidden="true">★★★★★</span><div><b>+200 reseñas en Google</b><small>Opiniones publicadas en leanfinance.es</small></div></div>
+    </div>
+    <div class="cases">
+      <article class="case">
+        <span class="tag">Préstamo ENISA</span>
+        <blockquote>«Súper profesional y bien organizada toda la gestión de la solicitud de Enisa de la mano de Lean Finance. Un acierto contar con vosotros.»</blockquote>
+        <div class="who"><img src="../assets/landing/eduardo-medina.webp" alt="Eduardo Medina Banderas" width="160" height="160" loading="lazy"><div><b>Eduardo Medina Banderas</b><span>Chargia</span></div></div>
+      </article>
+      <article class="case">
+        <span class="tag">Cliente</span>
+        <blockquote>«Apareció Lean Finance y convirtió un trabajo tedioso para Komsai en uno simple. Desde el primer momento aportaron exactamente lo que Komsai esperaba: profesionalismo, autonomía y eficiencia.»</blockquote>
+        <div class="who"><img src="../assets/landing/albert-llongueras.webp" alt="Albert Llongueras" width="160" height="160" loading="lazy"><div><b>Albert Llongueras</b><span>Komsai</span></div></div>
+      </article>
+      <article class="case">
+        <span class="tag">CFO y ronda</span>
+        <blockquote>«Trabajar con Lean Finance ha sido un acierto total. Su equipo de CFO nos ha ayudado a “poner orden” y profesionalizar nuestras finanzas y valorar la compañía para una ronda que ha sido exitosa.»</blockquote>
+        <div class="who"><i aria-hidden="true">AS</i><div><b>Albert Serrat</b><span>Ooptimo</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="como">
+  <div class="wrap">
+    <p class="eyebrow">Cómo funciona</p>
+    <h2 class="t">Tú nos das la información. <em>El resto lo hacemos nosotros.</em></h2>
+    <ol class="steps">
+      <li><b>Cuéntanos tu proyecto</b><p>Una llamada de 10-15 minutos para confirmar que ENISA encaja contigo.</p></li>
+      <li><b>Preparamos el expediente</b><p>Plan financiero, memoria del proyecto y toda la documentación.</p></li>
+      <li><b>Presentamos y hacemos seguimiento</b><p>Respondemos por ti a cualquier requerimiento de ENISA.</p></li>
+      <li><b>Recibes el desembolso</b><p>Un único pago, directamente en la cuenta de tu empresa.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="alt" id="faq">
+  <div class="wrap">
+    <p class="eyebrow">Preguntas frecuentes</p>
+    <h2 class="t">Antes de hacer el test.</h2>
+    <div class="faq">
+      <details open><summary>¿Qué es ENISA?</summary><p>Un préstamo participativo público para pymes y startups con un proyecto viable e innovador. Va de 25.000&nbsp;€ a 1,5&nbsp;M&nbsp;€, según tu empresa y la línea a la que te presentes.</p></details>
+      <details><summary>¿Necesito avales?</summary><p>No. ENISA no pide avales personales ni que cedas capital. Lo que sí se mira es que tengas las cuentas al día y fondos propios suficientes para el importe que pides. Lo revisamos contigo en la llamada.</p></details>
+      <details><summary>¿Cuánto tarda?</summary><p>Es muy variable y depende sobre todo de si ya tienes una ronda cerrada. Si la tienes, en nuestra experiencia, son aproximadamente de 4 a 5 meses hasta recibir el dinero. En la llamada te damos una estimación para tu caso.</p></details>
+      <details><summary>¿Y si no soy elegible ahora?</summary><p>Haz el test igualmente. Si te falta algo, como depositar las cuentas o cerrar la ronda, te decimos qué es y te avisamos cuando sea buen momento para pedirlo.</p></details>
+      <details><summary>¿Cuánto cuesta vuestro servicio?</summary><p>Depende del proyecto. Te lo cuenta el equipo en la llamada, sin compromiso.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 class="t">¿Tu empresa puede pedir ENISA? <em>Sal de dudas en un minuto.</em></h2>
+    <p class="lead">Cinco preguntas. Si encajas, eliges en el mismo paso cuándo te llamamos.</p>
+    <div class="row"><a class="cta lt" href="#test">Haz el test de ENISA <span class="ar">→</span></a></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <img src="../assets/landing/logo.png" alt="Lean Finance" width="580" height="82" loading="lazy">
+      <p><b>Lean Finance</b> · Consultora financiera, contable y fiscal para pymes y startups. Estructura y control para tomar mejores decisiones.</p>
+    </div>
+    <div class="notes">
+      <b>Notas de Qualivo (esto no saldría en la página)</b>
+      <ul>
+        <li>Hoy la web pide «Te contactamos» o la calculadora de importe y ahí se queda. Aquí el test separa a quien puede pedir ENISA ya (A/B) y agenda la llamada en el mismo paso; a quien todavía no (C) lo deja en seguimiento, sin decirle que no encaja.</li>
+        <li>Cifras, testimonios, fotos, logo, importes, pasos y plazo de 4-5 meses: de leanfinance.es (17-nov), tal cual. Huecos de agenda, ficha y puntuación: datos de ejemplo.</li>
+        <li>Al terminar: WhatsApp del asistente virtual de Lean Finance para confirmar, ficha con puntuación para el equipo y aviso a los C cuando depositen cuentas o cierren ronda. Si encaja, también señala CFO externo o asesoría.</li>
+        <li>Pendiente de confirmar con vosotros: los criterios del test (qué pasa a A, B o C), si mostramos vuestra tasa de éxito (la web dice «en torno al 93 %») y qué cifra de reseñas usar (+200 en la home, +180 en la página de ENISA).</li>
+      </ul>
+    </div>
+    <p class="small">Maqueta preparada por Qualivo para Lean Finance el 17 de noviembre de 2026. No es la web oficial de Lean Finance y no envía datos.</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky"><span><b>Test ENISA · 1 minuto</b>Sin avales ni dilución</span><a class="cta sm lt" href="#test">Haz el test</a></div>
+
+<script>
+(function () {
+  var box = document.getElementById('test');
+  var TOTAL = 6; // 5 preguntas + agenda
+  var r = {};
+  var Q = [
+    { k: 'sociedad', t: '¿Tu empresa es una sociedad constituida?', o: [
+      ['si', 'Sí, es una S.L. o S.A.'], ['tramite', 'Estamos constituyéndola'], ['no', 'Todavía no', 'Soy autónomo o aún es un proyecto']] },
+    { k: 'innova', t: '¿Tu proyecto es innovador?', h: 'Producto, tecnología o modelo de negocio con algo diferencial.', o: [
+      ['si', 'Sí, claramente'], ['parte', 'En parte', 'Tiene algo diferencial, no sé si basta'], ['no', 'No especialmente']] },
+    { k: 'fondos', t: '¿Tus fondos propios cubren, al menos, el importe que pedirías?', h: 'Capital y reservas que figuran en el balance.', o: [
+      ['si', 'Sí'], ['ronda', 'Sí, con la ronda que estamos cerrando'], ['nose', 'No lo sé'], ['no', 'Todavía no']] },
+    { k: 'cuentas', t: '¿Tienes depositadas las cuentas del último ejercicio?', h: 'En el Registro Mercantil.', o: [
+      ['si', 'Sí, depositadas'], ['pend', 'Aún no, las depositamos pronto'], ['nuevo', 'No hemos cerrado el primer ejercicio']] },
+    { k: 'importe', t: '¿Cuánto necesitas?', o: [
+      ['25.000 – 100.000 €'], ['100.000 – 300.000 €'], ['300.000 € – 1,5 M €'], ['Aún no lo sé']] }
+  ];
+  // Supuesto de Qualivo para la maqueta: criterios a validar con Lean Finance.
+  var HARD = { sociedad: { tramite: 'Terminar de constituir la sociedad', no: 'Constituir la sociedad' },
+    innova: { no: 'Concretar qué hace innovador tu proyecto' },
+    fondos: { no: 'Reforzar los fondos propios (por ejemplo, con una ronda)' },
+    cuentas: { pend: 'Depositar las cuentas del último ejercicio' } };
+  var SOFT = { innova: { parte: 'Qué hace innovador tu proyecto' },
+    fondos: { ronda: 'Cómo encaja la ronda en la solicitud', nose: 'Tus fondos propios, con el balance delante' },
+    cuentas: { nuevo: 'Qué línea encaja sin un ejercicio cerrado' },
+    importe: { 'Aún no lo sé': 'El importe que podrías pedir' } };
+
+  function el(t, c, x) { var d = document.createElement(t); if (c) d.className = c; if (x != null) d.textContent = x; return d; }
+  function frame(n, title, label) {
+    box.innerHTML = '';
+    var h = el('div', 'head'); var h2 = el('h2', null, title); var tag = el('span', 'demo', 'Demo'); tag.title = 'Maqueta: no envía datos'; h2.appendChild(tag);
+    h.appendChild(h2); h.appendChild(el('span', 'step', label));
+    var bar = el('div', 'bar'), s = el('span'); bar.appendChild(s); box.appendChild(h); box.appendChild(bar);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { s.style.width = Math.round(Math.min(n + .4, TOTAL) / TOTAL * 100) + '%'; }); });
+  }
+  function back(fn) { var b = el('button', 'back', '← Atrás'); b.type = 'button'; b.onclick = fn; box.appendChild(b); }
+  function top() { var y = box.getBoundingClientRect().top; if (y < 60 || y > window.innerHeight * .6) box.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
+
+  function pregunta(i, scroll) {
+    var q = Q[i];
+    frame(i, 'Test ENISA', 'Pregunta ' + (i + 1) + ' de ' + Q.length);
+    box.appendChild(el('p', 'q', q.t));
+    if (q.h) box.appendChild(el('p', 'hint', q.h));
+    var o = el('div', 'opts');
+    q.o.forEach(function (x) {
+      var b = el('button'); b.type = 'button'; b.setAttribute('aria-pressed', r[q.k] === x[0] ? 'true' : 'false');
+      var t = el('span'); t.appendChild(el('b', null, x[1] || x[0])); if (x[2]) t.appendChild(el('small', null, x[2])); b.appendChild(t);
+      b.appendChild(el('span', 'chev', '›'));
+      b.onclick = function () { r[q.k] = x[0]; r[q.k + 'Txt'] = x[1] || x[0]; if (i < Q.length - 1) pregunta(i + 1, true); else resultado(true); };
+      o.appendChild(b);
+    });
+    box.appendChild(o);
+    if (i === 0) box.appendChild(el('p', 'micro', '1 minuto · sin compromiso · sin registro previo'));
+    else back(function () { pregunta(i - 1); });
+    if (scroll) top();
+  }
+
+  function evalua() {
+    var hard = [], soft = [];
+    Object.keys(HARD).forEach(function (k) { if (HARD[k][r[k]]) hard.push(HARD[k][r[k]]); });
+    Object.keys(SOFT).forEach(function (k) { if (SOFT[k][r[k]]) soft.push(SOFT[k][r[k]]); });
+    return { g: hard.length ? 'C' : (soft.length ? 'B' : 'A'), hard: hard, soft: soft };
+  }
+  function lista(items) { var u = el('ul'); items.forEach(function (x) { u.appendChild(el('li', null, x)); }); return u; }
+  function input(name, label, type, ac, ph) {
+    var l = el('label', 'fld', label); var i = el('input'); i.name = name; i.type = type; i.autocomplete = ac; if (ph) i.placeholder = ph; if (r[name]) i.value = r[name];
+    l.appendChild(i); return l;
+  }
+  function consent(f, txt) {
+    var c = el('label', 'chk'); var cb = el('input'); cb.type = 'checkbox'; cb.name = 'ok'; c.appendChild(cb); c.appendChild(el('span', null, txt)); f.appendChild(c); return cb;
+  }
+  function huecos() {
+    var d = new Date(), out = [], dias = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'], horas = [['10:00', '13:00'], ['16:30', '18:00']], k = 0;
+    for (var i = 1; out.length < 4 && i < 14; i++) {
+      var x = new Date(d.getFullYear(), d.getMonth(), d.getDate() + i); if (x.getDay() === 0 || x.getDay() === 6) continue;
+      horas[k % 2].forEach(function (h) { out.push([dias[x.getDay()] + ' ' + x.getDate(), h]); }); k++;
+    }
+    return out.slice(0, 4);
+  }
+
+  function resultado(scroll) {
+    var e = evalua(); r.ev = e;
+    if (e.g === 'C') return aviso(e, scroll);
+    frame(5, 'Tu resultado', 'Último paso');
+    var res = el('div', 'res ' + e.g.toLowerCase());
+    var g = el('div', 'grade'); g.appendChild(el('b', null, e.g)); g.appendChild(document.createTextNode(e.g === 'A' ? 'Buen encaje' : 'Encaje posible')); res.appendChild(g);
+    if (e.g === 'A') {
+      res.appendChild(el('h3', null, 'Cumples lo básico para pedir ENISA.'));
+      res.appendChild(el('p', null, 'Lo confirmamos en una llamada de 10-15 minutos y te decimos qué línea encaja contigo.'));
+    } else {
+      res.appendChild(el('h3', null, 'Puede encajar. Lo vemos contigo.'));
+      res.appendChild(el('p', null, 'En la llamada de 10-15 minutos revisamos:'));
+      res.appendChild(lista(e.soft));
+    }
+    box.appendChild(res);
+    var f = el('form'); f.style.display = 'grid'; f.style.gap = '13px'; f.noValidate = true;
+    var lb = el('p', 'lbl2', 'Elige cuándo te llamamos'); lb.appendChild(el('span', 'demo', 'Huecos de ejemplo')); f.appendChild(lb);
+    var sl = el('div', 'slots'), sel = null;
+    huecos().forEach(function (x) {
+      var b = el('button'); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.appendChild(document.createTextNode(x[1])); b.appendChild(el('small', null, x[0]));
+      b.onclick = function () { sl.querySelectorAll('button').forEach(function (y) { y.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-pressed', 'true'); sel = x; err.hidden = true; };
+      sl.appendChild(b);
+    });
+    f.appendChild(sl);
+    var r2 = el('div', 'row2'); r2.appendChild(input('nombre', 'Nombre', 'text', 'given-name', 'Tu nombre')); r2.appendChild(input('empresa', 'Empresa', 'text', 'organization', 'Nombre de la empresa')); f.appendChild(r2);
+    f.appendChild(input('movil', 'Móvil (te llamamos aquí)', 'tel', 'tel', '6__ ___ ___'));
+    var cb = consent(f, 'Acepto que Lean Finance me contacte por teléfono y WhatsApp para esta llamada.');
+    var err = el('p', 'err'); err.hidden = true; err.setAttribute('role', 'alert'); f.appendChild(err);
+    var s = el('button', 'cta'); s.type = 'submit'; s.innerHTML = 'Agendar mi llamada <span class="ar">→</span>'; f.appendChild(s);
+    f.onchange = function () { err.hidden = true; };
+    f.onsubmit = function (ev) {
+      ev.preventDefault();
+      var falta = []; if (!sel) falta.push('elige un hueco'); if (!cb.checked) falta.push('marca la casilla de contacto');
+      if (falta.length) { err.textContent = 'Falta: ' + falta.join(' y ') + '.'; err.hidden = false; return; }
+      r.nombre = (f.nombre.value || '').trim() || 'Laura'; r.empresa = (f.empresa.value || '').trim() || 'Tu empresa'; r.movil = (f.movil.value || '').trim(); r.hora = sel;
+      agendada(true);
+    };
+    box.appendChild(f);
+    back(function () { pregunta(Q.length - 1); });
+    if (scroll) top();
+  }
+
+  function aviso(e, scroll) {
+    frame(5, 'Tu resultado', 'Último paso');
+    var res = el('div', 'res c');
+    var g = el('div', 'grade'); g.appendChild(el('b', null, 'C')); g.appendChild(document.createTextNode('Más adelante')); res.appendChild(g);
+    res.appendChild(el('h3', null, 'Te avisamos cuando sea buen momento.'));
+    res.appendChild(el('p', null, 'Antes de pedir ENISA te conviene:'));
+    res.appendChild(lista(e.hard));
+    box.appendChild(res);
+    var f = el('form'); f.style.display = 'grid'; f.style.gap = '13px'; f.noValidate = true;
+    var r2 = el('div', 'row2'); r2.appendChild(input('nombre', 'Nombre', 'text', 'given-name', 'Tu nombre')); r2.appendChild(input('email', 'Email', 'email', 'email', 'tu@empresa.com')); f.appendChild(r2);
+    var ch = el('fieldset', 'chips'); ch.appendChild(el('legend', null, '¿Cuándo crees que lo tendrás?'));
+    ['En 1‑3 meses', 'En 3‑6 meses', 'Más adelante'].forEach(function (v) {
+      var l = el('label'); var i = el('input'); i.type = 'radio'; i.name = 'cuando'; i.value = v; l.appendChild(i); l.appendChild(el('span', null, v)); ch.appendChild(l);
+    });
+    f.appendChild(ch);
+    var cb = consent(f, 'Acepto que Lean Finance me escriba para avisarme cuando pueda pedir ENISA.');
+    var err = el('p', 'err'); err.hidden = true; err.setAttribute('role', 'alert'); f.appendChild(err);
+    var s = el('button', 'cta'); s.type = 'submit'; s.innerHTML = 'Avisadme cuando cumpla <span class="ar">→</span>'; f.appendChild(s);
+    f.onchange = function () { err.hidden = true; };
+    f.onsubmit = function (ev) {
+      ev.preventDefault();
+      var c = f.querySelector('input[name=cuando]:checked'), falta = [];
+      if (!c) falta.push('cuándo crees que lo tendrás'); if (!cb.checked) falta.push('la casilla de contacto');
+      if (falta.length) { err.textContent = 'Falta: ' + falta.join(' y ') + '.'; err.hidden = false; return; }
+      r.nombre = (f.nombre.value || '').trim() || 'Laura'; r.email = (f.email.value || '').trim(); r.cuando = c.value;
+      avisado(true);
+    };
+    box.appendChild(f);
+    back(function () { pregunta(Q.length - 1); });
+    if (scroll) top();
+  }
+
+  var WA = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>';
+  function wa(title, line) { var w = el('div', 'wa'); w.innerHTML = WA; var t = el('span'); t.appendChild(el('b', null, title)); t.appendChild(el('br')); t.appendChild(document.createTextNode(line)); w.appendChild(t); return w; }
+  function ficha(rows) {
+    var f = el('div', 'ficha'); f.appendChild(el('span', 't', 'Así le llega al equipo · datos de ejemplo'));
+    rows.forEach(function (x) { var d = el('div'); d.appendChild(el('span', null, x[0])); var b = el('b'); if (x[2]) b.appendChild(el('span', x[2], x[1])); else b.textContent = x[1]; d.appendChild(b); f.appendChild(d); });
+    return f;
+  }
+  function cruzada() {
+    if (r.fondos === 'ronda') return 'Preparación de ronda';
+    if (r.cuentas !== 'si' || r.fondos === 'nose') return 'Asesoría fiscal y contable';
+    return 'CFO externo';
+  }
+  function reinicio(o) { var a = el('button', 'back', 'Volver a empezar la demo'); a.type = 'button'; a.style.justifySelf = 'center'; a.onclick = function () { r = {}; pregunta(0, true); }; o.appendChild(a); }
+
+  function agendada(scroll) {
+    frame(TOTAL, '¡Llamada agendada!', 'Listo');
+    var o = el('div', 'ok'), e = r.ev;
+    o.appendChild(el('span', 'big', 'Te llamamos el ' + r.hora[0] + ' a las ' + r.hora[1]));
+    var card = el('div', 'card'); card.appendChild(el('b', null, 'Llamada de 10-15 minutos con el equipo ENISA'));
+    card.appendChild(document.createTextNode('Revisamos tu caso, te decimos qué línea encaja y te contamos las condiciones.')); o.appendChild(card);
+    o.appendChild(wa('Te escribe el asistente virtual de Lean Finance por WhatsApp.', 'En unos minutos, al ' + (r.movil || 'móvil que nos has dejado') + ', para confirmarla.'));
+    o.appendChild(ficha([
+      ['Empresa', r.empresa],
+      ['Importe', r.importeTxt],
+      ['Puntuación', e.g === 'A' ? 'A · buen encaje' : 'B · encaje posible', e.g === 'A' ? 'pill hi' : 'pill'],
+      ['A revisar', e.soft.length ? e.soft.join(' · ') : 'Nada pendiente'],
+      ['También podría interesarle', cruzada()]
+    ]));
+    reinicio(o); box.appendChild(o);
+    if (scroll) top();
+  }
+
+  function avisado(scroll) {
+    frame(TOTAL, '¡Hecho!', 'Listo');
+    var o = el('div', 'ok');
+    o.appendChild(el('span', 'big', 'Gracias, ' + r.nombre.split(' ')[0] + '. Te avisamos ' + r.cuando.toLowerCase() + '.'));
+    var card = el('div', 'card'); card.appendChild(el('b', null, 'Cuando lo tengas, lo vemos en una llamada'));
+    card.appendChild(document.createTextNode('Mientras, si quieres, el equipo de ' + (r.fondos === 'no' ? 'consultoría puede ayudarte a preparar la ronda.' : 'asesoría y CFO externo puede ayudarte a prepararlo.'))); o.appendChild(card);
+    o.appendChild(ficha([
+      ['Puntuación', 'C · más adelante', 'pill lo'],
+      ['Le falta', r.ev.hard.join(' · ')],
+      ['Seguimiento', 'Recordatorio ' + r.cuando.toLowerCase()],
+      ['También podría interesarle', cruzada()]
+    ]));
+    reinicio(o); box.appendChild(o);
+    if (scroll) top();
+  }
+
+  pregunta(0);
+
+  var st = document.getElementById('sticky');
+  var go = document.querySelector('.hero .go'), vis = new Map();
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (x) { vis.set(x.target, x.isIntersecting); });
+      st.classList.toggle('on', !vis.get(box) && !vis.get(go));
+    });
+    io.observe(box); io.observe(go);
+  }
+})();
+</script>
+</body>
+</html>
