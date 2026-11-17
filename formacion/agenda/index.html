@@ -121,7 +121,8 @@ p{font-size:16px}
 .caso.nail .big{color:var(--verde)}
 .caso .lbl{font-size:14px;font-weight:700;margin-top:6px;max-width:20ch;line-height:1.35}
 .caso.eac .lbl{color:#C6CBD3}
-.caso .ctx{font-size:15.5px;line-height:1.55;max-width:46ch;margin-top:auto}
+.caso .ctx{font-size:15.5px;line-height:1.55;max-width:46ch;margin-top:10px}
+.caso .cifras{margin:18px 0 0}
 .caso.eac .ctx{color:#AEB5BF}
 .caso.eac .ctx b{color:#fff}
 .caso.nail .ctx{color:#3E434B}
@@ -134,17 +135,24 @@ p{font-size:16px}
 .maikel b{display:block;font-size:18px;letter-spacing:-.01em}
 .maikel small{display:block;font-size:14px;color:var(--gris);font-weight:700;margin-top:2px}
 .maikel p{margin-top:12px;color:#3E434B;max-width:52ch}
-.maikel .bio{margin-top:10px}
+.mas .bio{margin-top:10px}
 .maikel .datos span::after,.maikel .datos span::before{content:none!important;display:none!important}
 .maikel{align-items:start}
 .maikel .datos{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .maikel .datos span{font-size:13px;font-weight:700;background:var(--marfil-2);border:1px solid var(--linea);border-radius:999px;padding:6px 12px;color:var(--tinta)}
-.maikel .estudios{margin-top:16px;padding-top:14px;border-top:1px solid var(--linea);font-size:14px;color:#3E434B;line-height:1.5}
-.maikel .estudios ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
-.maikel .estudios li{display:grid;grid-template-columns:68px minmax(0,1fr);gap:10px}
-.maikel .estudios li span{font-weight:800;color:var(--tinta)}
-.maikel .estudios b{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris-claro);margin-right:6px}
+.mas .estudios{margin-top:16px;padding-top:14px;border-top:1px solid var(--linea);font-size:14px;color:#3E434B;line-height:1.5}
+.mas .estudios ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.mas .estudios li{display:grid;grid-template-columns:68px minmax(0,1fr);gap:10px}
+.mas .estudios li span{font-weight:800;color:var(--tinta)}
+.mas .estudios b{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris-claro);margin-right:6px}
 .entrevistas{margin-top:22px;max-width:820px}
+.mas{max-width:820px;margin-top:14px;background:#fff;border:1px solid var(--linea);border-radius:16px}
+.mas summary{cursor:pointer;list-style:none;padding:16px 22px;font-weight:800;font-size:15px;display:flex;justify-content:space-between;gap:12px}
+.mas summary::-webkit-details-marker{display:none}
+.mas summary::after{content:"+";font-size:20px;line-height:1;color:var(--verde)}
+.mas[open] summary::after{content:"−"}
+.mas-in{padding:0 22px 22px}
+.mas .bio{margin-top:0;color:#3E434B}
 .entrevistas .k{font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);margin-bottom:12px}
 .entrevistas .ent{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .entrevistas .ent a{display:block;background:#fff;border:1px solid var(--linea);border-radius:16px;overflow:hidden;text-decoration:none;color:var(--tinta);transition:transform .15s,box-shadow .15s}
@@ -210,7 +218,7 @@ p{font-size:16px}
   .grid-h{grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:56px;align-items:center}
   .hero h1{font-size:clamp(34px,3.4vw,44px)}
   .hero .lead{font-size:18px}
-  .casos{grid-template-columns:1.2fr 1fr 1fr;gap:16px}
+  .casos{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}}
 </style>
@@ -228,8 +236,8 @@ p{font-size:16px}
   <div class="wrap grid-h">
     <div class="h-txt">
       <p class="chip">Diagnóstico gratuito</p>
-      <h1 id="t-hero">Ya tenemos la información de tu centro. <span>Ahora veamos cómo conseguir más matrículas.</span></h1>
-      <p class="lead">Reserva una sesión de 30 minutos para revisar tu captación, el seguimiento de las solicitudes y las oportunidades de mejora.</p>
+      <h1 id="t-hero">Ya tenemos los datos de tu centro. <span>Solo falta elegir cuándo hablamos.</span></h1>
+      <p class="lead">En 30 minutos revisaremos cómo captáis alumnos, qué ocurre con las solicitudes y dónde podéis mejorar la conversión en matrículas.</p>
       <p class="datos"><span>30 minutos</span><span>Videollamada</span><span>Sin compromiso</span></p>
       <p class="huecos" id="huecos" hidden>Próximos huecos libres: <b id="huecos-t"></b></p>
     </div>
@@ -279,7 +287,7 @@ p{font-size:16px}
   </div>
 </section>
 
-<!-- 6 · Tres casos de éxito. EAC y Nail Boss: copiados literalmente de /formacion/. Nuria Roure: cifras de /casos/nuria-roure/. -->
+<!-- 6 · Tres casos compactos (una cifra + dos líneas). Cifras de /formacion/ (EAC, Nail Boss) y /casos/nuria-roure/. -->
 <!-- Verificar con Maikel vigencia y permiso de uso de estos casos en esta página -->
 <section class="sec" aria-labelledby="t-casos">
   <div class="wrap">
@@ -288,27 +296,18 @@ p{font-size:16px}
     <div class="casos">
       <article class="caso eac">
         <div class="cab"><span class="quien">Escola Aeronàutica de Catalunya</span><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" loading="lazy"></div>
-        <div class="cifras">
-          <div><div class="big">10,2×</div><div class="lbl">retorno sobre la inversión en publicidad</div></div>
-          <div><div class="big">44.000&nbsp;€</div><div class="lbl">facturados y atribuidos en un mes</div></div>
-        </div>
-        <p class="ctx"><b>Tres cursos, tres públicos distintos.</b> Montamos campañas por curso en Meta, Google y TikTok, conectadas al CRM, y seguimos cada solicitud hasta la entrevista y la matrícula. Ese mes: 10 matrículas, atribuidas por canal.</p>
+        <div class="cifras"><div><div class="big">10,2×</div><div class="lbl">retorno sobre la inversión en publicidad</div></div></div>
+        <p class="ctx">Campañas por curso en Meta, Google y TikTok, conectadas al CRM. 44.000&nbsp;€ facturados y atribuidos en un mes.</p>
       </article>
       <article class="caso nail">
         <div class="cab"><span class="quien">Nail Boss Academy</span><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" loading="lazy"></div>
-        <div class="cifras">
-          <div><div class="big">1.160</div><div class="lbl">solicitudes</div></div>
-          <div><div class="big">21</div><div class="lbl">matrículas</div></div>
-        </div>
-        <p class="ctx">En cuatro meses, partiendo de cero.</p>
+        <div class="cifras"><div><div class="big">21</div><div class="lbl">matrículas</div></div></div>
+        <p class="ctx">De 1.160 solicitudes en cuatro meses, partiendo de cero.</p>
       </article>
       <article class="caso nuria">
         <div class="cab"><span class="quien">Nuria Roure · formación online</span><img src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" loading="lazy"></div>
-        <div class="cifras">
-          <div><div class="big">6,45×</div><div class="lbl">de retorno</div></div>
-          <div><div class="big">12.900&nbsp;€</div><div class="lbl">en ventas atribuibles al sistema</div></div>
-        </div>
-        <p class="ctx">Con 2.000&nbsp;€ de inversión. Mismo tráfico, sistema distinto: lead scoring, seguimiento y automatizaciones para priorizar a quien de verdad quería empezar.</p>
+        <div class="cifras"><div><div class="big">6,45×</div><div class="lbl">de retorno</div></div></div>
+        <p class="ctx">12.900&nbsp;€ en ventas con 2.000&nbsp;€ de inversión. Mismo tráfico, mejor cualificación y seguimiento.</p>
       </article>
     </div>
     <p class="fuente">EAC: cifras medidas en el CRM del centro, del anuncio a la matrícula, en un mes de campaña.</p>
@@ -325,9 +324,14 @@ p{font-size:16px}
       <div>
         <b>Maikel Echevarría</b>
         <small>Fundador de Qualivo · Consultor en growth, automatización e IA</small>
-        <p>La sesión la hace personalmente Maikel. Antes de la llamada revisa tu web y lo que nos contaste en el formulario, para dedicar los 30 minutos a lo importante.</p>
+        <p>La sesión la hace personalmente Maikel. Antes revisa tu web y lo que nos contaste en el formulario, para dedicar los 30 minutos a lo importante.</p>
+        <div class="datos"><span>+10 años en growth y marketing</span><span>Desde dentro en escuelas de formación</span><span>Ex-CMO de Equipzilla</span></div>
+      </div>
+    </div>
+    <details class="mas">
+      <summary>Más sobre Maikel: trayectoria, formación y entrevistas</summary>
+      <div class="mas-in">
         <p class="bio">Más de 10 años de experiencia en adquisición de clientes, automatización comercial y despliegue de agentes de IA para marketing y ventas, en agencias, startups y escuelas de formación. Ha trabajado desde dentro en Growth Hacking Course y Escuela de Nuevos Negocios, y fue CMO de Equipzilla. Por eso conoce los dos lados: el de quien lleva las campañas y el de quien tiene que llenar las aulas.</p>
-        <div class="datos"><span>+10 años en growth y marketing</span><span>Campañas, CRM y automatización</span><span>Especialista en formación</span></div>
         <div class="estudios"><b>Formación</b>
           <ul>
             <li><span>Nuclio</span>Máster en Automatización e IA</li>
@@ -336,8 +340,6 @@ p{font-size:16px}
             <li><span>Linkia</span>FP Superior en Marketing, donde empezó</li>
           </ul>
         </div>
-      </div>
-    </div>
     <div class="entrevistas">
       <p class="k">Me han entrevistado</p>
       <div class="ent">
@@ -352,6 +354,8 @@ p{font-size:16px}
       </div>
       <a class="insta" href="https://www.instagram.com/maikel.echevarria/" target="_blank" rel="noopener">Más en Instagram · @maikel.echevarria</a>
     </div>
+      </div>
+    </details>
   </div>
 </section>
 
