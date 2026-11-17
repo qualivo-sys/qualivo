@@ -170,7 +170,7 @@ function cuando(t){ if(!t) return ""; var d=new Date(t), n=new Date(), m=(n-d)/6
   if(m<0) return d.toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short"})+" · "+d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
   if(m<1) return "ahora"; if(m<60) return "hace "+Math.round(m)+" min"; if(m<1440&&d.getDate()===n.getDate()) return d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
   return d.toLocaleDateString("es-ES",{day:"numeric",month:"short"})+" · "+d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}); }
-function dia(t){ if(!t) return ""; var d=new Date(t); return isNaN(d)?esc(t):d.toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short"}); }
+function dia(t){ if(!t) return ""; var d=(typeof t==="number"||/^\d{11,}$/.test(String(t)))?new Date(Number(t)):new Date(t); return isNaN(d)?esc(t):d.toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short"}); }
 function vacio(t){return '<div class="empty">'+t+'</div>'}
 
 function pinta(){
@@ -185,7 +185,7 @@ function pinta(){
   $("fun").innerHTML=D.etapas.map(function(e){var w=e.nombre==="Matrícula"||e.nombre==="Alumno";return '<div class="r'+(w?' won':'')+'"><span>'+esc(e.nombre)+'</span><div class="bar"><i style="width:'+(e.tratos.length/mx*100)+'%"></i></div><b>'+e.tratos.length+'</b></div>'}).join("");
   var cv=D.conversaciones.slice().sort(function(a,b){return (b.fecha||0)-(a.fecha||0)});
   $("rc").innerHTML=cv.length?cv.slice(0,5).map(function(c){return '<div class="row"><div class="av">'+ini(c.nombre)+'</div><div class="m"><b>'+esc(c.nombre)+'</b><span>'+(c.direccion==="inbound"?"":"Tú: ")+esc(c.ultimo)+'</span></div><div class="t">'+cuando(c.fecha)+(c.direccion==="inbound"?'<br><span class="pill o">Espera respuesta</span>':'')+'</div></div>'}).join(""):vacio("Todavía no ha escrito nadie por WhatsApp.");
-  var ms=D.matriculas.slice().sort(function(a,b){return String(b.fecha).localeCompare(String(a.fecha))});
+  var ms=D.matriculas.slice().sort(function(a,b){return new Date(isNaN(b.fecha)?b.fecha:Number(b.fecha))-new Date(isNaN(a.fecha)?a.fecha:Number(a.fecha))});
   $("rm").innerHTML=ms.length?ms.slice(0,5).map(function(m){return '<div class="row"><div class="av">'+ini(m.nombre)+'</div><div class="m"><b>'+esc(m.nombre)+'</b><span>'+esc(m.comunidad)+' · '+esc(m.pago)+'</span></div><div class="t"><b style="color:#1B2140">'+eur(m.importe)+'</b><br>'+dia(m.fecha)+'</div></div>'}).join(""):vacio("Aún no hay matrículas registradas.");
   var pr=D.llamadas.filter(function(l){return new Date(l.inicio)>new Date()});
   $("rl").innerHTML=pr.length?pr.slice(0,5).map(function(l){return '<div class="row"><div class="av">'+ini(l.nombre||l.titulo)+'</div><div class="m"><b>'+esc(l.nombre||l.titulo)+'</b><span>'+esc(l.comunidad||"")+'</span></div><div class="t">'+cuando(l.inicio)+'</div></div>'}).join(""):vacio("No hay llamadas agendadas.");
@@ -213,13 +213,14 @@ function pinta(){
       '<div class="kpi"><div class="l">Compras que registra Meta</div><div class="v">'+t.compras+'</div><div class="n">'+t.inicios+' pagos empezados</div></div>'+
       '<div class="kpi hl"><div class="l">Coste por compra</div><div class="v">'+(t.compras?eur(t.gasto/t.compras):"—")+'</div><div class="n">inversión ÷ compras</div></div>'+
       '<div class="kpi"><div class="l">Invertido sin ninguna compra</div><div class="v" style="color:#B42318">'+eur(sin)+'</div><div class="n">'+Math.round(sin/t.gasto*100)+' % de la inversión</div></div>';
-    var mats=D.matriculas||[], desde=mats.length?mats.map(function(m){return String(m.fecha).slice(0,10)}).sort()[0]:null;
+    var iso=function(x){var d=(typeof x==="number"||/^\d{11,}$/.test(String(x)))?new Date(Number(x)):new Date(x);return isNaN(d)?null:d.toISOString().slice(0,10)};
+    var mats=D.matriculas||[], fs=mats.map(function(m){return iso(m.fecha)}).filter(Boolean).sort(), desde=fs.length?fs[0]:null;
     var metaDesde=desde?P.diario.filter(function(x){return x.d>=desde}).reduce(function(a,x){return a+x.c},0):0;
     $("cruce").innerHTML=demo?'<h2>Lo que ve Meta y lo que entra de verdad</h2><p>Con campañas en marcha, aquí se compara cada día las compras que Meta se atribuye con las matrículas reales del CRM.</p>':
       '<h2>Lo que ve Meta y lo que entra de verdad</h2><p style="font-size:15px;color:#1B2140">Desde que la tienda está conectada al CRM ('+(desde?f1(desde):"—")+') han entrado <b>'+mats.length+' matrículas</b> reales. En esos mismos días, Meta se atribuye <b>'+metaDesde+' compras</b>.</p><p class="sub" style="margin:8px 0 0">Es pronto para sacar conclusiones (son pocos días y Meta puede atribuir con retraso), pero este es el cruce que nos dirá qué matrículas vienen de anuncios y cuáles no. Hoy esas matrículas llegan sin dato de campaña.</p>';
     var pasos=[["Clics en el anuncio",t.clics],["Visitas a la web",t.visitas],["Pago empezado",t.inicios],["Compra",t.compras]], mx2=Math.log(Math.max(t.clics,2));
     $("pf").innerHTML=pasos.map(function(x,i){return '<div class="r'+(i===3?' won':'')+'"><span>'+x[0]+'</span><div class="bar"><i style="width:'+(x[1]>0?Math.max(4,Math.log(x[1]+1)/mx2*100):0)+'%"></i></div><b style="min-width:54px">'+n0(x[1])+'</b></div>'}).join("");
-    $("pf-n").textContent="Barras en escala logarítmica para que se vean todos los pasos. Ojo: Meta solo registra "+n0(t.visitas)+" visitas de "+n0(t.clics)+" clics ("+(t.visitas/t.clics*100).toFixed(1).replace(".",",")+" %). En los 90 días anteriores era el "+(P.t90.visitas/P.t90.clics*100).toFixed(0)+" %: hay que revisar si el píxel está midiendo bien las visitas.";
+    $("pf-n").textContent="Barras en escala logarítmica para que se vean todos los pasos. Ojo: Meta solo registra "+n0(t.visitas)+" visitas de "+n0(t.clics)+" clics ("+(t.visitas/t.clics*100).toFixed(1).replace(".",",")+" %). En el conjunto de los últimos 90 días es el "+(P.t90.visitas/P.t90.clics*100).toFixed(0)+" %: hay que revisar si el píxel está midiendo bien las visitas.";
     var mr=Math.max.apply(null,P.regiones.map(function(x){return x.g}).concat([1]));
     $("pr").innerHTML=P.regiones.map(function(x){return '<div class="r" style="grid-template-columns:150px 1fr 64px"><span>'+esc(x.n)+'</span><div class="bar"><i style="width:'+(x.g/mr*100)+'%;background:var(--navy)"></i></div><b>'+eur(x.g)+'</b></div>'}).join("");
     var md=Math.max.apply(null,P.diario.map(function(x){return x.g}).concat([1]));
