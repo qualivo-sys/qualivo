@@ -6,6 +6,18 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Curso de Agente Inmobiliario online · Aula Inmobiliaria</title>
 <script>if(/[?&]revision=1/.test(location.search))document.documentElement.classList.add("rev")</script>
+<script>
+/* Medición · Aula Inmobiliaria. Consentimiento denegado por defecto (RGPD): nada de analítica ni publicidad se activa hasta que la persona acepta. */
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+(function(){var c={};try{c=JSON.parse(localStorage.getItem("aula_cookies")||"{}")}catch(e){}
+window.__aulaC=c;
+gtag("consent","default",{ad_storage:c.m?"granted":"denied",ad_user_data:c.m?"granted":"denied",ad_personalization:c.m?"granted":"denied",analytics_storage:c.a?"granted":"denied",functionality_storage:"granted",security_storage:"granted",wait_for_update:500});
+gtag("set","ads_data_redaction",!c.m);gtag("set","url_passthrough",true);
+/* El contenedor de Aula (el mismo de su web) solo se carga en su dominio. En la versión de revisión de qualivo.io no se envía nada a sus cuentas; ?gtm=1 lo fuerza para probar. */
+var h=location.hostname;window.__aulaGTM=/(^|\.)aulainmobiliaria\.com$/.test(h)||/[?&]gtm=1/.test(location.search);
+if(window.__aulaGTM){dataLayer.push({"gtm.start":new Date().getTime(),event:"gtm.js"});var j=document.createElement("script");j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id=GTM-MMJ7KDS";document.head.appendChild(j);}
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
 <style>
@@ -103,8 +115,22 @@ footer nav{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bo
 footer a{color:#D6DAE8}
 .fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.45);z-index:50}
 .fab svg{width:30px;height:30px;color:#fff}
+/* aviso de cookies */
+.ck{position:fixed;left:16px;right:16px;bottom:16px;z-index:90;max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 20px 50px -18px rgba(20,25,51,.45);padding:18px 20px;font-size:14px;color:var(--txt)}
+.ck b{color:var(--ink);font-size:15.5px}.ck p{margin-top:6px}.ck a{color:var(--ink);font-weight:500}
+.ck .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.ck button{font:inherit;font-weight:600;font-size:14px;min-height:44px;padding:10px 18px;border-radius:9px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;flex:1 1 150px}
+.ck button.p{background:var(--ink);color:#fff}
+.ck button.l{border-color:transparent;text-decoration:underline;flex:0 0 auto;font-weight:500}
+.ck .opts{display:grid;gap:10px;margin-top:12px}
+.ck label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}.ck label input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:#EC7B2A}
+.ck label span b{font-size:14px;display:block}
+.legal{font-size:12.5px;color:#AEB4CC;max-width:60ch;margin:16px auto 0}.legal a{color:#D6DAE8}
+footer button.lk{font:inherit;background:none;border:0;color:#D6DAE8;text-decoration:underline;cursor:pointer;padding:0}
+@media (max-width:860px){.ck{left:10px;right:10px;bottom:10px;padding:16px}.fab{bottom:18px}}
 /* revisión */
 html:not(.rev) .rev-only{display:none!important}
+[hidden]{display:none!important}
 .note{border:2px dashed #C9860A;background:#FFF8E6;color:#5A3D00;border-radius:10px;padding:10px 14px;font-size:13.5px;margin-top:14px;text-align:left}
 .ribbon{position:sticky;top:0;z-index:60;background:#23232C;color:#E4E6EB;font-size:12.5px;padding:8px 16px;display:flex;gap:10px 16px;flex-wrap:wrap;justify-content:center}
 .ribbon a{background:#3a3b47;border-radius:99px;padding:2px 10px;text-decoration:none;color:#fff}
@@ -237,13 +263,25 @@ html:not(.rev) .rev-only{display:none!important}
     <a class="btn tel" href="#hablar" data-track="reservar_llamada" data-book><svg class="i"><use href="#cal"/></svg>Agenda tu llamada</a>
   </div>
   <p class="hrs">O llama gratis al <a href="tel:900877847" data-track="llamar">900 877 847</a> · lunes a jueves de 9:00 a 18:00 · viernes de 9:00 a 14:00</p>
+  <p class="legal">Al escribirnos por WhatsApp o reservar una llamada, Aula Inmobiliaria tratará tus datos para atender tu consulta. Puedes ejercer tus derechos en info@aulainmobiliaria.com. Más información en la <a href="https://www.aulainmobiliaria.com/politica-de-privacidad/" target="_blank" rel="noopener">Política de privacidad</a>.</p>
   <div class="note rev-only" style="max-width:640px;margin:22px auto 0">Orden de los botones: 1) Matricúlate, 2) Agenda tu llamada, 3) WhatsApp para dudas, atendido por la asistente. El WhatsApp es el número conectado al CRM (691 28 90 46). El calendario es el del CRM; falta asignar quién atiende.</div>
 </div></section>
 
 <footer><div class="w">
-  <nav><a href="https://www.aulainmobiliaria.com/aviso-legal/">Aviso legal</a><a href="https://www.aulainmobiliaria.com/politica-de-privacidad/">Privacidad</a><a href="https://www.aulainmobiliaria.com/politica-de-cookies/">Cookies</a><a href="https://www.aulainmobiliaria.com/condiciones-de-venta/">Condiciones de venta</a></nav>
+  <nav><a href="https://www.aulainmobiliaria.com/aviso-legal-y-condiciones-de-uso/" target="_blank" rel="noopener">Aviso legal</a><a href="https://www.aulainmobiliaria.com/politica-de-privacidad/" target="_blank" rel="noopener">Privacidad</a><a href="https://www.aulainmobiliaria.com/politica-de-cookies/" target="_blank" rel="noopener">Política de cookies</a><button class="lk" type="button" id="ck-open">Configurar cookies</button><a href="https://www.aulainmobiliaria.com/condiciones-generales-de-contratacion/" target="_blank" rel="noopener">Condiciones de contratación</a></nav>
   <p>Aula Inmobiliaria · Av. Carrilet, 3 (Edificio D), planta 2 · 08902 L'Hospitalet de Llobregat<br><a href="mailto:info@aulainmobiliaria.com">info@aulainmobiliaria.com</a> · © Aula Inmobiliaria</p>
 </div></footer>
+
+<div class="ck" id="ck" role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
+  <b>Tu privacidad</b>
+  <p>Usamos cookies propias y de terceros para medir las visitas y mostrarte publicidad de nuestros cursos. Puedes aceptarlas, rechazarlas o elegir cuáles permites. Más información en la <a href="https://www.aulainmobiliaria.com/politica-de-cookies/" target="_blank" rel="noopener">Política de cookies</a>.</p>
+  <div class="opts" id="ck-opts" hidden>
+    <label><input type="checkbox" checked disabled><span><b>Necesarias</b>Imprescindibles para que la página funcione. Siempre activas.</span></label>
+    <label><input type="checkbox" id="ck-a"><span><b>Estadísticas</b>Nos dicen cuánta gente visita la página y qué apartados se usan, sin identificarte.</span></label>
+    <label><input type="checkbox" id="ck-m"><span><b>Publicidad</b>Permiten medir los anuncios y mostrarte publicidad de Aula Inmobiliaria en otras webs y redes.</span></label>
+  </div>
+  <div class="acts"><button type="button" class="p" id="ck-si">Aceptar todas</button><button type="button" class="p" id="ck-no">Rechazar</button><button type="button" id="ck-ok" hidden>Guardar mi elección</button><button type="button" class="l" id="ck-cfg">Configurar</button></div>
+</div>
 
 <a class="fab" href="#hablar" data-track="abrir_whatsapp" aria-label="Escríbenos por WhatsApp"><svg><use href="#wa"/></svg></a>
 
@@ -275,11 +313,58 @@ html:not(.rev) .rev-only{display:none!important}
   document.querySelectorAll("[data-cart]").forEach(function(a){ a.href = cart; });
   ext('a[data-track="abrir_whatsapp"]', wa); ext("[data-book]", book);
 
-  window.dataLayer.push({event:"ver_landing", curso:"agente_inmobiliario", ccaa:k, utm_campaign:q.get("utm_campaign") || undefined, utm_content:q.get("utm_content") || undefined});
+  /* ====== Medición ====== */
+  var ITEM = {item_id: String(v.prod), item_name: "Curso de Agente Inmobiliario", item_category: "Cursos de Inmobiliaria", item_variant: v.name, price: 390, quantity: 1};
+  var BASE = {curso: "agente_inmobiliario", ccaa: k};
+  ["utm_source","utm_medium","utm_campaign","utm_content"].forEach(function(p){ if (q.get(p)) BASE[p] = q.get(p); });
+  function ev(name, params){ var o = {event: name}; for (var x in BASE) o[x] = BASE[x]; for (var y in (params || {})) o[y] = params[y]; window.dataLayer.push(o);
+    if (document.documentElement.classList.contains("rev") && window.console) console.log("[evento]", name, params || {}); }
+  window.aulaEv = ev;
+  /* 1 · Ve el curso */
+  ev("view_item", {ecommerce: {currency: "EUR", value: 390, items: [ITEM]}});
+  /* 2 · Clics: matrícula, llamada, WhatsApp, teléfono */
   document.addEventListener("click", function(e){
     var a = e.target.closest("[data-track]"); if (!a) return;
-    var s = a.closest("section"); window.dataLayer.push({event:a.getAttribute("data-track"), curso:"agente_inmobiliario", ccaa:k, origen:s ? s.id : "flotante"});
+    var s = a.closest("section"), donde = s ? s.id : "flotante", t = a.getAttribute("data-track");
+    if (t === "empezar_matricula") ev("begin_checkout", {posicion: donde, ecommerce: {currency: "EUR", value: 390, items: [ITEM]}});
+    else if (t === "reservar_llamada") ev("generate_lead", {metodo: "llamada", posicion: donde});
+    else if (t === "abrir_whatsapp") ev("generate_lead", {metodo: "whatsapp", posicion: donde});
+    else if (t === "llamar") ev("generate_lead", {metodo: "telefono", posicion: donde});
   });
+  /* 3 · Hasta dónde baja y qué secciones ve */
+  var hitos = [25, 50, 75, 90], vistos = {};
+  window.addEventListener("scroll", function(){ var h = document.documentElement, pct = (h.scrollTop + window.innerHeight) / h.scrollHeight * 100;
+    hitos.forEach(function(x){ if (pct >= x && !vistos[x]) { vistos[x] = 1; ev("scroll_profundidad", {porcentaje: x}); } }); }, {passive: true});
+  if ("IntersectionObserver" in window) { var io = new IntersectionObserver(function(en){ en.forEach(function(x){ if (x.isIntersecting) { ev("ver_seccion", {seccion: x.target.id}); io.unobserve(x.target); } }); }, {threshold: .4});
+    ["temario","opiniones","matricula","dudas","hablar"].forEach(function(id){ var el = document.getElementById(id); if (el) io.observe(el); }); }
+  /* 4 · Dudas y temario que abre */
+  document.querySelectorAll(".faq details").forEach(function(d){ d.addEventListener("toggle", function(){ if (d.open) ev("abrir_duda", {pregunta: d.querySelector("summary").textContent.trim()}); }); });
+  var tem = document.querySelector("details.tem"); if (tem) tem.addEventListener("toggle", function(){ if (tem.open) ev("ver_temario_completo"); });
+  /* 5 · Tiempo en la página */
+  [30, 90].forEach(function(sg){ setTimeout(function(){ if (!document.hidden) ev("tiempo_en_pagina", {segundos: sg}); }, sg * 1000); });
+
+  /* ====== Aviso de cookies (RGPD) ====== */
+  var ck = document.getElementById("ck"), opts = document.getElementById("ck-opts"), ca = document.getElementById("ck-a"), cm = document.getElementById("ck-m");
+  function guarda(a, m){
+    var c = {a: a ? 1 : 0, m: m ? 1 : 0, t: new Date().toISOString(), v: 1};
+    try { localStorage.setItem("aula_cookies", JSON.stringify(c)); } catch (e) {}
+    gtag("consent", "update", {ad_storage: m ? "granted" : "denied", ad_user_data: m ? "granted" : "denied", ad_personalization: m ? "granted" : "denied", analytics_storage: a ? "granted" : "denied"});
+    gtag("set", "ads_data_redaction", !m);
+    window.dataLayer.push({event: "aula_consentimiento", estadisticas: !!a, publicidad: !!m});
+    /* Compatibilidad con las etiquetas del contenedor de Aula, que se activan con los avisos de Complianz */
+    if (a) window.dataLayer.push({event: "cmplz_event_statistics"});
+    if (m) window.dataLayer.push({event: "cmplz_event_marketing"});
+    ck.hidden = true;
+  }
+  document.getElementById("ck-si").addEventListener("click", function(){ guarda(1, 1); });
+  document.getElementById("ck-no").addEventListener("click", function(){ guarda(0, 0); });
+  document.getElementById("ck-ok").addEventListener("click", function(){ guarda(ca.checked, cm.checked); });
+  document.getElementById("ck-cfg").addEventListener("click", function(){ opts.hidden = false; document.getElementById("ck-ok").hidden = false; this.hidden = true; });
+  document.getElementById("ck-open").addEventListener("click", function(){ var c = window.__aulaC || {}; try { c = JSON.parse(localStorage.getItem("aula_cookies") || "{}"); } catch (e) {}
+    ca.checked = !!c.a; cm.checked = !!c.m; opts.hidden = false; document.getElementById("ck-ok").hidden = false; document.getElementById("ck-cfg").hidden = true; ck.hidden = false; });
+  var prev = window.__aulaC || {};
+  if (!prev.t) ck.hidden = false;
+  else { if (prev.a) window.dataLayer.push({event: "cmplz_event_statistics"}); if (prev.m) window.dataLayer.push({event: "cmplz_event_marketing"}); }
 })();
 </script>
 </body>
