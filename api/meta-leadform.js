@@ -183,7 +183,9 @@ const FORMULARIOS_SECTOR = {
   '2252569821991323': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v2-13nov' },
   // 17-nov-2026 (Maikel): formulario V3 de formación, 4 preguntas (web, solicitudes, inversión, qué mejorar).
   // Prioridad A/B/C por coherencia en api/_form-v3.js. «No invertimos» no se filtra (caso Cancomar).
-  '1183570324226136': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3-17nov' }
+  '1183570324226136': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3-17nov' },
+  // Misma versión con la página de gracias en /formacion/agenda/ (17-nov, Maikel).
+  '1024313877362865': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3b-17nov' }
 };
 
 async function nombreFormulario(formId) {
@@ -369,7 +371,7 @@ async function guardar(lead, opts) {
   if (sueltas) sueltas.forEach(function (t) { if (etiquetas.indexOf(t) === -1) etiquetas.push(t); });
   // Formulario V3: prioridad operativa A/B/C (autenticidad, volumen, capacidad, necesidad).
   let v3 = null;
-  if (String(lead.form_id || '') === '1183570324226136') {
+  if (require('./_form-v3.js').FORMS.indexOf(String(lead.form_id || '')) !== -1) {
     try {
       v3 = await require('./_form-v3.js').clasificar({ web: web, volumen: volumenCrudo, inversion: inversionCruda,
         mejora: valor(campos, ['mejora']), email: email });
