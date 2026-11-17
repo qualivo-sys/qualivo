@@ -97,8 +97,9 @@ p{font-size:16px}
 .logos{background:var(--marfil-2)}
 .logos .wrap{padding-top:40px;padding-bottom:40px}
 .logos p.k{font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);margin-bottom:20px}
-.logos .fila{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 24px;align-items:center}
-.logos .fila img{height:36px;width:100%;object-fit:contain}
+.logos .fila{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 24px;align-items:center}
+.logos .fila img{height:36px;width:calc(50% - 12px);object-fit:contain}
+.logos .fila img.ninja{height:28px}
 
 /* 6 · casos (estilo .caso de /formacion/) */
 .casos{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:28px}
@@ -174,7 +175,8 @@ p{font-size:16px}
   .sec{padding:clamp(72px,8vw,104px) 0}
   .top .wrap{min-height:64px}
   .hero{padding:48px 0 80px}
-  .logos .fila{grid-template-columns:repeat(5,minmax(0,1fr));gap:32px 48px}
+  .logos .fila{gap:32px 40px}
+  .logos .fila img{width:calc((100% - 200px)/6)}
   .logos .fila img{height:44px}
   .maikel{grid-template-columns:140px minmax(0,1fr);gap:28px;padding:28px}
   .maikel img{width:140px;height:140px}
@@ -249,7 +251,7 @@ p{font-size:16px}
 <section class="logos" aria-label="Centros que han trabajado con Qualivo">
   <div class="wrap">
     <p class="k">Han trabajado con Qualivo</p>
-    <div class="fila"><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" height="30" loading="lazy" decoding="async" style="filter:grayscale(1) brightness(.5) contrast(1.6)"><img src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" height="30" loading="lazy" decoding="async"></div>
+    <div class="fila"><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" height="30" loading="lazy" decoding="async" style="filter:grayscale(1) brightness(.5) contrast(1.6)"><img src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/formacion-ninja.webp" alt="Formación Ninja" class="ninja" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" height="30" loading="lazy" decoding="async"></div>
   </div>
 </section>
 
