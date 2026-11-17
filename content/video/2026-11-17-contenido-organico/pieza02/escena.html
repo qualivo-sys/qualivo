@@ -90,7 +90,7 @@ document.write('<script src="subs-'+VER+'-'+AP+'.js"><\/script>');
 const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1), ez=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, $=id=>document.getElementById(id);
 // ---- composición por formato (zonas seguras de Reels/Stories en 9:16) ----
 const L=FMT==='45'?{H:1350,cab:34,rot:[78,58],win:[160,890],sub:[1070,58],llam:930,gan:[160,890,76],cierre:[215,390,470,715,1075],nota:835}
-                 :{H:1920,cab:206,rot:[262,68],win:[362,1030],sub:[1410,64],llam:1262,gan:[362,1030,104],cierre:[450,660,800,1075,1400],nota:1205};
+                 :{H:1920,cab:206,rot:[330,72],win:[440,1060],sub:[1545,66],llam:1262,gan:[362,1030,104],cierre:[450,660,800,1075,1400],nota:1205};
 const W=1008,WH=L.win[1];
 $('e').style.height=L.H+'px';$('cab').style.top=L.cab+'px';$('rot').style.top=L.rot[0]+'px';$('nota').style.top=L.nota+'px';
 $('win').style.top=L.win[0]+'px';$('win').style.height=WH+'px';$('sub').style.top=L.sub[0]+'px';$('sub').style.fontSize=L.sub[1]+'px';
@@ -106,7 +106,7 @@ const PL={
  FORMP:{img:'lp0',sobre:'lp1',H:6168,pasos:[4500,4658,4784,4910,5036,5100],toque:[640,5170],iniAbs:30.2,cam:[0,4110,1280],cam2:[0,4160,1280],espera:0,mov:'fin',foco:[]},
  WAN:{img:'cvn7',cam:[1040,590,900],kfa:[[39,1040,590,900],[43.4,1040,600,900],[44.8,1040,880,900],[49.6,1040,890,900],[51,1040,1290,900],[55,1040,1310,900]],foco:[[1303,667,611,223,0,.7,3.4],[1066,910,611,152,0,6.2,2.2],[1303,1082,611,261,0,8.4,2.6],[1066,1363,286,114,0,12.3,1.4],[1303,1497,611,223,0,13.5,1.5],[1303,1740,611,299,0,14.9,1.2]]},
  LISTAP:{img:'l1',cam:[474,200,930],cam2:[474,268,800],espera:.3,mov:'fin',foco:[[474,560,2356,118]],tapa:690},
- ANUN:{img:'anun',cam:[0,-60,640],kfa:[[71,0,-60,640],[74.3,0,-40,640],[75.6,0,-70,1040],[78,0,-60,1030]],foco:[]},
+ ANUN:{img:'anun',tapa:272,cam:[0,-60,640],kfa:[[71,0,-60,640],[74.3,0,-40,640],[75.6,0,-70,1040],[78,0,-60,1030]],foco:[]},
  FIN6:{html:'<div class="f6"><div style="background-image:url(rec/adc.jpg)"><b><em>1</em> Anuncio</b></div><div style="background-image:url(rec/lp0.png)"><b><em>2</em> Landing</b></div><div style="background-image:url(rec/lp2.png);background-position:50% 76%;background-size:150%"><b><em>3</em> Formulario</b></div><div style="background-image:url(rec/cvn7.png);background-position:72% 19%;background-size:330%"><b><em>4</em> WhatsApp</b></div><div style="background-image:url(rec/l1.png);background-position:22% 18%;background-size:420%"><b><em>5</em> CRM</b></div><div style="background-image:url(rec/anun.png);background-position:0 0;background-size:260%"><b><em>6</em> Medición</b></div></div>',cam:[0,0,1008],foco:[]},
  LANDF:{img:'lp0',sobre:'lp1',H:6168,pasos:[4500,4658,4784,4910,5036,5100],toque:[640,5170],iniAbs:window.T.lau+.1,kfa:[[window.T.ld,0,0,1280],[window.T.ld+.95,0,0,1280],[window.T.lau-.15,0,FMT==='45'?4270:4130,1280],[window.T.f2,0,FMT==='45'?4300:4160,1280]],cam:[0,0,1280],foco:[]},
  FORM2:{img:'lp2',cam:[0,FMT==='45'?4300:4160,1280],pan:30,foco:[[68,5172,1144,116]]},
