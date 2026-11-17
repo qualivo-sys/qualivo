@@ -303,6 +303,23 @@ async function recoger() {
     return { directo: w, cerrada: w < hoy, captando: hoy <= sumaDias(w, -6), total: total, etapas: etapas };
   });
 
+  // 5b) Semanas de El Círculo de viernes a jueves (la semana natural de cada captación): lo que pasa en el
+  // calendario esa semana, sea de la edición que sea. Gasto de Meta en El Círculo y ventas por fecha de venta.
+  const semanasCirculo = ediciones.map(function (d) {
+    const desde = sumaDias(d, -12), hasta = sumaDias(d, -6);
+    const enRango = function (dia) { return dia >= desde && dia <= hasta; };
+    const vs = (ventas || []).filter(function (v) { return enRango(v.dia); });
+    const vc = vs.filter(function (v) { return v.puerta === 'El Círculo'; });
+    const gm = metaDia ? metaDia.filter(function (m) { return enRango(m.dia); }) : null;
+    return {
+      edicion: d, desde: desde, hasta: hasta, enCurso: hoy <= hasta,
+      gastoCirculo: gm ? gm.filter(function (m) { return m.puerta === 'El Círculo'; }).reduce(function (t, m) { return t + m.gasto; }, 0) : null,
+      gastoMeta: gm ? gm.reduce(function (t, m) { return t + m.gasto; }, 0) : null,
+      ventasCirculo: ventas ? { n: vc.length, eur: vc.reduce(function (t, v) { return t + v.importe; }, 0) } : null,
+      ventasTodas: ventas ? { n: vs.length, eur: vs.reduce(function (t, v) { return t + v.importe; }, 0) } : null
+    };
+  });
+
   // 6) Bolsa del VSL sin contactar
   let sinContactar = null;
   const stC = settGen && (settGen.stages || []).find(function (s) { return s.name === CONTACTAR_HUMANO; });
@@ -316,7 +333,7 @@ async function recoger() {
     generado: Date.now(), hoy: hoy, semanas: semanas, orden: ORDEN,
     registros: registros, llamadas: llamadas, gasto: meta ? gasto : null, google: gads ? google : null, ventas: ventas ? venta : null,
     meses: meses, mes: { registros: registrosMes, llamadas: llamadasMes, gasto: metaMes ? gastoMes : null, google: gadsMes ? googleMes : null, ventas: ventas ? ventaMes : null, costes: costes },
-    ediciones: edicion, edicionesEtiquetas: porEtiqueta, sinContactarVsl: sinContactar, closers: closers,
+    ediciones: edicion, edicionesEtiquetas: porEtiqueta, semanasCirculo: semanasCirculo, sinContactarVsl: sinContactar, closers: closers,
     fuentes: { meta: !!meta, hoja: !!ventas, googleAds: !!gads }
   };
 }

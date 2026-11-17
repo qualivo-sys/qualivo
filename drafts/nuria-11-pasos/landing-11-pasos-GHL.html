@@ -9,9 +9,9 @@ window.NR11 = {
     { hasta: '2026-11-22T23:59:59+01:00', precio: '175', regalo: true,
       franja: 'Oferta anticipada: 175 € y 3 meditaciones de regalo hasta el domingo 22',
       regaloTexto: 'Regalo si te inscribes antes del domingo 22:' },
-    { hasta: '2026-11-30T23:59:59+01:00', precio: '175', regalo: true,   // ❓ tramo de Black Friday abierto a todo el mundo: confirmar precio y regalo con Nuria
-      franja: 'Black Friday: 175 € y 3 meditaciones de regalo hasta el lunes 30',
-      regaloTexto: 'Regalo si te inscribes antes del lunes 30:' }
+    { hasta: '2026-11-30T23:59:59+01:00', precio: '175', regalo: false,  // Black Friday abierto a todo el mundo: 175 € sin meditaciones (Nuria, 16-nov)
+      franja: 'Black Friday: A 11 Pasos del Sueño por 175 € hasta el lunes 30',
+      regaloTexto: '' }
   ],
   precioDespues: '185',                // precio cuando ya no queda ningún tramo (sin regalo)
   cierre: '2026-12-05T00:00:00+01:00', // desde aquí los botones dicen «Inscripciones cerradas»
@@ -87,6 +87,7 @@ html,body{overflow-x:hidden}
 #n11 .bf .cd{display:inline-block;margin-left:10px;font-variant-numeric:tabular-nums;font-weight:600;color:#fff}
 #n11 .bf-badge{display:none;align-self:flex-start;background:#111827;color:#E7C98B;border-radius:999px;padding:7px 14px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:16px}
 #n11 .price .bf-badge{margin:0 auto 12px;display:none}
+#n11 .bf-urg{display:none;font-size:14.5px;font-weight:600;color:#9a3b2e;margin:6px 0 4px}#n11.bf-on .bf-urg{display:block}
 #n11 .old{font-family:var(--serif);font-size:26px;color:#9a937f;text-decoration:line-through;margin-right:10px;vertical-align:middle;display:none}
 #n11 .bonus-cd{display:block;margin-top:6px;font-size:14px;color:#708B9D}#n11 .bonus-cd b{color:#20304F;font-variant-numeric:tabular-nums}
 #n11 .bf-box{display:none;margin-top:14px;background:#111827;color:#F3EEE4;border-radius:14px;padding:14px 16px;font-size:14.5px;line-height:1.5}
@@ -94,6 +95,20 @@ html,body{overflow-x:hidden}
 #n11.bf-on .bf,#n11.bf-on .bf-badge,#n11.bf-on .bf-box{display:block}#n11.bf-on .bf-badge{display:inline-block}
 #n11 .bar .tag{background:#E7C98B;color:#111827;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;letter-spacing:.1em;margin-right:8px;display:none}
 #n11.bf-on .bar .tag{display:inline-block}
+#n11 .testi{background:var(--cream-2)}
+#n11 .tq{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:30px}
+#n11 .tq figure{grid-column:span 2;margin:0;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px 22px;box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative}
+#n11 .tq figure:nth-child(4){grid-column:2/span 2}
+#n11 .tq figure::before{content:"\201C";position:absolute;top:6px;right:18px;font-family:var(--serif);font-size:84px;line-height:1;color:var(--cream-2)}
+#n11 .tq .hl{font-family:var(--serif);font-size:20px;line-height:1.3;color:var(--navy);margin-bottom:12px;position:relative}
+#n11 .tq blockquote{margin:0 0 18px;font-size:14.5px;line-height:1.65;color:var(--ink);flex:1}
+#n11 .tq figcaption{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:14px}
+#n11 .tq .av{width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--cream);display:grid;place-items:center;font-family:var(--serif);font-size:17px;flex:none}
+#n11 .tq .who b{display:block;font-size:14px;color:var(--navy);font-weight:600}
+#n11 .tq .who span{font-size:12px;color:#8d8778}
+#n11 .tq-note{font-size:12.5px;color:#8d8778;text-align:center;margin-top:22px}
+@media (max-width:900px){#n11 .tq{grid-template-columns:1fr 1fr}#n11 .tq figure,#n11 .tq figure:nth-child(4){grid-column:auto}}
+@media (max-width:640px){#n11 .tq{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:26px -20px 0;padding:4px 20px 18px;-webkit-overflow-scrolling:touch}#n11 .tq figure{flex:0 0 84%;scroll-snap-align:center}#n11 .tq-swipe{display:block!important}}
 @media (max-width:640px){#n11 .bf .t{display:block;margin-bottom:2px}#n11 section{padding:48px 0}#n11 .grid{grid-template-columns:1fr}#n11 .about{grid-template-columns:1fr}#n11 .about img{max-width:220px}#n11 .vs{grid-template-columns:1fr}#n11 .days{grid-template-columns:repeat(6,1fr)}#n11 .bar span{display:none}#n11 .btn{width:100%}}
 </style>
 
@@ -104,15 +119,15 @@ html,body{overflow-x:hidden}
     <div class="w">
       <span class="bf-badge">Black Friday</span>
       <div class="kick">Programa de la Dra. Nuria Roure</div>
-      <h1>Recupera tus noches.<br><em>Recupera tu vida.</em></h1>
-      <p class="lede">A 11 Pasos del Sueño: 11 hábitos en 11 días para volver a entender tu sueño y cuidarlo cada día, con la guía de Nuria.</p>
+      <h1>Descubre los 11 pasos<br><em>para mejorar tu sueño.</em></h1>
+      <p class="lede">A 11 Pasos del Sueño: descubre los 11 hábitos con evidencia científica para dormir mejor, uno cada día, con la guía de Nuria.</p>
       <div class="chips">
         <span class="chip">Empezamos el <b data-k="inicio"></b></span>
         <span class="chip">1 paso al día</span>
         <span class="chip"><b data-k="directos"></b> directos con Nuria</span>
-        <span class="chip">Grabaciones durante 1 mes</span>
+        <span class="chip">Grabaciones durante 1 año</span>
       </div>
-      <div class="cta"><a class="btn" data-pago href="#">Quiero empezar los 11 pasos</a><small>Pago seguro · 14 días de garantía</small></div>
+      <div class="cta"><a class="btn" data-pago href="#">Quiero empezar los 11 pasos</a><small>Pago seguro</small></div>
     </div>
   </section>
 
@@ -124,7 +139,7 @@ html,body{overflow-x:hidden}
       <p><b>No tiene por qué ser así.</b> Cómo duermes tiene mucho que ver con lo que haces antes, durante y después de irte a la cama. Y eso se aprende, paso a paso.</p>
       <div class="vs">
         <div class="a"><b>Hoy</b><ul><li>Te acuestas sin rutina y sin señales para tu cuerpo.</li><li>Te desvelas y das vueltas a todo.</li><li>Pruebas cosas sueltas que no sabes si sirven.</li></ul></div>
-        <div class="b"><b>En 11 días</b><ul><li>Tienes una rutina sencilla que tu cuerpo reconoce.</li><li>Sabes qué hacer cuando te desvelas.</li><li>Entiendes por qué haces cada cosa.</li></ul></div>
+        <div class="b"><b>En 11 días</b><ul><li>Tienes una rutina sencilla que tu cuerpo reconoce.</li><li>Te despiertas menos por la noche gracias a mejores hábitos.</li><li>Entiendes por qué haces cada cosa.</li></ul></div>
       </div>
     </div>
   </section>
@@ -133,11 +148,12 @@ html,body{overflow-x:hidden}
     <div class="w">
       <div class="kick">Cómo funciona</div>
       <h2>Un paso al día. <em>Acompañada.</em></h2>
-      <p>No es un reto ni una masterclass. Cada día aprendes un hábito de sueño y lo pones en práctica esa misma noche. Unos minutos al día.</p>
+      <p>No es un reto ni una masterclass. Cada día aprendes un hábito de sueño y pones en práctica el hábito de ese paso. Unos minutos al día.</p>
+      <p>Muchas veces dejamos los hábitos por el camino. La constancia, la disciplina y el acompañamiento de una persona cada día durante unos minutos te darán el gran empujón que necesitas para aplicar hábitos saludables a tu sueño.</p>
       <div class="grid">
         <div class="card"><b>11 vídeos cortos</b><span>Uno por hábito, con lo que tienes que hacer ese día.</span></div>
-        <div class="card"><b><span data-k="directos"></span> directos con Nuria</b><span>30 minutos, por la mañana, para resolver dudas y ajustar.</span></div>
-        <div class="card"><b>Grabaciones</b><span>Si no puedes conectarte, tienes todo grabado durante 1 mes.</span></div>
+        <div class="card"><b><span data-k="directos"></span> directos con Nuria</b><span>Por Zoom, para resolver tus dudas personalmente.</span></div>
+        <div class="card"><b>Grabaciones</b><span>Si no puedes conectarte, tienes todo grabado durante 1 año.</span></div>
         <div class="card"><b>Grupo de Telegram</b><span>Para tus preguntas durante el programa.</span></div>
       </div>
       <div class="cta"><a class="btn" data-pago href="#">Quiero empezar los 11 pasos</a></div>
@@ -151,8 +167,24 @@ html,body{overflow-x:hidden}
         <div class="kick">Quién te acompaña</div>
         <h2>Dra. Nuria Roure</h2>
         <p>Doctora en Psicología y especialista en trastornos del sueño. Primera psicóloga de España acreditada como Somnologist por la Sociedad Europea de Investigación del Sueño (ESRS).</p>
-        <p>Más de 20 años ayudando a personas que no descansan. Autora de <i>Por Fin Duermo</i> (7.ª edición).</p>
+        <p>Más de 20 años ayudando a personas que no descansan. Autora de tres libros: <i>Por Fin Duermo</i> (9.ª edición), <i>Los hábitos del sueño</i> y <i>Dormir no es gratis</i>.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="testi">
+    <div class="w">
+      <div class="kick">Lo que dicen las alumnas</div>
+      <h2>Ellas ya han pasado <em>por los 11 pasos.</em></h2>
+      <div class="tq">
+        <figure><div class="hl">Ha merecido la pena, sin lugar a duda.</div><blockquote>Sinceramente, comencé con un gran escepticismo, porque soy de las que conocen la teoría pero no la aplicaba. Tengo que admitir que estoy durmiendo mejor: el 80&nbsp;% de los días duermo seguido entre 5 y 6 horas, y en mi caso es un gran avance. El modelo grupal creo que es un gran acierto.</blockquote><figcaption><span class="av">M</span><span class="who"><b>Mónica G.</b><span>Alumna de A 11 Pasos del Sueño</span></span></figcaption></figure>
+        <figure><div class="hl">Ya no tengo esos despertares de madrugada.</div><blockquote>El programa me ha encantado. He aprendido a regular mi ventana de sueño y, desde que empecé a aplicar los pasos, llevo varios días sin esos despertares. Lo recomiendo a todas las personas que tengan problemas para dormir.</blockquote><figcaption><span class="av">C</span><span class="who"><b>Carolina S.</b><span>Ceuta</span></span></figcaption></figure>
+        <figure><div class="hl">Estoy sorprendentemente encantada.</div><blockquote>Lo hice y he dormido 7 horas. Tengo muchas esperanzas puestas en lo que estoy aplicando. Muchas gracias.</blockquote><figcaption><span class="av">M</span><span class="who"><b>Mercedes S.</b><span>Alumna de A 11 Pasos del Sueño</span></span></figcaption></figure>
+        <figure><div class="hl">A los dos días ya dormía 6 horas.</div><blockquote>A los dos días de empezar el programa conseguí dormir 6 horas. El curso ha sido muy interesante: he aprendido cosas que no sabía. Seguiré trabajando las rutinas.</blockquote><figcaption><span class="av">M</span><span class="who"><b>María S.</b><span>Alumna de A 11 Pasos del Sueño</span></span></figcaption></figure>
+        <figure><div class="hl">El curso me ha parecido fantástico.</div><blockquote>He aprendido mucho. Gracias a la Dra. Roure estoy mejorando.</blockquote><figcaption><span class="av">M</span><span class="who"><b>Mariló H.</b><span>Alumna de A 11 Pasos del Sueño</span></span></figcaption></figure>
+      </div>
+      <div class="tq-note tq-swipe" style="display:none">Desliza para ver más →</div>
+      <div class="tq-note">Mensajes reales que las alumnas enviaron a Nuria. Cada persona es distinta y la experiencia puede variar.</div>
     </div>
   </section>
 
@@ -162,30 +194,31 @@ html,body{overflow-x:hidden}
         <div class="kick">A 11 Pasos del Sueño</div>
         <span class="bf-badge">Precio Black Friday</span>
         <div class="amt"><span class="old" id="n11-old"></span><span data-k="precio"></span> €</div>
+        <div class="bf-urg">Esta oferta desaparecerá pronto. Aprovecha este precio exclusivo.</div>
         <div style="font-size:14px;color:#8d8778">Un solo pago</div>
         <ul>
           <li>11 vídeos, uno por hábito</li>
-          <li><span data-k="directos"></span> sesiones en directo con Nuria</li>
-          <li>Grabaciones disponibles durante 1 mes</li>
+          <li><span data-k="directos"></span> sesiones en directo por Zoom con Nuria</li>
+          <li>Grabaciones disponibles durante 1 año</li>
           <li>Grupo de Telegram para tus preguntas</li>
           <li>Soporte por email para entrar a la plataforma</li>
         </ul>
         <div class="bonus"><b id="n11-rt"></b> 3 meditaciones guiadas de Nuria para acompañar tus noches.<span class="bonus-cd" id="n11-bcd"> Quedan <b data-cd></b></span></div>
         <div class="cta" style="justify-content:center"><a class="btn" data-pago href="#">Quiero empezar los 11 pasos</a></div>
         <p style="font-size:13.5px;margin-top:16px">Empezamos el <b data-k="inicio"></b>. Recibes el acceso al momento por email.</p>
+        <p style="font-size:12px;color:#9a937f;margin-top:8px">14 días de garantía de devolución si no has accedido al contenido.</p>
       </div>
     </div>
   </section>
 
   <section class="alt">
     <div class="w">
-      <h2>Garantía</h2>
-      <p>Tienes 14 días para pedir la devolución completa, siempre que no hayas accedido al contenido. Escríbenos y te devolvemos el dinero.</p>
-      <h2 style="margin-top:36px">Preguntas frecuentes</h2>
-      <details><summary>¿Y si no puedo conectarme a los directos?</summary><p>Tendrás todas las grabaciones durante 1 mes.</p></details>
-      <details><summary>¿Cuánto tiempo necesito cada día?</summary><p>Unos minutos para ver el vídeo del día y poner en práctica el hábito esa noche.</p></details>
-      <details><summary>¿Sustituye a un tratamiento?</summary><p>No. Es un programa de hábitos de sueño. Si tienes un trastorno diagnosticado o tomas medicación, sigue las indicaciones de tu médico.</p></details>
+      <h2>Preguntas frecuentes</h2>
+      <details><summary>¿Y si no puedo conectarme a los directos?</summary><p>Tendrás todas las grabaciones durante 1 año.</p></details>
+      <details><summary>¿Cuánto tiempo necesito cada día?</summary><p>Unos minutos al día para ver el vídeo y poner en práctica el hábito de ese paso.</p></details>
+      <details><summary>¿Sustituye a un tratamiento?</summary><p>No. Es un programa de implementación de hábitos de sueño. Si sufres un trastorno del sueño, como un insomnio crónico, o tomas medicación, podemos ofrecerte otras alternativas. Este programa es un primer paso.</p></details>
       <details><summary>¿Cuándo recibo el acceso?</summary><p>Al momento, por email, con los pasos para entrar a la plataforma y al grupo de Telegram.</p></details>
+      <details><summary>¿Tiene garantía?</summary><p>Sí. Tienes 14 días para pedir la devolución completa, siempre que no hayas accedido al contenido.</p></details>
       <details><summary>Tengo un problema con el pago o el acceso</summary><p>Escríbenos a <a href="mailto:hola@nuriaroure.com">hola@nuriaroure.com</a> y te ayudamos.</p></details>
     </div>
   </section>
@@ -219,7 +252,7 @@ html,body{overflow-x:hidden}
   var fr = document.getElementById('n11-franja'); if (fr && T) fr.textContent = T.franja || '';
   var rt = document.getElementById('n11-rt'); if (rt && T) rt.textContent = T.regaloTexto || 'Regalo:';
   var bo = root.querySelector('.bonus'); if (bo && !(T && T.regalo)) bo.style.display = 'none';
-  if (!T) Array.prototype.forEach.call(root.querySelectorAll('.bf-badge'), function (el) { el.style.display = 'none'; });
+  if (!T) Array.prototype.forEach.call(root.querySelectorAll('.bf-badge,.bf-urg'), function (el) { el.style.display = 'none'; });
   var cds = root.querySelectorAll('[data-cd]');
   if (T) {
     var pinta = function () {
