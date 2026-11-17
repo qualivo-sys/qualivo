@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Consultoría Comercial · Hiágora (maqueta)</title>
+<meta name="description" content="Maqueta de Qualivo para Hiágora: landing de la Consultoría Comercial que agenda la visita sin compromiso en el mismo paso.">
+<link rel="icon" href="../assets/landing/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,600;0,700;1,600;1,700&family=Roboto:wght@400;500;700;900&display=swap">
+<style>
+/* Landing · Hiágora · Consultoría Comercial (Check Comercial → visita sin compromiso). Maqueta de Qualivo, 16-nov-2026.
+   Marca tomada de hiagora.com: azul petróleo #1C404C, rojo del logo #E6425C, azul #1890D7, Crimson Text + Roboto. */
+:root{color-scheme:light;
+  --navy:#1C404C;--navy-2:#14313B;--navy-3:#0E242C;--slate:#405B65;--red:#E6425C;--red-btn:#D2304D;--red-hi:#E6425C;--blue:#1890D7;--sky:#A8DAEA;--green:#7BC299;
+  --ink:#14262D;--paper:#FFFFFF;--soft:#F2F6F7;--soft-2:#E8EFF1;--line:#D9E3E6;--muted:#52656C;--good:#1E7A4C;
+  --serif:"Crimson Text",Georgia,"Times New Roman",serif;--sans:"Roboto",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:16px;--shadow:0 30px 70px -30px rgba(10,30,38,.55);--g:16px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:var(--g)}
+@media (min-width:700px){:root{--g:28px}}
+h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.01em;text-wrap:balance;line-height:1.08}
+em{font-style:italic}
+
+/* franja de maqueta */
+.proposal{background:var(--navy-3);color:rgba(255,255,255,.82);font-size:12.5px;text-align:center;padding:7px 16px;letter-spacing:.01em}
+.proposal b{color:#fff;font-weight:500}
+
+/* barra superior */
+.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:10px}
+.top .brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.top .brand img{height:38px;width:auto}
+.top .brand span{font-size:12px;color:var(--muted);border-left:1px solid var(--line);padding-left:12px;line-height:1.25;font-weight:500}
+.top .right{display:flex;align-items:center;gap:18px}
+.top .tel{font-weight:700;color:var(--navy);text-decoration:none;font-size:15px;white-space:nowrap}
+
+/* botones */
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--red-btn);color:#fff;font-weight:700;font-size:16px;text-decoration:none;border:0;border-radius:999px;padding:15px 26px;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s;white-space:nowrap;letter-spacing:.005em}
+.cta:hover{transform:translateY(-1px);background:#C02643;box-shadow:0 12px 26px -12px rgba(210,48,77,.8)}
+.cta .ar{transition:transform .2s}
+.cta:hover .ar{transform:translateX(3px)}
+.cta.sm{padding:10px 18px;font-size:14.5px}
+.cta[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* hero */
+.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(900px 500px at 85% -10%,rgba(24,144,215,.28),transparent 60%),
+  radial-gradient(700px 520px at -10% 110%,rgba(230,66,92,.18),transparent 60%),
+  linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.hero .deco{position:absolute;z-index:-1;right:0;bottom:-10px;width:min(600px,72%);opacity:.55;pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:48px;align-items:center;padding-block:64px 80px}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sky)}
+.kicker::before{content:"";width:9px;height:9px;background:var(--red);border-radius:2px;transform:rotate(45deg)}
+.hero h1{font-size:clamp(42px,6vw,76px);margin:16px 0 18px;font-weight:700}
+.hero h1 em{color:#FF8A9C;font-weight:600}
+.hero h1 .l2{display:block;font-size:.62em;font-weight:600;color:rgba(255,255,255,.9);margin-top:.18em}
+.hero .sub{font-size:clamp(17px,1.55vw,19.5px);color:rgba(255,255,255,.84);max-width:54ch;margin:0}
+.hero .sub b{color:#fff;font-weight:500}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.facts li{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:500}
+.proof{display:flex;align-items:center;gap:14px;margin-top:28px}
+.faces{display:flex}
+.faces img{width:42px;height:42px;border-radius:50%;border:2px solid var(--navy);object-fit:cover;filter:grayscale(.2)}
+.faces img+img{margin-left:-12px}
+.proof p{margin:0;font-size:14.5px;color:rgba(255,255,255,.78);line-height:1.4}
+.proof p b{color:#fff;font-weight:700}
+.hero .go{display:none;margin-top:24px}
+
+/* formulario */
+.form{background:var(--paper);color:var(--ink);border-radius:22px;padding:26px;box-shadow:var(--shadow);display:grid;gap:14px;min-height:470px;align-content:start;position:relative;z-index:2;scroll-margin-top:84px}
+.form .head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.form h2{font-size:27px;margin:0;color:var(--navy)}
+.form .step{font-size:12.5px;color:var(--muted);font-weight:500;white-space:nowrap}
+.demo{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#7A4B00;background:#FFF1C9;border:1px dashed #D9A72C;border-radius:6px;padding:2px 7px;margin-left:8px;vertical-align:3px;font-family:var(--sans)}
+.bar{height:5px;border-radius:3px;background:var(--soft-2);overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),#F27A8E);transition:width .4s}
+.form .q{font-weight:700;font-size:18.5px;line-height:1.3;margin:2px 0 0}
+.opts{display:grid;gap:9px}
+.opts button{text-align:left;border:1.5px solid var(--line);background:var(--paper);border-radius:14px;padding:13px 15px;cursor:pointer;display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:12px;transition:border-color .15s,background .15s,transform .15s}
+.opts button:hover{border-color:var(--navy);background:var(--soft);transform:translateX(2px)}
+.opts .ico{width:36px;height:36px;border-radius:10px;background:var(--soft-2);display:grid;place-items:center;color:var(--navy)}
+.opts .ico svg{width:20px;height:20px}
+.opts b{display:block;font-size:16px;font-weight:700}
+.opts small{display:block;color:var(--muted);font-size:13.5px;line-height:1.35}
+.opts .chev{color:var(--muted);font-size:20px}
+.fld{display:grid;gap:5px;font-size:13.5px;font-weight:500;color:var(--slate)}
+.fld input{font-size:16px;border:1.5px solid var(--line);border-radius:12px;padding:12px 13px;background:var(--paper);color:var(--ink);width:100%}
+.fld input:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--navy)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;border:0;padding:0;margin:0}
+.chips legend{font-size:13.5px;font-weight:500;color:var(--slate);margin-bottom:5px;padding:0}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:7px 13px;font-size:14px;font-weight:500;transition:all .15s}
+.chips label:hover span{border-color:var(--navy)}
+.chips input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+.chips input:focus-visible+span{outline:2px solid var(--blue);outline-offset:2px}
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--muted);line-height:1.45}
+.chk input{margin-top:3px;accent-color:var(--navy)}
+.form .cta{width:100%}
+.back{background:none;border:0;color:var(--muted);font-size:13.5px;cursor:pointer;justify-self:start;padding:0;text-decoration:underline}
+.micro{font-size:12.5px;color:var(--muted);text-align:center;margin:0}
+.err{color:#B3261E;font-size:13px;margin:-4px 0 0}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--soft-2);border-radius:12px;padding:4px}
+.seg button{border:0;background:transparent;border-radius:9px;padding:10px 8px;font-weight:700;font-size:14.5px;cursor:pointer;color:var(--slate);line-height:1.2}
+.seg button small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--paper);color:var(--navy);box-shadow:0 2px 8px -3px rgba(10,30,38,.35)}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.slots button{border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:10px 6px;cursor:pointer;text-align:center;font-size:15px;font-weight:700;line-height:1.25}
+.slots button small{display:block;font-weight:400;color:var(--muted);font-size:12.5px}
+.slots button:hover{border-color:var(--navy)}
+.slots button[aria-pressed="true"]{border-color:var(--navy);background:var(--navy);color:#fff}
+.slots button[aria-pressed="true"] small{color:var(--sky)}
+.ok{display:grid;gap:12px}
+.ok .big{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.08;color:var(--navy)}
+.ok .card{border:1.5px solid var(--navy);border-radius:14px;padding:13px 14px;background:var(--soft);font-weight:500;font-size:15px;line-height:1.45}
+.ok .card b{display:block;font-size:16px}
+.wa{display:flex;gap:10px;align-items:flex-start;background:#E7F7EE;border-radius:14px;padding:12px 14px;font-size:14.5px;line-height:1.4;color:#14412A}
+.wa svg{width:22px;height:22px;flex:none;color:#1FA855;margin-top:1px}
+.ficha{border:1px dashed var(--line);border-radius:14px;padding:12px 14px;font-size:13.5px;display:grid;gap:5px}
+.ficha .t{font-size:11.5px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ficha div{display:flex;justify-content:space-between;gap:10px}
+.ficha div span{color:var(--muted)}
+.ficha div b{text-align:right}
+.pill{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12.5px;font-weight:700;background:#FDE3E7;color:#9E1C35}
+.pill.hi{background:#DDF3E6;color:var(--good)}
+.link{font-weight:700;color:var(--navy);font-size:14.5px;text-align:center}
+
+/* banda de logos */
+.logos{background:var(--navy-3);color:rgba(255,255,255,.7)}
+.logos .wrap{display:flex;align-items:center;gap:18px 34px;flex-wrap:wrap;padding-block:22px;justify-content:center}
+.logos p{margin:0;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--sky);flex-basis:100%;text-align:center}
+.logos img{height:44px;width:auto;opacity:.82;filter:grayscale(1) brightness(1.6)}
+.logos .txt{font-weight:900;letter-spacing:.06em;text-transform:uppercase;font-size:14px;color:rgba(255,255,255,.82);line-height:1.1;text-align:center}
+.logos .txt small{display:block;font-weight:500;letter-spacing:.2em;font-size:9.5px;opacity:.8}
+
+/* secciones */
+section{padding-block:84px}
+section.alt{background:var(--soft)}
+.eyebrow{font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--red-btn);margin:0}
+h2.t{font-size:clamp(34px,4.4vw,54px);margin:10px 0 16px;color:var(--navy)}
+h2.t em{color:var(--red-btn)}
+.lead{font-size:18.5px;color:var(--muted);max-width:62ch;margin:0}
+
+/* cifras */
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-block:1px solid var(--line)}
+.nums div{padding:26px 18px;text-align:center}
+.nums div+div{border-left:1px solid var(--line)}
+.nums b{display:block;font-family:var(--serif);font-size:40px;line-height:1;color:var(--navy)}
+.nums span{display:block;margin-top:6px;font-size:14px;color:var(--muted);line-height:1.35}
+.nums+section{padding-top:72px}
+
+/* resultados */
+.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px}
+.case{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;grid-template-rows:auto auto 1fr auto;gap:10px;position:relative;overflow:hidden}
+.case::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--red)}
+.case .n{font-family:var(--serif);font-weight:700;font-size:48px;line-height:1;color:var(--red-btn);letter-spacing:-.01em}
+.case .k{font-weight:700;font-size:15.5px;color:var(--navy)}
+.case blockquote{margin:0;font-family:var(--serif);font-size:19px;line-height:1.4;color:var(--ink)}
+.case .tag{position:absolute;top:18px;right:18px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--soft);border-radius:6px;padding:2px 7px}
+.who{display:flex;align-items:center;gap:12px;margin-top:8px;padding-top:14px;border-top:1px solid var(--line)}
+.who img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.who b{display:block;font-size:15.5px;line-height:1.25}
+.who span{font-size:13.5px;color:var(--muted);line-height:1.3;display:block}
+.wide{margin-top:18px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:var(--navy);color:#fff;border-radius:var(--r);padding:22px 26px}
+.wide img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.3)}
+.wide blockquote{margin:0;font-family:var(--serif);font-size:21px;line-height:1.35}
+.wide cite{display:block;font-style:normal;font-family:var(--sans);font-size:14px;color:var(--sky);margin-top:6px}
+
+/* para quién */
+.fit{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:36px}
+.fit>div{border-radius:var(--r);padding:26px}
+.fit .yes{background:var(--paper);border:1.5px solid var(--navy)}
+.fit .no{background:var(--soft);border:1px solid var(--line)}
+.fit h3{margin:0 0 14px;font-size:26px;color:var(--navy)}
+.fit ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.fit li{display:grid;grid-template-columns:26px 1fr;gap:6px;font-size:16.5px;line-height:1.45}
+.fit li::before{content:"";width:20px;height:20px;border-radius:50%;margin-top:2px;background:var(--navy) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/12px no-repeat}
+.fit .no li{color:var(--muted)}
+.fit .no li::before{background:#C9D5D9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6 6 18'/%3E%3C/svg%3E") center/11px no-repeat}
+
+/* cómo funciona */
+.flow{display:grid;grid-template-columns:.8fr 2.2fr 1.4fr;gap:16px;margin-top:38px;align-items:stretch}
+.ph{border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:12px}
+.ph .lbl{font-size:11.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.ph h3{margin:0;font-size:25px}
+.ph p{margin:0;font-size:15px;line-height:1.5}
+.ph.v{background:var(--red-btn);color:#fff}
+.ph.v .lbl{color:#FFD4DB}
+.ph.c{background:var(--paper);border:1.5px solid var(--navy)}
+.ph.c .lbl{color:var(--red-btn)}
+.ph.c h3{color:var(--navy)}
+.ph.c>p{color:var(--muted)}
+.ph.tb{background:var(--navy);color:#fff}
+.ph.tb .lbl{color:var(--sky)}
+.ph.tb>p{color:rgba(255,255,255,.8)}
+.four{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;counter-reset:s;margin-top:4px;flex:1;grid-auto-rows:1fr}
+.four div{counter-increment:s;background:var(--soft);border-radius:12px;padding:14px;display:grid;grid-template-columns:32px minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:12px;align-content:start}
+.four div::before{content:counter(s);grid-row:span 2;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--serif);font-weight:700;font-size:17px}
+.four b{display:block;font-size:16px;color:var(--navy);line-height:1.3;margin-top:4px}
+.four p{margin:4px 0 0;font-size:14px;color:var(--muted);line-height:1.4}
+.ph ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ph ul li{display:flex;gap:10px;align-items:center;font-weight:500;font-size:15.5px;background:rgba(255,255,255,.07);border-radius:10px;padding:9px 12px}
+.ph ul li::before{content:"";width:8px;height:8px;background:var(--red);border-radius:2px;transform:rotate(45deg);flex:none}
+.ph .dur{margin-top:auto;font-size:13px;font-weight:700;border-radius:999px;padding:4px 12px;align-self:flex-start}
+.ph.v .dur{background:rgba(255,255,255,.18)}
+.ph.tb .dur{background:rgba(168,218,234,.16);color:var(--sky)}
+.gains{margin-top:34px;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.gains b{font-family:var(--serif);font-size:21px;color:var(--navy);margin-right:6px}
+.gains span{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 13px;font-size:14.5px;font-weight:500}
+
+/* quién */
+#quien{overflow-x:clip}
+.split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:center}
+.portrait{position:relative;background:#fff;border-radius:22px;padding:24px 24px 0;box-shadow:var(--shadow);max-width:430px;justify-self:center;width:100%}
+.portrait::before{content:"";position:absolute;inset:auto -14px -14px auto;width:120px;height:120px;background:var(--red);border-radius:26px;transform:rotate(45deg);z-index:-1;opacity:.9}
+.portrait img{width:100%;aspect-ratio:485/561;object-fit:contain}
+.portrait figcaption{position:absolute;left:16px;bottom:16px;background:var(--navy);color:#fff;border-radius:12px;padding:9px 13px;font-size:13px;line-height:1.3}
+.portrait figcaption b{display:block;font-size:15px}
+.big-q{font-family:var(--serif);font-size:clamp(26px,3vw,36px);line-height:1.15;color:var(--navy);margin:14px 0 14px;font-style:italic;font-weight:600}
+.ticks{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:11px}
+.ticks li{display:grid;grid-template-columns:28px 1fr;gap:4px;font-size:16.5px}
+.ticks li::before{content:"";width:20px;height:20px;border-radius:50%;margin-top:3px;background:var(--red-btn) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/12px no-repeat}
+
+/* faq */
+.faq{max-width:840px;margin-top:26px}
+.faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.faq summary{cursor:pointer;font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--navy)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--serif);font-size:26px;line-height:.9;color:var(--red-btn)}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:10px 0 0;color:var(--muted);font-size:16.5px;max-width:70ch}
+
+/* cierre */
+.final{background:var(--navy);color:#fff;text-align:center;position:relative;overflow:hidden;isolation:isolate}
+.final::before{content:"";position:absolute;z-index:-1;width:520px;height:520px;right:-180px;top:-200px;border-radius:90px;transform:rotate(45deg);background:rgba(230,66,92,.14)}
+.final h2.t{color:#fff}
+.final h2.t em{color:#FF8A9C}
+.final .lead{color:rgba(255,255,255,.82);margin-inline:auto}
+.final .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+
+footer{padding:40px 0 120px;font-size:14px;color:var(--muted);background:var(--soft)}
+.foot{display:grid;grid-template-columns:auto 1fr;gap:28px 40px;align-items:start}
+.foot img{height:44px;width:auto}
+.foot address{font-style:normal;line-height:1.6}
+.foot address a{color:var(--navy);font-weight:700;text-decoration:none}
+.notes{background:#FFF8D6;color:#2B2410;border:1px dashed #C9A62C;border-radius:14px;padding:16px 18px;font-size:14px;margin-top:30px}
+.notes b{display:block;margin-bottom:6px}
+.notes ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.small{margin-top:16px;font-size:13px}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(20,49,59,.97);color:#fff;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;align-items:center;gap:12px;justify-content:space-between;transform:translateY(110%);transition:transform .3s}
+.sticky.on{transform:none}
+.sticky span{font-size:12.5px;line-height:1.3;color:rgba(255,255,255,.8)}
+.sticky span b{display:block;font-size:14.5px;color:#fff}
+
+@media (max-width:1000px){
+  .hero .wrap{grid-template-columns:1fr;gap:30px;padding-block:44px 56px}
+  .hero .go{display:inline-flex}
+  .cases{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr;gap:40px}
+  .fit{grid-template-columns:1fr}
+  .nums{grid-template-columns:1fr 1fr}
+  .nums div:nth-child(3){border-left:0}
+  .nums div:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  section{padding-block:60px}
+  .top .brand span,.top .tel,.top .cta{display:none}
+  .top .brand img{height:32px}
+  .sticky{display:flex}
+  .form{padding:20px 16px;border-radius:18px;min-height:0}
+  .form h2{font-size:24px}
+  .row2{grid-template-columns:1fr}
+  .slots{grid-template-columns:1fr 1fr}
+  .four{grid-template-columns:1fr;grid-auto-rows:auto}
+  .facts li:nth-child(n+4){display:none}
+  .hero h1{font-size:44px}
+  .nums b{font-size:32px}
+  .wide{grid-template-columns:1fr;padding:22px}
+  .wide blockquote{font-size:19px}
+  .case .n{font-size:42px}
+  .foot{grid-template-columns:1fr}
+  .logos img{height:36px}
+  .logos .wrap{gap:14px 24px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="proposal"><b>Maqueta de Qualivo para Hiágora</b> · no es la web oficial</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Hiágora, inicio"><img src="../assets/landing/logo.webp" alt="Hiágora · Todo vende" width="500" height="175"><span>Consultoría<br>Comercial</span></a>
+    <div class="right">
+      <a class="tel" href="tel:+34951014687">951 014 687</a>
+      <a class="cta sm" href="#visita">Pide tu visita</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <svg class="deco" viewBox="0 0 620 420" aria-hidden="true" fill="none">
+    <g fill="rgba(168,218,234,.10)" stroke="rgba(168,218,234,.22)">
+      <rect x="40" y="300" width="64" height="120" rx="6"/><rect x="130" y="262" width="64" height="158" rx="6"/><rect x="220" y="236" width="64" height="184" rx="6"/>
+      <rect x="310" y="190" width="64" height="230" rx="6"/><rect x="400" y="140" width="64" height="280" rx="6"/><rect x="490" y="74" width="64" height="346" rx="6"/>
+    </g>
+    <path d="M30 330 C 140 300, 200 270, 280 236 S 430 150, 580 50" stroke="#E6425C" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="580" cy="50" r="7" fill="#E6425C"/>
+  </svg>
+  <div class="wrap">
+    <div>
+      <span class="kicker">Consultoría Comercial · Check Comercial</span>
+      <h1>Vende por valor, <em>no por precio.</em><span class="l2">Y domina tu facturación.</span></h1>
+      <p class="sub">Si tienes un buen producto y tu equipo cierra menos de lo que debería, empieza por el <b>Check Comercial</b>: test, análisis, diagnóstico y plan de acción. La primera visita es sin compromiso.</p>
+      <ul class="facts">
+        <li>Visita sin compromiso</li>
+        <li>Presencial en Málaga u online</li>
+        <li>Desde 2011</li>
+        <li>Plan para tu caso, no genérico</li>
+      </ul>
+      <div class="proof">
+        <div class="faces"><img src="../assets/landing/alberto-serrano.webp" alt="" width="80" height="80"><img src="../assets/landing/paula-rueda.webp" alt="" width="80" height="80"><img src="../assets/landing/antonio-mancilla.webp" alt="" width="102" height="102"><img src="../assets/landing/agustin-ramirez.webp" alt="" width="80" height="80"></div>
+        <p><b>Más de 5.000 vendedores formados</b><br>y más de 100 casos de crecimiento.</p>
+      </div>
+      <a class="cta go" href="#visita">Pide tu visita sin compromiso <span class="ar">→</span></a>
+    </div>
+    <div class="form" id="visita" aria-live="polite"></div>
+  </div>
+</div>
+
+<div class="logos">
+  <div class="wrap">
+    <p>Empresas que han trabajado con Hiágora</p>
+    <img src="../assets/landing/cli-microcad.webp" alt="Microcad" width="350" height="140" loading="lazy">
+    <img src="../assets/landing/cli-nugasur.webp" alt="Nugasur" width="350" height="140" loading="lazy">
+    <img src="../assets/landing/cli-riversa.webp" alt="Riversa" width="350" height="140" loading="lazy">
+    <img src="../assets/landing/cli-generalelevadores.webp" alt="General Elevadores" width="350" height="140" loading="lazy">
+    <img src="../assets/landing/cli-centrosur.webp" alt="Centrosur" width="350" height="140" loading="lazy">
+    <img src="../assets/landing/cli-aganova.webp" alt="Grupo Aganova" width="350" height="140" loading="lazy">
+    <span class="txt">Dulces<small>Costa del Sol</small></span>
+  </div>
+</div>
+
+<section id="resultados">
+  <div class="wrap">
+    <p class="eyebrow">Resultados de clientes</p>
+    <h2 class="t">Lo que cambia cuando el equipo <em>vende con método.</em></h2>
+    <p class="lead">Lo cuentan ellos, con nombre y empresa.</p>
+    <div class="cases">
+      <article class="case">
+        <span class="n">30 % → 40 %</span>
+        <span class="k">de ratio de conversión en 3 años</span>
+        <blockquote>«Gracias a Hiágora hemos conseguido aumentar de un 30 % a un 40 % nuestro ratio de conversión en solo 3 años.»</blockquote>
+        <div class="who"><img src="../assets/landing/alberto-serrano.webp" alt="Alberto Serrano" width="80" height="80" loading="lazy"><div><b>Alberto Serrano</b><span>CEO · Trasteros Plus</span></div></div>
+      </article>
+      <article class="case">
+        <span class="n">+10-15 %</span>
+        <span class="k">de ticket medio por visita</span>
+        <blockquote>«Nos ha aportado una subida en el ticket medio por visita de entre el 10-15 %. Más seguridad en el equipo a la hora de la venta.»</blockquote>
+        <div class="who"><img src="../assets/landing/antonio-mancilla.webp" alt="Antonio Mancilla" width="102" height="102" loading="lazy"><div><b>Antonio Mancilla</b><span>Gerente · Dulces Costa del Sol</span></div></div>
+      </article>
+      <article class="case">
+        <span class="n">10 %</span>
+        <span class="k">de clientes reactivados</span>
+        <blockquote>«Hemos conseguido reactivar a un 10 % de clientes mediante un mayor seguimiento comercial.»</blockquote>
+        <div class="who"><img src="../assets/landing/paula-rueda.webp" alt="Paula Rueda" width="80" height="80" loading="lazy"><div><b>Paula Rueda</b><span>Directora adjunta · ERFRI</span></div></div>
+      </article>
+    </div>
+    <div class="wide">
+      <img src="../assets/landing/agustin-ramirez.webp" alt="Agustín Ramírez" width="80" height="80" loading="lazy">
+      <blockquote>«El 2018 hemos facturado 5 veces más que en 2013. Trabajamos en 42 países y nuestro ratio de cierre es más del 50 %.»<cite>Agustín Ramírez · CEO de Grupo Aganova</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="nums">
+    <div><b>2011</b><span>escuela de ventas en Málaga</span></div>
+    <div><b>+5.000</b><span>vendedores formados</span></div>
+    <div><b>+100</b><span>casos de crecimiento</span></div>
+    <div><b>3-12</b><span>meses de acompañamiento en Top Business</span></div>
+  </div>
+</div>
+
+<section id="para-quien">
+  <div class="wrap">
+    <p class="eyebrow">¿Es para tu empresa?</p>
+    <h2 class="t">Buen producto. Pocas ventas cerradas.</h2>
+    <p class="lead">La consultoría es para pymes que no se conforman con ir tirando. Si te reconoces en la columna de la izquierda, la visita merece la pena.</p>
+    <div class="fit">
+      <div class="yes">
+        <h3>Es para ti si…</h3>
+        <ul>
+          <li>Tienes equipo comercial, grande o pequeño.</li>
+          <li>Tu producto es bueno, pero cierras menos operaciones de las que deberías.</li>
+          <li>Para cerrar, acabáis bajando el precio y el margen lo nota.</li>
+          <li>Cada comercial vende a su manera y no sabes dónde se pierden las ventas.</li>
+          <li>Quieres decidir hacia dónde va la empresa, no reaccionar al mercado.</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h3>No es para ti si…</h3>
+        <ul>
+          <li>Buscas un informe largo para guardarlo en un cajón.</li>
+          <li>Quieres recomendaciones genéricas que valen para cualquiera.</li>
+          <li>No estás dispuesto a cambiar nada en el equipo.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="como">
+  <div class="wrap">
+    <p class="eyebrow">Cómo funciona</p>
+    <h2 class="t">Primero, el estado real. <em>Después, el plan.</em></h2>
+    <p class="lead">Empieza con una visita. Si tiene sentido, el Check Comercial te dice dónde estás y el Top Business te lleva hasta donde puedes llegar.</p>
+    <div class="flow">
+      <div class="ph v">
+        <span class="lbl">Paso 0</span>
+        <h3>Visita sin compromiso</h3>
+        <p>José Antonio conoce tu empresa y tu equipo. Te dice si el Check Comercial tiene sentido para ti.</p>
+        <span class="dur">Presencial u online</span>
+      </div>
+      <div class="ph c">
+        <span class="lbl">Fase 1 · Check Comercial</span>
+        <h3>Conoce cómo vende tu empresa hoy</h3>
+        <div class="four">
+          <div><b>Test</b><p>Cuestionarios y tests al equipo.</p></div>
+          <div><b>Análisis</b><p>Cómo se vende hoy y qué oportunidades hay.</p></div>
+          <div><b>Diagnóstico</b><p>Dónde se pierden las ventas.</p></div>
+          <div><b>Plan de acción</b><p>Recomendaciones directas para tu caso.</p></div>
+        </div>
+      </div>
+      <div class="ph tb">
+        <span class="lbl">Fase 2 · Top Business</span>
+        <h3>Llévala a su máximo potencial</h3>
+        <ul>
+          <li>Estrategia</li>
+          <li>Plan comercial global</li>
+          <li>Formación del equipo</li>
+          <li>Acompañamiento</li>
+        </ul>
+        <span class="dur">De 3 a 12 meses</span>
+      </div>
+    </div>
+    <div class="gains">
+      <b>Al terminar:</b>
+      <span>Propuesta de valor definida</span><span>Control del CRM</span><span>Previsión de ventas</span><span>Máximo rendimiento de cada cliente</span><span>Fuera clientes no rentables</span><span>Un método de venta común</span>
+    </div>
+  </div>
+</section>
+
+<section id="quien">
+  <div class="wrap split">
+    <figure class="portrait">
+      <img src="../assets/landing/padilla.webp" alt="Retrato en acuarela de José Antonio Padilla" width="485" height="561" loading="lazy">
+      <figcaption><b>José Antonio Padilla</b>Director de Hiágora</figcaption>
+    </figure>
+    <div>
+      <p class="eyebrow">Quién te visita</p>
+      <h2 class="t">José Antonio Padilla</h2>
+      <p class="lead">Director de la Escuela de Ventas Hiágora y de su Consultoría Comercial. Forma a equipos comerciales en Málaga desde 2011.</p>
+      <p class="big-q">«Los próximos 10 años los decides hoy.»</p>
+      <ul class="ticks">
+        <li>Un método contrastado en cientos de empresas.</li>
+        <li>Sin documentos eternos ni dosieres que nadie lee.</li>
+        <li>Trabaja con un número limitado de empresas al año.</li>
+      </ul>
+      <p style="margin-top:28px"><a class="cta" href="#visita">Pide tu visita sin compromiso <span class="ar">→</span></a></p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="faq">
+  <div class="wrap">
+    <p class="eyebrow">Preguntas frecuentes</p>
+    <h2 class="t">Antes de pedir la visita.</h2>
+    <div class="faq">
+      <details open><summary>¿Cuánto cuesta?</summary><p>Depende del tamaño del equipo. Te lo cuenta José Antonio en la visita, sin compromiso.</p></details>
+      <details><summary>¿Se puede bonificar?</summary><p>Pregúntalo en la visita: José Antonio te dice qué opciones hay para tu caso.</p></details>
+      <details><summary>¿Presencial u online?</summary><p>Las dos. La visita puede ser en tu empresa, en nuestra oficina de Málaga o por videollamada.</p></details>
+      <details><summary>¿Me compromete a algo la visita?</summary><p>No. La visita inicial es sin compromiso. Si el Check Comercial no tiene sentido para tu empresa, te lo decimos.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 class="t">Deja de vender por precio. <em>Empieza por la visita.</em></h2>
+    <p class="lead">Un minuto para pedirla y eliges el día en el mismo paso. Te escribimos por WhatsApp para confirmarla.</p>
+    <div class="row"><a class="cta" href="#visita">Pide tu visita sin compromiso <span class="ar">→</span></a></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <img src="../assets/landing/logo.webp" alt="Hiágora · Todo vende" width="500" height="175" loading="lazy">
+      <address>
+        <b>Hiágora · Escuela de Ventas y Consultoría Comercial</b><br>
+        C/ Esperanto nº4, oficinas 22-23, 29007 Málaga<br>
+        <a href="tel:+34951014687">951 014 687</a> · <a href="mailto:info@hiagora.com">info@hiagora.com</a>
+      </address>
+    </div>
+    <div class="notes">
+      <b>Notas de Qualivo (esto no saldría en la página)</b>
+      <ul>
+        <li>Hoy la página de Consultoría pide solo el email para «descargar el dossier» y ahí se queda. Aquí el gerente pide la visita, se cualifica y la deja agendada en el mismo paso.</li>
+        <li>Textos, testimonios, logos, retrato y datos de contacto sacados de hiagora.com (16-nov). Los textos finales los aprobáis vosotros.</li>
+        <li>Al enviar: ficha con empresa, tamaño del equipo y qué le preocupa; WhatsApp de Elena para confirmar y aviso a José Antonio si la empresa encaja. Lo veis en el panel.</li>
+        <li>Pendiente de confirmar: duración del Check Comercial (la web dice 12 h en un sitio y 48 h en otro), huecos reales de José Antonio y si la consultoría se puede bonificar. Esta maqueta no envía datos.</li>
+      </ul>
+    </div>
+    <p class="small">Maqueta preparada por Qualivo el 16 de noviembre de 2026. No es la web oficial de Hiágora.</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky"><span><b>Visita sin compromiso</b>Con José Antonio Padilla</span><a class="cta sm" href="#visita">Pide tu visita</a></div>
+
+<script>
+(function () {
+  var box = document.getElementById('visita');
+  var PANEL = 'https://qualivo.io/intelligence/?sector=hiagora&empresa=Hi%C3%A1gora&objetivo=conversion';
+  var r = { modo: 'Presencial en Málaga' };
+  var TOTAL = 3;
+  var ICONS = {
+    captar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".6" fill="currentColor"/></svg>',
+    cerrar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>',
+    seguimiento: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg>',
+    equipo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
+  };
+  var PREO = [
+    ['captar', 'Captar', 'Nos faltan clientes nuevos'],
+    ['cerrar', 'Cerrar', 'Presupuestamos mucho y cerramos poco'],
+    ['seguimiento', 'Seguimiento', 'Los clientes se nos enfrían'],
+    ['equipo', 'Organizar al equipo', 'Cada comercial va por libre']
+  ];
+  var EMPLEADOS = ['1-10', '11-50', '51-250', 'Más de 250'];
+  var COMERCIALES = ['1-2', '3-5', '6-15', 'Más de 15'];
+
+  function el(t, c, x) { var d = document.createElement(t); if (c) d.className = c; if (x != null) d.textContent = x; return d; }
+  function frame(n, title) {
+    box.innerHTML = '';
+    var h = el('div', 'head'); var h2 = el('h2', null, title); var tag = el('span', 'demo', 'Demo'); tag.title = 'Maqueta: no envía datos'; h2.appendChild(tag);
+    h.appendChild(h2); h.appendChild(el('span', 'step', n < TOTAL ? 'Paso ' + (n + 1) + ' de ' + TOTAL : 'Listo'));
+    var bar = el('div', 'bar'), s = el('span'); bar.appendChild(s); box.appendChild(h); box.appendChild(bar);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { s.style.width = Math.round((n + (n < TOTAL ? .35 : 0)) / TOTAL * 100) + '%'; }); });
+  }
+  function back(n) { var b = el('button', 'back', '← Atrás'); b.type = 'button'; b.onclick = function () { paso(n - 1); }; box.appendChild(b); }
+  function top() { var y = box.getBoundingClientRect().top; if (y < 60 || y > window.innerHeight * .6) box.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
+  function paso(n, scroll) { [preocupa, datos, agenda, fin][n](); if (scroll) top(); }
+
+  function preocupa() {
+    frame(0, 'Pide tu visita');
+    box.appendChild(el('p', 'q', '¿Qué te preocupa más de tus ventas?'));
+    var o = el('div', 'opts');
+    PREO.forEach(function (x) {
+      var b = el('button'); b.type = 'button';
+      var i = el('span', 'ico'); i.innerHTML = ICONS[x[0]]; b.appendChild(i);
+      var t = el('span'); t.appendChild(el('b', null, x[1])); t.appendChild(el('small', null, x[2])); b.appendChild(t);
+      b.appendChild(el('span', 'chev', '›'));
+      b.onclick = function () { r.preocupa = x[1]; paso(1, true); };
+      o.appendChild(b);
+    });
+    box.appendChild(o);
+    box.appendChild(el('p', 'micro', '1 minuto · visita sin compromiso · eliges día al final'));
+  }
+
+  function chips(name, legend, vals) {
+    var f = el('fieldset', 'chips'); f.appendChild(el('legend', null, legend));
+    vals.forEach(function (v) {
+      var l = el('label'); var i = el('input'); i.type = 'radio'; i.name = name; i.value = v; if (r[name] === v) i.checked = true;
+      l.appendChild(i); l.appendChild(el('span', null, v)); f.appendChild(l);
+    });
+    return f;
+  }
+  function input(name, label, type, ac, ph) {
+    var l = el('label', 'fld', label); var i = el('input'); i.name = name; i.type = type; i.autocomplete = ac; if (ph) i.placeholder = ph; if (r[name]) i.value = r[name];
+    l.appendChild(i); return l;
+  }
+  function datos() {
+    frame(1, 'Tu empresa');
+    var f = el('form'); f.style.display = 'grid'; f.style.gap = '13px'; f.noValidate = true;
+    var r2 = el('div', 'row2'); r2.appendChild(input('nombre', 'Nombre', 'text', 'given-name', 'Tu nombre')); r2.appendChild(input('empresa', 'Empresa', 'text', 'organization', 'Nombre de la empresa')); f.appendChild(r2);
+    f.appendChild(chips('empleados', 'Nº de empleados', EMPLEADOS));
+    f.appendChild(chips('comerciales', 'Nº de comerciales', COMERCIALES));
+    f.appendChild(input('movil', 'Móvil (para confirmarte la visita por WhatsApp)', 'tel', 'tel', '6__ ___ ___'));
+    var c = el('label', 'chk'); var cb = el('input'); cb.type = 'checkbox'; cb.name = 'ok'; cb.checked = !!r.ok; c.appendChild(cb);
+    c.appendChild(el('span', null, 'Acepto que Hiágora me contacte por WhatsApp y teléfono para organizar la visita.')); f.appendChild(c);
+    var err = el('p', 'err'); err.hidden = true; err.setAttribute('role', 'alert'); f.appendChild(err);
+    f.onchange = function () { err.hidden = true; };
+    var s = el('button', 'cta'); s.type = 'submit'; s.innerHTML = 'Pide tu visita sin compromiso <span class="ar">→</span>'; f.appendChild(s);
+    f.onsubmit = function (e) {
+      e.preventDefault();
+      var emp = f.querySelector('input[name=empleados]:checked'), com = f.querySelector('input[name=comerciales]:checked');
+      var falta = [];
+      if (!emp) falta.push('nº de empleados'); if (!com) falta.push('nº de comerciales'); if (!cb.checked) falta.push('la casilla de contacto');
+      if (falta.length) { err.textContent = 'Falta: ' + falta.join(', ') + '.'; err.hidden = false; return; }
+      r.nombre = (f.nombre.value || '').trim() || 'Marta'; r.empresa = (f.empresa.value || '').trim() || 'Tu empresa';
+      r.movil = (f.movil.value || '').trim(); r.empleados = emp.value; r.comerciales = com.value; r.ok = true;
+      paso(2, true);
+    };
+    box.appendChild(f); back(1);
+  }
+
+  function huecos() {
+    var d = new Date(), out = [], dias = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'], horas = ['10:00', '12:30', '17:00'];
+    for (var i = 1; out.length < 6 && i < 21; i++) {
+      var x = new Date(d.getFullYear(), d.getMonth(), d.getDate() + i); if (x.getDay() === 0 || x.getDay() === 6) continue;
+      out.push([dias[x.getDay()] + ' ' + x.getDate(), horas[out.length % 3]]);
+    }
+    return out;
+  }
+  function agenda() {
+    frame(2, 'Tu visita');
+    var nom = r.nombre.split(' ')[0];
+    box.appendChild(el('p', 'q', nom + ', elige cómo y cuándo te visita José Antonio:'));
+    var seg = el('div', 'seg'); seg.setAttribute('role', 'group'); seg.setAttribute('aria-label', 'Tipo de visita');
+    [['Presencial en Málaga', 'en tu empresa o en Hiágora'], ['Videollamada', 'te llega el enlace']].forEach(function (m) {
+      var b = el('button'); b.type = 'button'; b.appendChild(document.createTextNode(m[0])); b.appendChild(el('small', null, m[1]));
+      b.setAttribute('aria-pressed', r.modo === m[0] ? 'true' : 'false');
+      b.onclick = function () { r.modo = m[0]; seg.querySelectorAll('button').forEach(function (y) { y.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-pressed', 'true'); };
+      seg.appendChild(b);
+    });
+    box.appendChild(seg);
+    var g = el('div', 'slots'), sel = null;
+    huecos().forEach(function (x) {
+      var b = el('button'); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.appendChild(document.createTextNode(x[1])); b.appendChild(el('small', null, x[0]));
+      b.onclick = function () { g.querySelectorAll('button').forEach(function (y) { y.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-pressed', 'true'); sel = x; go.disabled = false; };
+      g.appendChild(b);
+    });
+    box.appendChild(g);
+    var go = el('button', 'cta', 'Confirmar visita'); go.type = 'button'; go.disabled = true;
+    go.onclick = function () { r.hora = sel; paso(3, true); };
+    box.appendChild(go);
+    box.appendChild(el('p', 'micro', '¿Ninguno te va bien? Confírmala y Elena te propone otro por WhatsApp.'));
+    back(2);
+  }
+
+  function prioridad() {
+    var big = COMERCIALES.indexOf(r.comerciales) >= 1 || EMPLEADOS.indexOf(r.empleados) >= 1;
+    return big ? ['Alta · encaja con el Check Comercial', 'pill hi'] : ['Media · equipo pequeño', 'pill'];
+  }
+  function fin() {
+    frame(3, '¡Visita pedida!');
+    var o = el('div', 'ok');
+    o.appendChild(el('span', 'big', 'Nos vemos el ' + r.hora[0] + ' a las ' + r.hora[1]));
+    var card = el('div', 'card'); card.appendChild(el('b', null, 'Visita sin compromiso con José Antonio Padilla'));
+    card.appendChild(document.createTextNode(r.modo === 'Videollamada' ? 'Por videollamada · te llega el enlace por WhatsApp' : 'Presencial en Málaga · en tu empresa o en C/ Esperanto 4'));
+    o.appendChild(card);
+    var wa = el('div', 'wa'); wa.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>';
+    var wt = el('span'); wt.appendChild(el('b', null, 'Te escribe Elena por WhatsApp para confirmar.')); wt.appendChild(el('br')); wt.appendChild(document.createTextNode('En unos minutos, al ' + (r.movil || 'móvil que nos has dejado') + '.')); wa.appendChild(wt);
+    o.appendChild(wa);
+    var f = el('div', 'ficha'); f.appendChild(el('span', 't', 'Así le llega a José Antonio · de ejemplo'));
+    var p = prioridad();
+    [['Empresa', r.empresa], ['Equipo', r.empleados + ' empleados · ' + r.comerciales + ' comerciales'], ['Le preocupa', r.preocupa]].forEach(function (x) {
+      var d = el('div'); d.appendChild(el('span', null, x[0])); d.appendChild(el('b', null, x[1])); f.appendChild(d);
+    });
+    var d = el('div'); d.appendChild(el('span', null, 'Prioridad')); var pb = el('b'); pb.appendChild(el('span', p[1], p[0])); d.appendChild(pb); f.appendChild(d);
+    o.appendChild(f);
+    var a = el('a', 'link', 'Ver cómo le llega en el panel →'); a.href = PANEL; a.target = '_blank'; a.rel = 'noopener'; o.appendChild(a);
+    var again = el('button', 'back', 'Volver a empezar la demo'); again.type = 'button'; again.style.justifySelf = 'center'; again.onclick = function () { r = { modo: 'Presencial en Málaga' }; paso(0); }; o.appendChild(again);
+    box.appendChild(o);
+  }
+
+  paso(0);
+
+  var st = document.getElementById('sticky');
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { st.classList.toggle('on', !e[0].isIntersecting); }).observe(box);
+})();
+</script>
+</body>
+</html>

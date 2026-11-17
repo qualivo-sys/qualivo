@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Panel · Aula Inmobiliaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--ink:#1B2140;--txt:#4A5068;--mut:#7A8096;--na:#EC7B2A;--navy:#3E4A6A;--bg:#F5F6FA;--card:#fff;--line:#E3E6EE;--ok:#1E9E5A;--wa:#25D366}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:14.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+header{background:var(--navy);color:#fff}
+.top{max-width:1280px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:18px;letter-spacing:.01em}.brand span{color:#F5A066}
+.top .sp{flex:1}
+.upd{font-size:12.5px;color:#C9CEE0}
+.tbtn{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:8px 14px;font-weight:500;font-size:13.5px}
+.tbtn:hover{background:rgba(255,255,255,.2)}
+.tbtn.on{background:#fff;color:var(--navy);border-color:#fff}
+nav{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;gap:4px;overflow-x:auto}
+nav button{background:none;border:0;color:#C9CEE0;padding:12px 16px;font-weight:500;border-bottom:3px solid transparent;white-space:nowrap}
+nav button.on{color:#fff;border-bottom-color:var(--na)}
+nav button b{background:var(--na);color:#fff;border-radius:99px;font-size:11.5px;padding:1px 7px;margin-left:6px;font-weight:600}
+main{max-width:1280px;margin:0 auto;padding:24px}
+.demo{background:#FFF4D6;border:1.5px dashed #C9860A;color:#5A3D00;border-radius:10px;padding:10px 14px;margin-bottom:18px;font-weight:500}
+h2{color:var(--ink);font-size:19px;font-weight:600;margin-bottom:12px}
+.sub{color:var(--mut);font-size:13px;margin:-8px 0 14px}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.kpi .l{font-size:12.5px;color:var(--mut)}
+.kpi .v{font-size:32px;font-weight:700;color:var(--ink);line-height:1.15;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi .n{font-size:12.5px;margin-top:2px;color:var(--mut)}.kpi .n.w{color:#C2560F;font-weight:600}
+.kpi.hl{border-top:4px solid var(--na)}
+.g2{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-top:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
+.fun{display:grid;gap:9px}
+.fun .r{display:grid;grid-template-columns:120px 1fr 34px;align-items:center;gap:10px;font-size:13.5px}
+.fun .bar{height:22px;background:#EEF0F5;border-radius:6px;overflow:hidden}
+.fun .bar i{display:block;height:100%;background:var(--navy);border-radius:6px;min-width:2px}
+.fun .r.won .bar i{background:var(--na)}
+.fun .r b{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+.list{display:grid;grid-template-columns:minmax(0,1fr)}
+.row{display:flex;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.av{width:36px;height:36px;border-radius:50%;background:#E7EAF2;color:var(--navy);display:grid;place-items:center;font-weight:600;font-size:13px;flex:none}
+.row .m{min-width:0;flex:1}
+.row .m b{display:block;color:var(--ink);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .m span{display:block;font-size:13px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .t{font-size:12px;color:var(--mut);white-space:nowrap;text-align:right;flex:none}
+.pill{display:inline-block;border-radius:99px;padding:2px 9px;font-size:11.5px;font-weight:600;background:#EEF0F5;color:var(--navy);white-space:nowrap}
+.pill.o{background:#FDEEE2;color:#B4510E}.pill.g{background:#E3F5EA;color:#157A45}.pill.r{background:#FDE7E7;color:#B42318}
+.empty{color:var(--mut);padding:22px 0;text-align:center;font-size:13.5px}
+/* embudo */
+.kan{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,1fr);gap:12px;overflow-x:auto;padding-bottom:10px}
+.col{background:#ECEEF4;border-radius:12px;padding:10px;min-height:220px}
+.col h3{font-size:13px;font-weight:600;color:var(--ink);display:flex;justify-content:space-between;padding:4px 6px 10px}
+.col h3 span{color:var(--mut);font-weight:500}
+.col.won{background:#FCE9DB}
+.tk{background:#fff;border-radius:10px;padding:11px 12px;margin-bottom:8px;border:1px solid var(--line);cursor:default}
+.tk b{display:block;color:var(--ink);font-weight:600;font-size:13.5px}
+.tk small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+.tk .f{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px;color:var(--mut)}
+.tk .f strong{color:var(--ink)}
+/* conversaciones */
+.chat{display:grid;grid-template-columns:340px 1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-height:560px}
+.cl{border-right:1px solid var(--line);overflow-y:auto;max-height:680px}
+.ci{display:flex;gap:10px;padding:13px 14px;border-bottom:1px solid var(--line);cursor:pointer;align-items:center;background:none;border-left:0;border-right:0;border-top:0;width:100%;text-align:left}
+.ci:hover{background:#F7F8FB}.ci.on{background:#FFF3EA}
+.ci .dot{width:9px;height:9px;border-radius:50%;background:var(--na);flex:none}
+.th{display:flex;flex-direction:column;min-width:0}
+.th .hd{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.th .hd b{color:var(--ink);font-size:15.5px}.th .hd span{color:var(--mut);font-size:13px}
+.msgs{flex:1;padding:18px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;max-height:600px;background:#F4F1EC}
+.b{max-width:74%;padding:9px 12px;border-radius:12px;font-size:14px;white-space:pre-wrap;word-break:break-word;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.b small{display:block;font-size:11px;color:var(--mut);margin-top:4px;text-align:right}
+.b.c{background:#fff;align-self:flex-start;color:var(--ink)}
+.b.a{background:#D9FDD3;align-self:flex-end;color:#10301C}
+.b.e{background:#FFF8E6;border:1.5px dashed #C9860A;align-self:flex-end;color:#5A3D00;box-shadow:none}
+.b.e strong{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+/* tablas */
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{font-size:12px;color:var(--mut);font-weight:500}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+td b{color:var(--ink)}
+.bars{display:grid;gap:9px}
+.bars .r{display:grid;grid-template-columns:150px 1fr 30px;gap:10px;align-items:center;font-size:13.5px}
+.bars .bar{height:20px;background:#EEF0F5;border-radius:6px;overflow:hidden}.bars .bar i{display:block;height:100%;background:var(--na);border-radius:6px}
+.bars b{text-align:right;color:var(--ink)}
+.gate{max-width:440px;margin:80px auto;text-align:center}
+.gate p{margin-top:10px}
+[hidden]{display:none!important}
+@media (max-width:980px){.kpis{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}.chat{grid-template-columns:1fr}.cl{max-height:260px;border-right:0;border-bottom:1px solid var(--line)}main{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand">Aula<span>Inmobiliaria</span> · Panel</div>
+    <div class="sp"></div>
+    <span class="upd" id="upd"></span>
+    <button class="tbtn" id="demo" title="Enseña cómo se verá el panel con actividad. No son datos reales.">Ver con datos de ejemplo</button>
+    <button class="tbtn" id="ref">Actualizar</button>
+  </div>
+  <nav id="nav">
+    <button data-t="resumen" class="on">Resumen</button>
+    <button data-t="embudo">Embudo</button>
+    <button data-t="conv">Conversaciones<b id="nb" hidden></b></button>
+    <button data-t="llamadas">Llamadas</button>
+    <button data-t="mat">Matrículas</button>
+  </nav>
+</header>
+<main>
+  <div class="demo" id="demob" hidden>Estás viendo DATOS DE EJEMPLO para enseñar cómo funciona el panel. No son alumnos ni conversaciones reales. Pulsa «Ver datos reales» para volver.</div>
+  <div class="gate card" id="gate" hidden><h2>Panel privado</h2><p>Este panel solo se abre con el enlace completo que te hemos enviado. Si lo has perdido, pídenoslo de nuevo.</p></div>
+
+  <section id="t-resumen">
+    <div class="kpis" id="kpis"></div>
+    <div class="g2">
+      <div class="card"><h2>Embudo de interesados</h2><p class="sub">Cuántas personas hay ahora en cada paso.</p><div class="fun" id="fun"></div></div>
+      <div class="card"><h2>Conversaciones recientes</h2><div class="list" id="rc"></div></div>
+    </div>
+    <div class="g2">
+      <div class="card"><h2>Últimas matrículas</h2><div class="list" id="rm"></div></div>
+      <div class="card"><h2>Próximas llamadas</h2><div class="list" id="rl"></div></div>
+    </div>
+  </section>
+
+  <section id="t-embudo" hidden><h2>Embudo · Agente Inmobiliario</h2><p class="sub">Cada tarjeta es una persona. Avanza sola de columna cuando escribe, se cualifica, empieza el pago o se matricula.</p><div class="kan" id="kan"></div></section>
+
+  <section id="t-conv" hidden><h2>Conversaciones de WhatsApp</h2><p class="sub">Con punto naranja, las que esperan respuesta. En amarillo, lo que Elena contestaría mientras está en modo borrador.</p>
+    <div class="chat"><div class="cl" id="cl"></div><div class="th"><div class="hd" id="thh"><span>Elige una conversación de la lista.</span></div><div class="msgs" id="msgs"></div></div></div></section>
+
+  <section id="t-llamadas" hidden><h2>Llamadas agendadas</h2><p class="sub">Reservas hechas desde el botón «Agenda tu llamada» de la landing.</p><div class="card tw"><table id="tl"></table></div></section>
+
+  <section id="t-mat" hidden><h2>Matrículas</h2><p class="sub">Pedidos pagados en la web, tal como entran desde la tienda.</p>
+    <div class="g2" style="margin-top:0"><div class="card"><h2>Por comunidad</h2><div class="bars" id="bc"></div></div><div class="card"><h2>Por forma de pago</h2><div class="bars" id="bp"></div></div></div>
+    <div class="card tw" style="margin-top:16px"><table id="tm"></table></div></section>
+</main>
+<script>
+(function(){
+"use strict";
+var API="https://qualivo.app.n8n.cloud/webhook/aula-panel-datos";
+var q=new URLSearchParams(location.search), K=q.get("k")||"";
+var D=null, real=null, demo=false, sel=null;
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function ini(n){return esc(String(n||"?").trim().split(/\s+/).slice(0,2).map(function(x){return x[0]||""}).join("").toUpperCase())}
+var eur=function(v){return new Intl.NumberFormat("es-ES",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(v||0)};
+function cuando(t){ if(!t) return ""; var d=new Date(t), n=new Date(), m=(n-d)/60000;
+  if(m<0) return d.toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short"})+" · "+d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
+  if(m<1) return "ahora"; if(m<60) return "hace "+Math.round(m)+" min"; if(m<1440&&d.getDate()===n.getDate()) return d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
+  return d.toLocaleDateString("es-ES",{day:"numeric",month:"short"})+" · "+d.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}); }
+function dia(t){ if(!t) return ""; var d=new Date(t); return isNaN(d)?esc(t):d.toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short"}); }
+function vacio(t){return '<div class="empty">'+t+'</div>'}
+
+function pinta(){
+  var k=D.kpis;
+  $("kpis").innerHTML=
+    '<div class="kpi"><div class="l">Conversaciones</div><div class="v">'+k.conversaciones+'</div><div class="n'+(k.sinResponder?' w':'')+'">'+(k.sinResponder?k.sinResponder+' esperan respuesta':'todas contestadas')+'</div></div>'+
+    '<div class="kpi"><div class="l">Interesados en el embudo</div><div class="v">'+k.enEmbudo+'</div><div class="n">sin matricular todavía</div></div>'+
+    '<div class="kpi"><div class="l">Llamadas agendadas</div><div class="v">'+k.llamadas+'</div><div class="n">próximas</div></div>'+
+    '<div class="kpi hl"><div class="l">Matrículas</div><div class="v">'+k.matriculas+'</div><div class="n">registradas en el CRM</div></div>'+
+    '<div class="kpi hl"><div class="l">Ingresos por matrículas</div><div class="v">'+eur(k.ingresos)+'</div><div class="n">IVA incluido</div></div>';
+  var mx=Math.max.apply(null,D.etapas.map(function(e){return e.tratos.length}).concat([1]));
+  $("fun").innerHTML=D.etapas.map(function(e){var w=e.nombre==="Matrícula"||e.nombre==="Alumno";return '<div class="r'+(w?' won':'')+'"><span>'+esc(e.nombre)+'</span><div class="bar"><i style="width:'+(e.tratos.length/mx*100)+'%"></i></div><b>'+e.tratos.length+'</b></div>'}).join("");
+  var cv=D.conversaciones.slice().sort(function(a,b){return (b.fecha||0)-(a.fecha||0)});
+  $("rc").innerHTML=cv.length?cv.slice(0,5).map(function(c){return '<div class="row"><div class="av">'+ini(c.nombre)+'</div><div class="m"><b>'+esc(c.nombre)+'</b><span>'+(c.direccion==="inbound"?"":"Tú: ")+esc(c.ultimo)+'</span></div><div class="t">'+cuando(c.fecha)+(c.direccion==="inbound"?'<br><span class="pill o">Espera respuesta</span>':'')+'</div></div>'}).join(""):vacio("Todavía no ha escrito nadie por WhatsApp.");
+  var ms=D.matriculas.slice().sort(function(a,b){return String(b.fecha).localeCompare(String(a.fecha))});
+  $("rm").innerHTML=ms.length?ms.slice(0,5).map(function(m){return '<div class="row"><div class="av">'+ini(m.nombre)+'</div><div class="m"><b>'+esc(m.nombre)+'</b><span>'+esc(m.comunidad)+' · '+esc(m.pago)+'</span></div><div class="t"><b style="color:#1B2140">'+eur(m.importe)+'</b><br>'+dia(m.fecha)+'</div></div>'}).join(""):vacio("Aún no hay matrículas registradas.");
+  var pr=D.llamadas.filter(function(l){return new Date(l.inicio)>new Date()});
+  $("rl").innerHTML=pr.length?pr.slice(0,5).map(function(l){return '<div class="row"><div class="av">'+ini(l.nombre||l.titulo)+'</div><div class="m"><b>'+esc(l.nombre||l.titulo)+'</b><span>'+esc(l.comunidad||"")+'</span></div><div class="t">'+cuando(l.inicio)+'</div></div>'}).join(""):vacio("No hay llamadas agendadas.");
+  // embudo
+  $("kan").innerHTML=D.etapas.map(function(e){var w=e.nombre==="Matrícula"||e.nombre==="Alumno";
+    return '<div class="col'+(w?' won':'')+'"><h3>'+esc(e.nombre)+'<span>'+e.tratos.length+'</span></h3>'+(e.tratos.map(function(t){return '<div class="tk"><b>'+esc(t.nombre)+'</b><small>'+esc(t.comunidad||"Comunidad sin dato")+'</small><div class="f"><span>'+esc(t.origen||"")+'</span><strong>'+eur(t.valor)+'</strong></div></div>'}).join("")||'')+'</div>'}).join("");
+  // conversaciones
+  var nr=k.sinResponder; $("nb").hidden=!nr; $("nb").textContent=nr;
+  $("cl").innerHTML=cv.length?cv.map(function(c){return '<button class="ci'+(sel===c.id?' on':'')+'" data-c="'+esc(c.id)+'"><div class="av">'+ini(c.nombre)+'</div><div class="m" style="min-width:0;flex:1"><b style="display:block;color:#1B2140;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.nombre)+'</b><span style="display:block;font-size:12.5px;color:#7A8096;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.ultimo)+'</span></div><div style="text-align:right;font-size:11.5px;color:#7A8096;white-space:nowrap">'+cuando(c.fecha)+'</div>'+(c.direccion==="inbound"?'<span class="dot" title="Espera respuesta"></span>':'')+'</button>'}).join(""):vacio("Todavía no hay conversaciones.");
+  // llamadas
+  $("tl").innerHTML='<tr><th>Cuándo</th><th>Persona</th><th>Comunidad</th><th>Teléfono</th><th>Estado</th></tr>'+(D.llamadas.length?D.llamadas.map(function(l){var p=new Date(l.inicio)<new Date();return '<tr><td><b>'+dia(l.inicio)+'</b> · '+new Date(l.inicio).toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"})+'</td><td>'+esc(l.nombre||l.titulo)+'</td><td>'+esc(l.comunidad||"—")+'</td><td>'+esc(l.telefono||"—")+'</td><td><span class="pill '+(p?'':'g')+'">'+(p?"Pasada":"Confirmada")+'</span></td></tr>'}).join(""):'<tr><td colspan="5">'+vacio("No hay llamadas agendadas todavía.")+'</td></tr>');
+  // matrículas
+  function barras(id,campo){var o={};D.matriculas.forEach(function(m){o[m[campo]]=(o[m[campo]]||0)+1});var a=Object.keys(o).map(function(x){return [x,o[x]]}).sort(function(a,b){return b[1]-a[1]});var m=Math.max.apply(null,a.map(function(x){return x[1]}).concat([1]));
+    $(id).innerHTML=a.length?a.map(function(x){return '<div class="r"><span>'+esc(x[0])+'</span><div class="bar"><i style="width:'+(x[1]/m*100)+'%"></i></div><b>'+x[1]+'</b></div>'}).join(""):vacio("Sin datos todavía.")}
+  barras("bc","comunidad"); barras("bp","pago");
+  $("tm").innerHTML='<tr><th>Fecha</th><th>Alumno</th><th>Comunidad</th><th>Forma de pago</th><th>Cómo llegó</th><th class="n">Importe</th></tr>'+(ms.length?ms.map(function(m){return '<tr><td>'+dia(m.fecha)+'</td><td><b>'+esc(m.nombre)+'</b></td><td>'+esc(m.comunidad)+'</td><td>'+esc(m.pago)+'</td><td>'+esc(m.origen)+(m.campana?' · '+esc(m.campana):'')+'</td><td class="n">'+eur(m.importe)+'</td></tr>'}).join(""):'<tr><td colspan="6">'+vacio("Aún no hay matrículas.")+'</td></tr>');
+  $("upd").textContent=demo?"Datos de ejemplo":"Actualizado "+cuando(D.actualizado);
+}
+function hilo(c){
+  sel=c.id; pinta();
+  $("thh").innerHTML='<div class="av">'+ini(c.nombre)+'</div><div><b>'+esc(c.nombre)+'</b><br><span>'+esc(c.telefono||"")+(c.comunidad?' · '+esc(c.comunidad):'')+'</span></div>';
+  $("msgs").innerHTML=vacio("Cargando…");
+  function muestra(ms){ $("msgs").innerHTML=ms.length?ms.map(function(m){ if(m.de==="elena") return '<div class="b e"><strong>Elena · asistente</strong>'+esc(m.texto.replace(/^🤖\s*/,""))+'<small>'+cuando(m.t)+'</small></div>'; return '<div class="b '+(m.de==="cliente"?'c':'a')+'">'+esc(m.texto)+'<small>'+cuando(m.t)+'</small></div>'}).join(""):vacio("Sin mensajes."); $("msgs").scrollTop=1e6; }
+  if(demo){ muestra((EJ.hilos[c.id]||[])); return; }
+  fetch(API+"?k="+encodeURIComponent(K)+"&conv="+encodeURIComponent(c.id)+"&c="+encodeURIComponent(c.contactoId||"")).then(function(r){return r.json()}).then(function(j){muestra(j.mensajes||[])}).catch(function(){ $("msgs").innerHTML=vacio("No se ha podido cargar la conversación.") });
+}
+function carga(){
+  if(demo){ D=EJ.datos(); pinta(); return; }
+  if(!K){ $("gate").hidden=false; document.querySelectorAll("main>section").forEach(function(s){s.hidden=true}); return; }
+  $("upd").textContent="Actualizando…";
+  fetch(API+"?k="+encodeURIComponent(K)).then(function(r){ if(!r.ok) throw 0; return r.json() }).then(function(j){ D=real=j; pinta() })
+   .catch(function(){ $("upd").textContent="No se han podido cargar los datos"; if(!D){ $("gate").hidden=false; document.querySelectorAll("main>section").forEach(function(s){s.hidden=true}); } });
+}
+$("nav").addEventListener("click",function(e){var b=e.target.closest("button[data-t]"); if(!b) return;
+  document.querySelectorAll("#nav button").forEach(function(x){x.classList.toggle("on",x===b)});
+  ["resumen","embudo","conv","llamadas","mat"].forEach(function(t){$("t-"+t).hidden=t!==b.getAttribute("data-t")}); });
+$("cl").addEventListener("click",function(e){var b=e.target.closest("[data-c]"); if(!b||!D) return; var c=D.conversaciones.filter(function(x){return x.id===b.getAttribute("data-c")})[0]; if(c) hilo(c); });
+$("ref").addEventListener("click",carga);
+$("demo").addEventListener("click",function(){ demo=!demo; sel=null; this.textContent=demo?"Ver datos reales":"Ver con datos de ejemplo"; this.classList.toggle("on",demo); $("demob").hidden=!demo;
+  $("thh").innerHTML='<span>Elige una conversación de la lista.</span>'; $("msgs").innerHTML=""; $("gate").hidden=true; var act=document.querySelector("#nav button.on").getAttribute("data-t"); ["resumen","embudo","conv","llamadas","mat"].forEach(function(t){$("t-"+t).hidden=t!==act}); carga(); });
+setInterval(function(){ if(!demo&&K&&!document.hidden) carga(); },5*60000);
+
+/* ===== Datos de ejemplo (inventados, solo para enseñar el panel) ===== */
+var EJ=(function(){
+  var h=3600000, d=24*h, N=function(){return Date.now()};
+  var P=[["Laura Ejemplo","Cataluña","Ya trabaja en una inmobiliaria","WhatsApp"],["Carlos Muestra","Andalucía","Empieza en el sector","Anuncio (meta)"],["Marta Prueba","Comunitat Valenciana","Empieza en el sector","WhatsApp"],["Javier Demo","Otra comunidad","Empieza en el sector","Anuncio (meta)"],["Nuria Ficticia","Illes Balears","Ya trabaja en una inmobiliaria","WhatsApp"],["Pablo Ejemplo","Cataluña","Empieza en el sector","Anuncio (meta)"],["Sara Muestra","Andalucía","Otra situación","WhatsApp"],["Diego Prueba","Otra comunidad","Empieza en el sector","Anuncio (meta)"],["Elena Demo","Cataluña","Ya trabaja en una inmobiliaria","Compra directa en la web"],["Raúl Ficticio","Comunitat Valenciana","Empieza en el sector","Anuncio (meta)"],["Irene Ejemplo","Andalucía","Empieza en el sector","WhatsApp"],["Óscar Muestra","Cataluña","Empieza en el sector","Anuncio (meta)"],["Lucía Prueba","Otra comunidad","Ya trabaja en una inmobiliaria","Anuncio (meta)"],["Marcos Demo","Illes Balears","Empieza en el sector","WhatsApp"]];
+  var rep=[["Solicitud",[0,1]],["Contactado",[2,3,4]],["Cualificado",[5,6]],["Pago iniciado",[7]],["Matrícula",[8,9,10,11]],["Alumno",[12]],["Más adelante",[13]],["Perdido",[]]];
+  var pagos=["Tarjeta","Aplázame","Bizum","Tarjeta","Transferencia"];
+  var hilos={
+   e1:[{de:"cliente",texto:"Hola, he visto el curso de agente inmobiliario. ¿Cuánto cuesta?",t:N()-50*60000},{de:"aula",texto:"¡Hola, Laura! Soy Elena, la asistente virtual de Aula Inmobiliaria 👋 El curso son 390 € con IVA y puedes pagarlo a plazos. ¿En qué comunidad vives o quieres trabajar?",t:N()-49*60000},{de:"cliente",texto:"En Barcelona. Ya trabajo en una inmobiliaria",t:N()-40*60000},{de:"aula",texto:"Perfecto. Son 250 horas online, a tu ritmo y con hasta un año para terminarlo, así que lo puedes compaginar con la agencia. Si quieres hablarlo antes, puedes agendar una llamada de 30 minutos aquí: [enlace]",t:N()-39*60000},{de:"cliente",texto:"Genial, me apunto a la llamada. ¿Me sirve para el registro de Cataluña?",t:N()-12*60000}],
+   e2:[{de:"cliente",texto:"Buenas, ¿se puede pagar a plazos?",t:N()-3*h},{de:"elena",texto:"Elena (BORRADOR, no enviado)\nRespondería: «¡Hola, Marta! Soy Elena, la asistente virtual de Aula Inmobiliaria. Sí: puedes pagarlo a plazos con Aplazame, lo eliges al pagar. ¿En qué comunidad vives o quieres trabajar?»",t:N()-3*h+60000}],
+   e3:[{de:"cliente",texto:"Hola, trabajo con contrato. ¿Me lo puede pagar la empresa?",t:N()-26*h},{de:"aula",texto:"¡Hola, Nuria! Puede que sí: se comprueba gratis y antes de comprar. Le paso tu consulta a una persona del equipo, que te escribe por aquí.",t:N()-26*h+90000},{de:"aula",texto:"Hola Nuria, soy Olga. ¿Me dices el nombre de tu empresa y lo miramos?",t:N()-20*h}]};
+  return { hilos:hilos, datos:function(){
+    var etapas=rep.map(function(r,i){return {id:"s"+i,nombre:r[0],tratos:r[1].map(function(x){var p=P[x];return {id:"t"+x,nombre:p[0],comunidad:p[1],origen:p[3],valor:390,estado:i>=4&&i<=5?"won":"open"}})}});
+    var mats=[8,9,10,11,12].map(function(x,i){var p=P[x];return {nombre:p[0],comunidad:p[1],pago:pagos[i],importe:390,fecha:new Date(N()-(i*1.6+0.4)*d).toISOString(),origen:p[3],campana:p[3].indexOf("Anuncio")===0?"Agente · desde cero":""}});
+    var conv=[{id:"e1",nombre:P[0][0],telefono:"+34 600 000 001",ultimo:"Genial, me apunto a la llamada. ¿Me sirve para el registro de Cataluña?",direccion:"inbound",fecha:N()-12*60000,comunidad:"Cataluña"},{id:"e2",nombre:P[2][0],telefono:"+34 600 000 002",ultimo:"Buenas, ¿se puede pagar a plazos?",direccion:"inbound",fecha:N()-3*h,comunidad:""},{id:"e3",nombre:P[4][0],telefono:"+34 600 000 003",ultimo:"Hola Nuria, soy Olga. ¿Me dices el nombre de tu empresa y lo miramos?",direccion:"outbound",fecha:N()-20*h,comunidad:"Illes Balears"}];
+    var ll=[{titulo:"Llamada informativa",nombre:P[0][0],comunidad:"Cataluña",telefono:"+34 600 000 001",inicio:new Date(N()+20*h).toISOString()},{titulo:"Llamada informativa",nombre:P[5][0],comunidad:"Cataluña",telefono:"+34 600 000 006",inicio:new Date(N()+2*d).toISOString()},{titulo:"Llamada informativa",nombre:P[6][0],comunidad:"Andalucía",telefono:"+34 600 000 007",inicio:new Date(N()-1*d).toISOString()}];
+    return {actualizado:new Date().toISOString(),etapas:etapas,conversaciones:conv,llamadas:ll,matriculas:mats,contactos:[],kpis:{contactos:14,conversaciones:3,sinResponder:2,enEmbudo:8,llamadas:2,matriculas:5,ingresos:1950}};
+  }};
+})();
+carga();
+})();
+</script>
+</body>
+</html>

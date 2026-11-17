@@ -27,13 +27,17 @@
     else el.innerHTML = '<button class="btn" type="button" data-demo="' + (d.pausado ? 'reanudar' : 'pausar') + '">' + ico(d.pausado ? 'play' : 'pausa') + '<span>' + (d.pausado ? 'Reanudar' : 'Pausar') + '</span></button>';
   }
 
-  function empezar() {
+  // opciones.hasta: salta sin esperar hasta ese paso (1 = primero) y deja la historia en pausa.
+  // opciones.vista: al llegar, abre esa vista (con el contacto de la historia seleccionado).
+  function empezar(opciones) {
+    opciones = opciones || {};
     const h = historia();
     if (!h) return;
     parar(true);
     const est = E();
     est.contactos = est.contactos.filter(function (c) { return c.id !== 'demo'; });
     const c = M.preparar(h.contacto, est.ahora);
+    if (h.contacto.forzar) c.forzar = h.contacto.forzar;
     est.contactos.push(c);
     est.nuevos = { demo: true };
     // Nombre propio del agente de voz y textos sin tecnología, si la historia lo pide.
@@ -41,7 +45,7 @@
     if (!('_vozOrig' in t)) t._vozOrig = t.agenteVoz;
     t.agenteVoz = h.agenteVoz || t._vozOrig;
     est.sinTecno = !!h.sinTecno;
-    d = { historia: h, paso: -1, pausado: false, antes: null, fin: false };
+    d = { historia: h, paso: -1, pausado: false, antes: null, fin: false, hasta: opciones.hasta ? Math.min(opciones.hasta, h.pasos.length) - 1 : null, vista: opciones.vista || null };
     QV.cerrarFicha();
     QV.recalcular();
     est.filtro = 'todos';
@@ -102,6 +106,17 @@
     pintarPanel(paso);
     if (paso.humano) return final(paso);
     d.restante = (paso.dur || 6) * 1000 * VEL;
+    if (d.hasta != null) {
+      if (d.paso < d.hasta) return siguiente();
+      // Llegó al paso pedido: quieto, y en la vista pedida.
+      d.hasta = null;
+      d.pausado = true;
+      if (d.vista) { QV.cerrarFicha(); if (d.vista === 'conversaciones') E().convSel = 'demo'; QV.irA(d.vista); }
+      pintarPanel(paso);
+      pintarBotones();
+      return;
+    }
+    if (d.pausado) { pintarPanel(paso); pintarBotones(); return; }
     programar();
   }
 
@@ -188,6 +203,14 @@
     if (!s) return;
     E().historia = s.value;
     if (QV.guardarUrl) QV.guardarUrl();
+  });
+  // Flecha derecha: siguiente paso ya (si está en pausa, sigue en pausa). Útil para grabar.
+  document.addEventListener('keydown', function (e) {
+    if (e.code !== 'ArrowRight' || !d || d.fin) return;
+    if (/input|textarea|select/i.test((e.target.tagName || ''))) return;
+    e.preventDefault();
+    clearTimeout(d.timer);
+    siguiente();
   });
   // Barra espaciadora: pausar / reanudar (cómodo al presentar)
   document.addEventListener('keydown', function (e) {

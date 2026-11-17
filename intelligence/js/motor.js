@@ -239,7 +239,9 @@
   // ---------------------------------------------------------------------------
   const ESTADOS = {
     vigilando: 'Vigilando', trabajando: 'Trabajando', esperando: 'Esperando respuesta',
-    escalado: 'Escalado', humano: 'Requiere persona', cerrado: 'Cerrado'
+    escalado: 'Escalado', humano: 'Requiere persona', cerrado: 'Cerrado',
+    // Textos neutros para historias de demo grabadas (sin sugerir automatismos)
+    encurso: 'En curso', programado: 'Programado', matriculada: 'Matriculada'
   };
 
   function nbaGenerica(c, k, x, T) {
@@ -439,13 +441,20 @@
     const rie = aplicar((rg.riesgo || []).concat(rg.soloPropiasRiesgo ? [] : R.riesgo), c, k, T, 4);
     const x = { fit: fit.v, comp: comp.v, int: int.v, riesgo: rie.v, fitM: fit.motivos, compM: comp.motivos, intM: int.motivos, riesgoM: rie.motivos, k: k };
     if (c.fin === 'ganado' && cfg.clienteSinIntencion) { x.int = Math.min(x.int, 40); }
-    x.prio = prioridad(x, c);
+    // Historias de demo grabadas: cada paso puede fijar encaje, prioridad y siguiente acción (c.forzar).
+    const F = c.forzar || null;
+    if (F && F.fit != null) x.fit = F.fit;
+    if (F && F.int != null) x.int = F.int;
+    if (F && F.riesgo != null) x.riesgo = F.riesgo;
+    x.prio = prioridad(x, c); // calcula también x.oportunidad
+    if (F && F.prio) x.prio = F.prio;
     x.prioN = PRIO[x.prio].n;
-    x.nba = (cfg.nba && cfg.nba(c, k, x, T, QV.motor)) || nbaGenerica(c, k, x, T);
-    x.porque = porque(x, c, T);
+    x.nba = (F && F.nba) ? Object.assign({ id: 'forzada', tipo: 'humano', estado: 'encurso', por: '' }, F.nba) : (cfg.nba && cfg.nba(c, k, x, T, QV.motor)) || nbaGenerica(c, k, x, T);
+    x.porque = (F && F.porque) || porque(x, c, T);
     x.senales = senales(c, k, x, T, cfg);
     x.atencion = (x.prio === 'urgente' || x.prio === 'alta') && ['nada', 'asignado', 'cerrar', 'esperar'].indexOf(x.nba.id) < 0;
-    x.orden = x.prioN * 1000 + x.oportunidad + x.riesgo * 0.2;
+    x.orden = x.prioN * 1000 + (x.oportunidad || 0) + x.riesgo * 0.2; // los cerrados no tienen oportunidad (antes daba NaN y desordenaba la lista)
+    if (F && F.arriba) x.orden += 100000; // la historia grabada va la primera de la lista
     return x;
   }
 

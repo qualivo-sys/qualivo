@@ -44,7 +44,8 @@
     { id: 'gestalt', txt: 'Institut Gestalt', desc: 'Formación en terapia: presentación, entrevista y reserva', ico: 'formacion', oculto: true },
     { id: 'cancomar', txt: 'CANCOMAR', desc: 'Formación marítima en Avilés: renovaciones a 5 años, listas de espera y convocatorias', ico: 'formacion', oculto: true },
     { id: 'igma', txt: 'IGMA', desc: 'Producción musical y DJ en Vigo: petición, clase de prueba, familia y matrícula', ico: 'formacion', oculto: true },
-    { id: 'dentalmarin', txt: 'Clínica Dental Marín', desc: 'Clínica dental con dos sedes, Patraix y Torrent: primera visita y presupuesto', ico: 'clinica', oculto: true }
+    { id: 'dentalmarin', txt: 'Clínica Dental Marín', desc: 'Clínica dental con dos sedes, Patraix y Torrent: primera visita y presupuesto', ico: 'clinica', oculto: true },
+    { id: 'hiagora', txt: 'Hiágora', desc: 'Escuela de ventas y consultoría comercial en Málaga: dossier, visita sin compromiso y contrato', ico: 'formacion', oculto: true }
   ];
   const OBJETIVOS = [
     { id: 'captacion', txt: 'Captación' }, { id: 'conversion', txt: 'Conversión' }, { id: 'seguimiento', txt: 'Seguimiento' },
@@ -656,7 +657,7 @@
           '<div class="hilo-pie">' + ico(icoAccion(sel.x.nba.tipo)) + '<span><b>' + esc(sel.x.nba.accion) + '</b> · ' + esc(sel.x.nba.quien) + ' · ' + esc(M.ESTADOS[sel.x.nba.estado]) + '</span></div>' +
           '<div class="hilo-acciones">' + accionesRealHtml(sel) + '</div></div>';
       }
-      return cabecera('Conversaciones', estado.cfg.sinAgentes ? '¿Qué hemos hablado con cada uno?' : '¿Qué está haciendo el sistema?', estado.cfg.sinAgentes ? 'WhatsApp, correo y llamadas en un solo sitio, con la ficha al lado. Todo lo escribe una persona del equipo.' : 'WhatsApp, correo y llamadas en un solo sitio. El agente escribe con el contexto de cada ' + T.contacto + ' y se aparta cuando hace falta una persona.') +
+      return cabecera('Conversaciones', estado.cfg.sinAgentes || estado.sinTecno ? '¿Qué hemos hablado con cada uno?' : '¿Qué está haciendo el sistema?', estado.sinTecno ? 'WhatsApp, correo y llamadas en un solo sitio, con la ficha al lado.' : estado.cfg.sinAgentes ? 'WhatsApp, correo y llamadas en un solo sitio, con la ficha al lado. Todo lo escribe una persona del equipo.' : 'WhatsApp, correo y llamadas en un solo sitio. El agente escribe con el contexto de cada ' + T.contacto + ' y se aparta cuando hace falta una persona.') +
         '<div class="conv-caja"><div class="conv-lista">' + lado + '</div>' + hilo + '</div>';
     },
 
@@ -916,7 +917,7 @@
     if (cuenta && QV.cuentas && QV.cuentas[cuenta]) { QV.cuentas[cuenta].arrancar(); return; }
     if (sector && SECTORES.some(function (s) { return s.id === sector; })) {
       iniciar({ sector: sector, empresa: p.get('empresa') || '', objetivo: p.get('objetivo') || 'todo', historia: p.get('historia') || '', vista: p.get('vista') || 'resumen' })
-        .then(function () { if (p.get('demo') === '1' && QV.demo) QV.demo.empezar(); })
+        .then(function () { if (p.get('demo') === '1' && QV.demo) QV.demo.empezar({ hasta: parseInt(p.get('paso') || '0', 10) || null, vista: p.get('paso') ? p.get('vista') : null }); })
         .catch(function () { mostrarInicio(); });
     } else {
       mostrarInicio();
