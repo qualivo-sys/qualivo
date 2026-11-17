@@ -97,8 +97,8 @@ $('tres').style.top=L.cierre[0]+'px';$('sobre').style.top=L.cierre[1]+'px';$('lo
 const PL={
  AD:{img:'ad',cam:[0,330,1800],cam2:[40,600,1720],espera:0,mov:'fin',foco:[]},
  GAL:{img:'gal',cam:[-105,45,1740],cam2:[0,-430,4410],espera:.35,mov:1.2,sigue:.04,foco:[],fondo:'#E4E7EC'},
- LANDF:{img:'lp0',sobre:'lp1',H:6168,pasos:[4500,4658,4784,4910,5036,5100],toque:[640,5170],iniAbs:window.T.lau+.1,kfa:[[window.T.ld,0,0,1280],[window.T.ld+.95,0,0,1280],[window.T.lau-.15,0,4130,1280],[window.T.f2,0,4160,1280]],cam:[0,0,1280],foco:[]},
- FORM2:{img:'lp2',cam:[0,4160,1280],pan:30,foco:[[68,5172,1144,116]]},
+ LANDF:{img:'lp0',sobre:'lp1',H:6168,pasos:[4500,4658,4784,4910,5036,5100],toque:[640,5170],iniAbs:window.T.lau+.1,kfa:[[window.T.ld,0,0,1280],[window.T.ld+.95,0,0,1280],[window.T.lau-.15,0,FMT==='45'?4270:4130,1280],[window.T.f2,0,FMT==='45'?4300:4160,1280]],cam:[0,0,1280],foco:[]},
+ FORM2:{img:'lp2',cam:[0,FMT==='45'?4300:4160,1280],pan:30,foco:[[68,5172,1144,116]]},
  LISTA0:{img:'l0',cam:[474,200,930],foco:[],fijo:1,tapa:540},
  LISTA:{img:'l1',cam:[474,200,930],cam2:[474,268,800],espera:.15,mov:'fin',foco:[[474,560,2356,118]],tapa:690},
  ORIGEN:{img:'p1',cam:[0,60,800],foco:[[26,186,760,44]],tapa:432},
@@ -185,7 +185,7 @@ window.setT=function(t){
  if(s){el.innerHTML=(s.q?'<small>'+s.q+'</small>':'')+s.x;el.style.opacity=1;}else el.style.opacity=0;
  el.style.top=(t>=e6-.15?L.cierre[4]:L.sub[0])+'px';
 };
-if(VER==='corta'){const tr=$('tres');tr.style.display='none';tr.style.textAlign='center';tr.style.fontSize='104px';tr.style.lineHeight='1.16';tr.style.top='640px';tr.innerHTML='<div>Captación</div><div>Conversión</div><div style="color:var(--tl)">Mejora continua</div>';const so=$('sobre');so.style.top='1050px';so.style.fontSize='38px';so.style.fontWeight=600;so.style.color='var(--mut)';so.innerHTML='Para academias y centros de formación';const c=$('cta');c.style.whiteSpace='normal';c.style.width='900px';c.style.textAlign='center';c.style.fontSize='60px';c.style.lineHeight='1.12';c.style.padding='46px 40px';c.style.borderRadius='22px';c.style.top='770px';c.innerHTML='Diagnóstico gratuito<br>de captación y ventas';const l=$('logo');l.style.width='230px';l.style.top='1180px';}
+if(VER==='corta'){const tr=$('tres');tr.style.display='none';tr.style.textAlign='center';tr.style.fontSize='104px';tr.style.lineHeight='1.16';tr.style.top='640px';tr.innerHTML='<div>Captación</div><div>Conversión</div><div style="color:var(--tl)">Mejora continua</div>';const so=$('sobre');so.style.top=(FMT==='45'?'745px':'1050px');so.style.fontSize=(FMT==='45'?'34px':'38px');so.style.fontWeight=600;so.style.color='var(--mut)';so.innerHTML='Para academias y centros de formación';const c=$('cta');c.style.whiteSpace='normal';c.style.width='900px';c.style.textAlign='center';c.style.fontSize='60px';c.style.lineHeight='1.12';c.style.padding='46px 40px';c.style.borderRadius='22px';c.style.top=(FMT==='45'?'455px':'770px');c.innerHTML='Diagnóstico gratuito<br>de captación y ventas';const l=$('logo');l.style.width='230px';l.style.top=(FMT==='45'?'850px':'1180px');}
 if(FMT==='45')document.querySelectorAll('.pv').forEach(d=>d.style.fontSize='70px');
 window.DUR=T.FIN;window.setT(0);
 </script>
