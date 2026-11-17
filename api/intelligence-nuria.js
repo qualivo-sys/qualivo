@@ -51,6 +51,8 @@ const COMPARA = require('./_nuria-comparativa.js');
 const CLASES = require('./_nuria-clases.js');
 const ENVIOS = require('./_nuria-envios.js');
 const GRUPOS = require('./_nuria-grupos.js');
+const BF = require('./_nuria-blackfriday.js');
+let cacheBF = null;
 let cacheGrupos = null;   // entradas y salidas de los grupos de WhatsApp: { t, datos }, 20 min
 const cacheEnv = new Map();   // envíos masivos: 'desde|hasta' → { t, datos }, 1 h
 const cacheCla = new Map();   // visualizaciones de clases: 'desde|hasta' → { t, datos }, 6 h
@@ -416,6 +418,16 @@ module.exports = async function (req, res) {
     // (sin datos personales) y guardado en _nuria-mensajes.json.
     try { return res.status(200).json(require('./_nuria-mensajes.json')); }
     catch (e) { return res.status(404).json({ error: 'Todavía no hay análisis de mensajes.' }); }
+  }
+
+  if (accion === 'blackfriday') {
+    try {
+      const fresco = String((req.query && req.query.fresco) || '') === '1';
+      if (!cacheBF || Date.now() - cacheBF.t > 600000 || (fresco && Date.now() - cacheBF.t > 60000)) cacheBF = { t: Date.now(), datos: await BF.blackfriday() };
+      return res.status(200).json(cacheBF.datos);
+    } catch (e) {
+      return res.status(502).json({ error: 'No se ha podido leer el Black Friday: ' + String(e.message || e).slice(0, 80) });
+    }
   }
 
   if (accion === 'grupos') {
