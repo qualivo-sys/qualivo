@@ -51,6 +51,8 @@ function tipologia(c) {
   // Formulario corto de formación (1-nov): tramo «más de 1.500 €».
   else if (/mas-de-1-500/.test(inv)) { pInv = 5; mInv = 'invierte más de 1.500 €'; }
   else if (/entre-500|500-y-2/.test(inv)) { pInv = 4; mInv = 'invierte 500-2.000 €'; }
+  // Formulario V3 (17-nov): tramo «menos de 1.000 €».
+  else if (/menos-de-1-000/.test(inv)) { pInv = 3; mInv = 'invierte menos de 1.000 €'; }
   else if (/menos-de-500|menos-500/.test(inv)) { pInv = 2; mInv = 'invierte menos de 500 €'; }
   else if (/nada/.test(inv)) { pInv = 0; mInv = 'no invierte'; }
   let pPre = -1, mPre = '';

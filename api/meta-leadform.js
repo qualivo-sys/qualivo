@@ -180,7 +180,10 @@ const FORMULARIOS_SECTOR = {
   '1448120514052614': { sector: 'Reformas, construcción o instalaciones', etiqueta: 'sector-reformas', angulo: 'form-4preg' },
   // 13-nov-2026 (Maikel): formulario V2 de formación. Web obligatoria, email de trabajo y «no invertimos»
   // sin descartar (caso Cancomar). La clave sin_publi no casa con el filtro de «nada», a propósito.
-  '2252569821991323': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v2-13nov' }
+  '2252569821991323': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v2-13nov' },
+  // 17-nov-2026 (Maikel): formulario V3 de formación, 4 preguntas (web, solicitudes, inversión, qué mejorar).
+  // Prioridad A/B/C por coherencia en api/_form-v3.js. «No invertimos» no se filtra (caso Cancomar).
+  '1183570324226136': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3-17nov' }
 };
 
 async function nombreFormulario(formId) {
@@ -244,7 +247,10 @@ async function guardar(lead, opts) {
   const hz = require('./_funnel-hz.js').desdeCampos(campos);
   const sector = (hz && hz.sector) || (conocido ? conocido.sector : '');
   // En el horizontal el tramo de volumen lo traduce _funnel-hz.js a las etiquetas vol-* de siempre.
-  const volumen = hz ? '' : valor(campos, ['volumen']);
+  // Claves de volumen de los formularios V2/V3: se traducen a textos que la puntuación reconoce.
+  const CLAVES_VOL = { menos20: 'Menos de 20 al mes', '20_49': '20-50 al mes', '50_99': '50-100 al mes', '100mas': 'Más de 100 al mes' };
+  const volumenCrudo = hz ? '' : valor(campos, ['volumen']);
+  const volumen = CLAVES_VOL[volumenCrudo] || volumenCrudo;
   const web = valor(campos, ['website', 'web', 'sitio_web']);
   // Meta devuelve la CLAVE de la opción elegida, no el texto que ve el usuario.
   const CLAVES_INV = {
@@ -255,7 +261,9 @@ async function guardar(lead, opts) {
     '500_999': 'Entre 500 y 999 €', '1000_2999': 'Entre 1.000 y 2.999 €', '3000mas': 'Más de 3.000 €',
     otros_nose: 'Otros canales o no lo sé',
     // Formulario V2 (13-nov). «Sin publicidad» no es «nada»: no se filtra.
-    sin_publi: 'Sin publicidad actualmente', '500_1999': 'Entre 500 y 1.999 €', '2000mas': 'Más de 2.000 €'
+    sin_publi: 'Sin publicidad actualmente', '500_1999': 'Entre 500 y 1.999 €', '2000mas': 'Más de 2.000 €',
+    // Formulario V3 (17-nov). «No invertimos» se guarda como «sin publicidad»: no se filtra.
+    no_invertimos: 'Sin publicidad actualmente', menos1000: 'Menos de 1.000 €'
   };
   const CLAVES_FUGA = {
     anuncios: 'En los anuncios y la captación', web: 'En la web y los formularios',
@@ -359,6 +367,16 @@ async function guardar(lead, opts) {
   if (v2) v2.etiquetas.forEach(function (t) { etiquetas.push(t); });
   if (hz) hz.etiquetas.forEach(function (t) { etiquetas.push(t); });
   if (sueltas) sueltas.forEach(function (t) { if (etiquetas.indexOf(t) === -1) etiquetas.push(t); });
+  // Formulario V3: prioridad operativa A/B/C (autenticidad, volumen, capacidad, necesidad).
+  let v3 = null;
+  if (String(lead.form_id || '') === '1183570324226136') {
+    try {
+      v3 = await require('./_form-v3.js').clasificar({ web: web, volumen: volumenCrudo, inversion: inversionCruda,
+        mejora: valor(campos, ['mejora']), email: email });
+      v3.etiquetas.forEach(function (t) { if (etiquetas.indexOf(t) === -1) etiquetas.push(t); });
+      if (!fuga && v3.mejora) fuga = CLAVES_FUGA[v3.mejora.fuga] || '';
+    } catch (e) { console.error('[leadform] v3:', e && e.message); }
+  }
 
   // Completar un contacto que ya existía (lo creó la landing porque el webhook
   // no procesó el aviso de Meta): se añaden los datos del formulario, pero no
@@ -453,6 +471,9 @@ async function guardar(lead, opts) {
           volumen ? 'Volumen que declara: ' + volumen : '',
           inversion ? 'Inversión mensual en captación: ' + inversion : '',
           fuga ? 'Dónde cree que se le escapa: ' + fuga : '',
+          web ? 'Web: ' + web : '',
+          v3 && v3.mejora ? 'Quiere mejorar: ' + v3.mejora.texto : '',
+          v3 ? 'Prioridad V3: ' + v3.prioridad + ' · ' + v3.motivos.join('; ') : '',
           lead.form_id ? 'Formulario: ' + lead.form_id + (porNombre ? ' (' + porNombre + ', reconocido por el nombre)' : '') : '',
           '', new Date().toISOString()].filter(Boolean).join('\n')
       })
