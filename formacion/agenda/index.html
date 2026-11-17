@@ -97,7 +97,7 @@ p{font-size:16px}
 .logos{background:var(--marfil-2)}
 .logos .wrap{padding-top:40px;padding-bottom:40px}
 .logos p.k{font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gris-claro);margin-bottom:20px}
-.logos .fila{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 24px;align-items:center}
+.logos .fila{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 24px;align-items:center}
 .logos .fila img{height:36px;width:100%;object-fit:contain}
 
 /* 6 · casos (estilo .caso de /formacion/) */
@@ -105,6 +105,10 @@ p{font-size:16px}
 .caso{border-radius:20px;padding:26px 22px;display:flex;flex-direction:column}
 .caso.eac{background:var(--tinta);color:#fff}
 .caso.nail{background:var(--verde-suave)}
+.caso.nuria{background:#fff;border:1px solid rgba(15,23,42,.12)}
+.caso.nuria .big{color:var(--tinta)}
+.caso.nuria .ctx{color:#3E434B}
+.caso.nuria .cab img{height:34px}
 .caso .cab{display:flex;justify-content:space-between;align-items:center;gap:14px}
 .caso .cab img{height:34px;width:auto}
 .caso.eac .cab img{filter:brightness(0) invert(1);opacity:.9;height:28px}
@@ -170,7 +174,7 @@ p{font-size:16px}
   .sec{padding:clamp(72px,8vw,104px) 0}
   .top .wrap{min-height:64px}
   .hero{padding:48px 0 80px}
-  .logos .fila{grid-template-columns:repeat(6,minmax(0,1fr));gap:32px 48px}
+  .logos .fila{grid-template-columns:repeat(5,minmax(0,1fr));gap:32px 48px}
   .logos .fila img{height:44px}
   .maikel{grid-template-columns:140px minmax(0,1fr);gap:28px;padding:28px}
   .maikel img{width:140px;height:140px}
@@ -180,7 +184,7 @@ p{font-size:16px}
   .grid-h{grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:56px;align-items:center}
   .hero h1{font-size:clamp(34px,3.4vw,44px)}
   .hero .lead{font-size:18px}
-  .casos{grid-template-columns:1.15fr .85fr;gap:16px}
+  .casos{grid-template-columns:1.2fr 1fr 1fr;gap:16px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}}
 </style>
@@ -241,15 +245,15 @@ p{font-size:16px}
   </div>
 </section>
 
-<!-- 5 · Logotipos: la misma fila que la portada de /formacion/ (.hero-prueba) -->
+<!-- 5 · Logotipos: todos los proyectos de formación (logos de /assets/img/clientes/). Sin FEMXA/XFP, como en /formacion/. -->
 <section class="logos" aria-label="Centros que han trabajado con Qualivo">
   <div class="wrap">
     <p class="k">Han trabajado con Qualivo</p>
-    <div class="fila"><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" height="30" loading="lazy" decoding="async" style="filter:grayscale(1) brightness(.5) contrast(1.6)"><img src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" height="30" loading="lazy" decoding="async"></div>
+    <div class="fila"><img src="/assets/img/clientes/eac.webp" alt="Escola Aeronàutica de Catalunya" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/nail-boss.webp" alt="Nail Boss Academy" height="30" loading="lazy" decoding="async" style="filter:grayscale(1) brightness(.5) contrast(1.6)"><img src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/escuela-nuevos-negocios.webp" alt="Escuela de Nuevos Negocios" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/emprende-aprendiendo.webp" alt="Emprende Aprendiendo" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/ciencia-interior.webp" alt="Ciencia Interior" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/growth-hacking-course.webp" alt="Growth Hacking Course" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/pro-trading-skills.webp" alt="Pro Trading Skills" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/miquel-baixas.webp" alt="Miquel Baixas" height="30" loading="lazy" decoding="async"><img src="/assets/img/clientes/judit-catala.webp" alt="Judit Català" height="30" loading="lazy" decoding="async"></div>
   </div>
 </section>
 
-<!-- 6 · Dos casos de éxito. Cifras y textos copiados literalmente de /formacion/ (bloques .caso.eac y .caso.nail). -->
+<!-- 6 · Tres casos de éxito. EAC y Nail Boss: copiados literalmente de /formacion/. Nuria Roure: cifras de /casos/nuria-roure/. -->
 <!-- Verificar con Maikel vigencia y permiso de uso de estos casos en esta página -->
 <section class="sec" aria-labelledby="t-casos">
   <div class="wrap">
@@ -271,6 +275,14 @@ p{font-size:16px}
           <div><div class="big">21</div><div class="lbl">matrículas</div></div>
         </div>
         <p class="ctx">En cuatro meses, partiendo de cero.</p>
+      </article>
+      <article class="caso nuria">
+        <div class="cab"><span class="quien">Nuria Roure · formación online</span><img src="/assets/img/clientes/nuria-roure.webp" alt="Nuria Roure" loading="lazy"></div>
+        <div class="cifras">
+          <div><div class="big">6,45×</div><div class="lbl">de retorno</div></div>
+          <div><div class="big">12.900&nbsp;€</div><div class="lbl">en ventas atribuibles al sistema</div></div>
+        </div>
+        <p class="ctx">Con 2.000&nbsp;€ de inversión. Mismo tráfico, sistema distinto: lead scoring, seguimiento y automatizaciones para priorizar a quien de verdad quería empezar.</p>
       </article>
     </div>
     <p class="fuente">EAC: cifras medidas en el CRM del centro, del anuncio a la matrícula, en un mes de campaña.</p>
