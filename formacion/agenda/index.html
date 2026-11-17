@@ -54,9 +54,9 @@ p{font-size:16px}
 .grid-h{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}
 .chip{display:inline-flex;align-items:center;gap:8px;background:var(--verde-suave);color:var(--verde);font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px;margin-bottom:16px}
 .chip::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--verde)}
-.hero h1{font-size:clamp(27px,7.4vw,46px);line-height:1.1;max-width:22ch}
+.hero h1{font-size:clamp(25px,6.6vw,46px);line-height:1.1;max-width:22ch}
 .hero h1 span{display:block;color:var(--verde);margin-top:.12em}
-.hero .lead{font-size:16.5px;color:#3E434B;margin-top:16px;max-width:46ch}
+.hero .lead{font-size:15.5px;color:#3E434B;margin-top:12px;max-width:46ch}
 .datos{display:flex;flex-wrap:wrap;gap:4px 0;margin-top:16px;font-size:14px;font-weight:800;color:var(--tinta)}
 .datos span{white-space:nowrap}
 .datos span:not(:last-child)::after{content:'·';margin:0 9px;color:var(--verde)}
@@ -75,6 +75,7 @@ p{font-size:16px}
 @media(max-width:639px){#cal iframe{height:1500px;min-height:1500px}}
 .abrir{display:none;margin:10px 0 0;padding:14px 16px;border-radius:12px;background:var(--tinta);color:#fff;text-decoration:none;font-weight:700;font-size:15px;text-align:center;line-height:1.35}
 @media(max-width:639px){.abrir{display:block}}
+@media(max-width:639px){.hero{padding-top:18px}.chip{margin-bottom:10px;font-size:11.5px}.hero .huecos{margin-top:12px;font-size:14px}.hero .meta-l{margin-top:10px}}
 .reservado{display:grid;grid-template-columns:36px minmax(0,1fr);gap:4px 12px;align-items:start;background:var(--verde-suave);border:1px solid rgba(14,124,116,.3);border-radius:14px;padding:16px;margin:0 0 12px}
 .reservado:focus{outline:none}
 .reservado .ok{grid-row:1/3;width:36px;height:36px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px}
@@ -419,6 +420,7 @@ p{font-size:16px}
   i.id='zBlsw8BEKA2zah81YlOl_'+Date.now(); /* lo usa form_embed.js para ajustar la altura a cada paso */
   i.setAttribute('scrolling','auto');
   i.title='Calendario para reservar el diagnóstico';
+  i.addEventListener('load',function(){ var c=document.querySelector('#cal .cargando'); if(c) c.remove(); });
   document.getElementById('cal').appendChild(i);
   var abrir=document.getElementById('abrir');
   abrir.href=src;
