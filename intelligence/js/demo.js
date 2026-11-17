@@ -65,7 +65,7 @@
         c[key] = Object.assign(c[key] || {}, k[key]);
         if (key === 's' && k.s.cita != null) c.s.tCita = Math.round((est.ahora + k.s.cita * M.MIN) / 3600000) * 3600000; // en punto
       } else if (key === 'conv') {
-        c.conv.push({ t: est.ahora, de: k.conv[0], canal: k.conv[1], texto: k.conv[2] });
+        c.conv.push({ t: est.ahora, de: k.conv[0], canal: k.conv[1], texto: k.conv[2], quien: k.conv[3] });
         if (k.conv[0] === 'c') c.tAct = est.ahora; else c.tToque = est.ahora;
       } else {
         c[key] = k[key];

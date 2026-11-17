@@ -275,7 +275,7 @@
         if (m.de === 'c' || estado.ahora - m.t > ventana || m.t > estado.ahora) return;
         const canal = m.canal === 'email' ? 'Correo' : m.canal === 'voz' ? 'Llamada' : m.canal === 'ig' ? 'Mensaje de Instagram' : 'WhatsApp';
         const quien = m.de === 'a' ? 'agente' : m.de === 'v' ? 'agente de voz' : 'equipo';
-        items.push({ t: m.t, ico: m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp', tono: m.de === 'h' ? 't-lila' : 't-teal', titulo: estado.sinTecno && m.de === 'a' ? canal + ' enviado automáticamente' : canal + ' enviado por el ' + quien, quien: c.n, id: c.id, detalle: m.texto.length > 90 ? m.texto.slice(0, 88) + '…' : m.texto });
+        items.push({ t: m.t, ico: m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp', tono: m.de === 'h' ? 't-lila' : 't-teal', titulo: m.quien ? canal + ' de ' + m.quien : estado.sinTecno && m.de === 'a' ? canal + ' enviado automáticamente' : canal + ' enviado por el ' + quien, quien: c.n, id: c.id, detalle: m.texto.length > 90 ? m.texto.slice(0, 88) + '…' : m.texto });
       });
       (c.llamadas || []).forEach(function (l) {
         if (estado.ahora - l.t > ventana || l.t > estado.ahora) return;
@@ -643,14 +643,14 @@
       const sel = contacto(estado.convSel);
       const lado = con.map(function (c) {
         const u = c.conv[c.conv.length - 1];
-        const qui = u.de === 'c' ? '' : u.de === 'h' ? (cfg.persona || 'Equipo') + ': ' : estado.sinTecno ? 'Automático: ' : 'Agente: ';
+        const qui = u.quien ? u.quien + ': ' : u.de === 'c' ? '' : u.de === 'h' ? (cfg.persona || 'Equipo') + ': ' : estado.sinTecno ? 'Automático: ' : 'Agente: ';
         return '<div class="conv-el" data-conv="' + c.id + '" aria-current="' + (c.id === estado.convSel) + '"><div class="l1"><b>' + esc(c.n) + '</b><time>' + M.fechaCorta(u.t, estado.ahora) + '</time></div><p>' + esc(qui + u.texto) + '</p><div class="l3">' + pillPrio(c.x.prio) + '<span class="pill t-gris">' + esc(M.ESTADOS[c.x.nba.estado]) + '</span></div></div>';
       }).join('');
       let hilo = '<p class="vacio">Sin conversaciones.</p>';
       if (sel) {
         hilo = '<div class="hilo-conv"><div class="hilo-cab"><div class="quien-fila">' + avatar(sel) + '<div><div class="nombre">' + esc(sel.n) + '</div><div class="meta">' + esc(metaContacto(sel)) + '</div></div></div><button class="btn btn-mini" data-abrir="' + sel.id + '">Ver ficha</button></div>' + '<div class="hilo-contacto">' + contactoRealHtml(sel) + '</div>' +
           '<div class="burbujas">' + sel.conv.filter(function (m) { return m.t <= estado.ahora; }).map(function (m) {
-            const quien = m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? (estado.cfg.cuenta || estado.sinTecno ? 'Envío automático' : 'Agente de WhatsApp') : m.de === 'v' ? 'Agente de voz' : (estado.cfg.persona || 'Equipo');
+            const quien = m.quien ? m.quien : m.de === 'c' ? sel.n.split(' ')[0] : m.de === 'a' ? (estado.cfg.cuenta || estado.sinTecno ? 'Envío automático' : 'Agente de WhatsApp') : m.de === 'v' ? 'Agente de voz' : (estado.cfg.persona || 'Equipo');
             const ic = m.canal === 'email' ? 'correo' : m.canal === 'voz' ? 'voz' : m.canal === 'ig' ? 'instagram' : 'whatsapp';
             return '<div class="burbuja ' + m.de + '"><small>' + ico(ic) + esc(quien) + ' · ' + M.fechaCorta(m.t, estado.ahora) + '</small>' + esc(m.texto) + '</div>';
           }).join('') + '</div>' +
