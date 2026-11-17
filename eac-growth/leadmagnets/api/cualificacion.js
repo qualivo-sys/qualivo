@@ -59,7 +59,8 @@ const CURSOS = {
 // El límite de 40 años es del curso de TCP (lo piden las aerolíneas); no se aplica a tierra ni despacho.
 export function motivosFuera(r, curso) {
   const m = [];
-  if (r.edad === 'Menor de 18') m.push('menor de 18');
+  // 17-nov (reunión con EAC): menor de 18 ya no descarta. Con 16 o 17 años pueden hacer el curso si vienen con su
+  // padre, madre o tutor: entran con la etiqueta menor-con-tutor y la comercial confirma la edad.
   if (r.edad === 'Mayor de 40' && curso === 'TCP') m.push('mayor de 40');
   if (r.espanol === 'Básico o no lo hablo') m.push('español básico');
   if (r.cuando === 'Solo busco info') m.push('solo busca info');
@@ -161,7 +162,8 @@ export default async function handler(req, res) {
     email, phone: tel,
     source: 'Web · formulario de cualificación' + (u.slug ? ' · ' + u.slug : ''),
     tags: ['form-web-v4', c.etiqueta, u.utm_source ? 'lead paid' : 'organico-web']
-      .concat(u.slug ? ['landing-' + u.slug.slice(0, 40)] : []),
+      .concat(u.slug ? ['landing-' + u.slug.slice(0, 40)] : [])
+      .concat(r.edad === 'Menor de 18' ? ['menor-con-tutor'] : []),   // 17-nov: 16-17 años con su padre, madre o tutor
     customFields,
   };
 

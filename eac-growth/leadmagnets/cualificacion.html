@@ -64,7 +64,7 @@
 
   // Regla de «fuera de perfil» (la misma que en api/cualificacion.js: si se cambia, en los dos)
   function fuera(r){
-    if (r.edad === 'Menor de 18') return 'menor';
+    // 17-nov (EAC): con 16 o 17 años pueden hacer el curso si vienen con su padre, madre o tutor: ya no se descarta.
     if (r.edad === 'Mayor de 40' && CURSO === 'TCP') return 'edad';
     if (r.espanol === 'Básico o no lo hablo') return 'espanol';
     if (r.cuando === 'Solo busco info' || r.punto === 'Solo explorando') return 'info';
