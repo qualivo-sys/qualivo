@@ -13,9 +13,17 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 window.__aulaC=c;
 gtag("consent","default",{ad_storage:c.m?"granted":"denied",ad_user_data:c.m?"granted":"denied",ad_personalization:c.m?"granted":"denied",analytics_storage:c.a?"granted":"denied",functionality_storage:"granted",security_storage:"granted",wait_for_update:500});
 gtag("set","ads_data_redaction",!c.m);gtag("set","url_passthrough",true);
-/* El contenedor de Aula (el mismo de su web) solo se carga en su dominio. En la versión de revisión de qualivo.io no se envía nada a sus cuentas; ?gtm=1 lo fuerza para probar. */
+/* Etiquetas de Aula: solo en su dominio (en la versión de revisión no se envía nada; ?gtm=1 lo fuerza para probar) y SOLO después de que la persona acepte. */
 var h=location.hostname;window.__aulaGTM=/(^|\.)aulainmobiliaria\.com$/.test(h)||/[?&]gtm=1/.test(location.search);
-if(window.__aulaGTM){dataLayer.push({"gtm.start":new Date().getTime(),event:"gtm.js"});var j=document.createElement("script");j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id=GTM-MMJ7KDS";document.head.appendChild(j);}
+var CFG={gtm:"GTM-MMJ7KDS",pixel:"235081101261304",ga4:""}; /* ga4: pegar aquí el identificador G-XXXXXXX cuando Aula lo facilite */
+var on={};
+window.__aulaCargar=function(c){ if(!window.__aulaGTM||!c) return;
+  if((c.a||c.m)&&!on.gtm){on.gtm=1;dataLayer.push({"gtm.start":new Date().getTime(),event:"gtm.js"});var j=document.createElement("script");j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id="+CFG.gtm;document.head.appendChild(j);}
+  if(c.a&&CFG.ga4&&!on.ga4){on.ga4=1;window.__aulaGA4on=1;var g=document.createElement("script");g.async=true;g.src="https://www.googletagmanager.com/gtag/js?id="+CFG.ga4;document.head.appendChild(g);gtag("js",new Date());gtag("config",CFG.ga4);}
+  if(c.m&&!on.px){on.px=1;!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+    fbq("init",CFG.pixel);fbq("track","PageView");(window.__aulaPx||[]).forEach(function(x){fbq.apply(null,x)});window.__aulaPx=null;}
+};
+window.__aulaCargar(c);
 })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -318,6 +326,14 @@ html:not(.rev) .rev-only{display:none!important}
   var BASE = {curso: "agente_inmobiliario", ccaa: k};
   ["utm_source","utm_medium","utm_campaign","utm_content"].forEach(function(p){ if (q.get(p)) BASE[p] = q.get(p); });
   function ev(name, params){ var o = {event: name}; for (var x in BASE) o[x] = BASE[x]; for (var y in (params || {})) o[y] = params[y]; window.dataLayer.push(o);
+    /* Píxel de Meta: solo lo que no duplica a la tienda (la tienda ya mide carrito, pago y compra). Se guarda en cola hasta que haya consentimiento. */
+    var px = null, ids = {content_ids: [String(v.prod)], content_type: "product", content_name: "Curso de Agente Inmobiliario", value: 390, currency: "EUR"};
+    if (name === "view_item") px = ["track", "ViewContent", ids];
+    else if (name === "generate_lead") px = ["track", "Lead", {content_name: "Curso de Agente Inmobiliario", metodo: params.metodo, ccaa: k}];
+    else if (name === "begin_checkout") px = ["trackCustom", "ClicMatricula", {ccaa: k, posicion: params.posicion, value: 390, currency: "EUR"}];
+    if (px) { if (window.fbq) window.fbq.apply(null, px); else if (window.__aulaPx !== null) (window.__aulaPx = window.__aulaPx || []).push(px); }
+    /* Analytics directo (si hay identificador): mismos nombres de evento */
+    if (window.__aulaGA4on) { var g = {}; for (var z in o) if (z !== "event" && z !== "ecommerce") g[z] = o[z]; if (o.ecommerce) { g.currency = "EUR"; g.value = 390; g.items = o.ecommerce.items; } gtag("event", name, g); }
     if (document.documentElement.classList.contains("rev") && window.console) console.log("[evento]", name, params || {}); }
   window.aulaEv = ev;
   /* 1 · Ve el curso */
@@ -351,6 +367,7 @@ html:not(.rev) .rev-only{display:none!important}
     gtag("consent", "update", {ad_storage: m ? "granted" : "denied", ad_user_data: m ? "granted" : "denied", ad_personalization: m ? "granted" : "denied", analytics_storage: a ? "granted" : "denied"});
     gtag("set", "ads_data_redaction", !m);
     window.dataLayer.push({event: "aula_consentimiento", estadisticas: !!a, publicidad: !!m});
+    if (window.__aulaCargar) window.__aulaCargar(c);
     /* Compatibilidad con las etiquetas del contenedor de Aula, que se activan con los avisos de Complianz */
     if (a) window.dataLayer.push({event: "cmplz_event_statistics"});
     if (m) window.dataLayer.push({event: "cmplz_event_marketing"});
