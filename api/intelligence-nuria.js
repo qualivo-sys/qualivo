@@ -55,6 +55,7 @@ const BF = require('./_nuria-blackfriday.js');
 const CPER = require('./_nuria-clases-personas.js');
 let cacheCPer = null;
 let cacheSal = null;
+let cacheCV = null;
 let cacheBF = null;
 let cacheGrupos = null;   // entradas y salidas de los grupos de WhatsApp: { t, datos }, 20 min
 const cacheEnv = new Map();   // envíos masivos: 'desde|hasta' → { t, datos }, 1 h
@@ -439,6 +440,27 @@ module.exports = async function (req, res) {
       return res.status(200).json(cacheBF.datos);
     } catch (e) {
       return res.status(502).json({ error: 'No se ha podido leer el Black Friday: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'clasesvideo') {
+    // Reproducciones por vídeo de las 3 últimas ediciones (domingo antes del directo a sábado después)
+    try {
+      if (!cacheCV || Date.now() - cacheCV.t > 6 * 3600000) {
+        const hoy = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+        const d = new Date(hoy); const w = d.getDay(); d.setDate(d.getDate() + (w >= 4 ? -(w - 3) : (3 - w)));
+        const iso = function (x) { return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); };
+        const eds = [0, 7, 14].map(function (k) { const x = new Date(d); x.setDate(x.getDate() - k); return x; });
+        const out = [];
+        for (const e of eds) {
+          const de = new Date(e); de.setDate(de.getDate() - 3); const a = new Date(e); a.setDate(a.getDate() + 3);
+          out.push({ edicion: iso(e), desde: iso(de), hasta: iso(a), videos: await CLASES.porVideo(iso(de), iso(a)) });
+        }
+        cacheCV = { t: Date.now(), datos: { ediciones: out } };
+      }
+      return res.status(200).json(cacheCV.datos);
+    } catch (e) {
+      return res.status(502).json({ error: 'No se ha podido leer Presto Player: ' + String(e.message || e).slice(0, 80) });
     }
   }
 
