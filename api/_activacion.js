@@ -355,6 +355,7 @@ async function primerWhatsApp(contactId, telefono, datos) {
 //     wa1-ctx-<supervision|fuera|noche>.
 const H = require('./_horario.js');
 const ESPERA_A_B_MIN = 10;
+const RETENER_A_B = false; // 18-nov-2026: primer WhatsApp al instante para todos
 // A/B del primer WhatsApp (P0.2): corto frente a largo, mitad y mitad. Las 15
 // preguntas del corto las aprobó Maikel el 1-oct. false = todos al largo.
 const WA1_CORTO = true;
@@ -448,7 +449,10 @@ async function primerWhatsAppCompleto(contactId, telefono, d) {
     const t = d.texto ? { texto: d.texto, ia: false, datosMsg: { nombre: d.nombre, fuga: d.fuga, sector: d.sector, hipotesis: d.hipotesis } } : await textoWa1(d, ficha, variante, ctx, pq);
     const traza = ['wa1-v-' + variante, 'wa1-ctx-' + ctx.ctx];
     // 4. A y B en horario de supervisión: borrador, aviso y 10 minutos.
-    if ((n === 'A' || n === 'B') && !d.soltar && H.supervision(ahora)) {
+    // 18-nov-2026 (Maikel, nuevo anuncio): «que le responda al instante, que esto
+    // es lo que vendemos». Sin retención: el primer WhatsApp sale ya también a
+    // los A y B. Poner RETENER_A_B = true para volver a la ventana de 10 minutos.
+    if (RETENER_A_B && (n === 'A' || n === 'B') && !d.soltar && H.supervision(ahora)) {
       await retenerParaMaikel(ficha, t.texto, n, traza);
       return { ok: false, canal: 'espera_maikel', nivel: n, borrador: t.texto, sale: ahora + ESPERA_A_B_MIN * 60000 };
     }
