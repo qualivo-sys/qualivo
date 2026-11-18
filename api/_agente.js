@@ -481,9 +481,9 @@ async function atender(contactId, opciones) {
   opciones = opciones || {};
   const hecho = { contactId: contactId };
   if (Date.now() < modeloCaidoHasta && !opciones.simular) return Object.assign(hecho, { accion: 'callar', motivo: 'modelo caído, en pausa' });
-  // De 21:30 a 8:00 no se escribe a nadie (1-oct). La respuesta la recoge el
-  // reloj a primera hora (api/wa-agente-reloj.js mira las de la noche).
-  if (!A.enVentana('whatsapp') && !opciones.simular) return Object.assign(hecho, { accion: 'callar', motivo: 'fuera de horario de WhatsApp' });
+  // 18-nov-2026 (Maikel): «si alguien contesta, que le responda al instante,
+  // que esto es lo que vendemos». Antes (1-oct) de 21:30 a 8:00 no se contestaba;
+  // ahora, si el lead escribe, se le responde a cualquier hora.
   try {
     let c = await contactoPorId(contactId);
     if (!c) return Object.assign(hecho, { accion: 'callar', motivo: 'sin_contacto' });

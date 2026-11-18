@@ -18,13 +18,16 @@ module.exports = async function handler(req, res) {
   const auth = String(req.headers.authorization || '');
   if (!secreto || auth !== 'Bearer ' + secreto) return res.status(401).json({ ok: false, error: 'unauthorized' });
   if (!process.env.ANTHROPIC_API_KEY) return res.status(200).json({ ok: false, error: 'sin_modelo' });
-  if (!A.enVentana('whatsapp')) return res.status(200).json({ ok: true, esperando: 'fuera de horario' });
+  // 18-nov-2026 (Maikel): si el lead escribe, se le contesta al instante a
+  // cualquier hora. Fuera de 8:00-21:30 solo se atienden respuestas; el primer
+  // WhatsApp y los retenidos siguen esperando a la ventana.
+  const enVentana = A.enVentana('whatsapp');
 
   const resumen = { miradas: 0, atendidas: 0, acciones: {} };
   // 1-oct-2026 (Bloque 1): los A/B retenidos salen solos a los 10 minutos si
   // Maikel no ha escrito ni ha puesto wa1-cancelar. Va aquí porque este reloj
   // corre cada 2 minutos; api/activacion.js lo repite cada 10 de respaldo.
-  try { resumen.retenidos = await A.soltarRetenidos(); delete resumen.retenidos.detalle; }
+  if (enVentana) try { resumen.retenidos = await A.soltarRetenidos(); delete resumen.retenidos.detalle; }
   catch (e) { console.error('[wa-agente-reloj] soltar retenidos:', e && e.message); }
   try {
     const r = await fetch(A.GHL_BASE + '/conversations/search?locationId=' + encodeURIComponent(process.env.GHL_LOCATION_ID) +
