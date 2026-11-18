@@ -80,6 +80,12 @@ h2{color:var(--ink);font-size:19px;font-weight:600;margin-bottom:12px}
 .b.a{background:#D9FDD3;align-self:flex-end;color:#10301C}
 .b.e{background:#FFF8E6;border:1.5px dashed #C9860A;align-self:flex-end;color:#5A3D00;box-shadow:none}
 .b.e strong{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.rep{display:grid;grid-template-columns:1fr auto;gap:10px;padding:14px 18px;border-top:1px solid var(--line);background:#fff;align-items:end}
+.rep textarea{font:inherit;font-size:14.5px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;resize:vertical;min-height:48px;color:var(--ink)}
+.rep textarea:focus{outline:2px solid var(--na);border-color:var(--na)}
+.rep button{background:var(--wa);color:#06361B;border:0;border-radius:10px;font-weight:600;padding:0 22px;min-height:48px}
+.rep button[disabled]{opacity:.5;cursor:default}
+.rep-n{grid-column:1/-1;font-size:12.5px;color:var(--mut);min-height:1em}
 /* tablas */
 .tw{overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:14px}
@@ -136,8 +142,8 @@ td.bad,td.bad b{color:#B42318}
 
   <section id="t-embudo" hidden><h2>Embudo · Agente Inmobiliario</h2><p class="sub">Cada tarjeta es una persona. Avanza sola de columna cuando escribe, se cualifica, empieza el pago o se matricula.</p><div class="kan" id="kan"></div></section>
 
-  <section id="t-conv" hidden><h2>Conversaciones de WhatsApp</h2><p class="sub">Con punto naranja, las que esperan respuesta. En amarillo, lo que Elena contestaría mientras está en modo borrador.</p>
-    <div class="chat"><div class="cl" id="cl"></div><div class="th"><div class="hd" id="thh"><span>Elige una conversación de la lista.</span></div><div class="msgs" id="msgs"></div></div></div></section>
+  <section id="t-conv" hidden><h2>Conversaciones de WhatsApp</h2><p class="sub">Con punto naranja, las que esperan respuesta. En amarillo, lo que hace Elena. Puedes contestar tú desde aquí: en cuanto escribas, Elena se calla en esa conversación.</p>
+    <div class="chat"><div class="cl" id="cl"></div><div class="th"><div class="hd" id="thh"><span>Elige una conversación de la lista.</span></div><div class="msgs" id="msgs"></div><form class="rep" id="rep" hidden><textarea id="rep-t" rows="2" maxlength="1500" placeholder="Escribe tu respuesta. Se envía por WhatsApp desde el número de Aula, y Elena deja de contestar en esta conversación." aria-label="Tu respuesta"></textarea><button type="submit" id="rep-b">Enviar</button><p class="rep-n" id="rep-n" aria-live="polite"></p></form></div></div></section>
 
   <section id="t-llamadas" hidden><h2>Llamadas agendadas</h2><p class="sub">Reservas hechas desde el botón «Agenda tu llamada» de la landing.</p><div class="card tw"><table id="tl"></table></div></section>
 
@@ -161,7 +167,7 @@ td.bad,td.bad b{color:#B42318}
 "use strict";
 var API="https://qualivo.app.n8n.cloud/webhook/aula-panel-datos";
 var q=new URLSearchParams(location.search), K=q.get("k")||"";
-var D=null, real=null, demo=false, sel=null;
+var D=null, real=null, demo=false, sel=null, actual=null;
 var $=function(id){return document.getElementById(id)};
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function ini(n){return esc(String(n||"?").trim().split(/\s+/).slice(0,2).map(function(x){return x[0]||""}).join("").toUpperCase())}
@@ -176,7 +182,7 @@ function vacio(t){return '<div class="empty">'+t+'</div>'}
 function pinta(){
   var k=D.kpis;
   $("kpis").innerHTML=
-    '<div class="kpi"><div class="l">Conversaciones</div><div class="v">'+k.conversaciones+'</div><div class="n'+(k.sinResponder?' w':'')+'">'+(k.sinResponder?k.sinResponder+' esperan respuesta':'todas contestadas')+'</div></div>'+
+    '<div class="kpi"><div class="l">Conversaciones</div><div class="v">'+k.conversaciones+'</div><div class="n'+((k.sinResponder||k.pidenPersona)?' w':'')+'">'+(k.pidenPersona?k.pidenPersona+' piden una persona':(k.sinResponder?k.sinResponder+' esperan respuesta':'todas contestadas'))+'</div></div>'+
     '<div class="kpi"><div class="l">Interesados en el embudo</div><div class="v">'+k.enEmbudo+'</div><div class="n">sin matricular todavía</div></div>'+
     '<div class="kpi"><div class="l">Llamadas agendadas</div><div class="v">'+k.llamadas+'</div><div class="n">próximas</div></div>'+
     '<div class="kpi hl"><div class="l">Matrículas</div><div class="v">'+k.matriculas+'</div><div class="n">registradas en el CRM</div></div>'+
@@ -194,7 +200,7 @@ function pinta(){
     return '<div class="col'+(w?' won':'')+'"><h3>'+esc(e.nombre)+'<span>'+e.tratos.length+'</span></h3>'+(e.tratos.map(function(t){return '<div class="tk"><b>'+esc(t.nombre)+'</b><small>'+esc(t.comunidad||"Comunidad sin dato")+'</small><div class="f"><span>'+esc(t.origen||"")+'</span><strong>'+eur(t.valor)+'</strong></div></div>'}).join("")||'')+'</div>'}).join("");
   // conversaciones
   var nr=k.sinResponder; $("nb").hidden=!nr; $("nb").textContent=nr;
-  $("cl").innerHTML=cv.length?cv.map(function(c){return '<button class="ci'+(sel===c.id?' on':'')+'" data-c="'+esc(c.id)+'"><div class="av">'+ini(c.nombre)+'</div><div class="m" style="min-width:0;flex:1"><b style="display:block;color:#1B2140;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.nombre)+'</b><span style="display:block;font-size:12.5px;color:#7A8096;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.ultimo)+'</span></div><div style="text-align:right;font-size:11.5px;color:#7A8096;white-space:nowrap">'+cuando(c.fecha)+'</div>'+(c.direccion==="inbound"?'<span class="dot" title="Espera respuesta"></span>':'')+'</button>'}).join(""):vacio("Todavía no hay conversaciones.");
+  $("cl").innerHTML=cv.length?cv.map(function(c){return '<button class="ci'+(sel===c.id?' on':'')+'" data-c="'+esc(c.id)+'"><div class="av">'+ini(c.nombre)+'</div><div class="m" style="min-width:0;flex:1"><b style="display:block;color:#1B2140;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.nombre)+'</b><span style="display:block;font-size:12.5px;color:#7A8096;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.ultimo)+'</span></div><div style="text-align:right;font-size:11.5px;color:#7A8096;white-space:nowrap">'+cuando(c.fecha)+(c.pidePersona?'<br><span class="pill r">Pide una persona</span>':'')+'</div>'+(c.direccion==="inbound"?'<span class="dot" title="Espera respuesta"></span>':'')+'</button>'}).join(""):vacio("Todavía no hay conversaciones.");
   // llamadas
   $("tl").innerHTML='<tr><th>Cuándo</th><th>Persona</th><th>Comunidad</th><th>Teléfono</th><th>Estado</th></tr>'+(D.llamadas.length?D.llamadas.map(function(l){var p=new Date(l.inicio)<new Date();return '<tr><td><b>'+dia(l.inicio)+'</b> · '+new Date(l.inicio).toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"})+'</td><td>'+esc(l.nombre||l.titulo)+'</td><td>'+esc(l.comunidad||"—")+'</td><td>'+esc(l.telefono||"—")+'</td><td><span class="pill '+(p?'':'g')+'">'+(p?"Pasada":"Confirmada")+'</span></td></tr>'}).join(""):'<tr><td colspan="5">'+vacio("No hay llamadas agendadas todavía.")+'</td></tr>');
   // matrículas
@@ -234,6 +240,7 @@ function hilo(c){
   sel=c.id; pinta();
   $("thh").innerHTML='<div class="av">'+ini(c.nombre)+'</div><div><b>'+esc(c.nombre)+'</b><br><span>'+esc(c.telefono||"")+(c.comunidad?' · '+esc(c.comunidad):'')+'</span></div>';
   $("msgs").innerHTML=vacio("Cargando…");
+  actual=c; $("rep").hidden=false; $("rep-t").disabled=$("rep-b").disabled=demo; $("rep-n").textContent=demo?"En los datos de ejemplo no se puede enviar.":""; $("rep-t").value="";
   function muestra(ms){ $("msgs").innerHTML=ms.length?ms.map(function(m){ if(m.de==="elena") return '<div class="b e"><strong>Elena · asistente</strong>'+esc(m.texto.replace(/^🤖\s*/,""))+'<small>'+cuando(m.t)+'</small></div>'; return '<div class="b '+(m.de==="cliente"?'c':'a')+'">'+esc(m.texto)+'<small>'+cuando(m.t)+'</small></div>'}).join(""):vacio("Sin mensajes."); $("msgs").scrollTop=1e6; }
   if(demo){ muestra((EJ.hilos[c.id]||[])); return; }
   fetch(API+"?k="+encodeURIComponent(K)+"&conv="+encodeURIComponent(c.id)+"&c="+encodeURIComponent(c.contactoId||"")).then(function(r){return r.json()}).then(function(j){muestra(j.mensajes||[])}).catch(function(){ $("msgs").innerHTML=vacio("No se ha podido cargar la conversación.") });
@@ -249,9 +256,16 @@ $("nav").addEventListener("click",function(e){var b=e.target.closest("button[dat
   document.querySelectorAll("#nav button").forEach(function(x){x.classList.toggle("on",x===b)});
   ["resumen","embudo","conv","llamadas","mat","pub"].forEach(function(t){$("t-"+t).hidden=t!==b.getAttribute("data-t")}); });
 $("cl").addEventListener("click",function(e){var b=e.target.closest("[data-c]"); if(!b||!D) return; var c=D.conversaciones.filter(function(x){return x.id===b.getAttribute("data-c")})[0]; if(c) hilo(c); });
+$("rep").addEventListener("submit",function(e){ e.preventDefault(); var t=$("rep-t").value.trim(); if(!t||!actual||demo) return;
+  if(!actual.contactoId){ $("rep-n").textContent="No se puede enviar: falta la ficha de este contacto."; return; }
+  $("rep-b").disabled=true; $("rep-n").textContent="Enviando…"; var c=actual;
+  fetch(API.replace("aula-panel-datos","aula-panel-enviar")+"?k="+encodeURIComponent(K),{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({contacto:c.contactoId,texto:t})})
+   .then(function(r){return r.json()}).then(function(j){ $("rep-b").disabled=false; if(!j.ok) throw 0; $("rep-t").value=""; $("rep-n").textContent="Enviado. Elena ya no contestará en esta conversación.";
+     setTimeout(function(){ if(actual===c){ hilo(c); $("rep-n").textContent="Enviado. Elena ya no contestará en esta conversación."; } carga(); },2500); })
+   .catch(function(){ $("rep-b").disabled=false; $("rep-n").textContent="No se ha podido enviar. Inténtalo de nuevo."; }); });
 $("ref").addEventListener("click",carga);
 $("demo").addEventListener("click",function(){ demo=!demo; sel=null; this.textContent=demo?"Ver datos reales":"Ver con datos de ejemplo"; this.classList.toggle("on",demo); $("demob").hidden=!demo;
-  $("thh").innerHTML='<span>Elige una conversación de la lista.</span>'; $("msgs").innerHTML=""; $("gate").hidden=true; var act=document.querySelector("#nav button.on").getAttribute("data-t"); ["resumen","embudo","conv","llamadas","mat","pub"].forEach(function(t){$("t-"+t).hidden=t!==act}); carga(); });
+  $("thh").innerHTML='<span>Elige una conversación de la lista.</span>'; $("msgs").innerHTML=""; $("rep").hidden=true; actual=null; $("gate").hidden=true; var act=document.querySelector("#nav button.on").getAttribute("data-t"); ["resumen","embudo","conv","llamadas","mat","pub"].forEach(function(t){$("t-"+t).hidden=t!==act}); carga(); });
 setInterval(function(){ if(!demo&&K&&!document.hidden) carga(); },5*60000);
 
 /* ===== Datos de ejemplo (inventados, solo para enseñar el panel) ===== */
