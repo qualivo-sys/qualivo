@@ -15,7 +15,7 @@ iw = ix(W1, 'whatsapp'); isol = ix(W1, 'solicitud'); e2 = p1('en') - .12
 T = {'a': t1, 'pd': p1('matrículas'), 'e2': e2, 'g': e2 + .2, 'ld': p1('pero') - .1, 'lau': p1('laura') - .1, 'sc': p1('principio') - .1, 'f2': p1('información') + .15,
      'l0': p1('solicitud') - .3, 'og': p1('con', isol) - .1, 'e3': p1('pocos') - .18, 'wr': p1('y', iw) - .1, 'll': p1('si') - .15, 'rq': rq,
      'e4': t2 - .1, 'ops': p2('así') - .15, 'e5': p2('así') - .15, 'ges': p2('gestionamos') - .1, 'e6': p2('mejoramos') - .1, 'sol': p2('solicita'), 'FIN': FIN}
-T = {k: round(v, 2) for k, v in T.items()}; T['c4'] = T['e7'] = T['e6']; T['c'] = [T['e6']] * 3; T['cap'] = T['lau']; T['a2'] = T['pd']
+T = {k: round(v, 2) for k, v in T.items()}; T['av'] = p2('avanzan'); T['na'] = p2('necesitan'); T['c4'] = T['e7'] = T['e6']; T['c'] = [T['e6']] * 3; T['cap'] = T['lau']; T['a2'] = T['pd']
 subs = []
 def trocea(W, t0):
     trozo = []

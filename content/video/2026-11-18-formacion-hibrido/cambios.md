@@ -50,3 +50,14 @@ No cambian: estética, galería y landing de Escuela Norte, voz de Raquel, músi
 - Medido: ningún silencio de más de 0,6 s; toma 1, -15,1 LUFS; Raquel, -15,2; toma 2, -15,1. **No he escuchado el resultado** (no puedo oír audio): la escucha queda para una persona.
 
 Regenerar: `python3 audio.py` y `node render.js "ver=corta&ap=hy&fmt=916|45" <dir>`.
+
+## Ajustes finales (18-nov, tras la revisión visual de Maikel)
+
+Mismos archivos, misma locución y misma duración (48,8 s). Lo anterior de este documento queda corregido en estos puntos:
+
+1. **Curso: Marketing Digital.** Anuncio, galería y landing de Escuela Norte rehechos («Marketing Digital por las tardes», temario de marketing, paleta nueva sin el azul y amarillo de FP; fuentes en `captacion/`). La tarjeta de origen dice «Curso de Marketing Digital». Las capturas de la demo (WhatsApp y CRM) dicen «Curso de tarde», que encaja. No se ha tocado la demo.
+2. **WhatsApp.** Un solo mensaje protagonista por plano, ampliado; el resto de la conversación queda atenuado.
+3. **De +3 días a +6 semanas.** La pantalla final muestra a Laura en «Necesitan atención» con «Volver a contactar · hoy», bajo el rótulo «Toca retomarla».
+4. **Oportunidades.** Ya no es la captura del listado: son dos bloques, «Avanzan» y «Necesitan atención», que se destacan cuando la voz los nombra. Es un rótulo que resume la vista real «Oportunidades» (prioridad y siguiente acción); los datos son simulados.
+5. **Zonas seguras (9:16).** Todo el contenido queda entre y = 268 y y ≈ 1.450 de 1.920: fuera del 14 % superior y del 20 % inferior. La guía más conservadora de Meta para Reels reserva el 35 % inferior (desde y = 1.248); los subtítulos (1.322-1.450) quedan dentro de esa franja. El botón del cierre está en 770-930.
+6. **Llamada de Raquel: no verificada y hoy no operativa.** Growth informa de que la llamada del agente de voz falla desde el 13-nov (línea SIP). La escena se mantiene con «La activa tu equipo», pero esta versión no debe lanzarse hasta que la llamada funcione y se haga la prueba.
