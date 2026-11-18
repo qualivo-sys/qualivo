@@ -85,7 +85,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     var gGoogle = (cur['VSL'] && cur['VSL'].google) || 0, fact = suma(cur, 'eur'), ventas = suma(cur, 'ventas'), gasto = suma(cur, 'gasto'), llam = suma(cur, 'llam'), reg = (F.registros[s] || {})._total || 0;
     var etiq = esMes ? 'mes' : 'semana';
     var h = '';
-    h += '<div class="barra"><div><h1>Nuria Roure · Intelligence</h1><p class="sub">' + (esMes ? 'Por meses' : 'Por semanas') + ' · datos de GHL, Meta y la hoja de ventas · actualizado hace ' + Math.round((datos.cacheSegundos || 0) / 60) + ' min</p></div>';
+    h += '<div class="barra"><div><h1>Nuria Roure · Intelligence</h1><p class="sub">' + (esMes ? 'Por meses' : 'Por semanas de viernes a jueves') + ' · datos de GHL, Meta y la hoja de ventas · actualizado hace ' + Math.round((datos.cacheSegundos || 0) / 60) + ' min</p></div>';
     h += '<div><button class="btn" id="modo" type="button">' + (esMes ? 'Ver por semanas' : 'Ver por meses') + '</button> <select id="sem" aria-label="Periodo">' + sem.map(function (w, k) { return '<option value="' + w + '"' + (w === s ? ' selected' : '') + '>' + (esMes ? nomMes(w) : 'Semana del ' + rango(w)) + (k === sem.length - 1 ? ' (en curso)' : '') + '</option>'; }).slice().reverse().join('') + '</select> ';
     h += '<button class="btn" id="refrescar" type="button">Actualizar</button> <a class="btn" href="/intelligence/?cuenta=nuria">Directo y fichas</a></div></div>';
     if (enCurso) h += '<p class="nota">' + (esMes ? 'El mes' : 'La semana') + ' en curso aún no está completo: compáralo con cuidado.</p>';

@@ -1,0 +1,912 @@
+<style>
+  :root{
+    --navy:#283249;--navy-deep:#1F2840;
+    --coral:#FFBB32;--coral-dark:#E6A419;
+    --beige:#FEFAF3;--beige-2:#F3EEE4;
+    --ink:#283249;--muted:#5A6B7D;--line:#E7E1D2;
+    --red:#E25C5C;--green:#3B8C5F;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--beige);color:var(--navy);font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .nr{width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;background:var(--beige);overflow-x:hidden}
+  .nr *{box-sizing:border-box}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+
+  /* ============ STICKY TOP STACK (bar + nav together) ============ */
+  /* Usamos position:fixed (en vez de sticky) porque GHL envuelve el HTML en contenedores con overflow/transform que rompen sticky. */
+  .sticky-top{position:fixed;top:0;left:0;right:0;z-index:50;width:100%}
+  .sticky-spacer{display:block;width:100%}
+
+  /* ============ STICKY TOP BAR ============ */
+  .nr-bar{position:relative;z-index:2;background:linear-gradient(135deg,#1F2840 0%,#283249 55%,#2d3a55 100%);color:#fff;overflow:hidden}
+  .nr-bar::before{content:"";position:absolute;top:-110px;right:-110px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(255,187,50,.22),rgba(255,187,50,0) 65%);pointer-events:none}
+  .nr-bar__star{position:absolute;color:#FFBB32;opacity:.7;pointer-events:none}
+  .nr-bar__star.s1{top:20px;right:90px;font-size:16px}
+  .nr-bar__star.s2{top:60px;right:170px;font-size:10px;opacity:.5;color:#fff}
+  .nr-bar__star.s3{bottom:22px;right:50px;font-size:12px;opacity:.55}
+  .nr-bar__inner{max-width:1240px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;gap:28px;position:relative}
+  .nr-bar__left{display:flex;align-items:center;gap:18px;min-width:0;flex:1}
+  .nr-bar__icon{width:56px;height:56px;border-radius:50%;background:rgba(255,187,50,.16);display:inline-flex;align-items:center;justify-content:center;flex:none;border:1px solid rgba(255,187,50,.25)}
+  .nr-bar__eyebrow{margin:0 0 4px;font-family:'Oswald',sans-serif;font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#FFBB32;display:inline-flex;align-items:center;gap:8px;line-height:1}
+  .nr-bar__eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:#FFBB32}
+  .nr-bar__title{margin:0;font-family:'Oswald',sans-serif;font-weight:600;font-size:21px;line-height:1.18;color:#fff;letter-spacing:-.003em}
+  .nr-bar__title span{color:#FFBB32}
+  .nr-bar__sub{margin:4px 0 0;font-size:12.5px;color:rgba(255,255,255,.7);font-weight:500}
+  .nr-bar__right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+  .nr-bar__cta{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 24px;background:#FFBB32;color:#283249;font-weight:700;font-size:14px;letter-spacing:.02em;border-radius:8px;text-decoration:none;border:1px solid rgba(40,50,73,.15);line-height:1;transition:background .18s,transform .15s,box-shadow .18s;white-space:nowrap;box-shadow:0 8px 20px -6px rgba(255,187,50,.55)}
+  .nr-bar__cta:hover{background:#fff;transform:translateY(-1px)}
+  .nr-bar__micro{margin:0;font-size:11.5px;color:rgba(255,255,255,.55);letter-spacing:.04em}
+  @media (max-width:880px){
+    .nr-bar__inner{padding:14px 20px;gap:14px}
+    .nr-bar__icon{width:46px;height:46px}.nr-bar__icon svg{width:22px;height:22px}
+    .nr-bar__title{font-size:17px}
+    .nr-bar__sub{display:none}
+    .nr-bar__cta{height:42px;font-size:13px;padding:0 18px}
+    .nr-bar__star{display:none}
+  }
+  @media (max-width:560px){
+    .nr-bar__inner{flex-direction:column;align-items:stretch}
+    .nr-bar__right{align-items:stretch}.nr-bar__cta{width:100%;justify-content:center}
+    .nr-bar__micro{text-align:center}
+    .nr-bar__icon,.nr-bar__eyebrow,.nr-bar__micro{display:none}
+    .nr-bar__inner{gap:10px;padding:12px 18px}
+    .nr-bar__title{font-size:16px}
+  }
+
+  /* ============ NAV ============ */
+  .nav{background:#fff;border-bottom:1px solid var(--line);position:relative;z-index:1}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:32px}
+  .nav-brand{font-family:'Oswald',sans-serif;font-weight:500;font-size:24px;letter-spacing:.06em;color:var(--navy);text-decoration:none}
+  .nav-links{display:flex;align-items:center;gap:38px;list-style:none;margin:0;padding:0}
+  .nav-links a{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:var(--navy);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .15s;position:relative}
+  .nav-links a:hover{color:var(--coral-dark)}
+  .nav-links a.is-cta{color:var(--coral-dark)}
+  .nav-links a.is-cta::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--coral)}
+  .nav-toggle{display:none;background:transparent;border:0;padding:8px;cursor:pointer;color:var(--navy)}
+  @media (max-width:860px){
+    .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 18px 30px -18px rgba(40,50,73,.35);padding:6px 22px 14px}
+    .nav.is-open .nav-links{display:flex}
+    .nav-links li{border-top:1px solid var(--line)}
+    .nav-links li:first-child{border-top:0}
+    .nav-links a{display:block;padding:15px 0;font-size:14px}
+    .nav-links a.is-cta::after{display:none}
+    .nav-toggle{display:block}
+    .nav-inner{padding:14px 0}
+    .nav-brand{font-size:20px}
+  }
+
+  /* ============ HERO ============ */
+  .hero{position:relative;background:var(--beige);overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center;padding-top:70px;padding-bottom:90px}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--navy);font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);margin:0 0 28px}
+  .hero-eyebrow .moon{color:var(--coral-dark)}
+  .hero h1{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(38px,5.5vw,68px);line-height:1.04;color:var(--navy);margin:0 0 22px;letter-spacing:-.008em;text-wrap:balance}
+  .hero h1 em{font-style:normal;color:var(--coral-dark)}
+  .hero-sub{font-family:'Oswald',sans-serif;font-weight:500;font-size:clamp(18px,1.8vw,22px);line-height:1.35;color:var(--navy);margin:0 0 22px;max-width:540px}
+  .hero-sub b{font-weight:600;color:var(--coral-dark)}
+  .hero-lede{font-size:16px;color:var(--muted);line-height:1.6;margin:0 0 36px;max-width:480px}
+  .hero-lede b{color:var(--navy);font-weight:600}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:22px}
+  .hero-meta{display:flex;align-items:center;gap:16px;color:var(--muted);font-size:13.5px;flex-wrap:wrap}
+  .hero-meta .stars{color:var(--coral);letter-spacing:1px;font-size:15px}
+  .hero-meta b{color:var(--navy);font-weight:700}
+
+  .hero-photo{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -25px rgba(40,50,73,.4);background:#EEE6D8}
+  .hero-photo img{width:100%;height:100%;object-fit:cover}
+  .hero-badge{position:absolute;bottom:24px;left:24px;background:#fff;border-radius:12px;padding:14px 18px;box-shadow:0 12px 30px -8px rgba(40,50,73,.35);max-width:240px}
+  .hero-badge .num{font-family:'Oswald',sans-serif;font-weight:600;color:var(--coral-dark);font-size:32px;line-height:1;margin:0}
+  .hero-badge .lbl{font-size:12.5px;color:var(--muted);margin:4px 0 0;line-height:1.4}
+  .hero-badge .lbl b{color:var(--navy);font-weight:600}
+
+  /* ============ BUTTONS (shared) ============ */
+  .btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 30px;background:var(--coral);color:var(--navy);font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:.02em;border-radius:8px;text-decoration:none;border:1px solid var(--navy);line-height:1;cursor:pointer;transition:background .18s,color .18s,transform .15s,box-shadow .18s;white-space:nowrap;box-shadow:0 10px 22px -8px rgba(255,187,50,.55)}
+  .btn:hover{background:var(--navy);color:#fff;transform:translateY(-1px)}
+  .btn svg{flex:none}
+  .btn.btn-ghost{background:transparent;color:var(--navy);box-shadow:none}
+  .btn.btn-ghost:hover{background:var(--navy);color:#fff}
+  .btn.btn-lg{height:62px;font-size:16px;padding:0 36px}
+  .btn.btn-light{background:var(--coral);border-color:var(--coral)}
+  .btn.btn-light:hover{background:#fff;color:var(--navy);border-color:#fff}
+
+  /* ============ MEDIOS ============ */
+  .medios{background:var(--navy);padding:34px 0;border-top:1px solid rgba(255,255,255,.05)}
+  .medios-inner{display:flex;align-items:center;gap:36px;flex-wrap:wrap;justify-content:center}
+  .medios-label{font-family:'Oswald',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0;padding-right:14px;border-right:1px solid rgba(255,255,255,.12)}
+  .medio{font-family:'Oswald',sans-serif;font-weight:500;color:#fff;font-size:18px;letter-spacing:.04em;opacity:.7;transition:opacity .2s}
+  .medio:hover{opacity:1}
+  .medio.italic{font-family:Georgia,serif;font-style:italic;font-weight:400;font-size:20px}
+  .medio.serif{font-family:'Cormorant Garamond','Playfair Display',Georgia,serif;font-weight:500;font-size:20px}
+  .medio.weight{font-weight:700;letter-spacing:0;font-size:16px}
+  @media (max-width:880px){.medios-inner{gap:22px}.medio{font-size:15px}.medio.italic,.medio.serif{font-size:17px}}
+
+  /* ============ EXCUSAS ============ */
+  .excusas{background:var(--beige);padding:110px 0}
+  .excusas-inner{max-width:840px;margin:0 auto;text-align:center}
+  .eyebrow{font-family:'Oswald',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--coral-dark);margin:0 0 18px;display:inline-block}
+  .h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(28px,4vw,48px);line-height:1.12;color:var(--navy);margin:0 0 20px;text-wrap:balance;letter-spacing:-.005em}
+  .h2 em{font-style:normal;color:var(--coral-dark)}
+  .lead{font-size:18px;color:var(--muted);line-height:1.6;margin:0 0 36px;max-width:600px;margin-left:auto;margin-right:auto}
+  .lead b{color:var(--navy);font-weight:600}
+
+  .excusas-list{display:flex;flex-direction:column;gap:14px;max-width:580px;margin:36px auto}
+  .excusa{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 22px;text-align:left;box-shadow:0 6px 16px -10px rgba(40,50,73,.15)}
+  .excusa .x{width:30px;height:30px;border-radius:50%;background:rgba(226,92,92,.12);color:var(--red);display:inline-flex;align-items:center;justify-content:center;flex:none;font-weight:700;font-size:15px}
+  .excusa .x::after{content:"";width:12px;height:2px;background:currentColor;display:block;position:relative}
+  .excusa .x::before{content:"";width:12px;height:2px;background:currentColor;display:block;position:absolute;transform:rotate(45deg)}
+  .excusa .x{position:relative;overflow:hidden}
+  .excusa .x svg{display:block}
+  .excusa p{margin:0;font-size:16px;color:var(--navy);font-weight:500;line-height:1.45}
+  .excusas-quote{margin:42px auto 0;max-width:640px;padding:24px 28px;background:var(--navy);color:#fff;border-radius:12px;text-align:center;position:relative}
+  .excusas-quote p{margin:0;font-family:'Oswald',sans-serif;font-weight:500;font-size:20px;line-height:1.35;font-style:italic;color:#fff}
+  .excusas-quote p em{font-style:italic;color:var(--coral)}
+  .excusas-foot{margin:32px auto 0;max-width:620px;color:var(--muted);font-size:17px;line-height:1.6}
+  .excusas-foot b{color:var(--navy);font-weight:600}
+
+  /* ============ MÉTODO NO ES PARA TODOS ============ */
+  .metodo{background:var(--navy);color:#fff;padding:110px 0;position:relative;overflow:hidden}
+  .metodo::before{content:"";position:absolute;top:-120px;left:-120px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,187,50,.12),rgba(255,187,50,0) 65%);pointer-events:none}
+  .metodo::after{content:"";position:absolute;bottom:-100px;right:-100px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,187,50,.08),rgba(255,187,50,0) 70%);pointer-events:none}
+  .metodo-inner{max-width:880px;margin:0 auto;text-align:center;position:relative}
+  .metodo .eyebrow{color:var(--coral)}
+  .metodo .h2{color:#fff}
+  .metodo .h2 em{color:var(--coral)}
+  .metodo .lead{color:rgba(255,255,255,.75)}
+  .metodo .lead b{color:#fff}
+
+  .metodo-rows{display:flex;flex-direction:column;gap:14px;max-width:680px;margin:36px auto 50px}
+  .metodo-row{display:flex;align-items:flex-start;gap:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:20px 24px;text-align:left}
+  .metodo-row .ic{width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+  .metodo-row.no .ic{background:rgba(226,92,92,.18);color:var(--red)}
+  .metodo-row.yes .ic{background:rgba(59,140,95,.2);color:#5DDC8E}
+  .metodo-row p{margin:0;font-size:16.5px;line-height:1.5;color:#fff;font-weight:500}
+  .metodo-row p b{color:var(--coral)}
+
+  .metodo-divider{width:60px;height:2px;background:var(--coral);margin:50px auto 30px}
+  .metodo h3{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(24px,3vw,34px);color:#fff;margin:0 0 18px;line-height:1.2;text-wrap:balance}
+  .metodo-body{color:rgba(255,255,255,.78);font-size:17px;line-height:1.65;max-width:620px;margin:0 auto 36px}
+  .metodo-proof{display:inline-block;background:rgba(255,187,50,.12);border:1px solid rgba(255,187,50,.3);border-radius:12px;padding:18px 28px;margin-bottom:36px}
+  .metodo-proof .num{font-family:'Oswald',sans-serif;font-weight:600;color:var(--coral);font-size:36px;line-height:1;display:block}
+  .metodo-proof .lbl{margin:6px 0 0;font-size:13.5px;color:rgba(255,255,255,.75);letter-spacing:.04em}
+
+  /* ============ BIO ============ */
+  .bio{background:var(--beige);padding:110px 0}
+  .bio-grid{display:grid;grid-template-columns:.95fr 1.1fr;gap:64px;align-items:center;max-width:1140px;margin:0 auto}
+  .bio-photo{aspect-ratio:4/5;border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -25px rgba(40,50,73,.3);background:#EEE6D8;position:relative}
+  .bio-photo img{width:100%;height:100%;object-fit:cover}
+  .bio-photo .tag{position:absolute;top:20px;left:20px;background:#fff;font-family:'Oswald',sans-serif;font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);padding:8px 14px;border-radius:999px;box-shadow:0 6px 16px -6px rgba(40,50,73,.25)}
+  .bio h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(30px,3.6vw,44px);line-height:1.12;color:var(--navy);margin:0 0 16px;letter-spacing:-.005em;text-wrap:balance}
+  .bio h2 em{font-style:normal;color:var(--coral-dark)}
+  .bio-role{font-family:'Oswald',sans-serif;font-weight:500;font-style:italic;font-size:19px;color:var(--coral-dark);margin:0 0 24px;line-height:1.4;max-width:520px}
+  .bio p{color:var(--muted);font-size:16px;line-height:1.7;margin:0 0 16px;max-width:540px}
+  .bio p b{color:var(--navy);font-weight:600}
+  .bio-creds{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 32px}
+  .bio-creds span{background:#fff;border:1px solid var(--line);color:var(--navy);font-family:'Oswald',sans-serif;font-weight:500;font-size:11.5px;letter-spacing:.06em;padding:7px 12px;border-radius:99px;text-transform:uppercase}
+  .bio-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .bio-ctas .link{font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;color:var(--navy);text-decoration:none;letter-spacing:.02em;display:inline-flex;align-items:center;gap:6px;padding:8px 4px;border-bottom:2px solid transparent;transition:border-color .15s,color .15s}
+  .bio-ctas .link:hover{color:var(--coral-dark);border-color:var(--coral)}
+  .bio-ctas .btn{height:50px;font-size:14px;padding:0 24px}
+
+  @media (max-width:880px){
+    .bio-grid{grid-template-columns:1fr;gap:40px}
+    .bio-photo{max-width:380px;margin:0 auto;aspect-ratio:1/1}
+  }
+
+  /* ============ PROGRAMA BANNER ============ */
+  .programa{background:var(--beige-2);padding:110px 0}
+  .programa-card{max-width:1140px;margin:0 auto;background:#fff;border-radius:18px;padding:46px;box-shadow:0 30px 60px -32px rgba(40,50,73,.25);border:1px solid var(--line)}
+  .programa-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:52px;align-items:center}
+
+  .pfd-card{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/5;background:var(--navy);box-shadow:0 20px 40px -20px rgba(40,50,73,.4)}
+  .pfd-card__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%}
+  .pfd-card__overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,50,73,.35) 0%,rgba(40,50,73,.1) 38%,rgba(40,50,73,.1) 58%,rgba(40,50,73,.92) 100%)}
+  .pfd-card__content{position:absolute;inset:0;padding:30px 30px 28px;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
+  .pfd-card__top{display:flex;flex-direction:column;gap:14px;max-width:92%}
+  .pfd-card__eyebrow{font-family:'Oswald',sans-serif;font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--coral);margin:0;display:inline-flex;align-items:center;gap:10px;line-height:1}
+  .pfd-card__eyebrow::after{content:"";display:inline-block;width:60px;height:2px;background:var(--coral)}
+  .pfd-card__title{font-family:'Oswald',sans-serif;font-weight:600;font-size:28px;line-height:1.1;color:#fff;margin:0;text-wrap:balance;letter-spacing:-.005em}
+  .pfd-card__sub{font-family:'Montserrat',sans-serif;font-weight:500;font-style:italic;font-size:14px;line-height:1.5;color:rgba(255,255,255,.85);margin:0}
+  .pfd-card__cta{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;height:42px;padding:0 18px;background:var(--coral);color:var(--navy);font-weight:700;font-size:13.5px;border-radius:6px;text-decoration:none;border:1px solid var(--navy);line-height:1;margin-top:18px;box-shadow:0 6px 18px -6px rgba(255,187,50,.6);transition:transform .15s,background .18s}
+  .pfd-card__cta:hover{background:#fff;transform:translateY(-1px)}
+  .pfd-card__bottom{font-family:'Oswald',sans-serif;font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#fff;text-align:center;line-height:1.5;border-top:1px solid rgba(255,255,255,.18);padding-top:14px;margin:0}
+  .pfd-card__bottom b{color:var(--coral);font-weight:700}
+
+  .pfd-right .eyebrow{margin-bottom:14px}
+  .pfd-right h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(28px,2.9vw,38px);line-height:1.14;color:var(--navy);margin:0 0 16px;text-wrap:balance;letter-spacing:-.005em}
+  .pfd-right h2 em{font-style:normal;color:var(--coral-dark)}
+  .pfd-right .sub{font-size:17px;color:var(--muted);line-height:1.55;margin:0 0 24px;max-width:520px}
+  .pfd-right .sub b{color:var(--navy);font-weight:600}
+  .pfd-divider{width:48px;height:2px;background:var(--coral);margin:0 0 22px}
+  .pfd-quote{font-family:'Oswald',sans-serif;font-weight:500;font-style:italic;font-size:21px;line-height:1.35;color:var(--navy);margin:0 0 30px;max-width:480px;text-wrap:balance}
+  .pfd-quote em{font-style:italic;color:var(--coral-dark)}
+
+  @media (max-width:880px){
+    .programa-card{padding:30px 26px}
+    .programa-grid{grid-template-columns:1fr;gap:32px}
+    .pfd-card{aspect-ratio:5/4;max-width:520px;margin:0 auto;width:100%}
+    .pfd-right .btn{width:100%;justify-content:center}
+  }
+
+  /* ============ CONFIANZA ============ */
+  .confianza{background:var(--beige);padding:70px 0;border-top:1px solid var(--line)}
+  .confianza-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:36px;text-align:left}
+  .confianza-logo{width:84px;height:84px;border-radius:14px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 8px 20px -10px rgba(40,50,73,.18)}
+  .confianza-logo svg{width:48px;height:48px}
+  .confianza h3{font-family:'Oswald',sans-serif;font-weight:600;font-size:20px;letter-spacing:.04em;color:var(--navy);margin:0 0 6px;text-transform:uppercase}
+  .confianza p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.55;max-width:480px}
+  @media (max-width:600px){.confianza-inner{flex-direction:column;text-align:center;gap:18px}}
+
+  /* ============ PRENSA ============ */
+  .prensa-wrap{margin-top:80px;padding-top:60px;border-top:1px solid var(--line)}
+  .prensa-head{text-align:center;max-width:680px;margin:0 auto 36px}
+  .prensa-head h3{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(24px,2.8vw,32px);color:var(--navy);margin:0 0 12px;line-height:1.18;text-wrap:balance;letter-spacing:-.005em}
+  .prensa-head h3 em{font-style:normal;color:var(--coral-dark)}
+  .prensa-head p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.6;max-width:560px;margin:0 auto}
+  .prensa-section-lbl{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--coral-dark);text-align:center;margin:0 0 20px}
+  .bio .prensa-section-lbl{color:var(--coral-dark);max-width:none;margin:0 0 20px;font-size:12px;line-height:1.4}
+  .bio .prensa-head p{margin:0 auto;max-width:560px}
+  .prensa-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 28px;max-width:1000px;margin:0 auto;padding:24px 20px;background:var(--beige-2);border:1px solid var(--line);border-radius:12px}
+  .prensa-logo{font-family:'Oswald',sans-serif;font-weight:500;color:var(--navy);font-size:18px;letter-spacing:.04em;opacity:.75;transition:opacity .2s,color .2s}
+  .prensa-logo:hover{opacity:1;color:var(--coral-dark)}
+  .prensa-logo.italic{font-family:Georgia,serif;font-style:italic;font-weight:400;font-size:21px}
+  .prensa-logo.serif{font-family:'Cormorant Garamond','Playfair Display',Georgia,serif;font-weight:500;font-size:21px}
+  .prensa-logo.weight{font-weight:700;letter-spacing:0;font-size:16px}
+  .prensa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1100px;margin:0 auto}
+  .prensa-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 22px;transition:transform .2s,box-shadow .2s,border-color .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px}
+  .prensa-card:hover{transform:translateY(-2px);box-shadow:0 16px 30px -16px rgba(40,50,73,.2);border-color:rgba(255,187,50,.4)}
+  .prensa-card .prensa-cat{display:inline-block;background:var(--beige-2);color:var(--coral-dark);font-family:'Oswald',sans-serif;font-weight:600;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:4px 9px;border-radius:99px;margin:0;align-self:flex-start}
+  .prensa-card h4{font-family:'Oswald',sans-serif;font-weight:600;color:var(--navy);font-size:19px;letter-spacing:.04em;margin:0;line-height:1.15}
+  .prensa-card p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.5}
+  .prensa-card .prensa-go{margin-top:auto;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--coral-dark);letter-spacing:.02em}
+  .prensa-cta{text-align:center;margin:28px 0 0}
+  @media (max-width:880px){.prensa-grid{grid-template-columns:repeat(2,1fr)}.prensa-logos{gap:12px 20px}.prensa-logo{font-size:16px}.prensa-logo.italic,.prensa-logo.serif{font-size:18px}}
+  @media (max-width:520px){.prensa-grid{grid-template-columns:1fr;max-width:380px}.prensa-wrap{margin-top:50px;padding-top:40px}}
+
+  /* ============ CONTACTO ============ */
+  .contacto{background:var(--beige);padding:100px 0;border-top:1px solid var(--line)}
+  .contacto-head{text-align:center;max-width:680px;margin:0 auto 48px}
+  .contacto-head h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(28px,3.4vw,40px);color:var(--navy);margin:0 0 14px;line-height:1.14;text-wrap:balance;letter-spacing:-.005em}
+  .contacto-head h2 em{font-style:normal;color:var(--coral-dark)}
+  .contacto-head p{margin:0;color:var(--muted);font-size:16.5px;line-height:1.6}
+  .contacto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:0 auto}
+  .contacto-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:32px 28px 28px;text-align:left;display:flex;flex-direction:column;gap:14px;transition:transform .2s,box-shadow .2s,border-color .2s;text-decoration:none;color:inherit}
+  .contacto-card:hover{transform:translateY(-3px);box-shadow:0 20px 40px -20px rgba(40,50,73,.2);border-color:rgba(255,187,50,.5)}
+  .contacto-card .c-ic{width:48px;height:48px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .contacto-card.wa .c-ic{background:rgba(37,211,102,.14);color:#25D366}
+  .contacto-card.mail .c-ic{background:rgba(255,187,50,.18);color:var(--coral-dark)}
+  .contacto-card.call .c-ic{background:rgba(40,50,73,.08);color:var(--navy)}
+  .contacto-card h3{font-family:'Oswald',sans-serif;font-weight:600;color:var(--navy);font-size:20px;margin:0 0 4px;line-height:1.2}
+  .contacto-card .c-sub{margin:0;font-size:14.5px;color:var(--muted);line-height:1.55}
+  .contacto-card .c-cta{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13.5px;color:var(--coral-dark);letter-spacing:.02em;line-height:1}
+  .contacto-card .c-cta svg{flex:none;transition:transform .2s}
+  .contacto-card:hover .c-cta svg{transform:translateX(3px)}
+  @media (max-width:880px){.contacto-grid{grid-template-columns:1fr;max-width:520px}}
+
+  /* ============ NEWSLETTER (sub) ============ */
+  .news{background:var(--beige-2);padding:80px 0}
+  .news-inner{max-width:640px;margin:0 auto;text-align:center}
+  .news h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:30px;color:var(--navy);margin:0 0 12px;line-height:1.2}
+  .news p{font-size:15px;color:var(--muted);line-height:1.6;margin:0 0 26px}
+  .news p b{color:var(--navy);font-weight:600}
+
+  /* Contenedor del embed de GHL (newsletter) */
+  .news-embed{
+    max-width:540px;
+    margin:0 auto;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:15px;
+    box-shadow:0 14px 34px -18px rgba(40,50,73,.22);
+    overflow:hidden;
+  }
+  .news-embed iframe{
+    display:block;
+    width:100%;
+    min-height:491px;   /* coincide con data-height del formulario */
+    height:491px;
+    border:none;
+    border-radius:15px;
+    background:#fff;
+  }
+  @media (max-width:520px){
+    .news-embed iframe{min-height:520px;height:520px}
+  }
+
+  .news-micro{margin:16px 0 0;font-size:12px;color:var(--muted)}
+
+  /* ============ FOOTER ============ */
+  .foot{background:var(--navy);color:#fff;padding:60px 0 28px;text-align:center}
+  .foot .brand{font-family:'Oswald',sans-serif;font-weight:500;color:#fff;font-size:24px;letter-spacing:.04em;display:inline-block;margin-bottom:18px}
+  .foot-links{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin:0 0 22px;font-size:13px;color:rgba(255,255,255,.7);font-family:'Oswald',sans-serif;letter-spacing:.04em;text-transform:uppercase;font-weight:500}
+  .foot-links a{color:rgba(255,255,255,.7);text-decoration:none;transition:color .15s}
+  .foot-links a:hover{color:var(--coral)}
+  .foot-legal{color:rgba(255,255,255,.55);font-size:11.5px;line-height:1.7;max-width:920px;margin:0 auto;padding:18px 0;border-top:1px solid rgba(255,255,255,.08)}
+  .foot-legal b{color:rgba(255,255,255,.9);font-weight:600}
+  .foot-legal a{color:rgba(255,255,255,.85);text-decoration:underline}
+  .foot-copy{margin-top:14px;color:rgba(255,255,255,.45);font-size:11px;letter-spacing:.04em}
+
+  /* ============ WHATSAPP FLOAT ============ */
+  .wa-float{position:fixed;right:22px;bottom:22px;z-index:60;display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:600;font-size:13.5px;padding:13px 18px 13px 14px;border-radius:999px;box-shadow:0 14px 30px -8px rgba(37,211,102,.55),0 6px 16px -6px rgba(0,0,0,.25);transition:transform .2s,background .2s}
+  .wa-float:hover{transform:translateY(-2px);background:#1ebe5b}
+  .wa-float .ic{width:34px;height:34px;border-radius:50%;background:#fff;display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .wa-float .lbl{line-height:1.15}
+  .wa-float .lbl small{display:block;font-weight:500;font-size:11px;opacity:.85;margin-top:2px}
+  @media (max-width:560px){.wa-float .lbl{display:none}.wa-float{padding:12px}.wa-float .ic{width:32px;height:32px}}
+
+  /* ============ MOBILE ADJUSTMENTS ============ */
+  @media (max-width:880px){
+    .wrap{padding:0 22px}
+    .hero-grid{grid-template-columns:1fr;gap:36px;padding-top:50px;padding-bottom:70px;text-align:left}
+    .hero-photo{max-width:420px;margin:0;aspect-ratio:1/1.1}
+    .excusas,.metodo,.bio,.programa{padding:80px 0}
+  }
+  @media (max-width:520px){
+    .wrap{padding:0 18px}
+    .hero-grid{padding-top:40px;padding-bottom:56px}
+    .hero-ctas .btn{width:100%;justify-content:center}
+    .excusas,.metodo,.bio,.programa,.news{padding:64px 0}
+  }
+</style>
+</head>
+<body>
+
+<div class="nr">
+
+  <!-- STICKY TOP STACK: bar + nav scroll together -->
+  <div class="sticky-top">
+
+  <!-- BLOQUE 0 — STICKY TOP BAR -->
+  <div class="nr-bar" id="nrBar" role="region" aria-label="Test de patrones de sueño">
+    <span class="nr-bar__star s1">✦</span>
+    <span class="nr-bar__star s2">✦</span>
+    <span class="nr-bar__star s3">✦</span>
+    <div class="nr-bar__inner">
+      <div class="nr-bar__left">
+        <span class="nr-bar__icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFBB32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </span>
+        <div>
+          <p class="nr-bar__eyebrow">Test gratuito · 3 minutos</p>
+          <p class="nr-bar__title">¿Qué te quita el sueño? <span>Descubre tu patrón.</span></p>
+          <p class="nr-bar__sub">Tu resultado al momento y una guía en tu correo — por la Dra. Nuria Roure.</p>
+        </div>
+      </div>
+      <div class="nr-bar__right">
+        <a class="nr-bar__cta" href="https://nr.nuriaroure.com/test-patrones?utm_source=home&utm_medium=organic&utm_campaign=test" target="_blank" rel="noopener">
+          Hacer el test gratis
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="nr-bar__micro">100% gratuito</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a href="https://nuriaroure.com/" class="nav-brand">Nuria Roure</a>
+      <ul class="nav-links" id="nrMenu">
+        <li><a href="https://nr.nuriaroure.com/test-patrones?utm_source=home&utm_medium=nav&utm_campaign=test" target="_blank" class="is-cta">Test de sueño</a></li>
+        <li><a href="https://nr.nuriaroure.com/3-claves-para-dormir-mejor-a?utm_source=home&utm_medium=nav&utm_campaign=programa" target="_blank">El programa</a></li>
+        <li><a href="https://nuriaroure.com/sobre-mi/" target="_blank" rel="noopener">Sobre mí</a></li>
+        <li><a href="https://nuriaroure.com/sala-de-prensa/" target="_blank" rel="noopener">Prensa</a></li>
+        <li><a href="https://nuriaroure.com/contacto/" target="_blank" rel="noopener">Contacto</a></li>
+      </ul>
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nrMenu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  </div>
+  <!-- /STICKY TOP STACK -->
+  <div class="sticky-spacer" id="stickySpacer" aria-hidden="true"></div>
+
+  <!-- BLOQUE 1 — HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="hero-eyebrow">Despierta para Dormir Mejor <span class="moon">🌙</span></span>
+        <h1>¿Estás viviendo o <em>sobreviviendo?</em></h1>
+        <p class="hero-sub">Noche que no duermes, sueño que se desvanece. ¿Estás viviendo tu vida o <b>sobreviviendo a ella</b>?</p>
+        <p class="hero-lede">Llevo <b>más de 25 años</b> ayudando a personas como tú a recuperar su sueño y, con él, su vida.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-lg" href="https://nr.nuriaroure.com/test-patrones?utm_source=home&utm_medium=organic&utm_campaign=test" target="_blank" rel="noopener">
+            Hacer el test gratuito
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="https://nr.nuriaroure.com/3-claves-para-dormir-mejor-a?utm_source=home&utm_medium=organic&utm_campaign=programa" target="_blank" rel="noopener">
+            Ver el método →
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span class="stars">★★★★★</span>
+          <span><b>+1.150 personas</b> ya han recuperado su sueño</span>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <picture fetchpriority="high" decoding="async">
+<source type="image/webp" srcset="https://nuriaroure.com/wp-content/uploads/2026/05/nuria-chair.jpg.webp"/>
+<img fetchpriority="high" width="1365" height="2048" decoding="async" src="https://nuriaroure.com/wp-content/uploads/2026/05/nuria-chair.jpg" alt="Dra. Nuria Roure" class="no-lazy" />
+</picture>
+
+
+        <div class="hero-badge">
+          <p class="num">25 años</p>
+          <p class="lbl">de experiencia tratando <b>insomnio crónico</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 2 — MEDIOS -->
+  <section class="medios">
+    <div class="wrap medios-inner">
+      <p class="medios-label">Hablan de mí en</p>
+      <span class="medio weight">TELE 5</span>
+      <span class="medio">la 3</span>
+      <span class="medio serif">VOGUE</span>
+      <span class="medio italic">¡HOLA!</span>
+      <span class="medio">laSexta</span>
+      <span class="medio weight">COPE</span>
+      <span class="medio">Cuatro</span>
+      <span class="medio">20 minutos</span>
+      <span class="medio serif">El Mundo</span>
+    </div>
+  </section>
+
+  <!-- BLOQUE 3 — EXCUSAS -->
+  <section class="excusas">
+    <div class="wrap excusas-inner">
+      <span class="eyebrow">Las excusas más comunes</span>
+      <h2 class="h2">La mayoría se ha resignado a dormir mal. <em>¿Y tú?</em></h2>
+      <p class="lead">Estamos llenos de excusas cuando hablamos del sueño:</p>
+
+      <div class="excusas-list">
+        <div class="excusa">
+          <span class="x">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+          </span>
+          <p>"Duermo mal <b>por la edad</b>."</p>
+        </div>
+        <div class="excusa">
+          <span class="x">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+          </span>
+          <p>"Duermo mal <b>porque es genético</b>."</p>
+        </div>
+        <div class="excusa">
+          <span class="x">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+          </span>
+          <p>"Duermo mal <b>por la menopausia</b>."</p>
+        </div>
+        <div class="excusa">
+          <span class="x">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+          </span>
+          <p>"Es <b>estrés</b>, ya pasará."</p>
+        </div>
+        <div class="excusa">
+          <span class="x">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+          </span>
+          <p>"Toda la vida he dormido <b>así</b>."</p>
+        </div>
+      </div>
+
+      <div class="excusas-quote">
+        <p>Me tiro de los pelos cuando escucho esto. <em>Nada de eso debe limitarte.</em></p>
+      </div>
+
+      <p class="excusas-foot">Lo he visto cientos de veces: <b>el sueño se recupera</b>. Con método, con ciencia, y con compromiso.</p>
+    </div>
+  </section>
+
+  <!-- BLOQUE 4 — MÉTODO NO ES PARA TODOS -->
+  <section class="metodo">
+    <div class="wrap metodo-inner">
+      <span class="eyebrow">El método</span>
+      <h2 class="h2">Mi método no es para todos. <em>¿Es para ti?</em></h2>
+
+      <div class="metodo-rows">
+        <div class="metodo-row no">
+          <span class="ic">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+          </span>
+          <p>Si buscas soluciones rápidas y poco duraderas, <b>este no es tu lugar.</b></p>
+        </div>
+        <div class="metodo-row yes">
+          <span class="ic">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <p>Si quieres <b>cambiar tus noches para siempre</b>, entonces sí.</p>
+        </div>
+      </div>
+
+      <div class="metodo-divider"></div>
+
+      <h3>Este proceso puede desafiarte.</h3>
+      <p class="metodo-body">Puede que no te guste todo lo que te diga, o todo lo que te haga hacer. Pero si confías en el camino, disfrutarás de un descanso profundo y una vida plena.</p>
+
+      <div class="metodo-proof">
+        <span class="num">+1.150</span>
+        <p class="lbl">personas ya lo han conseguido</p>
+      </div>
+
+      <div>
+        <a class="btn btn-light btn-lg" href="https://nr.nuriaroure.com/3-claves-para-dormir-mejor-a?utm_source=home&utm_medium=organic&utm_campaign=programa" target="_blank" rel="noopener">
+          Quiero conocer el método
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 5 — BIO -->
+  <section class="bio" id="bio">
+    <div class="wrap bio-grid">
+      <div class="bio-photo">
+        <span class="tag">Dra. Nuria Roure</span>
+        <img width="640" height="853" decoding="async" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='853'%20viewBox='0%200%20640%20853'%3E%3C/svg%3E" alt="Dra. Nuria Roure" class="perfmatters-lazy" data-src="https://nuriaroure.com/wp-content/uploads/2026/05/nuria-portrait-suit.webp" />
+      </div>
+      <div>
+        <span class="eyebrow">Sobre mí</span>
+        <h2>Soy la <em>Dra. Nuria Roure</em></h2>
+        <p class="bio-role">Doctora en Psicología y experta en sueño con más de <b style="font-style:normal;color:var(--navy);font-weight:600">25 años</b> de experiencia.</p>
+        <p>Primera psicóloga en España acreditada como <b>Somnologist por la European Sleep Research Society</b>. Profesora universitaria, miembro de la Sociedad Española de Sueño y autora en revistas científicas como <b>Sleep Medicine</b> y <b>PLoS One</b>.</p>
+        <p>Mi deseo es poner la <b>ciencia al servicio de las personas</b> que han probado de todo y aún no han recuperado su sueño.</p>
+        <div class="bio-creds">
+          <span>Doctora en Psicología</span>
+          <span>Somnologist · ESRS</span>
+          <span>Sleep Medicine · PLoS One</span>
+        </div>
+        <div class="bio-ctas">
+          <a class="btn btn-ghost" href="https://nuriaroure.com/sobre-mi/" target="_blank" rel="noopener">
+            Ver más sobre mí
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBAPARTADO: PRENSA -->
+    <div class="wrap prensa-wrap" id="prensa">
+      <div class="prensa-head">
+        <span class="eyebrow">Sala de prensa</span>
+        <h3>Mis apariciones en <em>medios</em></h3>
+        <p>Colaboraciones, entrevistas y artículos en los principales medios de España.</p>
+      </div>
+
+      <p class="prensa-section-lbl">Hablan de mí en</p>
+      <div class="prensa-logos">
+        <span class="prensa-logo serif">CaixaBank</span>
+        <span class="prensa-logo">TVE</span>
+        <span class="prensa-logo weight">TELE 5</span>
+        <span class="prensa-logo">Cuatro</span>
+        <span class="prensa-logo">laSexta</span>
+        <span class="prensa-logo italic">¡HOLA!</span>
+        <span class="prensa-logo serif">El País</span>
+        <span class="prensa-logo weight">COPE</span>
+        <span class="prensa-logo serif">ABC</span>
+        <span class="prensa-logo italic">Telva</span>
+        <span class="prensa-logo">EsRadio</span>
+        <span class="prensa-logo serif">El Mundo</span>
+        <span class="prensa-logo weight">LOS 40</span>
+        <span class="prensa-logo">Europa Press</span>
+        <span class="prensa-logo">20 minutos</span>
+        <span class="prensa-logo">Plaza Radio</span>
+        <span class="prensa-logo serif">El Confidencial</span>
+        <span class="prensa-logo serif">El Periódico</span>
+        <span class="prensa-logo">Cadena SER</span>
+        <span class="prensa-logo">Lleida TV</span>
+      </div>
+      <div class="prensa-cta">
+        <a class="btn" href="https://nuriaroure.com/sala-de-prensa/" target="_blank" rel="noopener">
+          Ver mis apariciones en prensa
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 6 — PROGRAMA POR FIN DUERMO -->
+  <section class="programa">
+    <div class="wrap">
+      <div class="programa-card">
+        <div class="programa-grid">
+
+          <a class="pfd-card" href="https://nr.nuriaroure.com/3-claves-para-dormir-mejor-a?utm_source=home&utm_medium=organic&utm_campaign=programa" target="_blank" rel="noopener" style="text-decoration:none">
+            <picture decoding="async" class="pfd-card__img" style="object-position:center 25%">
+<source type="image/webp" data-srcset="https://nuriaroure.com/wp-content/uploads/2026/05/nuria-book-blue.jpg.webp"/>
+<img width="2048" height="1366" decoding="async" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='2048'%20height='1366'%20viewBox='0%200%202048%201366'%3E%3C/svg%3E" alt="Programa Por Fin Duermo" class="perfmatters-lazy" data-src="https://nuriaroure.com/wp-content/uploads/2026/05/nuria-book-blue.jpg" />
+</picture>
+
+
+            <div class="pfd-card__overlay"></div>
+            <div class="pfd-card__content">
+              <div class="pfd-card__top">
+                <p class="pfd-card__eyebrow">Programa Por Fin Duermo</p>
+                <h3 class="pfd-card__title">El método de 6 pasos para recuperar tu sueño</h3>
+                <p class="pfd-card__sub">Sin fármacos ni soluciones temporales</p>
+                <span class="pfd-card__cta">Ver el método
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </span>
+              </div>
+              <p class="pfd-card__bottom">Más de <b>1.150 personas</b><br>han recuperado ya su sueño</p>
+            </div>
+          </a>
+
+          <div class="pfd-right">
+            <span class="eyebrow">El programa</span>
+            <h2>Descubre el método que ha funcionado con <em>más de 1.150 personas</em></h2>
+            <p class="sub">Recupera un sueño <b>profundo y reparador</b> en menos de 10 semanas.</p>
+            <div class="pfd-divider"></div>
+            <p class="pfd-quote">"El método de 6 pasos para dormir bien <em>sin depender de pastillas</em>"</p>
+            <a class="btn btn-lg" href="https://nr.nuriaroure.com/3-claves-para-dormir-mejor-a?utm_source=home&utm_medium=organic&utm_campaign=programa" target="_blank" rel="noopener">
+              Ver el vídeo del método
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 7 — CONFIANZA ONLINE -->
+  <section class="confianza">
+    <div class="wrap confianza-inner">
+      <div class="confianza-logo">
+        <svg viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="26" stroke="#283249" stroke-width="3"/>
+          <circle cx="32" cy="32" r="18" stroke="#283249" stroke-width="3"/>
+          <circle cx="32" cy="32" r="10" stroke="#FFBB32" stroke-width="3"/>
+          <circle cx="32" cy="32" r="3" fill="#FFBB32"/>
+        </svg>
+      </div>
+      <div>
+        <h3>Certificado de Confianza Online</h3>
+        <p>Sitio web certificado por Confianza Online: tu compra y navegación están protegidas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 8 — NEWSLETTER -->
+  <section class="news" id="newsletter">
+    <div class="wrap news-inner">
+      <span class="eyebrow">Newsletter</span>
+      <h2>Únete a mi comunidad</h2>
+      <p>📩 Casi cada día envío un correo con consejos, reflexiones y estrategias para dormir mejor. <b>No me autoexijo con mis hábitos de sueño, seguramente tú sí.</b> Por eso yo ya duermo bien… y tú no.</p>
+
+      <div class="news-embed">
+        <iframe style="width:100%;height:100%;border:none;border-radius:15px" id="inline-mNzzS8kchtUBT11KpIGL" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value data-activation-type="alwaysActivated" data-activation-value data-deactivation-type="neverDeactivate" data-deactivation-value data-form-name="NEWSLETTER (WEB)" data-height="491" data-layout-iframe-id="inline-mNzzS8kchtUBT11KpIGL" data-form-id="mNzzS8kchtUBT11KpIGL" title="NEWSLETTER (WEB)" class="perfmatters-lazy" data-src="https://link.kliking.io/widget/form/mNzzS8kchtUBT11KpIGL">
+        </iframe>
+      </div>
+
+      <p class="news-micro">Sin spam. Cancela cuando quieras.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="wrap">
+      <div class="brand">Nuria Roure</div>
+      <p class="foot-links">
+        <a href="https://nuriaroure.com/aviso-legal/">Aviso legal</a>
+        <a href="https://nuriaroure.com/politica-privacidad/">Política de privacidad</a>
+        <a href="https://nuriaroure.com/politica-de-cookies/">Cookies</a>
+        <a href="https://nuriaroure.com/condiciones-generales-de-contratacion/">Condiciones de contratación</a>
+      </p>
+      <p class="foot-legal">
+        <b>RESPONSABLE:</b> NURIA ROURE MIRO, Avinguda del Parc 154, 25110 Alpicat, Lleida. CIF nº 43736070Y. <a href="mailto:hola@nuriaroure.com">hola@nuriaroure.com</a> ·
+        <b>FINALIDAD:</b> Gestionar la inscripción a la newsletter. ·
+        <b>DERECHOS:</b> Acceso, rectificación, supresión, oposición y portabilidad escribiendo a <a href="mailto:info@nuriaroure.com">info@nuriaroure.com</a>.
+      </p>
+      <p class="foot-copy">© 2026 Nuria Roure · Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+</div>
+
+<!-- WHATSAPP FLOATING (comentado: reemplazado por el widget de LeadConnector) -->
+<!--
+<a class="wa-float"
+   href="https://api.whatsapp.com/send/?phone=34623781270&text=Hola+Nuria%2C+quiero+recibir+m%C3%A1s+informaci%C3%B3n+sobre+el+programa+Por+Fin+Duermo.&type=phone_number&app_absent=0"
+   target="_blank" rel="noopener" aria-label="WhatsApp">
+  <span class="ic">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.2-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.9-2-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3 0 1.4 1 2.7 1.2 2.9.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.3M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2"/></svg>
+  </span>
+  <span class="lbl">Habla con nosotras<small>Te respondemos por WhatsApp</small></span>
+</a>
+-->
+
+<!-- WIDGET LEADCONNECTOR (GHL) -->
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a26b6bfea8f17ad15cb83e3" data-source="WEB_USER"></script>
+
+<!-- EMBED LOADER DEL FORMULARIO GHL (newsletter) -->
+<script src="https://link.kliking.io/js/form_embed.js"></script>
+
+<script>
+  // Menú en móvil: abre y cierra la lista al pulsar el botón
+  (function(){
+    var nav = document.querySelector('.nr .nav');
+    var btn = nav && nav.querySelector('.nav-toggle');
+    if(!btn) return;
+    function cerrar(){ nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Abrir menú'); }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var abierto = nav.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      btn.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+    });
+    nav.querySelectorAll('.nav-links a').forEach(function(a){ a.addEventListener('click', cerrar); });
+    document.addEventListener('click', function(e){ if(!nav.contains(e.target)) cerrar(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrar(); });
+    window.addEventListener('resize', function(){ if(window.innerWidth > 860) cerrar(); });
+  })();
+
+  // Ajusta dinámicamente el espaciador para que el contenido no quede tapado por el sticky-top fijo
+  (function(){
+    var stack = document.querySelector('.sticky-top');
+    var spacer = document.getElementById('stickySpacer');
+    if(!stack || !spacer) return;
+    function sync(){ spacer.style.height = stack.offsetHeight + 'px'; }
+    sync();
+    window.addEventListener('resize', sync);
+    // En caso de que se cargue una fuente y cambie la altura del banner
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(sync); }
+    // Observa cambios internos (p.ej. si cierran el banner con ×)
+    if(window.ResizeObserver){
+      new ResizeObserver(sync).observe(stack);
+    }
+  })();
+</script>
+</body>
+</html>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/hello-elementor/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"6e22c4dbaf4746558d1845043c423a99"})});</script>			<script>
+				const registerAllyAction = () => {
+					if ( ! window?.ElementorProFrontendConfig || ! window?.elementorFrontend?.utils?.urlActions ) {
+						return;
+					}
+
+					elementorFrontend.utils.urlActions.addAction( 'allyWidget:open', () => {
+						if (window?.ea11yWidget?.widget?.open) {
+							return window.ea11yWidget.widget.isOpen()
+								? window.ea11yWidget.widget.close()
+								: window.ea11yWidget.widget.open();
+						}
+					} );
+				};
+
+				const waitingLimit = 30;
+				let retryCounter = 0;
+
+				const waitForElementorPro = () => {
+					return new Promise( ( resolve ) => {
+						const intervalId = setInterval( () => {
+							if ( retryCounter === waitingLimit ) {
+								resolve( null );
+							}
+
+							retryCounter++;
+
+							if ( window.elementorFrontend && window?.elementorFrontend?.utils?.urlActions ) {
+								clearInterval( intervalId );
+								resolve( window.elementorFrontend );
+							}
+								}, 100 ); // Check every 100 milliseconds for availability of elementorFrontend
+					});
+				};
+
+				waitForElementorPro().then( () => { registerAllyAction(); });
+			</script>
+						<script>
+				( () => {
+					const lazyloadRunObserver = () => {
+						const lazyloadBackgrounds = document.querySelectorAll( `.e-con.e-parent:not(.e-lazyloaded)` );
+						const lazyloadBackgroundObserver = new IntersectionObserver( ( entries ) => {
+							entries.forEach( ( entry ) => {
+								if ( entry.isIntersecting ) {
+									let lazyloadBackground = entry.target;
+									if( lazyloadBackground ) {
+										lazyloadBackground.classList.add( 'e-lazyloaded' );
+									}
+									lazyloadBackgroundObserver.unobserve( entry.target );
+								}
+							});
+						}, { rootMargin: '200px 0px 200px 0px' } );
+						lazyloadBackgrounds.forEach( ( lazyloadBackground ) => {
+							lazyloadBackgroundObserver.observe( lazyloadBackground );
+						} );
+					};
+					const events = [
+						'DOMContentLoaded',
+						'elementor/lazyload/observe',
+					];
+					events.forEach( ( event ) => {
+						document.addEventListener( event, lazyloadRunObserver );
+					} );
+				} )();
+			</script>
+			<script id="wp-hooks-js" src="https://nuriaroure.com/wp-includes/js/dist/hooks.min.js?ver=f0f188028580e8dc1255"></script>
+<script id="wp-i18n-js" src="https://nuriaroure.com/wp-includes/js/dist/i18n.min.js?ver=1dfe7db3940c23ea9216"></script>
+<script id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script id="presto-components-js-extra">
+var prestoComponents = {"url":"https://nuriaroure.com/wp-content/plugins/presto-player/dist/components/web-components/web-components.esm.js?ver=1794938601"};
+var prestoPlayer = {"plugin_url":"https://nuriaroure.com/wp-content/plugins/presto-player/","logged_in":"","root":"https://nuriaroure.com/wp-json/","nonce":"4f006c0ade","ajaxurl":"https://nuriaroure.com/wp-admin/admin-ajax.php","isAdmin":"","isSetup":{"bunny":{"storage":false,"stream":true}},"proVersion":"3.3.1","isPremium":"1","isProPluginActive":"1","hasLicenseKey":"1","dashboardUrl":"https://nuriaroure.com/wp-admin/admin.php?page=presto-dashboard","wpVersionString":"wp/v2/","prestoVersionString":"presto-player/v1/","debug":"","debug_navigator":"","i18n":{"skip":"Skip","rewatch":"Rewatch","emailPlaceholder":"Email address","emailDefaultHeadline":"Enter your email to play this episode.","emailError":"Something went wrong. Please refresh the page and try again.","chapters":"Chapters","show_chapters":"Show Chapters","hide_chapters":"Hide Chapters","restart":"Restart","rewind":"Rewind {seektime}s","play":"Play","pause":"Pause","fastForward":"Forward {seektime}s","seek":"Seek","seekLabel":"{currentTime} of {duration}","played":"Played","buffered":"Buffered","currentTime":"Current time","duration":"Duration","volume":"Volume","mute":"Mute","unmute":"Unmute","enableCaptions":"Enable captions","disableCaptions":"Disable captions","download":"Download","enterFullscreen":"Enter fullscreen","exitFullscreen":"Exit fullscreen","frameTitle":"Player for {title}","captions":"Captions","settings":"Settings","pip":"PIP","menuBack":"Go back to previous menu","speed":"Speed","normal":"Normal","quality":"Quality","loop":"Loop","start":"Start","end":"End","all":"All","reset":"Reset","disabled":"Disabled","enabled":"Enabled","advertisement":"Ad","qualityBadge":{"2160":"4K","1440":"HD","1080":"HD","720":"HD","576":"SD","480":"SD"},"auto":"AUTO","next":"Next","upNext":"Up Next","startOver":"Start Over"},"trackViews":"1","hls_start_level":"480"};
+var prestoComponents = {"url":"https://nuriaroure.com/wp-content/plugins/presto-player/dist/components/web-components/web-components.esm.js?ver=1794938601"};
+var prestoPlayer = {"plugin_url":"https://nuriaroure.com/wp-content/plugins/presto-player/","logged_in":"","root":"https://nuriaroure.com/wp-json/","nonce":"4f006c0ade","ajaxurl":"https://nuriaroure.com/wp-admin/admin-ajax.php","isAdmin":"","isSetup":{"bunny":{"storage":false,"stream":true}},"proVersion":"3.3.1","isPremium":"1","isProPluginActive":"1","hasLicenseKey":"1","dashboardUrl":"https://nuriaroure.com/wp-admin/admin.php?page=presto-dashboard","wpVersionString":"wp/v2/","prestoVersionString":"presto-player/v1/","debug":"","debug_navigator":"","i18n":{"skip":"Skip","rewatch":"Rewatch","emailPlaceholder":"Email address","emailDefaultHeadline":"Enter your email to play this episode.","emailError":"Something went wrong. Please refresh the page and try again.","chapters":"Chapters","show_chapters":"Show Chapters","hide_chapters":"Hide Chapters","restart":"Restart","rewind":"Rewind {seektime}s","play":"Play","pause":"Pause","fastForward":"Forward {seektime}s","seek":"Seek","seekLabel":"{currentTime} of {duration}","played":"Played","buffered":"Buffered","currentTime":"Current time","duration":"Duration","volume":"Volume","mute":"Mute","unmute":"Unmute","enableCaptions":"Enable captions","disableCaptions":"Disable captions","download":"Download","enterFullscreen":"Enter fullscreen","exitFullscreen":"Exit fullscreen","frameTitle":"Player for {title}","captions":"Captions","settings":"Settings","pip":"PIP","menuBack":"Go back to previous menu","speed":"Speed","normal":"Normal","quality":"Quality","loop":"Loop","start":"Start","end":"End","all":"All","reset":"Reset","disabled":"Disabled","enabled":"Enabled","advertisement":"Ad","qualityBadge":{"2160":"4K","1440":"HD","1080":"HD","720":"HD","576":"SD","480":"SD"},"auto":"AUTO","next":"Next","upNext":"Up Next","startOver":"Start Over"},"trackViews":"1","hls_start_level":"480"};
+//# sourceURL=presto-components-js-extra
+</script>
+<script defer type="module" id="presto-components-js" src="https://nuriaroure.com/wp-content/plugins/presto-player/src/player/player-static.js?ver=1794938601"></script>
+<script id="site_tracking-js-extra">
+var php_data = {"ac_settings":{"tracking_actid":89855574,"site_tracking_default":1,"site_tracking":1},"user_email":""};
+//# sourceURL=site_tracking-js-extra
+</script>
+<script id="site_tracking-js" src="https://nuriaroure.com/wp-content/plugins/activecampaign-subscription-forms/site_tracking.js?ver=7.1.4"></script>
+<script id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+//# sourceURL=rocket-browser-checker-js-after
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"/registro-el-circulo-l/|/registro-el-circulo-c/|/gracias-por-tu-registro-al-circulo/|/registro-el-circulo-l-org/|/registro-el-circulo-c-org/|/audio-bienvenida_v1/|/clase-1_v1/|/clase-2_v1/|/clase-3_v1/|/audio-bienvenida_v2/|/clase-1_v2/|/clase-2_v2/|/clase-3_v2/|/(?:.+/)?feed(?:/(?:.+/?)?)?$|/(?:.+/)?embed/|/(index.php/)?(.*)wp-json(/.*|$)|/refer/|/go/|/recommend/|/recommends/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https://nuriaroure.com","onHoverDelay":"100","rateThrottle":"3"};
+//# sourceURL=rocket-preload-links-js-extra
+</script>
+<script id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+
+//# sourceURL=rocket-preload-links-js-after
+</script>
+<script id="elementor-webpack-runtime-js" src="https://nuriaroure.com/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=4.4.0"></script>
+<script id="elementor-frontend-modules-js" src="https://nuriaroure.com/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=4.4.0"></script>
+<script id="jquery-ui-core-js-before">
+jQuery.uiBackCompat = true;
+//# sourceURL=jquery-ui-core-js-before
+</script>
+<script id="jquery-ui-core-js" src="https://nuriaroure.com/wp-includes/js/jquery/ui/core.min.js?ver=1.14.2"></script>
+<script id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Compartir en Facebook","shareOnX":"Compartir en X","pinIt":"Pinear","download":"Descargar","downloadImage":"Descargar imagen","fullscreen":"Pantalla completa","zoom":"Zoom","share":"Compartir","playVideo":"Reproducir v\u00eddeo","previous":"Anterior","next":"Siguiente","close":"Cerrar","a11yCarouselPrevSlideMessage":"Diapositiva anterior","a11yCarouselNextSlideMessage":"Diapositiva siguiente","a11yCarouselFirstSlideMessage":"Esta es la primera diapositiva","a11yCarouselLastSlideMessage":"Esta es la \u00faltima diapositiva","a11yCarouselPaginationBulletMessage":"Ir a la diapositiva"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"M\u00f3vil vertical","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"M\u00f3vil horizontal","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tableta vertical","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tableta horizontal","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Port\u00e1til","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Pantalla grande","value":2400,"default_value":2400,"direction":"min","is_enabled":false}},
+"hasCustomBreakpoints":false},"version":"4.4.0","is_static":false,"experimentalFeatures":{"additional_custom_breakpoints":true,"theme_builder_v2":true,"e_mcp_revision_snapshots":true,"landing-pages":true,"import-export-customization":true,"e_pro_atomic_form":true,"e_pro_collection_loop":true},"urls":{"assets":"https:\/\/nuriaroure.com\/wp-content\/plugins\/elementor\/assets\/","ajaxurl":"https:\/\/nuriaroure.com\/wp-admin\/admin-ajax.php","uploadUrl":"https:\/\/nuriaroure.com\/wp-content\/uploads"},"nonces":{"floatingButtonsClickTracking":"e5f8de33af","atomicFormsSendForm":"0bc0ad787b"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":24063,"title":"Descubre%20c%C3%B3mo%20mejorar%20tu%20descanso%20-%20Newsletter%20-%20Nuria%20Roure-%20Duerme%20Bien","excerpt":"","featuredImage":"https:\/\/nuriaroure.com\/wp-content\/uploads\/2022\/10\/cropped-logo-mini.png"}};
+//# sourceURL=elementor-frontend-js-before
+</script>
+<script id="elementor-frontend-js" src="https://nuriaroure.com/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=4.4.0"></script>
+<script id="perfmatters-lazy-load-js-before">
+window.lazyLoadOptions={elements_selector:"img[data-src],.perfmatters-lazy,.perfmatters-lazy-css-bg",thresholds:"0px 0px",class_loading:"pmloading",class_loaded:"pmloaded",callback_loaded:function(element){if(element.tagName==="IFRAME"){if(element.classList.contains("pmloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener("LazyLoad::Initialized",function(e){var lazyLoadInstance=e.detail.instance;var target=document.querySelector("body");var observer=new MutationObserver(function(mutations){lazyLoadInstance.update()});var config={childList:!0,subtree:!0};observer.observe(target,config);});function perfmattersLazyLoadVideo(e){var t=document.createElement("iframe"),r="ID?";r+=0===e.dataset.query.length?"":e.dataset.query+"&",r+="autoplay=1",t.setAttribute("src",r.replace("ID",e.dataset.src)),e.dataset.referrerpolicy && t.setAttribute("referrerpolicy",e.dataset.referrerpolicy),t.setAttribute("frameborder","0"),t.setAttribute("allowfullscreen","1"),t.setAttribute("allow","accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),e.dataset.title && t.setAttribute("title",e.dataset.title),e.replaceChild(t,e.firstChild),e.removeAttribute("role"),e.removeAttribute("tabindex"),e.removeAttribute("aria-label"),t.focus()};function perfmattersLazyLoadVideoKeyDown(e,t){"Enter"!==e.key&&" "!==e.key&&"Spacebar"!==e.key||(e.preventDefault(),perfmattersLazyLoadVideo(t))};function perfmattersLazyLoadYouTube(e){perfmattersLazyLoadVideo(e)}
+//# sourceURL=perfmatters-lazy-load-js-before
+</script>
+<script id="perfmatters-lazy-load-js" async src="https://nuriaroure.com/wp-content/plugins/perfmatters/js/lazyload.min.js?ver=2.6.9"></script>
+<script id="jquery-bind-first-js" defer src="https://nuriaroure.com/wp-content/plugins/pixelyoursite/dist/scripts/jquery.bind-first-0.2.3.min.js?ver=0.2.3"></script>
+<script id="js-cookie-pys-js" defer src="https://nuriaroure.com/wp-content/plugins/pixelyoursite/dist/scripts/js.cookie-2.1.3.min.js?ver=2.1.3"></script>
+<script id="js-sha256-js" defer src="https://nuriaroure.com/wp-content/plugins/pixelyoursite/dist/scripts/sha256.js?ver=0.11.0"></script>
+<script id="pys-js-extra">
+var pysOptions = {"staticEvents":[],"dynamicEvents":[],"triggerEvents":[],"triggerEventTypes":[],"ga":{"trackingIds":["UA-155986084-1"],"commentEventEnabled":true,"downloadEnabled":true,"formEventEnabled":true,"crossDomainEnabled":false,"crossDomainAcceptIncoming":false,"crossDomainDomains":[],"isDebugEnabled":[],"serverContainerUrls":{"UA-155986084-1":{"enable_server_container":"","server_container_url":"","transport_url":""}},"additionalConfig":{"UA-155986084-1":{"first_party_collection":true}},"disableAdvertisingFeatures":false,"disableAdvertisingPersonalization":false,"wooVariableAsSimple":true,"custom_page_view_event":false},"debug":"","siteUrl":"https://nuriaroure.com","ajaxUrl":"https://nuriaroure.com/wp-admin/admin-ajax.php","ajax_event":"d766e00c9e","enable_remove_download_url_param":"","cookie_duration":"7","fb_cookie_duration":"90","last_visit_duration":"60","enable_success_send_form":"","ajaxForServerEvent":"1","ajaxForServerStaticEvent":"1","useSendBeacon":"1","send_external_id":"1","external_id_expire":"180","track_cookie_for_subdomains":"1","google_consent_mode":"1","consent_mode_cmp_active":"","data_persistency":"recent_data","gdpr":{"ajax_enabled":true,"all_disabled_by_api":false,"facebook_disabled_by_api":false,"analytics_disabled_by_api":false,"google_ads_disabled_by_api":false,"pinterest_disabled_by_api":false,"bing_disabled_by_api":false,"reddit_disabled_by_api":false,"openai_disabled_by_api":false,"externalID_disabled_by_api":false,"facebook_prior_consent_enabled":true,"analytics_prior_consent_enabled":true,"google_ads_prior_consent_enabled":null,"pinterest_prior_consent_enabled":true,"bing_prior_consent_enabled":true,"openai_prior_consent_enabled":true,"cookiebot_integration_enabled":false,"cookiebot_facebook_consent_category":"marketing","cookiebot_analytics_consent_category":"statistics","cookiebot_tiktok_consent_category":"marketing","cookiebot_google_ads_consent_category":"marketing","cookiebot_pinterest_consent_category":"marketing","cookiebot_bing_consent_category":"marketing","cookiebot_openai_consent_category":"marketing","consent_magic_integration_enabled":false,"real_cookie_banner_integration_enabled":false,"cookie_notice_integration_enabled":false,"cookie_law_info_integration_enabled":false,"analytics_storage":{"enabled":true,"value":"granted","filter":false},"ad_storage":{"enabled":true,"value":"granted","filter":false},"ad_user_data":{"enabled":true,"value":"granted","filter":false},"ad_personalization":{"enabled":true,"value":"granted","filter":false}},"cookie":{"disabled_all_cookie":false,"disabled_start_session_cookie":false,"disabled_advanced_form_data_cookie":false,"disabled_landing_page_cookie":false,"disabled_first_visit_cookie":false,"disabled_trafficsource_cookie":false,"disabled_utmTerms_cookie":false,"disabled_utmId_cookie":false},"tracking_analytics":{"TrafficLanding":"","TrafficUtms":[],"TrafficUtmsId":[]},"GATags":{"ga_datalayer_type":"default","ga_datalayer_name":"dataLayerPYS"},"woo":{"enabled":false},"edd":{"enabled":false},"cache_bypass":"1794999286"};
+//# sourceURL=pys-js-extra
+</script>
+<script id="pys-js" defer src="https://nuriaroure.com/wp-content/plugins/pixelyoursite/dist/scripts/public.js?ver=11.4.3"></script>
+<script id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/nuriaroure.com\/wp-admin\/admin-ajax.php","nonce":"45c6fc5eb7","urls":{"assets":"https:\/\/nuriaroure.com\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/nuriaroure.com\/wp-json\/"},"settings":{"lazy_load_background_images":true},"popup":{"hasPopUps":true},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"},"x-twitter":{"title":"X"},"threads":{"title":"Threads"}},
+"facebook_sdk":{"lang":"es_ES","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/nuriaroure.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+//# sourceURL=elementor-pro-frontend-js-before
+</script>
+<script id="elementor-pro-frontend-js" src="https://nuriaroure.com/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=4.3.2"></script>
+<script id="pro-elements-handlers-js" src="https://nuriaroure.com/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js?ver=4.3.2"></script>
+	</body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me --

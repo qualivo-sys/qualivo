@@ -47,7 +47,9 @@ const MES_EN = { january: 1, february: 2, march: 3, april: 4, may: 5, june: 6, j
 // ---------- fechas (día civil de Madrid como 'YYYY-MM-DD') ----------
 function diaMadrid(d) { return new Intl.DateTimeFormat('sv-SE', { timeZone: ZONA }).format(d); }
 function sumaDias(dia, n) { const d = new Date(dia + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
-function lunesDe(dia) { const d = new Date(dia + 'T12:00:00Z'); return sumaDias(dia, -((d.getUTCDay() + 6) % 7)); }
+// Las semanas del panel van de VIERNES a JUEVES (como las ediciones de El Círculo: el viernes empieza una
+// captación y acaba la anterior). Pedido por Maikel el 18-nov. El nombre se mantiene por compatibilidad.
+function lunesDe(dia) { const d = new Date(dia + 'T12:00:00Z'); return sumaDias(dia, -((d.getUTCDay() + 2) % 7)); }
 function diaSemana(dia) { return new Date(dia + 'T12:00:00Z').getUTCDay(); } // 0 domingo
 // Inicio de un día de Madrid en UTC (ISO). Madrid es UTC+1 o UTC+2.
 function inicioUTC(dia) {
@@ -99,7 +101,7 @@ function corto(nombre) {
 }
 
 // ---------- Meta ----------
-// paso: '7' (semanas, si «desde» es lunes) o 'monthly'. Cada fila lleva el día de inicio del periodo.
+// paso: '7' (semanas de 7 días desde «desde», que es viernes) o 'monthly'. Cada fila lleva el día de inicio del periodo.
 async function gastoMeta(desde, hasta, paso) {
   const token = process.env.NURIA_META_TOKEN, cuenta = process.env.NURIA_META_CUENTA;
   if (!token || !cuenta) return null;
@@ -124,13 +126,13 @@ async function gastoMeta(desde, hasta, paso) {
 }
 
 // ---------- Google Ads (todo el gasto va al VSL: son las campañas Evergreen) ----------
-// paso: 'week' (semanas que empiezan en lunes) o 'month'. Devuelve [{ dia, gasto }].
+// paso: 'week' (por días; se agrupan en semanas de viernes a jueves) o 'month'. Devuelve [{ dia, gasto }].
 async function gastoGoogle(desde, hasta, paso) {
   const dev = process.env.NURIA_GADS_DEV_TOKEN, cli = process.env.NURIA_GADS_CLIENTE, mcc = process.env.NURIA_GADS_MCC;
   if (!dev || !cli) return null;
   const t = await tokenGoogle('https://www.googleapis.com/auth/adwords');
   if (!t) return null;
-  const seg = paso === 'month' ? 'segments.month' : 'segments.week';
+  const seg = paso === 'month' ? 'segments.month' : 'segments.date';
   const h = { Authorization: 'Bearer ' + t, 'developer-token': dev, 'Content-Type': 'application/json' };
   if (mcc) h['login-customer-id'] = mcc;
   const r = await fetch('https://googleads.googleapis.com/v25/customers/' + cli + '/googleAds:searchStream', {
@@ -139,7 +141,7 @@ async function gastoGoogle(desde, hasta, paso) {
   });
   if (!r.ok) throw new Error('Google Ads ' + r.status);
   const out = [];
-  (await r.json()).forEach(function (lote) { (lote.results || []).forEach(function (x) { out.push({ dia: paso === 'month' ? x.segments.month : x.segments.week, gasto: Number((x.metrics || {}).costMicros || 0) / 1e6 }); }); });
+  (await r.json()).forEach(function (lote) { (lote.results || []).forEach(function (x) { out.push({ dia: paso === 'month' ? x.segments.month : x.segments.date, gasto: Number((x.metrics || {}).costMicros || 0) / 1e6 }); }); });
   return out;
 }
 
@@ -266,7 +268,7 @@ async function recoger() {
     costesHoja().catch(function () { return null; })
   ]);
   const google = {}, googleMes = {}; semanas.forEach(function (s) { google[s] = 0; }); meses.forEach(function (m) { googleMes[m] = 0; });
-  (gads || []).forEach(function (g) { if (g.dia in google) google[g.dia] += g.gasto; });
+  (gads || []).forEach(function (g) { const k = lunesDe(g.dia); if (k in google) google[k] += g.gasto; });
   (gadsMes || []).forEach(function (g) { if (g.dia in googleMes) googleMes[g.dia] += g.gasto; });
   const gasto = {}, gastoMes = {}; semanas.forEach(function (s) { gasto[s] = {}; }); meses.forEach(function (m) { gastoMes[m] = {}; });
   (meta || []).forEach(function (m) { const o = gasto[lunesDe(m.dia)]; if (o) o[m.puerta] = (o[m.puerta] || 0) + m.gasto; });

@@ -1,0 +1,144 @@
+<!-- Qualivo · cabecera única de nuriaroure.com (pegar en un widget HTML de la plantilla Cabecera) -->
+<link href="https://nuriaroure.com/wp-content/cache/perfmatters/nuriaroure.com/fonts/81f329322587.google-fonts.min.css" rel="stylesheet">
+<style>
+#nrq{--navy:#283249;--navy-deep:#1F2840;
+    --coral:#FFBB32;--coral-dark:#E6A419;
+    --beige:#FEFAF3;--beige-2:#F3EEE4;
+    --ink:#283249;--muted:#5A6B7D;--line:#E7E1D2;
+    --red:#E25C5C;--green:#3B8C5F;;font-family:"Montserrat",system-ui,sans-serif;color:var(--navy);-webkit-font-smoothing:antialiased;line-height:1.55}
+#nrq *,#nrq *::before,#nrq *::after{box-sizing:border-box}#nrq a{color:inherit}#nrq svg{display:inline-block}#nrq p{margin:0}
+#nrq .wrap{max-width:1240px;margin:0 auto;padding:0 32px}@media (max-width:560px){#nrq .wrap{padding:0 20px}}
+#nrq ul{margin:0}
+#nrq .sticky-top{position:fixed;top:0;left:0;right:0;z-index:50;width:100%}
+#nrq .sticky-spacer{display:block;width:100%}
+#nrq .nr-bar{position:relative;z-index:2;background:linear-gradient(135deg,#1F2840 0%,#283249 55%,#2d3a55 100%);color:#fff;overflow:hidden}
+#nrq .nr-bar::before{content:"";position:absolute;top:-110px;right:-110px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(255,187,50,.22),rgba(255,187,50,0) 65%);pointer-events:none}
+#nrq .nr-bar__star{position:absolute;color:#FFBB32;opacity:.7;pointer-events:none}
+#nrq .nr-bar__star.s1{top:20px;right:90px;font-size:16px}
+#nrq .nr-bar__star.s2{top:60px;right:170px;font-size:10px;opacity:.5;color:#fff}
+#nrq .nr-bar__star.s3{bottom:22px;right:50px;font-size:12px;opacity:.55}
+#nrq .nr-bar__inner{max-width:1240px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;gap:28px;position:relative}
+#nrq .nr-bar__left{display:flex;align-items:center;gap:18px;min-width:0;flex:1}
+#nrq .nr-bar__icon{width:56px;height:56px;border-radius:50%;background:rgba(255,187,50,.16);display:inline-flex;align-items:center;justify-content:center;flex:none;border:1px solid rgba(255,187,50,.25)}
+#nrq .nr-bar__eyebrow{margin:0 0 4px;font-family:'Oswald',sans-serif;font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#FFBB32;display:inline-flex;align-items:center;gap:8px;line-height:1}
+#nrq .nr-bar__eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:#FFBB32}
+#nrq .nr-bar__title{margin:0;font-family:'Oswald',sans-serif;font-weight:600;font-size:21px;line-height:1.18;color:#fff;letter-spacing:-.003em}
+#nrq .nr-bar__title span{color:#FFBB32}
+#nrq .nr-bar__sub{margin:4px 0 0;font-size:12.5px;color:rgba(255,255,255,.7);font-weight:500}
+#nrq .nr-bar__right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+#nrq .nr-bar__cta{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 24px;background:#FFBB32;color:#283249;font-weight:700;font-size:14px;letter-spacing:.02em;border-radius:8px;text-decoration:none;border:1px solid rgba(40,50,73,.15);line-height:1;transition:background .18s,transform .15s,box-shadow .18s;white-space:nowrap;box-shadow:0 8px 20px -6px rgba(255,187,50,.55)}
+#nrq .nr-bar__cta:hover{background:#fff;transform:translateY(-1px)}
+#nrq .nr-bar__micro{margin:0;font-size:11.5px;color:rgba(255,255,255,.55);letter-spacing:.04em}
+@media (max-width:880px){#nrq .nr-bar__inner{padding:14px 20px;gap:14px}#nrq .nr-bar__icon{width:46px;height:46px}#nrq .nr-bar__icon svg{width:22px;height:22px}#nrq .nr-bar__title{font-size:17px}#nrq .nr-bar__sub{display:none}#nrq .nr-bar__cta{height:42px;font-size:13px;padding:0 18px}#nrq .nr-bar__star{display:none}}
+@media (max-width:560px){#nrq .nr-bar__inner{flex-direction:column;align-items:stretch}#nrq .nr-bar__right{align-items:stretch}#nrq .nr-bar__cta{width:100%;justify-content:center}#nrq .nr-bar__micro{text-align:center}#nrq .nr-bar__icon,#nrq .nr-bar__eyebrow,#nrq .nr-bar__micro{display:none}#nrq .nr-bar__inner{gap:10px;padding:12px 18px}#nrq .nr-bar__title{font-size:16px}}
+#nrq .nav{background:#fff;border-bottom:1px solid var(--line);position:relative;z-index:1}
+#nrq .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:32px}
+#nrq .nav-brand{font-family:'Oswald',sans-serif;font-weight:500;font-size:24px;letter-spacing:.06em;color:var(--navy);text-decoration:none}
+#nrq .nav-links{display:flex;align-items:center;gap:38px;list-style:none;margin:0;padding:0}
+#nrq .nav-links a{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:var(--navy);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .15s;position:relative}
+#nrq .nav-links a:hover{color:var(--coral-dark)}
+#nrq .nav-links a.is-cta{color:var(--coral-dark)}
+#nrq .nav-links a.is-cta::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--coral)}
+#nrq .nav-toggle{display:none;background:transparent;border:0;padding:8px;cursor:pointer;color:var(--navy)}
+@media (max-width:860px){#nrq .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 18px 30px -18px rgba(40,50,73,.35);padding:6px 22px 14px}#nrq .nav.is-open .nav-links{display:flex}#nrq .nav-links li{border-top:1px solid var(--line)}#nrq .nav-links li:first-child{border-top:0}#nrq .nav-links a{display:block;padding:15px 0;font-size:14px}#nrq .nav-links a.is-cta::after{display:none}#nrq .nav-toggle{display:block}#nrq .nav-inner{padding:14px 0}#nrq .nav-brand{font-size:20px}}
+#nrq .foot{background:var(--navy);color:#fff;padding:60px 0 28px;text-align:center}
+#nrq .foot .brand{font-family:'Oswald',sans-serif;font-weight:500;color:#fff;font-size:24px;letter-spacing:.04em;display:inline-block;margin-bottom:18px}
+#nrq .foot-links{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin:0 0 22px;font-size:13px;color:rgba(255,255,255,.7);font-family:'Oswald',sans-serif;letter-spacing:.04em;text-transform:uppercase;font-weight:500}
+#nrq .foot-links a{color:rgba(255,255,255,.7);text-decoration:none;transition:color .15s}
+#nrq .foot-links a:hover{color:var(--coral)}
+#nrq .foot-legal{color:rgba(255,255,255,.55);font-size:11.5px;line-height:1.7;max-width:920px;margin:0 auto;padding:18px 0;border-top:1px solid rgba(255,255,255,.08)}
+#nrq .foot-legal b{color:rgba(255,255,255,.9);font-weight:600}
+#nrq .foot-legal a{color:rgba(255,255,255,.85);text-decoration:underline}
+#nrq .foot-copy{margin-top:14px;color:rgba(255,255,255,.45);font-size:11px;letter-spacing:.04em}
+#nrq .nav-links a.is-here{color:var(--coral-dark)}
+</style>
+<div id="nrq">
+<div class="sticky-top">
+
+  <!-- BLOQUE 0 — STICKY TOP BAR -->
+  <div class="nr-bar" id="nrBar" role="region" aria-label="Test de patrones de sueño">
+    <span class="nr-bar__star s1">✦</span>
+    <span class="nr-bar__star s2">✦</span>
+    <span class="nr-bar__star s3">✦</span>
+    <div class="nr-bar__inner">
+      <div class="nr-bar__left">
+        <span class="nr-bar__icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFBB32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </span>
+        <div>
+          <p class="nr-bar__eyebrow">Test gratuito · 3 minutos</p>
+          <p class="nr-bar__title">¿Qué te quita el sueño? <span>Descubre tu patrón.</span></p>
+          <p class="nr-bar__sub">Tu resultado al momento y una guía en tu correo — por la Dra. Nuria Roure.</p>
+        </div>
+      </div>
+      <div class="nr-bar__right">
+        <a class="nr-bar__cta" href="https://nr.nuriaroure.com/test-patrones?utm_source=web&utm_medium=bar&utm_campaign=test" target="_blank" rel="noopener">
+          Hacer el test gratis
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="nr-bar__micro">100% gratuito</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a href="https://nuriaroure.com/" class="nav-brand">Nuria Roure</a>
+      <ul class="nav-links" id="nrMenu">
+        <li><a href="https://nr.nuriaroure.com/test-patrones?utm_source=web&utm_medium=nav&utm_campaign=test" target="_blank" rel="noopener" class="is-cta">Test de sueño</a></li>
+        <li><a href="https://nr.nuriaroure.com/3-claves-para-dormir-mejor-a?utm_source=web&utm_medium=nav&utm_campaign=programa" target="_blank" rel="noopener">El programa</a></li>
+        <li><a href="https://nuriaroure.com/meditacion-gratuita/">Meditación</a></li>
+        <li><a href="https://nuriaroure.com/sobre-mi/">Sobre mí</a></li>
+        <li><a href="https://nuriaroure.com/sala-de-prensa/">Prensa</a></li>
+        <li><a href="https://nuriaroure.com/blog/">Blog</a></li>
+        <li><a href="https://nuriaroure.com/contacto/">Contacto</a></li>
+      </ul>
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nrMenu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  </div>
+  <!-- /STICKY TOP STACK -->
+  <div class="sticky-spacer" id="stickySpacer" aria-hidden="true"></div>
+
+  <!-- BLOQUE 1 — HERO -->
+</div>
+<script>
+  // Menú en móvil: abre y cierra la lista al pulsar el botón
+  (function(){
+    var nav = document.querySelector('#nrq .nav');
+    var btn = nav && nav.querySelector('.nav-toggle');
+    if(!btn) return;
+    function cerrar(){ nav.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Abrir menú'); }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var abierto = nav.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      btn.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+    });
+    nav.querySelectorAll('.nav-links a').forEach(function(a){ a.addEventListener('click', cerrar); });
+    document.addEventListener('click', function(e){ if(!nav.contains(e.target)) cerrar(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrar(); });
+    window.addEventListener('resize', function(){ if(window.innerWidth > 860) cerrar(); });
+  })();
+
+  // Ajusta dinámicamente el espaciador para que el contenido no quede tapado por el sticky-top fijo
+  (function(){
+    var stack = document.querySelector('#nrq .sticky-top');
+    var spacer = document.getElementById('stickySpacer');
+    if(!stack || !spacer) return;
+    function sync(){ spacer.style.height = stack.offsetHeight + 'px'; }
+    sync();
+    window.addEventListener('resize', sync);
+    // En caso de que se cargue una fuente y cambie la altura del banner
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(sync); }
+    // Observa cambios internos (p.ej. si cierran el banner con ×)
+    if(window.ResizeObserver){
+      new ResizeObserver(sync).observe(stack);
+    }
+  })();
+</script>
+<script>(function(){var p=location.pathname.replace(/\/$/,'');document.querySelectorAll('#nrq .nav-links a').forEach(function(a){try{var q=new URL(a.href).pathname.replace(/\/$/,'');if(q&&q===p&&a.host===location.host)a.classList.add('is-here')}catch(e){}})})();</script>
