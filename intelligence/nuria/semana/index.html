@@ -168,6 +168,9 @@ small,.nota{color:var(--mut);font-size:12.5px}
     });
     h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>Grupo de WhatsApp:</b> entradas y salidas reales que avisa Funnelchat, asignadas a cada edición por la etiqueta de registro de la persona en Kliking. Se registran desde el 5-nov por la tarde: las ediciones hasta la del 11-nov (incluida) salen incompletas; la primera completa es la del 18-nov. «Entran»: personas distintas que entran (y su % sobre los registros); «Salen»: personas que salen (y su % sobre las que entraron). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
 
+    // Cuándo sale la gente del grupo de WhatsApp (Funnelchat): por día respecto al directo y franja horaria
+    h += '<h2>Cuándo sale la gente del grupo de WhatsApp</h2><p class="sub">Salidas del grupo de El Círculo por día y franja horaria, para ver qué mensajes del grupo coinciden con más salidas.</p><div id="salidas"><p class="cargando">Cargando…</p></div>';
+
     // Quién ve las clases (personas, con el enlace personal)
     h += '<h2>Quién ve las clases de El Círculo (personas)</h2><p class="sub">Personas distintas que empiezan, llegan a la mitad y acaban cada clase, gracias al enlace personal de los emails y WhatsApp. Se mide desde el 18-nov.</p><div id="cper"><p class="cargando">Cargando…</p></div>';
 
@@ -232,6 +235,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     cargarGrupos();
     cargarBF();
     cargarCPer();
+    cargarSalidas();
     cargarEnvios(mesEnv);
     cargarMensajes();
   }
@@ -331,6 +335,34 @@ small,.nota{color:var(--mut);font-size:12.5px}
       .catch(function (e) { var c = document.getElementById('envios'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
   }
 
+  function cargarSalidas() {
+    var c = document.getElementById('salidas'); if (!c) return;
+    fetch(API + '?accion=salidas', { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) {
+        var eds = Object.keys(d.ediciones || {}).sort().reverse().slice(0, 3);
+        if (!eds.length) { c.innerHTML = '<p class="nota">Todavía no hay salidas registradas.</p>'; return; }
+        var DS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+        var FR = ['madrugada', 'mañana', 'tarde', 'noche'];
+        var h = '';
+        eds.forEach(function (ed) {
+          var E = d.ediciones[ed], tot = 0, max = 0;
+          Object.keys(E).forEach(function (k) { tot += E[k]; if (E[k] > max) max = E[k]; });
+          h += '<div class="card"><b>Edición del miércoles ' + dia(ed) + '</b> <small>· ' + num(tot) + ' salidas</small><table><tr><th>Día</th>' + d.franjas.map(function (f) { return '<th class="n">' + esc(f) + '</th>'; }).join('') + '<th class="n">Total</th></tr>';
+          for (var dd = -12; dd <= 6; dd++) {
+            var fila = FR.map(function (f) { return E[dd + '|' + f] || 0; }), t = fila.reduce(function (a, b) { return a + b; }, 0);
+            if (!t) continue;
+            var nom = DS[((3 + dd) % 7 + 7) % 7], cuando = dd === 0 ? 'día del directo' : Math.abs(dd) + (Math.abs(dd) === 1 ? ' día ' : ' días ') + (dd < 0 ? 'antes' : 'después');
+            var faseT = dd <= -6 ? 'captación' : (dd <= -4 ? 'antes de las clases' : (dd <= -1 ? 'clases' : (dd === 0 ? 'directo' : 'venta')));
+            h += '<tr><td>' + nom + ' <small>(' + cuando + ' · ' + faseT + ')</small></td>' + fila.map(function (v) { return '<td class="n' + (max >= 5 && v === max ? ' bajo' : '') + '">' + (v ? num(v) : '<span class="neu">·</span>') + '</td>'; }).join('') + '<td class="n"><b>' + num(t) + '</b></td></tr>';
+          }
+          h += '</table></div>';
+        });
+        h += '<p class="nota">Salidas del grupo que avisa Funnelchat, por día respecto al directo del miércoles de la edición de cada persona y franja horaria (hora de Madrid). En rojo, la franja con más salidas. Compáralo con la hora a la que sale cada mensaje del grupo: si después de un mensaje se concentran las salidas, ese mensaje cansa.</p>';
+        c.innerHTML = h;
+      })
+      .catch(function (e) { c.innerHTML = '<p class="nota">' + esc(e.message) + (/n8n|clave/i.test(e.message) ? ' · Falta poner la clave nueva de n8n en Vercel (NURIA_N8N_API_KEY).' : '') + '</p>'; });
+  }
   function cargarCPer() {
     var c = document.getElementById('cper'); if (!c) return;
     fetch(API + '?accion=clasespersonas', { credentials: 'same-origin' })

@@ -54,6 +54,7 @@ const GRUPOS = require('./_nuria-grupos.js');
 const BF = require('./_nuria-blackfriday.js');
 const CPER = require('./_nuria-clases-personas.js');
 let cacheCPer = null;
+let cacheSal = null;
 let cacheBF = null;
 let cacheGrupos = null;   // entradas y salidas de los grupos de WhatsApp: { t, datos }, 20 min
 const cacheEnv = new Map();   // envíos masivos: 'desde|hasta' → { t, datos }, 1 h
@@ -438,6 +439,15 @@ module.exports = async function (req, res) {
       return res.status(200).json(cacheBF.datos);
     } catch (e) {
       return res.status(502).json({ error: 'No se ha podido leer el Black Friday: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'salidas') {
+    try {
+      if (!cacheSal || Date.now() - cacheSal.t > 1200000) cacheSal = { t: Date.now(), datos: await GRUPOS.salidasPorMomento() };
+      return res.status(200).json(cacheSal.datos);
+    } catch (e) {
+      return res.status(502).json({ error: 'No se han podido leer las salidas del grupo: ' + String(e.message || e).slice(0, 80) });
     }
   }
 
