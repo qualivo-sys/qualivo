@@ -168,6 +168,9 @@ small,.nota{color:var(--mut);font-size:12.5px}
     });
     h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>Grupo de WhatsApp:</b> entradas y salidas reales que avisa Funnelchat, asignadas a cada edición por la etiqueta de registro de la persona en Kliking. Se registran desde el 5-nov por la tarde: las ediciones hasta la del 11-nov (incluida) salen incompletas; la primera completa es la del 18-nov. «Entran»: personas distintas que entran (y su % sobre los registros); «Salen»: personas que salen (y su % sobre las que entraron). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
 
+    // Visualizaciones de cada clase (Presto Player), por edición
+    h += '<h2>Visualizaciones de cada clase</h2><p class="sub">Reproducciones de cada vídeo en Presto Player y tiempo medio de visionado, por edición (del domingo antes del directo al sábado después).</p><div id="clasesvideo"><p class="cargando">Cargando Presto Player…</p></div>';
+
     // Cuándo sale la gente del grupo de WhatsApp (Funnelchat): por día respecto al directo y franja horaria
     h += '<h2>Cuándo sale la gente del grupo de WhatsApp</h2><p class="sub">Salidas del grupo de El Círculo por día y franja horaria, para ver qué mensajes del grupo coinciden con más salidas.</p><div id="salidas"><p class="cargando">Cargando…</p></div>';
 
@@ -236,6 +239,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     cargarBF();
     cargarCPer();
     cargarSalidas();
+    cargarClasesVideo();
     cargarEnvios(mesEnv);
     cargarMensajes();
   }
@@ -335,6 +339,29 @@ small,.nota{color:var(--mut);font-size:12.5px}
       .catch(function (e) { var c = document.getElementById('envios'); if (c) c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
   }
 
+  function cargarClasesVideo() {
+    var c = document.getElementById('clasesvideo'); if (!c) return;
+    fetch(API + '?accion=clasesvideo', { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) {
+        var nombre = function (t) { t = String(t || ''); if (/audio/i.test(t)) return 'Audio del domingo'; var m = /clase[_\s-]*(\d)/i.exec(t); if (m) return 'Clase ' + m[1]; if (/directo|grabaci/i.test(t)) return 'Directo / grabación'; return t; };
+        var orden = function (n) { return /Audio/.test(n) ? 0 : (/Clase (\d)/.test(n) ? Number(/Clase (\d)/.exec(n)[1]) : 9); };
+        var regPor = {}; ((datos && datos.edicionesEtiquetas) || []).forEach(function (x) { regPor[x.directo] = x.registros; });
+        var min = function (s) { return s ? Math.round(s / 60) + ' min' : '—'; };
+        var h = '<div class="card"><table><tr><th>Edición</th><th>Vídeo</th><th class="n">Reproducciones</th><th class="n">Por cada 100 registros</th><th class="n">Tiempo medio</th></tr>';
+        d.ediciones.forEach(function (e) {
+          var V = (e.videos || []).filter(function (v) { return v.vistas >= 5 && !/^https?:/.test(v.titulo); }).map(function (v) { return { n: nombre(v.titulo), v: v.vistas, s: v.mediaSegundos }; }).sort(function (a, b) { return orden(a.n) - orden(b.n); });
+          var reg = regPor[e.edicion];
+          if (!V.length) { h += '<tr><td>Miércoles ' + dia(e.edicion) + '</td><td colspan="4"><span class="neu">sin reproducciones todavía</span></td></tr>'; return; }
+          V.forEach(function (v, k) {
+            h += '<tr><td>' + (k === 0 ? 'Miércoles ' + dia(e.edicion) + ' <small>(' + dia(e.desde) + ' a ' + dia(e.hasta) + ')</small>' : '') + '</td><td>' + esc(v.n) + '</td><td class="n">' + num(v.v) + '</td><td class="n">' + (reg ? Math.round(v.v / reg * 100) : '—') + '</td><td class="n">' + min(v.s) + '</td></tr>';
+          });
+        });
+        h += '</table><p class="nota">Datos de Presto Player (licencia oficial). Son <b>reproducciones, no personas</b>: si alguien ve la clase dos veces, cuenta dos. «Por cada 100 registros»: reproducciones divididas entre los registros de la edición. La clase 3 está en Vimeo y no sale aquí hasta que se suba a Presto. Para saber cuántas <b>personas</b> ven cada clase, mira «Quién ve las clases» (desde la edición del 25-nov).</p></div>';
+        c.innerHTML = h;
+      })
+      .catch(function (e) { c.innerHTML = '<p class="nota">' + esc(e.message) + '</p>'; });
+  }
   function cargarSalidas() {
     var c = document.getElementById('salidas'); if (!c) return;
     fetch(API + '?accion=salidas', { credentials: 'same-origin' })

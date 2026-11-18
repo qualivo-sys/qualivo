@@ -28,4 +28,23 @@ async function clases(desde, hasta) {
   return { desde: desde, hasta: hasta, mediaSegundos: tiempo ? Number(tiempo.average || 0) : null, dias: Object.keys(dias).sort().map(function (k) { return dias[k]; }) };
 }
 
-module.exports = { clases: clases };
+
+// Reproducciones y tiempo medio de CADA vídeo (clase 1, clase 2, audio del domingo…) en un periodo.
+function aNum(t) { const m = /([\d.,]+)/.exec(String(t || '')); return m ? Number(m[1].replace(/[.,]/g, '')) : 0; }
+function aSeg(t) { let s = 0; String(t || '').replace(/(\d+)\s*(hour|minute|second)/g, function (_, n, u) { s += Number(n) * (u === 'hour' ? 3600 : u === 'minute' ? 60 : 1); }); return s; }
+async function porVideo(desde, hasta) {
+  const u = process.env.NURIA_WP_USUARIO, c = process.env.NURIA_WP_CLAVE_APP;
+  if (!u || !c) return null;
+  const q = new URLSearchParams({ start: desde + 'T00:00:00', end: hasta + 'T23:59:59', per_page: '30' });
+  const ctl = new AbortController(); const t = setTimeout(function () { ctl.abort(); }, 90000);
+  try {
+    const r = await fetch(WP + 'analytics/top-videos?' + q, { headers: { Authorization: 'Basic ' + Buffer.from(u + ':' + c).toString('base64'), 'User-Agent': 'QualivoIntelligence/1.0 (+https://qualivo.io)' }, signal: ctl.signal });
+    if (!r.ok) throw new Error('Presto ' + r.status);
+    return (await r.json()).map(function (x) {
+      const st = {}; (x.stats || []).forEach(function (k) { st[k.id] = k.data; });
+      return { titulo: String((x.video || {}).title || '').replace(/\.(mp4|mp3|mov)$/i, ''), vistas: aNum(st.views_count), mediaSegundos: aSeg(st.average_duration) };
+    }).filter(function (v) { return v.vistas > 0; });
+  } finally { clearTimeout(t); }
+}
+
+module.exports = { clases: clases, porVideo: porVideo };
