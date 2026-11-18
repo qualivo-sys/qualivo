@@ -243,7 +243,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     var L = mensajesDatos.puertas || [];
     if (!L.length) { caja.innerHTML = '<p class="nota">Sin análisis.</p>'; return; }
     if (!msjPuerta) msjPuerta = L[0].puerta;
-    tabs.innerHTML = L.map(function (x) { return '<button class="btn" type="button" aria-pressed="' + (x.puerta === msjPuerta) + '" data-msj="' + esc(x.puerta) + '">' + esc(x.puerta) + '</button>'; }).join('');
+    tabs.innerHTML = L.map(function (x) { return '<button class="btn" type="button" aria-pressed="' + (x.puerta === msjPuerta) + '" data-msj="' + esc(x.puerta) + '">' + esc(x.puerta === 'El Círculo' ? 'Embudo El Círculo (registro gratuito → clases → directo)' : (x.puerta === 'VSL' ? 'Embudo VSL (vídeo → llamada)' : x.puerta)) + '</button>'; }).join('');
     Array.prototype.forEach.call(tabs.querySelectorAll('[data-msj]'), function (b) { b.onclick = function () { msjPuerta = b.getAttribute('data-msj'); pintarMensajes(); }; });
     var d = L.find(function (x) { return x.puerta === msjPuerta; }) || L[0];
     var pcM = function (a, b) { return b ? pc(a / b) : '—'; };
@@ -251,15 +251,49 @@ small,.nota{color:var(--mut);font-size:12.5px}
     var marca = function (v, todos, menor) { var vals = todos.filter(function (x) { return x != null; }); if (vals.length < 3 || v == null) return ''; var mx = Math.max.apply(null, vals), mn = Math.min.apply(null, vals); return v === (menor ? mn : mx) ? ' alto' : (v === (menor ? mx : mn) ? ' bajo' : ''); };
     var h = '<p class="nota">Muestra de <b>' + num(d.muestra) + '</b> de ' + num(d.cohorte) + ' personas registradas del ' + fd(d.desde) + ' al ' + fd(sumaDiasJ(d.hasta, -1)) + ' (recorrido completo). En la muestra, ' + num(d.agendan) + ' piden llamada (' + pcM(d.agendan, d.muestra) + '). En toda la cohorte compran ' + num(d.compranCohorte) + ' (' + pcM(d.compranCohorte, d.cohorte) + ', hoja de ventas).</p>';
     var circ = d.emails.some(function (e) { return e.diaDirecto != null; });
-    var diaTxt = function (o) { if (circ && o.diaDirecto != null) return o.diaDirecto === 0 ? 'D' : 'D' + (o.diaDirecto > 0 ? '+' : '−') + Math.abs(o.diaDirecto); return circ ? '—' : String(o.dia); };
+    // «Cuándo llega», en palabras. El Círculo: día de la semana respecto al directo del miércoles. VSL: días desde el registro.
+    var DS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    var fase = function (o) { if (!circ) return o.dia === 0 ? 'Al registrarse' : (o.dia <= 7 ? 'Primera semana' : 'Segunda semana en adelante'); var x = o.diaDirecto; if (o.dia === 0) return '1 · Al registrarse'; if (x <= -4) return '2 · Antes de las clases'; if (x <= -1) return '3 · Clases (domingo a martes)'; if (x === 0) return '4 · Día del directo (miércoles)'; return '5 · Venta (jueves a domingo)'; };
+    var diaTxt = function (o) {
+      if (!circ) return o.dia === 0 ? 'Día 0 <small>(el mismo día)</small>' : 'Día ' + o.dia + ' <small>(' + o.dia + (o.dia === 1 ? ' día' : ' días') + ' después)</small>';
+      if (o.diaDirecto == null) return '—';
+      if (o.dia === 0) return 'Al registrarse <small>(cualquier día de la captación)</small>';
+      var x = o.diaDirecto, nom = DS[((3 + x) % 7 + 7) % 7];
+      return nom + ' <small>(' + (x === 0 ? 'día del directo' : Math.abs(x) + (Math.abs(x) === 1 ? ' día ' : ' días ') + (x < 0 ? 'antes' : 'después') + ' del directo') + ')</small>';
+    };
+    // De qué flujo es cada mensaje: así cada pestaña separa lo suyo de lo que llega desde otros flujos.
+    var flujo = function (txt) {
+      var t = String(txt || '').toLowerCase();
+      if (/confirmaci[oó]n de tu llamada|recordatorio importante/.test(t)) return 'Agenda de llamada (confirmaciones)';
+      if (/plaza est[aá] confirmada|est[aá]s dentro del programa|datos de acceso|telegram privado/.test(t)) return 'Compra (accesos de alumnas)';
+      if (/meditaci[oó]n gratis|27\s?€|bonus que valen|se esfuma/.test(t)) return 'Meditación gratuita y oferta de 27 €';
+      if (/tu sesi[oó]n|tendremos la llamada|hora de nuestra cita|en directo en la sesi[oó]n/.test(t)) return 'Recordatorios de la llamada';
+      if (/clase en directo|pregunta antes del directo|estamos en directo/.test(t)) return 'Avisos de directos';
+      if (!circ && /el c[ií]rculo|soy lorena/.test(t)) return 'El Círculo';
+      return null;
+    };
     if (circ) { var ordD = function (a, b) { return (a.diaDirecto == null ? 99 : a.diaDirecto) - (b.diaDirecto == null ? 99 : b.diaDirecto); }; d.emails.sort(ordD); d.whatsapp.sort(ordD); }
     var Ab = d.emails.map(function (e) { return e.enviados ? e.abiertos / e.enviados : null; }), Cl = d.emails.map(function (e) { return e.enviados ? e.clics / e.enviados : null; });
-    h += '<div class="card"><b>Emails</b><table><tr><th class="n">Día</th><th>Asunto</th><th>Lleva a</th><th class="n">Lo reciben</th><th class="n pct">Abren</th><th class="n pct">Pulsan</th><th class="n">Pulsan y piden llamada</th></tr>';
-    d.emails.forEach(function (e, i) { h += '<tr><td class="n">' + diaTxt(e) + '</td><td>' + esc(e.asunto) + '</td><td><small>' + esc((e.llevaA || []).join(' · ') || '—') + '</small></td><td class="n">' + num(e.enviados) + '</td><td class="n pct' + marca(Ab[i], Ab) + '">' + pcM(e.abiertos, e.enviados) + '</td><td class="n pct' + marca(Cl[i], Cl) + '">' + pcM(e.clics, e.enviados) + '</td><td class="n">' + (e.clics ? num(e.agendaClic) + ' <small>(' + pcM(e.agendaClic, e.clics) + ')</small>' : '—') + '</td></tr>'; });
-    h += '</table><p class="nota">«Día»: ' + (circ ? 'respecto al directo del miércoles (D-3 = domingo antes; D = día del directo; D+4 = domingo después).' : 'días desde el registro.') + ' «Lleva a»: destinos de los enlaces del email; Kliking no dice cuál de ellos se pulsa. «Pulsan y piden llamada»: personas que pulsaron y en algún momento reservaron llamada; no quiere decir que la reservaran desde ese email. Aperturas infladas por Apple y otros gestores: compara emails entre sí. Verde y rojo: el mejor y el peor. Los envíos masivos no salen aquí (ver «Envíos de email»).</p></div>';
+    h += '<div class="card"><b>Emails del embudo ' + esc(d.puerta) + '</b><table><tr><th>Cuándo llega</th><th>Asunto</th><th>Lleva a</th><th class="n">Lo reciben</th><th class="n pct">Abren</th><th class="n pct">Pulsan</th><th class="n">Pulsan y piden llamada</th></tr>';
+    var propios = d.emails.filter(function (e) { return !flujo(e.asunto); }), ajenos = d.emails.filter(function (e) { return flujo(e.asunto); }).sort(function (a, b) { return flujo(a.asunto) < flujo(b.asunto) ? -1 : (flujo(a.asunto) > flujo(b.asunto) ? 1 : a.dia - b.dia); });
+    var faseAnt = null;
+    d.emails = propios.concat(ajenos);
+    Ab = d.emails.map(function (e) { return e.enviados ? e.abiertos / e.enviados : null; }); Cl = d.emails.map(function (e) { return e.enviados ? e.clics / e.enviados : null; });
+    d.emails.forEach(function (e, i) {
+      var fl = flujo(e.asunto), cab = fl ? 'De otros flujos · ' + fl : fase(e);
+      if (cab !== faseAnt) { h += '<tr><td colspan="7" style="background:var(--bg);font-weight:600;font-size:12.5px;color:var(--mut);padding-top:12px">' + esc(cab.replace(/^\d · /, '')) + (fl ? ' <small>(no son de este embudo: llegan porque la persona está también en ese flujo)</small>' : '') + '</td></tr>'; faseAnt = cab; }
+      h += '<tr><td>' + diaTxt(e) + '</td><td>' + esc(e.asunto) + '</td><td><small>' + esc((e.llevaA || []).join(' · ') || '—') + '</small></td><td class="n">' + num(e.enviados) + '</td><td class="n pct' + marca(Ab[i], Ab) + '">' + pcM(e.abiertos, e.enviados) + '</td><td class="n pct' + marca(Cl[i], Cl) + '">' + pcM(e.clics, e.enviados) + '</td><td class="n">' + (e.clics ? num(e.agendaClic) + ' <small>(' + pcM(e.agendaClic, e.clics) + ')</small>' : '—') + '</td></tr>'; });
+    h += '</table><p class="nota"><b>Cuándo llega:</b> ' + (circ ? 'El Círculo capta de viernes a jueves y hace el directo el miércoles siguiente. El primer email llega en el momento de registrarse; los demás, el día de la semana indicado, contado respecto al directo de su edición (clases el domingo, lunes y martes; directo el miércoles; venta de jueves a domingo).' : 'días desde que la persona se registra en el VSL (día 0 = el mismo día).') + ' Los emails están agrupados por fase; abajo, aparte, los que la persona recibe de <b>otros flujos</b> (confirmaciones y recordatorios de la llamada, accesos de alumnas, meditación, avisos de directos): no forman parte de este embudo. «Lleva a»: destinos de los enlaces del email; Kliking no dice cuál de ellos se pulsa. «Pulsan y piden llamada»: personas que pulsaron y en algún momento reservaron llamada; no quiere decir que la reservaran desde ese email. Aperturas infladas por Apple y otros gestores: compara emails entre sí. Verde y rojo: el mejor y el peor. Los envíos masivos no salen aquí (ver «Envíos de email»).</p></div>';
     var Le = d.whatsapp.map(function (w) { return w.enviados ? w.leidos / w.enviados : null; }), Co = d.whatsapp.map(function (w) { return w.enviados ? w.contestan / w.enviados : null; });
-    h += '<div class="card"><b>WhatsApp</b><table><tr><th class="n">Día</th><th>Mensaje (inicio)</th><th class="n">Lo reciben</th><th class="n pct">Leen</th><th class="n pct">Contestan</th><th class="n">Piden llamada</th></tr>';
-    d.whatsapp.forEach(function (w, i) { h += '<tr><td class="n">' + diaTxt(w) + '</td><td>' + esc(w.texto) + '…</td><td class="n">' + num(w.enviados) + '</td><td class="n pct' + marca(Le[i], Le) + '">' + pcM(w.leidos, w.enviados) + '</td><td class="n pct' + marca(Co[i], Co) + '">' + pcM(w.contestan, w.enviados) + '</td><td class="n">' + num(w.agenda) + ' <small>(' + pcM(w.agenda, w.enviados) + ')</small></td></tr>'; });
+    h += '<div class="card"><b>WhatsApp del embudo ' + esc(d.puerta) + '</b><table><tr><th>Cuándo llega</th><th>Mensaje (inicio)</th><th class="n">Lo reciben</th><th class="n pct">Leen</th><th class="n pct">Contestan</th><th class="n">Piden llamada</th></tr>';
+    var wp = d.whatsapp.filter(function (w) { return !flujo(w.texto); }), wa = d.whatsapp.filter(function (w) { return flujo(w.texto); }).sort(function (a, b) { return flujo(a.texto) < flujo(b.texto) ? -1 : (flujo(a.texto) > flujo(b.texto) ? 1 : a.dia - b.dia); });
+    d.whatsapp = wp.concat(wa);
+    Le = d.whatsapp.map(function (w) { return w.enviados ? w.leidos / w.enviados : null; }); Co = d.whatsapp.map(function (w) { return w.enviados ? w.contestan / w.enviados : null; });
+    var faseW = null;
+    d.whatsapp.forEach(function (w, i) {
+      var fl = flujo(w.texto), cab = fl ? 'De otros flujos · ' + fl : fase(w);
+      if (cab !== faseW) { h += '<tr><td colspan="6" style="background:var(--bg);font-weight:600;font-size:12.5px;color:var(--mut);padding-top:12px">' + esc(cab.replace(/^\d · /, '')) + '</td></tr>'; faseW = cab; }
+      h += '<tr><td>' + diaTxt(w) + '</td><td>' + esc(w.texto) + '…</td><td class="n">' + num(w.enviados) + '</td><td class="n pct' + marca(Le[i], Le) + '">' + pcM(w.leidos, w.enviados) + '</td><td class="n pct' + marca(Co[i], Co) + '">' + pcM(w.contestan, w.enviados) + '</td><td class="n">' + num(w.agenda) + ' <small>(' + pcM(w.agenda, w.enviados) + ')</small></td></tr>'; });
     h += '</table><p class="nota">«Leen»: con doble check azul (quien tiene desactivada la confirmación de lectura no cuenta). «Piden llamada»: de quienes lo reciben, cuántas reservan llamada en algún momento. «Contestan»: responden en las 48 h siguientes y antes de otro WhatsApp nuestro. Solo mensajes que reciben al menos el 3 % de la muestra; las respuestas a mano del equipo quedan fuera. Análisis del ' + fd(String(mensajesDatos.generado).slice(0, 10)) + '.</p></div>';
     caja.innerHTML = h;
   }
