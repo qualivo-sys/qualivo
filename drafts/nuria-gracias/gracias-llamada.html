@@ -5,11 +5,21 @@
 window.NRG = {
   whatsapp: '',   // opcional: enlace de WhatsApp del equipo (https://wa.me/34…) para dudas antes de la llamada
   videos: [
-    { titulo: '«Llevo muchos años durmiendo mal»', texto: 'Si llevas años sin descansar, esto es lo primero que quiero que sepas.', url: '' },
-    { titulo: '«Esto ya me lo sé»', texto: 'Por qué saber la teoría no es suficiente para volver a dormir.', url: '' },
-    { titulo: '«Me despierto a las tres»', texto: 'Qué pasa cuando te despiertas de madrugada y no vuelves a dormirte.', url: '' },
-    { titulo: '«¿Y si no me funciona?»', texto: 'La duda más habitual antes de empezar, respondida con sinceridad.', url: '' },
-    { titulo: '«¿Podré dejar los fármacos?»', texto: 'Lo que puedes esperar si hoy tomas algo para dormir.', url: '' }
+    { titulo: '«Llevo muchos años durmiendo mal»', texto: 'Llevar años durmiendo mal no te deja fuera: cambia el punto de partida. En la sesión te preguntarán por cómo son tus noches ahora.',
+      url: 'https://files.leadconnectorhq.com/file/6afdc8c259884fa0a79a854a/nuria-duda-1.mp4',
+      poster: 'https://files.leadconnectorhq.com/file/6afdc8b82c67284686288ef6/nuria-duda-poster-1.jpg' },
+    { titulo: '«Esto ya me lo sé, ya lo he probado»', texto: 'Por qué probar cosas sueltas no basta: lo que suele faltar es un orden, tiempo y alguien que te acompañe.',
+      url: 'https://files.leadconnectorhq.com/file/6afdc8c359884fa0a79a858f/nuria-duda-2.mp4',
+      poster: 'https://files.leadconnectorhq.com/file/6afdc8be898cec9ac739a7e0/nuria-duda-poster-2.jpg' },
+    { titulo: '«Me duermo bien, pero me despierto a las tres»', texto: 'Es el caso más frecuente en el programa y tiene nombre: insomnio de mantenimiento. Se trabaja desde las primeras semanas.',
+      url: 'https://files.leadconnectorhq.com/file/6afdc8c42c6728468628910a/nuria-duda-3.mp4',
+      poster: 'https://files.leadconnectorhq.com/file/6afdc8bf8b5100b36ad80fb0/nuria-duda-poster-3.jpg' },
+    { titulo: '«¿Y si no me funciona?»', texto: 'Por qué la sesión de valoración es lo que te protege: el equipo te dirá con sinceridad si el programa encaja contigo.',
+      url: 'https://files.leadconnectorhq.com/file/6afdc8c68140edeb93c02ed8/nuria-duda-4.mp4',
+      poster: 'https://files.leadconnectorhq.com/file/6afdc8c08b5100b36ad80fcc/nuria-duda-poster-4.jpg' },
+    { titulo: '«¿Podré dejar los fármacos?»', texto: 'Primero se trabaja el sueño sin tocar la medicación. Si quieres retirarla, siempre de forma pautada con tu médico.',
+      url: 'https://files.leadconnectorhq.com/file/6afdc8c78140edeb93c02f0c/nuria-duda-5.mp4',
+      poster: 'https://files.leadconnectorhq.com/file/6afdc8c02c6728468628906e/nuria-duda-poster-5.jpg' }
   ]
 };
 </script>
@@ -138,7 +148,7 @@ html,body{overflow-x:hidden}
     var d = document.createElement('div');
     d.className = 'vid' + (i === 0 ? ' dest' : '');
     d.innerHTML = (v.url
-      ? '<video controls playsinline preload="metadata" src="' + v.url + '#t=0.5"></video>'
+      ? '<video controls playsinline preload="none"' + (v.poster ? ' poster="' + v.poster + '"' : '') + ' src="' + v.url + '"></video>'
       : '<div class="falta">Vídeo pendiente de subir</div>')
       + '<div class="t"><b>' + v.titulo + '</b><span>' + v.texto + '</span></div>';
     box.appendChild(d);
