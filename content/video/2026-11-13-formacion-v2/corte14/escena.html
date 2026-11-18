@@ -30,6 +30,20 @@ html,body{background:#000}
 .ad .n{font-size:30px;font-weight:800;line-height:1.15}.ad .n small{display:block;font-size:21px;font-weight:500;color:#7A828E}
 .ad .im{background:linear-gradient(135deg,#1E2A44,#27BDB1);color:#fff;padding:120px 44px;font-size:86px;font-weight:800;line-height:1.05}.ad .im small{display:block;font-size:38px;font-weight:600;margin-top:18px;opacity:.95}
 .ad .f{display:flex;justify-content:space-between;align-items:center;padding:22px 26px;font-size:26px;font-weight:600;color:#4A5260}.ad .f b{background:#14181F;color:#fff;padding:14px 24px;border-radius:12px;font-size:25px}
+.pe{position:absolute;inset:0;background:#F4F6F9;color:#14181F;padding:34px 40px;overflow:hidden}
+.pe .h{display:flex;align-items:center;justify-content:space-between;font-size:46px;font-weight:800;margin-bottom:26px}
+.pe .h small{display:block;font-size:27px;font-weight:600;color:#7A828E;margin-top:4px}
+.pe .ct{font-size:30px;font-weight:800;padding:12px 20px;border-radius:999px;background:#FDECEC;color:#C0392B;white-space:nowrap}
+.pe .r{position:absolute;left:40px;right:40px;height:150px;background:#fff;border-radius:20px;box-shadow:0 4px 14px rgba(20,24,31,.08);display:flex;align-items:center;gap:22px;padding:0 26px}
+.pe .av{flex:none;width:92px;height:92px;border-radius:50%;background:#1E2A44;color:#fff;font-size:33px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.pe .n{flex:1;font-size:40px;font-weight:800;line-height:1.15;white-space:nowrap}.pe .n small{display:block;font-size:27px;font-weight:600;color:#7A828E;margin-top:6px}
+.pe .b{flex:none;font-size:29px;font-weight:800;padding:12px 18px;border-radius:12px;white-space:nowrap;text-align:center}
+.pe .b.v{background:#DDF5F2;color:#0B7F77}.pe .b.am{background:#FFF1CC;color:#8A6100}.pe .b.ro{background:#FDECEC;color:#C0392B}
+.pe .nv{box-shadow:0 0 0 4px #27BDB1,0 14px 34px rgba(20,24,31,.18)}
+.pe .pn{position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:2px solid #E3E6EA;box-shadow:0 -18px 44px rgba(20,24,31,.16);padding:30px 40px 78px;display:flex;gap:16px}
+.pe .pn div{flex:1;border-radius:16px;padding:22px 12px;text-align:center;font-size:36px;font-weight:800;background:#EAF8F6;color:#0B7F77}
+.pe .pn div small{display:block;font-size:27px;font-weight:700;margin-top:8px}.pe .pn i{display:block;font-style:normal;font-size:44px;line-height:1;margin-bottom:10px}
+.pe .pn .no{background:#FDECEC;color:#C0392B}
 .nota{position:absolute;left:0;right:0;text-align:center;font-size:34px;font-weight:600;color:var(--mut)}
 #win{position:absolute;left:36px;width:1008px}
 .capa{position:absolute;inset:0;overflow:hidden;opacity:0;border-radius:22px;background:#fff;box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.10)}
@@ -111,6 +125,15 @@ const PL={
  AVISO:{img:'p6',cam:[30,1800,1150],cam2:[30,1775,1150],espera:.2,mov:'fin',luz:1,foco:[[60,2778,1100,60]]},
  SI:{img:'cv8',cam:[1020,820,940],cam2:[1030,900,800],espera:.2,mov:'fin',luz:1,foco:[[1066,1154,350,114]]},
  MATRI:{img:'p8',cam:[0,10,800],cam2:[0,40,780],espera:.2,mov:'fin',salto:[432,800],luz:1,foco:[[26,188,760,44]],parche:[[262,298,236,56]]},
+ PEND:{html:'<div class="pe"><div class="h"><div>Solicitudes<small>Escuela Norte · Instagram</small></div><div class="ct" id="pct">3 sin responder</div></div><div class="r" id="pr0"><div class="av">MR</div><div class="n">Marta Ruiz<small>Curso de tarde · anuncio</small></div><div class="b v" id="pb0">Nueva · ahora</div></div><div class="r" id="pr1"><div class="av">DS</div><div class="n">Diego Sanz<small>Curso de tarde · anuncio</small></div><div class="b ro" id="pb1">Sin respuesta · 5 días</div></div><div class="r" id="pr2"><div class="av">CM</div><div class="n">Carla Mora<small>Curso online · anuncio</small></div><div class="b am" id="pb2">Llamada pendiente</div></div><div class="r" id="pr3"><div class="av">IP</div><div class="n">Iván Pérez<small>Curso online · anuncio</small></div><div class="b ro" id="pb3">Sin seguimiento</div></div><div class="pn" id="ppn"><div><i>✓</i>Anuncio<small>Funciona</small></div><div><i>✓</i>Solicitud<small>Recibida</small></div><div class="no" id="pno"><i>✕</i>Respuesta<small>Pendiente</small></div></div></div>',cam:[0,0,1008],foco:[],anim:(t,c)=>{const y0=170,dy=FMT==='45'?166:206,rh=FMT==='45'?150:186,en=ez(nm(t,.12,.6));
+  for(let i=0;i<4;i++){const r=$('pr'+i);r.style.height=rh+'px';r.style.top=(y0+(i===0?0:(i-1+en)*dy))+'px';}
+  const r=$('pr0'),b=$('pb0');r.style.opacity=nm(t,.12,.4);r.style.transform='translateY('+((1-en)*-60)+'px) scale('+(1+.03*Math.sin(Math.PI*nm(t,.5,1)))+')';
+  const d1=T.pd1,d2=T.pd2;r.classList.toggle('nv',t<d1);b.className='b '+(t<d1?'v':t<d2?'am':'ro');b.textContent=t<d1?'Nueva · ahora':t<d2?'Sin respuesta · 1 día':'Sin respuesta · 3 días';
+  b.style.transform='scale('+(1+.16*Math.max(Math.sin(Math.PI*nm(t,d1,d1+.35)),Math.sin(Math.PI*nm(t,d2,d2+.35))))+')';
+  $('pct').textContent=t<d1?'3 sin responder':'4 sin responder';
+  const pv=ez(nm(t,T.a2-.25,T.a2+.2));$('ppn').style.transform='translateY('+((1-pv)*260)+'px)';$('ppn').style.opacity=pv>0?1:0;
+  [...$('ppn').children].forEach((d,j)=>{const a=T.pp[j];d.style.opacity=nm(t,a,a+.2);d.style.transform='scale('+(.9+.1*ez(nm(t,a,a+.3))+(j===2?.06*Math.sin(Math.PI*nm(t,a+.3,a+.9)):0))+')';});
+ }},
  PV:{html:'<div class="pv"><img src="rec/logo-blanco.png"><div>Gestionamos <em>la captación.</em></div><div>Mejoramos el proceso <em>hasta la matrícula.</em></div></div>',cam:[0,0,1008],foco:[]},
  ADVIEJO:{html:'<div class="ad"><div class="t"><div class="h"><div class="av">EN</div><div class="n">Escuela Norte<small>Publicidad · anuncio de ejemplo</small></div></div><div class="im">Curso de tarde<small>Horarios compatibles con tu trabajo</small></div><div class="f"><span>Plazas para enero</span><b>Más información</b></div></div></div>',cam:[0,0,1008],foco:[],todo:1},
  PORQUE:{img:'p9',cam:[0,780,1190],foco:[[40,858,1120,138]]},
@@ -120,17 +143,17 @@ const T=window.T,a=T.a,e2=T.e2,e3=T.e3,rq=T.rq,e4=T.e4,e5=T.e5,e7=T.e7,e6=T.e6,c
 // secuencia: [plano, inicio]; cada plano dura hasta que empieza el siguiente
 const SEC=VER==='larga'
  ?[['LISTA',0,'Entra <em>una solicitud</em>'],['ORIGEN',e2+2.4,'Entra <em>con su anuncio</em>'],['FORM',e2+5.6,'Y con <em>lo que respondió</em>'],['WA',e3,'Recibe <em>un WhatsApp</em>'],['SINRESP',e3+2.4,'<em>Sin respuesta</em> en 24 h'],['LLAMADA',rq,'Pasa a <em>una llamada</em>'],['RETOMAR',e4+2.1,'Retomar <em>en enero</em>'],['AVISO',e4+7.5,'<em>Aviso</em> al equipo'],['SI',e5,'Laura <em>reserva plaza</em>'],['MATRI',e5+1.9,'<em>Matrícula</em> · vino de Instagram'],['MES',e7,'Mes a mes, <em>seguimos contigo</em>']]
- :[['AD',0,'','funde'],['GAL',T.g,'','funde'],['LANDF',T.ld,'','abajo'],['FORM2',T.f2,'','funde'],['LISTA0',T.l0,'','fila'],['LISTA',T.l0+.3,'','funde'],['WA',e3,'','crece'],['LLAMADA',T.ll,'','crece'],['RETOMAR',e4,'','der'],['SI',e5,'','der'],['ORIG',T.s5,'','crece']];
-const ROT=[[e2,'Gestionamos <em>la captación</em>'],[T.ld,'Mejoramos <em>el proceso hasta la matrícula</em>'],[T.lau,'Laura <em>pide información</em>'],[T.f2,'Solicitud <em>enviada</em>'],[T.l0,'Entra <em>en el sistema</em>'],[e3,'Recibe <em>un WhatsApp</em>'],[T.s3,'Sin respuesta <em>→ llamada</em>'],[rq,'Pasa a <em>una llamada</em>'],[e4,'Queda apuntado <em>cuándo retomarlo</em>'],[e5,'Laura <em>reserva plaza</em>'],[T.s5,'Sabes <em>de qué anuncio vino</em>'],[T.c[0]-.1,'<em>Captación</em>'],[T.c[1]-.1,'Captación · <em>Conversión</em>'],[T.c[2]-.1,'Captación · Conversión · <em>Mejora continua</em>']];
+ :[...(AP==='hb'?[['PEND',0,'','funde'],['GAL',T.g,'','crece']]:[['AD',0,'','funde'],['GAL',T.g,'','funde']]),['LANDF',T.ld,'','abajo'],['FORM2',T.f2,'','funde'],['LISTA0',T.l0,'','fila'],['LISTA',T.l0+.3,'','funde'],['WA',e3,'','crece'],['LLAMADA',T.ll,'','crece'],['RETOMAR',e4,'','der'],['SI',e5,'','der'],['ORIG',T.s5,'','crece']];
+const ROT=[...(AP==='hb'?[[.1,'Entra <em>una solicitud</em>'],[T.pd1,'Y se queda <em>sin respuesta</em>'],[T.a2-.1,'No siempre es <em>el anuncio</em>']]:[]),[e2,'Gestionamos <em>la captación</em>'],[T.ld,'Mejoramos <em>el proceso hasta la matrícula</em>'],[T.lau,'Laura <em>pide información</em>'],[T.f2,'Solicitud <em>enviada</em>'],[T.l0,'Entra <em>en el sistema</em>'],[e3,'Recibe <em>un WhatsApp</em>'],[T.s3,'Sin respuesta <em>→ llamada</em>'],[rq,'Pasa a <em>una llamada</em>'],[e4,'Queda apuntado <em>cuándo retomarlo</em>'],[e5,'Laura <em>reserva plaza</em>'],[T.s5,'Sabes <em>de qué anuncio vino</em>'],[T.c[0]-.1,'<em>Captación</em>'],[T.c[1]-.1,'Captación · <em>Conversión</em>'],[T.c[2]-.1,'Captación · Conversión · <em>Mejora continua</em>']];
 const win=$('win');SEC.forEach((s,i)=>{const p=PL[s[0]];const c=document.createElement('div');c.className='capa';c.id='c'+i;if(p.fondo)c.style.background=p.fondo;
  c.innerHTML=(p.html||'<img src="rec/'+p.img+'.png">')+(p.sobre?'<img id="so'+i+'" src="rec/'+p.sobre+'.png">':'')+(p.toque?'<div class="toque" id="tq'+i+'"></div>':'')+(p.cubre?'<div class="cub" id="cu'+i+'"></div>':'')+(p.salto?'<div class="sal" id="sa'+i+'"><img src="rec/'+p.img+'.png"></div>':'')+(p.tapa?'<div class="tapa" id="tp'+i+'"></div>':'')+(p.parche||[]).map((f,j)=>'<div class="tapa" style="bottom:auto;right:auto;border-radius:6px" id="pa'+i+'_'+j+'"></div>').join('')+(p.luz?'<div class="luz" id="lz'+i+'"></div>':'')+p.foco.map((f,j)=>'<div class="foco'+(f[4]?' am':'')+'" id="f'+i+'_'+j+'"></div>').join('');win.insertBefore(c,$('velo'));});
 const on=$('on');for(let i=0;i<16;i++)on.appendChild(document.createElement('i'));
 // gancho en grande (los primeros segundos, hasta que empieza el cuerpo)
-const GAN=AP==='h3'?[[0,T.a2-.1,'Tu academia <em>consigue solicitudes.</em>'],[T.a2-.1,e2-.15,'¿Pero cuántas <em>acaban en matrícula?</em>']]:AP==='h1'?[[0,2.25,'Conseguir solicitudes para tu academia <em>es una cosa.</em>'],[2.25,e2-.15,'Convertirlas en matrículas <em>es otra.</em>']]
+const GAN=AP==='hb'?[]:AP==='h3'?[[0,T.a2-.1,'Tu academia <em>consigue solicitudes.</em>'],[T.a2-.1,e2-.15,'¿Pero cuántas <em>acaban en matrícula?</em>']]:AP==='h1'?[[0,2.25,'Conseguir solicitudes para tu academia <em>es una cosa.</em>'],[2.25,e2-.15,'Convertirlas en matrículas <em>es otra.</em>']]
                   :[[0,e2-.15,'¿Cuántas solicitudes de tu academia <em>se quedan sin seguimiento?</em>']];
 GAN.forEach((g,i)=>{const d=document.createElement('div');d.id='g'+i;d.innerHTML=g[2];G.appendChild(d);});
 const RELOJ=VER==='larga'?[[0,'00:00'],[e2+2.4,'00:04'],[e3,'+2 min'],[e3+2.4,'+1 día'],[e4+7.5,'enero'],[e5,'+8 semanas'],[e7,'cada mes']]
-                        :[[0,'00:00'],[e3,'+2 min'],[T.s3+.4,'+1 día'],[e4,'enero'],[e5,'+8 semanas']];
+                        :[[0,'00:00'],...(AP==='hb'?[[T.pd1,'+1 día'],[T.pd2,'+3 días'],[e2,'00:00']]:[]),[e3,'+2 min'],[T.s3+.4,'+1 día'],[e4,'enero'],[e5,'+8 semanas']];
 window.setT=function(t){
  SEC.forEach((s,i)=>{const p=PL[s[0]],c=$('c'+i),t0=s[1],t1=i<SEC.length-1?SEC[i+1][1]:e6+1;
   const en=s[3]||'funde',sa=i<SEC.length-1?(SEC[i+1][3]||'funde'):'funde';
@@ -141,6 +164,7 @@ window.setT=function(t){
   if(sa==='der')tx-=ez(b)*1150;else if(sa==='izq')tx+=ez(b)*1150;else if(sa==='abajo'){ty-=ez(b)*120;sc*=1-.1*ez(b);op*=1-ez(b);}else if(sa==='crece'){sc*=1-.14*ez(b);op*=1-ez(b);}else if(sa==='fila'){const v=ez(b);tx-=205*v;ty-=75*v;sc*=1-.87*v;op*=1-nm(b,.78,1);}
   c.style.zIndex=(sa==='fila'&&b>0)?3:'';
   c.style.opacity=op;c.style.transform='translate('+tx+'px,'+ty+'px) scale('+sc+')';
+  if(p.anim){p.anim(t,c);return;}
   if(p.html){if(p.todo){c.firstChild.firstChild.style.transform='scale('+(1+.04*ez(nm(t,t0,t1)))+')';return;}c.firstChild.style.transform='scale('+(1+.03*ez(nm(t,t0,t1)))+')';[...c.firstChild.children].forEach((d,j)=>{const a=t0+.2+j*.55;d.style.opacity=nm(t,a,a+.3);d.style.transform='translateX('+((1-ez(nm(t,a,a+.4)))*-20)+'px)';});return;}
   let u=p.fijo?0:ez(nm(t,t0,t1)),w=p.cam[2]*(1-.07*u),x=p.cam[0]+(p.cam[2]-w)/2,y=p.cam[1]+(p.pan||12)*u;
   if(p.kfa){let k=0;while(k<p.kfa.length-2&&t>p.kfa[k+1][0])k++;const A=p.kfa[k],B=p.kfa[k+1],v=ez(nm(t,A[0],B[0]));x=A[1]+(B[1]-A[1])*v;y=A[2]+(B[2]-A[2])*v;w=A[3]+(B[3]-A[3])*v;}
@@ -157,7 +181,7 @@ window.setT=function(t){
   p.foco.forEach((f,j)=>{const d=$('f'+i+'_'+j);const fi=t0+(f[5]!==undefined?f[5]:.45+j*.9),ff=f[6]!==undefined?fi+f[6]:t1,fo=Math.min(nm(t,fi,fi+.25),1-nm(t,ff-.2,ff));d.style.opacity=fo;if(j===0&&p.luz){const z=$('lz'+i);z.style.opacity=fo;z.style.left=((f[0]-x)*s2-7)+'px';z.style.top=((f[1]-y)*s2-7)+'px';z.style.width=(f[2]*s2+14)+'px';z.style.height=(f[3]*s2+14)+'px';}
    d.style.left=((f[0]-x)*s2-7)+'px';d.style.top=((f[1]-y)*s2-7)+'px';d.style.width=(f[2]*s2+14)+'px';d.style.height=(f[3]*s2+14)+'px';});});
  // gancho: velo sobre la pantalla y texto grande
- const gv=1-nm(t,e2-.35,e2);$('velo').style.opacity=gv;
+ const gv=AP==='hb'?0:1-nm(t,e2-.35,e2);$('velo').style.opacity=gv;
  GAN.forEach((g,i)=>{const d=$('g'+i);const o=Math.min(nm(t,g[0],g[0]+.18),1-nm(t,g[1]-.18,g[1]));d.style.opacity=o;d.style.transform='translateY('+((1-ez(nm(t,g[0],g[0]+.3)))*18)+'px)';
   d.style.top=((L.gan[1]*.52-d.offsetHeight)/2)+'px';});
  $('ej').style.opacity=t>=e7?0:1;
