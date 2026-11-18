@@ -29,10 +29,10 @@ const WA_CADENCIA_PAUSADA = false;
 
 // Cadencia del 28-sep-2026 (Maikel, tras el debate con Paid):
 //   1. WhatsApp personalizado con IA en cuanto entra (en horario).
-//   2. Si a las 2 h 30 no ha contestado, según el nivel (api/_scoring.js), que
+//   2. Si a las 2 h (18-nov; antes 2 h 30) no ha contestado, según el nivel (api/_scoring.js), que
 //      se recalcula en cada vuelta:
-//        A   → aviso al móvil de Maikel para que llame él (ruta-maikel)
-//        B/C → una sola llamada de Raquel, en horario de voz (ruta-raquel)
+//        A   → aviso al móvil de Maikel y, desde el 18-nov, también llamada del agente
+//        B/C → una sola llamada del agente, en horario de voz (ruta-raquel)
 //        D   → sin llamada, solo WhatsApp (ruta-solo-wa)
 //   3. D+1: WhatsApp de conversación, sin enlace.
 //   4. D+3: WhatsApp con la agenda.
@@ -60,9 +60,14 @@ const SECUENCIAS_PAUSADAS = true;
 // consentimiento específico antes de volver. B/C siguen solo por WhatsApp y
 // las llamadas programadas se descartan sin llamar. Quitar cuando Maikel
 // apruebe la vuelta de la voz tras reparación y pruebas.
-const VOZ_PAUSADA = true;
+// 18-nov-2026 (Maikel): seguimiento obligatorio. Si el primer WhatsApp no
+// tiene respuesta en 2 horas, llama el agente de voz (también a los nivel A,
+// además del aviso a Maikel). Vuelve la voz por el número saliente de Vapi
+// (NUMERO_SALIENTE en _activacion.js). OJO: desde el 13-nov esa línea da
+// error SIP 480 del proveedor; si falla, queda nota y sigue solo WhatsApp.
+const VOZ_PAUSADA = false;
 const REENGANCHE_PAUSADO = true;
-const ESPERA_PASO2_MIN = 150;
+const ESPERA_PASO2_MIN = 120;
 
 // Nombre de pila limpio: en el formulario la gente escribe «Arq.Ziad» o «Dr. Pérez»
 // y el agente de voz lo leía tal cual. Se quita el título y se deja la primera palabra.
@@ -454,13 +459,13 @@ async function handler(req, res) {
           // siguiente acción con fecha para el siguiente tramo (1-oct).
           const tel = c.phone || '';
           const texto = 'LLÁMALE · nivel A · ' + (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '') +
-            '\nNo ha contestado al WhatsApp en 2 h 30.' + (datos.fuga ? '\nDónde se le escapa: ' + datos.fuga : '') + (tel ? '\nTel ' + tel : '');
+            '\nNo ha contestado al WhatsApp en 2 h. Le llama también el agente.' + (datos.fuga ? '\nDónde se le escapa: ' + datos.fuga : '') + (tel ? '\nTel ' + tel : '');
           if (HH.supervision(Date.now())) await require('./_aviso.js').movil(texto, { forzar: true });
           else await A.siguienteAccion(c, 'Llamar · nivel A sin respuesta', texto);
-          await A.etiquetar(c.id, ['act-paso2', 'ruta-maikel']);
-          await A.nota(c.id, 'CADENCIA · nivel A sin respuesta a las 2 h 30: le llama Maikel (no Raquel)' + (HH.supervision(Date.now()) ? ', aviso al móvil.' : ', tarea para el siguiente tramo de supervisión.'));
-          resumen.aviso_a = (resumen.aviso_a || 0) + 1; hechos++;
-          continue;
+          await A.etiquetar(c.id, ['ruta-maikel']);
+          await A.nota(c.id, 'CADENCIA · nivel A sin respuesta a las 2 h: aviso a Maikel' + (HH.supervision(Date.now()) ? ' al móvil' : ' para el siguiente tramo de supervisión') + ' y, además, llamada del agente (18-nov).');
+          resumen.aviso_a = (resumen.aviso_a || 0) + 1;
+          // 18-nov (Maikel): el agente llama igual; sigue al bloque de B y C.
         }
         if (VOZ_PAUSADA || nivel === 'D' || !c.phone || A.tiene(c, 'sin-canal')) {
           await A.etiquetar(c.id, ['act-paso2', 'ruta-solo-wa']);
