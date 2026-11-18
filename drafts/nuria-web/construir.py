@@ -11,6 +11,9 @@ arriba = cuerpo[cuerpo.find('<div class="nr">'):cuerpo.find('<section class="her
 pie = cuerpo[cuerpo.find('<footer class="foot">'):cuerpo.find('</footer>') + 9]
 s1 = cuerpo.find('<script>\n  // Menú en móvil')
 scripts = cuerpo[s1:cuerpo.find('</script>', s1) + 9]
+import importlib.util as _iu
+_sp = _iu.spec_from_file_location('cab', os.path.join(D, 'construir_cabecera.py')); _cab = _iu.module_from_spec(_sp); _sp.loader.exec_module(_cab)
+arriba = re.sub(r'<ul class="nav-links" id="nrMenu">.*?</ul>', _cab.menu_html(), arriba, flags=re.S)
 prensa = cuerpo[cuerpo.find('<div class="wrap prensa-wrap" id="prensa">'):cuerpo.find('<section class="programa">')]
 prensa = prensa[:prensa.rfind('</section>')]
 # quitar el lazy-load de perfmatters (fuera de WordPress no funciona)
@@ -151,7 +154,7 @@ contenido = f"""
 """
 
 def pagina(titulo, desc, contenido, aqui):
-    a = arriba.replace('href="https://nuriaroure.com/' + aqui + '/" target="_blank" rel="noopener">', 'href="https://nuriaroure.com/' + aqui + '/" class="is-here">') if aqui else arriba
+    a = arriba.replace('href="https://nuriaroure.com/' + aqui + '/">', 'href="https://nuriaroure.com/' + aqui + '/" class="is-here">') if aqui else arriba
     h = ('<!doctype html>\n<html lang="es">\n<head>\n<meta charset="utf-8" />\n<title>' + titulo + '</title>\n<meta name="description" content="' + desc + '">\n'
          '<meta name="viewport" content="width=device-width,initial-scale=1">\n' + FUENTES + estilo + extra + '</head>\n<body>\n\n' + a + contenido + '  ' + pie + '\n</div>\n' + scripts + '\n</body>\n</html>\n')
     return sin_lazy(h)
@@ -258,7 +261,15 @@ contenido_m = f"""
 KLIKING_JS = '<script src="https://link.kliking.io/js/form_embed.js"></script>\n'
 h = pagina('Meditación gratuita para dormir · Dra. Nuria Roure',
            'Descarga gratis la meditación guiada de la Dra. Nuria Roure para dormir una noche del tirón. Te llega al momento a tu correo.',
-           contenido_m, None)
+           contenido_m, 'meditacion-gratuita')
 h = h.replace('</head>', extra_m + '</head>', 1).replace('</body>', KLIKING_JS + '</body>', 1)
 open(os.path.join(D, 'meditacion.html'), 'w', encoding='utf-8').write(h)
 print('ok meditacion')
+
+# ---------- Portada: el mismo HTML de siempre, solo con el menú común ----------
+portada = re.sub(r'<ul class="nav-links" id="nrMenu">.*?</ul>', _cab.menu_html(), w, flags=re.S)
+_c = portada.find('// Menú en móvil'); portada = portada[:portada.find('</html>', _c) + 7] + '\n'
+CAB_PORTADA = open(os.path.join(D, 'portada-cabeza.html'), encoding='utf-8').read()
+portada = CAB_PORTADA + portada
+open(os.path.join(D, 'portada-menu-nuevo.html'), 'w', encoding='utf-8').write(portada)
+print('ok portada')
