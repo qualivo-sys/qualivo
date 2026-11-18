@@ -161,3 +161,104 @@ open(os.path.join(D, 'sobre-mi.html'), 'w', encoding='utf-8').write(pagina(
     'Doctora en Psicología y experta en sueño. Primera psicóloga en España acreditada como Somnologist por la ESRS. Autora de Por Fin Duermo.',
     contenido, 'sobre-mi'))
 print('ok')
+
+# ---------- Meditación gratuita (formulario de Kliking «Descargar Meditación ORG», el mismo que la página actual) ----------
+FORM = 'CVUL41Kzr7vhuPmjV8JU'
+TEST_M = 'https://nr.nuriaroure.com/test-patrones?utm_source=meditacion&utm_medium=organic&utm_campaign=test'
+extra_m = """<style>
+  .md-hero{padding:80px 0 70px}
+  .md-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;max-width:1140px;margin:0 auto}
+  .md-hero .lead{font-size:19px;color:var(--muted);margin:0 0 24px;max-width:540px}
+  .md-list{list-style:none;padding:0;margin:0 0 26px}
+  .md-list li{position:relative;padding:8px 0 8px 32px;font-size:16.5px}
+  .md-list li::before{content:"";position:absolute;left:0;top:13px;width:18px;height:18px;border-radius:50%;background:var(--coral) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23283249' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/11px no-repeat}
+  .md-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px 18px;box-shadow:0 30px 60px -30px rgba(40,50,73,.35)}
+  .md-card h3{font-family:'Oswald',sans-serif;font-weight:600;font-size:24px;margin:0 0 6px;color:var(--navy)}
+  .md-card p{color:var(--muted);font-size:15px;margin:0 0 14px}
+  .md-card iframe{width:100%;min-height:567px;border:0;display:block}
+  .md-free{display:inline-block;background:var(--navy);color:var(--coral);font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;padding:6px 12px;border-radius:999px;margin-bottom:14px}
+  .md-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1040px;margin:0 auto}
+  .md-steps div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px}
+  .md-steps b{display:block;font-family:'Oswald',sans-serif;font-size:34px;color:var(--coral-dark);line-height:1;margin-bottom:10px}
+  .md-steps span{color:var(--muted);font-size:15.5px}
+  @media (max-width:880px){.md-hero{padding:40px 0}.md-grid{grid-template-columns:1fr;gap:30px}.md-steps{grid-template-columns:1fr}}
+</style>
+"""
+contenido_m = f"""
+  <section class="md-hero">
+    <div class="wrap md-grid">
+      <div>
+        <span class="eyebrow">Meditación gratuita</span>
+        <h1>Dormir una noche <em>del tirón</em></h1>
+        <p class="lead">Una meditación guiada por la Dra. Nuria Roure para ayudarte a soltar el día, calmar la mente y preparar a tu cuerpo para dormir.</p>
+        <ul class="md-list">
+          <li>Guiada paso a paso, con la voz de Nuria.</li>
+          <li>Para escucharla en la cama, justo antes de dormir.</li>
+          <li>Te llega al momento a tu correo, gratis.</li>
+        </ul>
+        <div class="bio-creds">
+          <span>Doctora en Psicología</span>
+          <span>Somnologist · ESRS</span>
+          <span>Autora de Por Fin Duermo</span>
+        </div>
+      </div>
+      <div class="md-card" id="meditacion">
+        <span class="md-free">100 % gratis</span>
+        <h3>Recibe la meditación en tu correo</h3>
+        <p>Déjame tus datos y te la envío ahora mismo.</p>
+        <iframe src="https://link.kliking.io/widget/form/{FORM}" id="inline-{FORM}" data-layout="{{'id':'INLINE'}}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Descargar Meditación ORG" data-height="567" data-layout-iframe-id="inline-{FORM}" data-form-id="{FORM}" title="Descargar Meditación ORG"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="sm-sec alt">
+    <div class="wrap">
+      <div class="sm-head">
+        <span class="eyebrow">Cómo usarla</span>
+        <h2>Tres pasos <em>esta misma noche</em></h2>
+      </div>
+      <div class="md-steps">
+        <div><b>1</b><span>Apaga pantallas un rato antes y baja la luz de la habitación.</span></div>
+        <div><b>2</b><span>Túmbate, ponte cómoda y dale al play. No hace falta hacer nada más que escuchar.</span></div>
+        <div><b>3</b><span>Repítela varias noches seguidas: los hábitos de sueño funcionan con constancia.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sm-sec">
+    <div class="wrap bio-grid">
+      <div class="bio-photo">
+        <span class="tag">Dra. Nuria Roure</span>
+        <img width="640" height="853" src="https://nuriaroure.com/wp-content/uploads/2026/05/nuria-portrait-suit.webp" alt="Dra. Nuria Roure" loading="lazy">
+      </div>
+      <div>
+        <span class="eyebrow">Quién te acompaña</span>
+        <h2>Soy la <em>Dra. Nuria Roure</em></h2>
+        <p>Psicóloga doctorada en medicina del sueño y primera psicóloga de España acreditada como <b>Somnologist por la European Sleep Research Society</b>.</p>
+        <p>Más de 25 años acompañando a personas que no descansan. Autora de <b>Por Fin Duermo</b>, <i>Los hábitos del sueño</i> y <i>Dormir no es gratis</i>, y colaboradora habitual en medios de comunicación.</p>
+        <div class="bio-ctas">
+          <a class="btn" href="#meditacion">Quiero la meditación gratis {FL}</a>
+          <a class="btn btn-ghost" href="https://nuriaroure.com/sobre-mi/">Más sobre mí {FL}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sm-cta">
+    <div class="wrap">
+      <h2>¿Quieres saber qué te quita el sueño?</h2>
+      <p>Además de la meditación, haz el test gratuito: en 3 minutos tienes tu resultado y una guía en tu correo.</p>
+      <div class="btns">
+        <a class="btn" href="{TEST_M}" target="_blank" rel="noopener">Hacer el test gratis {FL}</a>
+      </div>
+    </div>
+  </section>
+
+"""
+KLIKING_JS = '<script src="https://link.kliking.io/js/form_embed.js"></script>\n'
+h = pagina('Meditación gratuita para dormir · Dra. Nuria Roure',
+           'Descarga gratis la meditación guiada de la Dra. Nuria Roure para dormir una noche del tirón. Te llega al momento a tu correo.',
+           contenido_m, None)
+h = h.replace('</head>', extra_m + '</head>', 1).replace('</body>', KLIKING_JS + '</body>', 1)
+open(os.path.join(D, 'meditacion.html'), 'w', encoding='utf-8').write(h)
+print('ok meditacion')
