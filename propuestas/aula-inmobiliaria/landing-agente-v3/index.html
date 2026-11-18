@@ -361,6 +361,26 @@ html:not(.rev) .rev-only{display:none!important}
   /* 5 · Tiempo en la página */
   [30, 90].forEach(function(sg){ setTimeout(function(){ if (!document.hidden) ev("tiempo_en_pagina", {segundos: sg}); }, sg * 1000); });
 
+  /* ====== Campaña → tienda. La tienda de Aula guarda en cada pedido el origen que lee de unas cookies propias del dominio (sbjs_*).
+     Si la visita llega con campaña (utm_*), la dejamos apuntada ahí para que el pedido la conserve. Solo con consentimiento y solo en el dominio de Aula. */
+  var UT = {}; ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id"].forEach(function(p){ if (q.get(p)) UT[p] = q.get(p); });
+  try { if (UT.utm_source) sessionStorage.setItem("aula_utm", JSON.stringify(UT)); else UT = JSON.parse(sessionStorage.getItem("aula_utm") || "{}"); } catch (e) {}
+  window.__aulaOrigen = function(c){
+    if (!c || !(c.a || c.m) || !UT.utm_source || !/(^|\.)aulainmobiliaria\.com$/.test(location.hostname)) return;
+    var n = function(x){ return x ? String(x).replace(/\|/g, " ").slice(0, 120) : "(none)"; }, p2 = function(z){ return (z < 10 ? "0" : "") + z; }, d = new Date();
+    var fd = d.getFullYear() + "-" + p2(d.getMonth() + 1) + "-" + p2(d.getDate()) + " " + p2(d.getHours()) + ":" + p2(d.getMinutes()) + ":" + p2(d.getSeconds());
+    var src = "typ=utm|||src=" + n(UT.utm_source) + "|||mdm=" + n(UT.utm_medium) + "|||cmp=" + n(UT.utm_campaign) + "|||cnt=" + n(UT.utm_content) + "|||trm=" + n(UT.utm_term) + "|||id=" + n(UT.utm_id) + "|||plt=(none)|||fmt=(none)|||tct=(none)";
+    var add = "fd=" + fd + "|||ep=" + location.origin + location.pathname + "?ccaa=" + k + "|||rf=" + (document.referrer ? document.referrer.split("?")[0] : "(none)");
+    var set = function(name, val, seg){ document.cookie = name + "=" + encodeURIComponent(val) + ";domain=.aulainmobiliaria.com;path=/;max-age=" + seg + ";SameSite=Lax;Secure"; };
+    var has = function(name){ return document.cookie.indexOf(name + "=") > -1; }, M6 = 15552000;
+    set("sbjs_current", src, M6); set("sbjs_current_add", add, M6);
+    if (!has("sbjs_first")) { set("sbjs_first", src, M6); set("sbjs_first_add", add, M6); }
+    if (!has("sbjs_migrations")) set("sbjs_migrations", "1418474375998=1", M6);
+    if (!has("sbjs_udata")) set("sbjs_udata", "vst=1|||uip=(none)|||uag=" + navigator.userAgent.replace(/\|/g, " "), M6);
+    set("sbjs_session", "pgs=1|||cpg=" + location.origin + location.pathname, 1800);
+  };
+  window.__aulaOrigen(window.__aulaC);
+
   /* ====== Aviso de cookies (RGPD) ====== */
   var ck = document.getElementById("ck"), opts = document.getElementById("ck-opts"), ca = document.getElementById("ck-a"), cm = document.getElementById("ck-m");
   function guarda(a, m){
@@ -370,6 +390,7 @@ html:not(.rev) .rev-only{display:none!important}
     gtag("set", "ads_data_redaction", !m);
     window.dataLayer.push({event: "aula_consentimiento", estadisticas: !!a, publicidad: !!m});
     if (window.__aulaCargar) window.__aulaCargar(c);
+    if (window.__aulaOrigen) window.__aulaOrigen(c);
     /* Compatibilidad con las etiquetas del contenedor de Aula, que se activan con los avisos de Complianz */
     if (a) window.dataLayer.push({event: "cmplz_event_statistics"});
     if (m) window.dataLayer.push({event: "cmplz_event_marketing"});
