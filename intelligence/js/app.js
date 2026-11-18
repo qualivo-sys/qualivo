@@ -82,6 +82,13 @@
 
   function completarCfg(cfg) {
     if (cfg._ok) return cfg;
+    // Campañas que solo existen dentro de una historia concreta (soloHistoria): fuera de
+    // ella no se enseñan, para no cambiar los totales del resto de la demo (18-nov).
+    if (cfg.campanas) {
+      let hUrl = '';
+      try { hUrl = new URLSearchParams(location.search).get('historia') || ''; } catch (e) {}
+      cfg.campanas = cfg.campanas.filter(function (c) { return !c.soloHistoria || c.soloHistoria === hUrl; });
+    }
     cfg.campanaNombre = function (id) { const c = cfg.campanas.filter(function (x) { return x.id === id; })[0]; return c ? c.nombre : ''; };
     cfg.campana = function (id) { return cfg.campanas.filter(function (x) { return x.id === id; })[0] || null; };
     cfg.etapaTxt = function (i) { return (cfg.recorrido[i] || {}).txt || ''; };

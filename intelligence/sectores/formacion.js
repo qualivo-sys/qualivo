@@ -55,7 +55,11 @@
       { id: 'c6', canal: 'Web', nombre: 'Catálogo abierto (orgánico)', inversion: 0, ticket: 1900,
         embudo: { anuncio: 2600, info: 70, contactado: 50, cualificado: 29, entrevista: 12, matricula: 7, alumno: 4 } },
       { id: 'c7', canal: 'Instagram', nombre: 'Cursos de tarde · Horarios compatibles', inversion: 1200, ticket: 890,
-        embudo: { anuncio: 7800, info: 146, contactado: 121, cualificado: 58, entrevista: 22, matricula: 11, alumno: 10 } }
+        embudo: { anuncio: 7800, info: 146, contactado: 121, cualificado: 58, entrevista: 22, matricula: 11, alumno: 10 } },
+      // Solo existe dentro de la historia «lauramkt» (anuncio híbrido de Creative, 18-nov):
+      // app.js la quita si la URL no pide esa historia, así no cambia el resto de la demo.
+      { id: 'c8', canal: 'Instagram', nombre: 'Curso de Marketing Digital · Aprende marketing desde cero', inversion: 1400, ticket: 1290, soloHistoria: 'lauramkt',
+        embudo: { anuncio: 8200, info: 152, contactado: 118, cualificado: 61, entrevista: 24, matricula: 10, alumno: 9 } }
     ],
     kpis: ['interesados', 'cpl', 'respuesta', 'cualificados', 'entrevistas', 'show', 'ventas', 'cpv', 'ingresos', 'roas'],
     kpiNombres: { interesados: 'Interesados', cualificados: 'Interesados cualificados', entrevistas: 'Entrevistas', ventas: 'Matrículas', cpv: 'Coste por matrícula', ingresos: 'Facturación' },
@@ -149,6 +153,41 @@
       // Historia para grabar el anuncio de Formación (oculta: solo con ?historia=laura).
       // Solo enseña lo que funciona hoy: respuesta automática, llamada que lanza una persona,
       // nota de la llamada en la ficha, aviso al equipo con fecha y matrícula unida a su anuncio.
+      // Anuncio híbrido Formación V2 (Creative, 18-nov): Curso de Marketing Digital.
+      // Laura no contesta al WhatsApp; una persona la pasa a llamada; Raquel llama y
+      // queda el siguiente contacto con responsable (Ana) en 6 semanas. Sin matrícula.
+      lauramkt: {
+        titulo: 'Curso de Marketing Digital: de Instagram a la llamada',
+        oculta: true,
+        sinTecno: true,
+        agenteVoz: 'Raquel',
+        contacto: { id: 'demo', n: 'Laura Vidal', rol: 'Particular', seg: 'particular', ciudad: 'Bilbao', prod: 'Curso de Marketing Digital', orig: 'c8', canal: 'wa', etapa: 1, valor: 1290, creado: 0, act: 0, f: { horario: 'Tardes, a partir de las 18:00' }, s: {}, conv: [],
+          forzar: { arriba: true, fit: 84, prio: 'urgente', porque: 'Prioridad urgente porque acaba de pedir información del Curso de Marketing Digital desde Instagram.',
+            nba: { accion: 'Responder por WhatsApp', quien: 'Seguimiento', estado: 'encurso', tipo: 'agente', por: 'Acaba de pedir información desde Instagram. Lo primero es contestar rápido.' } } },
+        pasos: [
+          { dur: 5, min: 0, txt: 'Entra una solicitud desde Instagram: Curso de Marketing Digital', feed: 'Nueva solicitud · Curso de Marketing Digital · anuncio «Aprende marketing desde cero»', cambio: {} },
+          { dur: 6, min: 2, txt: 'WhatsApp automático en 2 minutos', feed: 'WhatsApp automático enviado a los 2 minutos', toque: true,
+            cambio: { etapa: 2, conv: ['a', 'wa', 'Hola, Laura. Te escribimos de Escuela Norte por el Curso de Marketing Digital. ¿Te va bien que te llamemos un momento y te contamos el temario, los horarios y el precio?', 'Asistente virtual'],
+              forzar: { arriba: true, fit: 84, prio: 'alta', porque: 'Prioridad alta porque encaja con el Curso de Marketing Digital y ya tiene respuesta por WhatsApp.',
+                nba: { accion: 'Esperar su respuesta', quien: 'Seguimiento', estado: 'esperando', tipo: 'agente', por: 'Se le ha escrito a los 2 minutos. Si no contesta, mejor una llamada.' } } } },
+          { dur: 6, min: 1440, txt: 'Sin respuesta al WhatsApp', feed: 'Sin respuesta · 24 horas después del WhatsApp', 
+            cambio: { s: { intentos: 1 },
+              forzar: { arriba: true, fit: 84, prio: 'urgente', porque: 'Prioridad urgente porque encaja bien y lleva un día sin respuesta al WhatsApp.',
+                nba: { accion: 'Llamar', quien: 'Equipo', estado: 'humano', tipo: 'humano', por: 'Sin respuesta al WhatsApp en 24 horas. Mejor una llamada.' } } } },
+          { dur: 5, min: 20, txt: 'Ana, de admisiones, la pasa a llamada', feed: 'Ana, de admisiones, la pasa a llamada', persona: true,
+            cambio: { forzar: { arriba: true, fit: 84, prio: 'urgente', porque: 'Prioridad urgente porque encaja bien y lleva un día sin respuesta al WhatsApp.',
+              nba: { accion: 'Llamada de Raquel', quien: 'Seguimiento', estado: 'encurso', tipo: 'voz', por: 'Ana, de admisiones, la ha pasado a llamada.' } } } },
+          { dur: 14, min: 3, txt: 'Llamada de Raquel, anotada en su ficha', feed: 'Llamada de Raquel · 2 min · nota guardada en su ficha', act: true, ficha: true,
+            llamada: { dur: 125, res: 'luego', resumen: 'Cogió a la primera. Le interesa el Curso de Marketing Digital, pero ahora no puede empezar por trabajo. Pide que la llamen en unas seis semanas.', dijo: ['Quiere el Curso de Marketing Digital', 'Ahora no puede empezar', 'Pide que la llamen en unas seis semanas'],
+              trans: [['v', 'Hola, Laura, soy Raquel, la asistente virtual de Escuela Norte. Te llamo por el Curso de Marketing Digital. ¿Tienes un minuto?'], ['c', 'Sí, dime. Me interesa, pero ahora mismo no puedo empezar.'], ['v', 'Entendido. ¿Cuándo te vendría bien que te llamemos?'], ['c', 'En un mes y medio, más o menos.'], ['v', 'Perfecto. Se lo dejo apuntado a Ana, de admisiones, para dentro de seis semanas. ¡Gracias, Laura!']] },
+            cambio: { etapa: 3, forzar: { arriba: true, fit: 84, prio: 'alta', porque: 'Prioridad alta porque encaja bien y ha dicho cuándo quiere que la llamen.',
+              nba: { accion: 'Llamar en 6 semanas', quien: 'Ana · admisiones', estado: 'programado', tipo: 'humano', por: 'Pidió que la llamen en unas seis semanas. No se le insiste antes.' } } } },
+          { dur: 8, min: 2, txt: 'Siguiente acción con responsable: Ana · Admisiones, en 6 semanas', feed: 'Próximo contacto en 6 semanas · responsable: Ana, de admisiones', persona: true, ficha: true,
+            cambio: { s: { luego: '6 semanas', luegoTxt: 'la llamen en unas seis semanas' },
+              forzar: { arriba: true, fit: 84, prio: 'alta', porque: 'Vino del anuncio «Aprende marketing desde cero» de Instagram, ya ha hablado con Raquel y tiene el siguiente contacto con fecha.',
+                nba: { accion: 'Llamar en 6 semanas', quien: 'Ana · admisiones', estado: 'programado', tipo: 'humano', por: 'Próximo contacto en 6 semanas, como pidió. Ana tiene el aviso con la nota de la llamada.' } } } }
+        ]
+      },
       laura: {
         titulo: 'De Instagram a la matrícula',
         oculta: true,
