@@ -161,8 +161,10 @@
         oculta: true,
         sinTecno: true,
         agenteVoz: 'Raquel',
-        contacto: { id: 'demo', n: 'Laura Vidal', rol: 'Particular', seg: 'particular', ciudad: 'Bilbao', prod: 'Curso de Marketing Digital', orig: 'c8', canal: 'wa', etapa: 1, valor: 1290, creado: 0, act: 0, f: { horario: 'Tardes, a partir de las 18:00' }, s: {}, conv: [],
-          forzar: { arriba: true, fit: 84, prio: 'urgente', porque: 'Prioridad urgente porque acaba de pedir información del Curso de Marketing Digital desde Instagram.',
+        // f: las 3 respuestas del formulario (criterios de ejemplo de la escuela; ver informe-scoring del 18-nov).
+        contacto: { id: 'demo', n: 'Laura Vidal', rol: 'Particular', seg: 'particular', ciudad: 'Bilbao', prod: 'Curso de Marketing Digital', orig: 'c8', canal: 'wa', etapa: 1, valor: 1290, creado: 0, act: 0,
+          f: { '¿Qué modalidad y horario te viene mejor?': 'Online en directo, por las tardes (desde las 18:00)', '¿Cuándo te gustaría empezar?': 'En uno o dos meses', '¿Trabajas ya en marketing?': 'No, trabajo en atención al cliente y quiero cambiar de sector' }, s: {}, conv: [],
+          forzar: { arriba: true, fit: 84, prio: 'alta', porque: 'Prioridad alta porque acaba de pedir información y suma en los tres criterios de la escuela: horario de tarde, empezar en uno o dos meses y cambio de sector a marketing.',
             nba: { accion: 'Responder por WhatsApp', quien: 'Seguimiento', estado: 'encurso', tipo: 'agente', por: 'Acaba de pedir información desde Instagram. Lo primero es contestar rápido.' } } },
         pasos: [
           { dur: 5, min: 0, txt: 'Entra una solicitud desde Instagram: Curso de Marketing Digital', feed: 'Nueva solicitud · Curso de Marketing Digital · anuncio «Aprende marketing desde cero»', cambio: {} },
