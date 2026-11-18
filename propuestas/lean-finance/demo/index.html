@@ -18,6 +18,15 @@
 .wrap.main > *{min-width:0}
 h2{font-family:var(--serif);font-weight:700;font-size:clamp(24px,3vw,33px);line-height:1.15;letter-spacing:-.02em}
 .eyebrow{font-family:var(--mono)}
+.gads{display:grid;gap:12px}
+.gads .serp{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.gads .g{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff;font-family:Arial,Helvetica,sans-serif}
+.gads .g small{display:block;font-size:12px;color:#202124}.gads .g small b{font-weight:700}
+.gads .g .t{display:block;color:#1a0dab;font-size:17px;line-height:1.3;margin:4px 0 3px}
+.gads .g p{margin:0;font-size:13px;color:#4d5156;line-height:1.45}
+.gads .datos{display:flex;flex-wrap:wrap;gap:8px}
+.gads .datos span{font-size:13px;border:1px solid var(--line);border-radius:99px;padding:5px 11px;background:#fff}
+.gads .datos b{color:var(--accent)}
 .note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;line-height:1.5}
 .note a{color:var(--accent)}
 .ej{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;background:#B7790A;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;margin-right:4px}
@@ -315,6 +324,17 @@ footer p b{color:var(--ink)}
 
 <section class="pane" id="p-anuncios" role="tabpanel" aria-labelledby="t-anuncios">
   <header><h2>2 · Un anuncio para cada perfil <span class="ej">Propuesta de Qualivo</span></h2><p>Formato 4:5 para Instagram y Facebook. Vuestras cifras publicadas y, debajo, el testimonio que lo respalda.</p></header>
+  <div class="box gads">
+    <p class="cap" style="margin:0">Lo que ya hacéis en Google</p>
+    <div class="datos"><span><b>45</b> anuncios en España</span><span>activos el <b>17-nov</b></span><span>búsqueda, imagen y vídeo</span><span>desde <b>2023</b></span></div>
+    <div class="serp">
+      <div class="g"><small><b>Patrocinado</b> · leanfinance.es</small><span class="t">Servicio De CFO Externo - Ahorra costes con un CFO</span><p>Un CFO externo optimiza tu cash flow y reduce riesgos para el crecimiento de tu empresa.</p></div>
+      <div class="g"><small><b>Patrocinado</b> · leanfinance.es</small><span class="t">Tu Asesor Fiscal en Madrid</span><p>Asesoría fiscal y contable para empresas de Madrid. Contabilidad al día, asesor senior.</p></div>
+      <div class="g"><small><b>Patrocinado</b> · leanfinance.es</small><span class="t">Tu Asesor Fiscal en Valencia</span><p>Asesoría fiscal y contable para empresas de Valencia. Contabilidad al día, asesor senior.</p></div>
+    </div>
+    <p style="margin:0"><b>Hoy vuestra web le dice a Google qué formulario se ha enviado, con un valor fijo (de 40 a 300 €).</b> La pregunta es si Google sabe cuáles acaban en encargo firmado. Si se lo devolvemos desde el CRM, puja por las búsquedas que firman, no por las que solo rellenan.</p>
+    <p class="note" style="margin:0">Fuentes: Centro de Transparencia Publicitaria de Google y etiquetas públicas de leanfinance.es, consultados el 18-nov-2026. Textos de los anuncios copiados tal cual.</p>
+  </div>
   <div class="cols">
     <div>
       <p class="cap">Perfil 1 · fundador de startup</p>
