@@ -51,13 +51,13 @@ footer{background:#0C1F4D;color:#aab4cf;font-size:13px;padding:26px 22px;line-he
  <div class="mod">Estrategia y marca<span>Módulo 1</span></div><div class="mod">Publicidad en Meta y Google<span>Módulo 2</span></div><div class="mod">SEO y contenidos<span>Módulo 3</span></div><div class="mod">Email y automatización<span>Módulo 4</span></div><div class="mod">Analítica y medición<span>Módulo 5</span></div></section>
 <section class="cal"><h2 class="bc">Próxima convocatoria</h2><p style="color:#cfd6e6">Grupo de tarde. Plazas limitadas por grupo.</p><div class="f bc"><div><b>Enero</b>inicio</div><div><b>L–J</b>18:30 a 20:30</div><div><b>Online</b>en directo</div></div></section>
 <section style="padding:30px 0 10px"><div class="form" id="form"><h3 class="bc" id="h3">Solicita información</h3><div class="gra" id="gra">Hemos recibido tu solicitud. Te escribimos por WhatsApp en unos minutos.</div>
- <div class="cam">Nombre y apellidos</div><div class="cam">Teléfono</div><div class="cam">Email</div><div class="cam"><span>¿Qué horario prefieres?</span><span>▾</span></div>
+ <div class="cam">Nombre y apellidos</div><div class="cam">Teléfono</div><div class="cam"><span>¿Cuándo quieres empezar?</span><span>▾</span></div><div class="cam"><span>¿Cuál es tu situación actual?</span><span>▾</span></div><div class="cam"><span>¿Quién paga la formación?</span><span>▾</span></div>
  <div class="chk"><i id="ck"></i><span>He leído y acepto la política de privacidad.</span></div><div class="btn" id="btn">Quiero información</div></div></section>
 <section class="faq"><h2 class="bc">Preguntas frecuentes</h2><div class="q">¿Necesito conocimientos previos?<span>+</span></div><div class="q">¿Qué pasa si falto a una clase?<span>+</span></div><div class="q">¿Cómo se paga el curso?<span>+</span></div></section>
 <footer><b style="color:#fff">Escuela Norte</b><br>Escuela online · Campus virtual<br>Aviso legal · Privacidad · Cookies<br><br>Academia ficticia. Caso de ejemplo.</footer>
 <script>
 const E=+(new URLSearchParams(location.search).get('e')||0);
-if(E>=1){const v=['Laura Vidal','600 000 000','laura@correo.es','Tardes, a partir de las 18:00'];document.querySelectorAll('.cam').forEach((c,i)=>{c.style.color='#1a1a1a';if(c.firstElementChild)c.firstElementChild.textContent=v[i];else c.textContent=v[i];});
+if(E>=1){const v=['Laura Vidal','600 000 000','En la próxima convocatoria','Trabajo en el área · más de 3 años','Mi empresa'];document.querySelectorAll('.cam').forEach((c,i)=>{c.style.color='#1a1a1a';if(c.firstElementChild)c.firstElementChild.textContent=v[i];else c.textContent=v[i];});
  const k=document.getElementById('ck');k.style.cssText='background:#12337A;border-color:#12337A;color:#fff;font-size:14px;line-height:16px;text-align:center';k.textContent='✓';}
 if(E>=2){const b=document.getElementById('btn');b.style.background='#1E8E5A';b.textContent='✓ Solicitud enviada';document.getElementById('h3').textContent='¡Gracias, Laura!';document.getElementById('gra').style.display='block';}
 </script>

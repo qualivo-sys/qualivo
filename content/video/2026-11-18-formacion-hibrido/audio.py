@@ -2,11 +2,11 @@
 """Formación V2 · híbrido. Dos tomas largas de Javier (voz/h1 antes de Raquel, voz/h2 después) y la frase de Raquel del anuncio original.
    python3 audio.py → audio-corta-h{VZ}.m4a y subs-corta-h{VZ}.js. El montaje sigue a la voz: cada cambio de pantalla sale de una palabra."""
 import json, os, re, subprocess, sys
-VZ = sys.argv[1] if len(sys.argv) > 1 else 'e'
+VZ = sys.argv[1] if len(sys.argv) > 1 else 'f'
 MUS = {'pulso': (f'{os.path.dirname(os.path.abspath(__file__))}/../2026-09-17-sistema/musica-pulso.mp3', 0, 2600, .16),   # música: archivo, ganancia dB, paso bajo, volumen
        'afro': (f'{os.path.dirname(os.path.abspath(__file__))}/../../../produccion/video-anuncios/musica4/c-afrohouse-norm.mp3', 12, 4500, .19),
        'deep': (f'{os.path.dirname(os.path.abspath(__file__))}/../../../produccion/video-anuncios/musica3/2-deephouse-norm.mp3', 12, 4500, .19)}
-MK = sys.argv[2] if len(sys.argv) > 2 else 'pulso'; MF, MG, MLP, MV = MUS[MK]   # prefijo de las tomas en voz/: e = Emilio, h = Javier (guion anterior)
+MK = sys.argv[2] if len(sys.argv) > 2 else 'pulso'; MF, MG, MLP, MV = MUS[MK]   # prefijo de las tomas en voz/: f = Emilio y g = Dani (guion final con cualificación); e, d y h son tomas de guiones anteriores
 A = os.path.dirname(os.path.abspath(__file__)); V = f'{A}/voz'; S = f'{A}/../2026-09-17-sistema'
 def lufs(f, t=None):
     r = subprocess.run(['ffmpeg', '-v', 'info'] + (['-t', str(t)] if t else []) + ['-i', f, '-af', 'ebur128', '-f', 'null', '-'], capture_output=True, text=True).stderr
@@ -16,11 +16,12 @@ def ix(W, w, desde=0): return next(i for i in range(desde, len(W)) if W[i]['w'].
 RQ = 3.1; OBJ = -17.0
 t1 = .15; rq = round(t1 + W1[-1]['e'] + .50, 2); t2 = round(rq + RQ + .55, 2); FIN = round(t2 + W2[-1]['e'] + 1.5, 2)
 p1 = lambda w, d=0: round(t1 + W1[ix(W1, w, d)]['s'], 2); p2 = lambda w, d=0: round(t2 + W2[ix(W2, w, d)]['s'], 2)
-isb = ix(W1, 'sabemos'); irc = ix(W1, 'recibe'); e2 = p1('en') - .12; l0 = p1('sabemos') - .35
-T = {'a': t1, 'pd': p1('matrículas'), 'e2': e2, 'g': e2 + .2, 'ld': p1('implementamos') - .1, 'sc': p1('laura') - .25, 'lau': p1('laura') - .1,
-     'f2': p1('información') + .35, 'l0': l0, 'og': l0 + .9, 'e3': p1('recibe') - .15, 's3': p1('si', irc) - .1, 'll': p1('raquel') - .25, 'rq': rq,
+ipr = ix(W1, 'momento'); iin = ix(W1, 'interés'); e2 = p1('en') - .12
+T = {'a': t1, 'pd': p1('matrículas'), 'e2': e2, 'g': e2 + .2, 'ld': p1('implementamos') - .1, 'sc': p1('laura') - .3, 'lau': p1('laura') - .1,
+     'f2': p1('interés') - .25, 'sco': p1('por', iin) - .15, 'pu': p1('puntúa'), 'ay': p1('avisa') - .1, 'crm': p1('y', ipr) - .1, 'og': p1('prioridad') - .1,
+     'e3': p1('laura', ipr) - .15, 's3': p1('si', ipr) - .1, 'll': p1('raquel') - .25, 'rq': rq,
      'e4': t2 - .1, 'ops': p2('así') - .15, 'ges': p2('mejoramos') - .1, 'e6': p2('descubre') - .15, 'sol': p2('solicita'), 'FIN': FIN}
-T = {k: round(v, 2) for k, v in T.items()}; T['e5'] = T['ops']; T['c4'] = T['e7'] = T['e6']; T['c'] = [T['e6']] * 3; T['cap'] = T['lau']; T['a2'] = T['pd']
+T = {k: round(v, 2) for k, v in T.items()}; T['l0'] = T['sco']; T['e5'] = T['ops']; T['c4'] = T['e7'] = T['e6']; T['c'] = [T['e6']] * 3; T['cap'] = T['lau']; T['a2'] = T['pd']
 subs = []
 def trocea(W, t0):
     trozo = []
