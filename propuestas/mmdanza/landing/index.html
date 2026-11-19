@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Clase de prueba gratis · MMDanza (maqueta)</title>
+<meta name="description" content="Maqueta de Qualivo para MMDanza: landing de clase de prueba gratis con reserva en el mismo paso.">
+<meta name="theme-color" content="#0b0a0a">
+<link rel="icon" href="../assets/landing/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&family=Permanent+Marker&display=swap">
+<style>
+/* Landing · MMDanza · Clase de prueba gratis. Maqueta de Qualivo, 19-nov-2026.
+   Marca tomada de mmdanza.com y sus carteles 26-27: negro, rojo intenso (#9b0000 en su CSS), rotulación a mano para los nombres. */
+:root{color-scheme:dark;
+  --bg:#0b0a0a;--bg-2:#141112;--bg-3:#1c1718;--line:rgba(255,255,255,.12);--line-2:rgba(255,255,255,.2);
+  --red:#e3161f;--red-2:#c10f17;--red-deep:#9b0000;--red-soft:#ff5a5f;--blue:#2f4bff;
+  --paper:#f7f2ee;--paper-2:#efe7e1;--ink:#1a1314;--ink-2:#4d4244;--ink-line:#e2d8d2;
+  --white:#fff;--muted:rgba(255,255,255,.72);--good:#1f8a4c;
+  --sans:"Montserrat",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--hand:"Permanent Marker","Comic Sans MS",cursive;
+  --r:18px;--g:16px;--max:1200px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--white);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--red-soft);outline-offset:3px}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--g)}
+@media (min-width:700px){:root{--g:32px}}
+h1,h2,h3{font-weight:900;letter-spacing:-.025em;line-height:1.02;text-wrap:balance;margin:0}
+p{margin:0}
+.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--red-soft)}
+.eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
+.sec-h{font-size:clamp(32px,5.2vw,58px);margin:14px 0 0}
+.sec-p{font-size:clamp(16px,1.5vw,18px);color:var(--muted);margin-top:14px;max-width:56ch}
+section{position:relative}
+
+/* franja de maqueta */
+.proposal{background:#000;color:rgba(255,255,255,.7);font-size:12px;text-align:center;padding:7px 16px;letter-spacing:.01em;line-height:1.4}
+.proposal b{color:#fff;font-weight:600}
+
+/* barra superior */
+.top{position:sticky;top:0;z-index:40;background:rgba(11,10,10,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:62px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.brand img{height:40px;width:auto}
+.brand span{font-size:11px;line-height:1.25;color:var(--muted);border-left:1px solid var(--line-2);padding-left:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.nav{display:none;gap:26px;font-size:14px;font-weight:600}
+.nav a{text-decoration:none;color:rgba(255,255,255,.8)}
+.nav a:hover{color:#fff}
+@media (min-width:980px){.nav{display:flex}}
+@media (max-width:420px){.brand span{display:none}}
+
+/* botones */
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--red);color:#fff;font-weight:800;font-size:16px;text-decoration:none;border:0;border-radius:999px;padding:17px 28px;cursor:pointer;transition:transform .15s,box-shadow .25s,background .2s;letter-spacing:.005em;line-height:1.2;text-align:center;box-shadow:0 14px 34px -14px rgba(227,22,31,.9)}
+.cta:hover{transform:translateY(-2px);background:#f01d27;box-shadow:0 18px 40px -14px rgba(227,22,31,1)}
+.cta svg{width:18px;height:18px;flex:none;transition:transform .2s}
+.cta:hover svg{transform:translateX(3px)}
+.cta.sm{padding:10px 18px;font-size:14px;box-shadow:none}
+.cta.ghost{background:transparent;border:1.5px solid var(--line-2);box-shadow:none}
+.cta.ghost:hover{background:rgba(255,255,255,.08)}
+.cta[disabled]{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.top .cta.sm .long{display:none}
+@media (min-width:560px){.top .cta.sm .long{display:inline}}
+
+/* HERO */
+.hero{position:relative;min-height:calc(100svh - 62px - 30px);display:flex;isolation:isolate;overflow:hidden;background:var(--bg)}
+.hero-bg{position:absolute;inset:0;z-index:-3;background:url(../assets/landing/sala.webp) center 40%/cover no-repeat;opacity:.5;filter:saturate(.85)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(70% 60% at 85% 30%,rgba(227,22,31,.42),transparent 70%),
+  radial-gradient(60% 50% at 0% 100%,rgba(155,0,0,.5),transparent 70%),
+  linear-gradient(180deg,rgba(11,10,10,.55) 0%,rgba(11,10,10,.82) 55%,var(--bg) 100%)}
+.hero .wrap{display:grid;grid-template-columns:1fr;gap:22px;align-content:end;width:100%;padding-block:22px 34px}
+.hero-photos{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:10px;height:clamp(200px,30svh,380px);align-items:end}
+.hero-photos figure{margin:0;height:100%;border-radius:16px;overflow:hidden;position:relative;box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
+.hero-photos figure:nth-child(1),.hero-photos figure:nth-child(3){height:84%}
+.hero-photos figure:nth-child(3){align-self:start}
+.hero-photos img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.hero-photos figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 9px;background:linear-gradient(transparent,rgba(0,0,0,.75));font-family:var(--hand);font-size:clamp(10.5px,2.9vw,13px);text-align:center;letter-spacing:.02em;white-space:nowrap}
+.hero-copy{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.hero h1{font-size:clamp(46px,11.5vw,104px);line-height:.94;margin:14px 0 0;letter-spacing:-.04em}
+.hero h1 .hand{display:inline-block;color:var(--red);font-size:1.02em;letter-spacing:0;transform:rotate(-4deg);margin-left:.04em;text-shadow:0 6px 30px rgba(227,22,31,.45)}
+.hero .sub{font-size:clamp(16px,1.55vw,19px);color:rgba(255,255,255,.86);margin-top:18px;max-width:50ch}
+.hero .sub b{color:#fff;font-weight:700}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:26px}
+.hero .actions .cta{width:100%}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:22px 0 0;padding:0;list-style:none;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.8)}
+.facts li{display:flex;align-items:center;gap:8px}
+.facts li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red)}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (max-width:559px){.hero .actions .cta.ghost{display:none}}
+@media (max-width:420px){.cta:not(.sm):not(.ghost){font-size:15px;padding:17px 18px;gap:8px}}
+@media (min-width:560px){.hero .actions .cta{width:auto}}
+@media (min-width:980px){
+  .hero .wrap{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-content:center;align-items:center;padding-block:60px 70px}
+  .hero-photos{order:2;height:min(66svh,560px);gap:14px}
+  .hero-photos figure{border-radius:22px}
+  .hero-photos figcaption{font-size:15px}
+  .hero h1{font-size:clamp(64px,7.4vw,112px)}
+}
+
+/* ESTILOS */
+.estilos{background:var(--bg);padding:72px 0 84px}
+.styles-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:34px}
+.style-card{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:400px;border-radius:var(--r);overflow:hidden;text-decoration:none;isolation:isolate;background:var(--bg-3);border:1px solid var(--line)}
+.style-card .ph{position:absolute;inset:0;z-index:-2}
+.style-card .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.style-card:hover .ph img{transform:scale(1.05)}
+.style-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 58%,rgba(0,0,0,.92) 100%)}
+.style-card .body{padding:22px}
+.style-card .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;background:rgba(0,0,0,.55);border:1px solid var(--line-2);padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.style-card h3{font-size:clamp(28px,3vw,36px);margin-top:12px}
+.style-card p{color:rgba(255,255,255,.82);font-size:15px;margin-top:8px;max-width:40ch}
+.style-card .go{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-weight:800;font-size:14.5px;color:#fff;border-bottom:2px solid var(--red);padding-bottom:3px}
+.style-card .go svg{width:16px;height:16px;transition:transform .2s}
+.style-card:hover .go svg{transform:translateX(4px)}
+.style-card:not(.latinos) .ph{bottom:24%}
+.style-card:not(.latinos) .ph img{-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent);mask-image:linear-gradient(180deg,#000 70%,transparent)}
+.style-card:not(.latinos){background:#0b0a0a}
+.style-card:not(.latinos) .ph img{object-position:50% 42%}
+.style-card.latinos{min-height:540px}
+@media (max-width:699px){.style-card.latinos .ph{bottom:36%}.style-card.latinos .ph img{-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent);mask-image:linear-gradient(180deg,#000 72%,transparent)}.style-card.latinos{background:#0b0a0a}}
+.style-card.latinos .ph{display:grid;grid-template-columns:repeat(3,1fr)}
+.style-card.latinos .ph img{object-position:50% 15%}
+.style-card.latinos .ph img+img{border-left:2px solid var(--bg)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip-link{font-size:13.5px;font-weight:700;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid var(--line-2);text-decoration:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .2s,border-color .2s}
+.chip-link:hover{background:var(--red);border-color:var(--red)}
+@media (min-width:700px){.styles-grid{grid-template-columns:repeat(2,1fr)}.style-card.latinos{grid-column:1/-1;min-height:480px}}
+@media (min-width:1080px){.styles-grid{grid-template-columns:repeat(4,1fr);gap:16px}.style-card{min-height:440px}.style-card.latinos{grid-column:1/3;grid-row:1/3;min-height:auto}.style-card h3{font-size:25px}.style-card.latinos h3{font-size:44px}.style-card .body{padding:20px}.style-card p{font-size:14px}}
+
+/* PROFESORES */
+.profes{background:var(--paper);color:var(--ink);padding:78px 0 84px;overflow:hidden}
+.profes .eyebrow{color:var(--red-2)}
+.profes .sec-p{color:var(--ink-2)}
+.profes-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px}
+.rail-btns{display:none;gap:10px}
+.rail-btns button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.rail-btns button:hover{background:var(--ink);color:var(--paper)}
+.rail-btns svg{width:20px;height:20px}
+@media (min-width:700px){.rail-btns{display:flex}}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(72%,250px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:34px var(--g) 10px;margin-inline:calc(var(--g) * -1);scrollbar-width:none;overscroll-behavior-x:contain;scroll-padding-inline:var(--g)}
+.rail::-webkit-scrollbar{display:none}
+@media (min-width:1264px){.rail{padding-inline:calc((100vw - var(--max))/2 + var(--g));margin-inline:calc((100vw - var(--max))/-2 - var(--g));scroll-padding-inline:calc((100vw - var(--max))/2 + var(--g))}}
+.profe{scroll-snap-align:start;margin:0;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 22px 40px -28px rgba(40,10,10,.5);border:1px solid var(--ink-line)}
+.profe .ph{aspect-ratio:4/5;overflow:hidden;position:relative;background:#222}
+.profe img{width:100%;height:100%;object-fit:cover}
+.profe .new{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;border-radius:6px}
+.profe figcaption{padding:14px 16px 16px}
+.profe .name{font-family:var(--hand);font-size:21px;line-height:1.15;color:var(--ink)}
+.profe .what{font-size:13.5px;font-weight:600;color:var(--ink-2);margin-top:4px;line-height:1.4}
+.rail-note{font-size:12.5px;color:var(--ink-2);margin-top:14px}
+
+/* PASOS */
+.pasos{background:var(--paper-2);color:var(--ink);padding:78px 0 84px}
+.pasos .eyebrow{color:var(--red-2)}
+.steps3{list-style:none;padding:0;margin:36px 0 0;display:grid;gap:14px;counter-reset:s}
+.steps3 li{position:relative;background:#fff;border-radius:var(--r);padding:26px 22px 24px 86px;border:1px solid var(--ink-line);min-height:118px}
+.steps3 li::before{counter-increment:s;content:counter(s);position:absolute;left:22px;top:22px;width:46px;height:46px;border-radius:50%;background:var(--red);color:#fff;font-weight:900;font-size:21px;display:grid;place-items:center}
+.steps3 h3{font-size:21px;letter-spacing:-.015em;line-height:1.15}
+.steps3 p{color:var(--ink-2);font-size:15px;margin-top:6px}
+.steps3 .wa{display:inline-flex;align-items:center;gap:6px;color:var(--good);font-weight:700}
+.pasos .cta{margin-top:30px}
+@media (min-width:900px){.steps3{grid-template-columns:repeat(3,1fr);gap:18px}.steps3 li{padding:84px 26px 28px}.steps3 li::before{top:26px;left:26px;width:42px;height:42px}}
+
+/* HORARIOS Y UBICACIÓN */
+.horarios{background:var(--bg);padding:78px 0 84px;isolation:isolate;overflow:hidden}
+.horarios::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--bg) 0%,rgba(11,10,10,.86) 40%,rgba(11,10,10,.92) 100%),url(../assets/landing/sala.webp) center/cover no-repeat}
+.hz-grid{display:grid;gap:16px;margin-top:34px}
+.panel{background:rgba(20,17,18,.86);border:1px solid var(--line);border-radius:var(--r);padding:24px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.panel h3{font-size:14px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.slots{display:grid;gap:12px;margin-top:16px}
+.slot{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px}
+.slot:last-child{border-bottom:0;padding-bottom:0}
+.slot b{font-size:19px;font-weight:800}
+.slot span{color:var(--muted);font-size:14.5px;font-weight:600}
+.slot .h{font-size:clamp(24px,3vw,30px);font-weight:900;letter-spacing:-.02em;color:#fff;width:100%}
+.week{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:22px}
+.week div{text-align:center}
+.week .d{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted)}
+.week .b{height:16px;border-radius:5px;margin-top:6px;background:rgba(255,255,255,.08)}
+.week .b.on{background:var(--red)}
+.week .b.on2{background:#ff8a8e}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:12px;font-weight:600}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px}
+.addr{font-size:clamp(24px,3vw,30px);font-weight:900;letter-spacing:-.02em;margin-top:14px;line-height:1.15}
+.addr small{display:block;font-size:15px;font-weight:600;color:var(--muted);letter-spacing:0;margin-top:6px}
+.place-ph{margin-top:18px;border-radius:12px;overflow:hidden;aspect-ratio:16/7}
+.place-ph img{width:100%;height:100%;object-fit:cover}
+.panel .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.panel .note{font-size:13px;color:var(--muted);margin-top:14px}
+@media (min-width:900px){.hz-grid{grid-template-columns:1fr 1fr;gap:18px}.panel{padding:30px}}
+
+/* RESERVA */
+.reserva{padding:80px 0 90px;background:radial-gradient(80% 60% at 100% 0%,rgba(227,22,31,.38),transparent 70%),radial-gradient(70% 60% at 0% 100%,rgba(155,0,0,.55),transparent 70%),var(--bg-2);scroll-margin-top:62px}
+.res-grid{display:grid;gap:34px;align-items:start}
+.res-pitch .sec-h .hand{color:var(--red-soft);display:inline-block;transform:rotate(-3deg);font-size:1.02em;letter-spacing:0}
+.ticks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
+.ticks li{display:flex;gap:12px;align-items:flex-start;font-weight:600;color:rgba(255,255,255,.88)}
+.ticks svg{width:22px;height:22px;flex:none;color:var(--red-soft);margin-top:1px}
+.mini-faces{display:none;margin-top:30px;gap:8px}
+.mini-faces img{width:58px;height:72px;border-radius:10px;object-fit:cover;border:2px solid rgba(255,255,255,.15)}
+@media (min-width:980px){.res-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px}.mini-faces{display:flex}.res-pitch{position:sticky;top:110px}}
+
+.card{color-scheme:light;background:#fff;color:var(--ink);border-radius:22px;box-shadow:0 40px 80px -40px rgba(0,0,0,.9);overflow:hidden}
+.card-top{padding:20px 22px 0}
+.prog-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12.5px;font-weight:700;color:var(--ink-2);letter-spacing:.02em}
+.prog-meta .free{background:#fde7e8;color:var(--red-2);padding:4px 10px;border-radius:999px;font-weight:800;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.prog{height:6px;background:#f0e7e3;border-radius:6px;margin-top:12px;overflow:hidden}
+.prog i{display:block;height:100%;width:20%;background:var(--red);border-radius:6px;transition:width .35s cubic-bezier(.2,.7,.2,1)}
+.sumbar{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;min-height:0}
+.sumbar button{font-size:12.5px;font-weight:700;background:#f6efeb;border:1px solid var(--ink-line);border-radius:999px;padding:5px 10px 5px 11px;cursor:pointer;color:var(--ink);display:inline-flex;gap:6px;align-items:center}
+.sumbar button:hover{border-color:var(--red)}
+.sumbar button svg{width:12px;height:12px;color:var(--ink-2)}
+.step{padding:18px 22px 24px}
+.step h3{font-size:clamp(22px,2.6vw,27px);letter-spacing:-.02em;line-height:1.12}
+.step .hint{font-size:14px;color:var(--ink-2);margin-top:6px}
+.opts{display:grid;gap:9px;margin-top:18px}
+.opts.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.opt{position:relative;display:flex;align-items:center;gap:12px;text-align:left;width:100%;background:#fff;border:1.5px solid var(--ink-line);border-radius:14px;padding:13px 14px;cursor:pointer;font-weight:700;font-size:15px;color:var(--ink);transition:border-color .15s,background .15s,transform .1s;line-height:1.25}
+.opt:hover{border-color:#c9b9b2}
+.opt:active{transform:scale(.99)}
+.opt small{display:block;font-weight:500;font-size:13px;color:var(--ink-2);margin-top:2px}
+.opt .ic{width:38px;height:38px;border-radius:10px;background:#f6efeb;display:grid;place-items:center;flex:none;font-size:13px;font-weight:900;color:var(--red-2)}
+.opt .ic img{width:38px;height:38px;border-radius:10px;object-fit:cover;object-position:50% 20%}
+.opt[aria-pressed="true"]{border-color:var(--red);background:#fff4f4;box-shadow:inset 0 0 0 1px var(--red)}
+.opt[aria-pressed="true"]::after{content:"";position:absolute;right:12px;top:50%;width:20px;height:20px;margin-top:-10px;border-radius:50%;background:var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/13px no-repeat}
+.opt[aria-pressed="true"]{padding-right:40px}
+.opt[disabled]{opacity:.4;cursor:not-allowed}
+.opts.cols2 .opt{padding:12px}
+@media (max-width:480px){
+  [data-key="estilo"] .opt{flex-direction:column;align-items:flex-start;gap:8px;font-size:14px;padding:11px 12px}
+  [data-key="estilo"] .opt .ic,[data-key="estilo"] .opt .ic img{width:34px;height:34px}
+  [data-key="estilo"] .opt[aria-pressed="true"]{padding-right:12px}
+  [data-key="estilo"] .opt[aria-pressed="true"]::after{top:12px;margin-top:0;right:10px}
+}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:16px}
+.day{border:1.5px solid var(--ink-line);background:#fff;border-radius:12px;padding:11px 0;font-weight:800;font-size:15px;cursor:pointer;color:var(--ink);text-align:center;line-height:1.1}
+.day small{display:block;font-size:10.5px;font-weight:600;color:var(--ink-2);margin-top:3px;letter-spacing:.02em}
+.day[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.day[aria-pressed="true"] small{color:rgba(255,255,255,.7)}
+.lbl{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:20px;display:block}
+.field{margin-top:14px}
+.field label{display:block;font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.field input{width:100%;border:1.5px solid var(--ink-line);border-radius:12px;padding:14px 14px;font-size:16px;background:#fff;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
+.field input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(26,19,20,.08)}
+.field input[aria-invalid="true"]{border-color:var(--red);box-shadow:0 0 0 3px rgba(227,22,31,.12)}
+.field .err{font-size:12.5px;color:var(--red-2);font-weight:600;margin-top:5px}
+.tel-wrap{display:flex;align-items:stretch}
+.tel-wrap span{display:grid;place-items:center;padding:0 12px;border:1.5px solid var(--ink-line);border-right:0;border-radius:12px 0 0 12px;font-weight:700;color:var(--ink-2);background:#faf6f3}
+.tel-wrap input{border-radius:0 12px 12px 0}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:13px;color:var(--ink-2);line-height:1.45;cursor:pointer}
+.check input{width:20px;height:20px;margin:0;flex:none;accent-color:var(--red)}
+.check a{color:var(--ink);font-weight:600}
+.nav-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px}
+.back{background:none;border:0;color:var(--ink-2);font-weight:700;font-size:14px;cursor:pointer;padding:10px 4px;display:inline-flex;align-items:center;gap:6px}
+.back:hover{color:var(--ink)}
+.back svg{width:16px;height:16px}
+.nav-row .cta{box-shadow:none;padding:14px 22px;font-size:15px}
+.step .cta.full{width:100%;margin-top:20px}
+.secure{font-size:12px;color:var(--ink-2);text-align:center;margin-top:10px}
+.step-in{animation:stepin .35s cubic-bezier(.2,.7,.2,1) both}
+@keyframes stepin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+
+/* confirmación */
+.done{padding:30px 22px 26px;text-align:center}
+.done .ok{width:74px;height:74px;border-radius:50%;background:var(--good);display:grid;place-items:center;margin:0 auto;box-shadow:0 0 0 10px rgba(31,138,76,.12);animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
+.done .ok svg{width:38px;height:38px;color:#fff}
+.done .ok path{stroke-dasharray:30;stroke-dashoffset:30;animation:draw .45s .25s ease-out forwards}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.done h3{font-size:clamp(30px,4vw,40px);margin-top:18px}
+.done .lead{font-size:16.5px;color:var(--ink-2);margin:10px auto 0;max-width:36ch}
+.done .lead b{color:var(--ink)}
+.ticket{margin:22px auto 0;max-width:440px;text-align:left;border:1.5px dashed #d8c9c2;border-radius:16px;padding:16px 18px;background:#fbf7f5;display:grid;gap:8px}
+.ticket div{display:flex;justify-content:space-between;gap:14px;font-size:14px}
+.ticket span{color:var(--ink-2);font-weight:600}
+.ticket b{text-align:right;font-weight:800}
+.again{margin-top:18px}
+.team{border-top:1px solid var(--ink-line);background:#f7f2ee}
+.team summary{list-style:none;cursor:pointer;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:800;font-size:15px}
+.team summary::-webkit-details-marker{display:none}
+.team summary .lab{display:block;font-size:11.5px;font-weight:700;color:var(--ink-2);letter-spacing:.04em;margin-top:2px}
+.team summary .chev{width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--ink-line);display:grid;place-items:center;flex:none;transition:transform .25s}
+.team summary .chev svg{width:14px;height:14px}
+.team[open] summary .chev{transform:rotate(180deg)}
+.team-body{padding:0 22px 22px}
+.sample{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:#1a1314;color:#fff;padding:4px 8px;border-radius:5px}
+.lead-card{background:#fff;border:1px solid var(--ink-line);border-radius:16px;margin-top:12px;overflow:hidden}
+.lead-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--ink-line)}
+.lead-head .who{display:flex;align-items:center;gap:12px;min-width:0}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:16px;flex:none}
+.lead-head .nm{font-weight:800;font-size:16px;line-height:1.2;overflow-wrap:anywhere}
+.lead-head .tm{font-size:12px;color:var(--ink-2);font-weight:600}
+.prio{font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px;white-space:nowrap}
+.prio.alta{background:#fde7e8;color:var(--red-2)}
+.prio.media{background:#fff3d6;color:#8a5a00}
+.lead-rows{display:grid;grid-template-columns:1fr;margin:0}
+.lead-rows div{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:10px 16px;border-bottom:1px solid #f1e9e5;font-size:14px}
+.lead-rows dt{color:var(--ink-2);font-weight:600}
+.lead-rows dd{margin:0;font-weight:700;overflow-wrap:anywhere}
+.why{padding:12px 16px;font-size:13.5px;background:#fffaf0;color:#5a4300;border-bottom:1px solid #f1e9e5}
+.why b{color:#3b2c00}
+.wa-prev{padding:14px 16px 16px;background:#efeae2}
+.wa-prev .t{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#54656f}
+.bubble{background:#fff;border-radius:4px 14px 14px 14px;padding:10px 12px 8px;margin-top:8px;font-size:14px;line-height:1.5;color:#111b21;max-width:96%;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.bubble .from{font-size:12.5px;font-weight:800;color:#1f8a4c;display:block;margin-bottom:2px}
+.bubble .hr{display:block;text-align:right;font-size:11px;color:#667781;margin-top:2px}
+.team .foot{font-size:12px;color:var(--ink-2);margin-top:12px}
+
+/* FAQ */
+.faq{background:var(--paper);color:var(--ink);padding:78px 0 84px}
+.faq .eyebrow{color:var(--red-2)}
+.faq-grid{display:grid;gap:30px}
+.qa{border-top:1.5px solid var(--ink)}
+.qa details{border-bottom:1px solid var(--ink-line)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 2px;font-weight:800;font-size:clamp(17px,1.8vw,20px);letter-spacing:-.01em}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .pm{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;flex:none;transition:transform .25s,background .2s,color .2s}
+.qa summary .pm svg{width:14px;height:14px}
+.qa details[open] summary .pm{transform:rotate(45deg);background:var(--ink);color:#fff}
+.qa details p{padding:0 2px 22px;color:var(--ink-2);font-size:16px;max-width:62ch}
+@media (min-width:900px){.faq-grid{grid-template-columns:.8fr 1.2fr;gap:60px}}
+
+/* cierre */
+.final{padding:90px 0;text-align:center;isolation:isolate;overflow:hidden;background:var(--red-deep)}
+.final::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 80% at 50% 0%,rgba(255,60,60,.55),transparent 70%),linear-gradient(180deg,#a70008,#5c0004)}
+.final h2{font-size:clamp(38px,6.5vw,76px)}
+.final h2 .hand{display:block;font-size:.72em;transform:rotate(-2deg);margin-top:.1em;letter-spacing:0}
+.final p{color:rgba(255,255,255,.86);margin:16px auto 0;max-width:46ch;font-size:17px}
+.final .cta{margin-top:28px;background:#fff;color:var(--red-deep);box-shadow:0 18px 40px -18px rgba(0,0,0,.6)}
+.final .cta:hover{background:#fff}
+
+/* pie */
+footer{background:#000;color:rgba(255,255,255,.7);padding:44px 0 110px;font-size:14px}
+footer .row{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+footer img{height:54px;width:auto}
+footer .meta{line-height:1.6}
+footer .meta b{color:#fff}
+footer .disc{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:rgba(255,255,255,.6)}
+@media (min-width:900px){footer{padding-bottom:44px}}
+
+/* barra fija móvil */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(11,10,10,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.mbar.show{transform:none}
+.mbar .cta{width:100%;padding:15px 20px}
+@media (min-width:900px){.mbar{display:none}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="proposal"><b>Maqueta de Qualivo para MMDanza</b> · no es una página de MMDanza · el formulario no envía nada</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="MMDanza, inicio">
+      <img src="../assets/landing/logo.webp" alt="MMDanza Dance School" width="300" height="221">
+      <span>Academia de baile<br>Santa Cruz de Tenerife</span>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#estilos">Estilos</a><a href="#profes">Profesores</a><a href="#horarios">Horarios</a><a href="#faq">Preguntas</a>
+    </nav>
+    <a class="cta sm" href="#reserva" data-goto-form><span>Clase gratis<span class="long"> de prueba</span></span></a>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg" role="img" aria-label="Uno de los salones de MMDanza"></div>
+  <div class="wrap">
+    <div class="hero-photos" aria-hidden="true">
+      <figure><img src="../assets/landing/robermi.webp" alt="" width="344" height="430" fetchpriority="high"><figcaption>Robermi</figcaption></figure>
+      <figure><img src="../assets/landing/cristo-emma.webp" alt="" width="344" height="430" fetchpriority="high"><figcaption>Cristo y Emma</figcaption></figure>
+      <figure><img src="../assets/landing/irune.webp" alt="" width="344" height="430" fetchpriority="high"><figcaption>Irune Lorenzo</figcaption></figure>
+    </div>
+    <div class="hero-copy">
+      <span class="eyebrow" id="hero-eyebrow">Academia de baile · Santa Cruz</span>
+      <h1>Tu primera clase, <span class="hand">gratis</span></h1>
+      <p class="sub" id="hero-sub">Salsa, bachata, reparto, urbano, contemporáneo, pilates y grupos para niños y jóvenes. <b>Ven a probar sin compromiso</b>, aunque no hayas bailado nunca. En C/ Eduardo Zamacois 15, Santa Cruz de Tenerife.</p>
+      <div class="actions">
+        <a class="cta" href="#reserva" data-goto-form>Reserva tu clase de prueba gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="cta ghost" href="#estilos">Ver estilos</a>
+      </div>
+      <ul class="facts">
+        <li>En Santa Cruz desde 2002</li>
+        <li>Mañanas y tardes</li>
+        <li>Te confirmamos por WhatsApp</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ESTILOS -->
+<section class="estilos" id="estilos">
+  <div class="wrap">
+    <span class="eyebrow">Estilos</span>
+    <h2 class="sec-h">¿Qué te apetece bailar?</h2>
+    <p class="sec-p">Elige uno y reserva tu clase de prueba. Si no lo tienes claro, también: te orientamos.</p>
+
+    <div class="styles-grid">
+      <a class="style-card latinos" href="#reserva" data-estilo="latinos">
+        <div class="ph">
+          <img src="../assets/landing/cristo-emma.webp" alt="Cristo y Emma, salsa" width="344" height="430" loading="lazy">
+          <img src="../assets/landing/ivan-clara.webp" alt="Iván y Clara, bachata" width="344" height="430" loading="lazy">
+          <img src="../assets/landing/hector-carmen.webp" alt="Héctor y Carmen, kizomba" width="344" height="430" loading="lazy">
+        </div>
+        <div class="body">
+          <span class="tag">Adultos · desde cero</span>
+          <h3>Bailes latinos</h3>
+          <p>Empieza desde cero, continúa o perfecciona. Grupos de inicio, intermedio y avanzado.</p>
+          <div class="chips" role="list">
+            <span role="listitem" class="chip-link" data-estilo="salsa">Salsa</span>
+            <span role="listitem" class="chip-link" data-estilo="bachata">Bachata</span>
+            <span role="listitem" class="chip-link" data-estilo="reparto">Reparto</span>
+            <span role="listitem" class="chip-link" data-estilo="kizomba">Kizomba</span>
+            <span role="listitem" class="chip-link" data-estilo="zouk">Zouk</span>
+          </div>
+          <span class="go">Probar gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="style-card" href="#reserva" data-estilo="urbano">
+        <div class="ph"><img src="../assets/landing/irune.webp" alt="Irune Lorenzo, urbano" width="344" height="430" loading="lazy"></div>
+        <div class="body">
+          <span class="tag">Jóvenes y adultos</span>
+          <h3>Urbano y comercial</h3>
+          <p>Coreografías, grupo de formación y grupo de competición.</p>
+          <span class="go">Probar gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="style-card" href="#reserva" data-estilo="contemporaneo">
+        <div class="ph"><img src="../assets/landing/claudia.webp" alt="Claudia Di Yorio, danza contemporánea" width="344" height="430" loading="lazy"></div>
+        <div class="body">
+          <span class="tag">Técnica y expresión</span>
+          <h3>Moderno y contemporáneo</h3>
+          <p>Danza contemporánea con Claudia Di Yorio.</p>
+          <span class="go">Probar gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="style-card" href="#reserva" data-estilo="ninos">
+        <div class="ph"><img src="../assets/landing/valeria.webp" alt="Valeria, urbano para niños y jóvenes" width="344" height="430" loading="lazy"></div>
+        <div class="body">
+          <span class="tag">Desde 6 años</span>
+          <h3>Niños y jóvenes</h3>
+          <p>Moderno y urbano por edades, desde sus primeras coreografías.</p>
+          <span class="go">Probar gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="style-card" href="#reserva" data-estilo="pilates">
+        <div class="ph"><img src="../assets/landing/wence.webp" alt="Wence, pilates" width="344" height="430" loading="lazy"></div>
+        <div class="body">
+          <span class="tag">Nivel abierto</span>
+          <h3>Pilates y mantenimiento</h3>
+          <p>Mejora la postura y tonifica, de mañana o de tarde.</p>
+          <span class="go">Probar gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROFESORES -->
+<section class="profes" id="profes">
+  <div class="wrap">
+    <div class="profes-head">
+      <div>
+        <span class="eyebrow">Profesores</span>
+        <h2 class="sec-h">Con quién vas a bailar</h2>
+        <p class="sec-p">Algunos de los profesores de la temporada 26-27.</p>
+      </div>
+      <div class="rail-btns">
+        <button type="button" data-rail="-1" aria-label="Anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+        <button type="button" data-rail="1" aria-label="Siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+    <div class="rail" id="rail" tabindex="0" aria-label="Profesores">
+      <figure class="profe"><div class="ph"><img src="../assets/landing/robermi.webp" alt="Robermi" width="344" height="430" loading="lazy"><span class="new">Nuevo</span></div><figcaption><div class="name">Robermi</div><div class="what">Reparto · Bailes latinos · Rumba y afro</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/cristo-emma.webp" alt="Cristo y Emma" width="344" height="430" loading="lazy"></div><figcaption><div class="name">Cristo y Emma</div><div class="what">Salsa On1</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/cristo-ana.webp" alt="Cristo y Ana" width="344" height="430" loading="lazy"></div><figcaption><div class="name">Cristo y Ana</div><div class="what">Salsa On2</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/ivan-clara.webp" alt="Iván y Clara" width="344" height="430" loading="lazy"></div><figcaption><div class="name">Iván y Clara</div><div class="what">Bachata</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/hector-carmen.webp" alt="Héctor y Carmen" width="344" height="430" loading="lazy"></div><figcaption><div class="name">Héctor y Carmen</div><div class="what">Kizomba</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/vitor-nely.webp" alt="Vitor y Nely" width="344" height="430" loading="lazy"></div><figcaption><div class="name">Vitor y Nely</div><div class="what">Zouk brasileño</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/wence-yanira.webp" alt="Wence y Yanira" width="344" height="430" loading="lazy"></div><figcaption><div class="name">Wence y Yanira</div><div class="what">Bailes latinos</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/yanira.webp" alt="Yanira" width="344" height="430" loading="lazy" style="object-position:50% 70%"></div><figcaption><div class="name">Yanira</div><div class="what">Lady style</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/irune.webp" alt="Irune Lorenzo" width="344" height="430" loading="lazy"></div><figcaption><div class="name">Irune Lorenzo</div><div class="what">Urbano · Formación y competición</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/valeria.webp" alt="Valeria" width="344" height="430" loading="lazy"></div><figcaption><div class="name">Valeria</div><div class="what">Urbano · Formación y competición</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/claudia.webp" alt="Claudia Di Yorio" width="344" height="430" loading="lazy"></div><figcaption><div class="name">Claudia Di Yorio</div><div class="what">Contemporáneo · Mantenimiento</div></figcaption></figure>
+      <figure class="profe"><div class="ph"><img src="../assets/landing/wence.webp" alt="Wence" width="344" height="430" loading="lazy" style="object-position:50% 70%"></div><figcaption><div class="name">Wence</div><div class="what">Pilates</div></figcaption></figure>
+    </div>
+    <p class="rail-note">Nombres y estilos tal como aparecen en los carteles de MMDanza.</p>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="pasos" id="como">
+  <div class="wrap">
+    <span class="eyebrow">Clase de prueba</span>
+    <h2 class="sec-h">Así de fácil</h2>
+    <ol class="steps3">
+      <li><h3>Eliges estilo y día</h3><p>En un minuto, desde el móvil. Sin pagar nada.</p></li>
+      <li><h3>Te confirmamos por WhatsApp</h3><p>Te escribimos con el grupo y la hora que mejor te encajan.</p></li>
+      <li><h3>Vienes y pruebas</h3><p>Una clase completa con el grupo. Sin compromiso: decides después.</p></li>
+    </ol>
+    <a class="cta" href="#reserva" data-goto-form>Reserva tu clase de prueba gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<!-- HORARIOS Y UBICACIÓN -->
+<section class="horarios" id="horarios">
+  <div class="wrap">
+    <span class="eyebrow">Horarios y ubicación</span>
+    <h2 class="sec-h">Mañanas, tardes y en pleno Santa Cruz</h2>
+    <div class="hz-grid">
+      <div class="panel">
+        <h3>Horario de la academia</h3>
+        <div class="slots">
+          <div class="slot"><b>Mañanas</b><span>Lunes, miércoles y viernes</span><div class="h">9:00 – 11:30</div></div>
+          <div class="slot"><b>Tardes</b><span>De lunes a viernes</span><div class="h">17:00 – 22:00</div></div>
+        </div>
+        <div class="week" aria-hidden="true">
+          <div><div class="d">LUN</div><div class="b on2"></div><div class="b on"></div></div>
+          <div><div class="d">MAR</div><div class="b"></div><div class="b on"></div></div>
+          <div><div class="d">MIÉ</div><div class="b on2"></div><div class="b on"></div></div>
+          <div><div class="d">JUE</div><div class="b"></div><div class="b on"></div></div>
+          <div><div class="d">VIE</div><div class="b on2"></div><div class="b on"></div></div>
+        </div>
+        <div class="legend"><span><i style="background:#ff8a8e"></i>Mañana</span><span><i style="background:var(--red)"></i>Tarde</span></div>
+        <p class="note">El grupo y la hora exacta te los confirmamos por WhatsApp según tu estilo y nivel.</p>
+      </div>
+      <div class="panel">
+        <h3>Dónde estamos</h3>
+        <p class="addr">C/ Eduardo Zamacois, 15<small>Santa Cruz de Tenerife</small></p>
+        <div class="place-ph"><img src="../assets/landing/sala.webp" alt="Uno de los salones de MMDanza" width="1260" height="555" loading="lazy"></div>
+        <div class="links">
+          <a class="cta sm ghost" href="https://www.google.com/maps/search/?api=1&amp;query=MMDanza+Calle+Eduardo+Zamacois+15+Santa+Cruz+de+Tenerife" target="_blank" rel="noopener">Cómo llegar</a>
+          <a class="cta sm" href="#reserva" data-goto-form>Reservar clase gratis</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVA -->
+<section class="reserva" id="reserva">
+  <div class="wrap res-grid">
+    <div class="res-pitch">
+      <span class="eyebrow">Reserva</span>
+      <h2 class="sec-h">Reserva tu clase de prueba <span class="hand">gratis</span></h2>
+      <ul class="ticks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Cinco toques y listo</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No pagas nada por probar</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Te confirmamos la hora por WhatsApp</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Para ti o para tu hijo o hija</li>
+      </ul>
+      <div class="mini-faces" aria-hidden="true">
+        <img src="../assets/landing/robermi.webp" alt="" loading="lazy"><img src="../assets/landing/irune.webp" alt="" loading="lazy"><img src="../assets/landing/ivan-clara.webp" alt="" loading="lazy"><img src="../assets/landing/claudia.webp" alt="" loading="lazy"><img src="../assets/landing/vitor-nely.webp" alt="" loading="lazy">
+      </div>
+    </div>
+
+    <div class="card" id="booking">
+      <form id="form" novalidate autocomplete="on">
+        <div class="card-top" id="card-top">
+          <div class="prog-meta"><span id="prog-label">Paso 1 de 5 · Estilo</span><span class="free">Gratis</span></div>
+          <div class="prog" aria-hidden="true"><i id="prog-bar"></i></div>
+          <div class="sumbar" id="sumbar" aria-label="Lo que has elegido"></div>
+        </div>
+
+        <!-- 1 estilo -->
+        <div class="step" data-step="1">
+          <h3>¿Qué quieres bailar?</h3>
+          <p class="hint">Elige uno. Podrás cambiarlo.</p>
+          <div class="opts cols2" data-key="estilo">
+            <button type="button" class="opt" data-v="salsa"><span class="ic"><img src="../assets/landing/cristo-emma.webp" alt=""></span>Salsa</button>
+            <button type="button" class="opt" data-v="bachata"><span class="ic"><img src="../assets/landing/ivan-clara.webp" alt=""></span>Bachata</button>
+            <button type="button" class="opt" data-v="reparto"><span class="ic"><img src="../assets/landing/robermi.webp" alt=""></span>Reparto</button>
+            <button type="button" class="opt" data-v="kizomba"><span class="ic"><img src="../assets/landing/hector-carmen.webp" alt=""></span>Kizomba</button>
+            <button type="button" class="opt" data-v="zouk"><span class="ic"><img src="../assets/landing/vitor-nely.webp" alt=""></span>Zouk</button>
+            <button type="button" class="opt" data-v="latinos"><span class="ic"><img src="../assets/landing/wence-yanira.webp" alt=""></span>Latinos, aún no sé cuál</button>
+            <button type="button" class="opt" data-v="urbano"><span class="ic"><img src="../assets/landing/irune.webp" alt=""></span>Urbano y comercial</button>
+            <button type="button" class="opt" data-v="contemporaneo"><span class="ic"><img src="../assets/landing/claudia.webp" alt=""></span>Moderno y contemporáneo</button>
+            <button type="button" class="opt" data-v="ninos"><span class="ic"><img src="../assets/landing/valeria.webp" alt=""></span>Niños y jóvenes</button>
+            <button type="button" class="opt" data-v="pilates"><span class="ic"><img src="../assets/landing/wence.webp" alt=""></span>Pilates y mantenimiento</button>
+          </div>
+        </div>
+
+        <!-- 2 nivel -->
+        <div class="step" data-step="2" hidden>
+          <h3>¿Cuánto has bailado?</h3>
+          <p class="hint">Así te ponemos en el grupo adecuado.</p>
+          <div class="opts" data-key="nivel">
+            <button type="button" class="opt" data-v="nunca"><span class="ic">0</span><span>Nunca he bailado<small>Empiezo desde cero</small></span></button>
+            <button type="button" class="opt" data-v="algo"><span class="ic">1</span><span>Algo<small>He dado clases o bailo un poco</small></span></button>
+            <button type="button" class="opt" data-v="avanzado"><span class="ic">2</span><span>Avanzado<small>Bailo con soltura</small></span></button>
+          </div>
+          <div class="nav-row"><button type="button" class="back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Atrás</button></div>
+        </div>
+
+        <!-- 3 para quién -->
+        <div class="step" data-step="3" hidden>
+          <h3>¿Para quién es la clase?</h3>
+          <div class="opts cols2" data-key="quien">
+            <button type="button" class="opt" data-v="mi"><span class="ic">Yo</span>Para mí</button>
+            <button type="button" class="opt" data-v="hijo"><span class="ic">Hij</span>Para mi hijo o hija</button>
+          </div>
+          <div id="edad-box" hidden>
+            <span class="lbl">¿Qué edad tiene?</span>
+            <div class="opts cols2" data-key="edad" style="margin-top:10px">
+              <button type="button" class="opt" data-v="6-9">6 a 9 años</button>
+              <button type="button" class="opt" data-v="10-13">10 a 13 años</button>
+              <button type="button" class="opt" data-v="14-17">14 a 17 años</button>
+              <button type="button" class="opt" data-v="menos6">Menos de 6</button>
+            </div>
+          </div>
+          <div class="nav-row"><button type="button" class="back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Atrás</button><button type="button" class="cta" id="next3" hidden disabled>Seguir</button></div>
+        </div>
+
+        <!-- 4 día -->
+        <div class="step" data-step="4" hidden>
+          <h3>¿Qué días te vienen bien?</h3>
+          <p class="hint">Marca uno o varios, de lunes a viernes.</p>
+          <div class="days" data-key="dias">
+            <button type="button" class="day" data-v="L" aria-pressed="false">L<small>lun</small></button>
+            <button type="button" class="day" data-v="M" aria-pressed="false">M<small>mar</small></button>
+            <button type="button" class="day" data-v="X" aria-pressed="false">X<small>mié</small></button>
+            <button type="button" class="day" data-v="J" aria-pressed="false">J<small>jue</small></button>
+            <button type="button" class="day" data-v="V" aria-pressed="false">V<small>vie</small></button>
+          </div>
+          <span class="lbl">¿Mañana o tarde?</span>
+          <div class="opts cols2" data-key="franja" style="margin-top:10px">
+            <button type="button" class="opt" data-v="manana"><span>Mañana<small>9:00 – 11:30 · L, X y V</small></span></button>
+            <button type="button" class="opt" data-v="tarde"><span>Tarde<small>17:00 – 22:00</small></span></button>
+          </div>
+          <p class="hint" id="manana-note" hidden style="margin-top:10px">Por la mañana hay clases lunes, miércoles y viernes.</p>
+          <div class="nav-row"><button type="button" class="back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Atrás</button><button type="button" class="cta" id="next4" disabled>Seguir</button></div>
+        </div>
+
+        <!-- 5 datos -->
+        <div class="step" data-step="5" hidden>
+          <h3>¿A quién escribimos?</h3>
+          <p class="hint">Te confirmamos la clase por WhatsApp.</p>
+          <div class="field">
+            <label for="nombre">Tu nombre</label>
+            <input id="nombre" name="nombre" type="text" autocomplete="given-name" placeholder="Nombre" maxlength="60">
+            <div class="err" id="err-nombre" hidden>Escribe tu nombre.</div>
+          </div>
+          <div class="field">
+            <label for="tel">Tu teléfono (WhatsApp)</label>
+            <div class="tel-wrap"><span>+34</span><input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="600 000 000" maxlength="15"></div>
+            <div class="err" id="err-tel" hidden>Revisa el teléfono: 9 cifras.</div>
+          </div>
+          <label class="check"><input type="checkbox" id="priv"> <span>Acepto que MMDanza me contacte por WhatsApp para gestionar mi clase de prueba, según su <a href="#" onclick="return false">política de privacidad</a>.</span></label>
+          <div class="err" id="err-priv" hidden style="font-size:12.5px;color:var(--red-2);font-weight:600;margin-top:6px">Marca la casilla para poder escribirte.</div>
+          <button type="submit" class="cta full" id="submit">Reservar mi clase gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="secure">Maqueta: no se envía nada a ningún sitio.</p>
+          <div class="nav-row" style="margin-top:6px"><button type="button" class="back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Atrás</button></div>
+        </div>
+      </form>
+
+      <!-- confirmación -->
+      <div id="done" hidden>
+        <div class="done">
+          <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <h3>¡Reservado!</h3>
+          <p class="lead">Te escribimos por <b>WhatsApp</b> para confirmar la hora.</p>
+          <div class="ticket" id="ticket"></div>
+          <button type="button" class="cta ghost again" id="again" style="color:var(--ink);border-color:var(--ink-line)">Hacer otra reserva</button>
+        </div>
+        <details class="team" id="team">
+          <summary><span>Lo que recibe el equipo<span class="lab">Ejemplo de lo que vería MMDanza</span></span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="team-body">
+            <span class="sample">Ejemplo de lo que vería MMDanza</span>
+            <div class="lead-card">
+              <div class="lead-head">
+                <div class="who"><div class="avatar" id="l-av">A</div><div><div class="nm" id="l-nm"></div><div class="tm" id="l-tm"></div></div></div>
+                <span class="prio" id="l-prio"></span>
+              </div>
+              <dl class="lead-rows" id="l-rows"></dl>
+              <div class="why" id="l-why"></div>
+              <div class="wa-prev">
+                <div class="t">WhatsApp enviado en minutos (ejemplo)</div>
+                <div class="bubble"><span class="from">Asistente virtual de MMDanza</span><span id="l-wa"></span><span class="hr" id="l-hr"></span></div>
+              </div>
+            </div>
+            <p class="foot">Datos introducidos en el formulario + datos de ejemplo. El grupo sugerido sale de los carteles de la temporada 26-27 de MMDanza y lo confirma el equipo.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap faq-grid">
+    <div>
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 class="sec-h">Antes de venir</h2>
+    </div>
+    <div class="qa">
+      <details open><summary>¿Necesito experiencia?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>No. Hay grupos de inicio y de nivel básico. Dinos tu nivel al reservar y te ponemos en el grupo que te toca.</p></details>
+      <details><summary>¿Qué me pongo?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Ropa cómoda con la que te puedas mover y una botella de agua. Para latinos, un calzado que gire bien; si te animas, en la academia también tienen calzado de baile.</p></details>
+      <details><summary>¿Puedo ir con pareja?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Claro. Y si vienes sin pareja, también: cuéntanoslo al confirmar por WhatsApp y te orientamos.</p></details>
+      <details><summary>¿Cuánto cuesta?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>La clase de prueba es gratis. Las cuotas te las explicamos en recepción tras la prueba.</p></details>
+      <details><summary>¿Hay clases para niños?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Sí, grupos de niños y jóvenes por edades, desde los 6 años. Elige «Para mi hijo o hija» al reservar.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="final">
+  <div class="wrap">
+    <h2>Ven a probar.<span class="hand">La primera clase es gratis.</span></h2>
+    <p>Elige estilo y día. Nosotros te escribimos.</p>
+    <a class="cta" href="#reserva" data-goto-form>Reserva tu clase de prueba gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <img src="../assets/landing/logo.webp" alt="MMDanza Dance School" width="300" height="221" loading="lazy">
+      <div class="meta"><b>MMDanza Tenerife</b> · Academia de baile en Santa Cruz desde 2002<br>C/ Eduardo Zamacois, 15 · Santa Cruz de Tenerife<br>Mañanas L, X y V 9:00–11:30 · Tardes L a V 17:00–22:00</div>
+    </div>
+    <p class="disc">Propuesta preparada por Qualivo para MMDanza el 19-nov-2026. No es una página de MMDanza. Fotos y textos de mmdanza.com; mensajes y cifras de ejemplo.</p>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar" aria-hidden="true"><a class="cta" href="#reserva" data-goto-form tabindex="-1">Reserva tu clase de prueba gratis</a></div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s,r){return (r||document).querySelector(s)};
+  var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+  var ESTILOS = {
+    salsa:{n:'Salsa'}, bachata:{n:'Bachata'}, reparto:{n:'Reparto'}, kizomba:{n:'Kizomba'}, zouk:{n:'Zouk'},
+    latinos:{n:'Bailes latinos'}, urbano:{n:'Urbano y comercial'}, contemporaneo:{n:'Moderno y contemporáneo'},
+    ninos:{n:'Niños y jóvenes'}, pilates:{n:'Pilates y mantenimiento'}
+  };
+  var NIVEL = {nunca:'Nunca he bailado', algo:'Algo', avanzado:'Avanzado'};
+  var QUIEN = {mi:'Para mí', hijo:'Para su hijo o hija'};
+  var EDAD = {'menos6':'menos de 6 años','6-9':'6 a 9 años','10-13':'10 a 13 años','14-17':'14 a 17 años'};
+  var DIAS = {L:'lunes',M:'martes',X:'miércoles',J:'jueves',V:'viernes'};
+  var ORDER = ['L','M','X','J','V'];
+  var STEP_NAMES = ['Estilo','Nivel','Para quién','Día','Tus datos'];
+
+  var st = {estilo:null,nivel:null,quien:null,edad:null,dias:[],franja:null};
+  var cur = 1;
+
+  /* --- Grupo sugerido: sale de los carteles 26-27 de MMDanza (a confirmar por el equipo) --- */
+  function grupo(){
+    var e = st.estilo, lv = st.nivel, m = st.franja === 'manana', ini = lv !== 'avanzado' && lv !== 'algo', adv = lv === 'avanzado';
+    if (st.quien === 'hijo' || e === 'ninos'){
+      if (st.edad === '14-17') return 'Urbano · L, X y V 18:00–19:00 (Irune Lorenzo) o M y J 18:00–19:00 (Valeria)';
+      if (st.edad === '10-13') return 'Urbano · L, X y V 17:00–18:00 (Irune Lorenzo)';
+      if (st.edad === 'menos6') return 'El equipo le propone grupo por edad';
+      return 'Urbano · M y J 17:00–18:00, desde 6 años (Valeria)';
+    }
+    switch(e){
+      case 'salsa': if (m) return 'Bailes latinos básico · L y X 10:30–11:30 (Wence y Yanira)';
+        return ini ? 'Bailes latinos básico · L y X 18:00–19:00 (Wence y Yanira)' : adv ? 'Salsa On2 · M y J 21:00–22:00 (Cristo y Ana)' : 'Salsa On1 · M y J 20:00–21:00 (Cristo y Emma)';
+      case 'bachata': return ini ? 'Bachata inicio · M y J 20:00–21:00 (Iván y Clara)' : 'Bachata intermedio · M y J 21:00–22:00 (Iván y Clara)';
+      case 'reparto': return 'Reparto básico · sábado 12:00–13:30 (Robermi)';
+      case 'kizomba': return ini ? 'Kizomba inicio · M y J 19:00–20:00 (Héctor y Carmen)' : 'Kizomba intermedio · L y X 20:00–21:00 (Héctor y Carmen)';
+      case 'zouk': return 'Zouk inicio · L y X 21:00–22:00 (Vitor y Nely)';
+      case 'latinos': if (m) return 'Bailes latinos básico · L y X 10:30–11:30 (Wence y Yanira)';
+        return ini ? 'Bailes latinos básico · L y X 19:00–20:00 (Robermi)' : adv ? 'Intermedio-avanzado · L y X 20:00–21:00 (Robermi)' : 'Bailes latinos intermedio · M y J 19:00–20:00 (Wence y Yanira)';
+      case 'urbano': return 'Urbano · L, X y V (Irune Lorenzo) o M y J (Valeria), de 17:00 a 19:00 según edad';
+      case 'contemporaneo': return 'Danza contemporánea · M y J 17:30–19:00 (Claudia Di Yorio)';
+      case 'pilates': return m ? 'Mantenimiento · L, X y V 9:30–10:30, nivel abierto (Claudia Di Yorio)' : 'Pilates · L, X y V 17:00–18:00, nivel abierto (Wence)';
+    }
+    return 'El equipo propone grupo';
+  }
+  function perfil(){
+    if (st.quien === 'hijo' || st.estilo === 'ninos') return 'Niños y jóvenes';
+    if (st.estilo === 'pilates') return 'Pilates y mantenimiento';
+    if (st.estilo === 'urbano' || st.estilo === 'contemporaneo') return 'Urbano y comercial';
+    return 'Empieza latinos desde cero';
+  }
+  function prioridad(){
+    if (st.nivel === 'avanzado') return {k:'media', t:'Media', w:'Nivel avanzado: proponer prueba de nivel antes de asignar grupo.'};
+    if (st.quien === 'hijo' || st.estilo === 'ninos') return {k:'alta', t:'Alta', w:'Familia con días elegidos: confirmar edad y grupo hoy mismo.'};
+    if (st.estilo === 'reparto' && st.franja) return {k:'alta', t:'Alta', w:'Quiere empezar ya. Ojo: reparto básico es el sábado; ofrecer esa clase o latinos básico entre semana.'};
+    return {k:'alta', t:'Alta', w:'Quiere empezar y ya ha elegido día y franja: confirmar por WhatsApp en minutos.'};
+  }
+  function diasTxt(){
+    var d = ORDER.filter(function(x){return st.dias.indexOf(x) > -1}).map(function(x){return DIAS[x]});
+    if (!d.length) return '';
+    if (d.length === 5) return 'de lunes a viernes';
+    return d.length === 1 ? d[0] : d.slice(0,-1).join(', ') + ' y ' + d[d.length-1];
+  }
+  function franjaTxt(){ return st.franja === 'manana' ? 'mañana' : st.franja === 'tarde' ? 'tarde' : ''; }
+
+  /* --- navegación entre pasos --- */
+  var form = $('#form');
+  function go(n, focus){
+    cur = n;
+    $$('.step', form).forEach(function(s){
+      var on = +s.dataset.step === n;
+      s.hidden = !on;
+      if (on){ s.classList.remove('step-in'); void s.offsetWidth; s.classList.add('step-in'); }
+    });
+    $('#prog-bar').style.width = (n*20) + '%';
+    $('#prog-label').textContent = 'Paso ' + n + ' de 5 · ' + STEP_NAMES[n-1];
+    renderSum();
+    if (focus){ var h = $('.step[data-step="'+n+'"] h3', form); if (h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); } }
+  }
+  function renderSum(){
+    var bar = $('#sumbar'); bar.innerHTML = '';
+    var items = [];
+    if (st.estilo && cur > 1) items.push([1, ESTILOS[st.estilo].n]);
+    if (st.nivel && cur > 2) items.push([2, NIVEL[st.nivel]]);
+    if (st.quien && cur > 3) items.push([3, st.quien === 'hijo' ? 'Hijo/a' + (st.edad ? ' · ' + EDAD[st.edad] : '') : 'Para mí']);
+    if (st.dias.length && st.franja && cur > 4) items.push([4, ORDER.filter(function(x){return st.dias.indexOf(x) > -1}).join(' ') + ' · ' + franjaTxt()]);
+    items.forEach(function(it){
+      var b = document.createElement('button'); b.type = 'button';
+      b.setAttribute('aria-label', 'Cambiar ' + STEP_NAMES[it[0]-1].toLowerCase() + ': ' + it[1]);
+      b.appendChild(document.createTextNode(it[1]));
+      b.insertAdjacentHTML('beforeend','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>');
+      b.addEventListener('click', function(){ go(it[0], true); });
+      bar.appendChild(b);
+    });
+  }
+  function press(group, v){
+    $$('.opt', group).forEach(function(o){ o.setAttribute('aria-pressed', o.dataset.v === v ? 'true' : 'false'); });
+  }
+  $$('.opt').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+
+  function setEstilo(v){
+    st.estilo = v; press($('[data-key="estilo"]'), v);
+    if (v === 'ninos'){ setQuien('hijo'); }
+  }
+  function setQuien(v){
+    st.quien = v; press($('[data-key="quien"]'), v);
+    $('#edad-box').hidden = v !== 'hijo';
+    $('#next3').hidden = v !== 'hijo';
+    if (v !== 'hijo'){ st.edad = null; press($('[data-key="edad"]'), null); }
+    $('#next3').disabled = !(v === 'hijo' && st.edad);
+  }
+
+  $('[data-key="estilo"]').addEventListener('click', function(e){
+    var o = e.target.closest('.opt'); if (!o) return;
+    setEstilo(o.dataset.v); setTimeout(function(){ go(2, true); }, 180);
+  });
+  $('[data-key="nivel"]').addEventListener('click', function(e){
+    var o = e.target.closest('.opt'); if (!o) return;
+    st.nivel = o.dataset.v; press(this, st.nivel); setTimeout(function(){ go(3, true); }, 180);
+  });
+  $('[data-key="quien"]').addEventListener('click', function(e){
+    var o = e.target.closest('.opt'); if (!o) return;
+    setQuien(o.dataset.v);
+    if (o.dataset.v === 'mi') setTimeout(function(){ go(4, true); }, 180);
+  });
+  $('[data-key="edad"]').addEventListener('click', function(e){
+    var o = e.target.closest('.opt'); if (!o) return;
+    st.edad = o.dataset.v; press(this, st.edad); $('#next3').disabled = false;
+  });
+  $('#next3').addEventListener('click', function(){ if (st.quien === 'hijo' && st.edad) go(4, true); });
+
+  function syncDay(){
+    var hasMorningDay = st.dias.some(function(d){ return d === 'L' || d === 'X' || d === 'V'; });
+    var mb = $('[data-key="franja"] [data-v="manana"]');
+    var block = st.dias.length > 0 && !hasMorningDay;
+    mb.disabled = block;
+    $('#manana-note').hidden = !block;
+    if (block && st.franja === 'manana'){ st.franja = null; press($('[data-key="franja"]'), null); }
+    $('#next4').disabled = !(st.dias.length && st.franja);
+  }
+  $('[data-key="dias"]').addEventListener('click', function(e){
+    var d = e.target.closest('.day'); if (!d) return;
+    var v = d.dataset.v, i = st.dias.indexOf(v);
+    if (i > -1) st.dias.splice(i,1); else st.dias.push(v);
+    d.setAttribute('aria-pressed', i > -1 ? 'false' : 'true');
+    syncDay();
+  });
+  $('[data-key="franja"]').addEventListener('click', function(e){
+    var o = e.target.closest('.opt'); if (!o || o.disabled) return;
+    st.franja = o.dataset.v; press(this, st.franja); syncDay();
+  });
+  $('#next4').addEventListener('click', function(){ if (st.dias.length && st.franja){ go(5, true); setTimeout(function(){ $('#nombre').focus({preventScroll:true}); }, 60);} });
+
+  $$('[data-back]').forEach(function(b){ b.addEventListener('click', function(){
+    var prev = cur - 1;
+    go(Math.max(1, prev), true);
+  }); });
+
+  /* --- validación y envío (no se envía nada) --- */
+  function cleanTel(v){ var d = (v||'').replace(/\D/g,''); if (d.length === 11 && d.indexOf('34') === 0) d = d.slice(2); return d; }
+  function fmtTel(d){ return '+34 ' + d.slice(0,3) + ' ' + d.slice(3,6) + ' ' + d.slice(6); }
+  function setErr(id, on){ $('#err-'+id).hidden = !on; var inp = id === 'priv' ? null : $('#'+(id==='tel'?'tel':'nombre')); if (inp) inp.setAttribute('aria-invalid', on ? 'true' : 'false'); }
+  $('#nombre').addEventListener('input', function(){ if (this.value.trim().length > 1) setErr('nombre', false); });
+  $('#tel').addEventListener('input', function(){ if (/^[6789]\d{8}$/.test(cleanTel(this.value))) setErr('tel', false); });
+  $('#priv').addEventListener('change', function(){ if (this.checked) setErr('priv', false); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (cur !== 5) return;
+    var nombre = $('#nombre').value.trim().replace(/\s+/g,' ');
+    var tel = cleanTel($('#tel').value);
+    var okN = nombre.length > 1, okT = /^[6789]\d{8}$/.test(tel), okP = $('#priv').checked;
+    setErr('nombre', !okN); setErr('tel', !okT); setErr('priv', !okP);
+    if (!okN){ $('#nombre').focus(); return; }
+    if (!okT){ $('#tel').focus(); return; }
+    if (!okP){ $('#priv').focus(); return; }
+    showDone(nombre, tel);
+  });
+
+  function row(parent, k, v){
+    var d = document.createElement('div'); var dt = document.createElement('dt'); var dd = document.createElement('dd');
+    dt.textContent = k; dd.textContent = v; d.appendChild(dt); d.appendChild(dd); parent.appendChild(d);
+  }
+  function hhmm(dt){ return ('0'+dt.getHours()).slice(-2) + ':' + ('0'+dt.getMinutes()).slice(-2); }
+
+  function showDone(nombre, tel){
+    var est = ESTILOS[st.estilo].n, cuando = diasTxt() + ' por la ' + franjaTxt();
+    var first = nombre.split(' ')[0];
+    // ticket del alumno
+    var t = $('#ticket'); t.innerHTML = '';
+    [['Clase', est], ['Nivel', NIVEL[st.nivel]], ['Para', st.quien === 'hijo' ? 'Mi hijo o hija' + (st.edad ? ' (' + EDAD[st.edad] + ')' : '') : 'Mí'], ['Cuándo', cuando.charAt(0).toUpperCase() + cuando.slice(1)], ['Precio', 'Gratis']].forEach(function(p){
+      var d = document.createElement('div'); var s = document.createElement('span'); var b = document.createElement('b');
+      s.textContent = p[0]; b.textContent = p[1]; d.appendChild(s); d.appendChild(b); t.appendChild(d);
+    });
+    // ficha del equipo
+    var now = new Date(), wa = new Date(now.getTime() + 2*60000);
+    $('#l-av').textContent = first.charAt(0).toUpperCase();
+    $('#l-nm').textContent = nombre;
+    $('#l-tm').textContent = 'Nueva reserva · hoy, ' + hhmm(now);
+    var p = prioridad(); var pr = $('#l-prio'); pr.className = 'prio ' + p.k; pr.textContent = 'Prioridad ' + p.t.toLowerCase();
+    var rows = $('#l-rows'); rows.innerHTML = '';
+    row(rows, 'Teléfono', fmtTel(tel));
+    row(rows, 'Estilo', est);
+    row(rows, 'Nivel', NIVEL[st.nivel]);
+    row(rows, 'Para quién', st.quien === 'hijo' ? 'Su hijo o hija' + (st.edad ? ' · ' + EDAD[st.edad] : '') : 'Para él o ella');
+    row(rows, 'Disponibilidad', cuando.charAt(0).toUpperCase() + cuando.slice(1));
+    row(rows, 'Grupo sugerido', grupo());
+    row(rows, 'Origen', 'Anuncio Instagram «' + perfil() + '» (ejemplo)');
+    row(rows, 'Estado', 'WhatsApp enviado · esperando respuesta (ejemplo)');
+    $('#l-why').innerHTML = '';
+    var b = document.createElement('b'); b.textContent = 'Por qué ' + p.t.toLowerCase() + ': ';
+    $('#l-why').appendChild(b); $('#l-why').appendChild(document.createTextNode(p.w));
+    var g = grupo().split(' (')[0];
+    $('#l-wa').textContent = 'Hola, ' + first + '. Soy el asistente virtual de MMDanza. Tenemos tu clase de prueba gratis de ' + est.toLowerCase() + ' (' + diasTxt() + ', por la ' + franjaTxt() + '). Te proponemos: ' + g + '. ¿Te la dejamos reservada? Responde SÍ y te mandamos la dirección y qué traer.';
+    $('#l-hr').textContent = hhmm(wa);
+
+    form.hidden = true;
+    $('#done').hidden = false;
+    if (window.__mbarUpd) window.__mbarUpd();
+    $('#team').open = false;
+    var card = $('#booking');
+    var top = card.getBoundingClientRect().top + window.scrollY - 80;
+    if (Math.abs(window.scrollY - top) > 40) window.scrollTo({top: top, behavior: 'smooth'});
+  }
+
+  $('#again').addEventListener('click', function(){
+    st = {estilo:null,nivel:null,quien:null,edad:null,dias:[],franja:null};
+    $$('.opt').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+    $$('.day').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+    form.reset(); setQuien(null); $('#edad-box').hidden = true; syncDay();
+    ['nombre','tel','priv'].forEach(function(k){ setErr(k,false); });
+    $('#done').hidden = true; form.hidden = false; go(1, true);
+    if (window.__mbarUpd) window.__mbarUpd();
+  });
+
+  /* --- tarjetas de estilo: preseleccionan y llevan al paso 2 --- */
+  function preselect(v){
+    if (!ESTILOS[v]) return;
+    if (!$('#done').hidden) $('#again').click();
+    setEstilo(v); go(2, false);
+  }
+  $$('[data-estilo]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var t = e.target.closest('[data-estilo]');
+      e.preventDefault(); e.stopPropagation();
+      preselect(t.dataset.estilo);
+      $('#reserva').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  // landing por estilo: ?estilo=bachata
+  try {
+    var q = new URLSearchParams(location.search).get('estilo');
+    if (q && ESTILOS[q]){
+      preselect(q);
+      $('#hero-eyebrow').textContent = ESTILOS[q].n + ' · Santa Cruz';
+    }
+  } catch(err){}
+
+  /* --- carrusel de profesores --- */
+  var rail = $('#rail');
+  $$('[data-rail]').forEach(function(b){ b.addEventListener('click', function(){
+    var card = rail.querySelector('.profe'); var w = card ? card.getBoundingClientRect().width + 14 : 260;
+    rail.scrollBy({left: (+b.dataset.rail) * w * 2, behavior:'smooth'});
+  }); });
+
+  /* --- barra fija móvil: visible tras el hero y fuera del formulario --- */
+  var mbar = $('#mbar'), heroOut = false, formIn = false;
+  function upd(){ mbar.classList.toggle('show', heroOut && !formIn && $('#done').hidden); }
+  window.__mbarUpd = upd;
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){ heroOut = !en[0].isIntersecting; upd(); }, {rootMargin:'-40% 0px 0px 0px'}).observe($('.hero'));
+    new IntersectionObserver(function(en){ formIn = en[0].isIntersecting; upd(); }, {threshold:0}).observe($('#reserva'));
+  }
+
+  go(cur, false);
+})();
+</script>
+</body>
+</html>
