@@ -23,11 +23,11 @@ T = {'a': t1, 'pd': p1('matrículas'), 'e2': e2, 'g': e2 + .2, 'ld': p1('impleme
      'e4': t2 - .1, 'ops': p2('así') - .15, 'ges': p2('mejoramos') - .1, 'e6': p2('descubre') - .15, 'sol': p2('solicita'), 'FIN': FIN}
 if VZ == 'n':     # gancho «fantasma, planta rodadora y cuerda» + cuerpo de Aaron sin la frase del CRM
     il = ix(W1, 'laura'); e2 = p1('en', ix(W1, 'seguimiento')) - .12
-    T.update({'pero': p1('pero') - .12, 'otros': p1('otros') - .12, 'yotros': p1('y', ix(W1, 'llamada…')) - .1, 'e2': e2, 'g': e2, 'ld': p1('implementamos') - .1,
+    T.update({'pero': p1('algunos') - .12, 'otros': p1('otros') - .12, 'yotros': p1('y', ix(W1, 'llamada')) - .1, 'e2': e2, 'g': e2, 'ld': p1('implementamos') - .1,
               'sc': p1('laura') - .3, 'lau': p1('laura') - .1, 'f2': p1('interés') - .25, 'sco': p1('por', ix(W1, 'interés')) - .15, 'pu': p1('puntúa'), 'ay': p1('avisa') - .1,
               'crm': p1('avisa') + 1.0, 'e3': p1('laura', il + 1) - .15, 's3': p1('si', ix(W1, 'laura', il + 1)) - .1, 'pd': 0})
-    T['og'] = T['crm']
-T = {k: round(v, 2) for k, v in T.items()}; T['l0'] = T['sco']; T['e5'] = T['ops']; T['c4'] = T['e7'] = T['e6']; T['c'] = [T['e6']] * 3; T['cap'] = T['lau']; T['a2'] = T['pd']
+    T['og'] = T['crm']; T['o'] = [p1('cualificar') - .1, p1('priorizar') - .1, p1('organizar') - .1]; FIN = round(FIN - .5, 2); T['FIN'] = FIN
+T = {k: (v if isinstance(v, list) else round(v, 2)) for k, v in T.items()}; T['l0'] = T['sco']; T['e5'] = T['ops']; T['c4'] = T['e7'] = T['e6']; T['c'] = [T['e6']] * 3; T['cap'] = T['lau']; T['a2'] = T['pd']
 subs = []
 def trocea(W, t0):
     trozo = []
