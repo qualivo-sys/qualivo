@@ -1,0 +1,293 @@
+<!-- Test del sueño · 3 patrones · pide nombre, email y teléfono antes del resultado (entra en Kliking, pipeline «Test de calidad», y avisa a las comerciales) + Analytics y píxel de Meta con banner de cookies (para pegar en un bloque de código de GHL) -->
+<script>
+(function(){
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=window.gtag||function(){dataLayer.push(arguments);};
+  var ok=null;try{ok=localStorage.getItem('nr_cookies');}catch(e){}
+  var si=ok==='si';
+  gtag('consent','default',{analytics_storage:si?'granted':'denied',ad_storage:si?'granted':'denied',ad_user_data:si?'granted':'denied',ad_personalization:si?'granted':'denied',wait_for_update:500});
+  gtag('js',new Date());gtag('config','G-3ZCB8RNE69');
+  var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-3ZCB8RNE69';document.head.appendChild(s);
+  if(typeof window.fbq==='function'){try{window.fbq('consent',si?'grant':'revoke');}catch(e){}}
+})();
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Poppins:wght@300;400;500;600;700&display=swap');
+#nrt{--navy:#20304F;--navy-soft:#2b3d61;--cream:#F3EEE4;--cream-2:#EAE2D3;--slate:#708B9D;--slate-lt:#AFC0CB;--sage:#B8BBB3;--accent:#708B9D;--ink:#525C72;--line:#E1D9CA;--shadow:0 14px 40px -18px rgba(32,48,79,.26);--serif:"Fraunces",Georgia,serif;--sans:"Poppins",-apple-system,"Helvetica Neue",sans-serif;background:var(--cream);color:var(--navy);font-family:var(--sans);font-size:16px;line-height:1.6;padding:34px 0 46px;border-radius:14px;overflow-x:hidden;max-width:100%}
+#nrt *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+#nrt .nrt-shell{max-width:680px;margin:0 auto;padding:0 22px}
+#nrt .serif{font-family:var(--serif)}
+#nrt .prog{height:4px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:26px;visibility:hidden}
+#nrt .prog>i{display:block;height:100%;width:0;background:var(--accent);transition:width .35s ease}
+#nrt .screen{display:none;animation:nrtfade .45s ease both}
+#nrt .screen.nrtactive{display:flex;flex-direction:column}
+@keyframes nrtfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+#nrt .pill{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:12.5px;font-weight:500;color:var(--navy);box-shadow:var(--shadow);margin-bottom:24px}
+#nrt h1{font-family:var(--serif);font-weight:500;font-size:clamp(30px,6vw,50px);line-height:1.08;letter-spacing:.2px;margin-bottom:20px;color:var(--navy);overflow-wrap:break-word}
+#nrt h1 .g{color:var(--slate)}
+#nrt h1 em{font-style:italic;font-weight:400}
+#nrt .lede{font-size:17px;line-height:1.7;color:var(--ink);max-width:540px}
+#nrt .step{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--slate);margin-bottom:14px}
+#nrt .q{font-family:var(--serif);font-weight:500;font-size:clamp(22px,4.6vw,31px);line-height:1.25;margin-bottom:26px;letter-spacing:.2px;color:var(--navy);overflow-wrap:break-word}
+#nrt .btn{font-family:var(--sans);font-weight:600;font-size:15.5px;border:none;border-radius:12px;padding:17px 26px;cursor:pointer;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+#nrt .btn-primary{background:var(--navy);color:var(--cream)}
+#nrt .btn-primary:hover{background:var(--navy-soft)}
+#nrt .btn-primary:active{transform:scale(.985)}
+#nrt .start{align-self:flex-start;margin-top:30px}
+#nrt .meta{margin-top:16px;font-size:13px;color:#9a937f;letter-spacing:.02em}
+#nrt .opts{display:flex;flex-direction:column;gap:12px}
+#nrt .opt{font-family:var(--sans);font-size:16px;line-height:1.45;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;cursor:pointer;transition:.16s;color:var(--navy);width:100%;white-space:normal;overflow-wrap:break-word;box-shadow:0 6px 18px -14px rgba(32,48,79,.3)}
+#nrt .opt:hover{border-color:var(--slate);transform:translateY(-1px)}
+#nrt .opt:active{transform:scale(.99)}
+#nrt .yn{display:flex;gap:14px}
+#nrt .yn .opt{flex:1;text-align:center;font-weight:600;padding:20px 12px;box-shadow:none}
+#nrt .yn .yes{background:var(--navy);border-color:var(--navy);color:var(--cream)}
+#nrt .yn .yes:hover{background:var(--navy-soft);border-color:var(--navy-soft)}
+#nrt .yn .no{color:var(--navy)}
+#nrt .callout{background:var(--navy);color:#fff;border-radius:16px;padding:20px 22px;margin-bottom:26px;font-size:15.5px;line-height:1.6}
+#nrt .callout .em{color:var(--slate-lt);font-style:italic;font-family:var(--serif)}
+#nrt .res-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--slate);margin-bottom:8px}
+#nrt .res-name{font-family:var(--serif);font-weight:500;font-size:clamp(32px,7.5vw,50px);line-height:1.05;margin-bottom:16px;letter-spacing:.3px;color:var(--navy);overflow-wrap:break-word}
+#nrt .res-text{font-size:16.5px;line-height:1.68;color:var(--ink);margin-bottom:28px}
+#nrt .res-text strong{color:var(--navy);font-weight:600}
+#nrt .index{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-bottom:30px;box-shadow:var(--shadow)}
+#nrt .index .il{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--slate);margin-bottom:12px}
+#nrt .index .meter{height:8px;border-radius:8px;background:var(--cream-2);overflow:hidden;margin-bottom:12px}
+#nrt .index .meter>i{display:block;height:100%;background:var(--accent);width:0;transition:width .6s ease .2s}
+#nrt .index .iv{font-family:var(--serif);font-weight:500;font-size:22px;margin-bottom:6px}
+#nrt .index .id{font-size:14.5px;color:var(--ink);line-height:1.55}
+#nrt .gift-h{font-family:var(--serif);font-weight:500;font-size:clamp(24px,5vw,30px);margin-bottom:10px;color:var(--navy)}
+#nrt .gift-p{font-size:16px;color:var(--ink);line-height:1.65;margin-bottom:22px}
+#nrt .gift-p strong{color:var(--navy);font-weight:600}
+#nrt .gift{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 22px 20px;box-shadow:var(--shadow)}
+#nrt .gift .gl{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--slate);margin-bottom:14px}
+#nrt .gift-line{font-size:15px;line-height:1.55;color:var(--navy);margin-bottom:16px}
+#nrt .steps{list-style:none;counter-reset:g;margin:0 0 18px;padding:0}
+#nrt .steps li{position:relative;padding:9px 0 9px 40px;font-size:15px;line-height:1.5;color:var(--navy);border-bottom:1px solid var(--line)}
+#nrt .steps li:last-child{border-bottom:none}
+#nrt .steps li b{font-weight:600}
+#nrt .steps li:before{counter-increment:g;content:counter(g);position:absolute;left:0;top:7px;width:26px;height:26px;border-radius:50%;background:var(--navy);color:var(--cream);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+#nrt .gift .btn-primary{width:100%}
+#nrt .gift-note{font-size:12.5px;color:#9a937f;margin-top:13px;text-align:center}
+#nrt .gift.hl{border:2px solid var(--navy)}
+#nrt .giftrow{display:flex;align-items:center;gap:14px;margin-bottom:15px}
+#nrt .docicon{flex:none;width:54px;height:54px;border-radius:14px;background:var(--cream);display:flex;align-items:center;justify-content:center}
+#nrt .gname{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--navy);line-height:1.12}
+#nrt .gsub{font-size:13px;color:var(--ink);margin-top:3px}
+#nrt .arrowdown{text-align:center;font-size:30px;color:var(--slate);line-height:1;margin:4px 0 12px;font-weight:700;animation:nrtbob 1.4s ease-in-out infinite}
+@keyframes nrtbob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+#nrt .proof{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
+#nrt .proof .pl{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--slate);margin-bottom:10px}
+#nrt .proof p{font-size:14.5px;color:var(--ink);line-height:1.6;margin-bottom:14px}
+#nrt .proof p .nm{color:var(--navy);font-weight:600}
+#nrt .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+#nrt .tag2{font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--navy);border:1px solid var(--line);border-radius:999px;padding:7px 13px;background:#fff}
+#nrt .restart{margin-top:26px;font-size:13px;color:#9a937f;text-align:center;cursor:pointer;text-decoration:underline}
+#nrt .nrt-legal{max-width:680px;margin:28px auto 0;padding:0 22px;font-size:11.5px;color:#a39c88;line-height:1.55;text-align:center}
+#nrt .nrt-lbl{display:block;font-size:13px;font-weight:600;color:var(--navy);margin:14px 0 6px}
+#nrt .nrt-in{width:100%;font-family:var(--sans);font-size:16px;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--navy)}
+#nrt .nrt-in:focus{outline:none;border-color:var(--slate)}
+#nrt .nrt-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+#nrt .nrt-ok{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--ink);margin:18px 0 6px;cursor:pointer}
+#nrt .nrt-ok input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--navy)}
+#nrt .nrt-ok a{color:var(--navy)}
+#nrt .nrt-err{min-height:20px;font-size:13px;color:#b4442f;margin:6px 0 10px}
+#nrt .lead-f{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+#nrt .lead-f label.f{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--navy);letter-spacing:.02em}
+#nrt .lead-f input[type=text],#nrt .lead-f input[type=email],#nrt .lead-f input[type=tel]{font-family:var(--sans);font-size:16px;color:var(--navy);background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:15px 16px;width:100%;outline:none;transition:.16s}
+#nrt .lead-f input:focus{border-color:var(--slate)}
+#nrt .lead-f .ck{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:var(--ink);font-weight:400;cursor:pointer}
+#nrt .lead-f .ck input{width:20px;height:20px;flex:0 0 20px;margin-top:1px;accent-color:#20304F}
+#nrt .lead-f .ck a{color:var(--navy)}
+#nrt .lead-f .btn{width:100%;margin-top:6px}
+#nrt .lead-f .btn[disabled]{opacity:.6;cursor:wait}
+#nrt .lead-err{display:none;color:#a33a2b;font-size:13.5px}
+#nrt .lead-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#nrt .lead-note{font-size:12.5px;color:#8b8472;line-height:1.5;margin-top:4px}
+#nrt .ig{margin:22px 0 6px;padding:20px;border-radius:16px;background:#fff;border:1px solid rgba(32,48,79,.12);text-align:center}#nrt .ig p{margin:0 0 14px;font-size:15px;line-height:1.5}#nrt .ig .btn{width:100%;text-decoration:none}
+#nrt .gift.hl{margin-bottom:26px}
+#nrt .nrt-opc{font-size:13px;color:var(--ink);margin:0 0 6px}
+#nrt .nrt-sent{display:none;font-size:15px;line-height:1.55;color:var(--navy);background:var(--cream);border-radius:12px;padding:14px 16px}
+#nrt-ck{position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;max-width:640px;margin:0 auto;background:#20304F;color:#F3EEE4;border-radius:14px;padding:16px 18px;font-family:"Poppins",-apple-system,sans-serif;font-size:13.5px;line-height:1.5;box-shadow:0 14px 40px -12px rgba(0,0,0,.45);display:none}
+#nrt-ck a{color:#F3EEE4}
+#nrt-ck .b{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+#nrt-ck button{font-family:inherit;font-size:14px;font-weight:600;border-radius:10px;padding:11px 18px;cursor:pointer;border:1.5px solid #F3EEE4}
+#nrt-ck .ok{background:#F3EEE4;color:#20304F}
+#nrt-ck .no{background:transparent;color:#F3EEE4}
+/* GHL: a todo el ancho, sin márgenes ni esquinas, y fondo crema en toda la página */
+html,body{background:#F3EEE4!important}
+#nrt{border-radius:0!important;width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;min-height:100vh;padding-top:48px!important}
+</style>
+
+<div id="nrt">
+  <div class="nrt-shell">
+    <div class="prog" id="nrt-prog"><i id="nrt-progbar"></i></div>
+
+    <section class="screen nrtactive" id="nrt-s-intro">
+      <span class="pill">Test clínico · 3 patrones &#x1f319;</span>
+      <h1>¿Cuánto tiempo llevas <span class="g">sin ser <em>del todo tú?</em></span></h1>
+      <p class="lede">Si llevas años durmiendo mal, lo que más pesa no son las horas: es en quién te conviertes al día siguiente —más corta, con menos paciencia, menos tú con los que quieres. Este test no mide cuánto duermes. En 2 minutos te dice por qué no es tu carácter ni tu falta de constancia, sino un patrón que tu cerebro ha aprendido. Y lo que se aprende, se puede desactivar.</p>
+      <button class="btn btn-primary start" id="nrt-start">Empezar el test →</button>
+      <p class="meta">10 preguntas · 2 minutos · gratis</p>
+      <p class="meta" style="margin-top:20px;font-style:italic;color:var(--ink)">Lo han hecho mujeres como tú —escépticas, con años durmiendo mal.</p>
+    </section>
+
+    <section class="screen" id="nrt-s-door">
+      <div class="step">Tu momento</div>
+      <div class="q">¿Qué describe mejor tu momento ahora mismo?</div>
+      <div class="opts" id="nrt-door-opts"></div>
+    </section>
+
+    <section class="screen" id="nrt-s-sq">
+      <div class="step">Cómo duermes</div>
+      <div class="q" id="nrt-s-text"></div>
+      <div class="opts" id="nrt-s-opts"></div>
+    </section>
+    <section class="screen" id="nrt-s-q">
+      <div class="step" id="nrt-q-step">Pregunta</div>
+      <div class="q" id="nrt-q-text"></div>
+      <div class="yn">
+        <button class="opt yes" id="nrt-yes">Sí, me pasa</button>
+        <button class="opt no" id="nrt-no">No</button>
+      </div>
+    </section>
+
+    <section class="screen" id="nrt-s-lead">
+      <div class="step">Tu resultado está listo</div>
+      <div class="q">Un último paso para ver tu resultado</div>
+      <p class="lead-note" style="font-size:15px;color:var(--ink);margin:-12px 0 18px">Déjanos tus datos y lo ves al momento. El equipo de Nuria revisa personalmente cada test.</p>
+      <form class="lead-f" id="nrt-lead" novalidate>
+        <label class="f">Nombre<input type="text" id="nrt-l-nombre" autocomplete="given-name" required maxlength="60"></label>
+        <label class="f">Email<input type="email" id="nrt-l-email" autocomplete="email" required maxlength="120"></label>
+        <label class="f">Teléfono (con WhatsApp)<input type="tel" id="nrt-l-tel" autocomplete="tel" placeholder="+34 600 000 000" required maxlength="20"></label>
+        <div class="lead-hp" aria-hidden="true"><input type="text" id="nrt-l-web" tabindex="-1" autocomplete="off"></div>
+        <label class="ck"><input type="checkbox" id="nrt-l-priv"><span>He leído y acepto la <a href="https://nuriaroure.com/politica-privacidad/" target="_blank" rel="noopener">política de privacidad</a>.</span></label>
+        <label class="ck"><input type="checkbox" id="nrt-l-llamada"><span>Acepto que el equipo de Nuria Roure me llame por teléfono para comentar mi resultado y contarme cómo puede ayudarme. Puedo retirar este permiso cuando quiera.</span></label>
+        <div class="lead-err" id="nrt-l-err"></div>
+        <button class="btn btn-primary" type="submit" id="nrt-l-btn">Ver mi resultado →</button>
+        <p class="lead-note">Responsable: Nuria Roure. Usamos tus datos para enseñarte el resultado, enviarte información sobre el sueño y, si lo aceptas, llamarte. Puedes darte de baja cuando quieras.</p>
+      </form>
+    </section>
+
+    <section class="screen" id="nrt-s-result">
+      <div class="callout" id="nrt-r-pers"></div>
+      <div class="res-label">Tu patrón dominante</div>
+      <div class="res-name serif" id="nrt-r-name"></div>
+      <div class="res-text" id="nrt-r-text"></div>
+      <div class="index">
+        <div class="il">Tu índice de lucha nocturna</div>
+        <div class="meter"><i id="nrt-r-meter"></i></div>
+        <div class="iv serif" id="nrt-r-index"></div>
+        <div class="id" id="nrt-r-indexdesc"></div>
+      </div>
+      <div class="ig">
+        <p><b>Sigue a Nuria en Instagram.</b> Comparte ideas para entender tu sueño y empezar a soltar la lucha nocturna.</p>
+        <a class="btn btn-primary" id="nrt-ig" href="https://www.instagram.com/dra.nuriaroure/" target="_blank" rel="noopener">Seguir a @dra.nuriaroure →</a>
+      </div>
+      <div class="proof">
+        <div class="pl">No estás sola en esto</div>
+        <p>Mujeres como tú —escépticas, con años durmiendo mal, que ya habían probado de todo— han salido de este mismo patrón.</p>
+        <div class="tags">
+          <span class="tag2">Psicóloga</span>
+          <span class="tag2">Expert Somnologist · ESRS</span>
+          <span class="tag2">Intervención clínica · TCC-I</span>
+        </div>
+      </div>
+      <div class="restart" id="nrt-restart">Volver a empezar</div>
+    </section>
+  </div>
+  <div class="nrt-legal">Este test es orientativo y no sustituye una valoración profesional. Nuria Roure · primera psicóloga acreditada Expert Somnologist en España por la European Sleep Research Society.</div>
+</div>
+
+<div id="nrt-ck" role="dialog" aria-label="Cookies">Usamos cookies de medición (Google Analytics y Meta) para saber cómo se usa este test y mejorar nuestros anuncios. Puedes aceptarlas o rechazarlas. <a href="https://nuriaroure.com/politica-de-cookies/" target="_blank" rel="noopener">Más información</a>.
+  <div class="b"><button class="ok" id="nrt-ck-ok" type="button">Aceptar</button><button class="no" id="nrt-ck-no" type="button">Rechazar</button></div>
+</div>
+
+<script>
+(function(){
+  var root=document.getElementById('nrt'); if(!root) return;
+  function byId(id){return root.querySelector('#'+id);}
+  var IG_BASE="https://ig.me/m/dra.nuriaroure";
+  var lastSlug=null;
+  var META={test_inicio:'TestInicio',test_completado:'TestCompletado',clic_instagram:'ClicInstagram',lead_test:'Lead'};
+  var API='https://qualivo.io/api/nuria-test/',enviado=false,ultimo={};
+  function aceptado(){try{return localStorage.getItem('nr_cookies')==='si';}catch(e){return false;}}
+  function track(name,params){params=params||{};try{if(typeof window.gtag==='function'){window.gtag('event',name,params);}}catch(e){}
+    try{if(typeof window.fbq==='function'&&aceptado()&&META[name]){var mp={};for(var k in (params||{})){if(k!=='resultado'&&k!=='nivel'&&k!=='patron'&&k!=='indice'){mp[k]=params[k];}}if(META[name]==='Lead'){window.fbq('track','Lead',mp);}else{window.fbq('trackCustom',META[name],mp);}}}catch(e){}}
+  (function(){var ck=document.getElementById('nrt-ck');if(!ck)return;var v=null;try{v=localStorage.getItem('nr_cookies');}catch(e){}if(!v){ck.style.display='block';}
+    function elegir(si){try{localStorage.setItem('nr_cookies',si?'si':'no');}catch(e){}ck.style.display='none';
+      var g=si?'granted':'denied';try{window.gtag('consent','update',{analytics_storage:g,ad_storage:g,ad_user_data:g,ad_personalization:g});}catch(e){}
+      try{if(typeof window.fbq==='function'){window.fbq('consent',si?'grant':'revoke');if(si){window.fbq('track','PageView');}}}catch(e){}}
+    document.getElementById('nrt-ck-ok').addEventListener('click',function(){elegir(true);});
+    document.getElementById('nrt-ck-no').addEventListener('click',function(){elegir(false);});})();
+  var DOORS=[
+    {id:"perimenopausia",label:"Estoy en la perimenopausia o la menopausia"},
+    {id:"cuidadora",label:"Llevo años durmiendo a medias por cuidar de otros"},
+    {id:"exigencia",label:"Funciono con mucha exigencia y me cuesta desconectar"},
+    {id:"cronico",label:"Llevo años así y ya no sé bien por qué"}
+  ];
+  var QUESTIONS=[
+    {b:0,t:"Necesito que se den ciertas condiciones —temperatura, silencio, cierto orden— para poder dormir."},
+    {b:0,t:"Si algo se sale del plan a última hora, doy la noche por perdida antes incluso de acostarme."},
+    {b:1,t:"A media tarde ya empiezo a pensar en cómo irá esta noche."},
+    {b:1,t:"Si me despierto de madrugada, miro la hora casi sin querer y calculo cuánto me queda."},
+    {b:2,t:"Cancelo o evito planes —cenas, viajes, salir tarde— por miedo a desestabilizar el descanso."},
+    {b:2,t:"Según cómo haya ido la noche, cambio planes o descanso más al día siguiente."}
+  ];
+  var PATTERNS={
+    0:{slug:"control",name:"Control",text:"Has convertido el descanso en una lista de condiciones perfectas. Tiene todo el sentido: si algo no funciona, lo lógico es controlarlo mejor. Pero el sueño no responde al control como el resto de tu vida. Cuantas más condiciones le pones, más le dices a tu cerebro que dormir es algo delicado que hay que vigilar. Y lo que se vigila, se mantiene en guardia. <strong>No te falta método para dormir; te sobra control aplicado en la dirección equivocada.</strong>"},
+    1:{slug:"anticipacion",name:"Anticipación",text:"No le tienes miedo a la noche cuando llega. Se lo tienes desde mucho antes. Tu mente entra en modo examen: evalúa, calcula, predice. Y aquí está la trampa que casi nadie explica: la vigilancia es incompatible con el sueño. Para dormir, tu sistema necesita bajar la guardia; pero si lo tienes pendiente de medir y aprobar la noche, le pides justo lo contrario. <strong>No es que no sepas dormir; has aprendido a relacionarte con la noche desde la alerta.</strong>"},
+    2:{slug:"compensacion",name:"Compensación",text:"Has organizado tu vida —tu agenda, tu energía, a veces tu carácter— alrededor de una mala noche. Es una forma de protegerte, y es comprensible. Pero cada vez que compensas, le confirmas a tu cerebro que la noche fue una amenaza de la que hay que recuperarse, y eso mantiene el problema en el centro. <strong>No has fracasado tú; ha fracasado el marco con el que llevabas años intentando resolverlo.</strong>"}
+  };
+  var PERS={
+    perimenopausia:"Una parte de lo que vives puede tener que ver con tu etapa hormonal. Pero la etapa no explica el patrón entero —y el patrón <span class='em'>sí se puede trabajar.</span>",
+    cuidadora:"Llevas años durmiendo a medias por los demás. Puede que ahí empezara; lo que lo mantiene hoy es el patrón que verás abajo —y <span class='em'>eso se puede cambiar.</span>",
+    exigencia:"Funcionas por fuera mientras por dentro no terminas de desconectar. Ese motor de exigencia es justo lo que alimenta el patrón —y <span class='em'>se puede aflojar.</span>",
+    cronico:"Llevas tanto tiempo así que es muy probable que el insomnio ya se mantenga solo. Esto explica por qué —y por qué <span class='em'>llegar tarde no existe aquí.</span>"
+  };
+  var qi=0,scores=[0,0,0],totalYes=0,door=null,si=0,sueno=[];
+  var SLEEP=[
+    {k:'horas',t:'¿Cuántas horas duermes de media cada noche?',o:['Más de 7 horas','Entre 6 y 7 horas','Entre 5 y 6 horas','Menos de 5 horas']},
+    {k:'anos',t:'¿Cuánto tiempo llevas durmiendo mal?',o:['Menos de 6 meses','Entre 6 meses y 2 años','Entre 2 y 5 años','Más de 5 años']},
+    {k:'medicacion',t:'¿Tomas medicación para dormir?',o:['No','De vez en cuando','Casi todas las noches']}
+  ];
+  var SLUG={horas:['mas-7','6-7','5-6','menos-5'],anos:['menos-6-meses','6-meses-2-anos','2-5-anos','mas-5-anos'],medicacion:['no','a-veces','casi-cada-noche']};
+  function respuesta(k){for(var i=0;i<SLEEP.length;i++){if(SLEEP[i].k===k){return sueno[i]==null?'':SLUG[k][sueno[i]];}}return '';}
+  function renderS(){byId('nrt-q-step').textContent='Cómo duermes · '+(si+1)+' de '+SLEEP.length;byId('nrt-s-text').textContent=SLEEP[si].t;var box=byId('nrt-s-opts');box.innerHTML='';SLEEP[si].o.forEach(function(txt,k){var b=document.createElement('button');b.className='opt';b.textContent=txt;b.addEventListener('click',function(){sueno[si]=k;si++;if(si>=SLEEP.length){renderQ();show('q');}else if(si===2&&door===null){buildDoor();show('door');}else{renderS();}setProgress();});box.appendChild(b);});}
+  var S={intro:'nrt-s-intro',door:'nrt-s-door',sq:'nrt-s-sq',q:'nrt-s-q',lead:'nrt-s-lead',result:'nrt-s-result'};
+  function show(n){var k;for(k in S){byId(S[k]).classList.remove('nrtactive');}byId(S[n]).classList.add('nrtactive');if(n==='result'||n==='lead'){try{root.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}}}
+  function setProgress(){var p=byId('nrt-prog');p.style.visibility='visible';var total=QUESTIONS.length+SLEEP.length+1,done=(door===null?0:1)+si+qi;byId('nrt-progbar').style.width=Math.round(done/total*100)+'%';}
+  function next(){renderS();show('sq');setProgress();track('test_inicio',{});}
+  function buildDoor(){var box=byId('nrt-door-opts');box.innerHTML='';DOORS.forEach(function(d){var b=document.createElement('button');b.className='opt';b.textContent=d.label;b.addEventListener('click',function(){door=d.id;renderS();show('sq');setProgress();});box.appendChild(b);});}
+  function renderQ(){byId('nrt-q-step').textContent='Tu patrón · '+(qi+1)+' de '+QUESTIONS.length;byId('nrt-q-text').textContent=QUESTIONS[qi].t;}
+  function answer(yes){if(yes){scores[QUESTIONS[qi].b]++;totalYes++;}qi++;setProgress();if(qi>=QUESTIONS.length){buildResult();if(enviado){show('result');}else{show('lead');track('test_pide_datos',{});}}else{renderQ();show('q');}}
+  function buildResult(){var max=Math.max.apply(null,scores),dom=scores.indexOf(max),p=PATTERNS[dom];byId('nrt-r-pers').innerHTML=PERS[door]||PERS.cronico;byId('nrt-r-name').textContent=p.name;byId('nrt-r-text').innerHTML=p.text;var lvl,desc;if(totalYes<=1){lvl="Patrón incipiente";desc="La alerta aparece, pero todavía no organiza tu vida.";}else if(totalYes<=4){lvl="Patrón instalado";desc="Buena parte de tus decisiones del día y de la noche ya giran alrededor del sueño.";}else{lvl="Patrón arraigado";desc="Es muy probable que tu insomnio se esté manteniendo solo —por vigilancia y compensación—, no por falta de cansancio. Y precisamente por eso tiene tanto sentido trabajarlo ahora.";}byId('nrt-r-index').textContent=lvl+" · "+totalYes+"/6";byId('nrt-r-indexdesc').textContent=desc;byId('nrt-r-meter').style.width=Math.round(totalYes/6*100)+'%';lastSlug=p.slug;ultimo={patron:p.slug,nivel:nivelDe(totalYes),indice:totalYes};track('test_completado',{resultado:p.slug,nivel:nivelDe(totalYes),indice:totalYes});}
+  function nivelDe(n){return n<=1?'incipiente':(n<=4?'instalado':'arraigado');}
+  function restart(){si=0;sueno=[];qi=0;scores=[0,0,0];totalYes=0;door=null;show('intro');byId('nrt-prog').style.visibility='hidden';}
+  (function(){
+    var f=byId('nrt-lead');if(!f)return;
+    function err(t){var e=byId('nrt-l-err');e.textContent=t;e.style.display=t?'block':'none';}
+    f.addEventListener('submit',function(ev){ev.preventDefault();
+      var nombre=byId('nrt-l-nombre').value.trim(),email=byId('nrt-l-email').value.trim(),tel=byId('nrt-l-tel').value.trim();
+      if(!nombre){err('Escribe tu nombre.');return;}
+      if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)){err('Revisa el email.');return;}
+      if(tel.replace(/\D/g,'').length<9){err('Revisa el teléfono.');return;}
+      if(!byId('nrt-l-priv').checked){err('Para continuar, acepta la política de privacidad.');return;}
+      err('');var b=byId('nrt-l-btn');b.disabled=true;b.textContent='Un momento…';
+      var q={};try{q=Object.fromEntries(new URLSearchParams(location.search));}catch(e){}
+      var cuerpo={nombre:nombre,email:email,telefono:tel,privacidad:true,llamada:byId('nrt-l-llamada').checked,web:byId('nrt-l-web').value,
+        patron:ultimo.patron,nivel:ultimo.nivel,indice:ultimo.indice,
+        respuestas:{horas:respuesta('horas'),anos:respuesta('anos'),medicacion:respuesta('medicacion'),etapa:door||''},
+        url:location.href.slice(0,300),utm:q};
+      var hecho=false;function seguir(){if(hecho)return;hecho=true;enviado=true;track('lead_test',{});show('result');}
+      try{fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(cuerpo),keepalive:true}).then(function(r){if(r.status===400){hecho=true;b.disabled=false;b.textContent='Ver mi resultado →';err('Revisa tus datos, por favor.');return;}seguir();}).catch(seguir);}catch(e){seguir();}
+      setTimeout(seguir,6000);
+    });
+  })();
+  byId('nrt-ig').addEventListener('click',function(){track('clic_instagram',{});});
+  byId('nrt-start').addEventListener('click',next);
+  byId('nrt-yes').addEventListener('click',function(){answer(true);});
+  byId('nrt-no').addEventListener('click',function(){answer(false);});
+  byId('nrt-restart').addEventListener('click',restart);
+})();
+</script>
