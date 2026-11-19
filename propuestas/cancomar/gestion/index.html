@@ -99,7 +99,7 @@ td .btn2{padding:6px 11px;font-size:12.5px}
 <div class="wrap">
   <p class="eyebrow">Demo · gestión académica</p>
   <h1>Del WhatsApp a la ficha firmada, <em>sin teclear dos veces</em></h1>
-  <p class="lead">Lo que nos enseñasteis de Ágora, rehecho para cómo trabajáis: grupos que se crean con sus sesiones ya puestas, la matrícula que llega del CRM, todas las fichas de un grupo en un clic y los listados para Pesca, Capitanía y Marina Mercante.</p>
+  <p class="lead">Captación, gestión académica y gestión económica conectadas: grupos que se crean con sus sesiones ya puestas, la matrícula que llega del CRM, todas las fichas de un grupo en un clic, los listados para Pesca, Capitanía y Marina Mercante y el estado económico de cada alumno.</p>
   <div class="legend">
     <div><span class="real">Real</span><br><b>De cancomar.es y de la reunión del 19-nov:</b> nombres de los cursos y los pasos que hacéis hoy en Ágora.</div>
     <div><span class="ej">Datos de ejemplo</span><br><b>Inventado para la demo:</b> profesores, alumnos, fechas, horas, aulas, importes y el contenido de los impresos. Las plantillas oficiales serán las vuestras.</div>
@@ -119,7 +119,7 @@ td .btn2{padding:6px 11px;font-size:12.5px}
     <button role="tab" data-v="doc" aria-selected="false"><svg class="i"><use href="#i-doc"/></svg>Documentación</button>
     <button role="tab" data-v="ren" aria-selected="false"><svg class="i"><use href="#i-ren"/></svg>Renovaciones</button>
     <p class="sep">Fase posterior</p>
-    <button role="tab" data-v="fac" aria-selected="false"><svg class="i"><use href="#i-eur"/></svg>Facturación<span class="fase">Opcional</span></button>
+    <button role="tab" data-v="fac" aria-selected="false"><svg class="i"><use href="#i-eur"/></svg>Estado económico<span class="fase">Opcional</span></button>
     <div class="who"><i>SI</i><div><b>Académico</b><br><span style="opacity:.7">Jueves, 19 de noviembre</span></div></div>
   </aside>
   <div class="main2">
@@ -175,7 +175,7 @@ td .btn2{padding:6px 11px;font-size:12.5px}
             <canvas class="padc" id="pad" width="480" height="170" aria-label="Zona de firma"></canvas>
             <div class="row"><button class="btn2" id="clr">Borrar</button><button class="btn2 pri" id="sign">Firmar y siguiente</button></div>
           </div></div>
-          <p class="mini">Como ya hacéis hoy en tablet, pero cada firma cae en su grupo y no hay que descargarla de una en una.</p>
+          <p class="mini">Cada firma cae en su grupo y no hay que descargarla de una en una.</p>
         </div>
       </div>
       <div class="pan"><h4>Teoría o prácticas: cada curso saca sus listados</h4>
@@ -199,18 +199,25 @@ td .btn2{padding:6px 11px;font-size:12.5px}
       <p class="note">Esto conecta con lo ya contratado: al cerrar un grupo, cada certificado queda con su fecha de caducidad y el CRM prepara el aviso de renovación por WhatsApp para que admisiones lo apruebe.</p>
     </section>
 
-    <!-- FACTURACIÓN -->
+    <!-- ESTADO ECONÓMICO -->
     <section class="view" id="v-fac">
-      <div class="later"><span>⏸</span><span><b>Fase posterior · opcional.</b> Solo si queréis dejar Ágora del todo. Mientras tanto, la facturación sigue en Ágora o en vuestra gestoría. La factura electrónica (Verifactu) se revisará antes de comprometer nada.</span></div>
+      <div class="later"><span>🔗</span><span><b>Fase posterior · opcional.</b> La factura la emite un programa de facturación especializado (lo elegimos con vosotros y vuestra gestoría; cubre la factura electrónica). Esta pantalla está conectada con él: nadie teclea dos veces.</span></div>
+      <div class="flow">
+        <div class="ok"><b>1 · Matrícula</b>Alumno o empresa, curso y precio ya están.</div>
+        <div class="ok"><b>2 · Programa de facturación</b>Se crea el cliente y la factura, o el adeudo.</div>
+        <div class="ok"><b>3 · Cobro</b>Remesas y cobros se gestionan allí.</div>
+        <div><b>4 · De vuelta aquí</b>El estado aparece en la ficha del alumno, el grupo y la empresa.</div>
+      </div>
       <div class="kpis">
-        <div class="kpi"><b id="fk1">0</b><span>facturas este mes</span></div>
+        <div class="kpi"><b id="fk1">0</b><span>matrículas facturadas este mes</span></div>
         <div class="kpi"><b id="fk2">0</b><span>cobradas</span></div>
         <div class="kpi"><b id="fk3">0</b><span>pendientes de cobro</span></div>
-        <div class="kpi"><b id="fk4">0</b><span>en remesa de adeudo</span></div>
+        <div class="kpi"><b id="fk4">0</b><span>con adeudo domiciliado</span></div>
       </div>
-      <div class="tw stack"><table><thead><tr><th>Factura</th><th>Cliente</th><th>Concepto</th><th>Importe</th><th>Estado</th></tr></thead><tbody id="ftab"></tbody></table></div>
-      <div class="row"><button class="btn2" id="rem">Preparar remesa de adeudos</button><button class="btn2 pri" id="csv"><svg class="i"><use href="#i-dl"/></svg>Exportar noviembre para contabilidad</button></div>
-      <p class="note">La factura sale de la matrícula: alumno, curso y precio ya están. A final de mes, un fichero para la gestoría en el formato que use.</p>
+      <div class="row"><span class="sync" id="fsync">Programa de facturación · sincronizado hace 2 min</span><button class="btn2" id="rem">Sincronizar ahora</button></div>
+      <div class="tw stack"><table><thead><tr><th>Alumno o empresa</th><th>Curso</th><th>Factura</th><th>Importe</th><th>Estado</th><th></th></tr></thead><tbody id="ftab"></tbody></table></div>
+      <div class="row"><button class="btn2 pri" id="csv"><svg class="i"><use href="#i-dl"/></svg>Resumen del mes para dirección</button></div>
+      <p class="note">Las facturas, remesas y el cierre contable viven en el programa especializado. Aquí solo se consulta su estado, para no duplicar información ni trabajo.</p>
     </section>
   </div>
 </div>
@@ -279,7 +286,7 @@ var IN=[{n:'Andrés G.',c:'FB',o:'WhatsApp',d:'Nombre, móvil, DNI pendiente, qu
 var CERT=[];var sel={g:G[0].id,p:'p1'};
 
 /* ---- Navegación ---- */
-var TIT={gru:'Cursos y grupos',pro:'Profesores',alu:'Alumnos y matrícula',doc:'Documentación',ren:'Renovaciones',fac:'Facturación'};
+var TIT={gru:'Cursos y grupos',pro:'Profesores',alu:'Alumnos y matrícula',doc:'Documentación',ren:'Renovaciones',fac:'Estado económico'};
 function go(v){$$('.side button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.v===v)});$$('.view').forEach(function(s){s.classList.toggle('on',s.id==='v-'+v)});$('#vt').textContent=TIT[v];R[v]&&R[v]();if(history.replaceState)history.replaceState(null,'','#'+v)}
 $$('.side button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.v)})});
 
@@ -405,18 +412,23 @@ R.ren=function(){
  $('#rall').onclick=function(){var n=0;CERT.forEach(function(c,i){if(c.x<=lim&&!sent[i]){sent[i]=1;n++}});R.ren();toast(n?n+' avisos preparados en el CRM':'Ya estaban todos enviados')};
 };
 
-/* ---- Facturación ---- */
-var FAC=null,remesa=false;
+/* ---- Estado económico (conectado al programa de facturación) ---- */
+var FAC=null;
+var L={cob:['ok','Cobrada'],pen:['cad','Pendiente de cobro'],ade:['web','Adeudo domiciliado'],ven:['tel','Vencida']};
 R.fac=function(){
- if(!FAC){FAC=[];var cl=NOM.slice(0,7).concat(['Empresa pesquera (ej.)','Naviera de pasaje (ej.)']);cl.forEach(function(n,i){var c=CUR[i%CUR.length];FAC.push({id:'F26-'+(312+i),n:n,c:c.n,imp:[180,240,420,260,150,310,280][i%7]*(n.indexOf('Empresa')>=0||n.indexOf('Naviera')>=0?3:1),st:['cob','cob','pen','ade','cob','pen','ade','cob','pen'][i]})})}
- if(remesa)FAC.forEach(function(x){if(x.st==='ade')x.st='rem'});
- var L={cob:['ok','Cobrada'],pen:['cad','Pendiente'],ade:['web','Adeudo domiciliado'],rem:['emp','En remesa']};
- $('#fk1').textContent=FAC.length;$('#fk2').textContent=FAC.filter(function(x){return x.st==='cob'}).length;$('#fk3').textContent=FAC.filter(function(x){return x.st==='pen'}).length;$('#fk4').textContent=FAC.filter(function(x){return x.st==='rem'}).length;
- $('#ftab').innerHTML=FAC.map(function(x){return '<tr><td data-label="Factura" class="num">'+x.id+'</td><td data-label="Cliente"><b>'+esc(x.n)+'</b></td><td data-label="Concepto">'+esc(x.c)+'</td><td data-label="Importe" class="num">'+x.imp.toLocaleString('es-ES')+' € <span class="mini">ej.</span></td><td data-label="Estado"><span class="chip '+L[x.st][0]+'">'+L[x.st][1]+'</span></td></tr>'}).join('');
+ if(!FAC){FAC=[];var cl=NOM.slice(0,7).concat(['Empresa pesquera (ej.)','Naviera de pasaje (ej.)']);cl.forEach(function(n,i){var c=CUR[i%CUR.length],emp=/Empresa|Naviera/.test(n);FAC.push({id:'F26-'+(312+i),n:n,emp:emp,c:c.n,imp:[180,240,420,260,150,310,280][i%7]*(emp?3:1),st:['cob','cob','pen','ade','cob','ven','ade','cob','pen'][i]})})}
+ $('#fk1').textContent=FAC.length;$('#fk2').textContent=FAC.filter(function(x){return x.st==='cob'}).length;$('#fk3').textContent=FAC.filter(function(x){return x.st==='pen'||x.st==='ven'}).length;$('#fk4').textContent=FAC.filter(function(x){return x.st==='ade'}).length;
+ $('#ftab').innerHTML=FAC.map(function(x,i){return '<tr><td data-label="Alumno o empresa"><b>'+esc(x.n)+'</b>'+(x.emp?' <span class="chip emp">Empresa</span>':'')+'</td><td data-label="Curso">'+esc(x.c)+'</td><td data-label="Factura" class="num">'+x.id+'</td><td data-label="Importe" class="num">'+x.imp.toLocaleString('es-ES')+' € <span class="mini">ej.</span></td><td data-label="Estado"><span class="chip '+L[x.st][0]+'">'+L[x.st][1]+'</span></td><td><button class="btn2" data-f="'+i+'">Ficha económica</button></td></tr>'}).join('');
+ $$('#ftab [data-f]').forEach(function(b){b.onclick=function(){ficha(FAC[+b.dataset.f])}});
 };
-$('#rem').onclick=function(){remesa=true;R.fac();toast('Remesa de adeudos preparada (fichero para el banco). Simulación.')};
-$('#csv').onclick=function(){if(!FAC)R.fac();var rows=[['factura','fecha','cliente','concepto','base','iva','total','estado','nota']];FAC.forEach(function(x){rows.push([x.id,'2026-11-30',x.n,x.c,x.imp,'exento (a revisar)',x.imp,x.st,'DATOS DE EJEMPLO'])});
- var b=new Blob(['﻿'+rows.map(function(r){return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"'}).join(';')}).join('\n')],{type:'text/csv'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='contabilidad-2026-11-EJEMPLO.csv';document.body.appendChild(a);a.click();a.remove();toast('Exportado contabilidad-2026-11-EJEMPLO.csv')};
+function ficha(x){
+ var hist=[['Matrícula',x.c,'Origen: CRM · WhatsApp'],['Factura '+x.id,x.imp.toLocaleString('es-ES')+' € (ej.)','Emitida en el programa de facturación'],['Cobro',L[x.st][1],x.st==='ade'?'Entra en la próxima remesa':x.st==='cob'?'Conciliado':'Aviso de cobro preparado para aprobar']];
+ $('#dlgi').innerHTML='<button class="xc" data-close aria-label="Cerrar">×</button><h3 id="dlg-t">'+esc(x.n)+' · ficha económica</h3><p class="mini"><span class="ej">Datos de ejemplo</span> Lo que hoy veis en Ágora, aquí, leído del programa de facturación.</p><div class="docs">'+hist.map(function(h){return '<div class="doc" style="grid-template-columns:minmax(0,1fr) auto"><span><b>'+esc(h[0])+'</b><small>'+esc(h[2])+'</small></span><span class="chip">'+esc(h[1])+'</span></div>'}).join('')+'</div><div class="row"><span class="mini">Saldo pendiente: <b>'+((x.st==='pen'||x.st==='ven')?x.imp.toLocaleString('es-ES')+' €':'0 €')+'</b></span><button class="btn2" data-close style="margin-left:auto">Cerrar</button></div>';
+ var dl=$('#dlg');dl.showModal();$$('[data-close]',dl).forEach(function(b){b.onclick=function(){dl.close()}});
+}
+$('#rem').onclick=function(){if(!FAC)R.fac();FAC.forEach(function(x){if(x.st==='pen'&&Math.random()<.5)x.st='cob'});R.fac();$('#fsync').textContent='Programa de facturación · sincronizado ahora';toast('Estados de cobro actualizados desde el programa de facturación (simulación)')};
+$('#csv').onclick=function(){if(!FAC)R.fac();var rows=[['factura','cliente','curso','importe','estado','nota']];FAC.forEach(function(x){rows.push([x.id,x.n,x.c,x.imp,L[x.st][1],'DATOS DE EJEMPLO'])});
+ var b=new Blob(['﻿'+rows.map(function(r){return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"'}).join(';')}).join('\n')],{type:'text/csv'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='estado-economico-2026-11-EJEMPLO.csv';document.body.appendChild(a);a.click();a.remove();toast('Descargado el resumen del mes (datos de ejemplo)')};
 
 fillDg();
 var h=(location.hash||'').slice(1);go(TIT[h]?h:'gru');
