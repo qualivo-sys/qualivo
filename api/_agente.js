@@ -655,6 +655,17 @@ async function atender(contactId, opciones) {
       // Que el trato refleje que hay conversación viva.
       try { await require('./_tratos.js').mover(c.id, 'conversacion', { nombre: c.contactName || c.firstName || '', email: c.email || '', telefono: c.phone || '', empresa: c.companyName || '', origen: 'WhatsApp', fuente: 'Agente de WhatsApp' }); } catch (e) { /* no bloquea */ }
     }
+    // 19-nov (Maikel): que el aviso diga qué le ha contestado el agente.
+    if (decision.accion !== 'pasar' && decision.texto) {
+      try {
+        const AV = require('./_aviso.js');
+        await AV.movil('EL AGENTE HA RESPONDIDO · ' + (c.contactName || c.firstName || '?') + (c.companyName ? ' · ' + c.companyName : '') +
+          '\nÉl/ella: «' + String(ultimo.body).replace(/\s+/g, ' ').slice(0, 220) + '»' +
+          '\nAgente: «' + String(decision.texto).replace(/\s+/g, ' ').slice(0, 300) + '»' +
+          '\nAcción: ' + decision.accion + (decision.detalle && decision.detalle.hora ? ' · cita ' + decision.detalle.hora : '') +
+          (c.phone ? '\nTel ' + c.phone : '') + (await AV.fichaMovil(c.id)));
+      } catch (e) { console.error('[agente] aviso móvil:', e && e.message); }
+    }
     await A.nota(c.id, 'AGENTE DE WHATSAPP · ' + new Date().toLocaleString('es-ES', { timeZone: ZONA }) +
       '\nÉl: «' + String(ultimo.body).slice(0, 300) + '»' +
       '\nYo: «' + (decision.texto || '(nada)') + '»' +

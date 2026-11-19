@@ -418,9 +418,13 @@ async function handler(req, res) {
           // El lead entró de noche y el móvil no sonó (api/_aviso.js): se avisa ahora.
           try {
             const entro = c.dateAdded ? new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', weekday: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(c.dateAdded)) : '';
-            await require('./_aviso.js').movil('LEAD NUEVO (entró ' + (entro || 'de noche') + ') · ' + (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '') +
-              (datos.fuga ? '\n«' + datos.fuga + '»' : '') + (c.phone ? '\nTel ' + c.phone : '') +
-              '\nLe acaba de salir el primer WhatsApp' + (env.canal === 'whatsapp_fallido' ? ' (ha fallado, revisa el CRM)' : '') + '.');
+            const AV = require('./_aviso.js');
+            const ficha = await AV.fichaMovil(c.id, { fuga: datos.fuga });
+            await AV.movil('LEAD NUEVO (entró ' + (entro || 'de noche') + ') · ' + (c.firstName || c.contactName || '?') + (c.companyName ? ' · ' + c.companyName : '') +
+              (c.phone ? '\nTel ' + c.phone : '') + ficha +
+              '\nLe acaba de salir el primer WhatsApp' + (env.canal === 'whatsapp_fallido' ? ' (ha fallado, revisa el CRM)' : '') + '.' +
+              (env.texto ? '\nLe hemos escrito: «' + String(env.texto).replace(/\s+/g, ' ').slice(0, 260) + '»' : '') +
+              '\nSi contesta, le responde el agente y te aviso.');
           } catch (e) { console.error('[activacion] aviso pendiente no salió:', e && e.message); }
         }
         if (env.canal === 'whatsapp_fallido') resumen.wa_fallidos = (resumen.wa_fallidos || 0) + 1; else resumen.wa++;

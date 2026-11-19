@@ -41,9 +41,63 @@ async function movil(texto, opciones) {
   if (process.env.AVISO_MOVIL === '0' || !MOVIL_CONTACTO) return false;
   if (!(opciones && opciones.forzar) && !enHorarioMovil()) return 'fuera-de-horario';
   try {
-    await require('./_activacion.js').enviarPorGateway(MOVIL_CONTACTO, String(texto).slice(0, 900), { interno: true });
+    await require('./_activacion.js').enviarPorGateway(MOVIL_CONTACTO, String(texto).slice(0, 1600), { interno: true });
     return true;
   } catch (e) { console.error('[aviso] móvil:', e && e.message); return false; }
+}
+
+// 19-nov-2026 (Maikel): «los WhatsApps que me envías podrían ser más
+// informativos: las respuestas del lead, si ha contestado, qué ha dicho».
+// Lee la ficha del contacto en GHL y devuelve unas líneas para el aviso al
+// móvil: nivel y respuestas del formulario, web y correo y, si se pide,
+// los últimos mensajes de la conversación. Si algo falla, devuelve ''.
+function etiquetaTxt(tags, prefijo) {
+  const t = tags.filter(function (x) { return x.indexOf(prefijo) === 0; })[0];
+  if (!t) return '';
+  return t.slice(prefijo.length).replace(/-(al|de|a)-/g, ' $1 ').replace(/-mes$/, ' mes').replace(/mas$/, '+')
+    .replace(/^mas /, 'más ').replace(/^menos /, 'menos ').replace(/(\d)-(\d{3})/g, '$1.$2')
+    .replace(/(\D)-|-(\D)/g, function (m, a, b) { return (a || '') + ' ' + (b || ''); });
+}
+async function fichaMovil(contactId, o) {
+  o = o || {};
+  if (!contactId) return '';
+  try {
+    const A = require('./_activacion.js');
+    const r = await fetch(A.GHL_BASE + '/contacts/' + contactId, { headers: A.cabeceras() });
+    if (!r.ok) return '';
+    const c = (await r.json()).contact || {};
+    const tags = (c.tags || []).map(String);
+    const nivel = etiquetaTxt(tags, 'nivel-').toUpperCase();
+    const sector = etiquetaTxt(tags, 'sector-');
+    const vol = etiquetaTxt(tags, 'vol-');
+    const inv = etiquetaTxt(tags, 'inv-');
+    const lineas = [];
+    const cab = [nivel ? 'Nivel ' + nivel : '', sector ? 'Sector: ' + sector : ''].filter(Boolean).join(' · ');
+    if (cab) lineas.push(cab);
+    if (vol) lineas.push('Solicitudes: ' + vol);
+    if (inv) lineas.push('Inversión: ' + inv);
+    if (o.fuga) lineas.push('Se le escapa: «' + String(o.fuga).slice(0, 140) + '»');
+    if (c.website) lineas.push('Web: ' + String(c.website).replace(/^https?:\/\//, '').slice(0, 80));
+    if (c.email) lineas.push('Correo: ' + c.email);
+    if (tags.indexOf('act-agendado') > -1 || tags.indexOf('act-cita-confirmada') > -1) lineas.push('Tiene cita cogida.');
+    if (o.conversacion) {
+      const cv = await fetch(A.GHL_BASE + '/conversations/search?locationId=' + encodeURIComponent(process.env.GHL_LOCATION_ID) + '&contactId=' + contactId, { headers: A.cabeceras() });
+      const k = cv.ok ? ((await cv.json()).conversations || [])[0] : null;
+      if (k) {
+        const m = await fetch(A.GHL_BASE + '/conversations/' + k.id + '/messages?limit=25', { headers: A.cabeceras() });
+        const ms = m.ok ? (((await m.json()).messages || {}).messages || []) : [];
+        const utiles = ms.filter(function (x) { return !/CUSTOM_SMS|ACTIVITY/i.test(String(x.messageType || '')) && x.body; }).slice(0, o.conversacion).reverse();
+        if (utiles.length) {
+          lineas.push('— Últimos mensajes —');
+          utiles.forEach(function (x) {
+            const h = x.dateAdded ? new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' }).format(new Date(x.dateAdded)) : '';
+            lineas.push(h + ' ' + (String(x.direction) === 'inbound' ? 'Él/ella' : 'Nosotros') + ': «' + String(x.body).replace(/\s+/g, ' ').slice(0, 160) + '»');
+          });
+        }
+      }
+    }
+    return lineas.length ? '\n' + lineas.join('\n') : '';
+  } catch (e) { console.error('[aviso] ficha:', e && e.message); return ''; }
 }
 
 function escapa(s) {
@@ -76,10 +130,11 @@ async function leadNuevo(d) {
   d = d || {};
   if (d.cualificado !== false) {
     if (enHorarioMovil()) {
+      const ficha = await fichaMovil(d.contactId, { fuga: d.fuga });
       await movil('LEAD NUEVO · ' + (d.nombre || d.empresa || d.email || '?') + (d.empresa ? ' · ' + d.empresa : '') +
-        (d.fuga ? '\n«' + String(d.fuga).slice(0, 160) + '»' : '') +
         (d.telefono ? '\nTel ' + d.telefono : '') + (d.origen ? '\n' + d.origen : '') +
-        '\nPrimer WhatsApp: al momento; si es A o B en tu horario, te llega el borrador y sale solo a los 10 min.');
+        (ficha || ((d.fuga ? '\nSe le escapa: «' + String(d.fuga).slice(0, 160) + '»' : '') + (d.inversion ? '\nInversión: ' + d.inversion : ''))) +
+        '\nPrimer WhatsApp: sale al momento (de 8:00 a 21:30; si entra de noche, a las 8:00). Si contesta, le responde el agente.');
     } else if (d.contactId) {
       // De noche no suena el móvil: queda apuntado y se avisa por la mañana,
       // cuando le sale el primer WhatsApp al lead.
@@ -195,9 +250,10 @@ async function seMovio(tipo, d) {
   const m = MOVIMIENTOS[tipo];
   if (!m) return { ok: false, motivo: 'tipo_desconocido' };
   if (tipo === 'respondio' || tipo === 'agendado') {
+    const ficha = await fichaMovil(d.contactId, { conversacion: 4 });
     await movil((tipo === 'respondio' ? 'HA CONTESTADO · ' : 'HA COGIDO HORA · ') + (d.nombre || d.empresa || d.email || '?') +
-      (d.empresa ? ' · ' + d.empresa : '') + (d.texto ? '\n«' + String(d.texto).slice(0, 200) + '»' : '') +
-      (d.origen ? '\n' + d.origen : '') + (d.telefono ? '\nTel ' + d.telefono : ''));
+      (d.empresa ? ' · ' + d.empresa : '') + (d.texto ? '\n«' + String(d.texto).slice(0, 300) + '»' : '') +
+      (d.origen ? '\n' + d.origen : '') + (d.telefono ? '\nTel ' + d.telefono : '') + ficha);
   }
   const destino = process.env.AVISO_INTERNO_TO || process.env.INFORME_PAID_TO || 'maikel@qualivo.io';
   if (!process.env.RESEND_API_KEY) return { ok: false, motivo: 'sin_resend' };
@@ -255,5 +311,5 @@ async function seMovio(tipo, d) {
   }
 }
 
-module.exports = { leadNuevo: leadNuevo, seMovio: seMovio, movil: movil, enHorarioMovil: enHorarioMovil };
+module.exports = { leadNuevo: leadNuevo, seMovio: seMovio, movil: movil, enHorarioMovil: enHorarioMovil, fichaMovil: fichaMovil };
 
