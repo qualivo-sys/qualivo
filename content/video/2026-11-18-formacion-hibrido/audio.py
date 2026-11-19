@@ -26,6 +26,7 @@ if VZ == 'n':     # gancho «fantasma, planta rodadora y cuerda» + cuerpo de Aa
     T.update({'pero': p1('algunos') - .12, 'otros': p1('otros') - .12, 'yotros': p1('y', ix(W1, 'llamada')) - .1, 'e2': e2, 'g': e2, 'ld': p1('implementamos') - .1,
               'sc': p1('laura') - .3, 'lau': p1('laura') - .1, 'f2': p1('interés') - .25, 'sco': p1('por', ix(W1, 'interés')) - .15, 'pu': p1('puntúa'), 'ay': p1('avisa') - .1,
               'crm': p1('avisa') + 1.0, 'e3': p1('laura', il + 1) - .15, 's3': p1('si', ix(W1, 'laura', il + 1)) - .1, 'pd': 0})
+    T.update({'mv': p2('pipeline') - .1, 'atr': p2('ves') - .3, 'res': p2('no') - .15, 'ops': p2('ves') - .3, 'ges': p2('así') - .15, 'e6': p2('así') - .15})
     T['og'] = T['crm']; T['o'] = [p1('cualificar') - .1, p1('priorizar') - .1, p1('organizar') - .1]; FIN = round(FIN - .5, 2); T['FIN'] = FIN
 T = {k: (v if isinstance(v, list) else round(v, 2)) for k, v in T.items()}; T['l0'] = T['sco']; T['e5'] = T['ops']; T['c4'] = T['e7'] = T['e6']; T['c'] = [T['e6']] * 3; T['cap'] = T['lau']; T['a2'] = T['pd']
 subs = []
