@@ -20,7 +20,9 @@ import json, os, re, subprocess, sys, time, urllib.request, urllib.error
 S = os.environ.get("SP") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KEY = open(os.path.join(S, ".apollo_key")).read().strip()
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
-ADS = ["google_adwords_conversion", "google_remarketing", "facebook_custom_audiences", "facebook_widget", "linkedin_ads"]
+# 19-nov: "facebook_custom_audiences" no existe en Apollo (0 resultados) y "facebook_widget" es el botón social, no anuncios.
+# El píxel de Meta real es "facebook_pixel".
+ADS = ["google_adwords_conversion", "google_ads", "google_remarketing", "facebook_pixel", "linkedin_ads", "bing_ads", "doubleclick_conversion"]
 FAMILIAS = [
     ["formacion", "escuela", "academia", "cursos", "master", "e-learning", "training", "oposiciones"],
     ["consultoria", "asesoria", "asesoria fiscal", "gestoria", "financial advisory", "business consulting"],
@@ -38,7 +40,7 @@ EDU = [
     ["academia", "escuela", "formacion", "training", "education", "cursos", "masters", "educacion"],
 ]
 NO_ICP = re.compile(r"abogad|legal|law|asociaci|federaci|gremi|fundaci|colegio|universidad|universitat|ayuntamiento|camara|"
-                    r"agencia|marketing digital|software|seleccion|recruit|staffing|talent|empleo|inmobiliaria|clinica|dental", re.I)
+                    r"agencia|marketing digital|software|seleccion|recruit|staffing|talent|empleo|inmobiliaria|clinica|dental|university|autoescuela", re.I)
 
 
 def api(path, body):
@@ -80,7 +82,29 @@ def main():
 
     # 1-2. empresas nuevas
     orgs = {}
+    # Modo --edu: primero el ranking por volumen probable de leads (bin/universo_edu.py), de arriba abajo.
+    rank_p = os.path.join(S, "edu_universo.json")
+    if edu and os.path.exists(rank_p):
+        minp = int(os.environ.get("EDU_MIN_PUNTOS", "3"))
+        # Del ranking no se descarta por "vista" (antes se buscaba solo CEO/fundador): se descarta lo ya revelado.
+        import glob
+        rev_dom = set()
+        for g in glob.glob(os.path.join(S, "*revelados*.json")) + glob.glob(os.path.join(S, "*", "*revelados*.json")):
+            try:
+                for x in json.load(open(g)):
+                    d = (x.get("dom") or (x.get("email") or "@").split("@")[1] or "").lower()
+                    if d: rev_dom.add(d)
+            except Exception:
+                pass
+        for f in json.load(open(rank_p)):
+            if len(orgs) >= objetivo * mult: break
+            if f["puntos"] < minp or f["dom"] in env_dom or f["dom"] in rev_dom or NO_ICP.search(f["name"] or ""):
+                continue
+            orgs[f["id"]] = f["dom"]; vistas.add(f["id"])
+        print(f"del ranking de volumen (>= {minp} puntos): {len(orgs)}")
     for fi, fam in enumerate(FAMILIAS):
+        if len(orgs) >= objetivo * mult:
+            break
         pag = estado["pagina"].get(pref + str(fi), 1)
         for _ in range(npag):
             r = api("organizations/search", {"organization_locations": ["Spain"], "organization_num_employees_ranges": ["5,10", "11,50"],
