@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>CANCOMAR · Gestión académica</title>
+<meta name="description" content="Demo navegable: cursos, grupos, profesores, matrícula, documentación por lotes, renovaciones y facturación. Datos de ejemplo.">
+<link rel="icon" href="../assets/brand/isotipo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="base.css">
+<style>
+.dhero{--hero-img:url("/propuestas/cancomar/assets/brand/practicas.jpg")}
+@media (max-width:900px){.side{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:max-content}}
+.side .fase{margin-left:auto;font:800 9px var(--head);letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.16);border-radius:6px;padding:2px 6px}
+.side .sep{font:700 10px var(--head);letter-spacing:.12em;text-transform:uppercase;opacity:.55;padding:14px 10px 4px}
+@media (max-width:900px){.side .sep{display:none}}
+.sync{display:inline-flex;align-items:center;gap:6px;font:700 11.5px var(--head);border-radius:99px;padding:4px 10px;background:var(--good-soft);color:var(--good);white-space:nowrap}
+.sync::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.sync.ag{background:var(--accent-soft);color:var(--accent)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn2{font:700 13.5px var(--head);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:9px 15px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.btn2:hover{border-color:var(--brand);color:var(--accent)}
+.btn2.pri{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 10px 22px -12px rgba(0,71,107,.7)}
+.btn2.pri:hover{color:#fff;filter:brightness(1.08)}
+.btn2.amb{background:var(--amb);color:#3A2B00;border-color:transparent}
+.btn2[disabled]{opacity:.5;cursor:default}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.cc{border:1px solid var(--line);border-radius:14px;padding:13px 14px;background:var(--surface);display:grid;gap:6px;align-content:start;text-align:left;font:inherit;color:inherit;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.cc:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+.cc[aria-pressed="true"]{border-color:var(--brand);box-shadow:inset 0 0 0 2px var(--brand)}
+.cc b{font:800 15px/1.3 var(--head)}
+.cc small{color:var(--muted);font-size:12.5px}
+.av{width:40px;height:40px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font:800 13px var(--head);flex:none}
+.pr{display:flex;gap:10px;align-items:center}
+/* calendario semanal */
+.cal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.cal .d{background:var(--surface-2);border:1px solid var(--line-2);border-radius:12px;padding:8px;display:grid;gap:6px;align-content:start;min-height:120px}
+.cal .d > span{font:700 11px var(--head);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.ev{border-radius:8px;padding:6px 8px;font-size:12px;line-height:1.35;color:#fff;background:var(--c,#00719F)}
+.ev b{display:block;font:700 11.5px var(--head)}
+@media (max-width:700px){.cal{grid-template-columns:1fr}.cal .d{min-height:0}}
+/* firma */
+.padc{border:2px dashed var(--line);border-radius:14px;background:#fff;touch-action:none;width:100%;height:170px;display:block;cursor:crosshair}
+.tablet{background:#1b2a36;border-radius:26px;padding:16px;max-width:520px;box-shadow:var(--shadow-lg)}
+.tablet .scr{background:#fff;color:#0D2233;border-radius:14px;padding:14px;display:grid;gap:10px;font-size:13px}
+.tablet .scr h4{font:800 14px var(--head)}
+.tablet .scr .rgpd{font-size:11.5px;color:#4F6476;border:1px solid #D5E8F3;border-radius:8px;padding:8px;max-height:82px;overflow:auto}
+.docs{display:grid;gap:8px}
+.doc{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--surface)}
+.doc .ic{width:34px;height:40px;border-radius:6px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font:800 10px var(--head)}
+.doc small{display:block;color:var(--muted);font-size:12px}
+.doc.off{opacity:.45}
+@media (max-width:560px){.doc{grid-template-columns:auto minmax(0,1fr)}.doc > :last-child{grid-column:1/-1;justify-self:start}}
+.prog{height:8px;border-radius:99px;background:var(--line-2);overflow:hidden}
+.prog i{display:block;height:100%;background:var(--grad);width:0;transition:width .3s}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(30px);opacity:0;background:var(--deep);color:#fff;border-radius:12px;padding:11px 16px;font-size:14px;z-index:80;transition:all .3s;max-width:calc(100% - 32px);box-shadow:var(--shadow-lg)}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.flow > div{border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--surface-2);font-size:12.5px;display:grid;gap:3px}
+.flow > div b{font:800 12.5px var(--head)}
+.flow > div.ok{border-color:var(--good);background:var(--good-soft)}
+@media (max-width:700px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.later{display:flex;gap:10px;align-items:flex-start;border-radius:14px;padding:12px 14px;background:var(--warn-soft);color:var(--warn);font-size:13.5px;line-height:1.5}
+.later b{font-family:var(--head)}
+dialog.fd .in{padding:20px;display:grid;gap:14px}
+dialog.fd label{display:grid;gap:4px;font:600 13px var(--head)}
+dialog.fd select,dialog.fd input{font:15px var(--sans);border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:10px;padding:9px 11px}
+.xc{all:unset;cursor:pointer;justify-self:end;font:800 20px var(--head);padding:0 6px;color:var(--muted)}
+td .btn2{padding:6px 11px;font-size:12.5px}
+.mini{font-size:12.5px;color:var(--muted)}
+.view > *,.two > *,.pan > *{min-width:0}
+#dg{max-width:100%;min-width:0;flex:1 1 220px;text-overflow:ellipsis}
+.doc b{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-prof" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></symbol>
+  <symbol id="i-al" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.4 3.3-5 6.5-5s5.7 1.6 6.5 5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 15c2 .6 3.2 2.2 3.5 5"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-ren" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></symbol>
+  <symbol id="i-eur" viewBox="0 0 24 24"><path d="M18 6.5A7 7 0 1 0 18 17.5M4 10h10M4 14h10"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+</svg>
+
+<nav class="topnav" aria-label="Paquete CANCOMAR">
+  <div class="in">
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><img class="lgo" src="../assets/brand/logo-blanco.png" alt="CANCOMAR" width="137" height="20"><span class="by">19-nov-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="../anuncios/">Anuncios</a><a href="../landing-a/">Landings</a><a href="../recorrido/">Recorrido</a><a href="../demo/">CRM</a><a href="./" aria-current="page">Gestión</a><a href="alcance/">Alcance</a><a href="https://qualivo.io/intelligence/?sector=cancomar&amp;empresa=CANCOMAR&amp;objetivo=seguimiento">Intelligence</a><a href="../presentacion/">Presentación</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<div class="wrap">
+  <p class="eyebrow">Demo · gestión académica</p>
+  <h1>Del WhatsApp a la ficha firmada, <em>sin teclear dos veces</em></h1>
+  <p class="lead">Lo que nos enseñasteis de Ágora, rehecho para cómo trabajáis: grupos que se crean con sus sesiones ya puestas, la matrícula que llega del CRM, todas las fichas de un grupo en un clic y los listados para Pesca, Capitanía y Marina Mercante.</p>
+  <div class="legend">
+    <div><span class="real">Real</span><br><b>De cancomar.es y de la reunión del 19-nov:</b> nombres de los cursos y los pasos que hacéis hoy en Ágora.</div>
+    <div><span class="ej">Datos de ejemplo</span><br><b>Inventado para la demo:</b> profesores, alumnos, fechas, horas, aulas, importes y el contenido de los impresos. Las plantillas oficiales serán las vuestras.</div>
+  </div>
+</div>
+</header>
+
+<main class="wrap main">
+<div class="ejband" style="margin-top:6px"><span class="ej">Datos de ejemplo</span><span>Todo funciona en tu navegador y se borra al recargar. No hay datos de personas reales.</span></div>
+
+<div class="app">
+  <aside class="side" role="tablist" aria-label="Secciones">
+    <div class="logo"><img src="../assets/brand/logo-blanco.png" alt="CANCOMAR" width="123" height="18"><b>GESTIÓN</b></div>
+    <button role="tab" data-v="gru" aria-selected="true"><svg class="i"><use href="#i-cal"/></svg>Cursos y grupos</button>
+    <button role="tab" data-v="pro" aria-selected="false"><svg class="i"><use href="#i-prof"/></svg>Profesores</button>
+    <button role="tab" data-v="alu" aria-selected="false"><svg class="i"><use href="#i-al"/></svg>Alumnos y matrícula<em id="nmat">3</em></button>
+    <button role="tab" data-v="doc" aria-selected="false"><svg class="i"><use href="#i-doc"/></svg>Documentación</button>
+    <button role="tab" data-v="ren" aria-selected="false"><svg class="i"><use href="#i-ren"/></svg>Renovaciones</button>
+    <p class="sep">Fase posterior</p>
+    <button role="tab" data-v="fac" aria-selected="false"><svg class="i"><use href="#i-eur"/></svg>Facturación<span class="fase">Opcional</span></button>
+    <div class="who"><i>SI</i><div><b>Académico</b><br><span style="opacity:.7">Jueves, 19 de noviembre</span></div></div>
+  </aside>
+  <div class="main2">
+    <div class="tbar"><h3 id="vt">Cursos y grupos</h3><span class="sync">Google Calendar</span><span class="sync ag" title="Exportación e importación con Ágora mientras convivan">Ágora</span><span class="tag">Datos de ejemplo</span></div>
+
+    <!-- CURSOS Y GRUPOS -->
+    <section class="view on" id="v-gru">
+      <div class="row"><button class="btn2 pri" id="ng"><svg class="i"><use href="#i-plus"/></svg>Nuevo grupo desde plantilla</button><span class="mini">Eliges curso y fecha de inicio: sesiones, profesores, aulas y horarios salen solos.</span></div>
+      <div class="pan"><h4>Grupos abiertos</h4><div class="cards" id="glist"></div></div>
+      <div class="pan" id="gdet"></div>
+      <div class="pan"><h4>Catálogo de cursos · plantillas</h4>
+        <div class="tw stack"><table><thead><tr><th>Curso</th><th>Tipo</th><th>Horas (demo)</th><th>Plantilla de sesiones</th><th>Documentación oficial</th></tr></thead><tbody id="ctab"></tbody></table></div>
+      </div>
+    </section>
+
+    <!-- PROFESORES -->
+    <section class="view" id="v-pro">
+      <div class="cards" id="plist"></div>
+      <div class="pan" id="pdet"></div>
+      <p class="note">Los datos fiscales y de nómina del profesor viven en su ficha, no en cada curso. Cada sesión y cada comunicación oficial queda asignada a un profesor, como pide FUNDAE. Los docentes no necesitan usuario: ven sus clases en su Google Calendar.</p>
+    </section>
+
+    <!-- ALUMNOS Y MATRÍCULA -->
+    <section class="view" id="v-alu">
+      <div class="flow">
+        <div class="ok"><b>1 · WhatsApp</b>El alumno pide plaza. El CRM ya tiene nombre, curso y titulaciones.</div>
+        <div class="ok"><b>2 · Plaza reservada</b>Admisiones la confirma en el CRM.</div>
+        <div><b>3 · Un clic</b>Pasa a alumno y matrícula del grupo. Nadie teclea.</div>
+        <div><b>4 · Firma</b>Le llega la ficha a la tablet el primer día.</div>
+      </div>
+      <div class="pan"><h4>Llegan del CRM · plaza reservada</h4>
+        <div class="tw stack"><table><thead><tr><th>Persona</th><th>Curso pedido</th><th>Origen</th><th>Datos que ya tenemos</th><th></th></tr></thead><tbody id="intab"></tbody></table></div>
+      </div>
+      <div class="pan"><h4 id="mt">Matriculados</h4>
+        <div class="tw stack"><table><thead><tr><th>Alumno</th><th>Grupo</th><th>Ficha y protección de datos</th><th>Pago</th></tr></thead><tbody id="mtab"></tbody></table></div>
+      </div>
+    </section>
+
+    <!-- DOCUMENTACIÓN -->
+    <section class="view" id="v-doc">
+      <div class="row"><label class="mini" for="dg">Grupo</label><select id="dg" class="btn2" style="padding:8px 12px"></select><span class="mini" id="dinfo"></span></div>
+      <div class="two">
+        <div class="pan"><h4>Todo el grupo, de una vez</h4>
+          <div class="prog" aria-hidden="true"><i id="dprog"></i></div>
+          <p class="mini" id="dsig"></p>
+          <div class="docs" id="dlist"></div>
+        </div>
+        <div class="pan"><h4>Firma en tablet</h4>
+          <div class="tablet"><div class="scr">
+            <h4 id="tname">Ficha del alumno</h4>
+            <div class="rgpd">Aquí irá vuestro texto de protección de datos. El alumno lo lee, marca las casillas y firma con el dedo. La firma queda guardada con fecha y hora en su matrícula.</div>
+            <label style="display:flex;gap:8px;align-items:center;font-size:12.5px"><input type="checkbox" id="ck" checked> He leído y acepto el tratamiento de mis datos</label>
+            <canvas class="padc" id="pad" width="480" height="170" aria-label="Zona de firma"></canvas>
+            <div class="row"><button class="btn2" id="clr">Borrar</button><button class="btn2 pri" id="sign">Firmar y siguiente</button></div>
+          </div></div>
+          <p class="mini">Como ya hacéis hoy en tablet, pero cada firma cae en su grupo y no hay que descargarla de una en una.</p>
+        </div>
+      </div>
+      <div class="pan"><h4>Teoría o prácticas: cada curso saca sus listados</h4>
+        <div class="two" style="gap:12px">
+          <div class="cc" style="cursor:default"><b>Solo teoría</b><small>Ej.: Operador General del SMSSM, Sanitaria Específica Inicial</small><span>Fichas · asistencia · comunicación de inicio y de fin a Capitanía o Pesca.</span></div>
+          <div class="cc" style="cursor:default"><b>Teoría + prácticas</b><small>Ej.: Formación Básica, Marinero en la Pesca, Patrón Local de Pesca</small><span>Lo anterior + listado de prácticas y plantilla para Marina Mercante, con sus sesiones y su lugar de prácticas.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RENOVACIONES -->
+    <section class="view" id="v-ren">
+      <div class="kpis">
+        <div class="kpi"><b id="rk1">0</b><span>certificados emitidos en la demo</span></div>
+        <div class="kpi"><b>5 años</b><span>validez que vigilamos</span></div>
+        <div class="kpi"><b id="rk2">0</b><span>caducan en 6 meses</span></div>
+        <div class="kpi"><b id="rk3">0</b><span>ya enviados al CRM</span></div>
+      </div>
+      <div class="tw stack"><table><thead><tr><th>Alumno</th><th>Certificado</th><th>Emitido</th><th>Caduca</th><th></th></tr></thead><tbody id="rtab"></tbody></table></div>
+      <div class="row"><button class="btn2 amb" id="rall">Enviar los de los próximos 6 meses al CRM</button><a class="btn2" href="../demo/#renovaciones">Ver los avisos en el CRM →</a></div>
+      <p class="note">Esto conecta con lo ya contratado: al cerrar un grupo, cada certificado queda con su fecha de caducidad y el CRM prepara el aviso de renovación por WhatsApp para que admisiones lo apruebe.</p>
+    </section>
+
+    <!-- FACTURACIÓN -->
+    <section class="view" id="v-fac">
+      <div class="later"><span>⏸</span><span><b>Fase posterior · opcional.</b> Solo si queréis dejar Ágora del todo. Mientras tanto, la facturación sigue en Ágora o en vuestra gestoría. La factura electrónica (Verifactu) se revisará antes de comprometer nada.</span></div>
+      <div class="kpis">
+        <div class="kpi"><b id="fk1">0</b><span>facturas este mes</span></div>
+        <div class="kpi"><b id="fk2">0</b><span>cobradas</span></div>
+        <div class="kpi"><b id="fk3">0</b><span>pendientes de cobro</span></div>
+        <div class="kpi"><b id="fk4">0</b><span>en remesa de adeudo</span></div>
+      </div>
+      <div class="tw stack"><table><thead><tr><th>Factura</th><th>Cliente</th><th>Concepto</th><th>Importe</th><th>Estado</th></tr></thead><tbody id="ftab"></tbody></table></div>
+      <div class="row"><button class="btn2" id="rem">Preparar remesa de adeudos</button><button class="btn2 pri" id="csv"><svg class="i"><use href="#i-dl"/></svg>Exportar noviembre para contabilidad</button></div>
+      <p class="note">La factura sale de la matrícula: alumno, curso y precio ya están. A final de mes, un fichero para la gestoría en el formato que use.</p>
+    </section>
+  </div>
+</div>
+
+<div class="links3">
+  <a href="alcance/"><span class="k">Alcance</span><b>Qué se puede hacer y cómo</b><small>Lo que pedisteis, punto por punto, y las opciones para dejar o no Ágora.</small></a>
+  <a href="../demo/"><span class="k">CRM</span><b>Admisiones por dentro</b><small>Pipeline, WhatsApp aprobado, renovaciones y listas de espera.</small></a>
+  <a href="../recorrido/"><span class="k">Recorrido</span><b>El recorrido del alumno</b><small>De la petición a la renovación a 5 años.</small></a>
+</div>
+</main>
+
+<dialog class="fd" id="dlg" aria-labelledby="dlg-t"><div class="in" id="dlgi"></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="sig"><b>Qualivo</b><img src="../assets/brand/logo-blanco.png" alt="CANCOMAR" width="123" height="18"><span>Demo preparada para CANCOMAR · 19-nov-2026</span></div>
+    <p>No es una aplicación en producción ni contiene datos de CANCOMAR. Los nombres de los cursos son de cancomar.es; profesores, alumnos, horas, fechas, importes e impresos son datos de ejemplo.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('on')},2600)}
+var MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],DIA=['dom','lun','mar','mié','jue','vie','sáb'];
+function f(d){return d.getDate()+' '+MES[d.getMonth()]}
+function fy(d){return d.getDate()+' '+MES[d.getMonth()]+' '+d.getFullYear()}
+
+/* ---- Datos de ejemplo ---- */
+var PROF=[
+ {id:'p1',n:'Marta R.',a:'Seguridad y supervivencia',c:'#0097DA'},
+ {id:'p2',n:'Javier L.',a:'Navegación y pesca',c:'#00476B'},
+ {id:'p3',n:'Elena P.',a:'Sanitaria',c:'#12805A'},
+ {id:'p4',n:'Carlos V.',a:'Lucha contra incendios',c:'#B3261E'},
+ {id:'p5',n:'Nuria S.',a:'Radiocomunicaciones',c:'#6B4FD8'}
+];
+var AULA={a1:'Aula 1',a2:'Aula 2',pr:'Zona de prácticas',pi:'Piscina'};
+/* plantilla: lista de días; cada día [[profesor, aula, inicio, fin, contenido]...] */
+var CUR=[
+ {id:'FB',n:'Formación Básica en Seguridad Marítima',t:'P',h:'Datos de ejemplo',org:['Capitanía','Marina Mercante'],
+  pl:[[['p1','a1','09:00','13:00','Teoría'],['p1','a1','14:00','18:00','Teoría']],[['p4','a1','09:00','13:00','Incendios · teoría'],['p4','pr','14:00','18:00','Incendios · prácticas']],[['p1','pi','09:00','13:00','Supervivencia · prácticas'],['p3','a1','14:00','18:00','Primeros auxilios']],[['p3','a2','09:00','13:00','Primeros auxilios'],['p1','a1','14:00','18:00','Protección y evaluación']]]},
+ {id:'MP',n:'Marinero en la Pesca',t:'P',h:'Datos de ejemplo',org:['Pesca','Marina Mercante'],
+  pl:[[['p2','a1','09:00','13:00','Teoría'],['p2','a1','14:00','18:00','Teoría']],[['p2','a1','09:00','13:00','Teoría'],['p1','a1','14:00','18:00','Seguridad']],[['p2','pr','09:00','13:00','Prácticas'],['p2','pr','14:00','18:00','Prácticas']],[['p2','a1','09:00','13:00','Repaso y evaluación']]]},
+ {id:'PLP',n:'Patrón Local de Pesca',t:'P',h:'Datos de ejemplo',org:['Pesca','Capitanía'],
+  pl:[[['p2','a2','16:00','21:00','Navegación']],[['p2','a2','16:00','21:00','Navegación']],[['p5','a2','16:00','21:00','Radiocomunicaciones']],[['p2','a2','16:00','21:00','Pesca y legislación']],[['p2','pr','16:00','21:00','Prácticas de navegación']]]},
+ {id:'OG',n:'Operador General del SMSSM',t:'T',h:'Datos de ejemplo',org:['Capitanía'],
+  pl:[[['p5','a2','09:00','14:00','Teoría']],[['p5','a2','09:00','14:00','Teoría']],[['p5','a2','09:00','14:00','Simulador']],[['p5','a2','09:00','14:00','Simulador y evaluación']]]},
+ {id:'SEI',n:'Sanitaria Específica Inicial',t:'T',h:'Datos de ejemplo',org:['Capitanía'],
+  pl:[[['p3','a1','09:00','14:00','Teoría']],[['p3','a1','09:00','14:00','Teoría']],[['p3','a1','09:00','14:00','Casos y evaluación']]]},
+ {id:'ALCI',n:'Avanzado Lucha Contra Incendios',t:'P',h:'Datos de ejemplo',org:['Capitanía','Marina Mercante'],
+  pl:[[['p4','a1','09:00','13:00','Teoría'],['p4','pr','14:00','18:00','Prácticas']],[['p4','pr','09:00','13:00','Prácticas'],['p4','a1','14:00','18:00','Evaluación']]]}
+];
+CUR.forEach(function(c){var t=0;c.pl.forEach(function(d){d.forEach(function(s){t+=(+s[3].slice(0,2))-(+s[2].slice(0,2))})});c.h=t+' h (ejemplo)'});
+function cur(id){return CUR.filter(function(c){return c.id===id})[0]}
+function prof(id){return PROF.filter(function(p){return p.id===id})[0]}
+var NOM=['Andrés G.','Lucía F.','Rubén A.','Iván M.','Sara T.','Diego C.','Pablo R.','Noelia B.','Hugo D.','Álex P.','Marcos V.','Irene L.','Jorge S.','Óscar N.','Raúl H.','Celia O.','Adrián E.','Tomás Q.','Laura I.','Mario U.','Sergio K.','Paula J.'];
+function gen(c,start){var s=[],d=new Date(start);c.pl.forEach(function(day){while(d.getDay()===0||d.getDay()===6)d.setDate(d.getDate()+1);day.forEach(function(x){s.push({d:new Date(d),p:x[0],a:x[1],i:x[2],f:x[3],c:x[4]})});d.setDate(d.getDate()+1)});return s}
+var G=[];
+function addG(cid,start,n,signed){var c=cur(cid),g={id:cid+'-'+(G.filter(function(x){return x.c===cid}).length+1)+'/26',c:cid,s:gen(c,start),al:[]};for(var i=0;i<n;i++)g.al.push({n:NOM[(i*7+G.length*3)%NOM.length],f:i<signed,pay:i%5!==3});G.push(g);return g}
+addG('FB','2026-11-30',20,17);addG('MP','2026-11-23',18,18);addG('OG','2026-12-14',12,0);
+var IN=[{n:'Andrés G.',c:'FB',o:'WhatsApp',d:'Nombre, móvil, DNI pendiente, quiere renovar'},{n:'Lucía F.',c:'SEI',o:'Web',d:'Nombre, móvil, email, Formación Básica en vigor'},{n:'Empresa pesquera (3)',c:'MP',o:'WhatsApp',d:'3 tripulantes, contacto de la empresa, factura a empresa'}];
+var CERT=[];var sel={g:G[0].id,p:'p1'};
+
+/* ---- Navegación ---- */
+var TIT={gru:'Cursos y grupos',pro:'Profesores',alu:'Alumnos y matrícula',doc:'Documentación',ren:'Renovaciones',fac:'Facturación'};
+function go(v){$$('.side button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.v===v)});$$('.view').forEach(function(s){s.classList.toggle('on',s.id==='v-'+v)});$('#vt').textContent=TIT[v];R[v]&&R[v]();if(history.replaceState)history.replaceState(null,'','#'+v)}
+$$('.side button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.v)})});
+
+var R={};
+/* ---- Grupos ---- */
+R.gru=function(){
+ $('#glist').innerHTML=G.map(function(g){var c=cur(g.c),a=g.s[0].d,b=g.s[g.s.length-1].d;return '<button class="cc" data-g="'+g.id+'" aria-pressed="'+(g.id===sel.g)+'"><span class="chip '+(c.t==='P'?'urg':'web')+'">'+(c.t==='P'?'Teoría + prácticas':'Teoría')+'</span><b>'+esc(c.n)+'</b><small>Grupo '+g.id+' · '+f(a)+' – '+f(b)+' · '+g.al.length+' alumnos</small></button>'}).join('');
+ $$('#glist .cc').forEach(function(b){b.onclick=function(){sel.g=b.dataset.g;R.gru()}});
+ var g=G.filter(function(x){return x.id===sel.g})[0],c=cur(g.c);
+ var wk={};g.s.forEach(function(s){var k=s.d.toDateString();(wk[k]=wk[k]||[]).push(s)});
+ var days=Object.keys(wk).slice(0,5);
+ $('#gdet').innerHTML='<div class="row"><h4 style="margin-right:auto">'+esc(c.n)+' · grupo '+g.id+'</h4><span class="sync">'+g.s.length+' sesiones en el calendario de los docentes</span></div>'+
+ '<div class="cal">'+days.map(function(k){var d=new Date(k);return '<div class="d"><span>'+DIA[d.getDay()]+' '+f(d)+'</span>'+wk[k].map(function(s){var p=prof(s.p);return '<div class="ev" style="--c:'+p.c+'"><b>'+s.i+'–'+s.f+' · '+esc(p.n)+'</b>'+esc(s.c)+' · '+AULA[s.a]+'</div>'}).join('')+'</div>'}).join('')+'</div>'+
+ '<p class="mini">Cada sesión se puede cambiar (profesor, aula u hora) y el cambio llega al Google Calendar del docente. Si alguien coincide en dos aulas a la vez, avisa.</p>';
+ $('#ctab').innerHTML=CUR.map(function(c){var n=0;c.pl.forEach(function(d){n+=d.length});return '<tr><td data-label="Curso"><b>'+esc(c.n)+'</b></td><td data-label="Tipo">'+(c.t==='P'?'<span class="chip urg">Teoría + prácticas</span>':'<span class="chip web">Teoría</span>')+'</td><td data-label="Horas" class="num">'+c.h+'</td><td data-label="Plantilla">'+c.pl.length+' días · '+n+' sesiones</td><td data-label="Documentación">'+c.org.join(' · ')+'</td></tr>'}).join('');
+};
+$('#ng').onclick=function(){
+ var d=new Date(2027,0,11);
+ $('#dlgi').innerHTML='<button class="xc" data-close aria-label="Cerrar">×</button><h3 id="dlg-t">Nuevo grupo desde plantilla</h3><label>Curso<select id="nc">'+CUR.map(function(c){return '<option value="'+c.id+'">'+esc(c.n)+'</option>'}).join('')+'</select></label><label>Primer día<input type="date" id="nd" value="2027-01-11"></label><label>Plazas<input type="number" id="nn" value="20" min="1" max="22"></label><p class="mini">Se crean las sesiones con su profesor, aula y horario según la plantilla del curso. Luego se puede retocar todo.</p><div class="row"><button class="btn2 pri" id="nok">Crear grupo</button><button class="btn2" data-close>Cancelar</button></div>';
+ var dl=$('#dlg');dl.showModal();
+ $$('[data-close]',dl).forEach(function(b){b.onclick=function(){dl.close()}});
+ $('#nok').onclick=function(){var v=$('#nd').value||'2027-01-11';var g=addG($('#nc').value,v,Math.min(22,Math.max(1,+$('#nn').value||20)),0);sel.g=g.id;dl.close();R.gru();fillDg();toast('Grupo '+g.id+' creado con '+g.s.length+' sesiones y enviado a Google Calendar');setTimeout(function(){$('#gdet').scrollIntoView({behavior:'smooth',block:'start'})},50)};
+};
+$('#dlg').addEventListener('click',function(e){if(e.target===this)this.close()});
+
+/* ---- Profesores ---- */
+R.pro=function(){
+ function stats(p){var gs={},h=0;G.forEach(function(g){g.s.forEach(function(s){if(s.p===p.id){gs[g.id]=g;h+=(+s.f.slice(0,2))-(+s.i.slice(0,2))}})});return {g:Object.keys(gs).map(function(k){return gs[k]}),h:h}}
+ $('#plist').innerHTML=PROF.map(function(p){var s=stats(p);return '<button class="cc" data-p="'+p.id+'" aria-pressed="'+(p.id===sel.p)+'"><span class="pr"><span class="av" style="background:'+p.c+'">'+p.n.slice(0,2).toUpperCase()+'</span><span><b>'+esc(p.n)+'</b><br><small>'+esc(p.a)+'</small></span></span><small>'+s.g.length+' grupos · '+s.h+' h programadas</small></button>'}).join('');
+ $$('#plist .cc').forEach(function(b){b.onclick=function(){sel.p=b.dataset.p;R.pro()}});
+ var p=prof(sel.p),s=stats(p);
+ $('#pdet').innerHTML='<div class="row"><h4 style="margin-right:auto">'+esc(p.n)+' · '+esc(p.a)+'</h4><span class="sync">Ve sus clases en Google Calendar</span></div>'+
+ '<div class="two" style="gap:12px"><div><p class="k">Ficha</p><p class="mini">DNI, titulación, datos para factura o nómina y documentos acreditativos. <span class="ej">Ocultos en la demo</span></p></div><div><p class="k">Grupos vinculados</p>'+(s.g.length?s.g.map(function(g){var n=0,h=0;g.s.forEach(function(x){if(x.p===p.id){n++;h+=(+x.f.slice(0,2))-(+x.i.slice(0,2))}});return '<p>'+esc(cur(g.c).n)+' · '+g.id+' <span class="mini">· '+n+' sesiones · '+h+' h</span></p>'}).join(''):'<p class="mini">Sin grupos ahora.</p>')+'</div></div>'+
+ '<p class="mini">Horas del mes por profesor: el dato que hoy sacáis a mano para facturas y nóminas.</p>';
+};
+
+/* ---- Alumnos ---- */
+R.alu=function(){
+ $('#nmat').textContent=IN.length;$('#nmat').style.display=IN.length?'':'none';
+ $('#intab').innerHTML=IN.length?IN.map(function(x,i){return '<tr><td data-label="Persona"><b>'+esc(x.n)+'</b></td><td data-label="Curso">'+esc(cur(x.c).n)+'</td><td data-label="Origen"><span class="chip '+(x.o==='WhatsApp'?'wa':'web')+'">'+x.o+'</span></td><td data-label="Datos">'+esc(x.d)+'</td><td><button class="btn2 pri" data-i="'+i+'">Matricular</button></td></tr>'}).join(''):'<tr><td colspan="5" class="mini">Al día: no hay plazas reservadas pendientes de matricular.</td></tr>';
+ $$('#intab [data-i]').forEach(function(b){b.onclick=function(){var x=IN.splice(+b.dataset.i,1)[0];var g=G.filter(function(g){return g.c===x.c})[0]||addG(x.c,'2027-01-18',0,0);var n=/\((\d+)\)/.exec(x.n),k=n?+n[1]:1;for(var j=0;j<k;j++)g.al.unshift({n:k>1?'Tripulante '+(j+1):x.n,f:false,pay:false,nw:1});R.alu();toast(x.n+' → alumno y matrícula en '+g.id+'. 0 campos tecleados.')}});
+ var rows=[];G.forEach(function(g){g.al.slice(0,g.al.some(function(a){return a.nw})?6:3).forEach(function(a){rows.push([a,g])})});
+ $('#mtab').innerHTML=rows.map(function(r){var a=r[0],g=r[1];return '<tr'+(a.nw?' style="background:var(--good-soft)"':'')+'><td data-label="Alumno"><b>'+esc(a.n)+'</b>'+(a.nw?' <span class="chip ok">Nuevo</span>':'')+'</td><td data-label="Grupo">'+esc(cur(g.c).n)+' · '+g.id+'</td><td data-label="Ficha">'+(a.f?'<span class="chip ok">Firmada en tablet</span>':'<span class="chip cad">Pendiente de firma</span>')+'</td><td data-label="Pago">'+(a.pay?'<span class="chip ok">Pagado</span>':'<span class="chip cad">Pendiente</span>')+'</td></tr>'}).join('');
+ $('#mt').textContent='Matriculados (muestra de cada grupo)';
+};
+
+/* ---- Documentación ---- */
+var cg=null,curA=0;
+function fillDg(){$('#dg').innerHTML=G.map(function(g){return '<option value="'+g.id+'">'+esc(cur(g.c).n)+' · '+g.id+'</option>'}).join('');$('#dg').value=sel.g}
+$('#dg').onchange=function(){sel.g=this.value;R.doc()};
+R.doc=function(){
+ cg=G.filter(function(x){return x.id===sel.g})[0];var c=cur(cg.c);$('#dg').value=cg.id;
+ var fi=cg.al.filter(function(a){return a.f}).length,P=c.t==='P';
+ $('#dinfo').textContent=cg.al.length+' alumnos · '+cg.s.length+' sesiones';
+ $('#dprog').style.width=(cg.al.length?fi/cg.al.length*100:0)+'%';
+ $('#dsig').textContent=fi+' de '+cg.al.length+' fichas firmadas';
+ var D=[
+  ['fichas','PDF','Todas las fichas del grupo + protección de datos','1 PDF con '+cg.al.length+' páginas, ya firmadas',true],
+  ['asis','PDF','Listado de asistencia','Sale del horario del grupo: '+cg.s.length+' sesiones con su profesor',true],
+  ['ini','DOC','Comunicación de inicio · '+c.org[0],'Plantilla oficial con alumnos, fechas y profesor',true],
+  ['prac','DOC','Listado de prácticas · Marina Mercante',P?'Sesiones prácticas, lugar y profesor':'No aplica: curso solo de teoría',P],
+  ['fin','DOC','Comunicación de fin y actas · '+c.org.join(' / '),'Cuando se cierre el grupo',true]
+ ];
+ $('#dlist').innerHTML=D.map(function(d,i){return '<div class="doc'+(d[4]?'':' off')+'"><span class="ic">'+d[1]+'</span><span><b>'+esc(d[2])+'</b><small>'+esc(d[3])+'</small></span>'+(d[4]?'<button class="btn2'+(i===0?' pri':'')+'" data-d="'+d[0]+'"><svg class="i"><use href="#i-dl"/></svg>'+(i===0?'Descargar todas las fichas':'Generar')+'</button>':'<span class="chip">No aplica</span>')+'</div>'}).join('');
+ $$('#dlist [data-d]').forEach(function(b){b.onclick=function(){pdf(b.dataset.d)}});
+ curA=cg.al.findIndex(function(a){return !a.f});if(curA<0)curA=0;
+ $('#tname').textContent=cg.al.length?('Ficha de '+cg.al[curA].n+(cg.al[curA].f?' · ya firmada':'')):'Grupo sin alumnos';
+ clearPad();
+};
+function pdf(kind){
+ var J=window.jspdf&&window.jspdf.jsPDF;var c=cur(cg.c);
+ if(!J){toast('Simulación: se descargaría el PDF ('+cg.al.length+' fichas).');return}
+ var doc=new J({unit:'mm',format:'a4'}),W=210;
+ function head(t){doc.setFillColor(0,71,107);doc.rect(0,0,W,24,'F');doc.setTextColor(255);doc.setFont('helvetica','bold');doc.setFontSize(13);doc.text('CANCOMAR · '+t,14,15);doc.setFontSize(8);doc.text('DATOS DE EJEMPLO · DEMO QUALIVO',W-14,15,{align:'right'});doc.setTextColor(13,34,51)}
+ function mark(){doc.setTextColor(230,200,150);doc.setFontSize(40);doc.text('DATOS DE EJEMPLO',W/2,170,{align:'center',angle:30});doc.setTextColor(13,34,51)}
+ var a0=cg.s[0].d,a1=cg.s[cg.s.length-1].d,name;
+ if(kind==='fichas'){
+  cg.al.forEach(function(a,i){if(i)doc.addPage();mark();head('Ficha del alumno');doc.setFont('helvetica','normal');doc.setFontSize(11);
+   var y=40;[['Curso',c.n],['Grupo',cg.id],['Fechas',fy(a0)+' – '+fy(a1)],['Alumno',a.n+' (ejemplo)'],['DNI','[oculto en la demo]'],['Teléfono / email','[oculto en la demo]'],['Titulaciones previas','[según CRM]']].forEach(function(r){doc.setFont('helvetica','bold');doc.text(r[0]+':',14,y);doc.setFont('helvetica','normal');doc.text(String(r[1]),62,y);y+=9});
+   y+=6;doc.setFont('helvetica','bold');doc.text('Protección de datos',14,y);y+=7;doc.setFont('helvetica','normal');doc.setFontSize(9.5);
+   doc.text(doc.splitTextToSize('Aquí irá el texto de protección de datos de CANCOMAR. En la versión real se usa vuestro documento, con el consentimiento marcado por el alumno y la fecha y hora de la firma en tablet.',W-28),14,y);
+   y+=30;doc.rect(14,y,90,32);doc.setFontSize(9);doc.text(a.f?'Firmado en tablet · '+fy(a0)+' 08:52':'Pendiente de firma',16,y+38);
+   if(a.f){doc.setDrawColor(0,113,159);doc.setLineWidth(.7);doc.lines([[8,-6],[6,8],[10,-10],[8,6],[12,-4]],24,y+20)}doc.setDrawColor(0);doc.setLineWidth(.2);
+   doc.setFontSize(8);doc.text('Página '+(i+1)+' de '+cg.al.length,W-14,287,{align:'right'})});
+  name='fichas-'+cg.id.replace('/','-')+'.pdf';
+ } else if(kind==='asis'){
+  var days=[];cg.s.forEach(function(s){var k=f(s.d);if(days.indexOf(k)<0)days.push(k)});
+  head('Listado de asistencia');mark();doc.setFontSize(10);doc.text(c.n+' · grupo '+cg.id+' · '+fy(a0)+' – '+fy(a1),14,34);
+  var x0=14,cw=Math.min(28,(W-28-56)/days.length),y=44;doc.setFont('helvetica','bold');doc.setFontSize(8.5);doc.text('Alumno',x0,y);days.forEach(function(d,i){doc.text(d,x0+56+i*cw,y)});doc.setFont('helvetica','normal');
+  cg.al.forEach(function(a,i){y+=9;doc.text(a.n,x0,y);days.forEach(function(d,j){doc.rect(x0+56+j*cw,y-5,cw-3,7)})});
+  y+=14;doc.text('Profesores: '+cg.s.map(function(s){return prof(s.p).n}).filter(function(v,i,s){return s.indexOf(v)===i}).join(', ')+' (ejemplo)',14,y);
+  name='asistencia-'+cg.id.replace('/','-')+'.pdf';
+ } else {
+  var T={ini:'Comunicación de inicio · '+c.org[0],prac:'Listado de prácticas · Marina Mercante',fin:'Comunicación de fin · '+c.org.join(' / ')}[kind];
+  head(T);mark();doc.setFontSize(10);var y=38;
+  doc.text(doc.splitTextToSize('Ejemplo de cómo se rellena una plantilla. La versión real usará el impreso oficial vigente que nos facilitéis, con sus mismos campos.',W-28),14,y);y+=16;
+  [['Curso',c.n],['Grupo',cg.id],['Fechas',fy(a0)+' – '+fy(a1)],['Alumnos',cg.al.length],['Profesor responsable',prof(cg.s[0].p).n+' (ejemplo)']].forEach(function(r){doc.setFont('helvetica','bold');doc.text(r[0]+':',14,y);doc.setFont('helvetica','normal');doc.text(String(r[1]),64,y);y+=8});
+  if(kind==='prac'){y+=4;doc.setFont('helvetica','bold');doc.text('Sesiones prácticas',14,y);doc.setFont('helvetica','normal');cg.s.filter(function(s){return /[Pp]ráctic/.test(s.c)}).forEach(function(s){y+=7;doc.text(fy(s.d)+' · '+s.i+'–'+s.f+' · '+AULA[s.a]+' · '+prof(s.p).n,18,y)})}
+  y+=10;doc.setFont('helvetica','bold');doc.text('Relación de alumnos',14,y);doc.setFont('helvetica','normal');cg.al.forEach(function(a,i){y+=6;if(y>280){doc.addPage();y=20}doc.text((i+1)+'. '+a.n+' · DNI [oculto]',18,y)});
+  name=kind+'-'+cg.id.replace('/','-')+'.pdf';
+ }
+ doc.save(name);toast('Descargado '+name+' (datos de ejemplo)');
+}
+/* firma */
+var pad=$('#pad'),ctx=pad.getContext('2d'),dr=false,ink=false;
+function clearPad(){ctx.clearRect(0,0,pad.width,pad.height);ctx.strokeStyle='#D5E8F3';ctx.beginPath();ctx.moveTo(20,130);ctx.lineTo(460,130);ctx.stroke();ctx.fillStyle='#9DB6C7';ctx.font='12px sans-serif';ctx.fillText('Firma aquí con el dedo o el ratón',20,150);ink=false}
+function pt(e){var r=pad.getBoundingClientRect();return [(e.clientX-r.left)*pad.width/r.width,(e.clientY-r.top)*pad.height/r.height]}
+pad.addEventListener('pointerdown',function(e){dr=true;pad.setPointerCapture(e.pointerId);var p=pt(e);ctx.strokeStyle='#00476B';ctx.lineWidth=2.5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(p[0],p[1])});
+pad.addEventListener('pointermove',function(e){if(!dr)return;var p=pt(e);ctx.lineTo(p[0],p[1]);ctx.stroke();ink=true});
+pad.addEventListener('pointerup',function(){dr=false});
+$('#clr').onclick=clearPad;
+$('#sign').onclick=function(){if(!cg||!cg.al.length)return;if(!ink){toast('Falta la firma');return}if(!$('#ck').checked){toast('Falta aceptar la protección de datos');return}cg.al[curA].f=true;toast('Ficha de '+cg.al[curA].n+' firmada y guardada en el grupo');R.doc()};
+
+/* ---- Renovaciones ---- */
+var sent={};
+R.ren=function(){
+ if(!CERT.length){var base=[['Formación Básica en Seguridad Marítima','2022-03-14'],['Sanitaria Específica Inicial','2021-12-09'],['Avanzado Lucha Contra Incendios','2022-05-20'],['Operador General del SMSSM','2022-01-27'],['Formación Básica en Seguridad Marítima','2022-08-02'],['Marinero en la Pesca','2023-02-10'],['Avanzado Lucha Contra Incendios','2021-12-18']];
+  base.forEach(function(b,i){var e=new Date(b[1]),x=new Date(e);x.setFullYear(x.getFullYear()+5);CERT.push({n:NOM[(i*5+2)%NOM.length],c:b[0],e:e,x:x})})}
+ var now=new Date(2026,10,19),lim=new Date(2027,4,19);
+ $('#rk1').textContent=CERT.length;$('#rk2').textContent=CERT.filter(function(c){return c.x<=lim}).length;$('#rk3').textContent=Object.keys(sent).length;
+ $('#rtab').innerHTML=CERT.slice().sort(function(a,b){return a.x-b.x}).map(function(c){var i=CERT.indexOf(c),soon=c.x<=lim;return '<tr><td data-label="Alumno"><b>'+esc(c.n)+'</b></td><td data-label="Certificado">'+esc(c.c)+'</td><td data-label="Emitido">'+fy(c.e)+'</td><td data-label="Caduca">'+(soon?'<span class="chip cad">'+fy(c.x)+'</span>':fy(c.x))+'</td><td>'+(sent[i]?'<span class="chip ok">En el CRM</span>':'<button class="btn2" data-r="'+i+'">Enviar al CRM</button>')+'</td></tr>'}).join('');
+ $$('#rtab [data-r]').forEach(function(b){b.onclick=function(){sent[b.dataset.r]=1;R.ren();toast('Aviso de renovación preparado en el CRM para aprobar')}});
+ $('#rall').onclick=function(){var n=0;CERT.forEach(function(c,i){if(c.x<=lim&&!sent[i]){sent[i]=1;n++}});R.ren();toast(n?n+' avisos preparados en el CRM':'Ya estaban todos enviados')};
+};
+
+/* ---- Facturación ---- */
+var FAC=null,remesa=false;
+R.fac=function(){
+ if(!FAC){FAC=[];var cl=NOM.slice(0,7).concat(['Empresa pesquera (ej.)','Naviera de pasaje (ej.)']);cl.forEach(function(n,i){var c=CUR[i%CUR.length];FAC.push({id:'F26-'+(312+i),n:n,c:c.n,imp:[180,240,420,260,150,310,280][i%7]*(n.indexOf('Empresa')>=0||n.indexOf('Naviera')>=0?3:1),st:['cob','cob','pen','ade','cob','pen','ade','cob','pen'][i]})})}
+ if(remesa)FAC.forEach(function(x){if(x.st==='ade')x.st='rem'});
+ var L={cob:['ok','Cobrada'],pen:['cad','Pendiente'],ade:['web','Adeudo domiciliado'],rem:['emp','En remesa']};
+ $('#fk1').textContent=FAC.length;$('#fk2').textContent=FAC.filter(function(x){return x.st==='cob'}).length;$('#fk3').textContent=FAC.filter(function(x){return x.st==='pen'}).length;$('#fk4').textContent=FAC.filter(function(x){return x.st==='rem'}).length;
+ $('#ftab').innerHTML=FAC.map(function(x){return '<tr><td data-label="Factura" class="num">'+x.id+'</td><td data-label="Cliente"><b>'+esc(x.n)+'</b></td><td data-label="Concepto">'+esc(x.c)+'</td><td data-label="Importe" class="num">'+x.imp.toLocaleString('es-ES')+' € <span class="mini">ej.</span></td><td data-label="Estado"><span class="chip '+L[x.st][0]+'">'+L[x.st][1]+'</span></td></tr>'}).join('');
+};
+$('#rem').onclick=function(){remesa=true;R.fac();toast('Remesa de adeudos preparada (fichero para el banco). Simulación.')};
+$('#csv').onclick=function(){if(!FAC)R.fac();var rows=[['factura','fecha','cliente','concepto','base','iva','total','estado','nota']];FAC.forEach(function(x){rows.push([x.id,'2026-11-30',x.n,x.c,x.imp,'exento (a revisar)',x.imp,x.st,'DATOS DE EJEMPLO'])});
+ var b=new Blob(['﻿'+rows.map(function(r){return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"'}).join(';')}).join('\n')],{type:'text/csv'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='contabilidad-2026-11-EJEMPLO.csv';document.body.appendChild(a);a.click();a.remove();toast('Exportado contabilidad-2026-11-EJEMPLO.csv')};
+
+fillDg();
+var h=(location.hash||'').slice(1);go(TIT[h]?h:'gru');
+})();
+</script>
+</body>
+</html>
