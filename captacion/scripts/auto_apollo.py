@@ -27,6 +27,16 @@ FAMILIAS = [
     ["coaching", "idiomas", "language school", "escuela de negocios", "business school", "formacion para empresas"],
     ["consultoria de recursos humanos", "franquicias", "mentoring", "consultoria estrategica", "marketing training"],
 ]
+# Modo --edu (Maikel 19-nov: «atacar a todas las escuelas de formación online de España»):
+# solo formación/educación, todo a Meta formación v2, más páginas por búsqueda.
+EDU = [
+    ["formacion online", "cursos online", "e-learning", "elearning", "online education", "online courses", "educacion online", "formacion a distancia"],
+    ["academia online", "escuela online", "master online", "postgrado", "formacion profesional", "fp online", "certificaciones", "titulos propios"],
+    ["oposiciones", "preparacion oposiciones", "academia de oposiciones", "idiomas online", "ingles online", "clases online", "academia de idiomas"],
+    ["formacion para empresas", "formacion bonificada", "fundae", "formacion continua", "escuela de negocios", "business school", "formacion tecnica"],
+    ["escuela de diseño", "bootcamp", "escuela de marketing", "escuela de fotografia", "escuela de cocina", "escuela de musica", "escuela de danza", "escuela de yoga"],
+    ["academia", "escuela", "formacion", "training", "education", "cursos", "masters", "educacion"],
+]
 NO_ICP = re.compile(r"abogad|legal|law|asociaci|federaci|gremi|fundaci|colegio|universidad|universitat|ayuntamiento|camara|"
                     r"agencia|marketing digital|software|seleccion|recruit|staffing|talent|empleo|inmobiliaria|clinica|dental", re.I)
 
@@ -55,6 +65,12 @@ def main():
     objetivo = int(args[1]) if len(args) > 1 else 100
     max_cred = int(args[2]) if len(args) > 2 else 250
     dry = "--dry" in sys.argv
+    edu = "--edu" in sys.argv
+    global FAMILIAS, NO_ICP
+    pref, npag, mult = ("e", 10, 6) if edu else ("", 3, 3)
+    if edu:
+        FAMILIAS = EDU
+        NO_ICP = re.compile(NO_ICP.pattern.replace("|empleo", ""), re.I)
 
     env = set(json.load(open(os.path.join(S, "enviados_reales.json")))["correos"])
     env_dom = {e.split("@")[1] for e in env if "@" in e}
@@ -65,8 +81,8 @@ def main():
     # 1-2. empresas nuevas
     orgs = {}
     for fi, fam in enumerate(FAMILIAS):
-        pag = estado["pagina"].get(str(fi), 1)
-        for _ in range(3):
+        pag = estado["pagina"].get(pref + str(fi), 1)
+        for _ in range(npag):
             r = api("organizations/search", {"organization_locations": ["Spain"], "organization_num_employees_ranges": ["5,10", "11,50"],
                                              "currently_using_any_of_technology_uids": ADS, "q_organization_keyword_tags": fam,
                                              "per_page": 100, "page": pag})
@@ -81,10 +97,10 @@ def main():
                 orgs[oid] = dom; vistas.add(oid)
             if not lista:
                 pag = 1; break
-            if len(orgs) >= objetivo * 3:
+            if len(orgs) >= objetivo * mult:
                 break
-        estado["pagina"][str(fi)] = pag
-        if len(orgs) >= objetivo * 3:
+        estado["pagina"][pref + str(fi)] = pag
+        if len(orgs) >= objetivo * mult:
             break
     print(f"empresas nuevas candidatas: {len(orgs)}")
 
@@ -92,12 +108,12 @@ def main():
     ids, ya = [], set()
     oids = list(orgs)
     for i in range(0, len(oids), 50):
-        r = api("mixed_people/api_search", {"organization_ids": oids[i:i + 50], "person_seniorities": ["owner", "founder", "c_suite"],
+        r = api("mixed_people/api_search", {"organization_ids": oids[i:i + 50], "person_seniorities": ["owner", "founder", "c_suite"] + (["director", "head"] if edu else []),
                                             "contact_email_status": ["verified"], "person_locations": ["Spain"], "per_page": 100})
-        rank = lambda t: 0 if re.search(r"ceo|founder|fundador|director general|gerente|owner|propietari|socio", (t or "").lower()) else 1
+        rank = lambda t: 0 if re.search(r"ceo|founder|fundador|director general|directora general|gerente|owner|propietari|socio|director acad|directora acad|director de la escuela|directora de la escuela", (t or "").lower()) else 1
         for p in sorted(r.get("people") or [], key=lambda p: rank(p.get("title"))):
             on = (p.get("organization") or {}).get("name")
-            if not p.get("has_email") or on in ya or re.search(r"\bcto\b|technology|sistemas", (p.get("title") or "").lower()):
+            if not p.get("has_email") or on in ya or re.search(r"\bcto\b|technology|sistemas|financ|rrhh|recursos humanos|human resources|it\b|ingenier", (p.get("title") or "").lower()):
                 continue
             ya.add(on); ids.append(p["id"])
     print(f"decisores con email verificado: {len(ids)}")
@@ -116,7 +132,7 @@ def main():
                               emp=o.get("estimated_num_employees"), first_name=m.get("first_name"), last_name=m.get("last_name"),
                               company_name=o.get("name"), title=m.get("title")))
     hoy = time.strftime("%Y%m%d")
-    json.dump(filas, open(os.path.join(S, f"auto_revelados_{hoy}.json"), "w"), ensure_ascii=False, indent=1)
+    json.dump(filas, open(os.path.join(S, f"auto_revelados_{hoy}_{time.strftime('%H%M')}.json"), "w"), ensure_ascii=False, indent=1)
 
     # 5. filtros y carga
     ok, caidas = [], {}
@@ -129,9 +145,9 @@ def main():
         elif e in env: por = "ya contactado"
         if por: caidas[por] = caidas.get(por, 0) + 1; continue
         r = dict(r); r.pop("emp")
-        r["puerta"] = "meta_ads" if re.search(r"education|e-learning|training|higher", r["industry"] or "") else "google_ads"
+        r["puerta"] = "meta_ads" if edu or re.search(r"education|e-learning|training|higher", r["industry"] or "") else "google_ads"
         ok.append(r)
-    fich = os.path.join(S, f"auto_{hoy}_ok.json")
+    fich = os.path.join(S, (f"auto_edu_{hoy}_{time.strftime('%H%M')}_ok.json" if edu else f"auto_{hoy}_ok.json"))
     json.dump(ok, open(fich, "w"), ensure_ascii=False, indent=1)
     estado["vistas"] = sorted(vistas)
     json.dump(estado, open(os.path.join(S, "apollo_orgs_vistas.json"), "w"))
