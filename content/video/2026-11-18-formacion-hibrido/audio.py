@@ -14,14 +14,14 @@ def lufs(f, t=None):
 W1 = json.load(open(f'{V}/{VZ}1.json')); W2 = json.load(open(f'{V}/{VZ}2.json'))
 def ix(W, w, desde=0): return next((i for i in range(desde, len(W)) if W[i]['w'].lower().strip('¿?.,:') == w), 0)
 RQ = 3.1; OBJ = -17.0
-t1 = .15; rq = round(t1 + W1[-1]['e'] + .50, 2); t2 = round(rq + RQ + .55, 2); FIN = round(t2 + W2[-1]['e'] + 1.5, 2)
+t1 = .15; rq = round(t1 + W1[-1]['e'] + (.35 if VZ == 'm' else .50), 2); t2 = round(rq + RQ + (.35 if VZ == 'm' else .55), 2); FIN = round(t2 + W2[-1]['e'] + (1.2 if VZ == 'm' else 1.5), 2)
 p1 = lambda w, d=0: round(t1 + W1[ix(W1, w, d)]['s'], 2); p2 = lambda w, d=0: round(t2 + W2[ix(W2, w, d)]['s'], 2)
 ipr = ix(W1, 'momento'); iin = ix(W1, 'interés'); e2 = p1('en') - .12
 T = {'a': t1, 'pd': p1('matrículas'), 'e2': e2, 'g': e2 + .2, 'ld': p1('implementamos') - .1, 'sc': p1('laura') - .3, 'lau': p1('laura') - .1,
      'f2': p1('interés') - .25, 'sco': p1('por', iin) - .15, 'pu': p1('puntúa'), 'ay': p1('avisa') - .1, 'crm': p1('y', ipr) - .1, 'og': p1('prioridad') - .1,
      'e3': p1('laura', ipr) - .15, 's3': p1('si', ipr) - .1, 'll': p1('raquel') - .25, 'rq': rq,
      'e4': t2 - .1, 'ops': p2('así') - .15, 'ges': p2('mejoramos') - .1, 'e6': p2('descubre') - .15, 'sol': p2('solicita'), 'FIN': FIN}
-if VZ == 'n':     # gancho «fantasma, planta rodadora y cuerda» + cuerpo de Aaron sin la frase del CRM
+if VZ in ('n', 'm'):     # gancho «fantasma, planta rodadora y cuerda» + cuerpo de Aaron sin la frase del CRM
     il = ix(W1, 'laura'); e2 = p1('en', ix(W1, 'seguimiento')) - .12
     T.update({'pero': p1('algunos') - .12, 'otros': p1('otros') - .12, 'yotros': p1('y', ix(W1, 'llamada')) - .1, 'e2': e2, 'g': e2, 'ld': p1('implementamos') - .1,
               'sc': p1('laura') - .3, 'lau': p1('laura') - .1, 'f2': p1('interés') - .25, 'sco': p1('por', ix(W1, 'interés')) - .15, 'pu': p1('puntúa'), 'ay': p1('avisa') - .1,
@@ -49,7 +49,7 @@ fc = (f'[0:a]aformat=sample_rates=44100:channel_layouts=stereo,volume={g1:.2f}dB
       f'[3:a]aformat=sample_rates=44100:channel_layouts=stereo,atrim=0:{FIN},volume={MG}dB,lowpass=f={MLP},volume={MV},afade=t=in:st=0:d=0.8,afade=t=out:st={FIN-1.6}:d=1.6[m];'
       f'[m][sc]sidechaincompress=threshold=0.03:ratio=3:attack=40:release=700[md];[v][md]amix=inputs=2:normalize=0,loudnorm=I=-15:TP=-1.5:LRA=9[out]')
 SFX = ''
-if VZ == 'n':     # efectos discretos: «puf» del fantasma, viento y silbido de la cuerda
+if VZ in ('n', 'm'):     # efectos discretos: «puf» del fantasma, viento y silbido de la cuerda
     d1, d2, d3 = ms(T['pero'] + 1.25), ms(T['otros'] + .25), ms(T['yotros'] + 1.55)
     SFX = (f"anoisesrc=color=pink:d=0.35:r=44100:a=0.5,lowpass=f=1400,afade=t=in:st=0:d=0.03,afade=t=out:st=0.05:d=0.3,volume=0.5,aformat=channel_layouts=stereo,adelay={d1}|{d1}[x1];"
            f"anoisesrc=color=pink:d=1.5:r=44100:a=0.5,bandpass=f=650:w=500,afade=t=in:st=0:d=0.5,afade=t=out:st=0.8:d=0.7,volume=0.55,aformat=channel_layouts=stereo,adelay={d2}|{d2}[x2];"
