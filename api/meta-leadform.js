@@ -185,7 +185,9 @@ const FORMULARIOS_SECTOR = {
   // Prioridad A/B/C por coherencia en api/_form-v3.js. «No invertimos» no se filtra (caso Cancomar).
   '1183570324226136': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3-17nov' },
   // Misma versión con la página de gracias en /formacion/agenda/ (17-nov, Maikel).
-  '1024313877362865': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3b-17nov' }
+  '1024313877362865': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3b-17nov' },
+  // 19-nov-2026 (Maikel): V3c, mismas 4 preguntas; portada para escuelas de formación online y especializada.
+  '1435491215415333': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3c-19nov-escuelas-online' }
 };
 
 async function nombreFormulario(formId) {
