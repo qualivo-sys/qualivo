@@ -70,6 +70,7 @@ function preparar(b) {
   };
   const nota = [
     'Ha hecho el test de sueño de la web (' + dia + ').',
+    'Datos que ha escrito: ' + nombre + ' · ' + email + ' · ' + tel + '.',
     'Patrón dominante: ' + (PATRONES[patron] || 'sin dato') + (nivel ? ' · nivel ' + nivel : '') + (b.indice != null ? ' (' + Number(b.indice) + '/6)' : '') + '.',
     r.sueno.length ? 'Respuestas: ' + r.sueno.map(function (x) { return x[0] + ' ' + x[1]; }).join(' · ') + '.' : '',
     llamada ? 'ACEPTA QUE LA LLAMEN. Texto aceptado: «' + TEXTO_LLAMADA + '» Fecha: ' + dia + '. Formulario: test-patrones.' : 'NO ha dado permiso para llamarla: contactar solo por email o WhatsApp si ella escribe.',
@@ -103,19 +104,30 @@ async function handler(req, res) {
   if (recientes.size > 5000) recientes.clear();
   recientes.set(p.clave, ahora);
   try {
-    const c = await ghl('/contacts/upsert', 'POST', Object.assign({ locationId: loc }, p.contacto));
-    const id = (c.contact || {}).id;
+    // Se busca SOLO por email. No se usa el «upsert» de Kliking porque también junta por teléfono y hay
+    // muchos contactos con teléfonos inventados (600 000 000): pisaría el nombre y el email de otra persona.
+    // Si ya existe, no se cambian su nombre, email ni teléfono: lo que ha escrito va en la nota.
+    const ya = await ghl('/contacts/search/duplicate?locationId=' + encodeURIComponent(loc) + '&email=' + encodeURIComponent(p.clave), 'GET').catch(function () { return {}; });
+    let id = (ya.contact || {}).id;
+    if (id) {
+      if (!ya.contact.phone) await ghl('/contacts/' + id, 'PUT', { phone: p.contacto.phone }).catch(function () {});
+    } else {
+      const nuevo = Object.assign({ locationId: loc, source: 'Test patrones web' }, p.contacto);
+      let c = await ghl('/contacts/', 'POST', nuevo).catch(function () { return null; });
+      // Si Kliking no deja crearlo porque el teléfono ya es de otro contacto, se crea sin teléfono.
+      if (!c || !(c.contact || {}).id) { delete nuevo.phone; c = await ghl('/contacts/', 'POST', nuevo); }
+      id = (c.contact || {}).id;
+    }
     if (!id) throw new Error('sin contacto');
-    // Etiquetas aparte (se suman a las que ya tenga) y el origen solo si es nueva, para no pisar su primer registro.
-    await Promise.all([
-      ghl('/contacts/' + id + '/tags', 'POST', { tags: p.tags }).catch(function () {}),
-      c.new ? ghl('/contacts/' + id, 'PUT', { source: 'Test patrones web' }).catch(function () {}) : null
-    ]);
+    await ghl('/contacts/' + id + '/tags', 'POST', { tags: p.tags }).catch(function () {});
     // Pruebas internas (@qualivo.io): la tarea va al usuario API de Maikel y no molesta a las comerciales.
     const avisar = /@qualivo\.io$/.test(p.clave) ? [MAIKEL_API] : String(process.env.NURIA_TEST_AVISAR || PEPI).split(',').map(function (s) { return s.trim(); }).filter(Boolean);
     const vence = new Date(ahora + 30 * 60 * 1000).toISOString();
     await Promise.all([
-      ghl('/opportunities/upsert', 'POST', Object.assign({ locationId: loc, pipelineId: PIPELINE, contactId: id }, p.oportunidad)).catch(function () {}),
+      // Si ya está en el pipeline (abierta), no se mueve de etapa: la comercial ve la tarea y la nota.
+      ghl('/opportunities/search?location_id=' + encodeURIComponent(loc) + '&pipeline_id=' + PIPELINE + '&contact_id=' + id + '&status=open', 'GET')
+        .then(function (o) { if (!(o.opportunities || []).length) return ghl('/opportunities/', 'POST', Object.assign({ locationId: loc, pipelineId: PIPELINE, contactId: id }, p.oportunidad)); })
+        .catch(function () {}),
       ghl('/contacts/' + id + '/notes', 'POST', { body: p.nota }).catch(function () {})
     ].concat(avisar.map(function (u) {
       return ghl('/contacts/' + id + '/tasks', 'POST', Object.assign({ dueDate: vence, assignedTo: u }, p.tarea)).catch(function () {});
