@@ -153,7 +153,7 @@ td.bad,td.bad b{color:#B42318}
     <div class="g2" style="margin-top:0"><div class="card"><h2>Por comunidad</h2><div class="bars" id="bc"></div></div><div class="card"><h2>Por forma de pago</h2><div class="bars" id="bp"></div></div></div>
     <div class="card tw" style="margin-top:16px"><table id="tm"></table></div></section>
 
-  <section id="t-pub" hidden><h2>Publicidad en Meta</h2><p class="sub" id="pub-sub"></p>
+  <section id="t-pub" hidden><div id="tot"></div><h2>Publicidad en Meta</h2><p class="sub" id="pub-sub"></p>
     <div class="kpis" id="pk" style="grid-template-columns:repeat(4,minmax(0,1fr))"></div>
     <div class="card" id="cruce" style="margin-top:16px;border-left:5px solid var(--na)"></div>
     <div class="g2">
@@ -162,6 +162,7 @@ td.bad,td.bad b{color:#B42318}
     </div>
     <div class="card" style="margin-top:16px"><h2>Inversión diaria</h2><p class="sub">Cada barra es un día. El punto naranja marca los días con alguna compra registrada por Meta.</p><div class="dias" id="pd"></div></div>
     <div class="card tw" style="margin-top:16px"><h2>Campañas · últimos 30 días</h2><p class="sub">En rojo, las que han gastado sin ninguna compra registrada.</p><table id="pt"></table></div>
+    <div id="goo" style="margin-top:34px"></div>
   </section>
 </main>
 <script>
@@ -212,7 +213,7 @@ function pinta(){
   $("tm").innerHTML='<tr><th>Fecha</th><th>Alumno</th><th>Comunidad</th><th>Forma de pago</th><th>Cómo llegó</th><th class="n">Importe</th></tr>'+(ms.length?ms.map(function(m){return '<tr><td>'+dia(m.fecha)+'</td><td><b>'+esc(m.nombre)+'</b></td><td>'+esc(m.comunidad)+'</td><td>'+esc(m.pago)+'</td><td>'+esc(m.origen)+(m.campana?' · '+esc(m.campana):'')+'</td><td class="n">'+eur(m.importe)+'</td></tr>'}).join(""):'<tr><td colspan="6">'+vacio("Aún no hay matrículas.")+'</td></tr>');
 
   // publicidad
-  var P=D.publicidad;
+  var P=D.publicidad; pintaGoogle(D.google,P);
   if(!P||!P.t30){ $("pub-sub").textContent="Todavía no hay datos de publicidad."; $("pk").innerHTML=$("cruce").innerHTML=$("pf").innerHTML=$("pr").innerHTML=$("pd").innerHTML=$("pt").innerHTML=""; }
   else { var t=P.t30, f1=function(x){return new Date(x+"T12:00:00").toLocaleDateString("es-ES",{day:"numeric",month:"short"})}, n0=function(v){return new Intl.NumberFormat("es-ES").format(v||0)}, e2=function(v){return new Intl.NumberFormat("es-ES",{style:"currency",currency:"EUR",maximumFractionDigits:2}).format(v||0)};
     $("pub-sub").textContent="Datos de la cuenta de Meta Ads de Aula, del "+f1(t.desde)+" al "+f1(t.hasta)+". Se actualizan una vez al día (última descarga: "+f1(P.descargado)+"). Solo lectura: no se ha tocado ninguna campaña.";
@@ -265,6 +266,32 @@ $("rep").addEventListener("submit",function(e){ e.preventDefault(); var t=$("rep
    .then(function(r){return r.json()}).then(function(j){ $("rep-b").disabled=false; if(!j.ok) throw 0; $("rep-t").value=""; $("rep-n").textContent="Enviado. Elena ya no contestará en esta conversación.";
      setTimeout(function(){ if(actual===c){ hilo(c); $("rep-n").textContent="Enviado. Elena ya no contestará en esta conversación."; } carga(); },2500); })
    .catch(function(){ $("rep-b").disabled=false; $("rep-n").textContent="No se ha podido enviar. Inténtalo de nuevo."; }); });
+function pintaGoogle(G,P){
+  var f1=function(x){return new Date(x+"T12:00:00").toLocaleDateString("es-ES",{day:"numeric",month:"short"})}, n0=function(v){return new Intl.NumberFormat("es-ES").format(v||0)}, n1=function(v){return new Intl.NumberFormat("es-ES",{maximumFractionDigits:1}).format(v||0)}, e2=function(v){return new Intl.NumberFormat("es-ES",{style:"currency",currency:"EUR",maximumFractionDigits:2}).format(v||0)};
+  if(!G||!G.t30){ $("goo").innerHTML=""; $("tot").innerHTML=""; return; }
+  var t=G.t30, m=P&&P.t30?P.t30:null;
+  if(m){ var gt=t.gasto+m.gasto, ct=t.compras+m.compras;
+    $("tot").innerHTML='<h2>Toda la publicidad · últimos 30 días</h2><p class="sub">Meta y Google juntos. Las compras son las que cada plataforma se atribuye, no las de la tienda: sirven para comparar campañas, no para cuadrar caja.</p>'+
+     '<div class="kpis" style="grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:34px"><div class="kpi hl"><div class="l">Inversión total</div><div class="v">'+eur(gt)+'</div><div class="n">Meta '+eur(m.gasto)+' · Google '+eur(t.gasto)+'</div></div>'+
+     '<div class="kpi"><div class="l">Compras atribuidas</div><div class="v">'+n1(ct)+'</div><div class="n">Meta '+m.compras+' · Google '+n1(t.compras)+'</div></div>'+
+     '<div class="kpi"><div class="l">Coste por compra · Meta</div><div class="v">'+(m.compras?eur(m.gasto/m.compras):"—")+'</div><div class="n">inversión ÷ compras</div></div>'+
+     '<div class="kpi"><div class="l">Coste por compra · Google</div><div class="v">'+(t.compras?eur(t.gasto/t.compras):"—")+'</div><div class="n">inversión ÷ compras</div></div></div>'; }
+  else $("tot").innerHTML="";
+  var CL={compra:["Compras con importe","#1F8A4C"],duplicada:["La misma compra contada otra vez","#B42318"],video:["Reproducciones y suscripciones de YouTube","#8A8FA3"],conversacion:["Conversaciones iniciadas","#8A8FA3"],llamada:["Llamadas","#8A8FA3"],formulario:["Formularios","#8A8FA3"],otra:["Otras","#8A8FA3"]}, ag={};
+  G.desglose.forEach(function(x){ag[x.clase]=(ag[x.clase]||0)+x.c});
+  var ks=Object.keys(ag).sort(function(a,b){return ag[b]-ag[a]}), mx=Math.max.apply(null,ks.map(function(k){return ag[k]}).concat([1]));
+  var sin=G.campanas.filter(function(c){return !c.compras}).reduce(function(a,c){return a+c.gasto},0), noV=t.conversiones-t.compras;
+  $("goo").innerHTML='<h2>Publicidad en Google</h2><p class="sub">Datos de la cuenta de Google Ads de Aula, del '+f1(t.desde)+' al '+f1(t.hasta)+'. Se actualizan una vez al día (última descarga: '+f1(G.descargado)+'). Solo lectura: no se ha tocado ninguna campaña.</p>'+
+   '<div class="kpis" style="grid-template-columns:repeat(4,minmax(0,1fr))"><div class="kpi"><div class="l">Inversión · 30 días</div><div class="v">'+eur(t.gasto)+'</div><div class="n">'+n0(t.clics)+' clics</div></div>'+
+   '<div class="kpi"><div class="l">Compras con importe</div><div class="v">'+n1(t.compras)+'</div><div class="n">'+eur(t.valor)+' en ventas, según Google</div></div>'+
+   '<div class="kpi hl"><div class="l">Coste por compra</div><div class="v">'+(t.compras?eur(t.gasto/t.compras):"—")+'</div><div class="n">'+(t.gasto?'vuelven '+n1(t.valor/t.gasto)+' € por cada euro':'')+'</div></div>'+
+   '<div class="kpi"><div class="l">Invertido sin ninguna compra</div><div class="v" style="color:#B42318">'+eur(sin)+'</div><div class="n">'+(t.gasto?Math.round(sin/t.gasto*100):0)+' % de la inversión</div></div></div>'+
+   '<div class="card" style="margin-top:16px;border-left:5px solid var(--na)"><h2>Qué cuenta Google como «conversión»</h2><p style="font-size:15px;color:#1B2140">Google enseña <b>'+n1(t.conversiones)+' conversiones</b> en estos 30 días, pero solo <b>'+n1(t.compras)+' son compras</b>. Las otras '+n1(noV)+' son otras cosas o la misma compra contada dos veces.</p>'+
+   '<div class="bars" style="margin-top:14px">'+ks.map(function(k){return '<div class="r" style="grid-template-columns:minmax(110px,290px) minmax(40px,1fr) 44px"><span>'+CL[k][0]+'</span><div class="bar"><i style="width:'+(ag[k]/mx*100)+'%;background:'+CL[k][1]+'"></i></div><b>'+n1(ag[k])+'</b></div>'}).join("")+'</div>'+
+   '<p class="sub" style="margin:12px 0 0">Por eso este panel cuenta solo las compras con importe. Los decimales salen porque Google reparte una misma venta entre las campañas que intervinieron.</p></div>'+
+   '<div class="card tw" style="margin-top:16px"><h2>Campañas de Google · últimos 30 días</h2><p class="sub">En rojo, las que han gastado sin ninguna compra. «Conversiones» es la cifra que enseña Google; «Compras» son las ventas con importe.</p><table><tr><th>Campaña</th><th>Tipo</th><th class="n">Inversión</th><th class="n">Clics</th><th class="n">Conversiones</th><th class="n">Compras</th><th class="n">Coste por compra</th><th class="n">Ventas</th></tr>'+
+   G.campanas.map(function(c){var b=c.compras?'':' bad';return '<tr><td><b>'+esc(c.nombre)+'</b>'+(c.activa?'':' <span style="color:var(--mut);font-size:12px">(pausada)</span>')+'</td><td>'+esc(c.tipo)+'</td><td class="n">'+e2(c.gasto)+'</td><td class="n">'+n0(c.clics)+'</td><td class="n">'+n1(c.conv)+'</td><td class="n'+b+'">'+n1(c.compras)+'</td><td class="n'+b+'">'+(c.compras?e2(c.gasto/c.compras):"sin compras")+'</td><td class="n">'+(c.valor?e2(c.valor):"—")+'</td></tr>'}).join("")+'</table></div>';
+}
 function pintaElena(a){ var b=$("el"); if(a===null||a===undefined){ b.hidden=true; return; } b.hidden=false; b.disabled=false; b.classList.toggle("si",!!a); b.setAttribute("aria-pressed",a?"true":"false"); b.textContent=a?"Elena responde sola: SÍ":"Elena responde sola: NO"; }
 $("el").addEventListener("click",function(){ if(demo||!D||!D.elena) return; var nueva=!D.elena.activa, b=this;
   if(!confirm(nueva?"¿Encender a Elena?\n\nA partir de ahora contestará ella sola por WhatsApp a quien escriba. En las conversaciones donde escribas tú, se calla.":"¿Apagar a Elena?\n\nDejará de escribir a los interesados. Seguirás viendo su propuesta de respuesta como nota, pero no se envía.")) return;
@@ -292,7 +319,7 @@ var EJ=(function(){
     var mats=[8,9,10,11,12].map(function(x,i){var p=P[x];return {nombre:p[0],comunidad:p[1],pago:pagos[i],importe:390,fecha:new Date(N()-(i*1.6+0.4)*d).toISOString(),origen:p[3],campana:p[3].indexOf("Anuncio")===0?"Agente · desde cero":""}});
     var conv=[{id:"e1",nombre:P[0][0],telefono:"+34 600 000 001",ultimo:"Genial, me apunto a la llamada. ¿Me sirve para el registro de Cataluña?",direccion:"inbound",fecha:N()-12*60000,comunidad:"Cataluña"},{id:"e2",nombre:P[2][0],telefono:"+34 600 000 002",ultimo:"Buenas, ¿se puede pagar a plazos?",direccion:"inbound",fecha:N()-3*h,comunidad:""},{id:"e3",nombre:P[4][0],telefono:"+34 600 000 003",ultimo:"Hola Nuria, soy Olga. ¿Me dices el nombre de tu empresa y lo miramos?",direccion:"outbound",fecha:N()-20*h,comunidad:"Illes Balears"}];
     var ll=[{titulo:"Llamada informativa",nombre:P[0][0],comunidad:"Cataluña",telefono:"+34 600 000 001",inicio:new Date(N()+20*h).toISOString()},{titulo:"Llamada informativa",nombre:P[5][0],comunidad:"Cataluña",telefono:"+34 600 000 006",inicio:new Date(N()+2*d).toISOString()},{titulo:"Llamada informativa",nombre:P[6][0],comunidad:"Andalucía",telefono:"+34 600 000 007",inicio:new Date(N()-1*d).toISOString()}];
-    return {actualizado:new Date().toISOString(),publicidad:(real&&real.publicidad)||null,etapas:etapas,conversaciones:conv,llamadas:ll,matriculas:mats,contactos:[],kpis:{contactos:14,conversaciones:3,sinResponder:2,enEmbudo:8,llamadas:2,matriculas:5,ingresos:1950}};
+    return {actualizado:new Date().toISOString(),publicidad:(real&&real.publicidad)||null,google:(real&&real.google)||null,etapas:etapas,conversaciones:conv,llamadas:ll,matriculas:mats,contactos:[],kpis:{contactos:14,conversaciones:3,sinResponder:2,enEmbudo:8,llamadas:2,matriculas:5,ingresos:1950}};
   }};
 })();
 carga();
