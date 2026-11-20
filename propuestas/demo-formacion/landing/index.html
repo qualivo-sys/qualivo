@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Programa y sesión informativa · Escuela Ejemplo (maqueta)</title>
+<meta name="description" content="Maqueta de Qualivo con un centro ficticio: landing para pedir el programa y reservar la sesión informativa gratuita, con calificación A/B/C.">
+<meta name="theme-color" content="#0B1A2E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231F4E8C'/%3E%3Cpath d='M5 13l11-5 11 5-11 5z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M9.5 15.5v5c3.6 2.8 9.4 2.8 13 0v-5' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Landing · Escuela Ejemplo (centro ficticio) · Programa y sesión informativa. Maqueta de Qualivo.
+   Paleta sobria de azul marino; sin fotos: composiciones en CSS y SVG. */
+:root{color-scheme:dark;
+  --bg:#0B1A2E;--bg-2:#0F2340;--bg-3:#14304F;--line:rgba(255,255,255,.12);--line-2:rgba(255,255,255,.2);
+  --acc:#2F6DC4;--acc-2:#24589F;--acc-soft:#9CC3F2;--teal:#2A7F78;
+  --paper:#F4F6F9;--paper-2:#E9EEF4;--ink:#0F1B2A;--ink-2:#47556B;--ink-line:#DAE1EA;
+  --white:#fff;--muted:rgba(255,255,255,.74);--good:#1B7A55;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --r:18px;--g:16px;--max:1200px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--white);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--acc-soft);outline-offset:3px}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--g)}
+@media (min-width:700px){:root{--g:32px}}
+h1,h2,h3{font-weight:800;letter-spacing:-.025em;line-height:1.05;text-wrap:balance;margin:0}
+p{margin:0}
+.ser{font-family:var(--serif);font-weight:600;font-style:italic;letter-spacing:-.01em}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acc-soft)}
+.eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
+.sec-h{font-size:clamp(30px,4.6vw,52px);margin:14px 0 0}
+.sec-p{font-size:clamp(16px,1.5vw,18px);color:var(--muted);margin-top:14px;max-width:58ch}
+section{position:relative}
+.ico{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mark{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#2F6DC4,#14304F);color:#fff;flex:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.mark .ico{width:22px;height:22px}
+
+/* franja de maqueta */
+.proposal{background:#050D18;color:rgba(255,255,255,.72);font-size:12px;text-align:center;padding:7px 16px;letter-spacing:.01em;line-height:1.4}
+.proposal b{color:#fff;font-weight:600}
+
+/* barra superior */
+.top{position:sticky;top:0;z-index:40;background:rgba(11,26,46,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:62px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.brand b{font-family:var(--serif);font-weight:600;font-size:19px;letter-spacing:-.01em;white-space:nowrap}
+.brand span.tl{font-size:11px;line-height:1.25;color:var(--muted);border-left:1px solid var(--line-2);padding-left:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.nav{display:none;gap:26px;font-size:14px;font-weight:600}
+.nav a{text-decoration:none;color:rgba(255,255,255,.8)}
+.nav a:hover{color:#fff}
+@media (min-width:980px){.nav{display:flex}}
+@media (max-width:520px){.brand span.tl{display:none}}
+
+/* botones */
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--acc);color:#fff;font-weight:700;font-size:16px;text-decoration:none;border:0;border-radius:999px;padding:17px 28px;cursor:pointer;transition:transform .15s,box-shadow .25s,background .2s;letter-spacing:.005em;line-height:1.2;text-align:center;box-shadow:0 14px 34px -16px rgba(47,109,196,.9)}
+.cta:hover{transform:translateY(-2px);background:#3878D0}
+.cta svg{width:18px;height:18px;flex:none;transition:transform .2s}
+.cta:hover svg{transform:translateX(3px)}
+.cta.sm{padding:10px 18px;font-size:14px;box-shadow:none}
+.cta.ghost{background:transparent;border:1.5px solid var(--line-2);box-shadow:none}
+.cta.ghost:hover{background:rgba(255,255,255,.08)}
+.cta[disabled]{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.top .cta.sm{white-space:nowrap;flex:none}
+.top .cta.sm .long{display:none}
+@media (min-width:560px){.top .cta.sm .long{display:inline}.top .cta.sm .short{display:none}}
+
+/* HERO */
+.hero{position:relative;min-height:calc(100svh - 62px - 30px);display:flex;isolation:isolate;overflow:hidden;background:var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(60% 60% at 85% 25%,rgba(47,109,196,.42),transparent 70%),
+  radial-gradient(55% 50% at 0% 100%,rgba(42,127,120,.28),transparent 70%),
+  linear-gradient(180deg,#0B1A2E 0%,#0B1A2E 100%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(70% 70% at 75% 35%,#000,transparent);mask-image:radial-gradient(70% 70% at 75% 35%,#000,transparent)}
+.hero .wrap{display:grid;grid-template-columns:1fr;gap:26px;align-content:end;width:100%;padding-block:26px 34px}
+.hero-copy{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.hero h1{font-size:clamp(42px,10.5vw,92px);line-height:.98;margin:14px 0 0;letter-spacing:-.04em}
+.hero h1 .ser{display:block;color:var(--acc-soft);font-size:.92em;margin-top:.06em}
+.hero .sub{font-size:clamp(16px,1.55vw,19px);color:rgba(255,255,255,.86);margin-top:18px;max-width:52ch}
+.hero .sub b{color:#fff;font-weight:700}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:26px}
+.hero .actions .cta{width:100%}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:22px 0 0;padding:0;list-style:none;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.8)}
+.facts li{display:flex;align-items:center;gap:8px}
+.facts li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc-soft)}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (max-width:559px){.hero .actions .cta.ghost{display:none}}
+@media (max-width:420px){.cta:not(.sm):not(.ghost){font-size:15px;padding:17px 18px;gap:8px}}
+@media (min-width:560px){.hero .actions .cta{width:auto}}
+/* composición del hero: programa + sesión */
+.hero-vis{position:relative;padding-bottom:42px;max-width:520px;width:100%}
+.pcard{background:linear-gradient(180deg,#fff,#F4F7FB);color:var(--ink);border-radius:18px;padding:18px;box-shadow:0 40px 80px -40px rgba(0,0,0,.9);transform:rotate(-1.5deg)}
+.pc-top{display:flex;gap:12px;align-items:center}
+.pc-top .mark{width:42px;height:42px}
+.pc-top b{display:block;font-size:16px;line-height:1.2;font-weight:800;letter-spacing:-.01em}
+.pc-top small{display:block;font-size:12px;color:var(--ink-2);font-weight:600}
+.mods{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:6px}
+.mods li{display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:600;background:#fff;border:1px solid var(--ink-line);border-radius:10px;padding:7px 10px}
+.mods li span{font-size:11px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.pc-foot{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.pc-foot span{font-size:11.5px;font-weight:700;background:#E8EFF8;color:var(--acc-2);border-radius:99px;padding:3px 9px}
+.scard{position:absolute;right:-6px;bottom:0;width:min(220px,62%);background:var(--bg-3);border:1px solid var(--line-2);border-radius:16px;padding:14px 16px;box-shadow:0 30px 60px -24px rgba(0,0,0,.9);transform:rotate(2deg);display:grid;gap:2px}
+.scard small{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--acc-soft)}
+.scard b{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.1}
+.scard span{font-size:13px;color:var(--muted);font-weight:600}
+.scard em{font-style:normal;font-size:12px;font-weight:700;color:#8FE0BC;margin-top:4px}
+.ejtag{position:absolute;left:8px;bottom:6px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:#B7790A;color:#fff;border-radius:5px;padding:3px 8px}
+@media (max-width:559px){.mods li:nth-child(n+3){display:none}.pcard{padding:14px}.scard b{font-size:22px}}
+@media (min-width:980px){
+  .hero .wrap{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-content:center;align-items:center;padding-block:60px 70px}
+  .hero-vis{order:2;justify-self:end}
+  .hero h1{font-size:clamp(60px,6.6vw,92px)}
+}
+
+/* PROGRAMAS */
+.programas{background:var(--bg);padding:72px 0 84px}
+.prog-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:34px}
+.prog-card{position:relative;display:flex;flex-direction:column;border-radius:var(--r);overflow:hidden;text-decoration:none;isolation:isolate;background:var(--bg-2);border:1px solid var(--line);transition:border-color .2s,transform .2s}
+.prog-card:hover{border-color:var(--acc-soft);transform:translateY(-3px)}
+.prog-card .art{position:relative;height:150px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#0F2340,#2F6DC4)}
+.prog-card .art.g2{background:linear-gradient(135deg,#0F2340,#2A7F78)}
+.prog-card .art.g3{background:linear-gradient(135deg,#101826,#4A5F82)}
+.prog-card .art.g4{background:linear-gradient(135deg,#0C2420,#2E7A62)}
+.prog-card .art::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:20px 20px;-webkit-mask-image:radial-gradient(80% 80% at 70% 30%,#000,transparent);mask-image:radial-gradient(80% 80% at 70% 30%,#000,transparent)}
+.prog-card .art .disc{position:relative;display:grid;place-items:center;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.12);box-shadow:0 0 0 10px rgba(255,255,255,.05),0 0 0 22px rgba(255,255,255,.03)}
+.prog-card .art .disc .ico{width:32px;height:32px;stroke-width:1.6}
+.prog-card .art .bigi{position:absolute;right:-20px;top:-20px;width:140px;height:140px;opacity:.14;stroke-width:1.2}
+.prog-card .body{padding:20px;display:flex;flex-direction:column;flex:1}
+.prog-card .tag{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line-2);padding:4px 10px;border-radius:999px;color:var(--acc-soft)}
+.prog-card h3{font-size:clamp(22px,2.4vw,26px);margin-top:12px}
+.prog-card p{color:rgba(255,255,255,.8);font-size:15px;margin-top:8px}
+.prog-card .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.prog-card .meta span{font-size:12px;font-weight:700;background:rgba(255,255,255,.08);border-radius:99px;padding:3px 10px}
+.prog-card .go{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:16px;font-weight:700;font-size:14.5px;color:#fff}
+.prog-card .go span{border-bottom:2px solid var(--acc-soft);padding-bottom:2px}
+.prog-card .go svg{width:16px;height:16px;transition:transform .2s}
+.prog-card:hover .go svg{transform:translateX(4px)}
+.prog-note{font-size:12.5px;color:var(--muted);margin-top:16px}
+@media (min-width:700px){.prog-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.prog-grid{grid-template-columns:repeat(4,1fr);gap:16px}}
+
+/* CÓMO SE ESTUDIA */
+.estudio{background:var(--paper);color:var(--ink);padding:78px 0 84px;overflow:hidden}
+.estudio .eyebrow{color:var(--acc-2)}
+.estudio .sec-p{color:var(--ink-2)}
+.estudio-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px}
+.rail-btns{display:none;gap:10px}
+.rail-btns button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.rail-btns button:hover{background:var(--ink);color:var(--paper)}
+.rail-btns svg{width:20px;height:20px}
+@media (min-width:700px){.rail-btns{display:flex}}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(72%,260px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:34px var(--g) 10px;margin-inline:calc(var(--g) * -1);scrollbar-width:none;overscroll-behavior-x:contain;scroll-padding-inline:var(--g)}
+.rail::-webkit-scrollbar{display:none}
+@media (min-width:1264px){.rail{padding-inline:calc((100vw - var(--max))/2 + var(--g));margin-inline:calc((100vw - var(--max))/-2 - var(--g));scroll-padding-inline:calc((100vw - var(--max))/2 + var(--g))}}
+.feat{scroll-snap-align:start;margin:0;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 22px 40px -28px rgba(15,27,42,.45);border:1px solid var(--ink-line);display:flex;flex-direction:column}
+.feat .fi{height:120px;display:grid;place-items:center;background:linear-gradient(135deg,#E8EFF8,#D3E1F2);color:var(--acc-2);position:relative;overflow:hidden}
+.feat:nth-child(3n+2) .fi{background:linear-gradient(135deg,#E3F1EF,#CBE4E0);color:#1E605A}
+.feat:nth-child(3n) .fi{background:linear-gradient(135deg,#ECEFF4,#D8DEE8);color:#34445E}
+.feat .fi .ico{width:40px;height:40px;stroke-width:1.5}
+.feat .fi .n{position:absolute;left:12px;top:10px;font-size:11px;font-weight:800;letter-spacing:.12em;opacity:.6}
+.feat figcaption{padding:14px 16px 16px}
+.feat .name{font-weight:800;font-size:17px;line-height:1.2;color:var(--ink);letter-spacing:-.01em}
+.feat .what{font-size:14px;color:var(--ink-2);margin-top:6px;line-height:1.45}
+.rail-note{font-size:12.5px;color:var(--ink-2);margin-top:14px}
+
+/* PASOS */
+.pasos{background:var(--paper-2);color:var(--ink);padding:78px 0 84px}
+.pasos .eyebrow{color:var(--acc-2)}
+.steps3{list-style:none;padding:0;margin:36px 0 0;display:grid;gap:14px;counter-reset:s}
+.steps3 li{position:relative;background:#fff;border-radius:var(--r);padding:26px 22px 24px 86px;border:1px solid var(--ink-line);min-height:118px}
+.steps3 li::before{counter-increment:s;content:counter(s);position:absolute;left:22px;top:22px;width:46px;height:46px;border-radius:50%;background:var(--bg);color:#fff;font-weight:800;font-size:20px;display:grid;place-items:center}
+.steps3 h3{font-size:21px;letter-spacing:-.015em;line-height:1.15}
+.steps3 p{color:var(--ink-2);font-size:15px;margin-top:6px}
+.pasos .cta{margin-top:30px}
+@media (min-width:900px){.steps3{grid-template-columns:repeat(3,1fr);gap:18px}.steps3 li{padding:84px 26px 28px}.steps3 li::before{top:26px;left:26px;width:42px;height:42px}}
+
+/* SESIONES Y MODALIDADES */
+.sesiones{background:var(--bg);padding:78px 0 84px;isolation:isolate;overflow:hidden}
+.sesiones::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 60% at 100% 0%,rgba(47,109,196,.25),transparent 70%),radial-gradient(50% 50% at 0% 100%,rgba(42,127,120,.2),transparent 70%)}
+.hz-grid{display:grid;gap:16px;margin-top:34px}
+.panel{background:rgba(15,35,64,.8);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.panel h3{font-size:14px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.slots{display:grid;gap:12px;margin-top:16px}
+.slot{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px}
+.slot:last-child{border-bottom:0;padding-bottom:0}
+.slot .dt{display:grid;place-items:center;width:58px;height:62px;border-radius:12px;background:#fff;color:var(--ink);line-height:1}
+.slot .dt b{font-size:24px;font-weight:800}
+.slot .dt small{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)}
+.slot .tx b{display:block;font-size:17px;font-weight:700}
+.slot .tx span{color:var(--muted);font-size:14px;font-weight:600}
+.slot .pl{font-size:12px;font-weight:700;border:1px solid var(--line-2);border-radius:99px;padding:4px 10px;white-space:nowrap}
+.modos{display:grid;gap:10px;margin-top:16px}
+.modo{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:14px}
+.modo .mi{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:rgba(156,195,242,.14);color:var(--acc-soft)}
+.modo b{display:block;font-size:17px}
+.modo span{color:var(--muted);font-size:14.5px}
+.panel .note{font-size:13px;color:var(--muted);margin-top:14px}
+@media (min-width:900px){.hz-grid{grid-template-columns:1fr 1fr;gap:18px}.panel{padding:30px}}
+@media (max-width:420px){.slot{grid-template-columns:auto 1fr}.slot .pl{grid-column:2;justify-self:start}}
+
+/* FORMULARIO */
+.reserva{padding:80px 0 90px;background:radial-gradient(80% 60% at 100% 0%,rgba(47,109,196,.35),transparent 70%),radial-gradient(70% 60% at 0% 100%,rgba(42,127,120,.3),transparent 70%),var(--bg-2);scroll-margin-top:62px}
+.res-grid{display:grid;gap:34px;align-items:start}
+.res-pitch .sec-h .ser{color:var(--acc-soft);display:block}
+.ticks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
+.ticks li{display:flex;gap:12px;align-items:flex-start;font-weight:600;color:rgba(255,255,255,.88)}
+.ticks svg{width:22px;height:22px;flex:none;color:var(--acc-soft);margin-top:1px}
+.res-badges{display:none;margin-top:30px;gap:10px;flex-wrap:wrap}
+.res-badges span{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;border:1px solid var(--line-2);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.04)}
+@media (min-width:980px){.res-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px}.res-badges{display:flex}.res-pitch{position:sticky;top:110px}}
+
+.card{color-scheme:light;background:#fff;color:var(--ink);border-radius:22px;box-shadow:0 40px 80px -40px rgba(0,0,0,.9);overflow:hidden}
+.card-top{padding:20px 22px 0}
+.prog-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12.5px;font-weight:700;color:var(--ink-2);letter-spacing:.02em}
+.prog-meta .free{background:#E6EEF8;color:var(--acc-2);padding:4px 10px;border-radius:999px;font-weight:800;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.prog{height:6px;background:#E6EBF2;border-radius:6px;margin-top:12px;overflow:hidden}
+.prog i{display:block;height:100%;width:20%;background:var(--acc);border-radius:6px;transition:width .35s cubic-bezier(.2,.7,.2,1)}
+.sumbar{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;min-height:0}
+.sumbar button{font-size:12.5px;font-weight:700;background:#F1F4F9;border:1px solid var(--ink-line);border-radius:999px;padding:5px 10px 5px 11px;cursor:pointer;color:var(--ink);display:inline-flex;gap:6px;align-items:center}
+.sumbar button:hover{border-color:var(--acc)}
+.sumbar button svg{width:12px;height:12px;color:var(--ink-2)}
+.step{padding:18px 22px 24px}
+.step h3{font-size:clamp(22px,2.6vw,27px);letter-spacing:-.02em;line-height:1.12}
+.step .hint{font-size:14px;color:var(--ink-2);margin-top:6px}
+.opts{display:grid;gap:9px;margin-top:18px}
+.opts.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.opt{position:relative;display:flex;align-items:center;gap:12px;text-align:left;width:100%;background:#fff;border:1.5px solid var(--ink-line);border-radius:14px;padding:13px 14px;cursor:pointer;font-weight:700;font-size:15px;color:var(--ink);transition:border-color .15s,background .15s,transform .1s;line-height:1.25}
+.opt:hover{border-color:#AFC0D6}
+.opt:active{transform:scale(.99)}
+.opt small{display:block;font-weight:500;font-size:13px;color:var(--ink-2);margin-top:2px}
+.opt .ic{width:38px;height:38px;border-radius:10px;background:#EEF3FA;display:grid;place-items:center;flex:none;font-size:13px;font-weight:800;color:var(--acc-2)}
+.opt .ic .ico{width:20px;height:20px}
+.opt[aria-pressed="true"]{border-color:var(--acc);background:#F2F7FD;box-shadow:inset 0 0 0 1px var(--acc)}
+.opt[aria-pressed="true"]::after{content:"";position:absolute;right:12px;top:50%;width:20px;height:20px;margin-top:-10px;border-radius:50%;background:var(--acc) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/13px no-repeat}
+.opt[aria-pressed="true"]{padding-right:40px}
+.opt[disabled]{opacity:.4;cursor:not-allowed}
+.opts.cols2 .opt{padding:12px}
+@media (max-width:480px){
+  [data-key="programa"] .opt{flex-direction:column;align-items:flex-start;gap:8px;font-size:14px;padding:11px 12px}
+  [data-key="programa"] .opt .ic{width:34px;height:34px}
+  [data-key="programa"] .opt[aria-pressed="true"]{padding-right:12px}
+  [data-key="programa"] .opt[aria-pressed="true"]::after{top:12px;margin-top:0;right:10px}
+}
+.lbl{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:20px;display:block}
+.field{margin-top:14px}
+.field label{display:block;font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.field input{width:100%;border:1.5px solid var(--ink-line);border-radius:12px;padding:14px 14px;font-size:16px;background:#fff;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
+.field input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(15,27,42,.08)}
+.field input[aria-invalid="true"]{border-color:#B3261E;box-shadow:0 0 0 3px rgba(179,38,30,.12)}
+.field .err,.err{font-size:12.5px;color:#B3261E;font-weight:600;margin-top:5px}
+.tel-wrap{display:flex;align-items:stretch}
+.tel-wrap span{display:grid;place-items:center;padding:0 12px;border:1.5px solid var(--ink-line);border-right:0;border-radius:12px 0 0 12px;font-weight:700;color:var(--ink-2);background:#F5F7FA}
+.tel-wrap input{border-radius:0 12px 12px 0}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:13px;color:var(--ink-2);line-height:1.45;cursor:pointer}
+.check input{width:20px;height:20px;margin:0;flex:none;accent-color:var(--acc)}
+.check a{color:var(--ink);font-weight:600}
+.check.ses{background:#F2F7FD;border:1px solid #CFE0F4;border-radius:12px;padding:12px;color:var(--ink);font-size:14px}
+.check.ses b{font-weight:800}
+.nav-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px}
+.back{background:none;border:0;color:var(--ink-2);font-weight:700;font-size:14px;cursor:pointer;padding:10px 4px;display:inline-flex;align-items:center;gap:6px}
+.back:hover{color:var(--ink)}
+.back svg{width:16px;height:16px}
+.nav-row .cta{box-shadow:none;padding:14px 22px;font-size:15px}
+.step .cta.full{width:100%;margin-top:20px}
+.secure{font-size:12px;color:var(--ink-2);text-align:center;margin-top:10px}
+.step-in{animation:stepin .35s cubic-bezier(.2,.7,.2,1) both}
+@keyframes stepin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+
+/* confirmación */
+.done{padding:30px 22px 26px;text-align:center}
+.done .ok{width:74px;height:74px;border-radius:50%;background:var(--good);display:grid;place-items:center;margin:0 auto;box-shadow:0 0 0 10px rgba(27,122,85,.12);animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
+.done .ok svg{width:38px;height:38px;color:#fff}
+.done .ok path{stroke-dasharray:30;stroke-dashoffset:30;animation:draw .45s .25s ease-out forwards}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.done h3{font-size:clamp(30px,4vw,40px);margin-top:18px}
+.done .lead{font-size:16.5px;color:var(--ink-2);margin:10px auto 0;max-width:38ch}
+.done .lead b{color:var(--ink)}
+.ticket{margin:22px auto 0;max-width:460px;text-align:left;border:1.5px dashed #C8D3E1;border-radius:16px;padding:16px 18px;background:#F7F9FC;display:grid;gap:8px}
+.ticket div{display:flex;justify-content:space-between;gap:14px;font-size:14px}
+.ticket span{color:var(--ink-2);font-weight:600}
+.ticket b{text-align:right;font-weight:800}
+.again{margin-top:18px}
+.team{border-top:1px solid var(--ink-line);background:#F4F6F9}
+.team summary{list-style:none;cursor:pointer;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:800;font-size:15px}
+.team summary::-webkit-details-marker{display:none}
+.team summary .lab{display:block;font-size:11.5px;font-weight:700;color:var(--ink-2);letter-spacing:.04em;margin-top:2px}
+.team summary .chev{width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--ink-line);display:grid;place-items:center;flex:none;transition:transform .25s}
+.team summary .chev svg{width:14px;height:14px}
+.team[open] summary .chev{transform:rotate(180deg)}
+.team-body{padding:0 22px 22px}
+.sample{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:#B7790A;color:#fff;padding:4px 8px;border-radius:5px}
+.lead-card{background:#fff;border:1px solid var(--ink-line);border-radius:16px;margin-top:12px;overflow:hidden}
+.lead-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--ink-line)}
+.lead-head .who{display:flex;align-items:center;gap:12px;min-width:0}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--bg);color:#fff;display:grid;place-items:center;font-weight:800;font-size:16px;flex:none}
+.lead-head .nm{font-weight:800;font-size:16px;line-height:1.2;overflow-wrap:anywhere}
+.lead-head .tm{font-size:12px;color:var(--ink-2);font-weight:600}
+.prio{font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px;white-space:nowrap}
+.prio.A{background:#DFF2E9;color:#13623F}
+.prio.B{background:#FFF3D6;color:#7A5000}
+.prio.C{background:#E9EDF3;color:#47556B}
+.lead-rows{display:grid;grid-template-columns:1fr;margin:0}
+.lead-rows div{display:grid;grid-template-columns:128px 1fr;gap:10px;padding:10px 16px;border-bottom:1px solid #EDF1F6;font-size:14px}
+.lead-rows dt{color:var(--ink-2);font-weight:600}
+.lead-rows dd{margin:0;font-weight:700;overflow-wrap:anywhere}
+@media (max-width:420px){.lead-rows div{grid-template-columns:1fr;gap:2px}}
+.why{padding:12px 16px;font-size:13.5px;background:#FFFAF0;color:#5A4300;border-bottom:1px solid #EDF1F6}
+.why b{color:#3B2C00}
+.nexta{padding:12px 16px;font-size:13.5px;background:#EEF4FC;color:#163C6E;border-bottom:1px solid #EDF1F6;font-weight:600}
+.wa-prev{padding:14px 16px 16px;background:#EFEAE2}
+.wa-prev .t{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#54656F}
+.bubble{background:#fff;border-radius:4px 14px 14px 14px;padding:10px 12px 8px;margin-top:8px;font-size:14px;line-height:1.5;color:#111B21;max-width:96%;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.bubble .from{font-size:12.5px;font-weight:800;color:#1B7A55;display:block;margin-bottom:2px}
+.bubble .hr{display:block;text-align:right;font-size:11px;color:#667781;margin-top:2px}
+.team .foot{font-size:12px;color:var(--ink-2);margin-top:12px}
+
+/* FAQ */
+.faq{background:var(--paper);color:var(--ink);padding:78px 0 84px}
+.faq .eyebrow{color:var(--acc-2)}
+.faq-grid{display:grid;gap:30px}
+.qa{border-top:1.5px solid var(--ink)}
+.qa details{border-bottom:1px solid var(--ink-line)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 2px;font-weight:800;font-size:clamp(17px,1.8vw,20px);letter-spacing:-.01em}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .pm{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;flex:none;transition:transform .25s,background .2s,color .2s}
+.qa summary .pm svg{width:14px;height:14px}
+.qa details[open] summary .pm{transform:rotate(45deg);background:var(--ink);color:#fff}
+.qa details p{padding:0 2px 22px;color:var(--ink-2);font-size:16px;max-width:62ch}
+@media (min-width:900px){.faq-grid{grid-template-columns:.8fr 1.2fr;gap:60px}}
+
+/* cierre */
+.final{padding:90px 0;text-align:center;isolation:isolate;overflow:hidden;background:#14304F}
+.final::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 80% at 50% 0%,rgba(91,143,208,.5),transparent 70%),linear-gradient(180deg,#1A3E66,#0B1A2E)}
+.final h2{font-size:clamp(36px,6vw,68px)}
+.final h2 .ser{display:block;font-size:.8em;margin-top:.12em;color:var(--acc-soft)}
+.final p{color:rgba(255,255,255,.86);margin:16px auto 0;max-width:46ch;font-size:17px}
+.final .cta{margin-top:28px;background:#fff;color:var(--bg);box-shadow:0 18px 40px -18px rgba(0,0,0,.6)}
+.final .cta:hover{background:#fff}
+
+/* pie */
+footer{background:#050D18;color:rgba(255,255,255,.7);padding:44px 0 110px;font-size:14px}
+footer .row{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+footer .fb{display:flex;align-items:center;gap:12px}
+footer .fb b{font-family:var(--serif);font-weight:600;font-size:22px;color:#fff}
+footer .meta{line-height:1.6}
+footer .meta b{color:#fff}
+footer .disc{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:rgba(255,255,255,.6)}
+@media (min-width:900px){footer{padding-bottom:44px}}
+
+/* barra fija móvil */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(11,26,46,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.mbar.show{transform:none}
+.mbar .cta{width:100%;padding:15px 20px}
+@media (min-width:900px){.mbar{display:none}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="cap" viewBox="0 0 24 24"><path d="M2 9.5 12 5l10 4.5L12 14z"/><path d="M6 11.5V16c3.3 2.6 8.7 2.6 12 0v-4.5M22 9.5V15"/></symbol>
+  <symbol id="brief" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+  <symbol id="refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></symbol>
+  <symbol id="target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.6"/><path d="M16 14.2a5 5 0 0 1 5 5.3"/></symbol>
+  <symbol id="compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+  <symbol id="help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5h.01"/></symbol>
+  <symbol id="video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></symbol>
+  <symbol id="play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5z"/></symbol>
+  <symbol id="case" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol>
+  <symbol id="laptop" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></symbol>
+  <symbol id="award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></symbol>
+  <symbol id="cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="euro" viewBox="0 0 24 24"><path d="M18 6.5A7 7 0 1 0 18 17.5M4 10h10M4 14h10"/></symbol>
+  <symbol id="pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="mix" viewBox="0 0 24 24"><rect x="3" y="4" width="11" height="8" rx="1.5"/><path d="M8.5 15v4M5 19h7"/><path d="M17 8h2a2 2 0 0 1 2 2v9h-6v-3"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="tick" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="back" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
+  <symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+</svg>
+
+<div class="proposal"><b>Maqueta de Qualivo · centro ficticio</b> · Escuela Ejemplo no existe · el formulario no envía nada</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Escuela Ejemplo, inicio">
+      <span class="mark"><svg class="ico" aria-hidden="true"><use href="#cap"/></svg></span>
+      <b>Escuela Ejemplo</b>
+      <span class="tl">Formación para<br>profesionales</span>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#programas">Programas</a><a href="#estudio">Cómo se estudia</a><a href="#sesiones">Sesión informativa</a><a href="#faq">Preguntas</a>
+    </nav>
+    <a class="cta sm" href="#reserva" data-goto-form><span class="short">Programa</span><span class="long">Recibir el programa</span></a>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-vis" aria-hidden="true">
+      <div class="pcard">
+        <div class="pc-top"><span class="mark"><svg class="ico"><use href="#brief"/></svg></span><div><b>Programa de especialización</b><small>Escuela Ejemplo · PDF</small></div></div>
+        <ul class="mods"><li><span>01</span>Fundamentos y marco actual</li><li><span>02</span>Casos prácticos del sector</li><li><span>03</span>Herramientas del día a día</li><li><span>04</span>Proyecto final con tutor</li></ul>
+        <div class="pc-foot"><span>Online o híbrida</span><span>Directo + grabado</span><span>Tutor asignado</span></div>
+      </div>
+      <div class="scard"><small>Sesión informativa</small><b>Jueves 26</b><span>18:30 · online · 45 min</span><em>✓ Plaza reservada</em></div>
+      <span class="ejtag">Ejemplo</span>
+    </div>
+    <div class="hero-copy">
+      <span class="eyebrow" id="hero-eyebrow">Formación para profesionales</span>
+      <h1>Pide el programa. <span class="ser">Decide con calma.</span></h1>
+      <p class="sub" id="hero-sub">Programas para profesionales, <b>online, presenciales o híbridos</b>. Te enviamos el programa completo y te invitamos a una <b>sesión informativa gratuita</b> para resolver tus dudas antes de decidir.</p>
+      <div class="actions">
+        <a class="cta" href="#reserva" data-goto-form>Recibe el programa <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="cta ghost" href="#programas">Ver programas</a>
+      </div>
+      <ul class="facts">
+        <li>Matrícula todo el año o por convocatorias</li>
+        <li>Clases en directo y grabadas</li>
+        <li>Te respondemos por WhatsApp o correo</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMAS -->
+<section class="programas" id="programas">
+  <div class="wrap">
+    <span class="eyebrow">Programas</span>
+    <h2 class="sec-h">¿Qué quieres conseguir?</h2>
+    <p class="sec-p">Elige el que más se parezca a lo que buscas y te enviamos el programa. Si no lo tienes claro, también: te orientamos en la sesión informativa.</p>
+    <div class="prog-grid">
+      <a class="prog-card" href="#reserva" data-programa="especializacion">
+        <div class="art" aria-hidden="true"><svg class="ico bigi"><use href="#brief"/></svg><span class="disc"><svg class="ico"><use href="#brief"/></svg></span></div>
+        <div class="body"><span class="tag">Profesionales</span><h3>Especialización profesional</h3><p>Para profundizar en tu área sin dejar el trabajo, con casos reales y tutor.</p>
+          <div class="meta"><span>Online o híbrida</span><span>Por convocatorias</span></div>
+          <span class="go"><span>Recibir el programa</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="prog-card" href="#reserva" data-programa="certificacion">
+        <div class="art g2" aria-hidden="true"><svg class="ico bigi"><use href="#target"/></svg><span class="disc"><svg class="ico"><use href="#target"/></svg></span></div>
+        <div class="body"><span class="tag">Oposición · certificación</span><h3>Preparación con plan semanal</h3><p>Temario al día, calendario de estudio y simulacros con seguimiento.</p>
+          <div class="meta"><span>Online</span><span>Matrícula todo el año</span></div>
+          <span class="go"><span>Recibir el programa</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="prog-card" href="#reserva" data-programa="empresa">
+        <div class="art g3" aria-hidden="true"><svg class="ico bigi"><use href="#team"/></svg><span class="disc"><svg class="ico"><use href="#team"/></svg></span></div>
+        <div class="body"><span class="tag">Empresas</span><h3>Formación para equipos</h3><p>Grupos cerrados a vuestro calendario. Formación bonificable.</p>
+          <div class="meta"><span>Online, presencial o híbrida</span><span>A medida</span></div>
+          <span class="go"><span>Pedir propuesta</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="prog-card" href="#reserva" data-programa="reciclaje">
+        <div class="art g4" aria-hidden="true"><svg class="ico bigi"><use href="#compass"/></svg><span class="disc"><svg class="ico"><use href="#compass"/></svg></span></div>
+        <div class="body"><span class="tag">Reciclaje</span><h3>Cambio de sector</h3><p>Un itinerario desde la base, con orientación antes y durante el curso.</p>
+          <div class="meta"><span>Híbrida</span><span>Desde cero</span></div>
+          <span class="go"><span>Recibir el programa</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+    </div>
+    <p class="prog-note">Programas de ejemplo de un centro ficticio.</p>
+  </div>
+</section>
+
+<!-- CÓMO SE ESTUDIA -->
+<section class="estudio" id="estudio">
+  <div class="wrap">
+    <div class="estudio-head">
+      <div>
+        <span class="eyebrow">Cómo se estudia</span>
+        <h2 class="sec-h">Pensado para quien trabaja</h2>
+        <p class="sec-p">Lo que encontrarás en cualquiera de los programas.</p>
+      </div>
+      <div class="rail-btns">
+        <button type="button" data-rail="-1" aria-label="Anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+        <button type="button" data-rail="1" aria-label="Siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+    <div class="rail" id="rail" tabindex="0" aria-label="Cómo se estudia">
+      <figure class="feat"><div class="fi"><span class="n">01</span><svg class="ico" aria-hidden="true"><use href="#video"/></svg></div><figcaption><div class="name">Clases en directo</div><div class="what">A última hora de la tarde, para poder preguntar en el momento.</div></figcaption></figure>
+      <figure class="feat"><div class="fi"><span class="n">02</span><svg class="ico" aria-hidden="true"><use href="#play"/></svg></div><figcaption><div class="name">Todo queda grabado</div><div class="what">Si un día no puedes, lo ves cuando quieras desde el campus.</div></figcaption></figure>
+      <figure class="feat"><div class="fi"><span class="n">03</span><svg class="ico" aria-hidden="true"><use href="#case"/></svg></div><figcaption><div class="name">Casos prácticos</div><div class="what">Situaciones del día a día de la profesión, no solo teoría.</div></figcaption></figure>
+      <figure class="feat"><div class="fi"><span class="n">04</span><svg class="ico" aria-hidden="true"><use href="#chat"/></svg></div><figcaption><div class="name">Tutor asignado</div><div class="what">Una persona que responde tus dudas y sigue tu avance.</div></figcaption></figure>
+      <figure class="feat"><div class="fi"><span class="n">05</span><svg class="ico" aria-hidden="true"><use href="#laptop"/></svg></div><figcaption><div class="name">Campus online</div><div class="what">Materiales, grabaciones y entregas en un solo sitio.</div></figcaption></figure>
+      <figure class="feat"><div class="fi"><span class="n">06</span><svg class="ico" aria-hidden="true"><use href="#cal"/></svg></div><figcaption><div class="name">Calendario claro</div><div class="what">Sabes desde el principio qué toca cada semana.</div></figcaption></figure>
+      <figure class="feat"><div class="fi"><span class="n">07</span><svg class="ico" aria-hidden="true"><use href="#award"/></svg></div><figcaption><div class="name">Certificado</div><div class="what">Al terminar, con el detalle de horas y contenidos.</div></figcaption></figure>
+      <figure class="feat"><div class="fi"><span class="n">08</span><svg class="ico" aria-hidden="true"><use href="#euro"/></svg></div><figcaption><div class="name">Para empresas</div><div class="what">Formación bonificable: os ayudamos con la gestión.</div></figcaption></figure>
+    </div>
+    <p class="rail-note">Características de ejemplo de un centro ficticio.</p>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="pasos" id="como">
+  <div class="wrap">
+    <span class="eyebrow">Cómo funciona</span>
+    <h2 class="sec-h">Tres pasos, sin compromiso</h2>
+    <ol class="steps3">
+      <li><h3>Pides el programa</h3><p>Cinco preguntas, en un minuto, desde el móvil.</p></li>
+      <li><h3>Te lo enviamos</h3><p>Por correo y WhatsApp, con tu plaza en la sesión informativa gratuita.</p></li>
+      <li><h3>Decides con calma</h3><p>En la sesión resuelves dudas de contenido, horarios y modalidad. Después decides.</p></li>
+    </ol>
+    <a class="cta" href="#reserva" data-goto-form>Recibe el programa <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<!-- SESIONES Y MODALIDADES -->
+<section class="sesiones" id="sesiones">
+  <div class="wrap">
+    <span class="eyebrow">Sesión informativa y modalidades</span>
+    <h2 class="sec-h">Conócenos antes de decidir</h2>
+    <div class="hz-grid">
+      <div class="panel">
+        <h3>Próximas sesiones informativas · ejemplo</h3>
+        <div class="slots">
+          <div class="slot"><span class="dt"><b>26</b><small>nov</small></span><div class="tx"><b>Jueves · 18:30</b><span>Online · 45 minutos</span></div><span class="pl">Gratuita</span></div>
+          <div class="slot"><span class="dt"><b>1</b><small>dic</small></span><div class="tx"><b>Martes · 13:30</b><span>Online · a la hora de comer</span></div><span class="pl">Gratuita</span></div>
+          <div class="slot"><span class="dt"><b>3</b><small>dic</small></span><div class="tx"><b>Jueves · 18:30</b><span>Presencial y online</span></div><span class="pl">Gratuita</span></div>
+        </div>
+        <p class="note">Si no puedes en ninguna, te enviamos la grabación.</p>
+      </div>
+      <div class="panel">
+        <h3>Modalidades</h3>
+        <div class="modos">
+          <div class="modo"><span class="mi"><svg class="ico" aria-hidden="true"><use href="#laptop"/></svg></span><div><b>Online</b><span>Clases en directo y grabadas, desde donde estés.</span></div></div>
+          <div class="modo"><span class="mi"><svg class="ico" aria-hidden="true"><use href="#pin"/></svg></span><div><b>Presencial</b><span>En el aula, con el grupo y el docente.</span></div></div>
+          <div class="modo"><span class="mi"><svg class="ico" aria-hidden="true"><use href="#mix"/></svg></span><div><b>Híbrida</b><span>Online entre semana y algunas sesiones presenciales.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO -->
+<section class="reserva" id="reserva">
+  <div class="wrap res-grid">
+    <div class="res-pitch">
+      <span class="eyebrow">Programa y sesión informativa</span>
+      <h2 class="sec-h">Recibe el programa <span class="ser">y tu plaza en la sesión</span></h2>
+      <ul class="ticks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Cinco preguntas y listo</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>La sesión informativa es gratuita y sin compromiso</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Te lo enviamos por correo y WhatsApp</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Si lo paga tu empresa, te orientamos con la bonificación</li>
+      </ul>
+      <div class="res-badges" aria-hidden="true">
+        <span><svg class="ico"><use href="#laptop"/></svg>Online</span><span><svg class="ico"><use href="#pin"/></svg>Presencial</span><span><svg class="ico"><use href="#mix"/></svg>Híbrida</span>
+      </div>
+    </div>
+
+    <div class="card" id="booking">
+      <form id="form" novalidate autocomplete="on">
+        <div class="card-top" id="card-top">
+          <div class="prog-meta"><span id="prog-label">Paso 1 de 5 · Programa</span><span class="free">Sin compromiso</span></div>
+          <div class="prog" aria-hidden="true"><i id="prog-bar"></i></div>
+          <div class="sumbar" id="sumbar" aria-label="Lo que has elegido"></div>
+        </div>
+
+        <!-- 1 programa -->
+        <div class="step" data-step="1">
+          <h3>¿Qué programa te interesa?</h3>
+          <p class="hint">Elige uno. Podrás cambiarlo.</p>
+          <div class="opts cols2" data-key="programa">
+            <button type="button" class="opt" data-v="especializacion"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#brief"/></svg></span>Especialización profesional</button>
+            <button type="button" class="opt" data-v="actualizacion"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#refresh"/></svg></span>Curso de actualización</button>
+            <button type="button" class="opt" data-v="certificacion"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#target"/></svg></span>Oposición o certificación</button>
+            <button type="button" class="opt" data-v="empresa"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#team"/></svg></span>Formación para mi equipo</button>
+            <button type="button" class="opt" data-v="reciclaje"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#compass"/></svg></span>Cambio de sector</button>
+            <button type="button" class="opt" data-v="nose"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#help"/></svg></span>Aún no lo tengo claro</button>
+          </div>
+        </div>
+
+        <!-- 2 modalidad -->
+        <div class="step" data-step="2" hidden>
+          <h3>¿En qué modalidad?</h3>
+          <p class="hint">Así te enviamos el horario que te corresponde.</p>
+          <div class="opts" data-key="modalidad">
+            <button type="button" class="opt" data-v="online"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#laptop"/></svg></span><span>Online<small>En directo y grabado</small></span></button>
+            <button type="button" class="opt" data-v="presencial"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#pin"/></svg></span><span>Presencial<small>En el aula</small></span></button>
+            <button type="button" class="opt" data-v="hibrida"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#mix"/></svg></span><span>Híbrida<small>Online y algunas sesiones en el aula</small></span></button>
+            <button type="button" class="opt" data-v="igual"><span class="ic">?</span><span>Me da igual<small>Que me recomienden</small></span></button>
+          </div>
+          <div class="nav-row"><button type="button" class="back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Atrás</button></div>
+        </div>
+
+        <!-- 3 cuándo -->
+        <div class="step" data-step="3" hidden>
+          <h3>¿Cuándo te gustaría empezar?</h3>
+          <div class="opts" data-key="cuando">
+            <button type="button" class="opt" data-v="ya"><span class="ic">1</span><span>En la próxima convocatoria<small>En las próximas semanas</small></span></button>
+            <button type="button" class="opt" data-v="pronto"><span class="ic">2</span><span>En 1 a 3 meses</span></button>
+            <button type="button" class="opt" data-v="luego"><span class="ic">3</span><span>Más adelante</span></button>
+            <button type="button" class="opt" data-v="info"><span class="ic">i</span><span>Solo me estoy informando</span></button>
+          </div>
+          <div class="nav-row"><button type="button" class="back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Atrás</button></div>
+        </div>
+
+        <!-- 4 quién paga -->
+        <div class="step" data-step="4" hidden>
+          <h3>¿Quién pagaría la formación?</h3>
+          <p class="hint">Si es tu empresa, puede ser bonificable: te orientamos.</p>
+          <div class="opts" data-key="paga">
+            <button type="button" class="opt" data-v="yo"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#euro"/></svg></span><span>Yo</span></button>
+            <button type="button" class="opt" data-v="empresa"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#team"/></svg></span><span>Mi empresa</span></button>
+            <button type="button" class="opt" data-v="nose"><span class="ic">?</span><span>Compartido o aún no lo sé</span></button>
+          </div>
+          <div id="personas-box" hidden>
+            <span class="lbl">¿Para cuántas personas?</span>
+            <div class="opts cols2" data-key="personas" style="margin-top:10px">
+              <button type="button" class="opt" data-v="1">Solo para mí</button>
+              <button type="button" class="opt" data-v="2-5">2 a 5</button>
+              <button type="button" class="opt" data-v="6-15">6 a 15</button>
+              <button type="button" class="opt" data-v="16+">Más de 15</button>
+            </div>
+          </div>
+          <div class="nav-row"><button type="button" class="back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Atrás</button><button type="button" class="cta" id="next4" hidden disabled>Seguir</button></div>
+        </div>
+
+        <!-- 5 datos -->
+        <div class="step" data-step="5" hidden>
+          <h3>¿A dónde te lo enviamos?</h3>
+          <p class="hint">Te enviamos el programa por correo y te escribimos por WhatsApp.</p>
+          <div class="field">
+            <label for="nombre">Tu nombre</label>
+            <input id="nombre" name="nombre" type="text" autocomplete="given-name" placeholder="Nombre" maxlength="60">
+            <div class="err" id="err-nombre" hidden>Escribe tu nombre.</div>
+          </div>
+          <div class="field">
+            <label for="email">Tu correo</label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="nombre@correo.com" maxlength="90">
+            <div class="err" id="err-email" hidden>Revisa el correo.</div>
+          </div>
+          <div class="field">
+            <label for="tel">Tu teléfono (WhatsApp)</label>
+            <div class="tel-wrap"><span>+34</span><input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="600 000 000" maxlength="15"></div>
+            <div class="err" id="err-tel" hidden>Revisa el teléfono: 9 cifras.</div>
+          </div>
+          <label class="check ses"><input type="checkbox" id="sesion" checked> <span>Resérvame plaza en la <b>sesión informativa gratuita</b> del jueves 26 de noviembre a las 18:30 (online).</span></label>
+          <label class="check"><input type="checkbox" id="priv"> <span>Acepto que Escuela Ejemplo me contacte por correo y WhatsApp para enviarme el programa e información de la sesión, según su <a href="#" onclick="return false">política de privacidad</a>.</span></label>
+          <div class="err" id="err-priv" hidden style="margin-top:6px">Marca la casilla para poder escribirte.</div>
+          <button type="submit" class="cta full" id="submit">Recibir el programa <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="secure">Maqueta: no se envía nada a ningún sitio.</p>
+          <div class="nav-row" style="margin-top:6px"><button type="button" class="back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Atrás</button></div>
+        </div>
+      </form>
+
+      <!-- confirmación -->
+      <div id="done" hidden>
+        <div class="done">
+          <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <h3>¡Hecho!</h3>
+          <p class="lead" id="done-lead">Te enviamos el programa por <b>correo</b> y te escribimos por <b>WhatsApp</b>.</p>
+          <div class="ticket" id="ticket"></div>
+          <button type="button" class="cta ghost again" id="again" style="color:var(--ink);border-color:var(--ink-line)">Hacer otra solicitud</button>
+        </div>
+        <details class="team" id="team">
+          <summary><span>Lo que recibe el equipo<span class="lab">Ejemplo: solicitud calificada A, B o C</span></span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="team-body">
+            <span class="sample">Datos de ejemplo</span>
+            <div class="lead-card">
+              <div class="lead-head">
+                <div class="who"><div class="avatar" id="l-av">A</div><div><div class="nm" id="l-nm"></div><div class="tm" id="l-tm"></div></div></div>
+                <span class="prio" id="l-prio"></span>
+              </div>
+              <dl class="lead-rows" id="l-rows"></dl>
+              <div class="why" id="l-why"></div>
+              <div class="nexta" id="l-next"></div>
+              <div class="wa-prev">
+                <div class="t">WhatsApp enviado en minutos (ejemplo)</div>
+                <div class="bubble"><span class="from">Asistente virtual de Escuela Ejemplo</span><span id="l-wa"></span><span class="hr" id="l-hr"></span></div>
+              </div>
+            </div>
+            <p class="foot">Datos introducidos en el formulario + datos de ejemplo. La calificación sigue reglas que define el centro; aquí: A si ha elegido programa, quiere empezar en menos de 3 meses y sabe quién paga; C si solo se informa; B en el resto.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap faq-grid">
+    <div>
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 class="sec-h">Antes de decidir</h2>
+    </div>
+    <div class="qa">
+      <details open><summary>¿Puedo compaginarlo con mi trabajo?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Los programas están pensados para quien trabaja: clases a última hora de la tarde y todo grabado en el campus. En el programa verás las horas semanales que pide cada uno.</p></details>
+      <details><summary>¿Qué pasa en la sesión informativa?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Durante unos 45 minutos te contamos el contenido, el calendario y cómo es el día a día, y resolvemos dudas. Es gratuita y no te compromete a nada.</p></details>
+      <details><summary>¿Cuánto cuesta?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Depende del programa y de la modalidad. Te lo explica una persona del equipo, junto con las formas de pago, en la sesión informativa o por teléfono.</p></details>
+      <details><summary>¿Lo puede pagar mi empresa?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Sí. En muchos casos la formación para empleados puede bonificarse. Lo revisamos con tu empresa caso a caso y os ayudamos con la gestión.</p></details>
+      <details><summary>¿Qué certificado obtengo?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Depende del programa. En el programa que te enviamos viene detallado qué certificado se obtiene, con cuántas horas y qué contenidos.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="final">
+  <div class="wrap">
+    <h2>Pide el programa.<span class="ser">Decide con calma.</span></h2>
+    <p>Cinco preguntas. Te lo enviamos y te guardamos plaza en la sesión informativa.</p>
+    <a class="cta" href="#reserva" data-goto-form>Recibe el programa <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <div class="fb"><span class="mark"><svg class="ico" aria-hidden="true"><use href="#cap"/></svg></span><b>Escuela Ejemplo</b></div>
+      <div class="meta"><b>Formación para profesionales</b> · online, presencial e híbrida<br>Centro ficticio creado para esta demo</div>
+    </div>
+    <p class="disc">Maqueta preparada por Qualivo. Escuela Ejemplo es un centro de formación ficticio: marca, programas, fechas, personas, mensajes y cifras son de ejemplo. El formulario no envía nada.</p>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar" aria-hidden="true"><a class="cta" href="#reserva" data-goto-form tabindex="-1">Recibe el programa</a></div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s,r){return (r||document).querySelector(s)};
+  var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+  var PROGRAMAS = {
+    especializacion:{n:'Especialización profesional', c:'Especialízate sin dejar tu trabajo'},
+    actualizacion:{n:'Curso de actualización', c:'Especialízate sin dejar tu trabajo'},
+    certificacion:{n:'Oposición o certificación', c:'Prepárala con un plan semana a semana'},
+    empresa:{n:'Formación para equipos', c:'Forma a tu equipo a vuestro calendario'},
+    reciclaje:{n:'Cambio de sector', c:'¿Cambiar de sector? Empieza por ver si encaja'},
+    nose:{n:'Aún no lo tiene claro', c:'Web y recomendación'}
+  };
+  var MODAL = {online:'Online', presencial:'Presencial', hibrida:'Híbrida', igual:'Le da igual'};
+  var CUANDO = {ya:'En la próxima convocatoria', pronto:'En 1 a 3 meses', luego:'Más adelante', info:'Solo se está informando'};
+  var PAGA = {yo:'Él o ella', empresa:'Su empresa', nose:'Compartido o aún no lo sabe'};
+  var PAGA_YO = {yo:'Yo', empresa:'Mi empresa', nose:'Aún no lo sé'};
+  var PERS = {'1':'1 persona','2-5':'2 a 5 personas','6-15':'6 a 15 personas','16+':'más de 15 personas'};
+  var STEP_NAMES = ['Programa','Modalidad','Cuándo','Quién paga','Tus datos'];
+  var SESION = 'Jueves 26 nov · 18:30 · online';
+
+  var st = {programa:null,modalidad:null,cuando:null,paga:null,personas:null};
+  var cur = 1;
+
+  /* --- Calificación A/B/C (reglas de ejemplo; las define el centro) --- */
+  function calif(){
+    if (st.cuando === 'info') return {k:'C', w:'Solo se está informando.', n:'Sin llamadas: recibe el programa, la invitación a la sesión y los seguimientos de los días 2 y 5. Si no contesta, se archiva.'};
+    var prog = st.programa !== 'nose', when = st.cuando === 'ya' || st.cuando === 'pronto', pay = st.paga === 'yo' || st.paga === 'empresa';
+    if (prog && when && pay) return {k:'A', w:'Ha elegido programa, quiere empezar ' + CUANDO[st.cuando].toLowerCase() + ' y sabe quién paga.',
+      n:'Llamada del equipo hoy o mañana' + (st.paga === 'empresa' ? ', con quien lleva la formación bonificada.' : ', para contarle precio y formas de pago.')};
+    var falta = [];
+    if (!prog) falta.push('elegir programa');
+    if (!when) falta.push('fecha de inicio cercana');
+    if (!pay) falta.push('saber quién paga');
+    return {k:'B', w:'Le falta: ' + falta.join(', ') + '.', n:'WhatsApp del asistente y sesión informativa. El equipo le llama después de la sesión si tiene dudas.'};
+  }
+
+  /* --- navegación entre pasos --- */
+  var form = $('#form');
+  function go(n, focus){
+    cur = n;
+    $$('.step', form).forEach(function(s){
+      var on = +s.dataset.step === n;
+      s.hidden = !on;
+      if (on){ s.classList.remove('step-in'); void s.offsetWidth; s.classList.add('step-in'); }
+    });
+    $('#prog-bar').style.width = (n*20) + '%';
+    $('#prog-label').textContent = 'Paso ' + n + ' de 5 · ' + STEP_NAMES[n-1];
+    renderSum();
+    if (focus){ var h = $('.step[data-step="'+n+'"] h3', form); if (h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); } }
+  }
+  function renderSum(){
+    var bar = $('#sumbar'); bar.innerHTML = '';
+    var items = [];
+    if (st.programa && cur > 1) items.push([1, PROGRAMAS[st.programa].n]);
+    if (st.modalidad && cur > 2) items.push([2, MODAL[st.modalidad]]);
+    if (st.cuando && cur > 3) items.push([3, CUANDO[st.cuando]]);
+    if (st.paga && cur > 4) items.push([4, PAGA_YO[st.paga] + (st.paga === 'empresa' && st.personas ? ' · ' + PERS[st.personas] : '')]);
+    items.forEach(function(it){
+      var b = document.createElement('button'); b.type = 'button';
+      b.setAttribute('aria-label', 'Cambiar ' + STEP_NAMES[it[0]-1].toLowerCase() + ': ' + it[1]);
+      b.appendChild(document.createTextNode(it[1]));
+      b.insertAdjacentHTML('beforeend','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>');
+      b.addEventListener('click', function(){ go(it[0], true); });
+      bar.appendChild(b);
+    });
+  }
+  function press(group, v){
+    $$('.opt', group).forEach(function(o){ o.setAttribute('aria-pressed', o.dataset.v === v ? 'true' : 'false'); });
+  }
+  $$('.opt').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+
+  function setPrograma(v){
+    st.programa = v; press($('[data-key="programa"]'), v);
+    if (v === 'empresa') setPaga('empresa');
+  }
+  function setPaga(v){
+    st.paga = v; press($('[data-key="paga"]'), v);
+    $('#personas-box').hidden = v !== 'empresa';
+    $('#next4').hidden = v !== 'empresa';
+    if (v !== 'empresa'){ st.personas = null; press($('[data-key="personas"]'), null); }
+    $('#next4').disabled = !(v === 'empresa' && st.personas);
+  }
+
+  $('[data-key="programa"]').addEventListener('click', function(e){
+    var o = e.target.closest('.opt'); if (!o) return;
+    setPrograma(o.dataset.v); setTimeout(function(){ go(2, true); }, 180);
+  });
+  $('[data-key="modalidad"]').addEventListener('click', function(e){
+    var o = e.target.closest('.opt'); if (!o) return;
+    st.modalidad = o.dataset.v; press(this, st.modalidad); setTimeout(function(){ go(3, true); }, 180);
+  });
+  $('[data-key="cuando"]').addEventListener('click', function(e){
+    var o = e.target.closest('.opt'); if (!o) return;
+    st.cuando = o.dataset.v; press(this, st.cuando); setTimeout(function(){ go(4, true); }, 180);
+  });
+  $('[data-key="paga"]').addEventListener('click', function(e){
+    var o = e.target.closest('.opt'); if (!o) return;
+    setPaga(o.dataset.v);
+    if (o.dataset.v !== 'empresa') setTimeout(function(){ go5(); }, 180);
+  });
+  $('[data-key="personas"]').addEventListener('click', function(e){
+    var o = e.target.closest('.opt'); if (!o) return;
+    st.personas = o.dataset.v; press(this, st.personas); $('#next4').disabled = false;
+  });
+  function go5(){ go(5, true); setTimeout(function(){ $('#nombre').focus({preventScroll:true}); }, 60); }
+  $('#next4').addEventListener('click', function(){ if (st.paga === 'empresa' && st.personas) go5(); });
+
+  $$('[data-back]').forEach(function(b){ b.addEventListener('click', function(){ go(Math.max(1, cur - 1), true); }); });
+
+  /* --- validación y envío (no se envía nada) --- */
+  function cleanTel(v){ var d = (v||'').replace(/\D/g,''); if (d.length === 11 && d.indexOf('34') === 0) d = d.slice(2); return d; }
+  function fmtTel(d){ return '+34 ' + d.slice(0,3) + ' ' + d.slice(3,6) + ' ' + d.slice(6); }
+  function okMail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+  function setErr(id, on){ $('#err-'+id).hidden = !on; var inp = id === 'priv' ? null : $('#'+id); if (inp) inp.setAttribute('aria-invalid', on ? 'true' : 'false'); }
+  $('#nombre').addEventListener('input', function(){ if (this.value.trim().length > 1) setErr('nombre', false); });
+  $('#email').addEventListener('input', function(){ if (okMail(this.value.trim())) setErr('email', false); });
+  $('#tel').addEventListener('input', function(){ if (/^[6789]\d{8}$/.test(cleanTel(this.value))) setErr('tel', false); });
+  $('#priv').addEventListener('change', function(){ if (this.checked) setErr('priv', false); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (cur !== 5) return;
+    var nombre = $('#nombre').value.trim().replace(/\s+/g,' ');
+    var email = $('#email').value.trim();
+    var tel = cleanTel($('#tel').value);
+    var okN = nombre.length > 1, okE = okMail(email), okT = /^[6789]\d{8}$/.test(tel), okP = $('#priv').checked;
+    setErr('nombre', !okN); setErr('email', !okE); setErr('tel', !okT); setErr('priv', !okP);
+    if (!okN){ $('#nombre').focus(); return; }
+    if (!okE){ $('#email').focus(); return; }
+    if (!okT){ $('#tel').focus(); return; }
+    if (!okP){ $('#priv').focus(); return; }
+    showDone(nombre, email, tel, $('#sesion').checked);
+  });
+
+  function row(parent, k, v){
+    var d = document.createElement('div'); var dt = document.createElement('dt'); var dd = document.createElement('dd');
+    dt.textContent = k; dd.textContent = v; d.appendChild(dt); d.appendChild(dd); parent.appendChild(d);
+  }
+  function hhmm(dt){ return ('0'+dt.getHours()).slice(-2) + ':' + ('0'+dt.getMinutes()).slice(-2); }
+
+  function showDone(nombre, email, tel, sesion){
+    var P = PROGRAMAS[st.programa], first = nombre.split(' ')[0];
+    var pagaTxt = PAGA_YO[st.paga] + (st.paga === 'empresa' && st.personas ? ' · ' + PERS[st.personas] : '');
+    // resumen para la persona
+    var t = $('#ticket'); t.innerHTML = '';
+    [['Programa', st.programa === 'nose' ? 'Guía de programas' : P.n], ['Modalidad', st.modalidad === 'igual' ? 'Te recomendamos una' : MODAL[st.modalidad]], ['Empezar', st.cuando === 'info' ? 'Solo me informo' : CUANDO[st.cuando]], ['Lo paga', pagaTxt], ['Sesión informativa', sesion ? SESION : 'No, solo el programa'], ['Coste de la sesión', 'Gratuita']].forEach(function(p){
+      var d = document.createElement('div'); var s = document.createElement('span'); var b = document.createElement('b');
+      s.textContent = p[0]; b.textContent = p[1]; d.appendChild(s); d.appendChild(b); t.appendChild(d);
+    });
+    // ficha del equipo
+    var now = new Date(), wa = new Date(now.getTime() + 2*60000), c = calif();
+    $('#l-av').textContent = first.charAt(0).toUpperCase();
+    $('#l-nm').textContent = nombre;
+    $('#l-tm').textContent = 'Nueva solicitud · hoy, ' + hhmm(now);
+    var pr = $('#l-prio'); pr.className = 'prio ' + c.k; pr.textContent = 'Calificación ' + c.k;
+    var rows = $('#l-rows'); rows.innerHTML = '';
+    row(rows, 'Teléfono', fmtTel(tel));
+    row(rows, 'Correo', email);
+    row(rows, 'Programa', P.n);
+    row(rows, 'Modalidad', MODAL[st.modalidad]);
+    row(rows, 'Quiere empezar', CUANDO[st.cuando]);
+    row(rows, 'Lo paga', PAGA[st.paga] + (st.paga === 'empresa' && st.personas ? ' · ' + PERS[st.personas] : ''));
+    row(rows, 'Sesión informativa', sesion ? SESION : 'No ha reservado');
+    row(rows, 'Origen', st.programa === 'nose' ? 'Web (ejemplo)' : 'Anuncio «' + P.c + '» (ejemplo)');
+    row(rows, 'Estado', 'Programa enviado · WhatsApp enviado (ejemplo)');
+    $('#l-why').innerHTML = '';
+    var b = document.createElement('b'); b.textContent = 'Por qué ' + c.k + ': ';
+    $('#l-why').appendChild(b); $('#l-why').appendChild(document.createTextNode(c.w));
+    $('#l-next').textContent = 'Siguiente acción: ' + c.n;
+    var progTxt = st.programa === 'nose' ? 'la guía de programas' : 'el programa de ' + P.n + (st.modalidad !== 'igual' ? ' (' + MODAL[st.modalidad].toLowerCase() + ')' : '');
+    $('#l-wa').textContent = 'Hola, ' + first + '. Soy el asistente virtual de Escuela Ejemplo. Te acabo de enviar al correo ' + progTxt + '. ' +
+      (sesion ? 'Tienes plaza en la sesión informativa gratuita del jueves 26 a las 18:30 (online); ese día te mando el enlace. ' : '¿Quieres que te guarde plaza en la próxima sesión informativa gratuita? ') +
+      'Si tienes cualquier duda, escríbeme por aquí.';
+    $('#l-hr').textContent = hhmm(wa);
+
+    form.hidden = true;
+    $('#done').hidden = false;
+    if (window.__mbarUpd) window.__mbarUpd();
+    $('#team').open = false;
+    var card = $('#booking');
+    var top = card.getBoundingClientRect().top + window.scrollY - 80;
+    if (Math.abs(window.scrollY - top) > 40) window.scrollTo({top: top, behavior: 'smooth'});
+  }
+
+  $('#again').addEventListener('click', function(){
+    st = {programa:null,modalidad:null,cuando:null,paga:null,personas:null};
+    $$('.opt').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+    form.reset(); setPaga(null);
+    ['nombre','email','tel','priv'].forEach(function(k){ setErr(k,false); });
+    $('#done').hidden = true; form.hidden = false; go(1, true);
+    if (window.__mbarUpd) window.__mbarUpd();
+  });
+
+  /* --- tarjetas de programa: preseleccionan y llevan al paso 2 --- */
+  function preselect(v){
+    if (!PROGRAMAS[v]) return;
+    if (!$('#done').hidden) $('#again').click();
+    setPrograma(v); go(2, false);
+  }
+  $$('[data-programa]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      preselect(a.dataset.programa);
+      $('#reserva').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  // landing por programa: ?programa=certificacion
+  try {
+    var q = new URLSearchParams(location.search).get('programa');
+    if (q && PROGRAMAS[q] && q !== 'nose'){
+      preselect(q);
+      $('#hero-eyebrow').textContent = PROGRAMAS[q].n + ' · Escuela Ejemplo';
+    }
+  } catch(err){}
+
+  /* --- carrusel --- */
+  var rail = $('#rail');
+  $$('[data-rail]').forEach(function(b){ b.addEventListener('click', function(){
+    var card = rail.querySelector('.feat'); var w = card ? card.getBoundingClientRect().width + 14 : 260;
+    rail.scrollBy({left: (+b.dataset.rail) * w * 2, behavior:'smooth'});
+  }); });
+
+  /* --- barra fija móvil: visible tras el hero y fuera del formulario --- */
+  var mbar = $('#mbar'), heroOut = false, formIn = false;
+  function upd(){ mbar.classList.toggle('show', heroOut && !formIn && $('#done').hidden); }
+  window.__mbarUpd = upd;
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){ heroOut = !en[0].isIntersecting; upd(); }, {rootMargin:'-40% 0px 0px 0px'}).observe($('.hero'));
+    new IntersectionObserver(function(en){ formIn = en[0].isIntersecting; upd(); }, {threshold:0}).observe($('#reserva'));
+  }
+
+  go(cur, false);
+})();
+</script>
+</body>
+</html>

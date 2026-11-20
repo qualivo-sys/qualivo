@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Demo de formación · Qualivo</title>
+<meta name="description" content="Demo de ejemplo de Qualivo para centros de formación para profesionales: del anuncio a la sesión informativa y a la matrícula.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/deck.css">
+<style>
+/* Demo guiada en pestañas para un centro de formación ficticio (Escuela Ejemplo): cliente potencial, anuncios, landing, solicitud, WhatsApp, seguimientos, panel y siguiente paso. */
+:root{--serif:"Plus Jakarta Sans","Inter",system-ui,sans-serif;--display:"Fraunces",Georgia,serif;
+  --brand:#1F4E8C;--brand-2:#163C6E;--black:#0B1B2E;--hi:#8CBBF0;
+  --accent:#1F4E8C;--accent-ink:#fff;--accent-soft:#E6EEF8;
+  --good:#1B6B4F;--good-soft:#E0F1EA;
+  --paper:#F3F5F8;--surface:#FFFFFF;--surface-2:#F8FAFC;--ink:#0F1B2A;--ink-2:#253447;--muted:#56627A;--line:#DCE2EA;--line-2:#E8EDF3;
+  --wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent:#8AB8F0;--accent-ink:#081526;--accent-soft:#15263D;--good:#7FD4AE;--good-soft:#12301F;
+  --paper:#09111B;--surface:#101A27;--surface-2:#14202F;--ink:#E8EEF5;--ink-2:#CBD5E1;--muted:#9AA8B9;--line:#243246;--line-2:#1B2738;
+  --wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}}
+:root[data-theme="dark"]{--accent:#8AB8F0;--accent-ink:#081526;--accent-soft:#15263D;--good:#7FD4AE;--good-soft:#12301F;
+  --paper:#09111B;--surface:#101A27;--surface-2:#14202F;--ink:#E8EEF5;--ink-2:#CBD5E1;--muted:#9AA8B9;--line:#243246;--line-2:#1B2738;
+  --wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34}
+.wrap.main{display:grid;gap:26px;padding-top:0;padding-bottom:72px}
+.wrap.main > *{min-width:0}
+h2{font-family:var(--serif);font-weight:800;font-size:clamp(24px,3vw,33px);line-height:1.15;letter-spacing:-.02em}
+.note{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:9px 12px;line-height:1.5}
+.ej{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;background:#B7790A;color:#fff;border-radius:6px;padding:2px 7px;vertical-align:middle;margin-right:4px}
+h2 .ej{vertical-align:5px;margin-left:6px}
+.cap{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
+/* marca ficticia */
+.mark{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#1F4E8C,#0B1B2E);color:#fff;flex:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.mark .i{width:18px;height:18px;vertical-align:0}
+/* barra superior */
+.topnav{background:rgba(11,27,46,.96)!important;border-bottom:2px solid var(--brand)!important}
+.topnav .chip{display:inline-flex;align-items:center;gap:8px;flex:none}
+.topnav .chip b{font-family:var(--serif);font-weight:800;font-size:14px;letter-spacing:-.01em}
+.topnav .links a[aria-current="page"]{background:#fff;color:var(--black)}
+/* pestañas */
+nav.tabs{position:sticky;top:61px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:5px;box-shadow:var(--shadow-lg)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;font-size:13.5px;white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 8px;cursor:pointer;transition:background .25s,color .25s}
+nav.tabs button:hover{color:var(--ink);background:var(--line-2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-family:var(--mono);font-size:11px;background:var(--line-2);color:var(--muted);transition:background .25s,color .25s}
+nav.tabs button[aria-selected="true"]{background:var(--black);color:#fff;box-shadow:0 6px 16px -8px rgba(0,0,0,.6)}
+nav.tabs button[aria-selected="true"] span{background:var(--brand);color:#fff}
+@media (max-width:560px){nav.tabs{top:98px;border-radius:14px}nav.tabs button{padding:9px 11px}}
+.pane{display:none;gap:22px}
+.pane.on{display:grid;animation:paneIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px}
+.pane > header p{color:var(--muted);margin-top:8px;max-width:76ch;font-size:16.5px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;min-width:0}
+.box h3{font-family:var(--serif);font-weight:700;letter-spacing:-.01em}
+.box p{font-size:14.5px}
+/* cómo trabajamos */
+.para{display:grid;gap:14px;background:var(--black);color:#fff;border-radius:20px;padding:22px;box-shadow:var(--shadow-lg);margin-top:28px;position:relative;overflow:hidden;isolation:isolate}
+.para::before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(120% 90% at 100% 0%,rgba(47,109,181,.55),transparent 55%),radial-gradient(80% 70% at 0% 100%,rgba(27,107,79,.28),transparent 60%)}
+.para .eyebrow{color:var(--hi)}
+.para h2{font-size:clamp(22px,2.6vw,30px);color:#fff}
+.map{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.map li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.4;cursor:pointer;color:rgba(255,255,255,.8);transition:border-color .15s,background .15s}
+.map li:hover{border-color:var(--hi);background:rgba(47,109,181,.22)}
+.map li > span{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:13px;background:var(--brand);color:#fff;font-family:var(--mono);font-size:12px}
+.map li b{display:block;font-size:15px;color:#fff}
+@media (max-width:900px){.map{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.map{grid-template-columns:1fr}.map li{padding:8px 12px}}
+/* composiciones gráficas (sin fotos) */
+.art{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:linear-gradient(135deg,#0B1B2E 0%,#1F4E8C 100%)}
+.art::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:22px 22px;-webkit-mask-image:radial-gradient(90% 90% at 70% 30%,#000,transparent);mask-image:radial-gradient(90% 90% at 70% 30%,#000,transparent)}
+.art.g2{background:linear-gradient(135deg,#0B1B2E 0%,#1C5E6B 100%)}
+.art.g3{background:linear-gradient(135deg,#101826 0%,#3B4F6E 100%)}
+.art.g4{background:linear-gradient(135deg,#0C2420 0%,#2A6B57 100%)}
+.art .big{position:absolute;right:-18px;top:-14px;width:150px;height:150px;opacity:.16;stroke-width:1.2}
+/* perfiles */
+.prof{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:stretch}
+.pc{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);min-width:0}
+.ph{aspect-ratio:16/11;display:grid;place-items:center}
+.ph .disc{display:grid;place-items:center;width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.1);box-shadow:0 0 0 10px rgba(255,255,255,.05),0 0 0 22px rgba(255,255,255,.03)}
+.ph .disc .i{width:36px;height:36px;stroke-width:1.6}
+.ph .tag{position:absolute;left:10px;bottom:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.45);color:#fff;border-radius:6px;padding:3px 8px}
+.pc .bd{padding:16px;display:grid;gap:10px;align-content:start}
+.pc h3{font-family:var(--serif);font-weight:800;font-size:18px;letter-spacing:-.015em;line-height:1.25}
+.pc dl{margin:0;display:grid;gap:8px}
+.pc dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pc dd{margin:2px 0 0;font-size:14.5px;line-height:1.45}
+.pc dd.of{color:var(--ink);font-weight:600;border-left:3px solid var(--brand);padding-left:9px}
+.pv{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:22px;align-items:center;background:var(--black);color:#fff;border-radius:20px;padding:26px;overflow:hidden;position:relative;isolation:isolate}
+.pv::before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(70% 120% at 100% 50%,rgba(47,109,181,.5),transparent 60%)}
+.pv .eyebrow{color:var(--hi)}
+.pv blockquote{margin:8px 0 0;font-family:var(--serif);font-weight:800;font-size:clamp(21px,2.5vw,29px);line-height:1.2;letter-spacing:-.02em}
+.pv blockquote em{font-style:normal;color:var(--hi)}
+.pv ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.pv li{font-size:13.5px;font-weight:600;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);border-radius:99px;padding:6px 12px}
+/* punto de partida */
+.ya{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.datos{display:flex;flex-wrap:wrap;gap:8px}
+.datos span{font-size:13.5px;border:1px solid var(--line);border-radius:99px;padding:5px 12px;background:var(--surface-2)}
+.datos b{color:var(--accent)}
+.ya .op{border-left:4px solid var(--brand);background:var(--accent-soft);border-radius:0 12px 12px 0;padding:12px 14px;font-size:15px;line-height:1.55}
+/* anuncio 4:5 */
+.ads{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:start}
+.ads > div{min-width:0}
+.ad{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.ad .prop{display:block;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:#B7790A;color:#fff;padding:5px 8px}
+.ad .hd{display:flex;gap:9px;align-items:center;padding:10px 12px}
+.ad .hd b{display:block;font-size:13.5px;line-height:1.2}
+.ad .hd small{font-size:11.5px;color:var(--muted)}
+.ad .cr{aspect-ratio:4/5;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+.ad .cr .big{width:200px;height:200px;right:-30px;top:30px;opacity:.1}
+.ad .cr .doc{position:absolute;left:18px;right:18px;top:48px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px;display:grid;gap:7px;backdrop-filter:blur(2px)}
+.ad .cr .doc b{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.8;font-weight:500}
+.ad .cr .doc i{display:block;height:7px;border-radius:4px;background:rgba(255,255,255,.22)}
+.ad .cr .doc i:nth-child(2){width:86%}.ad .cr .doc i:nth-child(3){width:64%}.ad .cr .doc i:nth-child(4){width:74%}
+.ad .cr .k1{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.95);color:var(--black);border-radius:5px;padding:3px 8px}
+.ad .cr .h{font-family:var(--display);font-weight:600;font-size:clamp(23px,2vw,29px);line-height:1.08;letter-spacing:-.015em;position:relative}
+.ad .cr .h em{font-style:italic;color:var(--hi)}
+.ad .cr .k2{font-size:13px;font-weight:600;opacity:.92}
+.ad .cr .chips{display:flex;flex-wrap:wrap;gap:6px}
+.ad .cr .chips span{font-size:11px;font-weight:650;border:1px solid rgba(255,255,255,.6);border-radius:99px;padding:2px 9px}
+.ad .tx{padding:10px 12px 12px;font-size:13.5px;line-height:1.5;border-top:1px solid var(--line-2)}
+.ad .ft{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:var(--surface-2);border-top:1px solid var(--line-2)}
+.ad .ft small{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.ad .ft b{font-size:13px;line-height:1.3}
+.ad .ft a.cta{flex:none;background:var(--brand);color:#fff;text-decoration:none;border-radius:8px;padding:7px 10px;font-size:12.5px;font-weight:700;line-height:1.2;text-align:center;max-width:62%}
+/* ventanas (solicitud y panel) */
+.win{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);min-width:0}
+.wbar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.wbar i{width:11px;height:11px;border-radius:50%;background:#E5DFD2}
+.wbar i:nth-child(1){background:#F0A39B}.wbar i:nth-child(2){background:#F2D18A}.wbar i:nth-child(3){background:#A9D7A2}
+.wbar span{margin-left:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbar em{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#fff;background:#B7790A;border-radius:6px;padding:2px 7px;white-space:nowrap}
+.winbody{padding:18px;display:grid;gap:16px;background:var(--paper)}
+.inbox{display:grid;gap:8px}
+.inbox .r{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px}
+.inbox .r.sel{border-color:var(--brand);box-shadow:0 0 0 2px color-mix(in srgb,var(--brand) 22%,transparent)}
+.inbox .r b{display:block;font-size:14.5px}
+.inbox .r small{color:var(--muted);font-size:13px}
+.ini{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--line-2);font-weight:700;font-size:13px;color:var(--ink-2)}
+.pr{font-size:11.5px;font-weight:700;border-radius:99px;padding:3px 9px;white-space:nowrap}
+.pr.a{background:var(--good-soft);color:var(--good)}
+.pr.m{background:var(--warn-soft);color:var(--warn)}
+.pr.b{background:var(--line-2);color:var(--muted)}
+.ficha{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ficha .hd{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 18px;border-bottom:1px solid var(--line);align-items:center}
+.ficha .hd b{font-family:var(--serif);font-weight:800;font-size:19px;letter-spacing:-.015em}
+.ficha .hd p{font-size:13.5px;color:var(--muted)}
+.ficha .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+.ficha .grid > div{padding:12px 18px;border-bottom:1px solid var(--line-2);border-right:1px solid var(--line-2);font-size:14.5px}
+.ficha .grid > div:nth-child(2n){border-right:0}
+.ficha dl{margin:0}
+.ficha dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ficha dd{margin:3px 0 0;font-weight:600}
+.ficha .why2{padding:14px 18px;font-size:14.5px;border-bottom:1px solid var(--line-2);line-height:1.55}
+.ficha .next{padding:14px 18px;background:var(--accent-soft);font-weight:600;line-height:1.55;border-left:4px solid var(--brand)}
+.notif{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--good);border-radius:14px;padding:14px 16px;display:grid;gap:6px;box-shadow:var(--shadow)}
+.notif .t{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.notif p{font-size:14.5px;line-height:1.55}
+.rules{display:grid;gap:10px}
+.rules > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 15px;font-size:14.5px;line-height:1.5}
+.rules b{display:block;font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+/* WhatsApp */
+.phones{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.8fr);gap:22px;align-items:start}
+.phone{width:min(370px,100%);margin-inline:auto;background:#0E1316;border-radius:44px;padding:11px;box-shadow:0 0 0 1px #2b3236,0 30px 60px -20px rgba(12,24,30,.55),inset 0 0 0 2px #262d31}
+.phone .sbar{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:12.5px;padding:6px 22px 8px;font-weight:600}
+.phone .isl{width:90px;height:24px;border-radius:20px;background:#000}
+.phone .home{width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.55);margin:10px auto 2px}
+.wa{border-radius:30px;overflow:hidden;background:var(--wa-bg);display:grid;grid-template-rows:auto 1fr;height:640px;background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1px);background-size:14px 14px}
+.wa .top{background:var(--wa-head);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:10px}
+.wa .top .mark{width:34px;height:34px;border-radius:50%}
+.wa .top b{font-size:15px}
+.wa .top small{display:block;font-size:12px;opacity:.8}
+.wa .body{overflow-y:auto;padding:12px 10px;display:flex;flex-direction:column;gap:7px}
+.b{max-width:86%;padding:7px 10px 5px;border-radius:12px;font-size:14px;line-height:1.42;white-space:pre-line;box-shadow:0 1px 0 rgba(0,0,0,.08);color:var(--ink)}
+.b.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:4px}
+.b.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:4px}
+.b.hum{border-left:3px solid #00A3B5}
+.b .w{display:block;font-size:12px;font-weight:700;color:#00788A;margin-bottom:2px}
+.b time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.b.sys{align-self:center;background:color-mix(in srgb,var(--surface) 92%,transparent);font-size:12px;color:var(--muted);box-shadow:none;border:1px solid var(--line);text-align:center;border-radius:8px;max-width:94%}
+.b .qb{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.b .qb span{font-size:12.5px;font-weight:650;color:#00788A;border:1px solid color-mix(in srgb,#00788A 40%,transparent);border-radius:99px;padding:3px 9px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .b .w,:root:not([data-theme="light"]) .b .qb span{color:#53BDEB}}
+:root[data-theme="dark"] .b .w,:root[data-theme="dark"] .b .qb span{color:#53BDEB}
+/* seguimientos */
+.cal{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;position:relative}
+.cal::before{content:"";position:absolute;left:4%;right:4%;top:22px;height:2px;background:linear-gradient(90deg,var(--brand),var(--line))}
+.cal li{position:relative;display:grid;gap:8px;align-content:start;min-width:0}
+.cal .dot{justify-self:start;display:inline-grid;place-items:center;height:44px;padding:0 12px;border-radius:22px;background:var(--black);color:#fff;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;white-space:nowrap;border:2px solid var(--brand);position:relative;z-index:1}
+.cal li.end .dot{background:var(--surface);color:var(--muted);border-style:dashed;border-color:var(--line)}
+.cal .c{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:8px;box-shadow:var(--shadow)}
+.cal .c b{font-size:14.5px;line-height:1.3}
+.cal .c small{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cal blockquote{margin:0;background:var(--wa-out);color:#111;border-radius:4px 12px 12px 12px;padding:8px 10px;font-size:13.5px;line-height:1.45}
+.cal blockquote.alt{background:var(--paper);color:var(--ink);border:1px dashed var(--line)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cal blockquote:not(.alt){color:#E9EDEF}}
+:root[data-theme="dark"] .cal blockquote:not(.alt){color:#E9EDEF}
+/* panel */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:4px;align-content:start}
+.kpi b{font-family:var(--serif);font-weight:800;font-size:36px;line-height:1;letter-spacing:-.03em}
+.kpi span{font-size:13px;color:var(--muted);line-height:1.4}
+.kpi.alert{border-color:#B7790A;background:var(--warn-soft)}
+.kpi.alert b{color:var(--warn)}
+.fun{display:grid;gap:8px}
+.fun .st{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr) auto;gap:12px;align-items:center;font-size:14px}
+.fun .st > span:first-child{font-weight:600}
+.fun .bar{height:26px;border-radius:7px;background:var(--line-2);overflow:hidden}
+.fun .bar i{display:block;height:100%;border-radius:7px;background:#5B8FD0}
+.fun .st:nth-child(2) .bar i{background:#3A6FB3}.fun .st:nth-child(3) .bar i{background:#1F4E8C}.fun .st:nth-child(4) .bar i{background:#0B1B2E}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .fun .st:nth-child(4) .bar i{background:#BBD6F5}}
+:root[data-theme="dark"] .fun .st:nth-child(4) .bar i{background:#BBD6F5}
+.fun .st b{font-variant-numeric:tabular-nums;font-size:15px;min-width:64px;text-align:right}
+.tbl{overflow-x:auto}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+.tbl th,.tbl td{padding:10px 10px;border-bottom:1px solid var(--line-2);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl td:first-child{position:sticky;left:0;background:var(--surface);font-weight:600}
+.tbl th{white-space:normal;vertical-align:bottom;line-height:1.35;background:var(--surface-2);font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.tbl td.kc{font-weight:800;color:var(--accent)}
+.tbl tr.lo td.kc{color:var(--muted)}
+.tbl tfoot td{font-weight:700;border-top:2px solid var(--line);border-bottom:0}
+.tbl .mini{display:inline-block;width:56px;height:6px;border-radius:3px;background:var(--line-2);vertical-align:middle;margin-left:8px;overflow:hidden}
+.tbl .mini i{display:block;height:100%;background:var(--accent)}
+.idea{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;background:var(--black);color:#fff;border-radius:16px;padding:18px 20px}
+.idea .n{font-family:var(--display);font-size:40px;line-height:1;color:var(--hi)}
+.idea p{font-size:15px;line-height:1.55;color:rgba(255,255,255,.88)}
+.idea b{color:#fff}
+/* cierre */
+.next3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.next3 > div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:8px;align-content:start;box-shadow:var(--shadow)}
+.next3 .n{font-family:var(--display);font-size:44px;line-height:1;color:var(--accent)}
+.next3 h3{font-family:var(--serif);font-weight:800;font-size:19px;letter-spacing:-.015em}
+.next3 p{color:var(--muted);font-size:14.5px}
+.hero-end{position:relative;border-radius:20px;overflow:hidden;color:#fff;isolation:isolate;background:var(--black);display:grid}
+.hero-end .strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));position:relative}
+.hero-end .strip::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,27,46,0) 40%,var(--black) 100%)}
+.hero-end .strip span{aspect-ratio:1/.9;display:grid;place-items:center}
+.hero-end .strip span .i{width:34px;height:34px;stroke-width:1.5;opacity:.85}
+.hero-end .in{position:relative;z-index:1;margin-top:-34px;padding:0 26px 24px;display:grid;gap:10px}
+@media (max-width:640px){.hero-end .strip{grid-template-columns:repeat(3,minmax(0,1fr))}.hero-end .strip span:nth-child(n+4){display:none}}
+.hero-end h2{color:#fff;font-size:clamp(26px,3.4vw,40px)}
+.hero-end h2 em{font-style:normal;color:var(--hi)}
+.hero-end .in p{color:rgba(255,255,255,.82);max-width:62ch}
+.btnl{display:inline-flex;align-items:center;gap:6px;font-weight:650;background:var(--brand);color:#fff;text-decoration:none;border-radius:99px;padding:10px 18px;border:0;font-size:15px;cursor:pointer;font-family:inherit;transition:transform .15s}
+.btnl:hover{transform:translateY(-1px)}
+.navnext{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px}
+.navnext button,.navnext .btnl{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:650;background:var(--black);color:#fff;border:0;border-radius:99px;padding:12px 20px;margin:0;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s}
+.navnext .btnl.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.navnext button:hover,.navnext .btnl:hover{transform:translateX(3px);box-shadow:var(--shadow)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .navnext button{background:#fff;color:#000}:root:not([data-theme="light"]) nav.tabs button[aria-selected="true"]{background:#fff;color:#000}}
+:root[data-theme="dark"] .navnext button{background:#fff;color:#000}
+:root[data-theme="dark"] nav.tabs button[aria-selected="true"]{background:#fff;color:#000}
+.frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg);background:var(--surface)}
+.frame .wbar{border-bottom:1px solid var(--line)}
+.frame iframe{display:block;width:100%;height:720px;border:0;background:#fff}
+footer{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:22px;font-size:13.5px;color:var(--muted)}
+footer p b{color:var(--ink)}
+@media (max-width:1100px){.ads,.prof{grid-template-columns:repeat(2,minmax(0,1fr))}.phones{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.phones .rules{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr))}.cal{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:22px}.cal::before{display:none}}
+@media (max-width:900px){.two,.ya,.pv,.next3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.ads,.prof,.phones{grid-template-columns:1fr}.phones .rules{grid-template-columns:1fr}.ads > div,.prof > .pc{max-width:420px;margin-inline:auto;width:100%}.cal{grid-template-columns:1fr}.frame iframe{height:640px}.wa{height:600px}.phone{border-radius:40px;padding:9px}.winbody{padding:10px}.kpi b{font-size:30px}.pv,.para{padding:20px}.fun .st{grid-template-columns:1fr auto}.fun .st .bar{grid-column:1/-1;grid-row:2}.ficha .grid{grid-template-columns:1fr}.ficha .grid > div{border-right:0}.inbox .r{grid-template-columns:auto minmax(0,1fr)}.inbox .r .pr{grid-column:2;justify-self:start}}
+.mob{display:none;gap:8px}
+.mob > div{border:1px solid var(--line-2);border-radius:12px;padding:10px 12px;display:grid;gap:3px}
+.mob .fl{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--accent)}
+.mob small{font-size:12.5px;color:var(--muted)}
+@media (max-width:640px){.tbl{display:none}.mob{display:grid}}
+@media print{.pane{display:grid!important;break-before:page}nav.tabs,.navnext{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol><symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7M19 5.5a9 9 0 0 1 0 13"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M12 19h4.5a3.5 3.5 0 0 0 0-7h-8a3.5 3.5 0 0 1 0-7H12"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4M4 4h13l-2 4 2 4H4"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9.5 12 5l10 4.5L12 14z"/><path d="M6 11.5V16c3.3 2.6 8.7 2.6 12 0v-4.5M22 9.5V15"/></symbol><symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol><symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.6"/><path d="M16 14.2a5 5 0 0 1 5 5.3"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol><symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></symbol></svg>
+
+<nav class="topnav" aria-label="Presentación">
+  <div class="in">
+    <div class="brand"><span class="chip"><span class="mark"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><b>Escuela Ejemplo</b></span><span class="x">×</span><span class="qv">Qualivo</span><span class="by">Demo de ejemplo</span></div>
+    <div class="links"><a href="./" aria-current="page">Recorrido</a><a href="../landing/" target="_blank" rel="noopener">Landing</a></div>
+  </div>
+</nav>
+
+<div class="wrap main">
+
+<div class="para">
+  <p class="eyebrow">Cómo trabajamos · demo con un centro ficticio</p>
+  <h2>Vosotros formáis profesionales. Nosotros llevamos cada solicitud de la primera pregunta a la sesión informativa, y de ahí a la matrícula.</h2>
+  <ol class="map">
+    <li data-go="cliente"><span>1</span><div><b>Cliente potencial</b>A quién hablamos y qué le frena.</div></li>
+    <li data-go="anuncios"><span>2</span><div><b>Anuncios</b>Uno por perfil, sobrios y sin promesas.</div></li>
+    <li data-go="landing"><span>3</span><div><b>Landing</b>Programa y sesión informativa en un minuto.</div></li>
+    <li data-go="solicitud"><span>4</span><div><b>Solicitud</b>Llega calificada: A, B o C.</div></li>
+    <li data-go="whatsapp"><span>5</span><div><b>WhatsApp</b>Respuesta en minutos; lo delicado, a una persona.</div></li>
+    <li data-go="seguimientos"><span>6</span><div><b>Seguimientos</b>Suaves, y se archiva sin insistir.</div></li>
+    <li data-go="panel"><span>7</span><div><b>Panel</b>Qué campaña trae matrículas, no solo solicitudes.</div></li>
+    <li data-go="siguiente"><span>8</span><div><b>Siguiente paso</b>Montarlo con vuestros datos.</div></li>
+  </ol>
+</div>
+
+<nav class="tabs" role="tablist" aria-label="Pasos de la demo">
+  <button role="tab" id="t-cliente" aria-controls="p-cliente" data-p="cliente"><span>1</span>Cliente</button>
+  <button role="tab" id="t-anuncios" aria-controls="p-anuncios" data-p="anuncios"><span>2</span>Anuncios</button>
+  <button role="tab" id="t-landing" aria-controls="p-landing" data-p="landing"><span>3</span>Landing</button>
+  <button role="tab" id="t-solicitud" aria-controls="p-solicitud" data-p="solicitud"><span>4</span>Solicitud</button>
+  <button role="tab" id="t-whatsapp" aria-controls="p-whatsapp" data-p="whatsapp"><span>5</span>WhatsApp</button>
+  <button role="tab" id="t-seguimientos" aria-controls="p-seguimientos" data-p="seguimientos"><span>6</span>Seguimientos</button>
+  <button role="tab" id="t-panel" aria-controls="p-panel" data-p="panel"><span>7</span>Panel</button>
+  <button role="tab" id="t-siguiente" aria-controls="p-siguiente" data-p="siguiente"><span>8</span>Siguiente paso</button>
+</nav>
+
+<!-- 1 · CLIENTE -->
+<section class="pane" id="p-cliente" role="tabpanel" aria-labelledby="t-cliente">
+  <header><h2>1 · Cliente potencial <span class="ej">Ejemplo</span></h2><p>Cuatro perfiles que suelen llegar a un centro de formación para profesionales. Cada uno tiene un freno distinto, así que cada uno tendrá su anuncio y su mensaje.</p></header>
+  <div class="prof">
+    <article class="pc">
+      <div class="ph art"><svg class="i big" aria-hidden="true"><use href="#i-brief"/></svg><span class="disc"><svg class="i" aria-hidden="true"><use href="#i-brief"/></svg></span><span class="tag">Especialización</span></div>
+      <div class="bd"><h3>Profesional que quiere especializarse</h3>
+        <dl><div><dt>Le frena</dt><dd>«No sé si podré compaginarlo con el trabajo», «¿me servirá en mi día a día?».</dd></div>
+        <div><dt>Busca</dt><dd>Formación aplicada, horario compatible y un título que pueda enseñar.</dd></div>
+        <div><dt>Le ofrecemos</dt><dd class="of">Programa práctico con clases en directo y grabadas, casos reales y un tutor que responde.</dd></div></dl></div>
+    </article>
+    <article class="pc">
+      <div class="ph art g2"><svg class="i big" aria-hidden="true"><use href="#i-target"/></svg><span class="disc"><svg class="i" aria-hidden="true"><use href="#i-target"/></svg></span><span class="tag">Oposición · certificación</span></div>
+      <div class="bd"><h3>Persona que prepara una oposición o certificación</h3>
+        <dl><div><dt>Le frena</dt><dd>«¿El temario está al día?», «¿cuántas horas a la semana necesito?».</dd></div>
+        <div><dt>Busca</dt><dd>Método, calendario claro y simulacros para llegar con confianza.</dd></div>
+        <div><dt>Le ofrecemos</dt><dd class="of">Plan de estudio por semanas, simulacros periódicos y seguimiento de su avance.</dd></div></dl></div>
+    </article>
+    <article class="pc">
+      <div class="ph art g3"><svg class="i big" aria-hidden="true"><use href="#i-team"/></svg><span class="disc"><svg class="i" aria-hidden="true"><use href="#i-team"/></svg></span><span class="tag">Empresas · bonificable</span></div>
+      <div class="bd"><h3>Empresa que forma a su equipo</h3>
+        <dl><div><dt>Le frena</dt><dd>«¿Se puede bonificar?», «¿cuánto papeleo?», «¿encaja con nuestro calendario?».</dd></div>
+        <div><dt>Busca</dt><dd>Formación que se aplique al trabajo, sin parar la actividad, y alguien que lleve la gestión.</dd></div>
+        <div><dt>Le ofrecemos</dt><dd class="of">Grupos cerrados a su calendario y ayuda para tramitar la formación bonificada.</dd></div></dl></div>
+    </article>
+    <article class="pc">
+      <div class="ph art g4"><svg class="i big" aria-hidden="true"><use href="#i-compass"/></svg><span class="disc"><svg class="i" aria-hidden="true"><use href="#i-compass"/></svg></span><span class="tag">Reciclaje · cambio de sector</span></div>
+      <div class="bd"><h3>Alguien que se recicla o cambia de sector</h3>
+        <dl><div><dt>Le frena</dt><dd>«¿Llego tarde?», «no tengo base», «¿y si luego no me sirve?».</dd></div>
+        <div><dt>Busca</dt><dd>Empezar desde la base, con orientación y sin sentirse perdido.</dd></div>
+        <div><dt>Le ofrecemos</dt><dd class="of">Itinerario desde cero y una sesión informativa para ver si encaja antes de matricularse.</dd></div></dl></div>
+    </article>
+  </div>
+  <div class="pv">
+    <div><p class="eyebrow">La propuesta de valor, en una frase</p>
+    <blockquote>Formación práctica para profesionales, <em>compatible con tu trabajo</em>, y una sesión informativa gratuita para decidir con calma antes de matricularte.</blockquote></div>
+    <ul aria-label="Lo que ofrece el centro de ejemplo">
+      <li>Online, presencial o híbrida</li><li>Clases en directo y grabadas</li><li>Matrícula todo el año o por convocatorias</li><li>Tutor asignado</li><li>Formación bonificable para empresas</li>
+    </ul>
+  </div>
+  <div class="navnext"><button data-go="anuncios">Siguiente: los anuncios <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 2 · ANUNCIOS -->
+<section class="pane" id="p-anuncios" role="tabpanel" aria-labelledby="t-anuncios">
+  <header><h2>2 · Un anuncio para cada perfil <span class="ej">Ejemplo</span></h2><p>Formato 4:5 de Instagram y Facebook. Ganchos sobrios, sin prometer resultados. Todos llevan al mismo sitio: pedir el programa y apuntarse a la sesión informativa.</p></header>
+  <div class="box">
+    <p class="cap" style="margin:0">Punto de partida habitual <span class="ej">Ejemplo</span></p>
+    <div class="ya">
+      <div style="display:grid;gap:10px">
+        <div class="datos"><span>Unas <b>decenas</b> de peticiones al mes</span><span>Llegan por <b>web</b>, <b>correo</b> y <b>redes</b></span><span><b>Sin</b> publicidad de pago</span><span>Se responde <b>cuando se puede</b></span><span>Nadie sabe <b>cuántas se pierden</b></span></div>
+        <p style="font-size:14.5px">Lo difícil ya existe: un buen programa y gente que pregunta. Lo que suele faltar es responder rápido, ordenar quién está listo para matricularse y hacer un seguimiento sin agobiar.</p>
+      </div>
+      <p class="op"><b>La oportunidad:</b> que cada petición termine en una sesión informativa o en una conversación con el equipo, con su origen apuntado. Y, cuando haya publicidad, saber qué anuncio trae matrículas, no solo formularios.</p>
+    </div>
+  </div>
+  <div class="ads">
+    <div>
+      <p class="cap">Perfil 1 · especialización</p>
+      <article class="ad" aria-label="Anuncio de ejemplo: especialización compatible con el trabajo">
+        <span class="prop">Anuncio de ejemplo</span>
+        <div class="hd"><span class="mark"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><div><b>escuelaejemplo</b><small>Publicidad</small></div></div>
+        <div class="cr art"><svg class="i big" aria-hidden="true"><use href="#i-brief"/></svg><span class="k1">Especialización</span>
+          <div class="doc" aria-hidden="true"><b>Programa · 6 módulos</b><i></i><i></i><i></i></div>
+          <p class="h">Especialízate <em>sin dejar tu trabajo.</em></p><div class="chips"><span>Online o híbrido</span><span>Directo + grabado</span></div></div>
+        <p class="tx">Programa para profesionales en ejercicio, con casos reales y tutor. Pide el programa completo y resuelve tus dudas en la sesión informativa.</p>
+        <div class="ft"><div><small>Escuela Ejemplo</small><b>Online</b></div><a class="cta" href="../landing/?programa=especializacion" target="_blank" rel="noopener">Recibir programa</a></div>
+      </article>
+    </div>
+    <div>
+      <p class="cap">Perfil 2 · oposición</p>
+      <article class="ad" aria-label="Anuncio de ejemplo: preparación con plan semanal">
+        <span class="prop">Anuncio de ejemplo</span>
+        <div class="hd"><span class="mark"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><div><b>escuelaejemplo</b><small>Publicidad</small></div></div>
+        <div class="cr art g2"><svg class="i big" aria-hidden="true"><use href="#i-cal"/></svg><span class="k1">Preparación</span>
+          <div class="doc" aria-hidden="true"><b>Plan semanal · simulacros</b><i></i><i></i><i></i></div>
+          <p class="h">Prepárala con <em>un plan semana a semana.</em></p><p class="k2">Temario actualizado · simulacros · seguimiento</p></div>
+        <p class="tx">Te enseñamos el calendario y el método antes de que decidas. Sesión informativa gratuita, online.</p>
+        <div class="ft"><div><small>Escuela Ejemplo</small><b>Online</b></div><a class="cta" href="../landing/?programa=certificacion" target="_blank" rel="noopener">Ver calendario</a></div>
+      </article>
+    </div>
+    <div>
+      <p class="cap">Perfil 3 · empresas</p>
+      <article class="ad" aria-label="Anuncio de ejemplo: formación para equipos">
+        <span class="prop">Anuncio de ejemplo</span>
+        <div class="hd"><span class="mark"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><div><b>escuelaejemplo</b><small>Publicidad</small></div></div>
+        <div class="cr art g3"><svg class="i big" aria-hidden="true"><use href="#i-team"/></svg><span class="k1">Para empresas</span>
+          <div class="doc" aria-hidden="true"><b>Grupo cerrado · a medida</b><i></i><i></i><i></i></div>
+          <p class="h">Forma a tu equipo <em>a vuestro calendario.</em></p><div class="chips"><span>Grupos cerrados</span><span>Formación bonificable</span></div></div>
+        <p class="tx">Formación para equipos, online o en vuestras oficinas. Os ayudamos a tramitar la bonificación.</p>
+        <div class="ft"><div><small>Escuela Ejemplo</small><b>Empresas</b></div><a class="cta" href="../landing/?programa=empresa" target="_blank" rel="noopener">Pedir propuesta</a></div>
+      </article>
+    </div>
+    <div>
+      <p class="cap">Perfil 4 · cambio de sector</p>
+      <article class="ad" aria-label="Anuncio de ejemplo: cambio de sector">
+        <span class="prop">Anuncio de ejemplo</span>
+        <div class="hd"><span class="mark"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><div><b>escuelaejemplo</b><small>Publicidad</small></div></div>
+        <div class="cr art g4"><svg class="i big" aria-hidden="true"><use href="#i-compass"/></svg><span class="k1">Reciclaje</span>
+          <div class="doc" aria-hidden="true"><b>Itinerario desde la base</b><i></i><i></i><i></i></div>
+          <p class="h">¿Cambiar de sector? <em>Empieza por ver si encaja.</em></p><p class="k2">Sesión informativa gratuita · sin compromiso</p></div>
+        <p class="tx">Te contamos el itinerario, el tiempo que pide y cómo es el día a día. Después decides.</p>
+        <div class="ft"><div><small>Escuela Ejemplo</small><b>Gratuita</b></div><a class="cta" href="../landing/?programa=reciclaje" target="_blank" rel="noopener">Reservar sesión</a></div>
+      </article>
+    </div>
+  </div>
+  <p class="note">Marca, textos y diseños de ejemplo. Con vuestro centro se hacen con vuestros programas, vuestras fechas y, si queréis, vuestras imágenes.</p>
+  <div class="navnext"><button data-go="landing">Siguiente: la landing <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 3 · LANDING -->
+<section class="pane" id="p-landing" role="tabpanel" aria-labelledby="t-landing">
+  <header><h2>3 · La landing: del anuncio a la sesión informativa <span class="ej">Maqueta</span></h2><p>Cinco preguntas cortas: programa, modalidad, cuándo quiere empezar, quién lo paga y cómo contactar. Al enviar, la solicitud queda calificada A, B o C.</p></header>
+  <div class="frame"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Landing · programa y sesión informativa</span><em>Maqueta</em></div><iframe src="../landing/" title="Landing de ejemplo de Escuela Ejemplo (maqueta)" loading="lazy"></iframe></div>
+  <div class="navnext"><a class="btnl alt" href="../landing/" target="_blank" rel="noopener"><svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-ext"/></svg> Abrir la landing a pantalla completa</a><button data-go="solicitud">Siguiente: la solicitud <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 4 · SOLICITUD -->
+<section class="pane" id="p-solicitud" role="tabpanel" aria-labelledby="t-solicitud">
+  <header><h2>4 · La solicitud que recibe el equipo <span class="ej">Datos de ejemplo</span></h2><p>Cada petición llega ordenada: qué programa, qué modalidad, cuándo quiere empezar, quién paga y de qué campaña viene. El equipo sabe a quién llamar primero.</p></header>
+  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Solicitudes · esta semana</span><em>Datos de ejemplo</em></div>
+  <div class="winbody">
+    <div class="two">
+      <div style="display:grid;gap:10px;align-content:start">
+        <p class="cap" style="margin:0">Bandeja · 5 nuevas · datos de ejemplo</p>
+        <div class="inbox">
+          <div class="r sel"><span class="ini">LR</span><div><b>Lucía R.</b><small>Especialización · online · próxima convocatoria · paga ella</small></div><span class="pr a">A</span></div>
+          <div class="r"><span class="ini">MS</span><div><b>Marta S. · RR. HH. de una empresa</b><small>Equipo de 8 · híbrida · en 1-3 meses · paga la empresa</small></div><span class="pr a">A</span></div>
+          <div class="r"><span class="ini">DP</span><div><b>Daniel P.</b><small>Certificación · online · en 1-3 meses · aún no sabe quién paga</small></div><span class="pr m">B</span></div>
+          <div class="r"><span class="ini">JL</span><div><b>Javier L.</b><small>Sin programa elegido · pregunta el precio</small></div><span class="pr m">B · llamar</span></div>
+          <div class="r"><span class="ini">AG</span><div><b>Ana G.</b><small>Cambio de sector · solo se está informando</small></div><span class="pr b">C</span></div>
+        </div>
+        <p class="note" style="margin:0"><b>A:</b> ha elegido programa, quiere empezar en menos de 3 meses y sabe quién paga: llamada hoy. <b>B:</b> le falta una de las tres cosas: WhatsApp y sesión informativa. <b>C:</b> solo se informa: recibe el programa y la invitación, sin llamadas.</p>
+      </div>
+      <div class="ficha">
+        <div class="hd"><div><b>Lucía R. (ejemplo)</b><p>Pidió el programa el jueves a las 22:41, desde el móvil</p></div><span class="pr a">Calificación A</span></div>
+        <div class="grid">
+          <div><dl><dt>Programa</dt><dd>Especialización profesional</dd></dl></div>
+          <div><dl><dt>Modalidad</dt><dd>Online</dd></dl></div>
+          <div><dl><dt>Quiere empezar</dt><dd>En la próxima convocatoria</dd></dl></div>
+          <div><dl><dt>Lo paga</dt><dd>Ella</dd></dl></div>
+          <div><dl><dt>Sesión informativa</dt><dd>Jueves 26 · 18:30 · online</dd></dl></div>
+          <div><dl><dt>Vino de</dt><dd>Anuncio «Especialízate sin dejar tu trabajo»</dd></dl></div>
+          <div><dl><dt>WhatsApp</dt><dd>Programa enviado a las 22:42</dd></dl></div>
+          <div><dl><dt>Duda</dt><dd>Precio y si se puede fraccionar</dd></dl></div>
+        </div>
+        <div class="why2"><b>Por qué es A:</b> ha elegido programa, quiere empezar en la próxima convocatoria, lo paga ella y ya ha reservado la sesión informativa.</div>
+        <div class="next">Siguiente acción: que alguien del equipo la llame mañana por la mañana para contarle el precio y las formas de pago, que es lo que preguntó.</div>
+      </div>
+    </div>
+    <div class="notif"><div class="t"><span>Aviso al equipo · WhatsApp · ejemplo</span><span>22:42</span></div><p><b>Nueva solicitud A: Lucía R., especialización online, quiere empezar en la próxima convocatoria.</b> Vino del anuncio de especialización. Preguntó por el precio: llamarla mañana. [Ver ficha]</p></div>
+  </div></div>
+  <div class="navnext"><button data-go="whatsapp">Siguiente: el WhatsApp <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 5 · WHATSAPP -->
+<section class="pane" id="p-whatsapp" role="tabpanel" aria-labelledby="t-whatsapp">
+  <header><h2>5 · WhatsApp: en minutos, y una persona cuando hace falta <span class="ej">Datos de ejemplo</span></h2><p>El asistente virtual de Escuela Ejemplo envía el programa, confirma la sesión informativa y resuelve dudas sencillas. Si preguntan el precio o algo delicado, pasa la conversación a una persona del equipo.</p></header>
+  <div class="phones">
+    <div class="phone"><div class="sbar" aria-hidden="true"><b>22:42</b><span class="isl"></span><span>5G</span></div>
+      <div class="wa" aria-label="Conversación de ejemplo antes de la sesión informativa">
+        <div class="top"><span class="mark"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><div><b>Escuela Ejemplo</b><small>Asistente virtual · ejemplo</small></div></div>
+        <div class="body">
+          <div class="b sys">Jueves 22:42 · Lucía pide el programa de especialización</div>
+          <div class="b in">Hola, Lucía. Soy el asistente virtual de Escuela Ejemplo. Te acabo de enviar al correo el programa de <b>Especialización profesional (online)</b>.
+Tienes plaza en la sesión informativa gratuita: <b>jueves 26, 18:30, online</b>.<time>22:42</time></div>
+          <div class="b out">Gracias. ¿Las clases son en directo? Trabajo hasta las 18:00<time>22:45</time></div>
+          <div class="b in">Hay clases en directo a última hora de la tarde y todas quedan grabadas en el campus, para verlas cuando puedas. El detalle de horarios viene en la página 3 del programa.<time>22:45</time></div>
+          <div class="b out">¿Y cuánto cuesta? ¿Se puede pagar a plazos?<time>22:47</time></div>
+          <div class="b in">Eso te lo explica una persona del equipo, porque depende del programa y de la modalidad. Le paso tu consulta y te escribe mañana por la mañana 🙂<time>22:47</time></div>
+          <div class="b in hum"><span class="w">Elena · equipo de admisiones (ejemplo)</span>Buenos días, Lucía. Te cuento el precio y las formas de pago: ¿te llamo a las 10:00 o prefieres por aquí?<time>09:12</time></div>
+          <div class="b out">Llámame a las 10, gracias<time>09:20</time></div>
+        </div>
+      </div>
+      <div class="home" aria-hidden="true"></div></div>
+    <div class="phone"><div class="sbar" aria-hidden="true"><b>19:30</b><span class="isl"></span><span>5G</span></div>
+      <div class="wa" aria-label="Conversaciones de ejemplo después de la sesión informativa">
+        <div class="top"><span class="mark"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><div><b>Escuela Ejemplo</b><small>Asistente virtual · ejemplo</small></div></div>
+        <div class="body">
+          <div class="b sys">Jueves 26 · 19:30 · después de la sesión</div>
+          <div class="b in">Hola, Daniel. Gracias por venir a la sesión informativa. ¿Te ha quedado alguna duda?<span class="qb"><span>Quiero matricularme</span><span>Tengo una duda</span><span>Lo pienso</span></span><time>19:30</time></div>
+          <div class="b out">Una duda: ¿esto es una persona o un bot?<time>19:41</time></div>
+          <div class="b in">Soy el asistente virtual de Escuela Ejemplo, no una persona. Si prefieres hablar con alguien del equipo, te paso ahora mismo.<span class="qb"><span>Sí, con una persona</span><span>Sigo contigo</span></span><time>19:41</time></div>
+          <div class="b out">Sí, con una persona. Es por si mi empresa puede bonificarlo<time>19:43</time></div>
+          <div class="b in">Hecho. Aviso al equipo y te escribe alguien que lleva la formación bonificada.<time>19:43</time></div>
+          <div class="b sys">Otro caso · Ana se apuntó y no pudo entrar</div>
+          <div class="b in">Hola, Ana. Ayer no pudiste conectarte a la sesión informativa. ¿Te envío la grabación o prefieres la del jueves 3?<span class="qb"><span>La grabación</span><span>El jueves 3</span><span>Ahora no</span></span><time>10:15</time></div>
+          <div class="b out">La grabación, gracias<time>10:32</time></div>
+          <div class="b in">Aquí la tienes (45 min). Si te surge alguna duda, escríbeme.<time>10:32</time></div>
+        </div>
+      </div>
+      <div class="home" aria-hidden="true"></div></div>
+    <div class="rules">
+      <div><b>Cómo se presenta</b>Siempre como «el asistente virtual de Escuela Ejemplo». Nunca dice ser una persona.</div>
+      <div><b>Qué resuelve</b>Enviar el programa, fechas de la sesión informativa, modalidades, cómo es el campus.</div>
+      <div><b>Qué pasa al equipo</b>Precio, formas de pago, bonificación, convalidaciones y cualquier duda delicada.</div>
+      <div><b>Cuándo se calla</b>En cuanto escribe alguien del equipo, o si la persona pide no recibir más mensajes.</div>
+      <div><b>Quién aprueba</b>Vosotros: cada texto, antes de que salga.</div>
+    </div>
+  </div>
+  <div class="navnext"><button data-go="seguimientos">Siguiente: los seguimientos <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 6 · SEGUIMIENTOS -->
+<section class="pane" id="p-seguimientos" role="tabpanel" aria-labelledby="t-seguimientos">
+  <header><h2>6 · Seguimientos suaves <span class="ej">Datos de ejemplo</span></h2><p>Cuatro mensajes como máximo. Si la persona contesta en cualquier momento, la conversación pasa al equipo y el resto se para. Si no contesta, se archiva sin insistir.</p></header>
+  <ol class="cal">
+    <li><span class="dot">Minuto 1</span><div class="c"><small>A todos</small><b>Confirmación</b><blockquote>Te hemos enviado el programa. Tienes plaza en la sesión informativa del jueves 26, 18:30.</blockquote></div></li>
+    <li><span class="dot">Día de la sesión</span><div class="c"><small>Si reservó sesión</small><b>Recordatorio</b><blockquote>Hoy a las 18:30 es la sesión informativa. Aquí tienes el enlace.</blockquote><blockquote class="alt">Si no pudo entrar: «¿Te envío la grabación?»</blockquote></div></li>
+    <li><span class="dot">Día 2</span><div class="c"><small>Si no ha contestado</small><b>¿Alguna duda?</b><blockquote>¿Pudiste ver el programa? Si tienes alguna duda, dime y te ayudo.</blockquote></div></li>
+    <li><span class="dot">Día 5</span><div class="c"><small>Último mensaje</small><b>Puerta abierta</b><blockquote>No te escribo más para no molestar. Si te encaja más adelante, aquí estamos.</blockquote></div></li>
+    <li class="end"><span class="dot">Sin respuesta</span><div class="c"><small>Se archiva</small><b>Archivada, sin insistir</b><blockquote class="alt">Ningún mensaje más. Queda en la lista para avisarle solo si pide información de una nueva convocatoria.</blockquote></div></li>
+  </ol>
+  <p class="note">Ritmo de ejemplo: lo ajustamos a vuestras convocatorias. Cada texto lo aprobáis vosotros antes de que salga.</p>
+  <div class="navnext"><button data-go="panel">Siguiente: el panel <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 7 · PANEL -->
+<section class="pane" id="p-panel" role="tabpanel" aria-labelledby="t-panel">
+  <header><h2>7 · El panel: dónde se escapan las solicitudes <span class="ej">Datos de ejemplo</span></h2><p>De la solicitud a la matrícula, por campaña. Cifras inventadas para la demo: no son previsiones ni resultados de ningún centro.</p></header>
+  <div class="win"><div class="wbar" aria-hidden="true"><i></i><i></i><i></i><span>Panel · último mes</span><em>Datos de ejemplo</em></div><div class="winbody">
+    <div class="kpis">
+      <div class="kpi"><b>4 min</b><span>hasta el primer WhatsApp a cada solicitud (ejemplo)</span></div>
+      <div class="kpi"><b>65 / 66</b><span>solicitudes contactadas el mismo día (ejemplo)</span></div>
+      <div class="kpi"><b>31</b><span>fueron a una sesión informativa (ejemplo)</span></div>
+      <div class="kpi alert"><b>9</b><span>archivadas tras el día 5 sin respuesta, sin insistir (ejemplo)</span></div>
+    </div>
+    <div class="box">
+      <p class="cap" style="margin:0">Embudo del mes · todas las campañas · datos de ejemplo</p>
+      <div class="fun" role="list">
+        <div class="st" role="listitem"><span>Solicitudes</span><span class="bar"><i style="width:100%"></i></span><b>66</b></div>
+        <div class="st" role="listitem"><span>Contactados</span><span class="bar"><i style="width:98.5%"></i></span><b>65</b></div>
+        <div class="st" role="listitem"><span>Sesión informativa</span><span class="bar"><i style="width:47%"></i></span><b>31</b></div>
+        <div class="st" role="listitem"><span>Matrícula</span><span class="bar"><i style="width:18.2%"></i></span><b>12</b></div>
+      </div>
+    </div>
+    <div class="box">
+      <p class="cap" style="margin:0">Por campaña · datos de ejemplo</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Campaña</th><th>Solicitudes</th><th>Contactados</th><th>Calificadas A</th><th>Sesión informativa</th><th>Matrícula</th><th>De solicitud a matrícula</th></tr></thead>
+        <tbody>
+          <tr><td>Especialización</td><td>18</td><td>18</td><td>7</td><td>9</td><td>4</td><td class="kc">22 %<span class="mini"><i style="width:22%"></i></span></td></tr>
+          <tr><td>Oposición · certificación</td><td>14</td><td>14</td><td>5</td><td>7</td><td>3</td><td class="kc">21 %<span class="mini"><i style="width:21%"></i></span></td></tr>
+          <tr><td>Empresas</td><td>6</td><td>6</td><td>3</td><td>4</td><td>2</td><td class="kc">33 %<span class="mini"><i style="width:33%"></i></span></td></tr>
+          <tr class="lo"><td>Cambio de sector</td><td>16</td><td>16</td><td>2</td><td>6</td><td>1</td><td class="kc">6 %<span class="mini"><i style="width:6%"></i></span></td></tr>
+          <tr><td>Web, correo y recomendación</td><td>12</td><td>11</td><td>4</td><td>5</td><td>2</td><td class="kc">17 %<span class="mini"><i style="width:17%"></i></span></td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td>66</td><td>65</td><td>21</td><td>31</td><td>12</td><td>18 %</td></tr></tfoot>
+      </table></div>
+      <div class="mob"><div><b>Especialización</b><span class="fl">18 → 18 → 9 → 4</span><small>Calificadas A: 7 · de solicitud a matrícula: <b>22 %</b></small></div><div><b>Oposición · certificación</b><span class="fl">14 → 14 → 7 → 3</span><small>Calificadas A: 5 · de solicitud a matrícula: <b>21 %</b></small></div><div><b>Empresas</b><span class="fl">6 → 6 → 4 → 2</span><small>Calificadas A: 3 · de solicitud a matrícula: <b>33 %</b></small></div><div><b>Cambio de sector</b><span class="fl">16 → 16 → 6 → 1</span><small>Calificadas A: 2 · de solicitud a matrícula: <b>6 %</b></small></div><div><b>Web, correo y recomendación</b><span class="fl">12 → 11 → 5 → 2</span><small>Calificadas A: 4 · de solicitud a matrícula: <b>17 %</b></small></div><p class="muted" style="font-size:12.5px">Solicitudes → contactados → sesión informativa → matrícula · datos de ejemplo</p></div>
+      <p class="muted" style="font-size:13px">La barrita: de cada solicitud, cuántas acaban en matrícula.</p>
+    </div>
+    <div class="idea"><span class="n">→</span><p><b>Ver dónde se escapan.</b> En el ejemplo, «Cambio de sector» trae muchas solicitudes, pero pocas llegan a la sesión y casi ninguna se matricula: quizá necesita una sesión específica o un curso de entrada. «Empresas» trae pocas, pero un tercio se matricula: merece más atención. Con esto se decide dónde poner el esfuerzo del mes siguiente.</p></div>
+  </div></div>
+  <div class="navnext"><button data-go="siguiente">Siguiente paso <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 8 · SIGUIENTE PASO -->
+<section class="pane" id="p-siguiente" role="tabpanel" aria-labelledby="t-siguiente">
+  <div class="hero-end"><div class="strip" aria-hidden="true"><span class="art"><svg class="i"><use href="#i-mega"/></svg></span><span class="art g2"><svg class="i"><use href="#i-doc"/></svg></span><span class="art g3"><svg class="i"><use href="#i-chat"/></svg></span><span class="art g4"><svg class="i"><use href="#i-video"/></svg></span><span class="art"><svg class="i"><use href="#i-cap"/></svg></span><span class="art g2"><svg class="i"><use href="#i-chart"/></svg></span></div><div class="in"><p class="eyebrow" style="color:var(--hi)">8 · Siguiente paso</p><h2>Si os encaja, en una segunda reunión <em>lo montamos con vuestros datos.</em></h2><p>Esta demo es de un centro ficticio. La versión buena es la vuestra: vuestros programas, vuestras convocatorias y vuestras preguntas reales.</p></div></div>
+  <div class="next3">
+    <div><span class="n">1</span><h3>Hoy: nos contáis cómo funciona</h3><p>Qué programas tenéis, cómo son las convocatorias, por dónde llegan hoy las peticiones y en qué punto se quedan.</p></div>
+    <div><span class="n">2</span><h3>Segunda reunión: lo montamos con vuestros datos</h3><p>Anuncios, landing, mensajes de WhatsApp, calificación A/B/C y avisos al equipo, con vuestra marca y vuestros programas. Todo lo aprobáis vosotros.</p></div>
+    <div><span class="n">3</span><h3>Lo miramos juntos en el panel</h3><p>Con las primeras solicitudes, vemos dónde se escapan y qué ajustar antes de seguir.</p></div>
+  </div>
+  <div class="navnext"><a class="btnl alt" href="../landing/" target="_blank" rel="noopener">Ver la landing</a><button data-go="cliente">Volver al inicio <svg class="i" aria-hidden="true" style="width:17px;height:17px"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<footer>
+  <p><b>Maikel Echevarría · Qualivo · maikel@qualivo.io · qualivo.io</b></p>
+  <p>Demo de ejemplo preparada por Qualivo. Escuela Ejemplo es un centro de formación ficticio: marca, personas, mensajes y cifras son datos de ejemplo.</p>
+</footer>
+</div>
+
+<script>
+(function () {
+  var panes = ['cliente', 'anuncios', 'landing', 'solicitud', 'whatsapp', 'seguimientos', 'panel', 'siguiente'];
+  var first = true;
+  function show(id, push) {
+    if (panes.indexOf(id) < 0) id = 'cliente';
+    panes.forEach(function (p) {
+      document.getElementById('p-' + p).classList.toggle('on', p === id);
+      var t = document.getElementById('t-' + p);
+      t.setAttribute('aria-selected', p === id ? 'true' : 'false');
+      t.tabIndex = p === id ? 0 : -1;
+      if (p === id) { var nv = t.parentNode; if (nv.scrollTo) nv.scrollTo({ left: t.offsetLeft - (nv.clientWidth - t.offsetWidth) / 2 }); }
+    });
+    if (push) history.replaceState(null, '', '#' + id);
+    if (!first) { var tabs = document.querySelector('nav.tabs'); var y = tabs.getBoundingClientRect().top + window.scrollY - 70; if (window.scrollY > y) window.scrollTo({ top: Math.max(0, y) }); }
+    first = false;
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.p, true); });
+    b.addEventListener('keydown', function (e) {
+      var i = panes.indexOf(b.dataset.p);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = panes[(i + (e.key === 'ArrowRight' ? 1 : panes.length - 1)) % panes.length];
+        show(n, true); document.getElementById('t-' + n).focus();
+      }
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.go, true); document.querySelector('nav.tabs').scrollIntoView({ block: 'start' }); window.scrollBy(0, -70); });
+  });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
