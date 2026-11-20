@@ -187,7 +187,9 @@ const FORMULARIOS_SECTOR = {
   // Misma versión con la página de gracias en /formacion/agenda/ (17-nov, Maikel).
   '1024313877362865': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3b-17nov' },
   // 19-nov-2026 (Maikel): V3c, mismas 4 preguntas; portada para escuelas de formación online y especializada.
-  '1435491215415333': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3c-19nov-escuelas-online' }
+  '1435491215415333': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3c-19nov-escuelas-online' },
+  // 20-nov-2026 (Maikel): V3e = V3b con email estándar de Meta (autocompleta) en lugar del de trabajo.
+  '1826741068609740': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-v3e-20nov-email-std' }
 };
 
 async function nombreFormulario(formId) {
