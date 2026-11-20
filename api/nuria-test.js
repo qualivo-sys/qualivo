@@ -16,6 +16,8 @@ const ORIGENES = ['https://nr.nuriaroure.com', 'https://nuriaroure.com', 'https:
 const PATRONES = { control: 'Control', anticipacion: 'Anticipación', compensacion: 'Compensación' };
 const NIVELES = ['incipiente', 'instalado', 'arraigado'];
 const TEXTO_LLAMADA = 'Acepto que el equipo de Nuria Roure me llame por teléfono para conocer mi caso y comentar mi resultado. Me llamarán desde un número que empieza por 6. Puedo retirar este permiso cuando quiera.';
+const CAMPO_LLAMADA = 'pcO5PbesGTnsMv0t00GZ';   // campo de contacto «Acepta que la llamen (número que empieza por 6)»
+const OPCION_CAMPO = 'Acepto que el equipo de Nuria Roure me llame por teléfono para conocer mi caso. Me llamarán desde un número que empieza por 6. Puedo retirar este permiso cuando quiera.';
 const recientes = new Map();
 
 function clave() { return process.env.NURIA_GHL_API_KEY_ESCRITURA || process.env.NURIA_GHL_API_KEY; }
@@ -82,6 +84,7 @@ function preparar(b) {
     oportunidad: { name: nombre + ' · Test web', pipelineStageId: ETAPA, status: 'open', source: 'Test patrones web' },
     tarea: { title: (llamada ? 'Llamar: ' : 'Contactar (sin permiso de llamada): ') + nombre + ' ha hecho el test web', body: nota, completed: false },
     nota: nota,
+    llamada: llamada,
     clave: email
   };
 }
@@ -120,6 +123,8 @@ async function handler(req, res) {
     }
     if (!id) throw new Error('sin contacto');
     await ghl('/contacts/' + id + '/tags', 'POST', { tags: p.tags }).catch(function () {});
+    // Mismo campo de consentimiento que la casilla de los formularios de Kliking («Acepta que la llamen»).
+    if (p.llamada) await ghl('/contacts/' + id, 'PUT', { customFields: [{ id: CAMPO_LLAMADA, field_value: [OPCION_CAMPO] }] }).catch(function () {});
     // Pruebas internas (@qualivo.io): la tarea va al usuario API de Maikel y no molesta a las comerciales.
     const avisar = /@qualivo\.io$/.test(p.clave) ? [MAIKEL_API] : String(process.env.NURIA_TEST_AVISAR || PEPI).split(',').map(function (s) { return s.trim(); }).filter(Boolean);
     const vence = new Date(ahora + 30 * 60 * 1000).toISOString();
