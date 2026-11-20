@@ -56,7 +56,12 @@ def main():
         dep, off = 0, 0
         while off <= 20000:
             pl = get(key, f"/campaigns/{c['id']}/leads?offset={off}&limit=100")
-            rows = (pl or {}).get("data") or []
+            if pl is None:
+                # 20-nov: un fallo de lectura se contaba como 0 y daba una falsa alarma de depósito vacío
+                pl = get(key, f"/campaigns/{c['id']}/leads?offset={off}&limit=100")
+            if pl is None:
+                raise SystemExit(f"no puedo leer los leads de {nombre}; no doy ningun numero")
+            rows = pl.get("data") or []
             if not rows:
                 break
             dep += sum(1 for x in rows if (x.get("status") or "").upper() == "STARTED")
