@@ -73,6 +73,15 @@ html,body{overflow-x:hidden}
 #nrg .vid span{font-size:14.5px;line-height:1.55;color:var(--ink)}
 #nrg .vid.dest{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;align-items:center}
 #nrg .vid.dest .t{padding:26px}
+/* vídeo principal */
+#nrg .main-v{margin:26px 0 6px;border-radius:18px;overflow:hidden;background:#111;box-shadow:var(--shadow);border:1px solid var(--line)}
+#nrg .main-v video{display:block;width:100%;aspect-ratio:16/9;background:#111}
+#nrg .main-c{background:#fff;padding:14px 18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+#nrg .main-c b{font-family:var(--serif);font-weight:500;font-size:19px;color:var(--navy)}
+#nrg .main-c span{font-size:13.5px;color:var(--slate)}
+#nrg .datos{margin:18px 0 0 0;padding:18px 20px 18px 40px;background:var(--cream);border:1px solid var(--line);border-radius:16px;display:grid;gap:8px}
+#nrg .datos li{font-size:15.5px;line-height:1.55;color:var(--ink)}
+#nrg .datos b{color:var(--navy);font-weight:600}
 /* cierre */
 #nrg .navy{background:var(--navy);color:var(--cream)}
 #nrg .navy h2{color:var(--cream)}
@@ -90,20 +99,24 @@ html,body{overflow-x:hidden}
 </style>
 
 <div id="nrg">
-  <div class="top"><span class="ok">✓</span><b>Tu llamada está reservada.</b> Revisa tu WhatsApp: te escribiremos para confirmarla.</div>
+  <div class="top"><span class="ok">✓</span><b>Tu sesión está reservada.</b> Revisa tu WhatsApp: te escribiremos para confirmarla.</div>
 
   <section>
     <div class="w">
       <div class="estado"><span class="pulso"></span>Tu asesora está revisando tu solicitud ahora mismo</div>
       <div class="kick">Por Fin Duermo · Dra. Nuria Roure</div>
-      <h1>¡Tu llamada está <em>confirmada!</em></h1>
-      <p class="lede">Gracias por dar este paso. En la llamada vamos a ver tu caso con calma, entender qué está pasando con tu sueño y si el programa de Nuria es para ti.</p>
+      <h1>¡Tu sesión está <em>reservada!</em></h1>
+      <p class="lede">Gracias por dar este paso. Antes de nada, mira este vídeo: Nuria te explica qué es la sesión, cómo prepararla y qué no te vamos a prometer.</p>
+      <div class="main-v">
+        <video controls playsinline preload="none" poster="https://files.leadconnectorhq.com/file/6b006109268fda5bfe5ef126/nuria-bienvenida-poster.jpg" src="https://files.leadconnectorhq.com/file/6b0061088b5100b36a28e6d1/nuria-bienvenida.mp4"></video>
+        <div class="main-c"><b>Mira esto antes de tu sesión</b><span>6 minutos · Dra. Nuria Roure</span></div>
+      </div>
 
       <ol class="pasos">
-        <li class="hecho"><span class="n">✓</span><div><b>Reservas tu llamada <span class="tag si">Hecho</span></b><span>Ya tienes tu día y tu hora.</span></div></li>
-        <li class="ahora"><span class="n">2</span><div><b>Revisa tu WhatsApp <span class="tag ya">Ahora</span></b><span>Te escribiremos para confirmar la llamada. Contéstanos para que sepamos que te ha llegado.</span></div></li>
-        <li><span class="n">3</span><div><b>Mira los vídeos de Nuria</b><span>Más abajo responde a las dudas que casi todo el mundo tiene antes de la llamada.</span></div></li>
-        <li><span class="n">4</span><div><b>Llamada de valoración</b><span>Hablamos de tu caso: cuánto tiempo llevas así, qué has probado y qué necesitas.</span></div></li>
+        <li class="hecho"><span class="n">✓</span><div><b>Reservas tu sesión <span class="tag si">Hecho</span></b><span>Ya tienes tu día y tu hora.</span></div></li>
+        <li class="ahora"><span class="n">2</span><div><b>Revisa tu WhatsApp <span class="tag ya">Ahora</span></b><span>Te escribiremos para confirmar la sesión y enviarte el enlace. Contéstanos para que sepamos que te ha llegado.</span></div></li>
+        <li><span class="n">3</span><div><b>Mira los vídeos de Nuria</b><span>El de arriba y, más abajo, las dudas que casi todo el mundo tiene antes de la sesión.</span></div></li>
+        <li><span class="n">4</span><div><b>Sesión de valoración por videollamada</b><span>Unos 40-45 minutos con una persona del equipo formada por Nuria: qué pasa en tus noches, qué has probado y si podemos ayudarte.</span></div></li>
         <li><span class="n">5</span><div><b>Empiezas el programa con Nuria</b><span>Si encaja contigo, te explicamos cómo empezar.</span></div></li>
       </ol>
     </div>
@@ -111,13 +124,20 @@ html,body{overflow-x:hidden}
 
   <section class="alt">
     <div class="w">
-      <div class="kick">Antes de la llamada</div>
+      <div class="kick">Antes de la sesión</div>
       <h2>Prepárate para <em>aprovecharla</em></h2>
       <div class="prep">
-        <div><i>🤫</i><b>Un sitio tranquilo</b><span>Busca un rato sin interrupciones. Son unos 30 minutos.</span></div>
-        <div><i>📱</i><b>El móvil a mano</b><span>Te llamaremos al número que nos has dejado, a la hora de tu cita.</span></div>
-        <div><i>📝</i><b>Tus dudas apuntadas</b><span>Qué te preocupa, qué has probado ya y qué te gustaría conseguir.</span></div>
+        <div><i>🤫</i><b>Un sitio tranquilo y a solas</b><span>Es una videollamada cara a cara de unos 40-45 minutos. Conéctate unos minutos antes y prueba el enlace.</span></div>
+        <div><i>💬</i><b>Confirma por WhatsApp</b><span>Por ahí te enviamos el enlace y los recordatorios. Si te surge algo, avísanos y la movemos.</span></div>
+        <div><i>📝</i><b>Trae tus 5 datos</b><span>Los tienes justo debajo. Con ellos aprovechamos el tiempo para hablar de lo que importa.</span></div>
       </div>
+      <ol class="datos">
+        <li><b>A qué hora te despiertas</b> (o si te cuesta empezar a dormir).</li>
+        <li><b>Cuántas noches a la semana</b> te pasa.</li>
+        <li><b>Desde cuándo</b>: días, meses o años, y si empezó con algo concreto.</li>
+        <li><b>Si tomas algo</b>: medicación o suplementos.</li>
+        <li><b>Qué has probado</b> y si algo te funcionó, aunque fuera un tiempo.</li>
+      </ol>
     </div>
   </section>
 
@@ -125,14 +145,14 @@ html,body{overflow-x:hidden}
     <div class="w">
       <div class="kick">Nuria responde</div>
       <h2>Las dudas que casi todo el mundo tiene <em>antes de empezar</em></h2>
-      <p>Te recomendamos verlos antes de la llamada. Son cortos.</p>
+      <p>Te recomendamos verlos antes de la sesión. Son cortos.</p>
       <div class="vids" id="nrg-vids"></div>
     </div>
   </section>
 
   <section class="navy">
     <div class="w" style="text-align:center">
-      <h2>Nos vemos en la llamada</h2>
+      <h2>Nos vemos en la sesión</h2>
       <p>Si no puedes en el horario que has elegido, contesta al WhatsApp y te buscamos otro momento.</p>
       <a class="btn" id="nrg-wa" href="#" style="display:none" target="_blank" rel="noopener">Escribirnos por WhatsApp →</a>
     </div>
@@ -154,7 +174,7 @@ html,body{overflow-x:hidden}
     box.appendChild(d);
   });
   // solo un vídeo sonando a la vez
-  box.addEventListener('play', function (e) { box.querySelectorAll('video').forEach(function (x) { if (x !== e.target) x.pause(); }); }, true);
+  document.getElementById('nrg').addEventListener('play', function (e) { document.querySelectorAll('#nrg video').forEach(function (x) { if (x !== e.target) x.pause(); }); }, true);
   if (C.whatsapp) { var a = document.getElementById('nrg-wa'); a.href = C.whatsapp; a.style.display = 'inline-flex'; }
 })();
 </script>

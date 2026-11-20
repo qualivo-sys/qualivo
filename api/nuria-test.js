@@ -17,7 +17,7 @@ const PATRONES = { control: 'Control', anticipacion: 'Anticipación', compensaci
 const NIVELES = ['incipiente', 'instalado', 'arraigado'];
 const TEXTO_LLAMADA = 'Acepto que el equipo de Nuria Roure me llame por teléfono para conocer mi caso y comentar mi resultado. Me llamarán desde un número que empieza por 6. Puedo retirar este permiso cuando quiera.';
 const CAMPO_LLAMADA = 'pcO5PbesGTnsMv0t00GZ';   // campo de contacto «Acepta que la llamen (número que empieza por 6)»
-const OPCION_CAMPO = 'Acepto que el equipo de Nuria Roure me llame por teléfono para conocer mi caso. Me llamarán desde un número que empieza por 6. Puedo retirar este permiso cuando quiera.';
+const OPCION_CAMPO = 'Acepto que el equipo de Nuria Roure me llame por teléfono para conocer mi caso. Me llamarán desde un número que empieza por 6.';   // debe coincidir con la opción del campo en Kliking
 const recientes = new Map();
 
 function clave() { return process.env.NURIA_GHL_API_KEY_ESCRITURA || process.env.NURIA_GHL_API_KEY; }
