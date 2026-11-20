@@ -15,7 +15,7 @@ const MAIKEL_API = 'G6oafD4GUFk4DLX0CkfO';
 const ORIGENES = ['https://nr.nuriaroure.com', 'https://nuriaroure.com', 'https://www.nuriaroure.com'];
 const PATRONES = { control: 'Control', anticipacion: 'Anticipación', compensacion: 'Compensación' };
 const NIVELES = ['incipiente', 'instalado', 'arraigado'];
-const TEXTO_LLAMADA = 'Acepto que el equipo de Nuria Roure me llame por teléfono para comentar mi resultado y contarme cómo puede ayudarme. Puedo retirar este permiso cuando quiera.';
+const TEXTO_LLAMADA = 'Acepto que el equipo de Nuria Roure me llame por teléfono para conocer mi caso y comentar mi resultado. Me llamarán desde un número que empieza por 6. Puedo retirar este permiso cuando quiera.';
 const recientes = new Map();
 
 function clave() { return process.env.NURIA_GHL_API_KEY_ESCRITURA || process.env.NURIA_GHL_API_KEY; }
