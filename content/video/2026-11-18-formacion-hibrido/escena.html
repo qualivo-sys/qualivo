@@ -238,6 +238,7 @@ const PL={
  PORQUE:{img:'p9',cam:[0,780,1190],foco:[[40,858,1120,138]]},
  MES:{html:'<div class="mes"><div><i>✓</i>Gestionamos las campañas</div><div><i>✓</i>Revisamos qué se escapa</div><div><i>✓</i>Ajustamos contigo</div></div>',cam:[0,0,1008],foco:[]}
 };
+if(Q.get('ej')==='limpio'){PL.SCO.html=PL.SCO.html.replace('Cualificación y prioridad comercial · ejemplo','Cualificación y prioridad comercial');PL.RES.html=PL.RES.html.replace('Por anuncio · datos de ejemplo','Por anuncio');}
 const T=window.T,a=T.a,e2=T.e2,e3=T.e3,rq=T.rq,e4=T.e4,e5=T.e5,e7=T.e7,e6=T.e6,cap=T.cap;
 // secuencia: [plano, inicio]; cada plano dura hasta que empieza el siguiente
 const SEC=VER==='larga'
@@ -312,7 +313,7 @@ window.setT=function(t){
 if(VER==='corta'){const tr=$('tres');tr.style.display='none';tr.style.textAlign='center';tr.style.fontSize='104px';tr.style.lineHeight='1.16';tr.style.top='640px';tr.innerHTML='<div>Captación</div><div>Conversión</div><div style="color:var(--tl)">Mejora continua</div>';const so=$('sobre');so.style.top=(FMT==='11'?'565px':FMT==='45'?'760px':'1085px');so.style.fontSize=(FMT==='45'?'34px':'38px');so.style.fontWeight=600;so.style.color='var(--mut)';so.innerHTML='Para academias y centros de formación';const c=$('cta');c.style.whiteSpace='normal';c.style.width='900px';c.style.textAlign='center';c.style.fontSize='60px';c.style.lineHeight='1.12';c.style.padding='46px 40px';c.style.borderRadius='22px';c.style.top=(FMT==='11'?'300px':FMT==='45'?'470px':'800px');c.innerHTML='Solicita tu<br>diagnóstico gratuito';const ti=$('tit');ti.style.top=(FMT==='11'?'120px':FMT==='45'?'190px':'470px');ti.style.fontSize=(FMT==='11'?'54px':FMT==='45'?'60px':'70px');const l=$('logo');l.style.width='230px';l.style.top=(FMT==='11'?'640px':FMT==='45'?'850px':'1180px');}
 if(FMT==='45')document.querySelectorAll('.pv').forEach(d=>d.style.fontSize='70px');
 if((AP==='hn'||AP==='hm')){$('tit').innerHTML='¿Dónde pierde <em>alumnos tu escuela?</em>';$('sobre').innerHTML='Para escuelas de formación online y especializada';}
-if(Q.get('ej')==='no'){$('ej').style.visibility='hidden';}
+if(Q.get('ej')==='no'||Q.get('ej')==='limpio'){$('ej').style.visibility='hidden';}
 if(Q.get('ej')==='demo'){const j=$('ej');j.textContent='Demo ilustrativa';j.style.cssText+=';text-transform:none;letter-spacing:0;font-weight:600;font-size:17px;color:rgba(255,255,255,.82);background:rgba(16,19,25,.38);padding:5px 11px;border-radius:7px;left:12px;bottom:12px';}
 window.DUR=T.FIN;window.setT(0);
 </script>
