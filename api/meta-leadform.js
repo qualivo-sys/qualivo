@@ -488,12 +488,17 @@ async function guardar(lead, opts) {
 
   // Aviso a Maikel. Mismo agujero que en la landing: de estos leads no avisa
   // nadie (ver api/_aviso.js). Los de otra campaña no se avisan, que son ruido.
-  if (deEstaCampana && !completar && !filtrado) {
+  // 21-nov-2026 (Maikel): un lead filtrado al entrar estuvo una noche sin que
+  // nadie le contestara ni le avisara. «Esto no puede volver a pasar». El filtro
+  // sigue sin activar WhatsApp ni llamada, pero ahora Maikel recibe SIEMPRE el
+  // aviso, marcado como filtrado y con el motivo, para decidir él.
+  if (deEstaCampana && !completar) {
     try {
       await require('./_aviso.js').leadNuevo({
         nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
         inversion: inversion, fuga: fuga, cualificado: invierte || process.env.LLAMAR_SIN_INVERSION !== '0',
-        origen: 'Formulario instantáneo de Meta', contactId: contactId
+        origen: 'Formulario instantáneo de Meta', contactId: contactId,
+        filtrado: filtrado ? (declaraNada ? 'dice que no invierte nada' : 'ticket de menos de 300 €') : ''
       });
     } catch (err) {
       console.error('[leadform] aviso interno no salió:', err && err.message);

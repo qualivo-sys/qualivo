@@ -128,7 +128,20 @@ function paraMarcar(tel) {
  */
 async function leadNuevo(d) {
   d = d || {};
-  if (d.cualificado !== false) {
+  if (d.filtrado) {
+    // Filtrado al entrar: al lead no le sale nada, así que el aviso es lo único
+    // que hay. Suena en horario; de noche queda el correo y la etiqueta para la
+    // preparación del día.
+    const fichaF = await fichaMovil(d.contactId, { fuga: d.fuga });
+    const r = await movil('LEAD FILTRADO · NADIE LE HA ESCRITO · ' + (d.nombre || d.empresa || d.email || '?') +
+      (d.telefono ? '\nTel ' + d.telefono : '') + '\nMotivo del filtro: ' + d.filtrado +
+      (d.origen ? '\n' + d.origen : '') + (fichaF || '') +
+      '\nNo se le ha mandado WhatsApp ni llamada. Si quieres que se le atienda, dilo y Growth le escribe.');
+    if (r !== true && d.contactId) {
+      try { await require('./_activacion.js').etiquetar(d.contactId, ['aviso-filtrado-pendiente']); }
+      catch (e) { console.error('[aviso] no pude apuntar el aviso de filtrado:', e && e.message); }
+    }
+  } else if (d.cualificado !== false) {
     if (enHorarioMovil()) {
       const ficha = await fichaMovil(d.contactId, { fuga: d.fuga });
       await movil('LEAD NUEVO · ' + (d.nombre || d.empresa || d.email || '?') + (d.empresa ? ' · ' + d.empresa : '') +
@@ -149,7 +162,7 @@ async function leadNuevo(d) {
   const tel = paraMarcar(d.telefono);
   // El asunto es lo unico que se ve en la notificacion del movil, asi que lleva
   // el nombre y la fuga. "Nuevo lead" no dice nada y no hace levantar a nadie.
-  const asunto = (d.cualificado === false ? '[fuera de alcance] ' : '') +
+  const asunto = (d.filtrado ? '[FILTRADO · nadie le ha escrito] ' : d.cualificado === false ? '[fuera de alcance] ' : '') +
     quien + (d.empresa ? ' · ' + d.empresa : '') +
     (d.fuga ? ' · ' + String(d.fuga).slice(0, 70) : ' · pide diagnóstico');
 
@@ -180,8 +193,11 @@ async function leadNuevo(d) {
       ? '<p style="margin:22px 0 0;font-size:14px"><a href="https://app.gohighlevel.com/v2/location/' +
         escapa(process.env.GHL_LOCATION_ID || '') + '/contacts/detail/' + escapa(d.contactId) +
         '" style="color:#0E7C74">Abrir la ficha en el CRM</a></p>' : '') +
-    '<p style="margin:26px 0 0;font-size:13px;color:#9A9CA2">Ya le ha salido el primer mensaje ' +
-    'automático. Esto es para que puedas adelantarte y llamar tú.</p>' +
+    (d.filtrado
+      ? '<p style="margin:26px 0 0;font-size:14px;color:#B4342B"><b>Filtrado al entrar (' + escapa(d.filtrado) +
+        ').</b> No le ha salido ningún mensaje ni llamada. Si quieres que se le atienda, hay que escribirle a mano.</p>'
+      : '<p style="margin:26px 0 0;font-size:13px;color:#9A9CA2">Ya le ha salido el primer mensaje ' +
+        'automático. Esto es para que puedas adelantarte y llamar tú.</p>') +
     '</div>';
 
   try {
