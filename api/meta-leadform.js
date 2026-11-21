@@ -341,9 +341,15 @@ async function guardar(lead, opts) {
   // respuesta explícita (nada / no invertimos todavía): un formulario sin pregunta de inversión no
   // filtra a nadie. Ticket bajo = tramo 1 (menos de 300 €; en reformas, obra de menos de 3.000 €).
   const declaraNada = String(inversionCruda || '').toLowerCase() === 'nada' || /^(nada|no invertimos|todav[ií]a no)/i.test(String(inversion || ''));
-  const filtrado = deEstaCampana && !v2 && !hz && (declaraNada || tramoTic === 1);
-  if (filtrado) {
-    etiquetas.push('diagnostico-landing', 'paid', 'sin-inversion', 'filtro-sin-inversion-ticket-bajo', 'nut-stop');
+  // 21-nov-2026 (Maikel): «todo el que entre en nuestro GHL debe recibir un WhatsApp, sea
+  // cualificado o no. Si no es cualificado, le hacemos preguntas para cualificarlo». Se acaba el
+  // filtro silencioso del 4-nov: estos leads se activan como los demás, marcados para que el
+  // primer WhatsApp y el agente PRECUALIFIQUEN (preguntas, sin empujar la reunión).
+  const filtrado = false;
+  const bajoPerfil = deEstaCampana && !v2 && !hz && (declaraNada || tramoTic === 1);
+  if (bajoPerfil) {
+    etiquetas.push('diagnostico-landing', 'paid', 'activacion', 'act-ini-' + sello, 'precualificar-forzado',
+      declaraNada ? 'sin-inversion' : 'ticket-bajo');
   } else if (deEstaCampana && !invierte && !llamarSinInversion) {
     etiquetas.push('diagnostico-landing', 'paid', 'act-fuera');
   } else if (deEstaCampana) {
@@ -489,16 +495,16 @@ async function guardar(lead, opts) {
   // Aviso a Maikel. Mismo agujero que en la landing: de estos leads no avisa
   // nadie (ver api/_aviso.js). Los de otra campaña no se avisan, que son ruido.
   // 21-nov-2026 (Maikel): un lead filtrado al entrar estuvo una noche sin que
-  // nadie le contestara ni le avisara. «Esto no puede volver a pasar». El filtro
-  // sigue sin activar WhatsApp ni llamada, pero ahora Maikel recibe SIEMPRE el
-  // aviso, marcado como filtrado y con el motivo, para decidir él.
-  if (deEstaCampana && !completar) {
+  // nadie le contestara ni le avisara. «Esto no puede volver a pasar». Ya no hay
+  // filtro (todos reciben WhatsApp) y Maikel recibe el aviso de TODO lead nuevo,
+  // también de formularios fuera de la lista, que llegan marcados como tales.
+  if (!completar) {
     try {
       await require('./_aviso.js').leadNuevo({
         nombre: nombre, email: EMAIL_RE.test(email) ? email : '', telefono: telefono,
         inversion: inversion, fuga: fuga, cualificado: invierte || process.env.LLAMAR_SIN_INVERSION !== '0',
-        origen: 'Formulario instantáneo de Meta', contactId: contactId,
-        filtrado: filtrado ? (declaraNada ? 'dice que no invierte nada' : 'ticket de menos de 300 €') : ''
+        origen: deEstaCampana ? 'Formulario instantáneo de Meta' : 'Formulario de Meta FUERA DE LA LISTA (' + (lead.form_id || '?') + '): no se le ha escrito, revisa', contactId: contactId,
+        filtrado: ''
       });
     } catch (err) {
       console.error('[leadform] aviso interno no salió:', err && err.message);

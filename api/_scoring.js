@@ -93,7 +93,10 @@ function precualificar(c) {
   // señales de las de arriba y se colaban leads flojos (Antonio, 28-sep: nivel D sin precualificar).
   const tipo = tipologia(c).puntos;
   if (tipo < 6) motivos.unshift('scoring bajo (tipología ' + tipo + '/10)');
-  return { si: (tipo < 6 || motivos.length >= 2) && !agendado, motivos: motivos };
+  // 21-nov (Maikel): ticket de menos de 300 € o «no invierto nada» ya no se filtran: se precualifican.
+  const forzado = A.tiene(c, 'precualificar-forzado');
+  if (forzado) motivos.unshift(A.tiene(c, 'ticket-bajo') ? 'ticket de menos de 300 €' : 'dice que no invierte nada');
+  return { si: (forzado || tipo < 6 || motivos.length >= 2) && !agendado, motivos: motivos };
 }
 
 function comportamiento(c, mensajes) {
