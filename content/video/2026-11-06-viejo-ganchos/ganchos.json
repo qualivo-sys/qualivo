@@ -18,5 +18,15 @@
   "h1": "¿Ya tienes a alguien con <i>los anuncios?</i>",
   "p": "Perfecto. Nosotros conectamos lo que viene después: de la solicitud a la matrícula.",
   "voz": "¿Ya tienes a alguien con los anuncios? Nosotros conectamos lo que viene después."
+ },
+ "g5": {
+  "h1": "¿Tu escuela ya invierte <i>en publicidad?</i>",
+  "p": "Hay algo que deberías revisar: qué pasa con las solicitudes después de conseguirlas.",
+  "voz": "¿Tu escuela de formación online ya invierte en publicidad? Entonces hay algo que deberías revisar: qué pasa con las solicitudes después de conseguirlas."
+ },
+ "g6": {
+  "h1": "¿Tu escuela ya invierte <i>en publicidad?</i>",
+  "p": "Mira qué pasa con cada solicitud después de conseguirla.",
+  "voz": "¿Tu escuela de formación online ya invierte en publicidad? Mira qué pasa con cada solicitud."
  }
 }
