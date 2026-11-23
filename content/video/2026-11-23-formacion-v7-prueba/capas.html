@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8"><base href="../2026-09-17-sistema/">
+<!-- Formación · prueba audiovisual (9:16, 13 s). Capa gráfica que se compone sobre planos de vídeo generados.
+     Fondo transparente en los planos 1, 2 y 4; el plano 3 es una escena propia con un móvil en perspectiva. -->
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../anuncios/2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:transparent}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:SG;color:#0A0A0B}
+.abs{position:absolute;opacity:0;will-change:transform,filter,opacity}
+/* velo inferior para que el titular se lea sobre el vídeo */
+#velo{left:0;right:0;top:0;bottom:0;background:linear-gradient(180deg,rgba(10,10,11,.55) 0%,rgba(10,10,11,0) 30%,rgba(10,10,11,0) 55%,rgba(10,10,11,.6) 100%)}
+#t1{left:70px;right:70px;top:300px;font-family:Anton;font-size:128px;line-height:.94;text-transform:uppercase;color:#F4F1EB;text-shadow:0 6px 30px rgba(0,0,0,.55)}
+#t1 span{display:inline-block}#t1 i{font-style:normal;color:#F4CC38}
+/* plano 2: notificación flotando sobre el escritorio */
+#noti{left:90px;top:330px;width:900px;background:#F4CC38;border-radius:44px;padding:38px 42px;display:flex;align-items:center;gap:28px;box-shadow:0 40px 90px rgba(0,0,0,.6);transform-origin:50% 100%}
+#noti .av{flex:none;width:120px;height:120px;border-radius:50%;background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:60px;display:flex;align-items:center;justify-content:center}
+#noti small{display:block;font-size:26px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:rgba(10,10,11,.6);margin-bottom:6px}
+#noti b{display:block;font-family:Anton;font-weight:400;font-size:70px;line-height:1;text-transform:uppercase}
+#noti span{display:block;font-size:32px;font-weight:600;margin-top:8px}
+#noti em{position:absolute;right:36px;top:30px;font-style:normal;font-size:24px;font-weight:700;color:rgba(10,10,11,.55)}
+/* plano 3: móvil en perspectiva sobre fondo turquesa */
+#p3{inset:0;background:#1FA396;overflow:hidden;perspective:2400px}
+#p3 .luz{position:absolute;left:-200px;top:-300px;width:1500px;height:1500px;border-radius:50%;background:radial-gradient(circle,rgba(244,241,235,.35),rgba(244,241,235,0) 62%)}
+#p3 .som{position:absolute;left:210px;top:1560px;width:720px;height:150px;border-radius:50%;background:rgba(10,10,11,.38);filter:blur(40px)}
+#mov{position:absolute;left:170px;top:330px;width:740px;height:1340px;background:#0A0A0B;border-radius:76px;padding:22px;transform-style:preserve-3d;box-shadow:-40px 60px 120px rgba(10,10,11,.45)}
+#mov .scr{width:100%;height:100%;background:#EFE7DD;border-radius:56px;overflow:hidden;position:relative}
+.wah{background:#0A0A0B;color:#F4F1EB;padding:60px 36px 22px;display:flex;align-items:center;gap:20px}
+.wah .av{width:68px;height:68px;border-radius:50%;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:36px;display:flex;align-items:center;justify-content:center}
+.wah b{font-size:32px;display:block}.wah span{font-size:21px;color:rgba(244,241,235,.6)}
+.bub{position:absolute;left:28px;width:560px;background:#fff;border-radius:28px;border-top-left-radius:8px;padding:22px 26px;font-size:34px;line-height:1.26;font-weight:500;box-shadow:0 4px 0 rgba(10,10,11,.08);opacity:0;transform-origin:0 100%}
+.bub.r{left:auto;right:28px;width:auto;max-width:520px;background:#D9FDD3;border-radius:28px;border-top-right-radius:8px;transform-origin:100% 100%;font-weight:600}
+.typ{position:absolute;left:28px;width:130px;background:#fff;border-radius:28px;padding:24px 28px;display:flex;gap:10px;opacity:0}.typ i{width:15px;height:15px;border-radius:50%;background:#9AA2AE;display:block}
+.chip{position:absolute;background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:58px;text-transform:uppercase;padding:20px 30px;border-radius:22px;white-space:nowrap;box-shadow:0 30px 60px rgba(10,10,11,.45);opacity:0;transform-origin:50% 50%}
+.chip small{display:block;font-family:SG;font-size:22px;letter-spacing:.16em;font-weight:700;color:rgba(244,241,235,.7)}
+#t3{left:70px;right:70px;top:140px;font-family:Anton;font-size:96px;line-height:.95;text-transform:uppercase;color:#0A0A0B}
+#t3 span{display:inline-block;opacity:0}#t3 i{font-style:normal;color:#F4F1EB}
+/* plano 4: cita sobre el plano de admisiones */
+#cita{left:90px;top:1050px;width:900px;background:#F4F1EB;border-radius:40px;padding:30px 34px;display:flex;align-items:center;gap:30px;box-shadow:0 40px 90px rgba(0,0,0,.55);transform-origin:50% 50%}
+#cita .d{flex:none;width:180px;height:180px;background:#F4CC38;border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Anton;font-size:70px;line-height:1}
+#cita .d small{font-family:SG;font-size:26px;font-weight:700;letter-spacing:.14em}
+#cita b{display:block;font-family:Anton;font-weight:400;font-size:70px;line-height:1;text-transform:uppercase}
+#cita span{display:block;font-size:32px;font-weight:600;margin-top:8px;color:#3D4148}
+#cita em{display:inline-block;margin-top:12px;font-style:normal;background:#0E7C74;color:#F4F1EB;font-family:Anton;font-size:32px;text-transform:uppercase;padding:8px 18px;border-radius:12px;transform-origin:0 50%}
+#t4{left:70px;right:70px;top:300px;font-family:Anton;font-size:112px;line-height:.94;text-transform:uppercase;color:#F4F1EB;text-shadow:0 6px 30px rgba(0,0,0,.55)}
+#t4 span{display:inline-block;opacity:0}#t4 i{font-style:normal;color:#F4CC38}
+#flash{inset:0;background:#F4CC38}
+</style>
+<div id="e">
+  <div class="abs" id="velo"></div>
+  <div class="abs" id="t1"><span>¿Tu</span> <span>escuela</span> <span>online</span> <i><span>ya</span> <span>invierte</span> <span>en</span> <span>publicidad?</span></i></div>
+  <div class="abs" id="noti"><div class="av">LV</div><div><small>Nueva solicitud</small><b>Laura Vidal</b><span>Pide información de un curso</span></div><em>ahora</em></div>
+  <div class="abs" id="p3"><div class="luz"></div><div class="som" id="som"></div>
+    <div class="abs" id="t3"><span>Responde</span> <span>y</span> <i><span>cualifica.</span></i></div>
+    <div id="mov"><div class="scr">
+      <div class="wah"><div class="av">E</div><div><b>Escuela Norte</b><span>en línea</span></div></div>
+      <div class="typ" id="ty" style="top:190px"><i></i><i></i><i></i></div>
+      <div class="bub" id="b1" style="top:190px">Hola Laura, te interesa Marketing Digital. <b>¿Para cambiar de trabajo o para tu puesto actual?</b></div>
+      <div class="bub r" id="b2" style="top:520px">Para cambiar de trabajo.</div>
+      <div class="bub" id="b3" style="top:650px"><b>¿Reservamos una llamada con admisiones?</b></div>
+    </div></div>
+    <div class="chip" id="k1" style="left:500px;top:1290px"><small>Al momento</small>WhatsApp enviado</div>
+    <div class="chip" id="k2" style="left:70px;top:1500px;background:#F4CC38;color:#0A0A0B"><small style="color:rgba(10,10,11,.6)">Sistema</small>Cualificada · Nivel A</div>
+  </div>
+  <div class="abs" id="t4"><span>Reunión</span> <i><span>con</span> <span>admisiones.</span></i></div>
+  <div class="abs" id="cita"><div class="d"><small>JUE</small>17:00</div><div><b>Reunión agendada</b><span>Laura Vidal · Marketing Digital</span><em id="rec">Recordatorios enviados</em></div></div>
+  <div class="abs" id="flash"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+// cortes de plano (s): 1 Laura · 2 escritorio · 3 móvil · 4 admisiones
+const C={a:0,b:3.0,c:5.6,d:9.4,fin:13.0}; window.DUR=C.fin; window.C=C;
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1), lerp=(a,b,v)=>a+(b-a)*v;
+const expo=x=>x>=1?1:1-Math.pow(2,-10*x), io=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2, back=x=>{const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)}, pico=x=>Math.sin(cl(x,0,1)*Math.PI);
+function pop(el,t,t0,d=.3){ const v=nm(t,t0,t0+d); el.style.opacity=Math.min(1,v*3); el.style.transform=`scale(${v<=0?0:back(v)})`; }
+function palabras(el,t,t0,paso=.08){ [...el.querySelectorAll('span')].forEach((s,i)=>{const v=nm(t,t0+i*paso,t0+i*paso+.16); s.style.opacity=v; s.style.transform=`translateY(${(1-expo(v))*26}px)`; s.style.filter=v<1?`blur(${(8*(1-v)).toFixed(1)}px)`:'none';}); }
+window.setT=function(t){
+  // velo: solo sobre los planos de vídeo
+  $('velo').style.opacity=(t<C.c||t>=C.d)?1:0;
+  // destello de 2 fotogramas en cada corte, para que el corte se lea como intencionado
+  $('flash').style.opacity=[C.b,C.c,C.d].reduce((m,c)=>Math.max(m,t>=c-.04&&t<c+.08?.55*(1-nm(t,c,c+.08)):0),0);
+  // 1 · Laura: el titular entra palabra a palabra y se queda quieto
+  { const t1=$('t1'); t1.style.opacity=t<C.b?1:0; palabras(t1,t,.1); }
+  // 2 · escritorio: la notificación salta desde el móvil
+  { const n=$('noti'), v=nm(t,C.b+.35,C.b+.75), s=nm(t,C.c-.2,C.c); n.style.opacity=(t>=C.b+.35&&t<C.c)?Math.min(1,v*3):0;
+    n.style.transform=`translateY(${(1-expo(v))*420}px) scale(${(v<=0?0:lerp(.5,1,back(v)))*(1+.5*s*s)}) rotate(${2*Math.sin(nm(t,C.b+.75,C.b+1.4)*Math.PI*6)*(1-nm(t,C.b+.75,C.b+1.4))}deg)`; n.style.filter=`blur(${(12*(1-nm(v,0,.6))+14*s).toFixed(1)}px)`; }
+  // 3 · móvil en perspectiva: la cámara gira y se acerca mientras la conversación avanza
+  { const p=$('p3'), en=t>=C.c&&t<C.d, u=nm(t,C.c,C.d); p.style.opacity=en?1:0;
+    if(en){ const a=expo(nm(t,C.c,C.c+.7)); $('mov').style.transform=`translate3d(${lerp(120,0,a)}px,${lerp(160,0,a)-30*u}px,0) rotateY(${lerp(-34,-14,a)+8*u}deg) rotateX(${lerp(18,7,a)-3*u}deg) rotateZ(${lerp(7,2.5,a)-1.5*u}deg) scale(${lerp(.82,1,a)+.06*u})`;
+      $('som').style.transform=`translateX(${-40*u}px) scale(${1+.05*u})`; $('t3').style.opacity=1; palabras($('t3'),t,C.c+.25);
+      const q=Math.min(nm(t,C.c+.5,C.c+.65),1-nm(t,C.c+1.05,C.c+1.15)); $('ty').style.opacity=q; [...$('ty').children].forEach((el,k)=>el.style.transform=`translateY(${-7*Math.max(0,Math.sin(t*10+k*1.1))}px)`);
+      pop($('b1'),t,C.c+1.1); pop($('b2'),t,C.c+2.0); pop($('b3'),t,C.c+2.9);
+      [['k1',C.c+1.3,5],['k2',C.c+2.45,-4]].forEach(([id,t0,r])=>{ const v=nm(t,t0,t0+.35); const el=$(id); el.style.opacity=Math.min(1,v*3); el.style.transform=`translateY(${(1-expo(v))*90-14*nm(t,t0,C.d)}px) scale(${v<=0?0:lerp(.6,1,back(v))}) rotate(${r}deg)`; el.style.filter=v<1&&v>0?`blur(${(10*(1-v)).toFixed(1)}px)`:'none'; }); } }
+  // 4 · admisiones: titular y la cita que golpea
+  { const en=t>=C.d; $('t4').style.opacity=en?1:0; palabras($('t4'),t,C.d+.2);
+    const c=$('cita'), v=nm(t,C.d+.9,C.d+1.3); c.style.opacity=en?Math.min(1,v*3):0; c.style.transform=`scale(${lerp(1.5,1,expo(v))}) rotate(${lerp(-5,-1.5,expo(v))}deg)`; c.style.filter=v<1&&v>0?`blur(${(12*(1-v)).toFixed(1)}px)`:'none'; pop($('rec'),t,C.d+1.9); }
+};
+window.setT(0);
+</script>
+</html>
