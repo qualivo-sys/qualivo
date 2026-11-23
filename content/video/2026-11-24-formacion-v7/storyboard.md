@@ -4,7 +4,7 @@
 - **Estado:** storyboard y borrador en movimiento (`formacion-v7-borrador-916.mp4`). No es montaje final. No se publica. El anuncio antiguo sigue activo y no se toca.
 - **Guion:** el de la V6, sin cambios. Voz de Javier Rojas un 10 % más rápida. 56 s.
 
-## Plano a plano · versión refinada 2 (49,2 s)
+## Plano a plano · versión refinada 2 (52,4 s)
 
 Refinada el 23-nov con el último encargo de Maikel: el agente de voz baja a 3 s y sin simular una llamada, y el tiempo recuperado va a la gestión de la cita. Guion nuevo en `guion.json`.
 
@@ -17,7 +17,7 @@ Refinada el 23-nov con el último encargo de Maikel: el agente de voz baja a 3 s
 | 5 | 9,7-14,6 | Sistema | WhatsApp grande: una pregunta, una respuesta, y de qué anuncio viene. | «Sabemos de qué anuncio viene Laura. El sistema responde por WhatsApp, hace preguntas…» |
 | 6 | 14,6-18,1 | Sistema | Pipeline: la tarjeta de Laura salta a «Conversación abierta». | «…la cualifica y actualiza su etapa automáticamente.» |
 | 7 | 18,1-19,1 | Sistema | WhatsApp sin leer y sello «Sin respuesta». | «¿No responde?» |
-| 8 | 19,1-22,2 | Humano | **Laura** mira el móvil que suena. Tarjeta «Llamada entrante · Raquel · Asistente virtual». Dos tonos de llamada, sin voz. Aviso «Audio pendiente de la llamada real». | «Podemos activar un agente de voz.» |
+| 8 | 19,1-25,4 | Humano | **Laura** mira el móvil que suena y contesta. Tarjeta «Llamada entrante · Raquel · Asistente virtual». Tras el narrador, saludo breve de Raquel con sonido de teléfono y subtitulado. Etiqueta «Recreación · pendiente la llamada real». | «Podemos activar un agente de voz.» · Raquel: «Hola, Laura, soy Raquel, la asistente virtual de Escuela Norte.» |
 | 9 | 22,2-23,9 | Gráfico | Calendario: jueves 17:00 y «Pipeline: Reunión agendada». | «Laura reserva su reunión.» |
 | 10 | 23,9-27,1 | Sistema | WhatsApp grande: confirmación del jueves a las 17:00 y, ese día a las 9:00, el recordatorio con el enlace. | «El sistema la confirma por WhatsApp, le envía recordatorios…» |
 | 11 | 27,1-29,4 | Gráfico | El calendario cambia de jueves a viernes 12:00: «Agenda actualizada ✓». | «…y, si no puede asistir, la reprograma.» |
@@ -27,9 +27,8 @@ Refinada el 23-nov con el último encargo de Maikel: el agente de voz baja a 3 s
 
 ## Qué falta para una versión final
 
-- **La llamada real** del agente de voz (línea caída desde el 13-nov). Hasta entonces la escena no lleva voz de Raquel y muestra el aviso de audio pendiente, que habría que quitar o sustituir antes de publicar.
+- **La llamada real** del agente de voz (línea caída desde el 13-nov). Hasta entonces el saludo de Raquel es una recreación con la voz del agente y lleva la etiqueta «Recreación»; hay que sustituirlo por la grabación real antes de publicar. Desde la fila 9 los tiempos de la tabla van 3,2 s más tarde.
 - **Las señales de cualificación a Meta**, que Growth tiene propuestas para corregir.
-- **Duración:** 49,2 s, algo por debajo de los 50-53 s pedidos.
 - Subtítulos de toda la locución, base musical más larga (la actual se repite) y formato 4:5.
 - Decidir expresamente el uso de personas generadas en el anuncio.
 
