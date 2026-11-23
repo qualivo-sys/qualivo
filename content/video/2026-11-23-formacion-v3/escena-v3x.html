@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="es"><meta charset="utf-8"><base href="../2026-09-17-sistema/">
+<!-- Formación V3 · versión «espectacular» (9:16). Mismo guion y tiempos que escena-v3.html, con movimiento de cine:
+     gancho en el fotograma 0, transiciones con causa (zoom a través del botón, barrido, la ficha que se convierte en tarjeta,
+     inundación de color), desenfoque en los movimientos rápidos y texto dentro de la zona segura de Reels (288-1248 px). -->
+<style>
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../../anuncios/2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#e{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:SG;background:#0A0A0B;color:#0A0A0B}
+#fondo{position:absolute;inset:0;background:#1FA396;opacity:0}
+#rej{position:absolute;inset:-200px;background-image:linear-gradient(rgba(10,10,11,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(10,10,11,.07) 2px,transparent 2px);background-size:120px 120px;opacity:0}
+#tex{position:absolute;inset:0;opacity:.35;mix-blend-mode:multiply;pointer-events:none;z-index:60}
+.abs{position:absolute;opacity:0;will-change:transform,filter,opacity}
+/* gancho */
+#h1{left:80px;right:80px;top:300px;font-family:Anton;font-size:176px;line-height:.93;text-transform:uppercase;color:#F4F1EB;opacity:1}
+#h1 span{display:inline-block}#h1 i{font-style:normal;color:#F4CC38}
+#h2{left:80px;right:80px;top:300px;font-family:Anton;font-size:124px;line-height:.95;text-transform:uppercase;color:#F4F1EB}
+#h2 span{display:inline-block;opacity:0}#h2 i{font-style:normal;color:#F4CC38}
+#noti{left:90px;top:880px;width:900px;background:#F4CC38;border-radius:44px;padding:40px 44px;display:flex;align-items:center;gap:30px;transform-origin:50% 50%}
+#noti .av{flex:none;width:120px;height:120px;border-radius:50%;background:#0A0A0B;color:#F4CC38;font-family:Anton;font-size:60px;display:flex;align-items:center;justify-content:center}
+#noti small{display:block;font-size:26px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:rgba(10,10,11,.6);margin-bottom:6px}
+#noti b{display:block;font-family:Anton;font-weight:400;font-size:66px;line-height:1;text-transform:uppercase}
+#noti span{display:block;font-size:32px;font-weight:600;margin-top:8px}
+#noti em{position:absolute;right:36px;top:30px;font-style:normal;font-size:24px;font-weight:700;color:rgba(10,10,11,.55)}
+/* cabecera de escena: reloj + titular, dentro de la zona segura */
+#reloj{left:80px;top:296px;background:#0A0A0B;color:#F4F1EB;border-radius:999px;padding:12px 28px;display:flex;align-items:center;gap:18px;white-space:nowrap}
+#reloj b{font-family:Anton;font-size:44px;letter-spacing:.04em;color:#F4CC38;font-weight:400;line-height:1}
+#reloj span{font-size:22px;font-weight:600;color:rgba(244,241,235,.75)}
+#ej{right:80px;top:316px;font-size:18px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:rgba(10,10,11,.5)}
+#cap{left:80px;right:80px;top:392px;font-family:Anton;font-size:84px;line-height:.98;text-transform:uppercase;color:#0A0A0B;opacity:1}
+#cap span{display:inline-block;opacity:0}#cap i{font-style:normal;color:#F4F1EB}
+/* escenario */
+#stage{position:absolute;left:100px;top:610px;width:880px;height:1240px}
+.sc{position:absolute;inset:0;opacity:0;will-change:transform,filter,opacity;transform-origin:50% 30%}
+.phone{position:absolute;left:60px;top:0;width:760px;height:1240px;background:#0A0A0B;border-radius:64px;padding:22px}
+.screen{width:100%;height:100%;background:#F4F1EB;border-radius:46px;overflow:hidden;position:relative}
+.ig{position:absolute;inset:0;background:#fff}
+.igh{display:flex;align-items:center;gap:16px;padding:44px 30px 18px}
+.igh .av{width:56px;height:56px;border-radius:50%;background:#1FA396}
+.igh b{font-size:24px;display:block}.igh span{font-size:19px;color:#7A7C82}
+.igi{height:440px;background:#0A0A0B;color:#F4F1EB;display:flex;flex-direction:column;justify-content:center;padding:40px;gap:16px}
+.igi h4{font-family:Anton;font-size:64px;line-height:.95;text-transform:uppercase;font-weight:400}
+.igi p{font-size:26px;color:rgba(244,241,235,.75)}
+.igb{margin:18px 30px 0;border:3px solid #0A0A0B;border-radius:14px;padding:20px;text-align:center;font-weight:700;font-size:28px;background:#F4CC38}
+.igf{position:absolute;left:30px;right:30px;top:660px;background:#F4F1EB;border:3px solid #0A0A0B;border-radius:18px;padding:18px 22px;font-size:28px;line-height:1.35;min-height:170px}
+.igf small{display:block;font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#7A7C82;font-weight:700;margin-bottom:6px}
+.card{position:absolute;left:0;top:0;width:880px;background:#F4F1EB;border-radius:36px;padding:44px 48px;border:4px solid #0A0A0B}
+.card .k{font-size:22px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.card .k em{font-style:normal;background:#F4CC38;color:#0A0A0B;padding:6px 16px;border-radius:999px;letter-spacing:.06em}
+.card h2{font-family:Anton;font-size:84px;line-height:1;text-transform:uppercase;margin-bottom:22px;font-weight:400}
+.dato{display:grid;grid-template-columns:250px 1fr;gap:0 20px;padding:18px 0;border-top:2px solid rgba(10,10,11,.12);font-size:34px;line-height:1.25;opacity:0;font-weight:600}
+.dato b{font-weight:700;color:#7A7C82;font-size:22px;letter-spacing:.1em;text-transform:uppercase;padding-top:8px}
+.dato.hi span{background:#F4CC38;padding:2px 12px;border-radius:10px;justify-self:start}
+.wa{position:absolute;inset:0;background:#EFE7DD}
+.wah{background:#0A0A0B;color:#F4F1EB;padding:44px 40px 24px;display:flex;align-items:center;gap:20px}
+.wah .av{width:64px;height:64px;border-radius:50%;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:34px;display:flex;align-items:center;justify-content:center}
+.wah b{font-size:30px;display:block}.wah span{font-size:20px;color:rgba(244,241,235,.6)}
+.bub{position:absolute;left:30px;width:590px;background:#fff;border-radius:26px;border-top-left-radius:8px;padding:22px 26px;font-size:31px;line-height:1.3;box-shadow:0 4px 0 rgba(10,10,11,.08);opacity:0;transform-origin:0 100%}
+.bub .t{text-align:right;font-size:18px;color:#7A7C82;margin-top:8px}
+.bub.r{left:auto;right:30px;width:auto;max-width:520px;background:#D9FDD3;border-radius:26px;border-top-right-radius:8px;transform-origin:100% 100%;font-weight:600}
+.typing{position:absolute;left:30px;width:120px;background:#fff;border-radius:26px;padding:22px 28px;display:flex;gap:10px;opacity:0}
+.typing i{width:14px;height:14px;border-radius:50%;background:#9AA2AE;display:block}
+#sello{position:absolute;left:0;top:0;width:880px;background:#0A0A0B;color:#F4CC38;border-radius:36px;padding:40px 48px;font-family:Anton;font-size:112px;line-height:.95;text-transform:uppercase;opacity:0;transform-origin:50% 50%}
+#sello small{display:block;font-family:SG;font-size:26px;letter-spacing:.16em;font-weight:700;color:rgba(244,241,235,.7);margin-bottom:12px}
+#seg{top:300px}
+.board{position:absolute;left:0;top:0;width:880px;background:#F4F1EB;border-radius:36px;border:4px solid #0A0A0B;padding:36px 30px 40px}
+.board .k{font-size:22px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:20px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;height:500px}
+.col{background:rgba(10,10,11,.06);border-radius:22px;padding:16px 12px;position:relative}
+.col h4{font-size:21px;letter-spacing:.04em;text-transform:uppercase;color:#3D4148;margin-bottom:12px;text-align:center;line-height:1.15;height:50px}
+.col.on{background:rgba(244,204,56,.45)}
+.ghost{background:#fff;border-radius:16px;height:78px;margin-bottom:12px;opacity:.8}
+#ld{position:absolute;left:44px;top:330px;width:248px;background:#F4CC38;border:4px solid #0A0A0B;border-radius:18px;padding:14px 14px;font-size:27px;line-height:1.15;font-weight:700;transform-origin:50% 50%;opacity:0;z-index:4}
+#ld small{display:block;font-size:19px;font-weight:700;margin-top:4px}
+#atr{margin-top:22px;background:#0A0A0B;color:#F4F1EB;border-radius:22px;padding:24px 28px;font-size:30px;line-height:1.3;font-weight:600;opacity:0}
+#atr b{color:#F4CC38;font-family:Anton;font-weight:400;font-size:34px;letter-spacing:.03em;text-transform:uppercase;display:block;margin-bottom:6px}
+/* cierre */
+#fin{left:80px;right:80px;top:300px;text-align:center;opacity:1}
+#fin img{width:520px;opacity:0}
+#fin .t1{font-family:Anton;font-size:104px;line-height:.96;text-transform:uppercase;color:#F4F1EB;margin-top:60px}
+#fin .t1 span{display:inline-block;opacity:0}#fin .t1 i{font-style:normal;color:#F4CC38}
+#fin .cta{display:inline-block;font-family:Anton;font-size:64px;line-height:1;text-transform:uppercase;background:#F4CC38;color:#0A0A0B;padding:34px 44px;border-radius:24px;margin-top:64px;opacity:0;transform-origin:50% 50%}
+#fin .t2{font-size:32px;font-weight:600;color:rgba(244,241,235,.75);margin-top:34px;opacity:0}
+#fin .web{font-family:Anton;font-size:44px;letter-spacing:.06em;color:#1FA396;margin-top:22px;opacity:0}
+</style>
+<div id="e">
+  <div id="fondo"></div><div id="rej"></div>
+  <div class="abs" id="h1"><span>¿Tienes</span> <span>una</span><br><i><span>escuela</span><br><span>online?</span></i></div>
+  <div class="abs" id="h2"><span>Mira</span> <span>qué</span> <span>pasa</span> <span>cuando</span> <span>alguien</span> <i><span>pide</span> <span>información.</span></i></div>
+  <div class="abs" id="noti"><div class="av">LV</div><div><small>Nueva solicitud</small><b>Laura Vidal</b><span>Quiere información de un curso</span></div><em>ahora</em></div>
+  <div class="abs" id="reloj"><span>desde el anuncio</span><b>00:00</b></div>
+  <div class="abs" id="ej">Caso de ejemplo</div>
+  <div class="abs" id="cap"></div>
+  <div id="stage">
+    <div class="sc" id="s2a"><div class="phone"><div class="screen"><div class="ig">
+      <div class="igh"><div class="av"></div><div><b>Escuela Norte</b><span>Patrocinado</span></div></div>
+      <div class="igi"><h4>Marketing Digital online. Por las tardes.</h4><p>Cuéntanos qué buscas y te decimos si encaja.</p></div>
+      <div class="igb" id="btn">Más información</div>
+      <div class="igf" id="igf"><small>Cuéntanos qué buscas</small><span id="igt"></span></div>
+    </div></div></div></div>
+    <div class="sc" id="s3"><div class="card">
+      <div class="k"><span>CRM · Nueva solicitud</span><em>hace 4 s</em></div><h2>Laura Vidal</h2>
+      <div class="dato"><b>Curso</b><span>Marketing Digital online</span></div>
+      <div class="dato"><b>Horario</b><span>Tardes</span></div>
+      <div class="dato"><b>Origen</b><span>Instagram</span></div>
+      <div class="dato hi"><b>Campaña</b><span>Marketing Digital · tardes</span></div>
+    </div></div>
+    <div class="sc" id="s4"><div class="phone"><div class="screen"><div class="wa">
+      <div class="wah"><div class="av">E</div><div><b>Escuela Norte</b><span>en línea</span></div></div>
+      <div class="typing" id="ty1" style="top:170px"><i></i><i></i><i></i></div>
+      <div class="bub" id="b1" style="top:170px">Hola Laura, te interesa Marketing Digital por las tardes. <b>¿Para cambiar de trabajo o para tu puesto actual?</b><div class="t">+2 min ✓✓</div></div>
+      <div class="bub r" id="b2" style="top:466px">Para cambiar de trabajo.</div>
+      <div class="typing" id="ty2" style="top:580px"><i></i><i></i><i></i></div>
+      <div class="bub" id="b3" style="top:580px"><b>¿Cuándo te gustaría empezar?</b></div>
+      <div class="bub r" id="b4" style="top:700px">Cuanto antes.</div>
+    </div></div></div></div>
+    <div class="sc" id="s6"><div id="sello"><small>Laura Vidal · Nivel A</small>Aviso al equipo</div>
+      <div class="card" id="seg"><div class="k"><span>Seguimiento</span><em>siguiente paso</em></div>
+      <div class="dato"><b>Hoy</b><span>Llamar · admisiones</span></div>
+      <div class="dato"><b>Si no responde</b><span>WhatsApp mañana</span></div>
+      <div class="dato"><b>Después</b><span>Otro a los 3 días</span></div>
+    </div></div>
+    <div class="sc" id="s8"><div class="board"><div class="k">Pipeline · Escuela Norte</div>
+      <div class="cols">
+        <div class="col" id="k0"><h4>Nuevo lead</h4><div class="ghost"></div></div>
+        <div class="col" id="k1"><h4>Conversación abierta</h4><div class="ghost"></div></div>
+        <div class="col" id="k2"><h4>Reunión agendada</h4><div class="ghost"></div></div>
+      </div>
+      <div id="atr"><b>De dónde viene</b>Anuncio «Marketing Digital · tardes»</div>
+      <div id="ld">Laura Vidal<small>Nivel A</small></div>
+    </div></div>
+  </div>
+  <div class="abs" id="fin"><img src="rec/logo-blanco.png"><div class="t1"><span>Captación,</span> <span>seguimiento</span> <span>y</span> <i><span>ventas,</span> <span>conectados.</span></i></div><div class="cta">Solicita tu diagnóstico gratuito</div><div class="t2">Para escuelas de formación online</div><div class="web">QUALIVO.IO</div></div>
+  <div id="tex"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('tex').style.backgroundImage="url(\"data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 .55 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>')+"\")";
+const E={s1:6.0,m1:8.7,s2:12.3,s3:19.8,s4:27.0,s5:34.8}; const DUR=45.0; window.DUR=DUR;
+const cl=(x,a,b)=>Math.max(a,Math.min(b,x)), nm=(t,a,b)=>cl((t-a)/(b-a),0,1), lerp=(a,b,v)=>a+(b-a)*v;
+const expo=x=>x>=1?1:1-Math.pow(2,-10*x), p3in=x=>x*x*x, io=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2, back=x=>{const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const pico=x=>Math.sin(cl(x,0,1)*Math.PI);                       // 0→1→0: para el desenfoque en mitad del movimiento
+function S(el,o){ el.style.opacity=o.o===undefined?1:o.o; el.style.transform=`translate(${o.x||0}px,${o.y||0}px) scale(${o.s===undefined?1:o.s}) rotate(${o.r||0}deg)`; el.style.filter=o.b>0.3?`blur(${o.b.toFixed(1)}px)`:'none'; }
+// palabras que entran una a una con desenfoque y luego se quedan quietas
+function palabras(el,t,t0,paso=.067){ [...el.querySelectorAll('span')].forEach((s,i)=>{const v=nm(t,t0+i*paso,t0+i*paso+.14); s.style.opacity=v; s.style.filter=v<1?`blur(${(6*(1-v)).toFixed(1)}px)`:'none';}); }
+const CAPS=[[E.s1,E.s2,'<span>Llega</span> <span>desde</span> <span>un</span> <span>anuncio.</span> <i><span>Sabemos</span> <span>cuál.</span></i>'],[E.s2,E.s3,'<span>Respuesta</span> <span>por</span> <span>WhatsApp.</span> <i><span>En</span> <span>minutos.</span></i>'],[E.s3,E.s4,'<span>El</span> <span>equipo</span> <span>sabe</span> <i><span>cuándo</span> <span>intervenir.</span></i>'],[E.s4,E.s5,'<span>Qué</span> <span>anuncios</span> <span>generan</span> <i><span>oportunidades.</span></i>']];
+const RELOJ=[[E.s1,E.m1,'desde el anuncio','00:00'],[E.m1,E.s2,'desde el formulario','00:04'],[E.s2,E.s3,'desde el formulario','02:00'],[E.s3,E.s3+3.4,'seguimiento','hoy'],[E.s3+3.4,E.s4,'seguimiento','+1 día'],[E.s4,E.s5,'seguimiento','+3 días']];
+const IGT='Quiero información del curso de Marketing Digital. Trabajo por las mañanas, ¿puedo hacerlo por las tardes?';
+let capAct=-1;
+window.setT=function(t){
+  // ── fondo: negro en el gancho, la notificación se convierte en el mundo (amarillo) y se inunda de verde; negro al cierre
+  const z=nm(t,E.s1-.42,E.s1-.02), fl=io(nm(t,E.s1-.05,E.s1+.3)), fn=io(nm(t,E.s5-.25,E.s5+.2));
+  $('fondo').style.opacity=t<E.s1-.05?0:1-fn; $('rej').style.opacity=(t<E.s1?0:.9)*(1-fn); $('rej').style.transform=`translate(${-(t*9)%120}px,${-(t*6)%120}px)`;
+  $('e').style.background=t<E.s1-.05?'#0A0A0B':(t<E.s5-.25?'#F4CC38':'#0A0A0B'); $('fondo').style.opacity=t<E.s1-.05?0:(t<E.s5-.25?fl:1-fn);
+  // ── gancho (0–6 s): titular en pantalla desde el fotograma 0; la solicitud cae a los 0,35 s
+  const h1o=1-nm(t,2.05,2.25); S($('h1'),{o:h1o,b:8*nm(t,2.05,2.25)}); [...$('h1').querySelectorAll('span')].forEach(s=>s.style.opacity=1);
+  S($('h2'),{o:(t>=2.2?1:0)*(1-nm(t,E.s1-.5,E.s1-.3)),b:10*nm(t,E.s1-.5,E.s1-.3)}); palabras($('h2'),t,2.25);
+  { const a=nm(t,.35,.9), y=lerp(-1500,0,expo(a)), golpe=pico(nm(t,.8,1.15));          // cae, aterriza y da un toque de móvil
+    const zs=1+p3in(z)*26;                                                             // zoom a través: la tarjeta se hace el mundo
+    S($('noti'),{o:t<.35?0:(z>=1?0:1),y:y+(zs>1?-40*p3in(z):0),s:(1+.03*golpe)*zs,r:1.6*Math.sin(nm(t,.9,1.5)*Math.PI*6)*(1-nm(t,.9,1.5)),b:14*pico(nm(t,.35,.75))+18*pico(z)});
+    [...$('noti').children].forEach(c=>c.style.opacity=1-nm(z,.15,.5)); }
+  // ── cabecera
+  const r=RELOJ.find(x=>t>=x[0]&&t<x[1]); const rl=$('reloj'); if(r&&t<E.s5-.3){ rl.innerHTML='<span>'+r[2]+'</span><b>'+r[3]+'</b>'; const v=nm(t,r[0]+.25,r[0]+.5); S(rl,{o:Math.min(nm(t,E.s1+.25,E.s1+.5),1-nm(t,E.s5-.5,E.s5-.3)),s:1+.08*pico(v)}); } else rl.style.opacity=0;
+  $('ej').style.opacity=Math.min(nm(t,E.s1+.4,E.s1+.7),1-nm(t,E.s5-.5,E.s5-.3));
+  const ci=CAPS.findIndex(x=>t>=x[0]&&t<x[1]); const cap=$('cap'); if(ci>=0){ if(ci!==capAct){cap.innerHTML=CAPS[ci][2]; capAct=ci;} const c=CAPS[ci]; palabras(cap,t,c[0]+.3); const sal=nm(t,c[1]-.22,c[1]-.04); cap.style.opacity=1-sal; cap.style.filter=sal>0?`blur(${(8*sal).toFixed(1)}px)`:'none'; } else { cap.style.opacity=0; capAct=-1; }
+  // ── 1 · el anuncio: llega algo grande y se asienta; Laura escribe; zoom a través del botón → ficha
+  { const a=nm(t,E.s1-.02,E.s1+.5), zb=nm(t,E.m1-.38,E.m1-.03);
+    S($('s2a'),{o:t<E.s1-.02?0:(zb>=1?0:1),s:lerp(1.14,1,expo(a))*(1+p3in(zb)*5.5),y:lerp(60,0,expo(a))-p3in(zb)*-900*0+p3in(zb)*(-560*5.5*.0),b:12*(1-nm(a,0,.6))+16*pico(zb)});
+    $('s2a').style.transformOrigin='50% 49%';
+    $('igt').textContent=IGT.slice(0,Math.floor(nm(t,E.s1+.5,E.s1+2.0)*IGT.length)); $('btn').style.transform=`scale(${1+.06*pico(nm(t,E.m1-.75,E.m1-.4))})`; }
+  { const a=nm(t,E.m1-.06,E.m1+.42), w=nm(t,E.s2-.3,E.s2-.02);                           // entra algo grande y se asienta; sale barrida a la izquierda
+    S($('s3'),{o:t<E.m1-.06?0:(w>=1?0:1),s:lerp(1.1,1,expo(a)),x:-1500*p3in(w),b:10*(1-nm(a,0,.7))+22*pico(w)});
+    document.querySelectorAll('#s3 .dato').forEach((d,i)=>{const v=nm(t,E.m1+.35+i*.3,E.m1+.6+i*.3); d.style.opacity=v; d.style.transform=`translateX(${(1-expo(v))*40}px)`;});
+    const hi=document.querySelector('#s3 .dato.hi span'); hi.style.transform=`scale(${1+.07*pico(nm(t,E.m1+1.6,E.m1+2.0))})`; hi.style.transformOrigin='0 50%'; }
+  // ── 2 · WhatsApp: llega barrido desde la derecha y se enfoca; los mensajes saltan con muelle
+  { const a=nm(t,E.s2-.08,E.s2+.36), sal=nm(t,E.s3-.2,E.s3-.02);
+    S($('s4'),{o:t<E.s2-.08?0:1-sal,x:1500*(1-expo(a)),b:22*(1-nm(a,0,.75))+9*sal,s:1-.04*sal});
+    const B=[['b1',1.6,'ty1',.5],['b2',3.3],['b3',5.0,'ty2',4.1],['b4',6.1]];
+    B.forEach(([id,d,ty,dt])=>{ const v=nm(t,E.s2+d,E.s2+d+.32); S($(id),{o:Math.min(1,v*3),s:v<=0?0:back(v)});
+      if(ty){ const q=win(t,E.s2+dt,E.s2+d); $(ty).style.opacity=q; [...$(ty).children].forEach((i,k)=>i.style.transform=`translateY(${-7*Math.max(0,Math.sin(t*9+k*1.1))}px)`); } }); }
+  // ── 3 · seguimiento: sello que golpea y tareas en cascada
+  { const a=nm(t,E.s3-.02,E.s3+.3), sal=nm(t,E.s4-.22,E.s4-.02);
+    S($('s6'),{o:t<E.s3-.02?0:1-sal,b:8*(1-a)+10*sal,s:1-.05*sal});
+    const g=nm(t,E.s3+.25,E.s3+.6); S($('sello'),{o:Math.min(1,g*4),s:lerp(1.7,1,expo(g)),r:lerp(-5,-1.5,expo(g)),b:14*(1-nm(g,0,.5))});
+    const c=nm(t,E.s3+.9,E.s3+1.3); S($('seg'),{o:c,y:(1-expo(c))*70});
+    [1.3,3.6,4.5].forEach((d,i)=>{const el=document.querySelectorAll('#seg .dato')[i], v=nm(t,E.s3+d,E.s3+d+.28); el.style.opacity=v; el.style.transform=`translateX(${(1-expo(v))*40}px)`;}); }
+  // ── 4 · pipeline: la tarjeta de Laura llega grande y se encoge dentro del tablero; salta de etapa con desenfoque
+  { const a=nm(t,E.s4-.02,E.s4+.4), sal=nm(t,E.s5-.3,E.s5-.05);
+    S($('s8'),{o:t<E.s4-.02?0:1-sal,s:lerp(1.06,1,expo(a))*(1-.05*sal),b:9*(1-a)+12*sal});
+    const en=nm(t,E.s4+.1,E.s4+.7), j1=nm(t,E.s4+2.4,E.s4+2.85), j2=nm(t,E.s4+4.3,E.s4+4.75);
+    S($('ld'),{o:t<E.s4+.1?0:1,x:272*io(j1)+272*io(j2),y:-34*pico(j1)-34*pico(j2)+lerp(-150,0,expo(en)),s:lerp(2.6,1,expo(en))*(1+.06*pico(nm(t,E.s4+4.75,E.s4+5.1))),b:8*pico(en)+10*pico(j1)+10*pico(j2)});
+    const col=t<E.s4+2.6?0:t<E.s4+4.5?1:2; [0,1,2].forEach(i=>$('k'+i).classList.toggle('on',i===col&&t>E.s4+.6));
+    const v=nm(t,E.s4+5.1,E.s4+5.45); $('atr').style.opacity=v; $('atr').style.transform=`translateY(${(1-expo(v))*40}px)`; }
+  // ── 5 · cierre: inundación a negro, palabras una a una, botón con muelle; después, todo quieto
+  { const f=$('fin'); f.style.opacity=t<E.s5-.05?0:1; const lg=nm(t,E.s5+.15,E.s5+.5); const im=f.querySelector('img'); im.style.opacity=lg; im.style.filter=lg<1?`blur(${(8*(1-lg)).toFixed(1)}px)`:'none';
+    palabras(f.querySelector('.t1'),t,E.s5+.55,.09);
+    const c=nm(t,E.s5+4.2,E.s5+4.6); S(f.querySelector('.cta'),{o:Math.min(1,c*3),s:c<=0?0:back(c)});
+    f.querySelector('.t2').style.opacity=nm(t,E.s5+5.0,E.s5+5.3); f.querySelector('.web').style.opacity=nm(t,E.s5+5.4,E.s5+5.7); }
+};
+function win(t,a,b,fi=.15,fo=.12){ if(t<a||t>b) return 0; return Math.min(nm(t,a,a+fi), 1-nm(t,b-fo,b)); }
+window.setT(0);
+</script>
+</html>
