@@ -3,13 +3,14 @@
 Genera t.js (tiempos y cortes a partir de la locución) y capas.html. Estilos de la prueba audiovisual del 23-nov."""
 import json, os, subprocess
 A = os.path.dirname(os.path.abspath(__file__)); BASE = f'{A}/../2026-11-23-formacion-v7-prueba/capas.html'
-TEMPO, HUECO, COLA, LLAMADA = 1.10, 0.18, 1.3, 5.6
+TEMPO, HUECO, COLA, LLAMADA, RAQ = 1.10, 0.18, 1.3, 5.6, 4.3
 def dur(f): return float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]))
 T = {}; W = {}; t = 0.1
 for k in ['v0', 'v1', 'v2', 'v3', 'v4', 'v4b', 'v5', 'v6']:
     d = dur(f'{A}/voz/{k}.mp3') / TEMPO; T[k] = [round(t, 3), round(d, 3)]
     W[k] = {w['w'].strip('¿?.,:').lower(): round(t + w['s'] / TEMPO, 3) for w in reversed(json.load(open(f'{A}/voz/{k}.json')))}
-    t += d + (1.3 if k == 'v3' else HUECO)      # tras «agente de voz», 1,3 s para ver a Laura contestar
+    if k == 'v3': W['r1'] = {'ini': round(t + d + .2, 3), 'fin': round(t + d + .2 + RAQ / 1.08, 3)}      # saludo breve de Raquel (recreación) tras el narrador
+    t += d + (.2 + RAQ / 1.08 + .3 if k == 'v3' else HUECO)
 DUR = round(t - HUECO + COLA, 2); E = {k: round(T[k][0] - .1, 3) for k in T}; E['v0'] = 0
 r25 = lambda x: round(round(x * 25) / 25, 2)
 # cortes de plano: [inicio, tipo, plano de vídeo (o None si la escena es gráfica), segundo de entrada en el plano]
@@ -52,6 +53,7 @@ EXTRA = '''
 .sub{position:absolute;left:70px;max-width:860px;background:rgba(10,10,11,.86);color:#F4F1EB;border-radius:26px;padding:20px 28px;font-size:44px;line-height:1.18;font-weight:600;opacity:0;transform-origin:0 100%}
 .sub small{display:block;font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#F4CC38;margin-bottom:4px}
 .sub.r{left:auto;right:70px;background:rgba(244,241,235,.94);color:#0A0A0B;transform-origin:100% 100%}.sub.r small{color:#0E7C74}
+#subr{position:absolute;z-index:20;left:70px;top:770px;width:900px;font-size:44px;font-weight:700;line-height:1.2;color:#F4F1EB;background:rgba(10,10,11,.72);padding:18px 24px;border-radius:20px;opacity:0}
 #pend{position:absolute;z-index:20;left:70px;top:950px;border:3px dashed #F4CC38;color:#F4CC38;font-family:Anton;font-size:30px;text-transform:uppercase;padding:9px 16px;border-radius:12px;opacity:0;background:rgba(10,10,11,.5)}
 #onda{position:absolute;right:70px;top:300px;display:flex;gap:8px;align-items:center;height:60px;opacity:0}#onda i{width:9px;border-radius:5px;background:#F4CC38;display:block;height:14px}
 /* calendario */
@@ -198,7 +200,8 @@ CUERPO = r'''
     <div class="flo am" id="av" style="left:150px;top:1430px"><small>El sistema puede activar</small>Agente de voz</div>
   </div>
   <!-- 7 llamada: el agente de voz llama y Laura contesta -->
-  <div id="pend">Audio pendiente de la llamada real</div>
+  <div id="pend">Recreación · pendiente la llamada real</div>
+  <div id="subr">«Hola, Laura, soy Raquel, la asistente virtual de Escuela Norte.»</div>
   <div class="abs tt" id="q4b" style="top:290px"><span>Agente</span> <i><span>de</span> <span>voz.</span></i></div>
   <div class="abs" id="ent"><div class="av">R</div><div><small>Llamada entrante</small><b>Raquel</b><span>Asistente virtual · Escuela Norte</span></div><div class="ok">✆</div></div>
   <!-- 8 la cita: reserva, confirmación, recordatorio y reprogramación -->
@@ -284,7 +287,7 @@ window.setT=function(t){
       $('hora').textContent='Enviado hace '+(m<60?m+' min':Math.floor(m/60)+' h '+String(m%60).padStart(2,'0')+' min'); $('visto').style.opacity=nm(t,C[k][0]+.6,C[k][0]+.9);
       const v=nm(t,W.v3.responde-.1,W.v3.responde+.25), sr=$('sr'); sr.style.opacity=Math.min(1,v*3); sr.style.transform=`scale(${lerp(1.7,1,expo(v))}) rotate(-4deg)`; sr.style.filter=v<1&&v>0?`blur(${(12*(1-v)).toFixed(1)}px)`:'none'; flota('av',k,t,W.v3.agente-.3,3); } else ['sr','av'].forEach(i=>$(i).style.opacity=0); }
   // 7 · llamada: suena el teléfono de Laura, entra la llamada del agente y ella contesta
-  { const k='llamada', on=en(k,t), a=C[k][0]; $('pend').style.opacity=on?1:0; titulo('q4b',k,t,.1); const v=nm(t,a+.25,a+.6), e=$('ent'), co=nm(t,C[k][1]-1.1,C[k][1]-.8);
+  { const k='llamada', on=en(k,t), a=C[k][0]; $('pend').style.opacity=on?1:0; titulo('q4b',k,t,.1); const v=nm(t,a+.25,a+.6), e=$('ent'), co=nm(t,W.r1.ini-.15,W.r1.ini+.1); $('subr').style.opacity=on?co:0; $('pend').style.opacity=on?co:0;
     e.style.opacity=on?Math.min(1,v*3):0; e.style.transform=`translateY(${(1-expo(v))*260}px) scale(${1+.02*Math.sin((t-a)*26)*(1-co)})`; e.querySelector('small').textContent=co>=1?'En llamada':'Llamada entrante'; e.querySelector('.ok').style.transform=`scale(${1+.14*Math.abs(Math.sin((t-a)*7))*(1-co)})`; }
   // 8 · la cita: Laura reserva (calendario) → confirmación y recordatorio (WhatsApp) → reprogramación (calendario)
   { const k1=en('cal',t), k3=en('repro',t); $('e8').style.opacity=(k1||k3)?1:0; $('q5').style.opacity=k1?1:0; $('q5c').style.opacity=k3?1:0;

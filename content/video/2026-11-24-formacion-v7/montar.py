@@ -25,7 +25,7 @@ for i, (t0, tipo, plano, ss) in enumerate(P):
 open(f'{SP}/lista.txt', 'w').write('\n'.join(lst) + '\n')
 SFX = [(c - .15, 'aire') for k, c in C.items() if k not in ('laura', 'llamada')] + [(C['crm'] - .55, 'toque'), (C['crm'] + .4, 'golpe'), (C['crm'] + .45, 'aviso'), (C['origen'] + .25, 'pop'), (C['origen'] + .4, 'pop'), (C['origen'] + .55, 'pop'),
        (C['origen'] + 1.8, 'pop'), (W['v2']['anuncio'] - .25, 'toque'), (W['v2']['sistema'] - .1, 'pop'), (W['v2']['whatsapp'] + .45, 'pop'), (W['v2']['actualiza'] - .1, 'aviso'),
-       (W['v3']['responde'] - .1, 'golpe'), (W['v3']['agente'] - .3, 'aviso'), (C['llamada'] + .25, 'tono'), (C['llamada'] + 1.35, 'tono'),
+       (W['v3']['responde'] - .1, 'golpe'), (W['v3']['agente'] - .3, 'aviso'), (C['llamada'] + .25, 'tono'), (C['llamada'] + 1.35, 'tono'), (W['r1']['ini'] - .12, 'toque'),
        (W['v4']['reserva'] - .1, 'golpe'), (W['v4']['reunión'] + .3, 'aviso'), (W['v4']['confirma'] - .1, 'pop'), (W['v4']['envía'] + .1, 'pop'), (W['v4']['reprograma'] - .4, 'toque'), (W['v4']['reprograma'] + .1, 'aviso'), (C['adm'] + .9, 'pop'), (W['v5']['valida'] - .3, 'aviso'),
        (C['meta'] + .15, 'pop'), (C['meta'] + 1.0, 'pop'), (C['meta'] + 1.9, 'pop'), (C['meta'] + 2.6, 'aviso'), (W['v6']['captación'] - .1, 'pop'), (W['v6']['seguimiento'] - .1, 'pop'), (W['v6']['mejora'] - .1, 'pop'), (W['v6']['solicita'] + .5, 'pop')]
 GEN = {'aire': "anoisesrc=color=pink:d=0.34:r=44100:a=0.5,highpass=f=700,lowpass=f=5200,afade=t=in:st=0:d=0.2,afade=t=out:st=0.2:d=0.14,volume=0.17",
@@ -41,7 +41,9 @@ for i, k in enumerate(V):
     f = f'{A}/voz/{k}.mp3'; ent += ['-i', f]; t0 = T[k][0]; tp = TEMPO
     tel = ''
     fc.append(f'[{i+1}:a]{st},atempo={tp}{tel},volume={ref / rms(f) * (1.15 if tel else 1):.3f},adelay={int(t0*1000)}|{int(t0*1000)}[v{i}]'); et.append(f'[v{i}]')
-fc.append(f"[0:a]{st},aloop=loop=1:size=2646000,atrim=0:{DUR},volume='0.34+0.34*clip((t-{fin:.2f})/0.4,0,1)':eval=frame,afade=t=out:st={DUR-1.2:.2f}:d=1.2[m]")
+R = W['r1']; ent += ['-i', f'{A}/voz/r1.mp3']; f = f'{A}/voz/r1.mp3'      # saludo de Raquel (recreación), recortado a la primera frase y con banda de teléfono
+fc.append(f"[{len(V)+1}:a]atrim=0:4.3,afade=t=out:st=4.2:d=0.1,{st},atempo=1.08,highpass=f=280,lowpass=f=3600,volume={ref / rms(f) * 1.15:.3f},adelay={int(R['ini']*1000)}|{int(R['ini']*1000)}[vr]"); et.append('[vr]')
+fc.append(f"[0:a]{st},aloop=loop=1:size=2646000,atrim=0:{DUR},volume='0.34-0.2*clip((t-{R['ini']-.3:.2f})/0.3,0,1)+0.2*clip((t-{R['fin']:.2f})/0.4,0,1)+0.34*clip((t-{fin:.2f})/0.4,0,1)':eval=frame,afade=t=out:st={DUR-1.2:.2f}:d=1.2[m]")
 for n, (t0, tipo) in enumerate(SFX): fc.append(f"{GEN[tipo]},{st},adelay={int(max(0,t0)*1000)}|{int(max(0,t0)*1000)}[x{n}]"); et.append(f'[x{n}]')
 fc.append(''.join(et) + f'amix=inputs={len(et)}:normalize=0:duration=first,alimiter=limit=0.9[o]')
 au = f'{SP}/audio.m4a'; run('ffmpeg', '-v', 'error', '-y', *ent, '-filter_complex', ';'.join(fc), '-map', '[o]', '-t', str(DUR), '-c:a', 'aac', '-b:a', '192k', au)
