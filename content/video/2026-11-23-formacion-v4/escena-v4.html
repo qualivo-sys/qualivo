@@ -142,12 +142,12 @@ html,body{background:#000}
   <div class="abs" id="cap"></div>
   <div id="stage">
     <div class="sc" id="c1">
-      <div class="tile" id="t0" style="top:0"><u>1</u><div><b>Campañas</b><small>Meta y Google Ads</small></div><em>Qualivo</em></div><div class="fle" id="f0" style="top:278px"></div>
+      <div class="tile" id="t0" style="top:0"><u>1</u><div><b>Campañas</b><small>Meta Ads</small></div><em>Qualivo</em></div><div class="fle" id="f0" style="top:278px"></div>
       <div class="tile" id="t1" style="top:326px"><u>2</u><div><b>Landing</b><small>Página de captación</small></div><em>Qualivo</em></div><div class="fle" id="f1" style="top:604px"></div>
       <div class="tile" id="t2" style="top:652px"><u>3</u><div><b>Formulario</b><small>Con preguntas que cualifican</small></div><em>Qualivo</em></div>
     </div>
     <div class="sc" id="c2"><div class="card">
-      <div class="k"><span>Intelligence · Nueva solicitud</span><em>hace 4 s</em></div><h2>Laura Vidal</h2>
+      <div class="k"><span>CRM · Nueva solicitud</span><em>hace 4 s</em></div><h2>Laura Vidal</h2>
       <div class="dato hi"><b>Viene de</b><span>Anuncio «por las tardes»</span></div>
       <div class="dato"><b>Interés</b><span>Marketing Digital online</span></div>
       <div class="dato"><b>Quiere</b><span>Cambiar de trabajo · cuanto antes</span></div>
@@ -160,16 +160,17 @@ html,body{background:#000}
       <div class="bub" id="b3" style="top:556px">En directo, de 18 a 20 h, y quedan grabadas. <b>¿Reservamos una llamada?</b></div>
       <div class="tagnr" id="nr">Laura no responde</div>
     </div></div></div></div>
-    <div class="sc" id="c4"><div class="phone"><div class="screen"><div class="call">
-      <div class="av">R</div><h2>Agente de voz</h2><p id="cst">Llamando a Laura…</p>
-      <div class="wave" id="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="cond">Solo si se cumple la condición configurada</div>
-    </div></div></div></div>
+    <div class="sc" id="c4"><div class="card"><div class="k"><span>Seguimiento automático</span><em>sin respuesta</em></div><h2>El sistema insiste</h2>
+      <div class="dato"><b>+1 día</b><span>Nuevo WhatsApp</span></div>
+      <div class="dato"><b>+2 días</b><span>Correo</span></div>
+      <div class="dato"><b>+3 días</b><span>Otro WhatsApp</span></div>
+      <div class="dato"><b></b><span style="font-weight:700">Nadie tiene que acordarse.</span></div>
+    </div></div>
     <div class="sc" id="c5"><div class="cita" id="ci"><div class="d"><small>JUE</small>17:00</div><div><b>Reunión agendada</b><span>Laura Vidal · admisiones</span></div></div>
       <div class="card" id="c5c" style="top:250px"><div class="k"><span>Automático</span><em>cita</em></div>
       <div class="dato"><b>Etapa</b><span>Reunión agendada <span class="ok">✓</span></span></div>
-      <div class="dato"><b>Recordatorios</b><span>Enviados <span class="ok">✓</span></span></div>
-      <div class="dato"><b>¿No puede?</b><span>Reprograma desde el mensaje</span></div>
+      <div class="dato"><b>Recordatorios</b><span>La víspera y el mismo día <span class="ok">✓</span></span></div>
+      <div class="dato"><b>¿No puede?</b><span>Reprograma desde la cita</span></div>
     </div></div>
     <div class="sc" id="c6"><div class="card"><div class="k"><span>Antes de la llamada</span><em>para el equipo</em></div><h2>Laura Vidal</h2>
       <div class="dato"><b>Curso</b><span>Marketing Digital online</span></div>
@@ -180,7 +181,7 @@ html,body{background:#000}
     <div class="sc" id="c7"><div id="lz">
       <div class="nodo" id="n1" style="top:0"><div class="k">Meta Ads · campaña</div><b>Anuncio «por las tardes»</b><span>De aquí vino Laura</span><div class="sen" id="sen">Señal de calidad recibida</div></div>
       <div id="via"></div><div id="bola"></div>
-      <div class="nodo" id="n2" style="top:590px"><div class="k">Intelligence · resultado comercial</div><b>Laura Vidal</b><span>Reunión celebrada</span><div class="cua" id="cua">Cualificada ✓</div></div>
+      <div class="nodo" id="n2" style="top:590px"><div class="k">CRM · resultado comercial</div><b>Laura Vidal</b><span>Reunión celebrada</span><div class="cua" id="cua">Cualificada ✓</div></div>
     </div></div>
   </div>
   <div class="abs" id="val"><h3><span>Esto</span> <span>es</span> <i><span>Qualivo</span></i></h3>
@@ -210,8 +211,8 @@ function escena(el,t,a,b,ent,sal){ const i=nm(t,a-.06,a+.4), o=nm(t,b-.3,b-.03);
   if(ent==='zoom'){s*=lerp(1.12,1,expo(i)); bl+=11*(1-nm(i,0,.7));} if(ent==='der'){x+=1500*(1-expo(i)); bl+=22*(1-nm(i,0,.75));} if(ent==='izq'){x-=1500*(1-expo(i)); bl+=22*(1-nm(i,0,.75));} if(ent==='foco'){bl+=12*(1-i);}
   let op=t<a-.06?0:1; if(sal==='izq'){x-=1500*p3in(o); bl+=22*pico(o); if(o>=1)op=0;} else if(sal==='der'){x+=1500*p3in(o); bl+=22*pico(o); if(o>=1)op=0;} else if(sal==='zoom'){s*=1+p3in(o)*5; bl+=16*pico(o); if(o>=1)op=0;} else {op*=1-o; bl+=10*o; s*=1-.05*o;}
   S(el,{o:ent==='foco'?op*i:op,x,s,b:bl}); }
-const CAPS=[['s1','<span>Campañas,</span> <span>landing</span> <span>y</span> <i><span>formulario.</span></i>'],['s2','<span>Sabemos</span> <span>de</span> <span>qué</span> <i><span>anuncio</span> <span>viene.</span></i>'],['s3','<span>WhatsApp.</span> <i><span>En</span> <span>minutos.</span></i>'],['s4','<span>¿No</span> <span>responde?</span> <i><span>Agente</span> <span>de</span> <span>voz.</span></i>'],['s5','<span>Reunión</span> <span>y</span> <i><span>recordatorios.</span></i>'],['s6','<span>El</span> <span>equipo</span> <span>llega</span> <i><span>con</span> <span>todo.</span></i>'],['s7','<span>El</span> <span>resultado</span> <span>vuelve</span> <i><span>a</span> <span>la</span> <span>campaña.</span></i>']];
-const RELOJ={s1:['lo montamos nosotros','captación'],s2:['desde el formulario','00:04'],s3:['desde el formulario','02:00'],s4:['sin respuesta','+2 h'],s5:['seguimiento','reunión'],s6:['el día de la reunión','17:00'],s7:['después de la reunión','resultado']};
+const CAPS=[['s1','<span>Campañas,</span> <span>landing</span> <span>y</span> <i><span>formulario.</span></i>'],['s2','<span>Sabemos</span> <span>de</span> <span>qué</span> <i><span>anuncio</span> <span>viene.</span></i>'],['s3','<span>WhatsApp.</span> <i><span>En</span> <span>minutos.</span></i>'],['s4','<span>¿No</span> <span>responde?</span> <i><span>El</span> <span>sistema</span> <span>insiste.</span></i>'],['s5','<span>Reunión</span> <span>y</span> <i><span>recordatorios.</span></i>'],['s6','<span>El</span> <span>equipo</span> <span>llega</span> <i><span>con</span> <span>todo.</span></i>'],['s7','<span>El</span> <span>resultado</span> <span>vuelve</span> <i><span>a</span> <span>la</span> <span>campaña.</span></i>']];
+const RELOJ={s1:['lo montamos nosotros','captación'],s2:['desde el formulario','00:04'],s3:['desde el formulario','02:00'],s4:['sin respuesta','+1 día'],s5:['seguimiento','reunión'],s6:['el día de la reunión','17:00'],s7:['después de la reunión','resultado']};
 let capAct='';
 window.setT=function(t){
   const z=nm(t,E.s1-.44,E.s1-.04), fl=io(nm(t,E.s1-.07,E.s1+.28)), fn=io(nm(t,E.s8-.25,E.s8+.2));
@@ -240,9 +241,9 @@ window.setT=function(t){
   escena($('c3'),t,E.s3,E.s4+1.35,'der','zoom'); $('c3').style.transformOrigin='50% 72%';
   pop($('b1'),t,W.v3.recibe); pop($('b2'),t,W.v3.resuelve-.1); pop($('b3'),t,W.v3.resuelve+.9);
   { const v=nm(t,E.s4+.1,E.s4+.45); S($('nr'),{o:Math.min(1,v*3),x:-200,s:lerp(1.6,1,expo(v)),r:-3,b:10*(1-nm(v,0,.5))}); $('nr').style.left='50%'; $('nr').style.transform=`translateX(-50%) scale(${lerp(1.6,1,expo(v))}) rotate(-3deg)`; }
-  // ── 4 · agente de voz (breve)
+  // ── 4 · si no responde, el seguimiento sigue solo
   escena($('c4'),t,E.s4+1.35,E.s5,'zoom','izq');
-  { const con=t>W.v4.agente; $('cst').textContent=con?'En llamada · 00:0'+Math.min(9,Math.floor(t-W.v4.agente)):'Llamando a Laura…'; [...$('wave').children].forEach((i,n)=>{i.style.height=(con?20+70*Math.abs(Math.sin(t*9+n*.9)):16)+'px';}); }
+  document.querySelectorAll('#c4 .dato').forEach((d,i)=>fila(d,t,W.v4.insiste-.1+i*.5));
   // ── 5 · reunión, recordatorios y reprogramación
   escena($('c5'),t,E.s5,E.s6,'der','');
   { const v=nm(t,W.v5.agenda,W.v5.agenda+.4); S($('ci'),{o:Math.min(1,v*3),s:lerp(1.5,1,expo(v)),r:lerp(-4,0,expo(v)),b:12*(1-nm(v,0,.5))}); const c=nm(t,W.v5.sistema-.2,W.v5.sistema+.2); S($('c5c'),{o:c,y:(1-expo(c))*70});
@@ -253,7 +254,7 @@ window.setT=function(t){
   // ── 7 · el resultado vuelve a la campaña que la trajo
   escena($('c7'),t,E.s7,E.s8,'foco','');
   { const a=nm(t,E.s7+.1,E.s7+.5); S($('n2'),{o:Math.min(1,a*3),s:lerp(1.1,1,expo(a)),b:10*(1-nm(a,0,.7))}); pop($('cua'),t,W.v7.cualificada);
-    const b=nm(t,W.v7.intelligence-.2,W.v7.intelligence+.2); S($('n1'),{o:b,y:(1-expo(b))*-60}); $('via').style.opacity=nm(t,W.v7.puede,W.v7.puede+.3);
+    const b=nm(t,W.v7.sistema-.2,W.v7.sistema+.2); S($('n1'),{o:b,y:(1-expo(b))*-60}); $('via').style.opacity=nm(t,W.v7.envía,W.v7.envía+.3);
     const tb=W.v7.señal-.25, v=nm(t,tb,tb+1.0); S($('bola'),{o:t<tb?0:(v>=1?0:1),y:-330*io(v),s:1+.35*pico(v),b:7*pico(v)});
     const r=nm(t,tb+.95,tb+1.3); $('n1').style.transform+=` scale(${1+.04*pico(r)})`; pop($('sen'),t,tb+1.0); $('n1').style.background=r>0?'#F4CC38':'#F4F1EB'; }
   // ── 8 · esto es Qualivo

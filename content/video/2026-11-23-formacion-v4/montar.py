@@ -8,7 +8,7 @@ W = json.loads(open(f'{A}/t.js').read().split('window.W=')[1].split(';window.DUR
 SFX = [(W['v0']['laura'] + .45, 'toque'), (W['v0']['pide'], 'aire'), (W['v0']['pide'] + .45, 'aviso'), (E['v1'] - .45, 'aire2'),
        (W['v1']['campañas'] - .1, 'pop'), (W['v1']['páginas'] - .1, 'pop'), (W['v1']['formularios'] - .1, 'pop'), (E['v2'] - .3, 'aire'),
        (W['v2']['identifica'], 'toque'), (W['v2']['registra'], 'toque'), (W['v2']['cualifica'] + .05, 'pop'), (E['v3'] - .3, 'aire'),
-       (W['v3']['recibe'], 'pop'), (W['v3']['resuelve'] - .1, 'pop'), (W['v3']['resuelve'] + .9, 'pop'), (E['v4'] + .1, 'golpe'), (E['v4'] + 1.05, 'aire'),
+       (W['v3']['recibe'], 'pop'), (W['v3']['resuelve'] - .1, 'pop'), (W['v3']['resuelve'] + .9, 'pop'), (E['v4'] + .1, 'golpe'), (E['v4'] + 1.05, 'aire'), (W['v4']['insiste'] - .1, 'toque'), (W['v4']['insiste'] + .4, 'toque'), (W['v4']['insiste'] + .9, 'toque'),
        (E['v5'] - .3, 'aire'), (W['v5']['agenda'], 'golpe'), (W['v5']['actualiza'], 'toque'), (W['v5']['recordatorios'] - .2, 'toque'), (W['v5']['reprogramación'] - .2, 'toque'),
        (E['v6'] - .1, 'aire'), (W['v7']['cualificada'], 'pop'), (W['v7']['señal'] - .25, 'aire'), (W['v7']['señal'] + .75, 'aviso'), (E['v8'] - .3, 'aire2'),
        (W['v8']['captación'] - .1, 'pop'), (W['v8']['seguimiento'] - .1, 'pop'), (W['v8']['optimización'] - .1, 'pop'), (E['v9'] - .2, 'aire'), (W['v9']['solicita'] - .1, 'pop')]
