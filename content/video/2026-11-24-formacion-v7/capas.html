@@ -76,10 +76,10 @@ html,body{background:transparent}
 .sub{position:absolute;left:70px;max-width:860px;background:rgba(10,10,11,.86);color:#F4F1EB;border-radius:26px;padding:20px 28px;font-size:44px;line-height:1.18;font-weight:600;opacity:0;transform-origin:0 100%}
 .sub small{display:block;font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#F4CC38;margin-bottom:4px}
 .sub.r{left:auto;right:70px;background:rgba(244,241,235,.94);color:#0A0A0B;transform-origin:100% 100%}.sub.r small{color:#0E7C74}
-#pend{position:absolute;z-index:20;left:70px;top:300px;border:3px dashed #F4CC38;color:#F4CC38;font-family:Anton;font-size:30px;text-transform:uppercase;padding:9px 16px;border-radius:12px;opacity:0;background:rgba(10,10,11,.5)}
+#pend{position:absolute;z-index:20;left:70px;top:950px;border:3px dashed #F4CC38;color:#F4CC38;font-family:Anton;font-size:30px;text-transform:uppercase;padding:9px 16px;border-radius:12px;opacity:0;background:rgba(10,10,11,.5)}
 #onda{position:absolute;right:70px;top:300px;display:flex;gap:8px;align-items:center;height:60px;opacity:0}#onda i{width:9px;border-radius:5px;background:#F4CC38;display:block;height:14px}
 /* calendario */
-#cal{position:absolute;left:120px;top:520px;width:840px;background:#F4F1EB;border-radius:44px;padding:34px;transform-style:preserve-3d;box-shadow:-40px 60px 120px rgba(0,0,0,.6);color:#0A0A0B}
+#cal{position:absolute;left:120px;top:640px;width:840px;background:#F4F1EB;border-radius:44px;padding:34px;transform-style:preserve-3d;box-shadow:-40px 60px 120px rgba(0,0,0,.6);color:#0A0A0B}
 #cal .mes{font-family:Anton;font-size:60px;text-transform:uppercase;margin-bottom:18px;display:flex;justify-content:space-between}#cal .mes span{color:#0E7C74}
 #cal .gr{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}#cal .gr div{height:120px;border-radius:18px;background:rgba(10,10,11,.07);font-size:26px;font-weight:700;color:#7A7C82;padding:12px 14px}
 #cal .gr div.h{background:#F4CC38;color:#0A0A0B;border:4px solid #0A0A0B;transform-origin:50% 50%}#cal .gr div.h b{display:block;font-family:Anton;font-weight:400;font-size:40px;margin-top:6px}
@@ -122,6 +122,19 @@ html,body{background:transparent}
 #mv3 .scr{width:100%;height:100%;background:#EFE7DD;border-radius:56px;overflow:hidden;position:relative;color:#0A0A0B}
 #hora{position:absolute;left:0;right:0;top:330px;text-align:center;font-size:26px;font-weight:700;color:#7A7C82}
 #visto{position:absolute;right:40px;top:440px;font-size:30px;font-weight:700;color:#7A7C82;opacity:0}
+#ent{left:70px;top:1040px;width:940px;background:rgba(10,10,11,.9);border:4px solid rgba(244,241,235,.2);border-radius:44px;padding:30px 34px;display:flex;align-items:center;gap:28px;color:#F4F1EB;transform-origin:50% 100%}
+#ent .av{flex:none;width:150px;height:150px;border-radius:50%;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:84px;display:flex;align-items:center;justify-content:center}
+#ent small{display:block;font-size:26px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#F4CC38}
+#ent b{display:block;font-family:Anton;font-weight:400;font-size:76px;line-height:1;text-transform:uppercase;margin:4px 0}
+#ent span{display:block;font-size:30px;font-weight:600;color:rgba(244,241,235,.7)}
+#ent .ok{margin-left:auto;flex:none;width:110px;height:110px;border-radius:50%;background:#1FA396;color:#0A0A0B;font-size:60px;font-weight:800;display:flex;align-items:center;justify-content:center}
+#mv4{position:absolute;left:150px;top:560px;width:780px;height:1380px;background:#0A0A0B;border-radius:80px;padding:24px;transform-style:preserve-3d;box-shadow:-40px 60px 120px rgba(10,10,11,.5)}
+#mv4 .scr{width:100%;height:100%;background:#EFE7DD;border-radius:58px;overflow:hidden;position:relative;color:#0A0A0B}
+#mv4 .dia{position:absolute;left:0;right:0;text-align:center;font-size:24px;font-weight:700;color:#7A7C82;opacity:0}
+.cmp{position:absolute;top:560px;width:400px;height:520px;border-radius:30px;background-size:cover;background-position:center;border:7px solid #F4F1EB;overflow:hidden;opacity:0;transform-origin:50% 100%;color:#F4F1EB}
+.cmp b{position:absolute;left:16px;right:16px;bottom:76px;font-family:Anton;font-weight:400;font-size:40px;line-height:1;text-transform:uppercase}
+.cmp em{position:absolute;left:14px;right:14px;bottom:14px;font-style:normal;font-family:Anton;font-size:30px;text-transform:uppercase;text-align:center;padding:10px;border-radius:12px;background:rgba(244,241,235,.9);color:#3D4148}
+.cmp.g{border-color:#F4CC38}.cmp.g em{background:#F4CC38;color:#0A0A0B}
 /* agente de voz */
 #agc{position:absolute;left:340px;top:520px;width:400px;height:400px;border-radius:50%;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:220px;display:flex;align-items:center;justify-content:center;transform-origin:50% 50%}
 #agr{position:absolute;left:290px;top:470px;width:500px;height:500px;border-radius:50%;border:8px solid rgba(244,204,56,.55)}
@@ -131,11 +144,11 @@ html,body{background:transparent}
 .nod{position:absolute;left:140px;width:800px;border-radius:36px;padding:30px 36px;opacity:0;transform-origin:50% 50%}
 .nod small{display:block;font-size:24px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;margin-bottom:6px}
 .nod b{display:block;font-family:Anton;font-weight:400;font-size:74px;line-height:1;text-transform:uppercase}
-#n1{top:1380px;background:#F4F1EB;color:#0A0A0B}#n1 small{color:#0E7C74}
-#n2{top:985px;background:#1FA396;color:#0A0A0B}#n2 small{color:rgba(10,10,11,.65)}
+#n1{top:1560px;background:#F4F1EB;color:#0A0A0B}#n1 small{color:#0E7C74}
+#n2{top:1270px;background:#1FA396;color:#0A0A0B}#n2 small{color:rgba(10,10,11,.65)}
 #n3{top:560px;background:#16181C;color:#F4F1EB;border:5px solid rgba(244,241,235,.2)}#n3 small{color:#F4CC38}#n3.g{background:#F4CC38;color:#0A0A0B;border-color:#F4F1EB}#n3.g small{color:rgba(10,10,11,.65)}
 .tub{position:absolute;left:526px;width:28px;border-radius:14px;background:rgba(244,241,235,.14);overflow:hidden;opacity:0}.tub i{position:absolute;left:0;width:28px;height:90px;border-radius:14px;background:#F4CC38;display:block}
-#t1b{top:1195px;height:185px}#t2b{top:800px;height:185px}
+#t1b{top:1445px;height:115px}#t2b{left:296px;top:1085px;height:185px}
 /* cierre */
 #fin{inset:0;background:#0A0A0B}
 #con{position:absolute;left:70px;right:70px;top:290px}
@@ -207,34 +220,38 @@ html,body{background:transparent}
     <div class="flo cl" id="sr" style="left:230px;top:1180px;font-size:80px">Sin respuesta</div>
     <div class="flo am" id="av" style="left:150px;top:1430px"><small>El sistema puede activar</small>Agente de voz</div>
   </div>
-  <!-- 7 llamada -->
-  <div id="pend">Recreación con la voz del agente</div><div id="onda"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-
-  <div class="sub r" id="s2" style="top:1210px"><small>Laura</small>Sí, quería información sobre el curso.</div>
-  <!-- 7b interfaz del agente -->
-  <div class="abs esc" id="e7b" style="background:#0A0A0B"><div class="luz" style="opacity:.3"></div>
-    <div id="agr"></div><div id="agc">R</div><div id="agn">Raquel<small>asistente virtual · Escuela Norte</small></div><div id="ago"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="sub" id="s1" style="top:1340px"><small>Raquel · asistente virtual</small>Hola, Laura, soy Raquel, de Escuela Norte. ¿Te viene bien hablar un momento?</div>
-    <div class="sub" id="s3" style="top:1340px"><small>Raquel</small>¿Quieres que te ayude a reservar una llamada con admisiones?</div>
-    <div class="flo am" id="ia" style="left:210px;top:1620px;font-size:54px"><small>Etapa</small>Interesada en agendar</div>
-  </div>
-  <!-- 8 calendario -->
+  <!-- 7 llamada: el agente de voz llama y Laura contesta -->
+  <div id="pend">Audio pendiente de la llamada real</div>
+  <div class="abs tt" id="q4b" style="top:290px"><span>Agente</span> <i><span>de</span> <span>voz.</span></i></div>
+  <div class="abs" id="ent"><div class="av">R</div><div><small>Llamada entrante</small><b>Raquel</b><span>Asistente virtual · Escuela Norte</span></div><div class="ok">✆</div></div>
+  <!-- 8 la cita: reserva, confirmación, recordatorio y reprogramación -->
   <div class="abs esc" id="e8" style="background:#0A0A0B"><div class="luz" style="opacity:.35"></div>
-    <div class="abs tt" id="q5" style="top:290px"><span>Laura</span> <span>agenda</span> <i><span>una</span> <span>reunión.</span></i></div>
-    <div id="cal"><div class="mes">Esta semana <span>admisiones</span></div><div class="gr"><div>LUN</div><div>MAR</div><div>MIÉ</div><div class="h" id="jue">JUE<b>17:00</b></div><div>VIE</div></div></div>
-    <div class="flo vd" id="c1" style="left:100px;top:1010px;font-size:54px"><small style="color:rgba(244,241,235,.8)">WhatsApp</small>Confirmación enviada ✓</div>
-    <div class="flo vd" id="c2" style="left:260px;top:1190px;font-size:54px"><small style="color:rgba(244,241,235,.8)">Automático</small>Recordatorios ✓</div>
+    <div class="abs tt" id="q5" style="top:290px"><span>Laura</span> <span>reserva</span> <i><span>su</span> <span>reunión.</span></i></div>
+    <div class="abs tt" id="q5c" style="top:290px"><span>¿No</span> <span>puede?</span> <i><span>La</span> <span>cambia.</span></i></div>
+    <div id="cal"><div class="mes">Esta semana <span>admisiones</span></div><div class="gr"><div>LUN</div><div>MAR</div><div>MIÉ</div><div class="h" id="jue">JUE<b>17:00</b></div><div id="vie">VIE<b id="vieb" style="display:block;font-family:Anton;font-weight:400;font-size:40px;margin-top:6px;opacity:0">12:00</b></div></div></div>
+    <div class="flo am" id="c1" style="left:150px;top:1030px;font-size:58px"><small>Pipeline</small>Reunión agendada</div>
+    <div class="flo vd" id="c2" style="left:210px;top:1030px;font-size:58px"><small style="color:rgba(244,241,235,.8)">Automático</small>Agenda actualizada ✓</div>
+  </div>
+  <div class="abs esc" id="e8b" style="background:#1FA396"><div class="luz"></div>
+    <div class="abs tt osc" id="q5b" style="top:290px"><span>Confirmación</span> <i><span>y</span> <span>recordatorios.</span></i></div>
+    <div id="mv4"><div class="scr"><div class="wah"><div class="av">E</div><div><b>Escuela Norte</b><span>en línea</span></div></div>
+      <div class="bub" id="b6" style="top:190px;width:620px;font-size:40px">Laura, tu reunión con admisiones está <b>confirmada: jueves a las 17:00.</b></div>
+      <div class="dia" id="dia" style="top:520px">Jueves · 9:00</div>
+      <div class="bub" id="b7" style="top:570px;width:620px;font-size:40px"><b>Recordatorio:</b> hoy a las 17:00 tienes tu reunión. Aquí tienes el enlace.</div>
+    </div></div>
   </div>
   <!-- 9 admisiones -->
-  <div class="abs tt" id="q6" style="top:300px"><span>Admisiones</span> <i><span>lo</span> <span>sabe</span> <span>todo.</span></i></div>
+  <div class="abs tt" id="q6" style="top:300px"><span>Admisiones</span> <i><span>llega</span> <span>con</span> <span>todo.</span></i></div>
   <div class="flo cl" id="ad1" style="left:90px;top:1180px;white-space:normal;width:900px;font-size:52px"><small>Laura Vidal · jueves 17:00</small>Quiere cambiar de trabajo. Empezar cuanto antes.</div>
   <!-- 10 equipo -->
   <div class="abs tt" id="q7" style="top:300px"><span>La</span> <span>reunión</span> <i><span>se</span> <span>celebra</span> <span>y</span> <span>se</span> <span>valida.</span></i></div>
   <div class="flo am" id="va" style="left:230px;top:1340px;font-size:72px">Cualificada ✓</div>
-  <!-- 11 la señal: reunión cualificada → Intelligence → Meta Ads -->
+  <!-- 11 la señal: reunión cualificada → Intelligence → campaña; el anuncio que trae oportunidades frente al que solo trae formularios -->
   <div class="abs esc" id="e11" style="background:#0A0A0B"><div class="luz" style="opacity:.3"></div>
     <div class="abs tt" id="q8" style="top:290px;font-size:92px"><span>No</span> <span>solo</span> <i><span>por</span> <span>formularios.</span></i></div>
-    <div class="nod" id="n3"><small>Meta Ads · campaña</small><b>Anuncio «Da el salto»</b></div><div class="tub" id="t2b"><i></i><i></i></div>
+    <div class="cmp g" id="m1" style="left:110px;background-image:linear-gradient(180deg,rgba(10,10,11,0) 40%,rgba(10,10,11,.92) 100%),url(../2026-11-24-formacion-v7/img/a1.jpg)"><b>Da el salto al Marketing Digital</b><em id="m1e">Oportunidades cualificadas</em></div>
+    <div class="cmp" id="m2" style="left:570px;background-image:linear-gradient(180deg,rgba(10,10,11,0) 40%,rgba(10,10,11,.92) 100%),url(../2026-11-24-formacion-v7/img/a2.jpg)"><b>Tu nueva profesión empieza aquí</b><em>Solo formularios</em></div>
+    <div class="tub" id="t2b"><i></i><i></i></div>
     <div class="nod" id="n2"><small>Qualivo</small><b>Intelligence</b></div><div class="tub" id="t1b"><i></i><i></i></div>
     <div class="nod" id="n1"><small>Laura Vidal · resultado comercial</small><b>Reunión cualificada ✓</b></div>
   </div>
@@ -267,7 +284,7 @@ window.setT=function(t){
   { const k='laura', v=nm(t,.35,.75), pr=pico(nm(t,C[k][1]-.7,C[k][1]-.3)), f=$('f0'); f.style.opacity=en(k,t)?Math.min(1,v*3):0; f.style.transform=`translateY(${(1-expo(v))*-160}px) rotate(${lerp(-6,-2,expo(v))}deg) scale(${1-.03*pr})`; f.style.filter=v<1&&v>0?`blur(${(10*(1-v)).toFixed(1)}px)`:'none';
     $('f0b').style.background=pr>.2?'#0A0A0B':'#F4CC38'; $('f0b').style.color=pr>.2?'#F4CC38':'#0A0A0B'; $('f0b').style.transform=`scale(${1-.08*pr})`; }
   // quién es quién: Laura en sus tres planos, admisiones y el equipo de campañas
-  [['g0','laura'],['g2','llamada'],['g3','adm']].forEach(([id,k])=>{ const v=nm(t,C[k][0]+.25,C[k][0]+.55); $(id).style.opacity=en(k,t)?v:0; $(id).style.transform=`translateX(${(1-expo(v))*-60}px)`; });
+  [['g0','laura'],['g3','adm']].forEach(([id,k])=>{ const v=nm(t,C[k][0]+.25,C[k][0]+.55); $(id).style.opacity=en(k,t)?v:0; $(id).style.transform=`translateX(${(1-expo(v))*-60}px)`; });
   // 2 · el anuncio en el móvil de Laura: lo ve y pulsa «Solicitar información»
   { const k='anuncio'; $('e2').style.opacity=en(k,t)?1:0; if(en(k,t)){ gira('mv2',k,t,-18,10); const tp=C[k][1]-.55, pr=pico(nm(t,tp,tp+.35)), d=$('dedo'), v=nm(t,tp-.35,tp);
       d.style.opacity=Math.min(1,v*3)*(1-nm(t,tp+.25,tp+.45)); d.style.transform=`translate(${(1-expo(v))*220}px,${(1-expo(v))*300}px) scale(${1-.25*pr})`;
@@ -286,28 +303,29 @@ window.setT=function(t){
   { const k='pipe'; $('e5b').style.opacity=en(k,t)?1:0; if(en(k,t)){ gira('pipe',k,t,18,10); titulo('q3b',k,t,.1); const j=nm(t,W.v2.actualiza-.1,W.v2.actualiza+.4), tj=$('tarj');
       tj.style.transform=`translateX(${302*io(j)}px) translateY(${-50*pico(j)}px) translateZ(${40+60*pico(j)}px) scale(${1+.1*pico(j)})`; tj.style.filter=`blur(${(9*pico(j)).toFixed(1)}px)`; $('pc0').className='col'+(j<.5?' on':''); $('pc1').className='col'+(j>=.5?' on':''); } }
   // 6 · sin respuesta: el reloj avanza y el mensaje sigue sin leer
-  { const k='sinresp'; $('e6').style.opacity=en(k,t)?1:0; if(en(k,t)){ gira('mv3',k,t,16,9); titulo('q4',k,t); const u=nm(t,C[k][0]+.3,W.v3.responder+.3), m=Math.round(u*135);
+  { const k='sinresp'; $('e6').style.opacity=en(k,t)?1:0; if(en(k,t)){ gira('mv3',k,t,16,9); titulo('q4',k,t); const u=nm(t,C[k][0]+.3,W.v3.responde+.3), m=Math.round(u*135);
       $('hora').textContent='Enviado hace '+(m<60?m+' min':Math.floor(m/60)+' h '+String(m%60).padStart(2,'0')+' min'); $('visto').style.opacity=nm(t,C[k][0]+.6,C[k][0]+.9);
-      const v=nm(t,W.v3.responder-.1,W.v3.responder+.25), sr=$('sr'); sr.style.opacity=Math.min(1,v*3); sr.style.transform=`scale(${lerp(1.7,1,expo(v))}) rotate(-4deg)`; sr.style.filter=v<1&&v>0?`blur(${(12*(1-v)).toFixed(1)}px)`:'none'; flota('av',k,t,W.v3.agente-.3,3); } else ['sr','av'].forEach(i=>$(i).style.opacity=0); }
-  // 7 · llamada con audio: habla Raquel (interfaz), contesta Laura (plano), cierra Raquel (interfaz)
-  { const ag=en('agente',t)||en('agenteb',t), k=en('agenteb',t)?'agenteb':'agente', a=C[k][0]; $('e7b').style.opacity=ag?1:0; $('pend').style.opacity=(ag||en('llamada',t))?1:0;
-    if(ag){ const v=nm(t,C.agente[0],C.agente[0]+.4), hab=(t>=T.r1[0]&&t<T.r1[0]+T.r1[1])||(t>=T.r3[0]&&t<T.r3[0]+T.r3[1]); $('agc').style.transform=`scale(${lerp(.6,1,back(v))*(1+.03*(hab?Math.abs(Math.sin(t*7)):0))})`;
-      $('agr').style.transform=`scale(${1+.12*Math.abs(Math.sin((t-a)*3.2))})`; $('agr').style.opacity=.9-.6*Math.abs(Math.sin((t-a)*3.2)); [...$('ago').children].forEach((el,n)=>el.style.height=(hab?30+110*Math.abs(Math.sin(t*9+n*.8)):22)+'px');
-      const s1=$('s1'), s3=$('s3'); pop(s1,t,T.r1[0]); if(k!=='agente') s1.style.opacity=0; pop(s3,t,T.r3[0]); if(k!=='agenteb') s3.style.opacity=0; flota('ia','agenteb',t,W.r3.reservar,-3); } else { ['s1','s3','ia'].forEach(i=>$(i).style.opacity=0); }
-    const s2=$('s2'); pop(s2,t,T.r2[0]); if(!en('llamada',t)) s2.style.opacity=0; $('onda').style.opacity=0; }
-  // 8 · calendario en perspectiva
-  { const k='cal'; $('e8').style.opacity=en(k,t)?1:0; if(en(k,t)){ gira('cal',k,t,18,10); titulo('q5',k,t); const v=nm(t,W.v4.reunión-.2,W.v4.reunión+.15); $('jue').style.transform=`translateZ(${70*expo(v)}px) scale(${1+.14*expo(v)})`; $('jue').style.opacity=.35+.65*v;
-      flota('c1','cal',t,W.v4.confirmación-.1,-3); flota('c2','cal',t,W.v4.recordatorios-.1,3); } else ['c1','c2'].forEach(i=>$(i).style.opacity=0); }
+      const v=nm(t,W.v3.responde-.1,W.v3.responde+.25), sr=$('sr'); sr.style.opacity=Math.min(1,v*3); sr.style.transform=`scale(${lerp(1.7,1,expo(v))}) rotate(-4deg)`; sr.style.filter=v<1&&v>0?`blur(${(12*(1-v)).toFixed(1)}px)`:'none'; flota('av',k,t,W.v3.agente-.3,3); } else ['sr','av'].forEach(i=>$(i).style.opacity=0); }
+  // 7 · llamada: suena el teléfono de Laura, entra la llamada del agente y ella contesta
+  { const k='llamada', on=en(k,t), a=C[k][0]; $('pend').style.opacity=on?1:0; titulo('q4b',k,t,.1); const v=nm(t,a+.25,a+.6), e=$('ent'), co=nm(t,C[k][1]-1.1,C[k][1]-.8);
+    e.style.opacity=on?Math.min(1,v*3):0; e.style.transform=`translateY(${(1-expo(v))*260}px) scale(${1+.02*Math.sin((t-a)*26)*(1-co)})`; e.querySelector('small').textContent=co>=1?'En llamada':'Llamada entrante'; e.querySelector('.ok').style.transform=`scale(${1+.14*Math.abs(Math.sin((t-a)*7))*(1-co)})`; }
+  // 8 · la cita: Laura reserva (calendario) → confirmación y recordatorio (WhatsApp) → reprogramación (calendario)
+  { const k1=en('cal',t), k3=en('repro',t); $('e8').style.opacity=(k1||k3)?1:0; $('q5').style.opacity=k1?1:0; $('q5c').style.opacity=k3?1:0;
+    if(k1){ gira('cal','cal',t,18,10); palabras($('q5'),t,C.cal[0]+.2); const v=nm(t,W.v4.reserva-.1,W.v4.reserva+.3); $('jue').style.transform=`translateZ(${70*expo(v)}px) scale(${1+.14*expo(v)})`; $('jue').style.opacity=.35+.65*v; $('jue').className='h'; $('vie').className=''; $('vieb').style.opacity=0; $('vie').style.transform='none'; flota('c1','cal',t,W.v4.reunión-.1,-3); $('c2').style.opacity=0; }
+    else if(k3){ gira('cal','repro',t,-16,10); palabras($('q5c'),t,C.repro[0]+.15); const v=nm(t,W.v4.reprograma-.5,W.v4.reprograma-.1); $('jue').className=v>.5?'':'h'; $('jue').style.transform='none'; $('jue').style.opacity=1; $('vie').className=v>.5?'h':''; $('vieb').style.opacity=v>.5?1:0; $('vie').style.transform=`translateZ(${70*expo(v)}px) scale(${1+.14*expo(nm(v,.5,1))})`; flota('c2','repro',t,W.v4.reprograma,3); $('c1').style.opacity=0; }
+    else ['c1','c2'].forEach(i=>$(i).style.opacity=0);
+    const k2='conf'; $('e8b').style.opacity=en(k2,t)?1:0; if(en(k2,t)){ gira('mv4',k2,t,-18,10); titulo('q5b',k2,t); pop($('b6'),t,W.v4.confirma-.2); $('dia').style.opacity=nm(t,W.v4.envía-.2,W.v4.envía); pop($('b7'),t,W.v4.envía); } }
   // 9 · admisiones
-  { const e5=T.v5[0]-.1, pri=en('adm',t)&&t<e5, seg=en('adm',t)&&t>=e5; $('q6').style.opacity=pri?1:0; palabras($('q6'),t,C.adm[0]+.2); $('q7').style.opacity=seg?1:0; palabras($('q7'),t,e5+.1); flota('ad1','adm',t,C.adm[0]+.9,-1.5); if(seg) $('ad1').style.opacity=0; flota('va','adm',t,W.v5.valida-.3,-4); }
+  { const e5=T.v5[0]-.1, pri=en('adm',t)&&t<e5, seg=en('adm',t)&&t>=e5; $('q6').style.opacity=pri?1:0; palabras($('q6'),t,C.adm[0]+.2); $('q7').style.opacity=seg?1:0; palabras($('q7'),t,e5+.1); flota('ad1','adm',t,C.adm[0]+.7,-1.5); if(seg) $('ad1').style.opacity=0; flota('va','adm',t,W.v5.valida-.3,-4); }
   // 10 · el equipo valida la reunión
 
-  // 11 · la señal sube: reunión cualificada → Intelligence → campaña de Meta
+  // 11 · la señal sube hasta el anuncio que trajo a Laura; al lado, uno que solo trae formularios
   { const k='meta'; $('e11').style.opacity=en(k,t)?1:0; if(en(k,t)){ const a=C[k][0]; titulo('q8',k,t,W.v5.no-a-.1);
-      const p1=nm(t,a+.15,a+.5), p2=nm(t,a+1.0,a+1.35), p3=nm(t,a+1.9,a+2.25);
-      [['n1',p1],['n2',p2],['n3',p3]].forEach(([id,v])=>{ const el=$(id); el.style.opacity=Math.min(1,v*3); el.style.transform=`scale(${v<=0?0:lerp(.75,1,back(v))})`; });
-      [['t1b',a+.6],['t2b',a+1.5]].forEach(([id,t0])=>{ const el=$(id); el.style.opacity=nm(t,t0,t0+.25); [...el.children].forEach((i,n)=>{ i.style.top=(190-((t-t0)*260+n*140)%280)+'px'; }); });
-      const g=t>=a+2.6; $('n3').className='nod'+(g?' g':''); if(g) $('n3').style.transform=`scale(${1+.05*pico(nm(t,a+2.6,a+3.0))})`; $('n2').style.transform+=` scale(${1+.03*Math.sin((t-a)*6)})`; } }
+      const p1=nm(t,a+.15,a+.5), p2=nm(t,a+.8,a+1.15), p3=nm(t,a+1.5,a+1.9);
+      [['n1',p1],['n2',p2]].forEach(([id,v])=>{ const el=$(id); el.style.opacity=Math.min(1,v*3); el.style.transform=`scale(${v<=0?0:lerp(.75,1,back(v))})`; });
+      [['m1',-3,0],['m2',3,.12]].forEach(([id,r,d])=>{ const v=nm(t,a+1.5+d,a+1.9+d), el=$(id); el.style.opacity=Math.min(1,v*3)*(id==='m2'?1-.45*nm(t,a+2.5,a+2.9):1); el.style.transform=`translateY(${(1-expo(v))*200}px) rotate(${r}deg)`; });
+      [['t1b',a+.5],['t2b',a+1.3]].forEach(([id,t0])=>{ const el=$(id); el.style.opacity=nm(t,t0,t0+.25); [...el.children].forEach((i,n)=>{ i.style.top=(190-((t-t0)*260+n*140)%280)+'px'; }); });
+      const g=nm(t,a+2.5,a+2.9); $('m1').style.transform+=` scale(${1+.07*g})`; $('m1e').style.opacity=g; $('n2').style.transform+=` scale(${1+.03*Math.sin((t-a)*6)})`; } }
   // 12 · cierre: tres piezas unidas y botón
   { const k='fin', f=$('fin'); f.style.opacity=en(k,t)?1:0; const a=C[k][0], tS=W.v6.solicita, c=$('con'), sal=nm(t,tS-.45,tS-.25); c.style.opacity=1-sal; c.style.filter=sal>0?`blur(${(10*sal).toFixed(1)}px)`:'none'; palabras(c.querySelector('h3'),t,a+.15,.1);
     const nd=c.querySelectorAll('.nd'); [W.v6.captación,W.v6.seguimiento,W.v6.mejora].forEach((d,i)=>{ const q=nm(t,d-.1,d+.2); nd[i].style.opacity=Math.min(1,q*3); nd[i].style.transform=`translateX(${(1-expo(q))*-120}px)`; if(i<2){ const x=$('x'+i), ff=nm(t,d+.2,d+.45); x.style.top=(nd[i].offsetTop+nd[i].offsetHeight)+'px'; x.style.opacity=ff; x.style.transform=`scaleY(${ff})`; } });

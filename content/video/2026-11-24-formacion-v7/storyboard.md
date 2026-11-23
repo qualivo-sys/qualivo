@@ -4,43 +4,33 @@
 - **Estado:** storyboard y borrador en movimiento (`formacion-v7-borrador-916.mp4`). No es montaje final. No se publica. El anuncio antiguo sigue activo y no se toca.
 - **Guion:** el de la V6, sin cambios. Voz de Javier Rojas un 10 % más rápida. 56 s.
 
-## Plano a plano · versión refinada (52,7 s)
+## Plano a plano · versión refinada 2 (49,2 s)
 
-Refinada el 23-nov con los cinco cambios de Maikel: inicio conectado, sin planos genéricos, WhatsApp más cerca, llamada más evidente y la señal a Meta con más protagonismo.
+Refinada el 23-nov con el último encargo de Maikel: el agente de voz baja a 3 s y sin simular una llamada, y el tiempo recuperado va a la gestión de la cita. Guion nuevo en `guion.json`.
 
 | # | Tiempo | Tipo | Qué se ve | Voz |
 |---|---|---|---|---|
-| 1 | 0-2,3 | Humano | **Laura** en el sofá con el móvil. Etiqueta «Laura · quiere estudiar Marketing Digital», formulario del curso flotando y el titular «¿Tu escuela online ya invierte en publicidad?». | «¿Tu escuela online ya invierte en publicidad?» |
-| 2 | 2,3-4,3 | Sistema | El móvil de Laura en grande: el anuncio «Marketing Digital online. Por las tardes». Un dedo pulsa «Solicitar información». | «Mira cómo convertimos una solicitud…» |
-| 3 | 4,3-6,5 | Sistema | El CRM en perspectiva: la fila de Laura entra con su origen. | «…en una oportunidad comercial.» |
-| 4 | 6,5-9,7 | Gráfico | Tres anuncios de la campaña de Meta; «por las tardes» se enciende y baja hasta la ficha de Laura. | «Gestionamos tus anuncios y tus páginas de captación.» |
-| 5 | 9,7-14,6 | Sistema | WhatsApp en un móvil grande y cercano: una pregunta, una respuesta. Flota «Viene de: anuncio "por las tardes"». | «Sabemos de qué anuncio viene Laura. El sistema responde por WhatsApp, hace preguntas…» |
-| 6 | 14,6-18,1 | Sistema | Pipeline en perspectiva: la tarjeta de Laura salta a «Conversación abierta». Titular «Interesada. Cualificada.». | «…la cualifica y actualiza su etapa automáticamente.» |
-| 7 | 18,1-23,6 | Humano | El móvil de **Laura** boca abajo en la cocina. «Sin respuesta» y «El sistema puede activar: agente de voz». | «¿Laura deja de responder? El sistema puede activar un agente de voz para retomar la conversación.» |
-| 8 | 23,6-26,7 | Humano | **Laura** contesta. Subtítulos del saludo de Raquel y de su respuesta. Aviso de audio pendiente. | (hueco para la llamada real) |
-| 9 | 26,7-29,4 | Sistema | Interfaz de Raquel, asistente virtual: onda de voz, su propuesta de reservar y la etapa «Interesada en agendar». | (hueco para la llamada real) |
-| 10 | 29,4-33,5 | Gráfico | Calendario: jueves a las 17:00, confirmación y recordatorios. | «Laura agenda una reunión. Recibe confirmación y recordatorios…» |
-| 11 | 33,5-36,6 | Humano | La asesora de **admisiones** empieza la reunión, con la ficha de lo que Laura necesita. | «…y admisiones sabe exactamente qué necesita.» |
-| 12 | 36,6-39 | Humano | El **equipo de campañas** valida: «Cualificada ✓». | «Y cuando la reunión se celebra y se valida…» |
-| 13 | 39-45,3 | Gráfico | «Reunión cualificada ✓» → «Intelligence» → «Meta Ads · anuncio "por las tardes"», unidos por conductos con pulsos que suben; la campaña se enciende. Titular «No solo por formularios». | «…utilizamos ese resultado para mejorar las campañas. No optimizamos solo por formularios.» |
-| 14 | 45,3-52,7 | Gráfico | «Esto es Qualivo» con las tres piezas unidas; logo y botón. | «Esto es Qualivo: captación, seguimiento y mejora continua. Solicita tu diagnóstico gratuito.» |
-
-## Los seis puntos del encargo
-
-1. **Gancho para escuelas online:** la pregunta en el primer plano y el formulario del curso flotando junto a Laura.
-2. **Humano e interfaz conectados:** Laura pulsa → salta la solicitud; se pulsa el anuncio → entra en el CRM; tono de llamada → Laura contesta.
-3. **Laura reconocible:** lleva etiqueta con su nombre en sus tres planos. Admisiones y el equipo de campañas llevan etiqueta de otro color.
-4. **Responde, cualifica, sigue y gestiona la reunión:** planos 4 a 9.
-5. **Agente de voz con escena propia:** plano 7, con el hueco de audio.
-6. **El final enseña el ciclo:** planos 10 y 11.
+| 1 | 0-2,3 | Humano | **Laura** en el sofá con el móvil, su etiqueta, el formulario del curso y el titular. | «¿Tu escuela online ya invierte en publicidad?» |
+| 2 | 2,3-4,3 | Sistema | El móvil de Laura en grande con el anuncio «Da el salto al Marketing Digital». Un dedo pulsa «Solicitar información». | «Mira cómo convertimos una solicitud…» |
+| 3 | 4,3-6,5 | Sistema | El CRM en perspectiva: entra la fila de Laura con su origen. | «…en una oportunidad comercial.» |
+| 4 | 6,5-9,7 | Gráfico | Tres anuncios de la campaña; el de Laura se enciende y baja hasta su ficha. | «Gestionamos tus anuncios y tus páginas de captación.» |
+| 5 | 9,7-14,6 | Sistema | WhatsApp grande: una pregunta, una respuesta, y de qué anuncio viene. | «Sabemos de qué anuncio viene Laura. El sistema responde por WhatsApp, hace preguntas…» |
+| 6 | 14,6-18,1 | Sistema | Pipeline: la tarjeta de Laura salta a «Conversación abierta». | «…la cualifica y actualiza su etapa automáticamente.» |
+| 7 | 18,1-19,1 | Sistema | WhatsApp sin leer y sello «Sin respuesta». | «¿No responde?» |
+| 8 | 19,1-22,2 | Humano | **Laura** mira el móvil que suena. Tarjeta «Llamada entrante · Raquel · Asistente virtual». Dos tonos de llamada, sin voz. Aviso «Audio pendiente de la llamada real». | «Podemos activar un agente de voz.» |
+| 9 | 22,2-23,9 | Gráfico | Calendario: jueves 17:00 y «Pipeline: Reunión agendada». | «Laura reserva su reunión.» |
+| 10 | 23,9-27,1 | Sistema | WhatsApp grande: confirmación del jueves a las 17:00 y, ese día a las 9:00, el recordatorio con el enlace. | «El sistema la confirma por WhatsApp, le envía recordatorios…» |
+| 11 | 27,1-29,4 | Gráfico | El calendario cambia de jueves a viernes 12:00: «Agenda actualizada ✓». | «…y, si no puede asistir, la reprograma.» |
+| 12 | 29,4-35,4 | Humano | La asesora de **admisiones** con la ficha de lo que Laura necesita; después «Cualificada ✓». | «Y admisiones recibe todo el contexto antes de la llamada. Y cuando la reunión se celebra y se valida…» |
+| 13 | 35,4-41,7 | Gráfico | «Reunión cualificada ✓» → «Intelligence» → dos anuncios comparados: uno trae «Oportunidades cualificadas», el otro «Solo formularios». | «…utilizamos ese resultado para mejorar las campañas. No optimizamos solo por formularios.» |
+| 14 | 41,7-49,2 | Gráfico | «Esto es Qualivo», las tres piezas unidas, logo y botón. | «Esto es Qualivo: captación, seguimiento y mejora continua. Solicita tu diagnóstico gratuito.» |
 
 ## Qué falta para una versión final
 
-- **Planos sin marca de agua.** Dos planos (móvil sin contestar y equipo de campañas) son de HeyGen y llevan su marca; Higgsfield alcanzó su límite diario. Hay que regenerarlos.
-- **La misma Laura en todos sus planos.** En el plano 7 la mujer del fondo es de otra generación; conviene regenerarlo con la Laura del plano 1 como referencia.
-- **La llamada real** del agente de voz (línea caída desde el 13-nov).
+- **La llamada real** del agente de voz (línea caída desde el 13-nov). Hasta entonces la escena no lleva voz de Raquel y muestra el aviso de audio pendiente, que habría que quitar o sustituir antes de publicar.
 - **Las señales de cualificación a Meta**, que Growth tiene propuestas para corregir.
-- Subtítulos de toda la locución, base musical de más de 56 s y formato 4:5.
+- **Duración:** 49,2 s, algo por debajo de los 50-53 s pedidos.
+- Subtítulos de toda la locución, base musical más larga (la actual se repite) y formato 4:5.
 - Decidir expresamente el uso de personas generadas en el anuncio.
 
 ## Archivos
