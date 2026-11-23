@@ -3,11 +3,11 @@
    python3 montar_x.py"""
 import os, subprocess
 A = os.path.dirname(os.path.abspath(__file__)); S = f'{A}/../2026-09-17-sistema'; SP = os.environ.get('SP', '/tmp/v3'); os.makedirs(SP, exist_ok=True)
-VOZ = {'v0': 0.15, 'v1': 6.1, 'v2': 12.4, 'v3': 19.9, 'v4': 27.1, 'v5': 34.9}; DUR = 45.0
+VOZ = {'v0': 0.15, 'v1x': 6.1, 'v2': 13.3, 'v3': 20.8, 'v4': 28.0, 'v5x': 35.8, 'v6x': 47.8}; DUR = 51.5
 # efectos sintetizados: (segundo, tipo)
 SFX = [(.35, 'aire'), (.82, 'aviso'), (2.25, 'toque'), (5.6, 'aire2'), (8.33, 'aire'), (9.05, 'toque'), (9.35, 'toque'), (9.65, 'toque'), (9.95, 'toque'),
-       (12.02, 'aire'), (13.9, 'pop'), (15.6, 'pop'), (17.3, 'pop'), (18.4, 'pop'), (20.07, 'golpe'), (21.1, 'toque'), (23.4, 'toque'), (24.3, 'toque'),
-       (27.05, 'aire'), (29.42, 'aire'), (31.32, 'aire'), (32.1, 'toque'), (34.55, 'aire2'), (39.0, 'pop')]
+       (12.92, 'aire'), (14.8, 'pop'), (16.5, 'pop'), (18.2, 'pop'), (19.3, 'pop'), (20.97, 'golpe'), (22.0, 'toque'), (24.3, 'toque'), (25.2, 'toque'),
+       (27.95, 'aire'), (30.32, 'aire'), (32.22, 'aire'), (33.0, 'toque'), (35.45, 'aire2'), (38.0, 'pop'), (40.85, 'pop'), (42.85, 'pop'), (44.7, 'pop'), (47.4, 'aire'), (48.55, 'pop')]
 GEN = {'aire': "anoisesrc=color=pink:d=0.34:r=44100:a=0.5,highpass=f=700,lowpass=f=5200,afade=t=in:st=0:d=0.2,afade=t=out:st=0.2:d=0.14,volume=0.16",
        'aire2': "anoisesrc=color=brown:d=0.6:r=44100:a=0.8,highpass=f=180,lowpass=f=3200,afade=t=in:st=0:d=0.42,afade=t=out:st=0.42:d=0.18,volume=0.5",
        'toque': "aevalsrc='sin(2*PI*880*t)*exp(-45*t)':d=0.12:s=44100,volume=0.07",
