@@ -330,12 +330,12 @@ const EJEMPLOS_FUGA = [
 // o: { nombre, empresa, sector, fuga (texto crudo del formulario), inversion,
 //      volumen, opcion1, opcion2 } — opcion1/opcion2 salen de opcionesTarde().
 const EJEMPLOS_MAIKEL = [
-  'Hola Lisandra, soy Maikel, de Qualivo. Imagino que estarás liada con la clínica, así que te cuento por aquí.\n\n' +
+  'Hola Lisandra, soy Maikel, de Qualivo. Gracias por dejarnos tus datos; te cuento por aquí lo que hacemos.\n\n' +
   'Comentabas que donde más se os escapa es en el seguimiento y los presupuestos. Es algo que vemos bastante en clínicas: el paciente recibe el presupuesto, dice que se lo piensa y muchas veces ahí se queda. No ha dicho que no, pero con el día a día nadie vuelve a retomar esa conversación.\n\n' +
   'Nosotros trabajamos justo ese recorrido: que cada paciente tenga un siguiente paso y que el seguimiento se haga automáticamente por WhatsApp, voz o email cuando tenga sentido, sin depender de que alguien se acuerde.\n\n' +
   'En la llamada dibujamos vuestro recorrido actual, vemos dónde se están perdiendo oportunidades y te enseño cómo lo resolveríamos en Marítima Dental.\n\n' +
   '¿Te viene mejor esta tarde o el lunes por la tarde?',
-  'Joan, soy Maikel, de Qualivo. Imagino que estarás liado, así que te cuento por aquí.\n\n' +
+  'Joan, soy Maikel, de Qualivo. Gracias por dejarnos tus datos; te cuento por aquí lo que hacemos.\n\n' +
   'En el formulario pusiste que no tienes claro dónde se te escapa, y es lo más normal: casi nadie lo tiene medido. En reformas suele estar en uno de tres sitios: en lo que se tarda en contestar a quien pide presupuesto, en la visita que no se llega a cerrar, o en el presupuesto que se envía y nadie vuelve a llamar.\n\n' +
   'Nosotros trabajamos justo ese recorrido: que cada persona que pide presupuesto tenga una respuesta rápida y un siguiente paso, y que el seguimiento se haga solo por WhatsApp, voz o email cuando tenga sentido.\n\n' +
   'En la llamada dibujamos vuestro recorrido actual, vemos dónde se están perdiendo oportunidades y te enseño cómo lo resolveríamos en Shekinah.\n\n' +
@@ -383,8 +383,9 @@ async function mensajePersonalizado(o) {
       ? '1. Exactamente: «Hola [nombre], soy Maikel, de Qualivo. ' + ((d.ctx.cuando === 'esta mañana') ? 'Esta mañana' : 'Anoche') + ' nos dejaste tus datos, así que te cuento por aquí y me contestas cuando puedas.» (no digas que «acabas de» ni que estás liado/a)'
       : d.ctx && d.ctx.ctx === 'fuera'
         ? '1. Exactamente: «Hola [nombre], soy Maikel, de Qualivo. He visto que acabas de dejarnos tus datos, así que te cuento por aquí y me contestas cuando puedas.»'
-        : '1. «[Hola] [nombre], soy Maikel, de Qualivo. Imagino que estarás liado/a[, con X], así que te cuento por aquí.»'),
-    '   Solo añade «con X» si el sector lo deja claro (la clínica, la escuela…). Si no, sin nada.',
+        : '1. Exactamente: «Hola [nombre], soy Maikel, de Qualivo. Gracias por dejarnos tus datos; te cuento por aquí lo que hacemos.»'),
+    // 23-nov-2026 (Maikel): «eso de imagino que estarás liado no tiene que salir. Que le explique lo que hacemos y después responda con una pregunta».
+    '   Nunca digas que estará liado/a ni supongas cómo está.',
     '2. Lo que puso en el formulario sobre dónde se le escapa, dicho con naturalidad («Comentabas que…»,',
     '   «En el formulario pusiste que…»), y lo que se ve a menudo en su sector, explicado con un ejemplo',
     '   concreto del día a día. Nunca afirmes que le pasa a él: habla de lo que se ve «bastante» o «muchas veces».',
@@ -405,6 +406,7 @@ async function mensajePersonalizado(o) {
     '- Nunca fechas, días del mes ni horas concretas' + (d.precualificar ? '.' : ': solo las dos opciones de la pregunta final.'),
     '- Nada del sistema interno: ni «nivel», ni letras A/B/C/D, ni puntuaciones, ni «frío/caliente», ni «lead».',
     '- Tuteas. Sin emojis, sin listas, sin negritas ni asteriscos, sin comillas alrededor del texto.',
+    '- Nunca escribas «liado», «liada» ni «imagino que».',
     '- Contesta solo con el texto del mensaje.'
   ].join('\n');
   const usuario = 'FICHA: nombre ' + (d.nombre || '-') + (d.empresa ? ' · empresa ' + d.empresa : '') + ' · sector ' + (d.sector || '-') +
@@ -430,6 +432,7 @@ async function mensajePersonalizado(o) {
   if (!d.precualificar && (texto.indexOf(op1) === -1 || texto.indexOf(op2) === -1)) return { texto: '', motivo: 'no ofreció las dos tardes tal cual' };
   if (d.precualificar && ((op1 && texto.indexOf(op1) > -1) || (op2 && texto.indexOf(op2) > -1) || !/\?\s*$/.test(texto))) return { texto: '', motivo: 'precualificar: ofreció hora o no acaba en pregunta' };
   if (/\b\d{1,2} de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\b|\b\d{1,2}:\d{2}\b/i.test(texto)) return { texto: '', motivo: 'puso una fecha u hora' };
+  if (/\bliad[oa]\b|imagino que/i.test(texto)) return { texto: '', motivo: 'dijo que estará liado (Maikel 23-nov: no)' };
   if (/\bnivel\s*[abcd]\b|tipolog[ií]a|\bfr[ií]o\b|\bcaliente\b|probabilidad de compra|según nuestro algoritmo|\blead\b/i.test(texto)) {
     return { texto: '', motivo: 'mencionó algo del sistema interno' };
   }

@@ -152,7 +152,7 @@ function ultimoMensaje(datos) {
   const h = (datos.huecos || []).filter(Boolean);
   const cierre = 'Eso es justo lo que vemos en la llamada: te enseño el recorrido que montaríamos en tu caso, tanto en la captación como en el seguimiento. ' +
     (h.length >= 2 ? '¿Te va bien el ' + h[0] + ' o el ' + h[1] + '?' : 'Si te encaja, coge tú la hora que mejor te venga: ' + agenda(datos));
-  return (n ? 'Buenas ' + n : 'Buenas') + ', imagino que estarás liado, así que te cuento por aquí lo que hacemos.\n\n' + medio + '\n\n' + hacemos + '\n\n' + cierre;
+  return (n ? 'Buenas ' + n : 'Buenas') + ', te escribo por aquí para contarte en pocas líneas lo que hacemos.\n\n' + medio + '\n\n' + hacemos + '\n\n' + cierre;
 }
 
 function whatsapp3(datos) {
