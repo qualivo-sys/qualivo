@@ -25,6 +25,10 @@ Refinada el 23-nov con el último encargo de Maikel: el agente de voz baja a 3 s
 | 13 | 35,4-41,7 | Gráfico | «Reunión cualificada ✓» → «Intelligence» → dos anuncios comparados: uno trae «Oportunidades cualificadas», el otro «Solo formularios». | «…utilizamos ese resultado para mejorar las campañas. No optimizamos solo por formularios.» |
 | 14 | 41,7-49,2 | Gráfico | «Esto es Qualivo», las tres piezas unidas, logo y botón. | «Esto es Qualivo: captación, seguimiento y mejora continua. Solicita tu diagnóstico gratuito.» |
 
+## Cierre creativo (23-nov, decisión de Maikel)
+
+Maikel da por cerrada la creatividad con tres ajustes ya aplicados: el gancho está en pantalla desde el fotograma 0, la comparación de anuncios de la escena de Intelligence es más grande y entra antes, y el cierre dice «Captación, seguimiento y mejora continua. Todo conectado.» No se rehacen escenas ni se añaden funcionalidades. El anuncio antiguo sigue activo a 25 €/día; esta versión queda preparada para diciembre, a falta de las comprobaciones de abajo.
+
 ## Qué falta para una versión final
 
 - **La llamada real** del agente de voz (línea caída desde el 13-nov). Hasta entonces el saludo de Raquel es una recreación con la voz del agente y lleva la etiqueta «Recreación»; hay que sustituirlo por la grabación real antes de publicar. Desde la fila 9 los tiempos de la tabla van 3,2 s más tarde.
