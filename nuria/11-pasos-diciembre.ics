@@ -1,0 +1,60 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nuria Roure//A 11 Pasos del Sueno//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:A 11 Pasos del Sueño · diciembre 2026
+BEGIN:VEVENT
+UID:a11pasos-dic26-inicio@nuriaroure.com
+DTSTAMP:20261123T120000Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:Empieza A 11 Pasos del Sueño (Paso 1)
+DESCRIPTION:Hoy se abre el Paso 1 en tu plataforma. Cada día tendrás un paso nuevo.
+END:VEVENT
+BEGIN:VEVENT
+UID:a11pasos-dic26-20261207@nuriaroure.com
+DTSTAMP:20261123T120000Z
+DTSTART:20261207T090000Z
+DTEND:20261207T100000Z
+SUMMARY:Directo 1 con Nuria Roure · A 11 Pasos del Sueño (Zoom)
+LOCATION:https://www.nuriaroure.com/a11pasos
+DESCRIPTION:Sesión en directo por Zoom para resolver tus dudas. Enlace: https://www.nuriaroure.com/a11pasos
+URL:https://www.nuriaroure.com/a11pasos
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Directo con Nuria en 30 minutos
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a11pasos-dic26-20261210@nuriaroure.com
+DTSTAMP:20261123T120000Z
+DTSTART:20261210T130000Z
+DTEND:20261210T140000Z
+SUMMARY:Directo 2 con Nuria Roure · A 11 Pasos del Sueño (Zoom)
+LOCATION:https://www.nuriaroure.com/a11pasos
+DESCRIPTION:Sesión en directo por Zoom para resolver tus dudas. Enlace: https://www.nuriaroure.com/a11pasos
+URL:https://www.nuriaroure.com/a11pasos
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Directo con Nuria en 30 minutos
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a11pasos-dic26-20261215@nuriaroure.com
+DTSTAMP:20261123T120000Z
+DTSTART:20261215T170000Z
+DTEND:20261215T180000Z
+SUMMARY:Directo 3 con Nuria Roure · A 11 Pasos del Sueño (Zoom)
+LOCATION:https://www.nuriaroure.com/a11pasos
+DESCRIPTION:Sesión en directo por Zoom para resolver tus dudas. Enlace: https://www.nuriaroure.com/a11pasos
+URL:https://www.nuriaroure.com/a11pasos
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Directo con Nuria en 30 minutos
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+END:VCALENDAR
