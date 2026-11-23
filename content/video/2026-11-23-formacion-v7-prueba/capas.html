@@ -10,7 +10,7 @@ html,body{background:transparent}
 .abs{position:absolute;opacity:0;will-change:transform,filter,opacity}
 /* velo inferior para que el titular se lea sobre el vídeo */
 #velo{left:0;right:0;top:0;bottom:0;background:linear-gradient(180deg,rgba(10,10,11,.55) 0%,rgba(10,10,11,0) 30%,rgba(10,10,11,0) 55%,rgba(10,10,11,.6) 100%)}
-#t1{left:70px;right:70px;top:300px;font-family:Anton;font-size:128px;line-height:.94;text-transform:uppercase;color:#F4F1EB;text-shadow:0 6px 30px rgba(0,0,0,.55)}
+#t1{left:70px;right:70px;top:1010px;font-family:Anton;font-size:118px;line-height:.94;text-transform:uppercase;color:#F4F1EB;text-shadow:0 6px 30px rgba(0,0,0,.55)}
 #t1 span{display:inline-block}#t1 i{font-style:normal;color:#F4CC38}
 /* plano 2: notificación flotando sobre el escritorio */
 #noti{left:90px;top:330px;width:900px;background:#F4CC38;border-radius:44px;padding:38px 42px;display:flex;align-items:center;gap:28px;box-shadow:0 40px 90px rgba(0,0,0,.6);transform-origin:50% 100%}
@@ -36,7 +36,7 @@ html,body{background:transparent}
 #t3{left:70px;right:70px;top:140px;font-family:Anton;font-size:96px;line-height:.95;text-transform:uppercase;color:#0A0A0B}
 #t3 span{display:inline-block;opacity:0}#t3 i{font-style:normal;color:#F4F1EB}
 /* plano 4: cita sobre el plano de admisiones */
-#cita{left:90px;top:1050px;width:900px;background:#F4F1EB;border-radius:40px;padding:30px 34px;display:flex;align-items:center;gap:30px;box-shadow:0 40px 90px rgba(0,0,0,.55);transform-origin:50% 50%}
+#cita{left:90px;top:590px;width:900px;background:#F4F1EB;border-radius:40px;padding:30px 34px;display:flex;align-items:center;gap:30px;box-shadow:0 40px 90px rgba(0,0,0,.55);transform-origin:50% 50%}
 #cita .d{flex:none;width:180px;height:180px;background:#F4CC38;border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Anton;font-size:70px;line-height:1}
 #cita .d small{font-family:SG;font-size:26px;font-weight:700;letter-spacing:.14em}
 #cita b{display:block;font-family:Anton;font-weight:400;font-size:70px;line-height:1;text-transform:uppercase}
@@ -82,8 +82,8 @@ window.setT=function(t){
   // 1 · Laura: el titular entra palabra a palabra y se queda quieto
   { const t1=$('t1'); t1.style.opacity=t<C.b?1:0; palabras(t1,t,.1); }
   // 2 · escritorio: la notificación salta desde el móvil
-  { const n=$('noti'), v=nm(t,C.b+.35,C.b+.75), s=nm(t,C.c-.2,C.c); n.style.opacity=(t>=C.b+.35&&t<C.c)?Math.min(1,v*3):0;
-    n.style.transform=`translateY(${(1-expo(v))*420}px) scale(${(v<=0?0:lerp(.5,1,back(v)))*(1+.5*s*s)}) rotate(${2*Math.sin(nm(t,C.b+.75,C.b+1.4)*Math.PI*6)*(1-nm(t,C.b+.75,C.b+1.4))}deg)`; n.style.filter=`blur(${(12*(1-nm(v,0,.6))+14*s).toFixed(1)}px)`; }
+  { const n=$('noti'), v=nm(t,C.b+.7,C.b+1.1), s=nm(t,C.c-.2,C.c); n.style.opacity=(t>=C.b+.7&&t<C.c)?Math.min(1,v*3):0;
+    n.style.transform=`translateY(${(1-expo(v))*420}px) scale(${(v<=0?0:lerp(.5,1,back(v)))*(1+.5*s*s)}) rotate(${2*Math.sin(nm(t,C.b+1.1,C.b+1.75)*Math.PI*6)*(1-nm(t,C.b+1.1,C.b+1.75))}deg)`; n.style.filter=`blur(${(12*(1-nm(v,0,.6))+14*s).toFixed(1)}px)`; }
   // 3 · móvil en perspectiva: la cámara gira y se acerca mientras la conversación avanza
   { const p=$('p3'), en=t>=C.c&&t<C.d, u=nm(t,C.c,C.d); p.style.opacity=en?1:0;
     if(en){ const a=expo(nm(t,C.c,C.c+.7)); $('mov').style.transform=`translate3d(${lerp(120,0,a)}px,${lerp(160,0,a)-30*u}px,0) rotateY(${lerp(-34,-14,a)+8*u}deg) rotateX(${lerp(18,7,a)-3*u}deg) rotateZ(${lerp(7,2.5,a)-1.5*u}deg) scale(${lerp(.82,1,a)+.06*u})`;
