@@ -5,20 +5,18 @@ import json, os, subprocess
 A = os.path.dirname(os.path.abspath(__file__)); BASE = f'{A}/../2026-11-23-formacion-v7-prueba/capas.html'
 TEMPO, HUECO, COLA, LLAMADA = 1.10, 0.18, 1.3, 5.6
 def dur(f): return float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]))
-T = {}; W = {}; t = 0.1
-for k in ['v0', 'v1', 'v2', 'v3', 'r', 'v4', 'v5', 'v6']:
-    if k == 'r': T[k] = [round(t, 3), LLAMADA]; t += LLAMADA + HUECO; continue
-    d = dur(f'{A}/voz/{k}.mp3') / TEMPO; T[k] = [round(t, 3), round(d, 3)]
-    W[k] = {w['w'].strip('¿?.,:').lower(): round(t + w['s'] / TEMPO, 3) for w in reversed(json.load(open(f'{A}/voz/{k}.json')))}
-    t += d + HUECO
+T = {}; W = {}; t = 0.1; TLL = 1.06
+for k in ['v0', 'v1', 'v2', 'v3', 'r1', 'r2', 'r3', 'v4', 'v5', 'v6']:
+    tp = TLL if k[0] == 'r' else TEMPO; d = dur(f'{A}/voz/{k}.mp3') / tp; T[k] = [round(t, 3), round(d, 3)]
+    W[k] = {w['w'].strip('¿?.,:').lower(): round(t + w['s'] / tp, 3) for w in reversed(json.load(open(f'{A}/voz/{k}.json')))}
+    t += d + (0.3 if k in ('v3', 'r1', 'r2') else 0.55 if k == 'r3' else HUECO)
 DUR = round(t - HUECO + COLA, 2); E = {k: round(T[k][0] - .1, 3) for k in T}; E['v0'] = 0
 r25 = lambda x: round(round(x * 25) / 25, 2)
 # cortes de plano: [inicio, tipo, plano de vídeo (o None si la escena es gráfica), segundo de entrada en el plano]
 P = [[0, 'laura', 'laura', 1.3], [r25(W['v0']['mira'] - .5), 'anuncio', None, 0], [r25(W['v0']['solicitud'] + .3), 'crm', None, 0],
      [r25(E['v1']), 'origen', None, 0], [r25(E['v2']), 'wa', None, 0], [r25(W['v2']['cualifica'] - .25), 'pipe', None, 0],
-     [r25(E['v3']), 'sinresp', 'sinrespuesta', 0.3], [r25(E['r']), 'llamada', 'llamada', 0.6], [r25(E['r'] + 3.1), 'agente', None, 0],
-     [r25(E['v4']), 'cal', None, 0], [r25(W['v4']['admisiones'] - .25), 'adm', 'admisiones', 0.6],
-     [r25(E['v5']), 'equipo', 'equipo', 0.5], [r25(W['v5']['utilizamos'] - .2), 'meta', None, 0], [r25(E['v6']), 'fin', None, 0]]
+     [r25(E['v3']), 'sinresp', None, 0], [r25(E['r1'] - .1), 'agente', None, 0], [r25(E['r2'] - .05), 'llamada', 'llamada', 2.0], [r25(E['r3'] - .05), 'agenteb', None, 0],
+     [r25(E['v4']), 'cal', None, 0], [r25(W['v4']['admisiones'] - .25), 'adm', 'admisiones', 0.3], [r25(W['v5']['utilizamos'] - .2), 'meta', None, 0], [r25(E['v6']), 'fin', None, 0]]
 open(f'{A}/t.js', 'w').write('window.T=' + json.dumps(T) + ';window.W=' + json.dumps(W, ensure_ascii=False) + ';window.DUR=' + str(DUR) + ';window.P=' + json.dumps(P) + ';')
 json.dump({'T': T, 'DUR': DUR, 'TEMPO': TEMPO, 'P': P}, open(f'{A}/tiempos.json', 'w'), indent=1)
 h = open(BASE).read(); cab = h[:h.index('</style>')]
@@ -53,7 +51,7 @@ EXTRA = '''
 .sub{position:absolute;left:70px;max-width:860px;background:rgba(10,10,11,.86);color:#F4F1EB;border-radius:26px;padding:20px 28px;font-size:44px;line-height:1.18;font-weight:600;opacity:0;transform-origin:0 100%}
 .sub small{display:block;font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#F4CC38;margin-bottom:4px}
 .sub.r{left:auto;right:70px;background:rgba(244,241,235,.94);color:#0A0A0B;transform-origin:100% 100%}.sub.r small{color:#0E7C74}
-#pend{position:absolute;left:70px;top:300px;border:3px dashed #F4CC38;color:#F4CC38;font-family:Anton;font-size:30px;text-transform:uppercase;padding:9px 16px;border-radius:12px;opacity:0;background:rgba(10,10,11,.5)}
+#pend{position:absolute;z-index:20;left:70px;top:300px;border:3px dashed #F4CC38;color:#F4CC38;font-family:Anton;font-size:30px;text-transform:uppercase;padding:9px 16px;border-radius:12px;opacity:0;background:rgba(10,10,11,.5)}
 #onda{position:absolute;right:70px;top:300px;display:flex;gap:8px;align-items:center;height:60px;opacity:0}#onda i{width:9px;border-radius:5px;background:#F4CC38;display:block;height:14px}
 /* calendario */
 #cal{position:absolute;left:120px;top:520px;width:840px;background:#F4F1EB;border-radius:44px;padding:34px;transform-style:preserve-3d;box-shadow:-40px 60px 120px rgba(0,0,0,.6);color:#0A0A0B}
@@ -77,13 +75,16 @@ EXTRA = '''
 #mv2 .igb{margin:26px 32px 0;border-radius:18px;padding:26px;text-align:center;font-family:Anton;font-size:46px;text-transform:uppercase;background:#F4CC38;border:4px solid #0A0A0B;transform-origin:50% 50%}
 #dedo{position:absolute;left:330px;top:880px;width:120px;height:120px;border-radius:50%;background:rgba(10,10,11,.28);border:6px solid rgba(244,241,235,.9);opacity:0}
 /* origen: la campaña de Meta y la ficha */
-.cre{position:absolute;width:300px;height:400px;border-radius:30px;background:#0A0A0B;color:#F4F1EB;padding:26px;font-family:Anton;font-size:44px;line-height:.98;text-transform:uppercase;box-shadow:0 30px 60px rgba(10,10,11,.4);opacity:0;transform-origin:50% 100%;border:6px solid transparent}
-.cre small{display:block;font-family:SG;font-size:20px;letter-spacing:.14em;font-weight:700;color:rgba(244,241,235,.6);margin-bottom:14px}
-.cre.g{border-color:#F4CC38}
-#fich{position:absolute;left:110px;top:1150px;width:860px;background:#F4F1EB;border:5px solid #0A0A0B;border-radius:40px;padding:28px 32px;opacity:0;color:#0A0A0B;transform-origin:50% 0}
+.cre{position:absolute;width:340px;height:500px;border-radius:30px;background-color:#0A0A0B;background-size:cover;background-position:center;color:#F4F1EB;box-shadow:0 30px 60px rgba(10,10,11,.45);opacity:0;transform-origin:50% 100%;border:7px solid #F4F1EB;overflow:hidden}
+.cre .cab{position:absolute;left:0;right:0;top:0;background:rgba(244,241,235,.95);color:#0A0A0B;font-size:19px;font-weight:700;padding:10px 12px;display:flex;align-items:center;gap:8px}.cre .cab i{width:26px;height:26px;border-radius:50%;background:#1FA396;display:block}.cre .cab em{margin-left:auto;font-style:normal;font-weight:600;color:#7A7C82;font-size:16px}
+.cre b{position:absolute;left:18px;right:18px;bottom:22px;font-family:Anton;font-weight:400;font-size:40px;line-height:1;text-transform:uppercase}
+.cre u{position:absolute;left:18px;right:18px;bottom:22px;text-decoration:none;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:26px;text-transform:uppercase;text-align:center;padding:9px;border-radius:10px}
+.cre.g{border-color:#F4CC38;width:370px;height:560px}.cre.g b{bottom:86px;font-size:44px}
+#mv2 #adimg{background-image:linear-gradient(180deg,rgba(10,10,11,.1) 30%,rgba(10,10,11,.92) 100%),url(../2026-11-24-formacion-v7/img/a1.jpg);background-size:cover;background-position:center;justify-content:flex-end!important}
+#fich{position:absolute;left:110px;top:1240px;width:860px;background:#F4F1EB;border:5px solid #0A0A0B;border-radius:40px;padding:28px 32px;opacity:0;color:#0A0A0B;transform-origin:50% 0}
 #fich small{display:block;font-size:22px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#0E7C74}#fich b{display:block;font-family:Anton;font-weight:400;font-size:70px;line-height:1;text-transform:uppercase;margin:4px 0 12px}
 #fich span{display:inline-block;background:#F4CC38;border-radius:12px;padding:8px 16px;font-size:30px;font-weight:700;margin-right:10px}
-#hilo{position:absolute;left:532px;top:985px;width:14px;height:170px;border-radius:7px;background:#0A0A0B;transform-origin:50% 0;opacity:0}
+#hilo{position:absolute;left:533px;top:1124px;width:14px;height:120px;border-radius:7px;background:#0A0A0B;transform-origin:50% 0;opacity:0}
 /* pipeline */
 #pipe{position:absolute;left:70px;top:560px;width:940px;background:#F4F1EB;border-radius:44px;padding:30px;transform-style:preserve-3d;box-shadow:-40px 60px 120px rgba(10,10,11,.45);color:#0A0A0B}
 #pipe .k{font-size:24px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:18px}
@@ -92,6 +93,10 @@ EXTRA = '''
 #pipe .gh{background:#fff;border-radius:16px;height:90px;margin-bottom:12px;opacity:.8}
 #tarj{position:absolute;left:42px;top:300px;width:278px;background:#F4CC38;border:5px solid #0A0A0B;border-radius:20px;padding:16px;font-family:Anton;font-size:40px;text-transform:uppercase;line-height:1;transform-origin:50% 50%}
 #tarj small{display:block;font-family:SG;font-size:22px;font-weight:700;margin-top:6px}
+#mv3{position:absolute;left:170px;top:520px;width:740px;height:1100px;background:#0A0A0B;border:6px solid #2A2D33;border-radius:76px;padding:22px;transform-style:preserve-3d;box-shadow:-40px 60px 120px rgba(0,0,0,.6)}
+#mv3 .scr{width:100%;height:100%;background:#EFE7DD;border-radius:56px;overflow:hidden;position:relative;color:#0A0A0B}
+#hora{position:absolute;left:0;right:0;top:330px;text-align:center;font-size:26px;font-weight:700;color:#7A7C82}
+#visto{position:absolute;right:40px;top:440px;font-size:30px;font-weight:700;color:#7A7C82;opacity:0}
 /* agente de voz */
 #agc{position:absolute;left:340px;top:520px;width:400px;height:400px;border-radius:50%;background:#F4CC38;color:#0A0A0B;font-family:Anton;font-size:220px;display:flex;align-items:center;justify-content:center;transform-origin:50% 50%}
 #agr{position:absolute;left:290px;top:470px;width:500px;height:500px;border-radius:50%;border:8px solid rgba(244,204,56,.55)}
@@ -133,24 +138,24 @@ CUERPO = r'''
   <!-- 2 el móvil de Laura: el anuncio del curso -->
   <div class="abs esc" id="e2" style="background:#1FA396"><div class="luz"></div>
     <div id="mv2"><div class="scr"><div class="igh"><div class="av"></div><div><b>Escuela Norte</b><span>Patrocinado</span></div></div>
-      <div class="igi"><h4>Marketing Digital online. Por las tardes.</h4><p>Cuéntanos qué buscas y te decimos si encaja.</p></div><div class="igb" id="adb">Solicitar información</div></div><div id="dedo"></div></div>
+      <div class="igi" id="adimg"><h4>Da el salto al Marketing Digital</h4><p>Curso online con clases en directo.</p></div><div class="igb" id="adb">Solicitar información</div></div><div id="dedo"></div></div>
   </div>
   <!-- 4 CRM -->
   <div class="abs esc" id="e4" style="background:#1FA396"><div class="luz"></div>
     <div class="abs tt osc" id="q2" style="top:290px"><span>Entra</span> <i><span>en</span> <span>el</span> <span>CRM.</span></i></div>
     <div id="crm"><div class="k"><span>CRM · Solicitudes</span><span>en directo</span></div>
-      <div class="fl2 n" id="fn"><div class="av">LV</div><div><b>Laura Vidal</b><small>Marketing Digital · anuncio «por las tardes»</small></div></div>
+      <div class="fl2 n" id="fn"><div class="av">LV</div><div><b>Laura Vidal</b><small>Marketing Digital · anuncio «Da el salto»</small></div></div>
       <div class="fl2"><div class="av"></div><div>Solicitud anterior<small>En conversación</small></div></div>
       <div class="fl2"><div class="av"></div><div>Solicitud anterior<small>Reunión agendada</small></div></div></div>
   </div>
   <!-- 4b origen: la campaña de Meta y la ficha de Laura -->
   <div class="abs esc" id="e4b" style="background:#1FA396"><div class="luz"></div>
     <div class="abs tt osc" id="q1" style="top:290px"><span>Gestionamos</span> <i><span>tus</span> <span>anuncios.</span></i></div>
-    <div class="cre" id="cr0" style="left:70px;top:610px"><small>Meta Ads</small>Matrícula abierta</div>
-    <div class="cre g" id="cr1" style="left:390px;top:580px"><small>Meta Ads</small>Por las tardes</div>
-    <div class="cre" id="cr2" style="left:710px;top:610px"><small>Meta Ads</small>Plazas limitadas</div>
+    <div class="cre" id="cr0" style="left:40px;top:640px;background-image:linear-gradient(180deg,rgba(10,10,11,0) 45%,rgba(10,10,11,.92) 100%),url(../2026-11-24-formacion-v7/img/a2.jpg)"><div class="cab"><i></i>Escuela Norte<em>Patrocinado</em></div><b>Tu nueva profesión empieza aquí</b></div>
+    <div class="cre g" id="cr1" style="left:355px;top:560px;background-image:linear-gradient(180deg,rgba(10,10,11,0) 45%,rgba(10,10,11,.92) 100%),url(../2026-11-24-formacion-v7/img/a1.jpg)"><div class="cab"><i></i>Escuela Norte<em>Patrocinado</em></div><b>Da el salto al Marketing Digital</b><u>Solicitar información</u></div>
+    <div class="cre" id="cr2" style="left:700px;top:640px;background-image:linear-gradient(180deg,rgba(10,10,11,0) 45%,rgba(10,10,11,.92) 100%),url(../2026-11-24-formacion-v7/img/a3.jpg)"><div class="cab"><i></i>Escuela Norte<em>Patrocinado</em></div><b>Clases en directo, a tu ritmo</b></div>
     <div id="hilo"></div>
-    <div id="fich"><small>De este anuncio viene</small><b>Laura Vidal</b><span>Marketing Digital</span><span>Meta · «por las tardes»</span></div>
+    <div id="fich"><small>De este anuncio viene</small><b>Laura Vidal</b><span>Marketing Digital</span><span>Meta Ads · «Da el salto»</span></div>
   </div>
   <!-- 5 WhatsApp -->
   <div class="abs" id="p3"><div class="luz"></div><div class="som" id="som"></div>
@@ -162,7 +167,7 @@ CUERPO = r'''
       <div class="bub r" id="b2" style="top:520px;font-size:40px">Sí, cuanto antes.</div>
 
     </div></div>
-    <div class="flo" id="k0" style="left:330px;top:1560px;font-size:54px"><small>Viene de</small>Anuncio «por las tardes»</div>
+    <div class="flo" id="k0" style="left:330px;top:1560px;font-size:54px"><small>Viene de</small>Anuncio «Da el salto»</div>
   </div>
   <!-- 5b pipeline: la consecuencia en el CRM -->
   <div class="abs esc" id="e5b" style="background:#1FA396"><div class="luz"></div>
@@ -170,19 +175,24 @@ CUERPO = r'''
     <div id="pipe"><div class="k">CRM · Pipeline</div><div class="cols"><div class="col" id="pc0"><h4>Nueva solicitud</h4><div class="gh"></div></div><div class="col" id="pc1"><h4>Conversación abierta</h4><div class="gh"></div></div><div class="col" id="pc2"><h4>Reunión agendada</h4><div class="gh"></div></div></div>
       <div id="tarj">Laura Vidal<small>Nivel A</small></div></div>
   </div>
-  <!-- 6 sin respuesta -->
-  <div class="abs tt" id="q4" style="top:300px"><span>¿Laura</span> <span>deja</span> <i><span>de</span> <span>responder?</span></i></div>
-  <div class="flo cl" id="sr" style="left:240px;top:760px;font-size:76px">Sin respuesta</div>
-  <div class="flo am" id="av" style="left:120px;top:1330px"><small>El sistema puede activar</small>Agente de voz</div>
+  <!-- 6 sin respuesta: el mensaje queda sin contestar y pasan las horas -->
+  <div class="abs esc" id="e6" style="background:#0A0A0B"><div class="luz" style="opacity:.3"></div>
+    <div class="abs tt" id="q4" style="top:290px"><span>¿Laura</span> <span>deja</span> <i><span>de</span> <span>responder?</span></i></div>
+    <div id="mv3"><div class="scr"><div class="wah"><div class="av">E</div><div><b>Escuela Norte</b><span>en línea</span></div></div>
+      <div class="bub" id="b5" style="top:190px;width:600px;font-size:40px;opacity:1"><b>¿Reservamos una llamada con admisiones?</b></div><div id="hora"></div><div id="visto">Sin leer</div></div></div>
+    <div class="flo cl" id="sr" style="left:230px;top:1180px;font-size:80px">Sin respuesta</div>
+    <div class="flo am" id="av" style="left:150px;top:1430px"><small>El sistema puede activar</small>Agente de voz</div>
+  </div>
   <!-- 7 llamada -->
-  <div id="pend">Audio pendiente de la llamada real</div><div id="onda"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-  <div class="sub" id="s1" style="top:1010px"><small>Raquel · asistente virtual</small>Hola, Laura. ¿Te viene bien hablar un momento?</div>
+  <div id="pend">Recreación con la voz del agente</div><div id="onda"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
   <div class="sub r" id="s2" style="top:1210px"><small>Laura</small>Sí, quería información sobre el curso.</div>
   <!-- 7b interfaz del agente -->
   <div class="abs esc" id="e7b" style="background:#0A0A0B"><div class="luz" style="opacity:.3"></div>
     <div id="agr"></div><div id="agc">R</div><div id="agn">Raquel<small>asistente virtual · Escuela Norte</small></div><div id="ago"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="sub" id="s3" style="top:1340px"><small>Raquel</small>¿Te ayudo a reservar una llamada con admisiones?</div>
-    <div class="flo am" id="ia" style="left:210px;top:1600px;font-size:54px"><small>Etapa</small>Interesada en agendar</div>
+    <div class="sub" id="s1" style="top:1340px"><small>Raquel · asistente virtual</small>Hola, Laura, soy Raquel, de Escuela Norte. ¿Te viene bien hablar un momento?</div>
+    <div class="sub" id="s3" style="top:1340px"><small>Raquel</small>¿Quieres que te ayude a reservar una llamada con admisiones?</div>
+    <div class="flo am" id="ia" style="left:210px;top:1620px;font-size:54px"><small>Etapa</small>Interesada en agendar</div>
   </div>
   <!-- 8 calendario -->
   <div class="abs esc" id="e8" style="background:#0A0A0B"><div class="luz" style="opacity:.35"></div>
@@ -200,7 +210,7 @@ CUERPO = r'''
   <!-- 11 la señal: reunión cualificada → Intelligence → Meta Ads -->
   <div class="abs esc" id="e11" style="background:#0A0A0B"><div class="luz" style="opacity:.3"></div>
     <div class="abs tt" id="q8" style="top:290px;font-size:92px"><span>No</span> <span>solo</span> <i><span>por</span> <span>formularios.</span></i></div>
-    <div class="nod" id="n3"><small>Meta Ads · campaña</small><b>Anuncio «por las tardes»</b></div><div class="tub" id="t2b"><i></i><i></i></div>
+    <div class="nod" id="n3"><small>Meta Ads · campaña</small><b>Anuncio «Da el salto»</b></div><div class="tub" id="t2b"><i></i><i></i></div>
     <div class="nod" id="n2"><small>Qualivo</small><b>Intelligence</b></div><div class="tub" id="t1b"><i></i><i></i></div>
     <div class="nod" id="n1"><small>Laura Vidal · resultado comercial</small><b>Reunión cualificada ✓</b></div>
   </div>
@@ -224,7 +234,7 @@ const en=(k,t)=>t>=C[k][0]&&t<C[k][1];
 function flota(id,k,t,t0,rot=0){ const el=$(id), v=nm(t,t0,t0+.35); el.style.opacity=en(k,t)?Math.min(1,v*3):0; el.style.transform=`translateY(${(1-expo(v))*90-10*nm(t,t0,C[k][1])}px) scale(${v<=0?0:lerp(.6,1,back(v))}) rotate(${rot}deg)`; el.style.filter=v<1&&v>0?`blur(${(10*(1-v)).toFixed(1)}px)`:'none'; }
 function titulo(id,k,t,d=.2){ const el=$(id); el.style.opacity=en(k,t)?1:0; palabras(el,t,C[k][0]+d); }
 function gira(id,k,t,ry=-22,rx=12){ const u=nm(t,C[k][0],C[k][1]), a=expo(nm(t,C[k][0],C[k][0]+.7)); $(id).style.transform=`translate3d(${lerp(100,0,a)}px,${lerp(140,0,a)-24*u}px,0) rotateY(${lerp(ry*1.6,ry*.6,a)+7*u}deg) rotateX(${lerp(rx*1.5,rx*.6,a)-3*u}deg) rotateZ(${lerp(5,1.5,a)-1*u}deg) scale(${lerp(.84,1,a)+.05*u})`; }
-const VID=['laura','sinresp','llamada','adm','equipo'];
+const VID=['laura','llamada','adm'];
 window.setT=function(t){
   $('velo').style.opacity=VID.some(k=>en(k,t))?1:0;
   $('flash').style.opacity=P.slice(1).reduce((m,p)=>Math.max(m,t>=p[0]-.04&&t<p[0]+.08?.5*(1-nm(t,p[0],p[0]+.08)):0),0);
@@ -233,7 +243,7 @@ window.setT=function(t){
   { const k='laura', v=nm(t,.35,.75), pr=pico(nm(t,C[k][1]-.7,C[k][1]-.3)), f=$('f0'); f.style.opacity=en(k,t)?Math.min(1,v*3):0; f.style.transform=`translateY(${(1-expo(v))*-160}px) rotate(${lerp(-6,-2,expo(v))}deg) scale(${1-.03*pr})`; f.style.filter=v<1&&v>0?`blur(${(10*(1-v)).toFixed(1)}px)`:'none';
     $('f0b').style.background=pr>.2?'#0A0A0B':'#F4CC38'; $('f0b').style.color=pr>.2?'#F4CC38':'#0A0A0B'; $('f0b').style.transform=`scale(${1-.08*pr})`; }
   // quién es quién: Laura en sus tres planos, admisiones y el equipo de campañas
-  [['g0','laura'],['g1','sinresp'],['g2','llamada'],['g3','adm'],['g4','equipo']].forEach(([id,k])=>{ const v=nm(t,C[k][0]+.25,C[k][0]+.55); $(id).style.opacity=en(k,t)?v:0; $(id).style.transform=`translateX(${(1-expo(v))*-60}px)`; });
+  [['g0','laura'],['g2','llamada'],['g3','adm']].forEach(([id,k])=>{ const v=nm(t,C[k][0]+.25,C[k][0]+.55); $(id).style.opacity=en(k,t)?v:0; $(id).style.transform=`translateX(${(1-expo(v))*-60}px)`; });
   // 2 · el anuncio en el móvil de Laura: lo ve y pulsa «Solicitar información»
   { const k='anuncio'; $('e2').style.opacity=en(k,t)?1:0; if(en(k,t)){ gira('mv2',k,t,-18,10); const tp=C[k][1]-.55, pr=pico(nm(t,tp,tp+.35)), d=$('dedo'), v=nm(t,tp-.35,tp);
       d.style.opacity=Math.min(1,v*3)*(1-nm(t,tp+.25,tp+.45)); d.style.transform=`translate(${(1-expo(v))*220}px,${(1-expo(v))*300}px) scale(${1-.25*pr})`;
@@ -247,25 +257,27 @@ window.setT=function(t){
   // 5 · WhatsApp en un móvil en perspectiva
   { const k='wa', p=$('p3'); p.style.opacity=en(k,t)?1:0; if(en(k,t)){ gira('mov',k,t,-22,12); $('som').style.transform=`translateX(${-40*nm(t,C[k][0],C[k][1])}px)`; titulo('q3',k,t,.25);
       const a=C[k][0], q=Math.min(nm(t,a+.5,a+.65),1-nm(t,W.v2.sistema-.2,W.v2.sistema-.1)); $('ty').style.opacity=q; [...$('ty').children].forEach((el,n)=>el.style.transform=`translateY(${-7*Math.max(0,Math.sin(t*10+n*1.1))}px)`);
-      pop($('b1'),t,W.v2.sistema-.1); pop($('b2'),t,W.v2.whatsapp+.45); $('mov').style.transform+=' translateY(170px) scale(1.14)'; flota('k0',k,t,W.v2.anuncio-.25,4); } else $('k0').style.opacity=0; }
+      pop($('b1'),t,W.v2.sistema-.1); pop($('b2'),t,W.v2.whatsapp+.45); $('mov').style.transform+=' translateY(250px) scale(1.12)'; flota('k0',k,t,W.v2.anuncio-.25,4); } else $('k0').style.opacity=0; }
   // 5b · pipeline: la tarjeta de Laura avanza de etapa
   { const k='pipe'; $('e5b').style.opacity=en(k,t)?1:0; if(en(k,t)){ gira('pipe',k,t,18,10); titulo('q3b',k,t,.1); const j=nm(t,W.v2.actualiza-.1,W.v2.actualiza+.4), tj=$('tarj');
       tj.style.transform=`translateX(${302*io(j)}px) translateY(${-50*pico(j)}px) translateZ(${40+60*pico(j)}px) scale(${1+.1*pico(j)})`; tj.style.filter=`blur(${(9*pico(j)).toFixed(1)}px)`; $('pc0').className='col'+(j<.5?' on':''); $('pc1').className='col'+(j>=.5?' on':''); } }
-  // 6 · sin respuesta
-  { const k='sinresp'; titulo('q4',k,t); const v=nm(t,W.v3.responder-.1,W.v3.responder+.25), s=$('sr'); s.style.opacity=en(k,t)?Math.min(1,v*3):0; s.style.transform=`scale(${lerp(1.7,1,expo(v))}) rotate(-4deg)`; s.style.filter=v<1&&v>0?`blur(${(12*(1-v)).toFixed(1)}px)`:'none'; flota('av',k,t,W.v3.agente-.3,3); }
-  // 7 · llamada: subtítulos de la conversación y aviso de audio pendiente
-  { const k='llamada', a=C[k][0], on=en(k,t); $('pend').style.opacity=on?1:0; $('onda').style.opacity=on?1:0; [...$('onda').children].forEach((el,n)=>el.style.height=(14+40*Math.abs(Math.sin(t*9+n*.9)))+'px');
-    [['s1',a+.25],['s2',a+1.9]].forEach(([id,t0])=>{ const el=$(id), v=nm(t,t0,t0+.3); el.style.opacity=on?Math.min(1,v*3):0; el.style.transform=`scale(${v<=0?0:back(v)})`; }); }
-  // 7b · interfaz breve del agente: habla Raquel y la etapa cambia
-  { const k='agente', a=C[k][0]; $('e7b').style.opacity=en(k,t)?1:0; if(en(k,t)){ const v=nm(t,a,a+.4); $('agc').style.transform=`scale(${lerp(.6,1,back(v))})`; $('agr').style.transform=`scale(${1+.12*Math.abs(Math.sin((t-a)*3.2))})`; $('agr').style.opacity=.9-.6*Math.abs(Math.sin((t-a)*3.2));
-      [...$('ago').children].forEach((el,n)=>el.style.height=(30+110*Math.abs(Math.sin(t*9+n*.8)))+'px'); pop($('s3'),t,a+.3); flota('ia',k,t,a+1.5,-3); $('pend').style.opacity=1; } else $('ia').style.opacity=0; }
+  // 6 · sin respuesta: el reloj avanza y el mensaje sigue sin leer
+  { const k='sinresp'; $('e6').style.opacity=en(k,t)?1:0; if(en(k,t)){ gira('mv3',k,t,16,9); titulo('q4',k,t); const u=nm(t,C[k][0]+.3,W.v3.responder+.3), m=Math.round(u*135);
+      $('hora').textContent='Enviado hace '+(m<60?m+' min':Math.floor(m/60)+' h '+String(m%60).padStart(2,'0')+' min'); $('visto').style.opacity=nm(t,C[k][0]+.6,C[k][0]+.9);
+      const v=nm(t,W.v3.responder-.1,W.v3.responder+.25), sr=$('sr'); sr.style.opacity=Math.min(1,v*3); sr.style.transform=`scale(${lerp(1.7,1,expo(v))}) rotate(-4deg)`; sr.style.filter=v<1&&v>0?`blur(${(12*(1-v)).toFixed(1)}px)`:'none'; flota('av',k,t,W.v3.agente-.3,3); } else ['sr','av'].forEach(i=>$(i).style.opacity=0); }
+  // 7 · llamada con audio: habla Raquel (interfaz), contesta Laura (plano), cierra Raquel (interfaz)
+  { const ag=en('agente',t)||en('agenteb',t), k=en('agenteb',t)?'agenteb':'agente', a=C[k][0]; $('e7b').style.opacity=ag?1:0; $('pend').style.opacity=(ag||en('llamada',t))?1:0;
+    if(ag){ const v=nm(t,C.agente[0],C.agente[0]+.4), hab=(t>=T.r1[0]&&t<T.r1[0]+T.r1[1])||(t>=T.r3[0]&&t<T.r3[0]+T.r3[1]); $('agc').style.transform=`scale(${lerp(.6,1,back(v))*(1+.03*(hab?Math.abs(Math.sin(t*7)):0))})`;
+      $('agr').style.transform=`scale(${1+.12*Math.abs(Math.sin((t-a)*3.2))})`; $('agr').style.opacity=.9-.6*Math.abs(Math.sin((t-a)*3.2)); [...$('ago').children].forEach((el,n)=>el.style.height=(hab?30+110*Math.abs(Math.sin(t*9+n*.8)):22)+'px');
+      const s1=$('s1'), s3=$('s3'); pop(s1,t,T.r1[0]); if(k!=='agente') s1.style.opacity=0; pop(s3,t,T.r3[0]); if(k!=='agenteb') s3.style.opacity=0; flota('ia','agenteb',t,W.r3.reservar,-3); } else { ['s1','s3','ia'].forEach(i=>$(i).style.opacity=0); }
+    const s2=$('s2'); pop(s2,t,T.r2[0]); if(!en('llamada',t)) s2.style.opacity=0; $('onda').style.opacity=0; }
   // 8 · calendario en perspectiva
   { const k='cal'; $('e8').style.opacity=en(k,t)?1:0; if(en(k,t)){ gira('cal',k,t,18,10); titulo('q5',k,t); const v=nm(t,W.v4.reunión-.2,W.v4.reunión+.15); $('jue').style.transform=`translateZ(${70*expo(v)}px) scale(${1+.14*expo(v)})`; $('jue').style.opacity=.35+.65*v;
       flota('c1','cal',t,W.v4.confirmación-.1,-3); flota('c2','cal',t,W.v4.recordatorios-.1,3); } else ['c1','c2'].forEach(i=>$(i).style.opacity=0); }
   // 9 · admisiones
-  titulo('q6','adm',t); flota('ad1','adm',t,C.adm[0]+.9,-1.5);
+  { const e5=T.v5[0]-.1, pri=en('adm',t)&&t<e5, seg=en('adm',t)&&t>=e5; $('q6').style.opacity=pri?1:0; palabras($('q6'),t,C.adm[0]+.2); $('q7').style.opacity=seg?1:0; palabras($('q7'),t,e5+.1); flota('ad1','adm',t,C.adm[0]+.9,-1.5); if(seg) $('ad1').style.opacity=0; flota('va','adm',t,W.v5.valida-.3,-4); }
   // 10 · el equipo valida la reunión
-  titulo('q7','equipo',t); flota('va','equipo',t,W.v5.celebra,-4);
+
   // 11 · la señal sube: reunión cualificada → Intelligence → campaña de Meta
   { const k='meta'; $('e11').style.opacity=en(k,t)?1:0; if(en(k,t)){ const a=C[k][0]; titulo('q8',k,t,W.v5.no-a-.1);
       const p1=nm(t,a+.15,a+.5), p2=nm(t,a+1.0,a+1.35), p3=nm(t,a+1.9,a+2.25);
