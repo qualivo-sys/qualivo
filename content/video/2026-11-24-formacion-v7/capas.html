@@ -59,6 +59,12 @@ html,body{background:transparent}
 #adc .igh{display:flex;align-items:center;gap:16px;padding:22px 26px 14px}#adc .igh .av{width:56px;height:56px;border-radius:50%;background:#1FA396}#adc .igh b{font-size:26px;display:block}#adc .igh span{font-size:20px;color:#7A7C82}
 #adc .igi{height:330px;background:#0A0A0B;color:#F4F1EB;display:flex;flex-direction:column;justify-content:center;padding:34px}#adc .igi h4{font-family:Anton;font-weight:400;font-size:60px;line-height:.95;text-transform:uppercase}
 #adc .igb{margin:18px 26px 0;border-radius:14px;padding:18px;text-align:center;font-weight:700;font-size:28px;background:#F4CC38}
+#f0{left:60px;top:700px;width:580px;background:#F4F1EB;border-radius:34px;padding:26px 28px;box-shadow:0 30px 70px rgba(0,0,0,.55);color:#0A0A0B;transform-origin:0 0}
+#f0 small{display:block;font-size:22px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#0E7C74}
+#f0 b{display:block;font-family:Anton;font-weight:400;font-size:52px;line-height:1;text-transform:uppercase;margin:6px 0 16px}
+#f0 .bt{display:inline-block;background:#F4CC38;border:4px solid #0A0A0B;border-radius:16px;font-family:Anton;font-size:38px;text-transform:uppercase;padding:12px 26px;transform-origin:0 50%}
+.tag{position:absolute;background:rgba(10,10,11,.82);color:#F4F1EB;border-radius:999px;padding:12px 24px 12px 18px;font-size:28px;font-weight:700;display:flex;align-items:center;gap:12px;opacity:0;white-space:nowrap}
+.tag:before{content:'';width:18px;height:18px;border-radius:50%;background:#F4CC38}.tag.ad:before{background:#1FA396}.tag em{font-style:normal;font-weight:600;color:rgba(244,241,235,.65)}
 /* CRM en perspectiva */
 #crm{position:absolute;left:90px;top:520px;width:900px;background:#F4F1EB;border-radius:44px;padding:34px 36px;transform-style:preserve-3d;box-shadow:-40px 60px 120px rgba(10,10,11,.45);color:#0A0A0B}
 #crm .k{font-size:24px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0E7C74;margin-bottom:18px;display:flex;justify-content:space-between}
@@ -103,6 +109,12 @@ html,body{background:transparent}
   <div class="abs" id="velo"></div>
   <!-- 1 Laura -->
   <div class="abs tt" id="q0" style="top:1010px"><span>¿Tu</span> <span>escuela</span> <span>online</span> <i><span>ya</span> <span>invierte</span> <span>en</span> <span>publicidad?</span></i></div>
+  <div class="abs" id="f0"><small>Escuela Norte · curso online</small><b>Marketing Digital</b><span class="bt" id="f0b">Solicitar información</span></div>
+  <div class="tag" id="g0" style="left:70px;top:296px">Laura <em>· quiere estudiar Marketing Digital</em></div>
+  <div class="tag" id="g1" style="left:70px;top:1560px">Laura <em>· no ha visto el mensaje</em></div>
+  <div class="tag" id="g2" style="left:70px;top:400px">Laura <em>· contesta la llamada</em></div>
+  <div class="tag ad" id="g3" style="left:70px;top:560px">Admisiones <em>· Escuela Norte</em></div>
+  <div class="tag ad" id="g4" style="left:70px;top:560px">Equipo de campañas <em>· Qualivo</em></div>
   <!-- 2 mesa -->
   <div class="abs" id="noti"><div class="av">LV</div><div><small>Nueva solicitud</small><b>Laura Vidal</b><span>Pide información de un curso</span></div><em>ahora</em></div>
   <div class="flo am" id="op" style="left:150px;top:1340px"><small>Objetivo</small>Oportunidad comercial</div>
@@ -187,8 +199,12 @@ const VID=['laura','mesa','scroll','sinresp','llamada','adm','equipo'];
 window.setT=function(t){
   $('velo').style.opacity=VID.some(k=>en(k,t))?1:0;
   $('flash').style.opacity=P.slice(1).reduce((m,p)=>Math.max(m,t>=p[0]-.04&&t<p[0]+.08?.5*(1-nm(t,p[0],p[0]+.08)):0),0);
-  // 1 · Laura
+  // 1 · Laura: se ve qué está pidiendo; pulsa «Solicitar información» justo antes del corte
   titulo('q0','laura',t,.1);
+  { const k='laura', v=nm(t,.35,.75), pr=pico(nm(t,C[k][1]-.7,C[k][1]-.3)), f=$('f0'); f.style.opacity=en(k,t)?Math.min(1,v*3):0; f.style.transform=`translateY(${(1-expo(v))*-160}px) rotate(${lerp(-6,-2,expo(v))}deg) scale(${1-.03*pr})`; f.style.filter=v<1&&v>0?`blur(${(10*(1-v)).toFixed(1)}px)`:'none';
+    $('f0b').style.background=pr>.2?'#0A0A0B':'#F4CC38'; $('f0b').style.color=pr>.2?'#F4CC38':'#0A0A0B'; $('f0b').style.transform=`scale(${1-.08*pr})`; }
+  // quién es quién: Laura en sus tres planos, admisiones y el equipo de campañas
+  [['g0','laura'],['g1','sinresp'],['g2','llamada'],['g3','adm'],['g4','equipo']].forEach(([id,k])=>{ const v=nm(t,C[k][0]+.25,C[k][0]+.55); $(id).style.opacity=en(k,t)?v:0; $(id).style.transform=`translateX(${(1-expo(v))*-60}px)`; });
   // 2 · mesa: salta la notificación; al nombrar «oportunidad comercial» aparece el objetivo
   { const k='mesa', n=$('noti'), a=C[k][0], v=nm(t,a+.5,a+.9); n.style.opacity=en(k,t)&&t>=a+.5?Math.min(1,v*3):0; n.style.transform=`translateY(${(1-expo(v))*420}px) scale(${v<=0?0:lerp(.5,1,back(v))}) rotate(${2*Math.sin(nm(t,a+.9,a+1.55)*Math.PI*6)*(1-nm(t,a+.9,a+1.55))}deg)`; n.style.filter=`blur(${(12*(1-nm(v,0,.6))).toFixed(1)}px)`; flota('op',k,t,W.v0.oportunidad-.15,-3); }
   // 3 · scroll: nuestro anuncio aparece en el móvil de quien navega
