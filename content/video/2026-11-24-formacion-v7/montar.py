@@ -27,7 +27,7 @@ SFX = [(c - .15, 'aire') for k, c in C.items() if k not in ('laura', 'llamada')]
        (C['origen'] + 1.8, 'pop'), (W['v2']['anuncio'] - .25, 'toque'), (W['v2']['sistema'] - .1, 'pop'), (W['v2']['whatsapp'] + .45, 'pop'), (W['v2']['actualiza'] - .1, 'aviso'),
        (W['v3']['responde'] - .1, 'golpe'), (W['v3']['agente'] - .3, 'aviso'), (C['llamada'] + .25, 'tono'), (C['llamada'] + 1.35, 'tono'), (W['r1']['ini'] - .12, 'toque'),
        (W['v4']['reserva'] - .1, 'golpe'), (W['v4']['reunión'] + .3, 'aviso'), (W['v4']['confirma'] - .1, 'pop'), (W['v4']['envía'] + .1, 'pop'), (W['v4']['reprograma'] - .4, 'toque'), (W['v4']['reprograma'] + .1, 'aviso'), (C['adm'] + .9, 'pop'), (W['v5']['valida'] - .3, 'aviso'),
-       (C['meta'] + .15, 'pop'), (C['meta'] + 1.0, 'pop'), (C['meta'] + 1.9, 'pop'), (C['meta'] + 2.6, 'aviso'), (W['v6']['captación'] - .1, 'pop'), (W['v6']['seguimiento'] - .1, 'pop'), (W['v6']['mejora'] - .1, 'pop'), (W['v6']['solicita'] + .5, 'pop')]
+       (C['meta'] + .1, 'pop'), (C['meta'] + .5, 'pop'), (C['meta'] + .9, 'pop'), (C['meta'] + 1.0, 'pop'), (C['meta'] + 2.1, 'aviso'), (W['v6']['captación'] - .1, 'pop'), (W['v6']['seguimiento'] - .1, 'pop'), (W['v6']['mejora'] - .1, 'pop'), (W['v6']['solicita'] + .5, 'pop')]
 GEN = {'aire': "anoisesrc=color=pink:d=0.34:r=44100:a=0.5,highpass=f=700,lowpass=f=5200,afade=t=in:st=0:d=0.2,afade=t=out:st=0.2:d=0.14,volume=0.17",
        'toque': "aevalsrc='sin(2*PI*880*t)*exp(-45*t)':d=0.12:s=44100,volume=0.08",
        'pop': "aevalsrc='sin(2*PI*(420+900*t)*t)*exp(-26*t)':d=0.16:s=44100,volume=0.12",
