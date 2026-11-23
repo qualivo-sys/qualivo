@@ -5,6 +5,10 @@
 - **Control:** el anuncio antiguo con el formulario de cualificación sigue activo y no se toca.
 - **Archivo:** `formacion-v6-borrador-916.mp4` (9:16, 55,9 s).
 
+## Decisión de Maikel tras verlo (23-nov)
+
+Se deja de iterar sobre esta V6: queda como material de trabajo y no se publica. El guion y la propuesta de valor se dan por buenos; lo que falla es la dirección creativa (misma composición todo el vídeo, demasiado texto, sin momentos visuales distintos ni contraste de ritmo). Siguiente paso: moodboard y una prueba audiovisual de 10-15 s con al menos tres escenas visualmente distintas, antes de producir otro vídeo completo. El anuncio antiguo sigue activo a 25 €/día y no se toca.
+
 ## Los tres ajustes, cómo quedan
 
 1. **El adelanto ya no enseña «Reunión cualificada» como resultado.** En los primeros 3 s la ventana apila cuatro acciones (solicitud recibida, respuesta por WhatsApp, cualificada, reunión con admisiones), una cada 0,7 s, y la etapa termina en «Oportunidad comercial» cuando la voz lo dice. Después empieza el recorrido real de Laura desde cero.
