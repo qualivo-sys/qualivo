@@ -3,14 +3,14 @@
 Genera t.js (tiempos y cortes a partir de la locución) y capas.html. Estilos de la prueba audiovisual del 23-nov."""
 import json, os, subprocess
 A = os.path.dirname(os.path.abspath(__file__)); BASE = f'{A}/../2026-11-23-formacion-v7-prueba/capas.html'
-TEMPO, HUECO, COLA, LLAMADA, RAQ = 1.10, 0.18, 1.3, 5.6, 4.3
+TEMPO, HUECO, COLA, LLAMADA, RAQ = 1.10, 0.18, 1.3, 5.6, 2.1
 def dur(f): return float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]))
 T = {}; W = {}; t = 0.1
 for k in ['v0', 'v1', 'v2', 'v3', 'v4', 'v4b', 'v5', 'v6']:
     d = dur(f'{A}/voz/{k}.mp3') / TEMPO; T[k] = [round(t, 3), round(d, 3)]
     W[k] = {w['w'].strip('¿?.,:').lower(): round(t + w['s'] / TEMPO, 3) for w in reversed(json.load(open(f'{A}/voz/{k}.json')))}
-    if k == 'v3': W['r1'] = {'ini': round(t + d + .2, 3), 'fin': round(t + d + .2 + RAQ / 1.08, 3)}      # saludo breve de Raquel (recreación) tras el narrador
-    t += d + (.2 + RAQ / 1.08 + .3 if k == 'v3' else HUECO)
+    if k == 'v3': W['r1'] = {'ini': round(t + d + .2, 3), 'fin': round(t + d + .2 + RAQ, 3)}      # saludo breve de Raquel (recreación) tras el narrador
+    t += d + (.2 + RAQ + .3 if k == 'v3' else HUECO)
 DUR = round(t - HUECO + COLA, 2); E = {k: round(T[k][0] - .1, 3) for k in T}; E['v0'] = 0
 r25 = lambda x: round(round(x * 25) / 25, 2)
 # cortes de plano: [inicio, tipo, plano de vídeo (o None si la escena es gráfica), segundo de entrada en el plano]
@@ -53,7 +53,7 @@ EXTRA = '''
 .sub{position:absolute;left:70px;max-width:860px;background:rgba(10,10,11,.86);color:#F4F1EB;border-radius:26px;padding:20px 28px;font-size:44px;line-height:1.18;font-weight:600;opacity:0;transform-origin:0 100%}
 .sub small{display:block;font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#F4CC38;margin-bottom:4px}
 .sub.r{left:auto;right:70px;background:rgba(244,241,235,.94);color:#0A0A0B;transform-origin:100% 100%}.sub.r small{color:#0E7C74}
-#subr{position:absolute;z-index:20;left:70px;top:770px;width:900px;font-size:44px;font-weight:700;line-height:1.2;color:#F4F1EB;background:rgba(10,10,11,.72);padding:18px 24px;border-radius:20px;opacity:0}
+#subr{position:absolute;z-index:20;left:70px;top:900px;width:900px;font-size:44px;font-weight:700;line-height:1.2;color:#F4F1EB;background:rgba(10,10,11,.72);padding:18px 24px;border-radius:20px;opacity:0}
 #pend{position:absolute;z-index:20;left:70px;top:950px;border:3px dashed #F4CC38;color:#F4CC38;font-family:Anton;font-size:30px;text-transform:uppercase;padding:9px 16px;border-radius:12px;opacity:0;background:rgba(10,10,11,.5)}
 #onda{position:absolute;right:70px;top:300px;display:flex;gap:8px;align-items:center;height:60px;opacity:0}#onda i{width:9px;border-radius:5px;background:#F4CC38;display:block;height:14px}
 /* calendario */
@@ -200,8 +200,8 @@ CUERPO = r'''
     <div class="flo am" id="av" style="left:150px;top:1430px"><small>El sistema puede activar</small>Agente de voz</div>
   </div>
   <!-- 7 llamada: el agente de voz llama y Laura contesta -->
-  <div id="pend">Recreación · pendiente la llamada real</div>
-  <div id="subr">«Hola, Laura, soy Raquel, la asistente virtual de Escuela Norte.»</div>
+  <div id="pend" style="display:none"></div>
+  <div id="subr">«Hola, Laura, soy Raquel, de Escuela Norte.»</div>
   <div class="abs tt" id="q4b" style="top:290px"><span>Agente</span> <i><span>de</span> <span>voz.</span></i></div>
   <div class="abs" id="ent"><div class="av">R</div><div><small>Llamada entrante</small><b>Raquel</b><span>Asistente virtual · Escuela Norte</span></div><div class="ok">✆</div></div>
   <!-- 8 la cita: reserva, confirmación, recordatorio y reprogramación -->

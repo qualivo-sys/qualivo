@@ -41,8 +41,8 @@ for i, k in enumerate(V):
     f = f'{A}/voz/{k}.mp3'; ent += ['-i', f]; t0 = T[k][0]; tp = TEMPO
     tel = ''
     fc.append(f'[{i+1}:a]{st},atempo={tp}{tel},volume={ref / rms(f) * (1.15 if tel else 1):.3f},adelay={int(t0*1000)}|{int(t0*1000)}[v{i}]'); et.append(f'[v{i}]')
-R = W['r1']; ent += ['-i', f'{A}/voz/r1.mp3']; f = f'{A}/voz/r1.mp3'      # saludo de Raquel (recreación), recortado a la primera frase y con banda de teléfono
-fc.append(f"[{len(V)+1}:a]atrim=0:4.3,afade=t=out:st=4.2:d=0.1,{st},atempo=1.08,highpass=f=280,lowpass=f=3600,volume={ref / rms(f) * 1.15:.3f},adelay={int(R['ini']*1000)}|{int(R['ini']*1000)}[vr]"); et.append('[vr]')
+R = W['r1']; f = f'{S}/voz-formacion/dr.mp3'; ent += ['-i', f]      # saludo de Raquel: la voz del anuncio antiguo de formación, recortada a la primera frase
+fc.append(f"[{len(V)+1}:a]atrim=0:2.12,afade=t=out:st=2.02:d=0.1,{st},volume={ref / rms(f):.3f},adelay={int(R['ini']*1000)}|{int(R['ini']*1000)}[vr]"); et.append('[vr]')
 fc.append(f"[0:a]{st},aloop=loop=1:size=2646000,atrim=0:{DUR},volume='0.34-0.2*clip((t-{R['ini']-.3:.2f})/0.3,0,1)+0.2*clip((t-{R['fin']:.2f})/0.4,0,1)+0.34*clip((t-{fin:.2f})/0.4,0,1)':eval=frame,afade=t=out:st={DUR-1.2:.2f}:d=1.2[m]")
 for n, (t0, tipo) in enumerate(SFX): fc.append(f"{GEN[tipo]},{st},adelay={int(max(0,t0)*1000)}|{int(max(0,t0)*1000)}[x{n}]"); et.append(f'[x{n}]')
 fc.append(''.join(et) + f'amix=inputs={len(et)}:normalize=0:duration=first,alimiter=limit=0.9[o]')
