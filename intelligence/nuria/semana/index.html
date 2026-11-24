@@ -168,6 +168,12 @@ small,.nota{color:var(--mut);font-size:12.5px}
     });
     h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>Grupo de WhatsApp:</b> entradas y salidas reales que avisa Funnelchat, asignadas a cada edición por la etiqueta de registro de la persona en Kliking. Se registran desde el 5-nov por la tarde: las ediciones hasta la del 11-nov (incluida) salen incompletas; la primera completa es la del 18-nov. «Entran»: personas distintas que entran (y su % sobre los registros); «Salen»: personas que salen (y su % sobre las que entraron). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
 
+    // Llamadas de Ringover por embudo y comercial
+    h += '<h2>Llamadas de Ringover</h2><p class="sub">Llamadas de las comerciales por embudo y por persona: cuántas se hacen, cuántas contestan, cuánto se habla y cuántas acaban en cita y en venta.</p><div class="tabs" role="group" aria-label="Periodo de las llamadas" id="ringTabs"></div><div id="ringover"><p class="cargando">Cargando Ringover…</p></div>';
+
+    // Embudo completo de El Círculo por edición (registro → grupo → clases → directo → llamadas → ventas)
+    h += '<h2>Embudo completo de El Círculo</h2><p class="sub">Cada edición paso a paso, de los registros a las ventas, con la conversión de cada paso.</p><div id="embudocirculo"><p class="cargando">Cargando el embudo (tarda unos 20 segundos)…</p></div>';
+
     // Visualizaciones de cada clase (Presto Player), por edición
     h += '<h2>Visualizaciones de cada clase</h2><p class="sub">Reproducciones de cada vídeo en Presto Player y tiempo medio de visionado, por edición (del domingo antes del directo al sábado después).</p><div id="clasesvideo"><p class="cargando">Cargando Presto Player…</p></div>';
 
@@ -239,6 +245,8 @@ small,.nota{color:var(--mut);font-size:12.5px}
     cargarBF();
     cargarCPer();
     cargarSalidas();
+    cargarEmbudoCirculo();
+    cargarRingover(7);
     cargarClasesVideo();
     cargarEnvios(mesEnv);
     cargarMensajes();
@@ -362,6 +370,75 @@ small,.nota{color:var(--mut);font-size:12.5px}
       })
       .catch(function (e) { c.innerHTML = '<p class="nota">' + esc(e.message) + '</p>'; });
   }
+  function cargarRingover(dias) {
+    var c = document.getElementById('ringover'), t = document.getElementById('ringTabs'); if (!c) return;
+    var iso = function (x) { return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); };
+    var hoy = new Date(), de = new Date(); de.setDate(de.getDate() - (dias - 1));
+    if (t) t.innerHTML = [[7, 'Últimos 7 días'], [14, 'Últimos 14 días'], [30, 'Últimos 30 días']].map(function (o) { return '<button type="button" class="btn" aria-pressed="' + (o[0] === dias) + '" data-d="' + o[0] + '">' + o[1] + '</button>'; }).join('');
+    if (t) Array.prototype.forEach.call(t.querySelectorAll('button'), function (b) { b.onclick = function () { c.innerHTML = '<p class="cargando">Cargando Ringover…</p>'; cargarRingover(Number(b.getAttribute('data-d'))); }; });
+    fetch(API + '?accion=llamadas&desde=' + iso(de) + '&hasta=' + iso(hoy), { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) {
+        var pc2 = function (a, b) { return b ? ' <small>(' + Math.round(a / b * 100) + ' %)</small>' : ''; };
+        var mm = function (s) { return s ? Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') : '—'; };
+        var tabla = function (titulo, filas) {
+          var h = '<h3 style="margin:14px 0 6px">' + titulo + '</h3><table><tr><th></th><th class="n">Llamadas</th><th class="n">Personas</th><th class="n">Contestan</th><th class="n">Conversaciones +2 min</th><th class="n">Minutos hablados</th><th class="n">Duración media</th><th class="n">Con cita</th><th class="n">Cita hecha</th><th class="n">Compran</th></tr>';
+          filas.filter(function (f) { return f.llamadas > 0; }).forEach(function (f) {
+            h += '<tr><td>' + esc(f.nombre) + '</td><td class="n">' + num(f.llamadas) + '</td><td class="n">' + num(f.personas) + '</td><td class="n">' + num(f.contestadas) + pc2(f.contestadas, f.llamadas) + '</td><td class="n">' + num(f.conversaciones) + '</td><td class="n">' + num(f.minutos) + '</td><td class="n">' + mm(f.mediaSegundos) + '</td>'
+              + '<td class="n">' + (f.conCita == null ? '—' : num(f.conCita) + pc2(f.conCita, f.personas)) + '</td><td class="n">' + (f.citaHecha == null ? '—' : num(f.citaHecha)) + '</td><td class="n">' + (f.compran == null ? '—' : num(f.compran)) + '</td></tr>';
+          });
+          return h + '</table>';
+        };
+        var ent = d.comerciales.reduce(function (s, f) { return s + f.entrantes; }, 0), per = d.comerciales.reduce(function (s, f) { return s + f.perdidas; }, 0);
+        var h = '<div class="card" style="overflow-x:auto">' + tabla('Por embudo', d.embudos) + tabla('Por comercial', d.comerciales);
+        h += '<p class="nota">Llamadas salientes de Ringover del ' + dia(d.desde) + ' al ' + dia(d.hasta) + ' (' + num(d.total) + ' registros; ' + num(d.encontradas) + ' de ' + num(d.numeros) + ' números encontrados en Kliking). Además hubo ' + num(ent) + ' llamadas entrantes, ' + num(per) + ' sin contestar. <b>Embudo</b>: El Círculo si la persona tiene registro de alguna edición; si no, según su origen en Kliking. <b>Contestan</b>: llamadas que se descuelgan. <b>Conversaciones</b>: llamadas contestadas de 2 minutos o más. <b>Con cita</b>: personas llamadas que tienen una cita en cualquier agenda en el periodo o en las 2 semanas siguientes (% sobre personas llamadas). <b>Compran</b>: personas llamadas que aparecen en la hoja de ventas desde el inicio del periodo.</p></div>';
+        c.innerHTML = h;
+      })
+      .catch(function (e) { c.innerHTML = '<p class="nota">' + esc(e.message) + '</p>'; });
+  }
+  function cargarEmbudoCirculo() {
+    var c = document.getElementById('embudocirculo'); if (!c) return;
+    fetch(API + '?accion=embudocirculo', { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) {
+        var E = d.ediciones || [];
+        if (!E.length) { c.innerHTML = '<p class="nota">Todavía no hay ediciones con registros.</p>'; return; }
+        var p = function (a, b) { return a != null && b ? ' <small>(' + Math.round(a / b * 100) + ' %)</small>' : ''; };
+        var v = function (x) { return x == null ? '<span class="neu">—</span>' : num(x); };
+        var fila = function (titulo, f, sub) { return '<tr><td>' + titulo + (sub ? '<br><small>' + sub + '</small>' : '') + '</td>' + E.map(function (e) { return '<td class="n">' + f(e) + '</td>'; }).join('') + '</tr>'; };
+        var sec = function (t) { return '<tr><th colspan="' + (E.length + 1) + '" style="text-align:left;padding-top:14px">' + t + '</th></tr>'; };
+        var h = '<div class="card" style="overflow-x:auto"><table><tr><th>Paso</th>' + E.map(function (e) { return '<th class="n">Miércoles ' + dia(e.directo) + '<br><small>' + esc(e.estado) + '</small></th>'; }).join('') + '</tr>';
+        h += sec('1 · Registros');
+        h += fila('Registros según Meta', function (e) { return v(e.registrosMeta); }, 'campañas de El Círculo en la captación');
+        h += fila('Registros en Kliking', function (e) { return num(e.registrosKliking) + '<br><small>' + num(e.ads) + ' anuncios · ' + num(e.org) + ' orgánico</small>'; });
+        h += fila('Inversión en Meta', function (e) { return e.gasto == null ? '—' : eur(e.gasto); });
+        h += fila('Coste por registro', function (e) { return e.costeRegistro == null ? '—' : (e.costeRegistro.toFixed(2).replace('.', ',') + ' €'); }, 'inversión ÷ registros de anuncios');
+        h += sec('2 · Grupo de WhatsApp');
+        h += fila('Entran al grupo', function (e) { return v(e.grupoEntran) + p(e.grupoEntran, e.registrosKliking); }, '% sobre registros');
+        h += fila('Salen del grupo', function (e) { return e.grupoSalen == null ? '<span class="neu">sin acceso</span>' : num(e.grupoSalen) + p(e.grupoSalen, e.grupoEntran); }, '% sobre los que entran');
+        h += sec('3 · Clases (reproducciones)');
+        [['audio', 'Audio del domingo'], ['clase1', 'Clase 1'], ['clase2', 'Clase 2']].forEach(function (k) {
+          h += fila(k[1], function (e) { var x = e.vistas ? e.vistas[k[0]] : null; return x == null ? '<span class="neu">—</span>' : num(x) + ' <small>(' + Math.round(x / (e.registrosKliking || 1) * 100) + ' por 100 reg.)</small>'; });
+        });
+        h += sec('4 · Directo');
+        h += fila('Pulsan el enlace del Zoom', function (e) { return e.asistencia && e.asistencia.clicZoom ? num(e.asistencia.clicZoom) + p(e.asistencia.clicZoom, e.registrosKliking) : '<span class="neu">sin medir</span>'; }, '% sobre registros');
+        h += fila('Check-in durante el directo', function (e) { return e.asistencia && e.asistencia.checkin ? num(e.asistencia.checkin) + p(e.asistencia.checkin, e.asistencia.clicZoom || e.registrosKliking) : '<span class="neu">sin medir</span>'; }, '«Estoy aquí» a mitad del directo');
+        h += sec('5 · Llamadas');
+        h += fila('Agendadas', function (e) { return e.llamadas ? num(e.llamadas.agendadas) + p(e.llamadas.agendadas, e.registrosKliking) : '—'; }, 'personas · % sobre registros');
+        h += fila('Hechas', function (e) { return e.llamadas ? num(e.llamadas.hechas) + p(e.llamadas.hechas, e.llamadas.agendadas) : '—'; }, '% sobre agendadas');
+        h += fila('No-shows', function (e) { return e.llamadas ? num(e.llamadas.noShow) : '—'; });
+        h += fila('Canceladas', function (e) { return e.llamadas ? num(e.llamadas.canceladas) : '—'; });
+        h += fila('Pendientes', function (e) { return e.llamadas ? num(e.llamadas.pendientes) : '—'; }, 'confirmadas sin hacer aún');
+        h += sec('6 · Ventas');
+        h += fila('Ventas', function (e) { return e.compras == null ? '—' : num(e.compras) + (e.llamadas && e.llamadas.hechas ? '<br><small>' + Math.round(e.compras / e.llamadas.hechas * 100) + ' % de las llamadas hechas</small>' : ''); });
+        h += fila('Conversión total', function (e) { return e.compras == null || !e.registrosKliking ? '—' : (e.compras / e.registrosKliking * 100).toFixed(1).replace('.', ',') + ' %'; }, 'ventas ÷ registros');
+        h += fila('Facturación', function (e) { return e.facturacion == null ? '—' : eur(e.facturacion); });
+        h += fila('Coste por venta', function (e) { return e.compras && e.gasto ? eur(e.gasto / e.compras) : '—'; }, 'inversión en Meta ÷ ventas');
+        h += '</table><p class="nota">Edición = miércoles del directo; capta de viernes a jueves (12 a 6 días antes). <b>Registros Meta</b>: evento de registro de las campañas de El Círculo; <b>Kliking</b>: etiquetas «registro ads/org» de la edición (la diferencia son personas que ya estaban en la base y el píxel). <b>Grupo</b>: etiqueta «ingresa a comunidad» (solo la pone el enlace de entrada de Kliking, así que puede quedarse corta; con Funnelchat será exacto); las salidas salen de Funnelchat y necesitan la conexión con n8n' + (d.n8n ? '' : ' (ahora sin acceso)') + '. <b>Clases</b>: reproducciones en Presto Player del domingo antes al sábado después; son reproducciones, no personas. La clase 3 y el directo no se miden aquí. <b>Directo</b>: «pulsan el enlace del Zoom» = personas con la etiqueta «asiste directo AAAA-MM-DD» (trigger link del Zoom en los mensajes del día); «check-in» = etiqueta «check-in directo AAAA-MM-DD» (pulsan «Estoy aquí» durante el directo). La asistencia real con minutos llegará con la integración de Zoom. <b>Llamadas</b>: personas de la edición con cita en cualquier agenda (sin contar «invalid»), hasta 3 semanas después del directo. <b>Ventas</b>: hoja de ventas, personas de la edición. Las ediciones recientes siguen sumando llamadas y ventas.</p></div>';
+        c.innerHTML = h;
+      })
+      .catch(function (e) { c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+  }
   function cargarSalidas() {
     var c = document.getElementById('salidas'); if (!c) return;
     fetch(API + '?accion=salidas', { credentials: 'same-origin' })
@@ -423,6 +500,14 @@ small,.nota{color:var(--mut);font-size:12.5px}
       + '<div class="k"><div class="l">Clics en los emails VIP</div><div class="v">' + num(clicsVIP) + '</div><div class="neu">' + envVIP.length + ' de 3 enviados</div></div>'
       + '<div class="k"><div class="l">Compras de diciembre</div><div class="v">' + num(d.compras) + '</div><div class="neu">etiqueta «cliente 11 pasos dic2026»</div></div>'
       + '</div>';
+    if (d.detalle) {
+      var D = d.detalle, dias = Object.keys(D.porDia).sort();
+      h += '<div class="card"><b>Ventas de A 11 Pasos del Sueño (diciembre)</b><div class="kpis" style="margin-top:10px">'
+        + '<div class="k"><div class="l">Compras</div><div class="v">' + num(D.total) + '</div><div class="neu">personas con la etiqueta de compra</div></div>'
+        + '<div class="k"><div class="l">Venían de la lista VIP</div><div class="v">' + num(D.deLaVip) + '</div><div class="neu">' + (D.total ? pc(D.deLaVip / D.total) + ' de las compras' : '—') + (d.vip ? ' · ' + pc(D.deLaVip / d.vip) + ' de la lista compra' : '') + '</div></div>'
+        + '<div class="k"><div class="l">Ingresos estimados</div><div class="v">' + eur(D.ingresosEstimados) + '</div><div class="neu">175 € hasta el 30-nov, 185 € después</div></div>'
+        + '</div><table><tr><th>Día</th><th class="n">Compras</th></tr>' + dias.map(function (x) { return '<tr><td>' + dia(x) + '</td><td class="n">' + num(D.porDia[x]) + '</td></tr>'; }).join('') + (D.sinFecha ? '<tr><td><small>sin fecha</small></td><td class="n">' + num(D.sinFecha) + '</td></tr>' : '') + '</table></div>';
+    }
     if (d.plan) {
       h += '<div class="card"><b>Los 6 emails del plan</b><table><tr><th>Día</th><th>Email</th><th>A quién</th><th>Estado</th><th class="n">Entregados</th><th class="n">Abren</th><th class="n">Clics</th></tr>';
       d.plan.forEach(function (p) {
@@ -433,7 +518,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
       });
       h += '</table></div>';
     }
-    h += '<p class="nota"><b>Lista VIP:</b> personas a las que Kliking ha puesto la etiqueta «lista vip black friday 2026» al pulsar el botón de un email VIP. <b>Telegram:</b> miembros del grupo «BLACK FRIDAY VIP» según su página pública de invitación (incluye al equipo). Que haya menos en el grupo que en la lista es normal: algunas pulsan pero no acaban de entrar. <b>Emails:</b> datos exactos de Kliking; en rojo, los que tocan en los próximos 2 días y aún no están programados. <b>Compras:</b> salen cuando el flujo de compra ponga la etiqueta de diciembre. Se actualiza cada 10 minutos.</p>';
+    h += '<p class="nota"><b>Ventas:</b> día de compra = día del email de bienvenida «Ya estás dentro…» (si no tiene, el día de alta del contacto); los ingresos son estimados con el precio de cada día, porque Kliking no guarda el importe. <b>Lista VIP:</b> personas a las que Kliking ha puesto la etiqueta «lista vip black friday 2026» al pulsar el botón de un email VIP. <b>Telegram:</b> miembros del grupo «BLACK FRIDAY VIP» según su página pública de invitación (incluye al equipo). Que haya menos en el grupo que en la lista es normal: algunas pulsan pero no acaban de entrar. <b>Emails:</b> datos exactos de Kliking; en rojo, los que tocan en los próximos 2 días y aún no están programados. <b>Compras:</b> salen cuando el flujo de compra ponga la etiqueta de diciembre. Se actualiza cada 10 minutos.</p>';
     c.innerHTML = h;
   }
   function cargarBF() {

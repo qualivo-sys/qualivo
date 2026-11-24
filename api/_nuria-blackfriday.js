@@ -68,9 +68,41 @@ function cruzar(lista) {
   });
 }
 
+// Detalle de las compras de diciembre: cuántas venían de la lista VIP y el día de compra (= día del
+// email de bienvenida «Ya estás dentro…»; si no tiene, el día en que se dio de alta el contacto).
+// Ingresos estimados: 175 € hasta el 30-nov y 185 € después (no hay importes en Kliking).
+async function detalleCompras() {
+  const loc = process.env.NURIA_GHL_LOCATION_ID;
+  const r = await N.ghl('/contacts/search', { cuerpo: { locationId: loc, pageLimit: 200, filters: [{ field: 'tags', operator: 'eq', value: TAG_COMPRA }] } });
+  const cs = r.contacts || [];
+  const filas = await N.enParalelo(cs, 4, async function (c) {
+    let dia = null;
+    try {
+      const cv = await N.ghl('/conversations/search?locationId=' + loc + '&contactId=' + c.id, {});
+      for (const co of (cv.conversations || [])) {
+        const m = await N.ghl('/conversations/' + co.id + '/messages?limit=60', {});
+        const ems = (((m.messages || {}).messages) || []).filter(function (x) { return x.messageType === 'TYPE_EMAIL' && x.direction === 'outbound' && x.dateAdded >= '2026-11-01'; });
+        for (const x of ems) {
+          const d = await N.ghl('/conversations/messages/email/' + ((x.meta || {}).email || {}).messageIds[0], {}).catch(function () { return null; });
+          if (d && d.emailMessage && /ya est[áa]s dentro/i.test(d.emailMessage.subject || '')) { const f = N.diaMadrid(new Date(x.dateAdded)); if (!dia || f < dia) dia = f; }
+        }
+      }
+    } catch (e) { }
+    if (!dia && c.dateAdded && c.dateAdded >= '2026-11-01') dia = N.diaMadrid(new Date(c.dateAdded));
+    return { vip: (c.tags || []).indexOf(TAG_VIP) >= 0, dia: dia };
+  });
+  const porDia = {};
+  let sinFecha = 0, ingresos = 0;
+  filas.forEach(function (f) {
+    if (f.dia) porDia[f.dia] = (porDia[f.dia] || 0) + 1; else sinFecha++;
+    ingresos += f.dia && f.dia > '2026-11-30' ? 185 : 175;
+  });
+  return { total: filas.length, deLaVip: filas.filter(function (f) { return f.vip; }).length, porDia: porDia, sinFecha: sinFecha, ingresosEstimados: ingresos };
+}
+
 async function blackfriday() {
-  const [vip, compras, tg, lista] = await Promise.all([total(TAG_VIP), total(TAG_COMPRA), telegram(), campanas().catch(function () { return null; })]);
-  return { generado: Date.now(), vip: vip, compras: compras, telegram: tg, plan: lista ? cruzar(lista) : null };
+  const [vip, compras, tg, lista, det] = await Promise.all([total(TAG_VIP), total(TAG_COMPRA), telegram(), campanas().catch(function () { return null; }), detalleCompras().catch(function () { return null; })]);
+  return { generado: Date.now(), vip: vip, compras: compras, detalle: det, telegram: tg, plan: lista ? cruzar(lista) : null };
 }
 
 module.exports = { blackfriday: blackfriday };

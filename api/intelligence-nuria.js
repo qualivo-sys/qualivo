@@ -51,6 +51,10 @@ const COMPARA = require('./_nuria-comparativa.js');
 const CLASES = require('./_nuria-clases.js');
 const ENVIOS = require('./_nuria-envios.js');
 const GRUPOS = require('./_nuria-grupos.js');
+const EMBC = require('./_nuria-embudo-circulo.js');
+const RING = require('./_nuria-ringover.js');
+const cacheRing = new Map();   // llamadas de Ringover: 'desde|hasta' → { t, datos }, 15 min
+let cacheEmbC = null;   // embudo completo de El Círculo por edición: { t, datos }, 1 h
 const BF = require('./_nuria-blackfriday.js');
 const CPER = require('./_nuria-clases-personas.js');
 let cacheCPer = null;
@@ -461,6 +465,38 @@ module.exports = async function (req, res) {
       return res.status(200).json(cacheCV.datos);
     } catch (e) {
       return res.status(502).json({ error: 'No se ha podido leer Presto Player: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'llamadas') {
+    // Llamadas de Ringover por embudo y por comercial en un periodo (máximo 62 días)
+    try {
+      const dd = String(req.query.desde || ''), hh = String(req.query.hasta || '');
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(dd) || !/^\d{4}-\d{2}-\d{2}$/.test(hh) || dd > hh || (Date.parse(hh) - Date.parse(dd)) > 62 * 86400000) return res.status(400).json({ error: 'Periodo no válido' });
+      const k = dd + '|' + hh, c = cacheRing.get(k);
+      if (!c || Date.now() - c.t > 900000) {
+        if (cacheRing.size > 20) cacheRing.clear();
+        cacheRing.set(k, { t: Date.now(), datos: await RING.llamadas(dd, hh) });
+      }
+      return res.status(200).json(cacheRing.get(k).datos);
+    } catch (e) {
+      return res.status(502).json({ error: 'No se han podido leer las llamadas de Ringover: ' + String(e.message || e).slice(0, 80) });
+    }
+  }
+
+  if (accion === 'embudocirculo') {
+    // Embudo completo de El Círculo: las 3 últimas ediciones con directo hecho, la que está en clases y la que capta
+    try {
+      if (!cacheEmbC || Date.now() - cacheEmbC.t > 3600000) {
+        const hoy = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+        const d = new Date(hoy); d.setDate(d.getDate() + ((3 - d.getDay() + 7) % 7));   // próximo miércoles (o hoy)
+        const iso = function (x) { return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); };
+        const directos = [-21, -14, -7, 0, 7].map(function (k) { const x = new Date(d); x.setDate(x.getDate() + k); return iso(x); });
+        cacheEmbC = { t: Date.now(), datos: await EMBC.embudoCirculo(directos) };
+      }
+      return res.status(200).json(cacheEmbC.datos);
+    } catch (e) {
+      return res.status(502).json({ error: 'No se ha podido montar el embudo de El Círculo: ' + String(e.message || e).slice(0, 80) });
     }
   }
 
