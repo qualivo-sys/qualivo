@@ -179,3 +179,11 @@ Maikel separa los papeles: el estático vende toda la propuesta de valor y el v�
 - La ventana de Intelligence lleva en su barra la etiqueta «Datos ilustrativos», porque en la tabla siguen viéndose interesados, coste, inversión y matrículas de ejemplo.
 - Maikel: «No volvería a rediseñarlo. Ya tenemos una pieza suficientemente profesional para probarla en Meta». Pendiente solo de su aprobación de esta versión y de su instrucción a Paid.
 - Batería que plantea: vídeo antiguo (control), V7 (en prueba), este estático (aprobar tras los ajustes) y la demo corta para la siguiente ronda.
+
+### APROBADO por Maikel como creatividad (24-nov, noche)
+
+- Último cambio: la columna Optimización vuelve a «Intelligence · Atribución de ventas · Mejora continua», por coherencia con las otras dos y para reforzar la tecnología propia.
+- La etiqueta «Datos ilustrativos» pasa a 20 px sobre fondo amarillo para que se lea en el móvil.
+- Valoración de Maikel: diseño 9, claridad 9, propuesta de valor 9, jerarquía 9, diferenciación 8,5 y botón 9. «Yo lo aprobaría. No buscaría llegar al 10 mediante otras cinco versiones.»
+- Plan: incorporarlo a la batería junto al vídeo antiguo y el V7, con 30 €/día conjuntos, sin apagar anuncios sin autorización. Lo ejecuta Paid con la instrucción de Maikel en su chat.
+- Archivos definitivos: `png/sistema-completo-FINAL-45.png` y `png/sistema-completo-FINAL-916.png`.
