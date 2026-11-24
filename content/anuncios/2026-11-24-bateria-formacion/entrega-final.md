@@ -170,4 +170,4 @@ Maikel separa los papeles: el estático vende toda la propuesta de valor y el v�
 - **Cierre:** «Un equipo. Un sistema. Todo conectado.» · botón «Solicita tu diagnóstico gratuito» · logo. Sin etiquetas flotantes ni tarjetas.
 - **Reparto en Meta que plantea Maikel (30 €/día, tres activos como máximo):** vídeo antiguo, V7 y este estático; la demo corta, en reserva. No se toca nada sin su autorización expresa.
 
-- **Columna Optimización en lenguaje llano (Maikel, 24-nov: «Intelligence, atribución y mejora continua no sé si se entiende»):** pasa a «Qué anuncio funciona · Datos de tus ventas · Campañas que mejoran». «Qualivo Intelligence» sigue en la barra de la ventana.
+- **Columna Optimización en lenguaje llano (Maikel, 24-nov: «Intelligence, atribución y mejora continua no sé si se entiende»):** pasa a «Qué anuncio funciona · Datos de tus ventas · Mejores campañas». «Qualivo Intelligence» sigue en la barra de la ventana.
