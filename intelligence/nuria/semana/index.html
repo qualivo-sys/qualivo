@@ -168,6 +168,9 @@ small,.nota{color:var(--mut);font-size:12.5px}
     });
     h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>Grupo de WhatsApp:</b> entradas y salidas reales que avisa Funnelchat, asignadas a cada edición por la etiqueta de registro de la persona en Kliking. Se registran desde el 5-nov por la tarde: las ediciones hasta la del 11-nov (incluida) salen incompletas; la primera completa es la del 18-nov. «Entran»: personas distintas que entran (y su % sobre los registros); «Salen»: personas que salen (y su % sobre las que entraron). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
 
+    // Llamadas de Ringover por embudo y comercial
+    h += '<h2>Llamadas de Ringover</h2><p class="sub">Llamadas de las comerciales por embudo y por persona: cuántas se hacen, cuántas contestan, cuánto se habla y cuántas acaban en cita y en venta.</p><div class="tabs" role="group" aria-label="Periodo de las llamadas" id="ringTabs"></div><div id="ringover"><p class="cargando">Cargando Ringover…</p></div>';
+
     // Embudo completo de El Círculo por edición (registro → grupo → clases → directo → llamadas → ventas)
     h += '<h2>Embudo completo de El Círculo</h2><p class="sub">Cada edición paso a paso, de los registros a las ventas, con la conversión de cada paso.</p><div id="embudocirculo"><p class="cargando">Cargando el embudo (tarda unos 20 segundos)…</p></div>';
 
@@ -243,6 +246,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     cargarCPer();
     cargarSalidas();
     cargarEmbudoCirculo();
+    cargarRingover(7);
     cargarClasesVideo();
     cargarEnvios(mesEnv);
     cargarMensajes();
@@ -362,6 +366,32 @@ small,.nota{color:var(--mut);font-size:12.5px}
           });
         });
         h += '</table><p class="nota">Datos de Presto Player (licencia oficial). Son <b>reproducciones, no personas</b>: si alguien ve la clase dos veces, cuenta dos. «Por cada 100 registros»: reproducciones divididas entre los registros de la edición. La clase 3 está en Vimeo y no sale aquí hasta que se suba a Presto. Para saber cuántas <b>personas</b> ven cada clase, mira «Quién ve las clases» (desde la edición del 25-nov).</p></div>';
+        c.innerHTML = h;
+      })
+      .catch(function (e) { c.innerHTML = '<p class="nota">' + esc(e.message) + '</p>'; });
+  }
+  function cargarRingover(dias) {
+    var c = document.getElementById('ringover'), t = document.getElementById('ringTabs'); if (!c) return;
+    var iso = function (x) { return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); };
+    var hoy = new Date(), de = new Date(); de.setDate(de.getDate() - (dias - 1));
+    if (t) t.innerHTML = [[7, 'Últimos 7 días'], [14, 'Últimos 14 días'], [30, 'Últimos 30 días']].map(function (o) { return '<button type="button" class="btn" aria-pressed="' + (o[0] === dias) + '" data-d="' + o[0] + '">' + o[1] + '</button>'; }).join('');
+    if (t) Array.prototype.forEach.call(t.querySelectorAll('button'), function (b) { b.onclick = function () { c.innerHTML = '<p class="cargando">Cargando Ringover…</p>'; cargarRingover(Number(b.getAttribute('data-d'))); }; });
+    fetch(API + '?accion=llamadas&desde=' + iso(de) + '&hasta=' + iso(hoy), { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) {
+        var pc2 = function (a, b) { return b ? ' <small>(' + Math.round(a / b * 100) + ' %)</small>' : ''; };
+        var mm = function (s) { return s ? Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') : '—'; };
+        var tabla = function (titulo, filas) {
+          var h = '<h3 style="margin:14px 0 6px">' + titulo + '</h3><table><tr><th></th><th class="n">Llamadas</th><th class="n">Personas</th><th class="n">Contestan</th><th class="n">Conversaciones +2 min</th><th class="n">Minutos hablados</th><th class="n">Duración media</th><th class="n">Con cita</th><th class="n">Cita hecha</th><th class="n">Compran</th></tr>';
+          filas.filter(function (f) { return f.llamadas > 0; }).forEach(function (f) {
+            h += '<tr><td>' + esc(f.nombre) + '</td><td class="n">' + num(f.llamadas) + '</td><td class="n">' + num(f.personas) + '</td><td class="n">' + num(f.contestadas) + pc2(f.contestadas, f.llamadas) + '</td><td class="n">' + num(f.conversaciones) + '</td><td class="n">' + num(f.minutos) + '</td><td class="n">' + mm(f.mediaSegundos) + '</td>'
+              + '<td class="n">' + (f.conCita == null ? '—' : num(f.conCita) + pc2(f.conCita, f.personas)) + '</td><td class="n">' + (f.citaHecha == null ? '—' : num(f.citaHecha)) + '</td><td class="n">' + (f.compran == null ? '—' : num(f.compran)) + '</td></tr>';
+          });
+          return h + '</table>';
+        };
+        var ent = d.comerciales.reduce(function (s, f) { return s + f.entrantes; }, 0), per = d.comerciales.reduce(function (s, f) { return s + f.perdidas; }, 0);
+        var h = '<div class="card" style="overflow-x:auto">' + tabla('Por embudo', d.embudos) + tabla('Por comercial', d.comerciales);
+        h += '<p class="nota">Llamadas salientes de Ringover del ' + dia(d.desde) + ' al ' + dia(d.hasta) + ' (' + num(d.total) + ' registros; ' + num(d.encontradas) + ' de ' + num(d.numeros) + ' números encontrados en Kliking). Además hubo ' + num(ent) + ' llamadas entrantes, ' + num(per) + ' sin contestar. <b>Embudo</b>: El Círculo si la persona tiene registro de alguna edición; si no, según su origen en Kliking. <b>Contestan</b>: llamadas que se descuelgan. <b>Conversaciones</b>: llamadas contestadas de 2 minutos o más. <b>Con cita</b>: personas llamadas que tienen una cita en cualquier agenda en el periodo o en las 2 semanas siguientes (% sobre personas llamadas). <b>Compran</b>: personas llamadas que aparecen en la hoja de ventas desde el inicio del periodo.</p></div>';
         c.innerHTML = h;
       })
       .catch(function (e) { c.innerHTML = '<p class="nota">' + esc(e.message) + '</p>'; });
