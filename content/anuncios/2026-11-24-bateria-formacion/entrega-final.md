@@ -113,3 +113,14 @@ Maikel, tras ver la entrega: «los veo muy cargados y se nota mucho que son dise
 - Las tres fotografías son imágenes generadas (Higgsfield), sin personas ni marcas. Están en `img/`.
 - La versión anterior («cargada») sigue en `png/ad1…ad3` por si se quiere comparar o probar una contra otra.
 - Los copies de arriba sirven igual; con estas piezas el texto del anuncio lleva más peso, porque la imagen ya no enumera el servicio.
+
+## Decisión de Maikel (24-nov, noche): un solo estático y el V7
+
+Maikel descarta también la propuesta «limpia» («no tiene ningún sentido») y, tras ver las referencias de competidores de Growth, pide **un único estático que lleve todo lo que hacemos**, para dejarlo junto al V7.
+
+- **Pieza:** «Sistema completo», versión sobria. `png/sistema-completo-45.png` y `png/sistema-completo-916.png` (fuente: `sistema.html`, `render-sistema.js`).
+- **Referencia de estilo:** la comparativa de dos columnas sobre fondo liso que lleva 136 días activa en la biblioteca de Meta (Clientify). Sin iconos, miniaturas, fotos ni degradados.
+- **Contenido:** «Para escuelas de formación online» · «Tu escuela necesita algo más que una agencia de publicidad.» · Una agencia: campañas de anuncios, te entrega formularios, el resto es cosa tuya · Qualivo: campañas de anuncios, respuesta por WhatsApp, cualificación de cada solicitud, seguimiento y reuniones, ventas conectadas con tus campañas · «Un equipo. Un sistema. Todo conectado.» · «Solicita tu diagnóstico gratuito».
+- **No aparece:** el agente de voz (línea caída), ni «IA», ni Google Ads.
+- **Copy del anuncio:** el de «Sistema completo» de la sección de copies.
+- El resto de estáticos (`ad1…ad3`, `limpio-…`) quedan como histórico, sin uso.
