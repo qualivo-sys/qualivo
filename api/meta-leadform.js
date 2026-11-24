@@ -167,6 +167,8 @@ const FORMULARIOS_SECTOR = {
   // 19-oct-2026: test de cualificación de formación (21-31 oct). La copia es la que lleva el anuncio.
   // Sin estas entradas el rescate no los miraba y el primer lead apto (22-oct) no llegó al CRM.
   '2063720777591278': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' },
+  // 24-nov-2026 (Maikel): Formación V3, 3 preguntas (inversión, precio medio de la formación, qué mejorar). Mismas claves que FORM CUALIF.
+  '3577457215789799': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'v3-3preg-24nov' },
   '1419526843110847': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'cualif-oct' },
   // 1-nov-2026: formulario corto de formación (2 preguntas: ticket del alumno e inversión), para el anuncio de Javier (E-03).
   '1426444132403939': { sector: 'Formación o academia', etiqueta: 'sector-formacion', angulo: 'form-corto' },
