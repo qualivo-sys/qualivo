@@ -9,7 +9,8 @@
 //   esas campañas en la captación.
 // - Grupo: «[ingresa a comunidad] AAAA-MM-DD» y, si responde n8n, salidas de Funnelchat.
 // - Clases: reproducciones en Presto (del domingo antes al sábado después). No son personas.
-// - Asistencia al directo: no se mide en ningún sistema; sale como «sin medir».
+// - Asistencia al directo: etiquetas «asiste directo AAAA-MM-DD» (clic en el trigger link del Zoom en los
+//   mensajes del día) y «check-in directo AAAA-MM-DD» (clic en «Estoy aquí» durante el directo).
 // - Llamadas: citas de cualquier agenda de Kliking de personas de la edición, desde el inicio de la
 //   captación hasta 3 semanas después del directo. «invalid» no cuenta.
 // - Ventas: hoja de ventas, personas de la edición, desde el inicio de la captación.
@@ -80,7 +81,7 @@ async function embudoCirculo(directos) {
   const ediciones = [];
   for (const d of directos) {
     const desde = N.sumaDias(d, -12), hasta = N.sumaDias(d, -6);
-    const [ads, org, grupo] = await Promise.all([contactos('[registro ads]' + NBSP + d), contactos('[registro org]' + NBSP + d), total('[ingresa a comunidad]' + NBSP + d)]);
+    const [ads, org, grupo, clicZoom, checkin] = await Promise.all([contactos('[registro ads]' + NBSP + d), contactos('[registro org]' + NBSP + d), total('[ingresa a comunidad]' + NBSP + d), total('asiste directo ' + d), total('check-in directo ' + d)]);
     const personas = ads.concat(org);
     if (!personas.length) continue;
     const ids = new Set(personas.map(function (p) { return p.id; }));
@@ -112,7 +113,7 @@ async function embudoCirculo(directos) {
       registrosMeta: regMeta, registrosKliking: personas.length, ads: ads.length, org: org.length,
       gasto: gasto, costeRegistro: gasto != null && personas.length ? gasto / ads.length : null,
       grupoEntran: g ? g.entran : grupo, grupoSalen: g ? g.salen : null, fuenteGrupo: g ? 'funnelchat' : 'etiqueta',
-      vistas: vistas, asistencia: null, llamadas: ll,
+      vistas: vistas, asistencia: (clicZoom || checkin) ? { clicZoom: clicZoom, checkin: checkin } : null, llamadas: ll,
       compras: vs ? new Set(vs.map(function (v) { return v.email; })).size : null,
       facturacion: vs ? vs.reduce(function (s, v) { return s + (v.importe || 0); }, 0) : null
     });
