@@ -1,10 +1,10 @@
 // node render.js → png/<ad>-<formato>.png · avisa si algo se sale del lienzo o de la zona segura del 9:16 (290-1520 px)
 const {chromium}=require('playwright');
 (async()=>{const b=await chromium.launch();
-for(const k of ['ad1','ad1b','ad2','ad3','ad4fin','ad4rot'])for(const f of ['45','916']){
+for(const k of ['ad1','ad2','ad3','ad4fin','ad4rot'])for(const f of ['45','916']){
  const p=await b.newPage({viewport:{width:1080,height:f==='45'?1350:1920}});
  await p.goto('file://'+__dirname+'/estaticos.html#'+k+'-'+f,{waitUntil:'networkidle'});await p.evaluate(()=>document.fonts.ready);
  const av=await p.evaluate(f=>{const e=document.getElementById('e'),R=e.getBoundingClientRect(),o=[];const lo=f==='916'?285:20,hi=f==='916'?1525:R.height-20;
-  for(const c of e.querySelectorAll('h1,.ant,.t,li,.cie,.cta,.lg,.caja,h2')){const q=c.getBoundingClientRect();if(q.left<20||q.right>R.width-20||q.top<lo||q.bottom>hi)o.push((c.className||c.tagName)+' '+Math.round(q.left)+','+Math.round(q.top)+'-'+Math.round(q.right)+','+Math.round(q.bottom));}return o.slice(0,5)},f);
+  for(const c of e.querySelectorAll('h1,.ant,.pil,.hero,.t,li,.cie,.cta,.lg,.caja,h2')){const q=c.getBoundingClientRect();if(q.left<20||q.right>R.width-20||q.top<lo||q.bottom>hi)o.push((c.className||c.tagName)+' '+Math.round(q.left)+','+Math.round(q.top)+'-'+Math.round(q.right)+','+Math.round(q.bottom));}return o.slice(0,5)},f);
  await (await p.$('#e')).screenshot({path:`${__dirname}/png/${k==='ad1b'?'ad1-sin-voz':k==='ad4fin'?'ad4-cierre':k==='ad4rot'?'ad4-rotulo':k}-${f}.png`,omitBackground:k==='ad4rot'});console.log(k,f,av.length?'⚠ '+av.join(' | '):'ok');await p.close();}
 await b.close();})();
