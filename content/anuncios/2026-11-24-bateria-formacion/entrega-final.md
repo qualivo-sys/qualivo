@@ -187,3 +187,5 @@ Maikel separa los papeles: el estático vende toda la propuesta de valor y el v�
 - Valoración de Maikel: diseño 9, claridad 9, propuesta de valor 9, jerarquía 9, diferenciación 8,5 y botón 9. «Yo lo aprobaría. No buscaría llegar al 10 mediante otras cinco versiones.»
 - Plan: incorporarlo a la batería junto al vídeo antiguo y el V7, con 30 €/día conjuntos, sin apagar anuncios sin autorización. Lo ejecuta Paid con la instrucción de Maikel en su chat.
 - Archivos definitivos: `png/sistema-completo-FINAL-45.png` y `png/sistema-completo-FINAL-916.png`.
+
+- **24-nov, noche · Maikel pide quitar la etiqueta «Datos ilustrativos»** del estático y de la demo corta. Quitada en los dos. Las cifras que se ven en las interfaces siguen siendo de ejemplo del entorno de demostración, ahora sin rótulo que lo diga.
