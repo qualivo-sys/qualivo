@@ -134,3 +134,17 @@ Maikel descarta la comparativa («parece una diapositiva de una propuesta comerc
 - **Propuesta B (clara):** `png/producto-b-45.png` y `-916.png`. Fondo claro; tres ventanas apiladas: campañas, oportunidades y conversaciones de WhatsApp, cada una con su etiqueta.
 - **Capturas:** son pantallas reales de Qualivo Intelligence y del asistente de WhatsApp (`cap/`), del entorno de demostración: los nombres y los números que se ven son de ejemplo, no de clientes. La tabla de campañas, que lleva retornos y matrículas de ejemplo, va al fondo y desenfocada para que no se lean como resultados.
 - Fuente: `producto.html` y `render-producto.js`. Vista conjunta: `hoja-producto.png`.
+
+## «Sistema completo» · VERSIÓN FINAL para aprobación (24-nov, noche)
+
+Maikel elige la propuesta oscura («8/10, merece probarse») y pide tres ajustes, ya aplicados, sin más rediseño.
+
+- **Archivos:** `png/sistema-completo-FINAL-45.png` (1080×1350) y `png/sistema-completo-FINAL-916.png` (1080×1920, contenido entre 296 y 1500 px). Fuente: `final.html` y `render-final.js`. Vista conjunta: `hoja-sistema-completo-FINAL.png`.
+- **Subtítulo:** «Gestionamos tus anuncios, automatizamos el seguimiento y mejoramos tu conversión comercial.»
+- **Tercera interfaz:** la tabla de campañas de Intelligence (campaña, interesados, encaje, matrículas, retorno y lo que dice el sistema), nítida y con la etiqueta «Intelligence · campañas, oportunidades y matrículas». Delante siguen la tabla de oportunidades («CRM y seguimiento») y el móvil con el asistente («WhatsApp al momento»).
+- **Tres áreas:** Captación (Ads, landings y formularios) · Conversión (IA, CRM y reuniones) · Optimización (Intelligence y atribución).
+- **Cierre:** «Un equipo. Un sistema. Todo conectado.» sobre el botón «Solicita tu diagnóstico gratuito».
+- **Datos de las interfaces:** ilustrativos, del entorno de demostración de Qualivo; no son resultados de clientes y no llevan ningún rótulo que los presente como tales.
+- **Legibilidad:** el texto propio más pequeño mide 24 px sobre 1080 (las tres áreas). El texto de dentro de las capturas no está pensado para leerse entero en el móvil.
+- **Copy del anuncio:** texto principal «Para escuelas de formación online. Gestionamos tus anuncios, automatizamos el seguimiento y mejoramos tu conversión comercial: respuesta por WhatsApp, cualificación, CRM, reuniones y los datos de ventas conectados con tus campañas. Un equipo y un sistema. Solicita tu diagnóstico gratuito.» · Título «De captar solicitudes a conseguir alumnos» · Descripción «Diagnóstico gratuito para escuelas online».
+- **Plan de Maikel:** ponerla a competir con el vídeo antiguo y el V7 dentro de los 30 €/día conjuntos. Lo ejecuta Paid con su instrucción.
