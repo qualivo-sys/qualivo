@@ -1,0 +1,50 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<!-- Intelligence en la demo corta (versión final): el panel real (entorno de demostración), sin la columna de retorno, con los cuatro conceptos
+     que se van encendiendo a la vez que la locución los nombra. «Entrevistas» sale de la vista real de oportunidades (columna Etapa).
+     window.setF(i,n); los tiempos vienen de window.IA (t3.js). -->
+<script src="t3.js"></script>
+<style>
+@font-face{font-family:SG;src:url(../../anuncios/2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2');font-weight:300 700}
+@font-face{font-family:Anton;src:url(../../anuncios/2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1080px;height:1920px;overflow:hidden;background:#05080A;font-family:SG,sans-serif}
+body::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 900px at 50% 56%,rgba(31,163,150,.5),transparent 64%)}
+#pills{position:absolute;left:36px;right:36px;top:492px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#pills div{height:62px;border-radius:14px;border:2px solid rgba(255,255,255,.28);color:rgba(255,255,255,.5);font-weight:700;font-size:29px;letter-spacing:.03em;text-transform:uppercase;display:flex;align-items:center;justify-content:center}
+#view{position:absolute;left:36px;right:36px;top:656px;height:800px;border-radius:30px;overflow:hidden;background:#0B1416;box-shadow:0 0 0 2px rgba(255,255,255,.16),0 50px 120px rgba(0,0,0,.6)}
+#cam{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+#win{width:1422px;height:994px;background:#fff;border-radius:18px;overflow:hidden;position:relative}
+#bar{height:54px;background:#ECEAE4;display:flex;align-items:center;gap:10px;padding:0 20px;position:relative;z-index:3}#bar i{width:14px;height:14px;border-radius:50%;background:#C9C6BD;display:block}
+#bar b{margin-left:12px;font-size:22px;font-weight:700;color:#3D4148}
+#win img{display:block;width:1422px}
+#wb{position:absolute;left:0;top:54px;width:1422px;height:940px;background:#fff;opacity:0;z-index:2}
+.hl{position:absolute;border:6px solid #F4CC38;border-radius:16px;background:rgba(244,204,56,.13);box-shadow:0 0 0 6px rgba(244,204,56,.22);opacity:0;z-index:4}
+#cap{position:absolute;left:36px;right:36px;top:1486px;font-family:Anton;font-size:50px;line-height:1.14;text-transform:uppercase;color:#F4F1EB;text-align:center}
+#cap span{opacity:0;display:inline-block}#cap i{font-style:normal;color:#F4CC38}
+</style></head><body>
+<div id="pills"><div>Campañas y anuncios</div><div>Solicitudes cualificadas</div><div>Entrevistas</div><div>Matrículas</div></div>
+<div id="view"><div id="cam"><div id="win"><div id="bar"><i></i><i></i><i></i><b id="tit">Qualivo Intelligence · Campañas</b></div><img src="intel-campanas.png">
+ <div id="wb"><img src="../../anuncios/2026-11-24-bateria-formacion/cap/oportunidades.png"></div>
+ <div class="hl" id="h0" style="left:8px;top:132px;width:316px;height:856px"></div>
+ <div class="hl" id="h1" style="left:352px;top:132px;width:458px;height:856px"></div>
+ <div class="hl" id="h2" style="left:388px;top:434px;width:232px;height:320px"></div>
+ <div class="hl" id="h3" style="left:826px;top:132px;width:192px;height:856px"></div>
+ <div class="hl" id="h4" style="left:1030px;top:138px;width:132px;height:68px"></div>
+ <div class="hl" id="h5" style="left:1030px;top:698px;width:386px;height:286px"></div></div></div></div>
+<div id="cap"><span>Qué funciona.</span> <span>Dónde pierdes oportunidades.</span><br><span><i>Qué debemos optimizar.</i></span></div>
+<script>
+const VW=1008,VH=800,A=window.IA; const cl=x=>Math.max(0,Math.min(1,x)); const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2; const nm=(t,a,b)=>cl((t-a)/(b-a)); const $=id=>document.getElementById(id);
+// cámara: [t, escala, foco x, foco y] en coordenadas de la ventana (1422 × 994)
+const L=[.80,630,497], R=[.80,792,497], G=[.70,711,497];
+const K=[[0,...G],[A.camp-.55,...G],[A.camp-.05,...L],[A.opt-.25,...L],[A.opt+.3,...R],[A.sal,...R],[A.sal+.7,...G],[A.D,...G]];
+window.setF=(i,n)=>{ const t=i/25; let j=0; while(j<K.length-2&&t>=K[j+1][0])j++; const a=K[j],b=K[j+1],e=ease(nm(t,a[0],b[0])); const s=a[1]+(b[1]-a[1])*e,fx=a[2]+(b[2]-a[2])*e,fy=a[3]+(b[3]-a[3])*e;
+  $('cam').style.transform=`translate(${VW/2-fx*s}px,${VH/2-fy*s}px) scale(${s})`;
+  const on=[A.camp,A.sol,A.ent,A.mat]; [...$('pills').children].forEach((p,k)=>{ const v=nm(t,on[k]-.05,on[k]+.12), pu=Math.sin(nm(t,on[k]-.05,on[k]+.4)*Math.PI);
+    p.style.background=v>.5?'#F4CC38':'transparent'; p.style.color=v>.5?'#0A0A0B':'rgba(255,255,255,.5)'; p.style.borderColor=v>.5?'#F4CC38':'rgba(255,255,255,.28)'; p.style.transform=`scale(${1+.07*pu})`; });
+  const win=(a,b)=>nm(t,a-.05,a+.12)*(1-nm(t,b-.15,b));
+  const ob=nm(t,A.ent-.2,A.ent)*(1-nm(t,A.mat-.2,A.mat)); $('wb').style.opacity=ob; $('tit').textContent=ob>.5?'Qualivo Intelligence · Oportunidades':'Qualivo Intelligence · Campañas';
+  $('h0').style.opacity=win(A.camp,A.sol); $('h1').style.opacity=win(A.sol,A.ent-.1); $('h2').style.opacity=win(A.ent+.05,A.mat-.1); $('h3').style.opacity=win(A.mat+.05,A.opt);
+  $('h4').style.opacity=win(A.opt+.3,A.opt2+.1); $('h5').style.opacity=win(A.opt2+.15,A.sal);
+  const c=[A.opt+.3,A.opt2+.15,A.opt2+1.0]; [...$('cap').querySelectorAll('span')].forEach((sp,k)=>{ const v=nm(t,c[k],c[k]+.2); sp.style.opacity=v; sp.style.transform=`translateY(${(1-v)*18}px)`; }); };
+window.setF(0,1);
+</script></body></html>

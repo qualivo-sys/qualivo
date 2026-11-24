@@ -1,0 +1,281 @@
+{
+ "T": {
+  "d0": [
+   0.1,
+   2.104
+  ],
+  "d1": [
+   2.274,
+   4.112
+  ],
+  "d2": [
+   6.456,
+   5.539
+  ],
+  "d3": [
+   12.065,
+   2.999
+  ],
+  "d4": [
+   15.134,
+   8.417
+  ],
+  "d5": [
+   23.622,
+   3.435
+  ],
+  "d6": [
+   27.126,
+   2.153
+  ]
+ },
+ "DUR": 29.68,
+ "TEMPO": 1.08,
+ "P": [
+  [
+   0,
+   "ficha",
+   null
+  ],
+  [
+   3.72,
+   "o_crm",
+   13.7
+  ],
+  [
+   6.36,
+   "wa",
+   null
+  ],
+  [
+   8.96,
+   "pipe",
+   null
+  ],
+  [
+   10.24,
+   "o_seg",
+   35.2
+  ],
+  [
+   11.96,
+   "cal",
+   null
+  ],
+  [
+   13.32,
+   "conf",
+   null
+  ],
+  [
+   15.04,
+   "intel",
+   null
+  ],
+  [
+   25.36,
+   "fin",
+   null
+  ]
+ ],
+ "X": {
+  "d0": {
+   "online": 1.551,
+   "formación": 1.068,
+   "de": 0.97,
+   "escuela": 0.637,
+   "una": 0.508,
+   "tienes": 0.1
+  },
+  "d1": {
+   "cursos": 5.693,
+   "tus": 5.51,
+   "de": 5.392,
+   "uno": 5.177,
+   "sobre": 4.897,
+   "información": 4.317,
+   "solicita": 3.833,
+   "alguien": 3.51,
+   "cuando": 3.221,
+   "ocurre": 2.844,
+   "que": 2.726,
+   "lo": 2.597,
+   "mira": 2.274
+  },
+  "d2": {
+   "automáticamente": 10.81,
+   "seguimiento": 10.294,
+   "el": 6.456,
+   "activa": 9.842,
+   "y": 9.767,
+   "interesado": 9.165,
+   "al": 9.026,
+   "cualifica": 8.477,
+   "whatsapp": 7.736,
+   "por": 7.52,
+   "responde": 7.102,
+   "sistema": 6.671
+  },
+  "d3": {
+   "recordatorios": 14.022,
+   "y": 13.914,
+   "confirmaciones": 13.215,
+   "reuniones": 12.742,
+   "sus": 12.571,
+   "gestiona": 12.065
+  },
+  "d4": {
+   "publicitaria": 22.584,
+   "inversión": 22.154,
+   "tu": 22.025,
+   "optimizar": 21.456,
+   "podamos": 21.046,
+   "que": 20.929,
+   "para": 20.714,
+   "matrículas": 19.768,
+   "y": 15.134,
+   "entrevistas": 19.047,
+   "generando": 18.553,
+   "están": 18.241,
+   "te": 18.091,
+   "anuncios": 17.543,
+   "qué": 16.414,
+   "campañas": 16.618,
+   "sabes": 15.995,
+   "momento": 15.586,
+   "todo": 15.37,
+   "en": 15.285
+  },
+  "d5": {
+   "después": 26.298,
+   "ocurre": 25.923,
+   "que": 25.814,
+   "lo": 25.707,
+   "todo": 25.471,
+   "y": 25.373,
+   "captación": 24.815,
+   "tu": 24.718,
+   "gestionamos": 24.181,
+   "cuálivo": 23.773,
+   "en": 23.622
+  },
+  "d6": {
+   "gratuito": 28.448,
+   "diagnóstico": 27.825,
+   "tu": 27.707,
+   "solicita": 27.126
+  }
+ },
+ "SUBS": [
+  [
+   0.05,
+   1.018,
+   "¿Tienes una escuela de"
+  ],
+  [
+   1.018,
+   2.299,
+   "formación online?"
+  ],
+  [
+   2.224,
+   3.46,
+   "Mira lo que ocurre cuando"
+  ],
+  [
+   3.46,
+   4.847,
+   "alguien solicita información"
+  ],
+  [
+   4.847,
+   6.495,
+   "sobre uno de tus cursos."
+  ],
+  [
+   6.406,
+   7.686,
+   "El sistema responde por"
+  ],
+  [
+   7.686,
+   9.115,
+   "WhatsApp, cualifica al"
+  ],
+  [
+   9.115,
+   10.244,
+   "interesado y activa el"
+  ],
+  [
+   10.244,
+   12.095,
+   "seguimiento automáticamente."
+  ],
+  [
+   12.015,
+   13.165,
+   "Gestiona sus reuniones,"
+  ],
+  [
+   13.165,
+   13.972,
+   "confirmaciones y"
+  ],
+  [
+   13.972,
+   15.167,
+   "recordatorios."
+  ],
+  [
+   15.084,
+   16.568,
+   "Y en todo momento sabes qué"
+  ],
+  [
+   16.568,
+   18.191,
+   "campañas y qué anuncios te"
+  ],
+  [
+   18.191,
+   19.643,
+   "están generando entrevistas"
+  ],
+  [
+   19.643,
+   20.996,
+   "y matrículas, para que"
+  ],
+  [
+   20.996,
+   22.104,
+   "podamos optimizar tu"
+  ],
+  [
+   22.104,
+   23.655,
+   "inversión publicitaria."
+  ],
+  [
+   23.572,
+   24.765,
+   "En Qualivo gestionamos tu"
+  ],
+  [
+   24.765,
+   25.445,
+   "captación"
+  ]
+ ],
+ "IA": {
+  "camp": 1.578,
+  "sol": 3.003,
+  "ent": 4.007,
+  "mat": 4.728,
+  "opt": 5.674,
+  "opt2": 6.416,
+  "sal": 8.582,
+  "D": 10.32
+ }
+}
