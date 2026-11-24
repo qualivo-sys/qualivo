@@ -1,0 +1,234 @@
+{
+ "T": {
+  "a0": [
+   0.1,
+   2.185
+  ],
+  "a1": [
+   2.465,
+   2.494
+  ],
+  "a2": [
+   5.138,
+   4.346
+  ],
+  "a3": [
+   9.664,
+   4.797
+  ],
+  "a4": [
+   14.641,
+   5.937
+  ],
+  "a5": [
+   20.758,
+   3.42
+  ],
+  "a6": [
+   24.358,
+   2.185
+  ]
+ },
+ "DUR": 27.84,
+ "TEMPO": 1.1,
+ "P": [
+  [
+   0,
+   "anuncio",
+   null,
+   0
+  ],
+  [
+   2.36,
+   "crm",
+   null,
+   0
+  ],
+  [
+   5.04,
+   "wa",
+   null,
+   0
+  ],
+  [
+   6.68,
+   "pipe",
+   null,
+   0
+  ],
+  [
+   9.56,
+   "cal",
+   null,
+   0
+  ],
+  [
+   10.96,
+   "conf",
+   null,
+   0
+  ],
+  [
+   14.56,
+   "meta",
+   null,
+   0
+  ],
+  [
+   20.64,
+   "fin",
+   null,
+   0
+  ]
+ ],
+ "X": {
+  "a0": {
+   "publicidad": 1.483,
+   "en": 1.387,
+   "invierte": 1.018,
+   "ya": 0.924,
+   "online": 0.627,
+   "escuela": 0.279,
+   "tu": 0.1
+  },
+  "a1": {
+   "solicitud": 4.09,
+   "una": 3.868,
+   "entra": 3.594,
+   "cuando": 3.341,
+   "ocurre": 2.992,
+   "que": 2.898,
+   "lo": 2.781,
+   "mira": 2.465
+  },
+  "a2": {
+   "seguimiento": 8.632,
+   "el": 5.138,
+   "activa": 8.126,
+   "y": 8.062,
+   "contacto": 7.545,
+   "al": 7.407,
+   "cualifica": 6.943,
+   "whatsapp": 6.352,
+   "por": 6.162,
+   "responde": 5.74,
+   "sistema": 5.307
+  },
+  "a3": {
+   "automáticamente": 13.263,
+   "recordatorios": 12.471,
+   "y": 12.366,
+   "confirmaciones": 11.574,
+   "envía": 11.163,
+   "reunión": 10.593,
+   "una": 10.36,
+   "agenda": 9.949,
+   "cuando": 9.664
+  },
+  "a4": {
+   "campañas": 19.739,
+   "las": 19.57,
+   "mejorar": 19.095,
+   "para": 18.874,
+   "información": 18.325,
+   "esa": 18.156,
+   "utilizamos": 17.438,
+   "oportunidad": 16.372,
+   "la": 16.256,
+   "valida": 15.866,
+   "comercial": 15.401,
+   "equipo": 15.127,
+   "el": 15.032,
+   "cuando": 14.799,
+   "y": 14.641
+  },
+  "a5": {
+   "continua": 23.418,
+   "mejora": 23.091,
+   "y": 23.017,
+   "seguimiento": 22.521,
+   "captación": 21.93,
+   "cuálivo": 21.285,
+   "es": 21.149,
+   "esto": 20.758
+  },
+  "a6": {
+   "gratuito": 25.709,
+   "diagnóstico": 25.065,
+   "tu": 24.939,
+   "solicita": 24.358
+  }
+ },
+ "SUBS": [
+  [
+   0.05,
+   1.337,
+   "¿Tu escuela online ya invierte"
+  ],
+  [
+   1.337,
+   2.43,
+   "en publicidad?"
+  ],
+  [
+   2.415,
+   3.818,
+   "Mira lo que ocurre cuando entra"
+  ],
+  [
+   3.818,
+   5.091,
+   "una solicitud."
+  ],
+  [
+   5.088,
+   6.302,
+   "El sistema responde por"
+  ],
+  [
+   6.302,
+   8.012,
+   "WhatsApp, cualifica al contacto"
+  ],
+  [
+   8.012,
+   9.622,
+   "y activa el seguimiento."
+  ],
+  [
+   9.614,
+   11.113,
+   "Cuando agenda una reunión,"
+  ],
+  [
+   11.113,
+   12.421,
+   "envía confirmaciones y"
+  ],
+  [
+   12.421,
+   14.612,
+   "recordatorios automáticamente."
+  ],
+  [
+   14.591,
+   15.816,
+   "Y cuando el equipo comercial"
+  ],
+  [
+   15.816,
+   17.388,
+   "valida la oportunidad,"
+  ],
+  [
+   17.388,
+   19.045,
+   "utilizamos esa información para"
+  ],
+  [
+   19.045,
+   20.729,
+   "mejorar las campañas."
+  ]
+ ]
+}

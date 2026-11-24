@@ -37,6 +37,16 @@ html,body{background:#333}
 .ad1 .cta{background:#F4CC38;color:#0A0A0B;margin-top:24px;font-size:44px;white-space:nowrap;padding:26px 30px}
 .ad1 .lg{width:190px;flex:none;margin-bottom:8px}
 
+
+.ad1b .t.w{grid-column:1/-1;justify-content:center}.ad1b .t.w::before,.ad1b .t.w::after{display:none}
+.ad1b .gr::before{bottom:150px}
+.ad1b.f45 .t{padding:26px 24px}.ad1b.f916 .t{padding:28px 24px}
+/* ───── AD04 · piezas para el montaje de Maikel a cámara ───── */
+.ad4fin{background:#0A0A0B;color:#F4F1EB;align-items:center;justify-content:center;text-align:center;padding:0 80px}
+.ad4fin .lg{width:520px}.ad4fin .cie{font-family:Anton;font-size:76px;line-height:1.02;text-transform:uppercase;margin-top:60px}.ad4fin .cie em{font-style:normal;color:#F4CC38;display:block}
+.ad4fin .cta{background:#F4CC38;color:#0A0A0B;font-size:58px;margin-top:56px}.ad4fin .ant{margin-top:40px;color:rgba(244,241,235,.75);letter-spacing:.12em}
+.ad4rot{background:transparent}.ad4rot .rot{position:absolute;left:60px;top:70px;display:flex;align-items:center;gap:16px;background:rgba(10,10,11,.86);color:#F4F1EB;font-weight:700;font-size:34px;padding:16px 26px;border-radius:999px}
+.ad4rot.f916 .rot{top:300px}.ad4rot .rot i{width:16px;height:16px;border-radius:50%;background:#F4CC38;display:block}
 /* ───── AD02 · Fugas comerciales · claro, editorial ───── */
 .ad2{background:#F4F1EB;color:#0A0A0B;padding:64px 70px 60px}
 .ad2.f916{padding:290px 70px 410px}
@@ -109,6 +119,16 @@ ad1:`<div class="ant">Qualivo · Formación online</div>
   <div class="t">${svg('voz')}Agentes de voz</div><div class="t">${svg('cal')}Agenda y recordatorios</div>
   <div class="t">${svg('crm')}CRM y seguimiento</div><div class="t y">${svg('intel')}Intelligence y atribución</div></div>
  <div class="pie"><div><div class="cie">Un equipo. Un sistema.<br><em>Todo conectado.</em></div><div class="cta">Solicita tu diagnóstico gratuito</div></div><img class="lg" src="${R}logo-blanco.png"></div>`,
+ad1b:`<div class="ant">Qualivo · Formación online</div>
+ <h1>Tu escuela necesita <em>algo más</em> que una agencia de publicidad.</h1>
+ <div class="gr">
+  <div class="t">${svg('ads')}Meta y Google Ads</div><div class="t">${svg('land')}Landings y formularios</div>
+  <div class="t">${svg('score')}Lead scoring</div><div class="t">${svg('wa')}WhatsApp con IA</div>
+  <div class="t">${svg('cal')}Agenda y recordatorios</div>
+  <div class="t">${svg('crm')}CRM y seguimiento</div><div class="t y w">${svg('intel')}Intelligence y atribución</div></div>
+ <div class="pie"><div><div class="cie">Un equipo. Un sistema.<br><em>Todo conectado.</em></div><div class="cta">Solicita tu diagnóstico gratuito</div></div><img class="lg" src="${R}logo-blanco.png"></div>`,
+ad4fin:`<img class="lg" src="${R}logo-blanco.png"><div class="cie">Captación, seguimiento y mejora continua. <em>Todo conectado.</em></div><div class="cta">Solicita tu diagnóstico gratuito</div><div class="ant">Para escuelas de formación online</div>`,
+ad4rot:`<div class="rot"><i></i>Para escuelas de formación online</div>`,
 ad2:`<div class="ant">Para escuelas de formación online</div>
  <h1>¿Inviertes en publicidad pero no sabes dónde estás <em>perdiendo alumnos?</em></h1>
  <ol>
@@ -124,6 +144,6 @@ ad3:`<div class="cab"><div class="ant">Growth para escuelas online</div><h1>No t
   <div class="col b"><h2>Sistema Qualivo</h2><div class="caja y">${svg('ok')}Oportunidades cualificadas</div><div class="fl">↓</div><div class="caja">${svg('vuelve')}Datos que vuelven<br>a Meta</div></div>
   <div class="vs">VS</div></div>
  <div class="pie"><div><div class="cie">Conectamos tus campañas con lo que ocurre en ventas.</div><div class="cta">Solicita un diagnóstico gratuito</div></div><img class="lg" src="${R}logo-blanco.png"></div>`};
-function pinta(){const [k,f]=(location.hash.slice(1)||'ad1-45').split('-');const e=document.getElementById('e');e.className=k+' f'+f;e.style.display='flex';e.innerHTML=AD[k];}
+function pinta(){const [k,f]=(location.hash.slice(1)||'ad1-45').split('-');const e=document.getElementById('e');e.className=(k==='ad1b'?'ad1 ad1b':k)+' f'+f;if(k==='ad4rot')document.documentElement.style.background=document.body.style.background='transparent';e.style.display='flex';e.innerHTML=AD[k];}
 addEventListener('hashchange',pinta);pinta();
 </script></body></html>
