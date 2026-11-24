@@ -20,27 +20,28 @@ html,body{background:#333}
   linear-gradient(90deg,rgba(244,241,235,.045) 1px,transparent 1px) 0 0/54px 100%}
 .ad1>*{position:relative}
 .ad1 .ant{color:#1FA396}
-.ad1 h1{font-family:Anton;font-weight:400;font-size:98px;line-height:.98;text-transform:uppercase;margin-top:22px;letter-spacing:.005em}
+.ad1 h1{font-family:Anton;font-weight:400;font-size:84px;line-height:.98;text-transform:uppercase;margin-top:22px;letter-spacing:.005em}
 .ad1 h1 em{font-style:normal;color:#F4CC38}
-.ad1 .gr{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;position:relative}
-.ad1.f916 .gr{gap:18px;margin-top:44px}
+.ad1 .gr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px;position:relative}
+.ad1.f916 .gr{gap:13px;margin-top:30px}
 .ad1 .gr::before{content:"";position:absolute;left:50%;top:44px;bottom:44px;width:3px;margin-left:-1.5px;background:linear-gradient(#1FA396,#F4CC38)}
-.ad1 .t{display:flex;align-items:center;gap:20px;background:rgba(22,24,28,.92);border:2px solid rgba(244,241,235,.14);border-radius:22px;padding:22px 24px;font-weight:700;font-size:33px;line-height:1.08;position:relative}
-.ad1.f916 .t{padding:24px 24px}
-.ad1 .t svg{flex:none;width:56px;height:56px;stroke:#1FA396;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ad1 .t{display:flex;align-items:center;gap:18px;background:rgba(22,24,28,.92);border:2px solid rgba(244,241,235,.14);border-radius:22px;padding:18px 20px;font-weight:700;font-size:30px;line-height:1.1;position:relative}
+.ad1 .t small{display:block;font-size:19px;letter-spacing:.13em;text-transform:uppercase;color:#1FA396;margin-bottom:5px;font-weight:700}.ad1 .t.y small{color:rgba(10,10,11,.6)}
+.ad1.f916 .t{padding:15px 20px}
+.ad1 .t svg{flex:none;width:48px;height:48px;stroke:#1FA396;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .ad1 .t:nth-child(odd)::after,.ad1 .t:nth-child(even)::before{content:"";position:absolute;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:#F4F1EB}
 .ad1 .t:nth-child(odd)::after{right:-15px}.ad1 .t:nth-child(even)::before{left:-15px}
 .ad1 .t.y{background:#F4CC38;color:#0A0A0B;border-color:#F4CC38}.ad1 .t.y svg{stroke:#0A0A0B}
-.ad1 .pie{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
-.ad1 .cie{font-family:Anton;font-size:58px;line-height:1.02;text-transform:uppercase}
+.ad1 .pie{padding-top:22px;margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.ad1 .cie{font-family:Anton;font-size:52px;line-height:1.02;text-transform:uppercase}
 .ad1 .cie em{font-style:normal;color:#1FA396}
-.ad1 .cta{background:#F4CC38;color:#0A0A0B;margin-top:24px;font-size:44px;white-space:nowrap;padding:26px 30px}
+.ad1 .cta{background:#F4CC38;color:#0A0A0B;margin-top:18px;font-size:44px;white-space:nowrap;padding:26px 30px}
 .ad1 .lg{width:190px;flex:none;margin-bottom:8px}
 
 
 .ad1b .t.w{grid-column:1/-1;justify-content:center}.ad1b .t.w::before,.ad1b .t.w::after{display:none}
 .ad1b .gr::before{bottom:150px}
-.ad1b.f45 .t{padding:26px 24px}.ad1b.f916 .t{padding:28px 24px}
+.ad1b.f45 .t{padding:22px 20px}.ad1b.f916 .t{padding:20px 20px}
 /* ───── AD04 · piezas para el montaje de Maikel a cámara ───── */
 .ad4fin{background:#0A0A0B;color:#F4F1EB;align-items:center;justify-content:center;text-align:center;padding:0 80px}
 .ad4fin .lg{width:520px}.ad4fin .cie{font-family:Anton;font-size:76px;line-height:1.02;text-transform:uppercase;margin-top:60px}.ad4fin .cie em{font-style:normal;color:#F4CC38;display:block}
@@ -114,18 +115,12 @@ const AD={
 ad1:`<div class="ant">Qualivo · Formación online</div>
  <h1>Tu escuela necesita <em>algo más</em> que una agencia de publicidad.</h1>
  <div class="gr">
-  <div class="t">${svg('ads')}Meta y Google Ads</div><div class="t">${svg('land')}Landings y formularios</div>
-  <div class="t">${svg('score')}Lead scoring</div><div class="t">${svg('wa')}WhatsApp con IA</div>
-  <div class="t">${svg('voz')}Agentes de voz</div><div class="t">${svg('cal')}Agenda y recordatorios</div>
-  <div class="t">${svg('crm')}CRM y seguimiento</div><div class="t y">${svg('intel')}Intelligence y atribución</div></div>
+  <div class="t">${svg('ads')}<div><small>Meta y Google Ads</small>Llevamos tus campañas de anuncios</div></div><div class="t">${svg('land')}<div><small>Landings y formularios</small>Páginas que convierten visitas en solicitudes</div></div><div class="t">${svg('score')}<div><small>Lead scoring</small>Sabes qué solicitudes merecen una llamada</div></div><div class="t">${svg('wa')}<div><small>WhatsApp con IA</small>Cada solicitud recibe respuesta al momento</div></div><div class="t">${svg('voz')}<div><small>Agentes de voz</small>Si no contesta, le llamamos</div></div><div class="t">${svg('cal')}<div><small>Agenda y recordatorios</small>Confirmamos y recordamos cada reunión</div></div><div class="t">${svg('crm')}<div><small>CRM y seguimiento</small>Ningún contacto se queda sin seguimiento</div></div><div class="t y">${svg('intel')}<div><small>Intelligence</small>Ves qué anuncios traen alumnos y cuáles solo formularios</div></div></div>
  <div class="pie"><div><div class="cie">Un equipo. Un sistema.<br><em>Todo conectado.</em></div><div class="cta">Solicita tu diagnóstico gratuito</div></div><img class="lg" src="${R}logo-blanco.png"></div>`,
 ad1b:`<div class="ant">Qualivo · Formación online</div>
  <h1>Tu escuela necesita <em>algo más</em> que una agencia de publicidad.</h1>
  <div class="gr">
-  <div class="t">${svg('ads')}Meta y Google Ads</div><div class="t">${svg('land')}Landings y formularios</div>
-  <div class="t">${svg('score')}Lead scoring</div><div class="t">${svg('wa')}WhatsApp con IA</div>
-  <div class="t">${svg('cal')}Agenda y recordatorios</div>
-  <div class="t">${svg('crm')}CRM y seguimiento</div><div class="t y w">${svg('intel')}Intelligence y atribución</div></div>
+  <div class="t">${svg('ads')}<div><small>Meta y Google Ads</small>Llevamos tus campañas de anuncios</div></div><div class="t">${svg('land')}<div><small>Landings y formularios</small>Páginas que convierten visitas en solicitudes</div></div><div class="t">${svg('score')}<div><small>Lead scoring</small>Sabes qué solicitudes merecen una llamada</div></div><div class="t">${svg('wa')}<div><small>WhatsApp con IA</small>Cada solicitud recibe respuesta al momento</div></div><div class="t">${svg('cal')}<div><small>Agenda y recordatorios</small>Confirmamos y recordamos cada reunión</div></div><div class="t">${svg('crm')}<div><small>CRM y seguimiento</small>Ningún contacto se queda sin seguimiento</div></div><div class="t y w">${svg('intel')}<div><small>Intelligence</small>Ves qué anuncios traen alumnos y cuáles solo formularios</div></div></div>
  <div class="pie"><div><div class="cie">Un equipo. Un sistema.<br><em>Todo conectado.</em></div><div class="cta">Solicita tu diagnóstico gratuito</div></div><img class="lg" src="${R}logo-blanco.png"></div>`,
 ad4fin:`<img class="lg" src="${R}logo-blanco.png"><div class="cie">Captación, seguimiento y mejora continua. <em>Todo conectado.</em></div><div class="cta">Solicita tu diagnóstico gratuito</div><div class="ant">Para escuelas de formación online</div>`,
 ad4rot:`<div class="rot"><i></i>Para escuelas de formación online</div>`,

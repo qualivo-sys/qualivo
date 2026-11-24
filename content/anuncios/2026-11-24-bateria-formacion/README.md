@@ -90,6 +90,23 @@ Guion del brief. Con la voz del narrador de siempre (Javier Rojas) al ritmo del 
 - Los subtítulos ocupan el sitio de los titulares de escena. En el cierre no hay subtítulo porque el texto en pantalla ya dice lo mismo que la voz.
 - Nadie ha escuchado el audio. Verificado con transcripción automática y volumen (-14,0 LUFS).
 
+## Cambio en el AD01 (24-nov, Maikel)
+
+Maikel: «no se sabe muy bien qué hace cada uno; "Intelligence y atribución" nadie va a saber qué es». Cada módulo dice ahora qué hace en lenguaje llano, con el nombre técnico en pequeño encima:
+
+| Nombre | Qué dice ahora |
+|---|---|
+| Meta y Google Ads | Llevamos tus campañas de anuncios |
+| Landings y formularios | Páginas que convierten visitas en solicitudes |
+| Lead scoring | Sabes qué solicitudes merecen una llamada |
+| WhatsApp con IA | Cada solicitud recibe respuesta al momento |
+| Agentes de voz | Si no contesta, le llamamos |
+| Agenda y recordatorios | Confirmamos y recordamos cada reunión |
+| CRM y seguimiento | Ningún contacto se queda sin seguimiento |
+| Intelligence | Ves qué anuncios traen alumnos y cuáles solo formularios |
+
+«Páginas que convierten» y «ningún contacto se queda sin seguimiento» son promesas de servicio, no cifras. La variante sin agente de voz lleva los mismos textos menos esa fila.
+
 ## Siguiente paso
 
 Con el visto bueno a los estáticos y a los guiones: montar el AD05 (medio día, sin generar nada nuevo) y dejar el AD04 a la espera de la grabación de Maikel.
