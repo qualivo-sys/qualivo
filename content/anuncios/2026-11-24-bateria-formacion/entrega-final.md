@@ -124,3 +124,13 @@ Maikel descarta también la propuesta «limpia» («no tiene ningún sentido») 
 - **No aparece:** el agente de voz (línea caída), ni «IA», ni Google Ads.
 - **Copy del anuncio:** el de «Sistema completo» de la sección de copies.
 - El resto de estáticos (`ad1…ad3`, `limpio-…`) quedan como histórico, sin uso.
+
+## «Sistema completo» con el producto como protagonista: dos propuestas (24-nov, noche)
+
+Maikel descarta la comparativa («parece una diapositiva de una propuesta comercial») y pide vender Qualivo a través de su propio sistema: titular corto, capturas reales, interfaces superpuestas con profundidad y botón visible. Dos propuestas para elegir, sin publicar.
+
+- **Texto común:** «Para escuelas de formación online» · «De captar solicitudes a conseguir alumnos.» · «Gestionamos todo tu sistema de captación y conversión.» · Publicidad · Landings · Cualificación · WhatsApp IA · Reuniones · CRM y ventas · Qualivo Intelligence · «Solicita tu diagnóstico gratuito».
+- **Propuesta A (oscura):** `png/producto-a-45.png` y `-916.png`. Fondo negro con luz turquesa; la tabla de oportunidades de Intelligence en perspectiva, el móvil con el asistente de WhatsApp delante y la tabla de campañas al fondo, desenfocada.
+- **Propuesta B (clara):** `png/producto-b-45.png` y `-916.png`. Fondo claro; tres ventanas apiladas: campañas, oportunidades y conversaciones de WhatsApp, cada una con su etiqueta.
+- **Capturas:** son pantallas reales de Qualivo Intelligence y del asistente de WhatsApp (`cap/`), del entorno de demostración: los nombres y los números que se ven son de ejemplo, no de clientes. La tabla de campañas, que lleva retornos y matrículas de ejemplo, va al fondo y desenfocada para que no se lean como resultados.
+- Fuente: `producto.html` y `render-producto.js`. Vista conjunta: `hoja-producto.png`.
