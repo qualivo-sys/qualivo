@@ -73,6 +73,23 @@ Guion del brief. Con la voz del narrador de siempre (Javier Rojas) al ritmo del 
 - **Agente de voz.** El guion del brief no lo menciona, así que el AD05 puede quedar sin él y lanzarse aunque la línea siga caída. Paid lo había anotado como bloqueado; con este guion no lo está.
 - **Grabaciones reales o las escenas del V7.** El brief pide «sobre todo grabaciones reales del sistema». Las escenas del V7 son recreaciones fieles de la interfaz, no grabaciones. Si se quieren reales, hacen falta las mismas cinco capturas de la hoja del AD04, en grabación de pantalla. Con ellas se montan los dos vídeos.
 
+## Segunda entrega (24-nov, tarde): los cinco creados
+
+| | Archivos | Estado |
+|---|---|---|
+| AD01 | `png/ad1-45.png`, `png/ad1-916.png` · sin agente de voz: `png/ad1-sin-voz-45.png`, `png/ad1-sin-voz-916.png` | Listo. La variante quita «Agentes de voz» y deja siete módulos. |
+| AD02 | `png/ad2-45.png`, `png/ad2-916.png` | Listo. |
+| AD03 | `png/ad3-45.png`, `png/ad3-916.png` | Listo, sin capturas de Intelligence (ver aviso 4). |
+| AD04 | `png/ad4-rotulo-*.png`, `png/ad4-cierre-*.png`, `ad04-subtitulos.md` | Preparado lo que no depende de Maikel. Faltan su grabación y las cinco capturas reales. |
+| AD05 | `../../video/2026-11-24-formacion-ad05/formacion-ad05-demo-916.mp4` y `-45.mp4` (27,8 s) | Listo. Guion del brief, voz de Javier Rojas, subtitulado. |
+
+**Sobre el AD05:**
+
+- Está hecho con las escenas de interfaz del V7 (anuncio, CRM, WhatsApp, pipeline, cita, confirmación y recordatorio, Intelligence y cierre), sin planos de personas. No lleva grabaciones reales del sistema porque no hay ninguna disponible; son recreaciones de la interfaz.
+- El guion no menciona el agente de voz y el vídeo no lo enseña, así que no necesita variante.
+- Los subtítulos ocupan el sitio de los titulares de escena. En el cierre no hay subtítulo porque el texto en pantalla ya dice lo mismo que la voz.
+- Nadie ha escuchado el audio. Verificado con transcripción automática y volumen (-14,0 LUFS).
+
 ## Siguiente paso
 
 Con el visto bueno a los estáticos y a los guiones: montar el AD05 (medio día, sin generar nada nuevo) y dejar el AD04 a la espera de la grabación de Maikel.
