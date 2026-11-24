@@ -158,3 +158,14 @@ Maikel: «el problema no es la cantidad de funcionalidades, sino cómo están di
 - Sin subtítulo. Los servicios, en una rejilla de 3 × 2 con líneas finas: Publicidad · Landings y formularios · Lead scoring · WhatsApp IA · Gestión de citas · CRM y ventas. Intelligence no va en la rejilla porque es la pantalla principal, con su nombre en la barra de la ventana.
 - Cierre «Captación, seguimiento y mejora continua.» y botón algo más pequeño (40 px).
 - La versión anterior, más cargada, está en el commit 3c227d1a.
+
+### Tres niveles de lectura (24-nov, noche) · versión vigente
+
+Maikel separa los papeles: el estático vende toda la propuesta de valor y el vídeo despierta curiosidad enseñando el sistema. Para el estático (`png/sistema-completo-FINAL-45.png` y `-916.png`):
+
+- **Un segundo:** «Para escuelas de formación online».
+- **Tres segundos:** «De captar solicitudes a conseguir alumnos.» y «Gestionamos tu publicidad y todo lo que ocurre después.»
+- **Cinco segundos:** tres columnas con un icono discreto cada una: Captación (Publicidad, Landings, Formularios) · Conversión (WhatsApp IA, Lead scoring, CRM y citas) · Optimización (Intelligence, Atribución, Mejora continua).
+- **Interfaces:** la ventana de Qualivo Intelligence y el móvil del asistente de WhatsApp, con más perspectiva y un halo turquesa. La tabla de campañas va recortada (`cap/campanas-sin-retorno.png`): no se ven las columnas «Retorno» ni «Lo que dice el sistema». Quedan a la vista interesados, encaje y matrículas de ejemplo, y los nombres «Google» y «LinkedIn» de las campañas de demostración.
+- **Cierre:** «Un equipo. Un sistema. Todo conectado.» · botón «Solicita tu diagnóstico gratuito» · logo. Sin etiquetas flotantes ni tarjetas.
+- **Reparto en Meta que plantea Maikel (30 €/día, tres activos como máximo):** vídeo antiguo, V7 y este estático; la demo corta, en reserva. No se toca nada sin su autorización expresa.

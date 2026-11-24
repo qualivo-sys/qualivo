@@ -1,36 +1,46 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8">
-<!-- «Sistema completo» · versión con aire (24-nov, noche), sobre la propuesta oscura elegida por Maikel · final.html#45 | #916
-     Las interfaces son pantallas reales de Qualivo Intelligence y del asistente de WhatsApp con datos ilustrativos del entorno de demostración. -->
+<!-- «Sistema completo» · versión con tres niveles de lectura (24-nov, noche) · final.html#45 | #916
+     Las interfaces son pantallas reales de Qualivo Intelligence y del asistente de WhatsApp con datos ilustrativos del entorno de demostración;
+     la tabla de campañas va recortada, sin las columnas de retorno. -->
 <style>
 @font-face{font-family:Anton;src:url(../2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
 @font-face{font-family:SG;src:url(../2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2');font-weight:300 700}
 *{box-sizing:border-box;margin:0;padding:0}html,body{background:#333}
-#e{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:SG,sans-serif;background:#05080A;color:#F4F1EB;padding:84px 88px 78px;display:flex;flex-direction:column}
-#e.f916{height:1920px;padding:300px 88px 430px}
-#e::before{content:"";position:absolute;inset:0;background:radial-gradient(820px 620px at 70% 44%,rgba(31,163,150,.42),transparent 64%)}
+#e{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:SG,sans-serif;background:#05080A;color:#F4F1EB;padding:74px 84px 66px;display:flex;flex-direction:column}
+#e.f916{height:1920px;padding:296px 84px 424px}
+#e::before{content:"";position:absolute;inset:0;background:radial-gradient(760px 520px at 62% 41%,rgba(31,163,150,.5),transparent 66%),radial-gradient(520px 380px at 96% 30%,rgba(244,204,56,.13),transparent 62%)}
+.f916::before{background:radial-gradient(820px 600px at 62% 44%,rgba(31,163,150,.5),transparent 66%),radial-gradient(520px 380px at 96% 36%,rgba(244,204,56,.13),transparent 62%)!important}
 #e>*{position:relative}
 .id{font-weight:700;font-size:25px;letter-spacing:.14em;text-transform:uppercase;color:#F4CC38}
-h1{font-family:Anton;font-weight:400;font-size:80px;line-height:1;text-transform:uppercase;margin-top:20px}h1 em{font-style:normal;color:#F4CC38}
-.esc{height:440px;margin-top:44px;perspective:2200px}.f916 .esc{height:520px;margin-top:56px}
-.win{position:absolute;left:0;top:26px;width:690px;height:338px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1.5px rgba(255,255,255,.16);transform:rotateY(9deg) rotateX(3deg);transform-origin:0 50%}
-.f916 .win{top:40px;height:408px;width:700px}
+h1{font-family:Anton;font-weight:400;font-size:80px;line-height:1;text-transform:uppercase;margin-top:18px}h1 em{font-style:normal;color:#F4CC38}
+.sub{font-weight:600;font-size:32px;line-height:1.15;margin-top:16px;color:rgba(244,241,235,.9)}
+.esc{height:446px;margin-top:34px;perspective:1700px}.f916 .esc{height:470px;margin-top:54px}
+.win{position:absolute;left:-8px;top:34px;width:668px;height:384px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 46px 90px rgba(0,0,0,.62),0 0 70px rgba(31,163,150,.32),0 0 0 1.5px rgba(255,255,255,.2);transform:rotateY(17deg) rotateX(7deg) rotateZ(-2deg);transform-origin:0 50%}
+.f916 .win{width:660px;height:390px;top:44px}
 .win .bar{height:38px;background:#ECEAE4;display:flex;align-items:center;gap:8px;padding:0 14px}.win .bar i{width:11px;height:11px;border-radius:50%;background:#C9C6BD;display:block}
 .win .bar b{margin-left:10px;font-size:17px;font-weight:700;color:#3D4148;letter-spacing:.03em}.win img{display:block;width:100%}
-.tel{position:absolute;right:0;top:0;width:236px;height:432px;border-radius:40px;background:#0A0A0B;padding:10px;box-shadow:0 40px 90px rgba(0,0,0,.65),0 0 0 2px rgba(255,255,255,.2);transform:rotateY(-8deg) rotateX(3deg)}
-.f916 .tel{width:270px;height:500px}
-.tel div{border-radius:31px;overflow:hidden;height:100%}.tel img{display:block;width:100%}
-.ser{display:grid;grid-template-columns:repeat(3,1fr);column-gap:34px;margin-top:46px}.f916 .ser{margin-top:60px}
-.ser span{display:flex;align-items:center;gap:12px;font-weight:600;font-size:29px;line-height:1.1;padding:19px 0;border-top:1.5px solid rgba(244,241,235,.2)}
-.ser span i{flex:none;width:9px;height:9px;border-radius:50%;background:#1FA396;display:block}
-.cie{margin-top:auto;font-weight:600;font-size:30px;color:rgba(244,241,235,.72)}
-.pie{margin-top:22px;display:flex;align-items:center;justify-content:space-between}
+.tel{position:absolute;right:18px;top:-6px;width:246px;height:446px;border-radius:38px;background:#0A0A0B;padding:9px;box-shadow:0 46px 90px rgba(0,0,0,.7),0 0 60px rgba(31,163,150,.3),0 0 0 2px rgba(255,255,255,.24);transform:rotateY(-15deg) rotateX(6deg) rotateZ(3deg) translateZ(60px)}
+.f916 .tel{width:262px;height:476px;top:-4px}
+.tel div{border-radius:30px;overflow:hidden;height:100%}.tel img{display:block;width:100%}
+.col{display:grid;grid-template-columns:repeat(3,1fr);column-gap:30px;margin-top:38px}.f916 .col{margin-top:52px}
+.col div{border-top:2px solid rgba(244,241,235,.22);padding-top:16px}
+.col h2{display:flex;align-items:center;gap:10px;font-family:Anton;font-weight:400;font-size:36px;line-height:1;text-transform:uppercase;color:#F4CC38;margin-bottom:12px}
+.col h2 svg{width:30px;height:30px;stroke:#1FA396;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.col p{font-weight:600;font-size:26px;line-height:1.34;color:rgba(244,241,235,.92)}
+.cie{margin-top:auto;font-family:Anton;font-size:34px;line-height:1;text-transform:uppercase;letter-spacing:.01em}.cie em{font-style:normal;color:#1FA396}
+.pie{margin-top:18px;display:flex;align-items:center;justify-content:space-between}
 .cta{font-family:Anton;font-size:40px;line-height:1;text-transform:uppercase;padding:24px 30px;border-radius:16px;background:#F4CC38;color:#0A0A0B}
 .lg{width:190px}
 </style></head><body><div id="e">
  <div class="id">Para escuelas de formación online</div>
  <h1>De captar solicitudes a <em>conseguir alumnos.</em></h1>
- <div class="esc"><div class="win"><div class="bar"><i></i><i></i><i></i><b>Qualivo Intelligence</b></div><img src="cap/anuncios.png"></div><div class="tel"><div><img src="cap/whatsapp.png"></div></div></div>
- <div class="ser"><span><i></i>Publicidad</span><span><i></i>Landings y formularios</span><span><i></i>Lead scoring</span><span><i></i>WhatsApp IA</span><span><i></i>Gestión de citas</span><span><i></i>CRM y ventas</span></div>
- <div class="cie">Captación, seguimiento y mejora continua.</div>
+ <div class="sub">Gestionamos tu publicidad y todo lo que ocurre después.</div>
+ <div class="esc"><div class="win"><div class="bar"><i></i><i></i><i></i><b>Qualivo Intelligence</b></div><img src="cap/campanas-sin-retorno.png"></div><div class="tel"><div><img src="cap/whatsapp.png"></div></div></div>
+ <div class="col">
+  <div><h2><svg viewBox="0 0 56 56"><path d="M8 36V24l28-12v36L8 36z"/><path d="M14 38v8h8v-5"/><path d="M42 22c4 2 4 14 0 16"/></svg>Captación</h2><p>Publicidad<br>Landings<br>Formularios</p></div>
+  <div><h2><svg viewBox="0 0 56 56"><path d="M10 46l3-10a18 18 0 1 1 7 7z"/><path d="M21 25h14M21 32h9"/></svg>Conversión</h2><p>WhatsApp IA<br>Lead scoring<br>CRM y citas</p></div>
+  <div><h2><svg viewBox="0 0 56 56"><path d="M8 46h40"/><path d="M12 38l10-10 8 6 14-18"/><path d="M36 16h8v8"/></svg>Optimización</h2><p>Intelligence<br>Atribución<br>Mejora continua</p></div>
+ </div>
+ <div class="cie">Un equipo. Un sistema. <em>Todo conectado.</em></div>
  <div class="pie"><div class="cta">Solicita tu diagnóstico gratuito</div><img class="lg" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"></div>
 </div><script>document.getElementById('e').className='f'+(location.hash.slice(1)||'45')</script></body></html>
