@@ -171,3 +171,11 @@ Maikel separa los papeles: el estático vende toda la propuesta de valor y el v�
 - **Reparto en Meta que plantea Maikel (30 €/día, tres activos como máximo):** vídeo antiguo, V7 y este estático; la demo corta, en reserva. No se toca nada sin su autorización expresa.
 
 - **Columna Optimización en lenguaje llano (Maikel, 24-nov: «Intelligence, atribución y mejora continua no sé si se entiende»):** pasa a «Qué anuncio funciona · Datos de tus ventas · Mejores campañas». «Qualivo Intelligence» sigue en la barra de la ventana.
+
+### Cuatro ajustes finales del estático (24-nov, noche) · Maikel lo da por suficiente
+
+- «Publicidad» pasa a «Gestión de campañas» y «Lead scoring» a «Cualificación de leads».
+- La pantalla de WhatsApp va más luminosa.
+- La ventana de Intelligence lleva en su barra la etiqueta «Datos ilustrativos», porque en la tabla siguen viéndose interesados, coste, inversión y matrículas de ejemplo.
+- Maikel: «No volvería a rediseñarlo. Ya tenemos una pieza suficientemente profesional para probarla en Meta». Pendiente solo de su aprobación de esta versión y de su instrucción a Paid.
+- Batería que plantea: vídeo antiguo (control), V7 (en prueba), este estático (aprobar tras los ajustes) y la demo corta para la siguiente ronda.
