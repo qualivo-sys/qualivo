@@ -1,0 +1,256 @@
+{
+ "T": {
+  "d0": [
+   0.1,
+   2.164
+  ],
+  "d1": [
+   2.384,
+   4.229
+  ],
+  "d2": [
+   6.734,
+   5.697
+  ],
+  "d3": [
+   12.551,
+   3.085
+  ],
+  "d4": [
+   15.756,
+   8.658
+  ],
+  "d5": [
+   24.534,
+   3.533
+  ],
+  "d6": [
+   28.186,
+   2.214
+  ]
+ },
+ "DUR": 31.4,
+ "TEMPO": 1.05,
+ "P": [
+  [
+   0,
+   "o_ficha",
+   9.7
+  ],
+  [
+   3.88,
+   "o_crm",
+   13.7
+  ],
+  [
+   6.64,
+   "o_wa",
+   19.2
+  ],
+  [
+   9.2,
+   "pipe",
+   null
+  ],
+  [
+   10.68,
+   "o_seg",
+   35.2
+  ],
+  [
+   12.44,
+   "cal",
+   null
+  ],
+  [
+   13.84,
+   "conf",
+   null
+  ],
+  [
+   15.64,
+   "intel",
+   null
+  ],
+  [
+   24.44,
+   "fin",
+   null
+  ]
+ ],
+ "X": {
+  "d0": {
+   "online": 1.592,
+   "formación": 1.095,
+   "de": 0.995,
+   "escuela": 0.652,
+   "una": 0.52,
+   "tienes": 0.1
+  },
+  "d1": {
+   "cursos": 5.901,
+   "tus": 5.713,
+   "de": 5.591,
+   "uno": 5.37,
+   "sobre": 5.083,
+   "información": 4.485,
+   "solicita": 3.987,
+   "alguien": 3.656,
+   "cuando": 3.358,
+   "ocurre": 2.97,
+   "que": 2.849,
+   "lo": 2.716,
+   "mira": 2.384
+  },
+  "d2": {
+   "automáticamente": 11.212,
+   "seguimiento": 10.681,
+   "el": 6.734,
+   "activa": 10.217,
+   "y": 10.139,
+   "interesado": 9.52,
+   "al": 9.377,
+   "cualifica": 8.813,
+   "whatsapp": 8.05,
+   "por": 7.828,
+   "responde": 7.398,
+   "sistema": 6.955
+  },
+  "d3": {
+   "recordatorios": 14.563,
+   "y": 14.453,
+   "confirmaciones": 13.734,
+   "reuniones": 13.247,
+   "sus": 13.071,
+   "gestiona": 12.551
+  },
+  "d4": {
+   "publicitaria": 23.419,
+   "inversión": 22.976,
+   "tu": 22.844,
+   "optimizar": 22.258,
+   "podamos": 21.837,
+   "que": 21.716,
+   "para": 21.495,
+   "matrículas": 20.522,
+   "y": 15.756,
+   "entrevistas": 19.781,
+   "generando": 19.272,
+   "están": 18.951,
+   "te": 18.797,
+   "anuncios": 18.233,
+   "qué": 17.072,
+   "campañas": 17.282,
+   "sabes": 16.641,
+   "momento": 16.221,
+   "todo": 15.999,
+   "en": 15.911
+  },
+  "d5": {
+   "después": 27.287,
+   "ocurre": 26.9,
+   "que": 26.789,
+   "lo": 26.678,
+   "todo": 26.436,
+   "y": 26.336,
+   "captación": 25.761,
+   "tu": 25.661,
+   "gestionamos": 25.109,
+   "cuálivo": 24.689,
+   "en": 24.534
+  },
+  "d6": {
+   "gratuito": 29.546,
+   "diagnóstico": 28.905,
+   "tu": 28.784,
+   "solicita": 28.186
+  }
+ },
+ "SUBS": [
+  [
+   0.05,
+   1.045,
+   "¿Tienes una escuela de"
+  ],
+  [
+   1.045,
+   2.411,
+   "formación online?"
+  ],
+  [
+   2.334,
+   3.606,
+   "Mira lo que ocurre cuando"
+  ],
+  [
+   3.606,
+   5.033,
+   "alguien solicita información"
+  ],
+  [
+   5.033,
+   6.774,
+   "sobre uno de tus cursos."
+  ],
+  [
+   6.684,
+   8.0,
+   "El sistema responde por"
+  ],
+  [
+   8.0,
+   9.47,
+   "WhatsApp, cualifica al"
+  ],
+  [
+   9.47,
+   10.631,
+   "interesado y activa el"
+  ],
+  [
+   10.631,
+   12.583,
+   "seguimiento automáticamente."
+  ],
+  [
+   12.501,
+   13.684,
+   "Gestiona sus reuniones,"
+  ],
+  [
+   13.684,
+   15.79,
+   "confirmaciones y recordatorios."
+  ],
+  [
+   15.706,
+   17.232,
+   "Y en todo momento sabes qué"
+  ],
+  [
+   17.232,
+   18.901,
+   "campañas y qué anuncios te"
+  ],
+  [
+   18.901,
+   20.472,
+   "están generando entrevistas y"
+  ],
+  [
+   20.472,
+   22.208,
+   "matrículas, para que podamos"
+  ],
+  [
+   22.208,
+   23.369,
+   "optimizar tu inversión"
+  ],
+  [
+   23.369,
+   24.569,
+   "publicitaria."
+  ]
+ ]
+}

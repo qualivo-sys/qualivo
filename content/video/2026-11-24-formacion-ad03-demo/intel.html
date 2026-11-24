@@ -1,0 +1,32 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<!-- Escena de Intelligence de la demo corta: la tabla real de campañas (entorno de demostración, datos ilustrativos) con zoom sobre dos campañas.
+     window.setU(u) con u de 0 a 1 = avance de la escena. -->
+<style>
+@font-face{font-family:SG;src:url(../../anuncios/2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2');font-weight:300 700}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1080px;height:1920px;overflow:hidden;background:#05080A;font-family:SG,sans-serif}
+body::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 900px at 50% 56%,rgba(31,163,150,.5),transparent 64%)}
+#view{position:absolute;left:36px;right:36px;top:540px;height:1040px;border-radius:30px;overflow:hidden;background:#0B1416;box-shadow:0 0 0 2px rgba(255,255,255,.16),0 50px 120px rgba(0,0,0,.6)}
+#cam{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+#win{width:1600px;background:#fff;border-radius:18px;overflow:hidden;position:relative}
+#bar{height:54px;background:#ECEAE4;display:flex;align-items:center;gap:10px;padding:0 20px}#bar i{width:14px;height:14px;border-radius:50%;background:#C9C6BD;display:block}
+#bar b{margin-left:12px;font-size:22px;font-weight:700;color:#3D4148}
+#win img{display:block;width:1600px}
+.hl{position:absolute;border:6px solid #F4CC38;border-radius:14px;box-shadow:0 0 0 6px rgba(244,204,56,.25);opacity:0}
+.fila{position:absolute;left:0;width:1600px;background:rgba(244,204,56,.14);opacity:0}
+#nota{position:absolute;left:36px;top:1604px;font-weight:700;font-size:26px;letter-spacing:.06em;text-transform:uppercase;color:#0A0A0B;background:#F4CC38;padding:8px 18px;border-radius:999px}
+</style></head><body>
+<div id="view"><div id="cam"><div id="win"><div id="bar"><i></i><i></i><i></i><b>Qualivo Intelligence · Campañas</b></div><img src="../../anuncios/2026-11-24-bateria-formacion/cap/anuncios.png">
+ <div class="fila" id="f1" style="top:128px;height:198px"></div><div class="fila" id="f4" style="top:690px;height:302px"></div>
+ <div class="hl" id="h1" style="left:1214px;top:137px;width:140px;height:62px"></div><div class="hl" id="h4" style="left:1214px;top:697px;width:252px;height:62px"></div></div></div></div>
+<div id="nota">Datos ilustrativos</div>
+<script>
+const VW=1008,VH=1040; const cl=x=>Math.max(0,Math.min(1,x)); const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2; const nm=(u,a,b)=>cl((u-a)/(b-a));
+// puntos de cámara: [u, escala, foco x, foco y] en coordenadas de la ventana (1600 de ancho; la barra mide 54)
+const K=[[0,.60,800,520],[.13,.60,800,520],[.24,1.04,500,235],[.38,1.04,500,235],[.47,1.04,1150,235],[.60,1.04,1150,235],[.70,1.04,1150,820],[.86,1.04,1150,820],[.97,.60,800,520],[1,.60,800,520]];
+window.setU=u=>{ u=cl(u); let i=0; while(i<K.length-2&&u>=K[i+1][0])i++; const a=K[i],b=K[i+1],e=ease(nm(u,a[0],b[0])); const s=a[1]+(b[1]-a[1])*e,fx=a[2]+(b[2]-a[2])*e,fy=a[3]+(b[3]-a[3])*e;
+  document.getElementById('cam').style.transform=`translate(${VW/2-fx*s}px,${VH/2-fy*s}px) scale(${s})`;
+  const o1=nm(u,.22,.28)*(1-nm(u,.62,.68)), o4=nm(u,.68,.74)*(1-nm(u,.88,.94));
+  f1.style.opacity=o1; h1.style.opacity=nm(u,.46,.52)*(1-nm(u,.62,.68)); f4.style.opacity=o4; h4.style.opacity=nm(u,.72,.78)*(1-nm(u,.88,.94)); };
+window.setU(0);
+</script></body></html>
