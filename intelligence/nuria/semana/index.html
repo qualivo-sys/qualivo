@@ -168,6 +168,9 @@ small,.nota{color:var(--mut);font-size:12.5px}
     });
     h += '</table><p class="nota">Cada edición capta de viernes a jueves y hace el directo el miércoles siguiente. Desde la edición del 28-oct se cuentan con las etiquetas de GHL («registro ads», «registro org» e «ingresa a comunidad»); antes, con las etapas del pipeline. <b>Grupo de WhatsApp:</b> entradas y salidas reales que avisa Funnelchat, asignadas a cada edición por la etiqueta de registro de la persona en Kliking. Se registran desde el 5-nov por la tarde: las ediciones hasta la del 11-nov (incluida) salen incompletas; la primera completa es la del 18-nov. «Entran»: personas distintas que entran (y su % sobre los registros); «Salen»: personas que salen (y su % sobre las que entraron). Compras: ventas de la hoja de personas registradas en esa edición, desde el registro. Inversión: Meta en campañas de El Círculo durante la captación (viernes a jueves). <b>Vistas de clases:</b> reproducciones en Presto Player del domingo antes del directo al sábado después (audio, clases 1 y 2, directo y grabación); son reproducciones, no personas, y Presto aún no sabe quién las ve. Semáforo frente a la edición anterior: verde si mejora más de un 5 %, rojo si empeora más de un 5 %. Solo se colorean las ediciones con el directo de hace 7 días o más, porque las ventas siguen entrando después del directo.</p></div>';
 
+    // Embudo completo de El Círculo por edición (registro → grupo → clases → directo → llamadas → ventas)
+    h += '<h2>Embudo completo de El Círculo</h2><p class="sub">Cada edición paso a paso, de los registros a las ventas, con la conversión de cada paso.</p><div id="embudocirculo"><p class="cargando">Cargando el embudo (tarda unos 20 segundos)…</p></div>';
+
     // Visualizaciones de cada clase (Presto Player), por edición
     h += '<h2>Visualizaciones de cada clase</h2><p class="sub">Reproducciones de cada vídeo en Presto Player y tiempo medio de visionado, por edición (del domingo antes del directo al sábado después).</p><div id="clasesvideo"><p class="cargando">Cargando Presto Player…</p></div>';
 
@@ -239,6 +242,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     cargarBF();
     cargarCPer();
     cargarSalidas();
+    cargarEmbudoCirculo();
     cargarClasesVideo();
     cargarEnvios(mesEnv);
     cargarMensajes();
@@ -361,6 +365,48 @@ small,.nota{color:var(--mut);font-size:12.5px}
         c.innerHTML = h;
       })
       .catch(function (e) { c.innerHTML = '<p class="nota">' + esc(e.message) + '</p>'; });
+  }
+  function cargarEmbudoCirculo() {
+    var c = document.getElementById('embudocirculo'); if (!c) return;
+    fetch(API + '?accion=embudocirculo', { credentials: 'same-origin' })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Error'); return d; }); })
+      .then(function (d) {
+        var E = d.ediciones || [];
+        if (!E.length) { c.innerHTML = '<p class="nota">Todavía no hay ediciones con registros.</p>'; return; }
+        var p = function (a, b) { return a != null && b ? ' <small>(' + Math.round(a / b * 100) + ' %)</small>' : ''; };
+        var v = function (x) { return x == null ? '<span class="neu">—</span>' : num(x); };
+        var fila = function (titulo, f, sub) { return '<tr><td>' + titulo + (sub ? '<br><small>' + sub + '</small>' : '') + '</td>' + E.map(function (e) { return '<td class="n">' + f(e) + '</td>'; }).join('') + '</tr>'; };
+        var sec = function (t) { return '<tr><th colspan="' + (E.length + 1) + '" style="text-align:left;padding-top:14px">' + t + '</th></tr>'; };
+        var h = '<div class="card" style="overflow-x:auto"><table><tr><th>Paso</th>' + E.map(function (e) { return '<th class="n">Miércoles ' + dia(e.directo) + '<br><small>' + esc(e.estado) + '</small></th>'; }).join('') + '</tr>';
+        h += sec('1 · Registros');
+        h += fila('Registros según Meta', function (e) { return v(e.registrosMeta); }, 'campañas de El Círculo en la captación');
+        h += fila('Registros en Kliking', function (e) { return num(e.registrosKliking) + '<br><small>' + num(e.ads) + ' anuncios · ' + num(e.org) + ' orgánico</small>'; });
+        h += fila('Inversión en Meta', function (e) { return e.gasto == null ? '—' : eur(e.gasto); });
+        h += fila('Coste por registro', function (e) { return e.costeRegistro == null ? '—' : (e.costeRegistro.toFixed(2).replace('.', ',') + ' €'); }, 'inversión ÷ registros de anuncios');
+        h += sec('2 · Grupo de WhatsApp');
+        h += fila('Entran al grupo', function (e) { return v(e.grupoEntran) + p(e.grupoEntran, e.registrosKliking); }, '% sobre registros');
+        h += fila('Salen del grupo', function (e) { return e.grupoSalen == null ? '<span class="neu">sin acceso</span>' : num(e.grupoSalen) + p(e.grupoSalen, e.grupoEntran); }, '% sobre los que entran');
+        h += sec('3 · Clases (reproducciones)');
+        [['audio', 'Audio del domingo'], ['clase1', 'Clase 1'], ['clase2', 'Clase 2']].forEach(function (k) {
+          h += fila(k[1], function (e) { var x = e.vistas ? e.vistas[k[0]] : null; return x == null ? '<span class="neu">—</span>' : num(x) + ' <small>(' + Math.round(x / (e.registrosKliking || 1) * 100) + ' por 100 reg.)</small>'; });
+        });
+        h += sec('4 · Directo');
+        h += fila('Asistencia al directo', function () { return '<span class="neu">sin medir</span>'; });
+        h += sec('5 · Llamadas');
+        h += fila('Agendadas', function (e) { return e.llamadas ? num(e.llamadas.agendadas) + p(e.llamadas.agendadas, e.registrosKliking) : '—'; }, 'personas · % sobre registros');
+        h += fila('Hechas', function (e) { return e.llamadas ? num(e.llamadas.hechas) + p(e.llamadas.hechas, e.llamadas.agendadas) : '—'; }, '% sobre agendadas');
+        h += fila('No-shows', function (e) { return e.llamadas ? num(e.llamadas.noShow) : '—'; });
+        h += fila('Canceladas', function (e) { return e.llamadas ? num(e.llamadas.canceladas) : '—'; });
+        h += fila('Pendientes', function (e) { return e.llamadas ? num(e.llamadas.pendientes) : '—'; }, 'confirmadas sin hacer aún');
+        h += sec('6 · Ventas');
+        h += fila('Ventas', function (e) { return e.compras == null ? '—' : num(e.compras) + (e.llamadas && e.llamadas.hechas ? '<br><small>' + Math.round(e.compras / e.llamadas.hechas * 100) + ' % de las llamadas hechas</small>' : ''); });
+        h += fila('Conversión total', function (e) { return e.compras == null || !e.registrosKliking ? '—' : (e.compras / e.registrosKliking * 100).toFixed(1).replace('.', ',') + ' %'; }, 'ventas ÷ registros');
+        h += fila('Facturación', function (e) { return e.facturacion == null ? '—' : eur(e.facturacion); });
+        h += fila('Coste por venta', function (e) { return e.compras && e.gasto ? eur(e.gasto / e.compras) : '—'; }, 'inversión en Meta ÷ ventas');
+        h += '</table><p class="nota">Edición = miércoles del directo; capta de viernes a jueves (12 a 6 días antes). <b>Registros Meta</b>: evento de registro de las campañas de El Círculo; <b>Kliking</b>: etiquetas «registro ads/org» de la edición (la diferencia son personas que ya estaban en la base y el píxel). <b>Grupo</b>: etiqueta «ingresa a comunidad» (solo la pone el enlace de entrada de Kliking, así que puede quedarse corta; con Funnelchat será exacto); las salidas salen de Funnelchat y necesitan la conexión con n8n' + (d.n8n ? '' : ' (ahora sin acceso)') + '. <b>Clases</b>: reproducciones en Presto Player del domingo antes al sábado después; son reproducciones, no personas. La clase 3 y el directo no se miden aquí. <b>Asistencia al directo</b>: hoy no se registra en ningún sistema. <b>Llamadas</b>: personas de la edición con cita en cualquier agenda (sin contar «invalid»), hasta 3 semanas después del directo. <b>Ventas</b>: hoja de ventas, personas de la edición. Las ediciones recientes siguen sumando llamadas y ventas.</p></div>';
+        c.innerHTML = h;
+      })
+      .catch(function (e) { c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
   }
   function cargarSalidas() {
     var c = document.getElementById('salidas'); if (!c) return;
