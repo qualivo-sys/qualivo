@@ -169,3 +169,5 @@ Maikel separa los papeles: el estático vende toda la propuesta de valor y el v�
 - **Interfaces:** la ventana de Qualivo Intelligence y el móvil del asistente de WhatsApp, con más perspectiva y un halo turquesa. La tabla de campañas va recortada (`cap/campanas-sin-retorno.png`): no se ven las columnas «Retorno» ni «Lo que dice el sistema». Quedan a la vista interesados, encaje y matrículas de ejemplo, y los nombres «Google» y «LinkedIn» de las campañas de demostración.
 - **Cierre:** «Un equipo. Un sistema. Todo conectado.» · botón «Solicita tu diagnóstico gratuito» · logo. Sin etiquetas flotantes ni tarjetas.
 - **Reparto en Meta que plantea Maikel (30 €/día, tres activos como máximo):** vídeo antiguo, V7 y este estático; la demo corta, en reserva. No se toca nada sin su autorización expresa.
+
+- **Columna Optimización en lenguaje llano (Maikel, 24-nov: «Intelligence, atribución y mejora continua no sé si se entiende»):** pasa a «Qué anuncio funciona · Datos de tus ventas · Campañas que mejoran». «Qualivo Intelligence» sigue en la barra de la ventana.
