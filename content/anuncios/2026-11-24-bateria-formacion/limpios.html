@@ -1,0 +1,54 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<!-- Batería de Formación · propuesta «limpia» (24-nov): una fotografía, un titular y un botón · limpios.html#m1-45 | #m1-916 | #m2-… | #m3-… -->
+<style>
+@font-face{font-family:Anton;src:url(../2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
+@font-face{font-family:SG;src:url(../2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2');font-weight:300 700}
+*{box-sizing:border-box;margin:0;padding:0}html,body{background:#333}
+#e{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:SG,sans-serif;display:none}
+#e.f916{height:1920px}
+#e .im{position:absolute;left:0;right:0;bottom:0;height:1350px;background-size:cover;background-position:center bottom}
+#e.f916 .im{bottom:230px}
+#e .tx{position:absolute;left:70px;right:70px;top:74px}
+#e.f916 .tx{top:300px}
+.pil{display:inline-flex;align-items:center;gap:14px;font-weight:700;font-size:28px;letter-spacing:.1em;text-transform:uppercase}
+.pil i{width:14px;height:14px;border-radius:50%;display:block}
+h1{font-weight:400;margin-top:26px}
+.sub{font-weight:600;font-size:40px;line-height:1.18;margin-top:26px;max-width:860px}
+.pie{position:absolute;left:70px;right:70px;bottom:64px;display:flex;align-items:center;justify-content:space-between}
+#e.f916 .pie{bottom:420px}
+.cta{display:inline-block;font-family:Anton;font-size:46px;line-height:1;text-transform:uppercase;padding:26px 34px;border-radius:18px}
+.lg{width:200px}
+/* 1 · megáfono: negro */
+.m1{background:#03090B;color:#F4F1EB}.m1 .pil{color:#F4CC38}.m1 .pil i{background:#F4CC38}
+.m1 h1{font-family:Anton;font-size:104px;line-height:.98;text-transform:uppercase}.m1 h1 em{font-style:normal;color:#F4CC38}
+.m1 .sub{color:rgba(244,241,235,.86)}.m1 .cta{background:#F4CC38;color:#0A0A0B}
+.m1 .im::before,.m3 .im::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--c) 0%,transparent 34%,transparent 72%,rgba(0,0,0,.62) 100%)}
+.m1{--c:#03090B}
+/* 2 · cubo: crema editorial */
+.m2{background:#EFD9BD;color:#0A0A0B}.m2 .pil{color:#0A0A0B}.m2 .pil i{background:#D8432B}
+.m2 h1{font-family:"Liberation Serif",serif;font-weight:700;font-size:104px;line-height:.98;letter-spacing:-.02em}.m2 h1 em{font-style:italic;color:#D8432B}
+.m2 .sub{font-family:"Liberation Serif",serif;font-weight:400;font-size:44px}
+.m2 .cta{font-family:SG;font-weight:700;font-size:34px;text-transform:none;background:#0A0A0B;color:#F4F1EB;border-radius:999px;padding:24px 38px}
+.m2 .im::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#EFD9BD 0%,rgba(239,217,189,0) 30%)}
+/* 3 · formularios: turquesa oscuro */
+.m3{background:#04252B;color:#F4F1EB;--c:#04252B}.m3 .pil{color:#F4CC38}.m3 .pil i{background:#F4CC38}
+.m3 h1{font-family:Anton;font-size:118px;line-height:.98;text-transform:uppercase}.m3 h1 em{font-style:normal;color:#F4CC38}
+.m3 .sub{color:rgba(244,241,235,.9)}.m3 .cta{background:#F4CC38;color:#0A0A0B}
+.m1.f916{background:linear-gradient(#00090c 0 45%,#0b0a08 55% 100%)}.m1.f916 .im::after{content:'';position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(transparent,#0b0a08)}
+.m2.f916{background:linear-gradient(#eaceb0 0 45%,#cbaa8a 55% 100%)}.m2.f916 .im::after{content:'';position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(transparent,#cbaa8a)}
+.m3.f916{background:linear-gradient(#001c20 0 45%,#042529 55% 100%)}.m3.f916 .im::after{content:'';position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(transparent,#042529)}
+</style></head><body><div id="e"></div><script>
+const R='../../video/2026-09-17-sistema/rec/';
+const AD={
+m1:`<div class="im" style="background-image:url(img/megafono.jpg)"></div><div class="tx"><div class="pil"><i></i>Para escuelas de formación online</div>
+ <h1>Tu escuela necesita <em>algo más</em> que una agencia de publicidad.</h1><div class="sub">Campañas, seguimiento y reuniones. Un equipo. Un sistema.</div></div>
+ <div class="pie"><div class="cta">Solicita tu diagnóstico gratuito</div><img class="lg" src="${R}logo-blanco.png"></div>`,
+m2:`<div class="im" style="background-image:url(img/cubo.jpg)"></div><div class="tx"><div class="pil"><i></i>Para escuelas de formación online</div>
+ <h1>¿Sabes dónde está <em>perdiendo alumnos</em> tu escuela?</h1><div class="sub">Encontramos las fugas de tu captación y te ayudamos a cerrarlas.</div></div>
+ <div class="pie"><div class="cta">Solicita tu diagnóstico gratuito →</div><img class="lg" src="${R}qualivo-logo.png"></div>`,
+m3:`<div class="im" style="background-image:url(img/papeles.jpg)"></div><div class="tx"><div class="pil"><i></i>Para escuelas de formación online</div>
+ <h1>No todos los leads <em>valen lo mismo.</em></h1><div class="sub">Conectamos tus campañas con lo que ocurre en ventas.</div></div>
+ <div class="pie"><div class="cta">Solicita tu diagnóstico gratuito</div><img class="lg" src="${R}logo-blanco.png"></div>`};
+function pinta(){const [k,f]=(location.hash.slice(1)||'m1-45').split('-');const e=document.getElementById('e');e.className=k+' f'+f;e.style.display='block';e.innerHTML=AD[k];}
+addEventListener('hashchange',pinta);pinta();
+</script></body></html>

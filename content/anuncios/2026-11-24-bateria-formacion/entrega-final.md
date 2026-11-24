@@ -98,3 +98,18 @@ Botón de Meta en todos: «Más información». Oferta común: diagnóstico grat
 4. **Demo corta.** Las escenas del anuncio antiguo conservan sus datos de ejemplo: «curso de electricista», «Escuela Norte», «Laura Vidal», las etiquetas «Agente de captación / entrada / contacto / seguimiento» y «Prioridad 88/100». Nadie ha escuchado el audio.
 5. **Legibilidad en móvil.** Comprobada por tamaños: el texto más pequeño con significado mide 31 px sobre 1080 (AD01) y 35 px (AD03). No se ha probado en un teléfono real.
 6. **AD04 (Maikel a cámara)** queda fuera de esta batería, como en el reset.
+
+## Propuesta «limpia» (24-nov, noche)
+
+Maikel, tras ver la entrega: «los veo muy cargados y se nota mucho que son diseños de Claude; deberíamos ser más creativos». Segunda propuesta con otra lógica: una fotografía, un titular, una línea y el botón. La explicación del servicio pasa al texto del anuncio.
+
+| Pieza | Imagen | Titular | Línea |
+|---|---|---|---|
+| Sistema completo | Un megáfono amarillo sobre una mesa, con un aula vacía detrás | «Tu escuela necesita algo más que una agencia de publicidad.» | «Campañas, seguimiento y reuniones. Un equipo. Un sistema.» |
+| Fugas | Un cubo de metal que pierde agua por varios agujeros | «¿Sabes dónde está perdiendo alumnos tu escuela?» | «Encontramos las fugas de tu captación y te ayudamos a cerrarlas.» |
+| Formularios frente a oportunidades | Una pila de papeles grises con una sola hoja amarilla que sobresale | «No todos los leads valen lo mismo.» | «Conectamos tus campañas con lo que ocurre en ventas.» |
+
+- Archivos: `png/limpio-1-45.png`, `limpio-1-916.png`, `limpio-2-…`, `limpio-3-…` y `hoja-limpios.png`. Fuente: `limpios.html` y `render-limpios.js`.
+- Las tres fotografías son imágenes generadas (Higgsfield), sin personas ni marcas. Están en `img/`.
+- La versión anterior («cargada») sigue en `png/ad1…ad3` por si se quiere comparar o probar una contra otra.
+- Los copies de arriba sirven igual; con estas piezas el texto del anuncio lleva más peso, porque la imagen ya no enumera el servicio.
