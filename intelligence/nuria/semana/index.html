@@ -500,6 +500,14 @@ small,.nota{color:var(--mut);font-size:12.5px}
       + '<div class="k"><div class="l">Clics en los emails VIP</div><div class="v">' + num(clicsVIP) + '</div><div class="neu">' + envVIP.length + ' de 3 enviados</div></div>'
       + '<div class="k"><div class="l">Compras de diciembre</div><div class="v">' + num(d.compras) + '</div><div class="neu">etiqueta «cliente 11 pasos dic2026»</div></div>'
       + '</div>';
+    if (d.detalle) {
+      var D = d.detalle, dias = Object.keys(D.porDia).sort();
+      h += '<div class="card"><b>Ventas de A 11 Pasos del Sueño (diciembre)</b><div class="kpis" style="margin-top:10px">'
+        + '<div class="k"><div class="l">Compras</div><div class="v">' + num(D.total) + '</div><div class="neu">personas con la etiqueta de compra</div></div>'
+        + '<div class="k"><div class="l">Venían de la lista VIP</div><div class="v">' + num(D.deLaVip) + '</div><div class="neu">' + (D.total ? pc(D.deLaVip / D.total) + ' de las compras' : '—') + (d.vip ? ' · ' + pc(D.deLaVip / d.vip) + ' de la lista compra' : '') + '</div></div>'
+        + '<div class="k"><div class="l">Ingresos estimados</div><div class="v">' + eur(D.ingresosEstimados) + '</div><div class="neu">175 € hasta el 30-nov, 185 € después</div></div>'
+        + '</div><table><tr><th>Día</th><th class="n">Compras</th></tr>' + dias.map(function (x) { return '<tr><td>' + dia(x) + '</td><td class="n">' + num(D.porDia[x]) + '</td></tr>'; }).join('') + (D.sinFecha ? '<tr><td><small>sin fecha</small></td><td class="n">' + num(D.sinFecha) + '</td></tr>' : '') + '</table></div>';
+    }
     if (d.plan) {
       h += '<div class="card"><b>Los 6 emails del plan</b><table><tr><th>Día</th><th>Email</th><th>A quién</th><th>Estado</th><th class="n">Entregados</th><th class="n">Abren</th><th class="n">Clics</th></tr>';
       d.plan.forEach(function (p) {
@@ -510,7 +518,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
       });
       h += '</table></div>';
     }
-    h += '<p class="nota"><b>Lista VIP:</b> personas a las que Kliking ha puesto la etiqueta «lista vip black friday 2026» al pulsar el botón de un email VIP. <b>Telegram:</b> miembros del grupo «BLACK FRIDAY VIP» según su página pública de invitación (incluye al equipo). Que haya menos en el grupo que en la lista es normal: algunas pulsan pero no acaban de entrar. <b>Emails:</b> datos exactos de Kliking; en rojo, los que tocan en los próximos 2 días y aún no están programados. <b>Compras:</b> salen cuando el flujo de compra ponga la etiqueta de diciembre. Se actualiza cada 10 minutos.</p>';
+    h += '<p class="nota"><b>Ventas:</b> día de compra = día del email de bienvenida «Ya estás dentro…» (si no tiene, el día de alta del contacto); los ingresos son estimados con el precio de cada día, porque Kliking no guarda el importe. <b>Lista VIP:</b> personas a las que Kliking ha puesto la etiqueta «lista vip black friday 2026» al pulsar el botón de un email VIP. <b>Telegram:</b> miembros del grupo «BLACK FRIDAY VIP» según su página pública de invitación (incluye al equipo). Que haya menos en el grupo que en la lista es normal: algunas pulsan pero no acaban de entrar. <b>Emails:</b> datos exactos de Kliking; en rojo, los que tocan en los próximos 2 días y aún no están programados. <b>Compras:</b> salen cuando el flujo de compra ponga la etiqueta de diciembre. Se actualiza cada 10 minutos.</p>';
     c.innerHTML = h;
   }
   function cargarBF() {
