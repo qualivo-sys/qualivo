@@ -1,57 +1,36 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8">
-<!-- «Sistema completo» · versión final (24-nov, noche), sobre la propuesta oscura elegida por Maikel · final.html#45 | #916
+<!-- «Sistema completo» · versión con aire (24-nov, noche), sobre la propuesta oscura elegida por Maikel · final.html#45 | #916
      Las interfaces son pantallas reales de Qualivo Intelligence y del asistente de WhatsApp con datos ilustrativos del entorno de demostración. -->
 <style>
 @font-face{font-family:Anton;src:url(../2026-09-11-v2/fuentes/anton.ttf) format('truetype')}
 @font-face{font-family:SG;src:url(../2026-09-11-v2/fuentes/spacegrotesk.woff2) format('woff2');font-weight:300 700}
 *{box-sizing:border-box;margin:0;padding:0}html,body{background:#333}
-#e{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:SG,sans-serif;background:#05080A;color:#F4F1EB}
-#e.f916{height:1920px}
-#e::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 700px at 78% 50%,rgba(31,163,150,.55),transparent 62%),radial-gradient(700px 500px at 0% 72%,rgba(244,204,56,.16),transparent 60%)}
-.tx{position:absolute;left:64px;right:64px;top:58px;z-index:5}.f916 .tx{top:296px}
-.id{font-weight:700;font-size:26px;letter-spacing:.12em;text-transform:uppercase;color:#F4CC38}
-h1{font-family:Anton;font-weight:400;font-size:100px;line-height:.96;text-transform:uppercase;margin-top:16px}h1 em{font-style:normal;color:#F4CC38}
-.sub{font-weight:600;font-size:33px;line-height:1.16;margin-top:14px;color:rgba(244,241,235,.86)}
-.esc{position:absolute;left:0;right:0;top:412px;height:590px;perspective:1900px;z-index:2}.f916 .esc{top:670px;height:640px}
-.esc::after{content:"";position:absolute;left:0;right:0;bottom:-60px;height:200px;background:linear-gradient(transparent,#05080A 66%);z-index:4}
-.win{position:absolute;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 50px 110px rgba(0,0,0,.6),0 0 0 1.5px rgba(255,255,255,.16)}
-.win .bar{height:34px;background:#ECEAE4;display:flex;align-items:center;gap:8px;padding:0 14px}.win .bar i{width:11px;height:11px;border-radius:50%;background:#C9C6BD;display:block}
-.win .bar b{margin-left:10px;font-size:14px;font-weight:700;color:#5A5D63;letter-spacing:.04em}.win img{display:block;width:100%}
-#w0{left:250px;top:0;width:900px;transform:rotateY(-20deg) rotateX(9deg) rotateZ(2deg) translateZ(-160px);filter:brightness(.94)}
-#w1{left:-110px;top:215px;width:860px;transform:rotateY(18deg) rotateX(9deg) rotateZ(-2.5deg)}
-.tel{position:absolute;right:40px;top:150px;width:262px;height:455px;border-radius:42px;background:#0A0A0B;padding:11px;box-shadow:0 50px 100px rgba(0,0,0,.65),0 0 0 2px rgba(255,255,255,.18);transform:rotateY(-16deg) rotateX(6deg) rotateZ(3deg) translateZ(120px)}
-.tel div{border-radius:32px;overflow:hidden;height:100%}.tel img{display:block;width:100%}
-.tag{position:absolute;z-index:6;font-weight:700;font-size:23px;padding:10px 16px;border-radius:999px;white-space:nowrap;background:#F4CC38;color:#0A0A0B;box-shadow:0 10px 26px rgba(0,0,0,.4)}
-.blo{position:absolute;left:64px;right:64px;bottom:214px;z-index:5;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}.f916 .blo{bottom:600px}
-.blo div{border-radius:20px;padding:16px 18px 17px;background:rgba(244,241,235,.09);border:1.5px solid rgba(244,241,235,.24)}
-.blo b{display:block;font-family:Anton;font-weight:400;font-size:42px;line-height:1;text-transform:uppercase;color:#F4CC38}
-.blo span{display:block;font-weight:600;font-size:24px;line-height:1.14;margin-top:8px}
-.blo div.z{background:#1FA396;border-color:#1FA396;color:#0A0A0B}.blo div.z b{color:#0A0A0B}
-.cie{position:absolute;left:64px;right:64px;bottom:160px;z-index:5;font-family:Anton;font-size:34px;line-height:1;text-transform:uppercase;letter-spacing:.01em}.cie em{font-style:normal;color:#1FA396}
-.f916 .cie{bottom:545px}
-.pie{position:absolute;left:64px;right:64px;bottom:46px;z-index:5;display:flex;align-items:center;justify-content:space-between}.f916 .pie{bottom:425px}
-.cta{font-family:Anton;font-size:46px;line-height:1;text-transform:uppercase;padding:27px 34px;border-radius:20px;background:#F4CC38;color:#0A0A0B}
-.lg{width:200px}
-
-.f916 .esc{height:590px;top:690px}
-#w0{left:215px;top:6px;width:900px;height:420px}
-#w1{left:-110px;top:262px;width:800px;height:318px}
-.tel{top:196px;width:240px;height:400px;right:44px}
-.esc::after{bottom:-40px;height:130px}
-.blo div{background:#11181A;border-color:rgba(244,241,235,.26)}
-.blo{bottom:212px}.f916 .blo{bottom:596px}
+#e{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:SG,sans-serif;background:#05080A;color:#F4F1EB;padding:84px 88px 78px;display:flex;flex-direction:column}
+#e.f916{height:1920px;padding:300px 88px 430px}
+#e::before{content:"";position:absolute;inset:0;background:radial-gradient(820px 620px at 70% 44%,rgba(31,163,150,.42),transparent 64%)}
+#e>*{position:relative}
+.id{font-weight:700;font-size:25px;letter-spacing:.14em;text-transform:uppercase;color:#F4CC38}
+h1{font-family:Anton;font-weight:400;font-size:80px;line-height:1;text-transform:uppercase;margin-top:20px}h1 em{font-style:normal;color:#F4CC38}
+.esc{height:440px;margin-top:44px;perspective:2200px}.f916 .esc{height:520px;margin-top:56px}
+.win{position:absolute;left:0;top:26px;width:690px;height:338px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1.5px rgba(255,255,255,.16);transform:rotateY(9deg) rotateX(3deg);transform-origin:0 50%}
+.f916 .win{top:40px;height:408px;width:700px}
+.win .bar{height:38px;background:#ECEAE4;display:flex;align-items:center;gap:8px;padding:0 14px}.win .bar i{width:11px;height:11px;border-radius:50%;background:#C9C6BD;display:block}
+.win .bar b{margin-left:10px;font-size:17px;font-weight:700;color:#3D4148;letter-spacing:.03em}.win img{display:block;width:100%}
+.tel{position:absolute;right:0;top:0;width:236px;height:432px;border-radius:40px;background:#0A0A0B;padding:10px;box-shadow:0 40px 90px rgba(0,0,0,.65),0 0 0 2px rgba(255,255,255,.2);transform:rotateY(-8deg) rotateX(3deg)}
+.f916 .tel{width:270px;height:500px}
+.tel div{border-radius:31px;overflow:hidden;height:100%}.tel img{display:block;width:100%}
+.ser{display:grid;grid-template-columns:repeat(3,1fr);column-gap:34px;margin-top:46px}.f916 .ser{margin-top:60px}
+.ser span{display:flex;align-items:center;gap:12px;font-weight:600;font-size:29px;line-height:1.1;padding:19px 0;border-top:1.5px solid rgba(244,241,235,.2)}
+.ser span i{flex:none;width:9px;height:9px;border-radius:50%;background:#1FA396;display:block}
+.cie{margin-top:auto;font-weight:600;font-size:30px;color:rgba(244,241,235,.72)}
+.pie{margin-top:22px;display:flex;align-items:center;justify-content:space-between}
+.cta{font-family:Anton;font-size:40px;line-height:1;text-transform:uppercase;padding:24px 30px;border-radius:16px;background:#F4CC38;color:#0A0A0B}
+.lg{width:190px}
 </style></head><body><div id="e">
- <div class="tx"><div class="id">Para escuelas de formación online</div><h1>De captar solicitudes a <em>conseguir alumnos.</em></h1>
-  <div class="sub">Gestionamos tus anuncios, automatizamos el seguimiento y mejoramos tu conversión comercial.</div></div>
- <div class="esc">
-  <div class="win" id="w0"><div class="bar"><i></i><i></i><i></i><b>Qualivo Intelligence · Campañas</b></div><img src="cap/anuncios.png"></div>
-  <div class="win" id="w1"><div class="bar"><i></i><i></i><i></i><b>Qualivo Intelligence · Oportunidades</b></div><img src="cap/oportunidades.png"></div>
-  <div class="tel"><div><img src="cap/whatsapp.png"></div></div>
-  <div class="tag" style="left:330px;top:-14px">Intelligence · campañas, oportunidades y matrículas</div>
-  <div class="tag" style="left:64px;top:240px">CRM y seguimiento</div>
-  <div class="tag" style="right:40px;top:156px">WhatsApp al momento</div>
- </div>
- <div class="blo"><div><b>Captación</b><span>Ads, landings y formularios</span></div><div><b>Conversión</b><span>IA, CRM y reuniones</span></div><div class="z"><b>Optimización</b><span>Intelligence y atribución</span></div></div>
- <div class="cie">Un equipo. Un sistema. <em>Todo conectado.</em></div>
+ <div class="id">Para escuelas de formación online</div>
+ <h1>De captar solicitudes a <em>conseguir alumnos.</em></h1>
+ <div class="esc"><div class="win"><div class="bar"><i></i><i></i><i></i><b>Qualivo Intelligence</b></div><img src="cap/anuncios.png"></div><div class="tel"><div><img src="cap/whatsapp.png"></div></div></div>
+ <div class="ser"><span><i></i>Publicidad</span><span><i></i>Landings y formularios</span><span><i></i>Lead scoring</span><span><i></i>WhatsApp IA</span><span><i></i>Gestión de citas</span><span><i></i>CRM y ventas</span></div>
+ <div class="cie">Captación, seguimiento y mejora continua.</div>
  <div class="pie"><div class="cta">Solicita tu diagnóstico gratuito</div><img class="lg" src="../../video/2026-09-17-sistema/rec/logo-blanco.png"></div>
 </div><script>document.getElementById('e').className='f'+(location.hash.slice(1)||'45')</script></body></html>

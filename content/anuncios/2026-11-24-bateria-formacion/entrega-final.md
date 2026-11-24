@@ -148,3 +148,13 @@ Maikel elige la propuesta oscura («8/10, merece probarse») y pide tres ajustes
 - **Legibilidad:** el texto propio más pequeño mide 24 px sobre 1080 (las tres áreas). El texto de dentro de las capturas no está pensado para leerse entero en el móvil.
 - **Copy del anuncio:** texto principal «Para escuelas de formación online. Gestionamos tus anuncios, automatizamos el seguimiento y mejoramos tu conversión comercial: respuesta por WhatsApp, cualificación, CRM, reuniones y los datos de ventas conectados con tus campañas. Un equipo y un sistema. Solicita tu diagnóstico gratuito.» · Título «De captar solicitudes a conseguir alumnos» · Descripción «Diagnóstico gratuito para escuelas online».
 - **Plan de Maikel:** ponerla a competir con el vídeo antiguo y el V7 dentro de los 30 €/día conjuntos. Lo ejecuta Paid con su instrucción.
+
+### Ajuste de aire (24-nov, noche)
+
+Maikel: «el problema no es la cantidad de funcionalidades, sino cómo están distribuidas; quiero darle más aire». La versión final (`png/sistema-completo-FINAL-45.png` y `-916.png`) queda así:
+
+- Titular un 20 % más pequeño (80 px) y márgenes laterales de 88 px.
+- Solo dos elementos visuales: la ventana de Qualivo Intelligence (tabla de campañas) y el móvil con el asistente de WhatsApp, apenas solapados. Sin etiquetas flotantes.
+- Sin subtítulo. Los servicios, en una rejilla de 3 × 2 con líneas finas: Publicidad · Landings y formularios · Lead scoring · WhatsApp IA · Gestión de citas · CRM y ventas. Intelligence no va en la rejilla porque es la pantalla principal, con su nombre en la barra de la ventana.
+- Cierre «Captación, seguimiento y mejora continua.» y botón algo más pequeño (40 px).
+- La versión anterior, más cargada, está en el commit 3c227d1a.
