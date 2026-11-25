@@ -453,8 +453,8 @@ small,.nota{color:var(--mut);font-size:12.5px}
       var n = p[2];
       if (p[0] !== fase) { cuerpo += '<div class="rc-fase">' + p[0] + '</div>'; fase = p[0]; }
       var desdeAnt = n != null && prev && !p[4] && prev.n ? Math.round(n / prev.n * 100) : null;
-      if (desdeAnt != null && prev.n - n > 0 && p[1] !== 'Quedan en negociación') caidas.push({ de: prev.paso, a: p[1], pierden: prev.n - n, pct: 100 - desdeAnt });
-      cuerpo += '<div class="rc-fila"><div>' + p[1] + (p[3] ? '<br><small class="neu">' + p[3] + '</small>' : '') + '</div><div class="rc-bar' + (p[4] ? ' rep' : '') + '"><i style="width:' + (n ? Math.max(0.3, n / max * 100) : 0) + '%"></i></div><div class="rc-n"><b>' + (n == null ? '<span class="neu">—</span>' : num(n)) + '</b>' + (n != null && !p[4] && reg ? ' <small>· ' + (n / reg * 100).toFixed(n / reg < 0.1 ? 1 : 0).replace('.', ',') + ' % de los registros</small>' : '') + (desdeAnt != null ? '<br><small>' + desdeAnt + ' % del paso anterior</small>' : '') + '</div></div>';
+      if (desdeAnt != null && prev.n - n > 0 && p[1] !== 'Quedan en negociación' && p[1] !== 'Compran') caidas.push({ de: prev.paso, a: p[1], pierden: prev.n - n, pct: 100 - desdeAnt });
+      cuerpo += '<div class="rc-fila"><div>' + p[1] + (p[3] ? '<br><small class="neu">' + p[3] + '</small>' : '') + '</div><div class="rc-bar' + (p[4] ? ' rep' : '') + '">' + (n ? '<i style="width:' + Math.max(0.3, n / max * 100) + '%"></i>' : '') + '</div><div class="rc-n"><b>' + (n == null ? '<span class="neu">—</span>' : num(n)) + '</b>' + (n != null && !p[4] && reg ? ' <small>· ' + (n / reg * 100).toFixed(n / reg < 0.1 ? 1 : 0).replace('.', ',') + ' % de los registros</small>' : '') + (desdeAnt != null ? '<br><small>' + desdeAnt + ' % del paso anterior</small>' : '') + '</div></div>';
       if (n != null && !p[4] && p[1] !== 'Quedan en negociación') prev = { n: n, paso: p[1] };
     });
     caidas.sort(function (a, b) { return b.pct - a.pct; });
