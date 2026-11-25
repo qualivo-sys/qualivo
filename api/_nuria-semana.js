@@ -77,7 +77,7 @@ async function ghl(ruta, opc) {
         body: opc.cuerpo ? JSON.stringify(opc.cuerpo) : undefined,
         signal: ctl.signal
       });
-      if (r.status === 429 && intento < 5) { await new Promise(function (ok) { setTimeout(ok, 1200 * (intento + 1)); }); continue; }
+      if (r.status === 429 && intento < 6) { await new Promise(function (ok) { setTimeout(ok, 1500 * (intento + 1) + Math.random() * 1000); }); continue; }
       if (!r.ok) throw new Error('GHL ' + r.status);
       return await r.json();
     } finally { clearTimeout(t); }
