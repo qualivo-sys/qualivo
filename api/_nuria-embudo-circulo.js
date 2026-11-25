@@ -14,6 +14,9 @@
 // - Llamadas: citas de cualquier agenda de Kliking de personas de la edición, desde el inicio de la
 //   captación hasta 3 semanas después del directo. «invalid» no cuenta.
 // - Ventas: hoja de ventas, personas de la edición, desde el inicio de la captación.
+// - Después de la llamada: oportunidades de las personas de la edición en los pipelines de closers
+//   («🤑 AREA CLOSER» y «🤑 AREA CLOSER (LANZAMIENTOS)»), por etapa. Si una persona tiene varias, cuenta
+//   la más reciente. Oferta = la llamada llegó a la propuesta (negociación + ganada + perdida).
 // Solo lectura; la respuesta solo lleva recuentos.
 
 const N = require('./_nuria-semana.js');
@@ -67,16 +70,48 @@ async function citas(desde, hasta) {
   return out;
 }
 
+const PIPES_CLOSER = ['PbvYwRSmkmqfoqVIf4k9', 'j6l7ACTg4wAIC0G91iAE'];
+function grupoEtapa(n) {
+  n = String(n || '').toUpperCase();
+  if (/GANADA|FALTAN DATOS/.test(n)) return 'ganada';
+  if (/PERDIDA/.test(n)) return 'perdida';
+  if (/NO SHOW/.test(n)) return 'noShow';
+  if (/CANCEL/.test(n)) return 'cancelan';
+  if (/SEÑAL/.test(n)) return 'senal';
+  if (/HOT/.test(n)) return 'hot';
+  if (/LEJANO|FOLLOW/.test(n)) return 'lejano';
+  return 'agendada';   // sesión agendada, confirmada, reagenda
+}
+async function closers() {
+  const P = (await N.ghl('/opportunities/pipelines?locationId=' + LOC(), {})).pipelines || [];
+  const nombres = {};
+  P.forEach(function (p) { (p.stages || []).forEach(function (s) { nombres[s.id] = s.name; }); });
+  const porContacto = {};
+  for (const pid of PIPES_CLOSER) {
+    for (let page = 1; page <= 40; page++) {
+      const r = await N.ghl('/opportunities/search?location_id=' + LOC() + '&pipeline_id=' + pid + '&limit=100&page=' + page, {});
+      const o = r.opportunities || [];
+      o.forEach(function (x) {
+        const t = Date.parse(x.updatedAt || x.createdAt || 0) || 0, ya = porContacto[x.contactId];
+        if (!ya || t > ya.t) porContacto[x.contactId] = { t: t, g: grupoEtapa(nombres[x.pipelineStageId]) };
+      });
+      if (o.length < 100) break;
+    }
+  }
+  return porContacto;
+}
+
 function claseDe(t) { t = String(t || ''); if (/audio/i.test(t)) return 'audio'; const m = /clase[_\s-]*(\d)/i.exec(t); if (m) return 'clase' + m[1]; if (/directo|grabaci/i.test(t)) return 'directo'; return null; }
 
 async function embudoCirculo(directos) {
   const hoy = N.diaMadrid(new Date());
   const desdeTodo = N.sumaDias(directos[0], -12), hastaTodo = directos[directos.length - 1];
-  const [meta, ventas, grupos, todasCitas] = await Promise.all([
+  const [meta, ventas, grupos, todasCitas, opps] = await Promise.all([
     metaDiario(desdeTodo, hoy < hastaTodo ? hoy : hastaTodo).catch(function () { return null; }),
     N.ventasHoja(desdeTodo).catch(function () { return null; }),
     GRUPOS.grupos().catch(function () { return null; }),
-    citas(desdeTodo, N.sumaDias(hastaTodo, 21) < hoy ? N.sumaDias(hastaTodo, 21) : hoy).catch(function () { return null; })
+    citas(desdeTodo, N.sumaDias(hastaTodo, 21) < hoy ? N.sumaDias(hastaTodo, 21) : hoy).catch(function () { return null; }),
+    closers().catch(function () { return null; })
   ]);
   const ediciones = [];
   for (const d of directos) {
@@ -106,6 +141,13 @@ async function embudoCirculo(directos) {
         pendientes: pers(function (c) { return c.estado === 'confirmed' || c.estado === 'new'; })
       };
     }
+    let cl = null;
+    if (opps) {
+      cl = { total: 0, agendada: 0, noShow: 0, cancelan: 0, senal: 0, hot: 0, lejano: 0, ganada: 0, perdida: 0 };
+      ids.forEach(function (id) { const o = opps[id]; if (o) { cl.total++; cl[o.g]++; } });
+      cl.negociacion = cl.senal + cl.hot + cl.lejano;
+      cl.oferta = cl.negociacion + cl.ganada + cl.perdida;
+    }
     const vs = ventas ? ventas.filter(function (v) { return v.email && mails.has(v.email) && v.dia >= desde; }) : null;
     const g = grupos && grupos.ediciones ? grupos.ediciones[d] : null;
     ediciones.push({
@@ -113,7 +155,7 @@ async function embudoCirculo(directos) {
       registrosMeta: regMeta, registrosKliking: personas.length, ads: ads.length, org: org.length,
       gasto: gasto, costeRegistro: gasto != null && personas.length ? gasto / ads.length : null,
       grupoEntran: g ? g.entran : grupo, grupoSalen: g ? g.salen : null, fuenteGrupo: g ? 'funnelchat' : 'etiqueta',
-      vistas: vistas, asistencia: (clicZoom || checkin) ? { clicZoom: clicZoom, checkin: checkin } : null, llamadas: ll,
+      vistas: vistas, asistencia: (clicZoom || checkin) ? { clicZoom: clicZoom, checkin: checkin } : null, llamadas: ll, closer: cl,
       compras: vs ? new Set(vs.map(function (v) { return v.email; })).size : null,
       facturacion: vs ? vs.reduce(function (s, v) { return s + (v.importe || 0); }, 0) : null
     });

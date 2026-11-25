@@ -407,7 +407,16 @@ small,.nota{color:var(--mut);font-size:12.5px}
         var v = function (x) { return x == null ? '<span class="neu">—</span>' : num(x); };
         var fila = function (titulo, f, sub) { return '<tr><td>' + titulo + (sub ? '<br><small>' + sub + '</small>' : '') + '</td>' + E.map(function (e) { return '<td class="n">' + f(e) + '</td>'; }).join('') + '</tr>'; };
         var sec = function (t) { return '<tr><th colspan="' + (E.length + 1) + '" style="text-align:left;padding-top:14px">' + t + '</th></tr>'; };
-        var h = '<div class="card" style="overflow-x:auto"><table><tr><th>Paso</th>' + E.map(function (e) { return '<th class="n">Miércoles ' + dia(e.directo) + '<br><small>' + esc(e.estado) + '</small></th>'; }).join('') + '</tr>';
+        var R = E.filter(function (e) { return e.estado === 'directo hecho'; }).slice(-1)[0];
+        var h = '';
+        if (R) {
+          var pasos = [['Se registran', R.registrosKliking], ['Entran al grupo', R.grupoEntran], ['Ven la clase 1 (reprod.)', R.vistas && R.vistas.clase1], ['Reservan llamada', R.llamadas && R.llamadas.agendadas], ['Se presentan', R.llamadas && R.llamadas.hechas], ['Llegan a la oferta', R.closer && R.closer.oferta], ['En negociación', R.closer && R.closer.negociacion], ['Compran', R.compras]];
+          h += '<div class="card"><b>Resumen del recorrido · edición del miércoles ' + dia(R.directo) + '</b><table><tr><th>Paso</th><th class="n">Personas</th><th class="n">Del paso anterior</th><th class="n">De los registros</th></tr>';
+          var ant = null;
+          pasos.forEach(function (x) { var n = x[1]; h += '<tr><td>' + x[0] + '</td><td class="n">' + (n == null ? '—' : num(n)) + '</td><td class="n">' + (n != null && ant ? Math.round(n / ant * 100) + ' %' : '—') + '</td><td class="n">' + (n != null && R.registrosKliking ? (n / R.registrosKliking * 100).toFixed(1).replace('.', ',') + ' %' : '—') + '</td></tr>'; if (n != null && x[0] !== 'En negociación') ant = n; });
+          h += '</table><p class="nota">«En negociación» se compara con «Llegan a la oferta»; «Compran», con las que llegan a la oferta. La clase 1 son reproducciones, no personas. Detalle de todas las ediciones en la tabla de abajo.</p></div>';
+        }
+        h += '<div class="card" style="overflow-x:auto"><table><tr><th>Paso</th>' + E.map(function (e) { return '<th class="n">Miércoles ' + dia(e.directo) + '<br><small>' + esc(e.estado) + '</small></th>'; }).join('') + '</tr>';
         h += sec('1 · Registros');
         h += fila('Registros según Meta', function (e) { return v(e.registrosMeta); }, 'campañas de El Círculo en la captación');
         h += fila('Registros en Kliking', function (e) { return num(e.registrosKliking) + '<br><small>' + num(e.ads) + ' anuncios · ' + num(e.org) + ' orgánico</small>'; });
@@ -429,7 +438,16 @@ small,.nota{color:var(--mut);font-size:12.5px}
         h += fila('No-shows', function (e) { return e.llamadas ? num(e.llamadas.noShow) : '—'; });
         h += fila('Canceladas', function (e) { return e.llamadas ? num(e.llamadas.canceladas) : '—'; });
         h += fila('Pendientes', function (e) { return e.llamadas ? num(e.llamadas.pendientes) : '—'; }, 'confirmadas sin hacer aún');
-        h += sec('6 · Ventas');
+        var c0 = function (k) { return function (e) { return e.closer ? num(e.closer[k]) : '—'; }; };
+        h += sec('6 · Después de la llamada (pipeline de closers)');
+        h += fila('En el pipeline de closers', function (e) { return e.closer ? num(e.closer.total) : '—'; }, 'personas de la edición con oportunidad');
+        h += fila('Siguen en «sesión agendada»', c0('agendada'), 'agendada, confirmada o reagenda: o la llamada no ha llegado o no se ha movido la etapa');
+        h += fila('Llegan a la oferta', function (e) { return e.closer ? num(e.closer.oferta) + p(e.closer.oferta, e.llamadas && e.llamadas.hechas) : '—'; }, 'negociación + ganada + perdida · % sobre llamadas hechas');
+        h += fila('En negociación', function (e) { return e.closer ? num(e.closer.negociacion) + '<br><small>' + num(e.closer.hot) + ' hot · ' + num(e.closer.lejano) + ' lejano · ' + num(e.closer.senal) + ' señal</small>' : '—'; }, 'seguimiento hot, lejano, follow up o señal');
+        h += fila('Ganadas', function (e) { return e.closer ? num(e.closer.ganada) + p(e.closer.ganada, e.closer.oferta) : '—'; }, '% sobre las que llegan a la oferta');
+        h += fila('Perdidas', function (e) { return e.closer ? num(e.closer.perdida) + p(e.closer.perdida, e.closer.oferta) : '—'; }, '% sobre las que llegan a la oferta');
+        h += fila('No show / cancelan (pipeline)', function (e) { return e.closer ? num(e.closer.noShow) + ' · ' + num(e.closer.cancelan) : '—'; });
+        h += sec('7 · Ventas');
         h += fila('Ventas', function (e) { return e.compras == null ? '—' : num(e.compras) + (e.llamadas && e.llamadas.hechas ? '<br><small>' + Math.round(e.compras / e.llamadas.hechas * 100) + ' % de las llamadas hechas</small>' : ''); });
         h += fila('Conversión total', function (e) { return e.compras == null || !e.registrosKliking ? '—' : (e.compras / e.registrosKliking * 100).toFixed(1).replace('.', ',') + ' %'; }, 'ventas ÷ registros');
         h += fila('Facturación', function (e) { return e.facturacion == null ? '—' : eur(e.facturacion); });
