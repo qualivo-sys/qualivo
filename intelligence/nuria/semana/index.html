@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>Intelligence · Nuria Roure · Semanas y meses</title>
 <style>
+.rc-fila{display:grid;grid-template-columns:minmax(150px,1.2fr) 3fr minmax(150px,1fr);gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}.rc-bar{height:22px;background:var(--line);border-radius:4px;overflow:hidden}.rc-bar>i{display:block;height:100%;background:var(--a);min-width:3px}.rc-bar.rep>i{background:repeating-linear-gradient(45deg,var(--a),var(--a) 6px,transparent 6px,transparent 10px)}.rc-n{font-variant-numeric:tabular-nums;text-align:right}.rc-perd{font-size:12px;color:var(--down);padding:2px 0 2px 0;grid-column:2/4}.rc-fase{font-size:12px;font-weight:600;color:var(--mut);padding-top:12px;text-transform:uppercase;letter-spacing:.03em}@media (max-width:640px){.rc-fila{grid-template-columns:1fr;gap:4px}.rc-n{text-align:left}.rc-perd{grid-column:1}}
 :root{--bg:#f6f5f2;--card:#fff;--ink:#1d1d1f;--mut:#6b6b70;--line:#e4e2dc;--a:#3b5bdb;--b:#c9a227;--up:#2b8a3e;--down:#c92a2a;--warn:#fff4e6}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141416;--card:#1e1e22;--ink:#f1f1f3;--mut:#a0a0a8;--line:#2e2e34;--a:#748ffc;--b:#e3c158;--up:#69db7c;--down:#ff8787;--warn:#3a2d17}}
 :root[data-theme="dark"]{--bg:#141416;--card:#1e1e22;--ink:#f1f1f3;--mut:#a0a0a8;--line:#2e2e34;--a:#748ffc;--b:#e3c158;--up:#69db7c;--down:#ff8787;--warn:#3a2d17}
@@ -98,6 +99,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
       ['Registros nuevos', num(reg), ant ? delta(reg, (F.registros[prev] || {})._total || 0) : '']
     ];
     h += '<div class="kpis">' + k.map(function (x) { return '<div class="k"><div class="l">' + x[0] + '</div><div class="v">' + x[1] + '</div>' + x[2] + '</div>'; }).join('') + '</div>';
+    h += '<h2>El recorrido de El Círculo</h2><p class="sub">De la inscripción a la compra, paso a paso: cuántas personas llegan a cada paso y dónde se pierden más. Elige la edición (miércoles del directo).</p><div id="recorrido"><p class="cargando">Cargando…</p></div>';
 
     // Black Friday de A 11 Pasos del Sueño (se carga aparte)
     if (datos.hoy <= '2026-12-06') h += '<h2>Black Friday · A 11 Pasos del Sueño</h2><p class="sub">Lista VIP, grupo de Telegram, emails del plan y compras. Empezamos el 5 de diciembre.</p><div id="bf"><p class="cargando">Cargando el Black Friday…</p></div>';
@@ -422,6 +424,47 @@ small,.nota{color:var(--mut);font-size:12.5px}
       })
       .catch(function (e) { c.innerHTML = '<p class="nota">' + esc(e.message) + '</p>'; });
   }
+  var recDatos = null, recEd = null;
+  function pintarRecorrido() {
+    var c = document.getElementById('recorrido'); if (!c || !recDatos) return;
+    var E = (recDatos.ediciones || []).slice();
+    if (!E.length) { c.innerHTML = '<p class="nota">Todavía no hay ediciones.</p>'; return; }
+    if (!recEd || !E.some(function (e) { return e.directo === recEd; })) { var hechas = E.filter(function (e) { return e.estado === 'directo hecho'; }); recEd = (hechas.length ? hechas[hechas.length - 1] : E[E.length - 1]).directo; }
+    var R = E.find(function (e) { return e.directo === recEd; });
+    var L = R.llamadas || {}, C = R.closer || {}, V = R.vistas || {}, A = R.asistencia || {};
+    var reg = R.registrosKliking || 0;
+    // [fase, paso, personas, explicación, es reproducciones]
+    var P = [
+      ['Captación', 'Se registran', reg, (R.gasto ? eur(R.gasto) + ' en Meta · ' + (R.costeRegistro ? R.costeRegistro.toFixed(2).replace('.', ',') + ' € por registro' : '') : '')],
+      ['Captación', 'Entran al grupo de WhatsApp', R.grupoEntran, R.grupoSalen != null ? 'después salen ' + num(R.grupoSalen) + ' (' + Math.round(R.grupoSalen / (R.grupoEntran || 1) * 100) + ' %)' : ''],
+      ['Clases', 'Clase 1 (reproducciones)', V.clase1, 'reproducciones, no personas', true],
+      ['Clases', 'Clase 2 (reproducciones)', V.clase2, 'reproducciones, no personas', true],
+      ['Directo', 'Pulsan el enlace del Zoom', A.clicZoom || null, A.clicZoom ? '' : 'aún sin medir'],
+      ['Llamada', 'Reservan llamada', L.agendadas, ''],
+      ['Llamada', 'Se presentan a la llamada', L.hechas, L.agendadas ? 'no se presentan ' + num(L.noShow) + ' · cancelan ' + num(L.canceladas) + (L.pendientes ? ' · pendientes ' + num(L.pendientes) : '') : ''],
+      ['Venta', 'Llegan a la oferta', C.oferta, C.agendada ? num(C.agendada) + ' siguen en «sesión agendada» en el pipeline (sin actualizar o pendientes)' : ''],
+      ['Venta', 'Quedan en negociación', C.negociacion, C.negociacion ? num(C.hot) + ' hot · ' + num(C.lejano) + ' lejano' + (C.senal ? ' · ' + num(C.senal) + ' señal' : '') : ''],
+      ['Venta', 'Compran', R.compras, (R.facturacion ? eur(R.facturacion) : '') + (C.perdida != null ? ' · perdidas ' + num(C.perdida) : '')]
+    ];
+    var max = reg || 1, fase = null, prev = null, caidas = [];
+    var h = '<div class="tabs" role="group" aria-label="Edición">' + E.map(function (e) { return '<button class="btn" type="button" aria-pressed="' + (e.directo === recEd) + '" data-red="' + e.directo + '">' + dia(e.directo) + (e.estado === 'directo hecho' ? '' : ' <small>(' + esc(e.estado) + ')</small>') + '</button>'; }).join('') + '</div>';
+    var cuerpo = '';
+    P.forEach(function (p) {
+      var n = p[2];
+      if (p[0] !== fase) { cuerpo += '<div class="rc-fase">' + p[0] + '</div>'; fase = p[0]; }
+      var desdeAnt = n != null && prev && !p[4] && prev.n ? Math.round(n / prev.n * 100) : null;
+      if (desdeAnt != null && prev.n - n > 0 && p[1] !== 'Quedan en negociación') caidas.push({ de: prev.paso, a: p[1], pierden: prev.n - n, pct: 100 - desdeAnt });
+      cuerpo += '<div class="rc-fila"><div>' + p[1] + (p[3] ? '<br><small class="neu">' + p[3] + '</small>' : '') + '</div><div class="rc-bar' + (p[4] ? ' rep' : '') + '"><i style="width:' + (n ? Math.max(0.3, n / max * 100) : 0) + '%"></i></div><div class="rc-n"><b>' + (n == null ? '<span class="neu">—</span>' : num(n)) + '</b>' + (n != null && !p[4] && reg ? ' <small>· ' + (n / reg * 100).toFixed(n / reg < 0.1 ? 1 : 0).replace('.', ',') + ' % de los registros</small>' : '') + (desdeAnt != null ? '<br><small>' + desdeAnt + ' % del paso anterior</small>' : '') + '</div></div>';
+      if (n != null && !p[4] && p[1] !== 'Quedan en negociación') prev = { n: n, paso: p[1] };
+    });
+    caidas.sort(function (a, b) { return b.pct - a.pct; });
+    var top = caidas.slice(0, 3);
+    h += '<div class="card"><b>Edición del miércoles ' + dia(R.directo) + '</b>' + (R.estado !== 'directo hecho' ? ' <small>(' + esc(R.estado) + ': los números aún suben)</small>' : '') + '<div style="margin-top:6px">' + cuerpo + '</div>';
+    if (top.length) h += '<div class="card warn" style="margin-top:14px"><b>Dónde se pierde más gente</b><ol class="rec">' + top.map(function (x) { return '<li><b>' + esc(x.de) + ' → ' + esc(x.a) + ':</b> se pierde el ' + x.pct + ' % (' + num(x.pierden) + ' personas).</li>'; }).join('') + '</ol></div>';
+    h += '<p class="nota">Captación: viernes a jueves; directo el miércoles. Clases: reproducciones en Presto (no personas; la clase 3 no se mide). Llamadas: citas de cualquier agenda. Oferta y negociación: pipeline de closers (oferta = negociación + ganada + perdida). Compran: hoja de ventas. Detalle de todas las ediciones en «Embudo completo de El Círculo», más abajo.</p></div>';
+    c.innerHTML = h;
+    Array.prototype.forEach.call(c.querySelectorAll('[data-red]'), function (b) { b.onclick = function () { recEd = b.getAttribute('data-red'); pintarRecorrido(); }; });
+  }
   function cargarEmbudoCirculo() {
     var c = document.getElementById('embudocirculo'); if (!c) return;
     fetch(API + '?accion=embudocirculo', { credentials: 'same-origin' })
@@ -433,15 +476,8 @@ small,.nota{color:var(--mut);font-size:12.5px}
         var v = function (x) { return x == null ? '<span class="neu">—</span>' : num(x); };
         var fila = function (titulo, f, sub) { return '<tr><td>' + titulo + (sub ? '<br><small>' + sub + '</small>' : '') + '</td>' + E.map(function (e) { return '<td class="n">' + f(e) + '</td>'; }).join('') + '</tr>'; };
         var sec = function (t) { return '<tr><th colspan="' + (E.length + 1) + '" style="text-align:left;padding-top:14px">' + t + '</th></tr>'; };
-        var R = E.filter(function (e) { return e.estado === 'directo hecho'; }).slice(-1)[0];
         var h = '';
-        if (R) {
-          var pasos = [['Se registran', R.registrosKliking], ['Entran al grupo', R.grupoEntran], ['Ven la clase 1 (reprod.)', R.vistas && R.vistas.clase1], ['Reservan llamada', R.llamadas && R.llamadas.agendadas], ['Se presentan', R.llamadas && R.llamadas.hechas], ['Llegan a la oferta', R.closer && R.closer.oferta], ['En negociación', R.closer && R.closer.negociacion], ['Compran', R.compras]];
-          h += '<div class="card"><b>Resumen del recorrido · edición del miércoles ' + dia(R.directo) + '</b><table><tr><th>Paso</th><th class="n">Personas</th><th class="n">Del paso anterior</th><th class="n">De los registros</th></tr>';
-          var ant = null;
-          pasos.forEach(function (x) { var n = x[1]; h += '<tr><td>' + x[0] + '</td><td class="n">' + (n == null ? '—' : num(n)) + '</td><td class="n">' + (n != null && ant ? Math.round(n / ant * 100) + ' %' : '—') + '</td><td class="n">' + (n != null && R.registrosKliking ? (n / R.registrosKliking * 100).toFixed(1).replace('.', ',') + ' %' : '—') + '</td></tr>'; if (n != null && x[0] !== 'En negociación') ant = n; });
-          h += '</table><p class="nota">«En negociación» se compara con «Llegan a la oferta»; «Compran», con las que llegan a la oferta. La clase 1 son reproducciones, no personas. Detalle de todas las ediciones en la tabla de abajo.</p></div>';
-        }
+        recDatos = d; pintarRecorrido();
         h += '<div class="card" style="overflow-x:auto"><table><tr><th>Paso</th>' + E.map(function (e) { return '<th class="n">Miércoles ' + dia(e.directo) + '<br><small>' + esc(e.estado) + '</small></th>'; }).join('') + '</tr>';
         h += sec('1 · Registros');
         h += fila('Registros según Meta', function (e) { return v(e.registrosMeta); }, 'campañas de El Círculo en la captación');
@@ -481,7 +517,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
         h += '</table><p class="nota">Edición = miércoles del directo; capta de viernes a jueves (12 a 6 días antes). <b>Registros Meta</b>: evento de registro de las campañas de El Círculo; <b>Kliking</b>: etiquetas «registro ads/org» de la edición (la diferencia son personas que ya estaban en la base y el píxel). <b>Grupo</b>: etiqueta «ingresa a comunidad» (solo la pone el enlace de entrada de Kliking, así que puede quedarse corta; con Funnelchat será exacto); las salidas salen de Funnelchat y necesitan la conexión con n8n' + (d.n8n ? '' : ' (ahora sin acceso)') + '. <b>Clases</b>: reproducciones en Presto Player del domingo antes al sábado después; son reproducciones, no personas. La clase 3 y el directo no se miden aquí. <b>Directo</b>: «pulsan el enlace del Zoom» = personas con la etiqueta «asiste directo AAAA-MM-DD» (trigger link del Zoom en los mensajes del día); «check-in» = etiqueta «check-in directo AAAA-MM-DD» (pulsan «Estoy aquí» durante el directo). La asistencia real con minutos llegará con la integración de Zoom. <b>Llamadas</b>: personas de la edición con cita en cualquier agenda (sin contar «invalid»), hasta 3 semanas después del directo. <b>Ventas</b>: hoja de ventas, personas de la edición. Las ediciones recientes siguen sumando llamadas y ventas.</p></div>';
         c.innerHTML = h;
       })
-      .catch(function (e) { c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
+      .catch(function (e) { c.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; var r = document.getElementById('recorrido'); if (r) r.innerHTML = '<p class="err">' + esc(e.message) + '</p>'; });
   }
   function cargarSalidas() {
     var c = document.getElementById('salidas'); if (!c) return;
