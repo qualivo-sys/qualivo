@@ -17,7 +17,7 @@
 const N = require('./_nuria-semana.js');
 
 const EMBUDOS = [
-  { embudo: 'Lanzamiento Perpetuo', agendas: ['calendario-lanzamiento-perpetuo'], fuentesLead: ['Registro Taller ADS - Semana Sueño', 'Registro Taller ORG - Semana Sueño'], hoja: ['lanzamiento'] },
+  { embudo: 'Lanzamiento Perpetuo', agendas: ['calendario-lanzamiento-perpetuo'], fuentesLead: ['REGISTRO ADS - EL CÍRCULO', 'REGISTRO ORG - EL CÍRCULO', 'Registro Taller ADS - Semana Sueño', 'Registro Taller ORG - Semana Sueño'], hoja: ['lanzamiento'] },
   { embudo: 'VSL', agendas: ['calendario-vsl1-pfd-prueba-b'], fuentesLead: ['Registro VSL - ENERO 26'], hoja: ['vsl'] },
   { embudo: 'Test web', agendas: ['calendario-vsl1-pfd-web'], fuentesLead: ['Quiz Calidad Del Sueño', 'Test patrones web'], hoja: ['web'] },
   { embudo: 'Setter Instagram', agendas: ['sesion-diagnostico-instagram'], hoja: ['instagram', 'setter'] },
