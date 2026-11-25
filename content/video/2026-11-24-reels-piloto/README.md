@@ -29,3 +29,13 @@
 - **Edición:** paleta crema y rojo de álbum, tipografía de pegatina, golpes secos al pegar. Sin música; efectos opcionales, como en la ruleta.
 - **Producción:** el álbum y los cromos se animan a mano, sin coste; como mucho un plano generado del álbum abierto (35 créditos) para el arranque.
 - **Antes de montarlo:** necesito la lista exacta de lo que nombra Maikel en la grabación para decidir cuántos cromos y cuándo cae cada uno.
+
+## «Coleccionando herramientas» · v2 montada (25-nov)
+
+Concepto aprobado editorialmente por Contenido el 25-nov; pendiente del OK de Maikel para publicar. 62,5 s con el +10 % de velocidad, sin música, 0 créditos.
+
+- Plano fijo con dos acercamientos (la pregunta y el tramo final) y un solo texto en pantalla cada vez.
+- Álbum de cromos animado a mano (HTML → fotogramas): apertura con el rótulo literal «Una IA que me diga qué IA tengo que utilizar»; seis cromos de solo palabra e icono genérico (Instagram, Claude, Un agente, El mejor CRM, 20 automatizaciones, Un agente atendiendo clientes); contador «Cromos: 6 · Problemas resueltos: 0»; tarjeta de cierre con la frase final literal.
+- Se quita «Después de casi 10 años en marketing» (54,95–57,98 de la grabación) porque choca con el «casi 11 años» del arranque; queda «Después de tantos años».
+- Sin confirmar de oído: «casi 11 años» al principio.
+- El metraje de Maikel y el montaje no se suben al repositorio (carpeta de trabajo de la sesión, v5/). Copia de revisión y portada en la bandeja de Notion, sección 5.
