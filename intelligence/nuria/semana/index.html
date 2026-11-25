@@ -252,7 +252,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
     cargarMensajes();
   }
 
-  var mensajesDatos = null, msjPuerta = null;
+  var mensajesDatos = null, msjPuerta = null, msjSemana = {};
   function pintarMensajes() {
     var caja = document.getElementById('mensajes'), tabs = document.getElementById('msjTabs');
     if (!caja || !mensajesDatos) return;
@@ -261,11 +261,36 @@ small,.nota{color:var(--mut);font-size:12.5px}
     if (!msjPuerta) msjPuerta = L[0].puerta;
     tabs.innerHTML = L.map(function (x) { return '<button class="btn" type="button" aria-pressed="' + (x.puerta === msjPuerta) + '" data-msj="' + esc(x.puerta) + '">' + esc(x.puerta === 'El Círculo' ? 'Embudo El Círculo (registro gratuito → clases → directo)' : (x.puerta === 'VSL' ? 'Embudo VSL (vídeo → llamada)' : x.puerta)) + '</button>'; }).join('');
     Array.prototype.forEach.call(tabs.querySelectorAll('[data-msj]'), function (b) { b.onclick = function () { msjPuerta = b.getAttribute('data-msj'); pintarMensajes(); }; });
-    var d = L.find(function (x) { return x.puerta === msjPuerta; }) || L[0];
+    var PU = L.find(function (x) { return x.puerta === msjPuerta; }) || L[0];
     var pcM = function (a, b) { return b ? pc(a / b) : '—'; };
     var fd = function (x) { var z = new Date(x + 'T12:00:00Z'); return z.getUTCDate() + '-' + MES[z.getUTCMonth()]; };
+    // Por semanas: cada semana es la cohorte de personas registradas de viernes a jueves (en El Círculo, una edición).
+    var SEM = PU.semanas || [PU], esCirc = PU.puerta === 'El Círculo';
+    var nomSem = function (w) { return esCirc && w.semana ? 'Edición del ' + fd(w.semana) : 'Registradas del ' + fd(w.desde) + ' al ' + fd(w.hasta); };
+    if (!msjSemana[PU.puerta] || !SEM.some(function (w) { return w.semana === msjSemana[PU.puerta]; })) { var comp = SEM.filter(function (w) { return w.completa; }); msjSemana[PU.puerta] = (comp.length ? comp[comp.length - 1] : SEM[SEM.length - 1]).semana; }
+    var d = Object.assign({ puerta: PU.puerta }, SEM.find(function (w) { return w.semana === msjSemana[PU.puerta]; }) || SEM[SEM.length - 1]);
+    var hEvo = '';
+    if (PU.semanas && SEM.length > 1) {
+      var evo = function (lista, clave, fa, fb, la, lb) {
+        var orden = [], visto = {};
+        SEM.forEach(function (w) { (w[lista] || []).forEach(function (m) { if (!visto[m[clave]]) { visto[m[clave]] = { dd: m.diaDirecto != null ? m.diaDirecto : m.dia, dia: m.dia }; orden.push(m[clave]); } }); });
+        orden.sort(function (a, b) { return (visto[a].dia === 0 ? -99 : visto[a].dd) - (visto[b].dia === 0 ? -99 : visto[b].dd); });
+        var t = '<table><tr><th>' + (lista === 'emails' ? 'Email' : 'WhatsApp') + '</th>' + SEM.map(function (w) { return '<th class="n">' + esc(nomSem(w)) + (w.completa ? '' : '<br><small>en curso</small>') + '</th>'; }).join('') + '</tr>';
+        orden.forEach(function (k) {
+          t += '<tr><td>' + esc(k) + '</td>' + SEM.map(function (w) { var m = (w[lista] || []).find(function (x) { return x[clave] === k; }); return '<td class="n">' + (m ? pcM(m[fa], m.enviados) + ' · ' + pcM(m[fb], m.enviados) + '<br><small>' + num(m.enviados) + ' reciben</small>' : '<span class="neu">—</span>') + '</td>'; }).join('') + '</tr>';
+        });
+        return t + '</table><p class="nota">En cada celda: ' + la + ' · ' + lb + ' (sobre quienes lo reciben). «—»: ese mensaje no llegó a esa semana (o a menos del 3 % de la muestra).</p>';
+      };
+      hEvo += '<div class="card" style="overflow-x:auto"><b>Semana a semana · emails del embudo ' + esc(PU.puerta) + '</b>' + evo('emails', 'asunto', 'abiertos', 'clics', 'abren', 'pulsan') + '</div>';
+      hEvo += '<div class="card" style="overflow-x:auto"><b>Semana a semana · WhatsApp del embudo ' + esc(PU.puerta) + '</b>' + evo('whatsapp', 'texto', 'leidos', 'contestan', 'leen', 'contestan') + '</div>';
+      var hRes = '<div class="card" style="overflow-x:auto"><b>Semana a semana · resumen</b><table><tr><th>Semana</th><th class="n">Registradas</th><th class="n">Muestra</th><th class="n">Piden llamada (muestra)</th><th class="n">Compran (todas)</th></tr>';
+      SEM.forEach(function (w) { hRes += '<tr><td>' + esc(nomSem(w)) + (w.completa ? '' : ' <small>(en curso)</small>') + '</td><td class="n">' + num(w.cohorte) + '</td><td class="n">' + num(w.muestra) + '</td><td class="n">' + num(w.agendan) + ' <small>(' + pcM(w.agendan, w.muestra) + ')</small></td><td class="n">' + num(w.compranCohorte) + ' <small>(' + pcM(w.compranCohorte, w.cohorte) + ')</small></td></tr>'; });
+      hEvo = hRes + '</table></div>' + hEvo;
+    }
     var marca = function (v, todos, menor) { var vals = todos.filter(function (x) { return x != null; }); if (vals.length < 3 || v == null) return ''; var mx = Math.max.apply(null, vals), mn = Math.min.apply(null, vals); return v === (menor ? mn : mx) ? ' alto' : (v === (menor ? mx : mn) ? ' bajo' : ''); };
-    var h = '<p class="nota">Muestra de <b>' + num(d.muestra) + '</b> de ' + num(d.cohorte) + ' personas registradas del ' + fd(d.desde) + ' al ' + fd(sumaDiasJ(d.hasta, -1)) + ' (recorrido completo). En la muestra, ' + num(d.agendan) + ' piden llamada (' + pcM(d.agendan, d.muestra) + '). En toda la cohorte compran ' + num(d.compranCohorte) + ' (' + pcM(d.compranCohorte, d.cohorte) + ', hoja de ventas).</p>';
+    var h = hEvo;
+    if (PU.semanas) h += '<div class="tabs" role="group" aria-label="Semana" style="margin-top:12px">' + SEM.map(function (w) { return '<button class="btn" type="button" aria-pressed="' + (w.semana === d.semana) + '" data-msem="' + esc(w.semana) + '">' + esc(nomSem(w)) + (w.completa ? '' : ' (en curso)') + '</button>'; }).join('') + '</div>';
+    h += '<p class="nota">' + (PU.semanas ? '<b>Detalle de la semana elegida.</b> ' : '') + 'Muestra de <b>' + num(d.muestra) + '</b> de ' + num(d.cohorte) + ' personas registradas del ' + fd(d.desde) + ' al ' + fd(PU.semanas ? d.hasta : sumaDiasJ(d.hasta, -1)) + (d.completa === false ? ' (recorrido aún en curso).' : ' (recorrido completo).') + ' En la muestra, ' + num(d.agendan) + ' piden llamada (' + pcM(d.agendan, d.muestra) + '). En toda la cohorte compran ' + num(d.compranCohorte) + ' (' + pcM(d.compranCohorte, d.cohorte) + ', hoja de ventas).</p>';
     var circ = d.emails.some(function (e) { return e.diaDirecto != null; });
     // «Cuándo llega», en palabras. El Círculo: día de la semana respecto al directo del miércoles. VSL: días desde el registro.
     var DS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -312,6 +337,7 @@ small,.nota{color:var(--mut);font-size:12.5px}
       h += '<tr><td>' + diaTxt(w) + '</td><td>' + esc(w.texto) + '…</td><td class="n">' + num(w.enviados) + '</td><td class="n pct' + marca(Le[i], Le) + '">' + pcM(w.leidos, w.enviados) + '</td><td class="n pct' + marca(Co[i], Co) + '">' + pcM(w.contestan, w.enviados) + '</td><td class="n">' + num(w.agenda) + ' <small>(' + pcM(w.agenda, w.enviados) + ')</small></td></tr>'; });
     h += '</table><p class="nota">«Leen»: con doble check azul (quien tiene desactivada la confirmación de lectura no cuenta). «Piden llamada»: de quienes lo reciben, cuántas reservan llamada en algún momento. «Contestan»: responden en las 48 h siguientes y antes de otro WhatsApp nuestro. Solo mensajes que reciben al menos el 3 % de la muestra; las respuestas a mano del equipo quedan fuera. Análisis del ' + fd(String(mensajesDatos.generado).slice(0, 10)) + '.</p></div>';
     caja.innerHTML = h;
+    Array.prototype.forEach.call(caja.querySelectorAll('[data-msem]'), function (b) { b.onclick = function () { msjSemana[PU.puerta] = b.getAttribute('data-msem'); pintarMensajes(); }; });
   }
   function cargarMensajes() {
     if (mensajesDatos) return pintarMensajes();
