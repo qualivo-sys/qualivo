@@ -39,6 +39,20 @@ EDU = [
     ["escuela de diseño", "bootcamp", "escuela de marketing", "escuela de fotografia", "escuela de cocina", "escuela de musica", "escuela de danza", "escuela de yoga"],
     ["academia", "escuela", "formacion", "training", "education", "cursos", "masters", "educacion"],
 ]
+ONLINE = re.compile(r"online|e-?learning|virtual|a distancia|distance learning|campus|digital|remot|elearning|cursos en linea|formacion en linea", re.I)
+
+
+def es_online(nombre, dom, industria, claves=""):
+    """Escuela de formación ONLINE (Maikel 25-nov). Academias presenciales fuera salvo que Apollo las marque e-learning."""
+    elearn = re.search(r"e-learning|elearning", industria or "", re.I)
+    if re.search(r"academ", f"{nombre} {dom}", re.I) and not elearn:
+        return False
+    # las palabras clave de Apollo son demasiado laxas (salían drones, coaches, cátedras): solo sector o nombre/dominio
+    if re.search(r"universi|catedra|cátedra|drone|coach", f"{nombre} {dom}", re.I):
+        return False
+    return bool(elearn or ONLINE.search(f"{nombre} {dom}"))
+
+
 NO_ICP = re.compile(r"abogad|legal|law|asociaci|federaci|gremi|fundaci|colegio|universidad|universitat|ayuntamiento|camara|"
                     r"agencia|marketing digital|software|seleccion|recruit|staffing|talent|empleo|inmobiliaria|clinica|dental|university|autoescuela", re.I)
 
@@ -70,6 +84,11 @@ def main():
     edu = "--edu" in sys.argv
     global FAMILIAS, NO_ICP
     pref, npag, mult = ("e", 10, 6) if edu else ("", 3, 3)
+    # --micro (Maikel 25-nov «avanza con todo»): academias de 1-4 personas con anuncios. Va con --edu.
+    micro = "--micro" in sys.argv
+    rangos = ["1,4"] if micro else ["5,10", "11,50"]
+    if micro:
+        pref = "m"
     if edu:
         FAMILIAS = EDU
         NO_ICP = re.compile(NO_ICP.pattern.replace("|empleo", ""), re.I)
@@ -84,7 +103,7 @@ def main():
     orgs = {}
     # Modo --edu: primero el ranking por volumen probable de leads (bin/universo_edu.py), de arriba abajo.
     rank_p = os.path.join(S, "edu_universo.json")
-    if edu and os.path.exists(rank_p):
+    if edu and not micro and os.path.exists(rank_p):
         minp = int(os.environ.get("EDU_MIN_PUNTOS", "3"))
         # Del ranking no se descarta por "vista" (antes se buscaba solo CEO/fundador): se descarta lo ya revelado.
         import glob
@@ -98,7 +117,8 @@ def main():
                 pass
         for f in json.load(open(rank_p)):
             if len(orgs) >= objetivo * mult: break
-            if f["puntos"] < minp or f["dom"] in env_dom or f["dom"] in rev_dom or NO_ICP.search(f["name"] or ""):
+            if f["puntos"] < minp or f["dom"] in env_dom or f["dom"] in rev_dom or NO_ICP.search(f["name"] or "") \
+                    or not es_online(f["name"] or "", f["dom"], f.get("industry") or ""):
                 continue
             orgs[f["id"]] = f["dom"]; vistas.add(f["id"])
         print(f"del ranking de volumen (>= {minp} puntos): {len(orgs)}")
@@ -107,7 +127,7 @@ def main():
             break
         pag = estado["pagina"].get(pref + str(fi), 1)
         for _ in range(npag):
-            r = api("organizations/search", {"organization_locations": ["Spain"], "organization_num_employees_ranges": ["5,10", "11,50"],
+            r = api("organizations/search", {"organization_locations": ["Spain"], "organization_num_employees_ranges": rangos,
                                              "currently_using_any_of_technology_uids": ADS, "q_organization_keyword_tags": fam,
                                              "per_page": 100, "page": pag})
             cred += 1
@@ -116,7 +136,11 @@ def main():
             for o in lista:
                 oid = o.get("organization_id") or o.get("id")
                 dom = (o.get("primary_domain") or o.get("domain") or "").lower()
-                if not oid or not dom or oid in vistas or dom in env_dom or NO_ICP.search(o.get("name") or ""):
+                es_escuela = re.search(r"education|e-learning|elearning|training|coaching|higher|educaci|formaci", o.get("industry") or "", re.I) or \
+                    re.search(r"escuela|escola|academ|formaci|master|oposic|school|campus|institut|curso|learning|training|educa|idioma|language|bootcamp|estudios", (o.get("name") or "") + " " + dom, re.I)
+                claves = " ".join(o.get("keywords") or [])
+                if not oid or not dom or oid in vistas or dom in env_dom or NO_ICP.search(o.get("name") or "") or (micro and not es_escuela) \
+                        or (edu and not es_online(o.get("name") or "", dom, o.get("industry") or "", claves)):
                     vistas.add(oid); continue
                 orgs[oid] = dom; vistas.add(oid)
             if not lista:
