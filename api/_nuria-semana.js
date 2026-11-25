@@ -28,7 +28,7 @@ const CONTACTAR_HUMANO = 'CONTACTAR (HUMANO)';
 
 // Puerta de entrada según el origen («source») del contacto en GHL
 const PUERTAS = [
-  { puerta: 'El Círculo', fuentes: ['Registro Taller ADS - Semana Sueño', 'Registro Taller ORG - Semana Sueño'] },
+  { puerta: 'El Círculo', fuentes: ['REGISTRO ADS - EL CÍRCULO', 'REGISTRO ORG - EL CÍRCULO', 'Registro Taller ADS - Semana Sueño', 'Registro Taller ORG - Semana Sueño'] },
   { puerta: 'VSL', fuentes: ['Registro VSL - ENERO 26'] },
   { puerta: 'Test y meditación', fuentes: ['Quiz Calidad Del Sueño', 'Registro a Descargar Meditación', 'Registro a Descargar Meditación ORG', 'Test patrones web'] }
 ];
