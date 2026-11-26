@@ -50,6 +50,10 @@ def es_online(nombre, dom, industria, claves=""):
     # las palabras clave de Apollo son demasiado laxas (salían drones, coaches, cátedras): solo sector o nombre/dominio
     if re.search(r"universi|catedra|cátedra|drone|coach", f"{nombre} {dom}", re.I):
         return False
+    # 26-nov: «Psicología Online» (mental health care) y una agencia de Kit Digital pasaron por llevar «online/digital» en el nombre.
+    # Si Apollo da un sector y no es educativo, fuera.
+    if industria and not re.search(r"education|e-learning|elearning|training|higher|educaci|formaci", industria, re.I):
+        return False
     return bool(elearn or ONLINE.search(f"{nombre} {dom}"))
 
 
@@ -191,6 +195,14 @@ def main():
         elif e.split("@")[1] != (r["dom"] or "").lower(): por = "dominio cruzado"
         elif (r["emp"] or 0) > 50: por = "mas de 50"
         elif e in env: por = "ya contactado"
+        else:
+            # 26-nov: enviados_reales no tiene los cargados antes de que existiera; Smartlead es la verdad
+            try:
+                req = urllib.request.Request(f"https://server.smartlead.ai/api/v1/leads/?api_key={sl_key}&email={e}", headers={"User-Agent": UA})
+                d0 = json.load(urllib.request.urlopen(req, timeout=30))
+                if d0 and d0.get("lead_campaign_data"): por = "ya en Smartlead"
+            except Exception:
+                por = "sin comprobar en Smartlead"
         if por: caidas[por] = caidas.get(por, 0) + 1; continue
         r = dict(r); r.pop("emp")
         r["puerta"] = "meta_ads" if edu or re.search(r"education|e-learning|training|higher", r["industry"] or "") else "google_ads"
