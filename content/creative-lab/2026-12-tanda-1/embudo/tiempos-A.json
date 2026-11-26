@@ -1,0 +1,69 @@
+{
+ "v": "A",
+ "DUR": 26.56,
+ "P": [
+  {
+   "tipo": "pour",
+   "voz": "gA",
+   "t0": 0,
+   "d": 5.0,
+   "tv": 0.25,
+   "dv": 4.83,
+   "txt": "¿De qué sirve conseguir más alumnos potenciales si los pierdes por el camino?"
+  },
+  {
+   "tipo": "macro",
+   "voz": "l2",
+   "t0": 5.0,
+   "d": 2.48,
+   "tv": 5.35,
+   "dv": 1.7,
+   "txt": "La mayoría no llega al final."
+  },
+  {
+   "tipo": "wa",
+   "voz": "l3",
+   "t0": 7.48,
+   "d": 3.6,
+   "tv": 7.93,
+   "dv": 2.69,
+   "txt": "Unos se van porque nadie les contesta a tiempo."
+  },
+  {
+   "tipo": "conv",
+   "voz": "l4",
+   "t0": 11.08,
+   "d": 3.44,
+   "tv": 11.53,
+   "dv": 2.53,
+   "txt": "Otros, porque nadie comprueba qué necesitan."
+  },
+  {
+   "tipo": "intel",
+   "voz": "l5",
+   "t0": 14.52,
+   "d": 4.08,
+   "tv": 14.97,
+   "dv": 3.16,
+   "txt": "Y otros se enfrían sin que nadie les haga seguimiento."
+  },
+  {
+   "tipo": "tape",
+   "voz": "l6",
+   "t0": 18.6,
+   "d": 4.36,
+   "tv": 19.05,
+   "dv": 3.47,
+   "txt": "En Qualivo llevamos tus campañas y tapamos los agujeros."
+  },
+  {
+   "tipo": "fin",
+   "voz": "l7",
+   "t0": 22.96,
+   "d": 3.6,
+   "tv": 23.46,
+   "dv": 2.4,
+   "txt": "Solicita tu diagnóstico gratuito."
+  }
+ ]
+}

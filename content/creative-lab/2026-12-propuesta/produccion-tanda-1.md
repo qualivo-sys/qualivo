@@ -150,5 +150,14 @@ Sirven como anuncio corto, como reel y como apertura de una pieza larga. «La ll
 | --- | --- |
 | Antes de la propuesta | 2.907,25 |
 | Tras la propuesta (moodboard y tres pruebas) | 2.789,25 |
+| Tras generar los planos del embudo y de la clínica (26-nov) | 2.524,25 |
 
-El gasto de la tanda 1 se anota aquí al terminar cada pieza. Tope: 400.
+Gastado en la tanda 1 hasta ahora: 265 de 400 créditos [C] (cinco fotogramas clave, cinco planos a 720p y uno a 1080p). Quedan 135 para repeticiones. El cronómetro no gasta.
+
+## Estado
+
+| Pieza | Estado el 26-nov |
+| --- | --- |
+| El embudo agujereado | Montado: dos ganchos, 9:16 y 4:5, 26,6 s. En `content/creative-lab/2026-12-tanda-1/embudo/` |
+| La prueba del cronómetro | A la espera de la grabación de Maikel |
+| La clínica fantasma | Los tres planos generados y la locución están hechos. Falta montar: a la espera de las capturas reales del sector clínicas (pedidas a Growth) |
