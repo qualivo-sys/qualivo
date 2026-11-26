@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>CANCOMAR · Demo guiada</title>
+<meta name="description" content="Un alumno de ejemplo de principio a fin: petición por WhatsApp, matrícula, grupo, ficha firmada, estado económico y renovación. Datos de ejemplo.">
+<link rel="icon" href="../../assets/brand/isotipo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../base.css">
+<style>
+.dhero{--hero-img:url("/propuestas/cancomar/assets/brand/pesquero.jpg")}
+.wrap.main{gap:40px}
+.sec{display:grid;gap:16px;padding-top:12px}
+.sec > header{display:grid;gap:8px}
+.sec > header p{color:var(--muted);max-width:78ch}
+.ph{display:inline-flex;align-items:center;gap:6px;font:700 11px var(--head);border-radius:99px;padding:4px 10px;white-space:nowrap}
+.ph::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.ph.c{background:var(--accent-soft);color:var(--accent)}
+.ph.a{background:#E8E4FF;color:#3D2E9E}
+.ph.e{background:var(--warn-soft);color:var(--warn)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ph.a{background:#25204A;color:#B9AEFF}}
+.legend3{display:flex;gap:8px;flex-wrap:wrap}
+/* flujo de 3 áreas */
+.areas{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch}
+.area{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:8px;align-content:start;box-shadow:var(--shadow)}
+.area h3{font-size:17px}
+.area p{font-size:14px;color:var(--ink-2)}
+.area.c{border-top:4px solid var(--brand)}
+.area.a{border-top:4px solid #6B4FD8}
+.area.e{border-top:4px solid var(--amb)}
+.arr{display:grid;place-items:center;color:var(--muted);font:800 22px var(--head)}
+.ficha{grid-column:1/-1;text-align:center;font:700 13.5px var(--head);background:var(--grad);color:#fff;border-radius:14px;padding:10px 14px}
+@media (max-width:860px){.areas{grid-template-columns:1fr}.arr{transform:rotate(90deg);height:22px}}
+/* pasos */
+.steps{display:grid;gap:12px;counter-reset:s}
+.st{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+.st .n{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:800 17px var(--head);color:#fff;background:var(--grad)}
+.st.a .n{background:linear-gradient(135deg,#6B4FD8,#3D2E9E)}
+.st.e .n{background:var(--amb);color:#3A2B00}
+.st h3{font-size:16.5px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.st p{font-size:14px;color:var(--ink-2);margin-top:4px}
+.st .go{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.st .go a{font:700 13px var(--head);text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:8px 13px;color:var(--ink);background:var(--surface-2);white-space:nowrap}
+.st .go a:hover{border-color:var(--brand);color:var(--accent)}
+@media (max-width:700px){.st{grid-template-columns:44px minmax(0,1fr);align-items:start}.st .n{width:38px;height:38px;font-size:15px}.st .go{grid-column:1/-1;justify-content:flex-start}}
+.opts2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:8px}
+.opts2 div{border:1px dashed var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px;background:var(--surface-2)}
+.opts2 b{font-family:var(--head)}
+@media (max-width:700px){.opts2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Paquete CANCOMAR">
+  <div class="in">
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><img class="lgo" src="../../assets/brand/logo-blanco.png" alt="CANCOMAR" width="137" height="20"><span class="by">27-nov-2026</span></div>
+    <div class="links"><a href="../../demo/">CRM</a><a href="./" aria-current="page">Demo guiada</a><a href="../">Gestión</a><a href="../plan/">Arranque</a><a href="../../recorrido/">Recorrido</a><a href="../../presentacion/">Presentación</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<div class="wrap">
+  <p class="eyebrow">Demo guiada · un alumno de principio a fin</p>
+  <h1>Captación, gestión académica y económica, <em>conectadas en una sola ficha</em></h1>
+  <p class="lead">Seguimos a un alumno de ejemplo desde que escribe por WhatsApp hasta su renovación a los cinco años. Cada paso enlaza a la pantalla de la demo donde se ve.</p>
+  <div class="legend">
+    <div><span class="ej">Datos de ejemplo</span><br>Personas, fechas, importes e impresos son inventados. Las pantallas enseñan cómo funcionaría, no vuestros datos.</div>
+    <div><b>Por fases:</b> primero lo comercial; la gestión académica y la conexión económica, cuando hayamos revisado Ágora y lo decidáis.</div>
+  </div>
+</div>
+</header>
+
+<main class="wrap main">
+
+<section class="sec">
+  <header><p class="k">La idea</p><h2>Tres áreas, una sola ficha del alumno</h2>
+  <p>Lo que entra por captación llega a la gestión académica sin teclear, y el estado económico vuelve a la misma ficha. La facturación puede seguir en un programa especializado, conectado.</p></header>
+  <div class="areas">
+    <div class="area c"><span class="ph c">Fase 1 · Comercial</span><h3>Captación</h3><p>Peticiones de WhatsApp, web y teléfono en un sitio, respuesta preparada, seguimiento, listas de espera y renovaciones.</p></div>
+    <div class="arr" aria-hidden="true">→</div>
+    <div class="area a"><span class="ph a">Fase 2 · Académica</span><h3>Gestión académica</h3><p>Matrícula sin teclear, grupos con sus sesiones, calendario de docentes, fichas firmadas e impresos oficiales.</p></div>
+    <div class="arr" aria-hidden="true">→</div>
+    <div class="area e"><span class="ph e">Se estudia en el análisis</span><h3>Gestión económica</h3><p>Facturas, adeudos y cobros en el programa de facturación, con su estado visible en la ficha del alumno.</p></div>
+    <div class="ficha">La misma ficha del alumno en todo el recorrido · sin duplicar datos ni trabajo</div>
+  </div>
+</section>
+
+<section class="sec">
+  <header><p class="k">Paso a paso</p><h2>El recorrido de un alumno</h2>
+  <div class="legend3"><span class="ph c">Fase 1 · Comercial</span><span class="ph a">Fase 2 · Académica</span><span class="ph e">Conexión económica · se estudia en el análisis</span></div></header>
+  <div class="steps">
+    <div class="st"><span class="n">1</span><div><h3>Escribe por WhatsApp <span class="ph c">Fase 1</span></h3><p>Pregunta por un curso un domingo por la noche. La petición entra en el CRM con su curso y su urgencia, igual que si llega por la web o por teléfono.</p></div><div class="go"><a href="../../recorrido/#p1">Ver la petición</a></div></div>
+    <div class="st"><span class="n">2</span><div><h3>Recibe respuesta en minutos <span class="ph c">Fase 1</span></h3><p>El sistema prepara la respuesta con la próxima convocatoria; admisiones la revisa y la aprueba. Nada sale sin vuestro visto bueno.</p></div><div class="go"><a href="../../demo/#conversaciones">Ver en el CRM</a></div></div>
+    <div class="st"><span class="n">3</span><div><h3>Seguimiento y lista de espera <span class="ph c">Fase 1</span></h3><p>Si no contesta, recordatorios a los 1, 3 y 7 días. Si no hay fecha, entra en la lista de espera del curso y recibe aviso cuando se abre.</p></div><div class="go"><a href="../../recorrido/#p5">Seguimiento</a><a href="../../demo/#espera">Listas de espera</a></div></div>
+    <div class="st"><span class="n">4</span><div><h3>Reserva plaza <span class="ph c">Fase 1</span></h3><p>Pasa a «Plaza reservada» en el pipeline. Admisiones ve de un vistazo quién falta por confirmar o pagar.</p></div><div class="go"><a href="../../demo/#pipeline">Ver el pipeline</a></div></div>
+    <div class="st a"><span class="n">5</span><div><h3>Matrícula sin teclear <span class="ph a">Fase 2</span></h3><p>Con un clic, la plaza reservada se convierte en alumno y matrícula del grupo. Los datos que ya dio por WhatsApp no se vuelven a escribir.</p></div><div class="go"><a href="../#alu">Ver la matrícula</a></div></div>
+    <div class="st a"><span class="n">6</span><div><h3>Entra en un grupo con todo preparado <span class="ph a">Fase 2</span></h3><p>El grupo se crea desde la plantilla del curso, con sesiones, profesores y aulas. Cada docente lo ve en su Google Calendar.</p></div><div class="go"><a href="../#gru">Ver grupos</a></div></div>
+    <div class="st a"><span class="n">7</span><div><h3>Firma su ficha en tablet <span class="ph a">Fase 2</span></h3><p>El primer día firma la ficha y la protección de datos. Secretaría descarga todas las fichas del grupo de una vez, con la asistencia y los impresos de Pesca, Capitanía y Marina Mercante.</p></div><div class="go"><a href="../#doc">Ver documentación</a></div></div>
+    <div class="st e"><span class="n">8</span><div><h3>Su estado económico, en la misma ficha <span class="ph e">Se estudia</span></h3><p>La matrícula genera la factura o el adeudo en el programa de facturación, y facturas, cobros y pendientes vuelven a su ficha, a la del grupo y a la de la empresa.</p>
+      <div class="opts2"><div><b>Camino A</b> · La facturación sigue en Ágora y se conecta con la nueva herramienta.</div><div><b>Camino B</b> · Un programa de facturación especializado, elegido con vuestra gestoría, conectado igual.</div></div>
+      <p class="muted" style="font-size:13px">Los comparamos al revisar Ágora: qué datos deja exportar o conectar, y qué encaja mejor con vuestra gestoría.</p></div><div class="go"><a href="../#fac">Ver el estado económico</a></div></div>
+    <div class="st"><span class="n">9</span><div><h3>Cinco años después, renueva <span class="ph c">Fase 1</span></h3><p>Al cerrar el curso, su certificado queda con fecha de caducidad. Meses antes, el CRM prepara el aviso de renovación por WhatsApp.</p></div><div class="go"><a href="../../demo/#renovaciones">Ver renovaciones</a></div></div>
+  </div>
+</section>
+
+<div class="links3">
+  <a href="../plan/"><span class="k">Arranque</span><b>Plan de arranque</b><small>Fase comercial semana a semana y lo que necesitamos de cada parte.</small></a>
+  <a href="../../demo/"><span class="k">CRM</span><b>Admisiones por dentro</b><small>Pipeline, WhatsApp aprobado, renovaciones y listas de espera.</small></a>
+  <a href="../"><span class="k">Gestión</span><b>Gestión académica</b><small>Grupos, matrícula, fichas, firma, impresos y estado económico.</small></a>
+</div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="sig"><b>Qualivo</b><img src="../../assets/brand/logo-blanco.png" alt="CANCOMAR" width="123" height="18"><span>Demo guiada · 27-nov-2026</span></div>
+    <p>No es una aplicación en producción ni contiene datos de CANCOMAR. Los nombres de los cursos son de cancomar.es; todo lo demás son datos de ejemplo.</p>
+  </div>
+</footer>
+</body>
+</html>
