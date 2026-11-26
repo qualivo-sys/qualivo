@@ -144,6 +144,33 @@ Piezas cortas de 8–12 s, un solo plano cinematográfico y una frase. Mismo tra
 
 Sirven como anuncio corto, como reel y como apertura de una pieza larga. «La lluvia de leads» y «¿Quién tiene razón?» encajan dentro de esta serie. No se produce ninguna hasta cerrar la tanda 1.
 
+## Ajustes del 26-nov (tarde): un argumento distinto por anuncio
+
+Maikel pide que cada concepto venda un argumento comercial diferente, para no repetir «metáfora → WhatsApp → CRM → panel → diagnóstico» y para aprender qué problema interesa más, no solo qué estética.
+
+| Anuncio | Argumento | Qué enseña la demostración |
+| --- | --- | --- |
+| El embudo agujereado | Rentabilizar la inversión publicitaria | Campañas, seguimiento y qué anuncios generan matrículas |
+| La prueba del cronómetro | Velocidad de respuesta | El tiempo real hasta el primer WhatsApp |
+| La clínica fantasma | Convertir solicitudes en citas | Propuesta de hora, confirmación y recordatorio |
+| La lluvia de leads | Cantidad frente a calidad | Cualificación: quién encaja y quién no |
+| ¿Quién tiene razón? | Atribución entre marketing y ventas | La fila «No es el anuncio» de Intelligence |
+| La ruleta comercial | Falta de control del proceso | El pipeline con todos los contactos y su siguiente acción |
+
+### El embudo agujereado · versión 2 (28,8 s)
+
+Mismos tres planos generados; no se ha gastado ningún crédito. Cambian el mensaje, la demostración y el montaje. Archivos: `content/creative-lab/2026-12-tanda-1/embudo/embudo-v2-stories-916.mp4` y `embudo-v2-feed-45.mp4`. Sustituye a los ganchos A y B.
+
+| Tiempo | Imagen | Voz |
+| --- | --- | --- |
+| 0–4,3 s | El vertido en el embudo. El gancho va en una sola línea pequeña, por debajo de la acción | «Tu escuela paga por cada lead. ¿Cuántos acaba perdiendo?» |
+| 4,3–10,2 s | Macro de las figuritas saliendo por los agujeros | «Solicitudes sin responder, contactos sin cualificar y oportunidades sin seguimiento.» |
+| 10,2–12,6 s | Intelligence real: las campañas | «En Qualivo gestionamos tus campañas,» |
+| 12,6–14,9 s | WhatsApp real | «automatizamos el seguimiento» |
+| 14,9–20,2 s | Intelligence real: columna de matrículas y recomendación por campaña | «y conectamos marketing y ventas para saber qué anuncios generan matrículas.» |
+| 20,2–24,9 s | La cinta tapa los agujeros; el texto va por debajo de la plataforma | «No se trata solo de captar más. Se trata de perder menos.» |
+| 24,9–28,8 s | Cierre | «Descubre dónde está perdiendo oportunidades tu escuela.» |
+
 ## Control de créditos
 
 | Momento | Saldo [C] |
@@ -158,6 +185,6 @@ Gastado en la tanda 1 hasta ahora: 265 de 400 créditos [C] (cinco fotogramas cl
 
 | Pieza | Estado el 26-nov |
 | --- | --- |
-| El embudo agujereado | Montado: dos ganchos, 9:16 y 4:5, 26,6 s. En `content/creative-lab/2026-12-tanda-1/embudo/` |
+| El embudo agujereado | Versión 2 montada con el guion nuevo de Maikel: 9:16 y 4:5, 28,8 s. En `content/creative-lab/2026-12-tanda-1/embudo/` |
 | La prueba del cronómetro | A la espera de la grabación de Maikel |
 | La clínica fantasma | Los tres planos generados y la locución están hechos. Falta montar: a la espera de las capturas reales del sector clínicas (pedidas a Growth) |
