@@ -4,802 +4,353 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>Qualivo × Marín Clínica Dental · plan de arranque</title>
+<title>Qualivo × Marín Clínica Dental · cómo arrancamos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Yeseva+One&display=swap">
 <style>
-/* Reunión de arranque (27-nov, 12:00). Mismo lenguaje visual que «segunda». Flechas del teclado o scroll.
-   Cifras de campañas y formularios: API de Meta, 25-26 nov 2026 [C]. Presupuesto y reparto: propuesta [E]. Personas y mensajes: de ejemplo. */
-:root{--ink:#1D2333;--mut:#5E667A;--bg:#FBFAF7;--soft:#F4F1EA;--line:#E6E0D4;--deep:#2F3854;--deep2:#252C44;--beige:#E2D3BA;--acc:#8C6E3F;
---blue:#2EA3F2;--ok:#1E8A5A;--okbg:#E5F3EC;--bad:#B5432F;--badbg:#F8E6E1;--amb:#C98A12;--wa:#E9FBE0;--wabg:#EFE7DD;
+/* Reunión de arranque, 27-nov. Versión sencilla: una idea por pantalla. Guion para Maikel en ./guion/. Detalle en ./detalle/.
+   Cifras de campañas: API de Meta, 25-nov-2026 [C]. Presupuesto: propuesta [E]. Personas y mensajes: de ejemplo. */
+:root{--ink:#1D2333;--mut:#5E667A;--bg:#FBFAF7;--soft:#F4F1EA;--line:#E6E0D4;--deep:#2F3854;--beige:#E2D3BA;--acc:#8C6E3F;
+--blue:#2EA3F2;--ok:#1E8A5A;--okbg:#E5F3EC;--bad:#B5432F;--badbg:#F8E6E1;--wa:#E9FBE0;--wabg:#EFE7DD;
 --serif:"Yeseva One",Georgia,serif;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth;overflow-x:clip;scroll-snap-type:y proximity}
-body{background:var(--bg);color:var(--ink);font:18px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font:20px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit}
-svg{display:block}
 .top{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;gap:16px;padding:12px max(20px,env(safe-area-inset-right,0px)) 12px max(20px,env(safe-area-inset-left,0px));background:rgba(37,44,68,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
 .top img{height:26px;width:auto}
 .top .x{opacity:.5;font-size:14px}
 .top .q{font-weight:700;font-size:14px;letter-spacing:.04em;margin-right:auto}
-.top .cnt{font-size:12px;font-weight:600;opacity:.7;font-variant-numeric:tabular-nums}
-.s{min-height:100vh;min-height:100svh;padding:96px max(22px,env(safe-area-inset-right,0px)) 64px max(22px,env(safe-area-inset-left,0px));display:flex;align-items:center;scroll-snap-align:start}
+.top .cnt{font-size:13px;font-weight:600;opacity:.75;font-variant-numeric:tabular-nums}
+.s{min-height:100vh;min-height:100svh;padding:100px max(22px,env(safe-area-inset-right,0px)) 70px max(22px,env(safe-area-inset-left,0px));display:flex;align-items:center;scroll-snap-align:start}
 .s.alt{background:var(--soft)}
 .s.dark{background:var(--deep);color:#fff}
-.in{max-width:1160px;margin:0 auto;width:100%;min-width:0}
-.k{font:600 12.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:22px}
+.in{max-width:1100px;margin:0 auto;width:100%;min-width:0}
+.k{font:600 13px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:22px}
 .dark .k{color:var(--beige)}
-h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.05;text-wrap:balance}
-h1{font-size:clamp(44px,7.2vw,92px);max-width:14ch}
-h2{font-size:clamp(32px,4.6vw,58px);max-width:20ch;margin-bottom:34px}
-h3{font-size:clamp(21px,2vw,26px);line-height:1.15;margin-bottom:12px}
-.lead{font-size:clamp(17px,1.7vw,21px);color:var(--mut);max-width:46ch;margin:-14px 0 34px}
-.dark .lead{color:rgba(255,255,255,.78)}
-.tag{display:inline-block;font:700 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:5px 8px;vertical-align:middle;white-space:nowrap}
-.tag.c{background:var(--okbg);color:var(--ok)}
-.tag.e{background:#FFF1CF;color:#7A5600}
-.tag.x{background:#E9ECF5;color:var(--deep)}
-.dark .tag.c{background:rgba(255,255,255,.12);color:#9FE0BF}
-.dark .tag.e{background:rgba(255,255,255,.12);color:#F7D58A}
-.src{margin-top:22px;font-size:12.5px;color:var(--mut)}
+h1,h2{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.06;text-wrap:balance}
+h1{font-size:clamp(44px,7vw,90px);max-width:14ch}
+h2{font-size:clamp(34px,5vw,62px);max-width:18ch;margin-bottom:44px}
+.sub{font-size:clamp(19px,2vw,24px);color:var(--mut);max-width:40ch;margin:-24px 0 44px}
+.dark .sub{color:rgba(255,255,255,.78)}
+.src{margin-top:26px;font-size:13px;color:var(--mut)}
 .dark .src{color:rgba(255,255,255,.55)}
-.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;min-width:0;box-shadow:0 22px 44px -36px rgba(29,35,51,.55)}
+.ej{display:inline-block;font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:5px 8px;background:#FFF1CF;color:#7A5600;vertical-align:middle}
 
-/* portada */
+/* 1 portada */
 .hero{background:linear-gradient(95deg,rgba(37,44,68,.95) 0%,rgba(47,56,84,.84) 50%,rgba(47,56,84,.4) 100%),url(../assets/brand/clinica.jpg) center/cover;color:#fff}
-.hero .logo{height:54px;width:auto;margin-bottom:44px}
-.hero p{font-size:clamp(18px,2vw,24px);opacity:.86;margin-top:26px;max-width:36ch}
-.hero .meta{margin-top:44px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
-.hero .agenda{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px;max-width:760px}
-.hero .agenda span{border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:7px 14px;font-size:14px;font-weight:600;background:rgba(255,255,255,.06)}
+.hero .logo{height:56px;width:auto;margin-bottom:46px}
+.hero p{font-size:clamp(19px,2.1vw,25px);opacity:.86;margin-top:26px;max-width:32ch}
+.hero .meta{margin-top:46px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
 
-/* hecho */
-.done{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-.done .card{padding:22px 18px}
-.done .ck{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--okbg);color:var(--ok);margin-bottom:16px}
-.done b{display:block;font-size:17px;line-height:1.25;margin-bottom:8px}
-.done p{font-size:14.5px;color:var(--mut);line-height:1.45}
+/* 2 hecho */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.three > div{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px 26px;min-width:0;box-shadow:0 24px 48px -38px rgba(29,35,51,.6)}
+.three .ic{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--okbg);color:var(--ok);margin-bottom:22px}
+.three b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.12;margin-bottom:10px}
+.three p{font-size:17px;color:var(--mut)}
 
-/* histórico */
-.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid rgba(255,255,255,.2);border-bottom:1px solid rgba(255,255,255,.2);margin-bottom:30px}
-.kpis div{padding:20px 20px 20px 0;min-width:0}
-.kpis div+div{padding-left:20px;border-left:1px solid rgba(255,255,255,.2)}
-.kpis strong{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,46px);line-height:1}
-.kpis small{display:block;font-size:13.5px;opacity:.75;margin-top:8px}
-.chart{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:18px 18px 8px}
-.chart svg{width:100%;height:auto}
-.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;opacity:.8;margin:2px 0 10px 4px}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+/* 3 lo que hemos visto */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end}
+.duo{display:flex;gap:40px;align-items:flex-end;height:330px;border-bottom:2px solid rgba(255,255,255,.3);padding:0 10px}
+.duo div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+.duo i{display:block;width:100%;max-width:150px;border-radius:14px 14px 0 0}
+.duo strong{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,62px);line-height:1;margin-bottom:12px}
+.duo span{margin-top:12px;font-weight:700;font-size:18px;letter-spacing:.06em}
+.duo-l{display:flex;gap:40px;padding:0 10px}
+.duo-l span{flex:1;text-align:center;font-weight:700;padding-top:12px;font-size:18px}
+.say{font-family:var(--serif);font-size:clamp(26px,3vw,38px);line-height:1.2}
+.say em{font-style:normal;color:var(--beige)}
+.say + p{margin-top:22px;font-size:18px;color:rgba(255,255,255,.75)}
 
-/* qué funciona */
-.wk{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.bars{display:grid;gap:12px}
-.bar{display:grid;grid-template-columns:minmax(0,1fr) 68px;gap:12px;align-items:center}
-.bar .t{font-size:14.5px;line-height:1.3;margin-bottom:6px}
-.bar .t small{color:var(--mut)}
-.bar .tr{height:12px;border-radius:99px;background:var(--soft);overflow:hidden}
-.bar .tr i{display:block;height:100%;border-radius:99px}
-.bar b{font-variant-numeric:tabular-nums;font-size:16px;text-align:right}
-.good .bar .tr i{background:var(--ok)}
-.bad .bar .tr i{background:var(--bad)}
-.wk h3 .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:10px;vertical-align:3px}
-.lessons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
-.lessons div{border-top:2px solid var(--deep);padding-top:14px;font-size:15px;color:var(--mut);min-width:0}
-.lessons b{display:block;color:var(--ink);font-size:16.5px;margin-bottom:4px}
+/* 4 funciona */
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.cols3 > div{border-radius:22px;padding:28px 24px;min-width:0}
+.cols3 .g{background:var(--okbg)}
+.cols3 .b{background:var(--badbg)}
+.cols3 .o{background:#E3F2FD}
+.cols3 .h{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.cols3 .g .h{color:var(--ok)}.cols3 .b .h{color:var(--bad)}.cols3 .o .h{color:#0E6BA8}
+.cols3 .h i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;color:#fff;font-style:normal;font-size:18px}
+.cols3 .g .h i{background:var(--ok)}.cols3 .b .h i{background:var(--bad)}.cols3 .o .h i{background:var(--blue)}
+.cols3 b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.12;margin-bottom:12px}
+.cols3 p{font-size:17px;color:#3A4152}
+.cols3 .n{display:inline-block;margin-top:16px;font-weight:700;font-size:16px;background:#fff;border-radius:10px;padding:8px 12px}
 
-/* contactos recuperados */
-.rec{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:start}
-.big{font-family:var(--serif);font-size:clamp(64px,9vw,120px);line-height:.9;color:var(--deep)}
-.sede{display:flex;height:46px;border-radius:12px;overflow:hidden;margin:16px 0 8px;font-weight:700;font-size:14px;color:#fff}
-.sede div{display:flex;align-items:center;padding:0 14px;white-space:nowrap}
-.sede .p{background:var(--deep)}.sede .t{background:var(--blue)}
-.alert{display:flex;gap:14px;background:#FFF6E3;border:1px solid #F1DDAE;border-radius:16px;padding:18px;margin-top:18px;font-size:15px;line-height:1.5}
-.alert svg{flex:none;color:var(--amb);margin-top:2px}
-.map{position:relative;aspect-ratio:16/10;background:linear-gradient(180deg,#EEF3F7,#E7EEF3);border-radius:16px;overflow:hidden;border:1px solid var(--line);margin-top:16px}
-.map svg{position:absolute;inset:0;width:100%;height:100%}
+/* 5 plan */
+.plan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;position:relative}
+.plan > div{padding:0 30px 0 0;min-width:0;position:relative}
+.plan > div + div{padding-left:30px;border-left:1px solid rgba(255,255,255,.2)}
+.plan .num{font-family:var(--serif);font-size:84px;line-height:.9;color:var(--beige)}
+.plan b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.8vw,36px);line-height:1.1;margin:16px 0 14px}
+.plan p{font-size:18px;color:rgba(255,255,255,.8)}
+.plan ul{list-style:none;padding:0;margin-top:16px;display:grid;gap:8px;font-size:16px;color:rgba(255,255,255,.88)}
+.plan li::before{content:"✓";color:var(--beige);font-weight:700;margin-right:10px}
 
-/* plan de medios */
-.mp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.camp{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;min-width:0;box-shadow:0 22px 44px -36px rgba(29,35,51,.55)}
-.camp .hd{background:var(--deep);color:#fff;padding:18px 20px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.camp .hd small{display:block;font-weight:600;letter-spacing:.16em;font-size:11.5px;color:var(--beige);margin-bottom:6px}
-.camp .hd b{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.1}
-.camp .hd .eur{font-family:var(--serif);font-size:30px;line-height:1;white-space:nowrap;text-align:right}
-.camp .hd .eur em{display:block;font:500 12px var(--sans);font-style:normal;opacity:.7;margin-top:4px}
-.camp .bd{padding:18px 20px 20px}
-.adsets{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.adsets div{border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
-.adsets small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--acc);text-transform:uppercase}
-.adsets b{display:block;font-size:20px;font-variant-numeric:tabular-nums}
-.adsets span{display:block;font-size:13px;color:var(--mut)}
-.camp ul{list-style:none;padding:0;font-size:14.5px;display:grid;gap:7px}
-.camp li{display:grid;grid-template-columns:96px 1fr;gap:10px}
-.camp li b{font-weight:600;color:var(--mut);font-size:13px;letter-spacing:.02em}
-.mpfoot{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-top:18px}
-.split-bar{display:flex;height:38px;border-radius:10px;overflow:hidden;font-size:13px;font-weight:700;color:#fff;margin:10px 0 6px}
-.split-bar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;padding:0 6px}
-.phase{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.phase div{border-radius:12px;padding:12px;background:var(--soft);font-size:13.5px;line-height:1.4;min-width:0}
-.phase b{display:block;font-size:14.5px;margin-bottom:3px}
-.phase .on{background:var(--deep);color:#fff}
-
-/* calendario */
-.gantt{display:grid;grid-template-columns:200px repeat(12,minmax(0,1fr));gap:0;font-size:13px;position:relative}
-.gantt .h{font-weight:700;font-size:11.5px;letter-spacing:.06em;color:var(--mut);padding:0 0 10px;text-align:center;border-left:1px solid var(--line)}
-.gantt .h.w{background:var(--soft)}
-.gantt .r{padding:9px 12px 9px 0;font-weight:600;border-top:1px solid var(--line);line-height:1.25}
-.gantt .r small{display:block;font-weight:500;color:var(--mut);font-size:12px}
-.gantt .c{border-top:1px solid var(--line);border-left:1px solid var(--line);position:relative}
-.gantt .b{position:absolute;top:9px;bottom:9px;border-radius:8px;display:flex;align-items:center;padding:0 8px;font-weight:700;font-size:12px;color:#fff;white-space:nowrap;overflow:hidden;z-index:1}
-.gantt .b.q{background:var(--deep)}.gantt .b.cl{background:var(--acc)}.gantt .b.ad{background:var(--blue)}.gantt .b.ag{background:#9AA3B5}
-.gantt .m{position:absolute;top:50%;width:16px;height:16px;transform:translate(-50%,-50%) rotate(45deg);background:var(--bad);z-index:2;border-radius:3px}
-.gwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}
-.gwrap .gantt{min-width:860px}
-.miles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
-.miles div{border-left:3px solid var(--bad);padding:4px 0 4px 12px;font-size:14.5px;color:var(--mut);min-width:0}
-.miles b{display:block;color:var(--ink);font-size:15.5px}
-
-/* embudo */
-.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;position:relative}
-.flow .st{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:16px 14px;min-width:0;position:relative}
-.flow .st .n{font-family:var(--serif);font-size:26px;color:var(--beige);line-height:1}
-.flow .st b{display:block;font-size:16px;margin:10px 0 6px;line-height:1.2}
-.flow .st p{font-size:13px;line-height:1.45;color:rgba(255,255,255,.75)}
-.flow .st .t{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:6px;background:rgba(46,163,242,.2);color:#9CD6FB}
-.flow .st .t.eq{background:rgba(226,211,186,.18);color:var(--beige)}
-.flow .st:not(:last-child)::after{content:"";position:absolute;right:-9px;top:34px;width:8px;height:8px;border-top:2px solid var(--beige);border-right:2px solid var(--beige);transform:rotate(45deg);z-index:2}
-.loop{margin-top:16px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px dashed rgba(226,211,186,.55);border-radius:16px;padding:16px 18px;font-size:15px}
-.loop svg{flex:none;color:var(--beige)}
-.whoKey{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;margin-top:16px;opacity:.85}
-.whoKey span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px;vertical-align:0}
-.whoKey .a::before{background:#5DB8F5}.whoKey .b::before{background:var(--beige)}
-
-/* CRM */
-.crm{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(29,35,51,.6)}
-.crm .bar1{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);background:#FAF8F4;flex-wrap:wrap}
-.crm .bar1 b{margin-right:auto;font-size:15px}
-.crm .f{font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:99px;border:1px solid var(--line);background:#fff;cursor:pointer;font-family:var(--sans);color:var(--ink)}
-.crm .f.on{background:var(--deep);color:#fff;border-color:var(--deep)}
-.cols{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:10px;padding:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.col{background:var(--soft);border-radius:14px;padding:10px;min-height:250px}
-.col h4{font-size:12.5px;font-weight:700;display:flex;justify-content:space-between;margin-bottom:10px;letter-spacing:.02em}
-.col h4 span{color:var(--mut);font-weight:600}
-.lc{background:#fff;border-radius:10px;padding:10px;font-size:12.5px;line-height:1.35;margin-bottom:8px;border:1px solid var(--line)}
-.lc b{display:block;font-size:13px}
-.lc .tr{color:var(--mut)}
-.lc .pl{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
-.lc .pl i{font-style:normal;font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:5px;background:#EEF2F8;color:var(--deep)}
-.lc .pl i.t{background:#E3F2FD;color:#0E6BA8}
-.lc .pl i.a{background:var(--okbg);color:var(--ok)}
-.lc .pl i.w{background:#FFF1CF;color:#7A5600}
-.lc .nx{margin-top:6px;font-size:11.5px;color:var(--acc);font-weight:600}
-.crmside{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
-.crmside div{font-size:14.5px;color:var(--mut);border-top:2px solid var(--deep);padding-top:12px;min-width:0}
-.crmside b{display:block;color:var(--ink);font-size:16px;margin-bottom:3px}
-
-/* WhatsApp */
-.phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.ph{background:#111;border-radius:34px;padding:10px;box-shadow:0 30px 60px -34px rgba(29,35,51,.7);min-width:0;max-width:340px;width:100%;margin:0 auto}
-.ph .scr{background:var(--wabg);border-radius:26px;overflow:hidden;display:flex;flex-direction:column;height:100%}
-.ph .wh{display:flex;align-items:center;gap:10px;background:#075E54;color:#fff;padding:12px 14px}
-.ph .wh img{width:34px;height:34px;border-radius:50%;background:#fff;padding:5px;object-fit:contain}
-.ph .wh b{font-size:14px;display:block;line-height:1.2}
-.ph .wh small{font-size:11.5px;opacity:.8}
-.ph .msgs{padding:12px 10px 16px;display:grid;gap:8px;align-content:start;flex:1}
-.ph .when{justify-self:center;font-size:11px;font-weight:600;background:#E1F2FB;color:#41606F;padding:4px 10px;border-radius:8px}
-.ph .m{max-width:88%;font-size:13.2px;line-height:1.42;padding:8px 10px 6px;border-radius:10px;background:#fff;box-shadow:0 1px 1px rgba(0,0,0,.08);position:relative}
+/* 6 paciente */
+.jr{display:grid;grid-template-columns:1fr 360px;gap:56px;align-items:center}
+.steps{list-style:none;padding:0;display:grid;gap:0;counter-reset:n}
+.steps li{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}
+.steps li:first-child{border-top:1px solid var(--line)}
+.steps .t{font-weight:700;font-size:14px;color:var(--acc);letter-spacing:.04em;text-align:right}
+.steps b{display:block;font-size:20px}
+.steps span{font-size:16px;color:var(--mut)}
+.steps li.hl{background:linear-gradient(90deg,rgba(46,163,242,.1),transparent)}
+.ph{background:#111;border-radius:36px;padding:10px;box-shadow:0 34px 64px -34px rgba(29,35,51,.7);width:100%;max-width:360px;margin:0 auto}
+.ph .scr{background:var(--wabg);border-radius:28px;overflow:hidden}
+.ph .wh{display:flex;align-items:center;gap:10px;background:#075E54;color:#fff;padding:13px 15px}
+.ph .wh img{width:36px;height:36px;border-radius:50%;background:#fff;padding:5px;object-fit:contain}
+.ph .wh b{font-size:15px;display:block;line-height:1.2}
+.ph .wh small{font-size:12px;opacity:.8}
+.ph .msgs{padding:14px 11px 20px;display:grid;gap:9px}
+.ph .when{justify-self:center;font-size:11.5px;font-weight:600;background:#E1F2FB;color:#41606F;padding:4px 10px;border-radius:8px}
+.ph .m{max-width:90%;font-size:14.5px;line-height:1.42;padding:9px 11px 6px;border-radius:11px;background:#fff;box-shadow:0 1px 1px rgba(0,0,0,.08)}
 .ph .m.me{justify-self:end;background:var(--wa)}
 .ph .m small{display:block;text-align:right;font-size:10.5px;color:#8696A0;margin-top:2px}
-.ph .m.sys{justify-self:start}
-.ph .opts{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.ph .opts span{font-size:12px;font-weight:600;color:#027EB5;background:#F1FAFE;border-radius:7px;padding:5px 8px}
-.ph .cap{background:#fff;padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--deep);letter-spacing:.04em;border-top:1px solid #E7E0D6}
-.ph .cap span{display:block;font-weight:500;color:var(--mut);letter-spacing:0;font-size:12px}
-.seq{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:22px}
-.seq div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 12px;font-size:13.5px;line-height:1.4;min-width:0}
-.seq b{display:block;font-size:12px;letter-spacing:.08em;color:var(--acc);text-transform:uppercase;margin-bottom:3px}
+.ph .opts{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.ph .opts span{font-size:13px;font-weight:600;color:#027EB5;background:#F1FAFE;border-radius:7px;padding:6px 9px}
 
-/* emails */
-.mails{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-.mail{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 26px 50px -38px rgba(29,35,51,.6);min-width:0}
-.mail .mh{padding:12px 16px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--mut);background:#FAF8F4;line-height:1.6}
-.mail .mh b{color:var(--ink)}
-.mail .mb{padding:0}
-.mail .brand{background:var(--deep);padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
-.mail .brand img{height:22px;width:auto}
-.mail .brand span{color:var(--beige);font-size:11.5px;font-weight:600;letter-spacing:.14em}
-.mail .body{padding:20px 22px 22px;font-size:14.5px;line-height:1.55}
-.mail .body h4{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;margin-bottom:12px}
-.mail .body p{margin-bottom:10px;color:#3A4152}
-.mail .box{background:var(--soft);border-radius:12px;padding:12px 14px;margin:12px 0;display:grid;gap:6px;font-size:14px}
-.mail .box div{display:grid;grid-template-columns:86px 1fr;gap:8px}
-.mail .box b{font-weight:600;color:var(--mut);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;padding-top:2px}
-.mail .btn{display:inline-block;background:var(--deep);color:#fff;text-decoration:none;border-radius:10px;padding:11px 16px;font-weight:700;font-size:14px;margin:6px 8px 0 0}
-.mail .btn.l{background:#fff;color:var(--deep);border:1px solid var(--line)}
-.mail .ft{font-size:11.5px;color:var(--mut);border-top:1px solid var(--line);padding:12px 22px;line-height:1.5}
-.mlist{display:grid;gap:0;border-top:1px solid var(--line)}
-.mlist div{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px;align-items:baseline}
-.mlist b{font-size:12px;letter-spacing:.12em;color:var(--acc);text-transform:uppercase}
-.mlist span{color:var(--mut)}
-.mlist strong{color:var(--ink);font-weight:600;display:block}
+/* 7 vosotros */
+.board{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 30px 60px -44px rgba(29,35,51,.6)}
+.board .bh{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.board .bh b{margin-right:auto;font-size:16px}
+.board .f{font:600 13px var(--sans);padding:7px 13px;border-radius:99px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+.board .f.on{background:var(--deep);color:#fff;border-color:var(--deep)}
+.cols{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.col{background:var(--soft);border-radius:14px;padding:10px;min-height:220px;min-width:0}
+.col h4{font-size:14px;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between}
+.col h4 span{color:var(--mut)}
+.lc{background:#fff;border-radius:10px;padding:10px;font-size:13.5px;line-height:1.35;margin-bottom:8px;border:1px solid var(--line)}
+.lc b{display:block;font-size:14.5px}
+.lc .tr{color:var(--mut)}
+.lc i{display:inline-block;font-style:normal;font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;margin-top:6px;background:#EEF2F8;color:var(--deep)}
+.lc i.t{background:#E3F2FD;color:#0E6BA8}
+.lc .nx{margin-top:6px;font-size:12.5px;color:var(--acc);font-weight:600}
+.weekly{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+.weekly div{display:flex;gap:14px;align-items:center;font-size:17px;min-width:0}
+.weekly .ic{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--deep);color:#fff;font-weight:700;font-size:13px}
+.weekly b{display:block}
+.weekly span{color:var(--mut);font-size:15px}
 
-/* medición */
-.dash{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.tile{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;min-width:0}
-.tile small{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--mut);text-transform:uppercase}
-.tile strong{display:block;font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.1;margin-top:8px;color:var(--deep)}
-.tile span{font-size:12.5px;color:var(--mut)}
-.fun{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
-.fun .row{display:grid;grid-template-columns:170px 1fr 56px;gap:12px;align-items:center;margin:7px 0;font-size:14px}
-.fun .row .tr{height:26px;background:var(--soft);border-radius:7px;overflow:hidden}
-.fun .row .tr i{display:block;height:100%;background:linear-gradient(90deg,var(--deep),#56618A);border-radius:7px}
-.fun .row b{text-align:right;font-variant-numeric:tabular-nums}
-.fun .row.goal .tr i{background:linear-gradient(90deg,var(--ok),#3FB07D)}
-.mrow{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-top:14px}
-.ritual{display:grid;gap:10px}
-.ritual div{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px;font-size:14.5px;line-height:1.4}
-.ritual b{display:block;font-size:15px}
-.ritual .ic{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--deep);color:#fff;font-weight:700;font-size:13px}
+/* 8 inversión y fechas */
+.money{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.eur{font-family:var(--serif);font-size:clamp(72px,10vw,128px);line-height:.95}
+.eur small{display:block;font-family:var(--sans);font-size:20px;font-weight:500;opacity:.8;margin-top:14px;line-height:1.4}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.split div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:14px 16px;font-size:16px}
+.split b{display:block;font-size:22px;font-family:var(--serif);font-weight:400}
+.dates{list-style:none;padding:0;border-left:2px solid rgba(226,211,186,.5);display:grid;gap:26px;margin-left:10px}
+.dates li{position:relative;padding-left:30px}
+.dates li::before{content:"";position:absolute;left:-9px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--deep);border:3px solid var(--beige)}
+.dates li.on::before{background:var(--beige)}
+.dates small{display:block;font-weight:700;letter-spacing:.14em;font-size:13px;color:var(--beige);text-transform:uppercase}
+.dates b{display:block;font-size:22px;margin:4px 0 2px}
+.dates span{font-size:16px;color:rgba(255,255,255,.75)}
 
-/* necesitamos */
-.need{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 34px;border-top:1px solid var(--line)}
-.need div{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:start;padding:15px 0;border-bottom:1px solid var(--line);min-width:0}
-.need .bx{width:22px;height:22px;border:2px solid var(--deep);border-radius:6px;margin-top:2px}
-.need .bx.ok{background:var(--ok);border-color:var(--ok);position:relative}
-.need .bx.ok::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
-.need b{display:block;font-size:16px}
-.need span{font-size:14px;color:var(--mut)}
-.need em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--acc);white-space:nowrap;padding-top:3px}
+/* 9 necesitamos */
+.need{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.need li{display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;min-width:0}
+.need .nm{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--deep);color:#fff;font-family:var(--serif);font-size:22px}
+.need b{display:block;font-size:20px;margin-bottom:3px}
+.need span{font-size:16px;color:var(--mut)}
+.after{margin-top:26px;font-size:16px;color:var(--mut)}
+.after a{color:var(--deep);font-weight:600}
 
-/* cierre */
-.steps3{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;counter-reset:n}
-.steps3 div{border-top:1px solid rgba(255,255,255,.25);padding-top:20px;min-width:0}
-.steps3 div::before{counter-increment:n;content:"0" counter(n);display:block;font-family:var(--serif);font-size:34px;color:var(--beige);margin-bottom:8px}
-.steps3 b{display:block;font-size:18px;margin-bottom:6px}
-.steps3 p{font-size:15px;color:rgba(255,255,255,.75)}
-.links{margin-top:50px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:rgba(255,255,255,.7)}
-.links a{text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px}
-.links a:hover{color:#fff;border-color:#fff}
 .foot{padding:26px 22px 34px;text-align:center;font-size:12.5px;color:var(--mut)}
-.legal{margin-top:18px;display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--mut);max-width:80ch}
-.legal svg{flex:none;margin-top:2px;color:var(--acc)}
-
-@media (max-width:1000px){
-  .done{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .flow .st::after{display:none}
-  .phones{grid-template-columns:1fr}
-  .seq{grid-template-columns:1fr 1fr}
-  .dash{grid-template-columns:1fr 1fr}
-}
 @media (max-width:900px){
-  .wk,.rec,.mp,.mpfoot,.mails,.mrow,.need{grid-template-columns:1fr}
-  .kpis{grid-template-columns:1fr 1fr}
-  .kpis div,.kpis div+div{padding:16px 0;border-left:0}
-  .kpis div:nth-child(odd){padding-right:14px}
-  .lessons,.crmside,.miles,.steps3{grid-template-columns:1fr}
-  .phase{grid-template-columns:1fr}
-  .top .q{display:none}
-  .top{justify-content:space-between}
+  .three,.cols3,.plan,.need,.weekly,.split{grid-template-columns:1fr}
+  .plan > div,.plan > div + div{padding:24px 0;border-left:0;border-bottom:1px solid rgba(255,255,255,.2)}
+  .vs,.jr,.money{grid-template-columns:1fr;gap:36px}
+  .duo{height:250px}
+  .cols{grid-template-columns:repeat(5,minmax(150px,1fr));overflow-x:auto}
+  .top .q{display:none}.top{justify-content:space-between}
   html{scroll-snap-type:none}
-  .s{min-height:auto;padding-top:90px}
-  .fun .row{grid-template-columns:110px 1fr 46px;font-size:13px}
-}
-@media (max-width:560px){
-  .done,.dash,.seq,.adsets{grid-template-columns:1fr}
-  .camp .hd{flex-direction:column}
-  .camp .hd .eur{text-align:left}
-  .mlist div{grid-template-columns:1fr;gap:4px}
-  .need div{grid-template-columns:30px 1fr}
-  .need em{grid-column:2}
+  .s{min-height:auto}
+  body{font-size:18px}
 }
 </style>
 </head>
 <body>
 <header class="top">
   <img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental"><span class="x">×</span><span class="q">QUALIVO</span>
-  <span class="cnt" id="cnt">1 / 13</span>
+  <span class="cnt" id="cnt">1 / 9</span>
 </header>
 
-<!-- 0 · Portada -->
-<section class="s hero" id="p0">
+<!-- 1 -->
+<section class="s hero" id="p1">
   <div class="in">
     <img class="logo" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental">
-    <h1>Plan de arranque: del anuncio al sillón</h1>
-    <p>Qué hemos aprendido de vuestras campañas, cómo lo vamos a montar en Patraix y en Torrent, y qué ve cada paciente desde que pide información hasta que acepta el presupuesto.</p>
-    <div class="agenda">
-      <span>Hecho esta semana</span><span>Vuestros datos</span><span>Plan de medios</span><span>Calendario</span><span>Embudo</span><span>CRM</span><span>WhatsApp</span><span>Emails</span><span>Cómo lo medimos</span>
-    </div>
-    <div class="meta">Reunión de arranque · viernes 27 de noviembre · Qualivo</div>
+    <h1>Más pacientes en Patraix y en Torrent</h1>
+    <p>Lo que hemos visto en vuestros anuncios y cómo arrancamos la semana que viene.</p>
+    <div class="meta">Reunión de arranque · 27 de noviembre</div>
   </div>
 </section>
 
-<!-- 1 · Hecho -->
-<section class="s" id="p1">
+<!-- 2 -->
+<section class="s" id="p2">
   <div class="in">
-    <div class="k">01 · Lo que ya está hecho</div>
-    <h2>En tres días, todo lo vuestro está en vuestra casa</h2>
-    <div class="done">
-      <div class="card"><div class="ck"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>Auditoría de vuestras campañas</b><p>Dos años y medio de anuncios, mes a mes y anuncio a anuncio.</p></div>
-      <div class="card"><div class="ck"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>Página de Facebook conectada</b><p>Ya vemos los formularios y los contactos que habéis recibido.</p></div>
-      <div class="card"><div class="ck"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>Cuenta publicitaria propia</b><p>Creada en vuestro Business Manager, a nombre de la clínica.</p></div>
-      <div class="card"><div class="ck"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>Pago directo a Meta</b><p>Con vuestra tarjeta y vuestros datos fiscales. Las facturas, a vuestro nombre.</p></div>
-      <div class="card"><div class="ck"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>827 contactos recuperados</b><p>Las peticiones guardadas en vuestros formularios, listas para trabajarlas.</p></div>
-    </div>
-    <p class="src">Las campañas actuales siguen funcionando como hasta ahora mientras montamos lo nuevo.</p>
-  </div>
-</section>
-
-<!-- 2 · Histórico -->
-<section class="s dark" id="p2">
-  <div class="in">
-    <div class="k">02 · Lo que dicen vuestros datos</div>
-    <h2>Cada contacto cuesta hoy casi el triple que en 2024</h2>
-    <div class="kpis">
-      <div><strong>26.263 €</strong><small>invertidos desde feb-2024 <span class="tag c">Real</span></small></div>
-      <div><strong>3.011</strong><small>contactos por formulario <span class="tag c">Real</span></small></div>
-      <div><strong>4,43 €</strong><small>por contacto, media de 2024</small></div>
-      <div><strong>12,03 €</strong><small>por contacto, media de 2026</small></div>
-    </div>
-    <div class="chart">
-      <div class="legend"><span><i style="background:#56618A"></i>Inversión al mes</span><span><i style="background:#E2D3BA"></i>Coste por contacto</span></div>
-      <svg id="hist" viewBox="0 0 1100 330" role="img" aria-label="Inversión mensual y coste por contacto, febrero de 2024 a noviembre de 2026"></svg>
-    </div>
-    <p class="src">Fuente: cuenta publicitaria «Dental Marín», API de Meta, 25-nov-2026. Contacto = formulario enviado. Noviembre de 2026, hasta el día 25.</p>
-  </div>
-</section>
-
-<!-- 3 · Qué funciona -->
-<section class="s" id="p3">
-  <div class="in">
-    <div class="k">03 · Qué funciona y qué no</div>
-    <h2>Funcionan las ofertas concretas y los vídeos grabados en la clínica</h2>
-    <div class="wk">
-      <div class="card good">
-        <h3><span class="dot" style="background:var(--ok)"></span>Lo que vamos a aprovechar</h3>
-        <div class="bars" data-max="45">
-          <div class="bar"><div><div class="t">Limpieza gratis <small>· 547 contactos</small></div><div class="tr"><i data-v="1.12"></i></div></div><b>1,12 €</b></div>
-          <div class="bar"><div><div class="t">Limpieza + TAC 29,90 €</div><div class="tr"><i data-v="3.45"></i></div></div><b>3,45 €</b></div>
-          <div class="bar"><div><div class="t">Blanqueamiento + limpieza 99 € <small>· activo</small></div><div class="tr"><i data-v="4.36"></i></div></div><b>4,36 €</b></div>
-          <div class="bar"><div><div class="t">Vídeo «Implante desde 1 € al día» <small>· 699 contactos, en pausa</small></div><div class="tr"><i data-v="6.5"></i></div></div><b>6-7 €</b></div>
-          <div class="bar"><div><div class="t">Vídeo «Prótesis provisional fija con tus implantes» <small>· 545 contactos</small></div><div class="tr"><i data-v="11.79"></i></div></div><b>11,79 €</b></div>
-        </div>
-      </div>
-      <div class="card bad">
-        <h3><span class="dot" style="background:var(--bad)"></span>Lo que no repetiremos igual</h3>
-        <div class="bars" data-max="45">
-          <div class="bar"><div><div class="t">Ortodoncia 3 €/día <small>· la que más gasta ahora</small></div><div class="tr"><i data-v="40.4"></i></div></div><b>40,40 €</b></div>
-          <div class="bar"><div><div class="t">Ortodoncia + blanqueamiento</div><div class="tr"><i data-v="20.32"></i></div></div><b>20,32 €</b></div>
-          <div class="bar"><div><div class="t">Carillas</div><div class="tr"><i data-v="18.74"></i></div></div><b>18,74 €</b></div>
-          <div class="bar"><div><div class="t">Implantes en 24 h</div><div class="tr"><i data-v="14.59"></i></div></div><b>14,59 €</b></div>
-        </div>
-        <p class="src" style="margin-top:14px">Coste por contacto de cada anuncio en todo su histórico <span class="tag c">Real</span></p>
-      </div>
-    </div>
-    <div class="lessons">
-      <div><b>«Vecinos de Patraix» + oferta + plazas</b>El texto que mejor ha funcionado: cercano, concreto y con fecha.</div>
-      <div><b>Hoy se mide el contacto, no el paciente</b>Meta aprende a traer formularios baratos, no pacientes que se tratan.</div>
-      <div><b>13 campañas pequeñas</b>De 10 a 25 €/día cada una: demasiado repartido para que Meta aprenda.</div>
+    <div class="k">Esta semana</div>
+    <h2>Ya está todo a vuestro nombre</h2>
+    <div class="three">
+      <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>Vuestra cuenta de anuncios</b><p>Nueva, en vuestro Business Manager y con vuestra tarjeta. Si un día nos vamos, sigue siendo vuestra.</p></div>
+      <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>Vuestra página conectada</b><p>Ya vemos quién os escribe desde los anuncios.</p></div>
+      <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>827 personas recuperadas</b><p>Gente que ya os pidió información. Vamos a volver a escribirles.</p></div>
     </div>
   </div>
 </section>
 
-<!-- 4 · Contactos recuperados -->
-<section class="s alt" id="p4">
-  <div class="in rec">
+<!-- 3 -->
+<section class="s dark" id="p3">
+  <div class="in vs">
     <div>
-      <div class="k">04 · Los contactos que ya tenéis</div>
-      <h2>827 personas que ya os pidieron información</h2>
-      <div class="bars card" data-max="323" id="trat" style="padding:20px">
-        <div class="bar"><div><div class="t">Limpieza</div><div class="tr"><i data-v="323" style="background:var(--deep)"></i></div></div><b>323</b></div>
-        <div class="bar"><div><div class="t">Ortodoncia</div><div class="tr"><i data-v="256" style="background:var(--deep)"></i></div></div><b>256</b></div>
-        <div class="bar"><div><div class="t">Implantes</div><div class="tr"><i data-v="148" style="background:var(--deep)"></i></div></div><b>148</b></div>
-        <div class="bar"><div><div class="t">Blanqueamiento</div><div class="tr"><i data-v="70" style="background:var(--deep)"></i></div></div><b>70</b></div>
-        <div class="bar"><div><div class="t">Prótesis y carillas</div><div class="tr"><i data-v="30" style="background:var(--deep)"></i></div></div><b>30</b></div>
+      <div class="k">Lo que hemos visto</div>
+      <div class="duo">
+        <div><strong>4 €</strong><i style="height:33%;background:#8FA0C9"></i></div>
+        <div><strong>12 €</strong><i style="height:100%;background:var(--beige)"></i></div>
       </div>
-      <p class="src">Peticiones guardadas en los 38 formularios de la página <span class="tag c">Real</span>. Meta solo conserva una parte: los anuncios trajeron 3.011.</p>
+      <div class="duo-l"><span>2024</span><span>2026</span></div>
+      <p class="src">Lo que cuesta, de media, cada persona que rellena el formulario. Vuestra cuenta de anuncios, API de Meta, 25-nov.</p>
     </div>
     <div>
-      <div class="card">
-        <h3>Por formulario de sede</h3>
-        <div class="sede"><div class="p" style="width:57%">Patraix · 471</div><div class="t" style="width:43%">Torrent · 356</div></div>
-        <p style="font-size:14.5px;color:var(--mut)">Lo cruzamos con Clinic para saber cuántos ya son pacientes y a quién merece la pena volver a escribir.</p>
-        <div class="map" aria-label="Esquema: zona a la que se han enseñado los anuncios frente a Torrent">
-          <svg viewBox="0 0 400 250">
-            <path d="M0 175 C80 165 120 190 190 170 S330 150 400 160" stroke="#D3DDE6" stroke-width="10" fill="none"/>
-            <circle cx="282" cy="96" r="70" fill="rgba(47,56,84,.14)" stroke="#2F3854" stroke-width="2" stroke-dasharray="6 5"/>
-            <circle cx="282" cy="96" r="6" fill="#2F3854"/>
-            <text x="282" y="80" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="700" fill="#2F3854">Patraix</text>
-            <text x="282" y="186" text-anchor="middle" font-family="Montserrat" font-size="11" fill="#5E667A">Zona de los anuncios: 2-6 km</text>
-            <circle cx="86" cy="150" r="6" fill="#2EA3F2"/>
-            <circle cx="86" cy="150" r="40" fill="none" stroke="#2EA3F2" stroke-width="2" stroke-dasharray="3 5"/>
-            <text x="86" y="134" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="700" fill="#0E6BA8">Torrent</text>
-            <text x="86" y="210" text-anchor="middle" font-family="Montserrat" font-size="11" fill="#0E6BA8">Sin anuncios propios</text>
-            <path d="M130 140 L210 110" stroke="#5E667A" stroke-width="1.4" stroke-dasharray="4 4"/>
-            <text x="170" y="116" text-anchor="middle" font-family="Montserrat" font-size="11" fill="#5E667A">≈ 8 km</text>
-          </svg>
-        </div>
-        <div class="alert">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg>
-          <div><b>Oportunidad en Torrent.</b> Hay formularios «Torrent», pero todos los anuncios se han enseñado alrededor de Patraix. En Torrent no se ha anunciado nunca de verdad: empezamos de cero, con su propio público.</div>
-        </div>
-      </div>
+      <p class="say">Cada persona interesada os cuesta hoy <em>el triple</em> que hace dos años.</p>
+      <p>Y nadie sabe cuántas de ellas acaban sentándose en el sillón. Eso es lo primero que vamos a cambiar.</p>
     </div>
   </div>
 </section>
 
-<!-- 5 · Plan de medios -->
-<section class="s" id="p5">
+<!-- 4 -->
+<section class="s" id="p4">
   <div class="in">
-    <div class="k">05 · Plan de medios</div>
-    <h2>De 13 campañas a 2, y cada sede con su presupuesto</h2>
-    <div class="mp">
-      <div class="camp">
-        <div class="hd"><div><small>CAMPAÑA 1 · PRIMERA VISITA</small><b>Una oferta de entrada que trae gente a la clínica</b></div><div class="eur">7 €<em>al día</em></div></div>
-        <div class="bd">
-          <div class="adsets"><div><small>Patraix</small><b>4 €/día</b><span>Radio 3-4 km</span></div><div><small>Torrent</small><b>3 €/día</b><span>Público propio</span></div></div>
-          <ul>
-            <li><b>Anuncios</b><span>Limpieza 29,90 € y blanqueamiento + limpieza 99 €, con el tono «vecinos de…» que ya funciona.</span></li>
-            <li><b>Formulario</b><span>5 preguntas: tratamiento que le interesa, sede, cuándo puede venir y si quiere conocer la financiación.</span></li>
-            <li><b>Objetivo</b><span>Primera visita que, en el sillón, descubre otro tratamiento.</span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="camp">
-        <div class="hd"><div><small>CAMPAÑA 2 · IMPLANTES</small><b>El tratamiento de más valor, con vuestros vídeos</b></div><div class="eur">8 €<em>al día</em></div></div>
-        <div class="bd">
-          <div class="adsets"><div><small>Patraix</small><b>4 €/día</b><span>Radio 5-6 km</span></div><div><small>Torrent</small><b>4 €/día</b><span>Público propio</span></div></div>
-          <ul>
-            <li><b>Anuncios</b><span>Recuperamos «Implante desde 1 € al día» y «Prótesis provisional fija», más una versión nueva grabada en Torrent.</span></li>
-            <li><b>Formulario</b><span>Pregunta por la financiación antes de dar cita.</span></li>
-            <li><b>Objetivo</b><span>Presupuesto de implantes aceptado.</span></li>
-          </ul>
-        </div>
-      </div>
+    <div class="k">Qué funciona</div>
+    <h2>Lo que vamos a repetir y lo que no</h2>
+    <div class="cols3">
+      <div class="g"><div class="h"><i>✓</i>Funciona</div><b>Ofertas concretas y vídeos en la clínica</b><p>La limpieza a 29,90 €, el blanqueamiento a 99 € y los vídeos de implantes grabados con vosotros.</p><span class="n">3 a 7 € por persona</span></div>
+      <div class="b"><div class="h"><i>✕</i>No funciona</div><b>Ortodoncia, tal y como está</b><p>Es la campaña que más gasta ahora mismo y la que más cara sale.</p><span class="n">40 € por persona</span></div>
+      <div class="o"><div class="h"><i>+</i>Sin estrenar</div><b>Torrent</b><p>Los anuncios se han enseñado siempre alrededor de Patraix. En Torrent empezamos de cero, con sus propios anuncios.</p><span class="n">Nueva oportunidad</span></div>
     </div>
-    <div class="mpfoot">
-      <div class="card">
-        <h3 style="font-size:20px">Reparto del primer mes <span class="tag e">Propuesta</span></h3>
-        <div class="split-bar"><div style="width:27%;background:var(--deep)">C1 Patraix 4 €</div><div style="width:20%;background:#56618A">C1 Torrent 3 €</div><div style="width:27%;background:var(--acc)">C2 Patraix 4 €</div><div style="width:26%;background:#B0915F">C2 Torrent 4 €</div></div>
-        <p style="font-size:14px;color:var(--mut)">15 €/día ≈ <b style="color:var(--ink)">450 €/mes</b>, el 30-40 % de lo que invertís hoy (1.150-1.550 €/mes). Ortodoncia, en pausa hasta tener un ángulo nuevo.</p>
-      </div>
-      <div class="card">
-        <h3 style="font-size:20px">Cómo crece</h3>
-        <div class="phase">
-          <div class="on"><b>Diciembre</b>450 €/mes en la cuenta nueva, junto a la de la agencia.</div>
-          <div><b>Al salir la agencia</b>Todo el presupuesto pasa a la cuenta nueva.</div>
-          <div><b>Después</b>Más presupuesto a lo que traiga pacientes, no contactos.</div>
-        </div>
-      </div>
-    </div>
-    <div class="legal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.5"/></svg><span>Publicidad sanitaria: cada anuncio lleva el número de registro sanitario del centro y no promete resultados. Precios y financiación, solo los que nos confirméis.</span></div>
   </div>
 </section>
 
-<!-- 6 · Calendario -->
+<!-- 5 -->
+<section class="s dark" id="p5">
+  <div class="in">
+    <div class="k">El plan</div>
+    <h2>Tres cosas, nada más</h2>
+    <div class="plan">
+      <div><div class="num">1</div><b>Anuncios que traen pacientes</b><p>Dos campañas en vez de trece.</p><ul><li>Primera visita (limpieza, blanqueamiento)</li><li>Implantes, con vuestros vídeos</li><li>Patraix y Torrent, cada una con lo suyo</li></ul></div>
+      <div><div class="num">2</div><b>Respuesta en minutos</b><p>Quien rellena el formulario recibe un WhatsApp al momento, con huecos para venir.</p><ul><li>Recordatorio el día antes</li><li>Si no viene, se le ofrece otro día</li></ul></div>
+      <div><div class="num">3</div><b>Seguimiento hasta el sí</b><p>Después del presupuesto, nadie se queda sin una llamada o un mensaje.</p><ul><li>Al día siguiente, a los 3 días y a la semana</li><li>Sabemos qué anuncio trae pacientes, no solo contactos</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
 <section class="s alt" id="p6">
-  <div class="in">
-    <div class="k">06 · Calendario</div>
-    <h2>Campañas nuevas en marcha la semana que viene</h2>
-    <div class="gwrap">
-      <div class="gantt" id="gantt"></div>
+  <div class="in jr">
+    <div>
+      <div class="k">Lo que vive el paciente</div>
+      <h2 style="margin-bottom:30px">Del anuncio al sillón</h2>
+      <ol class="steps">
+        <li><span class="t">Día 0</span><div><b>Ve el anuncio y pide información</b><span>Unas preguntas rápidas: qué le interesa, en qué sede y cuándo puede venir.</span></div></li>
+        <li class="hl"><span class="t">2 min</span><div><b>Le escribís por WhatsApp</b><span>Con dos huecos concretos. Así es la pantalla de al lado.</span></div></li>
+        <li><span class="t">Día antes</span><div><b>Recordatorio de la cita</b><span>Confirma con un toque. Si no puede, la cambia.</span></div></li>
+        <li><span class="t">Visita</span><div><b>El doctor le explica el tratamiento</b><span>Se lleva el presupuesto por email, con la financiación.</span></div></li>
+        <li><span class="t">+1 · +3 · +7</span><div><b>Seguimiento hasta que decide</b><span>Un mensaje amable para resolver dudas.</span></div></li>
+      </ol>
     </div>
-    <div class="miles">
-      <div><b>Hoy, 27-nov</b>Cerramos tratamientos, financiación y datos de cada sede.</div>
-      <div><b>1-4 de diciembre</b>Campañas nuevas en vuestra cuenta.</div>
-      <div><b>Viernes 11-dic</b>Primer resumen semanal.</div>
-      <div><b>Salida de la agencia</b>Todo el presupuesto, a lo que funcione.</div>
-    </div>
-  </div>
-</section>
-
-<!-- 7 · Embudo -->
-<section class="s dark" id="p7">
-  <div class="in">
-    <div class="k">07 · El embudo</div>
-    <h2>Nadie se queda sin respuesta y nadie se queda sin seguimiento</h2>
-    <div class="flow">
-      <div class="st"><div class="n">1</div><b>Ve el anuncio</b><p>Oferta concreta, de su sede, con vuestro registro sanitario.</p><span class="t">Sistema</span></div>
-      <div class="st"><div class="n">2</div><b>Pide información</b><p>Formulario de 5 preguntas. Entra al CRM con su sede y tratamiento.</p><span class="t">Sistema</span></div>
-      <div class="st"><div class="n">3</div><b>WhatsApp en minutos</b><p>Mensaje de bienvenida y dos huecos para primera visita. Aviso a recepción.</p><span class="t">Sistema</span> <span class="t eq">Recepción</span></div>
-      <div class="st"><div class="n">4</div><b>Cita y recordatorios</b><p>Confirmación, recordatorio a 24 h y a 2 h. Si no viene, se le ofrece otro hueco.</p><span class="t">Sistema</span></div>
-      <div class="st"><div class="n">5</div><b>Visita y presupuesto</b><p>El doctor explica el tratamiento. Presupuesto por email con la financiación.</p><span class="t eq">Clínica</span></div>
-      <div class="st"><div class="n">6</div><b>Seguimiento</b><p>Día +1, +3 y +7 por WhatsApp. Si acepta, se marca en el CRM.</p><span class="t">Sistema</span> <span class="t eq">Recepción</span></div>
-    </div>
-    <div class="loop">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4.5h-4.5"/></svg>
-      <div><b>Y vuelta a Meta:</b> cada cita, visita y presupuesto aceptado se le devuelve a Meta. Así aprende a buscar personas que se tratan, no solo las que rellenan formularios.</div>
-    </div>
-    <div class="whoKey"><span class="a">Lo hace el sistema solo</span><span class="b">Lo hace vuestro equipo, con aviso</span></div>
-  </div>
-</section>
-
-<!-- 8 · CRM -->
-<section class="s" id="p8">
-  <div class="in">
-    <div class="k">08 · CRM</div>
-    <h2>Las dos sedes en un tablero, cada paciente con su próximo paso</h2>
-    <div class="crm">
-      <div class="bar1"><b>Pacientes nuevos · Marín Clínica Dental</b>
-        <button class="f on" data-s="all">Todas</button><button class="f" data-s="P">Patraix</button><button class="f" data-s="T">Torrent</button>
-        <span class="tag e">Datos de ejemplo</span>
+    <div class="ph"><div class="scr">
+      <div class="wh"><img src="../assets/brand/logo-marin.png" alt=""><div><b>Marín Clínica Dental</b><small>Patraix</small></div></div>
+      <div class="msgs">
+        <span class="when">2 minutos después del formulario</span>
+        <div class="m">¡Hola, Marta! 👋 Soy de Marín Clínica Dental, en Patraix. Hemos recibido tu solicitud para la <b>limpieza</b>.<br><br>¿Te viene bien alguno de estos huecos?<div class="opts"><span>Mar 1 · 10:30</span><span>Mié 2 · 17:00</span><span>Otro día</span></div><small>10:42</small></div>
+        <div class="m me">El miércoles a las 5 perfecto<small>10:47 ✓✓</small></div>
+        <div class="m">¡Hecho! Te esperamos el <b>miércoles a las 17:00</b>. Te mando la ubicación 📍<small>10:47</small></div>
       </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="s" id="p7">
+  <div class="in">
+    <div class="k">Lo que veis vosotros</div>
+    <h2>Cada paciente, en qué punto está</h2>
+    <div class="board">
+      <div class="bh"><b>Pacientes nuevos</b><button class="f on" data-s="all">Las dos sedes</button><button class="f" data-s="P">Patraix</button><button class="f" data-s="T">Torrent</button><span class="ej">Ejemplo</span></div>
       <div class="cols" id="cols"></div>
     </div>
-    <div class="crmside">
-      <div><b>Cada sede ve lo suyo</b>Recepción de Torrent solo ve las peticiones de Torrent. Vosotros, todo.</div>
-      <div><b>Nada se pierde</b>Cada ficha tiene fecha de próximo contacto. Si se pasa, salta un aviso.</div>
-      <div><b>Conectado a Clinic</b>Presupuestos y tratamientos aceptados, para saber qué campaña trae pacientes.</div>
+    <div class="weekly">
+      <div><span class="ic">HOY</span><div><b>Aviso al momento</b><span>Cada petición nueva, a quien la atiende en su sede.</span></div></div>
+      <div><span class="ic">VIE</span><div><b>Resumen cada viernes</b><span>Cuántos pidieron, vinieron y aceptaron.</span></div></div>
+      <div><span class="ic">MES</span><div><b>Revisión con vosotros</b><span>Qué funciona y dónde poner más.</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- 9 · WhatsApp -->
-<section class="s alt" id="p9">
+<!-- 8 -->
+<section class="s dark" id="p8">
+  <div class="in money">
+    <div>
+      <div class="k">Inversión en anuncios</div>
+      <div class="eur">450 €<small>al mes para empezar (15 € al día), pagados directamente a Meta con vuestra tarjeta.</small></div>
+      <div class="split"><div><b>Patraix</b>Primera visita e implantes</div><div><b>Torrent</b>Primera visita e implantes</div></div>
+      <p class="src">Propuesta para empezar: es menos de la mitad de lo que se invierte hoy. Cuando veamos qué trae pacientes, subimos ahí.</p>
+    </div>
+    <div>
+      <div class="k">Fechas</div>
+      <ul class="dates">
+        <li class="on"><small>Hoy</small><b>Cerramos los detalles</b><span>Tratamientos, financiación y datos de cada sede.</span></li>
+        <li><small>Lunes 30 noviembre</small><b>Os pasamos los textos</b><span>Anuncios y mensajes, para que los aprobéis.</span></li>
+        <li><small>1-4 diciembre</small><b>Arrancan los anuncios nuevos</b><span>Los de ahora siguen hasta que la agencia salga.</span></li>
+        <li><small>Viernes 11 diciembre</small><b>Primer resumen</b><span>Vuestros primeros números.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="s" id="p9">
   <div class="in">
-    <div class="k">09 · Mensajes de WhatsApp</div>
-    <h2>Lo que recibe el paciente, con vuestro tono</h2>
-    <div class="phones">
-      <div class="ph"><div class="scr">
-        <div class="wh"><img src="../assets/brand/logo-marin.png" alt=""><div><b>Marín Clínica Dental</b><small>Patraix</small></div></div>
-        <div class="msgs">
-          <span class="when">Hoy · 2 min después del formulario</span>
-          <div class="m sys">¡Hola, Marta! 👋 Soy Lorena, de Marín Clínica Dental en Patraix. Hemos recibido tu solicitud para la <b>limpieza con revisión</b>.<br><br>¿Te viene bien alguno de estos huecos?<div class="opts"><span>Mar 1 · 10:30</span><span>Mié 2 · 17:00</span><span>Otro día</span></div><small>10:42</small></div>
-          <div class="m me">El miércoles a las 5 perfecto<small>10:47 ✓✓</small></div>
-          <div class="m sys">¡Hecho! Te esperamos el <b>miércoles 2 a las 17:00</b> en [dirección Patraix]. Te mando la ubicación por aquí 📍<small>10:47</small></div>
-        </div>
-        <div class="cap">1 · Respuesta en minutos<span>Con dos huecos concretos, no «te llamamos».</span></div>
-      </div></div>
-      <div class="ph"><div class="scr">
-        <div class="wh"><img src="../assets/brand/logo-marin.png" alt=""><div><b>Marín Clínica Dental</b><small>Torrent</small></div></div>
-        <div class="msgs">
-          <span class="when">Martes · día antes de la cita</span>
-          <div class="m sys">Hola, Javier 😊 Te recordamos tu primera visita de mañana, <b>miércoles a las 10:00</b>, en Marín Clínica Dental Torrent.<br><br>¿Nos confirmas?<div class="opts"><span>✅ Confirmo</span><span>🔄 Cambiar hora</span></div><small>18:00</small></div>
-          <div class="m me">✅ Confirmo<small>18:12 ✓✓</small></div>
-          <div class="m sys">¡Genial! Si te surge algo, escríbenos y lo movemos sin problema. ¡Hasta mañana!<small>18:12</small></div>
-          <span class="when">Miércoles · 2 h antes</span>
-          <div class="m sys">Te esperamos a las 10:00 en [dirección Torrent] 📍<small>8:00</small></div>
-        </div>
-        <div class="cap">2 · Recordatorios<span>24 h y 2 h antes, con confirmación de un toque.</span></div>
-      </div></div>
-      <div class="ph"><div class="scr">
-        <div class="wh"><img src="../assets/brand/logo-marin.png" alt=""><div><b>Marín Clínica Dental</b><small>Patraix</small></div></div>
-        <div class="msgs">
-          <span class="when">Día +1 después del presupuesto</span>
-          <div class="m sys">Hola, Carmen. Ayer el doctor te explicó el tratamiento de <b>implantes</b>. ¿Te ha quedado alguna duda con el presupuesto o con la financiación?<small>11:00</small></div>
-          <div class="m me">Me gustaría saber cuánto sería al mes<small>12:31 ✓✓</small></div>
-          <div class="m sys">¡Claro! Te lo calculamos con las opciones de financiación y te lo mandamos hoy. ¿Te viene mejor que te llamemos?<div class="opts"><span>📞 Llamadme</span><span>💬 Por aquí</span></div><small>12:33</small></div>
-        </div>
-        <div class="cap">3 · Seguimiento del presupuesto<span>Día +1, +3 y +7. Si hay duda, avisa a recepción.</span></div>
-      </div></div>
-    </div>
-    <div class="seq">
-      <div><b>Si no viene</b>«Te echamos de menos hoy, ¿buscamos otro hueco?» y dos opciones.</div>
-      <div><b>Día +3</b>Recordatorio amable del presupuesto y contacto directo.</div>
-      <div><b>Día +7</b>Último toque. Si no responde, pasa a «Más adelante».</div>
-      <div><b>827 contactos</b>Mensaje de reactivación por tratamiento, si tienen permiso.</div>
-    </div>
-    <p class="src">Nombres, huecos y conversaciones de ejemplo. Los textos finales los aprobáis vosotros antes de activarlos.</p>
+    <div class="k">Lo que necesitamos de vosotros</div>
+    <h2>Seis cosas y arrancamos</h2>
+    <ul class="need">
+      <li><span class="nm">1</span><div><b>Qué tratamientos queréis llenar</b><span>En Patraix y en Torrent.</span></div></li>
+      <li><span class="nm">2</span><div><b>Qué financiación podemos anunciar</b><span>Las condiciones exactas.</span></div></li>
+      <li><span class="nm">3</span><div><b>Número de registro sanitario</b><span>De cada centro. Es obligatorio en los anuncios.</span></div></li>
+      <li><span class="nm">4</span><div><b>WhatsApp de cada sede</b><span>Qué número y quién contesta.</span></div></li>
+      <li><span class="nm">5</span><div><b>Acceso a Clinic</b><span>Para saber qué presupuestos se aceptan.</span></div></li>
+      <li><span class="nm">6</span><div><b>Quién lleva la web</b><span>Para medir las citas que llegan por ahí.</span></div></li>
+    </ul>
+    <p class="after">Y cuando podáis: fotos, vídeos y reseñas que podamos usar. ¿Queréis ver más detalle? <a href="detalle/">Plan completo</a></p>
   </div>
 </section>
 
-<!-- 10 · Emails -->
-<section class="s" id="p10">
-  <div class="in">
-    <div class="k">10 · Emails</div>
-    <h2>El email, para lo que se tiene que guardar</h2>
-    <div class="mails">
-      <div class="mail">
-        <div class="mh"><b>Marín Clínica Dental</b> · Asunto: <b>Tu primera visita: miércoles 2 a las 17:00</b></div>
-        <div class="mb">
-          <div class="brand"><img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental"><span>PATRAIX</span></div>
-          <div class="body">
-            <h4>Te esperamos, Marta</h4>
-            <p>Tu primera visita está confirmada. Dura unos 30 minutos y el doctor te explicará todo sin compromiso.</p>
-            <div class="box">
-              <div><b>Cuándo</b><span>Miércoles 2 de diciembre, 17:00</span></div>
-              <div><b>Dónde</b><span>[Dirección de Patraix]</span></div>
-              <div><b>Trae</b><span>DNI y, si tienes, radiografías recientes</span></div>
-            </div>
-            <a class="btn" href="#p10">Cómo llegar</a><a class="btn l" href="#p10">Cambiar la cita</a>
-          </div>
-          <div class="ft">Marín Clínica Dental · Nº de registro sanitario [del centro] · Puedes darte de baja de estos correos cuando quieras.</div>
-        </div>
-      </div>
-      <div>
-        <div class="mail" style="margin-bottom:18px">
-          <div class="mh"><b>Marín Clínica Dental</b> · Asunto: <b>Tu presupuesto y las opciones de financiación</b></div>
-          <div class="mb">
-            <div class="body">
-              <h4>Carmen, aquí tienes tu presupuesto</h4>
-              <p>Te lo dejamos por escrito para que lo mires con calma. Si quieres verlo a plazos, te calculamos la cuota.</p>
-              <a class="btn" href="#p10">Ver mi presupuesto</a><a class="btn l" href="#p10">Hablar por WhatsApp</a>
-            </div>
-          </div>
-        </div>
-        <div class="mlist">
-          <div><b>Al citar</b><span><strong>Confirmación de la cita</strong>Fecha, dirección, qué traer y botón para cambiarla.</span></div>
-          <div><b>Tras la visita</b><span><strong>Presupuesto y financiación</strong>Por escrito, para decidir en casa.</span></div>
-          <div><b>Día +7</b><span><strong>¿Te ayudamos a decidir?</strong>Dudas frecuentes del tratamiento y contacto directo.</span></div>
-          <div><b>Tras tratar</b><span><strong>¿Nos dejas una reseña?</strong>Enlace a Google de su sede.</span></div>
-          <div><b>A los 6 meses</b><span><strong>Revisión y limpieza</strong>Para que vuelva y traiga a la familia.</span></div>
-        </div>
-      </div>
-    </div>
-    <p class="src">Maquetas de ejemplo. Los textos finales los aprobáis vosotros.</p>
-  </div>
-</section>
-
-<!-- 11 · Medición -->
-<section class="s alt" id="p11">
-  <div class="in">
-    <div class="k">11 · Cómo lo medimos</div>
-    <h2>Lo que importa es el coste por paciente, no por contacto</h2>
-    <div class="dash">
-      <div class="tile"><small>Contactos</small><strong>—</strong><span>y coste por contacto</span></div>
-      <div class="tile"><small>Respuesta</small><strong>&lt; 5 min</strong><span>tiempo hasta el primer WhatsApp</span></div>
-      <div class="tile"><small>Citas que vienen</small><strong>—</strong><span>% de asistencia a primera visita</span></div>
-      <div class="tile"><small>Coste por paciente</small><strong>—</strong><span>inversión ÷ presupuestos aceptados</span></div>
-    </div>
-    <div class="mrow">
-      <div class="fun">
-        <h3 style="font-size:20px;margin-bottom:6px">Así leemos cada semana <span class="tag x">Ejemplo de lectura</span></h3>
-        <div class="row"><span>Contactos</span><div class="tr"><i style="width:100%"></i></div><b>100</b></div>
-        <div class="row"><span>Contactados en 5 min</span><div class="tr"><i style="width:90%"></i></div><b>90</b></div>
-        <div class="row"><span>Primera visita citada</span><div class="tr"><i style="width:40%"></i></div><b>40</b></div>
-        <div class="row"><span>Vinieron</span><div class="tr"><i style="width:30%"></i></div><b>30</b></div>
-        <div class="row goal"><span>Presupuesto aceptado</span><div class="tr"><i style="width:12%"></i></div><b>12</b></div>
-        <p class="src" style="margin-top:10px">Cifras ilustrativas para enseñar cómo se lee el embudo, no un objetivo. Las reales salen de vuestro CRM y de Clinic.</p>
-      </div>
-      <div class="ritual">
-        <div><span class="ic">L-V</span><div><b>Cada mañana</b>Contactos nuevos por sede y quién está pendiente de respuesta.</div></div>
-        <div><span class="ic">VIE</span><div><b>Cada viernes</b>Resumen semanal: qué campaña y qué sede traen pacientes. El primero, el 11-dic.</div></div>
-        <div><span class="ic">MES</span><div><b>Cada mes</b>Revisión con vosotros: qué escalamos, qué paramos y qué probamos.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 12 · Necesitamos -->
-<section class="s" id="p12">
-  <div class="in">
-    <div class="k">12 · Lo que necesitamos de vosotros</div>
-    <h2>Ocho cosas para lanzar el 1 de diciembre</h2>
-    <div class="need">
-      <div><span class="bx"></span><span><b>Tratamientos prioritarios</b><span>Cuáles queréis llenar primero en cada sede.</span></span><em>HOY</em></div>
-      <div><span class="bx"></span><span><b>Financiación anunciable</b><span>Condiciones exactas que podemos poner en los anuncios.</span></span><em>HOY</em></div>
-      <div><span class="bx"></span><span><b>Registro sanitario</b><span>El número de Patraix y el de Torrent.</span></span><em>HOY</em></div>
-      <div><span class="bx"></span><span><b>WhatsApp de cada sede</b><span>Qué número, si es la app o la API, y quién contesta.</span></span><em>HOY</em></div>
-      <div><span class="bx"></span><span><b>Avisos de cada sede</b><span>Quién recibe cada petición nueva en Patraix y en Torrent.</span></span><em>HOY</em></div>
-      <div><span class="bx"></span><span><b>Acceso a Clinic</b><span>Estado e importe de los presupuestos, para medir pacientes.</span></span><em>ESTA SEMANA</em></div>
-      <div><span class="bx"></span><span><b>Quién gestiona la web</b><span>Para instalar el píxel nuevo y medir las citas.</span></span><em>ESTA SEMANA</em></div>
-      <div><span class="bx"></span><span><b>Fotos, vídeos y reseñas</b><span>Material de la clínica que podamos usar, con permiso.</span></span><em>PRÓXIMA SEMANA</em></div>
-      <div><span class="bx ok"></span><span><b>Cuenta publicitaria y tarjeta</b><span>Hecho, gracias.</span></span><em>✓</em></div>
-      <div><span class="bx ok"></span><span><b>Página de Facebook</b><span>Hecho, gracias.</span></span><em>✓</em></div>
-    </div>
-  </div>
-</section>
-
-<!-- 13 · Cierre -->
-<section class="s dark" id="p13">
-  <div class="in">
-    <div class="k">13 · Siguientes pasos</div>
-    <h2>Lo que pasa a partir de hoy</h2>
-    <div class="steps3">
-      <div><b>Hoy</b><p>Cerramos tratamientos, financiación y datos de cada sede.</p></div>
-      <div><b>Esta semana</b><p>Os mandamos los textos de anuncios, WhatsApp y emails para que los aprobéis.</p></div>
-      <div><b>1-4 dic</b><p>Lanzamos las dos campañas y el CRM empieza a recibir.</p></div>
-      <div><b>11 dic</b><p>Primer resumen semanal con vuestros números.</p></div>
-    </div>
-    <div class="links">
-      <a href="../recorrido/">Recorrido del paciente</a>
-      <a href="../demo/">CRM en directo</a>
-      <a href="../whatsapp/">WhatsApp</a>
-      <a href="../anuncios/">Anuncios</a>
-      <a href="../landing-a/">Landing implantes</a>
-      <a href="https://qualivo.io/intelligence/?sector=dentalmarin">Panel</a>
-    </div>
-  </div>
-</section>
-
-<p class="foot">Preparado por Qualivo para Marín Clínica Dental. Cifras de campañas y formularios: API de Meta (25-26 nov 2026). Presupuesto y reparto: propuesta. Personas, mensajes y cifras del embudo: de ejemplo.</p>
+<p class="foot">Preparado por Qualivo para Marín Clínica Dental. Cifras de anuncios: vuestra cuenta, API de Meta (25-nov-2026). Personas y mensajes: de ejemplo.</p>
 
 <script>
 (function(){
-  /* Histórico mensual [C] · API de Meta, act Dental Marín, 25-nov-2026 */
-  var H=[["2024-02",352,40],["2024-03",179,26],["2024-04",1145,135],["2024-05",286,47],["2024-06",0,0],["2024-07",150,22],["2024-08",314,59],["2024-09",754,218],["2024-10",980,311],["2024-11",619,244],["2024-12",530,97],
-  ["2025-01",523,92],["2025-02",399,58],["2025-03",434,49],["2025-04",419,51],["2025-05",485,58],["2025-06",989,46],["2025-07",650,35],["2025-08",299,28],["2025-09",575,50],["2025-10",629,45],["2025-11",602,53],["2025-12",909,80],
-  ["2026-01",1093,97],["2026-02",864,73],["2026-03",1489,103],["2026-04",1492,88],["2026-05",1553,92],["2026-06",1509,73],["2026-07",1520,119],["2026-08",654,67],["2026-09",1264,189],["2026-10",1388,163],["2026-11",1215,103]];
-  var svg=document.getElementById('hist'),NS='http://www.w3.org/2000/svg';
-  function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;svg.appendChild(e);return e;}
-  var W=1100,Ht=330,L=56,R=56,T=20,B=46,pw=W-L-R,ph=Ht-T-B,n=H.length,bw=pw/n;
-  var maxS=1600,maxC=24;
-  [0,400,800,1200,1600].forEach(function(v){var y=T+ph-v/maxS*ph;el('line',{x1:L,x2:W-R,y1:y,y2:y,stroke:'rgba(255,255,255,.1)'});el('text',{x:L-8,y:y+4,'text-anchor':'end','font-size':11,fill:'rgba(255,255,255,.55)','font-family':'Montserrat'},v?v.toLocaleString('es-ES')+' €':'0');});
-  [0,8,16,24].forEach(function(v){var y=T+ph-v/maxC*ph;el('text',{x:W-R+8,y:y+4,'font-size':11,fill:'#E2D3BA','font-family':'Montserrat'},v+' €');});
-  var pts=[];
-  H.forEach(function(d,i){
-    var x=L+i*bw,h=d[1]/maxS*ph;
-    el('rect',{x:x+bw*.18,y:T+ph-h,width:bw*.64,height:Math.max(h,0),rx:3,fill:'#56618A'});
-    if(d[2]){var c=d[1]/d[2];pts.push([x+bw/2,T+ph-Math.min(c,maxC)/maxC*ph,c,d[0]]);}
-    var m=d[0].slice(5);if(m==='01'||i===0){el('text',{x:x+bw/2,y:Ht-22,'text-anchor':'middle','font-size':12,'font-weight':700,fill:'rgba(255,255,255,.75)','font-family':'Montserrat'},d[0].slice(0,4));}
-    if(m==='01'&&i>0)el('line',{x1:x,x2:x,y1:T,y2:T+ph,stroke:'rgba(255,255,255,.18)','stroke-dasharray':'3 4'});
-  });
-  el('path',{d:'M'+pts.map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' L'),fill:'none',stroke:'#E2D3BA','stroke-width':3,'stroke-linejoin':'round'});
-  pts.forEach(function(p){var c=el('circle',{cx:p[0],cy:p[1],r:3.6,fill:'#2F3854',stroke:'#E2D3BA','stroke-width':2});var t=document.createElementNS(NS,'title');t.textContent=p[3]+': '+p[2].toFixed(2).replace('.',',')+' € por contacto';c.appendChild(t);});
-  function note(i,txt,dy){var p=pts.filter(function(q){return q[3]===H[i][0];})[0];if(!p)return;el('text',{x:p[0],y:p[1]+dy,'text-anchor':'middle','font-size':12,'font-weight':700,fill:'#fff','font-family':'Montserrat'},txt);}
-  note(9,'2,54 €',-12);note(16,'21,50 €',-12);note(31,'6,69 €',22);note(33,'11,79 €',-12);
-
-  /* barras horizontales */
-  [].forEach.call(document.querySelectorAll('.bars'),function(b){var mx=+b.getAttribute('data-max');[].forEach.call(b.querySelectorAll('i[data-v]'),function(i){i.style.width=Math.max(2,(+i.getAttribute('data-v'))/mx*100)+'%';});});
-
-  /* Gantt: 12 columnas = semanas desde el 23-nov */
-  var wk=['23 nov','30 nov','7 dic','14 dic','21 dic','28 dic','4 ene','11 ene','18 ene','25 ene','1 feb','8 feb'];
-  var rows=[
-    ['Accesos y auditoría','Página, cuenta, tarjeta',[[0,1,'q','Hecho']]],
-    ['Reunión de arranque','Hoy',[[0.64,0,'m']]],
-    ['CRM, WhatsApp y emails','Montaje y vuestra aprobación',[[0.6,1.6,'q','Montaje']]],
-    ['Campañas nuevas','Cuenta de la clínica',[[1.15,10.85,'ad','Activas · 450 €/mes → más al salir la agencia']]],
-    ['Campañas de la agencia','Hasta su salida',[[0,4,'ag','Siguen hasta su salida · fecha por cerrar']]],
-    ['Reactivar 827 contactos','Por tratamiento y sede',[[2,2,'cl','WhatsApp + email']]],
-    ['Resumen semanal','Cada viernes',[[2.64,0,'m'],[3.64,0,'m'],[4.64,0,'m'],[5.64,0,'m'],[6.64,0,'m'],[7.64,0,'m'],[8.64,0,'m'],[9.64,0,'m'],[10.64,0,'m'],[11.64,0,'m']]],
-    ['Revisión mensual','Con vosotros',[[5.1,0,'m'],[9.6,0,'m']]]
-  ];
-  var g=document.getElementById('gantt'),h='<div></div>';
-  wk.forEach(function(w,i){h+='<div class="h'+(i<2?' w':'')+'">'+w+'</div>';});
-  rows.forEach(function(r){
-    h+='<div class="r">'+r[0]+'<small>'+r[1]+'</small></div>';
-    for(var i=0;i<12;i++){
-      var inner='';
-      r[2].forEach(function(b){
-        var s=b[0],len=b[1];
-        if(b[2]==='m'){ if(Math.floor(s)===i){inner+='<span class="m" style="left:'+((s-i)*100)+'%"></span>';} }
-        else if(Math.floor(s)===i){inner+='<span class="b '+b[2]+'" style="left:'+((s-i)*100)+'%;width:calc('+(len*100)+'% + '+(Math.ceil(s+len)-i-1)+'px)">'+b[3]+'</span>';}
-      });
-      h+='<div class="c">'+inner+'</div>';
-    }
-  });
-  g.innerHTML=h;
-  [].forEach.call(g.querySelectorAll('.c'),function(c,i){if(c.querySelector('.b'))c.style.zIndex=3;});
-
-  /* CRM (datos de ejemplo) */
-  var st=['Nueva','Contactada','Cita','Vino','Presupuesto','Aceptado','Más adelante'];
-  var L2=[
-    ['Marta R.','Limpieza 29,90','P',0,'Hace 2 min','Enviar WhatsApp'],['Javier S.','Implantes','T',0,'Hace 6 min','Enviar WhatsApp'],
-    ['Lucía M.','Blanqueamiento 99','P',1,'Respondió','Proponer hueco'],['Andrés P.','Implantes','T',1,'Sin respuesta','2º intento 17:00'],
-    ['Carmen V.','Implantes','P',2,'Mié 2 · 10:00','Recordatorio 24 h'],['Rosa G.','Limpieza 29,90','T',2,'Jue 3 · 17:30','Recordatorio 24 h'],
-    ['Pedro L.','Limpieza 29,90','P',3,'Vino ayer','Ofrecer revisión'],
-    ['Tomás B.','Implantes','P',4,'3.200 €','Día +3 hoy'],['Elena F.','Prótesis','T',4,'1.900 €','Día +1 mañana'],
-    ['Manuel C.','Implantes','T',5,'Aceptado','Señal a Meta ✓'],
-    ['Sara N.','Blanqueamiento 99','P',6,'En enero','Escribir 8-ene']
-  ];
+  var st=['Nuevo','Con cita','Vino','Presupuesto','Aceptado'];
+  var L=[['Marta R.','Limpieza','P',0,'Escribir ya'],['Javier S.','Implantes','T',0,'Escribir ya'],
+    ['Carmen V.','Implantes','P',1,'Recordar mañana'],['Rosa G.','Limpieza','T',1,'Recordar mañana'],
+    ['Pedro L.','Limpieza','P',2,'Ofrecer revisión'],
+    ['Tomás B.','Implantes','P',3,'Mensaje hoy (día 3)'],['Elena F.','Prótesis','T',3,'Mensaje mañana (día 1)'],
+    ['Manuel C.','Implantes','T',4,'¡Aceptado!']];
   var cols=document.getElementById('cols');
-  function draw(f){
-    var h='';
-    st.forEach(function(s,i){
-      var it=L2.filter(function(l){return l[3]===i&&(f==='all'||l[2]===f);});
-      h+='<div class="col"><h4>'+s+'<span>'+it.length+'</span></h4>';
-      it.forEach(function(l){h+='<div class="lc"><b>'+l[0]+'</b><span class="tr">'+l[1]+'</span><div class="pl"><i class="'+(l[2]==='T'?'t':'')+'">'+(l[2]==='T'?'Torrent':'Patraix')+'</i><i class="'+(i===5?'a':i===0?'w':'')+'">'+l[4]+'</i></div><div class="nx">→ '+l[5]+'</div></div>';});
-      h+='</div>';
-    });
-    cols.innerHTML=h;
-  }
+  function draw(f){var h='';st.forEach(function(s,i){var it=L.filter(function(l){return l[3]===i&&(f==='all'||l[2]===f);});
+    h+='<div class="col"><h4>'+s+'<span>'+it.length+'</span></h4>';
+    it.forEach(function(l){h+='<div class="lc"><b>'+l[0]+'</b><span class="tr">'+l[1]+'</span><br><i class="'+(l[2]==='T'?'t':'')+'">'+(l[2]==='T'?'Torrent':'Patraix')+'</i><div class="nx">→ '+l[4]+'</div></div>';});
+    h+='</div>';});cols.innerHTML=h;}
   draw('all');
-  [].forEach.call(document.querySelectorAll('.crm .f'),function(b){b.addEventListener('click',function(){[].forEach.call(document.querySelectorAll('.crm .f'),function(x){x.classList.remove('on');});b.classList.add('on');draw(b.getAttribute('data-s'));});});
-
-  /* navegación */
+  [].forEach.call(document.querySelectorAll('.board .f'),function(b){b.addEventListener('click',function(){[].forEach.call(document.querySelectorAll('.board .f'),function(x){x.classList.remove('on');});b.classList.add('on');draw(b.getAttribute('data-s'));});});
   var secs=[].slice.call(document.querySelectorAll('.s')),cnt=document.getElementById('cnt'),cur=0;
-  cnt.textContent='1 / '+secs.length;
   function go(i){i=Math.max(0,Math.min(secs.length-1,i));secs[i].scrollIntoView({behavior:'smooth'});}
   document.addEventListener('keydown',function(e){
     if(e.key==='ArrowDown'||e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(cur+1);}
     if(e.key==='ArrowUp'||e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur-1);}
   });
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){cur=secs.indexOf(en.target);cnt.textContent=(cur+1)+' / '+secs.length;}});},{threshold:.45});
-    secs.forEach(function(s){io.observe(s);});
-  }
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){cur=secs.indexOf(en.target);cnt.textContent=(cur+1)+' / '+secs.length;}});},{threshold:.5});secs.forEach(function(s){io.observe(s);});}
 })();
 </script>
 </body>
