@@ -105,9 +105,16 @@ def main():
 
     # 1-2. empresas nuevas
     orgs = {}
+    # --dominios=FICHERO (26-nov): lista JSON de dominios ya revisados a mano (o la de Growth). Se salta la búsqueda de empresas.
+    dlist = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--dominios=")), None)
+    if dlist:
+        for d in json.load(open(os.path.join(S, dlist))):
+            d = (d if isinstance(d, str) else d["dom"]).lower()
+            if d not in env_dom: orgs[d] = d
+        print(f"dominios de la lista {dlist}: {len(orgs)}")
     # Modo --edu: primero el ranking por volumen probable de leads (bin/universo_edu.py), de arriba abajo.
     rank_p = os.path.join(S, "edu_universo.json")
-    if edu and not micro and os.path.exists(rank_p):
+    if edu and not micro and not dlist and os.path.exists(rank_p):
         minp = int(os.environ.get("EDU_MIN_PUNTOS", "3"))
         # Del ranking no se descarta por "vista" (antes se buscaba solo CEO/fundador): se descarta lo ya revelado.
         import glob
@@ -127,7 +134,7 @@ def main():
             orgs[f["id"]] = f["dom"]; vistas.add(f["id"])
         print(f"del ranking de volumen (>= {minp} puntos): {len(orgs)}")
     for fi, fam in enumerate(FAMILIAS):
-        if len(orgs) >= objetivo * mult:
+        if dlist or len(orgs) >= objetivo * mult:
             break
         pag = estado["pagina"].get(pref + str(fi), 1)
         for _ in range(npag):
@@ -159,9 +166,19 @@ def main():
     # 3. decisores (gratis)
     ids, ya = [], set()
     oids = list(orgs)
-    for i in range(0, len(oids), 50):
-        r = api("mixed_people/api_search", {"organization_ids": oids[i:i + 50], "person_seniorities": ["owner", "founder", "c_suite"] + (["director", "head"] if edu else []),
-                                            "contact_email_status": ["verified"], "person_locations": ["Spain"], "per_page": 100})
+    paso = 10 if dlist else 50
+    for i in range(0, len(oids), paso):
+        if dlist:
+            # En escuelas pequeñas Apollo casi nunca rellena el «seniority» ni el estado del correo en la búsqueda:
+            # se filtra por cargo y la verificación la da people/bulk_match (y después los filtros de siempre).
+            r = api("mixed_people/api_search", {"q_organization_domains_list": oids[i:i + paso], "per_page": 100})
+            DEC = re.compile(r"\bceo\b|founder|fundador|director general|directora general|gerente|owner|propietari|socio|president|"
+                             r"managing director|director acad|directora acad|head of marketing|director de marketing|directora de marketing|"
+                             r"\bcmo\b|marketing manager|responsable de marketing|^director$|^directora$", re.I)
+            r["people"] = [p for p in r.get("people") or [] if DEC.search(p.get("title") or "")]
+        else:
+            r = api("mixed_people/api_search", {"organization_ids": oids[i:i + 50], "person_seniorities": ["owner", "founder", "c_suite"] + (["director", "head"] if edu else []),
+                                                "contact_email_status": ["verified"], "person_locations": ["Spain"], "per_page": 100})
         rank = lambda t: 0 if re.search(r"ceo|founder|fundador|director general|directora general|gerente|owner|propietari|socio|director acad|directora acad|director de la escuela|directora de la escuela", (t or "").lower()) else 1
         for p in sorted(r.get("people") or [], key=lambda p: rank(p.get("title"))):
             on = (p.get("organization") or {}).get("name")
