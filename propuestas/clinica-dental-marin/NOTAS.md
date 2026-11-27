@@ -105,7 +105,7 @@ Lo que falta o hay que revisar:
 Comprobado: sin scroll horizontal a 390 y 1440 px en todas las pestañas, sin errores de JS, capturas revisadas, interacciones probadas (enviar WhatsApp, marcar aceptado, filtrar por sede, reproducir el chat). `noindex,nofollow,noarchive` en las dos páginas. Sin commit.
 
 ## Reunión de arranque (27-nov, 12:00)
-- Versión sencilla (la que se enseña, 9 pantallas): https://qualivo.io/propuestas/clinica-dental-marin/arranque/
+- Versión para enseñar (13 pantallas: auditoría, embudo, resultados estimados, uso por recepción, resumen del viernes, calendario día a día): https://qualivo.io/propuestas/clinica-dental-marin/arranque/
 - Guion para Maikel (qué enseñar, qué decir y qué responder): https://qualivo.io/propuestas/clinica-dental-marin/arranque/guion/
 - Plan completo (detalle, 14 pantallas): https://qualivo.io/propuestas/clinica-dental-marin/arranque/detalle/ con hecho esta semana · histórico de campañas (gráfico mensual) · qué funciona y qué no · 827 contactos recuperados y Torrent · plan de medios (2 campañas × 2 sedes, 15 €/día) · calendario · embudo · CRM (filtro por sede) · WhatsApp (3 móviles) · emails (2 maquetas y secuencia) · medición · lo que necesitamos · siguientes pasos.
 - Cifras [C]: API de Meta del 25 y 26-nov (cuenta «Dental Marín» y formularios de la página). Presupuesto y reparto: propuesta [E], pendiente de validar con la clínica. Personas, conversaciones y embudo: de ejemplo.
