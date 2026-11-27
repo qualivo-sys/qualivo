@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>ESCAC · plan</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+/* Paquete para ESCAC (reunión 27-nov). Plantilla: cancomar/index.html. Sin logo ni imágenes de ESCAC: solo el nombre en texto. Paleta propia de Qualivo, tono cine. */
+:root{--b:#E0533D;--b2:#C4402C;--nv:#2A2338;--deep:#15121C;--cy:#FFB547;--amb:#FFB547;--red:#D8290F;--ok:#12805A;
+--grad:linear-gradient(135deg,#E0533D 0%,#7A2E52 100%);
+--paper:#FCFAF8;--surface:#FFFFFF;--surface-2:#F7F1EE;--ink:#1D1823;--muted:#645B6B;--line:#ECE2DE;--line-2:#F2EBE8;--accent:#C4402C;--accent-soft:#FCEDE9;
+--head:"Montserrat",system-ui,sans-serif;--sans:"Open Sans",system-ui,sans-serif;
+--shadow:0 1px 2px rgba(42,35,56,.06),0 14px 34px -18px rgba(42,35,56,.3)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#121018;--surface:#1C1824;--surface-2:#221D2C;--ink:#F1ECF4;--muted:#B2A8BA;--line:#342C3F;--line-2:#2A2334;--accent:#FF8A73;--accent-soft:#3A2130}}
+:root[data-theme="dark"]{--paper:#121018;--surface:#1C1824;--surface-2:#221D2C;--ink:#F1ECF4;--muted:#B2A8BA;--line:#342C3F;--line-2:#2A2334;--accent:#FF8A73;--accent-soft:#3A2130}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1140px;margin-inline:auto;padding-inline:16px}
+@media (min-width:800px){.wrap{padding-inline:28px}}
+h1,h2,h3{font-family:var(--head);letter-spacing:-.01em}
+.topnav{position:sticky;top:0;z-index:30;background:rgba(21,18,28,.94);color:#fff;backdrop-filter:blur(10px)}
+.topnav::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:var(--grad)}
+.topnav .in{max-width:1140px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.brand{display:flex;gap:10px;align-items:center;margin-right:auto;font:700 14px var(--head)}
+.brand .x{opacity:.55;font-weight:500}
+.brand small{font-weight:500;font-size:11px;opacity:.6}
+.links{display:flex;gap:2px;flex-wrap:wrap;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:3px}
+.links a{color:rgba(255,255,255,.85);text-decoration:none;font:600 13px var(--head);padding:6px 11px;border-radius:99px;white-space:nowrap}
+.links a:hover{color:#fff}
+.links a[aria-current]{background:#fff;color:var(--nv)}
+@media (max-width:700px){.brand small{display:none}.links{width:100%;justify-content:space-between}.links a{padding:5px 7px;font-size:12px}}
+.hero{position:relative;overflow:hidden;isolation:isolate;background:var(--deep);color:#fff;padding:70px 0 60px}
+.hero .hbg{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 85% 20%,rgba(224,83,61,.45),transparent 55%),radial-gradient(ellipse at 10% 100%,rgba(122,46,82,.55),transparent 60%),linear-gradient(110deg,#15121C 0%,#2A2338 100%)}
+.hero .hbg::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 14px,transparent 14px 28px);opacity:.6}
+.lockup{display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:9px 18px;margin-bottom:22px;backdrop-filter:blur(6px);font:800 15px var(--head)}
+.lockup i{font-style:normal;opacity:.6;font-weight:500}
+.eyebrow{font:700 12px var(--head);letter-spacing:.18em;text-transform:uppercase;color:var(--cy)}
+h1{font-weight:800;font-size:clamp(34px,5.4vw,62px);line-height:1.05;max-width:18ch;margin-top:10px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--amb)}
+.lead{font-size:clamp(16px,1.6vw,19px);color:rgba(255,255,255,.9);max-width:72ch;margin-top:16px}
+.fases{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.fases span{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:7px 16px 7px 7px;font:700 14px var(--head)}
+.fases b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--cy);color:var(--deep)}
+.note{font-size:13px;border:1px dashed rgba(255,255,255,.35);border-radius:12px;padding:10px 13px;margin-top:22px;max-width:92ch;color:rgba(255,255,255,.85);background:rgba(0,0,0,.2)}
+.ej{display:inline-block;font:700 10.5px var(--head);letter-spacing:.06em;text-transform:uppercase;color:#3A2B00;background:var(--amb);border-radius:6px;padding:3px 8px;vertical-align:middle;line-height:1.4}
+.real{display:inline-block;font:700 10.5px var(--head);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--ok);border-radius:6px;padding:3px 8px;vertical-align:middle;line-height:1.4}
+main{padding:44px 0 72px;display:grid;gap:56px}
+section{display:grid;gap:18px}
+h2{font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.15}
+h2 .n{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--grad);color:#fff;font-size:13px;margin-bottom:10px;box-shadow:0 8px 18px -8px rgba(122,46,82,.6);vertical-align:middle;margin-right:10px}
+.sub{color:var(--muted);max-width:78ch;font-size:16.5px}
+.said{display:grid;gap:12px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.said div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);display:grid;gap:6px;align-content:start;min-width:0}
+.said small{font:700 11px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.said b{font:800 18px/1.3 var(--head)}
+.said div.hot{border:2px solid var(--b)}
+.said div.hot b{color:var(--accent)}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;padding:0;list-style:none}
+.flow li{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 14px 14px;font-size:14px;color:var(--muted);display:grid;gap:4px;align-content:start;box-shadow:var(--shadow)}
+.flow li::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:var(--grad)}
+.flow li b{color:var(--ink);font:800 15.5px var(--head)}
+.pieces{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pieces a{display:grid;gap:6px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+.pieces a:hover{transform:translateY(-3px);border-color:var(--b)}
+.pieces a.main{background:var(--grad);color:#fff;border-color:transparent}
+.pieces a.main .fm,.pieces a.main p,.pieces a.main .go{color:rgba(255,255,255,.9)}
+.pieces .fm{font:700 10.5px var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.pieces b{font:800 17px var(--head)}
+.pieces p{font-size:14px;color:var(--muted);line-height:1.5}
+.pieces .go{font:700 13px var(--head);color:var(--accent);margin-top:2px}
+.next{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-width:0}
+.card h3{font-size:18px;line-height:1.3;margin-bottom:8px}
+.card p{font-size:15px;color:var(--muted)}
+.card .k{font:700 11px var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#fff;text-decoration:none;font:700 14.5px var(--head);border-radius:99px;padding:12px 20px;box-shadow:0 12px 24px -12px rgba(122,46,82,.8)}
+.btn.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+footer{border-top:3px solid transparent;border-image:var(--grad) 1;padding:22px 16px 40px;font-size:13px;color:var(--muted);display:grid;gap:6px}
+@media (max-width:1000px){.flow{grid-template-columns:repeat(3,minmax(0,1fr))}.said{grid-template-columns:1fr 1fr}.pieces{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.flow,.pieces,.said,.next{grid-template-columns:1fr}.hero{padding:44px 0 40px}.lockup{font-size:13px;padding:7px 14px}}
+.hero .wrap>*{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+.hero .wrap>*:nth-child(2){animation-delay:.08s}.hero .wrap>*:nth-child(3){animation-delay:.16s}.hero .wrap>*:nth-child(4){animation-delay:.24s}.hero .wrap>*:nth-child(5){animation-delay:.32s}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.hero .wrap>*{animation:none}.js .rv{opacity:1;transform:none;transition:none}}
+</style>
+<script>
+document.documentElement.classList.add('js');
+addEventListener('DOMContentLoaded',function(){
+  var els=document.querySelectorAll('main section>h2, main .card, main .flow li, main .pieces a, main .said div');
+  if(!('IntersectionObserver' in window)){return document.documentElement.classList.remove('js');}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var t=e.target;t.classList.add('on');io.unobserve(t);setTimeout(function(){t.classList.remove('rv','on');t.style.transitionDelay='';},1100);}});},{rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el,i){el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms';io.observe(el);});
+  setTimeout(function(){els.forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)el.classList.add('on');});},1200);
+});
+</script>
+</head>
+<body>
+<nav class="topnav" aria-label="Paquete ESCAC"><div class="in">
+<div class="brand"><span>Qualivo</span><span class="x" aria-hidden="true">×</span><span>ESCAC</span><small>27-nov-2026</small></div>
+<div class="links"><a href="./" aria-current="page">Plan</a><a href="./presentacion/">Presentación</a><a href="./recorrido/">Recorrido</a><a href="./landing/">Landing</a><a href="./anuncios/">Anuncios</a><a href="./whatsapp/">WhatsApp</a><a href="/intelligence/?sector=escac&amp;empresa=ESCAC&amp;objetivo=conversion" target="_blank" rel="noopener">Intelligence</a></div>
+</div></nav>
+
+<header class="hero"><div class="hbg" aria-hidden="true"></div><div class="wrap">
+<div class="lockup"><span>Qualivo</span><i aria-hidden="true">×</i><span>ESCAC</span></div>
+<p class="eyebrow">Propuesta · ESCAC · Escola Superior de Cinema i Audiovisuals de Catalunya</p>
+<h1>No es el anuncio: <em>es lo que pasa después</em></h1>
+<p class="lead">Cada solicitud de un programa de miles de euros que se enfría sin seguimiento es una matrícula perdida. Proponemos un sistema que responde al momento (también de noche), agenda la entrevista o la visita, sigue cada presupuesto y cada reserva de plaza, avisa al equipo de admisiones y dice qué campaña trae matrículas.</p>
+<div class="fases"><span><b>1</b>Responder al momento</span><span><b>2</b>Seguir cada presupuesto</span><span><b>3</b>Medir por matrícula</span></div>
+<p class="note"><span class="ej">Cómo leer esta página</span> Lo único real son las cuatro respuestas que nos diste en el formulario. Todo lo demás (alumnos, mensajes, cifras de las maquetas) son «Datos de ejemplo». Las cifras propias marcadas [E] son estimaciones nuestras.</p>
+</div></header>
+
+<main class="wrap">
+
+<section>
+<h2><span class="n">01</span>Lo que nos contaste</h2>
+<p class="sub">Tus respuestas al formulario, tal cual. <span class="real">Dato real</span></p>
+<div class="said">
+<div><small>Inversión en publicidad</small><b>500-999 €/mes</b></div>
+<div><small>Solicitudes al mes</small><b>20-49</b></div>
+<div class="hot"><small>Dónde se te escapa</small><b>«En el seguimiento y los presupuestos»</b></div>
+<div><small>Momento</small><b>«Más adelante, solo estoy mirando»</b></div>
+</div>
+</section>
+
+<section>
+<h2><span class="n">02</span>Qué proponemos</h2>
+<p class="sub">No tocamos el anuncio ni vuestra forma de admitir. Añadimos lo que falta entre la solicitud y la matrícula.</p>
+<ol class="flow">
+<li><b>1 · Respuesta inmediata</b>El asistente virtual contesta por WhatsApp en minutos, también de noche y en fin de semana.</li>
+<li><b>2 · Entrevista o visita</b>Propone hora, la agenda y envía recordatorios para que no falte.</li>
+<li><b>3 · Presupuesto a 48 h</b>Si no hay respuesta al presupuesto o a la reserva de plaza, seguimiento automático.</li>
+<li><b>4 · Avisos al equipo</b>Admisiones sabe a quién llamar hoy y por qué.</li>
+<li><b>5 · Panel por campaña</b>Qué campaña trae solicitudes, entrevistas y matrículas.</li>
+</ol>
+</section>
+
+<section>
+<h2><span class="n">03</span>Todas las piezas</h2>
+<p class="sub">Maquetas navegables. Nombres de alumnos, mensajes y cifras son de ejemplo.</p>
+<div class="pieces">
+<a class="main" href="./presentacion/"><span class="fm">Para la reunión</span><b>Presentación</b><p>Lo que nos contaste, lo que vemos, cómo lo resolveríamos y el siguiente paso.</p><span class="go">Abrir →</span></a>
+<a href="./recorrido/"><span class="fm">El sistema</span><b>Recorrido</b><p>De la solicitud a la matrícula, paso a paso: quién hace qué y cuándo.</p><span class="go">Abrir →</span></a>
+<a href="./landing/"><span class="fm">Captación</span><b>Landing</b><p>La página a la que llevan los anuncios, con formulario que cualifica.</p><span class="go">Abrir →</span></a>
+<a href="./anuncios/"><span class="fm">Captación</span><b>Anuncios</b><p>Ejemplos de anuncios y cómo se medirían: por matrícula, no por clic.</p><span class="go">Abrir →</span></a>
+<a href="./whatsapp/"><span class="fm">Respuesta inmediata</span><b>WhatsApp</b><p>Una conversación de ejemplo con el asistente virtual, de la primera pregunta a la entrevista.</p><span class="go">Abrir →</span></a>
+<a href="/intelligence/?sector=escac&amp;empresa=ESCAC&amp;objetivo=conversion" target="_blank" rel="noopener"><span class="fm">Cada mañana</span><b>Intelligence</b><p>El panel: solicitudes, entrevistas, presupuestos pendientes y matrículas por campaña.</p><span class="go">Abrir la demo →</span></a>
+</div>
+</section>
+
+<section>
+<h2><span class="n">04</span>Siguiente paso</h2>
+<div class="next">
+<div class="card"><span class="k">Paso 1</span><h3>Segunda reunión con quien decide</h3><p>Repasamos el recorrido de una solicitud real con admisiones y con la persona que toma la decisión.</p></div>
+<div class="card"><span class="k">Paso 2</span><h3>Piloto en un programa</h3><p>Lo probamos en un solo programa antes de la próxima convocatoria y lo medimos por entrevistas y matrículas.</p></div>
+</div>
+<div class="cta"><a class="btn" href="./presentacion/">Ver la presentación</a><a class="btn alt" href="./recorrido/">Recorrido</a><a class="btn alt" href="./whatsapp/">WhatsApp</a><a class="btn alt" href="/intelligence/?sector=escac&amp;empresa=ESCAC&amp;objetivo=conversion" target="_blank" rel="noopener">Intelligence</a></div>
+</section>
+
+</main>
+
+<footer class="wrap">
+<p><b>Qualivo · qualivo.io</b></p>
+<p>Propuesta preparada por Qualivo el 27 de noviembre de 2026 para ESCAC. No es una página de ESCAC. Lo único real son las respuestas al formulario; personas y cifras marcadas como «Datos de ejemplo» son inventadas y las marcadas [E] son estimaciones.</p>
+</footer>
+</body>
+</html>
