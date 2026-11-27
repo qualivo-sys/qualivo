@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Grado en Cine · Admisiones (ejemplo)</title>
+<meta name="description" content="Ejemplo de landing de captación preparado por Qualivo para ESCAC. Textos genéricos y datos de ejemplo: no es una página publicada de la escuela.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+:root{--b:#D9482B;--nv:#1B1F2A;--deep:#0E1118;--cy:#FFB547;--amb:#FFC43D;--wa:#25A35A;--ink:#151821;--mut:#5E6472;--soft:#FBEDE8;--soft2:#F8F6F3;--line:#ECE4DC;
+--grad:linear-gradient(135deg,#2A2F3D 0%,#0E1118 100%);
+--grad2:linear-gradient(135deg,#F0643F 0%,#B8321A 100%);
+--sh:0 24px 50px -32px rgba(14,17,24,.55),0 2px 6px -2px rgba(14,17,24,.08);
+--head:"Montserrat",system-ui,sans-serif;--sans:"Open Sans",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:110px}
+body{font:17px/1.6 var(--sans);color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--head);font-weight:800;letter-spacing:-.02em;line-height:1.1;text-wrap:balance}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.w{max-width:1160px;margin:0 auto;padding:0 20px}
+.ex{display:inline-block;font:700 10.5px var(--head);letter-spacing:.06em;text-transform:uppercase;background:#FFF3C4;color:#7A5600;border-radius:6px;padding:2px 7px;vertical-align:middle;white-space:nowrap}
+.tbc{background:#FFF3C4;color:#6B4B00;border-radius:5px;padding:0 5px;font-weight:600;font-size:.92em;white-space:nowrap}
+/* banda demo + nav del paquete */
+.demo{background:#FFF3C4;color:#7A5600;font:800 13px/1.4 var(--head);text-align:center;padding:8px 16px;letter-spacing:.03em;border-bottom:1px solid #F1DE9A}
+.demo span{font-weight:600}
+.topnav{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,rgba(14,17,24,.97) 0%,rgba(27,31,42,.96) 100%);color:#fff;backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.topnav .in{max-width:1180px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.topnav .brand{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0}
+.topnav .qv{font-family:var(--head);font-weight:800;font-size:14.5px}
+.topnav .x{font-size:13px;opacity:.6}
+.topnav .cl{font-family:var(--head);font-weight:900;font-size:14.5px;letter-spacing:.08em}
+.topnav .by{font-size:11.5px;opacity:.6;white-space:nowrap}
+.topnav .links{display:flex;gap:3px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:99px;padding:3px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.topnav .links::-webkit-scrollbar{display:none}
+.topnav .links a{color:rgba(255,255,255,.84);text-decoration:none;font-family:var(--head);font-weight:600;font-size:13px;padding:6px 12px;border-radius:99px;white-space:nowrap;transition:background .2s,color .2s}
+.topnav .links a:hover{background:rgba(255,255,255,.12);color:#fff}
+.topnav .links a[aria-current="page"]{background:#fff;color:var(--nv);box-shadow:0 4px 14px -6px rgba(0,0,0,.4)}
+/* cabecera de la landing */
+.site{background:#fff;border-bottom:1px solid var(--line)}
+.site .w{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;padding-bottom:14px}
+.wm{font:900 22px var(--head);letter-spacing:.14em;color:var(--nv);text-decoration:none}
+.wm small{display:block;font:700 10px var(--head);letter-spacing:.12em;color:var(--mut);text-transform:uppercase;margin-top:1px}
+.site nav{display:flex;gap:22px;font:600 14px var(--head)}
+.site nav a{text-decoration:none;color:var(--nv)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font:800 16px var(--head);text-decoration:none;border:0;border-radius:14px;padding:15px 22px;cursor:pointer;transition:transform .15s,box-shadow .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn.pri{background:var(--amb);color:#3A2B00;box-shadow:0 14px 28px -14px rgba(255,196,61,.9)}
+.btn.red{background:var(--b);color:#fff;box-shadow:0 14px 28px -14px rgba(217,72,43,.9)}
+.btn.gh{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.btn.sm{font-size:14px;padding:10px 14px;border-radius:11px}
+.btn.nv{background:var(--nv);color:#fff}
+.micro{font-size:13.5px;opacity:.8;margin-top:10px;display:flex;align-items:center;gap:7px}
+/* hero */
+.hero{position:relative;color:#fff;background:var(--deep);overflow:hidden}
+.hero .bg{position:absolute;inset:0;background:
+ radial-gradient(ellipse 60% 70% at 85% 30%,rgba(240,100,63,.45) 0%,rgba(240,100,63,0) 60%),
+ radial-gradient(ellipse 40% 50% at 70% 85%,rgba(255,181,71,.22) 0%,rgba(255,181,71,0) 70%),
+ linear-gradient(100deg,#0E1118 0%,#161A24 45%,#241A1A 100%)}
+.hero .strip{position:absolute;right:-60px;top:0;bottom:0;width:120px;background:repeating-linear-gradient(180deg,rgba(255,255,255,.07) 0 22px,transparent 22px 40px);transform:skewX(-8deg);opacity:.8}
+.hero .w{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,420px);gap:48px;align-items:center;padding-top:72px;padding-bottom:88px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:7px 14px 7px 8px;font:700 12.5px var(--head);letter-spacing:.05em;text-transform:uppercase}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--b);box-shadow:0 0 0 4px rgba(217,72,43,.3);margin-left:4px}
+.hero h1{font-size:clamp(36px,5.2vw,62px);margin-top:20px;font-weight:900}
+.hero h1 em{font-style:normal;color:var(--cy)}
+.hero .sub{font-size:clamp(17px,1.6vw,20px);opacity:.92;margin-top:20px;max-width:48ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.proof{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:26px;font-size:14px;opacity:.9}
+.proof span{display:inline-flex;align-items:center;gap:7px}
+.proof svg{width:16px;height:16px;color:var(--cy)}
+.next{background:#fff;color:var(--ink);border-radius:24px;box-shadow:0 40px 80px -30px rgba(0,0,0,.65);overflow:hidden}
+.next .top{background:var(--grad2);color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.next .top small{font:700 11.5px var(--head);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.next .top b{display:block;font:800 19px/1.2 var(--head);margin-top:2px}
+.cal{flex:none;background:#fff;color:var(--nv);border-radius:14px;text-align:center;padding:6px 12px;min-width:74px;font-family:var(--head)}
+.cal small{display:block;font:800 10.5px var(--head);letter-spacing:.12em;color:var(--b);opacity:1}
+.cal b{font:900 26px/1 var(--head);color:var(--nv);margin:0}
+.next ul{list-style:none;padding:16px 22px 4px;display:grid;gap:11px}
+.next li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.4}
+.next li svg{color:var(--b);width:20px;height:20px;margin-top:1px}
+.next li b{font-family:var(--head)}
+.next .cta{padding:16px 22px 20px}
+.next .cta .btn{width:100%}
+.next .cta p{font-size:12.5px;color:var(--mut);text-align:center;margin-top:9px}
+/* trust bar */
+.tbar{position:relative;z-index:2;margin-top:-44px}
+.tbar .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--sh)}
+.tbar .it{display:flex;gap:12px;align-items:center;padding:20px 18px;border-left:1px solid var(--line)}
+.tbar .it:first-child{border-left:0}
+.tbar .ic{width:44px;height:44px;border-radius:13px;background:var(--soft);color:var(--b);display:grid;place-items:center;flex:none}
+.tbar small{display:block;font:700 11px var(--head);letter-spacing:.09em;text-transform:uppercase;color:var(--mut)}
+.tbar b{font:800 15.5px/1.25 var(--head);color:var(--nv)}
+.src{font-size:12.5px;color:var(--mut);margin-top:12px;text-align:center}
+/* secciones */
+section.blk{padding:96px 0}
+section.alt{background:var(--soft2)}
+.eyb{font:800 12.5px var(--head);letter-spacing:.14em;text-transform:uppercase;color:var(--b);margin-bottom:12px;display:block}
+.blk h2{font-size:clamp(30px,3.8vw,46px);max-width:22ch}
+.blk .lead{color:var(--mut);font-size:clamp(17px,1.5vw,19px);margin-top:16px;max-width:60ch}
+.hd{margin-bottom:44px}
+.hd.c{text-align:center}.hd.c h2,.hd.c .lead{margin-inline:auto}
+/* qué aprenderás */
+.learn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.lc{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--sh);display:flex;flex-direction:column}
+.lc .im{height:120px;background:var(--grad);position:relative;display:grid;place-items:center;color:#fff}
+.lc .im::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(240,100,63,.55),rgba(240,100,63,0) 60%)}
+.lc .im svg{width:46px;height:46px;stroke-width:1.4;position:relative;z-index:1}
+.lc .im span{position:absolute;top:12px;left:12px;z-index:1;background:#fff;color:var(--nv);font:800 11.5px var(--head);border-radius:99px;padding:4px 10px}
+.lc .tx{padding:20px 22px 22px}
+.lc h3{font-size:19px;margin-bottom:6px}
+.lc p{color:var(--mut);font-size:15px}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+.hw{background:var(--soft2);border:1px solid var(--line);border-radius:18px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
+.hw .ic{width:40px;height:40px;border-radius:12px;background:var(--grad2);color:#fff;display:grid;place-items:center;flex:none}
+.hw b{font:800 16px/1.3 var(--head);display:block}
+.hw span{color:var(--mut);font-size:14.5px}
+/* salidas */
+.out{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px;align-items:center}
+.frame{border-radius:28px;background:var(--grad);color:#fff;padding:34px 30px;position:relative;overflow:hidden;box-shadow:var(--sh);min-height:360px;display:flex;flex-direction:column;justify-content:flex-end}
+.frame::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 20% 10%,rgba(240,100,63,.5),rgba(240,100,63,0) 65%)}
+.frame .corners{position:absolute;inset:20px;border:0;pointer-events:none;background:
+ linear-gradient(var(--cy),var(--cy)) top left/26px 2px no-repeat,linear-gradient(var(--cy),var(--cy)) top left/2px 26px no-repeat,
+ linear-gradient(var(--cy),var(--cy)) top right/26px 2px no-repeat,linear-gradient(var(--cy),var(--cy)) top right/2px 26px no-repeat,
+ linear-gradient(var(--cy),var(--cy)) bottom left/26px 2px no-repeat,linear-gradient(var(--cy),var(--cy)) bottom left/2px 26px no-repeat,
+ linear-gradient(var(--cy),var(--cy)) bottom right/26px 2px no-repeat,linear-gradient(var(--cy),var(--cy)) bottom right/2px 26px no-repeat}
+.frame .rec{position:absolute;top:34px;left:38px;font:800 12px var(--head);letter-spacing:.12em;display:flex;align-items:center;gap:7px}
+.frame .rec i{width:9px;height:9px;border-radius:50%;background:var(--b)}
+.frame q{position:relative;font:800 clamp(22px,2.4vw,30px)/1.2 var(--head);quotes:none;display:block}
+.frame p{position:relative;opacity:.8;font-size:14.5px;margin-top:12px}
+.roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:26px}
+.role{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.role .n{flex:none;width:34px;height:34px;border-radius:10px;background:var(--soft);color:var(--b);display:grid;place-items:center}
+.role .n svg{width:19px;height:19px}
+.role b{font:800 15.5px/1.3 var(--head);display:block}
+.role span{color:var(--mut);font-size:14px}
+/* admisión */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.stp{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px 24px;box-shadow:var(--sh)}
+.stp .num{font:900 54px/1 var(--head);background:var(--grad2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stp h3{font-size:20px;margin:14px 0 8px}
+.stp p{color:var(--mut);font-size:15.5px}
+.stp .when{display:inline-flex;gap:6px;align-items:center;margin-top:14px;font:700 12.5px var(--head);color:var(--b);background:var(--soft);border-radius:99px;padding:5px 11px}
+.wa-mock{margin-top:16px;background:#E7F3EC;border-radius:14px;padding:10px;font-size:13.5px;line-height:1.45}
+.wa-mock p{background:#fff;border-radius:10px 10px 10px 2px;padding:8px 10px;color:var(--ink);box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.wa-mock p+p{margin-top:6px}
+.wa-mock p.me{background:#D7F7C4;border-radius:10px 10px 2px 10px;margin-left:24px}
+.wa-mock small{display:block;font:700 10.5px var(--head);letter-spacing:.05em;text-transform:uppercase;color:#3D7A55;margin:0 0 5px 2px}
+.after{margin-top:20px;text-align:center;color:var(--mut);font-size:15px}
+/* agenda de visita */
+.visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:48px;align-items:start}
+.vlist{list-style:none;padding:0;display:grid;gap:12px;margin-top:26px}
+.vlist li{display:flex;gap:12px;align-items:flex-start;color:var(--mut);font-size:15.5px}
+.vlist svg{color:var(--b);margin-top:2px}
+.vlist b{color:var(--ink);font-family:var(--head)}
+.agenda{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--sh);overflow:hidden}
+.agenda .ah{background:var(--grad);color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.agenda .ah b{font:800 18px var(--head)}
+.agenda .ab{padding:20px 22px 22px}
+.lbl{font:800 12px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:4px 0 10px}
+.days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.days button,.slots button{font:600 14px/1.25 var(--sans);border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:13px;padding:10px 6px;cursor:pointer;transition:border-color .15s,background .15s;text-align:center}
+.days button b{display:block;font:900 22px/1 var(--head);color:var(--nv);margin:3px 0}
+.days button small{font:700 11px var(--head);letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.days button:hover,.slots button:hover{border-color:#F1B5A6}
+.days button[aria-pressed=true],.slots button[aria-pressed=true]{border-color:var(--b);background:var(--soft);color:#9A2E17;font-weight:700}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.vtype{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vtype button{font:600 14.5px var(--sans);border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:13px;padding:11px 10px;cursor:pointer}
+.vtype button[aria-pressed=true]{border-color:var(--b);background:var(--soft);color:#9A2E17;font-weight:700}
+.agenda .btn{width:100%;margin-top:18px}
+.agenda .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+/* faq */
+.faq{max-width:860px;margin:0 auto;display:grid;gap:12px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 24px -22px rgba(14,17,24,.6)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 22px;font:800 17px/1.35 var(--head);display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:30px;height:30px;border-radius:50%;background:var(--soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9482B' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/16px no-repeat;transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 22px 20px;color:var(--mut);font-size:16px}
+/* formulario */
+.fsec{background:var(--deep);color:#fff;position:relative;overflow:hidden}
+.fsec::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 90% 50%,rgba(240,100,63,.35),rgba(240,100,63,0) 65%)}
+.fsec .w{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,480px);gap:56px;align-items:center}
+.fsec h2{color:#fff}
+.fsec .lead{color:rgba(255,255,255,.82)}
+.fsec ul.ck{list-style:none;padding:0;display:grid;gap:12px;margin-top:26px}
+.fsec ul.ck li{display:flex;gap:12px;align-items:flex-start}
+.fsec ul.ck svg{color:var(--cy);margin-top:2px}
+.fbox{background:#fff;color:var(--ink);border-radius:26px;padding:26px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.fbox .fh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.fbox .fh b{font:800 20px var(--head)}
+.fbox .fh span{font:700 12.5px var(--head);color:var(--mut)}
+.fld{display:grid;gap:6px;margin-top:14px}
+.fld label{font:700 13.5px var(--head);color:var(--nv)}
+.fld input,.fld select{font:16px var(--sans);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;width:100%;background:#fff;color:var(--ink)}
+.fld input:focus,.fld select:focus{outline:2px solid var(--b);outline-offset:1px}
+.fld input[aria-invalid=true],.fld select[aria-invalid=true]{border-color:#C2410C;background:#FFF7F3}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.fbox .btn{width:100%;margin-top:20px}
+.err{font-size:13.5px;color:#B42318;margin-top:10px;min-height:1px}
+.legal{font-size:12px;color:var(--mut);margin-top:12px}
+.ok{text-align:center;padding:8px 2px}
+.ok .ic{width:62px;height:62px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;margin:0 auto 14px}
+.ok h3{font-size:22px;margin-bottom:8px}
+.ok p{color:var(--mut);font-size:15px}
+.ok .wa-mock{text-align:left}
+.again{margin-top:14px;background:none;border:0;color:var(--b);font:700 13.5px var(--head);cursor:pointer}
+.vmsg{margin-top:16px;background:#E6F6EE;border:1px solid #BFE6D0;color:#0F5E3C;border-radius:14px;padding:14px 16px;font-size:14.5px;line-height:1.5}
+.vmsg b{font-family:var(--head)}
+[hidden]{display:none!important}
+/* cta final */
+.final{background:var(--grad2);color:#fff;text-align:center;padding:84px 0;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;width:680px;height:680px;border-radius:50%;border:1px solid rgba(255,255,255,.14);right:-200px;top:-260px}
+.final::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;border:1px solid rgba(255,255,255,.14);left:-140px;bottom:-240px}
+.final .w{position:relative}
+.final h2{font-size:clamp(30px,4.4vw,52px);max-width:20ch;margin:0 auto}
+.final p{opacity:.92;font-size:19px;margin:16px auto 0;max-width:52ch}
+.final .ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:30px}
+footer{background:var(--deep);color:rgba(255,255,255,.72);padding:40px 0 120px;font-size:13.5px}
+footer .w{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer b{color:#fff;font-family:var(--head)}
+footer a{color:#fff}
+/* barra móvil */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);box-shadow:0 -10px 30px -18px rgba(14,17,24,.6)}
+.mbar .btn{flex:1;font-size:15px;padding:13px 10px}
+@media (max-width:1020px){
+ .hero .w,.out,.visit,.fsec .w{grid-template-columns:1fr}
+ .tbar .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .tbar .it{border-left:0;border-top:1px solid var(--line)}
+ .tbar .it:nth-child(-n+2){border-top:0}
+ .learn{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .frame{min-height:260px}
+ .site nav{display:none}
+}
+@media (max-width:760px){
+ section.blk{padding:68px 0}
+ .hero .w{padding-top:44px;padding-bottom:76px;gap:32px}
+ .steps,.learn,.how,.roles{grid-template-columns:1fr}
+ .mbar{display:flex}
+ .topnav .by{display:none}.topnav .links{width:100%}.topnav .links a{padding:6px 10px;font-size:12.5px}
+ .site .btn{display:none}
+ .fbox{padding:20px}
+ .hero .ctas .btn{flex:1 1 100%}
+ .hero .strip{display:none}
+ .w{padding:0 16px}
+}
+@media (max-width:420px){
+ .tbar .grid{grid-template-columns:1fr}.tbar .it{border-top:1px solid var(--line)!important}.tbar .it:first-child{border-top:0!important}
+ .two{grid-template-columns:1fr}
+ .days{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+ <symbol id="i-cert" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M7 8h10M7 11h6"/><circle cx="16.5" cy="17.5" r="2.5"/><path d="M15 19.5V22l1.5-1 1.5 1v-2.5"/></symbol>
+ <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+ <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M9 8.5c0 3.5 2.9 6.5 6.5 6.5l1-1.6-2-1-1 1c-1.2-.5-2.3-1.6-2.8-2.8l1-1-1-2z"/></symbol>
+ <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+ <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+ <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+ <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+ <symbol id="i-cam" viewBox="0 0 24 24"><rect x="2.5" y="7" width="13" height="11" rx="2"/><path d="M15.5 11l6-3.5v10l-6-3.5"/><circle cx="6" cy="4.5" r="2"/><circle cx="11.5" cy="4.5" r="2"/></symbol>
+ <symbol id="i-clap" viewBox="0 0 24 24"><path d="M3 10h18v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10l1.2-5.2 16.6-1.6.6 3.3L3 10zM8.5 4.3l2.6 4.4M14 3.8l2.6 4.4"/></symbol>
+ <symbol id="i-pen" viewBox="0 0 24 24"><path d="M15.5 4.5l4 4L8 20H4v-4z"/><path d="M13.5 6.5l4 4"/></symbol>
+ <symbol id="i-light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></symbol>
+ <symbol id="i-cut" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.2 8.2L20 20M8.2 15.8L20 4"/></symbol>
+ <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></symbol>
+ <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+ <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18c1.4 0 2-1 2-2 0-1.4-1.2-1.6-1.2-3 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4C21 6.4 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="15" cy="7" r="1.2"/></symbol>
+ <symbol id="i-play" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></symbol>
+ <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4.5"/></symbol>
+</svg>
+
+<div class="demo" role="note">Ejemplo de landing · datos de ejemplo <span>· maqueta de Qualivo para ESCAC, no publicada: programas, fechas y textos son genéricos</span></div>
+
+<nav class="topnav" aria-label="Paquete ESCAC">
+  <div class="in">
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><span class="cl">ESCAC</span><span class="by">27-nov-2026</span></div>
+    <div class="links"><a href="../">Plan</a><a href="../presentacion/">Presentación</a><a href="../recorrido/">Recorrido</a><a href="./" aria-current="page">Landing</a><a href="../anuncios/">Anuncios</a><a href="../whatsapp/">WhatsApp</a><a href="/intelligence/?sector=escac&amp;empresa=ESCAC&amp;objetivo=conversion">Intelligence</a></div>
+  </div>
+</nav>
+
+<!-- ===== A partir de aquí, la landing tal como la vería el futuro alumno ===== -->
+<header class="site"><div class="w">
+ <a class="wm" href="#top" aria-label="ESCAC (nombre en texto, sin logotipo)">ESCAC<small>Escuela de cine · ejemplo</small></a>
+ <nav aria-label="Secciones"><a href="#aprenderas">Qué aprenderás</a><a href="#salidas">Salidas</a><a href="#admision">Admisión</a><a href="#visita">Visita</a><a href="#dudas">Dudas</a></nav>
+ <a class="btn red sm" href="#solicitud">Solicitar información</a>
+</div></header>
+
+<section class="hero" id="top">
+ <div class="bg" aria-hidden="true"></div><div class="strip" aria-hidden="true"></div>
+ <div class="w">
+  <div>
+   <span class="chip"><i></i>Grado en Cine y Audiovisuales · admisiones abiertas</span>
+   <h1>Deja de ver películas solo desde la butaca. <em>Empieza a hacerlas.</em></h1>
+   <p class="sub">Cuatro años para aprender el oficio rodando: guion, dirección, fotografía, producción, montaje y sonido, con proyectos en equipo desde el primer curso y profesionales del sector como profesores.</p>
+   <div class="ctas">
+    <a class="btn pri" href="#solicitud">Solicitar información <svg class="i"><use href="#i-arrow"/></svg></a>
+    <a class="btn gh" href="#visita"><svg class="i"><use href="#i-cal"/></svg>Reservar una visita</a>
+   </div>
+   <p class="micro"><svg class="i" style="width:16px;height:16px"><use href="#i-wa"/></svg>Te contesta el asistente virtual por WhatsApp en un minuto, también de noche.</p>
+   <div class="proof">
+    <span><svg class="i"><use href="#i-clap"/></svg>Rodajes desde 1.º <span class="ex">Ejemplo</span></span>
+    <span><svg class="i"><use href="#i-users"/></svg>Grupos reducidos <span class="ex">Ejemplo</span></span>
+    <span><svg class="i"><use href="#i-pin"/></svg>Terrassa (Barcelona)</span>
+   </div>
+  </div>
+
+  <aside class="next" aria-label="Próxima jornada de puertas abiertas">
+   <div class="top">
+    <div><small>Próxima jornada de puertas abiertas</small><b>Conoce la escuela, los platós y a los profesores</b></div>
+    <div class="cal"><small>ENE</small><b>16</b></div>
+   </div>
+   <ul>
+    <li><svg class="i"><use href="#i-cal"/></svg><span><b>Sábado 16 de enero</b> · de 10:00 a 13:00 <span class="ex">Ejemplo</span></span></li>
+    <li><svg class="i"><use href="#i-pin"/></svg><span><b>Presencial en el campus</b> · o visita en línea si vives fuera</span></li>
+    <li><svg class="i"><use href="#i-users"/></svg><span>Puedes venir <b>con tu familia</b></span></li>
+    <li><svg class="i"><use href="#i-chat"/></svg><span>Resolvemos tus dudas sobre <b>la admisión y la entrevista</b></span></li>
+   </ul>
+   <div class="cta"><a class="btn red" href="#visita">Elegir día y hora</a><p>1 minuto · te enviamos un recordatorio el día antes</p></div>
+  </aside>
+ </div>
+</section>
+
+<div class="tbar"><div class="w">
+ <div class="grid">
+  <div class="it"><div class="ic"><svg class="i"><use href="#i-cert"/></svg></div><div><small>Titulación</small><b>Grado universitario <span class="tbc">[a confirmar]</span></b></div></div>
+  <div class="it"><div class="ic"><svg class="i"><use href="#i-clock"/></svg></div><div><small>Duración</small><b>4 cursos <span class="ex">Ejemplo</span></b></div></div>
+  <div class="it"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><div><small>Modalidad</small><b>Presencial</b></div></div>
+  <div class="it"><div class="ic"><svg class="i"><use href="#i-pin"/></svg></div><div><small>Lugar</small><b>Terrassa, Barcelona</b></div></div>
+ </div>
+ <p class="src">Ficha de ejemplo: en la versión real, cada dato sale de la información oficial del programa.</p>
+</div></div>
+
+<!-- Qué aprenderás -->
+<section class="blk" id="aprenderas"><div class="w">
+ <div class="hd">
+  <span class="eyb">Qué aprenderás</span>
+  <h2>Todo el proceso de una película, de la idea a la sala</h2>
+  <p class="lead">Pasarás por cada departamento antes de elegir el tuyo. Así entiendes cómo trabaja el resto del equipo y sabes en qué quieres especializarte.</p>
+ </div>
+ <div class="learn">
+  <article class="lc"><div class="im" aria-hidden="true"><span>Guion</span><svg class="i"><use href="#i-pen"/></svg></div><div class="tx"><h3>Contar una historia</h3><p>Estructura, personajes y diálogo. Escribes cortos que luego se ruedan de verdad.</p></div></article>
+  <article class="lc"><div class="im" aria-hidden="true"><span>Dirección</span><svg class="i"><use href="#i-clap"/></svg></div><div class="tx"><h3>Dirigir un rodaje</h3><p>Puesta en escena, trabajo con actores y cómo tomar decisiones con el reloj corriendo.</p></div></article>
+  <article class="lc"><div class="im" aria-hidden="true"><span>Fotografía</span><svg class="i"><use href="#i-light"/></svg></div><div class="tx"><h3>Pensar en luz y en encuadre</h3><p>Cámara, óptica e iluminación para que cada plano diga lo que tiene que decir.</p></div></article>
+  <article class="lc"><div class="im" aria-hidden="true"><span>Producción</span><svg class="i"><use href="#i-brief"/></svg></div><div class="tx"><h3>Hacer que el proyecto exista</h3><p>Presupuesto, plan de rodaje, permisos y equipo: lo que convierte una idea en un rodaje posible.</p></div></article>
+  <article class="lc"><div class="im" aria-hidden="true"><span>Montaje</span><svg class="i"><use href="#i-cut"/></svg></div><div class="tx"><h3>Encontrar la película en la sala de montaje</h3><p>Ritmo, continuidad y postproducción de imagen con herramientas profesionales.</p></div></article>
+  <article class="lc"><div class="im" aria-hidden="true"><span>Sonido y arte</span><svg class="i"><use href="#i-sound"/></svg></div><div class="tx"><h3>Crear el mundo de la historia</h3><p>Sonido directo, diseño sonoro, dirección de arte y vestuario.</p></div></article>
+ </div>
+ <div class="how">
+  <div class="hw"><div class="ic"><svg class="i"><use href="#i-cam"/></svg></div><div><b>Aprendes rodando</b><span>Prácticas en plató y en exteriores desde el primer curso.</span></div></div>
+  <div class="hw"><div class="ic"><svg class="i"><use href="#i-users"/></svg></div><div><b>Trabajas en equipo</b><span>Como en un rodaje real: cada uno en su departamento.</span></div></div>
+  <div class="hw"><div class="ic"><svg class="i"><use href="#i-play"/></svg></div><div><b>Sales con obra propia</b><span>Terminas con cortos y piezas que puedes enseñar.</span></div></div>
+ </div>
+ <p class="src" style="text-align:left">Contenidos de ejemplo. El plan de estudios real se enlazaría desde aquí.</p>
+</div></section>
+
+<!-- Salidas -->
+<section class="blk alt" id="salidas"><div class="w out">
+ <div class="frame" aria-hidden="true">
+  <div class="corners"></div>
+  <span class="rec"><i></i>REC</span>
+  <q>«¿Y de esto se puede vivir?» es la pregunta que más nos hacen las familias.</q>
+  <p>Estos son los puestos a los que suele llevar una formación en cine y audiovisuales.</p>
+ </div>
+ <div>
+  <span class="eyb">Salidas profesionales</span>
+  <h2>Dónde puedes trabajar cuando acabes</h2>
+  <p class="lead">El sector audiovisual va mucho más allá del largometraje: series, publicidad, plataformas, videoclips y contenido para marcas.</p>
+  <div class="roles">
+   <div class="role"><div class="n"><svg class="i"><use href="#i-clap"/></svg></div><div><b>Dirección y ayudantía</b><span>Cine, series, publicidad</span></div></div>
+   <div class="role"><div class="n"><svg class="i"><use href="#i-pen"/></svg></div><div><b>Guion y desarrollo</b><span>Ficción, formatos, plataformas</span></div></div>
+   <div class="role"><div class="n"><svg class="i"><use href="#i-brief"/></svg></div><div><b>Producción</b><span>Productoras y cadenas</span></div></div>
+   <div class="role"><div class="n"><svg class="i"><use href="#i-light"/></svg></div><div><b>Dirección de fotografía</b><span>Cámara e iluminación</span></div></div>
+   <div class="role"><div class="n"><svg class="i"><use href="#i-cut"/></svg></div><div><b>Montaje y postproducción</b><span>Edición, color, efectos</span></div></div>
+   <div class="role"><div class="n"><svg class="i"><use href="#i-sound"/></svg></div><div><b>Sonido</b><span>Directo, mezcla, diseño sonoro</span></div></div>
+   <div class="role"><div class="n"><svg class="i"><use href="#i-palette"/></svg></div><div><b>Dirección de arte</b><span>Decorado, vestuario, ambientación</span></div></div>
+   <div class="role"><div class="n"><svg class="i"><use href="#i-play"/></svg></div><div><b>Contenido para marcas</b><span>Agencias y departamentos de vídeo</span></div></div>
+  </div>
+  <p class="src" style="text-align:left">Salidas habituales del sector, no datos de inserción laboral de la escuela.</p>
+ </div>
+</div></section>
+
+<!-- Admisión -->
+<section class="blk" id="admision"><div class="w">
+ <div class="hd c">
+  <span class="eyb">Cómo es la admisión</span>
+  <h2>Tres pasos de «me interesa» a «tengo plaza»</h2>
+  <p class="lead">No hace falta haber rodado nada antes. Buscamos ganas de contar historias y de trabajar en equipo.</p>
+ </div>
+ <div class="steps">
+  <div class="stp"><div class="num">01</div><h3>Solicitud</h3><p>Nos dejas tu nombre, tu teléfono y el programa que te interesa. En un minuto recibes la información por WhatsApp.</p>
+   <div class="wa-mock" aria-label="Ejemplo de conversación"><small>Asistente virtual · ejemplo</small><p>Hola, Martina. Soy el asistente virtual de admisiones. Te paso la información del Grado en Cine. ¿Quieres que te reserve la entrevista?</p><p class="me">Sí, porfa 🙌</p></div>
+   <span class="when"><svg class="i" style="width:15px;height:15px"><use href="#i-clock"/></svg>1 minuto</span></div>
+  <div class="stp"><div class="num">02</div><h3>Entrevista</h3><p>Una conversación con el equipo de admisiones para conocerte: qué te mueve, qué ves y qué te gustaría contar. Presencial o en línea.</p><span class="when"><svg class="i" style="width:15px;height:15px"><use href="#i-bell"/></svg>Recordatorio el día antes</span></div>
+  <div class="stp"><div class="num">03</div><h3>Admisión</h3><p>Te comunicamos la resolución y, si todo encaja, te explicamos cómo hacer la reserva de plaza y la matrícula paso a paso.</p><span class="when"><svg class="i" style="width:15px;height:15px"><use href="#i-doc"/></svg>Reserva de plaza y matrícula</span></div>
+ </div>
+ <p class="after">Plazos, pruebas de acceso y requisitos concretos: <span class="tbc">[a confirmar con admisiones]</span></p>
+</div></section>
+
+<!-- Agenda de visita -->
+<section class="blk alt" id="visita"><div class="w visit">
+ <div>
+  <span class="eyb">Visita la escuela</span>
+  <h2>Ven a verla antes de decidir</h2>
+  <p class="lead">Una hora para recorrer los platós y las salas de montaje, hablar con el equipo de admisiones y resolver tus dudas. Si vives fuera, la hacemos en línea.</p>
+  <ul class="vlist">
+   <li><svg class="i"><use href="#i-check"/></svg><span><b>Elige día y hora</b> en el calendario, sin llamadas.</span></li>
+   <li><svg class="i"><use href="#i-check"/></svg><span><b>Recordatorio por WhatsApp</b> el día antes, con cómo llegar.</span></li>
+   <li><svg class="i"><use href="#i-check"/></svg><span><b>¿No puedes ir?</b> Cambias la hora desde el mismo mensaje.</span></li>
+  </ul>
+ </div>
+ <div class="agenda" id="agenda">
+  <div class="ah"><b>Reserva tu visita</b><span class="ex">Fechas de ejemplo</span></div>
+  <div class="ab" id="agBody">
+   <p class="lbl">Tipo de visita</p>
+   <div class="vtype" data-g="tipo"><button type="button" aria-pressed="true">En la escuela</button><button type="button" aria-pressed="false">En línea</button></div>
+   <p class="lbl" style="margin-top:16px">Día</p>
+   <div class="days" data-g="dia">
+    <button type="button" aria-pressed="false" data-v="jueves 10 de diciembre"><small>jue</small><b>10</b><small>dic</small></button>
+    <button type="button" aria-pressed="false" data-v="sábado 12 de diciembre"><small>sáb</small><b>12</b><small>dic</small></button>
+    <button type="button" aria-pressed="false" data-v="martes 12 de enero"><small>mar</small><b>12</b><small>ene</small></button>
+    <button type="button" aria-pressed="false" data-v="sábado 16 de enero"><small>sáb</small><b>16</b><small>ene</small></button>
+   </div>
+   <p class="lbl" style="margin-top:16px">Hora</p>
+   <div class="slots" data-g="hora">
+    <button type="button" aria-pressed="false">10:00</button><button type="button" aria-pressed="false">12:00</button><button type="button" aria-pressed="false">17:30</button>
+   </div>
+   <button class="btn red" type="button" id="agGo" disabled>Reservar visita</button>
+   <p class="legal">Ejemplo: no se reserva nada ni se envía ningún dato.</p>
+  </div>
+  <div class="ab" id="agOk" hidden aria-live="polite">
+   <div class="vmsg" id="agMsg"></div>
+   <button class="again" type="button" id="agAgain">Elegir otra hora</button>
+  </div>
+ </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="blk" id="dudas"><div class="w">
+ <div class="hd c"><span class="eyb">Dudas frecuentes</span><h2>Lo que nos preguntan antes de solicitar plaza</h2></div>
+ <div class="faq">
+  <details open><summary>¿Necesito experiencia previa en cine?</summary><div class="a"><p>No. En la entrevista nos interesa conocerte, saber qué te gusta y por qué quieres estudiar cine. Si tienes algo rodado o escrito, puedes traerlo, pero no es obligatorio.</p></div></details>
+  <details><summary>¿Cuánto cuesta y hay becas o financiación?</summary><div class="a"><p>Te enviamos el precio, las formas de pago y las becas disponibles por WhatsApp al pedir información. Importes y condiciones: <span class="tbc">[a confirmar con admisiones]</span>.</p></div></details>
+  <details><summary>¿Cómo es la entrevista?</summary><div class="a"><p>Una conversación con el equipo de admisiones, presencial o en línea. Te decimos con antelación cómo prepararla y te recordamos la cita el día antes.</p></div></details>
+  <details><summary>Vivo fuera de Cataluña o de España, ¿puedo hacer el proceso a distancia?</summary><div class="a"><p>Sí: la solicitud, la visita y la entrevista pueden hacerse en línea. Requisitos de acceso para estudiantes internacionales: <span class="tbc">[a confirmar con admisiones]</span>.</p></div></details>
+  <details><summary>¿En qué idioma son las clases?</summary><div class="a"><p><span class="tbc">[a confirmar con admisiones]</span>. Te lo indicamos en la información del programa que te interese.</p></div></details>
+  <details><summary>¿Quién me contesta por WhatsApp?</summary><div class="a"><p>Primero, el asistente virtual de admisiones, que responde al momento a cualquier hora. Para la entrevista y cualquier caso particular, te atiende el equipo de admisiones.</p></div></details>
+ </div>
+</div></section>
+
+<!-- Formulario -->
+<section class="blk fsec" id="solicitud"><div class="w">
+ <div>
+  <span class="eyb" style="color:var(--cy)">Solicita información</span>
+  <h2>Cuatro datos y te escribimos por WhatsApp en un minuto</h2>
+  <p class="lead">Te enviamos la información del programa, los plazos y te ofrecemos fecha para la entrevista o la visita.</p>
+  <ul class="ck">
+   <li><svg class="i"><use href="#i-check"/></svg><span>Respuesta inmediata del asistente virtual, también de noche y en fin de semana.</span></li>
+   <li><svg class="i"><use href="#i-check"/></svg><span>Sin compromiso: pedir información no te obliga a nada.</span></li>
+   <li><svg class="i"><use href="#i-check"/></svg><span>El equipo de admisiones te acompaña en la entrevista y en la reserva de plaza.</span></li>
+  </ul>
+ </div>
+
+ <div class="fbox">
+  <form id="fForm" novalidate>
+   <div class="fh"><b>Solicitar información</b><span>1 minuto</span></div>
+   <div class="fld"><label for="fNom">Nombre</label><input id="fNom" type="text" autocomplete="off" placeholder="Tu nombre"></div>
+   <div class="fld"><label for="fTel">Teléfono (WhatsApp)</label><input id="fTel" type="tel" inputmode="tel" autocomplete="off" placeholder="600 000 000"></div>
+   <div class="two">
+    <div class="fld"><label for="fProg">Programa</label>
+     <select id="fProg"><option value="">Elige uno</option><option>Grado en Cine y Audiovisuales</option><option>Máster en Dirección</option><option>Máster en Guion</option><option>Máster en Producción</option><option>Máster en Fotografía</option><option>Cursos cortos</option><option>Aún no lo sé</option></select></div>
+    <div class="fld"><label for="fCurso">Curso de inicio</label>
+     <select id="fCurso"><option value="">Elige uno</option><option>2027-2028</option><option>2028-2029</option><option>Solo me informo</option></select></div>
+   </div>
+   <p class="err" id="fErr" aria-live="polite"></p>
+   <button class="btn pri" type="submit">Quiero la información</button>
+   <p class="legal">Ejemplo de formulario: no envía ni guarda ningún dato.</p>
+  </form>
+  <div class="ok" id="fOk" hidden aria-live="polite">
+   <div class="ic"><svg class="i" style="width:30px;height:30px"><use href="#i-wa"/></svg></div>
+   <h3>Esto es una demo</h3>
+   <p>En la versión real, aquí te escribiría el asistente por WhatsApp en un minuto.</p>
+   <div class="wa-mock" aria-label="Ejemplo de mensaje"><small>Asistente virtual · ejemplo</small><p id="fPrev"></p></div>
+   <button class="again" type="button" id="fAgain">Probar otra vez</button>
+  </div>
+ </div>
+</div></section>
+
+<!-- CTA final -->
+<section class="final"><div class="w">
+ <h2>Tu primera película empieza con una pregunta</h2>
+ <p>Pide información o reserva una visita. El resto lo vemos juntos, sin prisas.</p>
+ <div class="ctas"><a class="btn pri" href="#solicitud">Solicitar información</a><a class="btn gh" href="#visita"><svg class="i"><use href="#i-cal"/></svg>Reservar visita</a></div>
+</div></section>
+
+<footer><div class="w">
+ <div><p><b>ESCAC</b> · Terrassa (Barcelona)</p><p style="margin-top:6px"><a href="../">Volver al plan de Qualivo</a></p></div>
+ <p style="max-width:56ch">Ejemplo de landing preparado por Qualivo para la reunión con ESCAC. No es una página de la escuela: programas, fechas, contenidos y conversaciones son datos de ejemplo con textos genéricos. Lo marcado «a confirmar» se completaría con el equipo de admisiones.</p>
+</div></footer>
+
+<div class="mbar"><a class="btn pri" href="#solicitud">Información</a><a class="btn red" href="#visita"><svg class="i"><use href="#i-cal"/></svg>Visita</a></div>
+
+<script>
+(function(){
+  /* agenda de visita */
+  var sel={tipo:'En la escuela',dia:'',hora:''};
+  var go=document.getElementById('agGo');
+  document.querySelectorAll('#agBody [data-g]').forEach(function(g){
+    g.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+      g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      sel[g.dataset.g]=b.dataset.v||b.textContent.trim();
+      go.disabled=!(sel.dia&&sel.hora);});
+  });
+  go.addEventListener('click',function(){
+    var online=sel.tipo==='En línea';
+    document.getElementById('agMsg').innerHTML='<b>Visita '+(online?'en línea':'en la escuela')+' · '+sel.dia+' a las '+sel.hora+'.</b><br>En la versión real, el asistente virtual te confirmaría la visita por WhatsApp en un minuto y te mandaría un recordatorio el día antes'+(online?' con el enlace de la videollamada.':' con cómo llegar.');
+    document.getElementById('agBody').hidden=true;document.getElementById('agOk').hidden=false;});
+  document.getElementById('agAgain').addEventListener('click',function(){
+    document.getElementById('agOk').hidden=true;document.getElementById('agBody').hidden=false;});
+
+  /* formulario (demo: no envía nada) */
+  var f=document.getElementById('fForm'),ok=document.getElementById('fOk'),err=document.getElementById('fErr');
+  var ids=['fNom','fTel','fProg','fCurso'];
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',function(){this.removeAttribute('aria-invalid');err.textContent='';});});
+  f.addEventListener('submit',function(e){e.preventDefault();
+    var bad=[];ids.forEach(function(id){var el=document.getElementById(id);var v=el.value.trim();
+      var fail=!v||(id==='fTel'&&v.replace(/\D/g,'').length<9);
+      el.setAttribute('aria-invalid',fail?'true':'false');if(fail)bad.push(el);});
+    if(bad.length){err.textContent='Rellena los cuatro campos (el teléfono, con al menos 9 cifras).';bad[0].focus();return;}
+    var nom=document.getElementById('fNom').value.trim().split(/\s+/)[0];
+    var prog=document.getElementById('fProg').value,curso=document.getElementById('fCurso').value;
+    var p=document.getElementById('fPrev');p.textContent='';
+    var txt='Hola, '+nom+'. Soy el asistente virtual de admisiones. '+(prog==='Aún no lo sé'?'Te cuento los programas para que veas cuál encaja contigo':'Te paso la información '+(prog==='Cursos cortos'?'de los cursos cortos':'del '+prog))+(curso==='Solo me informo'?'. Sin prisa: si te apetece, te reservo una visita para que conozcas la escuela.':' para el curso '+curso+'. ¿Te va bien que te reserve una visita o la entrevista?');
+    p.textContent=txt;
+    f.hidden=true;ok.hidden=false;});
+  document.getElementById('fAgain').addEventListener('click',function(){f.reset();ids.forEach(function(id){document.getElementById(id).removeAttribute('aria-invalid')});ok.hidden=true;f.hidden=false;});
+})();
+</script>
+</body>
+</html>
