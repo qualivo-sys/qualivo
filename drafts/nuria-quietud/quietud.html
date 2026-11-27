@@ -1,0 +1,223 @@
+<!-- Nuria Roure · página de Quietud (nuriaroure.com/quietud), versión móvil.
+     Para pegar en un widget HTML de Elementor (plantilla «Elementor lienzo» o «cabecera y pie»).
+     Sin fecha de inicio (se puede entrar cualquier mes) y sin testimonios (página solo para alumnas). -->
+<style>
+.qt{--azul:#708b9d;--azul-osc:#4f6878;--crema:#f7f4ef;--arena:#ece6dc;--tinta:#2b2f33;--gris:#6b7176;
+  font-family:"Apfel Grotesk","DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--tinta);background:var(--crema);line-height:1.55;font-size:17px;overflow-x:hidden}
+.qt *{box-sizing:border-box}
+.qt h1,.qt h2,.qt h3{font-family:"Fraunces","Playfair Display",Georgia,serif;font-weight:500;line-height:1.15;margin:0;color:var(--tinta);letter-spacing:-.01em}
+.qt p{margin:0}
+.qt .env{max-width:1040px;margin:0 auto;padding:0 20px}
+.qt .sec{padding:56px 0}
+.qt .eti{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);font-weight:600;margin-bottom:12px}
+.qt .h2{font-size:clamp(28px,7vw,40px);margin-bottom:16px}
+.qt .lead{font-size:18px;color:var(--gris)}
+.qt .btn{display:block;width:100%;max-width:380px;margin:28px auto 0;text-align:center;background:var(--azul);color:#fff!important;text-decoration:none;font-weight:600;font-size:17px;letter-spacing:.02em;padding:17px 24px;border-radius:999px;box-shadow:0 8px 24px rgba(79,104,120,.28);transition:transform .15s,background .15s}
+.qt .btn:hover{background:var(--azul-osc);transform:translateY(-1px)}
+.qt .btn:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+
+/* Portada */
+.qt .hero{position:relative;color:#fff;min-height:88vh;display:flex;align-items:flex-end;background:#3d4d57 url("https://nuriaroure.com/wp-content/uploads/2026/01/quietud-pexels-scaled.jpg") center/cover no-repeat}
+.qt .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,40,48,.15) 0%,rgba(30,40,48,.55) 45%,rgba(30,40,48,.88) 100%)}
+.qt .hero .env{position:relative;padding-bottom:48px;padding-top:120px;text-align:center}
+.qt .hero .eti{color:#dbe6ee}
+.qt .hero h1{color:#fff;font-size:clamp(40px,11vw,68px);margin-bottom:14px}
+.qt .hero p{font-size:19px;color:#eef2f5;max-width:560px;margin:0 auto}
+.qt .hero .btn{background:#fff;color:var(--azul-osc)!important}
+.qt .hero .nota{font-size:14px;color:#cfd9e0;margin-top:14px}
+
+/* Qué es */
+.qt .que{background:#fff;text-align:center}
+.qt .que .cita{font-family:"Fraunces",Georgia,serif;font-size:clamp(22px,5.6vw,30px);line-height:1.3;max-width:640px;margin:0 auto 18px}
+.qt .que .cita b{color:var(--azul-osc);font-weight:500}
+
+/* Tarjetas */
+.qt .tarjetas{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.qt .t{background:var(--crema);border-radius:18px;padding:20px 16px;text-align:left}
+.qt .t .ico{width:44px;height:44px;border-radius:12px;background:var(--arena);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.qt .t .ico svg{width:24px;height:24px;stroke:var(--azul-osc);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.qt .t b{display:block;font-size:16px;line-height:1.3}
+
+/* Cómo es */
+.qt .como .datos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px 0}
+.qt .dato{background:#fff;border-radius:16px;padding:16px 8px;text-align:center}
+.qt .dato .n{font-family:"Fraunces",Georgia,serif;font-size:34px;color:var(--azul-osc);line-height:1}
+.qt .dato .l{font-size:13px;color:var(--gris);margin-top:6px;line-height:1.3}
+.qt .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.qt .chip{background:#fff;border:1px solid var(--arena);border-radius:999px;padding:9px 14px;font-size:15px;display:inline-flex;align-items:center;gap:8px}
+.qt .chip:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--azul)}
+.qt .ritmo{background:var(--arena);border-radius:18px;padding:20px;margin-top:20px;font-size:16px}
+
+/* Qué se trabaja */
+.qt .trabajo{background:#fff}
+.qt .lista{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:10px}
+.qt .lista li{display:flex;gap:14px;align-items:flex-start;background:var(--crema);border-radius:14px;padding:14px 16px;font-size:16px}
+.qt .lista li .num{flex:0 0 28px;height:28px;border-radius:50%;background:var(--azul);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px}
+
+/* Grupo */
+.qt .grupo{background:var(--azul);color:#fff;text-align:center}
+.qt .grupo h2{color:#fff}
+.qt .grupo .eti{color:#dbe6ee}
+.qt .grupo p{color:#e8eef2}
+.qt .pastillas{display:grid;gap:10px;margin-top:24px}
+.qt .pastilla{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:14px;font-size:17px}
+
+/* Para quién */
+.qt .quien .lista li{background:#fff}
+.qt .quien .lista li .num{background:var(--arena);color:var(--azul-osc)}
+
+/* Resultados */
+.qt .res{display:grid;gap:10px;margin-top:24px}
+.qt .r{background:#fff;border-radius:18px;padding:18px 20px;display:flex;gap:16px;align-items:center}
+.qt .r .n{font-family:"Fraunces",Georgia,serif;font-size:36px;color:var(--azul-osc);flex:0 0 112px;line-height:1;white-space:nowrap}
+.qt .r p{font-size:15px;color:var(--gris)}
+
+/* Nuria */
+.qt .nuria{background:#fff}
+.qt .nuria .caja{display:grid;gap:22px;align-items:center}
+.qt .nuria img{width:100%;max-width:420px;aspect-ratio:4/5;object-fit:cover;object-position:22% center;border-radius:22px;display:block;margin:0 auto}
+
+/* Cierre */
+.qt .cierre{text-align:center;background:var(--crema)}
+.qt .cierre .h2{max-width:560px;margin-left:auto;margin-right:auto}
+
+/* Botón fijo en el móvil */
+.qt .fijo{position:fixed;left:12px;right:12px;bottom:12px;z-index:50;display:none}
+.qt .fijo a{display:block;text-align:center;background:var(--azul);color:#fff;text-decoration:none;font-weight:600;padding:15px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.qt .fijo.on{display:block}
+
+@media (min-width:760px){
+  .qt .sec{padding:84px 0}
+  .qt .tarjetas{grid-template-columns:repeat(4,1fr)}
+  .qt .lista.dos{grid-template-columns:1fr 1fr}
+  .qt .pastillas,.qt .res{grid-template-columns:repeat(3,1fr)}
+  .qt .r{flex-direction:column;text-align:center}
+  .qt .r .n{flex:none}
+  .qt .nuria .caja{grid-template-columns:1fr 1.1fr}
+  .qt .fijo{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){.qt .btn{transition:none}}
+</style>
+
+<div class="qt">
+
+  <section class="hero">
+    <div class="env">
+      <span class="eti">Para alumnas de Nuria Roure</span>
+      <h1>Recupera tu quietud mental</h1>
+      <p>Deja atrás la rumiación y la ansiedad y cambia la forma en la que te relacionas con tu mente.</p>
+      <a class="btn" href="https://dranuriaroure.thrivecart.com/quietud/">Quiero Quietud</a>
+      <p class="nota">Puedes empezar cualquier mes · 6 meses de acompañamiento</p>
+    </div>
+  </section>
+
+  <section class="sec que">
+    <div class="env">
+      <span class="eti">Qué es Quietud</span>
+      <p class="cita">Quietud no es un curso ni una terapia puntual. Es un <b>acompañamiento de 6 meses</b> para vivir con más calma mental, sin dejar de hacer tu vida.</p>
+      <p class="lead">Para personas que quieren dejar de sobrepensar, de exigirse tanto y de no disfrutar del presente, y tratarse con más amabilidad.</p>
+      <div class="tarjetas">
+        <div class="t"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></div><b>Encuentros en directo cada mes</b></div>
+        <div class="t"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3c-3 4-6 6-6 10a6 6 0 0 0 12 0c0-4-3-6-6-10z"/></svg></div><b>Prácticas guiadas semanales</b></div>
+        <div class="t"><div class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div><b>Acompañamiento entre sesiones</b></div>
+        <div class="t"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.5 1.5-4.5 4-4.5s3 1.5 3 4.5"/></svg></div><b>Un entorno que sostiene el cambio</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec como">
+    <div class="env">
+      <span class="eti">Cómo es el programa</span>
+      <h2 class="h2">Del ruido mental a la calma interior</h2>
+      <div class="datos">
+        <div class="dato"><div class="n">6</div><div class="l">meses desde tu inscripción</div></div>
+        <div class="dato"><div class="n">6</div><div class="l">sesiones mensuales online</div></div>
+        <div class="dato"><div class="n">1</div><div class="l">grupo privado de Telegram</div></div>
+      </div>
+      <div class="chips">
+        <span class="chip">Grabaciones de las sesiones</span>
+        <span class="chip">Ejercicios prácticos</span>
+        <span class="chip">Meditaciones</span>
+        <span class="chip">Entras cualquier mes</span>
+      </div>
+      <div class="ritmo">Cada sesión abre un tema profundo (calma mental, miedos, autoexigencia, autoestima, límites…) y el tiempo entre encuentros sirve para llevarlo a tu vida diaria, con acompañamiento. Un ritmo pensado para integrar, no para acumular información.</div>
+    </div>
+  </section>
+
+  <section class="sec trabajo">
+    <div class="env">
+      <span class="eti">Qué se trabaja</span>
+      <h2 class="h2">No se trata de cambiar quién eres, sino de dejar de vivir en lucha contigo</h2>
+      <ol class="lista dos">
+        <li><span class="num">1</span>Reducir la rumiación mental</li>
+        <li><span class="num">2</span>Calmar la mente sin luchar contra ella</li>
+        <li><span class="num">3</span>Gestionar miedos, dudas e inseguridades</li>
+        <li><span class="num">4</span>Soltar la autoexigencia y el perfeccionismo</li>
+        <li><span class="num">5</span>Fortalecer la autoestima desde el ser</li>
+        <li><span class="num">6</span>Poner y ponerte límites más saludables</li>
+        <li><span class="num">7</span>Integrar la calma en la vida cotidiana, sin dejar de hacer</li>
+      </ol>
+      <a class="btn" href="https://dranuriaroure.thrivecart.com/quietud/">Quiero Quietud</a>
+    </div>
+  </section>
+
+  <section class="sec grupo">
+    <div class="env">
+      <span class="eti">Grupo privado de Telegram</span>
+      <h2 class="h2">Un espacio cuidado y respetuoso durante todo el programa</h2>
+      <div class="pastillas">
+        <div class="pastilla">Compartir, si te apetece</div>
+        <div class="pastilla">Sentirte acompañada</div>
+        <div class="pastilla">Normalizar lo que te pasa</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec quien">
+    <div class="env">
+      <span class="eti">Es para ti si…</span>
+      <h2 class="h2">Quieres cambiar la forma en la que te relacionas con tu mente, tus emociones y contigo misma</h2>
+      <ul class="lista dos">
+        <li><span class="num">✓</span>Sientes la mente muy activa y cansada</li>
+        <li><span class="num">✓</span>Te exiges mucho y te cuesta parar</li>
+        <li><span class="num">✓</span>Quieres vivir con más calma sin dejar de hacer</li>
+        <li><span class="num">✓</span>Sabes que el acompañamiento marca la diferencia</li>
+        <li><span class="num">✓</span>Buscas un proceso profundo, pero amable</li>
+      </ul>
+      <div class="res">
+        <div class="r"><div class="n">70 %</div><p>de las personas renuevan</p></div>
+        <div class="r"><div class="n">100 %</div><p>lo recomendaría</p></div>
+        <div class="r"><div class="n">95 %</div><p>dice que las técnicas son fáciles de aplicar en su día a día</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec nuria">
+    <div class="env">
+      <div class="caja">
+        <img src="https://nuriaroure.com/wp-content/uploads/2025/01/Nuria-Roure_0107-3-scaled.jpg" alt="Nuria Roure, psicóloga">
+        <div>
+          <span class="eti">No estás sola</span>
+          <h2 class="h2">Te acompaño durante los 6 meses</h2>
+          <p class="lead">Mi presencia en el grupo es constante y cercana: acompaño como psicóloga, oriento y sostengo el proceso contigo.</p>
+          <p class="lead" style="margin-top:12px">— Nuria Roure</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec cierre">
+    <div class="env">
+      <span class="eti">Quietud</span>
+      <h2 class="h2">Aprende a tratarte mejor y a vivir con más calma interior</h2>
+      <p class="lead">Puedes empezar cualquier mes. Tus 6 meses cuentan desde tu inscripción.</p>
+      <a class="btn" href="https://dranuriaroure.thrivecart.com/quietud/">Quiero Quietud</a>
+    </div>
+  </section>
+
+  <div class="fijo" id="qtFijo"><a href="https://dranuriaroure.thrivecart.com/quietud/">Quiero Quietud</a></div>
+</div>
+<script>
+(function(){var f=document.getElementById('qtFijo'),h=document.querySelector('.qt .hero');if(!f||!h||!('IntersectionObserver' in window))return;
+new IntersectionObserver(function(e){f.classList.toggle('on',!e[0].isIntersecting)},{threshold:0}).observe(h);})();
+</script>
