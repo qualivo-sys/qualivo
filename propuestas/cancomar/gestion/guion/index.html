@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>CANCOMAR · Lo que vamos a ver</title>
+<meta name="description" content="Guion de la demo: lo que vamos a ver hoy, paso a paso, con un botón para abrir cada pantalla.">
+<link rel="icon" href="../../assets/brand/isotipo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+:root{--paper:#F4F9FC;--surface:#FFFFFF;--surface-2:#EEF6FB;--ink:#0D2233;--muted:#4F6476;--line:#D5E8F3;--brand:#0097DA;--navy:#00476B;--deep:#06263B;--cy:#00D8E8;--accent:#00719F;--accent-soft:#E3F3FB;--good:#12805A;--good-soft:#E0F3EA;--lila:#5B43C9;--lila-soft:#ECE8FF;--amb:#FEC42D;
+  --grad:linear-gradient(135deg,#0097DA 0%,#00476B 100%);--head:"Montserrat",system-ui,sans-serif;--sans:"Open Sans",system-ui,sans-serif;--shadow:0 1px 2px rgba(0,71,107,.06),0 14px 34px -18px rgba(0,71,107,.35);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#061723;--surface:#0B2131;--surface-2:#0F293C;--ink:#E8F3FA;--muted:#9DB6C7;--line:#1D3C52;--accent:#5CC6F2;--accent-soft:#0E3550;--good:#6FD3A0;--good-soft:#103024;--lila:#B9AEFF;--lila-soft:#25204A;--shadow:0 14px 34px -18px rgba(0,0,0,.7);color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#061723;--surface:#0B2131;--surface-2:#0F293C;--ink:#E8F3FA;--muted:#9DB6C7;--line:#1D3C52;--accent:#5CC6F2;--accent-soft:#0E3550;--good:#6FD3A0;--good-soft:#103024;--lila:#B9AEFF;--lila-soft:#25204A;--shadow:0 14px 34px -18px rgba(0,0,0,.7);color-scheme:dark}
+*{box-sizing:border-box}
+html{overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--head);text-wrap:balance}
+.ic{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.top{background:linear-gradient(110deg,rgba(6,38,59,.97) 0%,rgba(0,71,107,.9) 60%,rgba(0,151,218,.5) 100%),url("/propuestas/cancomar/assets/brand/hero.jpg") center/cover;color:#fff}
+.wrap{max-width:1160px;margin:0 auto;padding:0 16px}
+.top .wrap{padding-top:28px;padding-bottom:30px;display:grid;gap:14px}
+.logos{display:flex;align-items:center;gap:10px;font:800 15px var(--head)}
+.logos img{height:20px}
+.top h1{font-size:clamp(32px,5vw,58px);font-weight:800;line-height:1.05;letter-spacing:-.02em}
+.top p{font-size:clamp(16px,1.7vw,20px);color:rgba(255,255,255,.9);max-width:60ch}
+main.wrap{display:grid;gap:22px;padding-top:24px;padding-bottom:48px}
+.calma{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.calma div{background:var(--good-soft);border-radius:18px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:600}
+.calma .ic{color:var(--good);width:26px;height:26px}
+@media (max-width:900px){.calma{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.calma{grid-template-columns:1fr}}
+.pasos{display:grid;gap:14px;counter-reset:p}
+.paso{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:18px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+.paso .n{width:56px;height:56px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font:800 24px var(--head)}
+.paso.al .n{background:linear-gradient(135deg,#6B4FD8,#3D2E9E)}
+.paso.int .n{background:linear-gradient(135deg,#12805A,#0B5A40)}
+.paso h2{font-size:clamp(19px,2.2vw,24px);font-weight:800;line-height:1.2}
+.paso p{font-size:15.5px;color:var(--muted);margin-top:4px}
+.paso .where{display:inline-block;margin-top:8px;font:700 12px var(--head);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:4px 10px}
+.paso.al .where{color:var(--lila);background:var(--lila-soft)}
+.paso.int .where{color:var(--good);background:var(--good-soft)}
+.go{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font:800 16px var(--head);color:#fff;background:var(--grad);border-radius:99px;padding:13px 22px;white-space:nowrap;box-shadow:0 12px 26px -14px rgba(0,71,107,.8)}
+.paso.al .go{background:linear-gradient(135deg,#6B4FD8,#3D2E9E)}
+.paso.int .go{background:linear-gradient(135deg,#12805A,#0B5A40)}
+.go:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+.subs{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.subs a{text-decoration:none;font:700 13.5px var(--head);color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:99px;padding:8px 13px;display:inline-flex;gap:6px;align-items:center}
+.subs a:hover{border-color:var(--brand);color:var(--accent)}
+.subs a b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--lila);color:#fff;font-size:11px}
+@media (max-width:760px){.paso{grid-template-columns:52px minmax(0,1fr)}.paso .n{width:48px;height:48px;font-size:20px}.paso>.go{grid-column:1/-1;justify-self:start}}
+.junto{display:flex;gap:14px;align-items:center;background:var(--grad);color:#fff;border-radius:22px;padding:18px 22px}
+.junto .ic{width:40px;height:40px;color:var(--cy)}
+.junto b{font:800 clamp(17px,2vw,21px) var(--head);display:block}
+.junto span{font-size:15px;color:rgba(255,255,255,.88)}
+.ej{display:inline-block;font:700 10px var(--head);letter-spacing:.09em;text-transform:uppercase;color:#fff;background:#A86A00;border-radius:99px;padding:3px 9px}
+.pie{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.6"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <div class="logos"><span>Qualivo</span><span style="opacity:.6">×</span><img src="../../assets/brand/logo-blanco.png" alt="CANCOMAR" width="137" height="20"></div>
+    <h1>Lo que vamos a ver hoy</h1>
+    <p>Cinco pasos, de lo que empezamos ya a lo que vendrá después. Al final lo tendréis todo en un mismo sitio: vuestro Intelligence.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="calma" aria-label="Para que estéis tranquilos">
+    <div><svg class="ic"><use href="#i-check"/></svg>Si sabéis usar WhatsApp, sabéis usar esto.</div>
+    <div><svg class="ic"><use href="#i-check"/></svg>Os lo dejamos montado con vuestros cursos, aulas y profesores.</div>
+    <div><svg class="ic"><use href="#i-check"/></svg>Formación y acompañamiento: estamos con vosotros todo el camino.</div>
+    <div><svg class="ic"><use href="#i-check"/></svg>Ágora sigue funcionando hasta que lo nuevo esté probado.</div>
+  </div>
+
+  <div class="pasos">
+    <div class="paso"><span class="n">1</span><div><h2>Cómo arrancamos</h2><p>Qué cambia en vuestro día a día, qué recibís cada semana hasta enero y qué necesitamos de vosotros.</p><span class="where">Presentación</span></div><a class="go" href="../reunion/" target="_blank" rel="noopener">Abrir <svg class="ic" style="width:18px;height:18px"><use href="#i-arrow"/></svg></a></div>
+
+    <div class="paso"><span class="n">2</span><div><h2>Cómo llega y se atiende un alumno</h2><p>Escribe por WhatsApp, le llega la respuesta preparada y admisiones solo tiene que aprobarla.</p><span class="where">Intelligence · Conversaciones</span></div><a class="go" href="https://qualivo.io/intelligence/?sector=cancomar&amp;empresa=CANCOMAR&amp;objetivo=seguimiento&amp;vista=conversaciones" target="_blank" rel="noopener">Abrir <svg class="ic" style="width:18px;height:18px"><use href="#i-arrow"/></svg></a></div>
+
+    <div class="paso al"><span class="n">3</span><div><h2>La parte de alumnos</h2><p>Así os enseñaríamos a llevar los cursos, las clases y los alumnos. Toca cada punto para verlo.</p><span class="where">Demo de gestión de alumnos</span>
+      <div class="subs">
+        <a href="../#gru" target="_blank" rel="noopener"><b>a</b>Grupos y clases: cambiar profesor, aula u hora</a>
+        <a href="../#gru" target="_blank" rel="noopener"><b>b</b>Pasar lista</a>
+        <a href="../#alu" target="_blank" rel="noopener"><b>c</b>Matricular y la ficha de cada alumno</a>
+        <a href="../#pro" target="_blank" rel="noopener"><b>d</b>Profesores y su calendario</a>
+        <a href="../#doc" target="_blank" rel="noopener"><b>e</b>Fichas firmadas e impresos oficiales</a>
+        <a href="../#fac" target="_blank" rel="noopener"><b>f</b>Lo que ha pagado cada alumno</a>
+        <a href="../#aj" target="_blank" rel="noopener"><b>g</b>Todo a vuestra medida</a>
+      </div></div><a class="go" href="../#gru" target="_blank" rel="noopener">Abrir <svg class="ic" style="width:18px;height:18px"><use href="#i-arrow"/></svg></a></div>
+
+    <div class="paso int"><span class="n">4</span><div><h2>Y todo junto, en vuestro Intelligence</h2><p>Las peticiones, los alumnos, los grupos, las fichas y los pagos en el mismo sitio. Lo que hacéis en uno se ve en todo.</p><span class="where">Intelligence · Alumnos</span></div><a class="go" href="https://qualivo.io/intelligence/?sector=cancomar&amp;empresa=CANCOMAR&amp;objetivo=seguimiento&amp;vista=alumnos" target="_blank" rel="noopener">Abrir <svg class="ic" style="width:18px;height:18px"><use href="#i-arrow"/></svg></a></div>
+
+    <div class="paso"><span class="n">5</span><div><h2>Ágora y siguientes pasos</h2><p>Revisamos Ágora en diciembre y antes de enero os traemos la propuesta, también para la facturación.</p><span class="where">Presentación · final</span></div><a class="go" href="../reunion/#s9" target="_blank" rel="noopener">Abrir <svg class="ic" style="width:18px;height:18px"><use href="#i-arrow"/></svg></a></div>
+  </div>
+
+  <div class="junto"><svg class="ic"><use href="#i-link"/></svg><div><b>Un solo sitio para todo</b><span>Captación, alumnos, clases, fichas y pagos conectados. Sin teclear dos veces y sin saltar entre programas.</span></div></div>
+  <p class="pie"><span class="ej">Datos de ejemplo</span> Todo lo que veréis hoy usa datos inventados; nada de lo que aparece es vuestro.</p>
+</main>
+</body>
+</html>
