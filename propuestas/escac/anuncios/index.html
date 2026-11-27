@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>ESCAC · anuncios</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+/* Propuesta de anuncios de Meta para ESCAC (reunión 27-nov). Plantilla: cancomar/anuncios, simplificada.
+   Sin logo ni imágenes de ESCAC: solo el nombre en texto. Creatividades hechas con CSS. */
+:root{--b:#E0412F;--b2:#C23423;--nv:#1B1B22;--deep:#101015;--cy:#F2B53A;--amb:#F2B53A;--ok:#12805A;
+--grad:linear-gradient(135deg,#E0412F 0%,#7A1E3A 100%);
+--paper:#FBFAF8;--surface:#FFFFFF;--surface-2:#F4F1EC;--ink:#17171C;--muted:#5E5C66;--line:#E4E0D8;--line-2:#ECE8E1;
+--accent:#C23423;--accent-soft:#FCEDEA;
+--head:"Montserrat",system-ui,sans-serif;--sans:"Open Sans",system-ui,sans-serif;
+--shadow:0 1px 2px rgba(16,16,21,.06),0 14px 34px -18px rgba(16,16,21,.3);--shadow-lg:0 2px 6px rgba(16,16,21,.08),0 30px 60px -26px rgba(16,16,21,.55)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0D0D11;--surface:#17171D;--surface-2:#1B1B22;--ink:#EEEDF2;--muted:#A6A4B0;--line:#2C2B34;--line-2:#24232B;--accent:#FF7A66;--accent-soft:#2A1715}}
+:root[data-theme="dark"]{--paper:#0D0D11;--surface:#17171D;--surface-2:#1B1B22;--ink:#EEEDF2;--muted:#A6A4B0;--line:#2C2B34;--line-2:#24232B;--accent:#FF7A66;--accent-soft:#2A1715}
+*{box-sizing:border-box;margin:0}
+html{overflow-x:clip;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:16px}
+@media (min-width:800px){.wrap{padding-inline:28px}}
+h1,h2,h3{font-family:var(--head);letter-spacing:-.01em}
+/* menú */
+.topnav{position:sticky;top:0;z-index:30;background:rgba(16,16,21,.95);color:#fff;backdrop-filter:blur(10px)}
+.topnav::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:var(--grad)}
+.topnav .in{max-width:1180px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.brand{display:flex;gap:10px;align-items:center;margin-right:auto;font:700 14px var(--head)}
+.brand .x{opacity:.55;font-weight:500}
+.brand small{font-weight:500;font-size:11px;opacity:.6}
+.links{display:flex;gap:2px;flex-wrap:wrap;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:3px}
+.links a{color:rgba(255,255,255,.85);text-decoration:none;font:600 13px var(--head);padding:6px 11px;border-radius:99px;white-space:nowrap}
+.links a:hover{color:#fff}
+.links a[aria-current]{background:#fff;color:var(--nv)}
+@media (max-width:700px){.brand small{display:none}.links{width:100%;justify-content:space-between}.links a{padding:5px 6px;font-size:11.5px}}
+/* cabecera */
+.ahero{position:relative;color:#fff;overflow:hidden;isolation:isolate;background:radial-gradient(90% 120% at 85% 10%,rgba(224,65,47,.45),transparent 55%),radial-gradient(70% 90% at 0% 100%,rgba(242,181,58,.18),transparent 60%),#101015}
+.ahero::before,.ahero::after{content:"";position:absolute;left:0;right:0;height:14px;z-index:-1;background:repeating-linear-gradient(90deg,transparent 0 14px,rgba(255,255,255,.14) 14px 26px)}
+.ahero::before{top:10px}.ahero::after{bottom:10px}
+.ahero .wrap{padding-block:64px 54px;display:grid;gap:14px}
+.lockup{justify-self:start;display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:9px 18px;font:800 15px var(--head)}
+.lockup i{font-style:normal;opacity:.6;font-weight:500}
+.eyebrow{font:700 12px var(--head);letter-spacing:.18em;text-transform:uppercase;color:var(--cy)}
+.ahero h1{font-weight:800;font-size:clamp(32px,5vw,58px);line-height:1.05;max-width:20ch;text-wrap:balance}
+.ahero h1 em{font-style:normal;color:var(--amb)}
+.ahero .lead{color:rgba(255,255,255,.9);font-size:clamp(16px,1.6vw,18.5px);max-width:74ch}
+.maq{font-size:12.5px;color:rgba(255,255,255,.7);max-width:100ch}
+nav.jump{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+nav.jump a{color:#fff;text-decoration:none;font:600 13.5px var(--head);border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);border-radius:99px;padding:7px 14px}
+nav.jump a:hover{background:#fff;color:var(--nv)}
+/* secciones */
+.sec{padding:60px 0;border-top:1px solid var(--line-2)}
+.sec.alt{background:var(--surface-2)}
+.sh{display:grid;gap:8px;margin-bottom:12px}
+.sh .no{font:700 11.5px var(--head);letter-spacing:.16em;color:var(--accent);display:flex;align-items:center;gap:10px}
+.sh .no span{height:2px;width:40px;background:var(--grad);border-radius:2px}
+.sh h2{font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.15}
+.lede{color:var(--muted);font-size:17px;max-width:78ch;margin-bottom:22px}
+.k{font:700 11px var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.small{font-size:14px}.muted{color:var(--muted)}
+.ej{display:inline-block;font:700 10.5px var(--head);letter-spacing:.06em;text-transform:uppercase;color:#3A2B00;background:var(--amb);border-radius:6px;padding:3px 8px;vertical-align:middle;line-height:1.4}
+.real{display:inline-block;font:700 10.5px var(--head);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--ok);border-radius:6px;padding:3px 8px;vertical-align:middle;line-height:1.4}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-width:0}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#fff;text-decoration:none;font:700 14.5px var(--head);border-radius:99px;padding:12px 20px;box-shadow:0 12px 24px -12px rgba(122,30,58,.8)}
+.btn.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+/* datos de partida */
+.hoy{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.hoy .card{display:grid;gap:4px;align-content:start;border-top:5px solid var(--b)}
+.hoy b{font:800 26px/1.15 var(--head)}
+.hoy p{color:var(--muted);font-size:14.5px}
+@media (max-width:900px){.hoy{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.hoy{grid-template-columns:1fr}}
+.def{margin-top:16px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;background:var(--deep);color:#fff;border-radius:18px;padding:20px 22px}
+.def b{font:800 15px var(--head);color:var(--cy);letter-spacing:.04em;text-transform:uppercase}
+.def p{font-size:16.5px}.def p strong{color:var(--amb)}
+@media (max-width:640px){.def{grid-template-columns:1fr}}
+/* resumen */
+.plan6{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:1000px){.plan6{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.plan6{grid-template-columns:1fr}}
+.plan6 a{display:grid;gap:6px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+.plan6 a:hover{transform:translateY(-3px);border-color:var(--b)}
+.plan6 .fm{font:700 10.5px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.plan6 b{font:800 16px var(--head)}
+.plan6 p{color:var(--muted);font-size:14px;line-height:1.5}
+.lt{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:11px;background:var(--grad);color:#fff;font:800 18px var(--head)}
+/* bloque de anuncio */
+.angle{scroll-margin-top:70px}
+.ah{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start;margin-bottom:26px}
+.ah .lt{grid-row:span 2;width:58px;height:58px;border-radius:16px;font-size:28px}
+.ah h2{font-weight:800;font-size:clamp(24px,3.1vw,34px);line-height:1.15}
+.ah .meta{display:grid;gap:6px;font-size:15px;color:var(--muted);max-width:96ch}
+.ah .meta b{font:700 10.5px var(--head);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-right:6px}
+@media (max-width:560px){.ah{grid-template-columns:1fr}.ah .lt{grid-row:auto;width:46px;height:46px;font-size:22px}}
+.ads{display:grid;grid-template-columns:420px minmax(0,1fr);gap:32px;align-items:start}
+@media (min-width:981px){.ads>figure{position:sticky;top:84px}}
+@media (max-width:980px){.ads{grid-template-columns:minmax(0,1fr);justify-items:center}.ads>.copy{justify-self:stretch}}
+figure{margin:0;min-width:0;width:100%;display:grid;justify-items:center}
+figcaption{font-size:13px;color:var(--muted);margin-top:10px;text-align:center;line-height:1.45;max-width:420px}
+figcaption b{color:var(--ink)}
+/* marco instagram */
+.ig{width:min(420px,100%);background:#fff;color:#111;border-radius:16px;overflow:hidden;border:1px solid #DBDBDB;box-shadow:var(--shadow-lg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.ig .h{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.av{width:34px;height:34px;border-radius:50%;background:#101015;color:#fff;display:grid;place-items:center;font:800 8.5px var(--head);letter-spacing:.04em;flex:none;box-shadow:0 0 0 2px #fff,0 0 0 3.5px var(--b)}
+.ig .h b{font-size:13.5px;display:block;line-height:1.2}
+.ig .h small{font-size:11.5px;color:#737373}
+.ig .h .dots{margin-left:auto;font-weight:700;color:#262626;letter-spacing:1px}
+.ig .cta{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;border-bottom:1px solid #EFEFEF;font-size:14px;font-weight:600;color:#0095F6}
+.ig .cap{padding:10px 12px 14px;font-size:13.5px;line-height:1.45}
+.ig .cap b{margin-right:5px}.ig .cap span{color:#737373}
+/* creatividad: todo CSS */
+.cr{position:relative;aspect-ratio:4/5;overflow:hidden;font-family:var(--head);color:#fff;isolation:isolate;background:radial-gradient(80% 60% at 70% 30%,#3A2A4A 0%,transparent 70%),radial-gradient(70% 50% at 20% 80%,#5A1E1A 0%,transparent 70%),#0E0E13}
+.cr.sq{aspect-ratio:1/1}
+.cr::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.75) 100%)}
+.cr .demo{position:absolute;right:12px;top:12px;z-index:5}
+.cr .tag{position:absolute;left:14px;top:12px;z-index:4;background:var(--b);color:#fff;font:700 11px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:99px}
+.cr .btm{position:absolute;left:18px;right:18px;bottom:46px;z-index:4;display:grid;gap:8px;justify-items:start}
+.cr .hk{font:800 clamp(21px,5.6vw,28px)/1.12 var(--head);letter-spacing:-.015em;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.cr .hk em{font-style:normal;color:#101015;background:var(--amb);padding:0 .16em;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone;text-shadow:none}
+.cr .sub{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:9px 90px 10px 18px;background:var(--grad);font:700 12px/1.3 var(--sans)}
+.cr .wm{position:absolute;right:16px;bottom:9px;z-index:5;font:800 13px var(--head);letter-spacing:.14em}
+/* bandas de cine (letterbox) */
+.lb::before{content:"";position:absolute;left:0;right:0;top:0;height:9%;background:#000;z-index:3}
+/* visor de cámara */
+.vf{position:absolute;inset:14% 9% 34%;z-index:2}
+.vf i{position:absolute;width:22px;height:22px;border:2px solid rgba(255,255,255,.85)}
+.vf i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}.vf i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}
+.vf i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}.vf i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
+.vf .rec{position:absolute;left:10px;top:8px;font:700 11px var(--sans);display:flex;align-items:center;gap:6px;letter-spacing:.08em}
+.vf .rec::before{content:"";width:9px;height:9px;border-radius:50%;background:#FF3B30;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.2}}
+.vf .tc{position:absolute;right:10px;top:8px;font:600 11px ui-monospace,Menlo,monospace;opacity:.9}
+.vf .cross{position:absolute;left:50%;top:50%;width:26px;height:26px;transform:translate(-50%,-50%)}
+.vf .cross::before,.vf .cross::after{content:"";position:absolute;background:rgba(255,255,255,.7)}
+.vf .cross::before{left:50%;top:0;bottom:0;width:1.5px;transform:translateX(-50%)}.vf .cross::after{top:50%;left:0;right:0;height:1.5px;transform:translateY(-50%)}
+.vf .lv{position:absolute;left:10px;bottom:8px;display:flex;gap:2px;align-items:flex-end;height:14px}
+.vf .lv u{display:block;width:3px;background:#3BE38B;text-decoration:none}
+/* claqueta */
+.clap{position:absolute;left:50%;top:15%;width:74%;transform:translateX(-50%) rotate(-3deg);z-index:2;border-radius:8px;overflow:hidden;box-shadow:0 18px 36px -14px rgba(0,0,0,.8)}
+.clap .tp{height:30px;background:repeating-linear-gradient(-55deg,#fff 0 16px,#111 16px 32px);transform-origin:left bottom;transform:rotate(-7deg) translateY(-3px);border-radius:6px 6px 0 0}
+.clap .bd{background:#141418;border:2px solid #fff;border-top:0;padding:10px 12px;display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;font:700 10px var(--head);letter-spacing:.1em;color:rgba(255,255,255,.65)}
+.clap .bd b{display:block;font:800 15px/1.15 var(--head);color:#fff;letter-spacing:0;text-transform:none}
+.clap .bd .w{grid-column:1/-1}
+/* fichas de especialidad (máster) */
+.spec{position:absolute;left:16px;right:16px;top:16%;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.spec span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:10px 11px;font:700 12.5px/1.25 var(--head);backdrop-filter:blur(3px)}
+.spec span small{display:block;font:600 10px var(--sans);opacity:.7;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.spec span.on{background:var(--amb);border-color:var(--amb);color:#101015}
+/* familia: lista de dudas */
+.qs{position:absolute;left:16px;right:16px;top:15%;z-index:2;background:rgba(255,255,255,.96);color:#17171C;border-radius:14px;padding:12px 14px;display:grid;gap:7px;font:600 12.5px var(--sans);box-shadow:0 14px 30px -12px rgba(0,0,0,.6)}
+.qs b{font:800 13px var(--head)}
+.qs span{display:flex;gap:8px;align-items:flex-start;border-top:1px solid #EEE;padding-top:6px}
+.qs span::before{content:"?";flex:none;display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--b);color:#fff;font:800 11px var(--head)}
+/* tira de película (internacional) */
+.film{position:absolute;left:0;right:0;top:15%;z-index:2;height:42%;background:#0A0A0C;padding:16px 0;transform:rotate(-4deg) scale(1.08)}
+.film::before,.film::after{content:"";position:absolute;left:0;right:0;height:9px;background:repeating-linear-gradient(90deg,transparent 0 7px,#E9E4DA 7px 15px,transparent 15px 22px)}
+.film::before{top:3px}.film::after{bottom:3px}
+.film div{height:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 6px}
+.film div span{border-radius:3px;display:grid;place-items:end start;padding:7px;font:800 11px var(--head);letter-spacing:.06em}
+.film div span:nth-child(1){background:linear-gradient(160deg,#F2B53A,#C2541E)}
+.film div span:nth-child(2){background:linear-gradient(160deg,#4A6FA5,#1D2A44)}
+.film div span:nth-child(3){background:linear-gradient(160deg,#B03A48,#3D1530)}
+/* story 9:16 */
+.s9{position:relative;width:min(300px,100%);aspect-ratio:9/16;border-radius:26px;overflow:hidden;color:#fff;font-family:var(--head);isolation:isolate;box-shadow:var(--shadow-lg),0 0 0 7px #0B0B0F,0 0 0 8px #34333C;background:radial-gradient(90% 50% at 80% 20%,#4A2240 0%,transparent 70%),radial-gradient(80% 50% at 10% 85%,#5A1E1A 0%,transparent 70%),#0E0E13}
+.s9 .pb{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:3px;z-index:4}
+.s9 .pb i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.38)}.s9 .pb i.on{background:#fff}
+.s9 .hd{position:absolute;top:20px;left:12px;right:12px;display:flex;align-items:center;gap:7px;font:600 12px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;z-index:4}
+.s9 .hd .av{width:26px;height:26px;box-shadow:none;font-size:6.5px}
+.s9 .hd small{opacity:.75;font-size:10.5px;font-weight:400}
+.s9 .hd .x{margin-left:auto;opacity:.9;font-size:15px}
+.s9 .demo{position:absolute;right:12px;top:54px;z-index:5}
+.s9 .bt{position:absolute;left:16px;right:16px;bottom:78px;display:grid;gap:9px;justify-items:start;z-index:4}
+.s9 .hk{font:800 23px/1.12 var(--head);letter-spacing:-.015em}
+.s9 .hk em{font-style:normal;color:#101015;background:var(--amb);padding:0 .16em;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.s9 .sb{font:600 12px/1.35 var(--sans);opacity:.92}
+.s9 .up{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:4}
+.s9 .up span{background:#fff;color:#111;border-radius:99px;padding:8px 18px;font:700 13px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+/* entrada (jornada) */
+.ticket{position:absolute;left:16px;right:16px;top:86px;z-index:3;display:grid;grid-template-columns:1fr auto;background:#F6F1E7;color:#17171C;border-radius:12px;overflow:hidden;box-shadow:0 18px 36px -14px rgba(0,0,0,.8);transform:rotate(-2deg)}
+.ticket .m{padding:12px 13px;display:grid;gap:3px;font:600 11px var(--sans);color:#5E5C66}
+.ticket .m small{font:800 9.5px var(--head);letter-spacing:.18em;color:var(--b)}
+.ticket .m b{font:800 17px/1.15 var(--head);color:#17171C}
+.ticket .m span{font:700 12px var(--head);color:#17171C}
+.ticket .st{background:var(--b);color:#fff;writing-mode:vertical-rl;transform:rotate(180deg);font:800 11px var(--head);letter-spacing:.16em;text-transform:uppercase;display:grid;place-items:center;padding:8px 9px;border-right:2px dashed rgba(255,255,255,.5)}
+.agenda{position:absolute;left:16px;right:16px;top:232px;z-index:3;display:grid;gap:6px;font:600 11.5px var(--sans)}
+.agenda span{display:grid;grid-template-columns:44px 1fr;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:7px 9px}
+.agenda span b{font:800 11.5px var(--head);color:var(--amb)}
+/* remarketing: chat y huecos */
+.chat{position:absolute;left:14px;right:14px;top:88px;z-index:3;display:grid;gap:7px;font:500 12px/1.4 var(--sans)}
+.chat p{background:#fff;color:#111;border-radius:12px 12px 12px 4px;padding:8px 11px;max-width:88%;box-shadow:0 8px 20px -10px rgba(0,0,0,.55)}
+.chat p.me{justify-self:end;background:#DCF8C6;border-radius:12px 12px 4px 12px}
+.chat p small{display:block;text-align:right;color:#7F8F9B;font-size:9.5px}
+.slots{display:grid;gap:5px;justify-self:start;width:88%}
+.slots span{background:#fff;color:#027EB5;text-align:center;font:700 12px var(--sans);border-radius:9px;padding:7px;box-shadow:0 8px 20px -12px rgba(0,0,0,.55)}
+/* panel de texto */
+.copy{display:grid;gap:14px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);min-width:0}
+pre{white-space:pre-wrap;font:15px/1.6 var(--sans);background:var(--paper);border:1px solid var(--line-2);border-radius:12px;padding:12px 14px;margin:0;color:var(--ink);overflow-wrap:anywhere}
+.hook pre{font:800 19px/1.35 var(--head);border-left:5px solid var(--b)}
+.meta3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.meta3>div{min-width:0}.meta3 pre{font-size:14px}
+@media (max-width:640px){.meta3{grid-template-columns:1fr}}
+.why pre{background:var(--accent-soft);border-color:transparent}
+.go{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--deep);color:#fff;border-radius:14px;padding:14px 16px}
+.go .k{color:var(--cy)}
+.go p{font-size:14.5px;color:rgba(255,255,255,.88)}
+.go a{color:var(--deep);background:#fff;text-decoration:none;font:700 13.5px var(--head);border-radius:99px;padding:9px 14px;white-space:nowrap}
+@media (max-width:560px){.go{grid-template-columns:1fr}.go a{justify-self:start}}
+.mide{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mide li{background:var(--paper);border:1px solid var(--line-2);border-radius:10px;padding:9px 12px;font-size:14px;display:grid;gap:2px}
+.mide li b{font-family:var(--head);font-size:13.5px}
+.mide li span{color:var(--muted);font-size:13px}
+.mide li.main{grid-column:1/-1;border-color:var(--b);background:var(--accent-soft)}
+@media (max-width:560px){.mide{grid-template-columns:1fr}}
+/* reparto */
+.rep{display:grid;gap:8px}
+.rep div{display:grid;grid-template-columns:170px minmax(0,1fr) 46px;gap:12px;align-items:center;font-size:14.5px}
+.rep u{display:block;height:10px;border-radius:5px;background:var(--line);text-decoration:none;overflow:hidden}
+.rep u::after{content:"";display:block;height:100%;width:var(--w);background:var(--grad)}
+.rep b{font-family:var(--head);text-align:right}
+@media (max-width:560px){.rep div{grid-template-columns:minmax(0,1fr) 46px}.rep u{grid-column:1/-1;grid-row:2}}
+.foot{background:var(--grad);color:#fff;padding:34px 0 44px}
+.foot .wrap{display:grid;gap:8px;font-size:13.5px}
+.foot b{font:700 15px var(--head)}
+.foot a{color:#fff}
+.foot p{opacity:.88;max-width:100ch}
+@media (prefers-reduced-motion:reduce){.vf .rec::before{animation:none}}
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="Paquete ESCAC"><div class="in">
+  <div class="brand"><span>Qualivo</span><span class="x" aria-hidden="true">×</span><span>ESCAC</span><small>27-nov-2026</small></div>
+  <div class="links"><a href="../">Plan</a><a href="../presentacion/">Presentación</a><a href="../recorrido/">Recorrido</a><a href="../landing/">Landing</a><a href="./" aria-current="page">Anuncios</a><a href="../whatsapp/">WhatsApp</a><a href="/intelligence/?sector=escac&amp;empresa=ESCAC&amp;objetivo=conversion">Intelligence</a></div>
+</div></nav>
+
+<header class="ahero"><div class="wrap">
+  <div class="lockup"><span>Qualivo</span><i aria-hidden="true">×</i><span>ESCAC</span></div>
+  <p class="eyebrow">Captación · Anuncios de Meta</p>
+  <h1>Seis anuncios que no buscan clics: <em>buscan entrevistas</em></h1>
+  <p class="lead">Seis ideas de anuncio para Instagram y Facebook, una por cada persona que puede acabar matriculándose: quien quiere estudiar el grado, quien busca un máster, su familia, quien viene de fuera, quien quiere ver la escuela y quien pidió información y se quedó a medias. Todos llevan a un formulario corto o a WhatsApp, y se miden por entrevista realizada y por plaza reservada, no por clic.</p>
+  <nav class="jump" aria-label="Ir a"><a href="#partida">De dónde partimos</a><a href="#a">A · Grado</a><a href="#b">B · Máster</a><a href="#c">C · Familias</a><a href="#d">D · Internacional</a><a href="#e">E · Puertas abiertas</a><a href="#f">F · Remarketing</a></nav>
+  <p class="maq">Maqueta de Qualivo para ESCAC · creatividades hechas en HTML/CSS, sin logo ni imágenes de la escuela · no son anuncios publicados · textos, fechas y públicos son de ejemplo y se ajustan con vuestro equipo de admisiones</p>
+</div></header>
+
+<!-- PARTIDA -->
+<section class="sec" id="partida" style="border-top:0"><div class="wrap">
+  <div class="sh"><div class="no"><b>DE DÓNDE PARTIMOS</b><span></span></div><h2>Lo que nos contasteis en el formulario <span class="real">Vuestras respuestas</span></h2></div>
+  <p class="lede">Con estas cuatro respuestas ya se ve dónde está el margen: el anuncio funciona, lo que se escapa es lo que pasa después.</p>
+  <div class="hoy">
+    <div class="card"><p class="k">Inversión en anuncios</p><b>500–999 €/mes</b><p>Lo que invertís hoy al mes.</p></div>
+    <div class="card"><p class="k">Solicitudes al mes</p><b>20–49</b><p>Peticiones de información que entran.</p></div>
+    <div class="card"><p class="k">Dónde se escapa</p><b>Seguimiento y presupuestos</b><p>Con vuestras palabras.</p></div>
+    <div class="card"><p class="k">Momento</p><b>Solo mirando</b><p>«Más adelante». Esto es para verlo con calma.</p></div>
+  </div>
+  <div class="def"><b>La idea</b><p>No proponemos gastar más. Proponemos que cada anuncio <strong>pregunte lo justo</strong> (programa, curso de inicio, si viene con familia) y que cada solicitud reciba respuesta en minutos, también a las once de la noche, con dos huecos de entrevista o visita para elegir.</p></div>
+</div></section>
+
+<section class="sec alt"><div class="wrap">
+  <div class="sh"><div class="no"><b>LA PROPUESTA</b><span></span></div><h2>Seis anuncios, seis momentos <span class="ej">Ejemplo</span></h2></div>
+  <p class="lede">Cada anuncio le habla a una persona distinta y lleva a un sitio distinto. En pocas semanas se ve cuál trae entrevistas, y a ese se le da más presupuesto.</p>
+  <div class="plan6">
+    <a href="#a"><span class="lt">A</span><span class="fm">Futuro alumno · grado · feed 4:5</span><b>«Tu primera película empieza aquí»</b><p>Para quien acaba bachillerato y quiere estudiar cine.</p></a>
+    <a href="#b"><span class="lt">B</span><span class="fm">Profesional · máster · feed 4:5</span><b>«Ya sabes rodar. Ahora, especialízate»</b><p>Para quien ya trabaja o estudió audiovisual y quiere dar el salto.</p></a>
+    <a href="#c"><span class="lt">C</span><span class="fm">Familias · grado · cuadrado 1:1</span><b>«Tu hijo quiere estudiar cine»</b><p>Para madres y padres que deciden junto al alumno.</p></a>
+    <a href="#d"><span class="lt">D</span><span class="fm">Internacional · máster · feed 4:5</span><b>«Estudia cine en Barcelona»</b><p>Para alumnos de fuera de España (versión en inglés y en español).</p></a>
+    <a href="#e"><span class="lt">E</span><span class="fm">Visita · story 9:16</span><b>«Ven a ver la escuela por dentro»</b><p>Jornada de puertas abiertas: reserva de plaza para la visita.</p></a>
+    <a href="#f"><span class="lt">F</span><span class="fm">Remarketing · story 9:16</span><b>«Pediste información. Falta un paso»</b><p>Solo para quien pidió información y no agendó entrevista.</p></a>
+  </div>
+</div></section>
+
+<!-- A -->
+<section class="sec angle" id="a"><div class="wrap">
+  <div class="ah"><span class="lt" aria-hidden="true">A</span><h2>A · Grado: «Tu primera película empieza aquí»</h2><div class="meta">
+    <span><b>Ángulo</b>quien quiere estudiar cine ya se imagina dirigiendo o escribiendo; el anuncio le pone en esa escena</span>
+    <span><b>Público</b>17–20 años en Cataluña y resto de España, intereses cine, cortometrajes, fotografía, edición de vídeo</span>
+    <span><b>Formato</b>feed 4:5 en Instagram y Facebook; misma pieza recortada a 9:16 para stories</span></div></div>
+  <div class="ads">
+    <figure><div class="ig">
+      <div class="h"><span class="av">ESCAC</span><div><b>escac</b><small>Publicidad</small></div><span class="dots">···</span></div>
+      <div class="cr lb"><span class="demo ej">Ejemplo</span>
+        <div class="clap"><div class="tp"></div><div class="bd"><span class="w">Producción<b>Tu primera película</b></span><span>Escena<b>1</b></span><span>Toma<b>1</b></span><span class="w">Dirección<b>Tú</b></span></div></div>
+        <div class="btm"><p class="hk">Quieres hacer cine. <em>Aprende a contarlo.</em></p></div>
+        <p class="sub">Grado en Cine y Audiovisuales · Terrassa</p><span class="wm">ESCAC</span></div>
+      <div class="cta"><span>Solicitar información</span><span aria-hidden="true">›</span></div>
+      <p class="cap"><b>escac</b>¿Te ves dirigiendo, escribiendo o montando tu primera película? Cuéntanos qué te mueve… <span>más</span></p>
+    </div><figcaption><b>Feed 4:5</b> · claqueta y bandas de cine hechas con CSS · en producción, plano real de un rodaje de alumnos</figcaption></figure>
+    <div class="copy">
+      <div class="hook"><p class="k">Gancho · primera frase</p><pre>¿Te ves dirigiendo, escribiendo o montando tu primera película?</pre></div>
+      <div><p class="k">Texto principal</p><pre>¿Te ves dirigiendo, escribiendo o montando tu primera película?
+
+El Grado en Cine y Audiovisuales de ESCAC es para quien quiere aprender a contar historias con una cámara, desde el guion hasta la sala de montaje.
+
+Déjanos tres datos (qué te interesa, cuándo quieres empezar y desde dónde nos escribes) y te contestamos por WhatsApp en minutos, también de noche.</pre></div>
+      <div class="meta3"><div><p class="k">Titular</p><pre>Grado en Cine y Audiovisuales</pre></div><div><p class="k">Botón</p><pre>Solicitar información</pre></div><div><p class="k">Descripción</p><pre>Te respondemos por WhatsApp</pre></div></div>
+      <div class="why"><p class="k">Por qué funciona</p><pre>Habla de lo que el alumno quiere hacer, no de la escuela. Y promete lo que más falta hoy: una respuesta rápida. El formulario pregunta lo justo para que admisiones sepa con quién habla antes de llamar.</pre></div>
+      <div class="go"><div><p class="k">Lleva a</p><p>Formulario de 4 preguntas (programa, curso de inicio, ciudad o país, si decide con su familia) y WhatsApp del asistente virtual de admisiones.</p></div><a href="../landing/">Ver la landing →</a></div>
+      <div><p class="k">Qué medimos</p><ul class="mide">
+        <li class="main"><b>Coste por entrevista realizada</b><span>La cifra que manda. No el clic ni el formulario.</span></li>
+        <li><b>% de solicitudes con curso de inicio</b><span>Las que ya saben cuándo quieren empezar.</span></li>
+        <li><b>Tiempo hasta la primera respuesta</b><span>Desde que envía el formulario.</span></li>
+      </ul></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- B -->
+<section class="sec angle alt" id="b"><div class="wrap">
+  <div class="ah"><span class="lt" aria-hidden="true">B</span><h2>B · Máster: «Ya sabes rodar. Ahora, especialízate»</h2><div class="meta">
+    <span><b>Ángulo</b>el profesional no necesita que le convenzan del cine: necesita saber qué especialidad le encaja y si puede compaginarla</span>
+    <span><b>Público</b>23–35 años, graduados o profesionales del audiovisual, intereses dirección, guion, producción, dirección de fotografía</span>
+    <span><b>Formato</b>feed 4:5; una variante por especialidad cuando haya presupuesto</span></div></div>
+  <div class="ads">
+    <figure><div class="ig">
+      <div class="h"><span class="av">ESCAC</span><div><b>escac</b><small>Publicidad</small></div><span class="dots">···</span></div>
+      <div class="cr"><span class="demo ej">Ejemplo</span>
+        <div class="spec"><span class="on"><small>Máster</small>Dirección</span><span><small>Máster</small>Guion</span><span><small>Máster</small>Producción</span><span><small>Máster</small>Fotografía</span></div>
+        <div class="btm"><p class="hk">Ya sabes rodar. <em>Ahora, especialízate.</em></p></div>
+        <p class="sub">Másters de ESCAC · elige tu especialidad</p><span class="wm">ESCAC</span></div>
+      <div class="cta"><span>Más información</span><span aria-hidden="true">›</span></div>
+      <p class="cap"><b>escac</b>Dirección, guion, producción o fotografía: dinos qué especialidad te interesa y cuándo quieres empezar… <span>más</span></p>
+    </div><figcaption><b>Feed 4:5</b> · fichas de especialidad · la marcada cambia en cada variante del anuncio</figcaption></figure>
+    <div class="copy">
+      <div class="hook"><p class="k">Gancho · primera frase</p><pre>Ya sabes rodar. Ahora, especialízate.</pre></div>
+      <div><p class="k">Texto principal</p><pre>Ya sabes rodar. Ahora, especialízate.
+
+Dirección, guion, producción o dirección de fotografía: los másters de ESCAC son para quien ya está en el audiovisual y quiere dar el siguiente paso.
+
+Dinos qué especialidad te interesa y cuándo quieres empezar. Te proponemos dos huecos para una entrevista con admisiones.</pre></div>
+      <div class="meta3"><div><p class="k">Titular</p><pre>Másters en cine · elige tu especialidad</pre></div><div><p class="k">Botón</p><pre>Más información</pre></div><div><p class="k">Descripción</p><pre>Entrevista con admisiones</pre></div></div>
+      <div class="why"><p class="k">Por qué funciona</p><pre>Le trata como profesional. La especialidad marcada en la creatividad permite saber, desde el primer clic, a qué máster va cada solicitud, y que el asistente virtual pregunte ya por esa.</pre></div>
+      <div class="go"><div><p class="k">Lleva a</p><p>Formulario con la especialidad ya marcada y WhatsApp con dos huecos de entrevista.</p></div><a href="../whatsapp/">Ver la conversación →</a></div>
+      <div><p class="k">Qué medimos</p><ul class="mide">
+        <li class="main"><b>Coste por entrevista realizada, por especialidad</b><span>Qué máster se llena con anuncios y cuál no.</span></li>
+        <li><b>Entrevistas agendadas en menos de 24 h</b><span>Desde la solicitud.</span></li>
+        <li><b>Reservas de plaza por campaña</b><span>El dato final, en el panel.</span></li>
+      </ul></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- C -->
+<section class="sec angle" id="c"><div class="wrap">
+  <div class="ah"><span class="lt" aria-hidden="true">C</span><h2>C · Familias: «Tu hijo quiere estudiar cine»</h2><div class="meta">
+    <span><b>Ángulo</b>en el grado, la familia suele decidir con el alumno y paga; tiene preguntas distintas y nadie se las contesta en el anuncio</span>
+    <span><b>Público</b>40–58 años en Cataluña y resto de España, padres y madres de jóvenes de 16–19 años</span>
+    <span><b>Formato</b>cuadrado 1:1 en feed de Facebook, que es donde más está este público</span></div></div>
+  <div class="ads">
+    <figure><div class="ig">
+      <div class="h"><span class="av">ESCAC</span><div><b>escac</b><small>Publicidad</small></div><span class="dots">···</span></div>
+      <div class="cr sq"><span class="demo ej">Ejemplo</span>
+        <div class="qs"><b>Lo que suelen preguntar las familias</b><span>¿Qué salidas tiene estudiar cine?</span><span>¿Cómo es la entrevista o prueba de acceso?</span><span>¿Podemos visitar la escuela antes?</span></div>
+        <div class="btm"><p class="hk">¿Tu hijo quiere estudiar cine? <em>Resolvemos vuestras dudas.</em></p></div>
+        <p class="sub">Grado en Cine y Audiovisuales</p><span class="wm">ESCAC</span></div>
+      <div class="cta"><span>Solicitar información</span><span aria-hidden="true">›</span></div>
+      <p class="cap"><b>escac</b>Si tu hijo o tu hija quiere estudiar cine, es normal tener dudas. Te las resolvemos… <span>más</span></p>
+    </div><figcaption><b>Cuadrado 1:1</b> · tarjeta con las dudas típicas · las preguntas reales salen de vuestro equipo de admisiones</figcaption></figure>
+    <div class="copy">
+      <div class="hook"><p class="k">Gancho · primera frase</p><pre>¿Tu hijo o tu hija quiere estudiar cine?</pre></div>
+      <div><p class="k">Texto principal</p><pre>¿Tu hijo o tu hija quiere estudiar cine?
+
+Es normal tener dudas: qué se estudia, cómo es el acceso, qué salidas tiene. Lo mejor es verlo juntos.
+
+Déjanos tus datos y te proponemos una visita o una entrevista con admisiones, con tu hijo o hija y sin compromiso.</pre></div>
+      <div class="meta3"><div><p class="k">Titular</p><pre>Conoce el grado con tu familia</pre></div><div><p class="k">Botón</p><pre>Solicitar información</pre></div><div><p class="k">Descripción</p><pre>Visita o entrevista sin compromiso</pre></div></div>
+      <div class="why"><p class="k">Por qué funciona</p><pre>Si quien decide (y paga) no tiene respuestas, la solicitud del alumno se enfría. Este anuncio mete a la familia en la conversación desde el principio, y el asistente virtual ya sabe que la entrevista es para dos.</pre></div>
+      <div class="go"><div><p class="k">Lleva a</p><p>Formulario con «Vengo con mi familia» marcado y propuesta de visita.</p></div><a href="../landing/">Ver la landing →</a></div>
+      <div><p class="k">Qué medimos</p><ul class="mide">
+        <li class="main"><b>Visitas o entrevistas con familia realizadas</b><span>Y cuántas acaban en reserva de plaza.</span></li>
+        <li><b>Solicitudes de familia frente a alumno</b><span>Qué público convierte mejor.</span></li>
+        <li><b>No presentados</b><span>Cuántas citas se pierden pese a los recordatorios.</span></li>
+      </ul></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- D -->
+<section class="sec angle alt" id="d"><div class="wrap">
+  <div class="ah"><span class="lt" aria-hidden="true">D</span><h2>D · Internacional: «Estudia cine en Barcelona»</h2><div class="meta">
+    <span><b>Ángulo</b>a quien viene de fuera le pesan tres cosas: la ciudad, el idioma y los trámites; quiere hablar con alguien pronto</span>
+    <span><b>Público</b>22–32 años en Latinoamérica y Europa, intereses cine y estudiar en el extranjero; anuncio en español y en inglés</span>
+    <span><b>Formato</b>feed 4:5; la entrevista se propone por videollamada</span></div></div>
+  <div class="ads">
+    <figure><div class="ig">
+      <div class="h"><span class="av">ESCAC</span><div><b>escac</b><small>Publicidad</small></div><span class="dots">···</span></div>
+      <div class="cr"><span class="demo ej">Ejemplo</span>
+        <div class="film"><div><span>BARCELONA</span><span>TERRASSA</span><span>TU PELÍCULA</span></div></div>
+        <div class="btm"><p class="hk">Estudia cine en Barcelona. <em>Te ayudamos desde el primer mensaje.</em></p></div>
+        <p class="sub">Másters y grado · entrevista por videollamada</p><span class="wm">ESCAC</span></div>
+      <div class="cta"><span>Enviar mensaje</span><span aria-hidden="true">›</span></div>
+      <p class="cap"><b>escac</b>¿Quieres estudiar cine en Barcelona? Escríbenos desde donde estés: te respondemos en tu horario… <span>más</span></p>
+    </div><figcaption><b>Feed 4:5</b> · tira de película con CSS · versión en inglés: «Study film in Barcelona»</figcaption></figure>
+    <div class="copy">
+      <div class="hook"><p class="k">Gancho · primera frase</p><pre>¿Quieres estudiar cine en Barcelona?</pre></div>
+      <div><p class="k">Texto principal</p><pre>¿Quieres estudiar cine en Barcelona?
+
+Escríbenos desde donde estés. Te respondemos al momento, también si en tu país es de noche, y te proponemos una entrevista por videollamada con admisiones.
+
+Cuéntanos qué programa te interesa y cuándo quieres empezar.</pre></div>
+      <div class="meta3"><div><p class="k">Titular</p><pre>Estudia cine en Barcelona</pre></div><div><p class="k">Botón</p><pre>Enviar mensaje</pre></div><div><p class="k">Descripción</p><pre>Entrevista por videollamada</pre></div></div>
+      <div class="why"><p class="k">Por qué funciona</p><pre>Con otra zona horaria, una respuesta al día siguiente llega tarde. El anuncio abre directamente WhatsApp, y el asistente virtual contesta al instante en el idioma de la persona.</pre></div>
+      <div class="go"><div><p class="k">Lleva a</p><p>WhatsApp directo (anuncio de mensajes) con el asistente virtual de admisiones.</p></div><a href="../whatsapp/">Ver la conversación →</a></div>
+      <div><p class="k">Qué medimos</p><ul class="mide">
+        <li class="main"><b>Coste por videollamada realizada</b><span>Por país de origen.</span></li>
+        <li><b>Conversaciones fuera del horario de España</b><span>Las que sin asistente se habrían enfriado.</span></li>
+        <li><b>Reservas de plaza internacionales</b><span>El dato final, en el panel.</span></li>
+      </ul></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- E -->
+<section class="sec angle" id="e"><div class="wrap">
+  <div class="ah"><span class="lt" aria-hidden="true">E</span><h2>E · Visita: «Ven a ver la escuela por dentro»</h2><div class="meta">
+    <span><b>Ángulo</b>ver la escuela por dentro y hablar con admisiones convence más que cualquier anuncio; el anuncio solo tiene que conseguir que vengan</span>
+    <span><b>Público</b>a 150 km de Terrassa: interesados en el grado y sus familias, más quien ya pidió información</span>
+    <span><b>Formato</b>story y reel 9:16, con fecha concreta y reserva de sitio</span></div></div>
+  <div class="ads">
+    <figure><div class="s9" role="img" aria-label="Maqueta de story: entrada para la jornada de puertas abiertas">
+      <div class="pb"><i class="on"></i><i></i><i></i></div>
+      <div class="hd"><span class="av">ESCAC</span><b>escac</b><small>Publicidad</small><span class="x" aria-hidden="true">✕</span></div>
+      <span class="demo ej">Ejemplo</span>
+      <div class="ticket"><div class="m"><small>ENTRADA · PUERTAS ABIERTAS</small><b>Sábado 16 de enero</b><span>10:00 · Terrassa</span>Para futuros alumnos y familias</div><span class="st">Admite 2</span></div>
+      <div class="agenda"><span><b>10:00</b>Bienvenida y cómo es el grado</span><span><b>10:45</b>Visita a las instalaciones</span><span><b>11:30</b>Preguntas a admisiones</span></div>
+      <div class="bt"><p class="hk">Ven a ver la escuela <em>por dentro.</em></p><p class="sb">Reserva tu sitio: te mandamos la confirmación y un recordatorio por WhatsApp</p></div>
+      <div class="up"><span>Reservar mi sitio</span></div>
+    </div><figcaption><b>Story 9:16</b> · entrada «Admite 2» para que venga con su familia · fecha y programa: <span class="ej">Ejemplo</span></figcaption></figure>
+    <div class="copy">
+      <div class="hook"><p class="k">Gancho · primera frase</p><pre>Ven a ver la escuela por dentro.</pre></div>
+      <div><p class="k">Texto principal</p><pre>Ven a ver la escuela por dentro.
+
+Jornada de puertas abiertas el sábado 16 de enero a las 10:00, en Terrassa. Conoce las instalaciones y pregunta todo lo que quieras a admisiones.
+
+Reserva tu sitio y el de tu familia: te mandamos la confirmación por WhatsApp.</pre></div>
+      <div class="meta3"><div><p class="k">Titular</p><pre>Jornada de puertas abiertas</pre></div><div><p class="k">Botón</p><pre>Reservar</pre></div><div><p class="k">Descripción</p><pre>Sábado 16 de enero · Terrassa</pre></div></div>
+      <div class="why"><p class="k">Por qué funciona</p><pre>Una fecha concreta convierte el «ya miraré» en «ese sábado puedo». Y la reserva sigue sola: confirmación, recordatorio la víspera y el mismo día, y aviso a admisiones de quién viene y con quién.</pre></div>
+      <div class="go"><div><p class="k">Lleva a</p><p>Formulario de reserva de visita (cuántas personas, programa) y recordatorios por WhatsApp.</p></div><a href="../recorrido/">Ver el recorrido →</a></div>
+      <div><p class="k">Qué medimos</p><ul class="mide">
+        <li class="main"><b>Asistentes reales a la jornada</b><span>No reservas: personas que vienen.</span></li>
+        <li><b>% de asistencia sobre reservas</b><span>Lo que mejoran los recordatorios.</span></li>
+        <li><b>Entrevistas agendadas tras la visita</b><span>En los 7 días siguientes.</span></li>
+      </ul></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- F -->
+<section class="sec angle alt" id="f"><div class="wrap">
+  <div class="ah"><span class="lt" aria-hidden="true">F</span><h2>F · Remarketing: «Pediste información. Falta un paso»</h2><div class="meta">
+    <span><b>Ángulo</b>quien pidió información ya está interesado; si no agendó, casi siempre es por falta de un empujón, no de ganas</span>
+    <span><b>Público</b>solo quien pidió información en los últimos 30 días y no tiene entrevista ni visita agendada (lista del CRM); se excluye en cuanto agenda</span>
+    <span><b>Formato</b>story 9:16 con la conversación y los dos huecos; presupuesto pequeño</span></div></div>
+  <div class="ads">
+    <figure><div class="s9" role="img" aria-label="Maqueta de story: conversación de WhatsApp con dos huecos de entrevista">
+      <div class="pb"><i class="on"></i><i class="on"></i><i></i></div>
+      <div class="hd"><span class="av">ESCAC</span><b>escac</b><small>Publicidad</small><span class="x" aria-hidden="true">✕</span></div>
+      <span class="demo ej">Ejemplo</span>
+      <div class="chat"><p class="me">Hola, pedí información del grado pero no me dio tiempo a contestar<small>23:41</small></p><p>¡Sin problema! Soy el asistente virtual de admisiones. ¿Te va bien alguno de estos huecos para la entrevista?<small>23:41</small></p><span class="slots"><span>Martes 1 · 17:00</span><span>Jueves 3 · 11:30</span></span></div>
+      <div class="bt"><p class="hk">Pediste información. <em>Falta un paso.</em></p><p class="sb">Elige día para tu entrevista en un minuto, por WhatsApp</p></div>
+      <div class="up"><span>Enviar mensaje</span></div>
+    </div><figcaption><b>Story 9:16</b> · conversación del asistente virtual · chat y huecos: <span class="ej">Datos de ejemplo</span></figcaption></figure>
+    <div class="copy">
+      <div class="hook"><p class="k">Gancho · primera frase</p><pre>Pediste información. Falta un paso.</pre></div>
+      <div><p class="k">Texto principal</p><pre>Pediste información y se quedó a medias. Pasa mucho.
+
+El siguiente paso es una entrevista con admisiones: te explican el programa, el acceso y resuelves tus dudas.
+
+Escríbenos por WhatsApp y elige día en un minuto. Si vienes con tu familia, dínoslo.</pre></div>
+      <div class="meta3"><div><p class="k">Titular</p><pre>Elige día para tu entrevista</pre></div><div><p class="k">Botón</p><pre>Enviar mensaje</pre></div><div><p class="k">Descripción</p><pre>En un minuto, por WhatsApp</pre></div></div>
+      <div class="why"><p class="k">Por qué funciona</p><pre>Es el anuncio más barato y el más rentable: le habla a gente que ya levantó la mano. No vende la escuela otra vez, solo quita fricción al siguiente paso. Y no se ve nunca dos veces: en cuanto agenda, sale del público.</pre></div>
+      <div class="go"><div><p class="k">Lleva a</p><p>WhatsApp del asistente virtual, que reconoce la solicitud y propone dos huecos.</p></div><a href="../whatsapp/">Ver la conversación →</a></div>
+      <div><p class="k">Qué medimos</p><ul class="mide">
+        <li class="main"><b>Solicitudes recuperadas que agendan entrevista</b><span>De las que estaban paradas.</span></li>
+        <li><b>Coste por solicitud recuperada</b><span>Frente al coste de una solicitud nueva.</span></li>
+        <li><b>Días hasta agendar</b><span>Desde la primera solicitud.</span></li>
+      </ul></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap" style="display:grid;gap:14px">
+  <div class="sh"><div class="no"><b>EL REPARTO</b><span></span></div><h2>Con vuestro presupuesto actual <span class="ej">[E] estimación</span></h2></div>
+  <p class="lede" style="margin-bottom:4px">Sin subir lo que invertís hoy (500–999 €/mes). Un reparto de partida, que se mueve cada dos semanas hacia el anuncio que trae más entrevistas realizadas.</p>
+  <div class="card rep">
+    <div><span>A · Grado</span><u style="--w:30%"></u><b>30 %</b></div>
+    <div><span>B · Máster</span><u style="--w:25%"></u><b>25 %</b></div>
+    <div><span>C · Familias</span><u style="--w:10%"></u><b>10 %</b></div>
+    <div><span>D · Internacional</span><u style="--w:10%"></u><b>10 %</b></div>
+    <div><span>E · Puertas abiertas</span><u style="--w:15%"></u><b>15 %</b></div>
+    <div><span>F · Remarketing</span><u style="--w:10%"></u><b>10 %</b></div>
+    <p class="small muted">[E] Reparto propuesto por Qualivo, a ajustar con vuestro equipo según los programas que más os interese llenar. No es una previsión de resultados.</p>
+  </div>
+</div></section>
+
+<section class="sec alt"><div class="wrap" style="display:grid;gap:14px">
+  <div class="sh"><div class="no"><b>Y DESPUÉS</b><span></span></div><h2>El anuncio solo abre la conversación</h2></div>
+  <p class="lede" style="margin-bottom:6px">Lo que convierte una solicitud en matrícula es lo que pasa después: respuesta en minutos por WhatsApp, entrevista o visita agendada con recordatorios, seguimiento de la reserva de plaza a las 48 h y avisos al equipo de admisiones. Y un panel que dice qué campaña trae matrículas.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="../whatsapp/">Ver la conversación de WhatsApp →</a><a class="btn alt" href="../recorrido/">Recorrido de una solicitud</a><a class="btn alt" href="../landing/">Landing</a><a class="btn alt" href="../">Volver al plan</a></div>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <b>Qualivo</b>
+  <span><a href="https://qualivo.io">qualivo.io</a></span>
+  <p>Maqueta preparada el 27 de noviembre de 2026 para ESCAC. Las creatividades son maquetas en HTML/CSS, sin logo ni imágenes de la escuela; no son anuncios publicados. Textos, fechas, conversaciones y públicos son datos de ejemplo; el reparto marcado [E] es una estimación. Las cifras de inversión y solicitudes son las que nos indicasteis en el formulario. No es una página de ESCAC.</p>
+</div></footer>
+</body>
+</html>
