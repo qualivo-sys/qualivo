@@ -46,7 +46,8 @@
     { id: 'igma', txt: 'IGMA', desc: 'Producción musical y DJ en Vigo: petición, clase de prueba, familia y matrícula', ico: 'formacion', oculto: true },
     { id: 'dentalmarin', txt: 'Clínica Dental Marín', desc: 'Clínica dental con dos sedes, Patraix y Torrent: primera visita y presupuesto', ico: 'clinica', oculto: true },
     { id: 'hiagora', txt: 'Hiágora', desc: 'Escuela de ventas y consultoría comercial en Málaga: dossier, visita sin compromiso y contrato', ico: 'formacion', oculto: true },
-    { id: 'leanfinance', txt: 'Lean Finance', desc: 'Consultora financiera para pymes y startups: test de ENISA, llamada de diagnóstico y encargo', ico: 'b2b', oculto: true }
+    { id: 'leanfinance', txt: 'Lean Finance', desc: 'Consultora financiera para pymes y startups: test de ENISA, llamada de diagnóstico y encargo', ico: 'b2b', oculto: true },
+    { id: 'escac', txt: 'ESCAC', desc: 'Escuela de cine en Terrassa: solicitud de información, entrevista o prueba de acceso, presupuesto y matrícula', ico: 'formacion', oculto: true }
   ];
   const OBJETIVOS = [
     { id: 'captacion', txt: 'Captación' }, { id: 'conversion', txt: 'Conversión' }, { id: 'seguimiento', txt: 'Seguimiento' },
