@@ -9,68 +9,69 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Yeseva+One&display=swap">
 <style>
-/* Reunión de arranque, 27-nov. Versión sencilla: una idea por pantalla. Guion para Maikel en ./guion/. Detalle en ./detalle/.
-   Cifras de campañas: API de Meta, 25-nov-2026 [C]. Presupuesto: propuesta [E]. Personas y mensajes: de ejemplo. */
+/* Reunión de arranque, 27-nov 12:00. Pensada para dentistas: una idea por pantalla, muy visual. Guion en ./guion/. Detalle en ./detalle/.
+   Cifras de campañas: API de Meta, 25-nov-2026 [C]. Estimación de resultados y presupuesto: [E], rotulados. Personas y mensajes: de ejemplo. */
 :root{--ink:#1D2333;--mut:#5E667A;--bg:#FBFAF7;--soft:#F4F1EA;--line:#E6E0D4;--deep:#2F3854;--beige:#E2D3BA;--acc:#8C6E3F;
---blue:#2EA3F2;--ok:#1E8A5A;--okbg:#E5F3EC;--bad:#B5432F;--badbg:#F8E6E1;--wa:#E9FBE0;--wabg:#EFE7DD;
+--blue:#2EA3F2;--ok:#1E8A5A;--okbg:#E5F3EC;--bad:#B5432F;--badbg:#F8E6E1;--amb:#D9971E;--ambbg:#FCF0D6;--wa:#E9FBE0;--wabg:#EFE7DD;
 --serif:"Yeseva One",Georgia,serif;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth;overflow-x:clip;scroll-snap-type:y proximity}
 body{background:var(--bg);color:var(--ink);font:20px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
+svg{display:block}
 a{color:inherit}
 .top{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;gap:16px;padding:12px max(20px,env(safe-area-inset-right,0px)) 12px max(20px,env(safe-area-inset-left,0px));background:rgba(37,44,68,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
 .top img{height:26px;width:auto}
 .top .x{opacity:.5;font-size:14px}
 .top .q{font-weight:700;font-size:14px;letter-spacing:.04em;margin-right:auto}
 .top .cnt{font-size:13px;font-weight:600;opacity:.75;font-variant-numeric:tabular-nums}
-.s{min-height:100vh;min-height:100svh;padding:100px max(22px,env(safe-area-inset-right,0px)) 70px max(22px,env(safe-area-inset-left,0px));display:flex;align-items:center;scroll-snap-align:start}
+.s{min-height:100vh;min-height:100svh;padding:96px max(22px,env(safe-area-inset-right,0px)) 60px max(22px,env(safe-area-inset-left,0px));display:flex;align-items:center;scroll-snap-align:start}
 .s.alt{background:var(--soft)}
 .s.dark{background:var(--deep);color:#fff}
-.in{max-width:1100px;margin:0 auto;width:100%;min-width:0}
-.k{font:600 13px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:22px}
+.in{max-width:1140px;margin:0 auto;width:100%;min-width:0}
+.k{font:600 13px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:18px}
 .dark .k{color:var(--beige)}
 h1,h2{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.06;text-wrap:balance}
 h1{font-size:clamp(44px,7vw,90px);max-width:14ch}
-h2{font-size:clamp(34px,5vw,62px);max-width:18ch;margin-bottom:44px}
-.sub{font-size:clamp(19px,2vw,24px);color:var(--mut);max-width:40ch;margin:-24px 0 44px}
-.dark .sub{color:rgba(255,255,255,.78)}
-.src{margin-top:26px;font-size:13px;color:var(--mut)}
+h2{font-size:clamp(32px,4.4vw,56px);max-width:22ch;margin-bottom:34px}
+.src{margin-top:20px;font-size:13px;color:var(--mut)}
 .dark .src{color:rgba(255,255,255,.55)}
-.ej{display:inline-block;font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:5px 8px;background:#FFF1CF;color:#7A5600;vertical-align:middle}
+.tag{display:inline-block;font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:5px 8px;vertical-align:middle;white-space:nowrap}
+.tag.e{background:var(--ambbg);color:#7A5600}
+.tag.c{background:var(--okbg);color:var(--ok)}
+.dark .tag.c{background:rgba(255,255,255,.12);color:#9FE0BF}
+.dark .tag.e{background:rgba(255,255,255,.14);color:#F7D58A}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;min-width:0;box-shadow:0 24px 48px -38px rgba(29,35,51,.6)}
 
 /* 1 portada */
 .hero{background:linear-gradient(95deg,rgba(37,44,68,.95) 0%,rgba(47,56,84,.84) 50%,rgba(47,56,84,.4) 100%),url(../assets/brand/clinica.jpg) center/cover;color:#fff}
 .hero .logo{height:56px;width:auto;margin-bottom:46px}
-.hero p{font-size:clamp(19px,2.1vw,25px);opacity:.86;margin-top:26px;max-width:32ch}
+.hero p{font-size:clamp(19px,2.1vw,25px);opacity:.86;margin-top:26px;max-width:34ch}
 .hero .meta{margin-top:46px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
 
-/* 2 hecho */
-.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-.three > div{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px 26px;min-width:0;box-shadow:0 24px 48px -38px rgba(29,35,51,.6)}
-.three .ic{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--okbg);color:var(--ok);margin-bottom:22px}
-.three b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.12;margin-bottom:10px}
-.three p{font-size:17px;color:var(--mut)}
+/* 2 hoy en 4 preguntas */
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.four .card{padding:28px 22px}
+.four .ic{display:grid;place-items:center;width:60px;height:60px;border-radius:16px;background:var(--deep);color:#fff;margin-bottom:20px}
+.four small{display:block;font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--acc);margin-bottom:8px}
+.four b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(23px,2.2vw,28px);line-height:1.12}
 
-/* 3 lo que hemos visto */
-.vs{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end}
-.duo{display:flex;gap:40px;align-items:flex-end;height:330px;border-bottom:2px solid rgba(255,255,255,.3);padding:0 10px}
-.duo div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
-.duo i{display:block;width:100%;max-width:150px;border-radius:14px 14px 0 0}
-.duo strong{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,62px);line-height:1;margin-bottom:12px}
-.duo span{margin-top:12px;font-weight:700;font-size:18px;letter-spacing:.06em}
-.duo-l{display:flex;gap:40px;padding:0 10px}
-.duo-l span{flex:1;text-align:center;font-weight:700;padding-top:12px;font-size:18px}
-.say{font-family:var(--serif);font-size:clamp(26px,3vw,38px);line-height:1.2}
-.say em{font-style:normal;color:var(--beige)}
-.say + p{margin-top:22px;font-size:18px;color:rgba(255,255,255,.75)}
+/* 3 auditoría */
+.aud{display:grid;grid-template-columns:260px 1fr;gap:34px;align-items:stretch}
+.bign{display:grid;gap:14px;align-content:start}
+.bign div{border-left:3px solid var(--beige);padding:4px 0 4px 16px}
+.bign strong{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(34px,3.6vw,46px);line-height:1}
+.bign span{display:block;font-size:15px;opacity:.78;margin-top:6px;line-height:1.35}
+.bign .zero strong{color:#F3A48F}
+.qchart{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:20px 18px 14px;min-width:0}
+.qchart svg{width:100%;height:auto}
+.qleg{display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;opacity:.85;margin:0 0 6px 6px}
+.qleg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
 
 /* 4 funciona */
 .cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .cols3 > div{border-radius:22px;padding:28px 24px;min-width:0}
-.cols3 .g{background:var(--okbg)}
-.cols3 .b{background:var(--badbg)}
-.cols3 .o{background:#E3F2FD}
+.cols3 .g{background:var(--okbg)}.cols3 .b{background:var(--badbg)}.cols3 .o{background:#E3F2FD}
 .cols3 .h{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
 .cols3 .g .h{color:var(--ok)}.cols3 .b .h{color:var(--bad)}.cols3 .o .h{color:#0E6BA8}
 .cols3 .h i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;color:#fff;font-style:normal;font-size:18px}
@@ -79,32 +80,50 @@ h2{font-size:clamp(34px,5vw,62px);max-width:18ch;margin-bottom:44px}
 .cols3 p{font-size:17px;color:#3A4152}
 .cols3 .n{display:inline-block;margin-top:16px;font-weight:700;font-size:16px;background:#fff;border-radius:10px;padding:8px 12px}
 
-/* 5 plan */
-.plan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;position:relative}
-.plan > div{padding:0 30px 0 0;min-width:0;position:relative}
-.plan > div + div{padding-left:30px;border-left:1px solid rgba(255,255,255,.2)}
-.plan .num{font-family:var(--serif);font-size:84px;line-height:.9;color:var(--beige)}
-.plan b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.8vw,36px);line-height:1.1;margin:16px 0 14px}
-.plan p{font-size:18px;color:rgba(255,255,255,.8)}
-.plan ul{list-style:none;padding:0;margin-top:16px;display:grid;gap:8px;font-size:16px;color:rgba(255,255,255,.88)}
-.plan li::before{content:"✓";color:var(--beige);font-weight:700;margin-right:10px}
+/* 5 embudo */
+.fwrap{display:grid;grid-template-columns:1fr 300px;gap:34px;align-items:center}
+.funnel svg{width:100%;height:auto}
+.leak{display:grid;gap:14px}
+.leak > div{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;font-size:16px;line-height:1.4}
+.leak .d{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px}
+.leak b{display:block;font-size:17px}
 
-/* 6 paciente */
-.jr{display:grid;grid-template-columns:1fr 360px;gap:56px;align-items:center}
-.steps{list-style:none;padding:0;display:grid;gap:0;counter-reset:n}
-.steps li{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}
+/* 6 resultados */
+.res{display:grid;grid-template-columns:1.25fr .75fr;gap:34px;align-items:center}
+.rrow{display:grid;grid-template-columns:200px 1fr 120px;gap:16px;align-items:center;margin:10px 0}
+.rrow .l{font-weight:600;font-size:17px;line-height:1.25}
+.rrow .l small{display:block;font-weight:500;font-size:13.5px;opacity:.7}
+.rrow .tr{height:46px;border-radius:12px;background:rgba(255,255,255,.07);position:relative;overflow:hidden}
+.rrow .tr i{position:absolute;left:0;top:0;bottom:0;border-radius:12px;background:linear-gradient(90deg,#56618A,#7D88B3)}
+.rrow .tr u{position:absolute;top:0;bottom:0;border-radius:0 12px 12px 0;background:repeating-linear-gradient(135deg,rgba(226,211,186,.55) 0 6px,rgba(226,211,186,.25) 6px 12px);text-decoration:none}
+.rrow .v{font-family:var(--serif);font-size:30px;line-height:1;text-align:right;white-space:nowrap}
+.rrow.goal .tr i{background:linear-gradient(90deg,#2C9A69,#46BB87)}
+.rrow.goal .v{color:#9FE0BF}
+.rbox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:24px}
+.rbox strong{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(46px,5vw,64px);line-height:1;color:#9FE0BF}
+.rbox > span{display:block;font-size:16px;opacity:.85;margin:8px 0 18px}
+.rbox .plus span{display:block;font-size:16px;opacity:.85}
+.rbox p{font-size:15px;opacity:.78;line-height:1.5}
+.rbox p + p{margin-top:10px}
+.rbox .plus{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18)}
+.rbox .plus b{font-family:var(--serif);font-weight:400;font-size:28px;display:block}
+
+/* 7 paciente */
+.jr{display:grid;grid-template-columns:1fr 350px;gap:50px;align-items:center}
+.steps{list-style:none;padding:0}
+.steps li{display:grid;grid-template-columns:70px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--line);align-items:center}
 .steps li:first-child{border-top:1px solid var(--line)}
-.steps .t{font-weight:700;font-size:14px;color:var(--acc);letter-spacing:.04em;text-align:right}
-.steps b{display:block;font-size:20px}
-.steps span{font-size:16px;color:var(--mut)}
-.steps li.hl{background:linear-gradient(90deg,rgba(46,163,242,.1),transparent)}
-.ph{background:#111;border-radius:36px;padding:10px;box-shadow:0 34px 64px -34px rgba(29,35,51,.7);width:100%;max-width:360px;margin:0 auto}
+.steps .t{font-weight:700;font-size:14px;color:var(--acc);text-align:right;line-height:1.25}
+.steps b{display:block;font-size:19px}
+.steps span{font-size:15.5px;color:var(--mut)}
+.steps li.hl{background:linear-gradient(90deg,rgba(46,163,242,.12),transparent)}
+.ph{background:#111;border-radius:36px;padding:10px;box-shadow:0 34px 64px -34px rgba(29,35,51,.7);width:100%;max-width:350px;margin:0 auto}
 .ph .scr{background:var(--wabg);border-radius:28px;overflow:hidden}
 .ph .wh{display:flex;align-items:center;gap:10px;background:#075E54;color:#fff;padding:13px 15px}
 .ph .wh img{width:36px;height:36px;border-radius:50%;background:#fff;padding:5px;object-fit:contain}
 .ph .wh b{font-size:15px;display:block;line-height:1.2}
 .ph .wh small{font-size:12px;opacity:.8}
-.ph .msgs{padding:14px 11px 20px;display:grid;gap:9px}
+.ph .msgs{padding:14px 11px 18px;display:grid;gap:9px}
 .ph .when{justify-self:center;font-size:11.5px;font-weight:600;background:#E1F2FB;color:#41606F;padding:4px 10px;border-radius:8px}
 .ph .m{max-width:90%;font-size:14.5px;line-height:1.42;padding:9px 11px 6px;border-radius:11px;background:#fff;box-shadow:0 1px 1px rgba(0,0,0,.08)}
 .ph .m.me{justify-self:end;background:var(--wa)}
@@ -112,209 +131,350 @@ h2{font-size:clamp(34px,5vw,62px);max-width:18ch;margin-bottom:44px}
 .ph .opts{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
 .ph .opts span{font-size:13px;font-weight:600;color:#027EB5;background:#F1FAFE;border-radius:7px;padding:6px 9px}
 
-/* 7 vosotros */
-.board{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 30px 60px -44px rgba(29,35,51,.6)}
-.board .bh{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-.board .bh b{margin-right:auto;font-size:16px}
-.board .f{font:600 13px var(--sans);padding:7px 13px;border-radius:99px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
-.board .f.on{background:var(--deep);color:#fff;border-color:var(--deep)}
-.cols{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
-.col{background:var(--soft);border-radius:14px;padding:10px;min-height:220px;min-width:0}
-.col h4{font-size:14px;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between}
-.col h4 span{color:var(--mut)}
-.lc{background:#fff;border-radius:10px;padding:10px;font-size:13.5px;line-height:1.35;margin-bottom:8px;border:1px solid var(--line)}
-.lc b{display:block;font-size:14.5px}
-.lc .tr{color:var(--mut)}
-.lc i{display:inline-block;font-style:normal;font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;margin-top:6px;background:#EEF2F8;color:var(--deep)}
-.lc i.t{background:#E3F2FD;color:#0E6BA8}
-.lc .nx{margin-top:6px;font-size:12.5px;color:var(--acc);font-weight:600}
-.weekly{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
-.weekly div{display:flex;gap:14px;align-items:center;font-size:17px;min-width:0}
-.weekly .ic{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--deep);color:#fff;font-weight:700;font-size:13px}
-.weekly b{display:block}
-.weekly span{color:var(--mut);font-size:15px}
+/* 8 cómo lo usáis */
+.use{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.use > div{min-width:0}
+.use .st{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.use .st span{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--deep);color:#fff;font-family:var(--serif);font-size:20px;flex:none}
+.use .st b{font-size:19px;line-height:1.2}
+.notif{background:#1F2430;border-radius:24px;padding:16px;color:#fff;min-height:250px;display:grid;align-content:start;gap:10px}
+.notif .time{text-align:center;font-size:40px;font-weight:300;letter-spacing:-.02em;opacity:.95}
+.notif .date{text-align:center;font-size:12px;opacity:.7;margin-top:-8px;margin-bottom:6px}
+.notif .n{background:rgba(255,255,255,.14);border-radius:16px;padding:11px 12px;font-size:13.5px;line-height:1.35}
+.notif .n b{display:flex;justify-content:space-between;font-size:12px;opacity:.75;margin-bottom:3px;font-weight:600}
+.today{background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px;min-height:250px}
+.today h4{font-size:14px;display:flex;justify-content:space-between;margin-bottom:10px}
+.today h4 span{background:var(--bad);color:#fff;border-radius:99px;padding:1px 9px;font-size:12px}
+.task{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:9px 10px;margin-bottom:8px;font-size:13.5px;line-height:1.3}
+.task b{display:block;font-size:14px}
+.task small{color:var(--mut)}
+.task em{font-style:normal;font-size:11px;font-weight:700;padding:3px 7px;border-radius:6px;background:#EEF2F8;color:var(--deep);white-space:nowrap}
+.task em.t{background:#E3F2FD;color:#0E6BA8}
+.act{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;min-height:250px}
+.act .who{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.act .av{width:42px;height:42px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-weight:700;color:var(--deep)}
+.act .who b{display:block;font-size:15px}.act .who small{color:var(--mut);font-size:13px}
+.act .bt{display:grid;gap:8px}
+.act .bt span{display:flex;align-items:center;gap:10px;border-radius:12px;padding:11px 12px;font-weight:700;font-size:14.5px}
+.act .bt .a{background:#25D366;color:#fff}.act .bt .b{background:var(--deep);color:#fff}.act .bt .c{background:var(--soft);color:var(--ink)}
+.usefoot{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+.usefoot span{background:#fff;border:1px solid var(--line);border-radius:99px;padding:9px 16px;font-size:15px}
+.usefoot b{color:var(--acc)}
 
-/* 8 inversión y fechas */
-.money{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
-.eur{font-family:var(--serif);font-size:clamp(72px,10vw,128px);line-height:.95}
-.eur small{display:block;font-family:var(--sans);font-size:20px;font-weight:500;opacity:.8;margin-top:14px;line-height:1.4}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
-.split div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:14px 16px;font-size:16px}
-.split b{display:block;font-size:22px;font-family:var(--serif);font-weight:400}
-.dates{list-style:none;padding:0;border-left:2px solid rgba(226,211,186,.5);display:grid;gap:26px;margin-left:10px}
-.dates li{position:relative;padding-left:30px}
-.dates li::before{content:"";position:absolute;left:-9px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--deep);border:3px solid var(--beige)}
-.dates li.on::before{background:var(--beige)}
-.dates small{display:block;font-weight:700;letter-spacing:.14em;font-size:13px;color:var(--beige);text-transform:uppercase}
-.dates b{display:block;font-size:22px;margin:4px 0 2px}
-.dates span{font-size:16px;color:rgba(255,255,255,.75)}
+/* 9 resumen viernes */
+.rep{display:grid;grid-template-columns:420px 1fr;gap:46px;align-items:center}
+.mail{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 34px 64px -40px rgba(0,0,0,.6);color:var(--ink)}
+.mail .hd{background:var(--deep);color:#fff;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.15)}
+.mail .hd small{display:block;font-size:12px;letter-spacing:.12em;opacity:.7;text-transform:uppercase}
+.mail .hd b{font-family:var(--serif);font-weight:400;font-size:24px}
+.mail .bd{padding:18px 20px}
+.kp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.kp div{background:var(--soft);border-radius:12px;padding:12px}
+.kp strong{display:block;font-family:var(--serif);font-weight:400;font-size:32px;line-height:1}
+.kp span{font-size:13px;color:var(--mut)}
+.kp .g{background:var(--okbg)}.kp .g strong{color:var(--ok)}
+.mail .ln{font-size:14.5px;line-height:1.5;padding:9px 0;border-top:1px solid var(--line)}
+.mail .ln b{color:var(--deep)}
+.mail .ft{font-size:12px;color:var(--mut);padding:0 20px 16px}
+.repR h2{margin-bottom:22px}
+.repR ul{list-style:none;padding:0;display:grid;gap:14px}
+.repR li{display:flex;gap:14px;align-items:flex-start;font-size:18px;line-height:1.4}
+.repR li i{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.12);color:var(--beige);font-style:normal;font-weight:700;font-size:14px}
 
-/* 9 necesitamos */
-.need{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.need li{display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;min-width:0}
-.need .nm{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--deep);color:#fff;font-family:var(--serif);font-size:22px}
-.need b{display:block;font-size:20px;margin-bottom:3px}
-.need span{font-size:16px;color:var(--mut)}
-.after{margin-top:26px;font-size:16px;color:var(--mut)}
-.after a{color:var(--deep);font-weight:600}
+/* 10 calendario */
+.cal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.cal .dh{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--mut);text-transform:uppercase;padding:0 6px}
+.day{background:#fff;border:1px solid var(--line);border-radius:12px;min-height:96px;padding:7px 8px;font-size:12.5px;line-height:1.3;min-width:0}
+.day .d{font-weight:700;font-size:13px;color:var(--mut);display:flex;justify-content:space-between;align-items:center}
+.day.past{background:#F3F6F1}
+.day.today{border:2px solid var(--bad)}
+.day.today .d::after{content:"HOY";font-size:10.5px;color:#fff;background:var(--bad);border-radius:5px;padding:2px 6px;letter-spacing:.06em}
+.day.off{background:transparent;border-style:dashed;color:var(--mut)}
+.ch{display:block;border-radius:7px;padding:4px 6px;margin-top:5px;font-weight:600;font-size:12px}
+.ch.q{background:#E3E7F3;color:var(--deep)}
+.ch.c{background:var(--ambbg);color:#7A5600}
+.ch.d{background:var(--okbg);color:var(--ok)}
+.ch.r{background:var(--deep);color:#fff}
+.wk{grid-column:1/-1;font-weight:700;font-size:13px;color:var(--acc);letter-spacing:.06em;margin:8px 0 -2px 2px;text-transform:uppercase}
+.calleg{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:14px}
+.calleg span{display:inline-flex;align-items:center;gap:8px}
+.calleg i{width:14px;height:14px;border-radius:4px;display:inline-block}
 
+/* 11 inversión */
+.money{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.eur{font-family:var(--serif);font-size:clamp(76px,10vw,128px);line-height:.95}
+.eur small{display:block;font-family:var(--sans);font-size:20px;font-weight:500;opacity:.82;margin-top:14px;line-height:1.4}
+.cmp{display:grid;gap:16px}
+.cmp .row{display:grid;grid-template-columns:150px 1fr 110px;gap:14px;align-items:center;font-size:16px}
+.cmp .tr{height:40px;border-radius:10px;background:rgba(255,255,255,.08);overflow:hidden}
+.cmp .tr i{display:block;height:100%;border-radius:10px}
+.cmp b{font-family:var(--serif);font-weight:400;font-size:26px;text-align:right}
+.who2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.who2 div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:14px 16px;font-size:15.5px;line-height:1.4}
+.who2 b{display:block;font-size:13px;letter-spacing:.12em;color:var(--beige);text-transform:uppercase;margin-bottom:4px}
+
+/* 12 necesitamos */
+.need{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.need li{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0}
+.need .nm{flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--deep);color:#fff;font-family:var(--serif);font-size:21px}
+.need b{display:block;font-size:19px;margin-bottom:2px}
+.need span{font-size:15.5px;color:var(--mut)}
+
+/* 13 cierre */
+.close3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.close3 div{border-top:1px solid rgba(255,255,255,.25);padding-top:18px}
+.close3 small{display:block;font-weight:700;letter-spacing:.14em;font-size:13px;color:var(--beige);text-transform:uppercase;margin-bottom:8px}
+.close3 b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.15}
+.links{margin-top:46px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:rgba(255,255,255,.7)}
+.links a{text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px}
 .foot{padding:26px 22px 34px;text-align:center;font-size:12.5px;color:var(--mut)}
+
+@media (max-width:1000px){
+  .four{grid-template-columns:1fr 1fr}
+  .use{grid-template-columns:1fr}
+  .rep{grid-template-columns:1fr}
+  .mail{max-width:460px}
+}
 @media (max-width:900px){
-  .three,.cols3,.plan,.need,.weekly,.split{grid-template-columns:1fr}
-  .plan > div,.plan > div + div{padding:24px 0;border-left:0;border-bottom:1px solid rgba(255,255,255,.2)}
-  .vs,.jr,.money{grid-template-columns:1fr;gap:36px}
-  .duo{height:250px}
-  .cols{grid-template-columns:repeat(5,minmax(150px,1fr));overflow-x:auto}
+  .aud,.cols3,.fwrap,.res,.jr,.money,.need,.close3,.who2{grid-template-columns:1fr}
+  .rrow{grid-template-columns:120px 1fr 86px;gap:10px}
+  .rrow .v{font-size:22px}
+  .rrow .l{font-size:14.5px}
+  .cmp .row{grid-template-columns:100px 1fr 86px}
+  .calwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .cal{min-width:760px}
   .top .q{display:none}.top{justify-content:space-between}
   html{scroll-snap-type:none}
   .s{min-height:auto}
   body{font-size:18px}
 }
+@media (max-width:560px){.four{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header class="top">
   <img src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental"><span class="x">×</span><span class="q">QUALIVO</span>
-  <span class="cnt" id="cnt">1 / 9</span>
+  <span class="cnt" id="cnt">1 / 13</span>
 </header>
 
-<!-- 1 -->
+<!-- 1 · Portada -->
 <section class="s hero" id="p1">
   <div class="in">
     <img class="logo" src="../assets/brand/logo-marin-blanco.png" alt="Marín Clínica Dental">
     <h1>Más pacientes en Patraix y en Torrent</h1>
-    <p>Lo que hemos visto en vuestros anuncios y cómo arrancamos la semana que viene.</p>
-    <div class="meta">Reunión de arranque · 27 de noviembre</div>
+    <p>Qué ha pasado con vuestros anuncios, qué vamos a hacer, qué resultados esperamos y cómo lo vais a usar vosotros.</p>
+    <div class="meta">Reunión de arranque · viernes 27 de noviembre</div>
   </div>
 </section>
 
-<!-- 2 -->
+<!-- 2 · Hoy, en cuatro preguntas -->
 <section class="s" id="p2">
   <div class="in">
-    <div class="k">Esta semana</div>
-    <h2>Ya está todo a vuestro nombre</h2>
-    <div class="three">
-      <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>Vuestra cuenta de anuncios</b><p>Nueva, en vuestro Business Manager y con vuestra tarjeta. Si un día nos vamos, sigue siendo vuestra.</p></div>
-      <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>Vuestra página conectada</b><p>Ya vemos quién os escribe desde los anuncios.</p></div>
-      <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><b>827 personas recuperadas</b><p>Gente que ya os pidió información. Vamos a volver a escribirles.</p></div>
+    <div class="k">Hoy, en 20 minutos</div>
+    <h2>Cuatro preguntas</h2>
+    <div class="four">
+      <div class="card"><div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-4 3 3 5-6"/></svg></div><small>1</small><b>¿Qué ha pasado con vuestros anuncios?</b></div>
+      <div class="card"><div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></div><small>2</small><b>¿Qué vamos a hacer?</b></div>
+      <div class="card"><div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8" fill="currentColor"/></svg></div><small>3</small><b>¿Qué resultados esperamos?</b></div>
+      <div class="card"><div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></div><small>4</small><b>¿Cómo lo vais a usar vosotros?</b></div>
     </div>
   </div>
 </section>
 
-<!-- 3 -->
+<!-- 3 · Auditoría -->
 <section class="s dark" id="p3">
-  <div class="in vs">
-    <div>
-      <div class="k">Lo que hemos visto</div>
-      <div class="duo">
-        <div><strong>4 €</strong><i style="height:33%;background:#8FA0C9"></i></div>
-        <div><strong>12 €</strong><i style="height:100%;background:var(--beige)"></i></div>
+  <div class="in">
+    <div class="k">1 · Qué ha pasado</div>
+    <h2>Cada vez cuesta más conseguir a alguien interesado</h2>
+    <div class="aud">
+      <div class="bign">
+        <div><strong>26.263 €</strong><span>invertidos en anuncios desde febrero de 2024</span></div>
+        <div><strong>3.011</strong><span>personas han rellenado el formulario</span></div>
+        <div class="zero"><strong>¿?</strong><span>cuántas acabaron siendo pacientes: no se ha medido nunca</span></div>
       </div>
-      <div class="duo-l"><span>2024</span><span>2026</span></div>
-      <p class="src">Lo que cuesta, de media, cada persona que rellena el formulario. Vuestra cuenta de anuncios, API de Meta, 25-nov.</p>
+      <div class="qchart">
+        <div class="qleg"><span><i style="background:#3FB07D"></i>Barato (menos de 6 €)</span><span><i style="background:#E0A63A"></i>Normal (6-12 €)</span><span><i style="background:#D86A52"></i>Caro (más de 12 €)</span></div>
+        <svg id="qc" viewBox="0 0 860 360" role="img" aria-label="Coste por persona interesada, por trimestre, de 2024 a 2026"></svg>
+      </div>
     </div>
-    <div>
-      <p class="say">Cada persona interesada os cuesta hoy <em>el triple</em> que hace dos años.</p>
-      <p>Y nadie sabe cuántas de ellas acaban sentándose en el sillón. Eso es lo primero que vamos a cambiar.</p>
-    </div>
+    <p class="src">Lo que costó, de media, cada persona que rellenó el formulario, por trimestres. Vuestra cuenta de anuncios (API de Meta, 25-nov-2026) <span class="tag c">Real</span></p>
   </div>
 </section>
 
-<!-- 4 -->
+<!-- 4 · Qué funciona -->
 <section class="s" id="p4">
   <div class="in">
-    <div class="k">Qué funciona</div>
+    <div class="k">1 · Qué ha pasado</div>
     <h2>Lo que vamos a repetir y lo que no</h2>
     <div class="cols3">
       <div class="g"><div class="h"><i>✓</i>Funciona</div><b>Ofertas concretas y vídeos en la clínica</b><p>La limpieza a 29,90 €, el blanqueamiento a 99 € y los vídeos de implantes grabados con vosotros.</p><span class="n">3 a 7 € por persona</span></div>
-      <div class="b"><div class="h"><i>✕</i>No funciona</div><b>Ortodoncia, tal y como está</b><p>Es la campaña que más gasta ahora mismo y la que más cara sale.</p><span class="n">40 € por persona</span></div>
+      <div class="b"><div class="h"><i>✕</i>No funciona</div><b>Ortodoncia, tal y como está</b><p>Es lo que más gasta ahora mismo y lo que más caro sale.</p><span class="n">40 € por persona</span></div>
       <div class="o"><div class="h"><i>+</i>Sin estrenar</div><b>Torrent</b><p>Los anuncios se han enseñado siempre alrededor de Patraix. En Torrent empezamos de cero, con sus propios anuncios.</p><span class="n">Nueva oportunidad</span></div>
     </div>
   </div>
 </section>
 
-<!-- 5 -->
-<section class="s dark" id="p5">
+<!-- 5 · Embudo -->
+<section class="s alt" id="p5">
   <div class="in">
-    <div class="k">El plan</div>
-    <h2>Tres cosas, nada más</h2>
-    <div class="plan">
-      <div><div class="num">1</div><b>Anuncios que traen pacientes</b><p>Dos campañas en vez de trece.</p><ul><li>Primera visita (limpieza, blanqueamiento)</li><li>Implantes, con vuestros vídeos</li><li>Patraix y Torrent, cada una con lo suyo</li></ul></div>
-      <div><div class="num">2</div><b>Respuesta en minutos</b><p>Quien rellena el formulario recibe un WhatsApp al momento, con huecos para venir.</p><ul><li>Recordatorio el día antes</li><li>Si no viene, se le ofrece otro día</li></ul></div>
-      <div><div class="num">3</div><b>Seguimiento hasta el sí</b><p>Después del presupuesto, nadie se queda sin una llamada o un mensaje.</p><ul><li>Al día siguiente, a los 3 días y a la semana</li><li>Sabemos qué anuncio trae pacientes, no solo contactos</li></ul></div>
+    <div class="k">2 · Qué vamos a hacer</div>
+    <h2>El camino del paciente, y dónde se pierde hoy</h2>
+    <div class="fwrap">
+      <div class="funnel"><svg id="fn" viewBox="0 0 760 470" role="img" aria-label="Embudo: anuncio, formulario, WhatsApp, cita, visita, tratamiento"></svg></div>
+      <div class="leak">
+        <div><span class="d" style="background:var(--bad)">!</span><div><b>Hoy se pierde aquí</b>Se tarda en contestar y la persona ya ha pedido cita en otra clínica.</div></div>
+        <div><span class="d" style="background:var(--bad)">!</span><div><b>Y aquí</b>Después del presupuesto, nadie vuelve a escribir.</div></div>
+        <div><span class="d" style="background:var(--ok)">✓</span><div><b>Lo que ponemos</b>WhatsApp en 2 minutos, recordatorios y seguimiento hasta que decide.</div></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 6 -->
-<section class="s alt" id="p6">
+<!-- 6 · Resultados -->
+<section class="s dark" id="p6">
+  <div class="in">
+    <div class="k">3 · Qué resultados esperamos</div>
+    <h2>Lo que puede dar un mes con 450 €</h2>
+    <div class="res">
+      <div id="rr"></div>
+      <div class="rbox">
+        <strong>5-10</strong>
+        <span>tratamientos aceptados al mes</span>
+        <p>Calculado con lo que ya consiguen vuestros mejores anuncios (6-9 € por persona) y lo habitual en clínicas que contestan rápido y hacen seguimiento.</p>
+        <p><span class="tag e">Estimación</span> No es una promesa: el 11 de diciembre lo comprobamos con vuestros números reales.</p>
+        <div class="plus"><b>+ 827</b><span>personas que ya os pidieron información y a las que vamos a volver a escribir.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Lo que vive el paciente -->
+<section class="s alt" id="p7">
   <div class="in jr">
     <div>
-      <div class="k">Lo que vive el paciente</div>
-      <h2 style="margin-bottom:30px">Del anuncio al sillón</h2>
+      <div class="k">2 · Qué vamos a hacer</div>
+      <h2 style="margin-bottom:26px">Lo que vive el paciente</h2>
       <ol class="steps">
         <li><span class="t">Día 0</span><div><b>Ve el anuncio y pide información</b><span>Unas preguntas rápidas: qué le interesa, en qué sede y cuándo puede venir.</span></div></li>
-        <li class="hl"><span class="t">2 min</span><div><b>Le escribís por WhatsApp</b><span>Con dos huecos concretos. Así es la pantalla de al lado.</span></div></li>
+        <li class="hl"><span class="t">2 min</span><div><b>Recibe un WhatsApp</b><span>Con dos huecos concretos para venir. Así es la pantalla de al lado.</span></div></li>
         <li><span class="t">Día antes</span><div><b>Recordatorio de la cita</b><span>Confirma con un toque. Si no puede, la cambia.</span></div></li>
         <li><span class="t">Visita</span><div><b>El doctor le explica el tratamiento</b><span>Se lleva el presupuesto por email, con la financiación.</span></div></li>
-        <li><span class="t">+1 · +3 · +7</span><div><b>Seguimiento hasta que decide</b><span>Un mensaje amable para resolver dudas.</span></div></li>
+        <li><span class="t">+1 · +3<br>+7 días</span><div><b>Seguimiento hasta que decide</b><span>Un mensaje amable para resolver dudas.</span></div></li>
       </ol>
     </div>
     <div class="ph"><div class="scr">
       <div class="wh"><img src="../assets/brand/logo-marin.png" alt=""><div><b>Marín Clínica Dental</b><small>Patraix</small></div></div>
       <div class="msgs">
         <span class="when">2 minutos después del formulario</span>
-        <div class="m">¡Hola, Marta! 👋 Soy de Marín Clínica Dental, en Patraix. Hemos recibido tu solicitud para la <b>limpieza</b>.<br><br>¿Te viene bien alguno de estos huecos?<div class="opts"><span>Mar 1 · 10:30</span><span>Mié 2 · 17:00</span><span>Otro día</span></div><small>10:42</small></div>
+        <div class="m">¡Hola, Marta! 👋 Te escribimos de Marín Clínica Dental, en Patraix. Hemos recibido tu solicitud para la <b>limpieza</b>.<br><br>¿Te viene bien alguno de estos huecos?<div class="opts"><span>Mar 1 · 10:30</span><span>Mié 2 · 17:00</span><span>Otro día</span></div><small>10:42</small></div>
         <div class="m me">El miércoles a las 5 perfecto<small>10:47 ✓✓</small></div>
-        <div class="m">¡Hecho! Te esperamos el <b>miércoles a las 17:00</b>. Te mando la ubicación 📍<small>10:47</small></div>
+        <div class="m">¡Hecho! Te esperamos el <b>miércoles a las 17:00</b>. Te mandamos la ubicación 📍<small>10:47</small></div>
       </div>
     </div></div>
   </div>
 </section>
 
-<!-- 7 -->
-<section class="s" id="p7">
+<!-- 8 · Cómo lo usáis -->
+<section class="s" id="p8">
   <div class="in">
-    <div class="k">Lo que veis vosotros</div>
-    <h2>Cada paciente, en qué punto está</h2>
-    <div class="board">
-      <div class="bh"><b>Pacientes nuevos</b><button class="f on" data-s="all">Las dos sedes</button><button class="f" data-s="P">Patraix</button><button class="f" data-s="T">Torrent</button><span class="ej">Ejemplo</span></div>
-      <div class="cols" id="cols"></div>
+    <div class="k">4 · Cómo lo usáis vosotros</div>
+    <h2>Recepción, en tres toques</h2>
+    <div class="use">
+      <div>
+        <div class="st"><span>1</span><b>Os llega un aviso</b></div>
+        <div class="notif">
+          <div class="time">10:42</div><div class="date">martes, 1 de diciembre</div>
+          <div class="n"><b><span>Marín · Patraix</span><span>ahora</span></b>Nueva petición: <strong>Marta R.</strong> · Limpieza. Ya le hemos escrito por WhatsApp.</div>
+          <div class="n"><b><span>Marín · Torrent</span><span>9:15</span></b>Javier S. ha confirmado su cita de mañana a las 10:00 ✅</div>
+        </div>
+      </div>
+      <div>
+        <div class="st"><span>2</span><b>Miráis «Hoy toca»</b></div>
+        <div class="today">
+          <h4>Hoy toca <span>4</span></h4>
+          <div class="task"><div><b>Andrés P.</b><small>No contesta al WhatsApp · Implantes</small></div><em class="t">Torrent</em></div>
+          <div class="task"><div><b>Tomás B.</b><small>Presupuesto, día 3 · Implantes</small></div><em>Patraix</em></div>
+          <div class="task"><div><b>Lucía M.</b><small>Pregunta por la financiación</small></div><em>Patraix</em></div>
+          <div class="task"><div><b>Elena F.</b><small>No vino ayer · Prótesis</small></div><em class="t">Torrent</em></div>
+        </div>
+      </div>
+      <div>
+        <div class="st"><span>3</span><b>Un toque y listo</b></div>
+        <div class="act">
+          <div class="who"><span class="av">TB</span><div><b>Tomás B.</b><small>Implantes · presupuesto entregado</small></div></div>
+          <div class="bt"><span class="a">💬 Escribir por WhatsApp</span><span class="b">📞 Llamar</span><span class="c">✅ Ha aceptado</span><span class="c">🗓️ Recordar en 1 mes</span></div>
+        </div>
+      </div>
     </div>
-    <div class="weekly">
-      <div><span class="ic">HOY</span><div><b>Aviso al momento</b><span>Cada petición nueva, a quien la atiende en su sede.</span></div></div>
-      <div><span class="ic">VIE</span><div><b>Resumen cada viernes</b><span>Cuántos pidieron, vinieron y aceptaron.</span></div></div>
-      <div><span class="ic">MES</span><div><b>Revisión con vosotros</b><span>Qué funciona y dónde poner más.</span></div></div>
-    </div>
+    <div class="usefoot"><span><b>Desde el móvil o el ordenador</b> de recepción</span><span><b>Cada sede</b> ve solo lo suyo</span><span><b>Os enseñamos</b> a usarlo en 30 minutos</span><span class="tag e" style="align-self:center">Personas de ejemplo</span></div>
   </div>
 </section>
 
-<!-- 8 -->
-<section class="s dark" id="p8">
-  <div class="in money">
-    <div>
-      <div class="k">Inversión en anuncios</div>
-      <div class="eur">450 €<small>al mes para empezar (15 € al día), pagados directamente a Meta con vuestra tarjeta.</small></div>
-      <div class="split"><div><b>Patraix</b>Primera visita e implantes</div><div><b>Torrent</b>Primera visita e implantes</div></div>
-      <p class="src">Propuesta para empezar: es menos de la mitad de lo que se invierte hoy. Cuando veamos qué trae pacientes, subimos ahí.</p>
+<!-- 9 · Resumen del viernes -->
+<section class="s dark" id="p9">
+  <div class="in rep">
+    <div class="mail">
+      <div class="hd"><small>Resumen semanal · viernes</small><b>Marín · semana del 7 al 11 dic</b></div>
+      <div class="bd">
+        <div class="kp">
+          <div><strong>16</strong><span>pidieron información</span></div>
+          <div><strong>8</strong><span>con cita</span></div>
+          <div><strong>6</strong><span>vinieron</span></div>
+          <div class="g"><strong>2</strong><span>aceptaron tratamiento</span></div>
+        </div>
+        <div class="ln"><b>Lo mejor:</b> el vídeo de implantes en Torrent.</div>
+        <div class="ln"><b>Cambiamos:</b> el anuncio de limpieza de Patraix, que se ha encarecido.</div>
+        <div class="ln"><b>Para vosotros:</b> 3 presupuestos pendientes de respuesta.</div>
+      </div>
+      <div class="ft"><span class="tag e">Ejemplo</span> Cifras inventadas para enseñar el formato.</div>
     </div>
-    <div>
-      <div class="k">Fechas</div>
-      <ul class="dates">
-        <li class="on"><small>Hoy</small><b>Cerramos los detalles</b><span>Tratamientos, financiación y datos de cada sede.</span></li>
-        <li><small>Lunes 30 noviembre</small><b>Os pasamos los textos</b><span>Anuncios y mensajes, para que los aprobéis.</span></li>
-        <li><small>1-4 diciembre</small><b>Arrancan los anuncios nuevos</b><span>Los de ahora siguen hasta que la agencia salga.</span></li>
-        <li><small>Viernes 11 diciembre</small><b>Primer resumen</b><span>Vuestros primeros números.</span></li>
+    <div class="repR">
+      <div class="k">4 · Cómo lo usáis vosotros</div>
+      <h2>Cada viernes, un resumen en el móvil</h2>
+      <ul>
+        <li><i>1</i>Cuántas personas pidieron información, vinieron y aceptaron.</li>
+        <li><i>2</i>Qué anuncio y qué sede funcionan mejor.</li>
+        <li><i>3</i>Qué hemos cambiado y qué os toca a vosotros.</li>
+        <li><i>€</i>Cuánto os cuesta cada paciente, no cada clic.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- 9 -->
-<section class="s" id="p9">
+<!-- 10 · Calendario -->
+<section class="s alt" id="p10">
   <div class="in">
-    <div class="k">Lo que necesitamos de vosotros</div>
-    <h2>Seis cosas y arrancamos</h2>
+    <div class="k">Calendario</div>
+    <h2>Qué pasa cada día, hasta Navidad</h2>
+    <div class="calwrap"><div class="cal" id="cal"></div></div>
+    <div class="calleg"><span><i style="background:#E3E7F3"></i>Lo hacemos nosotros</span><span><i style="background:var(--ambbg)"></i>Lo hacéis vosotros</span><span><i style="background:var(--deep)"></i>Hito</span><span><i style="background:var(--okbg)"></i>Hecho</span></div>
+  </div>
+</section>
+
+<!-- 11 · Inversión -->
+<section class="s dark" id="p11">
+  <div class="in money">
+    <div>
+      <div class="k">Inversión en anuncios</div>
+      <div class="eur">450 €<small>al mes para empezar, 15 € al día. Lo pagáis directamente a Meta con vuestra tarjeta.</small></div>
+      <div class="who2"><div><b>Patraix</b>Primera visita e implantes</div><div><b>Torrent</b>Primera visita e implantes</div></div>
+    </div>
+    <div>
+      <div class="k">Comparado con hoy</div>
+      <div class="cmp">
+        <div class="row"><span>Hoy, con la agencia</span><div class="tr"><i style="width:100%;background:#8FA0C9"></i></div><b>~1.300 €</b></div>
+        <div class="row"><span>Para empezar</span><div class="tr"><i style="width:33%;background:var(--beige)"></i></div><b>450 €</b></div>
+      </div>
+      <p class="src" style="font-size:15px;margin-top:22px">Empezamos con menos de la mitad mientras la agencia sigue. Cuando veamos qué trae pacientes, ponemos más ahí. <span class="tag e">Propuesta</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 12 · Necesitamos -->
+<section class="s" id="p12">
+  <div class="in">
+    <div class="k">Para arrancar</div>
+    <h2>Seis cosas que necesitamos de vosotros</h2>
     <ul class="need">
       <li><span class="nm">1</span><div><b>Qué tratamientos queréis llenar</b><span>En Patraix y en Torrent.</span></div></li>
       <li><span class="nm">2</span><div><b>Qué financiación podemos anunciar</b><span>Las condiciones exactas.</span></div></li>
@@ -323,34 +483,107 @@ h2{font-size:clamp(34px,5vw,62px);max-width:18ch;margin-bottom:44px}
       <li><span class="nm">5</span><div><b>Acceso a Clinic</b><span>Para saber qué presupuestos se aceptan.</span></div></li>
       <li><span class="nm">6</span><div><b>Quién lleva la web</b><span>Para medir las citas que llegan por ahí.</span></div></li>
     </ul>
-    <p class="after">Y cuando podáis: fotos, vídeos y reseñas que podamos usar. ¿Queréis ver más detalle? <a href="detalle/">Plan completo</a></p>
+    <p class="src" style="font-size:15px">Y cuando podáis: fotos, vídeos y reseñas que podamos usar.</p>
   </div>
 </section>
 
-<p class="foot">Preparado por Qualivo para Marín Clínica Dental. Cifras de anuncios: vuestra cuenta, API de Meta (25-nov-2026). Personas y mensajes: de ejemplo.</p>
+<!-- 13 · Cierre -->
+<section class="s dark" id="p13">
+  <div class="in">
+    <div class="k">Resumen</div>
+    <h2>Lo que os llevamos de esta reunión</h2>
+    <div class="close3">
+      <div><small>Qué hacemos</small><b>Dos campañas, WhatsApp en 2 minutos y seguimiento hasta el sí.</b></div>
+      <div><small>Qué esperamos</small><b>Entre 5 y 10 tratamientos al mes para empezar, y medido.</b></div>
+      <div><small>Qué hacéis vosotros</small><b>Mirar «Hoy toca» y leer el resumen del viernes.</b></div>
+    </div>
+    <div class="links"><a href="detalle/">Plan completo</a><a href="../demo/">CRM en directo</a><a href="../recorrido/">Recorrido del paciente</a><a href="../anuncios/">Anuncios</a></div>
+  </div>
+</section>
+
+<p class="foot">Preparado por Qualivo para Marín Clínica Dental. Cifras de anuncios: vuestra cuenta (API de Meta, 25-nov-2026). Resultados: estimación. Personas y mensajes: de ejemplo.</p>
 
 <script>
 (function(){
-  var st=['Nuevo','Con cita','Vino','Presupuesto','Aceptado'];
-  var L=[['Marta R.','Limpieza','P',0,'Escribir ya'],['Javier S.','Implantes','T',0,'Escribir ya'],
-    ['Carmen V.','Implantes','P',1,'Recordar mañana'],['Rosa G.','Limpieza','T',1,'Recordar mañana'],
-    ['Pedro L.','Limpieza','P',2,'Ofrecer revisión'],
-    ['Tomás B.','Implantes','P',3,'Mensaje hoy (día 3)'],['Elena F.','Prótesis','T',3,'Mensaje mañana (día 1)'],
-    ['Manuel C.','Implantes','T',4,'¡Aceptado!']];
-  var cols=document.getElementById('cols');
-  function draw(f){var h='';st.forEach(function(s,i){var it=L.filter(function(l){return l[3]===i&&(f==='all'||l[2]===f);});
-    h+='<div class="col"><h4>'+s+'<span>'+it.length+'</span></h4>';
-    it.forEach(function(l){h+='<div class="lc"><b>'+l[0]+'</b><span class="tr">'+l[1]+'</span><br><i class="'+(l[2]==='T'?'t':'')+'">'+(l[2]==='T'?'Torrent':'Patraix')+'</i><div class="nx">→ '+l[4]+'</div></div>';});
-    h+='</div>';});cols.innerHTML=h;}
-  draw('all');
-  [].forEach.call(document.querySelectorAll('.board .f'),function(b){b.addEventListener('click',function(){[].forEach.call(document.querySelectorAll('.board .f'),function(x){x.classList.remove('on');});b.classList.add('on');draw(b.getAttribute('data-s'));});});
+  var NS='http://www.w3.org/2000/svg';
+  function mk(svg,n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;svg.appendChild(e);return e;}
+
+  /* Auditoría por trimestres [C] */
+  var Q=[['T1','2024',8.0],['T2','2024',7.9],['T3','2024',4.1],['T4','2024',3.3],['T1','2025',6.8],['T2','2025',12.2],['T3','2025',13.5],['T4','2025',12.0],['T1','2026',12.6],['T2','2026',18.0],['T3','2026',9.2],['T4','2026',9.8]];
+  var qc=document.getElementById('qc'),W=860,H=360,L=20,R=20,T=56,B=58,pw=W-L-R,ph=H-T-B,bw=pw/Q.length,mx=20;
+  Q.forEach(function(q,i){
+    var x=L+i*bw,h=q[2]/mx*ph,c=q[2]<6?'#3FB07D':q[2]<=12?'#E0A63A':'#D86A52';
+    mk(qc,'rect',{x:x+bw*.14,y:T+ph-h,width:bw*.72,height:h,rx:8,fill:c});
+    mk(qc,'text',{x:x+bw/2,y:T+ph-h-10,'text-anchor':'middle','font-family':'Montserrat','font-weight':700,'font-size':17,fill:'#fff'},(q[2]+'').replace('.',',')+' €');
+    mk(qc,'text',{x:x+bw/2,y:H-B+24,'text-anchor':'middle','font-family':'Montserrat','font-size':13,fill:'rgba(255,255,255,.7)'},q[0]);
+    if(q[0]==='T1'){mk(qc,'text',{x:x+bw*2,y:H-B+48,'text-anchor':'middle','font-family':'Montserrat','font-weight':700,'font-size':15,fill:'#fff'},q[1]);if(i)mk(qc,'line',{x1:x,x2:x,y1:T-10,y2:H-B+52,stroke:'rgba(255,255,255,.2)','stroke-dasharray':'4 5'});}
+  });
+  mk(qc,'line',{x1:L,x2:W-R,y1:T+ph,y2:T+ph,stroke:'rgba(255,255,255,.35)'});
+  function ann(i,txt,y){var x=L+i*bw+bw/2;mk(qc,'text',{x:x,y:y,'text-anchor':'middle','font-family':'Montserrat','font-size':13,'font-weight':600,fill:'#E2D3BA'},txt);}
+  ann(3,'Ofertas de limpieza',20);ann(3,'lo más barato',37);
+  ann(6.5,'Ortodoncia y carillas:',20);ann(6.5,'se encarece',37);
+  ann(9,'El pico',20);
+  ann(10.5,'Vuelve la',20);ann(10.5,'limpieza: baja',37);
+
+  /* Embudo */
+  var F=[['Ve el anuncio','Patraix y Torrent'],['Pide información','Unas preguntas rápidas'],['Recibe un WhatsApp','En 2 minutos, con huecos'],['Tiene cita','Recordatorio el día antes'],['Viene a la clínica','Primera visita'],['Acepta el tratamiento','Seguimiento hasta que decide']];
+  var fn=document.getElementById('fn'),fw=760,rowH=72,gap=6,top=6,cx=fw/2;
+  var widths=[740,640,550,460,380,300];
+  F.forEach(function(f,i){
+    var w1=widths[i],w2=widths[i+1]||widths[i]-70,y=top+i*(rowH+gap);
+    var col=i===5?'#1E8A5A':['#2F3854','#3B4670','#475384','#56618A','#68739A','#1E8A5A'][i];
+    mk(fn,'path',{d:'M'+(cx-w1/2)+' '+y+' L'+(cx+w1/2)+' '+y+' L'+(cx+w2/2)+' '+(y+rowH)+' L'+(cx-w2/2)+' '+(y+rowH)+' Z',fill:col});
+    mk(fn,'text',{x:cx,y:y+31,'text-anchor':'middle','font-family':'Montserrat','font-weight':700,'font-size':21,fill:'#fff'},f[0]);
+    mk(fn,'text',{x:cx,y:y+54,'text-anchor':'middle','font-family':'Montserrat','font-size':14.5,fill:'rgba(255,255,255,.8)'},f[1]);
+  });
+  function bad(i){var y=top+i*(rowH+gap)+rowH/2,x=cx+widths[i]/2+60;
+    var g=mk(fn,'g',{});var c=document.createElementNS(NS,'circle');c.setAttribute('cx',x-30);c.setAttribute('cy',y);c.setAttribute('r',17);c.setAttribute('fill','#B5432F');c.setAttribute('stroke','#fff');c.setAttribute('stroke-width','3');g.appendChild(c);
+    var t=document.createElementNS(NS,'text');t.setAttribute('x',x-30);t.setAttribute('y',y+6);t.setAttribute('text-anchor','middle');t.setAttribute('font-family','Montserrat');t.setAttribute('font-weight','700');t.setAttribute('font-size','18');t.setAttribute('fill','#fff');t.textContent='!';g.appendChild(t);}
+  bad(2);bad(5);
+
+  /* Resultados estimados [E] · 450 €/mes, 6-9 € por persona */
+  var RR=[['Personas que piden información','al mes',50,75],['Con cita','40-50 %',22,35],['Vienen a la clínica','~75 %',16,26],['Aceptan tratamiento','30-40 %',5,10]];
+  var rr=document.getElementById('rr'),h='';
+  RR.forEach(function(r,i){var a=r[2]/75*100,b=r[3]/75*100;
+    h+='<div class="rrow'+(i===3?' goal':'')+'"><div class="l">'+r[0]+'<small>'+r[1]+'</small></div><div class="tr"><i style="width:'+a+'%"></i><u style="left:'+a+'%;width:'+(b-a)+'%"></u></div><div class="v">'+r[2]+'-'+r[3]+'</div></div>';});
+  h+='<p class="src" style="margin-top:14px">Barra llena: escenario prudente. Rayado: hasta dónde puede llegar. <span class="tag e">Estimación</span></p>';
+  rr.innerHTML=h;
+
+  /* Calendario: semanas lun-vie desde el 23-nov */
+  var A={
+    '23/11':[['d','Auditoría']],'24/11':[['d','Página conectada']],'25/11':[['d','Cuenta propia y tarjeta']],'26/11':[['d','827 contactos recuperados']],
+    '27/11':[['r','Reunión'],['c','Las 6 cosas']],
+    '30/11':[['q','Textos de anuncios y mensajes'],['c','Aprobar textos']],
+    '1/12':[['q','Montamos WhatsApp y CRM']],'2/12':[['q','Formación a recepción (30 min)'],['c','Recepción']],
+    '3/12':[['r','Arrancan los anuncios'],['q','Patraix y Torrent']],'4/12':[['q','Revisamos las primeras peticiones']],
+    '7/12':[['q','Escribimos a los 827 contactos']],'9/12':[['q','Ajustamos lo que no funcione']],'10/12':[['c','Atender «Hoy toca»']],
+    '11/12':[['r','Primer resumen']],
+    '14/12':[['q','Nuevo anuncio con vídeo de Torrent'],['c','Grabar vídeo (15 min)']],'16/12':[['q','Ajustes']],'18/12':[['r','Resumen semanal']],
+    '21/12':[['q','Seguimiento de presupuestos']],'23/12':[['r','Resumen semanal']],'24/12':[['x','Nochebuena']],'25/12':[['x','Navidad']]
+  };
+  var days=['Lunes','Martes','Miércoles','Jueves','Viernes'],cal=document.getElementById('cal'),out='';
+  days.forEach(function(d){out+='<div class="dh">'+d+'</div>';});
+  var start=new Date(2026,10,23),today='27/11';
+  var wl=['Esta semana','Semana 1 · montaje y arranque','Semana 2 · primeros datos','Semana 3','Semana 4 · Navidad'];
+  for(var w=0;w<5;w++){
+    out+='<div class="wk">'+wl[w]+'</div>';
+    for(var i=0;i<5;i++){var dt=new Date(start.getTime()+(w*7+i)*864e5),key=dt.getDate()+'/'+(dt.getMonth()+1),it=A[key]||[];
+      var cls='day'+(key===today?' today':'')+(w===0&&key!==today?' past':'')+(it.length&&it[0][0]==='x'?' off':'');
+      out+='<div class="'+cls+'"><div class="d">'+dt.getDate()+' '+(dt.getMonth()===10?'nov':'dic')+'</div>';
+      it.forEach(function(a){out+=a[0]==='x'?'<span style="display:block;margin-top:6px;font-weight:600">'+a[1]+'</span>':'<span class="ch '+a[0]+'">'+(a[0]==='d'?'✓ ':'')+a[1]+'</span>';});
+      out+='</div>';}
+  }
+  cal.innerHTML=out;
+
+  /* navegación */
   var secs=[].slice.call(document.querySelectorAll('.s')),cnt=document.getElementById('cnt'),cur=0;
+  cnt.textContent='1 / '+secs.length;
   function go(i){i=Math.max(0,Math.min(secs.length-1,i));secs[i].scrollIntoView({behavior:'smooth'});}
   document.addEventListener('keydown',function(e){
     if(e.key==='ArrowDown'||e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(cur+1);}
     if(e.key==='ArrowUp'||e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur-1);}
   });
-  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){cur=secs.indexOf(en.target);cnt.textContent=(cur+1)+' / '+secs.length;}});},{threshold:.5});secs.forEach(function(s){io.observe(s);});}
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){cur=secs.indexOf(en.target);cnt.textContent=(cur+1)+' / '+secs.length;}});},{threshold:.45});secs.forEach(function(s){io.observe(s);});}
 })();
 </script>
 </body>
