@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>ESCAC · el recorrido</title>
+<meta name="description" content="Recorrido paso a paso de una solicitud de ejemplo en ESCAC: del anuncio a la matrícula, con lo que ve admisiones en cada momento.">
+<link rel="icon" href="/assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+/* Sistema visual Qualivo. ESCAC solo aparece como texto: sin logotipo ni imágenes suyas. */
+:root{
+  --paper:#F4F9FC;--surface:#FFFFFF;--surface-2:#EEF6FB;--ink:#0D2233;--ink-2:#1F3647;--muted:#4F6476;--line:#D5E8F3;--line-2:#E6F1F8;
+  --brand:#0097DA;--navy:#00476B;--deep:#06263B;--cy:#00D8E8;--amb:#FEC42D;
+  --accent:#00719F;--accent-ink:#FFFFFF;--accent-soft:#E3F3FB;--good:#12805A;--good-soft:#E0F3EA;
+  --warn:#8A5A00;--warn-soft:#FFF3C4;--bad:#B3261E;--bad-soft:#FBE7E4;--earth:#56687A;
+  --shadow:0 1px 2px rgba(0,71,107,.06),0 12px 30px -16px rgba(0,71,107,.25);
+  --shadow-lg:0 2px 6px rgba(0,71,107,.07),0 30px 60px -26px rgba(0,71,107,.45);
+  --grad:linear-gradient(135deg,#0097DA 0%,#00476B 100%);
+  --grad-deep:linear-gradient(120deg,#06263B 0%,#00476B 60%,#00618F 100%);
+  --r:18px;
+  --head:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --sans:"Open Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --wa-bg:#EFE7DD;--wa-in:#FFFFFF;--wa-out:#D9FDD3;--wa-head:#075E54;--ej:#A86A00;--real:#12805A;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#061723;--surface:#0B2131;--surface-2:#0F293C;--ink:#E8F3FA;--ink-2:#CFE2EE;--muted:#9DB6C7;--line:#1D3C52;--line-2:#163246;
+  --accent:#5CC6F2;--accent-ink:#04202F;--accent-soft:#0E3550;--good:#6FD3A0;--good-soft:#103024;
+  --warn:#F2C26B;--warn-soft:#2E2614;--bad:#FF8A80;--bad-soft:#3A1A17;--earth:#9DB6C7;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px -16px rgba(0,0,0,.65);--shadow-lg:0 30px 60px -26px rgba(0,0,0,.75);
+  --wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#061723;--surface:#0B2131;--surface-2:#0F293C;--ink:#E8F3FA;--ink-2:#CFE2EE;--muted:#9DB6C7;--line:#1D3C52;--line-2:#163246;
+  --accent:#5CC6F2;--accent-ink:#04202F;--accent-soft:#0E3550;--good:#6FD3A0;--good-soft:#103024;
+  --warn:#F2C26B;--warn-soft:#2E2614;--bad:#FF8A80;--bad-soft:#3A1A17;--earth:#9DB6C7;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px -16px rgba(0,0,0,.65);--shadow-lg:0 30px 60px -26px rgba(0,0,0,.75);
+  --wa-bg:#0B141A;--wa-in:#202C33;--wa-out:#005C4B;--wa-head:#1F2C34;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font:15.5px/1.6 var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:6px}
+h1,h2,h3,h4{margin:0;font-family:var(--head);text-wrap:balance}
+h2{font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-.02em}
+h3{font-size:17px;font-weight:700;line-height:1.3}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
+.muted{color:var(--muted)}
+.k{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:16px}
+@media (min-width:800px){.wrap{padding-inline:32px}}
+/* barra superior */
+.topnav{position:sticky;top:0;z-index:40;background:linear-gradient(90deg,rgba(6,38,59,.97) 0%,rgba(0,71,107,.96) 100%);color:#fff;backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.topnav .in{max-width:1180px;margin-inline:auto;padding:10px 16px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.topnav .brand{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0}
+.topnav .qv{font-family:var(--head);font-weight:800;font-size:14.5px}
+.topnav .x{font-size:13px;opacity:.6}
+.topnav img.lgo{height:20px;width:auto;display:block}
+.topnav .by{font-size:11.5px;opacity:.6;white-space:nowrap}
+.topnav .links{display:flex;gap:3px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:99px;padding:3px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.topnav .links::-webkit-scrollbar{display:none}
+.topnav .links a{color:rgba(255,255,255,.84);text-decoration:none;font-family:var(--head);font-weight:600;font-size:13px;padding:6px 12px;border-radius:99px;white-space:nowrap;transition:background .2s,color .2s}
+.topnav .links a:hover{background:rgba(255,255,255,.12);color:#fff}
+.topnav .links a[aria-current="page"]{background:#fff;color:var(--navy);box-shadow:0 4px 14px -6px rgba(0,0,0,.4)}
+@media (max-width:640px){.topnav .by{display:none}.topnav .links{width:100%}.topnav .links a{padding:6px 10px;font-size:12.5px}}
+/* cabecera */
+.dhero{position:relative;color:#fff;overflow:hidden;isolation:isolate;background:var(--deep)}
+.dhero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(100deg,rgba(6,38,59,.95) 0%,rgba(0,71,107,.86) 48%,rgba(0,151,218,.35) 100%),var(--hero-img) center 40%/cover no-repeat;animation:cZoom 2.4s cubic-bezier(.2,.7,.2,1) both}
+.dhero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:46px;z-index:-1;background:var(--paper);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 46' preserveAspectRatio='none'%3E%3Cpath d='M0 30 C200 0 400 46 600 24 S1000 6 1200 26 V46 H0Z'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 46' preserveAspectRatio='none'%3E%3Cpath d='M0 30 C200 0 400 46 600 24 S1000 6 1200 26 V46 H0Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.dhero .wrap{padding-block:60px 84px;display:grid;gap:16px}
+.dhero .wrap > *{animation:cUp .8s cubic-bezier(.2,.7,.2,1) both}
+.dhero .wrap > :nth-child(2){animation-delay:.12s}.dhero .wrap > :nth-child(3){animation-delay:.24s}.dhero .wrap > :nth-child(4){animation-delay:.36s}
+.dhero .eyebrow{justify-self:start;font-family:var(--head);font-weight:700;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:6px 14px;max-width:100%}
+.dhero .eyebrow::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cy);margin-right:9px;vertical-align:1px;box-shadow:0 0 0 3px rgba(0,216,232,.25)}
+.dhero h1{font-weight:800;font-size:clamp(34px,5.4vw,64px);line-height:1.03;letter-spacing:-.025em;max-width:18ch}
+.dhero h1 em{font-style:normal;color:var(--cy)}
+.dhero .lead{font-size:17px;line-height:1.65;color:rgba(255,255,255,.9);max-width:72ch}
+.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:8px;max-width:980px}
+.legend > div{border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:13px 15px;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:14px;line-height:1.55;color:rgba(255,255,255,.86)}
+.legend b{color:#fff}
+@media (max-width:700px){.legend{grid-template-columns:1fr}}
+.ej,.real,.nv{display:inline-block;font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#fff;border-radius:99px;padding:3px 9px;vertical-align:middle;margin-right:4px;line-height:1.4;white-space:nowrap}
+.ej{background:var(--ej)}.real{background:var(--real)}.nv{background:var(--earth)}
+h2 .ej,h2 .real{vertical-align:6px;margin-left:6px}
+/* pestañas */
+.wrap.main{display:grid;gap:26px;padding-bottom:72px}
+.wrap.main > *{min-width:0}
+nav.tabs{position:sticky;top:60px;z-index:20;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:5px;margin-top:-30px;box-shadow:var(--shadow-lg)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;font:600 13px var(--head);white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px;cursor:pointer;transition:background .25s,color .25s}
+nav.tabs button:hover{color:var(--ink);background:var(--line-2)}
+nav.tabs button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:11px;background:var(--line-2);color:var(--muted)}
+nav.tabs button[aria-selected="true"]{background:var(--grad);color:#fff;box-shadow:0 10px 22px -10px rgba(0,71,107,.75)}
+nav.tabs button[aria-selected="true"] span{background:#fff;color:var(--navy)}
+@media (max-width:640px){nav.tabs{top:92px}}
+.pane{display:none;gap:22px}
+.pane.on{display:grid}
+.pane.on > *{animation:cUp .55s cubic-bezier(.2,.7,.2,1) both}
+.pane.on > :nth-child(2){animation-delay:.07s}.pane.on > :nth-child(3){animation-delay:.14s}.pane.on > :nth-child(n+4){animation-delay:.21s}
+.pane > *{min-width:0}
+.pane > header{padding-top:8px;display:grid;gap:10px}
+.pane > header p{color:var(--muted);max-width:80ch;font-size:16px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.next{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+.note{font-size:13px;color:var(--muted);border:1px dashed color-mix(in srgb,var(--brand) 35%,var(--line));background:color-mix(in srgb,var(--accent-soft) 40%,transparent);border-radius:10px;padding:9px 12px;line-height:1.55}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;min-width:0;box-shadow:var(--shadow)}
+.callout{display:flex;gap:14px;align-items:flex-start;border-radius:var(--r);padding:18px 20px;background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--brand) 25%,transparent)}
+.callout > .i{margin-top:3px;width:22px;height:22px;color:var(--accent)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;border-radius:99px;padding:3px 10px;white-space:nowrap;line-height:1.4}
+.pill.ok{background:var(--good-soft);color:var(--good)}
+.pill.ko{background:var(--bad-soft);color:var(--bad)}
+.pill.hy{background:var(--warn-soft);color:var(--warn)}
+.pill.nt{background:var(--line-2);color:var(--muted)}
+.pill.bl{background:var(--accent-soft);color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 15px var(--head);border-radius:99px;padding:11px 20px;border:1px solid transparent;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .2s;line-height:1.2}
+.btn.pri{background:var(--grad);color:#fff;box-shadow:0 10px 24px -12px rgba(0,71,107,.7)}
+.btn.pri:hover{transform:translateY(-1px)}
+.btn.sec{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn.sec:hover{border-color:var(--brand);color:var(--accent)}
+.tw{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:auto;box-shadow:var(--shadow);max-width:100%}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:14.5px;line-height:1.5}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+thead th{background:var(--surface-2);font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;border-bottom:1px solid var(--line)}
+@media screen and (max-width:720px){
+  .stack{background:none;border:0;box-shadow:none;overflow:visible}
+  .stack table,.stack tbody,.stack tr,.stack td{display:block;width:100%}
+  .stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .stack tr{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:6px 0;margin-bottom:12px;box-shadow:var(--shadow)}
+  .stack td{border:0;padding:8px 16px}
+  .stack td[data-label]::before{content:attr(data-label);display:block;font-family:var(--head);font-weight:700;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+}
+.foot{background:var(--grad-deep);color:rgba(255,255,255,.75);font-size:13.5px}
+.foot .wrap{padding-block:44px;display:grid;gap:14px}
+.foot .sig{display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:#fff}
+.foot .sig b{font-family:var(--head);font-weight:800;font-size:22px}
+.foot .sig img{height:18px;width:auto}
+.foot .sig span{font-size:12px;opacity:.75}
+.foot a{color:#fff}
+@keyframes cUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes cZoom{from{transform:scale(1.07)}to{transform:scale(1)}}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+::selection{background:#BDE7F8;color:#06263B}
+
+/* resumen */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.flow{grid-template-columns:1fr}}
+.flow button{all:unset;cursor:pointer;display:grid;gap:6px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:var(--shadow);position:relative;transition:transform .25s,border-color .25s,box-shadow .25s}
+.flow button:hover{transform:translateY(-3px);border-color:var(--brand);box-shadow:var(--shadow-lg)}
+.flow button:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.flow i{font-style:normal;font-family:var(--head);font-weight:800;font-size:12px;color:var(--accent);letter-spacing:.08em}
+.flow b{font-family:var(--head);font-weight:800;font-size:16px;line-height:1.25}
+.flow small{font-size:13px;color:var(--muted);line-height:1.5}
+.flow button.hu{border-color:color-mix(in srgb,var(--good) 45%,var(--line))}
+.flow button.hu::after{content:"Admisiones";position:absolute;top:12px;right:12px;font-family:var(--head);font-weight:700;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--good);background:var(--good-soft);border-radius:99px;padding:2px 7px}
+.flow button.bd{background:linear-gradient(160deg,var(--accent-soft),var(--surface))}
+.chan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:800px){.chan{grid-template-columns:1fr}}
+.chan > div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:6px;align-content:start;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.chan > div::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--grad)}
+.chan b{font-family:var(--head);font-size:16px}
+.chan small{color:var(--muted);font-size:13.5px;line-height:1.5}
+.chan .ic{width:38px;height:38px;border-radius:11px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+/* paso */
+.stp{background:var(--surface);border:1px solid color-mix(in srgb,var(--brand) 16%,var(--line));border-radius:20px;padding:20px;box-shadow:var(--shadow-lg);display:grid;gap:16px;scroll-margin-top:150px}
+.stp > *{min-width:0}
+.stp .hd{display:flex;gap:14px;align-items:center}
+.stp .hd .n{width:42px;height:42px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:15px;flex:none;box-shadow:0 8px 18px -8px rgba(0,71,107,.7)}
+.stp .hd .k{margin:0 0 2px}
+.stp .hd h3{font-weight:800;font-size:clamp(20px,2.4vw,26px);line-height:1.2;letter-spacing:-.015em}
+.hm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:12px}
+@media (max-width:800px){.hm{grid-template-columns:1fr}}
+.hm > div{border-radius:12px;padding:13px 15px;font-size:14.5px;line-height:1.55;display:grid;gap:6px;align-content:start}
+.hm .hoy{background:var(--surface-2);border:1px solid var(--line-2)}
+.hm .mon{background:linear-gradient(160deg,var(--accent-soft),color-mix(in srgb,var(--accent-soft) 40%,var(--surface)));border:1px solid color-mix(in srgb,var(--brand) 22%,transparent)}
+.hm .k{margin:0}
+.hm ul,.box ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.q4{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:860px){.q4{grid-template-columns:1fr}}
+.q4 > div{min-width:0}
+.q4 .side{display:grid;gap:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:13px 15px;font-size:14px;line-height:1.55;display:grid;gap:6px;background:var(--surface)}
+.box .k{margin:0}
+.box.hu{border-color:color-mix(in srgb,var(--good) 40%,var(--line));background:color-mix(in srgb,var(--good-soft) 55%,transparent)}
+.box.hu .k{color:var(--good)}
+.box.sy .k{color:var(--accent)}
+/* móvil */
+.phn{background:var(--wa-bg);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.phn .bar,.chat .hd{background:var(--wa-head);color:#fff;display:flex;align-items:center;gap:10px;padding:9px 12px}
+.lg{width:32px;height:32px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none;overflow:hidden}
+.lg img{width:24px;height:auto;display:block}
+.phn .bar b,.chat .hd b{font-size:13.5px;display:block;line-height:1.2}
+.phn .bar small,.chat .hd small{font-size:11.5px;opacity:.8}
+.phn .bd{padding:12px;display:flex;flex-direction:column;gap:7px}
+.bub{max-width:90%;align-self:flex-start;background:var(--wa-in);color:var(--ink);border-radius:10px;border-top-left-radius:2px;padding:8px 10px 5px;font-size:13.5px;line-height:1.5;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.bub.me{align-self:flex-end;background:var(--wa-out);border-radius:10px;border-top-right-radius:2px}
+.bub p + p{margin-top:6px}
+.bub small{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:2px}
+.bub .sg{color:var(--muted);font-size:12.5px}
+.bub .btns,.msg .btns{display:grid;gap:4px;margin-top:7px}
+.bub .btns span,.msg .btns span{display:block;text-align:center;border-top:1px solid var(--line-2);padding-top:5px;color:#027EB5;font-weight:600;font-size:13px}
+.bub .ap{display:block;font-size:10.5px;color:var(--good);font-weight:700;margin-top:4px}
+.when{align-self:center;font-size:10.5px;font-weight:700;letter-spacing:.04em;color:var(--muted);background:color-mix(in srgb,var(--surface) 78%,transparent);border-radius:7px;padding:3px 9px;text-align:center}
+.call{align-self:center;display:flex;gap:8px;align-items:center;background:var(--bad-soft);color:var(--bad);border-radius:10px;padding:7px 12px;font-size:12.5px;font-weight:700}
+/* bandeja de aprobación */
+.appr{border:1px solid color-mix(in srgb,var(--brand) 30%,var(--line));border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow)}
+.appr .ah{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 13px;background:var(--surface-2);border-bottom:1px solid var(--line-2);font-size:13px}
+.appr .ah b{font-family:var(--head);font-size:14px}
+.appr .ab{padding:12px 13px;display:grid;gap:10px;font-size:14px;line-height:1.55}
+.appr .draft{background:var(--wa-out);color:var(--ink);border-radius:10px;padding:10px 12px;white-space:pre-line}
+.appr .why{font-size:12.5px;color:var(--muted)}
+.appr .acts{display:flex;gap:8px;flex-wrap:wrap}
+.appr .acts button{font:700 13px var(--head);border-radius:99px;padding:8px 14px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.appr .acts button.ok{background:var(--good);border-color:var(--good);color:#fff}
+.appr .acts button:disabled{opacity:.5;cursor:default}
+.appr .done{display:none;font-size:13px;font-weight:700;color:var(--good)}
+.appr.sent .done{display:block}
+/* ficha */
+.crm{border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px}
+.crm .ch{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;background:var(--surface-2);padding:9px 13px;border-bottom:1px solid var(--line-2)}
+.crm .ch b{font-family:var(--head);font-size:14px}
+.crm dl{margin:0;padding:9px 13px;display:grid;grid-template-columns:auto 1fr;gap:5px 12px}
+.crm dt{font-family:var(--head);font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.crm dd{margin:0;line-height:1.45;min-width:0}
+/* formulario */
+.form{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;font-size:13.5px}
+.form .fh{background:var(--grad);color:#fff;padding:12px 14px}
+.form .fh b{display:block;font-family:var(--head);font-size:14.5px}
+.form .fh small{opacity:.85}
+.form .fb{padding:12px 14px;display:grid;gap:11px}
+.form .qq b{display:block;font-size:13px;margin-bottom:5px}
+.form .opts{display:flex;flex-wrap:wrap;gap:5px}
+.form .opts span{border:1px solid var(--line);border-radius:99px;padding:3px 10px;font-size:12.5px;color:var(--ink-2)}
+.form .opts span.on{background:var(--accent-soft);border-color:var(--brand);color:var(--accent);font-weight:700}
+.form .send{background:var(--amb);color:#3A2B00;text-align:center;font:800 14px var(--head);border-radius:10px;padding:10px}
+/* línea de tiempo D+ */
+.dline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;position:relative}
+@media (max-width:860px){.dline{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.dline{grid-template-columns:1fr}}
+.dline > div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:15px;display:grid;gap:6px;align-content:start;box-shadow:var(--shadow)}
+.dline .d{font-family:var(--head);font-weight:800;font-size:26px;color:var(--accent);line-height:1}
+.dline .who{justify-self:start}
+.dline small{color:var(--muted);font-size:13.5px;line-height:1.5}
+/* lista de espera */
+.wl{display:grid;gap:8px}
+.wl .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-size:14px}
+.wl .row b{font-family:var(--head)}
+.wl .bar{grid-column:1/-1;height:7px;border-radius:99px;background:var(--line-2);overflow:hidden}
+.wl .bar i{display:block;height:100%;background:var(--grad);border-radius:99px}
+/* renovación */
+.ren{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface)}
+@media (max-width:760px){.ren{grid-template-columns:1fr}}
+.ren > div{padding:14px;display:grid;gap:4px;align-content:start;border-right:1px solid var(--line-2);font-size:13.5px}
+.ren > div:last-child{border-right:0}
+@media (max-width:760px){.ren > div{border-right:0;border-bottom:1px solid var(--line-2)}}
+.ren b{font-family:var(--head);font-size:15px}
+.ren span{color:var(--muted)}
+.ren .y{font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:.08em;color:var(--accent);text-transform:uppercase}
+.ren > div.hl{background:var(--accent-soft)}
+/* búsqueda empresa */
+.srch{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
+.srch .bx{display:flex;gap:6px;flex-wrap:wrap}
+.srch .bx span{border:1px solid var(--brand);background:var(--accent-soft);color:var(--accent);font-weight:700;border-radius:99px;padding:4px 11px;font-size:12.5px}
+.srch .res{display:grid;gap:6px}
+.srch .res div{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line-2);padding-top:7px;font-size:13.5px}
+/* simulación */
+.chat{background:var(--wa-bg);border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg);max-width:440px;width:100%;justify-self:center}
+.chat .bd{padding:14px 12px;display:flex;flex-direction:column;gap:7px;height:540px;overflow-y:auto;scroll-behavior:smooth}
+.msg{max-width:86%;padding:7px 10px 5px;border-radius:10px;font-size:14px;line-height:1.45;color:var(--ink);box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .3s ease-out;white-space:pre-line}
+.msg.in{background:var(--wa-in);align-self:flex-start;border-top-left-radius:2px}
+.msg.out{background:var(--wa-out);align-self:flex-end;border-top-right-radius:2px}
+.msg small{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:2px}
+.msg.sys{align-self:center;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:600;box-shadow:none;max-width:95%;text-align:center}
+.msg.day{align-self:center;background:color-mix(in srgb,var(--surface) 80%,transparent);color:var(--muted);font-size:11px;font-weight:700;box-shadow:none;padding:3px 10px}
+.msg .apv{display:block;font-size:10.5px;color:var(--good);font-weight:700;margin-top:3px;white-space:normal}
+.typing{align-self:flex-start;background:var(--wa-in);border-radius:10px;padding:9px 12px;display:flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bl 1s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes bl{0%,100%{opacity:.3}50%{opacity:1}}
+.scen{display:flex;gap:8px;flex-wrap:wrap}
+.scen button{font:600 13.5px var(--head);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:8px 14px;cursor:pointer}
+.scen button[aria-pressed="true"]{background:var(--grad);color:#fff;border-color:transparent}
+.agents{display:grid;gap:10px}
+.agent{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;transition:border-color .3s,box-shadow .3s}
+.agent .ai{width:36px;height:36px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.agent.lit{border-color:var(--brand);box-shadow:0 0 0 3px var(--accent-soft),var(--shadow)}
+.agent p{font-size:13.5px;color:var(--muted);margin-top:2px}
+.links3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:800px){.links3{grid-template-columns:1fr}}
+.links3 a{display:grid;gap:6px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);transition:transform .25s,border-color .25s}
+.links3 a:hover{transform:translateY(-3px);border-color:var(--brand)}
+.links3 a small{color:var(--muted);font-size:13.5px;line-height:1.5}
+.links3 a b{font-family:var(--head);font-weight:800;font-size:18px}
+/* Recorrido de una solicitud en ESCAC (reunión del 27-nov-2026): del anuncio a la matrícula. */
+.dhero{--hero-img:radial-gradient(circle at 82% 28%,rgba(0,216,232,.32),transparent 55%)}
+.topnav .esc{font-family:var(--head);font-weight:800;font-size:14.5px;letter-spacing:.06em}
+.lg{color:#075E54}
+.lg svg{width:18px;height:18px}
+/* fugas */
+.flow button.fg{border-color:color-mix(in srgb,var(--bad) 55%,var(--line));background:linear-gradient(160deg,var(--bad-soft),var(--surface))}
+.flow button.fg::after{content:"Fuga hoy";position:absolute;top:12px;right:12px;font-family:var(--head);font-weight:700;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--bad);background:var(--bad-soft);border:1px solid color-mix(in srgb,var(--bad) 30%,transparent);border-radius:99px;padding:2px 7px}
+.flow button.fg i{color:var(--bad)}
+nav.tabs button.lk span{background:var(--bad-soft);color:var(--bad)}
+nav.tabs button.lk[aria-selected="true"]{background:linear-gradient(135deg,#C8372D,#7E1A13)}
+.stp.lk{border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}
+.stp.lk .hd .n{background:linear-gradient(135deg,#C8372D,#7E1A13)}
+.leak{display:flex;gap:14px;align-items:flex-start;border-radius:var(--r);padding:16px 18px;background:var(--bad-soft);border:1px solid color-mix(in srgb,var(--bad) 35%,transparent);font-size:14.5px;line-height:1.6}
+.leak > .i{margin-top:3px;width:22px;height:22px;color:var(--bad)}
+.leak .t{display:block;font-family:var(--head);font-weight:800;color:var(--bad);font-size:15px;margin-bottom:2px}
+.said{display:inline-block;font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#fff;background:var(--real);border-radius:99px;padding:3px 9px;vertical-align:middle;line-height:1.4;white-space:nowrap}
+.est{font-family:var(--head);font-size:10px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:6px;padding:1px 6px;vertical-align:1px}
+/* anuncio */
+.ad{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);font-size:13.5px;max-width:380px;width:100%}
+.ad .ah{display:flex;gap:10px;align-items:center;padding:10px 12px}
+.ad .av{width:32px;height:32px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font:800 10px var(--head);flex:none}
+.ad .ah small{display:block;color:var(--muted);font-size:11.5px}
+.ad .vis{min-height:260px;background:linear-gradient(160deg,#06263B 0%,#00476B 55%,#0097DA 100%);color:#fff;display:grid;align-content:end;padding:18px;gap:6px;position:relative;overflow:hidden}
+.ad .vis::before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;border:26px solid rgba(255,255,255,.08)}
+.ad .vis b{font:800 24px/1.12 var(--head);position:relative}
+.ad .vis span{position:relative;opacity:.85}
+.ad .cta{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;background:var(--surface-2);font-weight:700}
+.ad .cta span{background:var(--brand);color:#fff;border-radius:8px;padding:6px 12px;font-size:12.5px;white-space:nowrap}
+/* presupuesto */
+.quote{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);font-size:13.5px}
+.quote .qh{background:var(--grad-deep);color:#fff;padding:12px 14px}
+.quote .qh b{display:block;font-family:var(--head);font-size:15px}
+.quote .qh small{opacity:.8}
+.quote dl{margin:0;padding:10px 14px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}
+.quote dt{font-family:var(--head);font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.quote dd{margin:0;min-width:0}
+.quote .qf{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}
+.quote .qf span{border-radius:99px;padding:6px 12px;font:700 12.5px var(--head);background:var(--accent-soft);color:var(--accent)}
+.quote .qf span.p{background:var(--amb);color:#3A2B00}
+/* registro de actividad */
+.log{display:grid;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);font-size:13.5px}
+.log div{display:grid;grid-template-columns:86px minmax(0,1fr);gap:10px;padding:8px 13px;border-bottom:1px solid var(--line-2)}
+.log div:last-child{border-bottom:0}
+.log b{font-family:var(--head);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.log div.al{background:var(--bad-soft)}
+.log div.al span{color:var(--bad);font-weight:700}
+/* embudo del panel */
+.fun{display:grid;gap:8px}
+.fun .row{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) 44px;gap:10px;align-items:center;font-size:13.5px}
+.fun .bar{height:12px;border-radius:99px;background:var(--line-2);overflow:hidden}
+.fun .bar i{display:block;height:100%;background:var(--grad);border-radius:99px}
+.fun .row.lk .bar i{background:linear-gradient(90deg,#D9473C,#8E1C15)}
+.fun .row b{text-align:right;font-family:var(--head);font-variant-numeric:tabular-nums}
+@media (max-width:460px){.fun .row{grid-template-columns:minmax(0,1fr) 44px}.fun .bar{grid-column:1/-1;grid-row:2}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+</svg>
+
+<nav class="topnav" aria-label="Paquete ESCAC">
+  <div class="in">
+    <div class="brand"><span class="qv">Qualivo</span><span class="x">×</span><span class="esc">ESCAC</span><span class="by">27-nov-2026</span></div>
+    <div class="links"><a href="/propuestas/escac/">Portada</a><a href="/propuestas/escac/presentacion/">Presentación</a><a href="/propuestas/escac/anuncios/">Anuncios</a><a href="/propuestas/escac/landing/">Landing</a><a href="/propuestas/escac/whatsapp/">WhatsApp</a><a href="/propuestas/escac/recorrido/" aria-current="page">Recorrido</a><a href="/intelligence/?sector=escac&amp;empresa=ESCAC&amp;objetivo=conversion">Intelligence</a></div>
+  </div>
+</nav>
+
+<header class="dhero">
+<div class="wrap">
+  <p class="eyebrow">El recorrido de una solicitud · del anuncio a la matrícula</p>
+  <h1>No es el anuncio: <em>es lo que pasa después</em></h1>
+  <p class="lead">Seguimos a Martina, 18 años, de Girona, que quiere hacer el Grado en Cine. Ve un anuncio, deja sus datos a las 23:40 y, a partir de ahí, paso a paso: qué recibe ella en el móvil y qué ve el equipo de admisiones en cada momento. El asistente virtual responde al instante, también de noche. Las entrevistas, los presupuestos y las decisiones son siempre de una persona de admisiones.</p>
+  <div class="legend">
+    <div><span class="said">Lo que nos contaste</span><br><b>Del formulario que rellenaste:</b> entre 20 y 49 solicitudes al mes, entre 500 y 999 € al mes en publicidad y que se os escapa <b>«en el seguimiento y los presupuestos»</b>. Esos dos pasos van marcados en rojo.</div>
+    <div><span class="ej">Datos de ejemplo</span><br><b>Propuesta nuestra para enseñar cómo funcionaría:</b> Martina, sus mensajes, las fechas, las horas, las fichas y cualquier cifra. Ningún nombre ni número es de ESCAC. Los textos definitivos los escribís o aprobáis vosotros.</div>
+  </div>
+</div>
+</header>
+
+<main class="wrap main">
+<nav class="tabs" role="tablist" aria-label="Pasos del recorrido">
+  <button role="tab" aria-selected="true" aria-controls="p0" id="t0"><span>0</span>En una pantalla</button>
+  <button role="tab" aria-selected="false" aria-controls="p1" id="t1"><span>1</span>Anuncio y solicitud</button>
+  <button role="tab" aria-selected="false" aria-controls="p2" id="t2"><span>2</span>WhatsApp en 1 minuto</button>
+  <button role="tab" aria-selected="false" aria-controls="p3" id="t3"><span>3</span>Entrevista y visita</button>
+  <button role="tab" aria-selected="false" aria-controls="p4" id="t4"><span>4</span>Recordatorios</button>
+  <button role="tab" aria-selected="false" aria-controls="p5" id="t5"><span>5</span>La entrevista</button>
+  <button role="tab" aria-selected="false" aria-controls="p6" id="t6" class="lk"><span>6</span>Presupuesto</button>
+  <button role="tab" aria-selected="false" aria-controls="p7" id="t7" class="lk"><span>7</span>Seguimiento 48 h</button>
+  <button role="tab" aria-selected="false" aria-controls="p8" id="t8"><span>8</span>Matrícula</button>
+  <button role="tab" aria-selected="false" aria-controls="p9" id="t9"><span>9</span>Verlo en marcha</button>
+</nav>
+
+<!-- 0 · EN UNA PANTALLA -->
+<section class="pane on" id="p0" role="tabpanel" aria-labelledby="t0">
+  <header>
+    <h2>El recorrido entero, en una pantalla</h2>
+    <p>Diez momentos, del anuncio a la matrícula. Pulsa cualquiera para verlo en detalle. Los marcados en verde los hace siempre una persona de admisiones. Los dos en rojo son donde nos dijiste que hoy se os escapa.</p>
+  </header>
+  <div class="flow">
+    <button data-go="1" data-to="s1"><i>01 · 21:05</i><b>Ve el anuncio</b><small>En Instagram. Toca «Más información».</small></button>
+    <button data-go="1" data-to="s1"><i>02 · 23:40</i><b>Deja sus datos</b><small>Formulario corto. Se crea su ficha con la campaña de origen.</small></button>
+    <button data-go="2" data-to="s2"><i>03 · 23:41</i><b>WhatsApp en 1 minuto</b><small>El asistente virtual le escribe, aunque sea casi medianoche.</small></button>
+    <button data-go="2" data-to="s2"><i>04 · 23:43</i><b>Tres preguntas</b><small>Programa, curso de inicio y cómo lo financia. Sale la prioridad.</small></button>
+    <button data-go="3" data-to="s3"><i>05 · 23:46</i><b>Entrevista y visita</b><small>Elige hueco en la agenda de admisiones. Sin llamadas de ida y vuelta.</small></button>
+    <button data-go="4" data-to="s4"><i>06</i><b>Recordatorios</b><small>La víspera y el mismo día, con un botón para cambiar la cita.</small></button>
+    <button data-go="5" data-to="s5" class="hu"><i>07</i><b>La entrevista</b><small>La hace admisiones, con la ficha delante.</small></button>
+    <button data-go="6" data-to="s6" class="fg"><i>08 · al día siguiente</i><b>Presupuesto y reserva</b><small>Sale en menos de 24 h, por WhatsApp y correo. Se sabe si lo ha abierto.</small></button>
+    <button data-go="7" data-to="s7" class="fg"><i>09 · a las 48 h</i><b>Seguimiento</b><small>Si no responde, el asistente virtual vuelve a escribir y avisa al equipo.</small></button>
+    <button data-go="8" data-to="s8" class="hu"><i>10</i><b>Matrícula</b><small>Reserva pagada, matrícula formalizada y atribuida a su campaña.</small></button>
+  </div>
+
+  <div class="tw stack"><table>
+    <thead><tr><th>Momento</th><th>Lo que suele pasar</th><th>Lo que montaríamos</th></tr></thead>
+    <tbody>
+      <tr><td data-label="Momento"><b>Solicitud de noche</b></td><td data-label="Lo que suele pasar">Se ve a la mañana siguiente, o días después. Para entonces ha pedido información a otras escuelas.</td><td data-label="Lo que montaríamos">WhatsApp del asistente virtual en un minuto, a cualquier hora, con tres preguntas de cualificación.</td></tr>
+      <tr><td data-label="Momento"><b>Entrevista</b></td><td data-label="Lo que suele pasar">Correos y llamadas para cuadrar una hora. Algunas citas no se presentan.</td><td data-label="Lo que montaríamos">Elige hueco en la agenda real de admisiones y recibe recordatorio la víspera y el mismo día.</td></tr>
+      <tr><td data-label="Momento"><b>Presupuesto</b> <span class="pill ko">Fuga</span></td><td data-label="Lo que suele pasar">Sale tarde y por correo. Se queda en la bandeja de la familia y nadie sabe si lo han abierto.</td><td data-label="Lo que montaríamos">Preparado con lo hablado en la entrevista, aprobado por admisiones y enviado en menos de 24 h, con aviso de apertura.</td></tr>
+      <tr><td data-label="Momento"><b>Seguimiento</b> <span class="pill ko">Fuga</span></td><td data-label="Lo que suele pasar">Si no contesta, depende de que alguien se acuerde. Muchas se enfrían sin un «no».</td><td data-label="Lo que montaríamos">Mensaje a las 48 h, llamada de una persona si sigue sin responder y aviso al equipo con la prioridad.</td></tr>
+      <tr><td data-label="Momento"><b>Qué campaña funciona</b></td><td data-label="Lo que suele pasar">Se sabe cuántas solicitudes trae cada anuncio, no cuántas matrículas.</td><td data-label="Lo que montaríamos">Cada matrícula vuelve a su campaña y su anuncio en el panel.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout"><svg class="i"><use href="#i-info"/></svg><div><b>La idea en una frase:</b> cada solicitud de un programa de miles de euros que se enfría sin seguimiento es una matrícula perdida. El sistema se encarga de que ninguna se quede sin respuesta ni sin seguimiento; admisiones se queda con lo que necesita a una persona: la entrevista, el presupuesto y la decisión.</div></div>
+  <div class="next"><span></span><button class="btn pri" data-go="1">Empezar: el anuncio <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 1 · ANUNCIO Y SOLICITUD -->
+<section class="pane" id="p1" role="tabpanel" aria-labelledby="t1">
+  <header>
+    <h2>1 · Ve el anuncio y deja sus datos a las 23:40</h2>
+    <p>Martina está en 2.º de Bachillerato. Entre semana mira escuelas por la noche, cuando acaba de estudiar. Ve el anuncio a las 21:05, le da vueltas y a las 23:40 rellena el formulario. Es justo la hora a la que nadie de admisiones está mirando.</p>
+  </header>
+  <article class="stp" id="s1">
+    <div class="hd"><b class="n">1</b><div><p class="k">Paso 1 · martes 12-ene · 21:05 → 23:40</p><h3>Del anuncio a una ficha con nombre, programa y campaña</h3></div></div>
+    <div class="hm">
+      <div class="hoy"><p class="k">Lo que suele pasar</p><ul><li>La solicitud llega a un correo o a una hoja y se ve al día siguiente.</li><li>No queda claro de qué campaña ni de qué anuncio viene.</li><li>Sin programa ni fecha de inicio, todas parecen iguales.</li></ul></div>
+      <div class="mon"><p class="k">Lo que montaríamos</p><p>Formulario corto en la landing o en el propio Meta: nombre, WhatsApp, programa que le interesa y consentimiento. Al enviarlo se crea su ficha con la campaña y el anuncio de origen, y se lanza el primer WhatsApp.</p><p>Nada más. El resto se lo pregunta el asistente virtual en la conversación, que es donde una persona de 18 años contesta.</p></div>
+    </div>
+    <div class="q4">
+      <div style="display:grid;gap:12px"><p class="k" style="margin:0">Lo que ve en Instagram <span class="ej">Datos de ejemplo</span></p>
+        <div class="ad">
+          <div class="ah"><span class="av">ESCAC</span><div><b>ESCAC</b><small>Publicidad</small></div></div>
+          <div class="vis"><span>Grado en Cine y Audiovisuales</span><b>Tu primer rodaje no tiene que esperar a acabar la carrera.</b></div>
+          <div class="cta"><span class="muted" style="background:none;color:var(--muted);padding:0">Solicita información</span><span>Más información</span></div>
+        </div>
+        <p class="note">Texto y visual inventados para el ejemplo. Los anuncios propuestos están en la pieza <a href="/propuestas/escac/anuncios/">Anuncios</a>.</p>
+      </div>
+      <div class="side">
+        <div class="form">
+          <div class="fh"><b>ESCAC · Solicita información</b><small>Te respondemos por WhatsApp en un minuto</small></div>
+          <div class="fb">
+            <div class="qq"><b>Nombre</b><div class="opts"><span class="on">Martina R.</span></div></div>
+            <div class="qq"><b>WhatsApp</b><div class="opts"><span class="on">+34 6•• ••• •••</span></div></div>
+            <div class="qq"><b>¿Qué te interesa?</b><div class="opts"><span class="on">Grado en Cine y Audiovisuales</span><span>Máster</span><span>Curso</span></div></div>
+            <div class="send">Quiero información · 23:40</div>
+          </div>
+        </div>
+        <div class="box hu"><p class="k">Lo que ve admisiones <span class="ej">Datos de ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Martina R. · 18 · Girona</b><span class="pill bl">Nueva · 23:40</span></div>
+            <dl><dt>Programa</dt><dd>Grado en Cine y Audiovisuales</dd><dt>Origen</dt><dd>Meta · campaña «Grado · Catalunya» · anuncio «Primer rodaje»</dd><dt>Estado</dt><dd>WhatsApp del asistente virtual en camino</dd></dl></div>
+          <p>De noche no suena ningún aviso. A las 8:30 lo encuentran todo hecho.</p></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="0"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="2">WhatsApp en un minuto <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 2 · WHATSAPP Y CUALIFICACIÓN -->
+<section class="pane" id="p2" role="tabpanel" aria-labelledby="t2">
+  <header>
+    <h2>2 · El asistente virtual le escribe en un minuto</h2>
+    <p>A las 23:41 Martina ya tiene un WhatsApp. El asistente virtual se presenta como lo que es, le hace tres preguntas y, con las respuestas, la ficha sale con prioridad. No da precios ni condiciones: eso es de admisiones.</p>
+  </header>
+  <article class="stp" id="s2">
+    <div class="hd"><b class="n">2</b><div><p class="k">Paso 2 · martes 12-ene · 23:41</p><h3>Respuesta inmediata y tres preguntas de cualificación</h3></div></div>
+    <div class="q4">
+      <div><p class="k">Lo que recibe Martina <span class="ej">Datos de ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg"><svg class="i"><use href="#i-film"/></svg></span><div><b>ESCAC · Admisiones</b><small>Asistente virtual · cuenta de empresa</small></div></div>
+          <div class="bd">
+            <span class="when">Martes 12-ene</span>
+            <div class="bub"><p>Hola Martina 👋 Soy el asistente virtual de admisiones de ESCAC. Hemos recibido tu solicitud sobre el Grado en Cine y Audiovisuales. ¿Te hago tres preguntas rápidas para preparar tu entrevista?</p><small>23:41</small><div class="btns"><span>Vale</span></div></div>
+            <div class="bub me">Vale!<small>23:42 ✓✓</small></div>
+            <div class="bub"><p><b>1.</b> ¿Lo que te interesa es el Grado en Cine y Audiovisuales, o también te miras algún curso?</p><small>23:42</small><div class="btns"><span>Solo el Grado</span><span>También cursos</span></div></div>
+            <div class="bub me">Solo el Grado<small>23:42 ✓✓</small></div>
+            <div class="bub"><p><b>2.</b> ¿Para qué curso querrías empezar?</p><small>23:42</small><div class="btns"><span>Septiembre de 2027</span><span>Septiembre de 2028</span><span>Aún no lo sé</span></div></div>
+            <div class="bub me">Septiembre de 2027<small>23:43 ✓✓</small></div>
+            <div class="bub"><p><b>3.</b> ¿Cómo tenéis pensado financiarlo?</p><small>23:43</small><div class="btns"><span>Mi familia</span><span>Beca o ayuda</span><span>Pago fraccionado</span><span>Aún no lo sé</span></div></div>
+            <div class="bub me">Mi familia, pero queremos ver opciones de pago<small>23:45 ✓✓</small></div>
+            <div class="bub"><p>Perfecto, gracias. Las condiciones de pago te las explica una persona de admisiones en la entrevista. ¿Te enseño los huecos para venir?</p><small>23:45</small></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box hu"><p class="k">Lo que ve admisiones a las 8:30 <span class="ej">Datos de ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Martina R.</b><span class="pill ko">Prioridad alta</span></div>
+            <dl><dt>Programa</dt><dd>Grado en Cine y Audiovisuales</dd><dt>Inicio</dt><dd>Septiembre de 2027</dd><dt>Financia</dt><dd>Familia · quiere ver opciones de pago</dd><dt>Respuesta</dt><dd>23:41 · 1 minuto después de la solicitud</dd><dt>Siguiente</dt><dd>Visita y entrevista · martes 19-ene · 17:30</dd></dl></div></div>
+        <div class="box sy"><p class="k">Cómo sale la prioridad</p><ul><li><b>Alta:</b> programa claro, empieza este próximo curso y sabe cómo lo paga.</li><li><b>Media:</b> empieza más adelante o aún no sabe cómo financiarlo.</li><li><b>Baja:</b> solo se informa. Recibe información y se le vuelve a escribir más adelante.</li></ul><p class="muted" style="font-size:13px">Las reglas las decidís vosotros. Estas son un ejemplo.</p></div>
+        <div class="box"><p class="k">Lo que el asistente virtual nunca hace</p><ul><li>Hacerse pasar por una persona.</li><li>Dar precios, becas o condiciones que no le hayáis dado por escrito.</li><li>Decidir una admisión. Si no sabe algo, lo pasa a admisiones.</li></ul></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="1"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="3">Agenda la entrevista y la visita <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 3 · AGENDA -->
+<section class="pane" id="p3" role="tabpanel" aria-labelledby="t3">
+  <header>
+    <h2>3 · Elige día para la entrevista y la visita</h2>
+    <p>En la misma conversación, sin colgar y sin esperar a que alguien la llame. El asistente virtual le ofrece los huecos libres de la agenda de admisiones. Viene de Girona, así que la visita a la escuela y la entrevista van el mismo día.</p>
+  </header>
+  <article class="stp" id="s3">
+    <div class="hd"><b class="n">3</b><div><p class="k">Paso 3 · martes 12-ene · 23:46</p><h3>Cita cerrada antes de medianoche</h3></div></div>
+    <div class="q4">
+      <div><p class="k">Lo que recibe Martina <span class="ej">Datos de ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg"><svg class="i"><use href="#i-film"/></svg></span><div><b>ESCAC · Admisiones</b><small>Asistente virtual · cuenta de empresa</small></div></div>
+          <div class="bd">
+            <div class="bub"><p>Puedes venir a conocer la escuela y hacer la entrevista el mismo día. Estos son los próximos huecos:</p><small>23:46</small><div class="btns"><span>Martes 19-ene · 17:30</span><span>Jueves 21-ene · 17:30</span><span>Prefiero entrevista online</span></div></div>
+            <div class="bub me">Martes 19 a las 17:30. Vendré con mi madre<small>23:47 ✓✓</small></div>
+            <div class="bub"><p>¡Hecho! Martes 19 de enero a las 17:30, visita y entrevista en la escuela. Os esperamos a las dos. Te mando un recordatorio la víspera. 🎬</p><small>23:47</small><div class="btns"><span>Añadir a mi calendario</span></div></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box hu"><p class="k">Lo que ve admisiones <span class="ej">Datos de ejemplo</span></p>
+          <div class="log">
+            <div><b>23:47</b><span>Cita en la agenda: <b>Martina R.</b> · visita + entrevista · mar 19-ene 17:30</span></div>
+            <div><b>23:47</b><span>Viene acompañada: madre</span></div>
+            <div><b>8:30</b><span>Resumen del día: 1 solicitud nueva de noche, ya con cita</span></div>
+          </div></div>
+        <div class="box sy"><p class="k">Qué hace el sistema</p><ul><li>Lee la agenda real del equipo y solo ofrece huecos libres.</li><li>Si ninguno le va, deja la ficha marcada para que la llame una persona.</li><li>Si es internacional, ofrece primero la entrevista online.</li></ul></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="2"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="4">Recordatorios <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 4 · RECORDATORIOS -->
+<section class="pane" id="p4" role="tabpanel" aria-labelledby="t4">
+  <header>
+    <h2>4 · Recordatorios: la víspera y el mismo día</h2>
+    <p>Entre el martes 12 y el martes 19 pasa una semana de exámenes. Dos mensajes cortos para que la cita no se caiga y, si se cae, que se mueva en vez de perderse.</p>
+  </header>
+  <article class="stp" id="s4">
+    <div class="hd"><b class="n">4</b><div><p class="k">Paso 4 · lunes 18-ene · 19:00 y martes 19-ene · 13:30</p><h3>Que venga, o que cambie la fecha sin desaparecer</h3></div></div>
+    <div class="q4">
+      <div><p class="k">Lo que recibe Martina <span class="ej">Datos de ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg"><svg class="i"><use href="#i-film"/></svg></span><div><b>ESCAC · Admisiones</b><small>Asistente virtual · cuenta de empresa</small></div></div>
+          <div class="bd">
+            <span class="when">Lunes 18-ene · la víspera</span>
+            <div class="bub"><p>Hola Martina 👋 Mañana a las 17:30 os esperamos a ti y a tu madre para la visita y la entrevista, en Terrassa. Aquí tienes cómo llegar. ¿Sigue en pie?</p><small>19:00</small><div class="btns"><span>Sí, allí estaré</span><span>Necesito cambiarla</span></div></div>
+            <div class="bub me">Sí, allí estaré<small>19:12 ✓✓</small></div>
+            <span class="when">Martes 19-ene · el mismo día</span>
+            <div class="bub"><p>¡Hoy es el día! Te esperamos a las 17:30. Si te retrasas, escríbenos por aquí.</p><small>13:30</small></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box hu"><p class="k">Lo que ve admisiones <span class="ej">Datos de ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Citas de hoy · martes 19-ene</b><span class="pill ok">4 confirmadas</span></div>
+            <dl><dt>17:30</dt><dd>Martina R. · Grado · confirmada ✓</dd><dt>18:30</dt><dd>Pau G. · Grado · confirmada ✓</dd><dt>Online</dt><dd>Inés M. · Máster · confirmada ✓</dd><dt>Movida</dt><dd>Jan S. · pasa al jueves 21 · pidió cambio</dd></dl></div></div>
+        <div class="box sy"><p class="k">Qué hace el sistema</p><ul><li>Programa los dos avisos al cerrar la cita.</li><li>Si pulsa «Necesito cambiarla», le ofrece otros huecos y libera el suyo.</li><li>Si no confirma la víspera, avisa a admisiones por la mañana.</li></ul></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="3"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="5">La entrevista <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 5 · ENTREVISTA -->
+<section class="pane" id="p5" role="tabpanel" aria-labelledby="t5">
+  <header>
+    <h2>5 · La entrevista la hace una persona</h2>
+    <p>Aquí el sistema se aparta. Quien entrevista llega con la ficha leída: qué quiere estudiar, cuándo empieza, que viene con su madre y que la familia quiere ver opciones de pago. Al acabar, deja dos líneas de notas y con eso se prepara el presupuesto.</p>
+  </header>
+  <article class="stp" id="s5">
+    <div class="hd"><b class="n">5</b><div><p class="k">Paso 5 · martes 19-ene · 17:30</p><h3>Visita, entrevista y notas en la ficha</h3></div></div>
+    <div class="hm">
+      <div class="box hu"><p class="k">Antes de entrar <span class="ej">Datos de ejemplo</span></p>
+        <div class="crm"><div class="ch"><b>Martina R. · 18 · Girona</b><span class="pill ko">Prioridad alta</span></div>
+          <dl><dt>Programa</dt><dd>Grado en Cine y Audiovisuales · sept. 2027</dd><dt>Financia</dt><dd>Familia · pregunta por opciones de pago</dd><dt>Viene con</dt><dd>Su madre</dd><dt>Conversación</dt><dd>9 mensajes con el asistente virtual · leer</dd></dl></div></div>
+      <div class="box"><p class="k">Al salir · notas de admisiones <span class="ej">Datos de ejemplo</span></p>
+        <p>«Muy motivada, ha rodado cortos en el instituto. Le interesa dirección. La madre pregunta por pago fraccionado y por becas. Enviar presupuesto y condiciones de reserva.»</p>
+        <p class="muted" style="font-size:13px">Con estas notas el sistema prepara el borrador del presupuesto para mañana a primera hora.</p></div>
+    </div>
+    <div class="callout"><svg class="i"><use href="#i-info"/></svg><div>Si la prueba de acceso o la entrevista tienen su propio proceso, el recorrido se adapta: el sistema solo agenda, recuerda y deja constancia. Lo que se valora y quién entra lo decidís vosotros.</div></div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="4"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="6">El presupuesto <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 6 · PRESUPUESTO (FUGA) -->
+<section class="pane" id="p6" role="tabpanel" aria-labelledby="t6">
+  <header>
+    <h2>6 · El presupuesto y la reserva de plaza</h2>
+    <p>Es el primero de los dos puntos donde nos dijiste que se os escapa. Martina sale de la entrevista con ganas. Cada día que el presupuesto tarda en llegar, esas ganas bajan y otra escuela le escribe.</p>
+  </header>
+  <div class="leak"><svg class="i"><use href="#i-alert"/></svg><div><span class="t">Fuga 1 · los presupuestos <span class="said">Lo que nos contaste</span></span>Lo habitual en este paso: el presupuesto se prepara a mano, sale días después por correo, llega a la bandeja de los padres y nadie sabe si se ha abierto. Desde fuera, un presupuesto sin respuesta y uno que nadie ha visto parecen lo mismo.</div></div>
+  <article class="stp lk" id="s6">
+    <div class="hd"><b class="n">6</b><div><p class="k">Paso 6 · miércoles 20-ene · 10:00</p><h3>Preparado de noche, aprobado por admisiones, enviado antes de 24 h</h3></div></div>
+    <div class="q4">
+      <div style="display:grid;gap:10px"><p class="k" style="margin:0">La bandeja de admisiones <span class="ej">Datos de ejemplo</span> · prueba el botón</p>
+        <div class="appr" id="appr">
+          <div class="ah"><b>Martina R. · presupuesto del Grado</b><span class="pill bl">Preparado por el sistema</span></div>
+          <div class="ab">
+            <div class="draft" id="draft">Hola Martina, gracias por venir ayer con tu madre. Como hablamos, te enviamos el presupuesto del Grado en Cine y Audiovisuales para septiembre de 2027, con las opciones de pago y el enlace para reservar plaza. Cualquier duda, contesta aquí.</div>
+            <p class="why">Por qué este mensaje: entrevista hecha ayer · notas «pago fraccionado y becas» · importes sacados de vuestra tarifa vigente, nunca inventados.</p>
+            <div class="acts"><button type="button" class="ok" id="ap-ok">Aprobar y enviar</button><button type="button" id="ap-ed">Editar</button><button type="button" id="ap-me">Lo llevo yo</button></div>
+            <p class="done" id="ap-done">✓ Enviado por WhatsApp y correo a las 10:00 · aprobado por admisiones · seguimiento de 48 h programado</p>
+          </div>
+        </div>
+        <div class="quote">
+          <div class="qh"><b>Presupuesto · Grado en Cine y Audiovisuales</b><small>Para Martina R. · curso 2027-2028</small></div>
+          <dl><dt>Programa</dt><dd>Grado en Cine y Audiovisuales · 1.er curso</dd><dt>Importe</dt><dd>El de vuestra tarifa vigente</dd><dt>Pago</dt><dd>Las modalidades que ofrezcáis</dd><dt>Reserva</dt><dd>Importe y plazo según vuestras condiciones</dd></dl>
+          <div class="qf"><span class="p">Reservar plaza</span><span>Tengo una duda</span></div>
+        </div>
+        <p class="note">Datos de ejemplo. No ponemos cifras: los importes y condiciones salen siempre de lo que nos deis.</p>
+      </div>
+      <div class="side">
+        <div class="box hu"><p class="k">Lo que ve admisiones después <span class="ej">Datos de ejemplo</span></p>
+          <div class="log">
+            <div><b>mié 10:00</b><span>Presupuesto enviado · WhatsApp y correo</span></div>
+            <div><b>mié 21:14</b><span>Abierto por Martina</span></div>
+            <div><b>jue 22:30</b><span>Abierto otra vez (2.ª vez) · probablemente con la familia</span></div>
+            <div class="al"><b>vie 10:00</b><span>48 h sin respuesta → seguimiento</span></div>
+          </div></div>
+        <div class="box sy"><p class="k">Qué hace el sistema</p><ul><li>Prepara el borrador con la ficha y las notas de la entrevista.</li><li>Lo envía por WhatsApp, que es lo que lee ella, y por correo, que es lo que lee la familia.</li><li>Avisa cuando lo abren y programa el seguimiento de las 48 h.</li></ul></div>
+        <div class="box"><p class="k">Panel · presupuestos abiertos <span class="ej">Datos de ejemplo</span></p><ul><li>Enviados esta semana: <b>9</b> · abiertos: 7 · sin respuesta: 5.</li><li>Más de 48 h sin respuesta: <b>3</b>, ya en seguimiento.</li><li>Tiempo medio entrevista → presupuesto: <b>17 h</b>.</li></ul></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="5"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="7">Si no responde: seguimiento a las 48 h <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 7 · SEGUIMIENTO 48 H (FUGA) -->
+<section class="pane" id="p7" role="tabpanel" aria-labelledby="t7">
+  <header>
+    <h2>7 · 48 horas sin respuesta: seguimiento</h2>
+    <p>El segundo punto donde se os escapa. Martina ha abierto el presupuesto dos veces y no ha contestado. No es un «no»: lo están hablando en casa y les ha surgido una duda que nadie les ha resuelto.</p>
+  </header>
+  <div class="leak"><svg class="i"><use href="#i-alert"/></svg><div><span class="t">Fuga 2 · el seguimiento <span class="said">Lo que nos contaste</span></span>Lo habitual en este paso: si la familia no contesta, nadie vuelve a escribir, o se escribe una semana después, cuando ya han elegido. Con 20 a 49 solicitudes al mes y un equipo pequeño, acordarse de cada una no depende de las ganas, depende de tener un sistema.</div></div>
+  <article class="stp lk" id="s7">
+    <div class="hd"><b class="n">7</b><div><p class="k">Paso 7 · viernes 22-ene · 10:00</p><h3>Un mensaje útil a las 48 h y una persona en cuanto hace falta</h3></div></div>
+    <div class="dline">
+      <div><span class="d">0 h</span><span class="pill bl who">Admisiones aprueba</span><b>Presupuesto</b><small>Por WhatsApp y correo, con el enlace para reservar.</small></div>
+      <div><span class="d">48 h</span><span class="pill bl who">Asistente virtual</span><b>Mensaje corto</b><small>«¿Pudisteis verlo en casa?» Con botones para la duda más típica: pagos, becas, fechas.</small></div>
+      <div><span class="d">4 días</span><span class="pill ok who">Persona</span><b>Llamada</b><small>Si sigue sin responder, aparece en la agenda de admisiones con la ficha y el historial.</small></div>
+      <div><span class="d">7 días</span><span class="pill bl who">Asistente virtual</span><b>Último aviso</b><small>«Te guardamos la información. Escríbenos cuando lo tengáis claro.» Pasa a «en pausa», no a perdida.</small></div>
+    </div>
+    <div class="q4">
+      <div><p class="k">Lo que recibe Martina <span class="ej">Datos de ejemplo</span></p>
+        <div class="phn"><div class="bar"><span class="lg"><svg class="i"><use href="#i-film"/></svg></span><div><b>ESCAC · Admisiones</b><small>Asistente virtual · cuenta de empresa</small></div></div>
+          <div class="bd">
+            <span class="when">Viernes 22-ene · 48 h después</span>
+            <div class="bub"><p>Hola Martina 👋 ¿Pudisteis ver el presupuesto en casa? Si os ha surgido alguna duda, dime cuál y te paso con admisiones.</p><small>10:00</small><div class="btns"><span>Dudas de pago o becas</span><span>Quiero reservar</span><span>Lo estamos pensando</span></div></div>
+            <div class="bub me">Dudas de pago. Mis padres preguntan si se puede fraccionar y si hay becas<small>14:20 ✓✓</small></div>
+            <div class="bub"><p>Buena pregunta. Eso os lo explica una persona de admisiones con las condiciones exactas. ¿Os va bien que os llamen hoy a las 18:00?</p><small>14:21</small><div class="btns"><span>Nos va bien</span><span>Mejor otro día</span></div></div>
+            <div class="bub me">Nos va bien<small>14:23 ✓✓</small></div>
+          </div></div></div>
+      <div class="side">
+        <div class="box hu"><p class="k">El aviso que le llega al equipo <span class="ej">Datos de ejemplo</span></p>
+          <div class="crm"><div class="ch"><b>Martina R. · llamar hoy 18:00</b><span class="pill ko">Prioridad alta</span></div>
+            <dl><dt>Motivo</dt><dd>Duda de pago fraccionado y becas · con la familia</dd><dt>Presupuesto</dt><dd>Enviado el miércoles · abierto 2 veces</dd><dt>Entrevista</dt><dd>Martes 19 · «muy motivada, le interesa dirección»</dd><dt>Asignado</dt><dd>Admisiones · en la agenda</dd></dl></div></div>
+        <div class="box"><p class="k">Reglas que se cumplen siempre</p><ul><li>Si responde, el seguimiento se para y la conversación pasa a una persona.</li><li>Nunca más de un mensaje al día, ni de noche, ni en domingo.</li><li>Ninguna duda de dinero la contesta el asistente virtual.</li><li>Quien pide no recibir más mensajes, no los recibe.</li></ul></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="6"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="8">Reserva y matrícula <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 8 · MATRÍCULA -->
+<section class="pane" id="p8" role="tabpanel" aria-labelledby="t8">
+  <header>
+    <h2>8 · Reserva de plaza y matrícula</h2>
+    <p>Tras la llamada del viernes, la familia reserva la plaza el lunes. La matrícula se formaliza cuando vosotros lo decidís, con vuestro proceso. Y esa matrícula vuelve a la campaña que la trajo.</p>
+  </header>
+  <article class="stp" id="s8">
+    <div class="hd"><b class="n">8</b><div><p class="k">Paso 8 · lunes 25-ene → matrícula</p><h3>De «quiero información» a «matriculada», y de vuelta al anuncio</h3></div></div>
+    <div class="q4">
+      <div class="crm"><div class="ch"><b>Martina R. · 18 · Girona</b><span class="pill ok">Plaza reservada</span></div>
+        <dl><dt>Programa</dt><dd>Grado en Cine y Audiovisuales · septiembre de 2027</dd><dt>Solicitud</dt><dd>Martes 12-ene · 23:40 · respondida en 1 min</dd><dt>Entrevista</dt><dd>Martes 19-ene · con visita</dd><dt>Presupuesto</dt><dd>Miércoles 20-ene · seguimiento a las 48 h</dd><dt>Reserva</dt><dd>Lunes 25-ene · pagada</dd><dt>Matrícula</dt><dd>Pendiente de vuestro proceso de admisión</dd><dt>Origen</dt><dd>Meta · «Grado · Catalunya» · anuncio «Primer rodaje»</dd></dl>
+        <p class="note" style="margin:0 13px 12px">Datos de ejemplo. 13 días de la solicitud a la reserva.</p></div>
+      <div class="side">
+        <div class="box"><p class="k">El panel · qué campaña trae matrículas <span class="ej">Datos de ejemplo</span></p>
+          <div class="fun">
+            <div class="row"><span>Solicitudes</span><span class="bar"><i style="width:100%"></i></span><b>38</b></div>
+            <div class="row"><span>Entrevistas</span><span class="bar"><i style="width:58%"></i></span><b>22</b></div>
+            <div class="row lk"><span>Presupuestos</span><span class="bar"><i style="width:42%"></i></span><b>16</b></div>
+            <div class="row"><span>Reservas</span><span class="bar"><i style="width:18%"></i></span><b>7</b></div>
+            <div class="row"><span>Matrículas</span><span class="bar"><i style="width:13%"></i></span><b>5</b></div>
+          </div>
+          <p class="muted" style="font-size:13px">Un mes de ejemplo, por campaña y por anuncio. Lo importante es ver dónde cae cada mes, no estas cifras.</p>
+          <p><a href="/intelligence/?sector=escac&amp;empresa=ESCAC&amp;objetivo=conversion">Verlo en Intelligence →</a></p></div>
+        <div class="box hu"><p class="k">Qué hace admisiones</p><p>Confirma la plaza, resuelve la admisión y formaliza la matrícula como siempre. El sistema solo mueve la ficha de etapa y lo apunta todo.</p></div>
+      </div>
+    </div>
+  </article>
+  <div class="next"><button class="btn sec" data-go="7"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn pri" data-go="9">Verlo en marcha <svg class="i"><use href="#i-arrow"/></svg></button></div>
+</section>
+
+<!-- 9 · VERLO EN MARCHA -->
+<section class="pane" id="p9" role="tabpanel" aria-labelledby="t9">
+  <header>
+    <h2>9 · Verlo en marcha <span class="ej">Datos de ejemplo</span></h2>
+    <p>Elige una versión y pulsa «Reproducir». A la izquierda, lo que ve Martina en su móvil. A la derecha, quién trabaja en cada momento: el asistente virtual, admisiones o la ficha y el panel.</p>
+  </header>
+  <div class="scen" role="group" aria-label="Versión">
+    <button aria-pressed="true" data-s="con">Martina · con el sistema</button>
+    <button aria-pressed="false" data-s="sin">Martina · sin seguimiento</button>
+  </div>
+  <div class="two">
+    <div style="display:grid;gap:10px">
+      <div class="chat">
+        <div class="hd"><span class="lg"><svg class="i"><use href="#i-film"/></svg></span><div><b>ESCAC · Admisiones</b><small>Así lo ve en su móvil</small></div></div>
+        <div class="bd" id="chat" aria-live="polite"></div>
+      </div>
+      <button class="btn pri" id="play" style="justify-self:center"><svg class="i"><use href="#i-play"/></svg> Reproducir</button>
+    </div>
+    <div class="agents">
+      <div class="agent" data-a="sis"><span class="ai"><svg class="i"><use href="#i-cpu"/></svg></span><div><h3>El asistente virtual</h3><p>Responde en un minuto, cualifica, agenda, recuerda y hace el seguimiento. No da precios ni decide nada.</p></div></div>
+      <div class="agent" data-a="adm"><span class="ai"><svg class="i"><use href="#i-user"/></svg></span><div><h3>Admisiones</h3><p>Hace la entrevista, aprueba el presupuesto, llama cuando hay dudas y confirma la plaza.</p></div></div>
+      <div class="agent" data-a="crm"><span class="ai"><svg class="i"><use href="#i-db"/></svg></span><div><h3>Ficha y panel</h3><p>Cada solicitud en su etapa: nueva, cita, entrevista, presupuesto, reserva, matrícula o en pausa. Y cada una con su campaña.</p></div></div>
+    </div>
+  </div>
+  <div class="links3">
+    <a href="/propuestas/escac/whatsapp/"><span class="k">WhatsApp</span><b>La conversación entera</b><small>Los mensajes del asistente virtual, uno a uno.</small></a>
+    <a href="/propuestas/escac/landing/"><span class="k">Landing</span><b>Donde deja sus datos</b><small>La página a la que llevan los anuncios.</small></a>
+    <a href="/intelligence/?sector=escac&amp;empresa=ESCAC&amp;objetivo=conversion"><span class="k">Intelligence</span><b>Qué campaña trae matrículas</b><small>El panel, con datos de ejemplo.</small></a>
+  </div>
+  <div class="next"><button class="btn sec" data-go="8"><svg class="i"><use href="#i-back"/></svg> Atrás</button><button class="btn sec" data-go="0">Volver al principio</button></div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="sig"><b>Qualivo</b><span>Preparado para ESCAC · 27-nov-2026</span></div>
+    <p>Lo marcado como «Lo que nos contaste» sale del formulario que rellenaste. Lo marcado como «Datos de ejemplo» es una propuesta para enseñar cómo funcionaría: Martina, las conversaciones, las fechas, las fichas y las cifras son inventadas. No es una página de ESCAC ni usa su logotipo ni sus imágenes. No prometemos resultados: enseñamos cómo se trabajaría cada solicitud.</p>
+    <p><a href="/propuestas/escac/">Volver a la portada del paquete</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('nav.tabs button'));
+  var panes=[].slice.call(document.querySelectorAll('.pane'));
+  function go(n,scroll,to){
+    n=Number(n);
+    tabs.forEach(function(t,i){t.setAttribute('aria-selected',i===n?'true':'false');t.tabIndex=i===n?0:-1;});
+    panes.forEach(function(p,i){p.classList.toggle('on',i===n);});
+    var nav=document.querySelector('nav.tabs');
+    if(tabs[n]&&nav){var l=tabs[n].offsetLeft-(nav.clientWidth-tabs[n].offsetWidth)/2;nav.scrollTo({left:l,behavior:'smooth'});}
+    var el=to&&document.getElementById(to);
+    if(el){setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'start'});},30);}
+    else if(scroll){var y=nav.getBoundingClientRect().top+window.scrollY-70;window.scrollTo({top:y,behavior:'smooth'});}
+    try{history.replaceState(null,'','#p'+n);}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){go(i,false);});
+    t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){var k=(i+1)%tabs.length;go(k);tabs[k].focus();}if(e.key==='ArrowLeft'){var j=(i-1+tabs.length)%tabs.length;go(j);tabs[j].focus();}});
+  });
+  [].slice.call(document.querySelectorAll('[data-go]')).forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-go'),true,b.getAttribute('data-to'));});});
+  var h=(location.hash.match(/^#p(\d)$/)||[])[1]; if(h&&tabs[h])go(h,false);
+
+  // bandeja de aprobación del presupuesto
+  var ap=document.getElementById('appr'),dr=document.getElementById('draft');
+  document.getElementById('ap-ok').addEventListener('click',function(){dr.contentEditable='false';ap.classList.add('sent');this.disabled=true;document.getElementById('ap-ed').disabled=true;document.getElementById('ap-me').disabled=true;});
+  document.getElementById('ap-ed').addEventListener('click',function(){dr.contentEditable='true';dr.focus();this.textContent='Editando…';});
+  document.getElementById('ap-me').addEventListener('click',function(){document.getElementById('ap-done').textContent='✓ Presupuesto asignado a ti. El sistema no enviará nada.';ap.classList.add('sent');this.disabled=true;document.getElementById('ap-ok').disabled=true;document.getElementById('ap-ed').disabled=true;});
+
+  // [tipo, texto, carril, botones, hora, aprobado por admisiones]
+  var S={
+    con:[
+      ['day','Martes 12-ene'],
+      ['sys','21:05 · Ve el anuncio en Instagram · campaña «Grado · Catalunya»','crm'],
+      ['sys','23:40 · Deja sus datos · ficha creada con su campaña','crm'],
+      ['in','Hola Martina 👋 Soy el asistente virtual de admisiones de ESCAC. Hemos recibido tu solicitud sobre el Grado en Cine y Audiovisuales. ¿Te hago tres preguntas rápidas para preparar tu entrevista?','sis',['Vale'],'23:41'],
+      ['out','Vale!','crm',null,'23:42'],
+      ['in','¿Para qué curso querrías empezar?','sis',['Septiembre de 2027','Septiembre de 2028','Aún no lo sé'],'23:42'],
+      ['out','Septiembre de 2027','crm',null,'23:43'],
+      ['in','¿Cómo tenéis pensado financiarlo?','sis',['Mi familia','Beca o ayuda','Pago fraccionado','Aún no lo sé'],'23:43'],
+      ['out','Mi familia, pero queremos ver opciones de pago','crm',null,'23:45'],
+      ['sys','Ficha: Grado · sept. 2027 · familia + opciones de pago · Prioridad alta','crm'],
+      ['in','Puedes venir a conocer la escuela y hacer la entrevista el mismo día. Estos son los próximos huecos:','sis',['Martes 19-ene · 17:30','Jueves 21-ene · 17:30','Entrevista online'],'23:46'],
+      ['out','Martes 19 a las 17:30. Vendré con mi madre','crm',null,'23:47'],
+      ['sys','Cita en la agenda de admisiones · en el resumen de las 8:30','adm'],
+      ['day','Lunes 18-ene · la víspera'],
+      ['in','Mañana a las 17:30 os esperamos a ti y a tu madre, en Terrassa. ¿Sigue en pie?','sis',['Sí, allí estaré','Necesito cambiarla'],'19:00'],
+      ['out','Sí, allí estaré','crm',null,'19:12'],
+      ['day','Martes 19-ene'],
+      ['in','¡Hoy es el día! Te esperamos a las 17:30.','sis',null,'13:30'],
+      ['sys','17:30 · Visita y entrevista con admisiones · notas en la ficha','adm'],
+      ['day','Miércoles 20-ene'],
+      ['in','Hola Martina, gracias por venir ayer con tu madre. Como hablamos, te enviamos el presupuesto del Grado para septiembre de 2027 y el enlace para reservar plaza.','adm',['Ver presupuesto','Reservar plaza'],'10:00',1],
+      ['sys','Presupuesto abierto 2 veces · sin respuesta','crm'],
+      ['day','Viernes 22-ene · 48 h después'],
+      ['in','Hola Martina 👋 ¿Pudisteis ver el presupuesto en casa? Si os ha surgido alguna duda, dime cuál y te paso con admisiones.','sis',['Dudas de pago o becas','Quiero reservar','Lo estamos pensando'],'10:00'],
+      ['out','Dudas de pago. Mis padres preguntan si se puede fraccionar','crm',null,'14:20'],
+      ['in','Eso os lo explica una persona de admisiones con las condiciones exactas. ¿Os va bien que os llamen hoy a las 18:00?','sis',['Nos va bien'],'14:21'],
+      ['sys','Aviso al equipo · Prioridad alta · llamada a las 18:00 con la familia','adm'],
+      ['day','Lunes 25-ene'],
+      ['sys','Reserva de plaza pagada · ficha → «Plaza reservada»','crm'],
+      ['sys','Al formalizar la matrícula: atribuida a «Grado · Catalunya» en el panel','crm']
+    ],
+    sin:[
+      ['day','Martes 12-ene'],
+      ['sys','23:40 · Deja sus datos en el formulario · nadie lo ve hasta mañana','crm'],
+      ['day','Miércoles 13-ene'],
+      ['in','Hola Martina, gracias por tu interés. ¿Cuándo te iría bien venir a una entrevista?','adm',null,'12:40'],
+      ['out','Hola! Esta semana tengo exámenes, ya os digo','crm',null,'21:10'],
+      ['sys','Nadie vuelve a escribir esa semana','crm'],
+      ['day','Diez días después'],
+      ['sys','Martina vuelve a escribir. Entrevista cuadrada por teléfono','adm'],
+      ['sys','Entrevista hecha · «el presupuesto te lo envío esta semana»','adm'],
+      ['day','Cuatro días después'],
+      ['sys','Presupuesto enviado por correo · nadie sabe si lo ha abierto','crm'],
+      ['day','Tres semanas después'],
+      ['sys','Sin respuesta. Nadie llama: queda como «pendiente»','crm'],
+      ['sys','La familia tenía una duda de pago que nadie resolvió · solicitud perdida sin un «no»','crm']
+    ]
+  };
+  var cur='con',timer=null,chat=document.getElementById('chat'),agents=[].slice.call(document.querySelectorAll('.agent'));
+  function lit(a){agents.forEach(function(x){x.classList.toggle('lit',x.getAttribute('data-a')===a);});}
+  function render(n){
+    chat.innerHTML='';
+    S[cur].slice(0,n).forEach(function(m){
+      var d=document.createElement('div');d.className='msg '+m[0];d.textContent=m[1];
+      if(m[3]){var b=document.createElement('div');b.className='btns';m[3].forEach(function(t){var s=document.createElement('span');s.textContent=t;b.appendChild(s);});d.appendChild(b);}
+      if(m[4]){var t=document.createElement('small');t.textContent=m[4]+(m[0]==='out'?' ✓✓':'');d.appendChild(t);}
+      if(m[0]==='in'){var a=document.createElement('span');a.className='apv';a.textContent=m[5]?'Preparado por el sistema · aprobado por admisiones':(m[2]==='sis'?'Asistente virtual':'Admisiones');d.appendChild(a);}
+      chat.appendChild(d);
+    });
+    chat.scrollTop=chat.scrollHeight;
+  }
+  function play(){
+    clearTimeout(timer);var i=0,msgs=S[cur];chat.innerHTML='';lit(null);
+    (function step(){
+      if(i>=msgs.length){lit(null);return;}
+      var m=msgs[i];
+      if(m[0]==='in'){var ty=document.createElement('div');ty.className='typing';ty.innerHTML='<i></i><i></i><i></i>';chat.appendChild(ty);chat.scrollTop=chat.scrollHeight;lit(m[2]);
+        timer=setTimeout(function(){i++;render(i);timer=setTimeout(step,850);},900);}
+      else{i++;render(i);if(m[2])lit(m[2]);timer=setTimeout(step,m[0]==='day'?700:m[0]==='sys'?1400:1100);}
+    })();
+  }
+  document.getElementById('play').addEventListener('click',play);
+  [].slice.call(document.querySelectorAll('.scen button')).forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('.scen button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed','true');cur=b.getAttribute('data-s');clearTimeout(timer);render(S[cur].length);lit(null);
+  });});
+  render(S[cur].length);
+})();
+</script>
+</body>
+</html>
