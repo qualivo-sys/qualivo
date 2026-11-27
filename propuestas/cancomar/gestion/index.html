@@ -92,6 +92,22 @@ td .btn2{padding:6px 11px;font-size:12.5px}
 .vs span.now{color:var(--good);margin-left:4px}
 tr.nw td{background:var(--good-soft)}
 .nextv{display:flex;justify-content:flex-end}
+.ev.btn3{all:unset;box-sizing:border-box;cursor:pointer;display:block;border-radius:8px;padding:6px 8px;font-size:12px;line-height:1.35;color:#fff;background:var(--c,#00719F)}
+.ev.btn3:hover{filter:brightness(1.1)}.ev.btn3:focus-visible{outline:3px solid var(--brand)}
+.ev.btn3 small{display:block;opacity:.85;font-size:11px}
+.lnk{all:unset;cursor:pointer;font-weight:700;color:var(--accent)}.lnk:hover{text-decoration:underline}
+.tg{font:700 12px var(--head);border-radius:99px;padding:5px 11px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink)}
+.tg.si{background:var(--good-soft);color:var(--good);border-color:var(--good)}.tg.no{background:var(--bad-soft);color:var(--bad);border-color:var(--bad)}
+.pbar{height:8px;border-radius:99px;background:var(--line-2);overflow:hidden;min-width:80px}.pbar i{display:block;height:100%;background:var(--good)}
+.sesl{display:grid;gap:6px}.sesl div{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-size:13px}
+@media (max-width:560px){.sesl div{grid-template-columns:1fr}}
+.ajg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}@media (max-width:900px){.ajg{grid-template-columns:1fr}}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chipx{font:700 12.5px var(--head);border-radius:99px;padding:6px 12px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink)}
+.chipx[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);border-color:var(--brand)}
+dialog.fd .two3{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pan > .chip{justify-self:start}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;font-size:14px}.kv dt{font:700 12px var(--head);color:var(--muted);text-transform:uppercase;letter-spacing:.05em;padding-top:2px}.kv dd{margin:0}
 .view > *,.two > *,.pan > *{min-width:0}
 #dg{max-width:100%;min-width:0;flex:1 1 220px;text-overflow:ellipsis}
 .doc b{overflow-wrap:anywhere}
@@ -107,6 +123,7 @@ tr.nw td{background:var(--good-soft)}
   <symbol id="i-eur" viewBox="0 0 24 24"><path d="M18 6.5A7 7 0 1 0 18 17.5M4 10h10M4 14h10"/></symbol>
   <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></symbol>
 </svg>
 
 <nav class="topnav" aria-label="Paquete CANCOMAR">
@@ -139,6 +156,7 @@ tr.nw td{background:var(--good-soft)}
     <button role="tab" data-v="alu" aria-selected="false"><svg class="i"><use href="#i-al"/></svg>Alumnos y matrícula<em id="nmat">3</em></button>
     <button role="tab" data-v="doc" aria-selected="false"><svg class="i"><use href="#i-doc"/></svg>Documentación</button>
     <button role="tab" data-v="ren" aria-selected="false"><svg class="i"><use href="#i-ren"/></svg>Renovaciones</button>
+    <button role="tab" data-v="aj" aria-selected="false"><svg class="i"><use href="#i-gear"/></svg>Ajustes</button>
     <p class="sep">Fase posterior</p>
     <button role="tab" data-v="fac" aria-selected="false"><svg class="i"><use href="#i-eur"/></svg>Estado económico<span class="fase">Opcional</span></button>
     <div class="who"><i>SI</i><div><b>Académico</b><br><span style="opacity:.7">Viernes, 27 de noviembre</span></div></div>
@@ -173,6 +191,11 @@ tr.nw td{background:var(--good-soft)}
       </div>
       <div class="pan"><h4 id="mt">Alumnos del grupo</h4>
         <div class="tw stack"><table><thead><tr><th>Alumno</th><th>Ficha y protección de datos</th><th>Pago</th></tr></thead><tbody id="mtab"></tbody></table></div>
+      </div>
+      <div class="pan"><h4>Todos los alumnos</h4>
+        <div class="row"><input id="dq" class="btn2" style="flex:1 1 200px;min-width:0;font-weight:400" type="search" placeholder="Buscar por nombre…" aria-label="Buscar alumno"><select id="df" class="btn2" aria-label="Filtrar"><option value="">Todos</option><option value="pen">Con pagos pendientes</option><option value="fir">Ficha sin firmar</option><option value="fal">Con faltas</option></select></div>
+        <div class="tw stack"><table><thead><tr><th>Alumno</th><th>Grupo</th><th>Asistencia</th><th>Ficha</th><th>Pagos</th></tr></thead><tbody id="dirtab"></tbody></table></div>
+        <p class="mini">Pulsa un alumno para ver su ficha: su calendario, su asistencia, lo que ha pagado y lo que le queda.</p>
       </div>
     </section>
 
@@ -217,6 +240,12 @@ tr.nw td{background:var(--good-soft)}
       <p class="note">Esto conecta con lo ya contratado: al cerrar un grupo, cada certificado queda con su fecha de caducidad y el CRM prepara el aviso de renovación por WhatsApp para que admisiones lo apruebe.</p>
     </section>
 
+    <!-- AJUSTES -->
+    <section class="view" id="v-aj">
+      <div class="intro2"><b>Todo se adapta a vuestra forma de trabajar.</b> Lo configuramos juntos al principio y lo podéis cambiar cuando queráis, sin llamar a nadie.</div>
+      <div id="ajbox" class="ajg"></div>
+    </section>
+
     <!-- ESTADO ECONÓMICO -->
     <section class="view" id="v-fac">
       <div class="later"><span>🔗</span><span><b>Fase posterior · opcional.</b> La factura la emite un programa de facturación especializado (lo elegimos con vosotros y vuestra gestoría; cubre la factura electrónica). Esta pantalla está conectada con él: nadie teclea dos veces.</span></div>
@@ -232,6 +261,7 @@ tr.nw td{background:var(--good-soft)}
         <div class="kpi"><b id="fk3">0</b><span>pendientes de cobro</span></div>
         <div class="kpi"><b id="fk4">0</b><span>con adeudo domiciliado</span></div>
       </div>
+      <div class="pan" id="pagpan"></div>
       <div class="row"><span class="sync" id="fsync">Programa de facturación · sincronizado hace 2 min</span><button class="btn2" id="rem">Sincronizar ahora</button></div>
       <div class="tw stack"><table><thead><tr><th>Alumno o empresa</th><th>Curso</th><th>Factura</th><th>Importe</th><th>Estado</th><th></th></tr></thead><tbody id="ftab"></tbody></table></div>
       <div class="row"><button class="btn2 pri" id="csv"><svg class="i"><use href="#i-dl"/></svg>Resumen del mes para dirección</button></div>
@@ -310,7 +340,7 @@ var DONE=null,selI=0;
 var CERT=[];var sel={g:G[0].id,p:'p1'};
 
 /* ---- Navegación ---- */
-var TIT={gru:'Cursos y grupos',pro:'Profesores',alu:'Alumnos y matrícula',doc:'Documentación',ren:'Renovaciones',fac:'Estado económico'};
+var TIT={gru:'Cursos y grupos',pro:'Profesores',alu:'Alumnos y matrícula',doc:'Documentación',ren:'Renovaciones',fac:'Estado económico',aj:'Ajustes'};
 function go(v){$$('.side button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.v===v)});$$('.view').forEach(function(s){s.classList.toggle('on',s.id==='v-'+v)});$('#vt').textContent=TIT[v];R[v]&&R[v]();if(history.replaceState)history.replaceState(null,'','#'+v)}
 $$('.side button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.v)})});
 
@@ -475,6 +505,141 @@ function ficha(x){
 $('#rem').onclick=function(){if(!FAC)R.fac();FAC.forEach(function(x){if(x.st==='pen'&&Math.random()<.5)x.st='cob'});R.fac();$('#fsync').textContent='Programa de facturación · sincronizado ahora';toast('Estados de cobro actualizados desde el programa de facturación (simulación)')};
 $('#csv').onclick=function(){if(!FAC)R.fac();var rows=[['factura','cliente','curso','importe','estado','nota']];FAC.forEach(function(x){rows.push([x.id,x.n,x.c,x.imp,L[x.st][1],'DATOS DE EJEMPLO'])});
  var b=new Blob(['﻿'+rows.map(function(r){return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"'}).join(';')}).join('\n')],{type:'text/csv'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='estado-economico-2026-11-EJEMPLO.csv';document.body.appendChild(a);a.click();a.remove();toast('Descargado el resumen del mes (datos de ejemplo)')};
+
+/* ===== Ampliación 27-nov: clases, asistencia, alumnos, profesores, pagos y ajustes ===== */
+var PRE={FB:420,MP:520,PLP:1200,OG:260,SEI:210,ALCI:240};
+var HOY=new Date();HOY.setHours(23,59,0,0);
+var AID=0;
+function prep(g,a,i){if(a.id)return a;a.id='a'+(++AID);a.tot=PRE[g.c]||300;a.pag=a.pay?a.tot:(i%3===0?Math.round(a.tot/2):0);a.plan=a.pay?'Pago único':(i%3===0?'Dos plazos':'Un pago, pendiente');a.asis={};g.s.forEach(function(s,k){if(s.d<=HOY)a.asis[k]=((i*7+k*3)%11)!==0});return a}
+function prepAll(){G.forEach(function(g){g.al.forEach(function(a,i){prep(g,a,i)})})}
+function gById(id){return G.filter(function(x){return x.id===id})[0]}
+function findA(id){var r=null;G.forEach(function(g){g.al.forEach(function(a,i){if(a.id===id)r={g:g,a:a,i:i}})});return r}
+function pasadas(g){var r=[];g.s.forEach(function(s,k){if(s.d<=HOY)r.push(k)});return r}
+function pctAs(g,a){var p=pasadas(g);if(!p.length)return null;var n=p.filter(function(k){return a.asis[k]}).length;return Math.round(n/p.length*100)}
+function eur(n){return n.toLocaleString('es-ES')+' €'}
+function money(a){var pen=a.tot-a.pag;return pen<=0?'<span class="chip ok">Pagado '+eur(a.tot)+'</span>':'<span class="chip cad">Le quedan '+eur(pen)+'</span>'}
+function asTxt(g,a){var p=pctAs(g,a);return p==null?'<span class="mini">Aún no empieza</span>':'<span class="chip '+(p>=90?'ok':p>=75?'cad':'tel')+'">'+p+' %</span>'}
+function openDlg(html){$('#dlgi').innerHTML='<button class="xc" data-close aria-label="Cerrar">×</button>'+html;var dl=$('#dlg');if(!dl.open)dl.showModal();$$('[data-close]',dl).forEach(function(b){b.onclick=function(){dl.close()}});return dl}
+function refresh(){var v=($$('.side button[aria-selected="true"]')[0]||{}).dataset;v=v&&v.v;R[v]&&R[v]()}
+
+/* Cambiar una sesión: profesor, aula, hora y contenido, con aviso de coincidencias */
+function editSes(gid,k){
+ var g=gById(gid),s=g.s[k];
+ var dl=openDlg('<h3 id="dlg-t">Cambiar la clase del '+DIA[s.d.getDay()]+' '+f(s.d)+'</h3><p class="mini">'+esc(cur(g.c).n)+' · grupo '+g.id+'</p>'+
+  '<label>Profesor<select id="es-p">'+PROF.map(function(p){return '<option value="'+p.id+'"'+(p.id===s.p?' selected':'')+'>'+esc(p.n)+' · '+esc(p.a)+'</option>'}).join('')+'</select></label>'+
+  '<label>Aula<select id="es-a">'+Object.keys(AULA).map(function(a){return '<option value="'+a+'"'+(a===s.a?' selected':'')+'>'+esc(AULA[a])+'</option>'}).join('')+'</select></label>'+
+  '<div class="two3"><label>Empieza<input type="time" id="es-i" value="'+s.i+'"></label><label>Termina<input type="time" id="es-f" value="'+s.f+'"></label></div>'+
+  '<label>Qué se da<input id="es-c" value="'+esc(s.c)+'"></label><p class="mini" id="es-w"></p>'+
+  '<div class="row"><button class="btn2 pri" id="es-ok">Guardar el cambio</button><button class="btn2" data-close>Cancelar</button></div>');
+ function check(){var p=$('#es-p').value,a=$('#es-a').value,i=$('#es-i').value,fn=$('#es-f').value,w=[];
+  G.forEach(function(x){x.s.forEach(function(o,j){if(x===g&&j===k)return;if(o.d.toDateString()!==s.d.toDateString())return;if(o.i<fn&&i<o.f){if(o.p===p)w.push(prof(p).n+' ya tiene clase de '+o.i+' a '+o.f+' en '+cur(x.c).n);if(o.a===a)w.push(AULA[a]+' está ocupada de '+o.i+' a '+o.f)}})});
+  $('#es-w').innerHTML=w.length?'<span class="chip tel">Ojo</span> '+esc(w[0]):'<span class="chip ok">Sin coincidencias</span> Ese profesor y esa aula están libres.'}
+ ['es-p','es-a','es-i','es-f'].forEach(function(id){$('#'+id).onchange=check});check();
+ $('#es-ok').onclick=function(){s.p=$('#es-p').value;s.a=$('#es-a').value;s.i=$('#es-i').value||s.i;s.f=$('#es-f').value||s.f;s.c=$('#es-c').value||s.c;dl.close();refresh();toast('Clase cambiada. A '+prof(s.p).n+' le llega el cambio a su Google Calendar.')};
+}
+
+/* Ficha del alumno: datos, su calendario, asistencia, pagos, ficha y cambio de grupo */
+function openAl(id){
+ var r=findA(id);if(!r)return;var g=r.g,a=r.a,c=cur(g.c),pen=a.tot-a.pag,pa=pctAs(g,a);
+ var otros=G.filter(function(x){return x!==g});
+ var dl=openDlg('<h3 id="dlg-t">'+esc(a.n)+'</h3><p class="mini"><span class="ej">Datos de ejemplo</span> '+esc(c.n)+' · grupo '+g.id+'</p>'+
+  '<div class="two3" style="align-items:start"><div class="pan" style="gap:6px"><h4>Datos</h4><dl class="kv"><dt>Curso</dt><dd>'+esc(c.n)+'</dd><dt>Fechas</dt><dd>'+f(g.s[0].d)+' – '+f(g.s[g.s.length-1].d)+'</dd><dt>DNI y contacto</dt><dd>[ocultos en la demo]</dd><dt>Viene de</dt><dd>WhatsApp · CRM</dd></dl></div>'+
+  '<div class="pan" style="gap:6px"><h4>Pagos</h4><p style="font:800 22px var(--head)">'+eur(a.pag)+' <span class="mini">de '+eur(a.tot)+'</span></p><div class="pbar"><i style="width:'+Math.round(a.pag/a.tot*100)+'%"></i></div><p class="mini">'+esc(a.plan)+(pen>0?' · le quedan '+eur(pen):' · todo pagado')+'</p>'+
+   (pen>0?'<div class="row"><input type="number" id="ap-v" class="btn2" style="width:110px;font-weight:400" value="'+pen+'" min="1" max="'+pen+'" aria-label="Importe"><button class="btn2 pri" id="ap-ok">Registrar pago</button><button class="btn2" id="ap-rec">Enviar recordatorio</button></div>':'')+'</div></div>'+
+  '<div class="pan" style="gap:8px"><h4>Su calendario y asistencia '+(pa==null?'':'· '+pa+' %')+'</h4><div class="sesl">'+g.s.map(function(s,k){var p=prof(s.p),past=s.d<=HOY;return '<div><b>'+DIA[s.d.getDay()]+' '+f(s.d)+'</b><span>'+s.i+'–'+s.f+' · '+esc(s.c)+' · '+esc(p.n)+' · '+AULA[s.a]+'</span>'+(past?'<button class="tg '+(a.asis[k]?'si':'no')+'" data-as="'+a.id+':'+k+'">'+(a.asis[k]?'Vino':'Faltó')+'</button>':'<span class="mini">Próxima</span>')+'</div>'}).join('')+'</div><p class="mini">Si lo queréis, el alumno recibe este calendario en su móvil y un recordatorio el día antes.</p></div>'+
+  '<div class="two3" style="align-items:start"><div class="pan" style="gap:6px"><h4>Ficha y protección de datos</h4>'+(a.f?'<span class="chip ok">Firmada en tablet</span>':'<span class="chip cad">Sin firmar</span> <button class="btn2" id="ap-fir">Firmar ahora</button>')+'</div>'+
+  '<div class="pan" style="gap:6px"><h4>Cambiar de grupo</h4><select id="ap-g" class="btn2">'+otros.map(function(x){return '<option value="'+x.id+'">'+esc(cur(x.c).n)+' · '+x.id+' · '+f(x.s[0].d)+'</option>'}).join('')+'</select><button class="btn2" id="ap-mv">Mover a este grupo</button></div></div>');
+ $$('[data-as]',dl).forEach(function(b){b.onclick=function(){var q=b.dataset.as.split(':');a.asis[+q[1]]=!a.asis[+q[1]];openAl(a.id);refresh()}});
+ if($('#ap-ok'))$('#ap-ok').onclick=function(){var v=Math.max(0,Math.min(pen,+$('#ap-v').value||0));if(!v)return;a.pag+=v;if(a.pag>=a.tot){a.pay=true;a.plan='Pagado'}openAl(a.id);refresh();toast('Pago de '+eur(v)+' registrado. En la versión real se apunta también en la facturación.')};
+ if($('#ap-rec'))$('#ap-rec').onclick=function(){toast('Recordatorio de pago preparado en el CRM para que admisiones lo apruebe.')};
+ if($('#ap-fir'))$('#ap-fir').onclick=function(){dl.close();sel.g=g.id;go('doc')};
+ $('#ap-mv').onclick=function(){var ng=gById($('#ap-g').value);g.al.splice(g.al.indexOf(a),1);a.asis={};ng.al.push(a);dl.close();sel.g=ng.id;refresh();toast(a.n+' movido a '+cur(ng.c).n+' · '+ng.id+'. Sus clases se actualizan solas.')};
+}
+
+/* Añadir alumno a mano (para quien no viene por WhatsApp) */
+function addAl(gid){var g=gById(gid);
+ var dl=openDlg('<h3 id="dlg-t">Añadir alumno a '+esc(cur(g.c).n)+'</h3><label>Nombre y apellido<input id="na-n" placeholder="Por ejemplo, Carmen V."></label><label>Forma de pago<select id="na-p"><option>Pago único</option><option>Dos plazos</option><option>Paga la empresa</option><option>Adeudo en cuenta</option></select></label><p class="mini">Si viene por WhatsApp no hace falta: entra solo desde el CRM.</p><div class="row"><button class="btn2 pri" id="na-ok">Añadir</button><button class="btn2" data-close>Cancelar</button></div>');
+ $('#na-ok').onclick=function(){var n=($('#na-n').value||'').trim();if(!n){toast('Falta el nombre');return}var a={n:n,f:false,pay:false,nw:1};g.al.push(a);prep(g,a,g.al.length);a.pag=0;a.plan=$('#na-p').value;dl.close();refresh();toast(n+' añadido al grupo '+g.id)};
+}
+
+/* Grupos: clases que se pueden cambiar, pasar lista y alumnos de la clase */
+var gruBase=R.gru;
+R.gru=function(){
+ prepAll();gruBase();
+ var g=gById(sel.g),c=cur(g.c),byDay={};g.s.forEach(function(s,k){var key=s.d.toDateString();(byDay[key]=byDay[key]||[]).push(k)});
+ var keys=Object.keys(byDay),past=pasadas(g);
+ if(sel.lista==null||sel.lg!==g.id){sel.lista=past.length?past[past.length-1]:0;sel.lg=g.id}
+ var L0=g.s[sel.lista];
+ $('#gdet').innerHTML='<div class="row"><h4 style="margin-right:auto">'+esc(c.n)+' · grupo '+g.id+'</h4><span class="sync">Cada docente lo ve en su Google Calendar</span></div>'+
+  '<p class="mini"><b>Toca una clase para cambiar el profesor, el aula o la hora.</b></p>'+
+  '<div class="cal">'+keys.slice(0,5).map(function(key){var d=new Date(key);return '<div class="d"><span>'+DIA[d.getDay()]+' '+f(d)+'</span>'+byDay[key].map(function(k){var s=g.s[k],p=prof(s.p);return '<button type="button" class="ev btn3" style="--c:'+p.c+'" data-es="'+g.id+':'+k+'"><b>'+s.i+'–'+s.f+' · '+esc(p.n)+'</b><small>'+esc(s.c)+' · '+AULA[s.a]+'</small></button>'}).join('')+'</div>'}).join('')+'</div>'+
+  (keys.length>5?'<p class="mini">Y '+(keys.length-5)+' días más.</p>':'')+
+  '<div class="row" style="margin-top:6px"><h4 style="margin-right:auto">Alumnos de esta clase · '+g.al.length+'</h4><label class="mini" for="pl">Pasar lista del</label><select id="pl" class="btn2">'+g.s.map(function(s,k){return '<option value="'+k+'"'+(k===sel.lista?' selected':'')+'>'+DIA[s.d.getDay()]+' '+f(s.d)+' · '+s.i+'</option>'}).join('')+'</select><button class="btn2 pri" id="addal"><svg class="i"><use href="#i-plus"/></svg>Añadir alumno</button></div>'+
+  '<div class="tw stack"><table><thead><tr><th>Alumno</th><th>¿Vino a esta clase?</th><th>Asistencia total</th><th>Ficha</th><th>Pagos</th></tr></thead><tbody>'+
+  g.al.map(function(a){return '<tr><td data-label="Alumno"><button class="lnk" data-oal="'+a.id+'">'+esc(a.n)+'</button>'+(a.nw?' <span class="chip ok">Nuevo</span>':'')+'</td><td data-label="¿Vino?">'+(L0.d<=HOY||true?'<button class="tg '+(a.asis[sel.lista]?'si':(sel.lista in a.asis?'no':''))+'" data-as2="'+a.id+'">'+(a.asis[sel.lista]?'Vino':(sel.lista in a.asis?'Faltó':'Marcar'))+'</button>':'')+'</td><td data-label="Asistencia">'+asTxt(g,a)+'</td><td data-label="Ficha">'+(a.f?'<span class="chip ok">Firmada</span>':'<span class="chip cad">Sin firmar</span>')+'</td><td data-label="Pagos">'+money(a)+'</td></tr>'}).join('')+'</tbody></table></div>'+
+  '<p class="mini">Toca «Marcar» para pasar lista: una vez vino, otra vez faltó. Con eso sale el listado de asistencia para Capitanía o Pesca.</p>';
+ $('#pl').onchange=function(){sel.lista=+this.value;R.gru()};
+ $('#addal').onclick=function(){addAl(g.id)};
+ $$('#gdet [data-as2]').forEach(function(b){b.onclick=function(){var a=findA(b.dataset.as2).a,k=sel.lista;a.asis[k]=!(a.asis[k]);R.gru()}});
+};
+
+/* Profesores: su calendario y alta de profesores */
+var proBase=R.pro;
+R.pro=function(){
+ proBase();var p=prof(sel.p),ses=[];
+ G.forEach(function(g){g.s.forEach(function(s,k){if(s.p===p.id)ses.push({g:g,s:s,k:k})})});
+ ses.sort(function(x,y){return x.s.d-y.s.d||(x.s.i<y.s.i?-1:1)});
+ $('#pdet').insertAdjacentHTML('beforeend','<div class="row" style="margin-top:6px"><h4 style="margin-right:auto">Calendario de '+esc(p.n)+'</h4><button class="btn2" id="addpr"><svg class="i"><use href="#i-plus"/></svg>Añadir profesor</button></div>'+
+  (ses.length?'<div class="sesl">'+ses.slice(0,12).map(function(x){return '<div><b>'+DIA[x.s.d.getDay()]+' '+f(x.s.d)+'</b><span>'+x.s.i+'–'+x.s.f+' · '+esc(cur(x.g.c).n)+' · '+AULA[x.s.a]+'</span><button class="btn2" data-es="'+x.g.id+':'+x.k+'" style="padding:6px 11px;font-size:12.5px">Cambiar</button></div>'}).join('')+'</div>'+(ses.length>12?'<p class="mini">Y '+(ses.length-12)+' clases más.</p>':''):'<p class="mini">Sin clases asignadas ahora. Asígnale una desde cualquier grupo tocando la clase.</p>')+
+  '<p class="mini">Lo mismo que ve en su Google Calendar del móvil. Si cambia una clase, se le actualiza sola.</p>');
+ $('#addpr').onclick=function(){var dl=openDlg('<h3 id="dlg-t">Añadir profesor</h3><label>Nombre<input id="pr-n" placeholder="Por ejemplo, Luis M."></label><label>Qué imparte<input id="pr-a" placeholder="Por ejemplo, Navegación"></label><p class="mini">Sus datos de nómina o factura se guardan en su ficha. No necesita usuario: ve sus clases en su calendario.</p><div class="row"><button class="btn2 pri" id="pr-ok">Añadir</button><button class="btn2" data-close>Cancelar</button></div>');
+  $('#pr-ok').onclick=function(){var n=($('#pr-n').value||'').trim();if(!n){toast('Falta el nombre');return}var id='p'+(PROF.length+1);PROF.push({id:id,n:n,a:$('#pr-a').value||'Profesor',c:['#0F766E','#9A3412','#1D4ED8','#7C3AED'][PROF.length%4]});sel.p=id;dl.close();R.pro();toast(n+' añadido. Ya se le pueden asignar clases.')}};
+};
+
+/* Alumnos: directorio con búsqueda y filtros */
+var aluBase=R.alu;
+function dir(){prepAll();var q=($('#dq').value||'').toLowerCase(),fl=$('#df').value,rows=[];
+ G.forEach(function(g){g.al.forEach(function(a){var p=pctAs(g,a);if(q&&a.n.toLowerCase().indexOf(q)<0)return;if(fl==='pen'&&a.tot-a.pag<=0)return;if(fl==='fir'&&a.f)return;if(fl==='fal'&&(p==null||p>=100))return;rows.push([g,a])})});
+ $('#dirtab').innerHTML=rows.length?rows.slice(0,40).map(function(r){var g=r[0],a=r[1];return '<tr><td data-label="Alumno"><button class="lnk" data-oal="'+a.id+'">'+esc(a.n)+'</button></td><td data-label="Grupo">'+esc(cur(g.c).n)+' · '+g.id+'</td><td data-label="Asistencia">'+asTxt(g,a)+'</td><td data-label="Ficha">'+(a.f?'<span class="chip ok">Firmada</span>':'<span class="chip cad">Sin firmar</span>')+'</td><td data-label="Pagos">'+money(a)+'</td></tr>'}).join(''):'<tr><td colspan="5" class="mini">Nadie con ese filtro.</td></tr>'}
+R.alu=function(){aluBase();dir()};
+$('#dq').oninput=dir;$('#df').onchange=dir;
+
+/* Estado económico: cuánto ha pagado cada alumno */
+var facBase=R.fac;
+R.fac=function(){facBase();prepAll();var rows=[];G.forEach(function(g){g.al.forEach(function(a){rows.push([g,a])})});
+ var tot=0,pag=0;rows.forEach(function(r){tot+=r[1].tot;pag+=r[1].pag});
+ var pend=rows.filter(function(r){return r[1].tot-r[1].pag>0});
+ $('#pagpan').innerHTML='<h4>Cuánto ha pagado cada alumno</h4><p class="mini">Cobrado '+eur(pag)+' de '+eur(tot)+' · '+pend.length+' alumnos con algo pendiente <span class="ej">Ejemplo</span></p><div class="pbar"><i style="width:'+Math.round(pag/tot*100)+'%"></i></div>'+
+  '<div class="tw stack"><table><thead><tr><th>Alumno</th><th>Curso</th><th>Pagado</th><th>Le queda</th><th></th></tr></thead><tbody>'+pend.slice(0,8).map(function(r){var g=r[0],a=r[1];return '<tr><td data-label="Alumno"><button class="lnk" data-oal="'+a.id+'">'+esc(a.n)+'</button></td><td data-label="Curso">'+esc(cur(g.c).n)+'</td><td data-label="Pagado">'+eur(a.pag)+' de '+eur(a.tot)+'</td><td data-label="Le queda"><span class="chip cad">'+eur(a.tot-a.pag)+'</span></td><td><button class="btn2" data-oal="'+a.id+'" style="padding:6px 11px;font-size:12.5px">Registrar pago</button></td></tr>'}).join('')+'</tbody></table></div>'+(pend.length>8?'<p class="mini">Y '+(pend.length-8)+' más. Usa el buscador de «Alumnos».</p>':'');
+};
+
+/* Ajustes: todo personalizable */
+var AJ={campos:{'DNI':1,'Libreta marítima':1,'Titulaciones previas':1,'Empresa que paga':1,'Talla de ropa de prácticas':0,'Foto':0,'Certificado médico':1},
+ pagos:{'Pago único':1,'Dos plazos':1,'Tres plazos':0,'Paga la empresa':1,'Adeudo en cuenta':1,'Bonificado por FUNDAE':0},
+ avisos:{'Recordatorio de clase el día antes':1,'Aviso si un alumno falta':1,'Recordatorio de pago 3 días antes':1,'Aviso de renovación 6 meses antes':1,'Resumen semanal para dirección':1},
+ estados:{'Petición nueva':1,'Contactado':1,'Esperando fecha':1,'Plaza reservada':1,'Matriculado':1,'Renovación':1,'Perdido':1}};
+R.aj=function(){
+ function grupo(t,k,desc){return '<div class="pan"><h4>'+t+'</h4><p class="mini">'+desc+'</p><div class="chips">'+Object.keys(AJ[k]).map(function(x){return '<button type="button" class="chipx" data-aj="'+k+'|'+esc(x)+'" aria-pressed="'+(AJ[k][x]?'true':'false')+'">'+esc(x)+'</button>'}).join('')+'</div><div class="row"><input class="btn2" style="flex:1 1 160px;min-width:0;font-weight:400" id="aj-'+k+'" placeholder="Añadir otro…"><button class="btn2" data-ajadd="'+k+'">Añadir</button></div></div>'}
+ $('#ajbox').innerHTML=
+  '<div class="pan"><h4>Aulas</h4><p class="mini">Las que se eligen al montar cada clase.</p><div class="chips">'+Object.keys(AULA).map(function(a){return '<span class="chipx" aria-pressed="true">'+esc(AULA[a])+'</span>'}).join('')+'</div><div class="row"><input class="btn2" style="flex:1 1 160px;min-width:0;font-weight:400" id="aj-aula" placeholder="Por ejemplo, Aula 3"><button class="btn2" id="aj-aula-ok">Añadir aula</button></div></div>'+
+  grupo('Qué pedimos en la ficha del alumno','campos','Marca lo que necesitáis. Lo demás no se pide.')+
+  grupo('Formas de pago','pagos','Las que ofrecéis a los alumnos y a las empresas.')+
+  grupo('Avisos automáticos','avisos','Los prepara el sistema y una persona los aprueba.')+
+  grupo('Etapas de las peticiones','estados','Las columnas del tablero de admisiones.')+
+  '<div class="pan"><h4>Cursos y documentos oficiales</h4><p class="mini">Qué impresos lleva cada curso. Toca para quitar o poner.</p>'+CUR.map(function(c,i){return '<div style="display:grid;gap:4px"><b style="font-size:13.5px">'+esc(c.n)+'</b><div class="chips">'+['Capitanía','Pesca','Marina Mercante'].map(function(o){return '<button type="button" class="chipx" data-org="'+i+'|'+o+'" aria-pressed="'+(c.org.indexOf(o)>=0)+'">'+o+'</button>'}).join('')+'</div></div>'}).join('')+'<button class="btn2" data-go2="gru">Ver las plantillas de cada curso →</button></div>';
+ $$('#ajbox [data-aj]').forEach(function(b){b.onclick=function(){var q=b.dataset.aj.split('|');AJ[q[0]][q[1]]=AJ[q[0]][q[1]]?0:1;R.aj()}});
+ $$('#ajbox [data-ajadd]').forEach(function(b){b.onclick=function(){var k=b.dataset.ajadd,v=($('#aj-'+k).value||'').trim();if(!v)return;AJ[k][v]=1;R.aj();toast('Añadido: '+v)}});
+ $('#aj-aula-ok').onclick=function(){var v=($('#aj-aula').value||'').trim();if(!v)return;AULA['x'+Object.keys(AULA).length]=v;R.aj();toast(v+' ya se puede elegir al montar las clases')};
+ $$('#ajbox [data-org]').forEach(function(b){b.onclick=function(){var q=b.dataset.org.split('|'),c=CUR[+q[0]],i=c.org.indexOf(q[1]);if(i>=0)c.org.splice(i,1);else c.org.push(q[1]);R.aj()}});
+ $$('#ajbox [data-go2]').forEach(function(b){b.onclick=function(){go(b.dataset.go2)}});
+};
+
+/* Acciones comunes */
+document.addEventListener('click',function(e){
+ var t=e.target.closest&&e.target.closest('[data-es],[data-oal]');if(!t)return;
+ if(t.dataset.es){var q=t.dataset.es.split(':');editSes(q[0],+q[1])}
+ else if(t.dataset.oal){openAl(t.dataset.oal)}
+});
 
 fillDg();
 var h=(location.hash||'').slice(1);go(TIT[h]?h:'gru');
